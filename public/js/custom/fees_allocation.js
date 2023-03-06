@@ -46,6 +46,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
+                    $('#selectAllchkbox').prop('checked', false); // Unchecks it
                     if (response.code == 200) {
                         var dataSetNew = response.data;
                         if (dataSetNew.length > 0) {
@@ -160,6 +161,7 @@ $(function () {
             }
         });
     });
+    $('#selectAllchkbox').prop('checked', false); // Unchecks it
     // script for all checkbox checked / unchecked
     $("#selectAllchkbox").on("change", function (ev) {
         var $chcks = $(".checked-area input[type='checkbox']");

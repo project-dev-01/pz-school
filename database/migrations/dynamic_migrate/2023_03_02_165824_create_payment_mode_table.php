@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeesGroupDetailsTable extends Migration
+class CreatePaymentModeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateFeesGroupDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fees_group_details', function (Blueprint $table) {
+        Schema::create('payment_mode', function (Blueprint $table) {
             $table->id();
-            $table->integer('fees_group_id');
-            $table->integer('fees_type_id');
-            $table->integer('payment_mode_id');
-            $table->decimal('amount', $precision = 10, $scale = 0);
-            $table->date('due_date');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateFeesGroupDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fees_group_details');
+        Schema::dropIfExists('payment_mode');
     }
 }

@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Parent List</h4>
+                <h4 class="page-title">Parent/Guardian List</h4>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Parent List<h4>
+                        <h4 class="navv">Parent/Guardian List<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -66,7 +66,6 @@
 @endsection
 @section('scripts')
 <script>
-    
     var parentImg = "{{ asset('public/users/images/') }}";
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var parentList = "{{ route('admin.parent.list') }}";

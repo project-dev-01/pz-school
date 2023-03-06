@@ -855,20 +855,20 @@ class ApiControllerOne extends BaseController
             // return $getStudentDetails;
             // dd($getStudentDetails);
             $details = [];
-            if($getStudentDetails){
+            if ($getStudentDetails) {
 
                 $details = $con->table('timetable_exam')->select('exam.name', 'timetable_exam.exam_id')
-                ->join('exam', 'timetable_exam.exam_id', '=', 'exam.id')
-                ->where([
-                    ['class_id', $getStudentDetails->class_id],
-                    ['section_id', $getStudentDetails->section_id],
-                    ['semester_id', $getStudentDetails->semester_id],
-                    ['session_id', $getStudentDetails->session_id],
-                    ['timetable_exam.academic_session_id', $getStudentDetails->academic_session_id]
-                ])
-                ->groupBy('timetable_exam.exam_id')
-                ->orderBy('timetable_exam.exam_date', 'desc')
-                ->get();
+                    ->join('exam', 'timetable_exam.exam_id', '=', 'exam.id')
+                    ->where([
+                        ['class_id', $getStudentDetails->class_id],
+                        ['section_id', $getStudentDetails->section_id],
+                        ['semester_id', $getStudentDetails->semester_id],
+                        ['session_id', $getStudentDetails->session_id],
+                        ['timetable_exam.academic_session_id', $getStudentDetails->academic_session_id]
+                    ])
+                    ->groupBy('timetable_exam.exam_id')
+                    ->orderBy('timetable_exam.exam_date', 'desc')
+                    ->get();
             }
             return $this->successResponse($details, 'Exam Timetable record fetch successfully');
         }
@@ -5514,6 +5514,7 @@ class ApiControllerOne extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
+
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // check exist name
@@ -5521,7 +5522,7 @@ class ApiControllerOne extends BaseController
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
                 // insert data
-                $query = $conn->table('fees_group')->insertGetId([
+                $insertId = $conn->table('fees_group')->insertGetId([
                     'name' => $request->name,
                     'description' => $request->description,
                     'academic_session_id' => $request->academic_session_id,
@@ -5532,18 +5533,24 @@ class ApiControllerOne extends BaseController
                 $fees = $request->fees;
                 foreach ($fees as $fee) {
                     if (isset($fee['fees_type_id'])) {
-                        $conn->table('fees_group_details')->insert([
-                            'fees_group_id' => $query,
-                            'fees_type_id' => $fee['fees_type_id'],
-                            'due_date' => $fee['due_date'],
-                            'amount' => $fee['amount'],
-                            'created_at' => date("Y-m-d H:i:s")
-                        ]);
+                        foreach ($fee['mode_id'] as $key => $grp_det) {
+                            // dd($grp_det);
+                            // if (isset($fee['amount'][$key]) && $insertId) {
+                            $conn->table('fees_group_details')->insert([
+                                'fees_group_id' => $insertId,
+                                'fees_type_id' => $fee['fees_type_id'],
+                                'due_date' => $fee['due_date'],
+                                'payment_mode_id' => $fee['mode_id'][$key],
+                                'amount' => isset($fee['amount'][$key]) ? $fee['amount'][$key] : 0,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                            // }
+                        }
                     }
                 }
                 // return $query;
                 $success = [];
-                if (!$query) {
+                if (!$insertId) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 } else {
                     return $this->successResponse($success, 'Fees Group has been successfully saved');
@@ -5586,19 +5593,49 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            // $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')
+            //     ->select(
+            //         'ft.name',
+            //         'ft.id as fees_type_id',
+            //         'fg.id',
+            //         'fg.fees_group_id',
+            //         'fg.amount',
+            //         'fg.due_date'
+            //     )
+            //     // ->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')
+
+
+            //     ->leftjoin('fees_group_details as fg', function ($join) use ($id) {
+            //         $join->on('fg.fees_type_id', '=', 'ft.id');
+            //         $join->where('fg.fees_group_id', $id);
+            //     })
+            //     ->orderBy('ft.id')
+            //     // ->groupBy('ft.id')
+            //     ->get();
+            // $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
+            // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
+
             $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')
-                ->select('ft.name', 'ft.id as fees_type_id', 'fg.id', 'fg.fees_group_id', 'fg.amount', 'fg.due_date')
-                // ->leftJoin('fees_group_details as fg', 'fg.fees_type_id', '=', 'ft.id')
-
-
+                ->select(
+                    'ft.name',
+                    DB::raw("group_concat(fg.payment_mode_id ORDER BY pm.id ASC) as payment_mode_id"),
+                    DB::raw("group_concat(pm.name ORDER BY pm.id ASC) as payment_mode_name"),
+                    DB::raw("group_concat(fg.amount ORDER BY pm.id ASC) as amount"),
+                    DB::raw("group_concat(fg.id ORDER BY pm.id ASC) as id"),
+                    'ft.id as fees_type_id',
+                    // 'fg.id',
+                    'fg.fees_group_id',
+                    'fg.due_date'
+                )
                 ->leftjoin('fees_group_details as fg', function ($join) use ($id) {
                     $join->on('fg.fees_type_id', '=', 'ft.id');
                     $join->where('fg.fees_group_id', $id);
                 })
+                ->leftJoin('payment_mode as pm', 'pm.id', '=', 'fg.payment_mode_id')
                 ->orderBy('ft.id')
+                ->groupBy('ft.id')
                 ->get();
             $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
-            // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
             return $this->successResponse($FeesGroupDetails, 'Fees Group row fetch successfully');
         }
     }
@@ -5635,23 +5672,43 @@ class ApiControllerOne extends BaseController
                 // return $request;
                 foreach ($fees as $fee) {
                     if (isset($fee['fees_type_id'])) {
-                        if ($fee['fees_group_details_id']) {
-                            $conn->table('fees_group_details')->where('id', $fee['fees_group_details_id'])->update([
-                                'due_date' => $fee['due_date'],
-                                'amount' => $fee['amount'],
-                                'created_at' => date("Y-m-d H:i:s")
-                            ]);
-                        } else {
-                            $conn->table('fees_group_details')->insert([
-                                'fees_group_id' => $id,
-                                'fees_type_id' => $fee['fees_type_id'],
-                                'due_date' => $fee['due_date'],
-                                'amount' => $fee['amount'],
-                                'created_at' => date("Y-m-d H:i:s")
-                            ]);
+
+                        foreach ($fee['fees_group_details_id'] as $key => $fees_group__id) {
+                            // dd($fees_group__id);
+
+                            // $conn->table('fees_group_details')->insert([
+                            //     'fees_group_id' => $insertId,
+                            //     'fees_type_id' => $fee['fees_type_id'],
+                            //     'due_date' => $fee['due_date'],
+                            //     'payment_mode_id' => $fee['mode_id'][$key],
+                            //     'amount' => $fee['amount'][$key],
+                            //     'created_at' => date("Y-m-d H:i:s")
+                            // ]);
+                            if ($fees_group__id) {
+                                // if (isset($fee['amount'][$key])) {
+                                $conn->table('fees_group_details')->where('id', $fees_group__id)->update([
+                                    'due_date' => $fee['due_date'],
+                                    'payment_mode_id' => $fee['mode_id'][$key],
+                                    'amount' => isset($fee['amount'][$key]) ? $fee['amount'][$key] : 0,
+                                    'created_at' => date("Y-m-d H:i:s")
+                                ]);
+                                // }
+                            } else {
+                                // if (isset($fee['amount'][$key])) {
+                                $conn->table('fees_group_details')->insert([
+                                    'fees_group_id' => $id,
+                                    'fees_type_id' => $fee['fees_type_id'],
+                                    'due_date' => $fee['due_date'],
+                                    'payment_mode_id' => $fee['mode_id'][$key],
+                                    'amount' => isset($fee['amount'][$key]) ? $fee['amount'][$key] : 0,
+                                    'created_at' => date("Y-m-d H:i:s")
+                                ]);
+                                // }
+                            }
                         }
                     }
                 }
+
                 $success = [];
                 if ($query) {
                     return $this->successResponse($success, 'Fees Group Details have Been updated');
@@ -5679,6 +5736,7 @@ class ApiControllerOne extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $query = $conn->table('fees_group')->where('id', $id)->delete();
+            $query = $conn->table('fees_group_details')->where('fees_group_id', $id)->delete();
 
             $success = [];
             if ($query) {
@@ -5981,9 +6039,7 @@ class ApiControllerOne extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $id = $request->id;
             // create new connection
-            $branchID = $request->branch_id;
             $academic_session_id = $request->academic_session_id;
             $conn = $this->createNewConnection($request->branch_id);
             // get data
@@ -6022,12 +6078,38 @@ class ApiControllerOne extends BaseController
                 // })
                 ->orderBy('st.id', 'ASC')
                 ->first();
+            // $FeesDetails['fees'] = $conn->table('fees_allocation as fa')
+            //     // ->select('fa.id as allocation_id','fg.name as group_name')
+            //     ->select(
+            //         'ft.name as fees_name',
+            //         'fg.name as group_name',
+            //         'ft.id as fees_type_id',
+            //         'fa.id as allocation_id',
+            //         'fgd.amount as paid_amount',
+            //         'fph.id as invoice_id',
+            //         'fph.collect_by',
+            //         'fph.amount',
+            //         'fph.date',
+            //     )
+            //     ->leftJoin('fees_group as fg', 'fa.group_id', '=', 'fg.id')
+            //     ->leftJoin('fees_group_details as fgd', 'fa.group_id', '=', 'fgd.fees_group_id')
+            //     ->leftJoin('fees_type as ft', 'fgd.fees_type_id', '=', 'ft.id')
+            //     ->leftjoin('fees_payment_history as fph', function ($join) {
+            //         $join->on('ft.id', '=', 'fph.fees_type_id');
+            //         $join->on('fa.id', '=', 'fph.allocation_id');
+            //     })
+            //     // ->leftJoin('fees_payment_history as fph', 'ft.id', '=', 'fph.fees_type_id')
+            //     ->groupBy('ft.id')
+            //     ->where('fa.student_id', $request->student_id)
+            //     ->get();
             $FeesDetails['fees'] = $conn->table('fees_allocation as fa')
                 // ->select('fa.id as allocation_id','fg.name as group_name')
                 ->select(
-                    'ft.name as fees_name',
-                    'fg.name as group_name',
+                    // 'fg.name as group_name',
+                    // 'ft.name as fees_name',
+                    DB::raw('CONCAT(fg.name, " - ", ft.name) as fees_name'),
                     'ft.id as fees_type_id',
+                    'fg.id',
                     'fa.id as allocation_id',
                     'fgd.amount as paid_amount',
                     'fph.id as invoice_id',
@@ -6035,16 +6117,24 @@ class ApiControllerOne extends BaseController
                     'fph.amount',
                     'fph.date',
                 )
-                ->leftJoin('fees_group as fg', 'fa.group_id', '=', 'fg.id')
                 ->leftJoin('fees_group_details as fgd', 'fa.group_id', '=', 'fgd.fees_group_id')
+                ->leftJoin('fees_group as fg', 'fa.group_id', '=', 'fg.id')
                 ->leftJoin('fees_type as ft', 'fgd.fees_type_id', '=', 'ft.id')
                 ->leftjoin('fees_payment_history as fph', function ($join) {
                     $join->on('ft.id', '=', 'fph.fees_type_id');
                     $join->on('fa.id', '=', 'fph.allocation_id');
                 })
                 // ->leftJoin('fees_payment_history as fph', 'ft.id', '=', 'fph.fees_type_id')
-                ->groupBy('ft.id')
-                ->where('fa.student_id', $request->student_id)
+                // ->where('fa.student_id', $request->student_id)
+                ->where([
+                    ['fa.student_id', '=', $request->student_id],
+                    ['fa.academic_session_id', '=', $academic_session_id]
+                ])
+                ->groupBy(['ft.id', 'fg.id'])
+                // ->orderBy('ft.id', 'asc')
+                // ->orderBy('fg.id', 'asc')
+                // ->groupBy('fgd.id')
+                // ->groupBy('ft.id')
                 ->get();
             // if (!empty($studentData)) {
             //     foreach ($studentData as $key => $value) {
@@ -6077,16 +6167,20 @@ class ApiControllerOne extends BaseController
                     'fa.id as allocation_id',
                     'fa.student_id',
                     't.name',
+                    'f.name as fees_group_name',
                     'fg.amount',
                     'fg.due_date',
                     'fg.fees_type_id'
                 )
+                ->leftJoin('fees_group as f', 'f.id', '=', 'fa.group_id')
                 ->leftJoin('fees_group_details as fg', 'fg.fees_group_id', '=', 'fa.group_id')
                 ->leftJoin('fees_type as t', 't.id', '=', 'fg.fees_type_id')
                 ->where([
                     ['fa.student_id', '=', $studentID],
                     ['fa.academic_session_id', '=', $academic_session_id]
                 ])
+                ->orderBy('f.id', 'asc')
+                ->orderBy('fg.id', 'asc')
                 ->get()->toArray();
             // dd($allocations);
             foreach ($allocations as $key => $allRow) {
@@ -6137,6 +6231,7 @@ class ApiControllerOne extends BaseController
                     ['student_id', '=', $request->student_id],
                     ['allocation_id', '=', $request->allocation_id],
                     ['fees_type_id', '=', $request->fees_type],
+                    ['fees_group_id', '=', $request->fees_group_id],
                     ['payment_mode_id', '=', $request->payment_mode]
                 ])->first();
                 if (isset($row->id)) {
@@ -6156,6 +6251,7 @@ class ApiControllerOne extends BaseController
                         'allocation_id' => $request->allocation_id,
                         'fees_type_id' => $request->fees_type,
                         'payment_mode_id' => $request->payment_mode,
+                        'fees_group_id' => $request->fees_group_id,
                         'payment_status_id' => $fees['payment_status'],
                         'collect_by' => $request->collect_by,
                         'amount' => $fees['amount'],
@@ -6174,6 +6270,7 @@ class ApiControllerOne extends BaseController
                             ['student_id', '=', $request->student_id],
                             ['allocation_id', '=', $request->allocation_id],
                             ['fees_type_id', '=', $request->fees_type],
+                            ['fees_group_id', '=', $request->fees_group_id],
                             ['payment_mode_id', '=', $request->payment_mode],
                             ['semester', '=', $fee['semester']]
                         ])->first();
@@ -6195,6 +6292,7 @@ class ApiControllerOne extends BaseController
                                 'student_id' => $request->student_id,
                                 'allocation_id' => $request->allocation_id,
                                 'fees_type_id' => $request->fees_type,
+                                'fees_group_id' => $request->fees_group_id,
                                 'payment_mode_id' => $request->payment_mode,
                                 'payment_status_id' => $fee['payment_status'],
                                 'collect_by' => $request->collect_by,
@@ -6218,6 +6316,7 @@ class ApiControllerOne extends BaseController
                             ['student_id', '=', $request->student_id],
                             ['allocation_id', '=', $request->allocation_id],
                             ['fees_type_id', '=', $request->fees_type],
+                            ['fees_group_id', '=', $request->fees_group_id],
                             ['payment_mode_id', '=', $request->payment_mode],
                             ['monthly', '=', $fee['month']]
                         ])->first();
@@ -6238,6 +6337,7 @@ class ApiControllerOne extends BaseController
                                 'student_id' => $request->student_id,
                                 'allocation_id' => $request->allocation_id,
                                 'fees_type_id' => $request->fees_type,
+                                'fees_group_id' => $request->fees_group_id,
                                 'payment_mode_id' => $request->payment_mode,
                                 'payment_status_id' => $fee['payment_status'],
                                 'collect_by' => $request->collect_by,
@@ -6272,6 +6372,7 @@ class ApiControllerOne extends BaseController
             'student_id' => 'required',
             'payment_mode' => 'required',
             'fees_type' => 'required',
+            'fees_group_id' => 'required',
             'allocation_id' => 'required',
             'academic_session_id' => 'required'
         ]);
@@ -6282,7 +6383,7 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $studentData = $conn->table('fees_payment_history as fph')
+            $studentData['fees_payment_details'] = $conn->table('fees_payment_history as fph')
                 ->select(
                     'fph.id',
                     'fph.student_id',
@@ -6305,11 +6406,25 @@ class ApiControllerOne extends BaseController
                     ['fph.student_id', '=', $request->student_id],
                     ['fph.allocation_id', '=', $request->allocation_id],
                     ['fph.fees_type_id', '=', $request->fees_type],
+                    ['fph.fees_group_id', '=', $request->fees_group_id],
                     ['fph.payment_mode_id', '=', $request->payment_mode]
                 ])
-                // ->groupBy('fph.payment_mode_id')
-                // ->orderBy('st.id', 'ASC')
                 ->get();
+            // here we get assign amount
+            $studentData['amount_details'] = $conn->table('fees_group_details as fgd')
+                ->select(
+                    // 'fgd.id',
+                    // 'fgd.fees_group_id',
+                    'fgd.amount as paying_amount',
+                    // 'fgd.payment_mode_id',
+                    // 'fgd.due_date',
+                )
+                ->where([
+                    ['fgd.fees_type_id', '=', $request->fees_type],
+                    ['fgd.fees_group_id', '=', $request->fees_group_id],
+                    ['fgd.payment_mode_id', '=', $request->payment_mode]
+                ])
+                ->first();
             return $this->successResponse($studentData, 'Fees paid fetch successfully');
         }
     }
@@ -6384,7 +6499,7 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $studentData = $conn->table('fees_payment_history as fph')
+            $studentData['fees_payment_details'] = $conn->table('fees_payment_history as fph')
                 ->select(
                     'fph.id',
                     'fph.student_id',
@@ -6409,7 +6524,56 @@ class ApiControllerOne extends BaseController
                     ['fph.fees_type_id', '=', $request->fees_type],
                 ])
                 ->get();
+            // // here we get assign amount
+            // $studentData['amount_details'] = $conn->table('fees_group_details as fgd')
+            //     ->select(
+            //         // 'fgd.id',
+            //         // 'fgd.fees_group_id',
+            //         'fgd.amount as paying_amount',
+            //         // 'fgd.payment_mode_id',
+            //         // 'fgd.due_date',
+            //     )
+            //     ->where([
+            //         ['fgd.fees_type_id', '=', $request->fees_type],
+            //         ['fgd.fees_group_id', '=', $request->fees_group_id],
+            //         ['fgd.payment_mode_id', '=', $request->payment_mode]
+            //     ])
+            //     ->first();
             return $this->successResponse($studentData, 'Fees paid fetch successfully');
+        }
+    }
+    // get fees get pay amount
+    public function feesGetPayAmount(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'fees_type' => 'required',
+            'fees_group_id' => 'required',
+            'payment_mode' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            // create new connection
+            $conn = $this->createNewConnection($request->branch_id);
+            // here we get assign amount
+            $getFeesAmt= $conn->table('fees_group_details as fgd')
+                ->select(
+                    // 'fgd.id',
+                    // 'fgd.fees_group_id',
+                    'fgd.amount as paying_amount',
+                    // 'fgd.payment_mode_id',
+                    // 'fgd.due_date',
+                )
+                ->where([
+                    ['fgd.fees_type_id', '=', $request->fees_type],
+                    ['fgd.fees_group_id', '=', $request->fees_group_id],
+                    ['fgd.payment_mode_id', '=', $request->payment_mode]
+                ])
+                ->first();
+            return $this->successResponse($getFeesAmt, 'get fees amount successfully');
         }
     }
     public function calResult($Array, $student_id)
@@ -6476,18 +6640,18 @@ class ApiControllerOne extends BaseController
                     ['en.active_status', '=', '0']
                 ])
                 ->first();
-                
-                if($request->class_id) {
 
-                    $student_class_id = $request->class_id;
-                }else {
-                    $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
-                }
-                if($request->section_id) {
-                    $student_section_id = $request->section_id;
-                }else {
-                    $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
-                }
+            if ($request->class_id) {
+
+                $student_class_id = $request->class_id;
+            } else {
+                $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
+            }
+            if ($request->section_id) {
+                $student_section_id = $request->section_id;
+            } else {
+                $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
+            }
             // $student_class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
             // $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
             $student_semester_id = isset($getStudentDetails->semester_id) ? $getStudentDetails->semester_id : 0;
@@ -6993,31 +7157,31 @@ class ApiControllerOne extends BaseController
                 ])
                 ->groupBy('en.student_id')
                 ->first();
-                $getExamsName = [];
-                if ($student) {
-                    $class_id = $student->class_id;
-                    $section_id = $student->section_id;
-                    $getExamsName = $Connection->table('timetable_exam as texm')
-                        ->select(
-                            'texm.exam_id as id',
-                            'ex.name as name',
-                            'texm.exam_date'
-                        )
-                        ->leftJoin('exam as ex', 'texm.exam_id', '=', 'ex.id')
-                        ->where('texm.exam_date', '<', $today)
-                        ->when($class_id != "All", function ($q)  use ($class_id) {
-                            $q->where('texm.class_id', $class_id);
-                        })
-                        ->where('texm.section_id', '=', $section_id)
-                        ->where('texm.academic_session_id', '=', $request->academic_session_id)
-                        ->groupBy('texm.exam_id')
-                        ->get();
-                }
-            
+            $getExamsName = [];
+            if ($student) {
+                $class_id = $student->class_id;
+                $section_id = $student->section_id;
+                $getExamsName = $Connection->table('timetable_exam as texm')
+                    ->select(
+                        'texm.exam_id as id',
+                        'ex.name as name',
+                        'texm.exam_date'
+                    )
+                    ->leftJoin('exam as ex', 'texm.exam_id', '=', 'ex.id')
+                    ->where('texm.exam_date', '<', $today)
+                    ->when($class_id != "All", function ($q)  use ($class_id) {
+                        $q->where('texm.class_id', $class_id);
+                    })
+                    ->where('texm.section_id', '=', $section_id)
+                    ->where('texm.academic_session_id', '=', $request->academic_session_id)
+                    ->groupBy('texm.exam_id')
+                    ->get();
+            }
+
             return $this->successResponse($getExamsName, 'Exams  list of Name record fetch successfully');
         }
     }
-    
+
     // student marks 
     public function getMarksByStudent(Request $request)
     {
@@ -7056,11 +7220,11 @@ class ApiControllerOne extends BaseController
                 ])
                 ->first();
             // dd($getStudentDetails);
-            if($request->class_id && $request->section_id) {
+            if ($request->class_id && $request->section_id) {
 
                 $class_id = $request->class_id;
                 $student_section_id = $request->section_id;
-            }else {
+            } else {
                 $class_id = isset($getStudentDetails->class_id) ? $getStudentDetails->class_id : 0;
                 $student_section_id = isset($getStudentDetails->section_id) ? $getStudentDetails->section_id : 0;
             }
@@ -7235,10 +7399,10 @@ class ApiControllerOne extends BaseController
                         $studentAr = $this->calculate_rank($studentArr);
                         $key = array_search($student_id, array_column($studentAr, 'student_id'));
                     }
-                    if($studentArr){
+                    if ($studentArr) {
                         $object->mark = $studentArr[$key]->mark;
                         $object->rank = $studentArr[$key]->rank;
-                    }else{
+                    } else {
                         $object->mark = 0;
                         $object->rank = 0;
                     }
@@ -7246,12 +7410,12 @@ class ApiControllerOne extends BaseController
                 }
                 $class_rank = collect($total_marks)->sortByDesc('mark')->all();
                 // dd($class_rank);
-                if($class_rank){
+                if ($class_rank) {
 
                     $student_rank = $this->calculate_overall_rank($class_rank);
                 }
                 // dd($student_rank);
-                if(isset($student_rank[$student_id])){
+                if (isset($student_rank[$student_id])) {
 
                     $rank = $student_rank[$student_id];
                 }
@@ -7275,11 +7439,11 @@ class ApiControllerOne extends BaseController
 
             //     $marks[$key]['rank'] = "";
             // }else{
-                    if($mark['mark']!=$last_mark){
-                        $rank++;
-                    }
-                    $last_mark = $mark['mark'];
-                    $marks[$key]['rank'] = $rank;
+            if ($mark['mark'] != $last_mark) {
+                $rank++;
+            }
+            $last_mark = $mark['mark'];
+            $marks[$key]['rank'] = $rank;
             // dd($last_mark);
             // }
         }
@@ -7482,11 +7646,10 @@ class ApiControllerOne extends BaseController
                         // dd($studentArr);
                         // $key = array_search($student_id, array_column($studentAr, 'student_id'));
                     }
-                    
                 }
                 $class_rank = collect($total_marks)->sortByDesc('mark')->all();
                 // dd($class_rank);
-                if($class_rank){
+                if ($class_rank) {
 
                     $student_rank = $this->calculate_overall_rank($class_rank);
                 }
@@ -7496,26 +7659,25 @@ class ApiControllerOne extends BaseController
                 //     $studentArr[$stu]->mark = $student['mark'];
                 //     $studentArr[$stu]->rank = $student['rank'];
                 // }
-                
+
                 // dd($stu);
-                foreach($studentArr as $stud){
+                foreach ($studentArr as $stud) {
                     $stud->mark = $student_rank[$stud->student_id]['mark'];
                     $stud->rank = $student_rank[$stud->student_id]['rank'];
                     $stud->total_mark = $student_rank[$stud->student_id]['total_mark'];
-                    
                 }
 
-                if($request->type=="top"){
+                if ($request->type == "top") {
 
-                
+
                     array_multisort(
                         array_column($studentArr, 'rank'),
                         SORT_ASC,
                         $studentArr
                     );
-                }else if($request->type=="bottom"){
+                } else if ($request->type == "bottom") {
 
-                
+
                     array_multisort(
                         array_column($studentArr, 'rank'),
                         SORT_DESC,
@@ -7524,15 +7686,15 @@ class ApiControllerOne extends BaseController
                 }
                 // dd($studentArr);
                 // if($studentArr){
-                    //     $object->mark = $studentArr[$key]->mark;
-                    //     $object->rank = $studentArr[$key]->rank;
-                    // }else{
-                    //     $object->mark = 0;
-                    //     $object->rank = 0;
-                    // }
-                    // array_push($allbysubject, $object);
+                //     $object->mark = $studentArr[$key]->mark;
+                //     $object->rank = $studentArr[$key]->rank;
+                // }else{
+                //     $object->mark = 0;
+                //     $object->rank = 0;
+                // }
+                // array_push($allbysubject, $object);
                 // dd($student_rank);
-                
+
                 // if(isset($student_rank[$student_id])){
 
                 //     $rank = $student_rank[$student_id];
@@ -7661,7 +7823,7 @@ class ApiControllerOne extends BaseController
             $tempPath = $request->tempPath;
             $fileSize = $request->fileSize;
             $mimeType = $request->mimeType;
-            
+
             header('Content-type: text/plain; charset=utf-8');
             // Valid File Extensions
             $valid_extension = array("csv");
@@ -7672,8 +7834,8 @@ class ApiControllerOne extends BaseController
                 // Check file size
                 if ($fileSize <= $maxFileSize) {
 
-                    
-                    $file = base_path() .'/uploads/'.$filename;
+
+                    $file = base_path() . '/uploads/' . $filename;
                     $suc = file_put_contents($file, $base64);
                     // File upload location
                     $location = 'uploads';
@@ -7707,28 +7869,28 @@ class ApiControllerOne extends BaseController
                     // exit();
                     fclose($file);
                     // dummyemail
-                    
+
                     $dummyInc = 1;
                     // Insert to MySQL database
                     foreach ($importData_arr as $importData) {
 
-                        
+
                         $dummyInc++;
                         $type = strtolower($importData[1]);
                         $name = $importData[2];
                         $table = "";
                         if (isset($type)) {
-                            if($type == "qualification"){
+                            if ($type == "qualification") {
                                 $table = "qualifications";
-                            }else if($type == "department"){
+                            } else if ($type == "department") {
                                 $table = "staff_departments";
-                            }else if($type == "designation"){
+                            } else if ($type == "designation") {
                                 $table = "staff_designations";
-                            }else if($type == "position"){
+                            } else if ($type == "position") {
                                 $table = "staff_positions";
-                            }else if($type == "category"){
+                            } else if ($type == "category") {
                                 $table = "staff_categories";
-                            }else if($type == "stream type"){
+                            } else if ($type == "stream type") {
                                 $table = "stream_types";
                             }
                         }
@@ -7738,7 +7900,7 @@ class ApiControllerOne extends BaseController
                                 'name' => $name,
                                 'created_at' => date("Y-m-d H:i:s")
                             ];
-                            if($table){
+                            if ($table) {
                                 // check exist name
                                 if ($Connection->table($table)->where('name', '=', $name)->count() < 1) {
                                     // insert data
@@ -7775,7 +7937,7 @@ class ApiControllerOne extends BaseController
             $email = $request->email;
             // dd($link);
             if ($email) {
-                $data = array('subject' => $request->subject,'remarks' => $request->remarks, 'email' => $email);
+                $data = array('subject' => $request->subject, 'remarks' => $request->remarks, 'email' => $email);
                 Mail::send('auth.faq_mail', $data, function ($message) use ($request) {
                     $message->to('rajesh@aibots.my', 'members')->subject('FAQ');
                     $message->from('rajesh@aibots.my', 'Password Reset');
@@ -7785,5 +7947,4 @@ class ApiControllerOne extends BaseController
             }
         }
     }
-    
 }

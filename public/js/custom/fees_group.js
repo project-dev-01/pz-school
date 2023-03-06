@@ -1,5 +1,5 @@
 $(function () {
-    
+
     $(".date-picker").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -8,7 +8,6 @@ $(function () {
         yearRange: "-100:+50", // last hundred years
     });
 
-    feesGroupTable();
     $("#feesGroupForm").validate({
         rules: {
             name: "required"
@@ -34,7 +33,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    
+
                     if (data.code == 200) {
                         $('#fees-group-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
@@ -48,64 +47,62 @@ $(function () {
     });
 
     // get all feesGroup table
-    function feesGroupTable() {
-        $('#fees-group-table').DataTable({
-            processing: true,
-            info: true,
-            // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: 'Download CSV',
-                    extension: '.csv',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    text: 'Download PDF',
-                    extension: '.pdf',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
+    $('#fees-group-table').DataTable({
+        processing: true,
+        info: true,
+        // dom: 'lBfrtip',
+        dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdf',
+                text: 'Download PDF',
+                extension: '.pdf',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
 
-                }
-            ],
-            ajax: feesGroupList,
-            "pageLength": 10,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        }).on('draw', function () {
-        });
-    }
+            }
+        ],
+        ajax: feesGroupList,
+        "pageLength": 10,
+        "aLengthMenu": [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ],
+        columns: [
+            {
+                searchable: false,
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+            }
+            ,
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    }).on('draw', function () {
+    });
     // update FeesGroup
     $('#edit-fees-group-form').on('submit', function (e) {
         e.preventDefault();

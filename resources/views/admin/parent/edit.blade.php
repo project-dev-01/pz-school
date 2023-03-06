@@ -219,7 +219,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Guardian Profile</h4>
+                <h4 class="page-title">Parent/Guardian Profile</h4>
             </div>
         </div>
     </div>
@@ -331,7 +331,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            Guardian Details
+                                        Parent/Guardian Details
                                             <h4>
                                     </li>
                                 </ul>

@@ -78,6 +78,7 @@
                             <thead class="">
                                 <tr>
                                     <th>#</th>
+                                    <th>Fees Group</th>
                                     <th>Fees Type</th>
                                     <th>Due Date</th>
                                     <th>Status</th>
@@ -123,6 +124,7 @@
                                 @endphp
                                 <tr>
                                     <td>{{ ++$key }}</td>
+                                    <td>{{ $row['fees_group_name'] }}</td>
                                     <td>{{ $row['name'] }}</td>
                                     <td>{{ $row['due_date'] }}</td>
                                     <td>
@@ -157,7 +159,7 @@
                     <div class="col-10">
                         <ul class="nav nav-pills navtab-bg nav-justified" id="apptabs">
                             @foreach($fees as $key=>$fee)
-                            <li class="nav-item" id="{{$fee['fees_type_id']}}" data-allocation_id="{{$fee['allocation_id']}}" data-paid_amount="{{$fee['paid_amount']}}">
+                            <li class="nav-item" id="{{$fee['fees_type_id']}}" data-fees_group_id="{{$fee['id']}}" data-allocation_id="{{$fee['allocation_id']}}" data-paid_amount="{{$fee['paid_amount']}}">
                                 <a href="#fee{{$fee['fees_type_id']}}" data-toggle="tab" aria-expanded="false" class="nav-link  {{ ($key==0) ? 'active' : '' }}">
                                     {{$fee['fees_name']}}
                                 </a>
@@ -370,6 +372,7 @@
 <script>
     var changePaymentModeUrl = "{{ config('constants.api.change_payment_mode') }}";
     var activeTabDetails = "{{ config('constants.api.fee_active_tab_details') }}";
+    var feesGetPayAmount = "{{ config('constants.api.fees_get_pay_amount') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/fees.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/fees_edit.js') }}"></script>

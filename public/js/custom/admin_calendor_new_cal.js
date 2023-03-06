@@ -211,6 +211,40 @@ $(document).ready(function () {
                 $("#taskShowTit").html(e.event.title);
                 $("#taskShowDesc").html(e.event.extendedProps.description);
             }
+            $("#editEventBtn").unbind().click(function () {
+                $('#taskUpdate')[0].reset();
+                // $(document).on('click', '#deleteEventBtn', function () {
+                // var id = $("#calendorID").val();
+                $('#showTasksModal').modal('hide');
+                $('#updateTasksModal').modal('show');
+                var calendor_id = $("#calendorID").val();
+                $.ajax({
+                    url: calendorEditTaskCalendor,
+                    type: "GET",
+                    dataType: 'json',
+                    data: {
+                        token: token,
+                        branch_id: branchID,
+                        calendor_id: calendor_id
+                    },
+                    success: function (response) {
+                        if (response.code == 200) {
+                            var start_dt = moment(response.data.start).format('DD-MM-YYYY');
+                            var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                            $("#updateTasksModal").find("#calendorID").val(response.data.id);
+                            $("#updateTasksModal").find("#taskTitle").val(response.data.title);
+                            $("#updateTasksModal").find("#taskDescription").val(response.data.description);
+                            $("#updateTasksModal").find("#startDate").html(start_dt);
+                            $("#updateTasksModal").find("#endDate").html(subonesec);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    }, error: function (err) {
+                        console.log(err);
+                        toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    }
+                });
+            });
             // delete
             $("#deleteEventBtn").unbind().click(function () {
                 var id = $("#calendorID").val();
@@ -302,39 +336,7 @@ $(document).ready(function () {
     // $("#updateTasksModal").on("hidden.bs.modal", function () {
     //     $('#updateCalBtn').unbind();
     // });
-    $('#editEventBtn').click(function () {
-        $('#taskUpdate')[0].reset();
-        // $(document).on('click', '#deleteEventBtn', function () {
-        // var id = $("#calendorID").val();
-        $('#showTasksModal').modal('hide');
-        $('#updateTasksModal').modal('show');
-        var calendor_id = $("#calendorID").val();
-        $.ajax({
-            url: calendorEditTaskCalendor,
-            type: "GET",
-            dataType: 'json',
-            data: {
-                token: token,
-                branch_id: branchID,
-                calendor_id: calendor_id
-            },
-            success: function (response) {
-                if (response.code == 200) {
-                    var start_dt = moment(response.data.start).format('DD-MM-YYYY');
-                    var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
-                    $("#updateTasksModal").find("#calendorID").val(response.data.id);
-                    $("#updateTasksModal").find("#taskTitle").val(response.data.title);
-                    $("#updateTasksModal").find("#taskDescription").val(response.data.description);
-                    $("#updateTasksModal").find("#startDate").html(start_dt);
-                    $("#updateTasksModal").find("#endDate").html(subonesec);
-                } else {
-                    toastr.error(response.message);
-                }
-            }, error: function (err) {
-                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
-            }
-        });
-    });
+    
 
 
     function tConvert(time) {

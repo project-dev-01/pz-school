@@ -3,6 +3,7 @@ $url = "http://localhost/school-management-system/api";
 // $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
     'main_db'=>'school-management-system',
+    // 'main_db'=>'paxsuzen_pz-school',
     'api' => [
         // login url
         'login' => $url.'/login',
@@ -471,6 +472,8 @@ return [
         // add task in calendor
         'calendor_add_task_calendor'=>$url.'/calendor/add-task-calendor',
         'calendor_list_task_calendor'=>$url.'/calendor/list-task-calendor',
+        'calendor_edit_task_calendor'=>$url.'/calendor/edit-task-calendor',
+        'calendor_update_task_calendor'=>$url.'/calendor/update-task-calendor',
         'calendor_delete_task_calendor'=>$url.'/calendor/delete-task-calendor',
         
         // education url
@@ -734,6 +737,7 @@ return [
         'fees_update' => $url.'/fees/update',
         'change_payment_mode' => $url.'/fees/change_payment_mode',
         'fee_active_tab_details' => $url.'/fees/active_tab_details',
+        'fees_get_pay_amount' => $url.'/fees/get_pay_amount',
         // add score rank modules
         'all_exam_subject_scores' => $url.'/all_exam_subject_scores',
         'all_exam_subject_ranks' => $url.'/all_exam_subject_ranks',

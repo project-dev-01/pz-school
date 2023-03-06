@@ -6599,6 +6599,7 @@ class AdminController extends Controller
             'collect_by' => session()->get('ref_user_id'),
             'fees_type' => $request->fees_type,
             'allocation_id' => $request->allocation_id,
+            'fees_group_id' => $request->fees_group_id,
             'payment_mode' => $request->payment_mode,
             'fees' => $request->fees[$request->payment_mode]
         ];
@@ -6633,12 +6634,14 @@ class AdminController extends Controller
 
     public function createFeesGroup()
     {
+        $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
-        // dd($fees_type);
+        // dd($payment_mode);
         return view(
             'admin.fees_group.add',
             [
                 'fees_type' => $fees_type['data'],
+                'payment_mode' => $payment_mode['data']
             ]
         );
     }
@@ -6661,6 +6664,7 @@ class AdminController extends Controller
         $data = [
             'id' => $id,
         ];
+        $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         // $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         $fees_group = Helper::PostMethod(config('constants.api.fees_group_details'), $data);
         // dd($fees_group['data']['fees_group_details']);
@@ -6674,6 +6678,7 @@ class AdminController extends Controller
             [
                 'fees_type' => $fees_group['data']['fees_type'],
                 'fees_group' => $fees_group['data']['fees_group'],
+                'payment_mode' => $payment_mode['data']
             ]
         );
     }

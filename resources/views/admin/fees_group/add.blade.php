@@ -47,6 +47,7 @@
                                         <th>#</th>
                                         <th>Fees Type</th>
                                         <th>Due Date</th>
+                                        <th>Payment Mode</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
@@ -63,14 +64,28 @@
                                         <td>{{$type['name']}}</td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" class="form-control date-picker" name="fees[{{$key}}][due_date]" value=""  autocomplete="off">
-                                                <span class="error"></span>
+                                                <input type="text" class="form-control date-picker" name="fees[{{$key}}][due_date]" value="" autocomplete="off">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" name="fees[{{$key}}][amount]" class="form-control" autocomplete="off" value="">
-                                                <span class="error"></span>
+                                                @forelse ($payment_mode as $mode)
+                                                <input type="hidden" name="fees[{{$key}}][mode_id][]" class="form-control" value="{{ $mode['id'] }}">
+                                                <input type="text" disabled name="fees[{{$key}}][payment_mode][]" class="form-control" value="{{ $mode['name'] }}">
+
+                                                <!-- <input type="text" disabled class="form-control" name="fees[{{$key}}][payment_mode]" value="{{ $mode['name'] }}"> -->
+                                                <br>
+                                                @empty
+                                                @endforelse
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                @forelse ($payment_mode as $mode)
+                                                <input type="number" name="fees[{{$key}}][amount][]" class="form-control" value="">
+                                                <br>
+                                                @empty
+                                                @endforelse
                                             </div>
                                         </td>
                                     </tr>
@@ -80,7 +95,7 @@
                             </table>
                         </div>
                         <div class="form-group">
-                            
+
                             <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                         </div>

@@ -18,6 +18,7 @@ class CreateFeesPaymentHistoryTable extends Migration
             $table->integer('student_id');
             $table->integer('allocation_id');
             $table->integer('fees_type_id');
+            $table->integer('fees_group_id');
             $table->string('monthly')->nullable();
             $table->string('semester')->nullable();
             $table->string('yearly')->nullable();
