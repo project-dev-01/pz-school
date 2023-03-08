@@ -4,6 +4,7 @@
 <!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
 <link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .nav-tabs {
@@ -18,6 +19,7 @@
         border: none;
         border-radius: 2px;
         border: 1px solid #929fa7;
+        background-color: #F4F7FC;
     }
 
     .tt-button-icon {
@@ -34,12 +36,67 @@
     .tt-button-icon {
         background-color: none;
     }
+    .tt-button-icon:hover, .tt-button-icon.active {
+    border-color: #E9D528;
+}
+.ck-placeholder
+{
+    height:200px;
+}
+.select2-container .select2-search--inline .select2-search__field {
+    box-sizing: border-box;
+    border: none;
+    font-size: 100%;
+    margin-top: 12px;
+    margin-left: 10px;
+    padding: 0;
+    max-width: 100%;
+    resize: none;
+    height: 21px;
+    vertical-align: bottom;
+    font-family: sans-serif;
+    overflow: hidden;
+    word-break: keep-all;
+}
+.select2-container--default .select2-selection--multiple {
+    background-color: #F4F7FC;
+}
+.pt-editor .pt-title {
+    color: #182730;
+    font-weight: 600;
+    font-size: 16px;
+    /* line-height: 26px; */
+    margin: 0px;
+    padding: 0 0 0 0;
+    letter-spacing: 0.01em;
+}
+.tt-topic-list .tt-list-header.tt-border-bottom
+{
+border-bottom: 1px solid #E9D528;
+}
+    .btn-blue {
+    color: #fff;
+    background-color: #4a81d4;
+    border-color: #4a81d4;
+    }
+   .btn-danger {
+    color: #fff;
+    background-color: #f1556c;
+    border-color: #f1556c;
+    }
+
+.btn i {
+    font-size: 14px;
+    color: white;
+    font-family: Open Sans;
+}
+
 </style>
 <main id="tt-pageContent">
     <div class="container card" style="background:white;">
         <div class="tt-wrapper-inner" id="createpostForumreset">
-            <h1 class="tt-title-border">
-                Create New Topic
+            <h1 class="tt-title-border" style="border-bottom: 1px solid #E9D528;">
+               <label style="margin-top: 10px;">Create New Topic</label>
             </h1>
             <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('admin.forum.create-topic') }}" autocomplete="off">
                 @csrf
@@ -283,6 +340,10 @@
                 </div>
                 <!-- /tt-search -->
             </div>
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table w-100 nowrap">
             <div class="tt-list-header tt-border-bottom">
                 <div class="tt-col-topic">Topic</div>
                 <div class="tt-col-category">Category</div>
@@ -363,9 +424,14 @@
                         {{$value['activity']}}
                         @endif
                     </div>
-                    <div class="tt-col-value">
-                            <a href="{{route('admin.forum.page-edit-topic', $value['id'])}}" class="btn btn-blue btn-sm waves-effect waves-light"><span class="tt-color03 tt-badge">Edit</span></a>
-                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="{{$value['id']}}" id="deletePostBtn"><span class="tt-color08 tt-badge">Delete</span></a>
+
+                    <div class="tt-col-value" style="padding-right: 0px;padding-left: 0px;">
+                        <div class="button-list">
+                            <a href="{{route('admin.forum.page-edit-topic', $value['id'])}}" class="btn btn-blue waves-effect waves-light"><span class=""><i class="mdi mdi-square-edit-outline"></i></span></a>
+
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="{{$value['id']}}" id="deletePostBtn"><span class=""><i class="mdi mdi-delete"></i></span></a>
+                        </div>                                
+                        
                     </div>
                 </div>
                 @php
@@ -376,6 +442,10 @@
             @endif
         </div>
     </div>
+</table>
+</div>
+</div>
+</div>
 </main>
 @endsection
 @section('scripts')

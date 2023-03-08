@@ -18,6 +18,7 @@
         border: none;
         border-radius: 2px;
         border: 1px solid #929fa7;
+        background-color: #F4F7FC;
     }
 
     .tt-button-icon {
@@ -34,12 +35,50 @@
     .tt-button-icon {
         background-color: none;
     }
+    .tt-button-icon:hover, .tt-button-icon.active {
+    border-color: #E9D528;
+}
+.ck-placeholder
+{
+    height:200px;
+}
+.select2-container .select2-search--inline .select2-search__field {
+    box-sizing: border-box;
+    border: none;
+    font-size: 100%;
+    margin-top: 12px;
+    margin-left: 10px;
+    padding: 0;
+    max-width: 100%;
+    resize: none;
+    height: 21px;
+    vertical-align: bottom;
+    font-family: sans-serif;
+    overflow: hidden;
+    word-break: keep-all;
+}
+.select2-container--default .select2-selection--multiple {
+    background-color: #F4F7FC;
+}
+.pt-editor .pt-title {
+    color: #182730;
+    font-weight: 600;
+    font-size: 16px;
+    /* line-height: 26px; */
+    margin: 0px;
+    padding: 0 0 0 0;
+    letter-spacing: 0.01em;
+}
+.tt-topic-list .tt-list-header.tt-border-bottom
+{
+border-bottom: 1px solid #E9D528;
+}
 </style>
 <main id="tt-pageContent">
     <div class="container card" style="background:white;">
-        <div class="tt-wrapper-inner" id="updatepostForumreset">
+        <div class="tt-wrapper-inner" id="updatepostForumreset" style="border-bottom: 1px solid #E9D528;">
             <h1 class="tt-title-border">
-                Create New Topic
+                <label style="margin-top: 10px;">Create New Topic</label>
             </h1>
             <form class="form-default form-update-topic" id="updatepostForum" method="post" action="{{ route('staff.forum.update-topic') }}" autocomplete="off">
                 @csrf

@@ -383,6 +383,7 @@ return [
         'admission_add' => $url.'/admission/add',
         // add_to_do_list
         'add_to_do_list' => $url.'/add_to_do_list',
+        'update_to_do_list' => $url.'/update_to_do_list',
         'get_to_do_list' => $url.'/get_to_do_list',
         'get_to_do_row' => $url.'/get_to_do_row',
         'delete_to_do_list' => $url.'/delete_to_do_list',

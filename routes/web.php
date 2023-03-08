@@ -512,6 +512,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
         Route::get('task/create', [AdminController::class, 'createTask'])->name('admin.task.create');
         Route::post('task/add', [AdminController::class, 'addToDoList'])->name('admin.task.add');
+        Route::post('task/update', [AdminController::class, 'updateToDoList'])->name('admin.task.update');
         Route::get('task/get', [AdminController::class, 'getToDoList'])->name('admin.task.get');
         Route::get('task/edit/{id}', [AdminController::class, 'editToDoList'])->name('admin.task.edit');
 

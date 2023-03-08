@@ -10990,6 +10990,78 @@ class ApiController extends BaseController
             }
         }
     }
+     // updateToDoList
+     public function updateToDoList(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'id'=>'required',
+             'branch_id' => 'required',
+             'title' => 'required',
+             'due_date' => 'required',
+             'assign_to' => 'required',
+             'priority' => 'required',
+             // 'check_list' => 'required',
+             'task_description' => 'required'
+         ]);
+        // $olf_file = $request->old_file;
+        // $old_files = explode(",", $request->old_file);
+        // $old_files = $Connection->table('to_do_lists')->where('id', $request->id)->whereRaw('FIND_IN_SET(?,to_do_lists.file)', [$request->old_file])->get();
+         if (!$validator->passes()) {
+             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+         } else {
+ 
+             // create new connection
+             $Connection = $this->createNewConnection($request->branch_id);
+             $fileDetails = $request->file;
+ 
+             $fileNames = [];
+             $old_file = explode(",", $request->old_file);
+             if ($old_file) {
+                $old_updated_file = explode(",", $request->old_updated_file);
+                $delete_files = array_diff($old_file,$old_updated_file);
+                foreach($delete_files as $delete){
+
+                    $file = base_path() . '/public/images/todolist/' . $delete;
+                        if (file_exists($file)) {
+                            unlink($file);
+                        }
+                }
+
+                foreach($old_updated_file as $file_name){
+                    array_push($fileNames, $file_name);
+                }
+            }
+             if ($fileDetails) {
+                 foreach ($fileDetails as $key => $value) {
+                     $now = now();
+                     $name = strtotime($now);
+                     $extension = $value['extension'];
+                     $fileName = $name . uniqid() . "." . $extension;
+                     $base64 = base64_decode($value['base64']);
+                     $file = base_path() . '/public/images/todolist/' . $fileName;
+                     $upload = file_put_contents($file, $base64);
+                     array_push($fileNames, $fileName);
+                 }
+             }
+             $insertArr = [
+                 'title' => $request->title,
+                 'due_date' => $request->due_date,
+                 'assign_to' => $request->assign_to,
+                 'priority' => $request->priority,
+                 'check_list' => $request->check_list,
+                 'task_description' => $request->task_description,
+                 'file' => implode(",", $fileNames),
+                 'mark_as_complete' => "0",
+                 'created_at' => date("Y-m-d H:i:s")
+             ];
+             $query = $Connection->table('to_do_lists')->where('id', $request->id)->update($insertArr);
+             if (!$query) {
+                 return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+             } else {
+                 return $this->successResponse([], 'To List has been successfully Updated');
+             }
+         }
+     }
     // get ToDoList
     public function getToDoList(Request $request)
     {
@@ -11021,7 +11093,7 @@ class ApiController extends BaseController
             // create new connection
             $createConnection = $this->createNewConnection($request->branch_id);
             // insert data
-            $toDoRow = $createConnection->table('to_do_lists')->where('id', $request->id)->get();
+            $toDoRow = $createConnection->table('to_do_lists')->where('id', $request->id)->first();
             return $this->successResponse($toDoRow, 'to Do Lists row fetch successfully');
         }
     }

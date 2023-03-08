@@ -4,10 +4,9 @@
 <!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
 <link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
-    .nav-tabs {
+       .nav-tabs {
         background-color: white;
     }
 
@@ -74,47 +73,31 @@
 {
 border-bottom: 1px solid #E9D528;
 }
-    .btn-blue {
-    color: #fff;
-    background-color: #4a81d4;
-    border-color: #4a81d4;
-    }
-   .btn-danger {
-    color: #fff;
-    background-color: #f1556c;
-    border-color: #f1556c;
-    }
-
-.btn i {
-    font-size: 14px;
-    color: white;
-    font-family: Open Sans;
-}
-
 </style>
 <main id="tt-pageContent">
     <div class="container card" style="background:white;">
-        <div class="tt-wrapper-inner" id="createpostForumreset">
-            <h1 class="tt-title-border" style="border-bottom: 1px solid #E9D528;">
-               <label style="margin-top: 10px;">Create New Topic</label>
+        <div class="tt-wrapper-inner" id="updatepostForumreset" style="border-bottom: 1px solid #E9D528;">
+            <h1 class="tt-title-border">
+                <label style="margin-top: 10px;">Create New Topic</label>
             </h1>
-            <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('student.forum.create-topic') }}" autocomplete="off">
+            <form class="form-default form-update-topic" id="updatepostForum" method="post" action="{{ route('admin.forum.update-topic') }}" autocomplete="off">
                 @csrf
+                <input type="hidden" name="id" value="{{$forum_edit['id']}}">
                 <div class="form-group">
                     <label for="inputTopicTitle">Topic Title</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicTitle" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
+                        <input type="text" name="inputTopicTitle" value="{{$forum_edit['topic_title']}}" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
                 <div class="form-group" id="selectedtpy">
-                    <input type="hidden" id="topictype" name="topictype">
+                    <input type="hidden" id="topictype" name="topictype" value="{{$forum_edit['types']}}">
                     <label>Topic Type</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
                             <div class="col-4 col-lg-3 col-xl-3">
-                                <a href="#" class="tt-button-icon">
+                                <a href="#" class="tt-button-icon {{$forum_edit['types']=='Discussion'? 'active':''}}">
                                     <span class="tt-icon">
                                         <svg>
                                             <use xlink:href="#icon-discussion"></use>
@@ -124,7 +107,7 @@ border-bottom: 1px solid #E9D528;
                                 </a>
                             </div>
                             <div class="col-4 col-lg-3 col-xl-3">
-                                <a href="#" class="tt-button-icon">
+                                <a href="#" class="tt-button-icon {{$forum_edit['types']=='Question'? 'active':''}}">
                                     <span class="tt-icon">
                                         <svg>
                                             <use xlink:href="#Question"></use>
@@ -134,7 +117,7 @@ border-bottom: 1px solid #E9D528;
                                 </a>
                             </div>
                             <div class="col-4 col-lg-3 col-xl-3">
-                                <a href="#" class="tt-button-icon">
+                                <a href="#" class="tt-button-icon{{$forum_edit['types']=='Technology'? 'active':''}}" >
                                     <span class="tt-icon">
                                         <svg>
                                             <use xlink:href="#Poll"></use>
@@ -164,8 +147,8 @@ border-bottom: 1px solid #E9D528;
                                 </a>
                             </div>-->
                             <div class="col-4 col-lg-3 col-xl-3">
-                                <a href="#" class="tt-button-icon">
-                                    <span class="tt-icon">
+                                <a href="#" class="tt-button-icon {{$forum_edit['types']=='Other'? 'active':''}}">
+                                    <span class="tt-icon" >
                                         <svg>
                                             <use xlink:href="#Others"></use>
                                         </svg>
@@ -179,7 +162,7 @@ border-bottom: 1px solid #E9D528;
                 <div class="form-group">
                     <label for="inputTopicHeader">Topic Header</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="Header of your topic">
+                        <input type="text" name="inputTopicHeader" value="{{$forum_edit['topic_header']}}" class="form-control" id="inputTopicHeader" placeholder="Header of your topic">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">Describe your topic header..</div>
@@ -259,7 +242,7 @@ border-bottom: 1px solid #E9D528;
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started" style="height:20px"></textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started" style="height:20px"> {{$forum_edit['body_content']}} </textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -270,7 +253,7 @@ border-bottom: 1px solid #E9D528;
                                         <option value="">Select category</option>
                                         @if(!empty($category))
                                         @foreach($category as $c)
-                                        <option value="{{$c['id']}}">{{$c['category_names']}}</option>
+                                        <option value="{{$c['id']}}"  {{$c['id'] == $forum_edit['category'] ? "Selected" : "" }}>{{$c['category_names']}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -280,13 +263,25 @@ border-bottom: 1px solid #E9D528;
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
                                 <label for="inputTopic" class="col-3 col-form-label">User</label>
-                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
-                                    <option value=""></option>
-                                    @foreach($usernames as $c)
-                                    <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                
+                                <select class="form-control select2-multiple" data-toggle="select2" id="selectedusers" name="tags[]" multiple="multiple" data-placeholder="Select User">
+                                    <option value="">Select User</option>
+                                    @forelse($usernames as $user)
+                                    @php
+                                    $selected = "";
+                                    @endphp
+                                    @foreach(explode(',', $forum_edit['tags']) as $info)
+                                    @if($user['id'] == $info)
+                                    @php
+                                    $selected = "Selected";
+                                    @endphp
+                                    @endif
                                     @endforeach
-
+                                    <option value="{{$user['id']}}" {{ $selected }}>{{$user['name']}}</option>
+                                    @empty
+                                    @endforelse
                                 </select>
+                                <!-- <input type="hidden" id="tags" name="tags"> -->
                                 <!-- <input type="text" id="inputTopicTags" placeholder="" autocomplete="off" class="form-control input-lg" />
                                 <input type="text" name="inputTopicTags" autocomplete="off" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags"> -->
 
@@ -306,10 +301,11 @@ border-bottom: 1px solid #E9D528;
 
                         </div>
                         <br>
+                        <span id="grpnames"></span>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Create Post</button>
+                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Update Post</button>
                         </div>
                     </div>
                 </div>
@@ -338,120 +334,17 @@ border-bottom: 1px solid #E9D528;
                 </div>
                 <!-- /tt-search -->
             </div>
-<div class="row">
-    <div class="col-12">
-        <div class="table-responsive">
-            <table class="table w-100 nowrap">
-            <div class="tt-list-header tt-border-bottom">
-                <div class="tt-col-topic">Topic</div>
-                <div class="tt-col-category">Category</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
-                <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
-                <div class="tt-col-value">Action</div>
-            </div>
-
-            @if(!empty($forum_list))
-            @php
-            $randomcolor = 1;
-            @endphp
-            @foreach($forum_list as $value)
-            @if($value['user_id']==$user_id)
-                @php
-                if($randomcolor==9)
-                {
-                $randomcolor = 1;
-                }
-                @endphp
-                <div class="tt-item">
-                    <div class="tt-col-avatar">
-                        <!-- <svg class="tt-icon">
-                            <use xlink:href="#icon-ava-n"></use>
-                        </svg>-->
-                        <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
-                        {{ $value['user_name'] }}
-                    </div>
-                    <div class="tt-col-description">
-                        <h6 class="tt-title">
-                            <a href="{{route('student.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
-                                {{ $value['topic_title'] }}
-                            </a>
-                        </h6>
-                        <div class="row align-items-center no-gutters hide-desktope">
-                            <div class="col-auto">
-                                <ul class="tt-list-badge">
-                                    <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge"></span></a></li>
-                                </ul>
-                            </div>
-                            <div class="col-auto ml-auto show-mobile">
-                                <div class="tt-value">1d</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
-                    <div class="tt-col-value hide-mobile">
-                        @if($value['likes']=== null)
-                        0
-                        @else
-                        {{$value['likes']}}
-                        @endif
-                    </div>
-                    <div class="tt-col-value hide-mobile">
-                        @if($value['replies']=== null)
-                        0
-                        @else
-                        {{$value['replies']}}
-                        @endif
-                    </div>
-                    <div class="tt-col-value hide-mobile">
-                        @if($value['views']=== null)
-                        0
-                        @else
-                        {{$value['views']}}
-                        @endif
-                    </div>
-                    <div class="tt-col-value hide-mobile">
-                        @php
-                        echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
-                        @endphp
-                        @if($value['activity']=== null)
-                        0
-                        @else
-                        {{$value['activity']}}
-                        @endif
-                    </div>
-
-                    <div class="tt-col-value" style="padding-right: 0px;padding-left: 0px;">
-                        <div class="button-list">
-                            <a href="{{route('student.forum.page-edit-topic', $value['id'])}}" class="btn btn-blue waves-effect waves-light"><span class=""><i class="mdi mdi-square-edit-outline"></i></span></a>
-
-                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="{{$value['id']}}" id="deletePostBtn"><span class=""><i class="mdi mdi-delete"></i></span></a>
-                        </div>                                
-                        
-                    </div>
-                </div>
-                @php
-                $randomcolor++;
-                @endphp
-            @endif
-            @endforeach
-            @endif
+            
         </div>
     </div>
-</table>
-</div>
-</div>
-</div>
 </main>
 @endsection
 @section('scripts')
 <script>
-    var indexPost = "{{ route('student.forum.page-create-topic') }}";
-    var deletePost = "{{ config('constants.api.forum_delete') }}";
+    var indexPost = "{{ route('admin.forum.page-create-topic') }}";
 </script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script>
     function SimpleUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -507,7 +400,7 @@ border-bottom: 1px solid #E9D528;
             // integration to choose the right communication channel. This example uses
             // a POST request with JSON as a data structure but your configuration
             // could be different.
-            xhr.open('POST', "{{ route('student.forum.image.store') }}", true);
+            xhr.open('POST', "{{ route('admin.forum.image.store') }}", true);
             xhr.setRequestHeader('x-csrf-token', '{{csrf_token()}}');
             xhr.responseType = 'json';
         }

@@ -2366,6 +2366,7 @@ class AdminController extends Controller
     public function createTask()
     {
         $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
+        // dd($allocate_section_list);
         return view(
             'admin.task.add',
             [
@@ -2435,9 +2436,8 @@ class AdminController extends Controller
             'task_description' => $request->task_description,
             'file' => $files,
         ];
-
         $response = Helper::PostMethod(config('constants.api.add_to_do_list'), $data);
-        // // dd($response);
+        // dd($response);
         return $response;
     }
     public function getToDoList(Request $request)
@@ -2466,14 +2466,57 @@ class AdminController extends Controller
             'id' => $id,
         ];
         $taskRow = Helper::PostMethod(config('constants.api.get_to_do_row'), $res);
+        // dd($taskRow);
         $allocate_section_list = Helper::GetMethod(config('constants.api.allocate_section_list'));
         return view(
             'admin.task.edit',
             [
                 'to_do_row' => $taskRow['data'],
-                'allocate_section_list' => $allocate_section_list['data']
+                'allocate_section_list' => $allocate_section_list['data'],
             ]
         );
+    }
+    public function updateToDoList(Request $request)
+    {
+        // $created_by = session()->get('user_id');
+
+        // $file = $request->file('file');
+        // $path = $file->path();
+        // $data = file_get_contents($path);
+        // $base64 = base64_encode($data);
+        // $extension = $file->getClientOriginalExtension();
+        $files = [];
+        if ($request->hasfile('file')) {
+            foreach ($request->file('file') as $file) {
+
+                $object = new \stdClass();
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+
+                $object->extension = $extension;
+                $object->base64 = $base64;
+                array_push($files, $object);
+            }
+        }
+        // print_r($files);
+        // exit;
+        $data = [
+            'id' => $request->id,
+            'title' => $request->title,
+            'due_date' => $request->due_date,
+            'assign_to' => $request->assign_to,
+            'priority' => $request->priority,
+            'check_list' => $request->check_list,
+            'old_file' => $request->old_file,
+            'task_description' => $request->task_description,
+            'old_updated_file' => $request->old_updated_file,
+            'file' => $files,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.update_to_do_list'), $data);
+        return $response;
     }
     public function evaluationReport()
     {

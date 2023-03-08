@@ -25,6 +25,7 @@ $(function () {
 
         // EventListener pour le bouton de suppression créé
         $('span.file-delete').click(function () {
+            console.log('123')
             let name = $(this).next('span.name').text();
             // Supprimer l'affichage du nom de fichier
             $(this).parent().remove();
@@ -40,6 +41,23 @@ $(function () {
             document.getElementById('attachment').files = dt.files;
         });
     });
+    
+    $('span.file-delete').click(function () {
+        console.log('123')
+        let name = $(this).next('span.name').text();
+        // Supprimer l'affichage du nom de fichier
+        $(this).parent().remove();
+        for (let i = 0; i < dt.items.length; i++) {
+            // Correspondance du fichier et du nom
+            if (name === dt.items[i].getAsFile().name) {
+                // Suppression du fichier dans l'objet DataTransfer
+                dt.items.remove(i);
+                continue;
+            }
+        }
+        // Mise à jour des fichiers de l'input file après suppression
+        document.getElementById('attachment').files = dt.files;
+    });
     // file change end
     // add checklist start 
     const addCheckListInp = document.getElementById('addCheckList');
@@ -49,6 +67,7 @@ $(function () {
     addCheckListBtn.addEventListener('click', createTask);
 
     function createTask() {
+        console.log('ckd',taskList)
         let val = addCheckListInp.value;
         createLi(taskList, val);
     }
@@ -187,6 +206,81 @@ $(function () {
         };
     });
     // add form submit end
+
+    // update checklist end 
+    // update form submit start
+    // rules validation
+
+    $("#updateToDoList").validate({
+        rules: {
+            "title": "required",
+            "due_date": "required",
+            "assign_to": "required",
+            "priority": "required",
+            "task_description": "required",
+            "file": "required",
+        }
+    });
+    // data bind 
+    $('#updateToDoList').on('submit', function (e) {
+        e.preventDefault();
+        var toDoListValid = $("#updateToDoList").valid();
+        // console.log(toDoListValid);
+        if (toDoListValid === true) {
+
+            var old_updated_file = $(".old_file_updated").map(function() {
+                return $(this).text();
+              }).get().join(','); 
+            var title = $("#title").val();
+            var id = $("#id").val();
+            var dueDate = $("#dueDate").val();
+            var assign_to = $("#assign_to").val();
+            var old_file = $("#old_file").val();
+            var priority = $("#priority").val();
+            var task_description = $("#task_description").val();
+            var files = $("#attachment").get(0).files;
+            var formData = new FormData();
+            formData.append("title", title);
+            formData.append("id", id);
+            formData.append("due_date", dueDate);
+            formData.append("assign_to", assign_to);
+            formData.append("priority", priority);
+            formData.append("old_updated_file", old_updated_file);
+            formData.append("check_list", checkListData);
+            formData.append("task_description", task_description);
+            formData.append("old_file", old_file);
+            for (var i = 0; i < files.length; i++) {
+                formData.append("file[]", files[i]);
+            }
+
+            $.ajax({
+                url: toDoListURL,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log('data', 200)
+                    console.log(response)
+                    if (response.code == 200) {
+                        toastr.success(response.message);
+                        // $('.updateToDoTask').modal('hide');
+                        $('#updateToDoList')[0].reset();
+                        window.location.href = gettoDoListURL;
+                        // $("#dassign_to").select2('val', '');
+
+                        // $('#taskList').find('ul').empty();
+                        // $('#filesList').find('#filesList').empty();
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+        };
+    });
+    // update form submit end
+
     // get row
     $(document).on('click', '#editToDoListBtn', function () {
         var id = $(this).data('id');
@@ -232,5 +326,21 @@ $(function () {
             }
         });
     });
+
+    
+    var old_checkk_list = $("#old_check_list").val();
+    if(old_checkk_list){
+        var old_checkk_list = old_checkk_list.split(',');
+        $.each(old_checkk_list, function (key, val) {
+            console.log(key,val)
+            createListTask(val)
+        });
+    }
+    
+    
+    function createListTask(val) {
+        console.log(1,val)
+        createLi(taskList, val);
+    }
 
 });
