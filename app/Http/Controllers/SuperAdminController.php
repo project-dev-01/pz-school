@@ -1696,7 +1696,19 @@ class SuperAdminController extends Controller
     }
     public function faqIndex()
     {
-        return view('super_admin.faq.index');
+        
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
+
+        ];
+        return view(
+            'super_admin.faq.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
     public function examResult()
     {

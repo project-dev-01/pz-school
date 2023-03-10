@@ -10,8 +10,8 @@
                 <form id="addAssignClassSubject" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="changeClassName">Grade<span class="text-danger">*</span></label>
-                        <select class="form-control add_class_name" id="changeClassName" name="class_name">
+                        <label for="addchangeClassName">Grade<span class="text-danger">*</span></label>
+                        <select class="form-control add_class_name" id="addchangeClassName" name="class_name">
                             <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>

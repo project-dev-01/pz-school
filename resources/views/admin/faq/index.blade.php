@@ -116,9 +116,9 @@
 
                 <div class="mt-4">
                     <form id="sendFaqMail" method="post" enctype="multipart/form-data" autocomplete="off">
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter Your Email">
-                        </div>
+                            <input type="hidden" name="email" id="email" value="{{$data['email']}}">
+                            <input type="hidden" name="name" id="name" value="{{$data['name']}}">
+                            <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
 
                         <div class="form-group">
                             <input type="text" name="subject" id="subject"  class="form-control" placeholder="Subject">

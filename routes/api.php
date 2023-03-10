@@ -490,6 +490,13 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('leave_type/update', [ApiController::class, 'updateLeaveType']);
     Route::post('leave_type/delete', [ApiController::class, 'deleteLeaveType']);
 
+    // staff Leave Assign routes
+    Route::post('staff_leave_assign/add', [ApiController::class, 'addStaffLeaveAssign']);
+    Route::get('staff_leave_assign/list', [ApiController::class, 'getStaffLeaveAssignList']);
+    Route::post('staff_leave_assign/staff_leave_assign-details', [ApiController::class, 'getStaffLeaveAssignDetails']);
+    Route::post('staff_leave_assign/update', [ApiController::class, 'updateStaffLeaveAssign']);
+    Route::post('staff_leave_assign/delete', [ApiController::class, 'deleteStaffLeaveAssign']);
+
     // Transport Route routes
     Route::post('transport_route/add', [ApiController::class, 'addTransportRoute']);
     Route::get('transport_route/list', [ApiController::class, 'getTransportRouteList']);

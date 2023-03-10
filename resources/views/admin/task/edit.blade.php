@@ -98,9 +98,9 @@
                                         @foreach(explode(',', $to_do_row['file']) as $file)
                                             <span class="file-block">
                                                 <span class="file-delete">
-                                                    <span style="margin-left: 5px; color: red; font-weight: bold;">X</span>
+                                                    <span class="name old_file_updated">{{$file}}</span>
+                                                    <span style="margin-left: 1px; color: red; font-weight: bold; margin-right: 5px;">X</span>
                                                 </span>
-                                                <span class="name old_file_updated">{{$file}}</span>
                                             </span>
                                         @endforeach
                                     @endif
@@ -109,8 +109,8 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                         </div>
 
                     </form>

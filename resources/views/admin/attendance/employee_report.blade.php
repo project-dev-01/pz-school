@@ -73,14 +73,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date">Date<span class="text-danger">*</span></label>
+                                    <label for="date">Month/Year<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="MM-YYYY">
                                     </div>
                                 </div>
                             </div>

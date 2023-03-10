@@ -4,18 +4,18 @@ $(function () {
     $('#changeClassName').on('change', function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
-        $("#assignClassSubFilter").find("#sectionID").empty();
-        $("#assignClassSubFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#assignClassSubFilter").find("#filtersectionID").empty();
+        $("#assignClassSubFilter").find("#filtersectionID").append('<option value="">Select Class</option>');
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#assignClassSubFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                    $("#assignClassSubFilter").find("#filtersectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
             }
         }, 'json');
     });
 
-    $('#changeClassName').on('change', function () {
+    $('#addchangeClassName').on('change', function () {
         var class_id = $(this).val();
         var IDnames = "#addAssignClassSubject";
         var section_id = null;
@@ -28,6 +28,9 @@ $(function () {
         getSections(class_id, IDnames, section_id);
     });
     function getSections(class_id, IDnames, section_id) {
+        console.log('123',IDnames)
+        console.log('class_id',class_id)
+        console.log('section_id',section_id)
         $(IDnames).find("#sectionID").empty();
         $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
 
@@ -56,10 +59,11 @@ $(function () {
         e.preventDefault();
         var classValid = $("#addAssignClassSubject").valid();
         if (classValid === true) {
-            var changeClassName = $("#changeClassName").val();
-            var sectionID = $("#sectionID").val();
-            var assignSubjects = $("#assignSubjects").val();
 
+            
+            var changeClassName = $("#addAssignClassSubject").find("select[name=class_name]").val();
+            var sectionID = $("#addAssignClassSubject").find("select[name=section_name]").val();
+            var assignSubjects = $("#addAssignClassSubject").find("select[name=subject_id]").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -266,7 +270,7 @@ $(function () {
     $('#assignClassSubFilter').on('submit', function (e) {
         e.preventDefault();
         var class_id = $("#changeClassName").val();
-        var section_id = $("#sectionID").val();
+        var section_id = $("#filtersectionID").val();
         AllLeaveListShow(class_id, section_id);
     });
     AllLeaveListShow(class_id = null, section_id = null);

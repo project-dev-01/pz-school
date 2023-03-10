@@ -3137,7 +3137,7 @@ class ApiControllerOne extends BaseController
                     DB::raw('DATE_FORMAT(lev.from_leave, "%d-%m-%Y") as from_leave'),
                     DB::raw('DATE_FORMAT(lev.to_leave, "%d-%m-%Y") as to_leave'),
                     DB::raw('DATE_FORMAT(lev.created_at, "%d-%m-%Y") as created_at'),
-                    DB::raw('DATEDIFF(lev.to_leave,lev.from_leave) as date_diff'),
+                    'lev.total_leave',
                     'lt.name as leave_type_name',
                     'rs.name as reason_name',
                     'lev.reason_id',
@@ -7924,7 +7924,6 @@ class ApiControllerOne extends BaseController
     }
     public function faqEmail(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
             'email' => 'required'
@@ -7937,10 +7936,10 @@ class ApiControllerOne extends BaseController
             $email = $request->email;
             // dd($link);
             if ($email) {
-                $data = array('subject' => $request->subject, 'remarks' => $request->remarks, 'email' => $email);
+                $data = array('subject' => $request->subject, 'remarks' => $request->remarks, 'email' => $email,'name' => $request->name, 'role_name' => $request->role_name);
                 Mail::send('auth.faq_mail', $data, function ($message) use ($request) {
                     $message->to('rajesh@aibots.my', 'members')->subject('FAQ');
-                    $message->from('rajesh@aibots.my', 'Password Reset');
+                    $message->from('askyourquery@paxsuzen.com', 'Password Reset');
                 });
                 // return $mail;
                 return $this->successResponse([], 'Mail Sended Successfully');

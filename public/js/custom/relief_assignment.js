@@ -46,8 +46,8 @@ $(function () {
                 name: 'leave_type_name'
             },
             {
-                data: 'date_diff',
-                name: 'date_diff'
+                data: 'total_leave',
+                name: 'total_leave'
             },
             {
                 data: 'from_leave',

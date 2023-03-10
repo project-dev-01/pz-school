@@ -566,6 +566,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('leave_type/update', [AdminController::class, 'updateLeaveType'])->name('admin.leave_type.update');
         Route::post('leave_type/delete', [AdminController::class, 'deleteLeaveType'])->name('admin.leave_type.delete');
 
+        // Staff Leave Assign routes
+        Route::get('staff_leave_assign/index', [AdminController::class, 'staffLeaveAssign'])->name('admin.staff_leave_assign');
+        Route::get('staff_leave_assign/list', [AdminController::class, 'getStaffLeaveAssignList'])->name('admin.staff_leave_assign.list');
+        Route::post('staff_leave_assign/add', [AdminController::class, 'addStaffLeaveAssign'])->name('admin.staff_leave_assign.add');
+        Route::post('staff_leave_assign/staff_leave_assign-details', [AdminController::class, 'getStaffLeaveAssignDetails'])->name('admin.staff_leave_assign.details');
+        Route::post('staff_leave_assign/update', [AdminController::class, 'updateStaffLeaveAssign'])->name('admin.staff_leave_assign.update');
+        Route::post('staff_leave_assign/delete', [AdminController::class, 'deleteStaffLeaveAssign'])->name('admin.staff_leave_assign.delete');
+
         // Transport Route routes
         Route::get('transport_route/index', [AdminController::class, 'transportRoute'])->name('admin.transport_route');
         Route::get('transport_route/list', [AdminController::class, 'getTransportRouteList'])->name('admin.transport_route.list');

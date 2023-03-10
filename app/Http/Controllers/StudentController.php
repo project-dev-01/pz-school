@@ -119,7 +119,19 @@ class StudentController extends Controller
 
     public function faqIndex()
     {
-        return view('parent.faq.index');
+        
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
+
+        ];
+        return view(
+            'student.faq.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
     // faq screen pages end
     // Home work screen pages start

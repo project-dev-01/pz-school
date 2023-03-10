@@ -434,6 +434,12 @@ return [
         'leave_type_details' => $url.'/leave_type/leave_type-details',
         'leave_type_update' => $url.'/leave_type/update',
         'leave_type_delete' => $url.'/leave_type/delete',
+        // staff leave assign url
+        'staff_leave_assign_add' => $url.'/staff_leave_assign/add',
+        'staff_leave_assign_list' => $url.'/staff_leave_assign/list',
+        'staff_leave_assign_details' => $url.'/staff_leave_assign/staff_leave_assign-details',
+        'staff_leave_assign_update' => $url.'/staff_leave_assign/update',
+        'staff_leave_assign_delete' => $url.'/staff_leave_assign/delete',
 
         // transport route url
         'transport_route_add' => $url.'/transport_route/add',

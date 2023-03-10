@@ -4,7 +4,6 @@ $(function () {
     $("#sendFaqMail").validate({
         rules: {
             subject:"required",
-            email: "required",
         }
     });
 
@@ -17,11 +16,15 @@ $(function () {
             $('#faq-mail').modal('hide');
             $("#overlay").fadeIn(300);
             var email = $("#email").val();
+            var name = $("#name").val();
+            var role_name = $("#role_name").val();
             var subject = $("#subject").val();
             var remarks = $("#remarks").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
+            formData.append('role_name', role_name);
+            formData.append('name', name);
             formData.append('email', email);
             formData.append('remarks', remarks);
             formData.append('subject', subject);

@@ -44,8 +44,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">Class<span class="text-danger">*</span></label>
-                                    <select id="sectionID" class="form-control" name="section_id">
+                                    <label for="filtersectionID">Class<span class="text-danger">*</span></label>
+                                    <select id="filtersectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
                                 </div>

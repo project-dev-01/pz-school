@@ -546,6 +546,16 @@
                     <div class="collapse" id="sidebarLeaveManage">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="{{ route('admin.leave_type')}}" class="nav-link {{ (request()->is('admin/leave_type')) ? 'active' : '' }}">
+                                    <span> Leave Types </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.staff_leave_assign')}}" class="nav-link {{ (request()->is('admin/staff_leave_assign')) ? 'active' : '' }}">
+                                    <span> Staff Leave Assign </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management/allleaves')) ? 'active' : '' }}">
                                     <span> All Leave</span>
                                 </a>

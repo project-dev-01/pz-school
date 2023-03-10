@@ -2348,7 +2348,18 @@ class AdminController extends Controller
     }
     public function faqIndex()
     {
-        return view('admin.faq.index');
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
+
+        ];
+        return view(
+            'admin.faq.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
     public function taskIndex()
     {
@@ -4598,6 +4609,82 @@ class AdminController extends Controller
         return $response;
     }
 
+    // index staffLeaveAssign
+    public function staffLeaveAssign()
+    {
+        
+        $staff = Helper::GetMethod(config('constants.api.employee_list'), []);
+        $leave_type = Helper::GetMethod(config('constants.api.leave_type_list'));
+        $academic_year = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($hostel_group);
+        return view(
+            'admin.staff_leave_assign.index',
+            [
+                'staff' => $staff['data'],
+                'leave_type' => $leave_type['data'],
+                'academic_year' => $academic_year['data'],
+            ]
+        );
+    }
+
+    public function addStaffLeaveAssign(Request $request)
+    {
+        $data = [
+            'staff_id' => $request->staff_id,
+            'leave_type' => $request->leave_type,
+            'leave_days' => $request->leave_days,
+            'academic_session_id' => $request->academic_session_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_assign_add'), $data);
+        return $response;
+    }
+    public function getStaffLeaveAssignList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.staff_leave_assign_list'));
+        return DataTables::of($response['data'])
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editStaffLeaveAssignBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStaffLeaveAssignBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getStaffLeaveAssignDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.staff_leave_assign_details'), $data);
+        return $response;
+    }
+    public function updateStaffLeaveAssign(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'staff_id' => $request->staff_id,
+            'leave_type' => $request->leave_type,
+            'leave_days' => $request->leave_days,
+            'academic_session_id' => $request->academic_session_id,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.staff_leave_assign_update'), $data);
+        return $response;
+    }
+    // DELETE Leave type Details
+    public function deleteStaffLeaveAssign(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.staff_leave_assign_delete'), $data);
+        return $response;
+    }
+
     // index Transport Route
     public function transportRoute()
     {
@@ -4671,7 +4758,8 @@ class AdminController extends Controller
         $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
         $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
         $data = [
-            'staff_id' => session()->get('ref_user_id')
+            'staff_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
         // dd($leave_taken_history);
@@ -4774,6 +4862,7 @@ class AdminController extends Controller
     // staff leave 
     public function staffApplyLeave(Request $request)
     {
+        
         $file = $request->file('file');
         if ($file) {
             $path = $file->path();
@@ -4790,6 +4879,8 @@ class AdminController extends Controller
             'leave_type' => $request->leave_type,
             'from_leave' => $request->from_leave,
             'to_leave' => $request->to_leave,
+            'total_leave' => $request->total_leave,
+            'academic_session_id' => $request->academic_session_id,
             'reason' => $request->reason,
             'remarks' => $request->remarks,
             'status' => $status,

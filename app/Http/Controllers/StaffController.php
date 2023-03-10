@@ -363,7 +363,19 @@ class StaffController extends Controller
 
     public function faqIndex()
     {
-        return view('staff.faq.index');
+        
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
+
+        ];
+        return view(
+            'staff.faq.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
 
     public function classes()
@@ -1625,6 +1637,8 @@ class StaffController extends Controller
             'leave_type' => $request->leave_type,
             'from_leave' => $request->from_leave,
             'to_leave' => $request->to_leave,
+            'total_leave' => $request->total_leave,
+            'academic_session_id' => $request->academic_session_id,
             'reason' => $request->reason,
             'remarks' => $request->remarks,
             'status' => $status,

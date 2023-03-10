@@ -218,7 +218,19 @@ class ParentController extends Controller
 
     public function faqIndex()
     {
-        return view('parent.faq.index');
+        
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
+
+        ];
+        return view(
+            'parent.faq.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
 
     public function examSchedule()

@@ -80,8 +80,8 @@ $(function () {
                     name: 'leave_type_name'
                 },
                 {
-                    data: 'date_diff',
-                    name: 'date_diff'
+                    data: 'total_leave',
+                    name: 'total_leave'
                 },
                 {
                     data: 'from_leave',
@@ -190,6 +190,7 @@ $(function () {
         formData.append('branch_id', branchID);
         formData.append('leave_id', leave_id);
         formData.append('staff_id', staff_id);
+        formData.append('academic_session_id', academic_session_id);
 
         $.ajax({
             url: staffLeaveDetailsShowUrl,
@@ -237,15 +238,21 @@ $(function () {
                     var takenLeaveDetails = "";
                     if (leave_type_details.length > 0) {
                         $.each(leave_type_details, function (key, val) {
+                            var used_leave = 0;
+                            if(val.used_leave){
+                                used_leave = val.used_leave;
+                            }
+                            var bal = val.total_leave - val.used_leave;
                             takenLeaveDetails += '<tr>' +
-                                '<td>' + val.leave_name + '</td>' +
-                                '<td>:</td>' +
-                                '<td>' + val.total_leave + '</td>' +
+                            '<td>' + val.leave_name + '</td>' +
+                            '<td>' + val.total_leave + '</td>' +
+                            '<td>' + used_leave + '</td>' +
+                            '<td>' +  bal + '</td>' +
                                 '</tr>';
 
                         });
                     } else {
-                        takenLeaveDetails += '<tr><td colspan="3" style="text-align: center;"> No Data Available</td></tr>';
+                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> No Data Available</td></tr>';
 
                     }
                     $('#alreadyTakenLeave tbody').append(takenLeaveDetails);

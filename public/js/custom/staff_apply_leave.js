@@ -1,4 +1,13 @@
 $(function () {
+    $(".number_validation").keypress(function(){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     $("#frm_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
@@ -27,7 +36,8 @@ $(function () {
             changeStdName: "required",
             to_ldate: "required",
             frm_ldate: "required",
-            changelevReasons: "required"
+            changelevReasons: "required",
+            total_leave:"required"
         }
     });
 
@@ -50,6 +60,7 @@ $(function () {
             var frm_leavedate = $("#frm_ldate").val();
             var to_leavedate = $("#to_ldate").val();
             var reason = $("#changelevReasons").val();
+            var total_leave = $("#total_leave").val();
             var remarks = $("#remarks").val();
 
             var formData = new FormData();
@@ -59,6 +70,8 @@ $(function () {
             formData.append('to_leave', to_leavedate);
             formData.append('reason', reason);
             formData.append('remarks', remarks);
+            formData.append('total_leave', total_leave);
+            formData.append('academic_session_id', academic_session_id);
             // formData.append('file', file);
             formData.append('file', $('input[type=file]')[0].files[0]);
             // Display the key/value pairs

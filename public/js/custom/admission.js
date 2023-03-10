@@ -1,5 +1,5 @@
 $(function () {
-    $(".number_validation").keypress(function(){
+    $(".number_validation").keypress(function(event){
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);

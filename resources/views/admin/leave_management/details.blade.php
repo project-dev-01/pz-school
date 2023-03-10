@@ -123,6 +123,14 @@
                 <h4 class="header-title">Already Taken Leave Details</h4>
                 <div class="table-responsive">
                     <table id="alreadyTakenLeave" class="table table-centered table-borderless table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Leave type</th>
+                                <th>Total Leave</th>
+                                <th>Used Leave</th>
+                                <th>Remaining Leave</th>
+                            </tr>
+                        </thead>
                         <tbody>
                         </tbody>
                     </table>

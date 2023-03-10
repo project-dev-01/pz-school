@@ -31,16 +31,25 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="alreadyTakenLeave" class="table table-centered table-borderless table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Leave type</th>
+                                            <th>Total Leave</th>
+                                            <th>Used Leave</th>
+                                            <th>Remaining Leave</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         @forelse($leave_taken_history as $val)
                                         <tr>
                                             <td>{{ $val['leave_name'] }}</td>
-                                            <td>:</td>
                                             <td>{{ $val['total_leave'] }}</td>
+                                            <td>{{ $val['used_leave'] }}</td>
+                                            <td>{{ $val['total_leave'] - $val['used_leave'] }}</td>
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="3" style="text-align: center;">No data available</td>
+                                            <td colspan="4" style="text-align: center;">No data available</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
@@ -124,6 +133,16 @@
                                                 <div class="input-group-prepend">
                                                 </div>
                                                 <input type="text" name="remarks" class="form-control" id="remarks">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="total_leave">Total Leave Days<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="text" name="total_leave" class="form-control number_validation" id="total_leave">
                                             </div>
                                         </div>
                                     </div>

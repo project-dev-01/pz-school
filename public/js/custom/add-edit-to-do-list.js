@@ -12,8 +12,8 @@ $(function () {
         for (var i = 0; i < this.files.length; i++) {
             let fileBloc = $('<span/>', { class: 'file-block' }),
                 fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
-            fileBloc.append('<span class="file-delete"><span style="margin-left: 5px; color: red; font-weight: bold;">X</span></span>')
-                .append(fileName);
+            fileBloc.append(fileName).append('<span class="file-delete"><span style="margin-left: 1px; color: red; font-weight: bold; margin-right: 5px;">X</span></span>');
+                
             $("#filesList > #files-names").append(fileBloc);
         };
         // Ajout des fichiers dans l'objet DataTransfer
@@ -83,7 +83,7 @@ $(function () {
         ul.appendChild(li);
         console.log(ul)
 
-        createIcons(li);
+        createIcons(content);
         checkListData.push(value);
         // reset feild
         addCheckListInp.value = "";
@@ -105,7 +105,7 @@ $(function () {
     //     });
     // }
 
-    function createIcons(li) {
+    function createIcons(content) {
         // const checkTask = document.createElement('input');
         const removeTaskBtn = document.createElement('button');
 
@@ -120,7 +120,7 @@ $(function () {
         console.log("create icon")
         console.log(removeTaskBtn)
         // li.appendChild(checkTask);
-        li.appendChild(removeTaskBtn);
+        content.appendChild(removeTaskBtn);
     }
 
     // function doneTask() {
