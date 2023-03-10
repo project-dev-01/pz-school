@@ -19,6 +19,7 @@ class CreateStaffLeavesTable extends Migration
             $table->date('from_leave');
             $table->date('to_leave');
             $table->integer('leave_type');
+            $table->integer('total_leave');
             $table->string('reason_id')->nullable();
             $table->text('assiner_remarks')->nullable();
             $table->integer('assiner_id')->nullable();
