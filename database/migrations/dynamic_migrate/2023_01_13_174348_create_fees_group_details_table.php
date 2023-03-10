@@ -19,6 +19,9 @@ class CreateFeesGroupDetailsTable extends Migration
             $table->integer('fees_type_id');
             $table->integer('payment_mode_id');
             $table->decimal('amount', $precision = 10, $scale = 0);
+            $table->string('monthly')->nullable();
+            $table->string('semester')->nullable();
+            $table->string('yearly')->nullable();
             $table->date('due_date');
             $table->timestamps();
         });

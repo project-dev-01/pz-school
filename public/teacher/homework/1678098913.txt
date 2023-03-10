@@ -1,5 +1,0 @@
-ALTER TABLE `fees_group_details` ADD `payment_mode_id` INT(255) NOT NULL AFTER `fees_type_id`;
-ALTER TABLE `fees_payment_history` ADD `fees_group_id` INT(255) NOT NULL AFTER `fees_type_id`;
-ALTER TABLE `to_do_lists` CHANGE `check_list` `check_list` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
-
-<input type="hidden" name="fees[{{$key}}][fees_group_details_id]" value="{{ $fees_group_details_id[$keys] }}">

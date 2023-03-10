@@ -8,169 +8,118 @@ $(function () {
         $(".payment_clear").hide();
         $(".payment_mode").val('');
         // alert(target);
-        $('.currentCheckBox').prop('checked', false);
+
         var amount = $('ul#apptabs li a.active').parent().data('paid_amount');
         var feesType = $('ul#apptabs li a.active').parent().attr('id');
         var allocation_id = $('ul#apptabs li a.active').parent().data('allocation_id');
         var fees_group_id = $('ul#apptabs li a.active').parent().data('fees_group_id');
         var studentID = $("#studentID").val();
         var academicYear = $("#academicYear").val();
-        $.post(feesGetPayModeIdUrl, {
-            token: token,
-            branch_id: branchID,
-            fees_type: feesType,
-            allocation_id: allocation_id,
-            student_id: studentID,
-            fees_group_id: fees_group_id,
-            academic_session_id: academicYear
-        }, function (res) {
-            // console.log("res")
-            // console.log(res)
-            if (res.code == 200) {
-                var payment_mode_id = 0;
-                if (res.data) {
-                    payment_mode_id = res.data.payment_mode_id;
-                }
-                if (payment_mode_id != 0) {
-                    console.log("not eq zero");
-                    console.log(payment_mode_id);
-                    var formData = new FormData();
-                    formData.append('token', token);
-                    formData.append('branch_id', branchID);
-                    formData.append('payment_mode', payment_mode_id);
-                    formData.append('fees_group_id', fees_group_id);
-                    formData.append('fees_type', feesType);
-                    formData.append('allocation_id', allocation_id);
-                    formData.append('student_id', studentID);
-                    formData.append('academic_session_id', academicYear);
-                    $.ajax({
-                        // url: feesGetPayModeIdUrl,
-                        url: activeTabDetails,
-                        method: "post",
-                        data: formData,
-                        processData: false,
-                        dataType: 'json',
-                        contentType: false,
-                        success: function (response) {
-                            console.log("response");
-                            console.log(response);
-                            // return false;
-
-                            if (response.code == 200) {
-                                var getStudentData = response.data.fees_payment_details;
-                                // var amount_details = response.data.amount_details;
-                                // var payingAmt = 0;
-                                // if (amount_details) {
-                                //     payingAmt = amount_details.paying_amount;
-                                // }
-                                // payingAmt = parseFloat(payingAmt).toFixed(2);
-                                // $(".fees_amount_" + payment_mode_id).val(payingAmt);
-
-                                if (getStudentData.length > 0) {
-                                    $.each(getStudentData, function (key, val) {
-                                        console.log("key");
-                                        console.log(key);
-                                        console.log(val);
-                                        // if (val.payment_mode_id) {
-
-                                        //     var payment_mode_id = val.payment_mode_id;
-                                        // }
-                                        $(".payment_mode").prop("disabled", true);
-                                        $(".payment_mode").val(val.payment_mode_id);
-                                        $(".payment_mode_onload").val(val.payment_mode_id);
-                                        $(".payment_" + payment_mode_id).show();
-
-                                        var date = (val.date ? val.date : "");
-                                        var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
-                                        var payingAmt = 0;
-                                        if (val.assign_amount) {
-                                            payingAmt = parseFloat(val.assign_amount).toFixed(2);
-                                        } else if (val.amount) {
-                                            payingAmt = val.amount;
-                                        } else {
-                                            payingAmt = parseFloat(0).toFixed(2);
-                                        }
-                                        // var amount = (val.amount ? val.amount : "");
-                                        var remarks = (val.remarks ? val.remarks : "");
-                                        // var amount = (val.amount ? val.amount : resAmt);
-                                        var fg_id = (val.fg_id ? val.fg_id : "");
-                                        // console.log("---");
-                                        // console.log(val);
-                                        // console.log(fg_id);
-                                        if (val.payment_mode_id == 1) {
-                                            $("#yearDate").val(date);
-                                            $("#yearPaySts").val(payment_status_id);
-                                            $("#yearAmt").val(payingAmt);
-                                            $("#yearMemo").val(remarks);
-                                            $("#yearFeesGroupDetailsID").val(fg_id);
-                                        }
-                                        if (val.payment_mode_id == 2) {
-                                            if (val.date) {
-                                                $('.isChecked_' + val.semester).prop('checked', true);
-                                                $('.checkbx_' + val.semester).prop('disabled', false);
-                                            }
-                                            $("#semesterDate" + val.semester).val(date);
-                                            $("#semesterPaySts" + val.semester).val(payment_status_id);
-                                            $("#semesterPayAmt" + val.semester).val(payingAmt);
-                                            $("#semesterMemo" + val.semester).val(remarks);
-                                            $("#semesterFeesGroupDetailsID" + val.semester).val(fg_id);
-                                        }
-                                        if (val.payment_mode_id == 3) {
-                                            if (val.date) {
-                                                $('.isChecked_' + val.monthly).prop('checked', true);
-                                                $('.checkbx_' + val.monthly).prop('disabled', false);
-                                            }
-                                            $("#monthDate" + val.monthly).val(date);
-                                            $("#monthPaySts" + val.monthly).val(payment_status_id);
-                                            $("#monthPayAmt" + val.monthly).val(payingAmt);
-                                            $("#monthMemo" + val.monthly).val(remarks);
-                                            $("#monthFeesGroupDetailsID" + val.monthly).val(fg_id);
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    });
-
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        // formData.append('payment_mode', payment_mode_id);
+        formData.append('fees_type', feesType);
+        formData.append('fees_group_id', fees_group_id);
+        formData.append('allocation_id', allocation_id);
+        formData.append('student_id', studentID);
+        formData.append('academic_session_id', academicYear);
+        $.ajax({
+            url: activeTabDetails,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    var getStudentData = response.data.fees_payment_details;
+                    // var amount_details = response.data.amount_details;
                     // var payingAmt = 0;
-                    // if (resAmt) {
-                    //     payingAmt = resAmt.paying_amount;
+
+                    // if (amount_details.paying_amount) {
+                    //     payingAmt = amount_details.paying_amount;
                     // }
                     // payingAmt = parseFloat(payingAmt).toFixed(2);
                     // $(".fees_amount_" + payment_mode_id).val(payingAmt);
 
-                    // $(".payment_mode").prop("disabled", true);
-                    // $(".payment_mode").val(val.payment_mode_id);
-                    // $(".payment_mode_onload").val(val.payment_mode_id);
-                    // $(".payment_" + payment_mode_id).show();
+                    if (getStudentData.length > 0) {
+                        $.each(getStudentData, function (key, val) {
+                            if (val.payment_mode_id) {
 
-                    // var date = (val.date ? val.date : "");
-                    // var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
-                    // var amount = (val.amount ? val.amount : "");
-                    // var remarks = (val.remarks ? val.remarks : "");
-                    // // var amount = (val.amount ? val.amount : resAmt);
+                                var payment_mode_id = val.payment_mode_id;
+                                $.post(feesGetPayAmount, {
+                                    token: token,
+                                    branch_id: branchID,
+                                    payment_mode: payment_mode_id,
+                                    fees_type: feesType,
+                                    fees_group_id: fees_group_id
+                                }, function (res) {
 
-                    // if (val.payment_mode_id == 1) {
-                    //     $("#yearDate").val(date);
-                    //     $("#yearPaySts").val(payment_status_id);
-                    //     $("#yearAmt").val(amount);
-                    //     $("#yearMemo").val(remarks);
-                    // }
-                    // if (val.payment_mode_id == 2) {
-                    //     $("#semesterDate" + val.semester).val(date);
-                    //     $("#semesterPaySts" + val.semester).val(payment_status_id);
-                    //     $("#semesterPayAmt" + val.semester).val(amount);
-                    //     $("#semesterMemo" + val.semester).val(remarks);
-                    // }
-                    // if (val.payment_mode_id == 3) {
-                    //     $("#monthDate" + val.monthly).val(date);
-                    //     $("#monthPaySts" + val.monthly).val(payment_status_id);
-                    //     $("#monthPayAmt" + val.monthly).val(amount);
-                    //     $("#monthMemo" + val.semester).val(remarks);
-                    // }
+                                    if (res.code == 200) {
+                                        var resAmt = res.data;
+                                        // var payingAmt = 0;
+                                        // if (resAmt) {
+                                        //     payingAmt = resAmt.paying_amount;
+                                        // }
+                                        // payingAmt = parseFloat(payingAmt).toFixed(2);
+                                        // $(".fees_amount_" + payment_mode_id).val(payingAmt);
+                                        $(".payment_mode").prop("disabled", true);
+                                        $(".payment_mode").val(val.payment_mode_id);
+                                        $(".payment_" + payment_mode_id).show();
+
+                                        var date = (val.date ? val.date : "");
+                                        var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
+                                        var amount = (val.amount ? val.amount : "");
+                                        // var amount = (val.amount ? val.amount : resAmt);
+
+                                        if (val.payment_mode_id == 1) {
+                                            $("#yearDate").val(date);
+                                            $("#yearPaySts").val(payment_status_id);
+                                            $("#yearAmt").val(amount);
+                                        }
+                                        if (val.payment_mode_id == 2) {
+                                            $("#semesterDate" + val.semester).val(date);
+                                            $("#semesterPaySts" + val.semester).val(payment_status_id);
+                                            $("#semesterPayAmt" + val.semester).val(amount);
+                                        }
+                                        if (val.payment_mode_id == 3) {
+                                            $("#monthDate" + val.monthly).val(date);
+                                            $("#monthPaySts" + val.monthly).val(payment_status_id);
+                                            $("#monthPayAmt" + val.monthly).val(amount);
+                                        }
+                                    }
+                                }, 'json');
+                                // $(".payment_mode").prop("disabled", true);
+
+                                // $(".payment_mode").val(val.payment_mode_id);
+                                // $(".payment_" + payment_mode_id).show();
+
+
+                                // var date = (val.date ? val.date : "");
+                                // var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
+                                // var amount = (val.amount ? val.amount : "");
+                                // if (val.payment_mode_id == 1) {
+                                //     $("#yearDate").val(date);
+                                //     $("#yearPaySts").val(payment_status_id);
+                                //     $("#yearAmt").val(amount);
+                                // }
+                                // if (val.payment_mode_id == 2) {
+                                //     $("#semesterDate" + val.semester).val(date);
+                                //     $("#semesterPaySts" + val.semester).val(payment_status_id);
+                                //     $("#semesterPayAmt" + val.semester).val(amount);
+                                // }
+                                // if (val.payment_mode_id == 3) {
+                                //     $("#monthDate" + val.monthly).val(date);
+                                //     $("#monthPaySts" + val.monthly).val(payment_status_id);
+                                //     $("#monthPayAmt" + val.monthly).val(amount);
+                                // }
+                            }
+                        });
+                    }
                 }
             }
-        }, 'json');
+        });
     });
     $(".date-picker").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -181,10 +130,6 @@ $(function () {
     });
     $(".payment_mode").on('change', function (e) {
         e.preventDefault();
-        // clear data
-        $('form .initialEmpty').val('');
-        $('.currentCheckBox').prop('checked', false);
-        // $('.checkbx_' + val.semester).prop('disabled', true);
         $(".payment_clear").hide();
         var payment_mode_id = $(this).val();
         $(".payment_" + payment_mode_id).show();
@@ -242,34 +187,20 @@ $(function () {
                                 var date = (val.date ? val.date : "");
                                 var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
                                 var amount = (val.amount ? val.amount : "");
-                                var fg_id = (val.fg_id ? val.fg_id : "");
-                                console.log("---");
-                                console.log(val);
-                                console.log(fg_id);
                                 if (val.payment_mode_id == 1) {
                                     $("#yearDate").val(date);
                                     $("#yearPaySts").val(payment_status_id);
                                     $("#yearAmt").val(amount);
-                                    $("#yearFeesGroupDetailsID").val(fg_id);
                                 }
                                 if (val.payment_mode_id == 2) {
-                                    // check default checked
-                                    // console.log(payment_mode_id);
-                                    // $('.isChecked_' + val.semester).prop('checked', false);
-                                    // $('.checkbx_' + val.semester).prop('disabled', true);
                                     $("#semesterDate" + val.semester).val(date);
                                     $("#semesterPaySts" + val.semester).val(payment_status_id);
                                     $("#semesterPayAmt" + val.semester).val(amount);
-                                    $("#semesterFeesGroupDetailsID" + val.semester).val(fg_id);
                                 }
                                 if (val.payment_mode_id == 3) {
-                                    // // check default checked
-                                    // $('.isChecked_' + val.semester).prop('checked', false);
-                                    // $('.checkbx_' + val.semester).prop('disabled', true);
                                     $("#monthDate" + val.monthly).val(date);
                                     $("#monthPaySts" + val.monthly).val(payment_status_id);
                                     $("#monthPayAmt" + val.monthly).val(amount);
-                                    $("#monthFeesGroupDetailsID" + val.monthly).val(fg_id);
                                 }
                             }
                         });
@@ -302,22 +233,18 @@ $(function () {
                                 var semester = (val.semester ? val.semester : 0);
                                 var monthly = (val.monthly ? val.monthly : 0);
                                 var payingAmt = parseFloat(paying_amount).toFixed(2);
-                                var fg_id = (val.fg_id ? val.fg_id : "");
                                 if (paymode_id == 1) {
                                     $('input[name="fees[1][amount]"]').val(parseFloat(payingAmt).toFixed(2));
-                                    $("#yearFeesGroupDetailsID").val(fg_id);
                                 }
                                 if (paymode_id == 2) {
                                     console.log("semester");
                                     console.log('"fees[2][' + semester + '][amount]"');
                                     $('input[name="fees[2][' + semester + '][amount]"]').val(parseFloat(payingAmt).toFixed(2));
-                                    $("#semesterFeesGroupDetailsID" + semester).val(fg_id);
                                 }
                                 if (paymode_id == 3) {
                                     console.log("month");
                                     console.log('"fees[2][' + monthly + '][amount]"');
                                     $('input[name="fees[3][' + monthly + '][amount]"]').val(parseFloat(payingAmt).toFixed(2));
-                                    $("#monthFeesGroupDetailsID" + monthly).val(fg_id);
                                 }
                                 // var payingAmt = 0;
                                 // payingAmt = parseFloat(payingAmt).toFixed(2);
@@ -414,7 +341,7 @@ $(function () {
         $(".payment_clear").hide();
         $(".payment_mode").val('');
         // alert(target);
-        $('.currentCheckBox').prop('checked', false);
+
         var amount = $('ul#apptabs li a.active').parent().data('paid_amount');
         var feesType = $('ul#apptabs li a.active').parent().attr('id');
         var allocation_id = $('ul#apptabs li a.active').parent().data('allocation_id');
@@ -485,22 +412,20 @@ $(function () {
                                         // }
                                         $(".payment_mode").prop("disabled", true);
                                         $(".payment_mode").val(val.payment_mode_id);
-                                        $(".payment_mode_onload").val(val.payment_mode_id);
                                         $(".payment_" + payment_mode_id).show();
 
                                         var date = (val.date ? val.date : "");
                                         var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
                                         var payingAmt = 0;
-                                        if (val.assign_amount) {
+                                        if(val.assign_amount){
                                             payingAmt = parseFloat(val.assign_amount).toFixed(2);
-                                        } else if (val.amount) {
+                                        }else if(val.amount){
                                             payingAmt = val.amount;
-                                        } else {
+                                        }else{
                                             payingAmt = parseFloat(0).toFixed(2);
                                         }
                                         // var amount = (val.amount ? val.amount : "");
                                         var remarks = (val.remarks ? val.remarks : "");
-                                        var fg_id = (val.fg_id ? val.fg_id : "");
                                         // var amount = (val.amount ? val.amount : resAmt);
 
                                         if (val.payment_mode_id == 1) {
@@ -508,29 +433,18 @@ $(function () {
                                             $("#yearPaySts").val(payment_status_id);
                                             $("#yearAmt").val(payingAmt);
                                             $("#yearMemo").val(remarks);
-                                            $("#yearFeesGroupDetailsID").val(fg_id);
                                         }
                                         if (val.payment_mode_id == 2) {
-                                            if (val.date) {
-                                                $('.isChecked_' + val.semester).prop('checked', true);
-                                                $('.checkbx_' + val.semester).prop('disabled', false);
-                                            }
                                             $("#semesterDate" + val.semester).val(date);
                                             $("#semesterPaySts" + val.semester).val(payment_status_id);
                                             $("#semesterPayAmt" + val.semester).val(payingAmt);
                                             $("#semesterMemo" + val.semester).val(remarks);
-                                            $("#semesterFeesGroupDetailsID" + val.semester).val(fg_id);
                                         }
                                         if (val.payment_mode_id == 3) {
-                                            if (val.date) {
-                                                $('.isChecked_' + val.monthly).prop('checked', true);
-                                                $('.checkbx_' + val.monthly).prop('disabled', false);
-                                            }
                                             $("#monthDate" + val.monthly).val(date);
                                             $("#monthPaySts" + val.monthly).val(payment_status_id);
                                             $("#monthPayAmt" + val.monthly).val(payingAmt);
                                             $("#monthMemo" + val.monthly).val(remarks);
-                                            $("#monthFeesGroupDetailsID" + val.monthly).val(fg_id);
                                         }
                                     });
                                 }
@@ -547,7 +461,6 @@ $(function () {
 
                     // $(".payment_mode").prop("disabled", true);
                     // $(".payment_mode").val(val.payment_mode_id);
-                    // $(".payment_mode_onload").val(val.payment_mode_id);
                     // $(".payment_" + payment_mode_id).show();
 
                     // var date = (val.date ? val.date : "");

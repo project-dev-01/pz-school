@@ -81,6 +81,7 @@
                                     <th>Fees Group</th>
                                     <th>Fees Type</th>
                                     <th>Due Date</th>
+                                    <th>Paid Date</th>
                                     <th>Status</th>
                                     <th>Amount</th>
                                     <!-- <th>Discount</th> -->
@@ -99,25 +100,34 @@
                                 $total_balance = 0;
                                 $total_amount = 0;
                                 // calc
-                                $type_discount = $row['history']['0']['total_discount'];
-                                $type_fine = $row['history']['0']['total_fine'];
-                                $type_amount = round($row['history']['0']['total_amount']);
-                                $balance = $row['amount'] - ($type_amount + $type_discount);
+                                if($row['payment_status_id'] == 1 && isset($row['paid_date'])){
+                                    $type_amount = round($row['paid_amount']);
+                                }else{
+                                    $type_amount = round(0);
+                                }
+                                $balance = ($row['amount'] - $type_amount);
                                 $balance = number_format($balance, 2, '.', '');
                                 $fees_amount = number_format($row['amount'], 2, '.', '');
                                 $paid_amt = number_format($type_amount, 2, '.', '');
 
                                 $labelmode = '';
                                 $paidSts = '';
+                                $date1 = $row['due_date'];
+                                $date2 = $row['paid_date'];
 
                                 if ($type_amount == 0) {
                                 $paidSts = 'unpaid';
                                 $labelmode = 'badge-danger';
                                 } elseif ($balance == 0) {
-                                $paidSts = 'paid';
-                                $labelmode = 'badge-success';
+                                    if ($date1 >= $date2){
+                                        $paidSts = 'paid';
+                                        $labelmode = 'badge-success';
+                                    }else{
+                                        $paidSts = 'delay';
+                                        $labelmode = 'badge-warning';
+                                    }
                                 } else {
-                                $paidSts = 'partly';
+                                $paidSts = 'delay';
                                 $labelmode = 'badge-warning';
                                 }
 
@@ -127,6 +137,7 @@
                                     <td>{{ $row['fees_group_name'] }}</td>
                                     <td>{{ $row['name'] }}</td>
                                     <td>{{ $row['due_date'] }}</td>
+                                    <td>{{ $row['paid_date'] }}</td>
                                     <td>
                                         <div class="badge label-table {{ $labelmode }}">{{ $paidSts }}</div>
                                     </td>
@@ -137,6 +148,9 @@
                                     <td>{{ $balance }}</td>
                                 </tr>
                                 @empty
+                                <tr>
+                                    <td class="text-center" colspan="9">No data available</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -174,6 +188,7 @@
                         <div class="col-md-5">
                             <div class="form-group" style="margin: 25px 6px;">
                                 <label for="payment_mode">Payment Mode</label>
+                                <input type="hidden" class="form-control payment_mode_onload" name="payment_mode_onload" value="" />
                                 <select id="payment_mode{{$fee['fees_type_id']}}" class="form-control payment_mode" name="payment_mode">
                                     <option value="">Select Payment Mode</option>
                                     @forelse ($payment_mode as $mode)
@@ -192,25 +207,32 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="amount">Amount<span class="text-danger">*</span></label>
-                                                        <input type="text" id="yearAmt" name="fees[1][amount]" readonly class="fees_amount_1 form-control">
+                                                        <input type="hidden" value="" id="yearFeesGroupDetailsID" name="fees[1][fees_group_details_id]">
+                                                        <input type="text" id="yearAmt" name="fees[1][amount]" readonly class="fees_amount_1 initialEmpty form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="student Name">Date<span class="text-danger">*</span></label>
-                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker" placeholder="MM/DD/YYYY">
+                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker initialEmpty" placeholder="YYYY-MM-DD">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="payment_status">Payment Status</label>
-                                                        <select class="form-control" id="yearPaySts" name="fees[1][payment_status]">
+                                                        <label for="payment_status">Payment Status<span class="text-danger">*</span></label>
+                                                        <select class="form-control initialEmpty" id="yearPaySts" name="fees[1][payment_status]">
                                                             <option value="">Select Payment Status</option>
                                                             @forelse ($payment_status as $status)
                                                             <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="memo">Memo</label>
+                                                        <textarea class="form-control initialEmpty" id="yearMemo" name="fees[1][memo]" placeholder="Enter Memo"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -224,7 +246,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!--  Start Student Fees Semester -->
                         <div class="payment_2 payment_clear" style="display:none;">
                             <div class="row">
@@ -239,38 +260,43 @@
                                                                 <th style="width: 20px;">
                                                                     <input type="checkbox" id="selectAllSemester">
                                                                 </th>
-                                                                <th>Date
+                                                                <th>Date<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Semester
                                                                 </th>
-                                                                <th>Amount
+                                                                <th>Amount<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Payment
-                                                                    Status
+                                                                    Status<span class="text-danger">*</span>
                                                                 </th>
+                                                                <th>Memo</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @foreach($semester as $sem)
                                                             <tr>
-                                                                <td class="semester-checked-area"><input type="checkbox" class="currentCheckBox" id="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][status]">
+                                                                <td class="semester-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$sem['id']}} initialEmpty" id="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][status]">
                                                                     <input type="hidden" value="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][semester]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}}" placeholder="MM/DD/YYYY" name="fees[2][{{$sem['id']}}][date]">
+                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[2][{{$sem['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$sem['name']}}
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" id="semesterPayAmt{{$sem['id']}}" name="fees[2][{{$sem['id']}}][amount]" readonly class="fees_amount_2 form-control">
+                                                                    <input type="hidden" value="" id="semesterFeesGroupDetailsID{{$sem['id']}}" name="fees[2][{{$sem['id']}}][fees_group_details_id]">
+                                                                    <input type="text" id="semesterPayAmt{{$sem['id']}}" name="fees[2][{{$sem['id']}}][amount]" readonly class="fees_amount_2 initialEmpty form-control">
                                                                 </td>
                                                                 <td>
-                                                                    <select class="form-control checkbx_{{$sem['id']}}" disabled id="semesterPaySts{{$sem['id']}}" name="fees[2][{{$sem['id']}}][payment_status]">
+                                                                    <select class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterPaySts{{$sem['id']}}" name="fees[2][{{$sem['id']}}][payment_status]">
                                                                         <option value="">Choose Payment Status</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty
                                                                         @endforelse
                                                                     </select>
+                                                                </td>
+                                                                <td>
+                                                                    <textarea class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterMemo{{$sem['id']}}" name="fees[2][{{$sem['id']}}][memo]" placeholder="Enter Memo"></textarea>
                                                                 </td>
                                                             </tr>
                                                             @endforeach
@@ -304,37 +330,42 @@
                                                                 <th style="width: 20px;">
                                                                     <input type="checkbox" id="selectAllMonth">
                                                                 </th>
-                                                                <th>Date
+                                                                <th>Date<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Month
                                                                 </th>
-                                                                <th>Amount
+                                                                <th>Amount<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Payment
-                                                                    Status
+                                                                    Status<span class="text-danger">*</span>
                                                                 </th>
+                                                                <th>Memo</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @foreach($month as $mon)
                                                             <tr>
-                                                                <td class="month-checked-area"><input type="checkbox" class="currentCheckBox" id="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][status]">
+                                                                <td class="month-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$mon['id']}} initialEmpty" id="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][status]">
                                                                     <input type="hidden" value="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][month]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}}" placeholder="MM/DD/YYYY" name="fees[3][{{$mon['id']}}][date]">
+                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[3][{{$mon['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$mon['name']}}
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" name="fees[3][{{$mon['id']}}][amount]" id="monthPayAmt{{$mon['id']}}" readonly class="fees_amount_3 form-control">
+                                                                    <input type="hidden" value="" id="monthFeesGroupDetailsID{{$mon['id']}}" name="fees[3][{{$mon['id']}}][fees_group_details_id]">
+                                                                    <input type="text" name="fees[3][{{$mon['id']}}][amount]" id="monthPayAmt{{$mon['id']}}" readonly class="fees_amount_3 initialEmpty form-control">
                                                                 </td>
-                                                                <td><select class="form-control checkbx_{{$mon['id']}}" disabled id="monthPaySts{{$mon['id']}}" name="fees[3][{{$mon['id']}}][payment_status]">
+                                                                <td><select class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthPaySts{{$mon['id']}}" name="fees[3][{{$mon['id']}}][payment_status]">
                                                                         <option value="">Choose Payment Status</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty
                                                                         @endforelse
                                                                     </select>
+                                                                </td>
+                                                                <td>
+                                                                    <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="Enter Memo"></textarea>
                                                                 </td>
                                                             </tr>
                                                             @endforeach
@@ -372,7 +403,7 @@
 <script>
     var changePaymentModeUrl = "{{ config('constants.api.change_payment_mode') }}";
     var activeTabDetails = "{{ config('constants.api.fee_active_tab_details') }}";
-    var feesGetPayAmount = "{{ config('constants.api.fees_get_pay_amount') }}";
+    var feesGetPayModeIdUrl = "{{ config('constants.api.fees_get_pay_mode_id') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/fees.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/fees_edit.js') }}"></script>
