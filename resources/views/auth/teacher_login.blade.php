@@ -62,7 +62,7 @@
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('teacher.authenticate') }}" method="post">
                                 <h1 class="welcomeback">Welcome back,</h1>
-                                <input type="hidden" name="branch_id" value="1">
+                                <input type="hidden" name="branch_id" value="3">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -76,7 +76,9 @@
                                 @endif
                                 @csrf
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span>
+
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span> -->
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 

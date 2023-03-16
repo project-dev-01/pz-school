@@ -19,6 +19,7 @@ class CreateFeesPaymentHistoryTable extends Migration
             $table->integer('allocation_id');
             $table->integer('fees_type_id');
             $table->integer('fees_group_id');
+            $table->integer('fees_group_details_id');
             $table->string('monthly')->nullable();
             $table->string('semester')->nullable();
             $table->string('yearly')->nullable();
@@ -30,7 +31,7 @@ class CreateFeesPaymentHistoryTable extends Migration
             $table->decimal('fine', $precision = 18, $scale = 2);
             $table->string('pay_via')->nullable();
             $table->text('remarks')->nullable();
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->integer('academic_session_id')->default('0');
             $table->timestamps();
         });

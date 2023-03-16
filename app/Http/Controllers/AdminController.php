@@ -6761,15 +6761,22 @@ class AdminController extends Controller
     }
     public function updateFees(Request $request)
     {
+        if($request->payment_mode){
+            $payment_mode = $request->payment_mode;
+        }else{
+            $payment_mode = $request->payment_mode_onload;
+        }
         $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
             'student_id' => $request->student_id,
             'collect_by' => session()->get('ref_user_id'),
             'fees_type' => $request->fees_type,
             'allocation_id' => $request->allocation_id,
             'fees_group_id' => $request->fees_group_id,
-            'payment_mode' => $request->payment_mode,
-            'fees' => $request->fees[$request->payment_mode]
+            'payment_mode' => $payment_mode,
+            'fees' => $request->fees[$payment_mode]
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.fees_update'), $data);
         // dd($response);
         return $response;
@@ -6803,12 +6810,31 @@ class AdminController extends Controller
     {
         $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
-        // dd($payment_mode);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $month = [["name" => 'January', 'id' => 1], ["name" => 'February', 'id' => 2], ["name" => 'March', 'id' => 3], ["name" => 'April', 'id' => 4], ["name" => 'May', 'id' => 5], ["name" => 'June', 'id' => 6], ["name" => 'July', 'id' => 7], ["name" => 'August', 'id' => 8], ["name" => 'September', 'id' => 9], ["name" => 'October', 'id' => 10], ["name" => 'November', 'id' => 11], ["name" => 'December', 'id' => 12]];
+        // order wise yearly semester monthly data
+        // $Yearly = "";
+        // $Semester = "";
+        // $Monthly = "";
+        // foreach ($payment_mode['data'] as $key => $fs) {
+        //     $Yearly = $fs['name'];
+        //     $Semester = $fs['name'];
+        //     $Monthly = $fs['name'];
+        // }
+
+        // dd($payment_mode['data'][0]['name']);
         return view(
             'admin.fees_group.add',
             [
                 'fees_type' => $fees_type['data'],
-                'payment_mode' => $payment_mode['data']
+                'semester' => $semester['data'],
+                'month' => $month,
+                'Yearly' => isset($payment_mode['data'][0]['name'])?$payment_mode['data'][0]['name']:'0',
+                'Yearly_ID' => isset($payment_mode['data'][0]['id'])?$payment_mode['data'][0]['id']:'0',
+                'Semester' => isset($payment_mode['data'][1]['name'])?$payment_mode['data'][1]['name']:'1',
+                'Semester_ID' => isset($payment_mode['data'][1]['id'])?$payment_mode['data'][1]['id']:'1',
+                'Monthly' => isset($payment_mode['data'][2]['name'])?$payment_mode['data'][2]['name']:'2',
+                'Monthly_ID' => isset($payment_mode['data'][2]['id'])?$payment_mode['data'][2]['id']:'2',
             ]
         );
     }
