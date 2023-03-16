@@ -1,4 +1,14 @@
 $(function () {
+    $('#selectAllchkbox').prop('checked', false); // Unchecks it
+    // script for all checkbox checked / unchecked
+    $("#selectAllchkbox").on("change", function (ev) {
+        var $chcks = $(".checked-area input[type='checkbox']");
+        if ($(this).is(':checked')) {
+            $chcks.prop('checked', true).trigger('change');
+        } else {
+            $chcks.prop('checked', false).trigger('change');
+        }
+    });
     // change 
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
@@ -15,12 +25,12 @@ $(function () {
     // change 
     $('#promoteClassID').on('change', function () {
         var class_id = $(this).val();
-        $("#promoteStudentForm").find("#promoteSectionID").empty();
-        $("#promoteStudentForm").find("#promoteSectionID").append('<option value="">Select Class</option>');
+        $("#promoteStudentForm").find(".promoteSectionID").empty();
+        $("#promoteStudentForm").find(".promoteSectionID").append('<option value="">Select Class</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#promoteStudentForm").find("#promoteSectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                    $("#promoteStudentForm").find(".promoteSectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
             }
         }, 'json');
@@ -63,6 +73,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
+                    console.log('ch',response);
                     if (response.code == 200) {
                         var dataSetNew = response.data;
                         if (dataSetNew.length > 0) {
@@ -91,13 +102,26 @@ $(function () {
         rules: {
             promote_year: "required",
             promote_class_id: "required",
-            promote_section_id: "required",
             promote_semester_id: "required",
             promote_session_id: "required",
         }
     });
     // promote students
     $('#promoteStudentForm').on('submit', function (e) {
+        $('.promotion_status').each(function () {
+            if ($(this).is(':checked')) {
+                var c = $(this).parent().parent().parent().find('.promoteSectionID');
+                $(c).rules("add", {
+                    required: true
+                })
+            }else if ($(this).is(':unchecked')) {
+                var c = $(this).parent().parent().parent().find('.promoteSectionID');
+                $(this).parent().parent().parent().find('.promoteSectionID').removeClass('error');
+                $(c).rules("add", {
+                    required: false
+                })
+            }
+        });
         e.preventDefault();
         var form = this;
         // $('#saveClassRoomAttendance').prop('disabled', true);
@@ -157,16 +181,29 @@ function bindStudents(dataSetNew) {
             { "bSortable": false, "aTargets": [0, 1, 2, 3] },
             {
                 "targets": 0,
+                "className": "checked-area",
+                "render": function (data, type, row, meta) {
+                    var promote = '<div class="switchery-demo">' +
+                        '<input type="hidden" name="promotion[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
+                        '<input type="hidden" name="promotion[' + meta.row + '][register_no]" value="' + row.register_no + '">' +
+                        '<input type="hidden" name="promotion[' + meta.row + '][roll_no]" value="' + row.roll_no + '">' +
+                        '<input type="checkbox" class="promotion_status" name="promotion[' + meta.row + '][promotion_status]"  data-plugin="switchery" data-color="#039cfd" />' +
+                        '</div>';
+                    return promote;
+                }
+            },
+            {
+                "targets": 1,
                 "render": function (data, type, row, meta) {
                     return meta.row + 1;
                 }
             },
             {
-                "targets": 1,
+                "targets": 2,
                 "className": "table-user",
                 "render": function (data, type, row, meta) {
                     if (row.photo) {
-                        var currentImg = parentImg + '/' + row.photo;
+                        var currentImg = studentImg + '/' + row.photo;
                     } else {
                         var currentImg = defaultImg;
                     }
@@ -176,15 +213,10 @@ function bindStudents(dataSetNew) {
                 }
             },
             {
-                "targets": 3,
+                "targets": 4,
                 "render": function (data, type, row, meta) {
-                    var promote = '<div class="switchery-demo">' +
-                        '<input type="hidden" name="promotion[' + meta.row + '][student_id]" value="' + row.student_id + '">' +
-                        '<input type="hidden" name="promotion[' + meta.row + '][register_no]" value="' + row.register_no + '">' +
-                        '<input type="hidden" name="promotion[' + meta.row + '][roll_no]" value="' + row.roll_no + '">' +
-                        '<input type="checkbox" disabled name="promotion[' + meta.row + '][promotion_status]" checked data-plugin="switchery" data-color="#039cfd" />' +
-                        '</div>';
-                    return promote;
+                    var drop = '<div class="form-group"><select class="form-control promoteSectionID" name="promotion[' + meta.row + '][promote_section_id]"><option value="">Select Class</option></select></div>';
+                    return drop;
                 }
             }
         ]

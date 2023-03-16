@@ -1,14 +1,27 @@
 $(function () {
 
+    $(".number_validation").keypress(function(event){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     leaveTypeTable();
     $("#leaveTypeForm").validate({
         rules: {
-            name: "required"
+            name: "required",
+            leave_days: "required",
+            gender: "required"
         }
     });
     $("#edit-leave-type-form").validate({
         rules: {
-            name: "required"
+            name: "required",
+            leave_days: "required",
+            gender: "required"
         }
     });
     // add leaveType
@@ -85,6 +98,18 @@ $(function () {
                     name: 'name'
                 },
                 {
+                    data: 'short_name',
+                    name: 'short_name'
+                },
+                {
+                    data: 'leave_days',
+                    name: 'leave_days'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
+                },
+                {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
@@ -102,6 +127,9 @@ $(function () {
         $.post(leaveTypeDetails, { id: id }, function (data) {
             $('.editLeaveType').find('input[name="id"]').val(data.data.id);
             $('.editLeaveType').find('input[name="name"]').val(data.data.name);
+            $('.editLeaveType').find('input[name="leave_days"]').val(data.data.leave_days);
+            $('.editLeaveType').find('input[name="short_name"]').val(data.data.short_name);
+            $('.editLeaveType').find('select[name="gender"]').val(data.data.gender);
             $('.editLeaveType').modal('show');
         }, 'json');
         console.log(id);
@@ -126,7 +154,6 @@ $(function () {
                             $(form).find('span.' + prefix + '_error').text(val[0]);
                         });
                     } else {
-
                         if (data.code == 200) {
                             $('#leave-type-table').DataTable().ajax.reload(null, false);
                             $('.editLeaveType').modal('hide');
@@ -165,6 +192,44 @@ $(function () {
                     if (data.code == 200) {
                         $('#leave-type-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    });
+
+    $(document).on('click', '#restoreLeaveTypeBtn', function () {
+        var id = $(this).data('id');
+        var name = $(this).data('name');
+        var short_name = $(this).data('short_name');
+        var leave_days = $(this).data('leave_days');
+        var gender = $(this).data('gender');
+        var url = leaveTypeRestore;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>Restore</b> this Leave Type',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id,
+                    name: name,
+                    short_name: short_name,
+                    leave_days: leave_days,
+                    gender: gender
+                }, function (data) {
+                    if (data.code == 200) {
+                        $('#leave-type-table').DataTable().ajax.reload(null, false);
+                        toastr.success("Leave Type Successfully Restored");
                     } else {
                         toastr.error(data.message);
                     }

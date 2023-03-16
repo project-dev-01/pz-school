@@ -370,9 +370,6 @@ $(function () {
     $("#employeeAttendanceFilter").validate({
         rules: {
             department: "required",
-            employee: "required",
-            date: "required",
-            session_id: "required",
         }
     });
     // add designation

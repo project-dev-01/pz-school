@@ -1,58 +1,96 @@
-<!-- Center modal content -->
-<div class="modal fade editStaffLeaveAssign" id="editStaffLeaveAssignModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myeditStaffLeaveAssignModalLabel">Edit Staff Leave Assign</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form id="edit-staff-leave-assign-form" method="post" action="{{ route('admin.staff_leave_assign.update') }}" autocomplete="off">
-                    @csrf
-                    <input type="hidden" name="id"><div class="form-group">
-                        <label for="staff_id">Staff<span class="text-danger">*</span></label>
-                        <select class="form-control" name="staff_id" id="staff_id">
-                            <option value="">Choose Staff</option>
-                            @forelse($staff as $s)
-                            <option value="{{$s['id']}}">{{$s['name']}}</option>
-                            @empty
-                            @endforelse
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="leave_type">Leave Type<span class="text-danger">*</span></label>
-                        <select class="form-control" id="leave_type" name="leave_type">
-                            <option value="0">Choose Leave Type</option>
-                            @forelse($leave_type as $type)
-                            <option value="{{$type['id']}}">{{$type['name']}}</option>
-                            @empty
-                            @endforelse
-                        </select>
-                        <span class="text-danger error-text category_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
-                        <input type="text" id="leave_days" name="leave_days" class="form-control" placeholder="Enter Leave Days">
-                        <span class="text-danger error-text leave_days_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="academic_session_id">Academic Year<span class="text-danger">*</span></label>
-                        <select class="form-control" id="academic_session_id" name="academic_session_id">
-                            <option value="0">Choose Academic Year</option>
-                            @forelse($academic_year as $ay)
-                            <option value="{{$ay['id']}}">{{$ay['name']}}</option>
-                            @empty
-                            @endforelse
-                        </select>
-                        <span class="text-danger error-text category_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
-                    </div>
+@extends('layouts.admin-layout')
+@section('title','Edit Staff Leave Assign')
+@section('content')
+<!-- Start Content-->
+<div class="container-fluid">
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
 
-                </form>
+                <h4 class="page-title">Staff Leave Assign</h4>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">Edit Staff Leave Assign
+                            <h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <form id="edit-staff-leave-assign-form" method="post" action="{{ route('admin.staff_leave_assign.update') }}" autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="id">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="staff_id">Staff Name</label>
+                                    <input type="hidden" name="staff_id" value="{{$staff['staff_id']}}">
+                                    <input type="text"  value="{{$staff['staff_name']}}" class="form-control" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Leave Type<span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Leave Days<span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                            @foreach($staff_leave as $key=>$leave)
+                            <input type="hidden" name="leave[{{$key}}][id]" value="{{$leave['id']}}">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select class="form-control" id="leave_type" name="leave[{{$key}}][leave_type]">
+                                            @forelse($leave_type as $type)
+                                                @if($type['id']==$leave['leave_type_id'])
+                                                <option value="{{$type['id']}}" Selected>{{$type['name']}}</option>
+                                                @endif
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                        <span class="text-danger error-text category_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" id="leave_days" name="leave[{{$key}}][leave_days]" value="{{$leave['leave_days']}}" class="form-control leave_days" placeholder="Enter Leave Days">
+                                        <span class="text-danger error-text leave_days_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        <div class="form-group">
+                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                        </div>
+
+                    </form>
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- col -->
+    </div> <!-- row -->
+</div> <!-- container -->
+@endsection
+@section('scripts')
+<script>
+    var staffLeaveAssignList = "{{ route('admin.staff_leave_assign.list') }}";
+    var staffLeaveAssignIndex = "{{ route('admin.staff_leave_assign') }}";
+    
+</script>
+<script src="{{ asset('public/js/custom/staff_leave_assign.js') }}"></script>
+
+@endsection
+

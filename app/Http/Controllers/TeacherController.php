@@ -48,13 +48,13 @@ class TeacherController extends Controller
     }
     public function applyleave()
     {
-        $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
         $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
         $data = [
-            'staff_id' => session()->get('ref_user_id')
+            'staff_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
+        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'),$data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
-
         return view('teacher.leave_management.applyleave', [
             'get_leave_types' => $get_leave_types['data'],
             'get_leave_reasons' => $get_leave_reasons['data'],
@@ -95,7 +95,8 @@ class TeacherController extends Controller
     public function getStaffLeaveList()
     {
         $staff_id = [
-            'staff_id' => session()->get('ref_user_id')
+            'staff_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
         // dd($response);
@@ -136,6 +137,7 @@ class TeacherController extends Controller
         $staff_data = [
             'staff_id' => $request->staff_id,
             'leave_status' => $request->leave_status,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
         return DataTables::of($response['data'])

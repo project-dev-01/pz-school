@@ -11518,6 +11518,13 @@ class ApiController extends BaseController
         } else {
             // create new connection
             $con = $this->createNewConnection($request->branch_id);
+            // curren tSemester 
+            $currentDate = date('Y-m-d');
+            $semester = $con->table('semester')
+                // ->whereRaw('(now() between start_date and end_date)')
+                ->whereRaw('"' . $currentDate . '" between `start_date` and `end_date`')
+                ->first();
+                // return $semester->id;
             // get data
             $student = $con->table('enrolls as e')->select('s.id', DB::raw('CONCAT(s.first_name, " ", s.last_name) as name'), 's.register_no', 's.roll_no', 's.mobile_no', 's.email', 's.gender', 's.photo')
                 ->leftJoin('students as s', 'e.student_id', '=', 's.id')
@@ -11533,8 +11540,9 @@ class ApiController extends BaseController
                 ->when($name, function ($query, $name) {
                     return $query->where('s.first_name', 'like', '%' . $name . '%')->orWhere('s.last_name', 'like', '%' . $name . '%');
                 })
-                // ->where('e.academic_session_id', '=', $request->academic_session_id)
-                ->where('e.active_status', '=', "0")
+                ->where('e.academic_session_id', '=', $request->academic_session_id)
+                // ->where('e.active_status', '=', "0")
+                ->groupBy('e.student_id')
                 ->get()->toArray();
 
             return $this->successResponse($student, 'Student record fetch successfully');
@@ -13437,7 +13445,12 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $getAllTypes = $conn->table('leave_types as lev')->get();
+            $staff = $conn->table('staffs as s')->where('id',$request->staff_id)->first();
+            $gender = '';
+            if($staff) {
+                $gender = $staff->gender;
+            }
+            $getAllTypes = $conn->table('leave_types as lev')->where('gender','=',"All")->orWhere('gender','=',$gender)->get();
             return $this->successResponse($getAllTypes, 'Staff leave types fetch successfully');
         }
     }
@@ -13448,6 +13461,8 @@ class ApiController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
+            'leave_days' => 'required',
+            'gender' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -13462,12 +13477,34 @@ class ApiController extends BaseController
                 return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
             } else {
                 // insert data
-                $query = $conn->table('leave_types')->insert([
+                $leave_type_id = $conn->table('leave_types')->insertGetId([
                     'name' => $request->name,
+                    'short_name' => $request->short_name,
+                    'leave_days' => $request->leave_days,
+                    'gender' => $request->gender,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
+                if($leave_type_id) {
+                    $gender = $request->gender;
+                    if($gender!= "All"){
+                        $staff = $conn->table('staffs')->where('gender',$gender)->get();
+                    }else{
+                        $staff = $conn->table('staffs')->get();
+                    }
+                    foreach($staff as $st) {
+                        $conn->table('staff_leave_assign')->insert([
+                            'staff_id' => $st->id,
+                            'leave_type' => $leave_type_id,
+                            'leave_days' => $request->leave_days,
+                            'academic_session_id' => $request->academic_session_id,
+                            'created_at' => date("Y-m-d H:i:s")
+                        ]);
+                    }
+                    
+                }
+                
                 $success = [];
-                if (!$query) {
+                if (!$leave_type_id) {
                     return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
                 } else {
                     return $this->successResponse($success, 'Leave Type has been successfully saved');
@@ -13520,6 +13557,8 @@ class ApiController extends BaseController
         $id = $request->id;
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
+            'leave_days' => 'required',
+            'gender' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -13537,8 +13576,44 @@ class ApiController extends BaseController
                 // update data
                 $query = $conn->table('leave_types')->where('id', $id)->update([
                     'name' => $request->name,
+                    'short_name' => $request->short_name,
+                    'leave_days' => $request->leave_days,
+                    'gender' => $request->gender,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
+
+                if($id) {
+                    $gender = $request->gender;
+                    if($gender!= "All"){
+                        $staff = $conn->table('staffs')->where('gender',$gender)->get();
+                    }else{
+                        $staff = $conn->table('staffs')->get();
+                    }
+                    foreach($staff as $st) {
+                        $updatecheck = $conn->table('staff_leave_assign')->where([['staff_id', '=', $st->id], ['leave_type', '=', $id],['status', '=', "0"]])->first();
+                        if ($updatecheck) {
+                            $conn->table('staff_leave_assign')->where('id', $updatecheck->id)->update([
+                                'staff_id' => $st->id,
+                                'leave_type' => $id,
+                                'leave_days' => $request->leave_days,
+                                'academic_session_id' => $request->academic_session_id,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }else{
+                            $addcheck = $conn->table('staff_leave_assign')->where([['staff_id', '=', $st->id], ['leave_type', '=', $id],['status', '=', "1"]])->first();
+                            if(!$addcheck){
+                                $conn->table('staff_leave_assign')->insert([
+                                    'staff_id' => $st->id,
+                                    'leave_type' => $id,
+                                    'leave_days' => $request->leave_days,
+                                    'academic_session_id' => $request->academic_session_id,
+                                    'created_at' => date("Y-m-d H:i:s")
+                                ]);
+                            }
+                        }
+                    }
+                    
+                }
                 $success = [];
                 if ($query) {
                     return $this->successResponse($success, 'Leave Type Details have Been updated');
@@ -13566,7 +13641,9 @@ class ApiController extends BaseController
             $conn = $this->createNewConnection($request->branch_id);
             // get data
             $query = $conn->table('leave_types')->where('id', $id)->delete();
-
+            if ($query) {
+                $conn->table('staff_leave_assign')->where('leave_type', $id)->delete();
+            }
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Leave Type have been deleted successfully');
@@ -13600,7 +13677,6 @@ class ApiController extends BaseController
                 'staff_id' => $request->staff_id,
                 'leave_type' => $request->leave_type,
                 'leave_days' => $request->leave_days,
-                'academic_session_id' => $request->academic_session_id,
                 'created_at' => date("Y-m-d H:i:s")
             ]);
             $success = [];
@@ -13625,10 +13701,20 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
+            $department = $request->department;
+            $staff_id = $request->staff_id;
             $StaffLeaveAssignDetails = $conn->table('staff_leave_assign as sla')
-                                        ->select('sla.id','sla.leave_days',DB::raw("CONCAT(st.first_name, ' ', st.last_name) as staff_id"),'lt.name as leave_type')
+                                        ->select('sla.id','sla.staff_id',DB::raw("CONCAT(st.first_name, ' ', st.last_name) as staff_name"),DB::raw("GROUP_CONCAT(lt.short_name) as leave_type"))
                                         ->join('staffs as st', 'sla.staff_id', '=', 'st.id')
                                         ->join('leave_types as lt', 'sla.leave_type', '=', 'lt.id')
+                                        
+                                        ->when($department, function ($query, $department) {
+                                            return $query->where('st.department_id', $department);
+                                        })
+                                        ->when($staff_id, function ($query, $staff_id) {
+                                            return $query->where('sla.staff_id', $staff_id);
+                                        })
+                                        ->groupBy('sla.staff_id')
                                         ->get();
             return $this->successResponse($StaffLeaveAssignDetails, 'Staff Leave Assign record fetch successfully');
         }
@@ -13636,9 +13722,8 @@ class ApiController extends BaseController
     // get StaffLeaveAssign row details
     public function getStaffLeaveAssignDetails(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
-            'id' => 'required',
+            'staff_id' => 'required',
             'branch_id' => 'required',
             'token' => 'required'
         ]);
@@ -13650,16 +13735,19 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $StaffLeaveAssignDetails = $conn->table('staff_leave_assign')->where('id', $id)->first();
+            $StaffLeaveAssignDetails['staff'] = $conn->table('staffs as s')->select('s.id as staff_id',DB::raw("CONCAT(s.first_name, ' ', s.last_name) as staff_name"))->where('s.id', $request->staff_id)->first();
+            $StaffLeaveAssignDetails['leave'] = $conn->table('staff_leave_assign as sla')
+                                                ->select('sla.id','lt.name as leave_name','sla.leave_days','sla.leave_type as leave_type_id')
+                                                ->join('leave_types as lt', 'sla.leave_type', '=', 'lt.id')
+                                                ->where('sla.staff_id', $request->staff_id)
+                                                ->get();
             return $this->successResponse($StaffLeaveAssignDetails, 'Staff Leave Assign row fetch successfully');
         }
     }
     // update StaffLeaveAssign
     public function updateStaffLeaveAssign(Request $request)
     {
-        $id = $request->id;
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
             'branch_id' => 'required',
             'token' => 'required',
         ]);
@@ -13671,13 +13759,14 @@ class ApiController extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // update data
-            $query = $conn->table('staff_leave_assign')->where('id', $id)->update([
-                'staff_id' => $request->staff_id,
-                'leave_type' => $request->leave_type,
-                'leave_days' => $request->leave_days,
-                'academic_session_id' => $request->academic_session_id,
-                'updated_at' => date("Y-m-d H:i:s")
-            ]);
+            foreach($request->leave_assign as $leave) {
+                $query = $conn->table('staff_leave_assign')->where('id', $leave['id'])->update([
+                    'leave_type' => $leave['leave_type'],
+                    'leave_days' => $leave['leave_days'],
+                    'status' => "1",
+                    'updated_at' => date("Y-m-d H:i:s")
+                ]);
+            }
             $success = [];
             if ($query) {
                 return $this->successResponse($success, 'Staff Leave Assign Details have Been updated');
@@ -14143,6 +14232,7 @@ class ApiController extends BaseController
                 ->when($leave_status != "All", function ($ins)  use ($leave_status) {
                     $ins->where('lev.status', $leave_status);
                 })
+                ->where('lev.academic_session_id', '=', $request->academic_session_id)
                 ->orderBy('lev.from_leave', 'desc')
                 ->get();
             return $this->successResponse($leaveDetails, 'Staff leave details fetch successfully');
@@ -14303,6 +14393,7 @@ class ApiController extends BaseController
                 ->when($leave_status != "All", function ($ins)  use ($leave_status) {
                     $ins->where('lev.status', $leave_status);
                 })
+                ->where('lev.academic_session_id', '=', $request->academic_session_id)
                 ->orderBy('lev.from_leave', 'desc')
                 ->get();
             return $this->successResponse($leaveDetails, 'Leave Approval History By Staff details fetch successfully');
@@ -14375,14 +14466,14 @@ class ApiController extends BaseController
                     'sla.leave_days as total_leave'
                 )
                 ->leftJoin('staff_leaves as lev', function ($q) use ($staff_id,$academic_session_id) {
-                        $q->on('sla.leave_type', '=', 'lev.leave_type')
-                            ->where('lev.status', '=', 'Approve')
-                            ->where('lev.staff_id', '=', $staff_id)
-                            ->where('lev.academic_session_id', '=', $academic_session_id);
+                    $q->on('sla.leave_type', '=', 'lev.leave_type')
+                        ->on('sla.staff_id', '=',  'lev.staff_id')
+                        ->where('lev.academic_session_id', '=', $academic_session_id)
+                        ->where('lev.status', '=', 'Approve');
                     })
                 ->leftJoin('leave_types as lt', 'sla.leave_type', '=', 'lt.id')
                 ->where('sla.staff_id', '=', $staff_id)
-                ->where('sla.academic_session_id', '=', $academic_session_id)
+                // ->where('sla.academic_session_id', '=', $academic_session_id)
                 ->groupBy('sla.leave_type')
                 ->get();
                 
@@ -14426,20 +14517,20 @@ class ApiController extends BaseController
             // ->get();
                 $leave_type_details = $conn->table('staff_leave_assign as sla')
                 ->select(
-                    'lev.staff_id',
+                    'sla.staff_id',
                     'lt.name as leave_name',
-                    DB::raw('sum(total_leave) as used_leave'),
+                    DB::raw('sum(lev.total_leave) as used_leave'),
                     'sla.leave_days as total_leave'
                 )
                 ->leftJoin('staff_leaves as lev', function ($q) use ($staff_id,$academic_session_id) {
                         $q->on('sla.leave_type', '=', 'lev.leave_type')
-                            ->where('lev.status', '=', 'Approve')
-                            ->where('lev.staff_id', '=', $staff_id)
-                            ->where('lev.academic_session_id', '=', $academic_session_id);
+                            ->on('sla.staff_id', '=',  'lev.staff_id')
+                            ->where('lev.academic_session_id', '=', $academic_session_id)
+                            ->where('lev.status', '=', 'Approve');
                     })
                 ->leftJoin('leave_types as lt', 'sla.leave_type', '=', 'lt.id')
                 ->where('sla.staff_id', '=', $staff_id)
-                ->where('sla.academic_session_id', '=', $academic_session_id)
+                // ->where('sla.academic_session_id', '=', $academic_session_id)
                 ->groupBy('sla.leave_type')
                 ->get();
             return $this->successResponse($leave_type_details, 'Staff leave history details fetch successfully');

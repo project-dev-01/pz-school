@@ -1,5 +1,18 @@
 $(function () { 
 
+    $("#department").on('change', function (e) {
+        e.preventDefault();
+        var department = $(this).val();
+        $("#employee").empty();
+        $("#employee").append('<option value="">Select Employee</option>');
+        $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#employee").append('<option value="' + val.id + '">' + val.first_name + ' ' + val.last_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
     staffLeaveAssignTable();
     $("#staffLeaveAssignForm").validate({
         rules: {
@@ -74,7 +87,13 @@ $(function () {
 
                 }
             ],
-            ajax: staffLeaveAssignList,
+            ajax: {
+                url: staffLeaveAssignList,
+                data: function (d) {
+                    d.department = $('#department').val(),
+                        d.employee = $('#employee').val()
+                }
+            },
             "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -88,16 +107,12 @@ $(function () {
                 }
                 ,
                 {
-                    data: 'staff_id',
-                    name: 'staff_id'
+                    data: 'staff_name',
+                    name: 'staff_name'
                 },
                 {
                     data: 'leave_type',
                     name: 'leave_type'
-                },
-                {
-                    data: 'leave_days',
-                    name: 'leave_days'
                 },
                 {
                     data: 'actions',
@@ -126,6 +141,12 @@ $(function () {
     });
     // update StaffLeaveAssign
     $('#edit-staff-leave-assign-form').on('submit', function (e) {
+        
+        $('.leave_days').each(function () {
+            $(this).rules("add", {
+                required: true
+            })
+        });
         e.preventDefault();
         var edt_leaveCheck = $("#edit-staff-leave-assign-form").valid();
         if (edt_leaveCheck === true) {
@@ -146,14 +167,11 @@ $(function () {
                     } else {
 
                         if (data.code == 200) {
-                            $('#staff-leave-assign-table').DataTable().ajax.reload(null, false);
-                            $('.editStaffLeaveAssign').modal('hide');
-                            $('.editStaffLeaveAssign').find('form')[0].reset();
                             toastr.success(data.message);
+                            window.location.href = staffLeaveAssignIndex;
                         } else {
-                            $('.editStaffLeaveAssign').modal('hide');
-                            $('.editStaffLeaveAssign').find('form')[0].reset();
                             toastr.error(data.message);
+                            window.location.href = staffLeaveAssignIndex;
                         }
                     }
                 }
@@ -189,5 +207,18 @@ $(function () {
                 }, 'json');
             }
         });
+    });
+
+    $("#staffLeaveAssignFilter").validate({
+        rules: {
+            department: "required",
+        }
+    });
+    $('#staffLeaveAssignFilter').on('submit', function (e) {
+        e.preventDefault();
+        var filterCheck = $("#staffLeaveAssignFilter").valid();
+        if (filterCheck === true) {
+            staffLeaveAssignTable();
+        }
     });
 });

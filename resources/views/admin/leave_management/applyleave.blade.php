@@ -134,7 +134,7 @@
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" name="total_leave" class="form-control number_validation" id="total_leave">
+                                                <input type="number" name="total_leave" class="form-control" id="total_leave">
                                             </div>
                                         </div>
                                     </div>

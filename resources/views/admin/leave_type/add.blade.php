@@ -16,6 +16,25 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
+                        <label for="short_name">Short Name</label>
+                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <span class="text-danger error-text name_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
+                        <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="Enter Leave Days">
+                        <span class="text-danger error-text leave_days_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender<span class="text-danger">*</span></label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="">Select Gender</option>
+                            <option value="All">All</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
                     </div>

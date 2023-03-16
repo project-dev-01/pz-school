@@ -105,7 +105,7 @@
                     <!-- end row-->
                     <form id="promoteStudentForm" method="post" action="{{ route('admin.promotion.add') }}" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="promote_year">Promote to academic year<span class="text-danger">*</span></label>
                                     <select id="promote_year" class="form-control" name="promote_year">
@@ -117,7 +117,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="promoteClassID">Promote to standard<span class="text-danger">*</span></label>
                                     <select id="promoteClassID" class="form-control" name="promote_class_id">
@@ -129,18 +129,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="promoteSectionID">Promote to class<span class="text-danger">*</span></label>
-                                    <select id="promoteSectionID" class="form-control" name="promote_section_id">
-                                        <option value="">Select Class</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="promote_semester_id">Promote to semester<span class="text-danger">*</span></label>
                                     <select id="promote_semester_id" class="form-control" name="promote_semester_id">
@@ -151,7 +140,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="promote_session_id">Promote to session<span class="text-danger">*</span></label>
                                     <select id="promote_session_id" class="form-control" name="promote_session_id">
@@ -163,14 +152,16 @@
                                 </div>
                             </div>
                         </div><br>
+                        ( Note : Student will not appear on the list after a Student has been Promoted )<br>
                         <div class="table-responsive">
                             <table class="table table-bordered w-100 nowrap" id="showStudentDetails">
                                 <thead>
                                     <tr>
+                                        <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>#</th>
                                         <th>Student Name</th>
                                         <th>Register No</th>
-                                        <th>Promotion Status</th>
+                                        <th>Promote to Class</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,6 +192,7 @@
     var getStudentListByClassSectionUrl = "{{ config('constants.api.get_student_by_class_section_sem_ses') }}";
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var studentImg = "{{ asset('public/users/images/') }}";
 </script>
 <script src="{{ asset('public/js/custom/promotion.js') }}"></script>
 @endsection

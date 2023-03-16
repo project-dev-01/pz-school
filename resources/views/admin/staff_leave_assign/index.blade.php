@@ -21,6 +21,57 @@
     <!-- end page title -->
 
     <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs" >
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            Select Ground
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <form id="staffLeaveAssignFilter"   method="post" autocomplete="off">
+                        <div class="row">      
+                             <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="department">Department<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="department" id="department">
+                                        <option value="">Select Department</option>
+                                        @foreach($department as $dep)
+                                        <option value="{{$dep['id']}}">{{$dep['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="employee">Employee</label>
+                                    <select class="form-control" name="employee" id="employee">
+                                        <option value="">Select Employee</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                                Filter
+                            </button> -->
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                Filter
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
+                    </form>
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -29,12 +80,11 @@
                             <h4>
                     </li>
                 </ul><br>
-                <div class="form-group pull-right">
+                <!-- <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
                         <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addStaffLeaveAssignModal">Add</button>
                     </div>
-                </div>
+                </div> -->
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table dt-responsive nowrap w-100" id="staff-leave-assign-table">
@@ -43,7 +93,6 @@
                                     <th>#</th>
                                     <th>Staff Name </th>
                                     <th>Leave Type </th>
-                                    <th>Leave Days </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -56,8 +105,6 @@
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-    @include('admin.staff_leave_assign.add')
-    @include('admin.staff_leave_assign.edit')
 </div>
 <!-- container -->
 @endsection
@@ -65,6 +112,7 @@
 
 <script>
     //staff Leave Assign routes
+    var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
     var staffLeaveAssignList = "{{ route('admin.staff_leave_assign.list') }}";
     var staffLeaveAssignDetails = "{{ route('admin.staff_leave_assign.details') }}";
     var staffLeaveAssignDelete = "{{ route('admin.staff_leave_assign.delete') }}";

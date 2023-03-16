@@ -18,7 +18,7 @@ class CreateStaffLeaveAssignTable extends Migration
             $table->integer('staff_id');
             $table->integer('leave_type');
             $table->integer('leave_days');
-            $table->integer('academic_session_id')->default('0');
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

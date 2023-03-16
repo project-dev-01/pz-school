@@ -5521,100 +5521,44 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // check exist name
-            // if ($conn->table('fees_group')->where('name', '=', $request->name)->count() > 0) {
-            //     return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
-            // } else {
-            // insert data
-            // return $request->fees;
-            $fees = $request->fees;
-            // if (count($request->fees) > 0) {
-            $insertId = $conn->table('fees_group')->insertGetId([
-                'name' => $request->name,
-                'description' => $request->description,
-                'academic_session_id' => $request->academic_session_id,
-                'created_at' => date("Y-m-d H:i:s")
-            ]);
-            // }
-            // return $query;
-            if (isset($insertId)) {
-                // $fees = isset($request->fees) ? count($request->fees) : 0;
-                // if ($fees > 0) {
-                foreach ($request->fees as $fee) {
-                    if (isset($fee['fees_type_id'])) {
-                        // $yearly_fees_details = isset($fee['yearly_fees_details']) ? count($fee['yearly_fees_details']) : 0;
-                        // $semester_fees_details = isset($fee['semester_fees_details']) ? count($fee['semester_fees_details']) : 0;
-                        // $monthly_fees_details = isset($fee['monthly_fees_details']) ? count($fee['monthly_fees_details']) : 0;
-                        // return $fee['semester_fees_details'];
-                        // insert yearly fees group
-                        // if ($yearly_fees_details > 0) {
+            if ($conn->table('fees_group')->where('name', '=', $request->name)->count() > 0) {
+                return $this->send422Error('Name Already Exist', ['error' => 'Name Already Exist']);
+            } else {
+                // insert data
+                $insertId = $conn->table('fees_group')->insertGetId([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'academic_session_id' => $request->academic_session_id,
+                    'created_at' => date("Y-m-d H:i:s")
+                ]);
 
-                        foreach ($fee['yearly_fees_details'] as $year) {
-                            // dd($year);
-                            // return $year['amount'];
-                            if (isset($year['due_date']) && isset($year['amount'])) {
-                                $conn->table('fees_group_details')->insert([
-                                    // 'fees_group_id' => $insertId,
-                                    'fees_group_id' => $insertId,
-                                    'fees_type_id' => $fee['fees_type_id'],
-                                    'amount' => isset($year['amount']) ? $year['amount'] : 0,
-                                    'payment_mode_id' => $year['payment_mode_id'],
-                                    'due_date' => $year['due_date'],
-                                    'yearly' => $year['yearly'],
-                                    'created_at' => date("Y-m-d H:i:s")
-                                ]);
-                            }
+                // return $query;
+                $fees = $request->fees;
+                foreach ($fees as $fee) {
+                    if (isset($fee['fees_type_id'])) {
+                        foreach ($fee['mode_id'] as $key => $grp_det) {
+                            // dd($grp_det);
+                            // if (isset($fee['amount'][$key]) && $insertId) {
+                            $conn->table('fees_group_details')->insert([
+                                'fees_group_id' => $insertId,
+                                'fees_type_id' => $fee['fees_type_id'],
+                                'due_date' => $fee['due_date'],
+                                'payment_mode_id' => $fee['mode_id'][$key],
+                                'amount' => isset($fee['amount'][$key]) ? $fee['amount'][$key] : 0,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                            // }
                         }
-                        // }
-                        // insert semester fees group
-                        // if ($semester_fees_details > 0) {
-                        foreach ($fee['semester_fees_details'] as $semester) {
-                            // dd($year);
-                            if (isset($semester['due_date']) && isset($semester['amount'])) {
-                                $conn->table('fees_group_details')->insert([
-                                    // 'fees_group_id' => $insertId,
-                                    'fees_group_id' => $insertId,
-                                    'fees_type_id' => $fee['fees_type_id'],
-                                    'amount' => isset($semester['amount']) ? $semester['amount'] : 0,
-                                    'payment_mode_id' => $semester['payment_mode_id'],
-                                    'due_date' => $semester['due_date'],
-                                    'semester' => $semester['semester'],
-                                    'created_at' => date("Y-m-d H:i:s")
-                                ]);
-                            }
-                        }
-                        // }
-                        // insert monthly fees group
-                        // if ($monthly_fees_details > 0) {
-                        foreach ($fee['monthly_fees_details'] as $month) {
-                            // dd($year);
-                            if (isset($month['due_date']) && isset($month['amount'])) {
-                                $conn->table('fees_group_details')->insert([
-                                    // 'fees_group_id' => $insertId,
-                                    'fees_group_id' => $insertId,
-                                    'fees_type_id' => $fee['fees_type_id'],
-                                    'amount' => isset($month['amount']) ? $month['amount'] : 0,
-                                    'payment_mode_id' => $month['payment_mode_id'],
-                                    'due_date' => $month['due_date'],
-                                    'monthly' => $month['monthly'],
-                                    'created_at' => date("Y-m-d H:i:s")
-                                ]);
-                            }
-                        }
-                        // }
                     }
                 }
-                // }
+                // return $query;
+                $success = [];
+                if (!$insertId) {
+                    return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
+                } else {
+                    return $this->successResponse($success, 'Fees Group has been successfully saved');
+                }
             }
-
-
-            // return $query;
-            $success = [];
-            if (!$insertId) {
-                return $this->send500Error('Something went wrong.', ['error' => 'Something went wrong']);
-            } else {
-                return $this->successResponse($success, 'Fees Group has been successfully saved');
-            }
-            // }
         }
     }
     // getFeesGroupList
@@ -5648,7 +5592,7 @@ class ApiControllerOne extends BaseController
         if (!$validator->passes()) {
             return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
         } else {
-            $fees_group__id = $request->id;
+            $id = $request->id;
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
@@ -5674,105 +5618,28 @@ class ApiControllerOne extends BaseController
             // $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
             // $FeesGroupDetails['fees_group_details'] = $conn->table('fees_group_details')->where('fees_group_id', $id)->get();
 
-            // $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')
-            //     ->select(
-            //         'ft.name',
-            //         DB::raw("group_concat(fg.payment_mode_id ORDER BY pm.id ASC) as payment_mode_id"),
-            //         DB::raw("group_concat(pm.name ORDER BY pm.id ASC) as payment_mode_name"),
-            //         DB::raw("group_concat(fg.amount ORDER BY pm.id ASC) as amount"),
-            //         DB::raw("group_concat(fg.id ORDER BY pm.id ASC) as id"),
-            //         'ft.id as fees_type_id',
-            //         // 'fg.id',
-            //         'fg.fees_group_id',
-            //         'fg.due_date'
-            //     )
-            //     ->leftjoin('fees_group_details as fg', function ($join) use ($id) {
-            //         $join->on('fg.fees_type_id', '=', 'ft.id');
-            //         $join->where('fg.fees_group_id', $id);
-            //     })
-            //     ->leftJoin('payment_mode as pm', 'pm.id', '=', 'fg.payment_mode_id')
-            //     ->orderBy('ft.id')
-            //     ->groupBy('ft.id')
-            //     ->get();
-            // $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
-            $fees_type = $conn->table('fees_type as ft')
+            $FeesGroupDetails['fees_type'] = $conn->table('fees_type as ft')
                 ->select(
-                    'ft.id',
-                    'ft.name'
+                    'ft.name',
+                    DB::raw("group_concat(fg.payment_mode_id ORDER BY pm.id ASC) as payment_mode_id"),
+                    DB::raw("group_concat(pm.name ORDER BY pm.id ASC) as payment_mode_name"),
+                    DB::raw("group_concat(fg.amount ORDER BY pm.id ASC) as amount"),
+                    DB::raw("group_concat(fg.id ORDER BY pm.id ASC) as id"),
+                    'ft.id as fees_type_id',
+                    // 'fg.id',
+                    'fg.fees_group_id',
+                    'fg.due_date'
                 )
+                ->leftjoin('fees_group_details as fg', function ($join) use ($id) {
+                    $join->on('fg.fees_type_id', '=', 'ft.id');
+                    $join->where('fg.fees_group_id', $id);
+                })
+                ->leftJoin('payment_mode as pm', 'pm.id', '=', 'fg.payment_mode_id')
+                ->orderBy('ft.id')
+                ->groupBy('ft.id')
                 ->get();
-
-            $FeesGroupDetails = [];
-            // if (!empty($studentData)) {
-            //     $i = 0;
-            //     foreach ($studentData as $key => $value) {
-            //         $object = new \stdClass();
-            //         // paid details
-            //         $invoiceSts = $this->getInvoiceStatus($value->student_id, $branchID, $academic_session_id);
-            //         // filter by invoice status
-            //         if (isset($request->payment_status)) {
-            //             if ($invoiceSts['payment_status_id'] == $request->payment_status) {
-            //                 $object->student_id = $value->student_id;
-            //                 $object->email = $value->email;
-            //                 $object->class_name = $value->class_name;
-            //                 $object->section_name = $value->section_name;
-            //                 $object->name = $value->name;
-            //                 $object->status = $invoiceSts['status'];
-            //                 $object->feegroup = $this->getfeeGroup($value->student_id, $branchID, $academic_session_id);
-            //                 array_push($arrData, $object);
-            // dd($fees_type);
-            if (count($fees_type) > 0) {
-                foreach ($fees_type as $value) {
-                    $object = new \stdClass();
-                    $object->fees_type_id = $value->id;
-                    $object->name = $value->name;
-                    // dd($fees_group__id);
-                    // print_r($value);
-                    // yearly fees details
-                    $query = $conn->table('fees_group_details as fg')
-                        ->select(
-                            'fg.id',
-                            'fg.fees_group_id',
-                            'fg.fees_type_id',
-                            'fg.payment_mode_id',
-                            'fg.amount',
-                            'fg.due_date',
-                            'fg.monthly',
-                            'fg.semester',
-                            'fg.yearly'
-                        )
-                        ->where('fg.fees_group_id', '=', $fees_group__id)
-                        ->where('fg.fees_type_id', '=', $value->id);
-                    // year
-                    $yearlyquery = clone $query;
-                    $yearlyquery->whereNotNull('fg.yearly');
-                    $year = $yearlyquery->get();
-                    // // semester
-                    $semesteryquery = clone $query;
-                    $semesteryquery->whereNotNull('fg.semester');
-                    $semester = $semesteryquery->get();
-                    // // monthly
-                    $monthlyyquery = clone $query;
-                    $monthlyyquery->whereNotNull('fg.monthly');
-                    $monthly = $monthlyyquery->get();
-
-                    $data = [
-                        'year' => $year,
-                        'semester' => $semester,
-                        'monthly' => $monthly
-                    ];
-                    $object->fees_details = $data;
-                    array_push($FeesGroupDetails, $object);
-                    // print_r($data);
-                }
-            }
-            // exit;
-            $fees_group = $conn->table('fees_group')->where('id', $fees_group__id)->first();
-            $feesdata = [
-                'fees_group_details' => $FeesGroupDetails,
-                'fees_group' => $fees_group
-            ];
-            return $this->successResponse($feesdata, 'Fees Group row fetch successfully');
+            $FeesGroupDetails['fees_group'] = $conn->table('fees_group')->where('id', $id)->first();
+            return $this->successResponse($FeesGroupDetails, 'Fees Group row fetch successfully');
         }
     }
     // update FeesGroup
@@ -6066,74 +5933,6 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($arrData, 'get student details fetch successfully');
         }
     }
-    // public function getInvoiceStatus($studentID, $branchID, $academic_session_id)
-    // {
-    //     // create new connection
-    //     $conn = $this->createNewConnection($branchID);
-    //     // get data
-    //     $allocationFeesGroup = $conn->table('fees_allocation as fa')
-    //         ->select('g.id', 'g.name')
-    //         ->join('fees_group as g', 'g.id', '=', 'fa.group_id')
-    //         ->where([
-    //             ['fa.student_id', '=', $studentID],
-    //             ['fa.academic_session_id', '=', $academic_session_id]
-    //         ])
-    //         ->get()->toArray();
-    //     if (!empty($allocationFeesGroup)) {
-    //         foreach ($allocationFeesGroup as $key => $value) {
-    //             echo $value->id;
-    //             echo $value->name;
-    //         }
-    //     }
-    //     // dd($allocationFeesGroup);
-
-    //     // return $allocationFeesGroup;
-
-    //     $status = "";
-    //     $payment_status_id = "";
-    //     $conn = $this->createNewConnection($branchID);
-    //     $balance = $conn->table('fees_allocation as fa')
-    //         ->select(
-    //             DB::raw('SUM(fgd.amount) as total'),
-    //             DB::raw('MIN(fa.id) as inv_no')
-    //         )
-    //         ->leftJoin('fees_group_details as fgd', 'fgd.fees_group_id', '=', 'fa.group_id')
-    //         ->leftJoin('fees_type as ft', 'ft.id', '=', 'fgd.fees_type_id')
-    //         ->where([
-    //             ['fa.student_id', '=', $studentID],
-    //             ['fa.academic_session_id', '=', $academic_session_id]
-    //         ])
-    //         ->get()->toArray();
-    //     dd($balance);
-
-    //     // $invNo = str_pad($balance['0']->inv_no, 4, '0', STR_PAD_LEFT);
-    //     $paid = $conn->table('fees_payment_history as fph')
-    //         ->select(
-    //             DB::raw('IFNULL(SUM(fph.amount), 0) as amount'),
-    //             DB::raw('IFNULL(SUM(fph.discount), 0) as discount'),
-    //             DB::raw('IFNULL(SUM(fph.fine), 0) as fine')
-    //         )
-    //         ->leftJoin('fees_allocation as fa', 'fph.allocation_id', '=', 'fa.id')
-    //         ->join('fees_group_details as fg', 'fg.id', '=', 'fph.fees_group_details_id')
-    //         ->where([
-    //             ['fa.student_id', '=', $studentID],
-    //             ['fa.academic_session_id', '=', $academic_session_id]
-    //         ])
-    //         ->get()->toArray();
-    //     dd($paid);
-    //     // $paid_amount = round($paid['0']->amount);
-    //     // if ($paid['0']->amount == 0) {
-    //     //     $status = 'unpaid';
-    //     //     $payment_status_id = 2;
-    //     // } elseif ($balance['0']->total == ($paid_amount + $paid['0']->discount)) {
-    //     //     $status = 'paid';
-    //     //     $payment_status_id = 1;
-    //     // } elseif ($paid['0']->amount > 1) {
-    //     //     $status = 'partly';
-    //     //     $payment_status_id = 3;
-    //     // }
-    //     // return array('status' => $status, 'payment_status_id' => $payment_status_id, 'invoice_no' => $invNo);
-    // }
     public function getInvoiceStatus($studentID, $branchID, $academic_session_id)
     {
         $status = "";
@@ -6366,88 +6165,31 @@ class ApiControllerOne extends BaseController
             $studentID = $request->student_id;
             $branchID = $request->branch_id;
             $academic_session_id = $request->academic_session_id;
-            // $allocations = $conn->table('fees_allocation as fa')
-            //     ->select(
-            //         'fa.id as allocation_id',
-            //         'fa.student_id',
-            //         't.name',
-            //         'f.name as fees_group_name',
-            //         'fg.amount',
-            //         'fg.due_date',
-            //         'fg.fees_type_id'
-            //     )
-            //     ->leftJoin('fees_group as f', 'f.id', '=', 'fa.group_id')
-            //     ->leftJoin('fees_group_details as fg', 'fg.fees_group_id', '=', 'fa.group_id')
-            //     // ->leftJoin('fees_payment_history as fph', 'fph.fees_group_id', '=', 'fa.group_id')
-            //     // ->leftjoin('fees_payment_history as fph', function ($join) {
-            //     //     $join->on('fa.id', '=', 'fph.fees_type_id');
-            //     //     $join->on('fa.id', '=', 'fph.allocation_id');
-            //     // })
-            //     ->leftJoin('fees_type as t', 't.id', '=', 'fg.fees_type_id')
-            //     ->where([
-            //         ['fa.student_id', '=', $studentID],
-            //         ['fa.academic_session_id', '=', $academic_session_id]
-            //     ])
-            //     ->orderBy('f.id', 'asc')
-            //     ->orderBy('fg.id', 'asc')
-            //     ->get()->toArray();
-            $allocations = $conn->table('fees_payment_history as fph')
+            $allocations = $conn->table('fees_allocation as fa')
                 ->select(
-                    // "fph.id",
-                    "fph.fees_group_details_id",
-                    'fph.date as paid_date',
-                    "fph.payment_status_id",
-                    "fph.student_id",
-                    "fph.allocation_id",
+                    'fa.id as allocation_id',
+                    'fa.student_id',
                     't.name',
                     'f.name as fees_group_name',
                     'fg.amount',
                     'fg.due_date',
-                    'fg.fees_type_id',
-                    "fph.amount as paid_amount",
-                    // "fph.fees_type_id",
-                    // "fph.amount as paid_amount",
-                    // "fph.remarks",
-                    // "fph.date",
-                    // "fph.payment_status_id",
-
-                    // 'fa.id as allocation_id',
-                    // 'fa.student_id',
-                    // 't.name',
-                    // 'f.name as fees_group_name',
-                    // 'fg.amount',
-                    // 'fg.due_date',
-                    // 'fg.fees_type_id'
+                    'fg.fees_type_id'
                 )
-                // ->leftJoin('fees_group as f', 'f.id', '=', 'fph.fees_group_id')
-                // ->leftJoin('fees_group_details as fg', 'fg.fees_group_id', '=', 'fa.group_id')
-                // ->leftJoin('fees_payment_history as fph', 'fph.fees_group_id', '=', 'fa.group_id')
-                // ->leftjoin('fees_payment_history as fph', function ($join) {
-                //     $join->on('fa.id', '=', 'fph.fees_type_id');
-                //     $join->on('fa.id', '=', 'fph.allocation_id');
-                // })
-                // ->leftjoin('fees_group_details as fg', function ($join) {
-                //     $join->on('fph.fees_group_id', '=', 'fg.fees_group_id');
-                //     $join->on('fph.fees_type_id', '=', 'fg.fees_type_id');
-                //     $join->on('fph.payment_mode_id', '=', 'fg.payment_mode_id');
-                //     $join->on('fph.monthly', '=', 'fg.monthly');
-                // })
-                ->join('fees_group_details as fg', 'fg.id', '=', 'fph.fees_group_details_id')
-                ->leftJoin('fees_type as t', 't.id', '=', 'fph.fees_type_id')
-                ->leftJoin('fees_group as f', 'f.id', '=', 'fph.fees_group_id')
+                ->leftJoin('fees_group as f', 'f.id', '=', 'fa.group_id')
+                ->leftJoin('fees_group_details as fg', 'fg.fees_group_id', '=', 'fa.group_id')
+                ->leftJoin('fees_type as t', 't.id', '=', 'fg.fees_type_id')
                 ->where([
-                    ['fph.student_id', '=', $studentID]
-                    // ['fph.academic_session_id', '=', $academic_session_id]
+                    ['fa.student_id', '=', $studentID],
+                    ['fa.academic_session_id', '=', $academic_session_id]
                 ])
-                // ->whereNotNull('fph.date')
-                // ->orderBy('fph.fees_group_details_id', 'asc')
-                ->orderBy('fph.date', 'desc')
+                ->orderBy('f.id', 'asc')
+                ->orderBy('fg.id', 'asc')
                 ->get()->toArray();
             // dd($allocations);
-            // foreach ($allocations as $key => $allRow) {
-            //     $historys = $this->getStudentFeeDeposit($allRow->allocation_id, $allRow->fees_type_id, $allRow->student_id, $branchID);
-            //     $allocations[$key]->history = $historys;
-            // }
+            foreach ($allocations as $key => $allRow) {
+                $historys = $this->getStudentFeeDeposit($allRow->allocation_id, $allRow->fees_type_id, $allRow->student_id, $branchID);
+                $allocations[$key]->history = $historys;
+            }
             return $this->successResponse($allocations, 'Get fees row fetch successfully');
         }
     }
@@ -6486,11 +6228,8 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             $fees = $request->fees;
-            // dd($request);
-            // return $fees;
             // check exist payment_mode,allocation_id,student_id,fees_type_id
             if ($request->payment_mode == "1") {
-                // return $fees;
                 $row = $conn->table('fees_payment_history')->select('id')->where([
                     ['student_id', '=', $request->student_id],
                     ['allocation_id', '=', $request->allocation_id],
@@ -6500,16 +6239,13 @@ class ApiControllerOne extends BaseController
                 ])->first();
                 if (isset($row->id)) {
                     $conn->table('fees_payment_history')->where('id', $row->id)->update([
-                        'payment_status_id' => isset($fees['payment_status']) ? $fees['payment_status'] : 0,
+                        'payment_status_id' => $fees['payment_status'],
                         'collect_by' => $request->collect_by,
-                        'amount' => isset($fees['amount']) ? $fees['amount'] : 0,
+                        'amount' => $fees['amount'],
                         'discount' => "0",
                         'fine' => "0",
-                        'yearly' => "1",
                         'pay_via' => "Cash",
-                        'remarks' => isset($fees['memo']) ? $fees['memo'] : "",
-                        'date' => isset($fees['date']) ? $fees['date'] : null,
-                        'fees_group_details_id' => isset($fees['fees_group_details_id']) ? $fees['fees_group_details_id'] : 0,
+                        'date' => $fees['date'],
                         'updated_at' => date("Y-m-d H:i:s")
                     ]);
                 } else {
@@ -6519,119 +6255,106 @@ class ApiControllerOne extends BaseController
                         'fees_type_id' => $request->fees_type,
                         'payment_mode_id' => $request->payment_mode,
                         'fees_group_id' => $request->fees_group_id,
-                        'payment_status_id' => isset($fees['payment_status']) ? $fees['payment_status'] : 0,
+                        'payment_status_id' => $fees['payment_status'],
                         'collect_by' => $request->collect_by,
-                        'amount' => isset($fees['amount']) ? $fees['amount'] : 0,
-                        'yearly' => "1",
+                        'amount' => $fees['amount'],
                         'discount' => "0",
                         'fine' => "0",
                         'pay_via' => "Cash",
-                        'remarks' => isset($fees['memo']) ? $fees['memo'] : "",
-                        'date' => isset($fees['date']) ? $fees['date'] : null,
-                        'fees_group_details_id' => isset($fees['fees_group_details_id']) ? $fees['fees_group_details_id'] : 0,
-                        'academic_session_id' => $request->academic_session_id,
+                        'date' => $fees['date'],
                         'created_at' => date("Y-m-d H:i:s")
                     ];
                     $conn->table('fees_payment_history')->insert($data);
                 }
             } else if ($request->payment_mode == "2") {
                 foreach ($fees as $fee) {
-                    // if (isset($fee['status'])) {
-                    $row = $conn->table('fees_payment_history')->select('id')->where([
-                        ['student_id', '=', $request->student_id],
-                        ['allocation_id', '=', $request->allocation_id],
-                        ['fees_type_id', '=', $request->fees_type],
-                        ['fees_group_id', '=', $request->fees_group_id],
-                        ['payment_mode_id', '=', $request->payment_mode],
-                        ['semester', '=', $fee['semester']]
-                    ])->first();
-                    if (isset($row->id)) {
-                        $conn->table('fees_payment_history')->where('id', $row->id)->update([
-                            'payment_status_id' => isset($fee['payment_status']) ? $fee['payment_status'] : 0,
-                            'collect_by' => $request->collect_by,
-                            'amount' => isset($fee['amount']) ? $fee['amount'] : 0,
-                            'discount' => "0",
-                            'fine' => "0",
-                            'pay_via' => "Cash",
-                            'remarks' => isset($fee['memo']) ? $fee['memo'] : "",
-                            'semester' => $fee['semester'],
-                            'date' => isset($fee['date']) ? $fee['date'] : null,
-                            'fees_group_details_id' => isset($fee['fees_group_details_id']) ? $fee['fees_group_details_id'] : 0,
-                            'academic_session_id' => $request->academic_session_id,
-                            'updated_at' => date("Y-m-d H:i:s")
-                        ]);
-                    } else {
-                        $data = [
-                            'student_id' => $request->student_id,
-                            'allocation_id' => $request->allocation_id,
-                            'fees_type_id' => $request->fees_type,
-                            'fees_group_id' => $request->fees_group_id,
-                            'payment_mode_id' => $request->payment_mode,
-                            'payment_status_id' => isset($fee['payment_status']) ? $fee['payment_status'] : 0,
-                            'collect_by' => $request->collect_by,
-                            'amount' => isset($fee['amount']) ? $fee['amount'] : 0,
-                            'discount' => "0",
-                            'fine' => "0",
-                            'pay_via' => "Cash",
-                            'remarks' => isset($fee['memo']) ? $fee['memo'] : "",
-                            'semester' => $fee['semester'],
-                            'date' => isset($fee['date']) ? $fee['date'] : null,
-                            'fees_group_details_id' => isset($fee['fees_group_details_id']) ? $fee['fees_group_details_id'] : 0,
-                            'academic_session_id' => $request->academic_session_id,
-                            'created_at' => date("Y-m-d H:i:s")
-                        ];
-                        $conn->table('fees_payment_history')->insert($data);
+                    if (isset($fee['status'])) {
+                        $row = $conn->table('fees_payment_history')->select('id')->where([
+                            ['student_id', '=', $request->student_id],
+                            ['allocation_id', '=', $request->allocation_id],
+                            ['fees_type_id', '=', $request->fees_type],
+                            ['fees_group_id', '=', $request->fees_group_id],
+                            ['payment_mode_id', '=', $request->payment_mode],
+                            ['semester', '=', $fee['semester']]
+                        ])->first();
+                        if (isset($row->id)) {
+                            $conn->table('fees_payment_history')->where('id', $row->id)->update([
+                                'payment_status_id' => $fee['payment_status'],
+                                'collect_by' => $request->collect_by,
+                                'amount' => $fee['amount'],
+                                'discount' => "0",
+                                'fine' => "0",
+                                'pay_via' => "Mas",
+                                'remarks' => "Cash",
+                                'semester' => $fee['semester'],
+                                'date' => $fee['date'],
+                                'updated_at' => date("Y-m-d H:i:s")
+                            ]);
+                        } else {
+                            $data = [
+                                'student_id' => $request->student_id,
+                                'allocation_id' => $request->allocation_id,
+                                'fees_type_id' => $request->fees_type,
+                                'fees_group_id' => $request->fees_group_id,
+                                'payment_mode_id' => $request->payment_mode,
+                                'payment_status_id' => $fee['payment_status'],
+                                'collect_by' => $request->collect_by,
+                                'amount' => $fee['amount'],
+                                'discount' => "0",
+                                'fine' => "0",
+                                'pay_via' => "Mas",
+                                'remarks' => "Cash",
+                                'semester' => $fee['semester'],
+                                'date' => $fee['date'],
+                                'created_at' => date("Y-m-d H:i:s")
+                            ];
+                            $conn->table('fees_payment_history')->insert($data);
+                        }
                     }
-                    // }
                 }
             } else if ($request->payment_mode == "3") {
                 foreach ($fees as $fee) {
-                    // if (isset($fee['status'])) {
-                    $row = $conn->table('fees_payment_history')->select('id')->where([
-                        ['student_id', '=', $request->student_id],
-                        ['allocation_id', '=', $request->allocation_id],
-                        ['fees_type_id', '=', $request->fees_type],
-                        ['fees_group_id', '=', $request->fees_group_id],
-                        ['payment_mode_id', '=', $request->payment_mode],
-                        ['monthly', '=', $fee['month']]
-                    ])->first();
-                    if (isset($row->id)) {
-                        $conn->table('fees_payment_history')->where('id', $row->id)->update([
-                            'payment_status_id' => isset($fee['payment_status']) ? $fee['payment_status'] : 0,
-                            'collect_by' => $request->collect_by,
-                            'amount' => isset($fee['amount']) ? $fee['amount'] : 0,
-                            'discount' => "0",
-                            'fine' => "0",
-                            'pay_via' => "Cash",
-                            'remarks' => isset($fee['memo']) ? $fee['memo'] : "",
-                            'monthly' => $fee['month'],
-                            'date' => isset($fee['date']) ? $fee['date'] : null,
-                            'fees_group_details_id' => isset($fee['fees_group_details_id']) ? $fee['fees_group_details_id'] : 0,
-                            'updated_at' => date("Y-m-d H:i:s")
-                        ]);
-                    } else {
-                        $data = [
-                            'student_id' => $request->student_id,
-                            'allocation_id' => $request->allocation_id,
-                            'fees_type_id' => $request->fees_type,
-                            'fees_group_id' => $request->fees_group_id,
-                            'payment_mode_id' => $request->payment_mode,
-                            'payment_status_id' => isset($fee['payment_status']) ? $fee['payment_status'] : 0,
-                            'collect_by' => $request->collect_by,
-                            'amount' => isset($fee['amount']) ? $fee['amount'] : 0,
-                            'discount' => "0",
-                            'fine' => "0",
-                            'pay_via' => "Cash",
-                            'remarks' => isset($fee['memo']) ? $fee['memo'] : "",
-                            'monthly' => $fee['month'],
-                            'date' => isset($fee['date']) ? $fee['date'] : null,
-                            'fees_group_details_id' => isset($fee['fees_group_details_id']) ? $fee['fees_group_details_id'] : 0,
-                            'academic_session_id' => $request->academic_session_id,
-                            'created_at' => date("Y-m-d H:i:s")
-                        ];
-                        $conn->table('fees_payment_history')->insert($data);
+                    if (isset($fee['status'])) {
+                        $row = $conn->table('fees_payment_history')->select('id')->where([
+                            ['student_id', '=', $request->student_id],
+                            ['allocation_id', '=', $request->allocation_id],
+                            ['fees_type_id', '=', $request->fees_type],
+                            ['fees_group_id', '=', $request->fees_group_id],
+                            ['payment_mode_id', '=', $request->payment_mode],
+                            ['monthly', '=', $fee['month']]
+                        ])->first();
+                        if (isset($row->id)) {
+                            $conn->table('fees_payment_history')->where('id', $row->id)->update([
+                                'payment_status_id' => $fee['payment_status'],
+                                'collect_by' => $request->collect_by,
+                                'amount' => $fee['amount'],
+                                'discount' => "0",
+                                'fine' => "0",
+                                'pay_via' => "Cash",
+                                'monthly' => $fee['month'],
+                                'date' => $fee['date'],
+                                'updated_at' => date("Y-m-d H:i:s")
+                            ]);
+                        } else {
+                            $data = [
+                                'student_id' => $request->student_id,
+                                'allocation_id' => $request->allocation_id,
+                                'fees_type_id' => $request->fees_type,
+                                'fees_group_id' => $request->fees_group_id,
+                                'payment_mode_id' => $request->payment_mode,
+                                'payment_status_id' => $fee['payment_status'],
+                                'collect_by' => $request->collect_by,
+                                'amount' => $fee['amount'],
+                                'discount' => "0",
+                                'fine' => "0",
+                                'pay_via' => "Cash",
+                                'monthly' => $fee['month'],
+                                'date' => $fee['date'],
+                                'created_at' => date("Y-m-d H:i:s")
+                            ];
+                            $conn->table('fees_payment_history')->insert($data);
+                        }
                     }
-                    // }
                 }
             }
             $query = 1;
@@ -6694,11 +6417,7 @@ class ApiControllerOne extends BaseController
             $studentData['amount_details'] = $conn->table('fees_group_details as fgd')
                 ->select(
                     // 'fgd.id',
-                    'fgd.id as fg_id',
-                    'fgd.payment_mode_id',
-                    'fgd.monthly',
-                    'fgd.semester',
-                    'fgd.yearly',
+                    // 'fgd.fees_group_id',
                     'fgd.amount as paying_amount',
                     // 'fgd.payment_mode_id',
                     // 'fgd.due_date',
@@ -6708,8 +6427,7 @@ class ApiControllerOne extends BaseController
                     ['fgd.fees_group_id', '=', $request->fees_group_id],
                     ['fgd.payment_mode_id', '=', $request->payment_mode]
                 ])
-                ->get();
-            $studentData['semester_count'] = $conn->table('semester')->get()->count();
+                ->first();
             return $this->successResponse($studentData, 'Fees paid fetch successfully');
         }
     }
@@ -6775,7 +6493,6 @@ class ApiControllerOne extends BaseController
             'student_id' => 'required',
             'fees_type' => 'required',
             'allocation_id' => 'required',
-            'payment_mode' => 'required',
             'academic_session_id' => 'required'
         ]);
 
@@ -6785,7 +6502,7 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // get data
-            $query = $conn->table('fees_payment_history as fph')
+            $studentData['fees_payment_details'] = $conn->table('fees_payment_history as fph')
                 ->select(
                     'fph.id',
                     'fph.student_id',
@@ -6802,61 +6519,14 @@ class ApiControllerOne extends BaseController
                     'fph.fine',
                     'fph.pay_via',
                     'fph.remarks',
-                    'fph.date',
-                    'fg.amount as assign_amount',
-                    'fg.id as fg_id'
-                );
-            if ($request->payment_mode == 1) {
-                $recentquery = clone $query;
-                $recentquery->leftjoin('fees_group_details as fg', function ($join) {
-                    $join->on('fph.fees_group_id', '=', 'fg.fees_group_id');
-                    $join->on('fph.fees_type_id', '=', 'fg.fees_type_id');
-                    $join->on('fph.payment_mode_id', '=', 'fg.payment_mode_id');
-                    $join->on('fph.yearly', '=', 'fg.yearly');
-                })
-                    ->where([
-                        ['fph.student_id', '=', $request->student_id],
-                        ['fph.allocation_id', '=', $request->allocation_id],
-                        ['fph.fees_type_id', '=', $request->fees_type],
-                        ['fph.payment_mode_id', '=', $request->payment_mode],
-                    ]);
-                $retData = $recentquery->get();
-            }
-            if ($request->payment_mode == 2) {
-                $recentquery = clone $query;
-                $recentquery->leftjoin('fees_group_details as fg', function ($join) {
-                    $join->on('fph.fees_group_id', '=', 'fg.fees_group_id');
-                    $join->on('fph.fees_type_id', '=', 'fg.fees_type_id');
-                    $join->on('fph.payment_mode_id', '=', 'fg.payment_mode_id');
-                    $join->on('fph.semester', '=', 'fg.semester');
-                })
-                    ->where([
-                        ['fph.student_id', '=', $request->student_id],
-                        ['fph.allocation_id', '=', $request->allocation_id],
-                        ['fph.fees_type_id', '=', $request->fees_type],
-                        ['fph.payment_mode_id', '=', $request->payment_mode],
-                    ]);
-                $retData = $recentquery->get();
-            }
-            if ($request->payment_mode == 3) {
-                $recentquery = clone $query;
-                $recentquery->leftjoin('fees_group_details as fg', function ($join) {
-                    $join->on('fph.fees_group_id', '=', 'fg.fees_group_id');
-                    $join->on('fph.fees_type_id', '=', 'fg.fees_type_id');
-                    $join->on('fph.payment_mode_id', '=', 'fg.payment_mode_id');
-                    $join->on('fph.monthly', '=', 'fg.monthly');
-                })
-                    ->where([
-                        ['fph.student_id', '=', $request->student_id],
-                        ['fph.allocation_id', '=', $request->allocation_id],
-                        ['fph.fees_type_id', '=', $request->fees_type],
-                        ['fph.payment_mode_id', '=', $request->payment_mode],
-                    ]);
-                $retData = $recentquery->get();
-            }
-
-            $studentData['fees_payment_details'] = isset($retData) ? $retData : [];
-            // dd($studentData);
+                    'fph.date'
+                )
+                ->where([
+                    ['fph.student_id', '=', $request->student_id],
+                    ['fph.allocation_id', '=', $request->allocation_id],
+                    ['fph.fees_type_id', '=', $request->fees_type],
+                ])
+                ->get();
             // // here we get assign amount
             // $studentData['amount_details'] = $conn->table('fees_group_details as fgd')
             //     ->select(
@@ -6875,17 +6545,15 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($studentData, 'Fees paid fetch successfully');
         }
     }
-    // already paid student mode id
-    public function getPayModeID(Request $request)
+    // get fees get pay amount
+    public function feesGetPayAmount(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
             'branch_id' => 'required',
-            'fees_group_id' => 'required',
             'fees_type' => 'required',
-            'allocation_id' => 'required',
-            'student_id' => 'required',
-            'academic_session_id' => 'required'
+            'fees_group_id' => 'required',
+            'payment_mode' => 'required'
         ]);
 
         if (!$validator->passes()) {
@@ -6894,19 +6562,21 @@ class ApiControllerOne extends BaseController
             // create new connection
             $conn = $this->createNewConnection($request->branch_id);
             // here we get assign amount
-            $getFeesMode = $conn->table('fees_payment_history as fgd')
+            $getFeesAmt= $conn->table('fees_group_details as fgd')
                 ->select(
-                    'fgd.payment_mode_id'
+                    // 'fgd.id',
+                    // 'fgd.fees_group_id',
+                    'fgd.amount as paying_amount',
+                    // 'fgd.payment_mode_id',
+                    // 'fgd.due_date',
                 )
                 ->where([
                     ['fgd.fees_type_id', '=', $request->fees_type],
                     ['fgd.fees_group_id', '=', $request->fees_group_id],
-                    ['fgd.allocation_id', '=', $request->allocation_id],
-                    ['fgd.student_id', '=', $request->student_id],
-                    ['fgd.academic_session_id', '=', $request->academic_session_id]
+                    ['fgd.payment_mode_id', '=', $request->payment_mode]
                 ])
                 ->first();
-            return $this->successResponse($getFeesMode, 'get fees amount successfully');
+            return $this->successResponse($getFeesAmt, 'get fees amount successfully');
         }
     }
     public function calResult($Array, $student_id)

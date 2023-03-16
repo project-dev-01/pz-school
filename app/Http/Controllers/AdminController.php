@@ -2012,7 +2012,6 @@ class AdminController extends Controller
             "promote_session_id" => $request->promote_session_id,
             "year" => $request->year
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.promotion_add'), $data);
         return $response;
     }
@@ -3926,10 +3925,8 @@ class AdminController extends Controller
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
             "academic_session_id" => session()->get('academic_session_id')
-
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
-        // dd($response);
         return DataTables::of($response['data'])
 
             ->addIndexColumn()
@@ -4560,7 +4557,11 @@ class AdminController extends Controller
     public function addLeaveType(Request $request)
     {
         $data = [
-            'name' => $request->name
+            'name' => $request->name,
+            'short_name' => $request->short_name,
+            'leave_days' => $request->leave_days,
+            'gender' => $request->gender,
+            "academic_session_id" => session()->get('academic_session_id'),
         ];
         $response = Helper::PostMethod(config('constants.api.leave_type_add'), $data);
         return $response;
@@ -4574,6 +4575,7 @@ class AdminController extends Controller
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveTypeBtn"><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveTypeBtn"><i class="fe-trash-2"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" data-leave_days="' . $row['leave_days'] . '"data-short_name="' . $row['short_name'] . '"data-name="' . $row['name'] .'"data-gender="' . $row['gender'] . '" id="restoreLeaveTypeBtn"><i class="fe-edit"></i></a>
                         </div>';
             })
 
@@ -4592,7 +4594,11 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $request->id,
-            'name' => $request->name
+            'name' => $request->name,
+            'short_name' => $request->short_name,
+            'leave_days' => $request->leave_days,
+            'gender' => $request->gender,
+            "academic_session_id" => session()->get('academic_session_id'),
         ];
 
         $response = Helper::PostMethod(config('constants.api.leave_type_update'), $data);
@@ -4613,16 +4619,12 @@ class AdminController extends Controller
     public function staffLeaveAssign()
     {
         
-        $staff = Helper::GetMethod(config('constants.api.employee_list'), []);
-        $leave_type = Helper::GetMethod(config('constants.api.leave_type_list'));
-        $academic_year = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         // dd($hostel_group);
         return view(
             'admin.staff_leave_assign.index',
             [
-                'staff' => $staff['data'],
-                'leave_type' => $leave_type['data'],
-                'academic_year' => $academic_year['data'],
+                'department' => $getdepartment['data'],
             ]
         );
     }
@@ -4640,18 +4642,41 @@ class AdminController extends Controller
     }
     public function getStaffLeaveAssignList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.staff_leave_assign_list'));
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            'staff_id' => $request->employee,
+            'department' => $request->department,
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.staff_leave_assign_list'), $data);
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editStaffLeaveAssignBtn"><i class="fe-edit"></i></a>
+                                <a href="' . route('admin.staff_leave_assign.edit', $row['staff_id']) . '"class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editStaffLeaveAssignBtn"><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStaffLeaveAssignBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
 
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    
+    public function staffLeaveAssignEdit($id,Request $request)
+    {
+        $data = [
+            'staff_id' => $id,
+            "academic_session_id" => session()->get('academic_session_id'),
+        ];
+        $leave_type = Helper::GetMethod(config('constants.api.leave_type_list'));
+        $staff_leave_assign = Helper::PostMethod(config('constants.api.staff_leave_assign_details'), $data);
+        return view(
+            'admin.staff_leave_assign.edit',
+            [
+                'leave_type' => $leave_type['data'],
+                'staff' => $staff_leave_assign['data']['staff'],
+                'staff_leave' => $staff_leave_assign['data']['leave'],
+            ]
+        );
     }
     public function getStaffLeaveAssignDetails(Request $request)
     {
@@ -4664,13 +4689,9 @@ class AdminController extends Controller
     public function updateStaffLeaveAssign(Request $request)
     {
         $data = [
-            'id' => $request->id,
             'staff_id' => $request->staff_id,
-            'leave_type' => $request->leave_type,
-            'leave_days' => $request->leave_days,
-            'academic_session_id' => $request->academic_session_id,
+            'leave_assign' => $request->leave,
         ];
-
         $response = Helper::PostMethod(config('constants.api.staff_leave_assign_update'), $data);
         return $response;
     }
@@ -4755,14 +4776,13 @@ class AdminController extends Controller
     // }
     public function applyleave()
     {
-        $get_leave_types = Helper::GetMethod(config('constants.api.get_leave_types'));
         $get_leave_reasons = Helper::GetMethod(config('constants.api.get_leave_reasons'));
         $data = [
             'staff_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'),$data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
-        // dd($leave_taken_history);
         return view('admin.leave_management.applyleave', [
             'get_leave_types' => $get_leave_types['data'],
             'get_leave_reasons' => $get_leave_reasons['data'],
@@ -4781,7 +4801,8 @@ class AdminController extends Controller
     public function getAllLeaveList(Request $request)
     {
         $staff_data = [
-            'leave_status' => $request->leave_status
+            'leave_status' => $request->leave_status,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_data);
         return DataTables::of($response['data'])
@@ -4839,7 +4860,8 @@ class AdminController extends Controller
     public function getStaffLeaveList()
     {
         $staff_id = [
-            'staff_id' => session()->get('ref_user_id')
+            'staff_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
         return DataTables::of($response['data'])

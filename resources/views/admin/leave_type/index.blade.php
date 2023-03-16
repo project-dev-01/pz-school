@@ -42,6 +42,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Leave Type Name</th>
+                                    <th>Short Name</th>
+                                    <th>Leave Days</th>
+                                    <th>Gender</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -66,6 +69,7 @@
     var leaveTypeList = "{{ route('admin.leave_type.list') }}";
     var leaveTypeDetails = "{{ route('admin.leave_type.details') }}";
     var leaveTypeDelete = "{{ route('admin.leave_type.delete') }}";
+    var leaveTypeRestore = "{{ route('admin.leave_type.update') }}";
 </script>
 
 <script src="{{ asset('public/js/custom/leave_type.js') }}"></script>

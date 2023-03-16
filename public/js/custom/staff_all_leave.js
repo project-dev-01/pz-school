@@ -120,12 +120,6 @@ $(function () {
             ],
             columnDefs: [
                 {
-                    "targets": 3,
-                    "render": function (data, type, row, meta) {
-                        return data + 1;
-                    }
-                },
-                {
                     "targets": 8,
                     "render": function (data, type, row, meta) {
                         var badgeColor = "";

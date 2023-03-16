@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>{{ $val['leave_name'] }}</td>
                                             <td>{{ $val['total_leave'] }}</td>
-                                            <td>{{ $val['used_leave'] }}</td>
+                                            <td>{{ $val['used_leave'] ? $val['used_leave'] : 0 }}</td>
                                             <td>{{ $val['total_leave'] - $val['used_leave'] }}</td>
                                         </tr>
                                         @empty

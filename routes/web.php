@@ -570,6 +570,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('staff_leave_assign/index', [AdminController::class, 'staffLeaveAssign'])->name('admin.staff_leave_assign');
         Route::get('staff_leave_assign/list', [AdminController::class, 'getStaffLeaveAssignList'])->name('admin.staff_leave_assign.list');
         Route::post('staff_leave_assign/add', [AdminController::class, 'addStaffLeaveAssign'])->name('admin.staff_leave_assign.add');
+        Route::get('staff_leave_assign/edit/{id}', [AdminController::class, 'staffLeaveAssignEdit'])->name('admin.staff_leave_assign.edit');
         Route::post('staff_leave_assign/staff_leave_assign-details', [AdminController::class, 'getStaffLeaveAssignDetails'])->name('admin.staff_leave_assign.details');
         Route::post('staff_leave_assign/update', [AdminController::class, 'updateStaffLeaveAssign'])->name('admin.staff_leave_assign.update');
         Route::post('staff_leave_assign/delete', [AdminController::class, 'deleteStaffLeaveAssign'])->name('admin.staff_leave_assign.delete');
