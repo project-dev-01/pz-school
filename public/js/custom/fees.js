@@ -1,5 +1,5 @@
 $(function () {
-    
+
     $("#btwyears").on('change', function (e) {
         e.preventDefault();
         $('#class_id').val("");
@@ -133,9 +133,6 @@ $(function () {
                     data: 'feegroup'
                 },
                 {
-                    data: 'status'
-                },
-                {
                     data: 'email'
                 }
             ],
@@ -166,28 +163,38 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var fsGroup = "";
                         data.forEach(function (day) {
-                            fsGroup += "- " + day['name'] + "<br>";
+                            var status = ""
+                            var paid_status = day['status'] ? day['status'] : "unpaid";
+                            if (paid_status == 'unpaid') {
+                                status = 'badge-danger';
+                            } else if (paid_status == 'paid') {
+                                status = 'badge-success';
+                            } else if (paid_status == 'delay') {
+                                status = 'badge-warning';
+                            }
+                            var status = '<div class="badge label-table ' + status + '">' + paid_status + '</div>';
+                            fsGroup += "- " + day['group_name'] + "<br>" + "- " + status + "<br>";
                         })
                         return fsGroup;
                     }
                 },
+                // {
+                //     "targets": 5,
+                //     "render": function (data, type, row, meta) {
+                //         var status = ""
+                //         if (data == 'unpaid') {
+                //             status = 'badge-danger';
+                //         } else if (data == 'paid') {
+                //             status = 'badge-success';
+                //         } else if (data == 'delay') {
+                //             status = 'badge-warning';
+                //         }
+                //         var status = '<div class="badge label-table ' + status + '">' + data + '</div>';
+                //         return status;
+                //     }
+                // },
                 {
                     "targets": 5,
-                    "render": function (data, type, row, meta) {
-                        var status = ""
-                        if (data == 'unpaid') {
-                            status = 'badge-danger';
-                        } else if (data == 'paid') {
-                            status = 'badge-success';
-                        } else if (data == 'partly') {
-                            status = 'badge-warning';
-                        }
-                        var status = '<div class="badge label-table ' + status + '">' + data + '</div>';
-                        return status;
-                    }
-                },
-                {
-                    "targets": 6,
                     "render": function (data, type, row, meta) {
                         var url = editFeesPageUrl.replace(':id', row.student_id);
                         var action = '<div class="button-list">' +
@@ -248,7 +255,7 @@ $(function () {
     });
 
 
-    
+
     getFeesTypeByBranch();
     function getFeesTypeByBranch() {
         var formData = new FormData();

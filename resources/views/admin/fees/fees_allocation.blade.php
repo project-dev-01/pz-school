@@ -82,6 +82,8 @@
                 <div class="card-body">
                     <form id="addFeesAllocationStud" method="post" action="{{ route('admin.fees.add_fees_allocation') }}" autocomplete="off">
                         <input type="hidden" name="group_id" id="feesAllocationStudGroupID">
+                        <input type="hidden" name="class_id" id="feesAllocationStudClassID">
+                        <input type="hidden" name="section_id" id="feesAllocationStudSectionID">
                         <div class="table-responsive">
                             <table id="feesAllocationStud" class="table dt-responsive nowrap w-100">
                                 <thead>
@@ -89,6 +91,7 @@
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>No</th>
                                         <th>Student Name</th>
+                                        <th>Payment Mode</th>
                                         <th>Gender</th>
                                         <th>Register No</th>
                                         <th>Email</th>
@@ -116,6 +119,7 @@
 <script>
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
     var feesAllocatedStudentsList = "{{ config('constants.api.fees_allocated_students') }}";
+    var paymentModeList = "{{ config('constants.api.payment_mode_list') }}";
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
     var studentImg = "{{ asset('public/users/images/') }}";

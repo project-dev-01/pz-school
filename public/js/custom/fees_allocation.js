@@ -53,6 +53,8 @@ $(function () {
                             $(".feesAllocationStudHideShow").show("slow");
                             // set group id
                             $("#feesAllocationStudGroupID").val(groupID);
+                            $("#feesAllocationStudClassID").val(classID);
+                            $("#feesAllocationStudSectionID").val(sectionID);
                             getFeesAllocation(dataSetNew);
                         } else {
                             $(".feesAllocationStudHideShow").hide();
@@ -68,6 +70,26 @@ $(function () {
 
         }
     });
+    // get payment mode list
+    var paymentList = [];
+    $.get(paymentModeList, {
+        token: token,
+        branch_id: branchID
+    }, function (res) {
+        if (res.code == 200) {
+            var res_data = res.data;
+            if (res_data.length > 0) {
+                $.each(res_data, function (k, val) {
+                    var obj = {};
+                    obj['id'] = val.id;
+                    obj['name'] = val.name;
+                    paymentList.push(obj);
+                });
+            }
+        }
+    }, 'json');
+
+
     function getFeesAllocation(dataSetNew) {
         $('#feesAllocationStud').DataTable().clear().destroy();
         $('#feesAllocationStud td').empty();
@@ -96,6 +118,25 @@ $(function () {
                     data: 'name'
                 },
                 {
+                    "render": function (d, t, r) {
+                        var $select = $("<select class='form-control' name='student_operations[" + r.id + "][payment_mode_id]'></select>", {
+                            "id": r.id + "start",
+                            "value": d
+                        });
+                        $.each(paymentList, function (k, v) {
+                            var $option = $("<option></option>", {
+                                "text": v.name,
+                                "value": v.id
+                            });
+                            if (r.payment_mode_id === v.id) {
+                                $option.attr("selected", "selected")
+                            }
+                            $select.append($option);
+                        });
+                        return $select.prop("outerHTML");
+                    }
+                },
+                {
                     data: 'gender'
                 },
                 {
@@ -110,7 +151,9 @@ $(function () {
                     "targets": 0,
                     "className": "checked-area",
                     "render": function (data, type, row, meta) {
-                        var student_remarks = '<input type="checkbox" name="student_operations[]" ' + (row.allocation_id != null ? "checked" : "") + ' value="' + row.id + '">';
+                        var student_remarks =
+                            '<input type="checkbox" class="currentCheckbox" name="student_operations[' + row.id + '][student_id]" ' + (row.allocation_id != null ? "checked" : "") + ' value="' + row.id + '">' +
+                            '<input type="checkbox" class="hiddenCheckbox' + row.id + '" style="visibility: hidden;" name="delete_student_operations[]" ' + (row.allocation_id != null ? "checked" : "") + ' value="' + row.id + '">';
                         return student_remarks;
                     }
                 },
@@ -171,4 +214,16 @@ $(function () {
             $chcks.prop('checked', false).trigger('change');
         }
     });
+    $(document).on('change', '.currentCheckbox', function () {
+        var checkedValue = $(this).val();
+        var ischecked = $(this).is(':checked');
+        if (ischecked == true) {
+            $('.hiddenCheckbox' + checkedValue).prop('checked', true);
+            $('.hiddenCheckbox' + checkedValue).val(checkedValue);
+        } else {
+            $('.hiddenCheckbox' + checkedValue).prop('checked', false);
+            $('.hiddenCheckbox' + checkedValue).val(checkedValue);
+        }
+    });
+
 });

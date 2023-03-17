@@ -121,7 +121,7 @@
                                     <th>Class</th>
                                     <th>Student Name</th>
                                     <th>Fees Group</th>
-                                    <th>Payment Status</th>
+                                    <!-- <th>Payment Status</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>

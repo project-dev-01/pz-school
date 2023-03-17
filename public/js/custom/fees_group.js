@@ -118,6 +118,8 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    console.log("data");
+                    console.log(data);
                     if (data.code == 0) {
                         $.each(data.error, function (prefix, val) {
                             $(form).find('span.' + prefix + '_error').text(val[0]);

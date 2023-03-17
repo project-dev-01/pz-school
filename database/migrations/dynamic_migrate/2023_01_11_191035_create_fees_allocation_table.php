@@ -15,8 +15,11 @@ class CreateFeesAllocationTable extends Migration
     {
         Schema::create('fees_allocation', function (Blueprint $table) {
             $table->id();
+            $table->integer('class_id');
+            $table->integer('section_id');
             $table->integer('student_id');
             $table->integer('group_id');
+            $table->integer('payment_mode_id');
             $table->integer('academic_session_id');
             $table->timestamps();
         });

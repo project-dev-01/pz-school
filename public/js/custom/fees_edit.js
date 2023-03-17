@@ -24,16 +24,12 @@ $(function () {
             fees_group_id: fees_group_id,
             academic_session_id: academicYear
         }, function (res) {
-            // console.log("res")
-            // console.log(res)
             if (res.code == 200) {
                 var payment_mode_id = 0;
                 if (res.data) {
                     payment_mode_id = res.data.payment_mode_id;
                 }
                 if (payment_mode_id != 0) {
-                    console.log("not eq zero");
-                    console.log(payment_mode_id);
                     var formData = new FormData();
                     formData.append('token', token);
                     formData.append('branch_id', branchID);
@@ -52,10 +48,6 @@ $(function () {
                         dataType: 'json',
                         contentType: false,
                         success: function (response) {
-                            console.log("response");
-                            console.log(response);
-                            // return false;
-
                             if (response.code == 200) {
                                 var getStudentData = response.data.fees_payment_details;
                                 // var amount_details = response.data.amount_details;
@@ -68,9 +60,6 @@ $(function () {
 
                                 if (getStudentData.length > 0) {
                                     $.each(getStudentData, function (key, val) {
-                                        console.log("key");
-                                        console.log(key);
-                                        console.log(val);
                                         // if (val.payment_mode_id) {
 
                                         //     var payment_mode_id = val.payment_mode_id;
@@ -94,9 +83,6 @@ $(function () {
                                         var remarks = (val.remarks ? val.remarks : "");
                                         // var amount = (val.amount ? val.amount : resAmt);
                                         var fg_id = (val.fg_id ? val.fg_id : "");
-                                        // console.log("---");
-                                        // console.log(val);
-                                        // console.log(fg_id);
                                         if (val.payment_mode_id == 1) {
                                             $("#yearDate").val(date);
                                             $("#yearPaySts").val(payment_status_id);
@@ -227,25 +213,16 @@ $(function () {
                 if (response.code == 200) {
                     var getStudentData = response.data.fees_payment_details;
                     var amount_details = response.data.amount_details;
-                    var semester_count = response.data.amount_details;
-                    console.log("getStudentData");
-                    console.log(getStudentData);
-                    console.log("amount_details");
-                    console.log(amount_details);
+                    // var semester_count = response.data.amount_details;
                     if (getStudentData.length > 0) {
                         // assign fees amount
                         var i = 0;
                         $.each(getStudentData, function (key, val) {
-                            console.log(i++);
-                            console.log("data come inside" + val.payment_mode_id);
                             if (val.payment_mode_id) {
                                 var date = (val.date ? val.date : "");
                                 var payment_status_id = (val.payment_status_id ? val.payment_status_id : "");
                                 var amount = (val.amount ? val.amount : "");
                                 var fg_id = (val.fg_id ? val.fg_id : "");
-                                console.log("---");
-                                console.log(val);
-                                console.log(fg_id);
                                 if (val.payment_mode_id == 1) {
                                     $("#yearDate").val(date);
                                     $("#yearPaySts").val(payment_status_id);
@@ -254,7 +231,6 @@ $(function () {
                                 }
                                 if (val.payment_mode_id == 2) {
                                     // check default checked
-                                    // console.log(payment_mode_id);
                                     // $('.isChecked_' + val.semester).prop('checked', false);
                                     // $('.checkbx_' + val.semester).prop('disabled', true);
                                     $("#semesterDate" + val.semester).val(date);
@@ -271,6 +247,10 @@ $(function () {
                                     $("#monthPayAmt" + val.monthly).val(amount);
                                     $("#monthFeesGroupDetailsID" + val.monthly).val(fg_id);
                                 }
+                                // if (val.date) {
+                                //     $('.isChecked_' + val.monthly).prop('checked', true);
+                                //     $('.checkbx_' + val.monthly).prop('disabled', false);
+                                // }
                             }
                         });
                     } else {
@@ -295,8 +275,6 @@ $(function () {
                         // }
                         if (amount_details.length > 0) {
                             $.each(amount_details, function (key, val) {
-                                console.log(key);
-                                console.log(val.paying_amount);
                                 var paying_amount = (val.paying_amount ? val.paying_amount : 0);
                                 var paymode_id = (val.payment_mode_id ? val.payment_mode_id : 0);
                                 var semester = (val.semester ? val.semester : 0);
@@ -308,16 +286,16 @@ $(function () {
                                     $("#yearFeesGroupDetailsID").val(fg_id);
                                 }
                                 if (paymode_id == 2) {
-                                    console.log("semester");
-                                    console.log('"fees[2][' + semester + '][amount]"');
                                     $('input[name="fees[2][' + semester + '][amount]"]').val(parseFloat(payingAmt).toFixed(2));
                                     $("#semesterFeesGroupDetailsID" + semester).val(fg_id);
+                                    $('.isChecked_' + semester).prop('checked', false);
+                                    $('.checkbx_' + semester).prop('disabled', true);
                                 }
                                 if (paymode_id == 3) {
-                                    console.log("month");
-                                    console.log('"fees[2][' + monthly + '][amount]"');
                                     $('input[name="fees[3][' + monthly + '][amount]"]').val(parseFloat(payingAmt).toFixed(2));
                                     $("#monthFeesGroupDetailsID" + monthly).val(fg_id);
+                                    $('.isChecked_' + semester).prop('checked', false);
+                                    $('.checkbx_' + semester).prop('disabled', true);
                                 }
                                 // var payingAmt = 0;
                                 // payingAmt = parseFloat(payingAmt).toFixed(2);
@@ -432,16 +410,12 @@ $(function () {
             fees_group_id: fees_group_id,
             academic_session_id: academicYear
         }, function (res) {
-            // console.log("res")
-            // console.log(res)
             if (res.code == 200) {
                 var payment_mode_id = 0;
                 if (res.data) {
                     payment_mode_id = res.data.payment_mode_id;
                 }
                 if (payment_mode_id != 0) {
-                    console.log("not eq zero");
-                    console.log(payment_mode_id);
                     var formData = new FormData();
                     formData.append('token', token);
                     formData.append('branch_id', branchID);
@@ -460,10 +434,6 @@ $(function () {
                         dataType: 'json',
                         contentType: false,
                         success: function (response) {
-                            console.log("response");
-                            console.log(response);
-                            // return false;
-
                             if (response.code == 200) {
                                 var getStudentData = response.data.fees_payment_details;
                                 // var amount_details = response.data.amount_details;
@@ -476,9 +446,6 @@ $(function () {
 
                                 if (getStudentData.length > 0) {
                                     $.each(getStudentData, function (key, val) {
-                                        console.log("key");
-                                        console.log(key);
-                                        console.log(val);
                                         // if (val.payment_mode_id) {
 
                                         //     var payment_mode_id = val.payment_mode_id;

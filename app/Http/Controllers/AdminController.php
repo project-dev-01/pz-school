@@ -6881,7 +6881,15 @@ class AdminController extends Controller
         ];
         $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
         // $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+
+        // $payment_mode = Helper::GetMethod(config('constants.api.payment_mode_list'));
+        // $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
+        // $semester = Helper::GetMethod(config('constants.api.semester'));
+        $month = [["name" => 'January', 'id' => 1], ["name" => 'February', 'id' => 2], ["name" => 'March', 'id' => 3], ["name" => 'April', 'id' => 4], ["name" => 'May', 'id' => 5], ["name" => 'June', 'id' => 6], ["name" => 'July', 'id' => 7], ["name" => 'August', 'id' => 8], ["name" => 'September', 'id' => 9], ["name" => 'October', 'id' => 10], ["name" => 'November', 'id' => 11], ["name" => 'December', 'id' => 12]];
+
         $fees_group = Helper::PostMethod(config('constants.api.fees_group_details'), $data);
+        // dd($fees_group);
         // dd($fees_group['data']['fees_group_details']);
         // foreach($fees_type['data'] as $type) {
         //     if($fees_group['data']['fees_group_details']['fees_type_id']==$type['id']) {
@@ -6891,9 +6899,18 @@ class AdminController extends Controller
         return view(
             'admin.fees_group.edit',
             [
-                'fees_type' => $fees_group['data']['fees_type'],
-                'fees_group' => $fees_group['data']['fees_group'],
-                'payment_mode' => $payment_mode['data']
+                // 'fees_type' => $fees_type['data'],
+                'semester' => $semester['data'],
+                'payment_mode' => $payment_mode['data'],
+                'month' => $month,
+                'Yearly' => isset($payment_mode['data'][0]['name'])?$payment_mode['data'][0]['name']:'0',
+                'Yearly_ID' => isset($payment_mode['data'][0]['id'])?$payment_mode['data'][0]['id']:'0',
+                'Semester' => isset($payment_mode['data'][1]['name'])?$payment_mode['data'][1]['name']:'1',
+                'Semester_ID' => isset($payment_mode['data'][1]['id'])?$payment_mode['data'][1]['id']:'1',
+                'Monthly' => isset($payment_mode['data'][2]['name'])?$payment_mode['data'][2]['name']:'2',
+                'Monthly_ID' => isset($payment_mode['data'][2]['id'])?$payment_mode['data'][2]['id']:'2',
+                'fees_type_fees_group_details' => $fees_group['data']['fees_group_details'],
+                'fees_group' => $fees_group['data']['fees_group']
             ]
         );
     }
@@ -6925,7 +6942,6 @@ class AdminController extends Controller
             'fees' => $request->fees,
             "academic_session_id" => session()->get('academic_session_id')
         ];
-
         $response = Helper::PostMethod(config('constants.api.fees_group_update'), $data);
         // dd($response);
         return $response;
@@ -6943,7 +6959,10 @@ class AdminController extends Controller
     function addFeesAllocation(Request $request)
     {
         $data = [
+            "delete_student_operations" => $request->delete_student_operations,
             "student_operations" => $request->student_operations,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
             "group_id" => $request->group_id,
             "academic_session_id" => session()->get('academic_session_id')
         ];

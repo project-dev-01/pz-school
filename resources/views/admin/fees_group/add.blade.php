@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Add Fees group')
+@section('title','Add Fees Group')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Fees group</h4>
+                <h4 class="page-title">Fees Group</h4>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Add Fees group
+                            Add Fees Group
                             <h4>
                     </li>
                 </ul><br>
@@ -87,11 +87,14 @@
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <tr>
-                                                                                        <td><input type="text" name="fees[{{$key}}][yearly_fees_details][0][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                        <td>
+                                                                                            <!-- hiddent feilds start-->
+                                                                                            <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][payment_mode_id]" value="{{$Yearly_ID}}">
+                                                                                            <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][yearly]" value="1">
+                                                                                            <!-- hiddent feilds end-->
+                                                                                            <input type="text" name="fees[{{$key}}][yearly_fees_details][0][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;">
+                                                                                        </td>
                                                                                         <td> <input type="number" name="fees[{{$key}}][yearly_fees_details][0][amount]" class="form-control"></td>
-                                                                                        <!-- hiddent feilds -->
-                                                                                        <td><input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][payment_mode_id]" value="{{$Yearly_ID}}"></td>
-                                                                                        <td><input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][yearly]" value="1"></td>
                                                                                     </tr>
 
                                                                                 </tbody>
@@ -121,12 +124,15 @@
                                                                                     <tbody>
                                                                                         @forelse ($semester as $skey => $sem)
                                                                                         <tr>
-                                                                                            <td><input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;"></td>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start-->
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][payment_mode_id]" value="{{$Semester_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][semester]" value="{{ $sem['id'] }}">
+                                                                                                <!-- hiddent feilds end-->
+                                                                                                <input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;">
+                                                                                            </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
                                                                                             <td> <input type="number" name="fees[{{$key}}][semester_fees_details][{{$skey}}][amount]" class="form-control"></td>
-                                                                                            <!-- hiddent feilds -->
-                                                                                            <td><input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][payment_mode_id]" value="{{$Semester_ID}}"></td>
-                                                                                            <td><input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][semester]" value="{{ $sem['id'] }}"></td>
                                                                                         </tr>
                                                                                         @empty
                                                                                         @endforelse
@@ -157,12 +163,15 @@
                                                                                     <tbody>
                                                                                         @forelse ($month as $mkey => $mon)
                                                                                         <tr>
-                                                                                            <td><input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;"></td>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start-->
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
+                                                                                                <!-- hiddent feilds end-->
+                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                            </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
                                                                                             <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" class="form-control"></td>
-                                                                                            <!-- hiddent feilds -->
-                                                                                            <td><input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}"></td>
-                                                                                            <td><input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}"></td>
                                                                                         </tr>
                                                                                         @empty
                                                                                         @endforelse
@@ -187,7 +196,7 @@
                         @endforelse
                         <div class="form-group">
                             <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
                         </div>
                     </form>
                 </div> <!-- end card-body -->

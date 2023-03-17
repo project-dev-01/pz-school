@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Edit Fees group')
+@section('title','Edit Fees')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -80,6 +80,7 @@
                                     <th>#</th>
                                     <th>Fees Group</th>
                                     <th>Fees Type</th>
+                                    <th>Payment Mode</th>
                                     <th>Due Date</th>
                                     <th>Paid Date</th>
                                     <th>Status</th>
@@ -136,6 +137,7 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $row['fees_group_name'] }}</td>
                                     <td>{{ $row['name'] }}</td>
+                                    <td>{{ $row['payment_mode_name'] }}</td>
                                     <td>{{ $row['due_date'] }}</td>
                                     <td>{{ $row['paid_date'] }}</td>
                                     <td>

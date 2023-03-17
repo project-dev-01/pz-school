@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Edit Fees group')
+@section('title','Edit Fees Group')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -8,28 +8,28 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Fees group</h4>
+                <h4 class="page-title">Fees Group</h4>
             </div>
         </div>
     </div>
     <!-- end page title -->
-
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Fees group
+                        <h4 class="navv">
+                            Edit Fees Group
                             <h4>
                     </li>
-                </ul>
+                </ul><br>
                 <div class="card-body">
                     <form id="edit-fees-group-form" method="post" action="{{ route('admin.fees_group.update') }}" autocomplete="off">
                         @csrf
                         <input type="hidden" name="id" value="{{$fees_group['id']}}">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Fees Group Name <span class="text-danger">*</span></label>
+                                <label for="name">Fees Group Name<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="Enter Fees Group Name">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
@@ -40,108 +40,272 @@
                                 <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description">{{$fees_group['description']}}</textarea>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Fees Type</th>
-                                        <th>Due Date</th>
-                                        <th>Payment Mode</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($fees_type as $key=>$type)
-                                    @php
-                                    $payment_mode_name = explode(",",$type['payment_mode_name']);
-                                    $payment_mode_id = explode(",",$type['payment_mode_id']);
-                                    $amount = explode(",",$type['amount']);
-                                    $fees_group_details_id = explode(",",$type['id']);
-                                    @endphp
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox-replace">
-                                                <label class="i-checks">
-                                                    <input type="checkbox" name="fees[{{$key}}][fees_type_id]" value="{{$type['fees_type_id']}}" @if($type['id']) checked @endif> <i></i>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>{{$type['name']}}</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control date-picker" name="fees[{{$key}}][due_date]" value="{{$type['due_date']}}" autocomplete="off">
-                                                <span class="error"></span>
-                                            </div>
-                                        </td>
-                                        <!-- <td>
-                                            <div class="form-group">
-                                                <input type="text" name="fees[{{$key}}][amount]" class="form-control" autocomplete="off" value="{{$type['amount']}}">
-                                                <span class="error"></span>
-                                            </div>
-                                        </td> -->
-                                        <td>
-                                            <div class="form-group">
-                                                @forelse ($payment_mode as $mode)
-                                                @if(count($payment_mode_id)>1)
-                                                    @forelse ($payment_mode_id as $mode_id)
-                                                        @if($mode_id == $mode['id'])
-                                                        <input type="hidden" name="fees[{{$key}}][mode_id][]" class="form-control" value="{{ $mode['id'] }}">
-                                                        <input type="text" disabled name="fees[{{$key}}][payment_mode][]" class="form-control" value="{{ $mode['name'] }}">
-                                                        <br>
-                                                        @endif
-                                                    @empty
-                                                    @endforelse
-                                                @else
-                                                <input type="hidden" name="fees[{{$key}}][mode_id][]" class="form-control" value="{{ $mode['id'] }}">
-                                                <input type="text" disabled name="fees[{{$key}}][payment_mode][]" class="form-control" value="{{ $mode['name'] }}">
-                                                <br>
-                                                @endif
-                                                @empty
-                                                @endforelse
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="form-group">
-                                                @forelse ($payment_mode as $keys => $mode)
-                                                @if(count($payment_mode_id)>1)
-                                                @if(isset($fees_group_details_id[$keys]))
-                                                <input type="hidden" name="fees[{{$key}}][fees_group_details_id][]" value="{{ isset($fees_group_details_id[$keys])?$fees_group_details_id[$keys]:'' }}">
-                                                <input type="number" name="fees[{{$key}}][amount][]" class="form-control" value="{{ isset($amount[$keys])?$amount[$keys]:'' }}">
-                                                <br>
-                                                @else
-                                                <input type="hidden" name="fees[{{$key}}][fees_group_details_id][]" value="">
-                                                <input type="number" name="fees[{{$key}}][amount][]" class="form-control" value="">
-                                                @endif
-                                                @else
-                                                <input type="hidden" name="fees[{{$key}}][fees_group_details_id][]" value="">
-                                                <input type="number" name="fees[{{$key}}][amount][]" class="form-control" value="">
-                                                <br>
-                                                @endif
-                                                @empty
-                                                @endforelse
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="4">No Data Available</td>
-                                        </td>
-                                        @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="form-group">
+                        @forelse ($fees_type_fees_group_details as $key => $type)
+                        @php
+                        $year_details = isset($type['fees_details']['year'])?$type['fees_details']['year']:[];
+                        $semester_details = isset($type['fees_details']['semester'])?$type['fees_details']['semester']:[];
+                        $monthly_details = isset($type['fees_details']['monthly'])?$type['fees_details']['monthly']:[];
+                        $is_checked = 0;
+                        // if all is not empty open collapse and check
+                        if(!empty($year_details) || !empty($semester_details) || !empty($monthly_details)){
+                        $is_checked = 1;
+                        }
+                        // echo $is_checked;
+                        // year details
+                        $yearly_group_details_id = isset($year_details[0]['fees_group_details_id'])?$year_details[0]['fees_group_details_id']:'';
+                        $year_amount = isset($year_details[0]['amount'])?$year_details[0]['amount']:'';
+                        $year_due_date = isset($year_details[0]['due_date'])?$year_details[0]['due_date']:'';
+                        @endphp
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p>
+                                    <div>
+                                        <label class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" data-target="#FeesType{{$type['id']}}" aria-expanded="false" aria-controls="FeesType{{$type['id']}}">
+                                            <input type="checkbox" class="form-group" data-checked_id="{{ $is_checked }}" name="fees[{{$key}}][fees_type_id]" @if($is_checked=='1' ) checked @endif value="{{$type['id']}}"> {{ $type['name'] }}
+                                        </label>
+                                    </div>
+                                    </p>
+                                    <div id="FeesType{{$type['id']}}" aria-expanded="false" class="collapse @if($is_checked=='1' ) show @endif">
+                                        <div class="card card-body">
+                                            <div class="col-12">
+                                                <ul class="nav nav-pills navtab-bg nav-justified">
+                                                    <li class="nav-item" id="{{$Yearly_ID}}" data-fees_group_id="{{$Yearly_ID}}">
+                                                        <a href="#year{{$type['id']}}" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                                            {{$Yearly}}
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item" id="{{$Semester_ID}}" data-fees_group_id="{{$Semester_ID}}">
+                                                        <a href="#semester{{$type['id']}}" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                                            {{$Semester}}
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item" id="{{$Monthly_ID}}" data-fees_group_id="{{$Monthly_ID}}">
+                                                        <a href="#monthly{{$type['id']}}" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                                            {{$Monthly}}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="year{{$type['id']}}">
+                                                        <div class="row">
+                                                            <div class="col-12">
 
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table dt-responsive nowrap w-100 ">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Due Date</th>
+                                                                                        <th>Amount</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <!-- hiddent feilds start-->
+                                                                                            <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][yearly]" value="1">
+                                                                                            <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][payment_mode_id]" value="{{$Yearly_ID}}">
+                                                                                            @if((isset($year_due_date)) || (isset($year_amount)))
+                                                                                            <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][fees_group_details_id]" value="{{ $yearly_group_details_id }}" class="form-control">
+                                                                                            @endif
+                                                                                            <!-- hiddent feilds end-->
+                                                                                            <input type="text" name="fees[{{$key}}][yearly_fees_details][0][due_date]" value="{{ $year_due_date }}" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;">
+                                                                                        </td>
+                                                                                        <td> <input type="number" name="fees[{{$key}}][yearly_fees_details][0][amount]" value="{{ $year_amount }}" class="form-control"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="semester{{$type['id']}}">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table dt-responsive nowrap w-100">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Semester Name</th>
+                                                                                            <th>Due Date</th>
+                                                                                            <th>Amount</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @forelse ($semester as $skey => $sem)
+                                                                                        @if(count($semester_details) >0)
+                                                                                        @php
+                                                                                        $not_match = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($semester_details as $smkey => $sem_det)
+                                                                                        @if($sem_det['semester'] == $sem['id'])
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start -->
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][fees_group_details_id]" value="{{ $sem_det['fees_group_details_id'] }}" class="form-control">
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][payment_mode_id]" value="{{$Semester_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][semester]" value="{{ $sem['id'] }}">
+                                                                                                <!-- hiddent feilds end -->
+                                                                                                <input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;">
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" value="{{ $sem_det['due_date'] }}" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][semester_fees_details][{{$skey}}][amount]" value="{{ $sem_det['amount'] }}" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @php
+                                                                                        $not_match = 1;
+                                                                                        @endphp
+
+                                                                                        @endif
+                                                                                        @endforeach
+                                                                                        @if($not_match == 0)
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start -->
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][payment_mode_id]" value="{{$Semester_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][semester]" value="{{ $sem['id'] }}">
+                                                                                                <!-- hiddent feilds end -->
+                                                                                                <input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;">
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][semester_fees_details][{{$skey}}][amount]" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @endif
+                                                                                        @else
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start -->
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][payment_mode_id]" value="{{$Semester_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][semester_fees_details][{{$skey}}][semester]" value="{{ $sem['id'] }}">
+                                                                                                <!-- hiddent feilds end -->
+                                                                                                <input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;">
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][semester_fees_details][{{$skey}}][amount]" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @endif
+                                                                                        @empty
+                                                                                        @endforelse
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="monthly{{$type['id']}}">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table dt-responsive nowrap w-100">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Month Name</th>
+                                                                                            <th>Due Date</th>
+                                                                                            <th>Amount</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @forelse ($month as $mkey => $mon)
+                                                                                        @if(count($monthly_details) >0)
+                                                                                        @php
+                                                                                        $not_match = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($monthly_details as $mmkey => $mon_det)
+                                                                                        @if($mon_det['monthly'] == $mon['id'])
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start-->
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][fees_group_details_id]" value="{{ $mon_det['fees_group_details_id'] }}" class="form-control">
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
+                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <!-- hiddent feilds end-->
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" value="{{ $mon_det['due_date'] }}" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" value="{{ $mon_det['amount'] }}" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @php
+                                                                                        $not_match = 1;
+                                                                                        @endphp
+
+                                                                                        @endif
+                                                                                        @endforeach
+                                                                                        @if($not_match == 0)
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start-->
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
+                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <!-- hiddent feilds end-->
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @endif
+                                                                                        @else
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- hiddent feilds start-->
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
+                                                                                                <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
+                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <!-- hiddent feilds end-->
+                                                                                            </td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" class="form-control"></td>
+                                                                                        </tr>
+                                                                                        @endif
+                                                                                        @empty
+                                                                                        @endforelse
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        @endforelse
+                        <div class="form-group">
                             <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                         </div>
-
                     </form>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
-        </div> <!-- col -->
-    </div> <!-- row -->
+        </div> <!-- end col -->
+
+    </div>
+    </form>
+</div> <!-- end card-body -->
+</div> <!-- end card-->
+</div> <!-- col -->
+</div> <!-- row -->
 </div> <!-- container -->
 @endsection
 @section('scripts')
