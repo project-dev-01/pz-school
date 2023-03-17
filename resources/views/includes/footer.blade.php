@@ -35,27 +35,6 @@
 <!-- plugin js -->
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 
-@if(Session::get('role_id') != '1')
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" /> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
-<!-- <script src="{{ asset('public/js/fullcalendar/fullcalendar.js') }}"></script> -->
-<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
-@else
-<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
-@endif
 @if(Session::get('role_id') == '1')
 <script>
     var logoutIdle = "{{ route('super_admin.logout') }}";
@@ -370,3 +349,10 @@
         }, 60000 * 60);
     };
 </script>
+<!-- <script type="text/javascript">
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function() {
+        window.location.href = url + "?lang=" + $(this).val();
+    });
+</script> -->

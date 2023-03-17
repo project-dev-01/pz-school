@@ -220,6 +220,7 @@
                                                         <p class="col-md-12"><span class="font-weight-semibold homework-list">Rank Out Of 5 </span>@if($work['remarks']) {{$work['rank']}} @endif</p>
                                                     </div>
                                                 </div>
+                                                @if(file_exists( public_path().'/teacher/homework/'.$work['document'] ))
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <p class="col-md-12"><span class="font-weight-semibold homework-list">Document</span><a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
@@ -227,6 +228,13 @@
                                                             </a></p>
                                                     </div>
                                                 </div>
+                                                @else
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Document</span></p>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                             <hr>
                                             <div class="row">
@@ -239,7 +247,7 @@
                                             <div class="row">
                                                 <input type="hidden" name="homework_id" value="{{$work['id']}}">
                                                 <div class="col-md-6">
-                                                    <p class="col-md-12"><span class="font-weight-semibold">Note </span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                    <p class="col-md-12"><span class="font-weight-semibold">Note <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                                    @if($work['remarks']) {{$work['remarks']}} @endif</textarea></p>
 
                                                 </div>
@@ -247,7 +255,7 @@
                                                 @if($work['file'])
 
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File :</div>
+                                                    <div class="col-md-6 font-weight-bold">Attachment File <span class="text-danger">*</span> :</div>
                                                     <div class="col-md-6">
                                                         <a href="{{asset('public/student/homework/')}}/{{$work['file']}}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -256,7 +264,7 @@
                                                 </div>
                                                 @else
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File :</div>
+                                                    <div class="col-md-6 font-weight-bold">Attachment File <span class="text-danger">*</span>:</div>
                                                     <div class="col-md-6">
                                                         <input type="file" name="file">
                                                     </div>

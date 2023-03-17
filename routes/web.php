@@ -10,6 +10,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\LangController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::get('/clear-cache', function () {
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// language controller
+// Route::get('lang/home', [LangController::class, 'index']);
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+
 
 Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () {
 

@@ -43,6 +43,17 @@
 
                     </div>
             </li>
+            <!-- <li class="dropdown d-none d-lg-inline-block">
+                <div class="form-group ">
+                    <label class="control-label"></label>
+                    <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
+			  margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="fr" {{ session()->get('locale') == 'fr' ? 'selected' : '' }}>France</option>
+                        <option value="sp" {{ session()->get('locale') == 'sp' ? 'selected' : '' }}>Spanish</option>
+                    </select>
+                </div>
+            </li> -->
             @if(Session::get('role_id') != '1')
             <li class="d-lg-inline-block" style="white-space: nowrap;width: 100px;overflow: hidden;text-overflow: ellipsis;">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">

@@ -1,7 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
-
-@section('content')
+@section('calendar')
+<!-- full calendar css start-->
+<link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/daygrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/timegrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- full calendar css end-->
+@endsection
+@section('css')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
@@ -89,7 +97,8 @@
 
     }
 </style>
-
+@endsection
+@section('content')
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -637,6 +646,14 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- full calendar js start -->
+<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<!-- full calendar js end -->
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";

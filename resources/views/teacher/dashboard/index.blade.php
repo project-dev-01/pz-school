@@ -1,7 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
-
-@section('content')
+@section('calendar')
+<!-- full calendar css start-->
+<link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/daygrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/timegrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- full calendar css end-->
+@endsection
+@section('css')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
@@ -89,7 +97,8 @@
 
     }
 </style>
-
+@endsection
+@section('content')
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -132,38 +141,6 @@
         </div> <!-- end col-->
     </div>
     @endif
-    <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="card-box">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="">
-                            <svg width="24" height="21" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.67 9.13C17.04 10.06 18 11.32 18 13V16H22V13C22 10.82 18.43 9.53 15.67 9.13Z" fill="#3A4265" />
-                                <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="#3A4265" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14 8C16.21 8 18 6.21 18 4C18 1.79 16.21 0 14 0C13.53 0 13.09 0.0999998 12.67 0.24C13.5 1.27 14 2.58 14 4C14 5.42 13.5 6.73 12.67 7.76C13.09 7.9 13.53 8 14 8Z" fill="#3A4265" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 9C5.33 9 0 10.34 0 13V16H16V13C16 10.34 10.67 9 8 9Z" fill="#3A4265" />
-                            </svg>
-                            <p class="mb-1 text-truncate">Teachers</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="text-right">
-                            <h3 class="my-1"><span style="color:#3A4265" data-plugin="counterup">{{$count['teacher_count']}}</span></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <div class="progress progress-sm m-0">
-                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        </div>
-                    </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
-                </div>
-            </div> <!-- end card-box-->
-
-        </div> <!-- end col-->
-    </div>
     <!-- end row-->
     <div class="row">
         <div class="col-xl-12">
@@ -1505,6 +1482,14 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- full calendar js start -->
+<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<!-- full calendar js end -->
 <script>
     // calendor js
 

@@ -1,7 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Dashboard')
-
-@section('content')
+@section('calendar')
+<!-- full calendar css start-->
+<link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/daygrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/timegrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- full calendar css end-->
+@endsection
+@section('css')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
@@ -39,14 +47,58 @@
         width: 150px;
     }
 
+    .table td {
+        border-top: none;
+        text-align: center;
+    }
+
+    .table th {
+        text-align: center;
+    }
+
+    .homework-list {
+        display: inline-block;
+        position: relative;
+        padding-right: 10px;
+    }
+
+    .homework-list::after {
+        content: ":";
+        position: absolute;
+        right: 10px;
+    }
+
+    .hover1:hover {
+        background-color: #D1E9EF;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -70px;
+            word-wrap: break-word;
+        }
+    }
+
     @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .popupresponsive {
+            margin: 0px -78px 0px -78px;
+
+        }
+
         .eventpopup {
             margin: 0px -30px 0px -27px;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .popupresponsive {
+            margin: 0px -65px 0px -65px;
         }
 
     }
 </style>
-
+@endsection
+@section('content')
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -54,10 +106,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">Dashboard</h4>
             </div>
         </div>
@@ -594,6 +646,14 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- full calendar js start -->
+<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<!-- full calendar js end -->
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
