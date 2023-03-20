@@ -105,4 +105,14 @@ class Helper
         }
         return $greetings;
     }
+
+    // get like column
+    public static function getLikeColumn($url, $data) {
+        $data["token"] = session()->get('token');
+        $data["branch_id"] = session()->get('branch_id');
+        return $data;
+        $response = Http::post($url, $data);
+        return $response->json();
+
+     }
 }

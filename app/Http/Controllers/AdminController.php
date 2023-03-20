@@ -6979,12 +6979,13 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.fees_delete'), $data);
         return $response;
     }
-    public function employeeMasterImport(Request $request)
+
+    public function employeeImport(Request $request)
     {
-        return view('admin.import.employee_master');
+        return view('admin.import.employee');
     }
 
-    public function employeeMasterImportAdd(Request $request)
+    public function employeeImportAdd(Request $request)
     {
 
         $validator = \Validator::make($request->all(), [
@@ -7010,14 +7011,12 @@ class AdminController extends Controller
                 'fileSize' => $fileSize,
                 'mimeType' => $mimeType,
             ];
-            // dd($data);
-            $response = Helper::PostMethod(config('constants.api.import_employee_master'), $data);
-            // dd($response);
+            $response = Helper::PostMethod(config('constants.api.import_employee'), $data);
             if ($response['code'] == 200) {
 
-                return redirect()->route('admin.employee_master.import')->with('success', ' Employee Master Imported Successfully');
+                return redirect()->route('admin.employee.import')->with('success', ' Employee Imported Successfully');
             } else {
-                return redirect()->route('admin.employee_master.import')->with('errors', $response['data']);
+                return redirect()->route('admin.employee.import')->with('errors', $response['data']);
             }
         }
     }

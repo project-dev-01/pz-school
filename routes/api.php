@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\ApiControllerOne;
+use App\Http\Controllers\Api\ImportController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\ChatController;
@@ -822,6 +823,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     
     // import Employee Master details in csv
-    Route::post('importcsv/employee/master', [ApiControllerOne::class, 'importCsvEmployeeMaster']);
+    Route::post('importcsv/employee', [ImportController::class, 'importCsvEmployee']);
+    Route::post('get_like_column_name', [ImportController::class, 'getLikeColumnName']);
     Route::post('faq/email', [ApiControllerOne::class, 'faqEmail']);
 });

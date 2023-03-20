@@ -756,13 +756,13 @@ return [
         'class_teacher_classes'=> $url.'/class_teacher_classes',
         'class_teacher_sections'=> $url.'/class_teacher_sections',
 
-        
-        'import_employee_master'=> $url.'/importcsv/employee/master',
+        'import_employee'=> $url.'/importcsv/employee',
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
         
         
+        'get_like_column_name'=> $url.'/get_like_column_name',
         'faq_email'=> $url.'/faq/email',
         ]
 

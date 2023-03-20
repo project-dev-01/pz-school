@@ -310,8 +310,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.employee_master.import')}}" class="nav-link {{ (request()->is('admin/employee_master/import')) ? 'active' : '' }}">
-                                    <span>Import Master</span>
+                                <a href="{{ route('admin.employee.import')}}" class="nav-link {{ (request()->is('admin/employee/import')) ? 'active' : '' }}">
+                                    <span>Employee Bulk Upload</span>
                                 </a>
                             </li>
                         </ul>

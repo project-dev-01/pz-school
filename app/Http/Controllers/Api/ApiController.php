@@ -13496,7 +13496,6 @@ class ApiController extends BaseController
                             'staff_id' => $st->id,
                             'leave_type' => $leave_type_id,
                             'leave_days' => $request->leave_days,
-                            'academic_session_id' => $request->academic_session_id,
                             'created_at' => date("Y-m-d H:i:s")
                         ]);
                     }
@@ -13596,7 +13595,6 @@ class ApiController extends BaseController
                                 'staff_id' => $st->id,
                                 'leave_type' => $id,
                                 'leave_days' => $request->leave_days,
-                                'academic_session_id' => $request->academic_session_id,
                                 'created_at' => date("Y-m-d H:i:s")
                             ]);
                         }else{
@@ -13606,7 +13604,6 @@ class ApiController extends BaseController
                                     'staff_id' => $st->id,
                                     'leave_type' => $id,
                                     'leave_days' => $request->leave_days,
-                                    'academic_session_id' => $request->academic_session_id,
                                     'created_at' => date("Y-m-d H:i:s")
                                 ]);
                             }

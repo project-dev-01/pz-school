@@ -10,7 +10,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Employee Master Import</h4>
+                <h4 class="page-title">Employee Import</h4>
             </div>
         </div>
     </div>
@@ -20,14 +20,14 @@
             <div class="card mb-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Employee Master Import<h4>
+                        <h4 class="nav-link">Employee Import<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="col-12">
                         <div class="col-sm-12 col-md-12">
                             <div class="dt-buttons" style="float:right;"> 
-                                <a href="{{asset('uploads/Sample Employee Master.csv')}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>Download Sample Csv</span></button></a>
+                                <a href="{{asset('uploads/Sample Employee.csv')}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>Download Sample Csv</span></button></a>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                     @endif
-                    <form method="post" enctype="multipart/form-data" action="{{ route('admin.employee_master.import.add') }}">
+                    <form method="post" enctype="multipart/form-data" action="{{ route('admin.employee.import.add') }}">
                         {{ csrf_field() }}
                         <div class="form-group" style="text-align: center;">
                            <div class="card-body" style="margin-left: 17px;">

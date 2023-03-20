@@ -780,8 +780,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         
         // employee master import routes
-        Route::get('employee/master/import', [AdminController::class, 'employeeMasterImport'])->name('admin.employee_master.import');
-        Route::post('employee/master/import/add', [AdminController::class, 'employeeMasterImportAdd'])->name('admin.employee_master.import.add');
+        Route::get('employee/import', [AdminController::class, 'employeeImport'])->name('admin.employee.import');
+        Route::post('employee/import/add', [AdminController::class, 'employeeImportAdd'])->name('admin.employee.import.add');
     });
 });
 // admin routes end
