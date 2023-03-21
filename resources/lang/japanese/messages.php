@@ -634,7 +634,7 @@ return [
     "incompleted" => "Incompleted",
     "homeWork_list" => "HomeWork List (All Subjects)",
     "timetable" => "Timetable",
-    "section " => "Section ",
+    "section " => "Section  ",
     "report_card" => "Report Card",
     "report_card_list" => "Report Card List",
     "leave_form" => "Leave Form",
