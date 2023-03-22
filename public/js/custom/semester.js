@@ -50,8 +50,6 @@ $(function () {
 
     });
 
-
-    semesterTable();
     $("#semesterForm").validate({
         rules: {
             name: "required",
@@ -99,73 +97,73 @@ $(function () {
     });
 
     // get all semester table
-    function semesterTable() {
-        $('#semester-table').DataTable({
-            processing: true,
-            info: true,
-            // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: 'Download CSV',
-                    extension: '.csv',
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
+    $('#semester-table').DataTable({
+        processing: true,
+        info: true,
+        // dom: 'lBfrtip',
+        dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            {
+                extend: 'csv',
+                text: 'Download CSV',
+                extension: '.csv',
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
                 }
-            ],
-            ajax: semesterList,
-            "pageLength": 5,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'start_date',
-                    name: 'start_date'
-                },
-                {
-                    data: 'end_date',
-                    name: 'end_date'
-                },
-                {
-                    data: 'year',
-                    name: 'year'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        }).on('draw', function () {
-        });
-    }
+            }
+        ],
+        ajax: semesterList,
+        "pageLength": 5,
+        "aLengthMenu": [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ],
+        columns: [
+            {
+                searchable: false,
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'start_date',
+                name: 'start_date'
+            },
+            {
+                data: 'end_date',
+                name: 'end_date'
+            },
+            {
+                data: 'academic_year',
+                name: 'academic_year'
+            },
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    }).on('draw', function () {
+    });
     // get row
     $(document).on('click', '#editSemesterBtn', function () {
         var id = $(this).data('id');
 
         $('.editSemester').find('form')[0].reset();
         $.post(semesterDetails, { id: id }, function (data) {
+            console.log("data")
+            console.log(data);
             $('.editSemester').find('input[name="id"]').val(data.data.id);
             $('.editSemester').find('input[name="name"]').val(data.data.name);
             $('.editSemester').find('input[name="start_date"]').val(data.data.start_date);
             $('.editSemester').find('input[name="end_date"]').val(data.data.end_date);
-            $('.editSemester').find('input[name="year"]').val(data.data.year);
+            $('.editSemester').find('select[name="year"]').val(data.data.academic_session_id);
             $('.editSemester').modal('show');
         }, 'json');
         console.log(id);

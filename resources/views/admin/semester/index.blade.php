@@ -46,7 +46,7 @@
                                     <th>Semester Name</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
-                                    <th>Year</th>
+                                    <th>Academic Year</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

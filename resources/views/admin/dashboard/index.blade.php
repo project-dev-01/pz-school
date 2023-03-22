@@ -110,7 +110,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div> -->
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">{{ __('messages.dashboard') }}</h4>
             </div>
         </div>
     </div>

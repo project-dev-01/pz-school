@@ -98,6 +98,18 @@ use \App\Http\Controllers\AdminController;
                             <tbody>
                                 @forelse ($student_fees_history as $key => $row)
                                 @php
+                                $args = [
+                                'payment_status_id'=>$row['payment_status_id'],
+                                'payment_mode_id'=>$row['payment_mode_id'],
+                                'due_date'=>$row['due_date'],
+                                'paid_date'=>$row['paid_date'],
+                                'amount'=>$row['amount'],
+                                'paid_amount'=>$row['paid_amount'],
+                                'payment_mode_name'=>$row['payment_mode_name'],
+                                ];
+                                $paidDetails = AdminController::paidStatusDetails($args);
+                                echo "<pre>";
+                                print_r($paidDetails);
                                 $count = 1;
                                 $total_fine = 0;
                                 $total_discount = 0;
@@ -115,22 +127,27 @@ use \App\Http\Controllers\AdminController;
                                 $fees_amount = number_format($row['amount'], 2, '.', '');
                                 $paid_amt = number_format($type_amount, 2, '.', '');
 
-                                $args = [
-                                'payment_status_id'=>$row['payment_status_id'],
-                                'payment_mode_id'=>$row['payment_mode_id'],
-                                'due_date'=>$row['due_date'],
-                                'paid_date'=>$row['paid_date'],
-                                'amount'=>$row['amount'],
-                                'paid_amount'=>$row['paid_amount'],
-                                'payment_mode_name'=>$row['payment_mode_name'],
-                                ];
-                                $paidDetails = AdminController::paidStatusDetails($args);
-                                //echo "<pre>";
-                                //print_r($paidDetails['paidSts']);
-                                //print_r($paidDetails['labelmode']);
+                                $labelmode = '';
+                                $paidSts = '';
+                                $date1 = $row['due_date'];
+                                $date2 = $row['paid_date'];
 
-                                $labelmode = isset($paidDetails['labelmode'])?$paidDetails['labelmode']:'';
-                                $paidSts = isset($paidDetails['paidSts'])?$paidDetails['paidSts']:'';
+                                if ($type_amount == 0) {
+                                if ($date1 >= $date2){
+                                $paidSts = 'unpaid';
+                                $labelmode = 'badge-danger';
+                                }else{
+                                $paidSts = 'delay';
+                                $labelmode = 'badge-warning';
+                                }
+
+                                } elseif ($balance == 0) {
+                                $paidSts = 'paid';
+                                $labelmode = 'badge-success';
+                                } else {
+                                $paidSts = 'delay';
+                                $labelmode = 'badge-warning';
+                                }
 
                                 @endphp
                                 <tr>

@@ -4575,7 +4575,7 @@ class AdminController extends Controller
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveTypeBtn"><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveTypeBtn"><i class="fe-trash-2"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" data-leave_days="' . $row['leave_days'] . '"data-short_name="' . $row['short_name'] . '"data-name="' . $row['name'] .'"data-gender="' . $row['gender'] . '" id="restoreLeaveTypeBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" data-leave_days="' . $row['leave_days'] . '"data-short_name="' . $row['short_name'] . '"data-name="' . $row['name'] . '"data-gender="' . $row['gender'] . '" id="restoreLeaveTypeBtn"><i class="fe-edit"></i></a>
                         </div>';
             })
 
@@ -4618,7 +4618,7 @@ class AdminController extends Controller
     // index staffLeaveAssign
     public function staffLeaveAssign()
     {
-        
+
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         // dd($hostel_group);
         return view(
@@ -4660,8 +4660,8 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    
-    public function staffLeaveAssignEdit($id,Request $request)
+
+    public function staffLeaveAssignEdit($id, Request $request)
     {
         $data = [
             'staff_id' => $id,
@@ -4781,7 +4781,7 @@ class AdminController extends Controller
             'staff_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'),$data);
+        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'), $data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
         return view('admin.leave_management.applyleave', [
             'get_leave_types' => $get_leave_types['data'],
@@ -4884,7 +4884,7 @@ class AdminController extends Controller
     // staff leave 
     public function staffApplyLeave(Request $request)
     {
-        
+
         $file = $request->file('file');
         if ($file) {
             $path = $file->path();
@@ -5941,7 +5941,14 @@ class AdminController extends Controller
     // index semester
     public function semester()
     {
-        return view('admin.semester.index');
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        return view(
+            'admin.semester.index',
+            [
+                'academic_year_list' => $academic_year_list['data']
+
+            ]
+        );
     }
 
     public function addSemester(Request $request)
@@ -6783,9 +6790,9 @@ class AdminController extends Controller
     }
     public function updateFees(Request $request)
     {
-        if($request->payment_mode){
+        if ($request->payment_mode) {
             $payment_mode = $request->payment_mode;
-        }else{
+        } else {
             $payment_mode = $request->payment_mode_onload;
         }
         $data = [
@@ -6851,12 +6858,12 @@ class AdminController extends Controller
                 'fees_type' => $fees_type['data'],
                 'semester' => $semester['data'],
                 'month' => $month,
-                'Yearly' => isset($payment_mode['data'][0]['name'])?$payment_mode['data'][0]['name']:'0',
-                'Yearly_ID' => isset($payment_mode['data'][0]['id'])?$payment_mode['data'][0]['id']:'0',
-                'Semester' => isset($payment_mode['data'][1]['name'])?$payment_mode['data'][1]['name']:'1',
-                'Semester_ID' => isset($payment_mode['data'][1]['id'])?$payment_mode['data'][1]['id']:'1',
-                'Monthly' => isset($payment_mode['data'][2]['name'])?$payment_mode['data'][2]['name']:'2',
-                'Monthly_ID' => isset($payment_mode['data'][2]['id'])?$payment_mode['data'][2]['id']:'2',
+                'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
+                'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
+                'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
+                'Semester_ID' => isset($payment_mode['data'][1]['id']) ? $payment_mode['data'][1]['id'] : '1',
+                'Monthly' => isset($payment_mode['data'][2]['name']) ? $payment_mode['data'][2]['name'] : '2',
+                'Monthly_ID' => isset($payment_mode['data'][2]['id']) ? $payment_mode['data'][2]['id'] : '2',
             ]
         );
     }
@@ -6903,12 +6910,12 @@ class AdminController extends Controller
                 'semester' => $semester['data'],
                 'payment_mode' => $payment_mode['data'],
                 'month' => $month,
-                'Yearly' => isset($payment_mode['data'][0]['name'])?$payment_mode['data'][0]['name']:'0',
-                'Yearly_ID' => isset($payment_mode['data'][0]['id'])?$payment_mode['data'][0]['id']:'0',
-                'Semester' => isset($payment_mode['data'][1]['name'])?$payment_mode['data'][1]['name']:'1',
-                'Semester_ID' => isset($payment_mode['data'][1]['id'])?$payment_mode['data'][1]['id']:'1',
-                'Monthly' => isset($payment_mode['data'][2]['name'])?$payment_mode['data'][2]['name']:'2',
-                'Monthly_ID' => isset($payment_mode['data'][2]['id'])?$payment_mode['data'][2]['id']:'2',
+                'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
+                'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
+                'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
+                'Semester_ID' => isset($payment_mode['data'][1]['id']) ? $payment_mode['data'][1]['id'] : '1',
+                'Monthly' => isset($payment_mode['data'][2]['name']) ? $payment_mode['data'][2]['name'] : '2',
+                'Monthly_ID' => isset($payment_mode['data'][2]['id']) ? $payment_mode['data'][2]['id'] : '2',
                 'fees_type_fees_group_details' => $fees_group['data']['fees_group_details'],
                 'fees_group' => $fees_group['data']['fees_group']
             ]
@@ -7019,5 +7026,123 @@ class AdminController extends Controller
                 return redirect()->route('admin.employee.import')->with('errors', $response['data']);
             }
         }
+    }
+    public static function paidStatusDetails($args)
+    {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.fees_status_check'), $data);
+        // current date
+        $now = date('Y-m-d');
+        $paid_date = isset($args['paid_date']) ? $args['paid_date'] : null;
+        $current_semester = isset($response['data']['current_semester']) ? $response['data']['current_semester'] : [];
+        $all_semester = isset($response['data']['all_semester']) ? $response['data']['all_semester'] : [];
+        $year_details = isset($response['data']['year_details']) ? $response['data']['year_details'] : [];
+        $paidSts = "";
+        $labelmode = "";
+        // amount paid
+        if ((isset($args['due_date'])) && (isset($paid_date))) {
+            // paid status id 1 mean paid
+            if ($args['payment_status_id'] == 1 && isset($args['paid_date'])) {
+                $type_amount = round($args['paid_amount']);
+            } else {
+                $type_amount = round(0);
+            }
+            $balance = ($args['amount'] - $type_amount);
+            $balance = number_format($balance, 2, '.', '');
+            if ($type_amount == 0) {
+                $paidSts = 'Pending';
+                $labelmode = 'badge-warning';
+            } elseif ($balance == 0) {
+                $paidSts = 'paid';
+                $labelmode = 'badge-success';
+            } else {
+                $paidSts = 'partial paid';
+                $labelmode = 'badge-blue';
+            }
+        }
+        // amount unpaid or delay
+        if ((isset($args['due_date'])) && ($paid_date === null || trim($paid_date) === '')) {
+            // yearly payment
+            if ($args['payment_mode_id'] == 1) {
+                $year_start_date = isset($year_details['0']['year_start_date']) ? $year_details['0']['year_start_date'] : null;
+                $start_date = date('Y-m-d', strtotime($year_start_date));
+                $year_end_date = isset($year_details['0']['year_end_date']) ? $year_details['0']['year_end_date'] : null;
+                $end_date = date('Y-m-d', strtotime($year_end_date));
+                if ($start_date <= $now && $now <= $end_date) {
+                    // match between semester date
+                    if ($args['due_date'] <= $now) {
+                        $paidSts = 'delay';
+                        $labelmode = 'badge-secondary';
+                    } else {
+                        $paidSts = 'Pending';
+                        $labelmode = 'badge-warning';
+                    }
+                } else {
+                    // not match between semester date
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+            // semester payment
+            if ($args['payment_mode_id'] == 2) {
+                $id = isset($current_semester['id']) ? $current_semester['id'] : 0;
+                $key = array_search($id, array_column($all_semester, 'id'));
+                if ((!empty($key)) || ($key === 0)) {
+                    // get which semester running now
+                    $get_semester = $all_semester[$key];
+                    $sem_start_date = isset($get_semester['start_date']) ? $get_semester['start_date'] : null;
+                    $start_date = date('Y-m-d', strtotime($sem_start_date));
+                    $sem_end_date = isset($get_semester['end_date']) ? $get_semester['end_date'] : null;
+                    $end_date = date('Y-m-d', strtotime($sem_end_date));
+                    if ($start_date <= $now && $now <= $end_date) {
+                        // match between semester date
+                        if ($args['due_date'] <= $now) {
+                            $paidSts = 'delay';
+                            $labelmode = 'badge-secondary';
+                        } else {
+                            $paidSts = 'Pending';
+                            $labelmode = 'badge-warning';
+                        }
+                    } else {
+                        // not match between semester date
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
+                    }
+                } else {
+                    // if semester finish
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+            // monthly payment
+            if ($args['payment_mode_id'] == 3) {
+                $query_date = date('Y-m-d', strtotime($args['due_date']));
+                // First day of the month.
+                $start_date = date('Y-m-01', strtotime($query_date));
+                // Last day of the month.
+                $end_date = date('Y-m-t', strtotime($query_date));
+                if ($start_date <= $now && $now <= $end_date) {
+                    // match between semester date
+                    if ($args['due_date'] <= $now) {
+                        $paidSts = 'delay';
+                        $labelmode = 'badge-secondary';
+                    } else {
+                        $paidSts = 'Pending';
+                        $labelmode = 'badge-warning';
+                    }
+                } else {
+                    // not match between semester date
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+        }
+        $ret_res = [
+            'paidSts' => $paidSts,
+            'labelmode' => $labelmode
+        ];
+        return $ret_res;
     }
 }

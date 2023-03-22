@@ -796,6 +796,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('fees/student_fees_history', [ApiControllerOne::class, 'studentFeesHistory']);
     Route::post('fees/update', [ApiControllerOne::class, 'updateFees']);
     Route::post('fees/fees_type_group', [ApiControllerOne::class, 'feesTypeGroup']);
+    Route::post('fees/fees_status_check', [ApiControllerOne::class, 'feesStatusCheck']);
     // FeesGroup routes
     Route::post('fees_group/add', [ApiControllerOne::class, 'addFeesGroup']);
     Route::get('fees_group/list', [ApiControllerOne::class, 'getFeesGroupList']);

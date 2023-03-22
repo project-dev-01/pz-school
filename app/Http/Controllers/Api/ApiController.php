@@ -8605,11 +8605,12 @@ class ApiController extends BaseController
                     // 'sm.name',
                     'sm.start_date',
                     'sm.end_date',
-                    'sm.year',
+                    'ay.name as academic_year',
                     // DB::raw('DATE_FORMAT(forum_post_replies.created_at, "%b %e %Y") as date')
                     // DB::raw("CONCAT(sm.name,'-','(',DATE_FORMAT(sm.start_date, '%b %Y'),'-', DATE_FORMAT(sm.end_date, '%b %Y'),')') as name")
                     DB::raw("CONCAT(sm.name,'-','(',DATE_FORMAT(sm.start_date, '%b'),'-', DATE_FORMAT(sm.end_date, '%b'),')') as name")
                 )
+                ->leftJoin('academic_year as ay', 'sm.academic_session_id', '=', 'ay.id')
                 ->get();
             return $this->successResponse($semester, 'Semester record fetch successfully');
         }
@@ -17723,7 +17724,7 @@ class ApiController extends BaseController
                     'name' => $request->name,
                     'start_date' => $request->start_date,
                     'end_date' => $request->end_date,
-                    'year' => $request->year,
+                    'academic_session_id' => $request->year,
                     'created_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
@@ -17784,7 +17785,7 @@ class ApiController extends BaseController
                     'name' => $request->name,
                     'start_date' => $request->start_date,
                     'end_date' => $request->end_date,
-                    'year' => $request->year,
+                    'academic_session_id' => $request->year,
                     'updated_at' => date("Y-m-d H:i:s")
                 ]);
                 $success = [];
