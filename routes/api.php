@@ -827,4 +827,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('importcsv/employee', [ImportController::class, 'importCsvEmployee']);
     Route::post('get_like_column_name', [ImportController::class, 'getLikeColumnName']);
     Route::post('faq/email', [ApiControllerOne::class, 'faqEmail']);
+    Route::post('first/name', [ApiControllerOne::class, 'firstName']);
+    
 });

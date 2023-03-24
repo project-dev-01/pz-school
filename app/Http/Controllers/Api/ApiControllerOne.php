@@ -9136,4 +9136,27 @@ class ApiControllerOne extends BaseController
             }
         }
     }
+
+    public function firstName(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'branch_id' => 'required',
+            'table_name' => 'required'
+        ]);
+        if (!$validator->passes()) {
+            return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
+        } else {
+            $createConnection = $this->createNewConnection($request->branch_id);
+            $table_name = $request->table_name;
+            $students = $createConnection->table($table_name)->select('id','first_name')->get();
+            foreach($students as $stud){
+                $trim = explode(' ',$stud->first_name);
+                $name1 = isset($trim[0]) ? $trim[0] : "";
+                $name2 = isset($trim[1]) ? $trim[1] : "";
+                $name = $name1 .' '.$name2;
+                $update = $createConnection->table($table_name)->where('id', $stud->id)->update(['first_name'=>$name]);
+            }
+            return "Success";
+        }
+    }
 }
