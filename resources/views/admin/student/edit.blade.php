@@ -691,7 +691,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="heard">Last Name<span class="text-danger">*</span></label>
+                                                    <label for="heard">Last Name</label>
                                                     <input type="text" class="form-control" maxlength="50" id="father_last_name" placeholder="Leo" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>

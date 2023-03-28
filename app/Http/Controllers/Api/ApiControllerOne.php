@@ -6796,6 +6796,189 @@ class ApiControllerOne extends BaseController
     //     return $studentData;
     //     // dd($studentData);
     // }
+    // public function getfeeGroup($studentID, $branchID, $academic_session_id)
+    // {
+    //     // create new connection
+    //     $conn = $this->createNewConnection($branchID);
+    //     $studentData = $conn->table('fees_allocation as fa')
+    //         ->select('g.id', 'g.name')
+    //         ->join('fees_group as g', 'g.id', '=', 'fa.group_id')
+    //         ->where([
+    //             ['fa.student_id', '=', $studentID],
+    //             ['fa.academic_session_id', '=', $academic_session_id]
+    //         ])
+    //         ->get()->toArray();
+
+    //     $paymentArr = [];
+    //     if (!empty($studentData)) {
+    //         foreach ($studentData as $val) {
+    //             $object = new \stdClass();
+    //             // $object->group_id = $val->id;
+    //             $object->group_name = $val->name;
+    //             // paid fees details
+    //             $paid_already_group = $conn->table('fees_payment_history as fph')
+    //                 ->select(
+    //                     DB::raw('IFNULL(SUM(fph.amount), 0) as paid_amount'),
+    //                     'fph.monthly',
+    //                     'fph.semester',
+    //                     'fph.yearly'
+    //                 )
+    //                 ->where('fph.fees_group_id', '=', $val->id)
+    //                 ->where([
+    //                     ['fph.student_id', '=', $studentID],
+    //                     ['fph.academic_session_id', '=', $academic_session_id],
+    //                     // paid mean payment_status_id equal to 1
+    //                     ['fph.payment_status_id', '=', '1']
+
+    //                 ])
+    //                 ->get();
+    //             // dd($paid_already_group);
+    //             // print_r($paid_already_group);
+    //             // print_r($paid_already_group[0]->paid_amount);
+    //             if (isset($paid_already_group[0]->paid_amount)) {
+    //                 $amt = round($paid_already_group[0]->paid_amount);
+    //                 // $val->name;
+    //                 if ($amt != 0) {
+    //                     $monthly = isset($paid_already_group[0]->monthly) ? $paid_already_group[0]->monthly : null;
+    //                     $semester = isset($paid_already_group[0]->semester) ? $paid_already_group[0]->semester : null;
+    //                     $yearly = isset($paid_already_group[0]->yearly) ? $paid_already_group[0]->yearly : null;
+    //                     // echo "amount paid";
+    //                     // balance fees details
+    //                     $balance_query = $conn->table('fees_group_details as fg')
+    //                         ->select(
+    //                             DB::raw('SUM(fg.amount) as total_amount')
+    //                         )
+    //                         ->where('fg.fees_group_id', '=', $val->id);
+    //                     // year
+    //                     $bal_yearly_query = clone $balance_query;
+    //                     $bal_yearly_query->whereNotNull('fg.yearly');
+    //                     $bal_year = $bal_yearly_query->get();
+    //                     // // semester
+    //                     $bal_sem_query = clone $balance_query;
+    //                     $bal_sem_query->whereNotNull('fg.semester');
+    //                     $bal_semester = $bal_sem_query->get();
+    //                     // // monthly
+    //                     $bal_month_query = clone $balance_query;
+    //                     $bal_month_query->whereNotNull('fg.monthly');
+    //                     $bal_monthly = $bal_month_query->get();
+    //                     // print_r($balance);
+    //                     // paid fees details
+    //                     $paid_query = $conn->table('fees_payment_history as fph')
+    //                         ->select(
+    //                             DB::raw('IFNULL(SUM(fph.amount), 0) as paid_amount')
+    //                         )
+    //                         ->where('fph.fees_group_id', '=', $val->id)
+    //                         ->where([
+    //                             ['fph.student_id', '=', $studentID],
+    //                             ['fph.academic_session_id', '=', $academic_session_id]
+    //                         ]);
+    //                     // year
+    //                     $paid_yearly_query = clone $paid_query;
+    //                     $paid_yearly_query->whereNotNull('fph.yearly');
+    //                     $paid_year = $paid_yearly_query->get();
+    //                     // // semester
+    //                     $paid_sem_query = clone $paid_query;
+    //                     $paid_sem_query->whereNotNull('fph.semester');
+    //                     $paid_semester = $paid_sem_query->get();
+    //                     // // monthly
+    //                     $paid_monthly_query = clone $paid_query;
+    //                     $paid_monthly_query->whereNotNull('fph.monthly');
+    //                     $paid_monthly = $paid_monthly_query->get();
+
+    //                     if (isset($yearly)) {
+    //                         $balance = isset($bal_year[0]->total_amount) ? $bal_year[0]->total_amount : null;
+    //                         $paid_amount = isset($paid_year[0]->paid_amount) ? $paid_year[0]->paid_amount : null;
+    //                     } else if (isset($semester)) {
+    //                         $balance = isset($bal_semester[0]->total_amount) ? $bal_semester[0]->total_amount : null;
+    //                         $paid_amount = isset($paid_semester[0]->paid_amount) ? $paid_semester[0]->paid_amount : null;
+    //                     } else if (isset($monthly)) {
+    //                         $balance = isset($bal_monthly[0]->total_amount) ? $bal_monthly[0]->total_amount : null;
+    //                         $paid_amount = isset($paid_monthly[0]->paid_amount) ? $paid_monthly[0]->paid_amount : null;
+    //                     } else {
+    //                         $balance = null;
+    //                         $paid_amount = null;
+    //                     }
+
+    //                     // here we check null
+    //                     if (isset($balance) && isset($paid_amount)) {
+    //                         // $checkRemainAmt = ($balance - $paid_amount);
+    //                         // $paidStsAmt = round($checkRemainAmt);
+    //                         $paid_amt = round($paid_amount);
+    //                         $check_bal_amt = round($balance);
+
+
+    //                         if ($paid_amt == 0) {
+    //                             $status = 'unpaid';
+    //                             $payment_status_id = 2;
+    //                         } elseif ($check_bal_amt == $paid_amt) {
+    //                             $status = 'paid';
+    //                             $payment_status_id = 1;
+    //                         } elseif ($paid_amt > 1) {
+    //                             $status = 'delay';
+    //                             $payment_status_id = 3;
+    //                         }
+    //                         // echo $status;
+    //                         // echo $payment_status_id;
+    //                         $object->status = isset($status) ? $status : 'unpaid';
+    //                         $object->payment_status_id = isset($payment_status_id) ? $payment_status_id : 2;
+    //                     } else {
+    //                         $object->status = 'unpaid';
+    //                         $object->payment_status_id = 2;
+    //                     }
+    //                     // $monthly
+    //                     // $paid_data = [
+    //                     //     'paid_year' => $paid_year,
+    //                     //     'paid_semester' => $paid_semester,
+    //                     //     'paid_monthly' => $paid_monthly
+    //                     // ];
+    //                     // $bal_data = [
+    //                     //     'bal_year' => $bal_year,
+    //                     //     'bal_semester' => $bal_semester,
+    //                     //     'bal_monthly' => $bal_monthly
+    //                     // ];
+    //                     // echo "<pre>";
+    //                     // print_r($bal_year[0]->paid_amount);
+    //                     // exit;
+    //                     // $yearly_data = [
+    //                     //     'bal_year' => isset($bal_year[0]->total_amount) ? $bal_year[0]->total_amount : null,
+    //                     //     'paid_year' => isset($paid_year[0]->paid_amount) ? $paid_year[0]->paid_amount : null
+    //                     // ];
+    //                     // $semester_data = [
+    //                     //     'bal_semester' => isset($bal_semester[0]->total_amount) ? $bal_semester[0]->total_amount : null,
+    //                     //     'paid_semester' => isset($paid_semester[0]->paid_amount) ? $paid_semester[0]->paid_amount : null
+    //                     // ];
+    //                     // $monthly_data = [
+    //                     //     'bal_monthly' => isset($bal_monthly[0]->total_amount) ? $bal_monthly[0]->total_amount : null,
+    //                     //     'paid_monthly' => isset($paid_monthly[0]->paid_amount) ? $paid_monthly[0]->paid_amount : null,
+    //                     // ];
+    //                     // echo "<pre>";
+    //                     // print_r($yearly_data);
+    //                     // echo "<pre>";
+    //                     // print_r($semester_data);
+    //                     // echo "<pre>";
+    //                     // print_r($monthly_data);
+    //                     // $object->name = $value->name;
+    //                     array_push($paymentArr, $object);
+    //                 } else {
+    //                     // echo "no amount paid";
+    //                     $object->status = 'unpaid';
+    //                     $object->payment_status_id = 2;
+    //                     array_push($paymentArr, $object);
+    //                 }
+    //             } else {
+    //                 // $val->name;
+    //                 $object->status = 'unpaid';
+    //                 $object->payment_status_id = 2;
+    //                 // echo "no amount paid";
+    //                 array_push($paymentArr, $object);
+    //             }
+    //         }
+    //     }
+    //     // dd($paymentArr);
+    //     return $paymentArr;
+    //     // return $studentData;
+    //     // dd($studentData);
+    // }
     // old
     public function getfeeGroup($studentID, $branchID, $academic_session_id)
     {
@@ -6803,178 +6986,274 @@ class ApiControllerOne extends BaseController
         $conn = $this->createNewConnection($branchID);
         // get data
         $studentData = $conn->table('fees_allocation as fa')
-            ->select('g.id', 'g.name')
+            ->select(
+                'g.id as group_id',
+                'g.name',
+                'fa.payment_mode_id',
+                'fa.academic_session_id',
+                'fg.amount',
+                'fg.id as fg_id',
+                'fg.monthly',
+                'fg.semester',
+                'fg.yearly',
+                'fg.due_date',
+                'fph.id',
+                'fph.student_id',
+                'fph.allocation_id',
+                'fph.fees_type_id',
+                'fph.payment_status_id',
+                'fph.collect_by',
+                'fph.amount as paid_amount',
+                'fph.discount',
+                'fph.fine',
+                'fph.pay_via',
+                'fph.remarks',
+                'fph.date as paid_date',
+                'ft.name as fees_type_name'
+                // 'fa.id as allocation_id',
+                // 'fa.payment_mode_id',
+                // 'fa.student_id',
+                // 't.name',
+                // 'f.name as fees_group_name',
+                // 'fg.amount',
+                // 'fg.due_date',
+                // 'fg.fees_type_id',
+                // "fph.fees_group_details_id",
+                // 'fph.date as paid_date',
+                // "fph.payment_status_id",
+                // "fph.student_id",
+                // "fph.amount as paid_amount"
+            )
             ->join('fees_group as g', 'g.id', '=', 'fa.group_id')
+            ->leftjoin('fees_group_details as fg', function ($join) {
+                $join->on('fg.fees_group_id', '=', 'fa.group_id')
+                    ->on('fg.payment_mode_id', '=', 'fa.payment_mode_id');
+            })
+            ->leftjoin('fees_payment_history as fph', function ($join) use ($studentID, $academic_session_id) {
+                $join->on('fph.fees_group_details_id', '=', 'fg.id');
+                $join->on('fph.student_id', '=', DB::raw("'$studentID'"));
+                $join->on('fph.academic_session_id', '=', DB::raw("'$academic_session_id'"));
+            })
+            ->join('fees_type as ft', 'ft.id', '=', 'fg.fees_type_id')
             ->where([
                 ['fa.student_id', '=', $studentID],
                 ['fa.academic_session_id', '=', $academic_session_id]
             ])
             ->get()->toArray();
+
+        // dd($studentData);
         $paymentArr = [];
         if (!empty($studentData)) {
+            $now = date('Y-m-d');
+            // current semester details
+            $current_semester = $conn->table('semester as sm')
+                ->select(
+                    'sm.id',
+                    'sm.name',
+                    'sm.start_date',
+                    'sm.end_date'
+                )
+                ->whereRaw('"' . $now . '" between `start_date` and `end_date`')
+                ->first();
+            // semester details
+            $all_semester = $conn->table('semester as sm')
+                ->select(
+                    'sm.id',
+                    'sm.name',
+                    'sm.start_date',
+                    'sm.end_date'
+                )
+                ->where([
+                    ['sm.academic_session_id', '=', $academic_session_id],
+                ])->get()->toArray();
+            // year details
+            $year_details = $conn->table('semester as sm')
+                ->select(DB::raw('MIN(sm.start_date) AS year_start_date, MAX(sm.end_date) AS year_end_date'))
+                ->where([
+                    ['sm.academic_session_id', '=', $academic_session_id],
+                ])
+                ->get();
+
             foreach ($studentData as $val) {
                 $object = new \stdClass();
                 // $object->group_id = $val->id;
                 $object->group_name = $val->name;
+                $object->fees_type_name = $val->fees_type_name;
+                $due_date = isset($val->due_date) ? $val->due_date : null;
+                $paid_date = isset($val->paid_date) ? $val->paid_date : null;
+                $payment_status_id = isset($val->payment_status_id) ? $val->payment_status_id : null;
+                $paid_amount = isset($val->paid_amount) ? $val->paid_amount : null;
+                $amount = $val->amount;
+                $payment_mode_id = $val->payment_mode_id;
+                // $paid_amount = isset($val->paid_amount) ? $val->paid_amount : null;
+                $paidSts = "";
+                $labelmode = "";
                 // paid fees details
-                $paid_already_group = $conn->table('fees_payment_history as fph')
-                    ->select(
-                        DB::raw('IFNULL(SUM(fph.amount), 0) as paid_amount'),
-                        'fph.monthly',
-                        'fph.semester',
-                        'fph.yearly'
-                    )
-                    ->where('fph.fees_group_id', '=', $val->id)
-                    ->where([
-                        ['fph.student_id', '=', $studentID],
-                        ['fph.academic_session_id', '=', $academic_session_id],
-                        // paid mean payment_status_id equal to 1
-                        ['fph.payment_status_id', '=', '1']
-
-                    ])
-                    ->get();
-                // dd($paid_already_group);
-                // print_r($paid_already_group);
-                // print_r($paid_already_group[0]->paid_amount);
-                if (isset($paid_already_group[0]->paid_amount)) {
-                    $amt = round($paid_already_group[0]->paid_amount);
-                    // $val->name;
-                    if ($amt != 0) {
-                        $monthly = isset($paid_already_group[0]->monthly) ? $paid_already_group[0]->monthly : null;
-                        $semester = isset($paid_already_group[0]->semester) ? $paid_already_group[0]->semester : null;
-                        $yearly = isset($paid_already_group[0]->yearly) ? $paid_already_group[0]->yearly : null;
-                        // echo "amount paid";
-                        // balance fees details
-                        $balance_query = $conn->table('fees_group_details as fg')
-                            ->select(
-                                DB::raw('SUM(fg.amount) as total_amount')
-                            )
-                            ->where('fg.fees_group_id', '=', $val->id);
-                        // year
-                        $bal_yearly_query = clone $balance_query;
-                        $bal_yearly_query->whereNotNull('fg.yearly');
-                        $bal_year = $bal_yearly_query->get();
-                        // // semester
-                        $bal_sem_query = clone $balance_query;
-                        $bal_sem_query->whereNotNull('fg.semester');
-                        $bal_semester = $bal_sem_query->get();
-                        // // monthly
-                        $bal_month_query = clone $balance_query;
-                        $bal_month_query->whereNotNull('fg.monthly');
-                        $bal_monthly = $bal_month_query->get();
-                        // print_r($balance);
-                        // paid fees details
-                        $paid_query = $conn->table('fees_payment_history as fph')
-                            ->select(
-                                DB::raw('IFNULL(SUM(fph.amount), 0) as paid_amount')
-                            )
-                            ->where('fph.fees_group_id', '=', $val->id)
-                            ->where([
-                                ['fph.student_id', '=', $studentID],
-                                ['fph.academic_session_id', '=', $academic_session_id]
-                            ]);
-                        // year
-                        $paid_yearly_query = clone $paid_query;
-                        $paid_yearly_query->whereNotNull('fph.yearly');
-                        $paid_year = $paid_yearly_query->get();
-                        // // semester
-                        $paid_sem_query = clone $paid_query;
-                        $paid_sem_query->whereNotNull('fph.semester');
-                        $paid_semester = $paid_sem_query->get();
-                        // // monthly
-                        $paid_monthly_query = clone $paid_query;
-                        $paid_monthly_query->whereNotNull('fph.monthly');
-                        $paid_monthly = $paid_monthly_query->get();
-
-                        if (isset($yearly)) {
-                            $balance = isset($bal_year[0]->total_amount) ? $bal_year[0]->total_amount : null;
-                            $paid_amount = isset($paid_year[0]->paid_amount) ? $paid_year[0]->paid_amount : null;
-                        } else if (isset($semester)) {
-                            $balance = isset($bal_semester[0]->total_amount) ? $bal_semester[0]->total_amount : null;
-                            $paid_amount = isset($paid_semester[0]->paid_amount) ? $paid_semester[0]->paid_amount : null;
-                        } else if (isset($monthly)) {
-                            $balance = isset($bal_monthly[0]->total_amount) ? $bal_monthly[0]->total_amount : null;
-                            $paid_amount = isset($paid_monthly[0]->paid_amount) ? $paid_monthly[0]->paid_amount : null;
-                        } else {
-                            $balance = null;
-                            $paid_amount = null;
-                        }
-
-                        // here we check null
-                        if (isset($balance) && isset($paid_amount)) {
-                            // $checkRemainAmt = ($balance - $paid_amount);
-                            // $paidStsAmt = round($checkRemainAmt);
-                            $paid_amt = round($paid_amount);
-                            $check_bal_amt = round($balance);
-
-
-                            if ($paid_amt == 0) {
-                                $status = 'unpaid';
-                                $payment_status_id = 2;
-                            } elseif ($check_bal_amt == $paid_amt) {
-                                $status = 'paid';
-                                $payment_status_id = 1;
-                            } elseif ($paid_amt > 1) {
-                                $status = 'delay';
-                                $payment_status_id = 3;
-                            }
-                            // echo $status;
-                            // echo $payment_status_id;
-                            $object->status = isset($status) ? $status : 'unpaid';
-                            $object->payment_status_id = isset($payment_status_id) ? $payment_status_id : 2;
-                        } else {
-                            $object->status = 'unpaid';
-                            $object->payment_status_id = 2;
-                        }
-                        // $monthly
-                        // $paid_data = [
-                        //     'paid_year' => $paid_year,
-                        //     'paid_semester' => $paid_semester,
-                        //     'paid_monthly' => $paid_monthly
-                        // ];
-                        // $bal_data = [
-                        //     'bal_year' => $bal_year,
-                        //     'bal_semester' => $bal_semester,
-                        //     'bal_monthly' => $bal_monthly
-                        // ];
-                        // echo "<pre>";
-                        // print_r($bal_year[0]->paid_amount);
-                        // exit;
-                        // $yearly_data = [
-                        //     'bal_year' => isset($bal_year[0]->total_amount) ? $bal_year[0]->total_amount : null,
-                        //     'paid_year' => isset($paid_year[0]->paid_amount) ? $paid_year[0]->paid_amount : null
-                        // ];
-                        // $semester_data = [
-                        //     'bal_semester' => isset($bal_semester[0]->total_amount) ? $bal_semester[0]->total_amount : null,
-                        //     'paid_semester' => isset($paid_semester[0]->paid_amount) ? $paid_semester[0]->paid_amount : null
-                        // ];
-                        // $monthly_data = [
-                        //     'bal_monthly' => isset($bal_monthly[0]->total_amount) ? $bal_monthly[0]->total_amount : null,
-                        //     'paid_monthly' => isset($paid_monthly[0]->paid_amount) ? $paid_monthly[0]->paid_amount : null,
-                        // ];
-                        // echo "<pre>";
-                        // print_r($yearly_data);
-                        // echo "<pre>";
-                        // print_r($semester_data);
-                        // echo "<pre>";
-                        // print_r($monthly_data);
-                        // $object->name = $value->name;
-                        array_push($paymentArr, $object);
+                // print_r($val);
+                // amount paid
+                if ((isset($due_date)) && (isset($paid_date))) {
+                    // paid status id 1 mean paid
+                    if ($payment_status_id == 1 && isset($paid_date)) {
+                        $type_amount = round($paid_amount);
                     } else {
-                        // echo "no amount paid";
-                        $object->status = 'unpaid';
-                        $object->payment_status_id = 2;
-                        array_push($paymentArr, $object);
+                        $type_amount = round(0);
                     }
-                } else {
-                    // $val->name;
-                    $object->status = 'unpaid';
-                    $object->payment_status_id = 2;
-                    // echo "no amount paid";
-                    array_push($paymentArr, $object);
+                    $balance = ($amount - $type_amount);
+                    $balance = number_format($balance, 2, '.', '');
+                    if ($balance == 0) {
+                        $paidSts = 'paid';
+                        $labelmode = 'badge-success';
+                    } else {
+                        $paidSts = 'pending';
+                        $labelmode = 'badge-warning';
+                    }
                 }
+                // amount unpaid or delay
+                if ((isset($due_date)) && ($paid_date === null || trim($paid_date) === '')) {
+                    // yearly payment
+                    if ($payment_mode_id == 1) {
+                        $year_start_date = isset($year_details['0']->year_start_date) ? $year_details['0']->year_start_date : null;
+                        $start_date = date('Y-m-d', strtotime($year_start_date));
+                        $year_end_date = isset($year_details['0']->year_end_date) ? $year_details['0']->year_end_date : null;
+                        $end_date = date('Y-m-d', strtotime($year_end_date));
+                        if ($start_date <= $now && $now <= $end_date) {
+                            // match between semester date
+                            if ($due_date <= $now) {
+                                $paidSts = 'delay';
+                                $labelmode = 'badge-secondary';
+                            } else {
+                                $paidSts = 'pending';
+                                $labelmode = 'badge-warning';
+                            }
+                        } else {
+                            // not match between semester date
+                            $paidSts = 'unpaid';
+                            $labelmode = 'badge-danger';
+                        }
+                    }
+                    // semester payment
+                    if ($payment_mode_id == 2) {
+                        $id = isset($current_semester->id) ? $current_semester->id : 0;
+                        $key = array_search($id, array_column($all_semester, 'id'));
+                        if ((!empty($key)) || ($key === 0)) {
+                            // get which semester running now
+                            $get_semester = $all_semester[$key];
+                            $sem_start_date = isset($get_semester->start_date) ? $get_semester->start_date : null;
+                            $start_date = date('Y-m-d', strtotime($sem_start_date));
+                            $sem_end_date = isset($get_semester->end_date) ? $get_semester->end_date : null;
+                            $end_date = date('Y-m-d', strtotime($sem_end_date));
+                            if ($start_date <= $now && $now <= $end_date) {
+                                // match between semester date
+                                if ($due_date <= $now) {
+                                    $paidSts = 'delay';
+                                    $labelmode = 'badge-secondary';
+                                } else {
+                                    $paidSts = 'pending';
+                                    $labelmode = 'badge-warning';
+                                }
+                            } else {
+                                // not match between semester date
+                                $paidSts = 'unpaid';
+                                $labelmode = 'badge-danger';
+                            }
+                        } else {
+                            // if semester finish
+                            $paidSts = 'unpaid';
+                            $labelmode = 'badge-danger';
+                        }
+                    }
+                    // monthly payment
+                    if ($payment_mode_id == 3) {
+                        $query_date = date('Y-m-d', strtotime($due_date));
+                        // First day of the month.
+                        $start_date = date('Y-m-01', strtotime($query_date));
+                        // Last day of the month.
+                        $end_date = date('Y-m-t', strtotime($query_date));
+                        if ($start_date <= $now && $now <= $end_date) {
+                            // match between semester date
+                            if ($due_date <= $now) {
+                                $paidSts = 'delay';
+                                $labelmode = 'badge-secondary';
+                            } else {
+                                $paidSts = 'pending';
+                                $labelmode = 'badge-warning';
+                            }
+                        } else {
+                            // not match between semester date
+                            $paidSts = 'unpaid';
+                            $labelmode = 'badge-danger';
+                        }
+                    }
+                }
+                $object->paidSts = $paidSts;
+                $object->labelmode = $labelmode;
+                $object->dueDate = $due_date;
+                // $object->group_id = $val->group_id;
+                array_push($paymentArr, $object);
+                // $ret_res = [
+                //     'paidSts' => $paidSts,
+                //     'labelmode' => $labelmode
+                // ];
+                // echo $paidSts;
+                // echo $labelmode;
+                // exit;
             }
         }
+        // dd($paymentArr);
+        // default payment status
+        // $defpaidSts = "pending";
+        // $deflabelmode = "badge-warning";
+
+        // if (!empty($paymentArr)) {
+        //     // group by of group id 
+        //     $arr = array();
+        //     foreach ($paymentArr as $key => $item) {
+        //         $arr[$item->group_id][$key] = $item;
+        //     }
+        //     ksort($arr, SORT_NUMERIC);
+        //     // dd($arr);
+        //     // check if paid or unpaid or delay or pending
+        //     foreach ($arr as $pay) {
+        //         print_r($pay);
+        //         $countArr = count($pay);
+        //         $paidCount = 0;
+        //         $unPaidCount = 0;
+        //         $delayCount = 0;
+        //         $pendingCount = 0;
+        //         foreach ($pay as $paid_detail) {
+        //             // print_r($paid_detail);
+        //             if ($paid_detail->paidSts == "paid") {
+        //                 $paidCount++;
+        //             }
+        //             if ($paid_detail->paidSts == "unpaid") {
+        //                 $unPaidCount++;
+        //             }
+        //             if ($paid_detail->paidSts == "delay") {
+        //                 $delayCount++;
+        //             }
+        //             if ($paid_detail->paidSts == "pending") {
+        //                 $pendingCount++;
+        //             }
+        //             // print_r($pay->group_name);
+        //             // print_r($pay->group_id);
+        //         }
+        //         if ($countArr == $paidCount) {
+        //             $defpaidSts = "paid";
+        //             $deflabelmode = "badge-success";
+        //         }
+        //         echo "</br>";
+        //         echo "----------";
+        //         echo $countArr;
+        //         echo $paidCount;
+        //         echo $unPaidCount;
+        //         echo $delayCount;
+        //         echo $pendingCount;
+        //         echo "</br>";
+        //         echo "----------";
+        //         // print_r($pay->group_name);
+        //         // print_r($pay->group_id);
+        //     }
+        // }
         // dd($paymentArr);
         return $paymentArr;
         // return $studentData;
@@ -7514,16 +7793,15 @@ class ApiControllerOne extends BaseController
                     $html .= '<optgroup label="' . $row->name . '">';
                     $resultdetails = $conn->table('fees_group_details as fgd')
                         ->select(
-                            'fgd.id',
                             'fgd.fees_group_id',
                             'fgd.fees_type_id',
-                            'fgd.amount',
                             'ft.name as fees_type_name'
                         )
                         ->join('fees_type as ft', 'fgd.fees_type_id', '=', 'ft.id')
                         ->where([
-                            ['fees_group_id', '=', $row->id]
+                            ['fgd.fees_group_id', '=', $row->id]
                         ])
+                        ->groupBy('fgd.fees_type_id')
                         ->get();
                     foreach ($resultdetails as $t) {
                         // dd($t);
@@ -7533,7 +7811,7 @@ class ApiControllerOne extends BaseController
                     $html .= '</optgroup>';
                 }
             } else {
-                $html .= '<option value="">no_information_available</option>';
+                $html .= '<option value="">No Fees Available</option>';
             }
             return $this->successResponse($html, 'Fees type fetch successfully');
         }
@@ -8996,21 +9274,6 @@ class ApiControllerOne extends BaseController
                         $studentArr
                     );
                 }
-                // dd($studentArr);
-                // if($studentArr){
-                //     $object->mark = $studentArr[$key]->mark;
-                //     $object->rank = $studentArr[$key]->rank;
-                // }else{
-                //     $object->mark = 0;
-                //     $object->rank = 0;
-                // }
-                // array_push($allbysubject, $object);
-                // dd($student_rank);
-
-                // if(isset($student_rank[$student_id])){
-
-                //     $rank = $student_rank[$student_id];
-                // }
             }
 
             $data = [
@@ -9077,40 +9340,6 @@ class ApiControllerOne extends BaseController
             return $this->successResponse($success, 'Class teacher section record fetch successfully');
         }
     }
-    // // get class teacher grades 
-    // public function classTeacherGrades(Request $request)
-    // {
-
-    //     $validator = \Validator::make($request->all(), [
-    //         'token' => 'required',
-    //         'branch_id' => 'required',
-    //         'academic_session_id' => 'required'
-    //     ]);
-
-    //     if (!$validator->passes()) {
-    //         return $this->send422Error('Validation error.', ['error' => $validator->errors()->toArray()]);
-    //     } else {
-    //         // create new connection
-    //         $createConnection = $this->createNewConnection($request->branch_id);
-    //         $success = $createConnection->table('teacher_allocations as ta')
-    //             ->select(
-    //                 'ta.id',
-    //                 'ta.class_id',
-    //                 'ta.section_id',
-    //                 'ta.teacher_id',
-    //                 'ta.type',
-    //                 's.name as section_name',
-    //                 'c.name as class_name',
-    //                 DB::raw("CONCAT(st.first_name, ' ', st.last_name) as teacher_name")
-    //             )
-    //             ->join('sections as s', 'ta.section_id', '=', 's.id')
-    //             ->join('staffs as st', 'ta.teacher_id', '=', 'st.id')
-    //             ->join('classes as c', 'ta.class_id', '=', 'c.id')
-    //             ->where('ta.academic_session_id', $request->academic_session_id)
-    //             ->get();
-    //         return $this->successResponse($success, 'Teacher Allocation record fetch successfully');
-    //     }
-    // }
 
     public function faqEmail(Request $request)
     {
@@ -9148,13 +9377,13 @@ class ApiControllerOne extends BaseController
         } else {
             $createConnection = $this->createNewConnection($request->branch_id);
             $table_name = $request->table_name;
-            $students = $createConnection->table($table_name)->select('id','first_name')->get();
-            foreach($students as $stud){
-                $trim = explode(' ',$stud->first_name);
+            $students = $createConnection->table($table_name)->select('id', 'first_name')->get();
+            foreach ($students as $stud) {
+                $trim = explode(' ', $stud->first_name);
                 $name1 = isset($trim[0]) ? $trim[0] : "";
                 $name2 = isset($trim[1]) ? $trim[1] : "";
-                $name = $name1 .' '.$name2;
-                $update = $createConnection->table($table_name)->where('id', $stud->id)->update(['first_name'=>$name]);
+                $name = $name1 . ' ' . $name2;
+                $update = $createConnection->table($table_name)->where('id', $stud->id)->update(['first_name' => $name]);
             }
             return "Success";
         }

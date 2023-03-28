@@ -163,17 +163,24 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var fsGroup = "";
                         data.forEach(function (day) {
-                            var status = ""
-                            var paid_status = day['status'] ? day['status'] : "unpaid";
-                            if (paid_status == 'unpaid') {
-                                status = 'badge-danger';
-                            } else if (paid_status == 'paid') {
-                                status = 'badge-success';
-                            } else if (paid_status == 'delay') {
-                                status = 'badge-warning';
-                            }
+                            // var status = ""
+                            var paid_status = day['paidSts'] ? day['paidSts'] : "pending";
+                            var status = day['labelmode'] ? day['labelmode'] : "badge-warning";
+                            // if (paid_status == 'unpaid') {
+                            //     status = 'badge-danger';
+                            // } else if (paid_status == 'paid') {
+                            //     status = 'badge-success';
+                            // } else if (paid_status == 'delay') {
+                            //     status = 'badge-secondary';
+                            // } else {
+                            //     status = 'badge-warning';
+                            // }
+
                             var status = '<div class="badge label-table ' + status + '">' + paid_status + '</div>';
-                            fsGroup += "- " + day['group_name'] + "<br>" + "- " + status + "<br>";
+                            fsGroup += "(" + day['group_name'] + "<br>"
+                                + "- " + day['fees_type_name'] + "<br>"
+                                + "- " + day['dueDate'] + "<br>"
+                                + "- " + status + ")" + "<br>" ;
                         })
                         return fsGroup;
                     }

@@ -73,6 +73,7 @@
                                 @csrf
                                 <h1 class="welcomeback">Welcome back,</h1>
                                 <div class="form-group">
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">BERJAYA</span> -->
                                     <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                 </div>
                                 <input class="form-control" type="hidden" name="session" value="{{$session}}">

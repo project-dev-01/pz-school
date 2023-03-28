@@ -5047,6 +5047,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($semester);
         return view('admin.classroom.management', [
             'class' => $response['data'],
             'semester' => $semester['data'],
@@ -7051,15 +7052,12 @@ class AdminController extends Controller
             }
             $balance = ($args['amount'] - $type_amount);
             $balance = number_format($balance, 2, '.', '');
-            if ($type_amount == 0) {
-                $paidSts = 'Pending';
-                $labelmode = 'badge-warning';
-            } elseif ($balance == 0) {
+            if ($balance == 0) {
                 $paidSts = 'paid';
                 $labelmode = 'badge-success';
             } else {
-                $paidSts = 'partial paid';
-                $labelmode = 'badge-blue';
+                $paidSts = 'pending';
+                $labelmode = 'badge-warning';
             }
         }
         // amount unpaid or delay
