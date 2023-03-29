@@ -149,14 +149,14 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">To Do List<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
                             </li>
                         </ul>
                         <div class="card-body">
                             <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
+                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
@@ -225,7 +225,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                             <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Upcoming <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }} <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
@@ -295,7 +295,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
                                             <h5 class="">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Past <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.past') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)
@@ -525,7 +525,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Class </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.class') }}</div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="ttSectionID" name="section_id">
@@ -639,7 +639,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
                                 <option value="">Choose Grade</option>
                                 <option value="">Tingatan1</option>
@@ -649,7 +649,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Class<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
                                 <option value="">Choose Class</option>
                                 <option value="">class 1</option>
@@ -674,7 +674,7 @@
                             <tr>
                                 <th>Semester</th>
                                 <th>Sudent Name</th>
-                                <th>Grade</th>
+                                <th>{{ __('messages.grade') }}</th>
                                 <th>Exam Name</th>
                                 <th>Total Marks</th>
                                 <th>Exam Marks</th>
@@ -766,7 +766,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Class<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
                                 <option value="">Choose Class</option>
                                 <option value="">class 1</option>
@@ -792,7 +792,7 @@
                             <tr>
                                 <th rowspan="2">Semester</th>
                                 <th rowspan="2">Sudent Name</th>
-                                <th rowspan="2">Grade</th>
+                                <th rowspan="2">{{ __('messages.grade') }}</th>
                                 <th rowspan="2">Exam Name</th>
                                 <th rowspan="2">Total Subject</th>
                                 <th rowspan="2">Total Marks</th>
@@ -966,7 +966,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <label for="sr_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="sr_btwyears" class="form-control studentRank" name="year">
                                 <option value="">Select Academic Year</option>
                                 @forelse($academic_year_list as $r)
@@ -990,7 +990,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_section_id">Class<span class="text-danger">*</span></label>
+                            <label for="sr_section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="sr_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
                             </select>
@@ -1073,7 +1073,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <label for="st_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="st_btwyears" class="form-control studentSemester" name="year">
                                 <option value="">Select Academic Year</option>
                                 @forelse($academic_year_list as $r)
@@ -1085,7 +1085,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st_class_id">Grade<span class="text-danger">*</span></label>
+                            <label for="st_class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="st_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
                                 @forelse ($classes as $class)
@@ -1097,7 +1097,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st_section_id">Class<span class="text-danger">*</span></label>
+                            <label for="st_section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="st_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
                             </select>
@@ -1140,7 +1140,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ems_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <label for="ems_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="ems_btwyears" class="form-control examMarkStatus" name="year">
                                 <option value="">Select Academic Year</option>
                                 @forelse($academic_year_list as $r)
@@ -1152,7 +1152,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ems_class_id">Grade<span class="text-danger">*</span></label>
+                            <label for="ems_class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="ems_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
                                 @forelse ($classes as $class)
@@ -1164,7 +1164,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ems_section_id">Class<span class="text-danger">*</span></label>
+                            <label for="ems_section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="ems_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
                             </select>
@@ -1294,7 +1294,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <label for="st10_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="st10_btwyears" class="form-control studentTop" name="year">
                                 <option value="">Select Academic Year</option>
                                 @forelse($academic_year_list as $r)
@@ -1306,7 +1306,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_class_id">Grade<span class="text-danger">*</span></label>
+                            <label for="st10_class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="st10_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
                                 @forelse ($classes as $class)
@@ -1318,7 +1318,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_section_id">Class<span class="text-danger">*</span></label>
+                            <label for="st10_section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="st10_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
                             </select>
@@ -1388,7 +1388,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_btwyears">Academic year<span class="text-danger">*</span></label>
+                            <label for="sb10_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="sb10_btwyears" class="form-control studentBottom" name="year">
                                 <option value="">Select Academic Year</option>
                                 @forelse($academic_year_list as $r)
@@ -1400,7 +1400,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_class_id">Grade<span class="text-danger">*</span></label>
+                            <label for="sb10_class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="sb10_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
                                 @forelse ($classes as $class)
@@ -1412,7 +1412,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_section_id">Class<span class="text-danger">*</span></label>
+                            <label for="sb10_section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="sb10_section_id" class="form-control " name="section_id">
                                 <option value="">Select Class</option>
                             </select>

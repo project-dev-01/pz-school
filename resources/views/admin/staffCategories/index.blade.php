@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol> -->
                 </div>
-                <h4 class="page-title">Staff Category</h4>
+                <h4 class="page-title">{{ __('messages.staff_category') }}</h4>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Staff Category <h4>
+                        <h4 class="nav-link">{{ __('messages.staff_category') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addstaffcategoryModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addstaffcategoryModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
 
@@ -39,8 +39,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Staff Category</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.staff_category') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

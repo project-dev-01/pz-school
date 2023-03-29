@@ -62,7 +62,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-value-large hide-mobile">Category</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.category') }}</div>
                             <div class="tt-col-value-large hide-mobile">Status</div>
                             <div class="tt-col-value-large hide-mobile">Activity</div>
                         </div>
@@ -183,7 +183,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-category">Category</div>
+                            <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value hide-mobile">Likes</div>
                             <div class="tt-col-value hide-mobile">Replies</div>
                             <div class="tt-col-value hide-mobile">Views</div>
@@ -294,7 +294,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-category">Category</div>
+                            <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">Activity</div>
                         </div>
                         <div class="tt-item">

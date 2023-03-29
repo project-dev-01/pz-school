@@ -37,7 +37,7 @@
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Class</label>
+                        <label for="section_name">{{ __('messages.class') }}</label>
                         <select class="form-control" id="section_name" name="section_name">
                             <option value="">Select</option>
                             <option>A</option>

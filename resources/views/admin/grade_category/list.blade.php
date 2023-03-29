@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Grade Category</h4>
+                <h4 class="page-title">{{ __('messages.grade_category') }}</h4>
             </div>
         </div>
     </div>
@@ -19,12 +19,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Grade Category<h4>
+                        <h4 class="navv">{{ __('messages.grade_category') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addGradeCategoryModal">Add </button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addGradeCategoryModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -33,8 +33,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.name') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

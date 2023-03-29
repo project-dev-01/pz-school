@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Grade</h4>
+                <h4 class="page-title">{{ __('messages.grade') }}</h4>
             </div>
         </div>
     </div>
@@ -25,12 +25,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Grade<h4>
+                        <h4 class="navv">{{ __('messages.grade') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -39,9 +39,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade Name</th>
-                                    <th>Grade Numeric</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.grade_name') }}</th>
+                                    <th>{{ __('messages.grade_numeric') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

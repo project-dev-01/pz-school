@@ -21,7 +21,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="soap_category_id">Category <span class="text-danger">*</span></label>
+                        <label for="soap_category_id">{{ __('messages.category') }} <span class="text-danger">*</span></label>
                         <select id="soap_category_id" class="form-control" name="soap_category_id">
                             <option value="">Select Category</option>
                         </select>

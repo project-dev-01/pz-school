@@ -42,7 +42,7 @@
                             </div>                       
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade</label>
+                                    <label for="class_id">{{ __('messages.grade') }}</label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classes as $class)
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class</label>
+                                    <label for="section_id">{{ __('messages.class') }}</label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -114,7 +114,7 @@
                                             <th>Name</th>
                                             <th>Register No</th>
                                             <th>Roll No</th>
-                                            <th>Gender</th>
+                                            <th>{{ __('messages.gender') }}</th>
                                             <th>Email</th>
                                             <th>Actions</th>
                                         </tr>

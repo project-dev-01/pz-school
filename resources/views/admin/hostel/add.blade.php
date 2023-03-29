@@ -16,7 +16,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category<span class="text-danger">*</span></label>
+                        <label for="category">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="category" name="category">
                             <option value="">Select The Category</option>
                             @foreach($category as $cat)

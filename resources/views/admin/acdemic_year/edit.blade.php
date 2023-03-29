@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" id="acdemicYearID" name="id">
                     <div class="form-group">
-                        <label for="name">Academic Year<span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                         @php
                         $firstYear = (int)date('Y') - 5;
                         $lastYear = $firstYear + 20;

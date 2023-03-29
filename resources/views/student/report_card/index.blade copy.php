@@ -98,7 +98,7 @@
                                                         <tr>
                                                             <th>Subject</th>
                                                             <th>Score</th>
-                                                            <th>Grade</th>
+                                                            <th>{{ __('messages.grade') }}</th>
                                                             <th>Ranking</th>
                                                             <th>Status</th>
                                                         </tr>

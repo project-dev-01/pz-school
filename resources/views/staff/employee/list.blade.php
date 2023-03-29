@@ -36,7 +36,7 @@
                                         <th>Employee Name</th>
                                         <th>Email</th>
                                         <th>Mobile No</th>
-                                        <th>Date of Birth</th>
+                                        <th>{{ __('messages.date_of_birth') }}</th>
                                         <th>Joining Date</th>
                                         <th>Department</th>
                                         <th>Designation</th>

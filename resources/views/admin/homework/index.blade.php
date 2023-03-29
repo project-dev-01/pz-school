@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Homework</h4>
+                <h4 class="page-title">{{ __('messages.homework') }}</h4>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Add Homework
+                        <h4 class="navv">{{ __('messages.add_homework') }}
                             <h4>
                     </li>
                 </ul>
@@ -29,13 +29,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="title">Homework Title<span class="text-danger">*</span></label>
+                                    <label for="title">{{ __('messages.homework_title') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="title" placeholder="Enter Homework Title">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @foreach($class as $cla)
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="section_id">Class<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="date_of_homework">Date Of Homework<span class="text-danger">*</span></label>
+                                    <label for="date_of_homework">{{ __('messages.date_of_homework') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="date_of_submission">Date Of Submission<span class="text-danger">*</span></label>
+                                    <label for="date_of_submission">{{ __('messages.date_of_submission') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">Attachment File<span class="text-danger">*</span></label>
+                                    <label for="document">{{ __('messages.attachment_file') }}<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" id="homework_file" class="custom-file-input" name="file">
@@ -130,7 +130,7 @@
                                     <div class="checkbox checkbox-purple">
                                         <input id="publish_later" type="checkbox">
                                         <label for="publish_later">
-                                            Published later
+                                        {{ __('messages.publish_later') }}
                                         </label>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="description">Description<span class="text-danger">*</span></label>
+                                    <label for="description">{{ __('messages.description') }}<span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="description" placeholder="Please enter Description"></textarea>
                                 </div>
                             </div>

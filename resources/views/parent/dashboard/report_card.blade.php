@@ -31,7 +31,7 @@
                                                                 <tr>
                                                                     <th>Subject</th>
                                                                     <th>Score</th>
-                                                                    <th>Grade</th>
+                                                                    <th>{{ __('messages.grade') }}</th>
                                                                     <th>Ranking</th>
                                                                 </tr>
                                                             </thead>
@@ -132,7 +132,7 @@
                                                                 <tr>
                                                                     <th>Subject</th>
                                                                     <th>Score</th>
-                                                                    <th>Grade</th>
+                                                                    <th>{{ __('messages.grade') }}</th>
                                                                     <th>Ranking</th>
                                                                 </tr>
                                                             </thead>

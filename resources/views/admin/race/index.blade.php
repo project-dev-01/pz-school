@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Race</h4>
+                <h4 class="page-title">{{ __('messages.race') }}</h4>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Race<h4>
+                        <h4 class="nav-link">{{ __('messages.race') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addRaceModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addRaceModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,8 +38,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Race Name</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.race_name') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

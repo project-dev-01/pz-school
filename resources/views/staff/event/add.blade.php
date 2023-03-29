@@ -35,7 +35,7 @@
                         <span class="text-danger error-text audience_error"></span>
                     </div>
                     <div class="form-group" id="class">
-                        <label for="class">Class</label>
+                        <label for="class">{{ __('messages.class') }}</label>
                         <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="class[]">
                             @foreach($classDetails as $class)
                                 <option value="{{$class->id}}">{{$class->name}}</option>

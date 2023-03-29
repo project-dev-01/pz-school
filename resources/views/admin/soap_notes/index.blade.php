@@ -38,7 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Category</th>
+                                    <th>{{ __('messages.category') }}</th>
                                     <th>Sub Category </th>
                                     <th>Notes </th>
                                     <th>Action</th>

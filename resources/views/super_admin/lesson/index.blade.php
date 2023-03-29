@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Standard</th>
-                                <th>Class</th>
+                                <th>{{ __('messages.class') }}</th>
                                 <th>Teacher</th>
                                 <th>Week Days</th>
                                 <th>Start Time</th>

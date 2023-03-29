@@ -23,7 +23,7 @@
                                         <thead>
                                             <tr>                                               
                                                 <th class="text-center">S.no</th>
-                                                <th class="text-center">Employee Name</th>
+                                                <th class="text-center"> Name</th>
                                                 <th class="text-center">Leave Date From</th>                                                
                                                 <th class="text-center">No.Of.Days</th>
                                                 <th class="text-center">Reason(s)</th>                                                

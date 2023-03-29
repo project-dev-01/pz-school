@@ -155,7 +155,7 @@
                                                                 <th>#</th>
                                                                 <th>Subject</th>
                                                                 <th>Standard</th>
-                                                                <th>Class</th>
+                                                                <th>{{ __('messages.class') }}</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
@@ -201,7 +201,7 @@
                                                                 <th>#</th>
                                                                 <th>Subject</th>
                                                                 <th>Standard</th>
-                                                                <th>Class</th>
+                                                                <th>{{ __('messages.class') }}</th>
                                                                 <th>Date of Homework</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>

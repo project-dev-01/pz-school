@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" id="sectionAlloID" name="said">
                     <div class="form-group">
-                        <label for="class_id">Grade<span class="text-danger">*</span></label>
+                        <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="editClassID" name="class_id">
                             <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)
@@ -21,7 +21,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="section_id">Class<span class="text-danger">*</span></label>
+                        <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="editSectionID" name="section_id">
                             <option value="">Choose Class</option>
                             @forelse($sectionDetails as $section)

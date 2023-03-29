@@ -86,7 +86,7 @@
                         </div>
                     </div> <!-- end col -->
                     <div class="col-lg-2">
-                        <a href="{{ route('parent.dashboard')}}" class="chil-shaw btn btn-primary-bn btn-circle pull-right"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="{{ route('parent.dashboard')}}" class="chil-shaw btn btn-primary-bn btn-circle pull-right"><i class="fas fa-tachometer-alt"></i>{{ __('messages.dashboard') }}</a>
                     </div>
                 </div>
                 <!-- end row -->
@@ -161,7 +161,7 @@
                         </div>
                     </div> <!-- end col -->
                     <div class="col-lg-2">
-                        <a href="{{ route('parent.dashboard')}}" class="chil-shaw btn btn-primary-bn btn-circle pull-right"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="{{ route('parent.dashboard')}}" class="chil-shaw btn btn-primary-bn btn-circle pull-right"><i class="fas fa-tachometer-alt"></i>{{ __('messages.dashboard') }}</a>
                     </div>
                 </div>
                 <!-- end row -->

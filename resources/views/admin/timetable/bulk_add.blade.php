@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Add Bulk Schedule</h4>
+                <h4 class="page-title">{{ __('messages.add_bulk_schedule') }}</h4>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select  class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">Select Grade</option>
                                         <option value="All">All</option>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="day">Day<span class="text-danger">*</span></label>
+                                    <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                                     <select id="day" class="form-control" name="day">
                                         <option value="">Select Day</option>
                                         <option value="sunday">Sunday</option>
@@ -71,7 +71,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -83,7 +83,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -95,7 +95,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -116,7 +116,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Add Bulk Schedule
+                        {{ __('messages.add_bulk_schedule') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -130,12 +130,12 @@
                                         <table class="table table-bordered mb-0 text-center" id="timetable_table">
                                             <thead>
                                                 <tr>
-                                                    <th>Break</th>
-                                                    <th>Subject</th>
-                                                    <th>Teacher</th>
-                                                    <th>Starting Time</th>
-                                                    <th>Ending Time</th>
-                                                    <th>Class Room</th>
+                                                    <th>{{ __('messages.break') }}</th>
+                                                    <th>{{ __('messages.subject') }}</th>
+                                                    <th>{{ __('messages.teacher') }}</th>
+                                                    <th>{{ __('messages.starting_time') }}</th>
+                                                    <th>{{ __('messages.ending_time') }}</th>
+                                                    <th>{{ __('messages.class_room') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="timetable_body">
@@ -192,7 +192,7 @@
                             </div> <!-- end col-->
                         </div>
                         <button type="button" class="btn btn-soft-secondary waves-effect" style="color: #fff; border-color: #1abc9c; background-color: #1abc9c;" id="addMore">
-                            <i class="fas fa-plus-circle"></i> Add More </button>
+                            <i class="fas fa-plus-circle"></i> {{ __('messages.add_more') }}</button>
                         <!-- end row-->
                         <input type="hidden" id="form_class_id" name="class_id">
                         <input type="hidden" id="form_section_id" name="section_id">
@@ -201,7 +201,7 @@
                         <input type="hidden" id="form_day" name="day">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

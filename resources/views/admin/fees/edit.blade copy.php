@@ -35,14 +35,14 @@ use \App\Http\Controllers\AdminController;
                                 <label class="mb-4">Grade : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="mb-4">Class : <span class="text-muted mr-2">{{$student['section_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.class') }} : <span class="text-muted mr-2">{{$student['section_name']}}</span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Academic Year : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
+                                <label class="mb-4">{{ __('messages.academic_year') }} : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
                             </div>
                             <div class="col-md-4">
                                 <label class="mb-4">Email : <span class="text-muted mr-2">{{$student['email']}}</span></label>
@@ -351,7 +351,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>Date<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Month
+                                                                <th>{{ __('messages.month') }}
                                                                 </th>
                                                                 <th>Amount<span class="text-danger">*</span>
                                                                 </th>

@@ -3,14 +3,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddAssignTeachernModalLabel">Add Assign Teacher</h4>
+                <h4 class="modal-title" id="myaddAssignTeachernModalLabel">{{ __('messages.add_assign_teacher') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="addAssignTeacherForm" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                        <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="changeClassName" name="class_name">
                             <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)
@@ -21,13 +21,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sectionID">Class<span class="text-danger">*</span></label>
+                        <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_name">
                             <option value="">Choose Class</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignClassTeacher">Grade Teacher<span class="text-danger">*</span></label>
+                        <label for="assignClassTeacher">{{ __('messages.grade_teacher') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
                             <option value="">Choose Grade Teacher</option>
                             @forelse($getAllTeacherList as $teacher)
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="subjectType">Type<span class="text-danger">*</span></label>
+                        <label for="subjectType">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="subjectType" name="type">
                             <option value="0">Main</option>
                             <option value="2">Sub</option>
@@ -46,8 +46,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

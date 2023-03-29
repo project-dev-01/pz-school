@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Assign Grade Subjects</h4>
+                <h4 class="page-title">{{ __('messages.assign_grade_subjects') }}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Grade Subjects<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classDetails as $cla)
@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="filtersectionID">Class<span class="text-danger">*</span></label>
+                                    <label for="filtersectionID"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="filtersectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -64,7 +64,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -75,13 +75,13 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Grade Subjects List<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects_list') }}<h4>
                     </li>
                 </ul><br>
 
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addAssignClassSubjectModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addAssignClassSubjectModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -90,10 +90,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade</th>
-                                    <th>Class</th>
-                                    <th>Subject</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.class') }}</th>
+                                    <th>{{ __('messages.subject') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

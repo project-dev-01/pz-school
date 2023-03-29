@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">To Do List</h4>
+                <h4 class="page-title">{{ __('messages.to_do_list') }}</h4>
             </div>
         </div>
     </div>

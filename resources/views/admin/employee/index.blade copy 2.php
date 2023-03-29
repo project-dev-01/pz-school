@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="gender">Gender<span class="text-danger">*</span></label>
+                                    <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male">Male</option>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="religion">Religion<span class="text-danger">*</span></label>
+                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">Choose Religion</option>
                                         @forelse($religion as $r)
@@ -75,7 +75,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="race">Race<span class="text-danger">*</span></label>
+                                    <label for="race">{{ __('messages.race') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="race" id="addRace">
                                         <option value="">Choose race</option>
                                         @forelse($races as $r)
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric_number">NRIC Number</label>
+                                    <label for="nric_number">{{ __('messages.nric_number') }}</label>
                                     <input type="text" class="form-control" name="nric_number" id="nricNumber">
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="birthday">Date Of Birth<span class="text-danger">*</span></label>
+                                    <label for="birthday">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -396,7 +396,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="blood_group">Blood Group<span class="text-danger">*</span></label>
+                                        <label for="blood_group">{{ __('messages.blood_group') }}<span class="text-danger">*</span></label>
                                         <select class="form-control" name="blood_group" id="blood_group">
                                             <option value="">Choose Blood Group</option>
                                             <option value="A+">A+</option>

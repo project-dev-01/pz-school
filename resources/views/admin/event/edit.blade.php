@@ -70,7 +70,7 @@
 
                             <div class="col-md-4" id="edit_class" {{$cla}}>
                                 <div class="form-group">
-                                    <label for="class">Grade</label>
+                                    <label for="class">{{ __('messages.grade') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="edit_classes" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($class as $cla)
                                         @php

@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="country">Country<span class="text-danger">*</span></label>
+                                        <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
                                         <select id="country" class="form-control" name="country" required="">
                                             <option value="">Select</option>
                                             @foreach($countries as $c)
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="state">State<span class="text-danger">*</span></label>
+                                        <label for="state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                                         <select id="state" class="form-control" name="state" required="">
                                             <option value="">Select State</option>
                                         </select>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="city">City<span class="text-danger">*</span></label>
+                                        <label for="city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                                         <select id="city" class="form-control" required="">
                                             <option value="">Select City</option>
                                         </select>
@@ -96,8 +96,8 @@
                                         <th>Mobile No</th>
                                         <th>Currency</th>
                                         <th>Symbol</th>
-                                        <th>Country</th>
-                                        <th>State</th>
+                                        <th>{{ __('messages.country') }}</th>
+                                        <th>{{ __('messages.state') }}</th>
                                         <th>City</th>
                                         <th>Address</th>
                                         <th>Action</th>

@@ -106,7 +106,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Student Name</th>
-                                                <th>Class</th>
+                                                <th>{{ __('messages.class') }}</th>
                                                 <th>Section</th>
                                                 <th>Action</th>
                                             </tr>

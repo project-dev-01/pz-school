@@ -83,7 +83,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.total_strength') }}</span></h6>
                                 </div>
 
                             </div>

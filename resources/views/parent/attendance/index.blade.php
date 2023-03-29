@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="attendanceList">Month/Year<span class="text-danger">*</span></label>
+                                    <label for="attendanceList">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
                                         <input type="text" id="attendanceList" class="form-control" name="year_month" placeholder="MM-YYYY" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
                                         <div class="input-group-prepend">

@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Class</h4>
+                <h4 class="header-title">{{ __('messages.class') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">

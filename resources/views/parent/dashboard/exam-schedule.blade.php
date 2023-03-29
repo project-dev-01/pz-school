@@ -27,11 +27,11 @@
                                         <td id="examName"></td>
                                     </tr>
                                     <tr>
-                                        <td>Grade</td>
+                                        <td>{{ __('messages.grade') }}</td>
                                         <td id="examStandard"></td>
                                     </tr>
                                     <tr>
-                                        <td>Class</td>
+                                        <td>{{ __('messages.class') }}</td>
                                         <td id="examClass"></td>
                                     </tr>
                                     <tr>

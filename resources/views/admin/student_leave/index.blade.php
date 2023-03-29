@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active">Datatables</li>
                         </ol>
                     </div> -->
-                <h4 class="page-title">Student Leave Details</h4>
+                <h4 class="page-title">{{ __('messages.student_leave_details') }}</h4>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Student Leave Details List
+                        {{ __('messages.student_leave_details_list') }} 
                             <h4>
                     </li>
                 </ul>
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classes as $class)
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -69,7 +69,7 @@
             <div class="card studentLeaveShow" style="display: none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student Leave Details List
+                        <h4 class="navv"> {{ __('messages.student_leave_details_list') }}
                             <h4>
                     </li>
                 </ul>
@@ -79,16 +79,16 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Student Name</th>
-                                    <th>Standard</th>
-                                    <th>Class</th>
-                                    <th>Leave from</th>
-                                    <th>To Leave</th>
-                                    <th>Status</th>
-                                    <th>Reason</th>
-                                    <th>Document</th>
-                                    <th>Teacher Remarks</th>
-                                    <th>Action</th>
+                                    <th> {{ __('messages.student_name') }}</th>
+                                    <th> {{ __('messages.standard') }}</th>
+                                    <th> {{ __('messages.class') }}</th>
+                                    <th> {{ __('messages.leave_from') }}</th>
+                                    <th> {{ __('messages.to_leave') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.reason') }}</th>
+                                    <th> {{ __('messages.document') }}</th>
+                                    <th> {{ __('messages.teacher_remarks') }}</th>
+                                    <th> {{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

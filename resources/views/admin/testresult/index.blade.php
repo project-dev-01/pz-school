@@ -28,7 +28,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Exam Marks</h4>
+                <h4 class="page-title">{{ __('messages.exam_marks') }}</h4>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">Exam Marks
+                                <h4 class="navv">{{ __('messages.exam_marks') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -50,7 +50,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                            <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                             <select id="changeClassName" class="form-control" name="class_id">
                                                 <option value="">Select Grade</option>
                                                 @forelse ($classes as $class)
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="sectionID">Class<span class="text-danger">*</span></label>
+                                            <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                             <select id="sectionID" class="form-control" name="section_id">
                                                 <option value="">Select Class</option>
                                             </select>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                            <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                             <select id="examnames" class="form-control" name="exam_id">
                                                 <option value="">Select Exams</option>
                                             </select>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                            <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                             <select id="subjectID" class="form-control" name="subject_id">
                                                 <option value="">Select Subject</option>
                                             </select>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="paperID">Paper Name</label>
+                                            <label for="paperID">{{ __('messages.paper_name') }}</label>
                                             <select id="paperID" class="form-control" name="paper_id">
                                                 <option value="">Select Paper</option>
                                             </select>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="semester_id">Semester</label>
+                                            <label for="semester_id">{{ __('messages.semester') }}</label>
                                             <select id="semester_id" class="form-control" name="semester_id">
                                                 <option value="0">Select Semester</option>
                                                 @foreach($semester as $sem)
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="session_id">Session</label>
+                                            <label for="session_id">{{ __('messages.session') }}</label>
                                             <select id="session_id" class="form-control" name="session_id">
                                                 <option value="0">Select Session</option>
                                                 @foreach($session as $ses)
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group text-right m-b-0">
                                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                        Filter
+                                    {{ __('messages.filter') }}
                                     </button>
                                     <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                                 Cancel
@@ -177,7 +177,7 @@
                                                 <th width="10%">#</th>
                                                 <th class="text-center" width="10%">Student Name</th>
                                                 <th class="text-center" width="20%">Score</th>
-                                                <th class="text-center" width="15%">Grade</th>
+                                                <th class="text-center" width="15%">{{ __('messages.grade') }}</th>
                                                 <th class="text-center" width="15%">Pass/Fail</th>
                                                 <th class="text-center" width="15%">Ranking</th>
                                                 <th class="text-center" width="15%">Status</th>
@@ -259,7 +259,7 @@
                                             <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
                                         </div>
                                         <div class="col-6">
-                                            <h3 data-plugin="">Grade</h3>
+                                            <h3 data-plugin="">{{ __('messages.grade') }}</h3>
                                             <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
                                         </div>
                                     </div> <!-- end row -->

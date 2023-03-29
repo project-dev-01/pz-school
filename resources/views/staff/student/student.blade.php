@@ -107,7 +107,7 @@
                                                 <th>Name</th>
                                                 <th>Roll</th>
                                                 <th>Register No</th>
-                                                <th>Class</th>
+                                                <th>{{ __('messages.class') }}</th>
                                                 <th>Section</th>
                                                 <th>Guardian Name</th>
 

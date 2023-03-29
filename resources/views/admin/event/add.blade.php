@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-4" id="class">
                                 <div class="form-group">
-                                    <label for="class">Grade</label>
+                                    <label for="class">{{ __('messages.grade') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>

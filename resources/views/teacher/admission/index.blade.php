@@ -26,16 +26,16 @@
             <div class="card">
                 <div class="card-body">
                 <span class=" fas fa-user-graduate  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Student Admission</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.student_admission') }}</span>
                 <hr>
                     <span class="fas fa-home  " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Academic Details
+                    <span class="header-title mb-3" id="span-parent">{{ __('messages.academic_details') }}
                     <hr id="hr"></span>
                     <form id="demo-form" data-parsley-validate="">                                         
                     <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label for="heard">Academic Year<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">2020-2021</option>
                             <option value="press">Press</option>
@@ -61,7 +61,7 @@
                     </div>
                         <div class="col-md-3">
                         <div class="form-group mb-3">
-                            <label for="">Admission Date<span class="text-danger">*</span></label>												
+                            <label for="">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>												
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -77,7 +77,7 @@
                     <div class="row">
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Class<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Select</option>
                             <option value="press">Press</option>
@@ -101,7 +101,7 @@
                     </div>
                         <div class="col-md-3">
                         <div class="form-group">
-                        <label for="">Category<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
                             <option value="press">Press</option>
@@ -113,12 +113,12 @@
                     </div>										
                     </div>
                     <span class="fas fa-user-check  " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Student Details
+                    <span class="header-title mb-3" id="span-parent">{{ __('messages.student_details') }}
                     <hr id="hr"></span>
                     <div class="row">
                         <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">First Name<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group mb-3">
-                            <label for="">Last Name</label>
+                            <label for="">{{ __('messages.last_name') }}</label>
                                 <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -146,7 +146,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                        <label for="heard">Gender<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Male</option>
                             <option value="press">Female</option>
@@ -157,7 +157,7 @@
                         <div class="row">
                         <div class="col-md-6">
                     <div class="form-group">
-                        <label for="heard">Blood Group<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.blood_group') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
                             <option value="press">Press</option>
@@ -169,7 +169,7 @@
                     </div>
                     <div class="col-md-6">
                     <div class="form-group mb-3">
-                            <label for="">Date Of Birth</label>
+                            <label for="">{{ __('messages.date_of_birth') }}</label>
                                 <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -192,7 +192,7 @@
                     </div>
                         <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">Religion</label>
+                        <label for="">{{ __('messages.religion') }}</label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
@@ -223,14 +223,14 @@
                     </div>
                         <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">City</label>
+                        <label for="">{{ __('messages.city') }}</label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
                     </div>
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">State</label>
+                        <label for="">{{ __('messages.state') }}</label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Category</h4>
+                <h4 class="page-title">{{ __('messages.category') }}</h4>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Category</h4>
+                <h4 class="header-title">{{ __('messages.category') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">

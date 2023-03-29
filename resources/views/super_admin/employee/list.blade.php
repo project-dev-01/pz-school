@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Employee')
+@section('title','')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                         </ol>
                     </div>
-                    <h4 class="page-title">Employee List</h4>
+                    <h4 class="page-title"> List</h4>
                 </div>
             </div>
         </div>
@@ -34,10 +34,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Branch Name</th>
-                                        <th>Employee Name</th>
+                                        <th> Name</th>
                                         <th>Email</th>
                                         <th>Mobile No</th>
-                                        <th>Date of Birth</th>
+                                        <th>{{ __('messages.date_of_birth') }}</th>
                                         <th>Joining Date</th>
                                         <th>Department</th>
                                         <th>Designation</th>

@@ -43,7 +43,7 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>Room Name</th>
-                                <th>Category</th>
+                                <th>{{ __('messages.category') }}</th>
                                 <th>No of Beds</th>
                                 <th>Cost Per Bed</th>
                                 <th>Remarks</th>
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>1</td>
                                 <td>Block A</td>
-                                <td>Category</td>
+                                <td>{{ __('messages.category') }}</td>
                                 <td>50</td>
                                 <td>5000</td>
                                 <td>Good</td>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
                             <option value="">select</option>

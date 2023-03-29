@@ -41,7 +41,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Schedule List</h4>
+                <h4 class="page-title">{{ __('messages.schedule_list') }}</h4>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @foreach($class as $cla)
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class<span class="text-danger">*</span></label>
+                                    <label for="section_id"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -82,7 +82,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id"> {{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id"> {{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -105,7 +105,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -126,7 +126,7 @@
                             </a>
                         </div>
                         <h4 class="nav-link">
-                            Schedule List
+                        {{ __('messages.schedule_list') }}
                         </h4>
                     </li>
                 </ul><br>
@@ -141,7 +141,7 @@
                             </div> <!-- end table-responsive-->
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;"> {{ __('messages.download') }}</button>
                                 </div>
                             </div>
                         </div> <!-- end col-->
@@ -160,7 +160,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditTimetableModalLabel">Schedule Edit</h4>
+                <h4 class="modal-title" id="myeditTimetableModalLabel"> {{ __('messages.schedule_edit') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -184,8 +184,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Done</button>
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light"> {{ __('messages.done') }}</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal"> {{ __('messages.close') }}</button>
                     </div>
 
                 </form>

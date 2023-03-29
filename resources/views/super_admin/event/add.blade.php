@@ -42,7 +42,7 @@
                         <span class="text-danger error-text audience_error"></span>
                     </div>
                     <div class="form-group" id="class">
-                        <label for="class">Class<span class="text-danger">*</span></label>
+                        <label for="class">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" id="class_name" multiple="multiple" data-placeholder="Choose ..." name="class[]">
                             <option value="">Select</option>
                         </select>

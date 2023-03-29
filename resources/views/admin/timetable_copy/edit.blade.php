@@ -45,7 +45,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Select Academic Year</option>
                                         @forelse($academic_year_list as $r)

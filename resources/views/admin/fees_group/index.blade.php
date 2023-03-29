@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Fees Group</h4>
+                <h4 class="page-title">{{ __('messages.fees_group') }}</h4>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Fees Group<h4>
+                        <h4 class="nav-link">{{ __('messages.fees_group') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <a href="{{ route('admin.fees_group.create')}}" class="btn add-btn btn-rounded waves-effect waves-light"> Add</a>
+                        <a href="{{ route('admin.fees_group.create')}}" class="btn add-btn btn-rounded waves-effect waves-light">{{ __('messages.add') }}</a>
                         <!-- <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addFeesGroupModal">Add</button> -->
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Fees Group Name</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.fees_group_name') }}</th>
+                                    <th>{{ __('messages.description') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

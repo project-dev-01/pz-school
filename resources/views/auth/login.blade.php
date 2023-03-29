@@ -44,6 +44,14 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
+                         <div class="form-group" style="text-align:right;">
+                    <label class="control-label"></label>
+                    <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
+			  margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                    </select>
+                </div>
 
                         <!-- Logo -->
                         <div class="auth-brand text-center text-lg-left">
@@ -56,6 +64,7 @@
                                     </a>
                                 </div>
                             </div>
+                           
                         </div>
 
                         <!-- form -->
@@ -141,6 +150,13 @@
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
+    <script type="text/javascript">
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function() {
+        window.location.href = url + "?lang=" + $(this).val();
+    });
+</script>
 
 </body>
 

@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="student Name">Grade<span class="text-danger">*</span></label>
+                                <label for="student Name">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
                                     <option value="">Select Grade</option>
                                     <option value="">Tingkatan 1</option>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="student Name">Class<span class="text-danger">*</span></label>
+                                <label for="student Name">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
                                     <option value="">Select Class</option>
                                     <option value="">Unggul</option>
@@ -93,8 +93,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade</th>
-                                    <th>Class</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.class') }}</th>
                                     <th>Subject</th>
                                     <th>Action</th>
                                 </tr>

@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">     
                  
                     <div class="form-group">
-                        <label for="year_id">Academic Year<span class="text-danger">*</span></label><select id="year_id" class="form-control" name="year_id">
+                        <label for="year_id">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label><select id="year_id" class="form-control" name="year_id">
                             <option value="">Choose Academic Year</option>
                             @forelse($academic_year_list as $r)
                             <option value="{{$r['id']}}">{{$r['name']}}</option>

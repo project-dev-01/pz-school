@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Location</h4>
+                <h4 class="page-title"> {{ __('messages.location') }}</h4>
             </div>
         </div>
     </div>
@@ -25,13 +25,13 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Location<h4>
+                        <h4 class="nav-link">{{ __('messages.location_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addExamHallModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addExamHallModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
 
@@ -41,9 +41,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Location Name</th>
-                                    <th>No Of Seats</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.location_name') }}</th>
+                                    <th>{{ __('messages.no_of_seats') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

@@ -12,7 +12,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">{{ __('messages.dashboard') }}</h4>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-user-graduate font-24"></i>
-                                            <p class="text-muted mb-1">Students</p>
+                                            <p class="text-muted mb-1">{{ __('messages.students') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -69,7 +69,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.total_strength') }}</span></h6>
                                 </div>
 
                             </div>
@@ -80,7 +80,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="  fas fa-user-tie  font-24"></i>
-                                            <p class="text-muted mb-1">Parents</p>
+                                            <p class="text-muted mb-1">{{ __('messages.parents') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -106,7 +106,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-chalkboard-teacher font-24"></i>
-                                            <p class="text-muted mb-1">Teachers</p>
+                                            <p class="text-muted mb-1">{{ __('messages.teachers') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -121,7 +121,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.total_strength') }}</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div>
@@ -137,7 +137,7 @@
                                 <ul class="nav nav-tabs" >
                                     <li class="nav-item">
                                         <h4 class="nav-link">
-                                            <span data-feather="" class="icon-dual" id="span-parent"></span> To Do List
+                                            <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.to_do_list') }}
                                             <h4>
                                     </li>
                                 </ul>
@@ -145,7 +145,7 @@
                                     <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                         <div class="col">
                                             <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">(10)</span></h5>
+                                                <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">(10)</span></h5>
                                             </a>
                                             <!-- Right modal -->
                                             <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
@@ -196,7 +196,7 @@
                                             <div class="mt-4">
                                                 <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                                     <h5 class="mb-0">
-                                                        <i class='mdi mdi-chevron-down font-18'></i> Upcoming <span class="text-muted font-14">(5)</span>
+                                                        <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }} <span class="text-muted font-14">(5)</span>
                                                     </h5>
                                                 </a>
 
@@ -301,7 +301,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label class="control-label">Category</label>
+                                            <label class="control-label">{{ __('messages.category') }}</label>
                                             <select class="form-control custom-select" name="category" id="event-category" required>
 
                                                 <option value="bg-primary">First Communion</option>

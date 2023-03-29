@@ -19,11 +19,11 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Group</h4>
+                <h4 class="page-title">{{ __('messages.group') }}</h4>
             </div>
         </div>
     </div>
@@ -34,12 +34,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Group<h4>
+                        <h4 class="nav-link">{{ __('messages.group') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.group.create')}}">Add</a>
+                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.group.create')}}">{{ __('messages.add') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -48,10 +48,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Group Name</th>
-                                    <th>No of Members</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.group_name') }}</th>
+                                    <th>{{ __('messages.no_of_members') }}</th>
+                                    <th>{{ __('messages.description') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title', 'Dashboard')
 @section('calendar')
 <!-- full calendar css start-->
 <link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
@@ -162,7 +162,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p class="mb-1 text-truncate">Employee</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.employee') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -176,7 +176,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
 
@@ -199,7 +199,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p class="mb-1 text-truncate">Students</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.students') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -213,7 +213,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
 
@@ -228,7 +228,7 @@
                                 <path d="M5.242 13.769L0 9.5L12 0L24 9.5L18.758 13.769C17.548 11.249 14.978 9.5 12 9.5C9.023 9.5 6.452 11.248 5.242 13.769ZM12 10C10.1435 10 8.36301 10.7375 7.05025 12.0503C5.7375 13.363 5 15.1435 5 17C5 18.8565 5.7375 20.637 7.05025 21.9497C8.36301 23.2625 10.1435 24 12 24C13.8565 24 15.637 23.2625 16.9497 21.9497C18.2625 20.637 19 18.8565 19 17C19 15.1435 18.2625 13.363 16.9497 12.0503C15.637 10.7375 13.8565 10 12 10Z" fill="#3A4265" />
                             </svg>
 
-                            <p class="mb-1 text-truncate">Parents</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.parents') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -242,7 +242,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
 
@@ -259,7 +259,7 @@
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14 8C16.21 8 18 6.21 18 4C18 1.79 16.21 0 14 0C13.53 0 13.09 0.0999998 12.67 0.24C13.5 1.27 14 2.58 14 4C14 5.42 13.5 6.73 12.67 7.76C13.09 7.9 13.53 8 14 8Z" fill="#3A4265" />
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 9C5.33 9 0 10.34 0 13V16H16V13C16 10.34 10.67 9 8 9Z" fill="#3A4265" />
                             </svg>
-                            <p class="mb-1 text-truncate">Teachers</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.teachers') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -273,7 +273,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
         </div> <!-- end col-->
@@ -287,14 +287,14 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">To Do List<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
                             </li>
                         </ul>
                         <div class="card-body">
                             <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
+                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
@@ -363,7 +363,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                             <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Upcoming <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
@@ -433,7 +433,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
                                             <h5 class="">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Past <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>  {{ __('messages.past') }} <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)

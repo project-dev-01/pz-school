@@ -51,7 +51,7 @@
             </ul><br> -->
 
             <ul id="side-menu">
-                <li class="menu-title">Menu Details</li>
+                <li class="menu-title"> {{ __('messages.menu_details') }}</li>
                 @if(Session::get('role_id'))
                 @if(Session::get('role_id') == '1')
                 <li>
@@ -59,7 +59,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Dashboards </span>
+                        <span>  {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
                 <li>
@@ -165,7 +165,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Dashboards </span>
+                        <span>  {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
                 <li>
@@ -187,7 +187,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Admission </span>
+                        <span>{{ __('messages.admission') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAdmission">
@@ -195,19 +195,19 @@
                             <li>
                                 <a href="#sidebarStudentDetails" data-toggle="collapse">
                                     <!--<i class="fas fa-user-graduate"></i>-->
-                                    <span> Student Details </span>
+                                    <span>{{ __('messages.student_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarStudentDetails">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.admission')}}" class="nav-link {{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
-                                                <span>New Admission</span>
+                                                <span>{{ __('messages.new_admission') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student*')) ? 'active' : '' }}">
-                                                <span> Student List </span>
+                                                <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -221,19 +221,19 @@
                             <li>
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
-                                    <span>Parent/Guardian Details </span>
+                                    <span>{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
-                                                <span>Add Parent/Guardian</span>
+                                                <span>{{ __('messages.add_parent') }}/{{ __('messages.guardian') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
-                                                <span>Parent/Guardian List</span>
+                                                <span>{{ __('messages.parent') }}/{{ __('messages.guardian_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -265,45 +265,45 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Employee </span>
+                        <span> {{ __('messages.employee') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarEmployee">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarEmpMasters" data-toggle="collapse">
-                                    Masters <span class="menu-arrow"></span>
+                                {{ __('messages.masters') }}<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sideBarEmpMasters">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.qualification')}}" class="nav-link {{ (request()->is('admin/qualification*')) ? 'active' : '' }}">
-                                                <span> Add Qualification </span>
+                                                <span>{{ __('messages.add_qualification') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.staffcategory')}}" class="nav-link {{ (request()->is('admin/staffcategory*')) ? 'active' : '' }}">
-                                                <span> Add Staff Category </span>
+                                                <span>{{ __('messages.add_staff_category') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.department')}}" class="nav-link {{ (request()->is('admin/department*')) ? 'active' : '' }}">
-                                                <span> Add Department </span>
+                                                <span>{{ __('messages.add_department') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.designation')}}" class="nav-link {{ (request()->is('admin/designation*')) ? 'active' : '' }}">
-                                                <span>Add Designation </span>
+                                                <span>{{ __('messages.add_designation') }} </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.staff_position')}}" class="nav-link {{ (request()->is('admin/staff_position*')) ? 'active' : '' }}">
-                                                <span>Staff Position </span>
+                                                <span>{{ __('messages.staff_position') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
-                                                <span>Stream Type </span>
+                                                <span>{{ __('messages.stream_type') }} </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -311,12 +311,12 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.employee')}}" class="nav-link {{ (request()->is('admin/employee')) ? 'active' : '' }}">
-                                    <span>Add Employee</span>
+                                    <span>{{ __('messages.add_employee') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.listemployee')}}" class="nav-link {{ (request()->is('admin/listemployee')) ? 'active' : '' }}">
-                                    <span>Employee List</span>
+                                    <span>{{ __('messages.employee_list') }}</span>
                                 </a>
                             </li>
                             <li>
@@ -342,35 +342,35 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Academic</span>
+                        <span>{{ __('messages.academic') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sideBarAcademic">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                    Grades & Classes <span class="menu-arrow"></span>
+                                {{ __('messages.grades') }}&{{ __('messages.classes') }}<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.section')}}" class="nav-link {{ (request()->is('admin/section*')) ? 'active' : '' }}">
-                                                <span> Classes </span>
+                                                <span>{{ __('messages.classes') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
-                                                <span> Grades </span>
+                                                <span>{{ __('messages.grades') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.section_allocation')}}" class="nav-link {{ (request()->is('admin/section_allocation*')) ? 'active' : '' }}">
-                                                <span> Classes Allocation </span>
+                                                <span>{{ __('messages.classes_allocation') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.assign_teacher')}}" class="nav-link {{ (request()->is('admin/assign_teacher*')) ? 'active' : '' }}">
-                                                <span> Assign Grade Teacher </span>
+                                                <span>{{ __('messages.assign_grade_teacher') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -378,23 +378,23 @@
                             </li>
                             <li>
                                 <a href="#sidebarForSub" data-toggle="collapse">
-                                    Subjects <span class="menu-arrow"></span>
+                                {{ __('messages.subjects') }} <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForSub">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.subjects')}}" class="nav-link {{ (request()->is('admin/subjects*')) ? 'active' : '' }}">
-                                                <span> Subjects </span>
+                                                <span>{{ __('messages.subjects') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.class_assign_subject')}}" class="nav-link {{ (request()->is('admin/class_assign*')) ? 'active' : '' }}">
-                                                <span> Grade Assign </span>
+                                                <span>{{ __('messages.grade_assign') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.teacher_assign_subject')}}" class="nav-link {{ (request()->is('admin/teacher_assign*')) ? 'active' : '' }}">
-                                                <span> Teacher Assign </span>
+                                                <span>{{ __('messages.teacher_assign') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -403,29 +403,29 @@
                             <li>
                                 <a href="#sidebartimeTable" data-toggle="collapse">
                                     <!-- <i class="far fa-calendar-alt"></i>-->
-                                    <span> Time Table </span>
+                                    <span>{{ __('messages.time_tables') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebartimeTable">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('admin/timetable/create')) ? 'active' : '' }}">
-                                                <span>Add Schedule</span>
+                                                <span>{{ __('messages.add_schedule') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable')) ? 'active' : '' }}">
-                                                <span> Time Table </span>
+                                                <span>{{ __('messages.time_table') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.bulk.create')}}" class="nav-link {{ (request()->is('timetable/bulk/create')) ? 'active' : '' }}">
-                                                <span>Add Bulk Schedule</span>
+                                                <span>{{ __('messages.add_bulk_schedule') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.copy')}}" class="nav-link {{ (request()->is('timetable/copy')) ? 'active' : '' }}">
-                                                <span> Time Table Copy </span>
+                                                <span>{{ __('messages.time_table_copy') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -433,7 +433,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.promotion.index')}}" class="nav-link {{ (request()->is('admin/promotion*')) ? 'active' : '' }}">
-                                    <span>Promotion</span>
+                                    <span>{{ __('messages.promotion') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -442,7 +442,7 @@
                 <li>
                     <a href="{{ route('admin.classroom.management')}}" class="nav-link {{ (request()->is('admin/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
+                        <span>{{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
                 <li>
@@ -482,7 +482,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.task')}}" class="nav-link {{ (request()->is('admin/task*')) ? 'active' : '' }}">
-                                    <span>To Do List</span>
+                                    <span>{{ __('messages.to_do_list') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -923,7 +923,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.soap_category')}}" class="nav-link {{ (request()->is('admin/soap_category*')) ? 'active' : '' }}">
-                                    <span>Category </span>
+                                    <span>{{ __('messages.category') }} </span>
                                 </a>
                             </li>
                             <li>
@@ -1034,12 +1034,12 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.religion')}}" class="nav-link {{ (request()->is('admin/religion*')) ? 'active' : '' }}">
-                                                <span>Religion </span>
+                                                <span>{{ __('messages.religion') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.race')}}" class="nav-link {{ (request()->is('admin/race*')) ? 'active' : '' }}">
-                                                <span>Race</span>
+                                                <span>{{ __('messages.race') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -1064,7 +1064,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.academic_year')}}" class="nav-link {{ (request()->is('admin/academic_year*')) ? 'active' : '' }}">
-                                                <span>Academic Year </span>
+                                                <span>{{ __('messages.academic_year') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -1149,7 +1149,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M4.08171 0.243231C2.76064 0.356801 1.51649 1.08837 0.766601 2.19249C0.563862 2.491 0.313088 3.0067 0.206566 3.34412C-0.0108295 4.03279 9.10194e-05 3.64385 9.10194e-05 10.7017C9.10194e-05 17.7985 -0.0103579 17.4431 0.218249 18.1251C0.783 19.8098 2.24727 20.9967 4.01002 21.1985C4.21762 21.2223 6.14711 21.2359 9.33259 21.2361L14.3295 21.2364L17.1521 22.6456C19.6315 23.8836 20.0147 24.0643 20.3047 24.1323C20.7038 24.226 21.3091 24.2358 21.6552 24.1543C22.7744 23.8906 23.6145 23.0619 23.9188 21.9216L24 21.6171V12.9507C24 4.76607 23.9964 4.26609 23.935 3.95787C23.7437 2.99724 23.3238 2.19224 22.6767 1.54552C21.9275 0.796687 20.9561 0.34469 19.8793 0.243884C19.3945 0.198485 4.6092 0.197904 4.08171 0.243231ZM13.2584 4.79739C14.1859 4.95024 15.0177 5.41057 15.4892 6.03187C15.7075 6.31954 15.934 6.767 16.0177 7.07634C16.0994 7.37804 16.1305 8.18133 16.0742 8.53503C15.9406 9.37361 15.421 10.0903 14.2783 11.0123C13.5617 11.5904 13.4241 11.8211 13.4241 12.4444V12.7875H12.1673H10.9105L10.9306 12.1983C10.967 11.13 11.0667 10.9567 12.2268 9.94396C13.0331 9.24002 13.3465 8.90536 13.5369 8.54493C13.6082 8.40985 13.6227 8.33044 13.6207 8.0839C13.6186 7.8284 13.6031 7.75632 13.5115 7.57726C13.2591 7.0841 12.6479 6.87473 11.9445 7.04048C11.6293 7.11475 11.4476 7.21548 11.2416 7.43018C11.033 7.64764 10.9004 7.90274 10.8408 8.20113C10.8169 8.32043 10.7944 8.42287 10.7908 8.42882C10.7783 8.44916 8.29035 8.28229 8.26607 8.25948C8.22791 8.22361 8.33381 7.64042 8.4391 7.30686C8.55531 6.93859 8.73591 6.57035 8.94456 6.27635C9.16446 5.9665 9.66061 5.51163 10.001 5.30781C10.8525 4.79801 12.0877 4.60445 13.2584 4.79739ZM12.644 13.7864C13.6441 14.0605 14.0314 15.4191 13.3305 16.1944C12.9998 16.5603 12.6095 16.719 12.0949 16.6969C11.8009 16.6842 11.7326 16.6673 11.49 16.5475C11.1741 16.3915 10.9429 16.1591 10.7863 15.8404C10.6931 15.6508 10.6849 15.6001 10.6849 15.217C10.6849 14.8399 10.6942 14.7801 10.7827 14.5914C11.107 13.8997 11.8636 13.5725 12.644 13.7864Z" fill="#C4C7D2" />
                         </svg>
-                        <span> FAQs </span>
+                        <span>{{ __('messages.faqs') }}</span>
                     </a>
                 </li>
                 @elseif(Session::get('role_id') == '3')
@@ -1158,7 +1158,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Dashboards </span>
+                        <span>  {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
                 <li>
@@ -1296,7 +1296,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Dashboards </span>
+                        <span>  {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
                 <li>
@@ -1476,7 +1476,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Student Details </span>
+                        <span> {{ __('messages.student_details') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarStudentDetails">
@@ -1588,7 +1588,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span>Dashboard</span>
+                        <span>{{ __('messages.dashboard') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1760,7 +1760,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Dashboards </span>
+                        <span>  {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
                 <li>

@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Exam Paper</h4>
+                <h4 class="page-title">{{ __('messages.exam_paper') }}</h4>
             </div>
         </div>
     </div>
@@ -25,12 +25,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Exam Paper<h4>
+                        <h4 class="navv">{{ __('messages.exam_paper') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addExamPaperModal">Add </button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addExamPaperModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -39,13 +39,13 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade</th>
-                                    <th>Subject</th>
-                                    <th>Grade Category</th>
-                                    <th>Paper Name</th>
-                                    <th>Paper Type</th>
-                                    <th>Subject Weightage</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.subject') }}</th>
+                                    <th>{{ __('messages.grade_category') }}</th>
+                                    <th>{{ __('messages.paper_name') }}</th>
+                                    <th>{{ __('messages.paper_type') }}</th>
+                                    <th>{{ __('messages.subject_weightage') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

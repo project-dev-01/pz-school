@@ -46,7 +46,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Schedule List</h4>
+                <h4 class="page-title"> {{ __('messages.schedule_list') }}</h4>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @foreach($class as $cla)
@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -87,7 +87,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -134,7 +134,7 @@
                             </a>
                         </div>
                         <h4 class="nav-link">
-                            Schedule List
+                        {{ __('messages.schedule_list') }}
                         </h4>
                     </li>
                 </ul><br>
@@ -158,8 +158,8 @@
                                     <input type="hidden" name="session_id" id="downSessionID">
                                     <input type="hidden" name="academic_year" id="downAcademicYear">
                                     <div class="clearfix float-right">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">{{ __('messages.download') }}</button>
 
                                     </div>
                                 </form>

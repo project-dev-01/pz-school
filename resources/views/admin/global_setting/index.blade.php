@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Global Settings</h4>
+                <h4 class="page-title">{{ __('messages.global_settings') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Global Setting
+                        <h4 class="navv">{{ __('messages.global_settings') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -41,14 +41,14 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Academic Year</th>
-                                    <th>Footer Text</th>
-                                    <th>TimeZone</th>
-                                    <th>Facebook Url</th>
-                                    <th>Twitter Url</th>
-                                    <th>LinkedIn Url</th>
-                                    <th>Youtube Url</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.academic_year') }}</th>
+                                    <th>{{ __('messages.footer_text') }}</th>
+                                    <th>{{ __('messages.timeZone') }}</th>
+                                    <th>{{ __('messages.facebook_url') }}</th>
+                                    <th>{{ __('messages.twitter_url') }}</th>
+                                    <th>{{ __('messages.linkedIn_url') }}</th>
+                                    <th>{{ __('messages.youtube_url') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

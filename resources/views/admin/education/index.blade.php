@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Education</h4>
+                <h4 class="page-title">{{ __('messages.education') }}</h4>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Education</h4>
+                <h4 class="header-title">{{ __('messages.education') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" style="margin: 0px 0px 0px -15px;" data-toggle="modal" data-target="#addEducationModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" style="margin: 0px 0px 0px -15px;" data-toggle="modal" data-target="#addEducationModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 </p>
@@ -36,8 +36,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Education Name</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.education_name') }}</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>                         

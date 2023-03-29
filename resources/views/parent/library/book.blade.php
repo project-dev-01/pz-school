@@ -47,7 +47,7 @@
                                         <th>Cover</th>
                                         <th>Edition</th>
                                         <th>ISBN No</th>
-                                        <th>Category</th>
+                                        <th>{{ __('messages.category') }}</th>
                                         <th>Description</th>
                                         <th>Purchase Date</th>
                                         <th>Price</th>

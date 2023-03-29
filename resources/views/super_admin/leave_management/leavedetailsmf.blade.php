@@ -24,7 +24,7 @@
                         <div class="row">                            
                             <div class="col-md-6"> 
                                 <div class="row">
-                                <div class="col-sm-6"><h5>Gender :</h5></div>
+                                <div class="col-sm-6"><h5>{{ __('messages.gender') }} :</h5></div>
                                 <div class="col-sm-5"><h4 class="font-weight-bold">Male</h4></div></div>
                             </div>
                             <div class="col-md-6">

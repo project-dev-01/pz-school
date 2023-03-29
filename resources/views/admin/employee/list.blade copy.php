@@ -89,7 +89,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Short Name</th>
-                                    <th>Grade</th>
+                                    <th>{{ __('messages.grade') }}</th>
                                     <th>Stream Type</th>
                                     <th>Department</th>
                                     <th>Designation</th>

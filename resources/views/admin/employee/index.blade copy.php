@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
+                                    <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male">Male</option>
@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="religion">Religion</label>
+                                    <label for="religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">Choose Religion</option>
                                         <option value="Hindu">Hindu</option>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="blood_group">Blood Group</label>
+                                    <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                     <select class="form-control" name="blood_group" id="blood_group">
                                         <option value="">Choose Blood Group</option>
                                         <option value="A+">A+</option>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="birthday">Date Of Birth</label>
+                                    <label for="birthday">{{ __('messages.date_of_birth') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric_number">NRIC Number</label>
+                                    <label for="nric_number">{{ __('messages.nric_number') }}</label>
                                     <input type="text" class="form-control" name="nric_number" id="nricNumber">
                                 </div>
                             </div>

@@ -50,7 +50,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-category">Category</div>
+                            <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">Activity</div>
                         </div>
                         @if(!empty($forum_post_user_crd))
@@ -120,7 +120,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-category">Category</div>
+                            <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">Activity</div>
                             <div class="tt-col-value">Status</div>
                         </div>
@@ -199,7 +199,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-category">Category</div>
+                            <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">Activity</div>
                         </div>
                         @if(!empty($forum_post_user_allreplies))

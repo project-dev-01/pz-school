@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Category</h4>
+                <h4 class="page-title">{{ __('messages.category') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Category<h4>
+                        <h4 class="navv">{{ __('messages.category') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">

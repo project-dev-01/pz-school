@@ -66,14 +66,14 @@
                                 <input type="hidden" name="parent_id" value="{{ Session::get('ref_user_id') }}">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="first_name">First Name</label>
+                                        <label for="first_name">{{ __('messages.first_name') }}</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="Enter The First Name">
                                         <span class="text-danger error-text first_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="last_name">Last Name</label>
+                                        <label for="last_name">{{ __('messages.last_name') }}</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="Enter The Last Name">
                                         <span class="text-danger error-text last_name_error"></span>
                                     </div>

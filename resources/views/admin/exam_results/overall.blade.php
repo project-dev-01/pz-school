@@ -19,7 +19,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Overall</h4>
+                <h4 class="page-title">{{ __('messages.overall') }}</h4>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Select Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classnames as $class)
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examnames">Exam Name<span class="text-danger">*</span></label>
+                                    <label for="examnames">{{ __('messages.exam_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
                                         <option value="">Select Exam</option>
                                         @forelse ($allexams as $exam)
@@ -99,7 +99,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Get
+                            {{ __('messages.get') }}
                             </button>
                         </div>
                     </form>

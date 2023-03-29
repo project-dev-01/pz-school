@@ -247,7 +247,7 @@ border-bottom: 1px solid #E9D528;
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="category" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
                                         <option value="">Select category</option>

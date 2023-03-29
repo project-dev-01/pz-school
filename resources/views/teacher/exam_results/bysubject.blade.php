@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Select Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         <!-- <option value="All">All</option> -->
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID" id="lblsectionId">Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID" id="lblsectionId">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>

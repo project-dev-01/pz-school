@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <h5 class="text-center">Exam : Annual Exam</h5>
-                <h6 class="text-center">Grade : I(A)</h6>
+                <h6 class="text-center">{{ __('messages.grade') }} : I(A)</h6>
                 <hr>
                 <div class="table-responsive">
                     <table class="table table-bordered mb-0">

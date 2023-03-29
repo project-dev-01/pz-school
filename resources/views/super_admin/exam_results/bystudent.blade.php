@@ -118,19 +118,19 @@
                                     </tr>      
                                     <tr>
                                         <th class="align-top">Mark</th>
-                                        <th class="align-top">Grade</th> 
+                                        <th class="align-top">{{ __('messages.grade') }}</th> 
                                         <th class="text-center">Mark</th> 
-                                        <th class="align-top">Grade</th>
+                                        <th class="align-top">{{ __('messages.grade') }}</th>
                                         <th class="align-top">Mark</th>                                        
-                                        <th class="text-center">Grade</th>
+                                        <th class="text-center">{{ __('messages.grade') }}</th>
                                         <th class="text-center">Mark</th>  
-                                        <th class="align-top">Grade</th>                                                                       
+                                        <th class="align-top">{{ __('messages.grade') }}</th>                                                                       
                                         <th class="text-center">Mark</th> 
-                                        <th class="align-top">Grade</th>
+                                        <th class="align-top">{{ __('messages.grade') }}</th>
                                         <th class="align-top">Mark</th>  
-                                        <th class="text-center">Grade</th>      
+                                        <th class="text-center">{{ __('messages.grade') }}</th>      
                                         <th class="text-center">Mark</th>  
-                                        <th class="text-center">Grade</th>                                
+                                        <th class="text-center">{{ __('messages.grade') }}</th>                                
                                     </tr>                           
                                 </thead>
                                 <tbody>

@@ -45,7 +45,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Hostel Name</th>
-                                    <th>Category</th>
+                                    <th>{{ __('messages.category') }}</th>
                                     <th>Warden</th>
                                     <th>Remarks</th>
                                     <th>Action</th>

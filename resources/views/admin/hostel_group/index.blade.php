@@ -10,11 +10,11 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Hostel Group</h4>
+                <h4 class="page-title">{{ __('messages.hostel_group') }}</h4>
             </div>
         </div>
     </div>
@@ -25,12 +25,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Hostel Group<h4>
+                        <h4 class="nav-link">{{ __('messages.hostel_group') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.hostel_group.create')}}">Add</a>
+                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.hostel_group.create')}}">{{ __('messages.add') }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -39,12 +39,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Group Name</th>
-                                    <th>Incharge Staff</th>
-                                    <th>Incharge Student</th>
-                                    <th>Student</th>
-                                    <th>Color</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.group_name') }}</th>
+                                    <th>{{ __('messages.incharge_staff') }}</th>
+                                    <th>{{ __('messages.incharge_student') }}</th>
+                                    <th>{{ __('messages.student') }}</th>
+                                    <th>{{ __('messages.color') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

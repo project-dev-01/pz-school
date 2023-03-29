@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Fees Allocation Details</h4>
+                <h4 class="page-title">{{ __('messages.fees_allocation_details') }}</h4>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Fees Allocation<h4>
+                        <h4 class="navv">{{ __('messages.fees_allocation') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classnames as $class)
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="group_id">Fees Group<span class="text-danger">*</span></label>
+                                    <label for="group_id">{{ __('messages.fees_group') }}<span class="text-danger">*</span></label>
                                     <select id="group_id" class="form-control" name="group_id">
                                         <option value="">Select Fees Group</option>
                                         @forelse ($fees_group_list as $group_list)
@@ -59,7 +59,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                         <th>No</th>
                                         <th>Student Name</th>
                                         <th>Payment Mode</th>
-                                        <th>Gender</th>
+                                        <th>{{ __('messages.gender') }}</th>
                                         <th>Register No</th>
                                         <th>Email</th>
                                     </tr>

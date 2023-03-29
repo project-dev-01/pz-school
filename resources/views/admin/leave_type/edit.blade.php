@@ -26,7 +26,7 @@
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="gender">Gender</label>
+                        <label for="gender">{{ __('messages.gender') }}</label>
                         <select class="form-control" id="gender" name="gender">
                             <option value="">Select Gender</option>
                             <option value="All">All</option>

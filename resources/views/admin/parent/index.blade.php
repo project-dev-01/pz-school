@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Parent/Guardian List</h4>
+                <h4 class="page-title">{{ __('messages.parent') }}/{{ __('messages.guardian_list') }}</h4>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Parent/Guardian List<h4>
+                        <h4 class="navv">{{ __('messages.parent') }}/{{ __('messages.guardian_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -39,10 +39,10 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Occupation</th>
-                                                <th>Email</th>
-                                                <th>Actions</th>
+                                                <th> {{ __('messages.name') }}</th>
+                                                <th> {{ __('messages.occupation') }}</th>
+                                                <th> {{ __('messages.email') }}</th>
+                                                <th> {{ __('messages.actions') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>

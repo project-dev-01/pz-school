@@ -62,7 +62,7 @@
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">Topic</div>
-                            <div class="tt-col-value-large hide-mobile">Category</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.category') }}</div>
                             <div class="tt-col-value-large hide-mobile">Status</div>
                             <div class="tt-col-value-large hide-mobile">Activity</div>
                         </div>

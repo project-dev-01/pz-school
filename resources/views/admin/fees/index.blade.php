@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Fees Details</h4>
+                <h4 class="page-title">{{ __('messages.fees_details') }}</h4>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Student Details<h4>
+                        <h4 class="navv">{{ __('messages.student_details') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Select Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">Grade<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         <!-- <option value="All">All</option> -->
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">Class<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -60,7 +60,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="student_id">Student</label>
+                                    <label for="student_id">{{ __('messages.student') }}</label>
                                     <select id="student_id" class="form-control" name="student_id">
                                         <option value="">Select Student</option>
                                     </select>
@@ -69,7 +69,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="fees_type">Fees Type</label>
+                                    <label for="fees_type">{{ __('messages.fees_type') }}Fees Type</label>
                                     <select id="fees_type" class="form-control" name="fees_type">
 
                                     </select>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="payment_status">Payment Status</label>
+                                    <label for="payment_status">{{ __('messages.payment_status') }}</label>
                                     <select id="payment_status" class="form-control" name="payment_status">
                                         <option value="">Select Payment Status</option>
                                         @forelse ($payment_status as $status)
@@ -91,7 +91,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Grade</th>
-                                    <th>Class</th>
+                                    <th>{{ __('messages.class') }}</th>
                                     <th>Student Name</th>
                                     <th>Fees Group</th>
                                     <!-- <th>Payment Status</th> -->

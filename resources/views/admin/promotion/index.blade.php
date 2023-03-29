@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Student Promotion</h4>
+                <h4 class="page-title">{{ __('messages.student_promotion') }}</h4>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student Promotion<h4>
+                        <h4 class="navv">{{ __('messages.student_promotion') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Choose Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classes as $class)
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester<span class="text-danger">*</span></label>
+                                    <label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session<span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="">Select Session</option>
                                         @foreach($session as $ses)
@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>

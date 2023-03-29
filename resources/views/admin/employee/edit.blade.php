@@ -247,7 +247,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="first_name"> First name<span class="text-danger">*</span></label>
+                                    <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -260,7 +260,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="last_name"> Last name</label>
+                                    <label for="last_name">{{ __('messages.last_name') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -273,7 +273,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
+                                    <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male" {{$employee['gender'] =="Male" ? 'selected' : '' }}>Male</option>
@@ -292,7 +292,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="religion">Religion</label>
+                                    <label for="religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">Choose Religion</option>
                                         @forelse($religion as $r)
@@ -304,7 +304,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="race">Race</label>
+                                    <label for="race">{{ __('messages.race') }}</label>
                                     <select class="form-control" name="race" id="addRace">
                                         <option value="">Choose race</option>
                                         @forelse($races as $r)
@@ -319,20 +319,20 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Passport">Passport Number</label>
+                                    <label for="Passport">{{ __('messages.passport_number') }}</label>
                                     <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="Passport Number">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric_number">NRIC Number</label>
+                                    <label for="nric_number">{{ __('messages.nric_number') }}</label>
                                     <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="NRIC Number">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="birthday">Date Of Birth</label>
+                                    <label for="birthday">{{ __('messages.date_of_birth') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -364,7 +364,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="country">Country</label>
+                                    <label for="country">{{ __('messages.country') }}</label>
                                     <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="Country">
                                 </div>
                             </div>
@@ -372,19 +372,19 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="state">State/Province</label>
+                                    <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                     <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="State/Province">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="city">City</label>
+                                    <label for="city">{{ __('messages.city') }}</label>
                                     <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="City">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="post_code">Zip/Postal code</label>
+                                    <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
                                     <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
                                 </div>
                             </div>
@@ -392,13 +392,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Address 1</label>
+                                    <label for="present_address">{{ __('messages.address_1') }}</label>
                                     <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="Address 1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="permanent_address">Address 2</label>
+                                    <label for="permanent_address">{{ __('messages.address_2') }}</label>
                                     <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="Address 2">
                                 </div>
                             </div>
@@ -716,7 +716,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="blood_group">Blood Group</label>
+                                        <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                         <select class="form-control" name="blood_group" id="blood_group">
                                             <option value="">Choose Blood Group</option>
                                             <option value="A+" {{$employee['blood_group'] == "A+" ? 'selected' : ''}}>A+</option>

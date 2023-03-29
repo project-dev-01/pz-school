@@ -3,26 +3,26 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddSubjectModalLabel">Add Subject</h4>
+                <h4 class="modal-title" id="myaddSubjectModalLabel">{{ __('messages.add_subject') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="addSubjectSubmit" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Subject Name<span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="subjectName" name="name" class="form-control" placeholder="Enter Subject Name">
                     </div>
                     <div class="form-group">
-                        <label for="short_name">Short Name<span class="text-danger">*</span></label>
+                        <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="shortName" name="short_name" class="form-control" placeholder="Enter Short Name">
                     </div>
                     <div class="form-group">
-                        <label for="subject_code">Subject Code</label>
+                        <label for="subject_code">{{ __('messages.subject_code') }}</label>
                         <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
                     </div>
                     <div class="form-group">
-                        <label for="subjectType">Subject Type 1</label>
+                        <label for="subjectType">{{ __('messages.subject_type_1') }}</label>
                         <select class="form-control" id="subjectType" name="subject_type">
                             <option value="">Choose Subject Type 1</option>
                             <option value="Optional">Optional</option>
@@ -31,7 +31,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="subjectType">Subject Type 2</label>
+                        <label for="subjectType">{{ __('messages.subject_type_2') }}</label>
                         <select class="form-control" id="subjectTypeTwo" name="subject_type_2">
                             <option value="">Choose Subject type 2</option>
                             <option value="Theory">Theory</option>
@@ -39,22 +39,22 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="times_per_week">Minimum Times Per Week</label>
+                        <label for="times_per_week">{{ __('messages.minimum_times_per_week') }}</label>
                         <input type="number" id="times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>
                     <div class="form-group">
-                        <label for="subjectColor">Subject Color</label>
+                        <label for="subjectColor">{{ __('messages.subject_color') }}</label>
                         <input type="text" id="subjectColor" name="subject_color_calendor" class="form-control subjectColor" value="#4a81d4">
                     </div>
                     <div class="form-group">
                         <div class="checkbox checkbox-success form-check-inline">
                             <input type="checkbox" id="excludeExams" name="exam_exclude">
-                            <label for="excludeExams"> Exclude From Exams </label>
+                            <label for="excludeExams">{{ __('messages.exclude_from_exams') }}</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

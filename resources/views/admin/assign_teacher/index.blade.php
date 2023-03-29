@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Assign Teacher</h4>
+                <h4 class="page-title">{{ __('messages.assign_teacher') }}</h4>
             </div>
         </div>
     </div>
@@ -24,12 +24,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Teacher<h4>
+                        <h4 class="navv">{{ __('messages.assign_teacher') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addAssignTeachernModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addAssignTeachernModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,11 +38,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade</th>
-                                    <th>Classes</th>
-                                    <th>Teacher</th>
-                                    <th>Type</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.classes') }}</th>
+                                    <th>{{ __('messages.teacher') }}</th>
+                                    <th>{{ __('messages.type') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

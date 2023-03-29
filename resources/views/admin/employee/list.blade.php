@@ -29,7 +29,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Employee List</h4>
+                <h4 class="page-title">{{ __('messages.employee_list') }}</h4>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Employee List<h4>
+                        <h4 class="nav-link">{{ __('messages.employee_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -49,14 +49,14 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>
-                                    <th>Short Name</th>
-                                    <th>Grade</th>
-                                    <th>Stream Type</th>
-                                    <th>Department</th>
-                                    <th>Designation</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.name') }}</th>
+                                    <th>{{ __('messages.short_name') }}</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.stream_type') }}</th>
+                                    <th>{{ __('messages.department') }}</th>
+                                    <th>{{ __('messages.designation') }}</th>
+                                    <th>{{ __('messages.email') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

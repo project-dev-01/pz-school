@@ -232,7 +232,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="first_name"> First name<span class="text-danger">*</span></label>
+                                    <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -245,7 +245,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="last_name"> Last name</label>
+                                    <label for="last_name">{{ __('messages.last_name') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -258,7 +258,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
+                                    <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Choose Gender</option>
                                         <option value="Male" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Male</option>
@@ -290,13 +290,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="passport">Passport Number<span class="text-danger">*</span></label>
+                                    <label for="passport">{{ __('messages.passport_number') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" value="{{$branch['passport']}}" placeholder="Passport Number" name="passport" id="Passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric_number">NRIC Number<span class="text-danger">*</span></label>
+                                    <label for="nric_number">{{ __('messages.nric_number') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" value="{{$branch['nric_number']}}" name="nric_number" placeholder="nric number" id="nricNumber">
                                 </div>
                             </div>
@@ -322,7 +322,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="country">Country</label>
+                                    <label for="country">{{ __('messages.country') }}</label>
                                     <select id="editGetCountry" class="form-control" name="country">
                                         <option value="">Select Country</option>
                                         @foreach($countries as $c)
@@ -340,7 +340,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="state">State/Province</label>
+                                    <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                     <select id="editGetState" class="form-control" name="state">
                                         <option value="">Select State</option>
                                         @foreach($states as $s)
@@ -356,7 +356,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="city">City</label>
+                                    <label for="city">{{ __('messages.city') }}</label>
                                     <select id="editGetCity" class="form-control" name="city">
                                         <option value="">Select City</option>
                                         @foreach($cities as $c)
@@ -371,7 +371,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="post_code">Zip/Postal code</label>
+                                    <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
                                     <input type="text" class="form-control" value="{{$branch['post_code']}}" name="post_code" id="postCode" placeholder="000000">
                                 </div>
                             </div>

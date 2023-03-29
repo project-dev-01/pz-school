@@ -247,7 +247,7 @@
             </div>
             <div class="tt-list-header tt-border-bottom">
                 <div class="tt-col-topic">Topic</div>
-                <div class="tt-col-category">Category</div>
+                <div class="tt-col-category">{{ __('messages.category') }}</div>
                 <div class="tt-col-value hide-mobile">Likes</div>
                 <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>

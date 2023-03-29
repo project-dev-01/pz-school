@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Employee Name</label>
+                                    <label for="heard"> Name</label>
                                     <input class="form-control" type="text" placeholder="Enter your Name">
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         <thead>
                                             <tr>                                               
                                                 <th class="text-center">S.no</th>
-                                                <th class="text-center">Employee Name</th>
+                                                <th class="text-center"> Name</th>
                                                 <th class="text-center">No.Of.Days</th>                                                                                             
                                                 <th class="text-center">Reason(s)</th>  
                                                 <th class="text-center">Admin Remarks</th>                                                                                                

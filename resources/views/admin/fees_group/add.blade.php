@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Fees Group</h4>
+                <h4 class="page-title">{{ __('messages.fees_group') }}</h4>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Add Fees Group
+                        {{ __('messages.add_fees_group') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -28,14 +28,14 @@
                         @csrf
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Fees Group Name<span class="text-danger">*</span></label>
+                                <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter Fees Group Name">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="description">{{ __('messages.description') }}</label>
                                 <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                                                                             <table class="table dt-responsive nowrap w-100 ">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>Due Date</th>
-                                                                                        <th>Amount</th>
+                                                                                        <th>{{ __('messages.due_date') }}</th>
+                                                                                        <th>{{ __('messages.amount') }}</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
@@ -116,9 +116,9 @@
                                                                                 <table class="table dt-responsive nowrap w-100">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Semester Name</th>
-                                                                                            <th>Due Date</th>
-                                                                                            <th>Amount</th>
+                                                                                            <th>{{ __('messages.semester_name') }}</th>
+                                                                                            <th>{{ __('messages.due_date') }}</th>
+                                                                                            <th>{{ __('messages.amount') }}</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -155,9 +155,9 @@
                                                                                 <table class="table dt-responsive nowrap w-100">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Month Name</th>
-                                                                                            <th>Due Date</th>
-                                                                                            <th>Amount</th>
+                                                                                            <th>{{ __('messages.month_name') }}</th>
+                                                                                            <th>{{ __('messages.due_date') }}</th>
+                                                                                            <th>{{ __('messages.amount') }}</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -195,8 +195,8 @@
                         @empty
                         @endforelse
                         <div class="form-group">
-                            <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
+                            <a href="{{ route('admin.fees_group') }}" class="btn btn-light">{{ __('messages.back') }}</a>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
                         </div>
                     </form>
                 </div> <!-- end card-body -->

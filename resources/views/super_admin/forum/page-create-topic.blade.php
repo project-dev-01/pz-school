@@ -264,7 +264,7 @@ border-bottom: 1px solid #E9D528;
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="category" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
                                         <option value="">Select category</option>
@@ -344,7 +344,7 @@ border-bottom: 1px solid #E9D528;
             <table class="table w-100 nowrap">
             <div class="tt-list-header tt-border-bottom">
                 <div class="tt-col-topic">Topic</div>
-                <div class="tt-col-category">Category</div>
+                <div class="tt-col-category">{{ __('messages.category') }}</div>
                 <div class="tt-col-value hide-mobile">Likes</div>
                 <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>

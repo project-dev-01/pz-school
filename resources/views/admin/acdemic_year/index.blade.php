@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Academic Year</h4>
+                <h4 class="page-title"> {{ __('messages.academic_year') }}</h4>
             </div>
         </div>
     </div>
@@ -19,12 +19,12 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Academic Year<h4>
+                        <h4 class="navv"> {{ __('messages.academic_year') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#academicYearModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#academicYearModal"> {{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -33,8 +33,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Academic Year</th>
-                                    <th>Action</th>
+                                    <th> {{ __('messages.academic_year') }}</th>
+                                    <th> {{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

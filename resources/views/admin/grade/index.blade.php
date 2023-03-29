@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Grade</h4>
+                <h4 class="page-title">{{ __('messages.grade') }}</h4>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Grade</h4>
+                <h4 class="header-title">{{ __('messages.grade') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addGradeModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addGradeModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 </p>
@@ -36,14 +36,14 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Grade Category</th>
-                                <th>Notes</th>
-                                <th>Grade Name</th>
-                                <th>Grade Point</th>
-                                <th>Min Percentage</th>
-                                <th>Max Percentage</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.grade_category') }}</th>
+                                <th>{{ __('messages.notes') }}</th>
+                                <th>{{ __('messages.grade_name') }}</th>
+                                <th>{{ __('messages.grade_point') }}</th>
+                                <th>{{ __('messages.min_percentage') }}</th>
+                                <th>{{ __('messages.max_percentage') }}</th>
+                                <th>{{ __('messages.status') }}</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                     </table>

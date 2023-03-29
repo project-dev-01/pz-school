@@ -110,7 +110,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div> -->
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">{{ __('messages.dashboard') }}</h4>
             </div>
         </div>
     </div>
@@ -148,14 +148,14 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">To Do List<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
                             </li>
                         </ul>
                         <div class="card-body">
                             <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
+                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
@@ -224,7 +224,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                             <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Upcoming <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
@@ -292,7 +292,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
                                             <h5 class="">
-                                                <i class='mdi mdi-chevron-down font-18'></i> Past <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.past') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)

@@ -64,7 +64,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="MM-YYYY">
+                                        <input type="text" class="form-control" name="date" placeholder="MM-YYYY" id="employeeReportDate">
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
 
-                        <form method="post" action="{{ route('teacher.attendance.excel')}}">
+                        <form method="post" action="{{ route('staff.attendance.excel')}}">
                             @csrf
                             <input type="hidden" name="department" id="excelDepartment">
                             <input type="hidden" name="employee" id="excelEmployee">
@@ -246,11 +246,10 @@
                                 </button>
                             </div>
                         </form>
-                        <form method="post" action="{{ route('teacher.attendance.employee_pdf')}}">
+                        <form method="post" action="{{ route('staff.attendance.employee_pdf')}}">
                             @csrf
                             <input type="hidden" name="employee" id="downExcelEmployee">
                             <input type="hidden" name="session" id="downExcelSession">
-                            <input type="hidden" name="department" id="downExcelDepartment">
                             <input type="hidden" name="date" id="downExcelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">

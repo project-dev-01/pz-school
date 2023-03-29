@@ -16,7 +16,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Exam Result</h4>
+                <h4 class="page-title">{{ __('messages.exam_result') }}</h4>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Exam
+                        {{ __('messages.exam') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="btwyears">Academic year<span class="text-danger">*</span></label>
+                                    <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
                                         <option value="">Select Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @forelse ($classnames as $class)
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-3" id="section_drp_div">
                                 <div class="form-group">
-                                    <label for="sectionID" id="lblsectionId">Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID" id="lblsectionId">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Class</option>
                                     </select>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                    <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
                                         <option value="">Select Exams</option>
                                     </select>
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Roll No<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.roll_no') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="registerno" name="registerno">
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Get
+                            {{ __('messages.get') }}
                             </button>
                         </div>
                     </form>
