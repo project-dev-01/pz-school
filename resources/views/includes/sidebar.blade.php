@@ -210,6 +210,11 @@
                                                 <span> Student List </span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.student.import')}}" class="nav-link {{ (request()->is('admin/student/import')) ? 'active' : '' }}">
+                                                <span>Student Bulk Upload</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -229,6 +234,11 @@
                                         <li>
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
                                                 <span>Parent/Guardian List</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.parent.import')}}" class="nav-link {{ (request()->is('admin/parent/import')) ? 'active' : '' }}">
+                                                <span>Parent Bulk Upload</span>
                                             </a>
                                         </li>
                                     </ul>

@@ -825,6 +825,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     // import Employee Master details in csv
     Route::post('importcsv/employee', [ImportController::class, 'importCsvEmployee']);
+    Route::post('importcsv/parent', [ImportController::class, 'importCsvParent']);
+    Route::post('importcsv/student', [ImportController::class, 'importCsvStudent']);
     Route::post('get_like_column_name', [ImportController::class, 'getLikeColumnName']);
     Route::post('faq/email', [ApiControllerOne::class, 'faqEmail']);
     Route::post('first/name', [ApiControllerOne::class, 'firstName']);

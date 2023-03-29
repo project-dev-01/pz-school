@@ -14644,18 +14644,34 @@ class ApiController extends BaseController
                 } else {
 
                     if ($att['status']) {
-                        $query = $conn->table('staff_attendances')->insert([
-                            'date' => $att['date'],
-                            'check_in' => $att['check_in'],
-                            'check_out' => $att['check_out'],
-                            'status' => $att['status'],
-                            'reason_id' => $att['reason_id'],
-                            'hours' => $att['hours'],
-                            'remarks' => $att['remarks'],
-                            'staff_id' => $employee,
-                            'session_id' => $session_id,
-                            'created_at' => date("Y-m-d H:i:s")
-                        ]);
+                        $check = $conn->table('staff_attendances')->where('date', $att['date'])->where('staff_id', $employee)->first();
+                        if($check){
+                            $query = $conn->table('staff_attendances')->where('id', $check->id)->update([
+                                'date' => $att['date'],
+                                'check_in' => $att['check_in'],
+                                'check_out' => $att['check_out'],
+                                'status' => $att['status'],
+                                'reason_id' => $att['reason_id'],
+                                'hours' => $att['hours'],
+                                'remarks' => $att['remarks'],
+                                'staff_id' => $employee,
+                                'session_id' => $session_id,
+                                'updated_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }else{
+                            $query = $conn->table('staff_attendances')->insert([
+                                'date' => $att['date'],
+                                'check_in' => $att['check_in'],
+                                'check_out' => $att['check_out'],
+                                'status' => $att['status'],
+                                'reason_id' => $att['reason_id'],
+                                'hours' => $att['hours'],
+                                'remarks' => $att['remarks'],
+                                'staff_id' => $employee,
+                                'session_id' => $session_id,
+                                'created_at' => date("Y-m-d H:i:s")
+                            ]);
+                        }
                     }
                 }
             }
@@ -14766,6 +14782,7 @@ class ApiController extends BaseController
                     DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
                     DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
+                    DB::raw('COUNT(CASE WHEN sa.status = "excused" then 1 ELSE NULL END) as "excusedCount"'),
 
                 )
                 ->join('staffs as st', 'sa.staff_id', '=', 'st.id')
@@ -14805,6 +14822,7 @@ class ApiController extends BaseController
                     $object->presentCount = $value->presentCount;
                     $object->absentCount = $value->absentCount;
                     $object->lateCount = $value->lateCount;
+                    $object->excusedCount = $value->excusedCount;
                     $object->session_name = $value->session_name;
                     $staff_id = $value->staff_id;
                     $sess = $value->session_id;

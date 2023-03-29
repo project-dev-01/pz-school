@@ -103,7 +103,7 @@
     <div class="row" id="employee_attendance_widget">
         <div class="col-12">
             <div class="row">
-                <div class="col-md-4 col-xl-4">
+                <div class="col-md-3 col-xl-3">
                     <div class="card-box">
                         <div class="row">
                             <div class="col-6">
@@ -141,7 +141,7 @@
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
-                <div class="col-md-4 col-xl-4">
+                <div class="col-md-3 col-xl-3">
                     <div class="card-box">
                         <div class="row">
                             <div class="col-6">
@@ -176,7 +176,7 @@
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
-                <div class="col-md-4 col-xl-4">
+                <div class="col-md-3 col-xl-3">
                     <div class="card-box">
                         <div class="row">
                             <div class="col-6">
@@ -203,6 +203,41 @@
                         </div>
                     </div>
                 </div> <!-- end row -->
+                <div class="col-md-3 col-xl-3">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_59_2318)">
+                                            <path d="M0 18.6667C0.0521565 18.2957 0.0962869 17.9247 0.148443 17.5798C0.294192 16.5919 0.537261 15.6184 0.874621 14.6714C1.23927 13.5946 1.81449 12.5887 2.57172 11.7038C3.46053 10.6593 4.72431 9.94343 6.13441 9.68573C7.69185 9.36207 9.32112 9.51976 10.7723 10.1346C11.53 10.4746 12.2045 10.9543 12.7543 11.5442C13.2132 12.0305 13.6028 12.569 13.9137 13.1468L13.9779 13.2581C14.284 12.9197 14.6359 12.6192 15.0251 12.3641C15.7892 11.8787 16.6865 11.6035 17.6128 11.5702C18.3739 11.5193 19.1385 11.6063 19.8636 11.8262C20.7852 12.1257 21.5877 12.6751 22.1665 13.4028C22.7898 14.195 23.2433 15.0903 23.5025 16.0403C23.7288 16.8147 23.8858 17.605 23.9719 18.4033C23.9719 18.4886 23.992 18.5739 24 18.6629L0 18.6667Z" fill="#3A4265" />
+                                            <path d="M7.7633 8.3132C6.87327 8.31466 6.00277 8.07193 5.26202 7.61572C4.52127 7.15952 3.94357 6.51034 3.60206 5.7504C3.26054 4.99045 3.17056 4.15391 3.34352 3.34666C3.51647 2.53941 3.94458 1.79775 4.57365 1.21559C5.20272 0.633425 6.00445 0.236927 6.87736 0.0762895C7.75027 -0.0843483 8.65509 -0.00190527 9.4773 0.313188C10.2995 0.628281 11.0021 1.16186 11.4962 1.84636C11.9903 2.53086 12.2536 3.33551 12.2528 4.15845C12.2517 5.25941 11.7785 6.31506 10.9369 7.0939C10.0953 7.87275 8.95402 8.31123 7.7633 8.3132Z" fill="#3A4265" />
+                                            <path d="M18.018 4.02492C18.7079 4.02639 19.3819 4.21708 19.9545 4.57285C20.5271 4.92862 20.9727 5.43347 21.2349 6.02351C21.4971 6.61354 21.564 7.26223 21.4273 7.88746C21.2905 8.5127 20.9563 9.08636 20.4667 9.53586C19.9772 9.98535 19.3545 10.2905 18.6773 10.4126C18.0002 10.5347 17.2991 10.4683 16.6628 10.2218C16.0265 9.97531 15.4836 9.55983 15.1028 9.02792C14.722 8.49601 14.5204 7.87159 14.5236 7.23371C14.523 6.81031 14.6132 6.391 14.7889 6.00001C14.9646 5.60902 15.2224 5.25409 15.5473 4.95573C15.8722 4.65738 16.2579 4.42151 16.682 4.26175C17.106 4.10198 17.5601 4.02149 18.018 4.02492Z" fill="#3A4265" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_59_2318">
+                                                <rect width="24" height="18.6667" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    <p class="mb-1 text-truncate">Excused</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <h3 class="my-1"><span style="color:#3A4265" id="widget-excused" data-plugin="counterup">0</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="progress progress-sm m-0">
+                                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                </div>
+                            </div>
+                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                        </div>
+                    </div> <!-- end card-box-->
+                </div> <!-- end col -->
                 <!-- tasks panel -->
             </div>
         </div>
@@ -230,6 +265,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Excused</button></th>
                                                 </tr>
                                             </table>
                                         </div>

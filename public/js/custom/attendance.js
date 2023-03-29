@@ -12,27 +12,26 @@ $(function () {
             $(this).closest('tr').find('.checkin').prop('readonly', true);
             $(this).closest('tr').find('.checkout').prop('readonly', true);
             $(this).closest('tr').find('.hours').prop('readonly', true);
-
-
-            var reason = $(this).closest('tr').find('.reason');
-            reason.empty();
-            reason.append('<option value="">Select Reason</option>');
-            $.post(getTeacherAbsentExcuse, {
-                token: token,
-                branch_id: branchID,
-                status: status
-            }, function (res) {
-                if (res.code == 200) {
-                    $.each(res.data, function (key, val) {
-                        reason.append('<option value="' + val.id + '">' + val.name + '</option>');
-                    });
-                }
-            }, 'json');
         } else {
             $(this).closest('tr').find('.checkin').prop('readonly', false);
             $(this).closest('tr').find('.checkout').prop('readonly', false);
             $(this).closest('tr').find('.hours').prop('readonly', false);
         }
+        
+        var reason = $(this).closest('tr').find('.reason');
+        reason.empty();
+        reason.append('<option value="">Select Reason</option>');
+        $.post(getTeacherAbsentExcuse, {
+            token: token,
+            branch_id: branchID,
+            status: status
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    reason.append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
     });
 
     $(document).on('change', ".checkin", function (e) {
@@ -224,6 +223,7 @@ $(function () {
                         var widgetpresent = 0;
                         var widgetabsent = 0;
                         var widgetlate = 0;
+                        var widgetexcused = 0;
                         var i = 1;
                         if (get_attendance_list.length > 0) {
                             attendanceListShow += '<div class="table-responsive">' +
@@ -242,6 +242,7 @@ $(function () {
                             attendanceListShow += '<th>Total<br>Present</th>' +
                                 '<th>Total<br>Absent</th>' +
                                 '<th>Total<br>Late</th>' +
+                                '<th>Total<br>Excused</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>';
@@ -279,6 +280,9 @@ $(function () {
                                             if (res.status == "late") {
                                                 color = "btn-warning";
                                             }
+                                            if (res.status == "excused") {
+                                                color = "btn-info";
+                                            }
                                             attendanceListShow += '<td>' +
                                                 '<input type="hidden" value="' + res.status + '" ></input>' +
                                                 '<button type="button" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
@@ -297,11 +301,13 @@ $(function () {
                                 attendanceListShow += '<td>' + res.presentCount + '</td>' +
                                     '<td>' + res.absentCount + '</td>' +
                                     '<td>' + res.lateCount + '</td>' +
+                                    '<td>' + res.excusedCount + '</td>' +
                                     '</tr>';
 
                                 widgetpresent += res.presentCount;
                                 widgetabsent += res.absentCount;
                                 widgetlate += res.lateCount;
+                                widgetexcused += res.excusedCount;
                             });
 
                             // add functions tr end
@@ -318,6 +324,7 @@ $(function () {
                         $("#widget-present").text(widgetpresent);
                         $("#widget-absent").text(widgetabsent);
                         $("#widget-late").text(widgetlate);
+                        $("#widget-excused").text(widgetexcused);
                         $("#employeeAttendanceReportListShow").append(attendanceListShow);
                         // var newLabels = [];
                         // var absentData = [];

@@ -758,6 +758,8 @@ return [
         'class_teacher_sections'=> $url.'/class_teacher_sections',
 
         'import_employee'=> $url.'/importcsv/employee',
+        'import_parent'=> $url.'/importcsv/parent',
+        'import_student'=> $url.'/importcsv/student',
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',

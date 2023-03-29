@@ -7051,12 +7051,15 @@ class AdminController extends Controller
             }
             $balance = ($args['amount'] - $type_amount);
             $balance = number_format($balance, 2, '.', '');
-            if ($balance == 0) {
+            if ($type_amount == 0) {
+                $paidSts = 'Pending';
+                $labelmode = 'badge-warning';
+            } elseif ($balance == 0) {
                 $paidSts = 'paid';
                 $labelmode = 'badge-success';
             } else {
-                $paidSts = 'pending';
-                $labelmode = 'badge-warning';
+                $paidSts = 'partial paid';
+                $labelmode = 'badge-blue';
             }
         }
         // amount unpaid or delay
