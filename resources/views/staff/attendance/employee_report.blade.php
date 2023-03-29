@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date">Month/Year<span class="text-danger">*</span></label>
+                                    <label for="date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -124,7 +124,7 @@
                                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div> <!-- end col -->
@@ -186,11 +186,10 @@
                                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div> <!-- end col -->
-                        
                         <div class="col-md-3 col-xl-3">
                             <div class="card-box">
                                 <div class="row">
