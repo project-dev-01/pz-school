@@ -233,7 +233,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.parent') }}/{{ __('messages.guardian_list') }}</span>
+                                                <span>{{ __('messages.parent') }}/ {{ __('messages.guardian_list') }}</span>
                                             </a>
                                         </li>
                                         <li>

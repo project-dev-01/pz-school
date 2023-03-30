@@ -301,7 +301,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Social Links
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.social_links') }}
                                 <h4>
                         </li>
                     </ul>

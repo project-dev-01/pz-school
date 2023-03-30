@@ -145,7 +145,7 @@
                         </textarea>
                     </div>
                     <span class="fas fa-user-lock " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">  Login Details
+                    <span class="header-title mb-3" id="span-parent">  {{ __('messages.login_details') }}
                     <hr id="hr"></span>
                     
                     <div class="row">
@@ -193,12 +193,12 @@
                     </div>
                     </div>
                     <span class="fas fa-globe  " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Social Links
+                    <span class="header-title mb-3" id="span-parent">{{ __('messages.social_links') }}
                     <hr id="hr"></span>
                         <div class="row">
                         <div class="col-md-4">
                         <div class="form-group mb-3">
-                            <label for="validationCustomUsername">Facebook</label>
+                            <label for="validationCustomUsername">{{ __('messages.facebook') }}</label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -212,7 +212,7 @@
                     </div>
                     <div class="col-md-4">
                     <div class="form-group mb-3">
-                            <label for="validationCustomUsername">Twitter</label>
+                            <label for="validationCustomUsername">{{ __('messages.twitter') }}</label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -226,7 +226,7 @@
                     </div>
                     <div class="col-md-4">
                     <div class="form-group mb-3">
-                            <label for="validationCustomUsername">Linkedin</label>
+                            <label for="validationCustomUsername">{{ __('messages.linkedin') }}</label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">

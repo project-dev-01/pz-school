@@ -571,7 +571,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Login Details<h4>
+                            <h4 class="navv">{{ __('messages.login_details') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -641,7 +641,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="facebook_url">Facebook</label>
+                                    <label for="facebook_url">{{ __('messages.facebook') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -654,7 +654,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="twitter_url">Twitter</label>
+                                    <label for="twitter_url">{{ __('messages.twitter') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -667,7 +667,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="linkedin_url">Linkedin</label>
+                                    <label for="linkedin_url">{{ __('messages.linkedin') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

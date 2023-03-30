@@ -286,7 +286,7 @@
                     </div>										
                     </div>
                     <span class="fas fa-user-lock " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">  Login Details
+                    <span class="header-title mb-3" id="span-parent">  {{ __('messages.login_details') }}
                     <hr id="hr"></span>
                         <div class="row">
                         <div class="col-md-6">

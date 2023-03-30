@@ -320,7 +320,7 @@
                             </div>
                         </div>
                         <span class="fas fa-globe  " id="span-parent"></span>
-                        <span class="header-title mb-3" id="span-parent">Social Links
+                        <span class="header-title mb-3" id="span-parent">{{ __('messages.social_links') }}
                             <hr id="hr">
                         </span>
                         <div class="row">

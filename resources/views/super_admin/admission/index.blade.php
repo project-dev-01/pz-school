@@ -265,7 +265,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span>Login Details
+                            <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.login_details') }}
                             <h4>
                     </li>
                 </ul>

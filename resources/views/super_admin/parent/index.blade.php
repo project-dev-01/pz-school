@@ -130,7 +130,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Login Details
+                        {{ __('messages.login_details') }}
                             <h4>
                     </li>
                 </ul>
@@ -183,7 +183,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Social Links
+                        {{ __('messages.social_links') }}
                             <h4>
                     </li>
                 </ul>
@@ -191,7 +191,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="validationCustomUsername">Facebook</label>
+                                <label for="validationCustomUsername">{{ __('messages.facebook') }}</label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -204,7 +204,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="validationCustomUsername">Twitter</label>
+                                <label for="validationCustomUsername">{{ __('messages.twitter') }}</label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -217,7 +217,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group mb-3">
-                                <label for="validationCustomUsername">Linkedin</label>
+                                <label for="validationCustomUsername">{{ __('messages.linkedin') }}</label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
