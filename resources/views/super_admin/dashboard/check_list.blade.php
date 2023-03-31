@@ -9,7 +9,7 @@
                 <!-- <div class="text-center">
                     <h4 class="mt-0">Text in a modal</h4>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">{{ __('messages.close') }}</button>
                 </div> -->
                 <!-- <div class="text-center"> -->
                 <div class="row">
@@ -198,7 +198,7 @@
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-cloud-upload-outline"></i></a>
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-at"></i></a>
                                             </div>
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>Submit</button>
+                                            <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>{{ __('messages.submit') }}</button>
                                         </div>
                                     </form>
                                 </div> <!-- end .border-->
@@ -225,7 +225,7 @@
                 <!-- <div class="text-center">
                     <h4 class="mt-0">Text in a modal</h4>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">{{ __('messages.close') }}</button>
                 </div> -->
                 <!-- <div class="text-center"> -->
                 <div class="row">
@@ -413,7 +413,7 @@
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-cloud-upload-outline"></i></a>
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-at"></i></a>
                                             </div>
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>Submit</button>
+                                            <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>{{ __('messages.submit') }}</button>
                                         </div>
                                     </form>
                                 </div> <!-- end .border-->

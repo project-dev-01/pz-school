@@ -77,7 +77,7 @@
                                 <input type="text" id="citizenship" name="citizenship" class="form-control" placeholder="Citizenship">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="occupation">Occupation</label>
+                                <label for="occupation">{{ __('messages.occupation') }}</label>
                                 <input type="text" id="occupation" name="occupation" class="form-control" placeholder="Occupation">
                             </div>
                             <div class="form-group mb-3">
@@ -92,7 +92,7 @@
                                 <label for="age">Age</label>
                                 <input class="form-control" id="age" type="number" name="age" placeholder="Age">
                             </div>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">{{ __('messages.submit') }}</button>
                         </form>
                     </div> <!-- end col -->
                 </div>

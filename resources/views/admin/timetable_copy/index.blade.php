@@ -171,7 +171,7 @@
                     <input type="hidden" name="semester_id" id="edit_semester_id">
                     <input type="hidden" name="session_id" id="edit_session_id">
                     <div class="form-group">
-                        <label for="day">Day<span class="text-danger">*</span></label>
+                        <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                         <select id="day" class="form-control" name="day">
                             <option value="">Select Day</option>
                             <option value="sunday">Sunday</option>

@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                         @forelse ($subjects as $sub)

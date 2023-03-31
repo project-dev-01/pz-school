@@ -67,13 +67,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Occupation<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                     <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">Income</label>
+                                    <label for="">{{ __('messages.income') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

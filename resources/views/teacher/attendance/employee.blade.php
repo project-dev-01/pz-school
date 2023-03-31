@@ -83,7 +83,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Employee List
+                        {{ __('messages.employee_list') }}
                             <h4>
                     </li>
                 </ul><br>

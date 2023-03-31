@@ -38,7 +38,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Employee Name</th>
-                                        <th>Department Name</th>
+                                        <th>{{ __('messages.department_name') }}</th>
                                         <th>Approval Head</th>
                                         <th>Action</th>
                                     </tr>

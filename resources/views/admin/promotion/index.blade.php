@@ -170,7 +170,7 @@
                             <br>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Promotion
+                                {{ __('messages.promotion') }}
                                 </button>
                             </div>
                         </div> <!-- end table-responsive-->

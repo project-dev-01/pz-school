@@ -5,7 +5,7 @@
                                 <div class="card-box">
                                     <form class="addSoapForm" method="post" action="{{ route('admin.soap.add') }}" autocomplete="off">
                                         <div class="form-group text-right m-b-0">
-                                            <!--<button type="button" class="btn btn-secondary waves-effect">Close</button>-->
+                                            <!--<button type="button" class="btn btn-secondary waves-effect">{{ __('messages.close') }}</button>-->
                                             <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
                                         </div>
                                         <input type="hidden" class="student_id" name="student_id">
@@ -47,7 +47,7 @@
                                                                             <table class="table table-bordered table-nowrap table-hover table-centered m-0">
                                                                                 <thead>
                                                                                     <th>No</th>
-                                                                                    <th>Subject</th>
+                                                                                    <th>{{ __('messages.subject') }}</th>
                                                                                     <th>Refered By</th>
                                                                                     <th>Date</th>
                                                                                     <th>Action</th>

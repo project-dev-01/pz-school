@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject" class="form-control" required="" name="subject">
                                         <option value="">Select Subject</option>
                                         <option value="All">All</option>

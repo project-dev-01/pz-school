@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="department">Department<span class="text-danger">*</span></label>
+                                    <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="department" id="employeeReportDepartment">
                                         <option value="">Select Department</option>
                                         @foreach($department as $dep)

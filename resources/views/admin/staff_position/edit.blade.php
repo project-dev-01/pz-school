@@ -11,12 +11,12 @@
                     @csrf
                     <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="name">Staff Position Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.staff_position_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Staff Position Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

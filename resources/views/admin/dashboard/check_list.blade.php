@@ -14,7 +14,7 @@
                 <!-- <div class="text-center">
                     <h4 class="mt-0">Text in a modal</h4>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">{{ __('messages.close') }}</button>
                 </div> -->
                 <!-- <div class="text-center"> -->
                 <div class="row">
@@ -100,7 +100,7 @@
 
                                                 <input type="hidden" name="to_do_list_id" id="toDoListId">
                                                 <div class="p-2 bg-light d-flex justify-content-between align-items-center">
-                                                    <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>Submit</button>
+                                                    <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>{{ __('messages.submit') }}</button>
                                                 </div>
                                             </form>
                                         </div> <!-- end .border-->

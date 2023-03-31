@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subjectID" id="lblsectionId">Subject Name<span class="text-danger">*</span></label>
+                                    <label for="subjectID" id="lblsectionId">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Assign Grade Subjects</h4>
+                <h4 class="page-title">{{ __('messages.assign_grade_subjects') }}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Grade Subjects<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -78,7 +78,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Assign Grade Subjects List<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects_list') }}<h4>
                     </li>
                 </ul><br>
 

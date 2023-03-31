@@ -28,13 +28,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignSubjects">Subject<span class="text-danger">*</span></label>
+                        <label for="assignSubjects">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
                             <option value="">Choose Subject</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignClassTeacher">Grade Teacher<span class="text-danger">*</span></label>
+                        <label for="assignClassTeacher">{{ __('messages.grade_teacher') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
                             <option value="">Choose Grade Teacher</option>
                             @forelse($getAllTeacherList as $teacher)
@@ -45,14 +45,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="editsubjectType">Type<span class="text-danger">*</span></label>
+                        <label for="editsubjectType">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="editsubjectType" name="type">
                             <option value="0">Main</option>
                             <option value="1">Alternative</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

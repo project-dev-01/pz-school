@@ -8,7 +8,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Grades</h4>
+                <h4 class="page-title">{{ __('messages.grades') }}</h4>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
                                     <tr>
                                         <th>S.No</th>
                                         <th>Branch</th>
-                                        <th>Grade Name</th>
+                                        <th>{{ __('messages.grade_name') }}</th>
                                         <th>Grade Point</th>
                                         <th>Min Percentage</th>
                                         <th>Max Percentage</th>

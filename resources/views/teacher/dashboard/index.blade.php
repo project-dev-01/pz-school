@@ -415,7 +415,7 @@
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
-                                                <td>Type</td>
+                                                <td>{{ __('messages.type') }}</td>
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
@@ -537,7 +537,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Subject Name </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.subject_name') }} </div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="ttSubjectID" name="subject_id">
@@ -584,7 +584,7 @@
                                     <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
+                                    <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">{{ __('messages.close') }}</button> -->
                                     <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
                                 </div>
                             </div>
@@ -1045,7 +1045,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>Marks</th>
                                 <th>Subject Position</th>
                             </tr>

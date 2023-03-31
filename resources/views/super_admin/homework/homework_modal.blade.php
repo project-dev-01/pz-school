@@ -87,7 +87,7 @@
                                                             <th>#</th>
                                                             <th>Student</th>
                                                             <th>Register No</th>
-                                                            <th>Subject</th>
+                                                            <th>{{ __('messages.subject') }}</th>
                                                             <th>Status</th>
                                                             <th data-field="user-status">Score</th>
                                                             <th>Remarks</th>

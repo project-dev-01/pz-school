@@ -403,7 +403,7 @@
                             <li>
                                 <a href="#sidebartimeTable" data-toggle="collapse">
                                     <!-- <i class="far fa-calendar-alt"></i>-->
-                                    <span>{{ __('messages.time_tables') }}</span>
+                                    <span>Time Tables</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebartimeTable">
@@ -415,7 +415,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.time_table') }}</span>
+                                                <span>Time Table</span>
                                             </a>
                                         </li>
                                         <li>
@@ -657,7 +657,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
-                                                <span>Add Schedule</span>
+                                                <span>{{ __('messages.add_schedule') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -1023,7 +1023,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarSettingMasters" data-toggle="collapse">
-                                    Masters <span class="menu-arrow"></span>
+                                {{ __('messages.masters') }} <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sideBarSettingMasters">
                                     <ul class="nav-second-level">
@@ -1069,7 +1069,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
-                                                <span>Stream Type </span>
+                                                <span>{{ __('messages.stream_type') }} </span>
                                             </a>
                                         </li>
                                         <li>
@@ -1164,7 +1164,7 @@
                 <li>
                     <a href="{{ route('staff.classroom.management')}}" class="nav-link {{ (request()->is('staff/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
+                        <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
 
@@ -1308,7 +1308,7 @@
                 <li>
                     <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
+                        <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
                 <li>

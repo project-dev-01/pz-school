@@ -44,7 +44,7 @@
                                 <th>S.No</th>
                                 <th>Branch Name</th>
                                 <th>Vehicle No</th>
-                                <th>Capacity</th>
+                                <th>{{ __('messages.capacity') }}</th>
                                 <th>Driver Name</th>
                                 <th>Driver Phone</th>
                                 <th>Driver License</th>

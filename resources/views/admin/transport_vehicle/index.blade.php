@@ -42,7 +42,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Vehicle Number</th>
-                                    <th>Capacity</th>
+                                    <th>{{ __('messages.capacity') }}</th>
                                     <th>Insurance Renewal</th>
                                     <th>Driver Name</th>
                                     <th>Driver Phone</th>

@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject" class="form-control" required="" name="subject">
                                         <option value="">Select Subject</option>
                                         <option value="All">All</option>
@@ -273,7 +273,7 @@
                                             </div><br>
                                             <div class="form-group text-right m-b-0">
                                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>

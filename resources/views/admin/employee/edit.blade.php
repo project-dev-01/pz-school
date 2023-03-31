@@ -228,7 +228,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">Personal details<h4>
+                            <h4 class="nav-link">{{ __('messages.personal_details') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -286,7 +286,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="short_name">Short name</label>
+                                    <label for="short_name">{{ __('messages.short_name') }}</label>
                                     <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="AHMAD ABDULLAH">
                                 </div>
                             </div>
@@ -351,7 +351,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="employment_status">Employment status</label>
+                                    <label for="employment_status">{{ __('messages.employment_status') }}</label>
                                     <select class="form-control" name="employment_status" id="employment_status">
                                         <option value="">Choose employment status</option>
                                         <option value="Under_Probation" {{$employee['employment_status'] =="Under_Probation" ? 'selected' : '' }}>Under Probation</option>
@@ -408,14 +408,14 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Employee Details<h4>
+                            <h4 class="navv">{{ __('messages.employee_details') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="role_id">Role<span class="text-danger">*</span></label>
+                                    <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <!-- <select class="form-control" name="role_id" id="role_id"> -->
                                     <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose The Role">
                                         <option value="">Select Role</option>
@@ -439,7 +439,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="joining_date">Joining Date</label>
+                                    <label for="joining_date">{{ __('messages.joining_date') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -452,7 +452,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="designation_id">Designation</label>
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="Choose The Designation">
                                         <option value="">Select Designation</option>
                                         @forelse($designation as $des)
@@ -477,7 +477,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department_id">Department</label>
+                                    <label for="department_id">{{ __('messages.department') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose The Department">
                                         <option value="">Select Department</option>
                                         @forelse($department as $dep)
@@ -499,7 +499,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff_position">Staff Position</label>
+                                    <label for="staff_position">{{ __('messages.staff_position') }}</label>
                                     <select class="form-control" id="staffPosition" name="staff_position">
                                         <option value="">Select Position</option>
                                         @forelse($staff_positions as $r)
@@ -511,7 +511,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="salary_grade">Salary Grade</label>
+                                    <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
                                     <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Salary Grade">
                                 </div>
                             </div>
@@ -520,7 +520,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff_category">Staff Category</label>
+                                    <label for="staff_category">{{ __('messages.staff_category') }}</label>
                                     <select class="form-control" id="staffCategory" name="staff_category">
                                         <option value="">Select Category</option>
                                         @forelse($staff_categories as $r)
@@ -532,7 +532,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="qualifications">Staff Qualification</label>
+                                    <label for="qualifications">{{ __('messages.staff_qualification') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose The Qualification">
                                         <option value="">Select Qualification</option>
                                         @forelse($qualifications as $qua)
@@ -554,7 +554,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="stream_type">Stream Type</label>
+                                    <label for="stream_type">{{ __('messages.stream_type') }}</label>
                                     <select class="form-control" id="streamType" name="stream_type">
                                         <option value="">Select Stream Type</option>
                                         @forelse($stream_types as $r)
@@ -684,33 +684,33 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Medical History<h4>
+                            <h4 class="navv">{{ __('messages.medical_history') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
-                                <label class="custom-control-label" for="skip_medical_history">Skipped Medical History</label>
+                                <label class="custom-control-label" for="skip_medical_history">{{ __('messages.skipped_medical_history') }}</label>
                             </div>
                         </div>
                         <div id="medical_history_form">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="height">Height</label>
+                                        <label for="height">{{ __('messages.height') }}</label>
                                         <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" placeholder="Height" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="weight">Weight</label>
+                                        <label for="weight">{{ __('messages.weight') }}</label>
                                         <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" placeholder="Weight" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="allergy">Allergy</label>
+                                        <label for="allergy">{{ __('messages.allergy') }}</label>
                                         <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="Allergy" placeholder="Allergy" data-parsley-trigger="change">
                                     </div>
                                 </div>
@@ -737,33 +737,33 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Bank Details<h4>
+                            <h4 class="navv">{{ __('messages.bank_details') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
-                                <label class="custom-control-label" for="skip_bank_details">Skipped Bank Details</label>
+                                <label class="custom-control-label" for="skip_bank_details">{{ __('messages.skipped_bank_details') }}</label>
                             </div>
                         </div>
                         <div id="bank_details_form">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
+                                        <label for="bank_name">{{ __('messages.bank_name') }}<span class="text-danger">*</span></label>
                                         <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" placeholder="Bank Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="holder_name">Account Holder<span class="text-danger">*</span></label>
+                                        <label for="holder_name">{{ __('messages.account_holder') }}<span class="text-danger">*</span></label>
                                         <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" placeholder="Ali" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
+                                        <label for="bank_branch">{{ __('messages.bank_branch') }}<span class="text-danger">*</span></label>
                                         <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" placeholder="Branch Name" data-parsley-trigger="change">
                                     </div>
                                 </div>
@@ -771,19 +771,19 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="bank_address">Bank Address<span class="text-danger">*</span></label>
+                                        <label for="bank_address">{{ __('messages.bank_address') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" placeholder="Bank Address" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="ifsc_code">IFSC Code<span class="text-danger">*</span></label>
+                                        <label for="ifsc_code">{{ __('messages.ifsc_code') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" placeholder="IFSC Code" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="">Account No<span class="text-danger">*</span></label>
+                                        <label for="">{{ __('messages.account_no') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" placeholder="Account Number" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>

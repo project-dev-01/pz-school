@@ -17,7 +17,7 @@
                                         <td class="title"></td>
                                     </tr>
                                     <tr>
-                                        <td>Type</td>
+                                        <td>{{ __('messages.type') }}</td>
                                         <td class="type"></td>
                                     </tr>
                                     <tr>

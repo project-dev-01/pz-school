@@ -29,7 +29,7 @@
                                         <td class="title">Volley Ball</td>
                                     </tr>
                                     <tr>
-                                        <td>Type</td>
+                                        <td>{{ __('messages.type') }}</td>
                                         <td class="type">Sports</td>
                                     </tr>
                                     <tr>

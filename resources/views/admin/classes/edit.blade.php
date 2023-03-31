@@ -11,19 +11,19 @@
                     @csrf
                     <input type="hidden" id="classID" name="class_id">
                     <div class="form-group">
-                        <label for="name">Grade Name</label>
+                        <label for="name">{{ __('messages.grade_name') }}</label>
                         <input type="text" id="editclassName" name="name" class="form-control" placeholder="Enter Grade Name">
                     </div>
                     <div class="form-group">
-                        <label for="name_numeric">Grade Numeric</label>
+                        <label for="name_numeric">{{ __('messages.grade_numeric') }}</label>
                         <input type="text" id="editnameNumeric" name="name_numeric" class="form-control" placeholder="Enter Grade Numeric">
                     </div>
                     <div class="form-group">
-                        <label for="short_name">Short Name<span class="text-danger">*</span></label>
+                        <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="edit_short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

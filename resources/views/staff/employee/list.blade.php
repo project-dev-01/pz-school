@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                         </ol>
                     </div>
-                    <h4 class="page-title">Employee List</h4>
+                    <h4 class="page-title">{{ __('messages.employee_list') }}</h4>
                 </div>
             </div>
         </div>
@@ -37,9 +37,9 @@
                                         <th>Email</th>
                                         <th>Mobile No</th>
                                         <th>{{ __('messages.date_of_birth') }}</th>
-                                        <th>Joining Date</th>
-                                        <th>Department</th>
-                                        <th>Designation</th>
+                                        <th>{{ __('messages.joining_date') }}</th>
+                                        <th>{{ __('messages.department') }}</th>
+                                        <th>{{ __('messages.designation') }}</th>
                                         <th>Present Address</th>
                                         <th>Action</th>
                                     </tr>
@@ -53,7 +53,7 @@
                                         <td>27/03/2021</td>
                                         <td>01/01/2020</td>
                                         <td>Staff</td>
-                                        <td>Teacher</td>
+                                        <td>{{ __('messages.teacher') }}</td>
                                         <td>21,KL</td>
                                         <td>
                                             <div class="button-list">

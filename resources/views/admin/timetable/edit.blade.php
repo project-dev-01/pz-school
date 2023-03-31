@@ -50,8 +50,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Break</th>
-                                                <th>Subject</th>
-                                                <th>Teacher</th>
+                                                <th>{{ __('messages.subject') }}</th>
+                                                <th>{{ __('messages.teacher') }}</th>
                                                 <th>Starting Time</th>
                                                 <th>Ending Time</th>
                                                 <th>Class Room</th>

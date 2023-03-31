@@ -29,7 +29,7 @@
                                                         <table class="table mb-0">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Subject</th>
+                                                                    <th>{{ __('messages.subject') }}</th>
                                                                     <th>Score</th>
                                                                     <th>{{ __('messages.grade') }}</th>
                                                                     <th>Ranking</th>
@@ -112,7 +112,7 @@
                                                         <table class="table mb-0">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Subject</th>
+                                                                    <th>{{ __('messages.subject') }}</th>
                                                                     <th>Score</th>
                                                                     <th>{{ __('messages.grade') }}</th>
                                                                     <th>Ranking</th>

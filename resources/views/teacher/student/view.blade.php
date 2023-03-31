@@ -785,13 +785,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                     <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_income">Income</label>
+                                                    <label for="txt_income">{{ __('messages.income') }}</label>
                                                     <input type="text" maxlength="50" id="father_income" class="form-control " placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
@@ -966,13 +966,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                     <input type="text" maxlength="50" id="mother_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_income">Income</label>
+                                                    <label for="txt_income">{{ __('messages.income') }}</label>
                                                     <input type="text" maxlength="50" id="mother_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
@@ -1160,13 +1160,13 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">Occupation<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                     <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Occupation" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_income">Income</label>
+                                                    <label for="txt_income">{{ __('messages.income') }}</label>
                                                     <input type="text" maxlength="50" id="guardian_income" class="form-control" placeholder="Income" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
@@ -1413,9 +1413,9 @@
                                                 <td width="25%" class="father_education"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Occupation</th>
+                                                <th width="25%">{{ __('messages.occupation') }}</th>
                                                 <td width="25%" class="father_occupation"></td>
-                                                <th width="25%">Income</th>
+                                                <th width="25%">{{ __('messages.income') }}</th>
                                                 <td width="25%" class="father_income"></td>
                                             </tr>
                                             <tr>
@@ -1476,9 +1476,9 @@
                                                 <td width="25%" class="mother_education"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Occupation</th>
+                                                <th width="25%">{{ __('messages.occupation') }}</th>
                                                 <td width="25%" class="mother_occupation"></td>
-                                                <th width="25%">Income</th>
+                                                <th width="25%">{{ __('messages.income') }}</th>
                                                 <td width="25%" class="mother_income"></td>
                                             </tr>
                                             <tr>
@@ -1539,9 +1539,9 @@
                                                 <td width="25%" class="guardian_education"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Occupation</th>
+                                                <th width="25%">{{ __('messages.occupation') }}</th>
                                                 <td width="25%" class="guardian_occupation"></td>
-                                                <th width="25%">Income</th>
+                                                <th width="25%">{{ __('messages.income') }}</th>
                                                 <td width="25%" class="guardian_income"></td>
                                             </tr>
                                             <tr>

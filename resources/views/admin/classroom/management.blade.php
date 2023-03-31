@@ -519,7 +519,7 @@
                                                     <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                                                     <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
                                                 </div>
                                             </div><!-- /.modal-content -->
@@ -569,7 +569,7 @@
                                                 <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                                                 <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">Save</button>
                                             </div>
                                         </div><!-- /.modal-content -->
@@ -677,7 +677,7 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-success text-uppercase shadow-sm">
-                                                            <i class="fe-plus-circle"></i> Add</button>
+                                                            <i class="fe-plus-circle"></i> {{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-danger text-uppercase" disabled="disabled">
                                                             <i class="fe-minus-circle"></i> Remove</button>
                                                         <button type="submit" id="save-button" class="btn btn-info waves-effect waves-light text-uppercase">

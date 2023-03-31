@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Role<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Role</option>
                                         <option value="">Teacher</option>
@@ -120,7 +120,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Staff Id</th>
+                                                <th>{{ __('messages.staff_id') }}</th>
                                                 <th>Status</th>
                                                 <th>Remarks</th>
 

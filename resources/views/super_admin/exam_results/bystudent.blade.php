@@ -105,7 +105,7 @@
                                     <tr>
                                         <th class="align-middle" rowspan="3">S.no.</th>
                                         <th class="align-middle" rowspan="3">Student Name</th>                                        
-                                        <th class="text-center"colspan="14">Subject Name</th>                                
+                                        <th class="text-center"colspan="14">{{ __('messages.subject_name') }}</th>                                
                                     </tr>   
                                     <tr>
                                         <th colspan="2" class="align-top">English</th>

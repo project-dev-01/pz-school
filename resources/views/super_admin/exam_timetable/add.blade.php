@@ -14,7 +14,7 @@
                     <table class="table table-bordered mb-0">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>Date</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>

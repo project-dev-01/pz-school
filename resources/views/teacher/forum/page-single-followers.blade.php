@@ -364,7 +364,7 @@
                                 <div class="row align-items-center no-gutters hide-desktope">
                                     <div class="col-9">
                                         <ul class="tt-list-badge">
-                                            <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Teacher</span></a></li>
+                                            <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">{{ __('messages.teacher') }}</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="col-3 ml-auto show-mobile">
@@ -375,7 +375,7 @@
                                 Japanese Kanji is so hard to remember, let alone write :')In school, we got given a booklet, where it'd show the kanji, then its hiragana/romaji. They created the book so that each kanji represented an object/picture
                                 </div>
                             </div>
-                            <div class="tt-col-category"><a href="#"><span class="tt-color05 tt-badge">Teacher</span></a></div>
+                            <div class="tt-col-category"><a href="#"><span class="tt-color05 tt-badge">{{ __('messages.teacher') }}</span></a></div>
                             <div class="tt-col-value-large hide-mobile">9 Jan,21</div>
                         </div>
                         <div class="tt-item">

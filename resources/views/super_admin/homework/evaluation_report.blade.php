@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Subject</option>
                                         <option value="press">English</option>
@@ -153,7 +153,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Subject</th>
+                                                                <th>{{ __('messages.subject') }}</th>
                                                                 <th>Standard</th>
                                                                 <th>{{ __('messages.class') }}</th>
                                                                 <th>Date of Homework</th>
@@ -199,7 +199,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Subject</th>
+                                                                <th>{{ __('messages.subject') }}</th>
                                                                 <th>Standard</th>
                                                                 <th>{{ __('messages.class') }}</th>
                                                                 <th>Date of Homework</th>

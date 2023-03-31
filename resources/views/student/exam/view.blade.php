@@ -20,7 +20,7 @@
                     <table class="table table-bordered dt-responsive">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>Paper Name</th>
                                 <th>Date</th>
                                 <th>Starting Time</th>

@@ -432,7 +432,7 @@
                                                                             <td id="type"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Subject</td>
+                                                                            <td>{{ __('messages.subject') }}</td>
                                                                             <td id="start_date">
                                                                             </td>
                                                                         </tr>
@@ -855,7 +855,7 @@
                                     </div>
                                     <div class="form-group text-right m-b-0">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit">
-                                            Submit
+                                        {{ __('messages.submit') }}
                                         </button>
                                         <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                             Cancel

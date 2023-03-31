@@ -116,7 +116,7 @@
                                             <th>Roll No</th>
                                             <th>{{ __('messages.gender') }}</th>
                                             <th>Email</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('messages.actions') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody >

@@ -16,7 +16,7 @@
                         <span class="text-danger error-text vehicle_no_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="capacity">Capacity<span class="text-danger">*</span></label>
+                        <label for="capacity">{{ __('messages.capacity') }}<span class="text-danger">*</span></label>
                         <input type="text"  name="capacity" class="form-control" placeholder="Enter Capacity">
                         <span class="text-danger error-text capacity_error"></span>
                     </div>
@@ -41,8 +41,8 @@
                         <span class="text-danger error-text driver_license_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit"  class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit"  class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

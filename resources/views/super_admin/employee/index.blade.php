@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Add Employee</h4>
+                <h4 class="page-title">{{ __('messages.add_employee') }}</h4>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="role">Role<span class="text-danger">*</span></label>
+                                    <label for="role">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role">
                                         <option value="">Select Role</option>
                                         @foreach($roles as $r)
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-4">
-                                    <label for="joining_date">Joining Date<span class="text-danger">*</span></label>
+                                    <label for="joining_date">{{ __('messages.joining_date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -69,7 +69,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="designation">Designation<span class="text-danger">*</span></label>
+                                    <label for="designation">{{ __('messages.designation') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDesignation" name="designation">
                                         <option value="">Select Designation</option>
                                         <option>BEd</option>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department">Department<span class="text-danger">*</span></label>
+                                    <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDepartment" name="department">
                                         <option value="">Select Department</option>
                                         <option value="press">Accounting and Finance Department</option>
@@ -363,7 +363,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Bank Branch<span class="text-danger">*</span></label>
+                                    <label for="">Bank Brancsh<span class="text-danger">*</span></label>
                                     <input type="text" id="" class="form-control" name="" data-parsley-trigger="change">
                                 </div>
                             </div>

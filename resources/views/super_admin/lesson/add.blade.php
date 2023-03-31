@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="date">Teacher<span class="text-danger">*</span></label>
+                        <label for="date">{{ __('messages.teacher') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select Teacher</option>
                             <option>Smith</option>
@@ -71,8 +71,8 @@
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="eventTypeSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" id="eventTypeSubmit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

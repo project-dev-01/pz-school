@@ -101,7 +101,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Subject</option>
                                         <option>All </option>
@@ -260,7 +260,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="ml-2 btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -373,7 +373,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="ml-2 btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -487,7 +487,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>

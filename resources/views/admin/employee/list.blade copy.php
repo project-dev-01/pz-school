@@ -92,7 +92,7 @@
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>Stream Type</th>
                                     <th>Department</th>
-                                    <th>Designation</th>
+                                    <th>{{ __('messages.designation') }}</th>
                                     <th>Email</th>
                                     <th>Mobile No</th>
                                     <th>Action</th>

@@ -523,7 +523,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Subject Name </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.subject_name') }} </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="ttSubjectID" name="subject_id">
@@ -589,7 +589,7 @@
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
-                                                <td>Type</td>
+                                                <td>{{ __('messages.type') }}</td>
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
@@ -821,7 +821,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Subject</th>
+                                    <th>{{ __('messages.subject') }}</th>
                                     <th>Marks</th>
                                     <th>Subject Position</th>
                                 </tr>

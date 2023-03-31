@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option>Select Subject</option>
                                         <option value="press">English</option>

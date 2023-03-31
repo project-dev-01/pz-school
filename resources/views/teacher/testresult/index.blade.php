@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                            <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                             <select id="subjectID" class="form-control" name="subject_id">
                                                 <option value="">Select Subject</option>
                                             </select>
@@ -349,7 +349,7 @@
                 <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="Enter memo here" name="student_remarks"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                 <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
             </div>
         </div><!-- /.modal-content -->

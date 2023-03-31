@@ -14,7 +14,7 @@
                     <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>Paper Name</th>
                                 <th>Date</th>
                                 <th>Starting Time</th>

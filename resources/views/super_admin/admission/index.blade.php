@@ -325,7 +325,7 @@
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="customCheck11">
-                            <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
+                            <label class="custom-control-label" for="customCheck11">{{ __('messages.skipped_bank_details') }}</label>
                         </div>
                     </div>
                     <div class="row">
@@ -359,13 +359,13 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Occupation<span class="text-danger">*</span></label>
+                                <label for="">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                 <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="">Income</label>
+                                <label for="">{{ __('messages.income') }}</label>
                                 <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                             </div>
                         </div>

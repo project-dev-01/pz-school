@@ -45,7 +45,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
-                                <th>Type</th>
+                                <th>{{ __('messages.type') }}</th>
                                 <th>Audience</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
