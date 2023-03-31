@@ -159,8 +159,8 @@
                                     <tr>
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>#</th>
-                                        <th>Student Name</th>
-                                        <th>Register No</th>
+                                        <th>{{ __('messages.student_name') }}</th>
+                                        <th>{{ __('messages.register_no') }}</th>
                                         <th>Promote to Class</th>
                                     </tr>
                                 </thead>

@@ -40,7 +40,7 @@
                                 <th>#</th>
                                 <th>Hall No</th>
                                 <th>No Of Seats</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

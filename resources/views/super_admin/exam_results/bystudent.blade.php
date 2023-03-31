@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -103,9 +103,9 @@
                             <table class="table w-100 nowrap table-bordered table-striped" id="">
                                 <thead>
                                     <tr>
-                                        <th class="align-middle" rowspan="3">S.no.</th>
-                                        <th class="align-middle" rowspan="3">Student Name</th>                                        
-                                        <th class="text-center"colspan="14">{{ __('messages.subject_name') }}</th>                                
+                                        <th class="align-middle" rowspan="3">S.no.</th>                                    
+                                        <th class="align-middle" rowspan="3">{{ __('messages.student_name') }}</th>                                   
+                                        <th class="text-center"colspan="14">{{ __('messages.subject_name') }}</th>                            
                                     </tr>   
                                     <tr>
                                         <th colspan="2" class="align-top">English</th>

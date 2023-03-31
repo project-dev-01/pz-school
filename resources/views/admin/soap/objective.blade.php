@@ -6,7 +6,7 @@
                                     <form class="addSoapForm" method="post" action="{{ route('admin.soap.add') }}" autocomplete="off">
                                         <div class="form-group text-right m-b-0">
                                             <!--<button type="button" class="btn btn-secondary waves-effect">{{ __('messages.close') }}</button>-->
-                                            <button type="submit" class="btn btn-info waves-effect waves-light">Save</button>
+                                            <button type="submit" class="btn btn-info waves-effect waves-light">{{ __('messages.save') }}</button>
                                         </div>
                                         <input type="hidden" class="student_id" name="student_id">
                                         <input type="hidden"  name="soap_type_id" value="2">
@@ -50,7 +50,7 @@
                                                                                     <th>{{ __('messages.subject') }}</th>
                                                                                     <th>Refered By</th>
                                                                                     <th>Date</th>
-                                                                                    <th>Action</th>
+                                                                                    <th>{{ __('messages.action') }}</th>
                                                                                 </thead>
 
                                                                                 <tbody id="objective-category-{{ $category['id'] }}" class="objective-category-table" data-type="2">
@@ -87,7 +87,7 @@
                         <th>Title</th>
                         <th>Refered By</th>
                         <th>Date</th>
-                        <th>Action</th>
+                        <th>{{ __('messages.action') }}</th>
                     </tr>
                 </thead>
 

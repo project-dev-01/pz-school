@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.designation_name') }}</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

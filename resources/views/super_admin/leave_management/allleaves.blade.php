@@ -24,7 +24,7 @@
                     <li class="nav-item">
                         <h4 class="nav-link">
                         <span class="fab fa-audible" id="span-parent"></span>
-                         Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>           
@@ -52,7 +52,7 @@
                     </form>
                     <div class="form-group text-right m-b-0">
                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
+                    {{ __('messages.filter') }}
                                  </button>               
                     </div>
                 </div> <!-- end card-body -->

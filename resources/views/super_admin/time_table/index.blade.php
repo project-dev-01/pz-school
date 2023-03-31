@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">Time Table</li>
+                        <li class="breadcrumb-item active">{{ __('messages.time_table') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Time Table</h4>
+                <h4 class="page-title">{{ __('messages.time_table') }}</h4>
             </div>
         </div>
     </div>

@@ -44,8 +44,8 @@
                                     <th>Route Name</th>
                                     <th>Start Place</th>
                                     <th>Stop Place</th>
-                                    <th>Remarks</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.remarks') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

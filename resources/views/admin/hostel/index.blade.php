@@ -44,11 +44,11 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Hostel Name</th>
+                                    <th>{{ __('messages.hostel_name') }}</th>
                                     <th>{{ __('messages.category') }}</th>
                                     <th>Warden</th>
-                                    <th>Remarks</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.remarks') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

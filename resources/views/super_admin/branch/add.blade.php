@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="school_name">School Name<span class="text-danger">*</span></label>
+                        <label for="school_name">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
                         <input type="text" maxlength="50" name="school_name" class="form-control" placeholder="Enter School Name">
                     </div>
                 </div>
@@ -161,7 +161,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="email">Email<span class="text-danger">*</span></label>
+                        <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group mb-3">
-                        <label for="password">Password<span class="text-danger">*</span></label>
+                        <label for="password">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -187,7 +187,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group mb-3">
-                        <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
+                        <label for="confirm_password">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -200,7 +200,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group mb-3">
-                        <label class="switch">Authentication
+                        <label class="switch">{{ __('messages.authentication') }}
 
                             <input id="status" name="status" type="checkbox">
                             <span>

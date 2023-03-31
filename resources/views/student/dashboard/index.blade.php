@@ -551,7 +551,7 @@
 
                                     <!--<div class="row mt-2">-->
                                     <div class="col-11 text-right">
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">{{ __('messages.save') }}</button>
                                     </div>
                                     <!--</div>-->
                                 </div>
@@ -695,7 +695,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="semester_id">Semester</label>
+                            <label for="semester_id">{{ __('messages.semester') }}</label>
                             <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                 <option value="0">Select Semester</option>
                                 @foreach($semester as $sem)
@@ -706,7 +706,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="session_id">Session</label>
+                            <label for="session_id">{{ __('messages.session') }}</label>
                             <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                 <option value="0">Select Session</option>
                                 @foreach($session as $ses)

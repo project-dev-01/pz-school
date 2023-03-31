@@ -47,8 +47,8 @@
                                         <th>Grade Point</th>
                                         <th>Min Percentage</th>
                                         <th>Max Percentage</th>
-                                        <th>Remarks</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.remarks') }}</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
 
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-3 col-form-label">Name<span class="text-danger">*</span></label>
+                                                <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                 </div>
@@ -123,7 +123,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-3 col-form-label">Remarks<span class="text-danger">*</span></label>
+                                                <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                 </div>
@@ -133,7 +133,7 @@
                                     <div class="col-md-1"></div>
                                 </div>
                                 <div class="clearfix mt-4">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">{{ __('messages.save') }}</button>
                                 </div>
                             </form>
 

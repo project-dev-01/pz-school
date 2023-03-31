@@ -39,7 +39,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Payment Status Name</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

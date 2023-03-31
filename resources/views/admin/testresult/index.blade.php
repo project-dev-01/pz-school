@@ -175,7 +175,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="10%">#</th>
-                                                <th class="text-center" width="10%">Student Name</th>
+                                                <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
                                                 <th class="text-center" width="20%">Score</th>
                                                 <th class="text-center" width="15%">{{ __('messages.grade') }}</th>
                                                 <th class="text-center" width="15%">Pass/Fail</th>
@@ -365,13 +365,13 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                <label for="heard">Remarks</label>
+                <label for="heard">{{ __('messages.remarks') }}</label>
                 <input type="hidden" id="studenetID" />
                 <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="Enter memo here" name="student_remarks"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
+                <button type="button" id="studentRemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -222,7 +222,7 @@
                         <div class="row">
                         <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="email">Email<span class="text-danger">*</span></label>
+                            <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -236,7 +236,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-3">
-                            <label for="email">Password<span class="text-danger">*</span></label>
+                            <label for="email">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -250,7 +250,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group mb-3">
-                            <label for="email">Retype Password<span class="text-danger">*</span></label>
+                            <label for="email">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">

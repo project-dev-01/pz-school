@@ -156,7 +156,7 @@
                                         <a href="javascript:void(0);" class="dropdown-item">Export
                                             Report</a>
                                         <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                        <a href="javascript:void(0);" class="dropdown-item">{{ __('messages.action') }}</a>
                                     </div>
                                 </div>
 
@@ -240,7 +240,7 @@
                                         <a href="javascript:void(0);" class="dropdown-item">Export
                                             Report</a>
                                         <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                        <a href="javascript:void(0);" class="dropdown-item">{{ __('messages.action') }}</a>
                                     </div>
                                 </div>
 
@@ -424,7 +424,7 @@
                                                                             }
                                                                         </style>
                                                                         <tr>
-                                                                            <td>Name</td>
+                                                                            <td>{{ __('messages.name') }}</td>
                                                                             <td id="title"></td>
                                                                         </tr>
                                                                         <tr>
@@ -761,7 +761,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="session_id">Session</label>
+                                                                <label for="session_id">{{ __('messages.session') }}</label>
                                                                 <select id="session_id" class="form-control" name="session_id">
                                                                     <option value="0">Select Session
                                                                     </option>
@@ -774,7 +774,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="semester_id">Semester</label>
+                                                                <label for="semester_id">{{ __('messages.semester') }}</label>
                                                                 <select id="semester_id" class="form-control" name="semester_id">
                                                                     <option value="0">Select
                                                                         Semester</option>
@@ -794,7 +794,7 @@
                                             <div class="card">
                                                 <ul class="nav nav-tabs">
                                                     <li class="nav-item">
-                                                        <h4 class="navv">Parent/Guardian Details<h4>
+                                                        <h4 class="navv">{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}<h4>
                                                     </li>
                                                 </ul>
                                                 <div class="card-body">

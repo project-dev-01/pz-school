@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>

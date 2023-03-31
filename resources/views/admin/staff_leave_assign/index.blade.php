@@ -26,7 +26,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -58,7 +58,7 @@
                                 Filter
                             </button> -->
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -93,7 +93,7 @@
                                     <th>#</th>
                                     <th>Staff Name </th>
                                     <th>Leave Type </th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

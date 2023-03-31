@@ -50,7 +50,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semesterID">Semester</label>
+                                    <label for="semesterID">{{ __('messages.semester') }}</label>
                                     <select id="semesterID" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sessionID">Session</label>
+                                    <label for="sessionID">{{ __('messages.session') }}</label>
                                     <select id="sessionID" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -118,7 +118,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>

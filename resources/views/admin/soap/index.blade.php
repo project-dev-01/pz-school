@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12"><b>Name :<span class="font-weight-semibold student_name"></span></b> </p>
+                                <p class="col-md-12"><b>{{ __('messages.name') }} :<span class="font-weight-semibold student_name"></span></b> </p>
                             </div>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="old_session_id">Session</label>
+                                                        <label for="old_session_id">{{ __('messages.session') }}</label>
                                                         <select id="old_session_id" class="form-control"  name="session_id">                              
                                                         <option value="">Select Session</option>
                                                             @foreach($session as $ses)
@@ -143,7 +143,7 @@
                                             </div>
                                             <div class="form-group text-right m-b-0">
                                                 <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
-                                                    Filter
+                                                {{ __('messages.filter') }}
                                                 </button>
                                             </div>
                                         </form>
@@ -153,8 +153,8 @@
                                             <thead class="">
                                                     <tr>
                                                         <th>S.no</th>
-                                                        <th colspan="2">Student Name</th>
-                                                        <th>Email</th>
+                                                        <th colspan="2">{{ __('messages.student_name') }}</th>
+                                                        <th>{{ __('messages.email') }}</th>
                                                         <th>{{ __('messages.grade') }}</th>
                                                         <th>{{ __('messages.class') }}</th>
                                                     </tr>
@@ -226,7 +226,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="session_id">Session</label>
+                                                        <label for="session_id">{{ __('messages.session') }}</label>
                                                         <select id="session_id" class="form-control"  name="session_id">                              
                                                         <option value="">Select Session</option>
                                                             @foreach($session as $ses)
@@ -238,7 +238,7 @@
                                             </div>
                                             <div class="form-group text-right m-b-0">
                                                 <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
-                                                    Filter
+                                                {{ __('messages.filter') }}
                                                 </button>
                                             </div>
                                         
@@ -249,8 +249,8 @@
                                                 <thead class="">
                                                     <tr>
                                                         <th>S.no</th>
-                                                        <th colspan="2">Student Name</th>
-                                                        <th>Email</th>
+                                                        <th colspan="2">{{ __('messages.student_name') }}</th>
+                                                        <th>{{ __('messages.email') }}</th>
                                                         <th>{{ __('messages.grade') }}</th>
                                                         <th>{{ __('messages.class') }}</th>
                                                     </tr>
@@ -295,7 +295,7 @@
                                                                                 }
                                                                             </style>
                                                                             <tr>
-                                                                                <td>Name</td>
+                                                                                <td>{{ __('messages.name') }}</td>
                                                                                 <td id="title"></td>
                                                                             </tr>
                                                                             <tr>
@@ -598,7 +598,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="std_session_id">Session</label>
+                                                                    <label for="std_session_id">{{ __('messages.session') }}</label>
                                                                     <select id="std_session_id" class="form-control" name="std_session_id" disabled>
                                                                         <option value="0">Select Session</option>
                                                                         @foreach($session as $ses)
@@ -609,7 +609,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="std_semester_id">Semester</label>
+                                                                    <label for="std_semester_id">{{ __('messages.semester') }}</label>
                                                                     <select id="std_semester_id" class="form-control" name="std_semester_id" disabled>
                                                                         <option value="0">Select Semester</option>
                                                                         @foreach($semester as $sem)
@@ -625,7 +625,7 @@
                                                 <div class="card">
                                                     <ul class="nav nav-tabs">
                                                         <li class="nav-item">
-                                                            <h4 class="navv">Parent/Guardian Details<h4>
+                                                            <h4 class="navv">{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}<h4>
                                                         </li>
                                                     </ul>
                                                     <div class="card-body">

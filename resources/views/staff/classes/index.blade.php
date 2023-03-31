@@ -40,7 +40,7 @@
                                 <th>#</th>
                                 <th>Class Name</th>
                                 <th>Name Numeric</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

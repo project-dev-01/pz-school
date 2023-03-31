@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Register No<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.register_no') }}<span class="text-danger">*</span></label>
                                     <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" data-parsley-trigger="change">
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -268,7 +268,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="document" class="col-form-label">Photo</label>
+                                    <label for="document" class="col-form-label">{{ __('messages.photo') }}</label>
                                     <div class="col-12">
                                         <input type="file" class="custom-file-input" name="photo">
                                         <label class="custom-file-label" for="document">Choose file</label>
@@ -300,7 +300,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -313,7 +313,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="email">Password<span class="text-danger">*</span></label>
+                                    <label for="email">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -326,7 +326,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="email">Retype Password<span class="text-danger">*</span></label>
+                                    <label for="email">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -344,7 +344,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Guardian Details
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.guardian_details') }}
                                 <h4>
                         </li>
                     </ul>
@@ -358,7 +358,7 @@
                         <div class="row" id="parent_list" style="display:none;">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="heard">Guardian<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.guardian') }}<span class="text-danger">*</span></label>
                                     <select id="parent_id" name="parent_id" class="form-control">
                                         <option value="">Select Guardian</option>
                                         @foreach($parent as $par)
@@ -378,13 +378,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="heard">Name<span class="text-danger">*</span></label>
+                                        <label for="heard">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="txt_name" id="txt_name" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="heard">Relation<span class="text-danger">*</span></label>
+                                        <label for="heard">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="txt_relation" id="txt_relation" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
@@ -392,13 +392,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="heard">Father Name</label>
+                                        <label for="heard">{{ __('messages.father_name') }}</label>
                                         <input type="text" class="form-control" name="txt_fathernam" id="txt_fathernam" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="heard">Mother Name</label>
+                                        <label for="heard">{{ __('messages.mother_name') }}</label>
                                         <input type="text" class="form-control" name="txt_mothernam" id="txt_mothernam" placeholder="" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
@@ -418,7 +418,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Education</label>
+                                        <label for="">{{ __('messages.education') }}</label>
                                         <input type="" id="txt_eduction" class="form-control" name="txt_eduction" data-parsley-trigger="change">
                                     </div>
                                 </div>
@@ -458,7 +458,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="email">Email<span class="text-danger">*</span></label>
+                                        <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
@@ -471,7 +471,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group mb-3">
-                                        <label for="email">Password<span class="text-danger">*</span></label>
+                                        <label for="email">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
@@ -484,7 +484,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group mb-3">
-                                        <label for="email">Retype Password<span class="text-danger">*</span></label>
+                                        <label for="email">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
@@ -503,7 +503,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Transport Details
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.transport_details') }}
                                 <h4>
                         </li>
                     </ul>
@@ -512,7 +512,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="drp_transport_route">Transport Route</label>
+                                    <label for="drp_transport_route">{{ __('messages.transport_route') }}</label>
 
                                     <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                         <option value="">Select Transport</option>
@@ -537,7 +537,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Hostel Details
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.hostel_details') }}
                                 <h4>
                         </li>
                     </ul>
@@ -545,7 +545,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="drp_hostelnam">Hostel Name</label>
+                                    <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                     <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
                                         <option value="">Select Hostel</option>
                                         @foreach($hostel as $hos)
@@ -556,7 +556,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="drp_roomname">Room Name</label>
+                                    <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                     <select id="drp_roomname" name="drp_roomname" class="form-control">
                                         <option value="">First select the hostel</option>
                                     </select>
@@ -569,7 +569,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span>Previous School Details
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.previous_school_details') }}
                                 <h4>
                         </li>
                     </ul>
@@ -577,19 +577,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">School Name</label>
+                                    <label for="">{{ __('messages.school_name') }}</label>
                                     <input type="" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Qualification</label>
+                                    <label for="">{{ __('messages.qualification') }}</label>
                                     <input type="" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="message">Remarks</label>
+                            <label for="message">{{ __('messages.remarks') }}</label>
                             <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                 </textarea>
                         </div>

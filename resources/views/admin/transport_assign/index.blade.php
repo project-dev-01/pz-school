@@ -44,7 +44,7 @@
                                     <th>Route</th>
                                     <th>Stoppage</th>
                                     <th>Vehicle</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

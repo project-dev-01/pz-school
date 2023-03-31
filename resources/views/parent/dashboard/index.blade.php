@@ -561,7 +561,7 @@
                                     </div>
 
                                     <div class="col-11 text-right">
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">{{ __('messages.save') }}</button>
                                     </div>
                                 </div>
                         </div>
@@ -652,7 +652,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
+                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">Select Student</option>
                                         @forelse ($get_std_names_dashboard as $std)
@@ -748,7 +748,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Student Name</th>
+                                    <th>{{ __('messages.student_name') }}</th>
                                     <th>Leave From</th>
                                     <th>To From</th>
                                     <th>Teacher remarks</th>
@@ -756,7 +756,7 @@
                                     <th>Document</th>
                                     <th>Status</th>
                                     <th>Apply Date</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -779,7 +779,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="semester_id">Semester</label>
+                                <label for="semester_id">{{ __('messages.semester') }}</label>
                                 <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                     <option value="0">Select Semester</option>
                                     @foreach($semester as $sem)
@@ -790,7 +790,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="session_id">Session</label>
+                                <label for="session_id">{{ __('messages.session') }}</label>
                                 <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                     <option value="0">Select Session</option>
                                     @foreach($session as $ses)

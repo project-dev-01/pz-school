@@ -40,7 +40,7 @@
                                     <th>#</th>
                                     <th>Category Name</th>
                                     <th>Soap Type</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

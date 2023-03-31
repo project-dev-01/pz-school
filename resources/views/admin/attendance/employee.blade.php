@@ -34,7 +34,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="employeeReportSession" class="form-control" name="session_id">
                                         <option value="">Select Session</option>
                                         <option value="All">All</option>
@@ -88,7 +88,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>

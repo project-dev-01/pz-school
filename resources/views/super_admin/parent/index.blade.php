@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="">Name<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Relation<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
                                     <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                                 </div>
                             </div>
@@ -53,13 +53,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Father Name<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.father_name') }}<span class="text-danger">*</span></label>
                                     <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Mother Name<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.mother_name') }}<span class="text-danger">*</span></label>
                                     <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Education</label>
+                                    <label for="">{{ __('messages.education') }}</label>
                                     <input type="" id="" class="form-control" name="" data-parsley-trigger="change" required="">
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="email">Email<span class="text-danger">*</span></label>
+                                <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -152,7 +152,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group mb-3">
-                                <label for="email">Password<span class="text-danger">*</span></label>
+                                <label for="email">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -165,7 +165,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group mb-3">
-                                <label for="email">Retype Password<span class="text-danger">*</span></label>
+                                <label for="email">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-merge">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">

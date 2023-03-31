@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="col-md-4" id="remarks_div" style="display:none;">
                                         <div class="form-group">
-                                            <label for="heard">Remarks</label>
+                                            <label for="heard">{{ __('messages.remarks') }}</label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>
@@ -193,7 +193,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Name</th>
+                                                        <th>{{ __('messages.name') }}</th>
                                                         <th>Leave Type</th>
                                                         <th>Leave From</th>
                                                         <th>To From</th>
@@ -201,7 +201,7 @@
                                                         <th>Document</th>
                                                         <th>Status</th>
                                                         <th>Apply Date</th>
-                                                        <th>Action</th>
+                                                        <th>{{ __('messages.action') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Qualification</h4>
+                <h4 class="page-title">{{ __('messages.qualification') }}</h4>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Qualification</h4>
+                <h4 class="header-title">{{ __('messages.qualification') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.qualification_name') }}</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>                         

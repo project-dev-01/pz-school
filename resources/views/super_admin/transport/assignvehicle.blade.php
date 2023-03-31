@@ -99,7 +99,7 @@
                     
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Transport Route<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.transport_route') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
                             <option value="">Select</option>

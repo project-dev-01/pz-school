@@ -119,10 +119,10 @@
                                     <th>#</th>
                                     <th>Grade</th>
                                     <th>{{ __('messages.class') }}</th>
-                                    <th>Student Name</th>
+                                    <th>{{ __('messages.student_name') }}</th>
                                     <th>Fees Group</th>
                                     <!-- <th>Payment Status</th> -->
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

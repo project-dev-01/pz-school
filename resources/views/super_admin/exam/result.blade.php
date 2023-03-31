@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                <label for="heard">Roll No<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.roll_no') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" required="">
                                 </div>
                             </div>
@@ -86,11 +86,11 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <tr>
-                                            <th>Roll No</th>
+                                            <th>{{ __('messages.roll_no') }}</th>
                                             <td>PZ123456</td>
                                         </tr>
                                         <tr>
-                                            <td>Name</td>
+                                            <td>{{ __('messages.name') }}</td>
                                             <td>William</td>
                                         </tr>
                                         <tr>
@@ -112,8 +112,8 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr style="background-color:#0ABAB5">
-                                                <th>Roll No.</th>
-                                                <th>Name</th>
+                                                <th>{{ __('messages.roll_no') }}.</th>
+                                                <th>{{ __('messages.name') }}</th>
                                                 <th>English</th>
                                                 <th>Mathematics</th>
                                                 <th>History</th>

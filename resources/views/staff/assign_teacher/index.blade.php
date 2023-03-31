@@ -39,7 +39,7 @@
                                 <th>Class Name</th>
                                 <th>Section Name</th>
                                 <th>Teacher Name</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

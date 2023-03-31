@@ -331,7 +331,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                        Parent/Guardian Details
+                                        {{ __('messages.parent') }}/{{ __('messages.guardian_details') }}
                                             <h4>
                                     </li>
                                 </ul>
@@ -342,7 +342,7 @@
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
                                                     <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('public/users/images/').'/'.$parent['photo'] ? asset('public/users/images/').'/'.$parent['photo'] : asset('public/images/users/default.jpg') }}" />
-                                                    <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                                    <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -484,7 +484,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="education">Education</label>
+                                                <label for="education">{{ __('messages.education') }}</label>
                                                 <select class="form-control" name="education">
                                                     <option value="">Choose Education</option>
                                                     @forelse($education as $e)
@@ -568,7 +568,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -581,7 +581,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group mb-3">
-                                                <label class="switch">Authentication
+                                                <label class="switch">{{ __('messages.authentication') }}
 
                                                     <input id="edit_status" name="status" type="checkbox" {{ $parent['status'] == "1" ? "checked" : "" }}>
                                                     <span>
@@ -658,7 +658,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="password">Password</label>
+                                                <label for="password">{{ __('messages.password') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -671,7 +671,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="confirm_password">Retype Password</label>
+                                                <label for="confirm_password">{{ __('messages.retype_password') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">

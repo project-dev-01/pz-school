@@ -217,7 +217,7 @@
                                 <!--3rd row-->
                                 <br />
                                 <div class="clearfix mt-4">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">Save</button>
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">{{ __('messages.save') }}</button>
                                 </div>
                             </form>
 

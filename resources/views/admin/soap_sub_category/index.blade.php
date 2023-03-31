@@ -55,7 +55,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.category') }}</th>
                                     <th>Sub Category Name</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

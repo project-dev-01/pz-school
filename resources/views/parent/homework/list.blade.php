@@ -213,7 +213,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Remarks</span>{{$work['description']}}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.remarks') }}</span>{{$work['description']}}</p>
                                                     </div>
                                                 </div>
                                             </div>

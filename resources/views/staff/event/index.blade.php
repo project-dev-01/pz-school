@@ -44,7 +44,7 @@
                                 <th>End Date</th>
                                 <th>Created By</th>
                                 <th>Publish</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

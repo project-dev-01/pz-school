@@ -318,7 +318,7 @@
                                     </div>
                                     <div class="col-6 text-right">
                                         <button type="button" class="btn btn-light mr-1" data-dismiss="modal">{{ __('messages.close') }}</button>
-                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">{{ __('messages.save') }}</button>
                                     </div>
                                 </div>
                             </form>

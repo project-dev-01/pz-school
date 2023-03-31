@@ -760,7 +760,7 @@
                                 <h6 class="tt-title">Similar TAGS</h6>
                                 <ul class="tt-list-badge">
                                     <li><a href="#"><span class="tt-badge">Life Advice</span></a></li>
-                                    <li><a href="#"><span class="tt-badge">Education</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">{{ __('messages.education') }}</span></a></li>
                                     <li><a href="#"><span class="tt-badge">Area of study</span></a></li>
                                </ul>
                             </div>

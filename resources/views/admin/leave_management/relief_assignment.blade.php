@@ -34,7 +34,7 @@
                                         <th>No.Of.Days</th>
                                         <th>From Leave</th>
                                         <th>To Leave</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

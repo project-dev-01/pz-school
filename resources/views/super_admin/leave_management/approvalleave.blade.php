@@ -27,7 +27,7 @@
                                                 <th class="text-center">Leave Date From</th>                                                
                                                 <th class="text-center">No.Of.Days</th>
                                                 <th class="text-center">Reason(s)</th>                                                
-                                                <th class="text-center">Action</th>                                                
+                                                <th class="text-center">{{ __('messages.action') }}</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>

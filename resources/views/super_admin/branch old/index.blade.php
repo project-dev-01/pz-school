@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="button">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                                 <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
@@ -91,8 +91,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Branch Name</th>
-                                        <th>School Name</th>
-                                        <th>Email</th>
+                                        <th>{{ __('messages.school_name') }}</th>
+                                        <th>{{ __('messages.email') }}</th>
                                         <th>Mobile No</th>
                                         <th>Currency</th>
                                         <th>Symbol</th>
@@ -100,7 +100,7 @@
                                         <th>{{ __('messages.state') }}</th>
                                         <th>City</th>
                                         <th>Address</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

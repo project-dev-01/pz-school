@@ -264,10 +264,10 @@
                                                         <thead>
                                                             <tr>
                                                                 <th data-field="state" data-checkbox="true"></th>
-                                                                <th data-field="id" data-switchable="false">Student Name
+                                                                <th data-field="id" data-switchable="false">{{ __('messages.student_name') }}
                                                                 </th>
                                                                 <th data-field="name">Attentance</th>
-                                                                <th data-field="date">Remarks</th>
+                                                                <th data-field="date">{{ __('messages.remarks') }}</th>
                                                                 <th data-field="amount">Rating</th>
                                                                 <th data-field="user-status">Short Test
                                                                 </th>

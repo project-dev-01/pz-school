@@ -37,7 +37,7 @@
                 <div class="text-left mt-3">
                     <h4 class="font-13 text-uppercase">About Me :</h4>
                     <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
-                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
                     <p class="text-muted mb-2 font-13"><strong>Mobile No :</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
                 </div>
             </div> <!-- end card-box -->

@@ -52,7 +52,7 @@
                                 <th>Price</th>
                                 <th>Total Stock</th>
                                 <th>Issued Copies</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
