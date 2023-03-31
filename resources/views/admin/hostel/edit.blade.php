@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="name">Hostel Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.hostel_name') }}<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" placeholder="Enter The Hostel Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
@@ -43,7 +43,7 @@
                         <span class="text-danger error-text address_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="remarks">Remarks</label>
+                        <label for="remarks">{{ __('messages.remarks') }}</label>
                         <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>

@@ -39,7 +39,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Event Type Name</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

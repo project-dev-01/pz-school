@@ -30,14 +30,14 @@
                 </ul><br>
                 <div class="card-body">
                     <label class="form-inline mb-3">
-                        Show
+                    {{ __('messages.show') }}
                         <select id="demo-show-entries" class="form-control form-control-sm ml-1 mr-1">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
                             <option value="20">20</option>
                         </select>
-                        entries
+                    {{ __('messages.entries') }}
                     </label>
 
                     <div class="table-responsive">
@@ -48,7 +48,7 @@
                                     <th>Employee Name</th>
                                     <th>Department Name</th>
                                     <th>Approval Head</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -276,7 +276,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="school_name">School Name<span class="text-danger">*</span></label>
+                                    <label for="school_name">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
                                     <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="Enter School Name">
                                 </div>
                             </div>

@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Roll No<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.roll_no') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="registerno" name="registerno">
                             </div>
                             </div>

@@ -238,7 +238,7 @@
                                     <div class="mt-3">
                                         <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
                                         <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $employee['photo'] && asset('public/images/staffs/').'/'.$employee['photo'] ? asset('public/images/staffs/').'/'.$employee['photo'] : asset('public/images/users/default.jpg') }}" />
-                                        <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                        <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -579,7 +579,7 @@
                             <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
                             <div class="col-md-5">
                                 <div class="form-group mb-3">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -592,7 +592,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group mb-3">
-                                    <label for="password">Password</label>
+                                    <label for="password">{{ __('messages.password') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -605,7 +605,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
-                                    <label class="switch">Authentication
+                                    <label class="switch">{{ __('messages.authentication') }}
 
                                         <input id="edit_status" name="status" type="checkbox" {{ $employee['status'] == "1" ? "checked" : "" }}>
                                         <span>
@@ -617,7 +617,7 @@
                             </div>
                             <!-- <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="confirm_password">Retype Password</label>
+                                    <label for="confirm_password">{{ __('messages.retype_password') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

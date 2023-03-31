@@ -56,7 +56,7 @@
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Publish</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

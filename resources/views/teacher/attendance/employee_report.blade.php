@@ -34,7 +34,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -45,7 +45,7 @@
                             <input type="hidden" id="employeeReportEmployee" name="employee" value="{{$employee}}">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="employeeReportSession" class="form-control" name="session_id">
                                         <option value="">Select Session</option>
                                         <option value="All">All</option>

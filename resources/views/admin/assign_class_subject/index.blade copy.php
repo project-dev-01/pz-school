@@ -69,7 +69,7 @@
 
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
+                        {{ __('messages.filter') }}
                         </button>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
                                     <th>Subject</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

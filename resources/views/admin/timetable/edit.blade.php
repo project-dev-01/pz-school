@@ -55,7 +55,7 @@
                                                 <th>Starting Time</th>
                                                 <th>Ending Time</th>
                                                 <th>Class Room</th>
-                                                <th>Action</th>
+                                                <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="edit_timetable_body">

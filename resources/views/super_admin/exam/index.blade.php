@@ -47,8 +47,8 @@
                                         <th>Exam Type</th>
                                         <th>Term</th>
                                         <th>Mark Distribution</th>
-                                        <th>Remarks</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.remarks') }}</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Name<span class="text-danger">*</span></label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                                             <div class="col-9">
                                                 <input type="email" required parsley-type="email" class="form-control" id="inputEmail3" placeholder="">
                                             </div>
@@ -177,7 +177,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Remarks </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.remarks') }}</label>
                                             <div class="col-9">
                                                 <textarea type="email" class="form-control form-control-sm" id="colFormLabel"></textarea>
                                             </div>

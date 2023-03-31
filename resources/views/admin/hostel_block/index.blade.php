@@ -45,7 +45,7 @@
                                     <th>Block Warden</th>
                                     <th>Total Floor</th>
                                     <th>Block Leader</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

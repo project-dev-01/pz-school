@@ -352,7 +352,7 @@
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
                                                     <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && asset('public/users/images/').'/'.$student['photo'] ? asset('public/users/images/').'/'.$student['photo'] : asset('public/images/users/default.jpg') }}" />
-                                                    <p class="text-muted text-center mt-2 mb-0">Photo</p>
+                                                    <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -536,7 +536,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Register No<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.register_no') }}<span class="text-danger">*</span></label>
                                                 <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{$student['register_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
@@ -599,7 +599,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="session_id">Session</label>
+                                                <label for="session_id">{{ __('messages.session') }}</label>
                                                 <select id="session_id" class="form-control" name="session_id">
                                                     <option value="0">Select Session</option>
                                                     @foreach($session as $ses)
@@ -610,7 +610,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="semester_id">Semester</label>
+                                                <label for="semester_id">{{ __('messages.semester') }}</label>
                                                 <select id="semester_id" class="form-control" name="semester_id">
                                                     <option value="0">Select Semester</option>
                                                     @foreach($semester as $sem)
@@ -626,7 +626,7 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Student Login Details
+                                        <h4 class="navv">{{ __('messages.student_login_details') }}
                                             <h4>
                                     </li>
                                 </ul>
@@ -634,7 +634,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -647,7 +647,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group mb-3">
-                                                <label class="switch">Authentication
+                                                <label class="switch">{{ __('messages.authentication') }}
 
                                                     <input id="edit_status" name="status" type="checkbox" {{ $student['status'] == "1" ? "checked" : "" }}>
                                                     <span>
@@ -663,14 +663,14 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Father Details<h4>
+                                        <h4 class="navv">{{ __('messages.father_details') }}<h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="father_name">Father Name</label>
+                                                <label for="father_name">{{ __('messages.father_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="father_name" aria-describedby="inputGroupPrepend">
                                                 <input type="hidden" name="father_id" id="father_id" value="{{$student['father_id']}}">
                                                 <div id="father_list">
@@ -721,7 +721,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
@@ -779,7 +779,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="education">Education</label>
+                                                    <label for="education">{{ __('messages.education') }}</label>
                                                     <input type="text" class="form-control" data-parsley-trigger="change" id="father_education" readonly>
                                                 </div>
                                             </div>
@@ -843,14 +843,14 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Mother Details<h4>
+                                        <h4 class="navv">{{ __('messages.mother_details') }}<h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="mother_name">Mother Name</label>
+                                                <label for="mother_name">{{ __('messages.mother_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="mother_name" aria-describedby="inputGroupPrepend">
                                                 <input type="hidden" name="mother_id" id="mother_id" value="{{$student['mother_id']}}">
                                                 <div id="mother_list">
@@ -902,7 +902,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
@@ -960,7 +960,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="education">Education</label>
+                                                    <label for="education">{{ __('messages.education') }}</label>
                                                     <input type="text" class="form-control" data-parsley-trigger="change" id="mother_education" readonly>
                                                 </div>
                                             </div>
@@ -1024,14 +1024,14 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Guardian Details<h4>
+                                        <h4 class="navv">{{ __('messages.guardian_details') }}<h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="guardian_name">Guardian Name</label>
+                                                <label for="guardian_name">{{ __('messages.guardian_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="guardian_name" aria-describedby="inputGroupPrepend">
                                                 <input type="hidden" name="guardian_id" id="guardian_id" value="{{$student['guardian_id']}}">
                                                 <div id="guardian_list">
@@ -1040,7 +1040,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="relation">Relation</label>
+                                                <label for="relation">{{ __('messages.relation') }}</label>
                                                 <select class="form-control" name="relation">
                                                     <option value="">Choose Relation</option>
                                                     @forelse($relation as $r)
@@ -1096,7 +1096,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
@@ -1154,7 +1154,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="education">Education</label>
+                                                    <label for="education">{{ __('messages.education') }}</label>
                                                     <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" readonly>
                                                 </div>
                                             </div>
@@ -1217,14 +1217,14 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Transport Details</h4>
+                                        <h4 class="navv">{{ __('messages.transport_details') }}</h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="drp_transport_route">Transport Route</label>
+                                                <label for="drp_transport_route">{{ __('messages.transport_route') }}</label>
 
                                                 <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                                     <option value="">Select Transport</option>
@@ -1252,14 +1252,14 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Hostel Details</h4>
+                                        <h4 class="navv">{{ __('messages.hostel_details') }}</h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="drp_hostelnam">Hostel Name</label>
+                                                <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                                 <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
                                                     <option value="">Select Hostel</option>
                                                     @foreach($hostel as $hos)
@@ -1270,7 +1270,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="drp_roomname">Room Name</label>
+                                                <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
                                                     <option value="">First select the hostel</option>
 
@@ -1286,26 +1286,26 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">Previous School Details</h4>
+                                        <h4 class="navv">{{ __('messages.previous_school_details') }}</h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="txt_prev_schname">School Name</label>
+                                                <label for="txt_prev_schname">school_names</label>
                                                 <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="txt_prev_qualify">Qualification</label>
+                                                <label for="txt_prev_qualify">{{ __('messages.qualification') }}</label>
                                                 <input type="text" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="txtarea_prev_remarks">Remarks</label>
+                                                <label for="txtarea_prev_remarks">{{ __('messages.remarks') }}</label>
                                                 <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{$student['remarks']}}
                                                 </textarea>
                                             </div>
@@ -1325,7 +1325,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="password">Password</label>
+                                                <label for="password">{{ __('messages.password') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -1338,7 +1338,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="confirm_password">Retype Password</label>
+                                                <label for="confirm_password">{{ __('messages.retype_password') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -1381,7 +1381,7 @@
                         <div class="card" id="father_info" style="display:none">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <h4 class="navv">Father Details</h4>
+                                    <h4 class="navv">{{ __('messages.father_details') }}</h4>
                                 </li>
                             </ul>
                             <div class="card-body">
@@ -1389,7 +1389,7 @@
                                     <table class="table table-striped table-bordered table-condensed mb-none">
                                         <tbody>
                                             <tr>
-                                                <th width="25%">Name</th>
+                                                <th width="25%">{{ __('messages.name') }}</th>
                                                 <td width="25%" class="father_name"></td>
                                                 <th width="25%">{{ __('messages.date_of_birth') }}</th>
                                                 <td width="25%" class="father_date_of_birth"></td>
@@ -1401,7 +1401,7 @@
                                                 <td width="25%" class="father_nric"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Email</th>
+                                                <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="father_email"></td>
                                                 <th width="25%">Mobile No</th>
                                                 <td width="25%" class="father_mobile_no"></td>
@@ -1409,7 +1409,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.blood_group') }}</th>
                                                 <td width="25%" class="father_blood_group"></td>
-                                                <th width="25%">Education</th>
+                                                <th width="25%">{{ __('messages.education') }}</th>
                                                 <td width="25%" class="father_education"></td>
                                             </tr>
                                             <tr>
@@ -1444,7 +1444,7 @@
                         <div class="card" id="mother_info" style="display:none">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <h4 class="navv">Mother Details</h4>
+                                    <h4 class="navv">{{ __('messages.mother_details') }}</h4>
                                 </li>
                             </ul>
                             <div class="card-body">
@@ -1452,7 +1452,7 @@
                                     <table class="table table-striped table-bordered table-condensed mb-none">
                                         <tbody>
                                             <tr>
-                                                <th width="25%">Name</th>
+                                                <th width="25%">{{ __('messages.name') }}</th>
                                                 <td width="25%" class="mother_name"></td>
                                                 <th width="25%">{{ __('messages.date_of_birth') }}</th>
                                                 <td width="25%" class="mother_date_of_birth"></td>
@@ -1464,7 +1464,7 @@
                                                 <td width="25%" class="mother_nric"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Email</th>
+                                                <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="mother_email"></td>
                                                 <th width="25%">Mobile No</th>
                                                 <td width="25%" class="mother_mobile_no"></td>
@@ -1472,7 +1472,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.blood_group') }}</th>
                                                 <td width="25%" class="mother_blood_group"></td>
-                                                <th width="25%">Education</th>
+                                                <th width="25%">{{ __('messages.education') }}</th>
                                                 <td width="25%" class="mother_education"></td>
                                             </tr>
                                             <tr>
@@ -1507,7 +1507,7 @@
                         <div class="card" id="guardian_info" style="display:none">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <h4 class="navv">Guardian Details ({{$student['relation']}})</h4>
+                                    <h4 class="navv">{{ __('messages.guardian_details') }} ({{$student['relation']}})</h4>
                                 </li>
                             </ul>
                             <div class="card-body">
@@ -1515,7 +1515,7 @@
                                     <table class="table table-striped table-bordered table-condensed mb-none">
                                         <tbody>
                                             <tr>
-                                                <th width="25%">Name</th>
+                                                <th width="25%">{{ __('messages.name') }}</th>
                                                 <td width="25%" class="guardian_name"></td>
                                                 <th width="25%">{{ __('messages.date_of_birth') }}</th>
                                                 <td width="25%" class="guardian_date_of_birth"></td>
@@ -1527,7 +1527,7 @@
                                                 <td width="25%" class="guardian_nric"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Email</th>
+                                                <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="guardian_email"></td>
                                                 <th width="25%">Mobile No</th>
                                                 <td width="25%" class="guardian_mobile_no"></td>
@@ -1535,7 +1535,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.blood_group') }}</th>
                                                 <td width="25%" class="guardian_blood_group"></td>
-                                                <th width="25%">Education</th>
+                                                <th width="25%">{{ __('messages.education') }}</th>
                                                 <td width="25%" class="guardian_education"></td>
                                             </tr>
                                             <tr>

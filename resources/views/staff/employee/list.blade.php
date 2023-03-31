@@ -34,14 +34,14 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Employee Name</th>
-                                        <th>Email</th>
+                                        <th>{{ __('messages.email') }}</th>
                                         <th>Mobile No</th>
                                         <th>{{ __('messages.date_of_birth') }}</th>
                                         <th>Joining Date</th>
                                         <th>Department</th>
                                         <th>Designation</th>
                                         <th>Present Address</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

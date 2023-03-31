@@ -41,13 +41,13 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Vehicle Number</th>
+                                    <th>{{ __('messages.vehicle_number') }}</th>
                                     <th>Capacity</th>
                                     <th>Insurance Renewal</th>
                                     <th>Driver Name</th>
                                     <th>Driver Phone</th>
                                     <th>Driver License Number</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

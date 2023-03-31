@@ -90,11 +90,11 @@
                                     <tr>
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>No</th>
-                                        <th>Student Name</th>
+                                        <th>{{ __('messages.student_name') }}</th>
                                         <th>Payment Mode</th>
                                         <th>{{ __('messages.gender') }}</th>
-                                        <th>Register No</th>
-                                        <th>Email</th>
+                                        <th>{{ __('messages.register_no') }}</th>
+                                        <th>{{ __('messages.email') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -45,7 +45,7 @@
                     <!-- <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">(123)
                             123 1234</span></p> -->
 
-                    <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ml-2 ">{{ Session::get('email') }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 ">{{ Session::get('email') }}</span></p>
 
                     <!-- <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span></p> -->
                 </div>
@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Name</label>
+                                        <label for="name">{{ __('messages.name') }}</label>
                                         <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter name">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>

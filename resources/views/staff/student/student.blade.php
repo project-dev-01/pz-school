@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Student List</h4>
+                <h4 class="page-title">{{ __('messages.student_list') }}</h4>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -70,7 +70,7 @@
                     </form>
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Filter
+                        {{ __('messages.filter') }}
                         </button>
                         <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel
@@ -104,12 +104,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
+                                                <th>{{ __('messages.name') }}</th>
                                                 <th>Roll</th>
-                                                <th>Register No</th>
+                                                <th>{{ __('messages.register_no') }}</th>
                                                 <th>{{ __('messages.class') }}</th>
                                                 <th>Section</th>
-                                                <th>Guardian Name</th>
+                                                <th>{{ __('messages.guardian_name') }}</th>
 
                                             </tr>
                                         </thead>

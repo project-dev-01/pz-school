@@ -40,7 +40,7 @@
                                         <th>Employee Name</th>
                                         <th>Department Name</th>
                                         <th>Approval Head</th>
-                                        <th>Action</th>
+                                        <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

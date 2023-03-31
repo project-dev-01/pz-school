@@ -45,7 +45,7 @@
                                     <th>Short Name</th>
                                     <th>Leave Days</th>
                                     <th>{{ __('messages.gender') }}</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

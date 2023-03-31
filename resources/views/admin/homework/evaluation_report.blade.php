@@ -32,7 +32,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -144,7 +144,7 @@
                                                                 <th>Date of Submission</th>
                                                                 <th>Complete/Incomplete</th>
                                                                 <th>Total Student</th>
-                                                                <th>Action</th>
+                                                                <th>{{ __('messages.action') }}</th>
 
                                                             </tr>
                                                         </thead>

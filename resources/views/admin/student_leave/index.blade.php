@@ -106,13 +106,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <label for="heard">Remarks</label>
+                    <label for="heard">{{ __('messages.remarks') }}</label>
                     <input type="hidden" id="studenet_leave_tbl_id" />
                     <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                    <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">Save</button>
+                    <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

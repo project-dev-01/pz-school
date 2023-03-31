@@ -32,7 +32,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="document">Photo</label>
+                        <label for="document">{{ __('messages.photo') }}</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" id="photo" class="custom-file-input" name="photo" accept="image/png, image/gif, image/jpeg" >

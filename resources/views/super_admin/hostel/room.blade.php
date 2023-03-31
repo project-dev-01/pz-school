@@ -43,11 +43,11 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>Branch Name</th>
-                                <th>Room Name</th>
+                                <th>{{ __('messages.room_name') }}</th>
                                 <th>{{ __('messages.category') }}</th>
                                 <th>No of Beds</th>
                                 <th>Cost Per Bed</th>
-                                <th>Remarks</th>
+                                <th>{{ __('messages.remarks') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Hostel Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.hostel_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Remarks<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

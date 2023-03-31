@@ -122,7 +122,7 @@
                             <div class="tt-col-topic">Topic</div>
                             <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">Activity</div>
-                            <div class="tt-col-value">Action</div>
+                            <div class="tt-col-value">{{ __('messages.action') }}</div>
                         </div>
                         @if(!empty($forum_threadslist))
                         @php

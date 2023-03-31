@@ -29,7 +29,7 @@ use \App\Http\Controllers\AdminController;
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Student Name : <span class="text-muted mr-2">{{$student['name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.student_name') }} : <span class="text-muted mr-2">{{$student['name']}}</span></label>
                             </div>
                             <div class="col-md-4">
                                 <label class="mb-4">Grade : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
@@ -45,7 +45,7 @@ use \App\Http\Controllers\AdminController;
                                 <label class="mb-4">{{ __('messages.academic_year') }} : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="mb-4">Email : <span class="text-muted mr-2">{{$student['email']}}</span></label>
+                                <label class="mb-4">{{ __('messages.email') }} : <span class="text-muted mr-2">{{$student['email']}}</span></label>
                             </div>
                             <div class="col-md-4">
                                 <label class="mb-4">Parent Phone No : <span class="text-muted mr-2"></span></label>
@@ -281,7 +281,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>Date<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Semester
+                                                                <th>{{ __('messages.semester') }}
                                                                 </th>
                                                                 <th>Amount<span class="text-danger">*</span>
                                                                 </th>

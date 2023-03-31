@@ -581,7 +581,7 @@
                                         <a href="{{ route('teacher.classroom.management')}}"><button type="button" class="btn btn-primary width-xs waves-effect waves-light">Go to Class</button></a>
                                     </div> -->
                                 <div class="col-6 text-left">
-                                    <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                    <button type="submit" class="btn btn-success" id="btn-save-event">{{ __('messages.save') }}</button>
                                 </div>
                                 <div class="col-6 text-right">
                                     <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
@@ -659,7 +659,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
                                 <option value="">Choose Student</option>
                                 <option value="">Sheelu</option>
@@ -672,13 +672,13 @@
                     <table class="table table-bordered w-100 nowrap" id="">
                         <thead>
                             <tr>
-                                <th>Semester</th>
+                                <th>{{ __('messages.semester') }}</th>
                                 <th>Sudent Name</th>
                                 <th>{{ __('messages.grade') }}</th>
                                 <th>Exam Name</th>
                                 <th>Total Marks</th>
                                 <th>Exam Marks</th>
-                                <th>Remarks</th>
+                                <th>{{ __('messages.remarks') }}</th>
                             </tr>
 
                         </thead>
@@ -776,7 +776,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="">Student Name<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
                                 <option value="">Choose Student</option>
                                 <option value="">Sheelu</option>
@@ -790,14 +790,14 @@
                     <table class="table table-bordered w-100 nowrap" id="">
                         <thead>
                             <tr>
-                                <th rowspan="2">Semester</th>
+                                <th rowspan="2">{{ __('messages.semester') }}</th>
                                 <th rowspan="2">Sudent Name</th>
                                 <th rowspan="2">{{ __('messages.grade') }}</th>
                                 <th rowspan="2">Exam Name</th>
                                 <th rowspan="2">Total Subject</th>
                                 <th rowspan="2">Total Marks</th>
                                 <th colspan="9">Subject Marks</th>
-                                <th rowspan="2">Remarks</th>
+                                <th rowspan="2">{{ __('messages.remarks') }}</th>
                             </tr>
                             <tr>
 
@@ -1014,7 +1014,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_semester_id">Semester</label>
+                            <label for="sr_semester_id">{{ __('messages.semester') }}</label>
                             <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                 <option value="0">Select Semester</option>
                                 @foreach($semester as $sem)
@@ -1025,7 +1025,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_session_id">Session</label>
+                            <label for="sr_session_id">{{ __('messages.session') }}</label>
                             <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                 <option value="0">Select Session</option>
                                 @foreach($session as $ses)
@@ -1326,7 +1326,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_semester_id">Semester</label>
+                            <label for="st10_semester_id">{{ __('messages.semester') }}</label>
                             <select id="st10_semester_id" class="form-control studentTop" name="semester_id">
                                 <option value="0">Select Semester</option>
                                 @foreach($semester as $sem)
@@ -1337,7 +1337,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_session_id">Session</label>
+                            <label for="st10_session_id">{{ __('messages.session') }}</label>
                             <select id="st10_session_id" class="form-control studentTop" name="session_id">
                                 <option value="0">Select Session</option>
                                 @foreach($session as $ses)
@@ -1360,7 +1360,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Student Name</th>
+                                <th>{{ __('messages.student_name') }}</th>
                                 <th>Total Marks</th>
                                 <th>Marks</th>
                                 <th>Rank</th>
@@ -1420,7 +1420,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_semester_id">Semester</label>
+                            <label for="sb10_semester_id">{{ __('messages.semester') }}</label>
                             <select id="sb10_semester_id" class="form-control studentBottom" name="semester_id">
                                 <option value="0">Select Semester</option>
                                 @foreach($semester as $sem)
@@ -1431,7 +1431,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_session_id">Session</label>
+                            <label for="sb10_session_id">{{ __('messages.session') }}</label>
                             <select id="sb10_session_id" class="form-control studentBottom" name="session_id">
                                 <option value="0">Select Session</option>
                                 @foreach($session as $ses)
@@ -1455,7 +1455,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Student Name</th>
+                                <th>{{ __('messages.student_name') }}</th>
                                 <th>Total Marks</th>
                                 <th>Marks</th>
                                 <th>Rank</th>

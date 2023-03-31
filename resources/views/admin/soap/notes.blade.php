@@ -29,7 +29,7 @@
                         <th>Date</th>
                         <th>Refered By</th>
                         <th>Title</th>
-                        <th>Action</th>
+                        <th>{{ __('messages.action') }}</th>
                     </tr>
                 </thead>
 

@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="name">Name<span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                         <input type="text" name="name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group">

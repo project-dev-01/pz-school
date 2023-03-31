@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="school_name" class="col-3 col-form-label">School Name<span class="text-danger">*</span></label>
+                                                <label for="school_name" class="col-3 col-form-label">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="school_name" name="school_name" value="{{$branch['school_name']}}" placeholder="Enter School Name">
                                                     <span class="text-danger error-text school_name_error"></span>
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="email" class="col-3 col-form-label">Email<span class="text-danger">*</span></label>
+                                                <label for="email" class="col-3 col-form-label">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="email" class="form-control" id="email" readonly name="email" value="{{$branch['email']}}" placeholder="Enter Email">
                                                     <span class="text-danger error-text email_error"></span>

@@ -30,7 +30,7 @@
                     <table class="table table-centered table-borderless table-striped mb-0">
                         <tbody>
                             <tr>
-                                <td>Name</td>
+                                <td>{{ __('messages.name') }}</td>
                                 <td>:</td>
                                 <td id="staffName"></td>
                             </tr>
@@ -100,7 +100,7 @@
                 <hr>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                    <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">Save</button>
+                    <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                     <table class="table table-centered table-borderless table-striped mb-0">
                         <tbody>
                             <tr>
-                                <td>Name</td>
+                                <td>{{ __('messages.name') }}</td>
                                 <td>:</td>
                                 <td id="staffName"></td>
                             </tr>
@@ -212,7 +212,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">Save</button>
+                <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

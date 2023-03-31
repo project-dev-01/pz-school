@@ -41,13 +41,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Room Number</th>
-                                    <th>Hostel Name</th>
+                                    <th>{{ __('messages.hostel_name') }}</th>
                                     <th>Block</th>
                                     <th>Floor</th>
                                     <th>No of Beds</th>
                                     <th>Cost Per Bed</th>
-                                    <th>Remarks</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.remarks') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

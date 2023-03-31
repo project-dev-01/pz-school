@@ -64,7 +64,7 @@
                                                 <th>#</th>
                                                 <th>Staff Name</th>
                                                 <th>Staff Department</th>
-                                                <th>Action</th>
+                                                <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="staff_table">
@@ -93,10 +93,10 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Student Name</th>
+                                                <th>{{ __('messages.student_name') }}</th>
                                                 <th>Student Class</th>
                                                 <th>Student Section</th>
-                                                <th>Action</th>
+                                                <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="student_table">
@@ -127,8 +127,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Parent Name</th>
-                                                <th>Email</th>
-                                                <th>Action</th>
+                                                <th>{{ __('messages.email') }}</th>
+                                                <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="parent_table">

@@ -41,7 +41,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Category Name</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

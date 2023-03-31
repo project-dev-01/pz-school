@@ -39,8 +39,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Branch</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.name') }}</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

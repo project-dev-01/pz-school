@@ -55,7 +55,7 @@
                                     <th>#</th>
                                     <th>Event Type Name</th>
                                     <th>Color</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

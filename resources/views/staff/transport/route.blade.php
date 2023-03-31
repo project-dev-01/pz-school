@@ -45,7 +45,7 @@
                                 <th>Route Name</th>
                                 <th>Start Place</th>
                                 <th>Stop Place</th>
-                                <th>Remarks</th>
+                                <th>{{ __('messages.remarks') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Remarks<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

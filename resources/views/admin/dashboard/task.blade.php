@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="saveBtn" class="btn btn-success waves-effect waves-light">Save</button>
+                        <button type="button" id="saveBtn" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
                     </div>
 
                 </form>

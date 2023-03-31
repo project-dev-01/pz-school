@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeStdName">Student Name<span class="text-danger">*</span></label>
+                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">Select Student</option>
                                         @forelse ($get_std_names_dashboard as $std)
@@ -134,7 +134,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Student Name</th>
+                                    <th>{{ __('messages.student_name') }}</th>
                                     <th>Leave From</th>
                                     <th>To From</th>
                                     <th>Teacher remarks</th>
@@ -142,7 +142,7 @@
                                     <th>Document</th>
                                     <th>Status</th>
                                     <th>Apply Date</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

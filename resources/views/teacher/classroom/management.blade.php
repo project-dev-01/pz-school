@@ -65,7 +65,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Semester</label>
+                                    <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session</label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">Select Session</option>
                                         @foreach($session as $ses)
@@ -242,7 +242,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Filter
+                                {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -488,9 +488,9 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Student name</th>
+                                                                <th>{{ __('messages.student_name') }}</th>
                                                                 <th>Attendance</th>
-                                                                <th>Remarks</th>
+                                                                <th>{{ __('messages.remarks') }}</th>
                                                                 <th>Reasons</th>
                                                                 <th>Student behaviour</th>
                                                                 <th>Class behaviour</th>
@@ -514,13 +514,13 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-body">
-                                                    <label for="heard">Remarks</label>
+                                                    <label for="heard">{{ __('messages.remarks') }}</label>
                                                     <input type="hidden" id="studenetID" />
                                                     <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                    <button type="button" id="studentRemarksSave" class="btn btn-primary">Save</button>
+                                                    <button type="button" id="studentRemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -540,7 +540,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
-                                                                    <th>Student name</th>
+                                                                    <th>{{ __('messages.student_name') }}</th>
                                                                     <th>From Leave</th>
                                                                     <th>To Leave</th>
                                                                     <th>Reason</th>
@@ -564,13 +564,13 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <label for="heard">Remarks</label>
+                                                <label for="heard">{{ __('messages.remarks') }}</label>
                                                 <input type="hidden" id="studenet_leave_tbl_id" />
                                                 <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                                                <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">Save</button>
+                                                <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -621,9 +621,9 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
-                                                                    <th>Student Name</th>
+                                                                    <th>{{ __('messages.student_name') }}</th>
                                                                     <th>Student Remarks</th>
-                                                                    <th>Remarks</th>
+                                                                    <th>{{ __('messages.remarks') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -720,7 +720,7 @@
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group text-right m-b-0">
-                                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light">Save</button>
+                                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light">{{ __('messages.save') }}</button>
                                                             </div>
                                                         </div>
                                                     </form>

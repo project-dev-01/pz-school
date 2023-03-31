@@ -212,7 +212,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Remarks :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.remarks') }} :</div>
                                                         <div class="col-md-6">N/A</div>
                                                     </div>
                                                 </div>
@@ -323,7 +323,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Remarks :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.remarks') }} :</div>
                                                         <div class="ml-2">N/A</div>
                                                     </div>
                                                 </div>
@@ -437,7 +437,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Remarks :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.remarks') }} :</div>
                                                         <div class="ml-2">N/A</div>
                                                     </div>
                                                 </div>

@@ -3,7 +3,7 @@
 	<strong></strong><br>
 	<b>Email :</b>{{ $email }}
 	<br>
-	<b>Name :</b>{{ $name }}
+	<b>{{ __('messages.name') }} :</b>{{ $name }}
 	<br>
 	<b>Role :</b>{{ $role_name }}
 	<br>

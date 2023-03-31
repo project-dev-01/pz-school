@@ -43,7 +43,7 @@
                                     <th>#</th>
                                     <th>Location Name</th>
                                     <th>No Of Seats</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

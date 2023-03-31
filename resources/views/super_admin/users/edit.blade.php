@@ -49,18 +49,18 @@
                                 <span class="text-danger error-text role_name_error"></span>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="name">Name</label>
+                                <label for="name">{{ __('messages.name') }}</label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="email">Email</label>
+                                <label for="email">{{ __('messages.email') }}</label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Email">
                                 <span class="text-danger error-text email_error"></span>
 
                             </div>
                             <div class="form-group mb-3">
-                                <label for="password">Password</label>
+                                <label for="password">{{ __('messages.password') }}</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
                                     <div class="input-group-append" data-password="false">

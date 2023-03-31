@@ -26,7 +26,7 @@
                         <span class="text-danger error-text stop_place_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="remarks">Remarks</label>
+                        <label for="remarks">{{ __('messages.remarks') }}</label>
                         <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>

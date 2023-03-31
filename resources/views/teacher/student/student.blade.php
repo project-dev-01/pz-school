@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Student List</h4>
+                <h4 class="page-title">{{ __('messages.student_list') }}</h4>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Select Ground
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -36,7 +36,7 @@
                         <div class="row">      
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="student_name">Student Name</label>
+                                    <label for="student_name">{{ __('messages.student_name') }}</label>
                                     <input type="text" name="student_name" class="form-control" id="student_name" placeholder="ADAM IRFAN">
                                 </div>
                             </div>                       
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Session <span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control"  name="session_id">                              
                                     <option value="">Select Session</option>
                                         @foreach($session as $ses)
@@ -77,7 +77,7 @@
                                 Filter
                             </button> -->
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Filter
+                            {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -99,7 +99,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Students List
+                        {{ __('messages.students_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -111,11 +111,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
-                                            <th>Register No</th>
-                                            <th>Roll No</th>
+                                            <th>{{ __('messages.name') }}</th>
+                                            <th>{{ __('messages.register_no') }}</th>
+                                            <th>{{ __('messages.roll_no') }}</th>
                                             <th>{{ __('messages.gender') }}</th>
-                                            <th>Email</th>
+                                            <th>{{ __('messages.email') }}</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>

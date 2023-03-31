@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Staff Category</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>                         

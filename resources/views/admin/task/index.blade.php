@@ -104,7 +104,7 @@
                                     <th>Date & Time</th>
                                     <th>Priority</th>
                                     <th>Description</th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Qualification">Qualification</label>
+                                    <label for="Qualification">{{ __('messages.qualification') }}</label>
                                     <input type="text" class="form-control" name="Qualification" id="Qualification">
                                 </div>
                             </div>
@@ -257,7 +257,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -270,7 +270,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="password">Password<span class="text-danger">*</span></label>
+                                    <label for="password">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -283,7 +283,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
-                                    <label for="confirm_password">Retype Password<span class="text-danger">*</span></label>
+                                    <label for="confirm_password">{{ __('messages.retype_password') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

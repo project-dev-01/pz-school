@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="vehicle_no">Vehicle Number<span class="text-danger">*</span></label>
+                        <label for="vehicle_no">{{ __('messages.vehicle_number') }}<span class="text-danger">*</span></label>
                         <input type="text" id="vehicle_no" name="vehicle_no" class="form-control" placeholder="Enter Vehicle Number">
                         <span class="text-danger error-text vehicle_no_error"></span>
                     </div>

@@ -130,7 +130,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Email<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="email" placeholder="Email id" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>

@@ -41,7 +41,7 @@
                                     <th>{{ __('messages.category') }}</th>
                                     <th>Sub Category </th>
                                     <th>Notes </th>
-                                    <th>Action</th>
+                                    <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -42,7 +42,7 @@
                                 <th>Week Days</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
