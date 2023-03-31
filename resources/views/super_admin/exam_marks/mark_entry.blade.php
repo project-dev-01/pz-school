@@ -145,7 +145,7 @@
                                                 <th>{{ __('messages.student_name') }}</th>
                                                 <th>{{ __('messages.roll_no') }}</th>
                                                 <th>IsAbsent</th>
-                                                <th>Marks</th>
+                                                <th>{{ __('messages.marks') }}</th>
 
                                             </tr>
                                         </thead>

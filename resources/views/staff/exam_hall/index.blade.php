@@ -38,8 +38,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Hall No</th>
-                                <th>No Of Seats</th>
+                                <th>{{ __('messages.hall_no') }}</th>
+                                <th>{{ __('messages.no_of_seats') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

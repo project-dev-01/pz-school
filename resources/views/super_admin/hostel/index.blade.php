@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Hostel Master</h4>
+                <h4 class="page-title">{{ __('messages.hostel_master') }}</h4>
             </div>
         </div>
     </div>     
@@ -128,7 +128,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Hostel Address<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.hostel_address') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

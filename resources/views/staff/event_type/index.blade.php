@@ -14,7 +14,7 @@
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Event Types</h4>
+                <h4 class="page-title">{{ __('messages.event_types') }}</h4>
             </div>
         </div>
     </div>
@@ -23,12 +23,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Event Type</h4>
+                <h4 class="header-title">{{ __('messages.event_type') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Event Type</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">{{ __('messages.add_event_type') }}</button>
                     </div>
                 </div>
                 </p>
@@ -38,7 +38,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Event Type Name</th>
+                                <th>{{ __('messages.event_type_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

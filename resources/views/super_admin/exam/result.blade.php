@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Exam Result</h4>
+                <h4 class="page-title">{{ __('messages.exam_result') }}</h4>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Exam Result
+                        {{ __('messages.exam_result') }}
                             <h4>
                     </li>
                 </ul><br>

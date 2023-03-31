@@ -109,8 +109,8 @@
                                                 <th>Break</th>
                                                 <th>Subject</th>
                                                 <th>Teacher</th>
-                                                <th>Starting Time</th>
-                                                <th>Ending Time</th>
+                                                <th>{{ __('messages.starting_time') }}</th>
+                                                <th>{{ __('messages.ending_time') }}</th>
                                                 <th>Class Room</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>

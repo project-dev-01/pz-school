@@ -128,12 +128,12 @@
                                         <thead>
                                             <tr>
                                                 <th>Subject <span class="text-danger">*</span></th>
-                                                <th>Paper Name</th>
+                                                <th>{{ __('messages.paper_name') }}</th>
                                                 <th>Date <span class="text-danger">*</span></th>
-                                                <th>Starting Time <span class="text-danger">*</span></th>
-                                                <th>Ending Time <span class="text-danger">*</span></th>
-                                                <th>Location</th>
-                                                <th>Distributor</th>
+                                                <th>{{ __('messages.starting_time') }}<span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.ending_time') }} <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.location') }}</th>
+                                                <th>{{ __('messages.distributor') }}</th>
                                                 <!-- <th>Marks<span class="text-danger">*</span></th> -->
 
                                             </tr>

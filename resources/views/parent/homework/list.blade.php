@@ -141,7 +141,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Submit">
-                                Get
+                            {{ __('messages.get') }}
                             </button>
                         </div>
                     </form>

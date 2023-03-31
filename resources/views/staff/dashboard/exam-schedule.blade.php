@@ -13,7 +13,7 @@
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tr>
-                                        <td>Exam Name</td>
+                                        <td>{{ __('messages.exam_name') }}</td>
                                         <td id="examName"></td>
                                     </tr>
                                     <tr>

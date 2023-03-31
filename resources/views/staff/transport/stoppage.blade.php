@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Stoppage</h4>
+                <h4 class="page-title">{{ __('messages.stoppage') }}</h4>
             </div>
         </div>
     </div>     
@@ -42,9 +42,9 @@
                         <thead>
                             <tr>
                                 <th>S.No</th>
-                                <th>Stoppage</th>
-                                <th>Stop Time</th>
-                                <th>Route Fare</th>
+                                <th>{{ __('messages.stoppage') }}</th>
+                                <th>{{ __('messages.stop_time') }}</th>
+                                <th>{{ __('messages.route_fare') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@
                     <div class="col-md-8">
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Stoppage<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.stoppage') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -75,7 +75,7 @@
                     
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Route Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.route_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Stop Time<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.stop_time') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Route Fare<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.route_fare') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

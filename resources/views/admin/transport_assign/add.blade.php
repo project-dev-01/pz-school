@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddTransportAssignModalLabel">Add Assign</h4>
+                <h4 class="modal-title" id="myaddTransportAssignModalLabel">{{ __('messages.add_assign') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,7 +11,7 @@
                     @csrf                   
                  
                     <div class="form-group">
-                        <label for="route_id">Route<span class="text-danger">*</span></label>
+                        <label for="route_id">{{ __('messages.route') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="route_id">
                             <option value="">Select Route</option>
                             @forelse($route as $rou)
@@ -22,7 +22,7 @@
                         <span class="text-danger error-text stop_position_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="stoppage_id">Stoppage<span class="text-danger">*</span></label>
+                        <label for="stoppage_id">{{ __('messages.stoppage') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="stoppage_id">
                             <option value="">Select Stoppage</option>
                             @forelse($stoppage as $stop)
@@ -33,7 +33,7 @@
                         <span class="text-danger error-text stoppage_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="vehicle_id">Vehicle<span class="text-danger">*</span></label>
+                        <label for="vehicle_id">{{ __('messages.vehicle') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="vehicle_id">
                             <option value="">Select Vehicle</option>
                             @forelse($vehicle as $veh)

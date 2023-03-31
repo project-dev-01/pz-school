@@ -390,7 +390,7 @@
                             The Services include a college guidance management system that enables high schools and affiliated organizations to monitor and assist students in their post-secondary planning; to engage and collaborate with students, parents and guardians, and college admissions representatives; to manage the creation and delivery of application-related documents to colleges; and to collect, analyze, and report on student engagement, academic achievements, and application outcomes.
                             </dd>                           
                         </dl>
-                        <h6 class="tt-title">TERM</h6>
+                        <h6 class="tt-title">{{ __('messages.term') }}</h6>
                         <p>  This Agreement shall become effective on the date of Client’s acceptance hereof and shall continue for the period set forth in the Order Form (“Initial Term”). At the end of the Initial Term, and each subsequent anniversary thereof, this Agreement shall automatically renew for an additional one-year period </p>
                    
                     </div>

@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">              
                 </div>
-                <h4 class="page-title">By Class</h4>
+                <h4 class="page-title">{{ __('messages.by_class') }}</h4>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Exam Name<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.exam_name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Exam</option>
                                         <option value="">Annual</option>
@@ -73,7 +73,7 @@
                     </form>
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Get
+                        {{ __('messages.get') }}
                         </button>                 
                     </div>
 

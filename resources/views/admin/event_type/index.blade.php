@@ -26,7 +26,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Event Types</h4>
+                <h4 class="page-title">{{ __('messages.event_types') }}</h4>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Event Type
+                        <h4 class="navv">{{ __('messages.event_type') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -53,8 +53,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Event Type Name</th>
-                                    <th>Color</th>
+                                    <th>{{ __('messages.event_type_name') }}</th>
+                                    <th>{{ __('messages.color') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Stoppage</h4>
+                <h4 class="page-title">{{ __('messages.stoppage') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Stoppage<h4>
+                        <h4 class="navv">{{ __('messages.stoppage') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -41,9 +41,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Stop Position</th>
-                                    <th>Stop Time</th>
-                                    <th>Route Fare</th>
+                                    <th>{{ __('messages.stop_position') }}</th>
+                                    <th>{{ __('messages.stop_time') }}</th>
+                                    <th>{{ __('messages.route_fare') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

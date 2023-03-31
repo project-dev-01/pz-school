@@ -11,12 +11,12 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="name">Room Number</label>
+                        <label for="name">{{ __('messages.room_number') }}</label>
                         <input type="text" name="name" class="form-control" placeholder="Enter The Room Number">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="hostel">Hostel</label>
+                        <label for="hostel">{{ __('messages.hostel') }}</label>
                         <select class="form-control" id="hostel" name="hostel_id">
                             <option value="">Select The Hostel</option>
                             @foreach($hostel as $hos)
@@ -26,7 +26,7 @@
                         <span class="text-danger error-text hostel_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="block">Select Block</label>
+                        <label for="block">{{ __('messages.select_block') }}</label>
                         <select class="form-control" id="edit_block" name="block">
                             <option value="">Select The Block</option>
                             @foreach($block as $blo)
@@ -36,7 +36,7 @@
                         <span class="text-danger error-text block_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="floor">Floor</label>
+                        <label for="floor">{{ __('messages.floor') }}</label>
                         <select class="form-control" id="edit_floor" name="floor">
                             <option value="">Select The Floor</option>
                         </select>
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="bed_fee">Cost Per Bed</label>
+                        <label for="bed_fee">{{ __('messages.cost_per_bed') }}</label>
                         <input type="text" name="bed_fee" class="form-control" placeholder="Enter The Cost Per Bed">
                         <span class="text-danger error-text bed_fee_error"></span>
                     </div>

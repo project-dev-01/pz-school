@@ -510,7 +510,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="heard">Room Number</label>
+                                <label for="heard">{{ __('messages.room_number') }}</label>
                                 <select id="heard" class="form-control" required="">
                                     <option value="">Select</option>
                                     <option>14 </option>

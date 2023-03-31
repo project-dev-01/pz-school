@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="route_id">Route<span class="text-danger">*</span></label>
+                        <label for="route_id">{{ __('messages.route') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="route_id">
                             <option value="">Select Route</option>
                             @forelse($route as $rou)
@@ -22,7 +22,7 @@
                         <span class="text-danger error-text stop_position_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="stoppage_id">Stoppage<span class="text-danger">*</span></label>
+                        <label for="stoppage_id">{{ __('messages.stoppage') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="stoppage_id">
                             <option value="">Select Stoppage</option>
                             @forelse($stoppage as $stop)
@@ -33,7 +33,7 @@
                         <span class="text-danger error-text stoppage_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="vehicle_id">Vehicle<span class="text-danger">*</span></label>
+                        <label for="vehicle_id">{{ __('messages.vehicle') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="vehicle_id">
                             <option value="">Select Vehicle</option>
                             @forelse($vehicle as $veh)

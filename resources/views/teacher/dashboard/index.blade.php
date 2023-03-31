@@ -419,11 +419,11 @@
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
-                                                <td>Start Date</td>
+                                                <td>{{ __('messages.start_date') }}</td>
                                                 <td id="start_date"></td>
                                             </tr>
                                             <tr>
-                                                <td>End Date</td>
+                                                <td>{{ __('messages.end_date') }}</td>
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
@@ -435,7 +435,7 @@
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>
-                                                <td>Audience</td>
+                                                <td>{{ __('messages.audience') }}</td>
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
@@ -501,7 +501,7 @@
                 <div class="modal-content">
                     <div class="modal-header py-3 px-4 border-bottom-0 d-block">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h5 class="modal-title" style="color: #6FC6CC">Schedule</h5>
+                        <h5 class="modal-title" style="color: #6FC6CC">{{ __('messages.schedule') }}</h5>
                     </div>
                     <div class="modal-body p-4">
                         <form id="addDailyReport" method="post" action="{{ route('teacher.classroom.add_daily_report') }}" autocomplete="off">
@@ -675,9 +675,9 @@
                                 <th>{{ __('messages.semester') }}</th>
                                 <th>Sudent Name</th>
                                 <th>{{ __('messages.grade') }}</th>
-                                <th>Exam Name</th>
+                                <th>{{ __('messages.exam_name') }}</th>
                                 <th>Total Marks</th>
-                                <th>Exam Marks</th>
+                                <th>{{ __('messages.exam_marks') }}</th>
                                 <th>{{ __('messages.remarks') }}</th>
                             </tr>
 
@@ -793,7 +793,7 @@
                                 <th rowspan="2">{{ __('messages.semester') }}</th>
                                 <th rowspan="2">Sudent Name</th>
                                 <th rowspan="2">{{ __('messages.grade') }}</th>
-                                <th rowspan="2">Exam Name</th>
+                                <th rowspan="2">{{ __('messages.exam_name') }}</th>
                                 <th rowspan="2">Total Subject</th>
                                 <th rowspan="2">Total Marks</th>
                                 <th colspan="9">Subject Marks</th>
@@ -1046,7 +1046,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Subject</th>
-                                <th>Marks</th>
+                                <th>{{ __('messages.marks') }}</th>
                                 <th>Subject Position</th>
                             </tr>
                         </thead>
@@ -1362,7 +1362,7 @@
                                 <th>#</th>
                                 <th>{{ __('messages.student_name') }}</th>
                                 <th>Total Marks</th>
-                                <th>Marks</th>
+                                <th>{{ __('messages.marks') }}</th>
                                 <th>Rank</th>
                             </tr>
                         </thead>
@@ -1457,7 +1457,7 @@
                                 <th>#</th>
                                 <th>{{ __('messages.student_name') }}</th>
                                 <th>Total Marks</th>
-                                <th>Marks</th>
+                                <th>{{ __('messages.marks') }}</th>
                                 <th>Rank</th>
                             </tr>
                         </thead>

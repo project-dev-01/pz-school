@@ -27,11 +27,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="paper_name">Paper Name<span class="text-danger">*</span></label>
+                        <label for="paper_name">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
                         <input type="text" name="paper_name" class="form-control" placeholder="Enter Paper Name">
                     </div>
                     <div class="form-group">
-                        <label for="paper_type">Paper Type<span class="text-danger">*</span></label>
+                        <label for="paper_type">{{ __('messages.paper_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="paper_type" name="paper_type">
                             <option value="">Select Paper Type</option>
                             @forelse($get_paper_type as $gpt)
@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="grade_category">Grade Category<span class="text-danger">*</span></label>
+                        <label for="grade_category">{{ __('messages.grade_category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="grade_category">
                             <option value="">Select Grade Category</option>
                             @forelse($grade_category as $gc)
@@ -51,11 +51,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="subject_weightage">Subject Weightage</label>
+                        <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
                         <input type="number" name="subject_weightage" class="form-control" placeholder="Enter Subject Weightage">
                     </div>
                     <div class="form-group">
-                        <label for="notes">Notes</label>
+                        <label for="notes">{{ __('messages.notes') }}</label>
                         <textarea name="notes" class="form-control" maxlength="255" placeholder="Enter Notes"></textarea>
                     </div>
                     <div class="form-group">

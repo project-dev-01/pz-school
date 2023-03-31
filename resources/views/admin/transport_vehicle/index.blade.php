@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Vehicle</h4>
+                <h4 class="page-title">{{ __('messages.vehicle') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Vehicle<h4>
+                        <h4 class="navv">{{ __('messages.vehicle') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -43,10 +43,10 @@
                                     <th>#</th>
                                     <th>{{ __('messages.vehicle_number') }}</th>
                                     <th>Capacity</th>
-                                    <th>Insurance Renewal</th>
-                                    <th>Driver Name</th>
-                                    <th>Driver Phone</th>
-                                    <th>Driver License Number</th>
+                                    <th>{{ __('messages.insurance_renewal') }}</th>
+                                    <th>{{ __('messages.driver_name') }}</th>
+                                    <th>{{ __('messages.driver_phone') }}</th>
+                                    <th>{{ __('messages.driver_license_number') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

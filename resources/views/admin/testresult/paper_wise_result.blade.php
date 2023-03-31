@@ -16,7 +16,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Exam Paper Result</h4>
+                <h4 class="page-title">{{ __('messages.exam_paper_result') }}</h4>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">Exam Paper Result
+                                <h4 class="navv">{{ __('messages.exam_paper_result') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -116,7 +116,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Exam Paper Result
+                        {{ __('messages.exam_paper_result') }}
                             <h4>
                     </li>
                 </ul><br>

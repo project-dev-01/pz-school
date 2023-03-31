@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Location</h4>
+                <h4 class="page-title">{{ __('messages.location') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Location List<h4>
+                        <h4 class="nav-link">{{ __('messages.location_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -41,8 +41,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Location Name</th>
-                                    <th>No Of Seats</th>
+                                    <th>{{ __('messages.location_name') }}</th>
+                                    <th>{{ __('messages.no_of_seats') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

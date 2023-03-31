@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Event</h4>
+                <h4 class="page-title">{{ __('messages.event') }}</h4>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="audience">Audience<span class="text-danger">*</span></label>
+                                    <label for="audience">{{ __('messages.audience') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="edit_audience" name="audience">
                                         <option value="">Select The Audience</option>
                                         <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="start_date">Start Date<span class="text-danger">*</span></label>
+                                    <label for="start_date">{{ __('messages.start_date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="end_date">End Date<span class="text-danger">*</span></label>
+                                    <label for="end_date">{{ __('messages.end_date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -144,7 +144,7 @@
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
                                         <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" {{$event['all_day'] == "on" ? 'checked':''}}>
-                                        <label class="custom-control-label" for="allDay">All Day</label>
+                                        <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }}</label>
                                     </div>
                                 </div>
                             </div>

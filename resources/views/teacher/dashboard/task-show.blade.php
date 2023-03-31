@@ -22,11 +22,11 @@
                                         <td><input type="hidden" id="calendorID" value=""></td>
                                     </tr>
                                     <tr>
-                                        <td>Start Date</td>
+                                        <td>{{ __('messages.start_date') }}</td>
                                         <td id="startDateDetails"></td>
                                     </tr>
                                     <tr>
-                                        <td>End Date</td>
+                                        <td>{{ __('messages.end_date') }}</td>
                                         <td id="endDateDetails"></td>
                                     </tr>
                                 </table>

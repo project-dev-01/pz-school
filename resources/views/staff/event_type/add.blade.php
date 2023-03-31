@@ -3,14 +3,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddEventTypeModallLabel">Add Event Type</h4>
+                <h4 class="modal-title" id="myaddEventTypeModallLabel">{{ __('messages.add_event_type') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="eventTypeForm" method="post" action="{{ route('event_type.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Event Type Name</label>
+                        <label for="name">{{ __('messages.event_type_name') }}</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

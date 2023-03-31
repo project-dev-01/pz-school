@@ -287,7 +287,7 @@
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title" id="modal-title">Event</h5>
+                            <h5 class="modal-title" id="modal-title">{{ __('messages.event') }}</h5>
                         </div>
                         <div class="modal-body p-4">
                             <form class="needs-validation" name="event-form" id="form-event" novalidate>

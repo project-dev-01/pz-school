@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Forum </title>
+    <title>{{ __('messages.forum') }} </title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">

@@ -16,7 +16,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="start_date">Start Date<span class="text-danger">*</span></label>
+                        <label for="start_date">{{ __('messages.start_date') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="end_date">End Date<span class="text-danger">*</span></label>
+                        <label for="end_date">{{ __('messages.end_date') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">

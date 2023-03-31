@@ -44,9 +44,9 @@
                                         <th>S.No</th>
                                         <th>Branch</th>
                                         <th>Grade Name</th>
-                                        <th>Grade Point</th>
-                                        <th>Min Percentage</th>
-                                        <th>Max Percentage</th>
+                                        <th>{{ __('messages.grade_point') }}</th>
+                                        <th>{{ __('messages.min_percentage') }}</th>
+                                        <th>{{ __('messages.max_percentage') }}</th>
                                         <th>{{ __('messages.remarks') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-3 col-form-label">Grade Point<span class="text-danger">*</span></label>
+                                                <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.grade_point') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                 </div>
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-3 col-form-label">Min Percentage<span class="text-danger">*</span></label>
+                                                <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.min_percentage') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                 </div>
@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-3 col-form-label">Max Percentage<span class="text-danger">*</span></label>
+                                                <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.max_percentage') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                                 </div>

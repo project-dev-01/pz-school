@@ -15,12 +15,12 @@
                         <thead>
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>
-                                <th>Paper Name</th>
+                                <th>{{ __('messages.paper_name') }}</th>
                                 <th>Date</th>
-                                <th>Starting Time</th>
-                                <th>Ending Time</th>
-                                <th>Location</th>
-                                <th>Distributor</th>
+                                <th>{{ __('messages.starting_time') }}</th>
+                                <th>{{ __('messages.ending_time') }}</th>
+                                <th>{{ __('messages.location') }}</th>
+                                <th>{{ __('messages.distributor') }}</th>
                             </tr>
                         </thead>
                         <tbody id="exam-timetable">

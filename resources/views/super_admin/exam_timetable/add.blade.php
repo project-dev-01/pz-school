@@ -16,8 +16,8 @@
                             <tr style="background-color:#0ABAB5">
                                 <th>Subject</th>
                                 <th>Date</th>
-                                <th>Starting Time</th>
-                                <th>Ending Time</th>
+                                <th>{{ __('messages.starting_time') }}</th>
+                                <th>{{ __('messages.ending_time') }}</th>
                                 <th>Hall Room</th>
 
                             </tr>

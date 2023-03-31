@@ -560,11 +560,11 @@
                                                     <td id="type"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Start Date</td>
+                                                    <td>{{ __('messages.start_date') }}</td>
                                                     <td id="start_date"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>End Date</td>
+                                                    <td>{{ __('messages.end_date') }}</td>
                                                     <td id="end_date"></td>
                                                 </tr>
                                                 <tr id="start_time_row" style="display:none">
@@ -576,7 +576,7 @@
                                                     <td id="end_time"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Audience</td>
+                                                    <td>{{ __('messages.audience') }}</td>
                                                     <td id="audience"></td>
                                                 </tr>
                                                 <tr>

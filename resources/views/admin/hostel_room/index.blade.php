@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Hostel Room</h4>
+                <h4 class="page-title">{{ __('messages.hostel_room') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Hostel Room<h4>
+                        <h4 class="navv">{{ __('messages.hostel_room') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -40,12 +40,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Room Number</th>
+                                    <th>{{ __('messages.room_number') }}</th>
                                     <th>{{ __('messages.hostel_name') }}</th>
-                                    <th>Block</th>
-                                    <th>Floor</th>
-                                    <th>No of Beds</th>
-                                    <th>Cost Per Bed</th>
+                                    <th>{{ __('messages.block') }}</th>
+                                    <th>{{ __('messages.floor') }}</th>
+                                    <th>{{ __('messages.no_of_beds') }}</th>
+                                    <th>{{ __('messages.cost_per_bed') }}</th>
                                     <th>{{ __('messages.remarks') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

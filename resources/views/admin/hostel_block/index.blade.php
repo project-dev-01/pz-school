@@ -41,10 +41,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Block Name</th>
-                                    <th>Block Warden</th>
-                                    <th>Total Floor</th>
-                                    <th>Block Leader</th>
+                                    <th>{{ __('messages.block_name') }}</th>
+                                    <th>{{ __('messages.block_warden') }}</th>
+                                    <th>{{ __('messages.total_floor') }}</th>
+                                    <th>{{ __('messages.block_leader') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

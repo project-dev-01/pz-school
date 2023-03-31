@@ -33,15 +33,15 @@
                                         <td class="type">Sports</td>
                                     </tr>
                                     <tr>
-                                        <td>Start Date</td>
+                                        <td>{{ __('messages.start_date') }}</td>
                                         <td class="start_date">26-01-2022</td>
                                     </tr>
                                     <tr>
-                                        <td>End Date</td>
+                                        <td>{{ __('messages.end_date') }}</td>
                                         <td class="end_date">28-01-2022</td>
                                     </tr>
                                     <tr>
-                                        <td>Audience</td>
+                                        <td>{{ __('messages.audience') }}</td>
                                         <td class="audience">All</td>
                                     </tr>
                                     <tr>

@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Exam Schedule</h4>
+                <h4 class="page-title">{{ __('messages.exam_schedule') }}</h4>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Branch</th>
-                                                <th>Exam Name</th>
+                                                <th>{{ __('messages.exam_name') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>
 
                                             </tr>

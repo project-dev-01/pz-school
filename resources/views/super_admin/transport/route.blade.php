@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Route Master</h4>
+                <h4 class="page-title">{{ __('messages.route_master') }}</h4>
             </div>
         </div>
     </div>     
@@ -43,9 +43,9 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>Branch Name</th>
-                                <th>Route Name</th>
-                                <th>Start Place</th>
-                                <th>Stop Place</th>
+                                <th>{{ __('messages.route_name') }}</th>
+                                <th>{{ __('messages.start_place') }}</th>
+                                <th>{{ __('messages.stop_place') }}</th>
                                 <th>{{ __('messages.remarks') }}</th>
                             </tr>
                         </thead>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Route Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.route_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -104,7 +104,7 @@
                     
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Route Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.route_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Start Place<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.start_place') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Stop Place<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.stop_place') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

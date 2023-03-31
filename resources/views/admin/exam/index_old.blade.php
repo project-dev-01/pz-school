@@ -26,7 +26,7 @@
                 <ul class="nav nav-tabs nav-bordered">
                     <li class="nav-item">
                         <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                            Exam List
+                        {{ __('messages.exam_list') }}
                         </a>
                     </li>
                     <li class="nav-item">
@@ -42,9 +42,9 @@
                                 <thead>
                                     <tr>
                                         <th>S.No</th>
-                                        <th>Exam Name</th>
+                                        <th>{{ __('messages.exam_name') }}</th>
                                         <th>Exam Type</th>
-                                        <th>Term</th>
+                                        <th>{{ __('messages.term') }}</th>
                                         <th>Mark Distribution</th>
                                         <th>{{ __('messages.remarks') }}</th>
                                         <th>{{ __('messages.action') }}</th>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Term </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Select Term</option>

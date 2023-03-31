@@ -3,7 +3,7 @@
 <main id="tt-pageContent">
     <div class="tt-custom-mobile-indent container">
         <div class="tt-categories-title">
-            <div class="tt-title">Categories</div>
+            <div class="tt-title">{{ __('messages.categories') }}</div>
             <div class="tt-search">
                 <form class="search-wrapper">
                     <div class="search-form">

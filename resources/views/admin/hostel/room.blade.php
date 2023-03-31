@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Hostel Roomssssssssssssss</h4>
+                <h4 class="page-title">{{ __('messages.hostel_room') }}</h4>
             </div>
         </div>
     </div>     
@@ -44,8 +44,8 @@
                                 <th>S.No</th>
                                 <th>{{ __('messages.room_name') }}</th>
                                 <th>{{ __('messages.category') }}</th>
-                                <th>No of Beds</th>
-                                <th>Cost Per Bed</th>
+                                <th>{{ __('messages.no_of_beds') }}</th>
+                                <th>{{ __('messages.cost_per_bed') }}</th>
                                 <th>{{ __('messages.remarks') }}</th>
                             </tr>
                         </thead>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Hostel Address<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.hostel_address') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

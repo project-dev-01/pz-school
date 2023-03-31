@@ -27,7 +27,7 @@
                     </div>
                     <div id="test"></div>
                     <div class="form-group" id="watchman">
-                        <label for="watchman">Warden Name<span class="text-danger">*</span></label>
+                        <label for="watchman">{{ __('messages.warden_name') }}<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" id="watch" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="Choose The Warden Name">
                             <option value="">Select Warden</option>
                             @forelse($warden as $war)
@@ -38,7 +38,7 @@
                         <span class="text-danger error-text watchman_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="address">Hostel Address<span class="text-danger">*</span></label>
+                        <label for="address">{{ __('messages.hostel_address') }}<span class="text-danger">*</span></label>
                         <input type="text" name="address" id="address" class="form-control" placeholder="Enter Hostel Address">
                         <span class="text-danger error-text address_error"></span>
                     </div>

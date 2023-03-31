@@ -38,7 +38,7 @@
             <div class="tt-wrapper-inner">
                 <ul class="nav nav-tabs pt-tabs-default" role="tablist">
                     <li class="nav-item show">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-01" role="tab"><span>Activity</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-01" role="tab"><span>{{ __('messages.activity') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>Threads</span></a>
@@ -53,7 +53,7 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>10 Following</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-06" role="tab"><span>Categories</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-06" role="tab"><span>{{ __('messages.categories') }}</span></a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +64,7 @@
                             <div class="tt-col-topic">Topic</div>
                             <div class="tt-col-value-large hide-mobile">{{ __('messages.category') }}</div>
                             <div class="tt-col-value-large hide-mobile">Status</div>
-                            <div class="tt-col-value-large hide-mobile">Activity</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.activity') }}</div>
                         </div>
                         <div class="tt-item">
                             <div class="tt-col-avatar">

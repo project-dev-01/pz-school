@@ -151,7 +151,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Exam Result
+                        {{ __('messages.exam_result') }}
                             <h4>
                     </li>
                 </ul><br>

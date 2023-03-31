@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">           
                     <div class="form-group">
-                        <label for="name">Category Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.category_name') }} <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Category Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

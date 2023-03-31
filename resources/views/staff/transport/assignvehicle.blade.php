@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Assign Vehicle</h4>
+                <h4 class="page-title">{{ __('messages.assign_vehicle') }}</h4>
             </div>
         </div>
     </div>     
@@ -31,7 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                        Assign Vehicle
+                        {{ __('messages.assign_vehicle') }}
                         </a>
                     </li> 
                 </ul>
@@ -42,10 +42,10 @@
                         <thead>
                             <tr>
                                 <th>S.No</th>
-                                <th>Route Name</th>
-                                <th>Stoppage</th>
-                                <th>Stop Place</th>
-                                <th>Route Fare</th>
+                                <th>{{ __('messages.route_name') }}</th>
+                                <th>{{ __('messages.stoppage') }}</th>
+                                <th>{{ __('messages.stop_place') }}</th>
+                                <th>{{ __('messages.route_fare') }}</th>
                                 <th>Vehicle No</th>
                             </tr>
                         </thead>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Stoppage<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.stoppage') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
                             <option value="">select</option>

@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" id="event_type_id" name="event_type_id">
                     <div class="form-group">
-                        <label for="name">Event Type Name</label>
+                        <label for="name">{{ __('messages.event_type_name') }}</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

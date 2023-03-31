@@ -76,7 +76,7 @@
                                                 <div class="card-box">
                                                     <div class="card-body">
                                                         <div class="form-group">
-                                                            <label for="heard">Notes</label>
+                                                            <label for="heard">{{ __('messages.notes') }}</label>
                                                             <textarea class="form-control" id="product-description" rows="5" placeholder="Enter Your Notes"></textarea>
                                                         </div>
                                                         <div class="form-group">
@@ -159,7 +159,7 @@
                                                 <div class="card-box">
                                                     <div class="card-body">
                                                         <div class="form-group">
-                                                            <label for="heard">Notes</label>
+                                                            <label for="heard">{{ __('messages.notes') }}</label>
                                                             <textarea class="form-control" id="product-description" rows="5" placeholder="Enter Your Notes"></textarea>
                                                         </div>
                                                         <div class="form-group">

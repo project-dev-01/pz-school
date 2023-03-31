@@ -15,7 +15,7 @@
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
-                        <label for="term_id" class="col-3 col-form-label">Term </label>
+                        <label for="term_id" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                         <select  class="form-control" name="term_id">
                             <option value="">Select Term</option>
                             @foreach($term as $t)

@@ -28,7 +28,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Exam Marks</h4>
+                <h4 class="page-title">{{ __('messages.exam_marks') }}</h4>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">Exam Marks
+                                <h4 class="navv">{{ __('messages.exam_marks') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="paperID">Paper Name</label>
+                                            <label for="paperID">{{ __('messages.paper_name') }}</label>
                                             <select id="paperID" class="form-control" name="paper_id">
                                                 <option value="">Select Paper</option>
                                             </select>

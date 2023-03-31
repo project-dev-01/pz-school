@@ -19,11 +19,11 @@
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="startEndDate">Start Date</label>
+                        <label for="startEndDate">{{ __('messages.start_date') }}</label>
                         <p id="startDate"></p>
                     </div>
                     <div class="form-group">
-                        <label for="endDate">End Date</label>
+                        <label for="endDate">{{ __('messages.end_date') }}</label>
                         <p id="endDate"></p>
                     </div>
                     <div class="form-group">

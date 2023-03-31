@@ -21,15 +21,15 @@
                                         <td class="type"></td>
                                     </tr>
                                     <tr>
-                                        <td>Start Date</td>
+                                        <td>{{ __('messages.start_date') }}</td>
                                         <td class="start_date"></td>
                                     </tr>
                                     <tr>
-                                        <td>End Date</td>
+                                        <td>{{ __('messages.end_date') }}</td>
                                         <td class="end_date"></td>
                                     </tr>
                                     <tr>
-                                        <td>Audience</td>
+                                        <td>{{ __('messages.audience') }}</td>
                                         <td class="audience"></td>
                                     </tr>
                                     <tr>

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Event Types</h4>
+                <h4 class="page-title">{{ __('messages.event_types') }}</h4>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Event Type</h4>
+                <h4 class="header-title">{{ __('messages.event_type') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEventType">Add Event Type</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addEventType">{{ __('messages.add_event_type') }}</button>
                     </div>
                 </div>
                 </p>
@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Branch</th>
-                                <th>Event Type Name</th>
+                                <th>{{ __('messages.event_type_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

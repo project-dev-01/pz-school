@@ -23,7 +23,7 @@
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Event</h4>
+                <h4 class="page-title">{{ __('messages.event') }}</h4>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Event
+                        <h4 class="navv">{{ __('messages.event') }}
                             <h4>
                     </li>
                 </ul>
@@ -52,9 +52,9 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Type</th>
-                                    <th>Audience</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
+                                    <th>{{ __('messages.audience') }}</th>
+                                    <th>{{ __('messages.start_date') }}</th>
+                                    <th>{{ __('messages.end_date') }}</th>
                                     <th>Publish</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

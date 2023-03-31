@@ -350,7 +350,7 @@ border-bottom: 1px solid #E9D528;
                 <div class="tt-col-value hide-mobile">Likes</div>
                 <div class="tt-col-value hide-mobile">Replies</div>
                 <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
+                <div class="tt-col-value">{{ __('messages.activity') }}</div>
                 <div class="tt-col-value">{{ __('messages.action') }}</div>
             </div>
 

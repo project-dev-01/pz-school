@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Category Name</th>
+                                <th>{{ __('messages.category_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
@@ -71,7 +71,7 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="Category_name">Category Name</label>
+                        <label for="Category_name">{{ __('messages.category_name') }}</label>
                         <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="Enter Category name">
                         <span class="text-danger error-text Category_name_error"></span>
                     </div>

@@ -10,11 +10,11 @@
                 <form id="exam-hall-form" method="post"  action="{{ route('admin.exam_hall.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="hall_no">Location Name<span class="text-danger">*</span></label>
+                        <label for="hall_no">{{ __('messages.location_name') }}<span class="text-danger">*</span></label>
                         <input type="text"  name="hall_no" class="form-control" placeholder="Enter Location Name">
                     </div>
                     <div class="form-group">
-                        <label for="no_of_seats">No of Seats<span class="text-danger">*</span></label>
+                        <label for="no_of_seats">{{ __('messages.no_of_seats') }}<span class="text-danger">*</span></label>
                         <input type="text"  name="no_of_seats" class="form-control" placeholder="Enter No of Seats">
                     </div>
                     <div class="form-group">

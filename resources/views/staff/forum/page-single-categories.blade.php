@@ -53,7 +53,7 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>10 Following</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link active" data-toggle="tab" href="#tt-tab-06" role="tab"><span>Categories</span></a>
+                        <a class="nav-link active" data-toggle="tab" href="#tt-tab-06" role="tab"><span>{{ __('messages.categories') }}</span></a>
                     </li>
                 </ul>
             </div>

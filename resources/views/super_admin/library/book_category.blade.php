@@ -37,7 +37,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Branch</th>
-                                <th>Category Name</th>
+                                <th>{{ __('messages.category_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
@@ -104,7 +104,7 @@
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="Category_name">Category Name</label>
+                        <label for="Category_name">{{ __('messages.category_name') }}</label>
                         <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="Enter Category name">
                         <span class="text-danger error-text Category_name_error"></span>
                     </div>

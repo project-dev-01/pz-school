@@ -127,8 +127,8 @@
                                             <tr>
                                                 <th>Subject <span class="text-danger">*</span></th>
                                                 <th>Date <span class="text-danger">*</span></th>
-                                                <th>Starting Time <span class="text-danger">*</span></th>
-                                                <th>Ending Time <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.starting_time') }} <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.ending_time') }} <span class="text-danger">*</span></th>
                                                 <th>Hall Room <span class="text-danger">*</span></th>
                                                 <th>XXXName<span class="text-danger">*</span></th>
 

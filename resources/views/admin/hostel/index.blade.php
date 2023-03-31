@@ -18,7 +18,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Hostel</h4>
+                <h4 class="page-title">{{ __('messages.hostel') }}</h4>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Hostel<h4>
+                        <h4 class="navv">{{ __('messages.hostel') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -46,7 +46,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.hostel_name') }}</th>
                                     <th>{{ __('messages.category') }}</th>
-                                    <th>Warden</th>
+                                    <th>{{ __('messages.warden') }}</th>
                                     <th>{{ __('messages.remarks') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Branch</li>
                     </ol>-->
                 </div> 
-                <h4 class="page-title">Vehicle Master</h4>
+                <h4 class="page-title">{{ __('messages.vehicle_master') }}</h4>
             </div>
         </div>
     </div>     
@@ -44,8 +44,8 @@
                                 <th>S.No</th>
                                 <th>Vehicle No</th>
                                 <th>Capacity</th>
-                                <th>Driver Name</th>
-                                <th>Driver Phone</th>
+                                <th>{{ __('messages.driver_name') }}</th>
+                                <th>{{ __('messages.driver_phone') }}</th>
                                 <th>Driver License</th>
                             </tr>
                         </thead>
@@ -79,7 +79,7 @@
                     
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Route Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.route_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Driver Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.driver_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Driver Phone<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.driver_phone') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

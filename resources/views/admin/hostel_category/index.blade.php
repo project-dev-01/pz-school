@@ -40,7 +40,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Category Name</th>
+                                    <th>{{ __('messages.category_name') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

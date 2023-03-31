@@ -466,7 +466,7 @@
                     <div class="modal-content">
                         <div class="modal-header py-3 px-4 border-bottom-0 d-block">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h5 class="modal-title" style="color: #6FC6CC">Schedule</h5>
+                            <h5 class="modal-title" style="color: #6FC6CC">{{ __('messages.schedule') }}</h5>
                         </div>
                         <div class="modal-body p-4">
                             <form id="addStudentReport" method="post" action="{{ route('student.classroom.add_daily_report_remarks') }}" autocomplete="off">
@@ -538,7 +538,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Notes</div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.notes') }}</div>
                                             </div>
                                             <div class="col-6">
                                                 <textarea class="form-control" style="margin: 12px; height: 42px;width: 80%;" placeholder="Enter your notes" id="calNotes" name="student_remarks"></textarea>
@@ -604,11 +604,11 @@
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
-                                                <td>Start Date</td>
+                                                <td>{{ __('messages.start_date') }}</td>
                                                 <td id="start_date"></td>
                                             </tr>
                                             <tr>
-                                                <td>End Date</td>
+                                                <td>{{ __('messages.end_date') }}</td>
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
@@ -620,7 +620,7 @@
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>
-                                                <td>Audience</td>
+                                                <td>{{ __('messages.audience') }}</td>
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
@@ -738,7 +738,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Subject</th>
-                                <th>Marks</th>
+                                <th>{{ __('messages.marks') }}</th>
                                 <th>Subject Position</th>
                             </tr>
                         </thead>
@@ -766,7 +766,7 @@
                         <thead>
                             <tr>
                                 <th rowspan="2">#</th>
-                                <th rowspan="2">Exam Name</th>
+                                <th rowspan="2">{{ __('messages.exam_name') }}</th>
                                 @forelse ($all_exam_subject_scores as $ddkey => $scores)
                                 @php
                                 $countsub = count($scores['exam_marks']);

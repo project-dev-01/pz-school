@@ -35,7 +35,7 @@
                     <nav>
                         @if(Session::get('role_id') == '1')
                         <ul>
-                            <li class="{{ (request()->is('super_admin/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('super_admin/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-single-user')) ? 'active' : '' }}">
@@ -44,12 +44,12 @@
                                     <li class="{{ (request()->is('super_admin/forum/index')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('super_admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('super_admin.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('super_admin.forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-single-categories') }}">Single User Categories</a></li>
-                                    <li><a href="{{ route('super_admin.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('super_admin.forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('super_admin.forum.page-tabs-guidelines') }}">Guidelines</a></li>
@@ -58,7 +58,7 @@
                         </ul>
                         @elseif(Session::get('role_id') == '2')
                         <ul>
-                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-single-user')) ? 'active' : '' }}">
@@ -67,13 +67,13 @@
                                     <li class="{{ (request()->is('staff/forum/index')) ? 'active' : '' }}"><a href="{{ route('staff.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('staff/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('staff.forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('staff.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('staff.forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-categories') }}">Single User Categories</a></li>
                                     <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
-                                    <li><a href="{{ route('staff.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('staff.forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs-guidelines') }}">Guidelines</a></li>
@@ -88,7 +88,7 @@
                         </ul>
                         @elseif(Session::get('role_id') == '3')
                         <ul>
-                            <li class="{{ (request()->is('parent/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('parent/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('parent/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('parent/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('parent/forum/page-single-user')) ? 'active' : '' }}">
@@ -97,13 +97,13 @@
                                     <li class="{{ (request()->is('parent/forum/index')) ? 'active' : '' }}"><a href="{{ route('parent.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('parent/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('parent.forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('parent.forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('parent.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('parent.forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('parent.forum.page-single-categories') }}">Single User Categories</a></li>
                                     <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
-                                    <li><a href="{{ route('parent.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('parent.forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('parent.forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('parent.forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('parent.forum.page-tabs-guidelines') }}">Guidelines</a></li>
@@ -118,7 +118,7 @@
                         </ul>  
                         @elseif(Session::get('role_id') == '4')
                         <ul>
-                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-single-user')) ? 'active' : '' }}">
@@ -127,13 +127,13 @@
                                     <li class="{{ (request()->is('staff/forum/index')) ? 'active' : '' }}"><a href="{{ route('staff.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('staff/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('staff.forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('staff.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('staff.forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-categories') }}">Single User Categories</a></li>
                                     <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
-                                    <li><a href="{{ route('staff.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('staff.forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs-guidelines') }}">Guidelines</a></li>
@@ -148,7 +148,7 @@
                         </ul>
                         @elseif(Session::get('role_id') == '5')
                         <ul>
-                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('staff/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('staff/forum/page-single-user')) ? 'active' : '' }}">
@@ -157,13 +157,13 @@
                                     <li class="{{ (request()->is('staff/forum/index')) ? 'active' : '' }}"><a href="{{ route('staff.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('staff/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('staff.forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('staff.forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('staff.forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('staff.forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('staff.forum.page-single-categories') }}">Single User Categories</a></li>
                                     <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
-                                    <li><a href="{{ route('staff.forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('staff.forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('staff.forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('staff.forum.page-tabs-guidelines') }}">Guidelines</a></li>
@@ -178,7 +178,7 @@
                         </ul>
                         @else
                         <ul>
-                            <li class="{{ (request()->is('super_admin/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('forum.page-categories') }}"><span>Categories</span></a></li>
+                            <li class="{{ (request()->is('super_admin/forum/page-categories')) ? 'active' : '' }}"><a href="{{ route('forum.page-categories') }}"><span>{{ __('messages.categories') }}</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-tabs')) ? 'active' : '' }}"><a href="{{ route('forum.page-tabs') }}"><span>Trending</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-create-topic')) ? 'active' : '' }}"><a href="{{ route('forum.page-create-topic') }}"><span>New</span></a></li>
                             <li class="{{ (request()->is('super_admin/forum/page-single-user')) ? 'active' : '' }}">
@@ -187,13 +187,13 @@
                                     <li class="{{ (request()->is('super_admin/forum/index')) ? 'active' : '' }}"><a href="{{ route('super_admin.forum.index') }}">Home</a></li>
                                     <li class="{{ (request()->is('super_admin/forum/page-single-topic')) ? 'active' : '' }}"><a href="{{ route('forum.page-single-topic') }}">Single Topic</a></li>
                                     <li><a href="{{ route('forum.page-create-topic') }}">Create Topic</a></li>
-                                    <li><a href="{{ route('forum.page-single-user') }}">Single User Activity</a></li>
+                                    <li><a href="{{ route('forum.page-single-user') }}">{{ __('messages.single_user_activity') }}</a></li>
                                     <li><a href="{{ route('forum.page-single-threads') }}">Single User Threads</a></li>
                                     <li><a href="{{ route('forum.page-single-replies') }}">Single User Replies</a></li>
                                     <li><a href="{{ route('forum.page-single-followers') }}">Single User Followers</a></li>
                                     <li><a href="{{ route('forum.page-single-categories') }}">Single User Categories</a></li>
                                     <!-- <li><a href="page-single_settings.html">Single User Settings</a></li> -->
-                                    <li><a href="{{ route('forum.page-categories') }}">Categories</a></li>
+                                    <li><a href="{{ route('forum.page-categories') }}">{{ __('messages.categories') }}</a></li>
                                     <li><a href="{{ route('forum.page-categories-single') }}">Single Category</a></li>
                                     <li><a href="{{ route('forum.page-tabs') }}">About</a></li>
                                     <li><a href="{{ route('forum.page-tabs-guidelines') }}">Guidelines</a></li>

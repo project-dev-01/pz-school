@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Event</h4>
+                <h4 class="page-title">{{ __('messages.event') }}</h4>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Event</h4>
+                <h4 class="header-title">{{ __('messages.event') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
@@ -37,9 +37,9 @@
                                 <th>#</th>
                                 <th>Title</th>
                                 <th>Type</th>
-                                <th>Audience</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
+                                <th>{{ __('messages.audience') }}</th>
+                                <th>{{ __('messages.start_date') }}</th>
+                                <th>{{ __('messages.end_date') }}</th>
                                 <th>Created By</th>
                                 <th>Publish</th>
                                 <th>{{ __('messages.action') }}</th>

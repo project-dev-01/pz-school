@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Exam Result</h4>
+                <h4 class="page-title">{{ __('messages.exam_result') }}</h4>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
 
                         <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Get
+                        {{ __('messages.get') }}
                         </button>  
                 </div>
                 </form>
@@ -87,7 +87,7 @@
             <ul class="nav nav-tabs" >
                 <li class="nav-item">
                     <h4 class="nav-link">
-                        Exam Result
+                    {{ __('messages.exam_result') }}
                         <h4>
                 </li>
             </ul><br>

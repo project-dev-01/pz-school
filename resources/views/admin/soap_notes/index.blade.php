@@ -40,7 +40,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.category') }}</th>
                                     <th>Sub Category </th>
-                                    <th>Notes </th>
+                                    <th>{{ __('messages.notes') }} </th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

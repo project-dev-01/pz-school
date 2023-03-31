@@ -32,7 +32,7 @@
                         <span class="text-danger error-text type_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="audience">Audience<span class="text-danger">*</span></label>
+                        <label for="audience">{{ __('messages.audience') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="audience" name="audience">
                             <option value="">Select</option>
                             <option value="1">EveryBody</option>
@@ -58,12 +58,12 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="start_date">Start Date<span class="text-danger">*</span></label>
+                        <label for="start_date">{{ __('messages.start_date') }}<span class="text-danger">*</span></label>
                         <input class="form-control homeWorkAdd" id="start_date" type="date" name="start_date">
                         <span class="text-danger error-text start_date_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="end_date">End Date<span class="text-danger">*</span></label>
+                        <label for="end_date">{{ __('messages.end_date') }}<span class="text-danger">*</span></label>
                         <input class="form-control homeWorkAdd" id="end_date" type="date" name="end_date">
                         <span class="text-danger error-text end_date_error"></span>
                     </div> 
