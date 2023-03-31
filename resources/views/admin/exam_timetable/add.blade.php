@@ -16,7 +16,7 @@
                             <tr style="background-color:#0ABAB5">
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>Paper Name</th>
-                                <th>Date</th>
+                                <th>{{ __('messages.date') }}</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
                                 <th>Location</th>
@@ -39,7 +39,7 @@
                         <input type="hidden" name="semester_id" id="semester_id">
                         <input type="hidden" name="session_id" id="session_id">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            Download
+                        {{ __('messages.download') }}
                         </button>
                     </form>
                 </div>

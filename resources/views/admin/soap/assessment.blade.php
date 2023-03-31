@@ -50,7 +50,7 @@
                                                                                         <th>No</th>
                                                                                         <th>{{ __('messages.subject') }}</th>
                                                                                         <th>Refered By</th>
-                                                                                        <th>Date</th>
+                                                                                        <th>{{ __('messages.date') }}</th>
                                                                                         <th>{{ __('messages.action') }}</th>
                                                                                     </tr>
                                                                                 </thead>
@@ -87,9 +87,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Title</th>
+                        <th>{{ __('messages.title') }}</th>
                         <th>Refered By</th>
-                        <th>Date</th>
+                        <th>{{ __('messages.date') }}</th>
                         <th>{{ __('messages.action') }}</th>
                     </tr>
                 </thead>

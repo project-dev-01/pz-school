@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">{{ __('messages.description') }}</label>
                                     <textarea class="form-control" name="description"></textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div> 

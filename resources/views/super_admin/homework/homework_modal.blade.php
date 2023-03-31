@@ -85,7 +85,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Student</th>
+                                                            <th>{{ __('messages.student') }}</th>
                                                             <th>{{ __('messages.register_no') }}</th>
                                                             <th>{{ __('messages.subject') }}</th>
                                                             <th>Status</th>

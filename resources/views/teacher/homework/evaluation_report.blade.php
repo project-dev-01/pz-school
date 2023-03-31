@@ -21,7 +21,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Evaluation Report</h4>
+                <h4 class="page-title">{{ __('messages.evaluation_report') }}</h4>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Evaluation Report
+                            {{ __('messages.evaluation_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -140,9 +140,9 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>Title</th>
-                                                                <th>Date of Homework</th>
-                                                                <th>Date of Submission</th>
+                                                                <th>{{ __('messages.title') }}</th>
+                                                                <th>{{ __('messages.date_of_homework') }}</th>
+                                                                <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
                                                                 <th>Total Student</th>
                                                                 <th>{{ __('messages.action') }}</th>
@@ -176,8 +176,8 @@
                                                                 <th>{{ __('messages.subject') }}</th>
                                                                 <th>Grade</th>
                                                                 <th>{{ __('messages.class') }}</th>
-                                                                <th>Date of Homework</th>
-                                                                <th>Date of Submission</th>
+                                                                <th>{{ __('messages.date_of_homework') }}</th>
+                                                                <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
                                                                 <th>Total Student</th>
                                                                 <th>{{ __('messages.action') }}</th>

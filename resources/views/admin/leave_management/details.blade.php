@@ -55,7 +55,7 @@
                                 <td id="leaveType"></td>
                             </tr>
                             <tr>
-                                <td>Reason</td>
+                                <td>{{ __('messages.reason') }}</td>
                                 <td>:</td>
                                 <td id="reason"></td>
                             </tr>
@@ -166,7 +166,7 @@
                                 <td id="leaveType"></td>
                             </tr>
                             <tr>
-                                <td>Reason</td>
+                                <td>{{ __('messages.reason') }}</td>
                                 <td>:</td>
                                 <td id="reason"></td>
                             </tr>

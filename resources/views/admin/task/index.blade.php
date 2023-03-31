@@ -100,10 +100,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
-                                    <th>Date & Time</th>
-                                    <th>Priority</th>
-                                    <th>Description</th>
+                                    <th>{{ __('messages.title') }}</th>
+                                    <th>{{ __('messages.date') }} & {{ __('messages.time') }}</th>
+                                    <th>{{ __('messages.priority') }}</th>
+                                    <th>{{ __('messages.description') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

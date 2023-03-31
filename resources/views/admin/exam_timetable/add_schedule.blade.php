@@ -129,7 +129,7 @@
                                             <tr>
                                                 <th>{{ __('messages.subject') }} <span class="text-danger">*</span></th>
                                                 <th>Paper Name</th>
-                                                <th>Date <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.date') }} <span class="text-danger">*</span></th>
                                                 <th>Starting Time <span class="text-danger">*</span></th>
                                                 <th>Ending Time <span class="text-danger">*</span></th>
                                                 <th>Location</th>

@@ -312,7 +312,7 @@
                                                                                 <td id="end_date"></td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>Description</td>
+                                                                                <td>{{ __('messages.description') }}</td>
                                                                                 <td id="description">
                                                                                 </td>
                                                                             </tr>

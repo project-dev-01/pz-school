@@ -18,11 +18,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Title</th>
+                                                <th>{{ __('messages.title') }}</th>
                                                 <th>Soap Type</th>
                                                 <th>Action By</th>
                                                 <th>Action Type</th>
-                                                <th>Date</th>
+                                                <th>{{ __('messages.date') }}</th>
                                             </tr>
                                         </thead>
 

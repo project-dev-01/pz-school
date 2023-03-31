@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">All Leaves</h4>
+                <h4 class="page-title">{{ __('messages.all_leaves') }}</h4>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                                         <th>No.Of.Days</th>
                                         <th>From Leave</th>
                                         <th>To Leave</th>
-                                        <th>Reason</th>
+                                        <th>{{ __('messages.reason') }}</th>
                                         <th>Document</th>
                                         <th>Status</th>
                                         <!-- <th>Remarks</th> -->

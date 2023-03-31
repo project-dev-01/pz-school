@@ -411,7 +411,7 @@
                                         <div class=" table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <td>Title</td>
+                                                <td>{{ __('messages.title') }}</td>
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
@@ -439,7 +439,7 @@
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
-                                                <td>Description</td>
+                                                <td>{{ __('messages.description') }}</td>
                                                 <td id="description"></td>
                                             </tr>
                                         </table>
@@ -998,7 +998,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="sr_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="sr_student_id" class="form-control studentRank" name="student_id">
                                 <option value="">Select Student</option>
                             </select>
@@ -1105,7 +1105,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="st_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="st_student_id" class="form-control studentSemester" name="student_id">
                                 <option value="">Select Student</option>
                             </select>
@@ -1172,7 +1172,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ems_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="ems_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="ems_student_id" class="form-control examMarkStatus" name="student_id">
                                 <option value="">Select Student</option>
                             </select>

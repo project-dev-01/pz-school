@@ -71,7 +71,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>

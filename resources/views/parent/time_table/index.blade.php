@@ -149,7 +149,7 @@
                         </div> <!-- end col-->
                         <div class="col-md-12">
                             <div class="clearfix mt-4">
-                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">Download</button>
+                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">{{ __('messages.download') }}</button>
                             </div>
                         </div> 
                     </div>

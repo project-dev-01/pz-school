@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Homework</h4>
+                <h4 class="page-title">{{ __('messages.homework') }}</h4>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span> Add Homework
+                            <span data-feather="" class="icon-dual" id="span-parent"></span> {{ __('messages.add_homework') }}
                             <h4>
                     </li>
                 </ul>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Date Of Homework<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.date_of_homework') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Date Of Submission<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.date_of_submission') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Homework<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.homework') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
                                         </div>
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Attachment File<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.attachment_file') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group">
                                                 <div class="custom-file">

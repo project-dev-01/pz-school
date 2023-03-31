@@ -85,7 +85,7 @@
                                     <th>Leave from</th>
                                     <th>To Leave</th>
                                     <th>Status</th>
-                                    <th>Reason</th>
+                                    <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>
                                     <th>Teacher Remarks</th>
                                     <th>{{ __('messages.action') }}</th>

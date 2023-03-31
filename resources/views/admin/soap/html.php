@@ -169,7 +169,7 @@
                                                 <th>S.no</th>
                                                 <th colspan="2">Student Profile</th>
                                                 <th>{{ __('messages.class') }}</th>
-                                                <th>Date</th>
+                                                <th>{{ __('messages.date') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -253,7 +253,7 @@
                                                 <th>S.no</th>
                                                 <th colspan="2">Student Profile</th>
                                                 <th>{{ __('messages.class') }}</th>
-                                                <th>Date</th>
+                                                <th>{{ __('messages.date') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -373,7 +373,7 @@
                                                             <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%
                                                             </h3>
                                                             <p class="text-muted mb-1 text-truncate">
-                                                                Attendance Report</p>
+                                                            {{ __('messages.attendance_report') }}</p>
                                                         </div>
                                                     </div>
                                                 </div> <!-- end row-->
@@ -441,7 +441,7 @@
                                                                             <td id="end_date"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Description</td>
+                                                                            <td>{{ __('messages.description') }}</td>
                                                                             <td id="description">
                                                                             </td>
                                                                         </tr>

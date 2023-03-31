@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="title">Title<span class="text-danger">*</span></label>
+                                    <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name">
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
@@ -120,7 +120,7 @@
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
                                         <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" checked>
-                                        <label class="custom-control-label" for="holiday">Holiday</label>
+                                        <label class="custom-control-label" for="holiday">{{ __('messages.holiday') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">{{ __('messages.description') }}</label>
                                     <textarea class="form-control" name="description"></textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div>

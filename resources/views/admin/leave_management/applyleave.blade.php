@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Leave Management</h4>
+                <h4 class="page-title">{{ __('messages.leave_management') }}</h4>
             </div>
         </div>
     </div>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="document">Attachment File</label>
+                                            <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                             <div class="input-group">
                                                 <div class="custom-file">
@@ -197,7 +197,7 @@
                                                         <th>Leave Type</th>
                                                         <th>Leave From</th>
                                                         <th>To From</th>
-                                                        <th>Reason</th>
+                                                        <th>{{ __('messages.reason') }}</th>
                                                         <th>Document</th>
                                                         <th>Status</th>
                                                         <th>Apply Date</th>

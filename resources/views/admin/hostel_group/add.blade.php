@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="student">Student</label>
+                                    <label for="student">{{ __('messages.student') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="Choose The Student">
                                         <option value="">Select Student</option>
                                         @forelse($student as $stu)

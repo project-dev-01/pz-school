@@ -22,7 +22,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Employee Attendance Report</h4>
+                <h4 class="page-title">{{ __('messages.employee_attendance_report') }}</h4>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@
                                                     </clipPath>
                                                 </defs>
                                             </svg>
-                                            <p class="mb-1 text-truncate">Present</p>
+                                            <p class="mb-1 text-truncate">{{ __('messages.present') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -145,7 +145,7 @@
                                                     </clipPath>
                                                 </defs>
                                             </svg>
-                                            <p class="mb-1 text-truncate">Late</p>
+                                            <p class="mb-1 text-truncate">{{ __('messages.late') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -172,7 +172,7 @@
                                                 <path d="M5.242 13.769L0 9.5L12 0L24 9.5L18.758 13.769C17.548 11.249 14.978 9.5 12 9.5C9.023 9.5 6.452 11.248 5.242 13.769ZM12 10C10.1435 10 8.36301 10.7375 7.05025 12.0503C5.7375 13.363 5 15.1435 5 17C5 18.8565 5.7375 20.637 7.05025 21.9497C8.36301 23.2625 10.1435 24 12 24C13.8565 24 15.637 23.2625 16.9497 21.9497C18.2625 20.637 19 18.8565 19 17C19 15.1435 18.2625 13.363 16.9497 12.0503C15.637 10.7375 13.8565 10 12 10Z" fill="#3A4265" />
                                             </svg>
 
-                                            <p class="mb-1 text-truncate">Absent</p>
+                                            <p class="mb-1 text-truncate">{{ __('messages.absent') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -237,7 +237,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -251,9 +251,9 @@
                                         <div class="form-group">
                                             <table class="">
                                                 <tr>
-                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Excused</button></th>
 
                                                 </tr>
@@ -278,7 +278,7 @@
                             <input type="hidden" name="date" id="excelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Download
+                                {{ __('messages.download') }}
                                 </button>
                             </div>
                         </form>
@@ -289,7 +289,7 @@
                             <input type="hidden" name="date" id="downExcelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    PDF
+                                {{ __('messages.pdf') }}
                                 </button>
                             </div>
                         </form>

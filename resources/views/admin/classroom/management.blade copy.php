@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Late</p>
+                                            <p class="mb-1">Lsate</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -427,7 +427,7 @@
                                                 <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
                                                 <span class="mb-0 mt-1" style="text-align:center">Present</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#358fde'></i>
-                                                <span class="mb-0 mt-1">Late</span>
+                                                <span class="mb-0 mt-1">Lsate</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
                                                 <span class="mb-0 mt-1">Absent</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#696969'></i>
@@ -455,7 +455,7 @@
                                                                 <option value="">Not Selected</option>
                                                                 <option value="present">Present</option>
                                                                 <option value="absent">Absent</option>
-                                                                <option value="late">Late</option>
+                                                                <option value="late">Lsate</option>
                                                                 <option value="excused">Excused</option>
                                                             </select>
                                                         </div>

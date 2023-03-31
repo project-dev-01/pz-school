@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
+                                <th>{{ __('messages.title') }}</th>
                                 <th>{{ __('messages.type') }}</th>
                                 <th>Audience</th>
                                 <th>Start Date</th>

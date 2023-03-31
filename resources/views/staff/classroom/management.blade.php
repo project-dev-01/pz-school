@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_date">Date<span class="text-danger">*</span></label>
+                                    <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Count Down</label>
+                                    <label>{{ __('messages.count_down') }}</label>
                                     <div>
                                         <!-- #classroom_count_down is always 100% responsive to it's container-->
 
@@ -257,7 +257,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Present</p>
+                                            <p class="mb-1">{{ __('messages.present') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -267,7 +267,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Absent</p>
+                                            <p class="mb-1">{{ __('messages.absent') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Late</p>
+                                            <p class="mb-1">{{ __('messages.late') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -425,11 +425,11 @@
                                         <div class="col-md-4 form-group text-right m-b-0">
                                             <a href="javascript: void(0);" class="text-reset mb-2 d-block">
                                                 <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
-                                                <span class="mb-0 mt-1" style="text-align:center">Present</span>
+                                                <span class="mb-0 mt-1" style="text-align:center">{{ __('messages.present') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#358fde'></i>
-                                                <span class="mb-0 mt-1">Late</span>
+                                                <span class="mb-0 mt-1">{{ __('messages.late') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
-                                                <span class="mb-0 mt-1">Absent</span>
+                                                <span class="mb-0 mt-1">{{ __('messages.absent') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#696969'></i>
                                                 <span class="mb-0 mt-1">Excused</span>
                                             </a>
@@ -453,9 +453,9 @@
                                                             <label for="changeAttendance">Select Attendance</label>
                                                             <select id="changeAttendance" class="form-control">
                                                                 <option value="">Not Selected</option>
-                                                                <option value="present">Present</option>
-                                                                <option value="absent">Absent</option>
-                                                                <option value="late">Late</option>
+                                                                <option value="present">{{ __('messages.present') }}</option>
+                                                                <option value="absent">{{ __('messages.absent') }}</option>
+                                                                <option value="late">{{ __('messages.late') }}</option>
                                                                 <option value="excused">Excused</option>
                                                             </select>
                                                         </div>
@@ -543,7 +543,7 @@
                                                                     <th>{{ __('messages.student_name') }}</th>
                                                                     <th>From Leave</th>
                                                                     <th>To Leave</th>
-                                                                    <th>Reason</th>
+                                                                    <th>{{ __('messages.reason') }}</th>
                                                                     <th>Document</th>
                                                                     <th>Status</th>
                                                                     <th>{{ __('messages.remarks') }}</th>

@@ -11,12 +11,12 @@
                     @csrf
                     <input type="hidden" id="calendorID" name="calendar_id" class="form-control">
                     <div class="form-group">
-                        <label for="title">Title <span class="text-danger">*</span></label>
+                        <label for="title">{{ __('messages.title') }} <span class="text-danger">*</span></label>
                         <input type="text" id="taskTitle" name="title" class="form-control" placeholder="Enter title">
                         <span id="titleError" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">{{ __('messages.description') }}</label>
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
                     </div>
                     <div class="form-group">

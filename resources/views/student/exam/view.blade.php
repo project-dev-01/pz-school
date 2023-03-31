@@ -22,7 +22,7 @@
                             <tr style="background-color:#0ABAB5">
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>Paper Name</th>
-                                <th>Date</th>
+                                <th>{{ __('messages.date') }}</th>
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
                                 <th>Location</th>

@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Leave Management</h4>
+                <h4 class="page-title">{{ __('messages.leave_management') }}</h4>
             </div>
         </div>
     </div>

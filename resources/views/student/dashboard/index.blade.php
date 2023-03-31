@@ -596,7 +596,7 @@
                                     <div class="table-responsive">
                                         <table class="table mb-0">
                                             <tr>
-                                                <td>Title</td>
+                                                <td>{{ __('messages.title') }}</td>
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
@@ -624,7 +624,7 @@
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
-                                                <td>Description</td>
+                                                <td>{{ __('messages.description') }}</td>
                                                 <td id="description"></td>
                                             </tr>
                                         </table>

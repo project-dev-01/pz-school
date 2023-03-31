@@ -404,7 +404,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">Date<span class="text-danger">*</span>: 09-02-2022</label>
+                                                <label for="">{{ __('messages.date') }}<span class="text-danger">*</span>: 09-02-2022</label>
                                             </div>
                                         </div>
                                     </div>

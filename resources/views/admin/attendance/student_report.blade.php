@@ -38,7 +38,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title"> Attendance Report</h4>
+                <h4 class="page-title"> {{ __('messages.attendance_report') }}</h4>
             </div>
         </div>
     </div>
@@ -138,7 +138,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -152,10 +152,10 @@
                                         <div class="form-group">
                                             <table class="">
                                                 <tr>
-                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> {{ __('messages.holiday') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
 
                                                 </tr>
                                             </table>
@@ -181,7 +181,7 @@
                             <input type="hidden" name="date" id="excelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    Download
+                                {{ __('messages.download') }}
                                 </button>
                             </div>
                         </form>
@@ -195,7 +195,7 @@
                             <input type="hidden" name="year_month" id="downExcelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                    PDF
+                                {{ __('messages.pdf') }}
                                 </button>
                             </div>
                         </form>
@@ -215,7 +215,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Daily Present and Late Analysis
+                        {{ __('messages.daily_present_and_late_analysis') }}
                             <h4>
                     </li>
                 </ul><br>

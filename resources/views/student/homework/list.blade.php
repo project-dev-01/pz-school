@@ -10,7 +10,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div> -->
-                <h4 class="page-title">HomeWork</h4>
+                <h4 class="page-title">{{ __('messages.homework') }}</h4>
             </div>
         </div>
     </div>
@@ -181,7 +181,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Title</span>{{$work['title']}}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.title') }}</span>{{$work['title']}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -193,12 +193,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Homework</span>{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.date_of_homework') }}</span>{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Submission</span>{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.date_of_submission') }}</span>{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,7 +255,7 @@
                                                 @if($work['file'])
 
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File <span class="text-danger">*</span> :</div>
+                                                    <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} <span class="text-danger">*</span> :</div>
                                                     <div class="col-md-6">
                                                         <a href="{{asset('public/student/homework/')}}/{{$work['file']}}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -264,7 +264,7 @@
                                                 </div>
                                                 @else
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File <span class="text-danger">*</span>:</div>
+                                                    <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} <span class="text-danger">*</span>:</div>
                                                     <div class="col-md-6">
                                                         <input type="file" name="file">
                                                     </div>

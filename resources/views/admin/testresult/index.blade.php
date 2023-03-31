@@ -149,8 +149,8 @@
                             <input type="hidden" name="grade_category" id="downGradeCategory">
                             <input type="hidden" name="academic_session_id" id="downAcademicSessionID">
                             <div class="clearfix">
-                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
                             </div>
                         </form>
                     </div>
