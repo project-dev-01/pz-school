@@ -38,9 +38,9 @@
                                         <th>{{ __('messages.email') }}</th>
                                         <th>Mobile No</th>
                                         <th>{{ __('messages.date_of_birth') }}</th>
-                                        <th>Joining Date</th>
-                                        <th>Department</th>
-                                        <th>Designation</th>
+                                        <th>{{ __('messages.joining_date') }}</th>
+                                        <th>{{ __('messages.department') }}</th>
+                                        <th>{{ __('messages.designation') }}</th>
                                         <th>Present Address</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>

@@ -120,7 +120,7 @@
                                 <div class="row align-items-center no-gutters hide-desktope">
                                     <div class="col-9">
                                         <ul class="tt-list-badge">
-                                            <li class="show-mobile"><a href="#"><span class="tt-color04 tt-badge">Student</span></a></li>
+                                            <li class="show-mobile"><a href="#"><span class="tt-color04 tt-badge">{{ __('messages.student') }}</span></a></li>
                                         </ul>
                                         <a href="#" class="tt-btn-icon show-mobile">
                                             <i class="tt-icon"><svg>
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tt-col-category tt-col-value-large hide-mobile"><span class="tt-color04 tt-badge">Student</span></div>
+                            <div class="tt-col-category tt-col-value-large hide-mobile"><span class="tt-color04 tt-badge">{{ __('messages.student') }}</span></div>
                             <div class="tt-col-value-large hide-mobile">
                                 <a href="#" class="tt-btn-icon">
                                     <i class="tt-icon"><svg>
@@ -264,7 +264,7 @@
                                 <div class="row align-items-center no-gutters">
                                     <div class="col-11">
                                         <ul class="tt-list-badge">
-                                            <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">Student</span></a></li>
+                                            <li class="show-mobile"><a href="#"><span class="tt-color03 tt-badge">{{ __('messages.student') }}</span></a></li>
                                             <li><a href="#"><span class="tt-badge">University</span></a></li>
                                             <li><a href="#"><span class="tt-badge">Study Advice</span></a></li>
                                         </ul>
@@ -274,7 +274,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tt-col-category"><span class="tt-color03 tt-badge">Student</span></div>
+                            <div class="tt-col-category"><span class="tt-color03 tt-badge">{{ __('messages.student') }}</span></div>
                             <div class="tt-col-value hide-mobile">401</div>
                             <div class="tt-col-value tt-color-select  hide-mobile">975</div>
                             <div class="tt-col-value hide-mobile">12.6k</div>
@@ -364,7 +364,7 @@
                                 <div class="row align-items-center no-gutters hide-desktope">
                                     <div class="col-9">
                                         <ul class="tt-list-badge">
-                                            <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">Teacher</span></a></li>
+                                            <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">{{ __('messages.teacher') }}</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="col-3 ml-auto show-mobile">
@@ -375,7 +375,7 @@
                                 Japanese Kanji is so hard to remember, let alone write :')In school, we got given a booklet, where it'd show the kanji, then its hiragana/romaji. They created the book so that each kanji represented an object/picture
                                 </div>
                             </div>
-                            <div class="tt-col-category"><a href="#"><span class="tt-color05 tt-badge">Teacher</span></a></div>
+                            <div class="tt-col-category"><a href="#"><span class="tt-color05 tt-badge">{{ __('messages.teacher') }}</span></a></div>
                             <div class="tt-col-value-large hide-mobile">9 Jan,21</div>
                         </div>
                         <div class="tt-item">

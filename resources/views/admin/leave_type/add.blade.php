@@ -16,7 +16,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="short_name">Short Name</label>
+                        <label for="short_name">{{ __('messages.short_name') }}</label>
                         <input type="text" id="short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
@@ -35,8 +35,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

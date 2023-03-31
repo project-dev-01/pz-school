@@ -26,13 +26,13 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="capacity">Capacity</label>
+                        <label for="capacity">{{ __('messages.capacity') }}</label>
                         <input type="text" id="capacity" name="capacity" class="form-control" placeholder="Enter capacity">
                         <span class="text-danger error-text capacity_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="sectionSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" id="sectionSubmit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

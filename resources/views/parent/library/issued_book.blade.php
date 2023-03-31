@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Description</label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.description') }}</label>
                                             <div class="col-9">
                                                 <input type="email" required parsley-type="email" class="form-control" id="inputEmail3" placeholder="">
                                             </div>

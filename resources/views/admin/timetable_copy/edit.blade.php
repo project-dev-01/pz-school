@@ -107,8 +107,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Break</th>
-                                                <th>Subject</th>
-                                                <th>Teacher</th>
+                                                <th>{{ __('messages.subject') }}</th>
+                                                <th>{{ __('messages.teacher') }}</th>
                                                 <th>{{ __('messages.starting_time') }}</th>
                                                 <th>{{ __('messages.ending_time') }}</th>
                                                 <th>Class Room</th>

@@ -45,7 +45,7 @@
                                 <th>Branch</th>
                                 <th>Book Title</th>
                                 <th>Cover</th>
-                                <th>Role</th>
+                                <th>{{ __('messages.role') }}</th>
                                 <th>User name</th>
                                 <th>Date of Issue</th>
                                 <th>Date of Expiry</th>

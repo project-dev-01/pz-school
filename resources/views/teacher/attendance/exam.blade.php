@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Date<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <input type="text" class="form-control homeWorkAdd" id="name" placeholder="" aria-describedby="inputGroupPrepend" required>
                                         <div class="input-group-prepend">
@@ -112,9 +112,9 @@
                                         <div class="form-group">
                                             <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Present</option>
-                                                <option value="press">Absent</option>
-                                                <option value="net">Holiday</option>
+                                                <option value="">{{ __('messages.present') }}</option>
+                                                <option value="press">{{ __('messages.absent') }}</option>
+                                                <option value="net">{{ __('messages.holiday') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -141,19 +141,19 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-md-3"><input type="radio" id="contactChoice1" name="details" value="present">
-                                                            <label for="contactChoice1">Present</label>
+                                                            <label for="contactChoice1">{{ __('messages.present') }}</label>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="radio" id="contactChoice2" name="details" value="Absent">
-                                                            <label for="contactChoice2">Absent</label>
+                                                            <label for="contactChoice2">{{ __('messages.absent') }}</label>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="radio" id="contactChoice3" name="details" value="Holiday">
-                                                            <label for="contactChoice3">Holiday</label>
+                                                            <label for="contactChoice3">{{ __('messages.holiday') }}</label>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <input type="radio" id="contactChoice3" name="details" value="Late">
-                                                            <label for="contactChoice3">Late</label>
+                                                            <label for="contactChoice3">{{ __('messages.late') }}</label>
                                                         </div>
                                                     </div>
                                                 </td>

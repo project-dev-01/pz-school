@@ -257,7 +257,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Present</p>
+                                            <p class="mb-1">{{ __('messages.present') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -267,7 +267,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Absent</p>
+                                            <p class="mb-1">{{ __('messages.absent') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -277,7 +277,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="mb-1">Late</p>
+                                            <p class="mb-1">{{ __('messages.late') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -425,11 +425,11 @@
                                         <div class="col-md-4 form-group text-right m-b-0">
                                             <a href="javascript: void(0);" class="text-reset mb-2 d-block">
                                                 <i class='fas fa-circle' style='font-size:14px;color:#60a05b'></i>
-                                                <span class="mb-0 mt-1" style="text-align:center">Present</span>
+                                                <span class="mb-0 mt-1" style="text-align:center">{{ __('messages.present') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#358fde'></i>
-                                                <span class="mb-0 mt-1">Late</span>
+                                                <span class="mb-0 mt-1">{{ __('messages.late') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
-                                                <span class="mb-0 mt-1">Absent</span>
+                                                <span class="mb-0 mt-1">{{ __('messages.absent') }}</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#696969'></i>
                                                 <span class="mb-0 mt-1">Excused</span>
                                             </a>
@@ -453,9 +453,9 @@
                                                             <label for="changeAttendance">Select Attendance</label>
                                                             <select id="changeAttendance" class="form-control">
                                                                 <option value="">Not Selected</option>
-                                                                <option value="present">Present</option>
-                                                                <option value="absent">Absent</option>
-                                                                <option value="late">Late</option>
+                                                                <option value="present">{{ __('messages.present') }}</option>
+                                                                <option value="absent">{{ __('messages.absent') }}</option>
+                                                                <option value="late">{{ __('messages.late') }}</option>
                                                                 <option value="excused">Excused</option>
                                                             </select>
                                                         </div>
@@ -519,7 +519,7 @@
                                                     <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                                                     <button type="button" id="studentRemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                                                 </div>
                                             </div><!-- /.modal-content -->
@@ -543,7 +543,7 @@
                                                                     <th>{{ __('messages.student_name') }}</th>
                                                                     <th>From Leave</th>
                                                                     <th>To Leave</th>
-                                                                    <th>Reason</th>
+                                                                    <th>{{ __('messages.reason') }}</th>
                                                                     <th>Document</th>
                                                                     <th>Status</th>
                                                                 </tr>
@@ -569,7 +569,7 @@
                                                 <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                                                 <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                                             </div>
                                         </div><!-- /.modal-content -->
@@ -677,7 +677,7 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-success text-uppercase shadow-sm">
-                                                            <i class="fe-plus-circle"></i> Add</button>
+                                                            <i class="fe-plus-circle"></i> {{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-danger text-uppercase" disabled="disabled">
                                                             <i class="fe-minus-circle"></i> Remove</button>
                                                         <button type="submit" id="save-button" class="btn btn-info waves-effect waves-light text-uppercase">

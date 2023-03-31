@@ -14,8 +14,8 @@
                     <table class="table table-bordered mb-0">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
-                                <th>Date</th>
+                                <th>{{ __('messages.subject') }}</th>
+                                <th>{{ __('messages.date') }}</th>
                                 <th>{{ __('messages.starting_time') }}</th>
                                 <th>{{ __('messages.ending_time') }}</th>
                                 <th>Hall Room</th>

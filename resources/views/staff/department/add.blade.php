@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddDepartmentModalLabel">Add Department</h4>
+                <h4 class="modal-title" id="myaddDepartmentModalLabel">{{ __('messages.add_department') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -18,13 +18,13 @@
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="department_name">Department Name</label>
+                        <label for="department_name">{{ __('messages.department_name') }}</label>
                         <input type="text" id="department_name" name="department_name" class="form-control" placeholder="Enter Department name">
                         <span class="text-danger error-text department_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="button" id="sectionSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="button" id="sectionSubmit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

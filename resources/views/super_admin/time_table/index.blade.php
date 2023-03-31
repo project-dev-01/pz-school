@@ -34,7 +34,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped mb-0 table-centered" id="task-table">
                         <thead>
-                            <th width="125">Time</th>
+                            <th width="125">{{ __('messages.time') }}</th>
                             @foreach($weekDays as $day)
                             <th>{{ $day }}</th>
                             @endforeach

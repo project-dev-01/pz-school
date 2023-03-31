@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">Attachment File</label>
+                                    <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -138,7 +138,7 @@
                                     <th>Leave From</th>
                                     <th>To From</th>
                                     <th>Teacher remarks</th>
-                                    <th>Reason</th>
+                                    <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>
                                     <th>Status</th>
                                     <th>Apply Date</th>

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Designation</h4>
+                <h4 class="page-title">{{ __('messages.designation') }}</h4>
             </div>
         </div>
     </div>
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Designation</h4>
+                <h4 class="header-title">{{ __('messages.designation') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addDesignationModal">Add Designation</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addDesignationModal">{{ __('messages.add_designation') }}</button>
                     </div>
                 </div>
                 </p>
@@ -36,14 +36,14 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Designation Name</th>
+                                <th>{{ __('messages.designation_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Teacher</td>
+                                <td>{{ __('messages.teacher') }}</td>
                                 <td> 
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>

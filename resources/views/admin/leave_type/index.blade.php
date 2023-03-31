@@ -42,7 +42,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Leave Type Name</th>
-                                    <th>Short Name</th>
+                                    <th>{{ __('messages.short_name') }}</th>
                                     <th>Leave Days</th>
                                     <th>{{ __('messages.gender') }}</th>
                                     <th>{{ __('messages.action') }}</th>

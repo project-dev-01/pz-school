@@ -303,7 +303,7 @@
                                                                                 <td id="type"></td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>Subject</td>
+                                                                                <td>{{ __('messages.subject') }}</td>
                                                                                 <td id="start_date">
                                                                                 </td>
                                                                             </tr>
@@ -312,7 +312,7 @@
                                                                                 <td id="end_date"></td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>Description</td>
+                                                                                <td>{{ __('messages.description') }}</td>
                                                                                 <td id="description">
                                                                                 </td>
                                                                             </tr>

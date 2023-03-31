@@ -85,7 +85,7 @@ use \App\Http\Controllers\AdminController;
                                     <th>Fees Group</th>
                                     <th>Fees Type</th>
                                     <th>Payment Mode</th>
-                                    <th>Due Date</th>
+                                    <th>{{ __('messages.due_date') }}</th>
                                     <th>Paid Date</th>
                                     <th>Status</th>
                                     <th>Amount</th>
@@ -262,7 +262,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <th style="width: 20px;">
                                                                     <input type="checkbox" id="selectAllSemester">
                                                                 </th>
-                                                                <th>Date<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.date') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>{{ __('messages.semester') }}
                                                                 </th>
@@ -332,7 +332,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <th style="width: 20px;">
                                                                     <input type="checkbox" id="selectAllMonth">
                                                                 </th>
-                                                                <th>Date<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.date') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>{{ __('messages.month') }}
                                                                 </th>

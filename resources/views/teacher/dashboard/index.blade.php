@@ -411,11 +411,11 @@
                                         <div class=" table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <td>Title</td>
+                                                <td>{{ __('messages.title') }}</td>
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
-                                                <td>Type</td>
+                                                <td>{{ __('messages.type') }}</td>
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
@@ -439,7 +439,7 @@
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
-                                                <td>Description</td>
+                                                <td>{{ __('messages.description') }}</td>
                                                 <td id="description"></td>
                                             </tr>
                                         </table>
@@ -537,7 +537,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Subject Name </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.subject_name') }} </div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="ttSubjectID" name="subject_id">
@@ -584,7 +584,7 @@
                                     <button type="submit" class="btn btn-success" id="btn-save-event">{{ __('messages.save') }}</button>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">Close</button> -->
+                                    <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">{{ __('messages.close') }}</button> -->
                                     <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
                                 </div>
                             </div>
@@ -998,7 +998,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="sr_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="sr_student_id" class="form-control studentRank" name="student_id">
                                 <option value="">Select Student</option>
                             </select>
@@ -1045,8 +1045,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
+                                <th>Marks</th>
                                 <th>Subject Position</th>
                             </tr>
                         </thead>
@@ -1105,7 +1106,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="st_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="st_student_id" class="form-control studentSemester" name="student_id">
                                 <option value="">Select Student</option>
                             </select>
@@ -1172,7 +1173,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ems_student_id">Student<span class="text-danger">*</span></label>
+                            <label for="ems_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="ems_student_id" class="form-control examMarkStatus" name="student_id">
                                 <option value="">Select Student</option>
                             </select>

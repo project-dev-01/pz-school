@@ -42,7 +42,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.vehicle_number') }}</th>
-                                    <th>Capacity</th>
+                                    <th>{{ __('messages.capacity') }}</th>
                                     <th>{{ __('messages.insurance_renewal') }}</th>
                                     <th>{{ __('messages.driver_name') }}</th>
                                     <th>{{ __('messages.driver_phone') }}</th>

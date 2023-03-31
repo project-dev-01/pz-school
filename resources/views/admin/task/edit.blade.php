@@ -28,16 +28,16 @@
                         @csrf
                         <input type="hidden" name="id" id="id" value={{$to_do_row['id']}}>
                         <div class="form-group">
-                            <label for="title">Title<span class="text-danger">*</span></label>
+                            <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
                             <input type="text" id="title" name="title" value={{$to_do_row['title']}} class="form-control" placeholder="Enter Title">
                         </div>
 
                         <div class="form-group">
-                            <label for="dueDate">Due Date & Time<span class="text-danger">*</span></label>
+                            <label for="dueDate">{{ __('messages.due_date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
                             <input type="text" id="dueDate" name="due_date" value={{$to_do_row['due_date']}} class="form-control" placeholder="Enter Date & Time">
                         </div>
                         <div class="form-group">
-                            <label for="assign_to">Assigned To<span class="text-danger">*</span></label>
+                            <label for="assign_to">{{ __('messages.assigned_to') }}<span class="text-danger">*</span></label>
                             <select class="form-control select2-multiple" data-toggle="select2" id="assign_to" name="assign_to" multiple="multiple" data-placeholder="Choose ...">
                                 
 
@@ -58,15 +58,15 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="priority">Priority<span class="text-danger">*</span></label>
+                            <label for="priority">{{ __('messages.priority') }}<span class="text-danger">*</span></label>
                             <select id="priority" class="form-control" name="priority">
-                                <option value="Low" {{ $to_do_row['priority']=="Low" ? "Selected":""}}>Low</option>
-                                <option value="Medium" {{ $to_do_row['priority']=="Medium" ? "Selected":""}}>Medium</option>
-                                <option value="High" {{ $to_do_row['priority']=="High" ? "Selected":""}}>High</option>
+                                <option value="Low" {{ $to_do_row['priority']=="Low" ? "Selected":""}}>{{ __('messages.low') }}</option>
+                                <option value="Medium" {{ $to_do_row['priority']=="Medium" ? "Selected":""}}>{{ __('messages.medium') }}</option>
+                                <option value="High" {{ $to_do_row['priority']=="High" ? "Selected":""}}>{{ __('messages.high') }}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="check_list">Checklists/Sub-tasks</label>
+                            <label for="check_list">{{ __('messages.checklists') }}/{{ __('messages.sub-tasks') }}</label>
                             <input type="text" class="form-control"  name="check_list[]" id="addCheckList" placeholder="Add CheckList">
                             <input type="hidden" name="old_check_list" id="old_check_list" value="{{$to_do_row['check_list']}}">
 
@@ -76,11 +76,11 @@
                             <ul id="taskList"></ul>
                         </div>
                         <div class="form-group">
-                            <label for="task_description">Task Description<span class="text-danger">*</span></label>
+                            <label for="task_description">{{ __('messages.task_description') }}<span class="text-danger">*</span></label>
                             <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="Enter Description">{{$to_do_row['task_description']}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="attachment">Attachment</label>
+                            <label for="attachment">{{ __('messages.attachment') }}</label>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">

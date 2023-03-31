@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject" class="form-control" required="" name="subject">
                                         <option value="">Select Subject</option>
                                         <option value="All">All</option>
@@ -184,7 +184,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Title</span>{{$work['title']}}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.title') }}</span>{{$work['title']}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -196,12 +196,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Homework</span>{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.date_of_homework') }}</span>{{ date('F j , Y', strtotime($work['date_of_homework'])) }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Date Of Submission</span>{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.date_of_submission') }}</span>{{ date('F j , Y', strtotime($work['date_of_submission'])) }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,7 +250,7 @@
                                                 @if($work['file'])
 
                                                 <div class="col-md-6">
-                                                    <div class="col-md-6 font-weight-bold">Attachment File :</div>
+                                                    <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} :</div>
                                                     <div class="col-md-6">
                                                         <a href="{{asset('public/student/homework/')}}/{{$work['file']}}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>

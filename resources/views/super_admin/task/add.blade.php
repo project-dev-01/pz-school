@@ -19,35 +19,35 @@
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="title">Title<span class="text-danger">*</span></label>
+                        <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
                         <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
                         <span class="text-danger error-text title_error"></span>
                     </div>
                     
                     <div class="form-group">
-                        <label for="date">Date & Time<span class="text-danger">*</span></label>
+                        <label for="date">{{ __('messages.date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
                         <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="Enter Date & Time">
                         <span class="text-danger error-text date_error"></span>
                     </div>
                     
                     <div class="form-group">
-                        <label for="priority">Priority<span class="text-danger">*</span></label>
+                        <label for="priority">{{ __('messages.priority') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
+                            <option value="Low">{{ __('messages.low') }}</option>
+                            <option value="Medium">{{ __('messages.medium') }}</option>
+                            <option value="High">{{ __('messages.high') }}</option>
                         </select>
                         <span class="text-danger error-text priority_error"></span>
                     </div>
                     
                     <div class="form-group">
-                        <label for="description">Description<span class="text-danger">*</span></label>
+                        <label for="description">{{ __('messages.description') }}<span class="text-danger">*</span></label>
                         <input type="text" id="description" name="description" class="form-control" placeholder="Enter Description">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="eventTypeSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" id="eventTypeSubmit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

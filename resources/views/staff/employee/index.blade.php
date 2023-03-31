@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                     <span class=" fas fa-user-circle  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Add Employee</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.add_employee') }}</span>
                 <hr>						
                 <span class="fas fa-home  " id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">{{ __('messages.academic_details') }}
@@ -42,7 +42,7 @@
                     </div>
                         <div class="col-md-4">
                         <div class="form-group mb-4">
-                            <label for="">Joining Date<span class="text-danger">*</span></label>												
+                            <label for="">{{ __('messages.joining_date') }}<span class="text-danger">*</span></label>												
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -56,9 +56,9 @@
                     </div>	
                     <div class="col-md-4">
                         <div class="form-group">
-                        <label for="heard">Designation<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.designation') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">select Designation</option>
+                            <option value="">Select Designation</option>
                             <option value="press">Academic coordinator</option>
                             <option value="net">Academic adviser</option>
                             <option value="mouth">Registrar</option>
@@ -74,7 +74,7 @@
                     
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="heard">Department<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Select Department</option>
                             <option value="press">Accounting and Finance Department</option>
@@ -93,7 +93,7 @@
                     </div>									
                     </div>
                     <span class="fas fa-user-check  " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent">Employee Details
+                    <span class="header-title mb-3" id="span-parent">{{ __('messages.employee_details') }}
                     <hr id="hr"></span>
                     <div class="row"> 
                         <div class="col-md-6">
@@ -311,32 +311,32 @@
                     </div>
                     </div>
                     <span class="fas fa-university " id="span-parent"></span>
-                    <span class="header-title mb-3" id="span-parent"> Bank Details
+                    <span class="header-title mb-3" id="span-parent"> {{ __('messages.bank_details') }}
                     <hr id="hr"></span>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                <label class="custom-control-label" for="customCheck11">Skipped Bank Details</label>
+                                <label class="custom-control-label" for="customCheck11">{{ __('messages.skipped_bank_details') }}</label>
                             </div>
                         </div>
                         <div class="row">
                         <div class="col-md-4">
                         <div class="form-group">
-                        <label for="">Bank Name<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.bank_name') }}<span class="text-danger">*</span></label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
                     </div>
                         <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">Account Holder<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.account_holder') }}<span class="text-danger">*</span></label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
                     </div>
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">Bank Branch<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.bank_branch') }}<span class="text-danger">*</span></label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
@@ -345,21 +345,21 @@
                     <div class="row">
                         <div class="col-md-4">
                         <div class="form-group mb-3">
-                            <label for="validationCustomUsername">Bank Address</label>
+                            <label for="validationCustomUsername">{{ __('messages.bank_address') }}</label>
                                 <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                         </div>                                      
                     </div>
                     <div class="col-md-4">
                     <div class="form-group mb-3">
-                            <label for="validationCustomUsername">IFSC Code</label>
+                            <label for="validationCustomUsername">{{ __('messages.ifsc_code') }}</label>
                                 <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                         </div> 
                     </div>
                     <div class="col-md-4">
                         <div class="form-group mb-3">
-                            <label for="">Account No<span class="text-danger">*</span></label>
+                            <label for="">{{ __('messages.account_no') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                         </div> 

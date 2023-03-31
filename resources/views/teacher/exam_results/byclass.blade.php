@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subjectID" id="lblsectionId">Subject Name<span class="text-danger">*</span></label>
+                                    <label for="subjectID" id="lblsectionId">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>
@@ -146,8 +146,8 @@
                                         <input type="hidden" name="subject_id" id="downSubjectID">
                                         <input type="hidden" name="academic_year" id="downAcademicYear">
                                         <div class="clearfix float-right">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                            <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                            <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
                                         </div>
                                     </form>
                                 </div>

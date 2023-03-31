@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Employee Attendance</h4>
+                <h4 class="page-title">{{ __('messages.employee_attendance') }}</h4>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Employee List
+                        {{ __('messages.employee_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -97,12 +97,12 @@
                                         <table class="table w-100 nowrap" id="timetable_table">
                                             <thead>
                                                 <tr>
-                                                    <th>Date</th>
+                                                    <th>{{ __('messages.date') }}</th>
                                                     <th>Status</th>
-                                                    <th>Check In</th>
-                                                    <th>Check Out</th>
-                                                    <th>Total Hours</th>
-                                                    <th>Reason</th>
+                                                    <th>{{ __('messages.check_in') }}</th>
+                                                    <th>{{ __('messages.check_out') }}t</th>
+                                                    <th>{{ __('messages.total_hours') }}</th>
+                                                    <th>{{ __('messages.reason') }}</th>
                                                     <th>{{ __('messages.remarks') }}</th>
                                                 </tr>
                                             </thead>

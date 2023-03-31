@@ -43,7 +43,7 @@
                         <span class="text-danger error-text floor_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="no_of_beds">Capacity</label>
+                        <label for="no_of_beds">{{ __('messages.capacity') }}</label>
                         <input type="text" name="no_of_beds" class="form-control" placeholder="Enter The Capacity">
                         <span class="text-danger error-text no_of_beds_error"></span>
                     </div>
@@ -59,7 +59,7 @@
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

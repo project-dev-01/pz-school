@@ -38,7 +38,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.name') }}</th>
-                                <th>Role</th>
+                                <th>{{ __('messages.role') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

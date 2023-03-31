@@ -35,7 +35,7 @@
                                         <td id="examClass"></td>
                                     </tr>
                                     <tr>
-                                        <td>Subject</td>
+                                        <td>{{ __('messages.subject') }}</td>
                                         <td id="examSubject"></td>
                                     </tr>
                                     <tr>

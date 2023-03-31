@@ -85,7 +85,7 @@
                                     <th>Leave from</th>
                                     <th>To Leave</th>
                                     <th>Status</th>
-                                    <th>Reason</th>
+                                    <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>
                                     <th>Teacher Remarks</th>
                                     <th>{{ __('messages.action') }}</th>
@@ -111,7 +111,7 @@
                     <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                     <button type="button" id="student_leave_RemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                 </div>
             </div><!-- /.modal-content -->

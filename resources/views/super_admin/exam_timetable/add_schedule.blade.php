@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Add Schedule</h4>
+                <h4 class="page-title">{{ __('messages.add_schedule') }}</h4>
             </div>
         </div>
     </div>
@@ -113,7 +113,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Add Schedule
+                            {{ __('messages.add_schedule') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -125,8 +125,8 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Subject <span class="text-danger">*</span></th>
-                                                <th>Date <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.subject') }} <span class="text-danger">*</span></th>
+                                                <th>{{ __('messages.date') }} <span class="text-danger">*</span></th>
                                                 <th>{{ __('messages.starting_time') }} <span class="text-danger">*</span></th>
                                                 <th>{{ __('messages.ending_time') }} <span class="text-danger">*</span></th>
                                                 <th>Hall Room <span class="text-danger">*</span></th>

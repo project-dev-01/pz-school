@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Add Homework
+                        {{ __('messages.add_homework') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="title">Homework Title<span class="text-danger">*</span></label>
+                                    <label for="title">{{ __('messages.homework_title') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="title" placeholder="Enter Homework Title">
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>
@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="date_of_homework">Date Of Homework<span class="text-danger">*</span></label>
+                                    <label for="date_of_homework">{{ __('messages.date_of_homework') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="date_of_submission">Date Of Submission<span class="text-danger">*</span></label>
+                                    <label for="date_of_submission">{{ __('messages.date_of_submission') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="document">Attachment File<span class="text-danger">*</span></label>
+                                <label for="document">{{ __('messages.attachment_file') }}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" id="homework_file" class="custom-file-input" name="file">
@@ -142,7 +142,7 @@
                         <div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="description">Description<span class="text-danger">*</span></label>
+                                    <label for="description">{{ __('messages.description') }}<span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="description" rows="1" placeholder="Please enter Description"></textarea>
                                 </div>
                                 <div class="col-md-4" id="schedule" style="display:none">

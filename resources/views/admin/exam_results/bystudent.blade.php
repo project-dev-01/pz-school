@@ -145,8 +145,8 @@
                                             <input type="hidden" name="section_id" id="downSectionID">
                                             <input type="hidden" name="academic_year" id="downAcademicYear">
                                             <div class="clearfix float-right">
-                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
                                             </div>
                                         </form>
                                     </div>

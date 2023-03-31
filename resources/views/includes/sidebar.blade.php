@@ -403,7 +403,7 @@
                             <li>
                                 <a href="#sidebartimeTable" data-toggle="collapse">
                                     <!-- <i class="far fa-calendar-alt"></i>-->
-                                    <span>{{ __('messages.time_tables') }}</span>
+                                    <span>Time Tables</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebartimeTable">
@@ -415,7 +415,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.time_table') }}</span>
+                                                <span>Time Table</span>
                                             </a>
                                         </li>
                                         <li>
@@ -451,19 +451,19 @@
                         <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Homework </span>
+                        <span> {{ __('messages.homework') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarHomework">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.homework')}}" class="nav-link {{ (request()->is('admin/employee*')) ? 'active' : '' }}">
-                                    <span>Add Homework</span>
+                                    <span>{{ __('messages.add_homework') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.evaluation_report')}}" class="nav-link {{ (request()->is('admin/evaluation_report*')) ? 'active' : '' }}">
-                                    <span>Evaluation Report</span>
+                                    <span>{{ __('messages.evaluation_report') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -475,7 +475,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.40087 0.864441V2.21359C4.39407 2.49344 4.44513 2.7717 4.55081 3.03102C4.65649 3.29035 4.81453 3.52521 5.01515 3.72097C5.33433 4.02942 5.74738 4.22314 6.18914 4.27158C6.63089 4.32002 7.07624 4.22042 7.45497 3.98849C7.76124 3.80698 8.01252 3.54612 8.18211 3.23361C8.35171 2.92111 8.43328 2.56862 8.41819 2.21359C8.41819 1.81949 8.41819 1.42251 8.41819 1.0284V0.864441H15.5818V1.1032C15.5818 1.55196 15.5819 2.00072 15.5992 2.44948C15.6835 2.9343 15.9429 3.37155 16.3283 3.67863C16.7138 3.98572 17.1986 4.14139 17.6913 4.11625C18.184 4.09111 18.6503 3.88691 19.0024 3.54219C19.3544 3.19748 19.5677 2.73611 19.602 2.24524C19.602 1.79072 19.602 1.33621 19.602 0.870191C19.6424 0.870191 19.6799 0.870191 19.7174 0.870191C20.4672 0.870191 21.2141 0.870191 21.9611 0.870191C22.4311 0.865816 22.888 1.0252 23.2529 1.32086C23.6177 1.61652 23.8677 2.02992 23.9597 2.48975C23.9866 2.6407 23.9991 2.79384 23.9971 2.94714C23.9971 8.8328 23.9971 14.7194 23.9971 20.607C24.0052 20.8816 23.9567 21.155 23.8548 21.4103C23.753 21.6656 23.5998 21.8974 23.4047 22.0914C23.2097 22.2854 22.9769 22.4376 22.7207 22.5385C22.4645 22.6394 22.1903 22.6869 21.915 22.6782H2.08222C1.80715 22.6869 1.53318 22.6394 1.27718 22.5387C1.02117 22.438 0.788519 22.2861 0.593511 22.0924C0.398503 21.8987 0.245239 21.6672 0.14318 21.4123C0.0411206 21.1573 -0.00756946 20.8843 3.98242e-05 20.6099C3.98242e-05 14.7204 3.98242e-05 8.8328 3.98242e-05 2.94714C-0.00492326 2.67848 0.0434605 2.41148 0.142405 2.16156C0.24135 1.91163 0.388892 1.6837 0.576543 1.49091C0.764193 1.29812 0.988214 1.14427 1.23574 1.03823C1.48327 0.932189 1.74941 0.876061 2.01879 0.873071C2.77726 0.873071 3.53281 0.873071 4.29128 0.873071L4.40087 0.864441ZM19.7808 15.6591H11.8587V17.1435H19.7808V15.6591ZM11.8558 9.65552H19.778V8.17691H11.8558V9.65552ZM8.16729 13.9964L5.94669 16.0705L4.91999 15.0119L3.83852 16.0561L5.89476 18.1791L9.19972 15.0982L8.16729 13.9964ZM5.94669 8.99389C5.60061 8.63718 5.26029 8.2891 4.91999 7.93528L3.83852 8.97951L5.89476 11.1054L9.19972 8.02445L8.16729 6.92844L5.94669 8.99389Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Tasks </span>
+                        <span> {{ __('messages.tasks') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarTasks">
@@ -492,7 +492,7 @@
                 <li>
                     <a href="{{ route('admin.attendance.employee_entry')}}" class="nav-link {{ (request()->is('admin/attendance/employee_entry')) ? 'active' : '' }}">
                         <i class="fas fa-user-clock"></i>
-                        <span> Employee Attendance </span>
+                        <span> {{ __('messages.employee_attendance') }} </span>
                     </a>
                 </li>
                 <li>
@@ -509,7 +509,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Attendance Report</span>
+                        <span> {{ __('messages.attendance_report') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAttendance">
@@ -550,7 +550,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Leave Management </span>
+                        <span> {{ __('messages.leave_management') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarLeaveManage">
@@ -567,7 +567,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management/allleaves')) ? 'active' : '' }}">
-                                    <span> All Leave</span>
+                                    <span> {{ __('messages.all_leave') }}</span>
                                 </a>
                             </li>
                             <li>
@@ -657,7 +657,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.timetable.set_examwise')}}" class="nav-link {{ (request()->is('admin/exam/set_examwise')) ? 'active' : '' }}">
-                                                <span>Add Schedule</span>
+                                                <span>{{ __('messages.add_schedule') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -1023,7 +1023,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarSettingMasters" data-toggle="collapse">
-                                    Masters <span class="menu-arrow"></span>
+                                {{ __('messages.masters') }} <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sideBarSettingMasters">
                                     <ul class="nav-second-level">
@@ -1069,7 +1069,7 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.stream_type')}}" class="nav-link {{ (request()->is('admin/stream_type*')) ? 'active' : '' }}">
-                                                <span>Stream Type </span>
+                                                <span>{{ __('messages.stream_type') }} </span>
                                             </a>
                                         </li>
                                         <li>
@@ -1164,7 +1164,7 @@
                 <li>
                     <a href="{{ route('staff.classroom.management')}}" class="nav-link {{ (request()->is('staff/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
+                        <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
 
@@ -1205,7 +1205,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Attendance Report</span>
+                        <span> {{ __('messages.attendance_report') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAttendance">
@@ -1232,7 +1232,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Leave Management </span>
+                        <span> {{ __('messages.leave_management') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarLeaveManage">
@@ -1308,7 +1308,7 @@
                 <li>
                     <a href="{{ route('teacher.classroom.management')}}" class="nav-link {{ (request()->is('teacher/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
-                        <span> Classroom Management </span>
+                        <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
                 <li>
@@ -1316,19 +1316,19 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Homework </span>
+                        <span> {{ __('messages.homework') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarHomework">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('teacher.homework')}}" class="nav-link {{ (request()->is('teacher/homework*')) ? 'active' : '' }}">
-                                    <span>Add Homework</span>
+                                    <span>{{ __('messages.add_homework') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('teacher.evaluation_report')}}" class="nav-link {{ (request()->is('teacher/evaluation_report*')) ? 'active' : '' }}">
-                                    <span>Evaluation Report</span>
+                                    <span>{{ __('messages.evaluation_report') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -1376,7 +1376,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Attendance Report</span>
+                        <span> {{ __('messages.attendance_report') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAttendance">
@@ -1502,7 +1502,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Leave Management </span>
+                        <span> {{ __('messages.leave_management') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarLeaveManage">

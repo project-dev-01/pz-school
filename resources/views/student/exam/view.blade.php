@@ -20,9 +20,9 @@
                     <table class="table table-bordered dt-responsive">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.paper_name') }}</th>
-                                <th>Date</th>
+                                <th>{{ __('messages.date') }}</th>
                                 <th>{{ __('messages.starting_time') }}</th>
                                 <th>{{ __('messages.ending_time') }}</th>
                                 <th>{{ __('messages.location') }}</th>

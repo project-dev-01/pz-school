@@ -149,8 +149,8 @@
                             <input type="hidden" name="grade_category" id="downGradeCategory">
                             <input type="hidden" name="academic_session_id" id="downAcademicSessionID">
                             <div class="clearfix">
-                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">PDF</button>
-                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">Download</button>
+                                <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
                             </div>
                         </form>
                     </div>
@@ -370,7 +370,7 @@
                 <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="Enter memo here" name="student_remarks"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                 <button type="button" id="studentRemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
             </div>
         </div><!-- /.modal-content -->

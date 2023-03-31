@@ -20,12 +20,12 @@
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="title">Title<span class="text-danger">*</span></label>
+                        <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
                         <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name">
                         <span class="text-danger error-text title_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="type">Type<span class="text-danger">*</span></label>
+                        <label for="type">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="type" name="type">
                             <option value="">Select</option>
                         </select>
@@ -68,13 +68,13 @@
                         <span class="text-danger error-text end_date_error"></span>
                     </div> 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">{{ __('messages.description') }}</label>
                         <textarea class="form-control" name="description"></textarea>
                         <span class="text-danger error-text description_error"></span>
                     </div> 
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                        <button type="submit" id="eventSubmit" class="btn btn-success waves-effect waves-light">Submit</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" id="eventSubmit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                     </div>
 
                 </form>

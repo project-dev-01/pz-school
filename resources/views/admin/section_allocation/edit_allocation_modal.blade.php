@@ -31,11 +31,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="capacity">Capacity</label>
+                        <label for="capacity">{{ __('messages.capacity') }}</label>
                         <input type="number" id="editsectionCapacity" name="capacity" class="form-control" placeholder="Enter Capacity">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

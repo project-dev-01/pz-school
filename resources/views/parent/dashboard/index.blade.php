@@ -523,7 +523,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Subject Name </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.subject_name') }} </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="ttSubjectID" name="subject_id">
@@ -585,11 +585,11 @@
                                     <div class="table-responsive">
                                         <table class="table mb-0">
                                             <tr>
-                                                <td>Title</td>
+                                                <td>{{ __('messages.title') }}</td>
                                                 <td id="title"></td>
                                             </tr>
                                             <tr>
-                                                <td>Type</td>
+                                                <td>{{ __('messages.type') }}</td>
                                                 <td id="type"></td>
                                             </tr>
                                             <tr>
@@ -613,7 +613,7 @@
                                                 <td id="audience"></td>
                                             </tr>
                                             <tr>
-                                                <td>Description</td>
+                                                <td>{{ __('messages.description') }}</td>
                                                 <td id="description"></td>
                                             </tr>
                                         </table>
@@ -705,7 +705,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">Attachment File</label>
+                                    <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -752,7 +752,7 @@
                                     <th>Leave From</th>
                                     <th>To From</th>
                                     <th>Teacher remarks</th>
-                                    <th>Reason</th>
+                                    <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>
                                     <th>Status</th>
                                     <th>Apply Date</th>
@@ -821,7 +821,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Subject</th>
+                                    <th>{{ __('messages.subject') }}</th>
                                     <th>{{ __('messages.marks') }}</th>
                                     <th>Subject Position</th>
                                 </tr>

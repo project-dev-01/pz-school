@@ -4,7 +4,7 @@
             <div class="card-box">
                 <form class="addSoapForm" method="post" action="{{ route('admin.soap.add') }}" autocomplete="off">
                     <div class="form-group text-right m-b-0">
-                        <!--<button type="button" class="btn btn-secondary waves-effect">Close</button>-->
+                        <!--<button type="button" class="btn btn-secondary waves-effect">{{ __('messages.close') }}</button>-->
                         <button type="submit" class="btn btn-info waves-effect waves-light">{{ __('messages.save') }}</button>
                     </div>
                     <input type="hidden" class="student_id" name="student_id">
@@ -47,9 +47,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Subject</th>
+                                                            <th>{{ __('messages.subject') }}</th>
                                                             <th>Refered By</th>
-                                                            <th>Date</th>
+                                                            <th>{{ __('messages.date') }}</th>
                                                             <th>{{ __('messages.action') }}</th>
                                                         </tr>
                                                     </thead>
@@ -87,9 +87,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>Title</th>
+                                                            <th>{{ __('messages.title') }}</th>
                                                             <th>Refered By</th>
-                                                            <th>Date</th>
+                                                            <th>{{ __('messages.date') }}</th>
                                                             <th>{{ __('messages.action') }}</th>
                                                         </tr>
                                                     </thead>

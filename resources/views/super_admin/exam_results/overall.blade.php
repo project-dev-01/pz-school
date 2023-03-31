@@ -107,8 +107,8 @@
                                         <th class="align-top" rowspan="2">S.no.</th>
                                         <th class="align-top" rowspan="2">{{ __('messages.class') }}</th>
                                         <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
-                                        <th class="align-top" rowspan="2">Absent</th>
-                                        <th class="align-top" rowspan="2">Present</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.absent') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.present') }}</th>
                                         <th class="align-top" rowspan="2">Class Teacher Name</th>
                                         <th class="text-center">A+</th>
                                         <th class="text-center">A</th>

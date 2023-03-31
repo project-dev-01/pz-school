@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">All Leaves</h4>
+                <h4 class="page-title">{{ __('messages.all_leaves') }}</h4>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                                         <th>No.Of.Days</th>
                                         <th>From Leave</th>
                                         <th>To Leave</th>
-                                        <th>Reason</th>
+                                        <th>{{ __('messages.reason') }}</th>
                                         <th>Document</th>
                                         <th>Status</th>
                                         <!-- <th>Remarks</th> -->
@@ -106,7 +106,7 @@
                     <textarea class="form-control" id="leave_remarks" rows="5" placeholder="Enter remarks here" name="leave_remarks"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                     <button type="button" id="leave_RemarksSave" class="btn btn-primary">{{ __('messages.save') }}</button>
                 </div>
             </div><!-- /.modal-content -->

@@ -40,7 +40,7 @@
                             <input type="hidden" id="parentCount" class="form-control"  @if($parent)value="{{count($parent)}}" @else value="0" @endif>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">{{ __('messages.description') }}</label>
                                     <textarea class="form-control" name="description">{{$group['description']}}</textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div> 

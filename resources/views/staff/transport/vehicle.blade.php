@@ -43,7 +43,7 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>Vehicle No</th>
-                                <th>Capacity</th>
+                                <th>{{ __('messages.capacity') }}</th>
                                 <th>{{ __('messages.driver_name') }}</th>
                                 <th>{{ __('messages.driver_phone') }}</th>
                                 <th>Driver License</th>

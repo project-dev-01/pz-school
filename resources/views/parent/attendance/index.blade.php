@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject_id">Subject<span class="text-danger">*</span></label>
+                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                         @forelse ($subjects as $sub)
@@ -83,7 +83,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -97,10 +97,10 @@
                                         <div class="form-group">
                                             <table class="">
                                                 <tr>
-                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> Present</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> Absent</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> Holiday</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Late</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> {{ __('messages.holiday') }}</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
                                                 </tr>
                                             </table>
                                         </div>
@@ -115,7 +115,7 @@
                     <!-- end row-->
                     <!-- <div class="form-group text-right m-b-0">
                         <button id="exportAttendance" class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Download
+                            {{ __('messages.download') }}
                         </button>
                     </div> -->
 

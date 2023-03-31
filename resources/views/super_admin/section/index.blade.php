@@ -38,7 +38,7 @@
                                 <th>#</th>
                                 <th>Branch</th>
                                 <th>{{ __('messages.name') }}</th>
-                                <th>Capacity</th>
+                                <th>{{ __('messages.capacity') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

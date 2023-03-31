@@ -8,7 +8,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Classroom</h4>
+                <h4 class="page-title">{{ __('messages.classroom') }}</h4>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Subject<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
                                     <option value="">English</option>
                                     <option value="press">Maths</option>
@@ -47,13 +47,13 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Date<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.date') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control " value="<?php echo date('d-m-Y'); ?>" name="class_date" id="classDate" require="">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Count Down<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.count_down') }}<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
                                     <option value="">01:00 hours</option>
                                 </select>
@@ -287,9 +287,9 @@
                                                                         <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
                                                                             Mark</a>
                                                                         <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
                                                                             <a class="dropdown-item" href="#">Excused</a>
                                                                         </div>
                                                                     </div>
@@ -318,9 +318,9 @@
                                                                         <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
                                                                             Mark</a>
                                                                         <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
                                                                             <a class="dropdown-item" href="#">Excused</a>
                                                                         </div>
                                                                     </div>
@@ -349,9 +349,9 @@
                                                                         <a href="#" class="dropdown-toggle" id="aa" style="color:blue" data-toggle="dropdown" aria-expanded="false">
                                                                             Mark</a>
                                                                         <div class="dropdown-menu dropdown-menu-center">
-                                                                            <a class="dropdown-item" href="#">Present</a>
-                                                                            <a class="dropdown-item" href="#">Late</a>
-                                                                            <a class="dropdown-item" href="#">Absent</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
                                                                             <a class="dropdown-item" href="#">Excused</a>
                                                                         </div>
                                                                     </div>

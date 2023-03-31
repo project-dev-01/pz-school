@@ -191,7 +191,7 @@
                     <input type="hidden" name="semester_id" id="edit_semester_id">
                     <input type="hidden" name="session_id" id="edit_session_id">
                     <div class="form-group">
-                        <label for="day">Day<span class="text-danger">*</span></label>
+                        <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                         <select id="day" class="form-control" name="day">
                             <option value="">Select Day</option>
                             <option value="sunday">Sunday</option>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success waves-effect waves-light">Done</button>
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                     </div>
 
                 </form>

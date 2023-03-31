@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="grade">Grade Name<span class="text-danger">*</span></label>
+                        <label for="grade">{{ __('messages.grade_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="grade" name="grade" class="form-control" placeholder="Enter Grade Name">
                     </div>
                     <div class="form-group">
@@ -48,7 +48,7 @@
                         <input type="text" name="notes" class="form-control" placeholder="Enter Notes">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

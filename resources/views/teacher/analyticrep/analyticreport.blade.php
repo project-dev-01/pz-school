@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                    <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                     </select>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="studentID">Student<span class="text-danger">*</span></label>
+                                    <label for="studentID">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                                     <select id="studentID" class="form-control" name="student_id">
                                         <option value="">Select Student</option>
                                     </select>
@@ -111,7 +111,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>

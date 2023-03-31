@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="description">{{ __('messages.description') }}</label>
                                 <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description">{{$fees_group['description']}}</textarea>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                                                             <table class="table dt-responsive nowrap w-100 ">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>Due Date</th>
+                                                                                        <th>{{ __('messages.due_date') }}</th>
                                                                                         <th>Amount</th>
                                                                                     </tr>
                                                                                 </thead>
@@ -135,7 +135,7 @@
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Semester Name</th>
-                                                                                            <th>Due Date</th>
+                                                                                            <th>{{ __('messages.due_date') }}</th>
                                                                                             <th>Amount</th>
                                                                                         </tr>
                                                                                     </thead>
@@ -213,7 +213,7 @@
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Month Name</th>
-                                                                                            <th>Due Date</th>
+                                                                                            <th>{{ __('messages.due_date') }}</th>
                                                                                             <th>Amount</th>
                                                                                         </tr>
                                                                                     </thead>

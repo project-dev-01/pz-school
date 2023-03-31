@@ -14,9 +14,9 @@
                     <table class="table table-bordered table-centered dt-responsive nowrap w-100" width="100%">
                         <thead>
                             <tr style="background-color:#0ABAB5">
-                                <th>Subject</th>
+                                <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.paper_name') }}</th>
-                                <th>Date</th>
+                                <th>{{ __('messages.date') }}</th>
                                 <th>{{ __('messages.starting_time') }}</th>
                                 <th>{{ __('messages.ending_time') }}</th>
                                 <th>{{ __('messages.location') }}</th>
@@ -39,7 +39,7 @@
                         <input type="hidden" name="semester_id" id="semester_id">
                         <input type="hidden" name="session_id" id="session_id">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            Download
+                        {{ __('messages.download') }}
                         </button>
                     </form>
                 </div>

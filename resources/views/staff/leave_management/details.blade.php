@@ -55,7 +55,7 @@
                                 <td id="leaveType"></td>
                             </tr>
                             <tr>
-                                <td>Reason</td>
+                                <td>{{ __('messages.reason') }}</td>
                                 <td>:</td>
                                 <td id="reason"></td>
                             </tr>
@@ -99,7 +99,7 @@
                 </div>
                 <hr>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                     <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
                 </div>
             </div>
@@ -166,7 +166,7 @@
                                 <td id="leaveType"></td>
                             </tr>
                             <tr>
-                                <td>Reason</td>
+                                <td>{{ __('messages.reason') }}</td>
                                 <td>:</td>
                                 <td id="reason"></td>
                             </tr>
@@ -211,8 +211,13 @@
                 <hr>
             </div>
             <div class="modal-footer">
+<<<<<<< HEAD
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
+                <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">Save</button>
+=======
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
+>>>>>>> 11a536e8f1d63d7ffa9b7f2fa6a8a49a55044f49
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

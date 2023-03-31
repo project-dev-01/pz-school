@@ -26,9 +26,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Date</th>
+                        <th>{{ __('messages.date') }}</th>
                         <th>Refered By</th>
-                        <th>Title</th>
+                        <th>{{ __('messages.title') }}</th>
                         <th>{{ __('messages.action') }}</th>
                     </tr>
                 </thead>

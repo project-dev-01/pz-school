@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="subjectID">Subject<span class="text-danger">*</span></label>
+                                    <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">Select Subject</option>
                                         @forelse ($get_student_by_all_subjects as $subject)
@@ -71,7 +71,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Attendance Report
+                        {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>

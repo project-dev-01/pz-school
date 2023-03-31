@@ -14,7 +14,7 @@
                 <!-- <div class="text-center">
                     <h4 class="mt-0">Text in a modal</h4>
                     <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">{{ __('messages.close') }}</button>
                 </div> -->
                 <!-- <div class="text-center"> -->
                 <div class="row">
@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <!-- assignee -->
-                                        <p class="mt-2 mb-1 text-muted">Assigned To</p>
+                                        <p class="mt-2 mb-1 text-muted">{{ __('messages.assigned_to') }}</p>
                                         <div class="media">
                                             <!-- <img src="../assets/images/users/user-9.jpg" alt="Arya S" class="rounded-circle mr-2" height="24" /> -->
                                             <div class="media-body">
@@ -52,7 +52,7 @@
 
                                     <div class="col-6">
                                         <!-- start due date -->
-                                        <p class="mt-2 mb-1 text-muted">Due Date</p>
+                                        <p class="mt-2 mb-1 text-muted">{{ __('messages.due_date') }}</p>
                                         <div class="media">
                                             <i class='mdi mdi-calendar-month-outline font-18 text-success mr-1'></i>
                                             <div class="media-body">
@@ -76,14 +76,14 @@
                                 <!-- end task description -->
 
                                 <!-- start sub tasks/checklists -->
-                                <h5 class="mt-4 mb-2 font-size-16">Checklists/Sub-tasks</h5>
+                                <h5 class="mt-4 mb-2 font-size-16">{{ __('messages.checklists') }}/{{ __('messages.sub-tasks') }}</h5>
                                 <div id="dashCheckList">
                                 </div>
 
                                 <!-- end sub tasks/checklists -->
 
                                 <!-- start attachments -->
-                                <h5 class="mt-4 mb-2 font-size-16">Attachments</h5>
+                                <h5 class="mt-4 mb-2 font-size-16">{{ __('messages.attachment') }}</h5>
                                 <div id="dashAttachments">
                                 </div>
                                 <!-- end attachments -->
@@ -100,7 +100,7 @@
 
                                                 <input type="hidden" name="to_do_list_id" id="toDoListId">
                                                 <div class="p-2 bg-light d-flex justify-content-between align-items-center">
-                                                    <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>Submit</button>
+                                                    <button type="submit" class="btn btn-sm btn-success"><i class="mdi mdi-send mr-1"></i>{{ __('messages.submit') }}</button>
                                                 </div>
                                             </form>
                                         </div> <!-- end .border-->

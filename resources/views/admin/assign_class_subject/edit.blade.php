@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="assignSubjects">Subject<span class="text-danger">*</span></label>
+                        <label for="assignSubjects">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
                             <option value="">Choose Subject</option>
                             @forelse($getSubjectList as $sub)
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                     </div>
 

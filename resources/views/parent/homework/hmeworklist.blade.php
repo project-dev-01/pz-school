@@ -11,7 +11,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">HomeWork</h4>
+                <h4 class="page-title">{{ __('messages.homework') }}</h4>
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Subject</option>
                                         <option>All </option>
@@ -192,13 +192,13 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Date Of Homework :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.date_of_homework') }} :</div>
                                                         <div class="col-md-6">20 Jan 2022</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Date Of Submission :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.date_of_submission') }} :</div>
                                                         <div class="col-md-6">22 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -249,7 +249,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-md-6 col-form-label">Attachment File:</label>
+                                                        <label for="inputEmail3" class="col-md-6 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="col-md-6 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
@@ -260,7 +260,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="ml-2 btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -303,13 +303,13 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Homework :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.date_of_homework') }} :</div>
                                                         <div class="ml-2">20 Jan 2022</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Submission :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.date_of_submission') }} :</div>
                                                         <div class="ml-2">22 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -362,7 +362,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Attachment File:</label>
+                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
@@ -373,7 +373,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="ml-2 btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -417,13 +417,13 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Homework :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.date_of_homework') }} :</div>
                                                         <div class="ml-2">20 Jan 2022</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Date Of Submission :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.date_of_submission') }} :</div>
                                                         <div class="ml-2">22 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -476,7 +476,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Attachment File:</label>
+                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
@@ -487,7 +487,7 @@
                                             </div>
                                             <div class="col-8 offset-4">
                                                 <button type="submit" class="btn btn-primary-bl waves-effect waves-light float-right">
-                                                    Submit
+                                                {{ __('messages.submit') }}
                                                 </button>
                                             </div>
                                         </div>

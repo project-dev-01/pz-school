@@ -496,7 +496,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="occupation">Occupation<span class="text-danger">*</span></label>
+                                                <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" value="{{$parent['occupation']}}" name="occupation" placeholder="Occupation" data-parsley-trigger="change">
                                             </div>
                                         </div>
@@ -504,7 +504,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="income">Income</label>
+                                                <label for="income">{{ __('messages.income') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">

@@ -13,11 +13,11 @@
                             <div class="table-responsive">
                                 <table class="table mb-0">
                                     <tr>
-                                        <td>Title</td>
+                                        <td>{{ __('messages.title') }}</td>
                                         <td id="taskShowTit"></td>
                                     </tr>
                                     <tr>
-                                        <td>Description</td>
+                                        <td>{{ __('messages.description') }}</td>
                                         <td id="taskShowDesc"></td>
                                         <td><input type="hidden" id="calendorID" value=""></td>
                                     </tr>

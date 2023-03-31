@@ -552,11 +552,11 @@
                                                     }
                                                 </style>
                                                 <tr>
-                                                    <td>Title</td>
+                                                    <td>{{ __('messages.title') }}</td>
                                                     <td id="title"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Type</td>
+                                                    <td>{{ __('messages.type') }}</td>
                                                     <td id="type"></td>
                                                 </tr>
                                                 <tr>
@@ -580,7 +580,7 @@
                                                     <td id="audience"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Description</td>
+                                                    <td>{{ __('messages.description') }}</td>
                                                     <td id="description"></td>
                                                 </tr>
                                             </table>

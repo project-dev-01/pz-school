@@ -25,11 +25,11 @@
                             <div class="table-responsive">
                                 <table class="table w-100 nowrap">
                                     <tr>
-                                        <td>Title</td>
+                                        <td>{{ __('messages.title') }}</td>
                                         <td class="title"></td>
                                     </tr>
                                     <tr>
-                                        <td>Type</td>
+                                        <td>{{ __('messages.type') }}</td>
                                         <td class="type"></td>
                                     </tr>
                                     <tr>
@@ -45,7 +45,7 @@
                                         <td class="audience"></td>
                                     </tr>
                                     <tr>
-                                        <td>Description</td>
+                                        <td>{{ __('messages.description') }}</td>
                                         <td class="description"></td>
                                     </tr>
                                 </table>
