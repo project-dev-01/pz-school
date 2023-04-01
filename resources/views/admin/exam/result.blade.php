@@ -137,7 +137,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            <header><b>Student General Details</b></header>
+                                            <header><b>{{ __('messages.student_general_details') }}</b></header>
                                             <h4>
                                     </li>
                                 </ul>
@@ -156,7 +156,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            <header><b>Individual Subject</b></header>
+                                            <header><b>{{ __('messages.individual_subject') }}</b></header>
                                             <h4>
                                     </li>
                                 </ul>

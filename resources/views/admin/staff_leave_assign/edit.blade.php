@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Staff Leave Assign</h4>
+                <h4 class="page-title">{{ __('messages.staff_leave_assign') }}</h4>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
                             </div>
                             @endforeach
                         <div class="form-group">
-                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">{{ __('messages.back') }}</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                         </div>
 

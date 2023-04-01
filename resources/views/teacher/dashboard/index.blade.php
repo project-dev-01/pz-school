@@ -510,7 +510,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Grade </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.grade') }}</div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="setCurDate" name="date">
@@ -978,7 +978,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_class_id">Grade<span class="text-danger">*</span></label>
+                            <label for="sr_class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                             <select id="sr_class_id" class="form-control" name="class_id">
                                 <option value="">Select Grade</option>
                                 @forelse ($classes as $class)

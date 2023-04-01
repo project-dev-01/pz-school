@@ -28,7 +28,7 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">Add Class</button>
+                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addClassModal">{{ __('messages.add_class') }}</button>
                     </div>
                 </div>
                 </p>
@@ -38,7 +38,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Class Name</th>
+                                <th>{{ __('messages.class_Name') }}</th>
                                 <th>Name Numeric</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>

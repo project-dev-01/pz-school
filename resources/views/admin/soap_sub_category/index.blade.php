@@ -26,7 +26,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Sub Category</h4>
+                <h4 class="page-title">{{ __('messages.sub_category') }}</h4>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Sub Category
+                        <h4 class="navv">{{ __('messages.sub_category') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -54,7 +54,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.category') }}</th>
-                                    <th>Sub Category Name</th>
+                                    <th>{{ __('messages.sub_category_name') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

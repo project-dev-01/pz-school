@@ -69,7 +69,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="fees_type">{{ __('messages.fees_type') }}Fees Type</label>
+                                    <label for="fees_type">{{ __('messages.fees_type') }}</label>
                                     <select id="fees_type" class="form-control" name="fees_type">
 
                                     </select>
@@ -117,10 +117,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Grade</th>
+                                    <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>Fees Group</th>
+                                    <th>{{ __('messages.fees_group') }}</th>
                                     <!-- <th>Payment Status</th> -->
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

@@ -89,7 +89,7 @@
                                                             <th>{{ __('messages.register_no') }}</th>
                                                             <th>{{ __('messages.subject') }}</th>
                                                             <th>Status</th>
-                                                            <th data-field="user-status">Score</th>
+                                                            <th data-field="user-status">{{ __('messages.score') }}</th>
                                                             <th>{{ __('messages.remarks') }}</th>
                                                             <th>Submission</th>
                                                             <th>Student Remarks</th>

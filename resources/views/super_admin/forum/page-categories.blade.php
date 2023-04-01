@@ -46,7 +46,7 @@
                                             @endphp
                                     </a></li>
                             </ul>
-                            <h4 class="tt-title"><a href="{{route('super_admin.forum.page-single-user')}}">Threads</a></h4>
+                            <h4 class="tt-title"><a href="{{route('super_admin.forum.page-single-user')}}">{{ __('messages.threads') }}</a></h4>
                         </div>
                         <div class="tt-item-layout">
                             <div class="innerwrapper">

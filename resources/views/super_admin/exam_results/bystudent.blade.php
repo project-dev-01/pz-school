@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Class Name</option>
                                         <option value="">A</option>
@@ -103,7 +103,7 @@
                             <table class="table w-100 nowrap table-bordered table-striped" id="">
                                 <thead>
                                     <tr>
-                                        <th class="align-middle" rowspan="3">S.no.</th>                                    
+                                        <th class="align-middle" rowspan="3">{{ __('messages.s.no.') }}</th>                                    
                                         <th class="align-middle" rowspan="3">{{ __('messages.student_name') }}</th>                                   
                                         <th class="text-center"colspan="14">{{ __('messages.subject_name') }}</th>                            
                                     </tr>   
@@ -117,19 +117,19 @@
                                         <th colspan="2" class="text-center">Civics Education</th>                               
                                     </tr>      
                                     <tr>
-                                        <th class="align-top">Mark</th>
+                                        <th class="align-top">{{ __('messages.mark') }}</th>
                                         <th class="align-top">{{ __('messages.grade') }}</th> 
-                                        <th class="text-center">Mark</th> 
+                                        <th class="text-center">{{ __('messages.mark') }}</th> 
                                         <th class="align-top">{{ __('messages.grade') }}</th>
-                                        <th class="align-top">Mark</th>                                        
+                                        <th class="align-top">{{ __('messages.mark') }}</th>                                        
                                         <th class="text-center">{{ __('messages.grade') }}</th>
-                                        <th class="text-center">Mark</th>  
+                                        <th class="text-center">{{ __('messages.mark') }}</th>  
                                         <th class="align-top">{{ __('messages.grade') }}</th>                                                                       
-                                        <th class="text-center">Mark</th> 
+                                        <th class="text-center">{{ __('messages.mark') }}</th> 
                                         <th class="align-top">{{ __('messages.grade') }}</th>
-                                        <th class="align-top">Mark</th>  
+                                        <th class="align-top">{{ __('messages.mark') }}</th>  
                                         <th class="text-center">{{ __('messages.grade') }}</th>      
-                                        <th class="text-center">Mark</th>  
+                                        <th class="text-center">{{ __('messages.mark') }}</th>  
                                         <th class="text-center">{{ __('messages.grade') }}</th>                                
                                     </tr>                           
                                 </thead>

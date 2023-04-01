@@ -49,7 +49,7 @@
                         <span class="text-danger error-text class_error"></span>
                     </div>
                     <div class="form-group" id="section">
-                        <label for="section">Section<span class="text-danger">*</span></label>
+                        <label for="section">{{ __('messages.section') }}<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" id="section_name" multiple="multiple" data-placeholder="Choose ..." name="section[]">
                             <option value="">Select</option> 
                             

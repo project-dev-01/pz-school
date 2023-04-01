@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="sectionID">Class Name<span class="text-danger">*</span></label>
+                                    <label for="sectionID">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">Select Section</option>
                                     </select>
@@ -189,7 +189,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="">
-                                            <p class="text-muted mb-1">Excused</p>
+                                            <p class="text-muted mb-1">{{ __('messages.excused') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -214,7 +214,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-user-graduate font-24"></i><br><br>
-                                            <p class="text-muted mb-1">Perfect attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.perfect_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -229,7 +229,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.100%_of_class') }}</span></h6>
                                 </div>
 
                             </div>
@@ -240,7 +240,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="  fas fa-user-tie  font-24"></i><br><br>
-                                            <p class="text-muted mb-1">Average Attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.average_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -255,7 +255,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.100%_of_class') }}</span></h6>
                                 </div>
 
                             </div>
@@ -266,7 +266,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-chalkboard-teacher font-24"></i><br><br>
-                                            <p class="text-muted mb-1">Below Attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.below_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -281,7 +281,7 @@
                                         <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
-                                    <h6 class="text-uppercase"><span class="text-muted float-right">100% of class</span></h6>
+                                    <h6 class="text-uppercase"><span class="text-muted float-right">{{ __('messages.100%_of_class') }}</span></h6>
                                 </div>
                             </div> <!-- end card-box-->
                         </div>
@@ -293,19 +293,19 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> Classroom details
+                                <h4 class="navv"> {{ __('messages.classroom_details') }}
                                     <h4>
                             </li>
                         </ul><br>
                         <ul class="nav nav-tabs nav-bordered">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="navv active">
-                                    Layout Mode
+                                {{ __('messages.layout_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="navv">
-                                    List Mode
+                                {{ __('messages.list_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -333,7 +333,7 @@
                                                 <i class='fas fa-circle' style='font-size:14px;color:#de354f'></i>
                                                 <span class="mb-0 mt-1">Absent</span>
                                                 <i class='fas fa-circle' style='font-size:14px;color:#696969'></i>
-                                                <span class="mb-0 mt-1">Excused</span>
+                                                <span class="mb-0 mt-1">{{ __('messages.excused') }}</span>
                                             </a>
 
                                         </div>
@@ -355,7 +355,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="changeAttendance">Select Attendance</label>
+                                                    <label for="changeAttendance">{{ __('messages.select_attendance') }}</label>
                                                     <select id="changeAttendance" class="form-control">
                                                         <option value="">Not Selected</option>
                                                         <option value="present">Present</option>
@@ -383,8 +383,8 @@
                                                             <th>Attentance</th>
                                                             <th>{{ __('messages.remarks') }}</th>
                                                             <th>Reasons</th>
-                                                            <th>Student behaviour</th>
-                                                            <th>Class behaviour</th>
+                                                            <th>{{ __('messages.student_behaviour') }}</th>
+                                                            <th>{{ __('messages.class_behaviour') }}</th>
 
                                                         </tr>
                                                     </thead>
@@ -423,7 +423,7 @@
                                         <div class="col-md-12">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
-                                                    <h4 class="navv">Student Leave Request
+                                                    <h4 class="navv">{{ __('messages.student_leave_request') }}
                                                         <h4>
                                                 </li>
                                             </ul><br>

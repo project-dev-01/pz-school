@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Class Name<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">Select Class Name</option>
@@ -156,7 +156,7 @@
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="inputGroupFile04">
-                                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                                    <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_file') }}</label>
                                                 </div>
                                             </div>
                                         </div>

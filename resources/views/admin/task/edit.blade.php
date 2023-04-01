@@ -85,7 +85,7 @@
                                 <div class="custom-file">
                                     <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">
                                     <input type="hidden" name="old_file" id="old_file" value="{{$to_do_row['file']}}">
-                                    <label class="custom-file-label" for="attachment">Choose file</label>
+                                    <label class="custom-file-label" for="attachment">{{ __('messages.choose_file') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary"></a>{{ __('messages.back') }}
                             <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
                         </div>
 

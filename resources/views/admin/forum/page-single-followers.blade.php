@@ -41,10 +41,10 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-01" role="tab"><span>{{ __('messages.activity') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>Threads</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>{{ __('messages.threads') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>Replies</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.replies') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
                         <a class="nav-link active" data-toggle="tab" href="#tt-tab-04" role="tab"><span>5 Followers</span></a>
@@ -61,7 +61,7 @@
                 <div class="tab-pane tt-indent-none" id="tt-tab-01" role="tabpanel">
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
-                            <div class="tt-col-topic">Topic</div>
+                            <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                             <div class="tt-col-value-large hide-mobile">{{ __('messages.category') }}</div>
                             <div class="tt-col-value-large hide-mobile">Status</div>
                             <div class="tt-col-value-large hide-mobile">{{ __('messages.activity') }}</div>
@@ -182,11 +182,11 @@
                 <div class="tab-pane tt-indent-none" id="tt-tab-02" role="tabpanel">
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
-                            <div class="tt-col-topic">Topic</div>
+                            <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                             <div class="tt-col-category">{{ __('messages.category') }}</div>
-                            <div class="tt-col-value hide-mobile">Likes</div>
-                            <div class="tt-col-value hide-mobile">Replies</div>
-                            <div class="tt-col-value hide-mobile">Views</div>
+                            <div class="tt-col-value hide-mobile">{{ __('messages.likes') }}</div>
+                            <div class="tt-col-value hide-mobile">{{ __('messages.replies') }}</div>
+                            <div class="tt-col-value hide-mobile">{{ __('messages.views') }}</div>
                             <div class="tt-col-value">{{ __('messages.activity') }}</div>
                         </div>
                         <div class="tt-item">
@@ -293,7 +293,7 @@
                 <div class="tab-pane tt-indent-none" id="tt-tab-03" role="tabpanel">
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
-                            <div class="tt-col-topic">Topic</div>
+                            <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                             <div class="tt-col-category">{{ __('messages.category') }}</div>
                             <div class="tt-col-value">{{ __('messages.activity') }}</div>
                         </div>
@@ -420,8 +420,8 @@
                             <div class="tt-col-name">User</div>
                             <div class="tt-col-value-large hide-mobile">Follow date</div>
                             <div class="tt-col-value-large hide-mobile">Last Activity</div>
-                            <div class="tt-col-value-large hide-mobile">Threads</div>
-                            <div class="tt-col-value-large hide-mobile">Replies</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.threads') }}</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.replies') }}</div>
                             <div class="tt-col-value">Level</div>
                         </div>
                         <div class="tt-item">
@@ -532,8 +532,8 @@
                             <div class="tt-col-name">User</div>
                             <div class="tt-col-value-large hide-mobile">Follow date</div>
                             <div class="tt-col-value-large hide-mobile">Last Activity</div>
-                            <div class="tt-col-value-large hide-mobile">Threads</div>
-                            <div class="tt-col-value-large hide-mobile">Replies</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.threads') }}</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.replies') }}</div>
                             <div class="tt-col-value">Level</div>
                         </div>
                         <div class="tt-item">
@@ -750,7 +750,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color04 tt-badge">Study Advice</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 98</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">{{ __('messages.threads') }} - 98</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -780,7 +780,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color05 tt-badge">Study Hacks</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 28</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">{{ __('messages.threads') }} - 28</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">
@@ -809,7 +809,7 @@
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color06 tt-badge">Languages</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">Threads - 74</a></h6>
+                            <h6 class="tt-title"><a href="{{ route('admin.forum.page-categories-single') }}">{{ __('messages.threads') }} - 74</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="tt-innerwrapper">

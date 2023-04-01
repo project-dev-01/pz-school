@@ -46,9 +46,9 @@
                                                                         <div class="table-responsive">
                                                                             <table class="table table-bordered table-nowrap table-hover table-centered m-0">
                                                                                 <thead>
-                                                                                    <th>No</th>
+                                                                                    <th>{{ __('messages.no') }}</th>
                                                                                     <th>{{ __('messages.subject') }}</th>
-                                                                                    <th>Refered By</th>
+                                                                                    <th>{{ __('messages.refered_by') }}</th>
                                                                                     <th>{{ __('messages.date') }}</th>
                                                                                     <th>{{ __('messages.action') }}</th>
                                                                                 </thead>
@@ -83,9 +83,9 @@
             <table class="table table-bordered table-nowrap table-hover table-centered m-0">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>{{ __('messages.no') }}</th>
                         <th>{{ __('messages.title') }}</th>
-                        <th>Refered By</th>
+                        <th>{{ __('messages.refered_by') }}</th>
                         <th>{{ __('messages.date') }}</th>
                         <th>{{ __('messages.action') }}</th>
                     </tr>

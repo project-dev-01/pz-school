@@ -71,7 +71,7 @@
                                         <th>#</th>
                                         <th>Employee Name</th>
                                         <th>Leave Type</th>
-                                        <th>No.Of.Days</th>
+                                        <th>{{ __('messages.no._of._days') }}</th>
                                         <th>From Leave</th>
                                         <th>To Leave</th>
                                         <th>{{ __('messages.reason') }}</th>

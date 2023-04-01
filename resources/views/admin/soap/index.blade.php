@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">SOAP</h4>
+                <h4 class="page-title">{{ __('messages.soap') }}</h4>
             </div>
         </div>
     </div>
@@ -70,27 +70,27 @@
                     </li>
                     <li class="nav-item">
                         <a href="#subjective" data-toggle="tab" data-soap-type-id="1" data-tab="subjective" aria-expanded="true" class="nav-link">
-                            S-Subjective
+                        {{ __('messages.s_subjective') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#objective" data-toggle="tab" data-soap-type-id="2" data-tab="objective" aria-expanded="true" class="nav-link">
-                            O-Objective
+                        {{ __('messages.o_objective') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#assessment" data-toggle="tab" data-soap-type-id="3" data-tab="assessment" aria-expanded="true" class="nav-link">
-                            A-Assessment
+                        {{ __('messages.a_assessment') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#plan" data-toggle="tab" data-soap-type-id="4" data-tab="plan" aria-expanded="true" class="nav-link">
-                            P-Plan
+                        {{ __('messages.p_plan') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#log" data-toggle="tab"  aria-expanded="true" data-tab="log" class="nav-link">
-                            logs
+                        {{ __('messages.logs') }}
                         </a>
                     </li>
                 </ul>
@@ -103,7 +103,7 @@
                                 <div class="card">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <h4 class="navv">Old Records<h4>
+                                            <h4 class="navv">{{ __('messages.old_records') }}<h4>
                                         </li>
                                     </ul><br>
                                     <div class="card-body">
@@ -198,7 +198,7 @@
                                 <div class="card">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
-                                            <h4 class="navv">New Records<h4>
+                                            <h4 class="navv">{{ __('messages.new_records') }}<h4>
                                         </li>
                                     </ul><br>
                                     <div class="card-body">
@@ -728,7 +728,7 @@
                                         <table class="table table-bordered table-centered mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
+                                                    <th>{{ __('messages.no') }}</th>
                                                     <th>Family Details</th>
                                                 </tr>
                                             </thead>

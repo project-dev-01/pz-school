@@ -117,7 +117,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">Choose file</label>
+                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                                         </div>
                                     </div>
                                     <span id="file_name"></span>

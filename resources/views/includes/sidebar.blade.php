@@ -18,7 +18,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-settings mr-1"></i>
-                        <span>Settings</span>
+                        <span>{{ __('messages.settings') }}</span>
                     </a>
 
                     <!-- item-->
@@ -115,7 +115,7 @@
                             <rect x="12.7998" y="0.809509" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
                             <rect x="12.7998" y="5.6095" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
                         </svg>
-                        <span> Application Form </span>
+                        <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
                 <li>
@@ -140,7 +140,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Settings </span>
+                        <span>{{ __('messages.settings') }}</span>
                     </a>
                 </li>
                 <li>
@@ -321,7 +321,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.employee.import')}}" class="nav-link {{ (request()->is('admin/employee/import')) ? 'active' : '' }}">
-                                    <span>Employee Bulk Upload</span>
+                                    <span>{{ __('messages.employee_bulk_upload') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -557,12 +557,12 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.leave_type')}}" class="nav-link {{ (request()->is('admin/leave_type')) ? 'active' : '' }}">
-                                    <span> Leave Types </span>
+                                    <span> {{ __('messages.leave_types') }} </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.staff_leave_assign')}}" class="nav-link {{ (request()->is('admin/staff_leave_assign')) ? 'active' : '' }}">
-                                    <span> Staff Leave Assign </span>
+                                    <span>{{ __('messages.staff_leave_assign') }} </span>
                                 </a>
                             </li>
                             <li>
@@ -916,7 +916,7 @@
                             </defs>
                         </svg>
 
-                        <span> SOAP </span>
+                        <span> {{ __('messages.soap') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarSoap">
@@ -928,7 +928,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.soap_sub_category')}}" class="nav-link {{ (request()->is('admin/soap_sub_category*')) ? 'active' : '' }}">
-                                    <span>Sub Category </span>
+                                    <span>{{ __('messages.sub_category') }} </span>
                                 </a>
                             </li>
                             <li>
@@ -938,7 +938,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.soap')}}" class="nav-link {{ (request()->is('admin/soap/*')) ? 'active' : '' }}">
-                                    <span> Soap </span>
+                                    <span> {{ __('messages.soap') }} </span>
                                 </a>
                             </li>
                         </ul>
@@ -963,7 +963,7 @@
                             </defs>
                         </svg>
 
-                        <span> Fees </span>
+                        <span>{{ __('messages.fees') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarFees">
@@ -980,22 +980,22 @@
                             </li> -->
                             <li>
                                 <a href="{{ route('admin.fees_type')}}" class="nav-link {{ (request()->is('admin/fees_type*')) ? 'active' : '' }}">
-                                    <span>Fees Type </span>
+                                    <span>{{ __('messages.fees_type') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.fees_group')}}" class="nav-link {{ (request()->is('admin/fees_group*')) ? 'active' : '' }}">
-                                    <span>Fees Group </span>
+                                    <span>{{ __('messages.fees_group') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.fees_allocation')}}" class="nav-link {{ (request()->is('admin/fees/fees_allocation')) ? 'active' : '' }}">
-                                    <span>Fees Allocation </span>
+                                    <span>{{ __('messages.fees_allocation') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/index')) ? 'active' : '' }}">
-                                    <span>Fees </span>
+                                    <span>{{ __('messages.fees') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -1016,7 +1016,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Settings </span>
+                        <span>{{ __('messages.settings') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sideBarSettings">
@@ -1049,17 +1049,17 @@
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.absent_reason')}}" class="nav-link {{ (request()->is('admin/absent_reason*')) ? 'active' : '' }}">
-                                                <span>Absent Reason </span>
+                                                <span>{{ __('messages.absent_reason') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.late_reason')}}" class="nav-link {{ (request()->is('admin/late_reason*')) ? 'active' : '' }}">
-                                                <span>Late Reason </span>
+                                                <span>{{ __('messages.late_reason') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.excused_reason')}}" class="nav-link {{ (request()->is('admin/excused_reason*')) ? 'active' : '' }}">
-                                                <span>Excused Reason </span>
+                                                <span>{{ __('messages.excused_reason') }}/span>
                                             </a>
                                         </li>
                                         <li>
@@ -1082,33 +1082,34 @@
                             </li>
                             <li>
                                 <a href="#sidebarCopyOldData" data-toggle="collapse">
-                                    Copy Academic & Exam Masters <span class="menu-arrow"></span>
+                                {{ __('messages.copy_academic') }}&{{ __('messages.exam_masters') }}
+                              <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarCopyOldData">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.acdemic.copy.assign_teacher')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/assign_teacher')) ? 'active' : '' }}">
-                                                <span>Copy Assign Teacher </span>
+                                                <span>{{ __('messages.copy_assign_teacher') }}</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.acdemic.copy.grade_assign')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/grade_assign')) ? 'active' : '' }}">
-                                                <span>Copy Grade Assign </span>
+                                         <a href="{{ route('admin.acdemic.copy.grade_assign')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/grade_assign')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.copy_grade_assign') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.acdemic.copy.subject_teacher_assign')}}" class="nav-link {{ (request()->is('admin/acdemic/copy/subject_teacher_assign')) ? 'active' : '' }}">
-                                                <span>Copy Subject Teacher Assign </span>
+                                                <span>{{ __('messages.copy_subject_teacher_assign') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.exam_master.copy.exam_setup')}}" class="nav-link {{ (request()->is('admin/exam_master/copy/exam_setup')) ? 'active' : '' }}">
-                                                <span>Copy Exam Setup </span>
+                                                <span>{{ __('messages.copy_exam_setup') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.exam_master.copy.exam_paper')}}" class="nav-link {{ (request()->is('admin/exam_master/copy/exam_paper')) ? 'active' : '' }}">
-                                                <span>Copy Exam Paper </span>
+                                                <span>{{ __('messages.copy_exam_paper') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -1239,7 +1240,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('staff.leave_management.allleaves')}}" class="nav-link {{ (request()->is('staff/leave_management/allleaves')) ? 'active' : '' }}">
-                                    <span> Leave Approval</span>
+                                    <span>{{ __('messages.leave_approval') }}</span>
                                 </a>
                             </li>
                             <li>
@@ -1272,7 +1273,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Settings </span>
+                        <span>{{ __('messages.settings') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1509,7 +1510,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('teacher.leave_management.allleaves')}}" class="nav-link {{ (request()->is('teacher/leave_management/allleaves')) ? 'active' : '' }}">
-                                    <span> Leave Approval</span>
+                                    <span>{{ __('messages.leave_approval') }}</span>
                                 </a>
                             </li>
                             <li>
@@ -1531,14 +1532,14 @@
                             <rect x="12.7998" y="0.809509" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
                             <rect x="12.7998" y="5.6095" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
                         </svg>
-                        <span> Application Form </span>
+                        <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
 
                         <i data-feather="message-square"></i>
-                        <span> Chat </span>
+                        <span>{{ __('messages.chat') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1564,7 +1565,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Settings </span>
+                        <span>{{ __('messages.settings') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1603,7 +1604,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
                         </svg>
-                        <span> Homework List </span>
+                        <span> {{ __('messages.homework_list') }} </span>
                         <!--<span class="menu-arrow"></span>-->
                     </a>
                     <!--<div class="collapse" id="sidebarHomework">
@@ -1668,7 +1669,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Report Card </span>
+                        <span> {{ __('messages.report_card') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1705,13 +1706,13 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Application Form </span>
+                        <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
                         <i data-feather="message-square"></i>
-                        <span> Chat </span>
+                        <span>{{ __('messages.chat') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1736,7 +1737,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> Settings </span>
+                        <span>{{ __('messages.settings') }}</span>
                     </a>
                 </li>
                 <li>
@@ -1775,7 +1776,7 @@
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
                         </svg>
-                        <span>Homework List</span>
+                        <span>{{ __('messages.homework_list') }}</span>
                         <!--<span class="menu-arrow"></span>-->
                     </a>
                     <!-- <div class="collapse" id="sidebarHomework">
@@ -1809,7 +1810,7 @@
                 <li>
                     <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
                         <i class="far fa-id-card"></i>
-                        <span> Report Card </span>
+                        <span>{{ __('messages.report_card') }}</span>
                     </a>
                 </li>
                 <li>

@@ -246,12 +246,12 @@
                 <!-- /tt-search -->
             </div>
             <div class="tt-list-header tt-border-bottom">
-                <div class="tt-col-topic">Topic</div>
+                <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                 <div class="tt-col-category">{{ __('messages.category') }}</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
-                <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.likes') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.replies') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.views') }}</div>
+                <div class="tt-col-value">{{ __('messages.activity') }}</div>
             </div>
             @if(!empty($forum_list))
             @php

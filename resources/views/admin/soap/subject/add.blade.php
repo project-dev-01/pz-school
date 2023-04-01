@@ -162,10 +162,10 @@
                                 <div class="tt-wrapper-inner addSoapSubject">
                                     <div class="row">
                                         <div class="col-auto ml-md-auto">
-                                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">Back</a>
+                                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">{{ __('messages.back') }}</a>
                                         </div>
                                     </div>
-                                    <h1 class="tt-title-border">Create New Topic</h1>
+                                    <h1 class="tt-title-border">{{ __('messages.create_new_topic') }}</h1>
                                     <form id="addSoapSubjectForm" method="post" action="{{ route('admin.soap_subject.add') }}">
                                         @csrf
                                         <div class="form-group">
@@ -193,7 +193,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="soap_type_id" class="">Soap Type<span class="text-danger">*</span></label>
+                                            <label for="soap_type_id" class="">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                                             <select id="soap_type_id" class="col-md-6 form-control" name="soap_type_id">
                                                 <option value="">Select Type</option>
                                                 <option value="1">S - Subjective</option>

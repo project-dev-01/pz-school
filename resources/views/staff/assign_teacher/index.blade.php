@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Class Name</th>
+                                <th>{{ __('messages.class_Name') }}</th>
                                 <th>Section Name</th>
                                 <th>Teacher Name</th>
                                 <th>{{ __('messages.action') }}</th>

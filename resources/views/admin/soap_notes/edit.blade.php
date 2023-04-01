@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="soap_type_id">Soap Type<span class="text-danger">*</span></label>
+                        <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="edit_soap_type_id" class="form-control" name="soap_type_id">
                             <option value="">Select Soap Type</option>
                             <option value="1">Subjective</option>
@@ -27,7 +27,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="soap_sub_category_id">Sub Category <span class="text-danger">*</span></label>
+                        <label for="soap_sub_category_id">{{ __('messages.sub_category') }} <span class="text-danger">*</span></label>
                         <select id="soap_sub_category_id" class="form-control" name="soap_sub_category_id">
                             <option value="">Select Sub Category</option>
                         </select>

@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Class Name</option>
                                         <option value="">A</option>
@@ -126,7 +126,7 @@
                             <ul class="nav nav-tabs nav-bordered">
                                 <li class="nav-item">
                                     <a href="#current-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                        Homework List
+                                    {{ __('messages.homework_list') }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -159,7 +159,7 @@
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
+                                                                <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 
                                                             </tr>
@@ -205,7 +205,7 @@
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
+                                                                <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 
                                                             </tr>

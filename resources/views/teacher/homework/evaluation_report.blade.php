@@ -144,7 +144,7 @@
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
+                                                                <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 
                                                             </tr>
@@ -174,12 +174,12 @@
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>{{ __('messages.subject') }}</th>
-                                                                <th>Grade</th>
+                                                                <th>{{ __('messages.grade') }}</th>
                                                                 <th>{{ __('messages.class') }}</th>
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
+                                                                <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 
                                                             </tr>

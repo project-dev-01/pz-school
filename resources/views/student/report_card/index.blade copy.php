@@ -25,7 +25,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="selected_year">Year<span class="text-danger">*</span></label>
+                                    <label for="selected_year">{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <select id="selected_year" class="yrselectdesc form-control"></select>
 
                                 </div>
@@ -73,7 +73,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Report Card List
+                        {{ __('messages.report_card_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -97,9 +97,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Subject</th>
-                                                            <th>Score</th>
+                                                            <th>{{ __('messages.score') }}</th>
                                                             <th>{{ __('messages.grade') }}</th>
-                                                            <th>Ranking</th>
+                                                            <th>{{ __('messages.ranking') }}</th>
                                                             <th>Status</th>
                                                         </tr>
                                                     </thead>
@@ -125,7 +125,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Report Card List
+                        {{ __('messages.report_card_list') }}
                             <h4>
                     </li>
                 </ul><br>

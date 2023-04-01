@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddClassModalLabel">Add Class</h4>
+                <h4 class="modal-title" id="myaddClassModalLabel">{{ __('messages.add_class') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -21,7 +21,7 @@
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="name">Class Name</label>
+                        <label for="name">{{ __('messages.class_Name') }}</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter class name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

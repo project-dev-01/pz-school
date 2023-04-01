@@ -96,7 +96,7 @@
                     <div class="col-sm-12">
                         <div class="card-box">
                             <div class="table-responsive">
-                            <header><b>Student General Details</b></header>
+                            <header><b>{{ __('messages.student_general_details') }}</b></header>
                                 <table class="table table-bordered mb-0" id="tbl_general_details">
                                     <thead id="tbl_general_details_header"></thead>                                   
                                 </table>
@@ -105,7 +105,7 @@
                                                  
                             <div class="table-responsive">
                             <hr>
-                            <header><b>Individual Subject</b></header>
+                            <header><b>{{ __('messages.individual_subject') }}</b></header>
                                 <table class="table table-bordered mb-0" id="tbl_std_subject_marks">
                                     <thead id="tbl_std_subject_marks_header">
                                        

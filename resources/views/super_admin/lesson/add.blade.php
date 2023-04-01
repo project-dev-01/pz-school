@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="title">Class Name<span class="text-danger">*</span></label>
+                        <label for="title">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select Class Name</option>
                             <option>A</option>

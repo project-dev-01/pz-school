@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Fees group</h4>
+                <h4 class="page-title">{{ __('messages.fees_group') }}</h4>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Add Fees group
+                        <h4 class="navv">{{ __('messages.add_fees_group') }}
                             <h4>
                     </li>
                 </ul>
@@ -28,7 +28,7 @@
                         @csrf
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Fees Group Name<span class="text-danger">*</span></label>
+                                <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter Fees Group Name">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
@@ -45,10 +45,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Fees Type</th>
+                                        <th>{{ __('messages.fees_type') }}</th>
                                         <th>Due Date</th>
                                         <th>Payment Mode</th>
-                                        <th>Amount</th>
+                                        <th>{{ __('messages.amount') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group">
 
-                            <a href="{{ route('admin.fees_group') }}" class="btn btn-light">Back</a>
+                            <a href="{{ route('admin.fees_group') }}" class="btn btn-light"></a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                         </div>
 

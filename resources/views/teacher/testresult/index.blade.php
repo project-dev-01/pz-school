@@ -155,12 +155,12 @@
                                             <tr>
                                                 <th width="10%">#</th>
                                                 <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
-                                                <th class="text-center" width="20%">Score</th>
-                                                <th class="text-center" width="15%">Grade</th>
+                                                <th class="text-center" width="20%">{{ __('messages.score') }}</th>
+                                                <th class="text-center" width="15%">{{ __('messages.grade') }}</th>
                                                 <th class="text-center" width="15%">Pass/Fail</th>
-                                                <th class="text-center" width="15%">Ranking</th>
+                                                <th class="text-center" width="15%">{{ __('messages.ranking') }}</th>
                                                 <th class="text-center" width="15%">Status</th>
-                                                <th class="text-center" width="30%">Memo</th>
+                                                <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
                                             </tr>
 
                                         </thead>
@@ -184,7 +184,7 @@
             <div class="card" id="subject_average_card" style="display:none">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Subject Average
+                        <h4 class="navv">{{ __('messages.subject_average') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -198,7 +198,7 @@
                                     <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
                                     <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                                <h4 class="header-title mb-0">Subject Average</h4>
+                                <h4 class="header-title mb-0">{{ __('messages.subject_average') }}</h4>
 
                                 <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
                                     <div id="subject-avg-chart" class="apex-charts" data-colors="#f672a7"></div>
@@ -214,7 +214,7 @@
             <div class="card" id="scores_by_graph_card" style="visibility: hidden;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Scores by Graph
+                        <h4 class="navv">{{ __('messages.scores_by_graph') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -227,14 +227,14 @@
                                 <a data-toggle="collapse" href="#cardCollpase3" role="button" aria-expanded="false" aria-controls="cardCollpase3"><i class="mdi mdi-minus"></i></a>
                                 <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                             </div>
-                            <h4 class="header-title mb-0">Statistics</h4>
+                            <h4 class="header-title mb-0">{{ __('messages.statistics') }}</h4>
 
                             <div id="cardCollpase3" class="collapse pt-3 show">
                                 <div class="text-center">
 
                                     <div class="row mt-2">
                                         <div class="col-6">
-                                            <h3 data-plugin="">Number of Student</h3>
+                                            <h3 data-plugin="">{{ __('messages.number_of_student') }}</h3>
                                             <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
                                         </div>
                                         <div class="col-6">
@@ -267,7 +267,7 @@
                                     <a data-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
                                     <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                                 </div>
-                                <h4 class="header-title mb-0">Test Execution Summary</h4>
+                                <h4 class="header-title mb-0">{{ __('messages.test_execution_summary') }}</h4>
 
                                 <div id="cardCollpase1" class="collapse pt-3 show">
                                     <div class="text-center">
@@ -282,7 +282,7 @@
                     <div class="col-lg-6" id="radar-chart" style="display:none">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Test Score Analysis</h4>
+                                <h4 class="header-title">{{ __('messages.test_score_analysis') }}</h4>
                                 <div class="mt-4 chartjs-chart">
                                     <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
                                     <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->

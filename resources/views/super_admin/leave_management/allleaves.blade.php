@@ -81,7 +81,7 @@
                                             <tr>                                               
                                                 <th class="text-center">S.no</th>
                                                 <th class="text-center"> Name</th>
-                                                <th class="text-center">No.Of.Days</th>                                                                                             
+                                                <th class="text-center">{{ __('messages.no._of._days') }}</th>                                                                                             
                                                 <th class="text-center">Reason(s)</th>  
                                                 <th class="text-center">Admin Remarks</th>                                                                                                
                                                 <th class="text-center">Leave Status</th>                                                

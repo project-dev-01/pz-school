@@ -114,7 +114,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Homework List
+                        {{ __('messages.homework_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -143,7 +143,7 @@
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
                                                                 <th>Complete/Incomplete</th>
-                                                                <th>Total Student</th>
+                                                                <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 
                                                             </tr>

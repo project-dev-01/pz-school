@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Class Name</option>
                                         <option value="">A</option>
@@ -103,12 +103,12 @@
                             <table class="table w-100 nowrap table-bordered table-striped" id="">
                                 <thead>
                                     <tr>
-                                        <th class="align-top" rowspan="2">S.no.</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.s.no.') }}</th>
                                         <th class="align-top" rowspan="2">{{ __('messages.subject_name') }}</th>
                                         <th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>
                                         <th class="align-top" rowspan="2">{{ __('messages.absent') }}</th>
                                         <th class="align-top" rowspan="2">{{ __('messages.present') }}</th>
-                                        <th class="align-top" rowspan="2">Class Teacher Name</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.class_teacher_name') }}</th>
                                         <th class="text-center">A+</th>
                                         <th class="text-center">A</th>
                                         <th class="text-center">A-</th>

@@ -19,7 +19,7 @@
                 <ul class="nav nav-tabs" style="border-bottom: 2px solid blue;">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Classroom details
+                        {{ __('messages.classroom_details') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="heard">Class name<span class="text-danger">*</span></label>
+                                <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
                                     <option value="">class (A)</option>
                                     <option value="press">class (B)</option>
@@ -68,7 +68,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class=" fas fa-users font-24"></i>
-                                            <p class="text-muted mb-1">Average Attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.average_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -94,7 +94,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-user-graduate font-24"></i>
-                                            <p class="text-muted mb-1">Perfect attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.perfect_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -121,7 +121,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="  fas fa-user-tie  font-24"></i>
-                                            <p class="text-muted mb-1">Average Attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.average_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -148,7 +148,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-chalkboard-teacher font-24"></i>
-                                            <p class="text-muted mb-1">Below Attendance</p>
+                                            <p class="text-muted mb-1">{{ __('messages.below_attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -175,12 +175,12 @@
                             <ul class="nav nav-tabs nav-bordered">
                                 <li class="nav-item">
                                     <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                        Layout Mode
+                                    {{ __('messages.layout_mode') }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                        List Mode
+                                    {{ __('messages.list_mode') }}
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -290,7 +290,7 @@
                                                                             <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.excused') }}</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -321,7 +321,7 @@
                                                                             <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.excused') }}</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -352,7 +352,7 @@
                                                                             <a class="dropdown-item" href="#">{{ __('messages.present') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.late') }}</a>
                                                                             <a class="dropdown-item" href="#">{{ __('messages.absent') }}</a>
-                                                                            <a class="dropdown-item" href="#">Excused</a>
+                                                                            <a class="dropdown-item" href="#">{{ __('messages.excused') }}</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>

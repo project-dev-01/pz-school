@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Soap Notes</h4>
+                <h4 class="page-title">{{ __('messages.soap_notes') }}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Soap Notes<h4>
+                        <h4 class="nav-link">{{ __('messages.soap_notes') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -39,7 +39,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.category') }}</th>
-                                    <th>Sub Category </th>
+                                    <th>{{ __('messages.sub_category') }} </th>
                                     <th>{{ __('messages.notes') }} </th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

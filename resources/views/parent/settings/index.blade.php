@@ -48,7 +48,7 @@
                 <ul class="nav nav-pills navtab-bg nav-justified">
                     <li class="nav-item">
                         <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                            Settings
+                        {{ __('messages.settings') }}
                         </a>
                     </li>
                     <li class="nav-item">
@@ -60,7 +60,7 @@
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
                         <form method="POST" action="{{ route('parent.settings.updateProfileInfo') }}" id="updateProfileInfo">
-                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.personal_info') }}</h5>
                             <div class="row">
                                 <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
                                 <input type="hidden" name="parent_id" value="{{ Session::get('ref_user_id') }}">
@@ -114,7 +114,7 @@
                                 <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="old">Old Password :</label>
+                                        <label for="old">{{ __('messages.old_password') }} :</label>
                                         <input type="password" class="form-control" id="old" name="old" placeholder="Old Password">
                                         <span class="text-danger error-text old_error"></span>
                                     </div>
@@ -123,7 +123,7 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="password">New Password : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
+                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
                                         <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
                                         <span class="text-danger error-text password_error"></span>
                                     </div>
@@ -132,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="confirmed">Confirm New Password :</label>
+                                        <label for="confirmed">{{ __('messages.confirm_new_password') }} :</label>
                                         <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="Confirm New Password">
                                         <span class="text-danger error-text confirmed_error"></span>
                                     </div>

@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Student Attendance</h4>
+                <h4 class="page-title">{{ __('messages.student_attendance') }}</h4>
             </div>
         </div>
     </div>

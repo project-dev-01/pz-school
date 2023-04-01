@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Section</h4>
+                <h4 class="page-title">{{ __('messages.section') }}</h4>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Class Name</th>
+                                <th>{{ __('messages.class_Name') }}</th>
                                 <th>Section Name</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>

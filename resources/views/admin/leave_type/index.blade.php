@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Leave Types</h4>
+                <h4 class="page-title">{{ __('messages.leave_types') }}</h4>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Leave Type Name</th>
+                                    <th>{{ __('messages.leave_type_name') }}</th>
                                     <th>{{ __('messages.short_name') }}</th>
                                     <th>Leave Days</th>
                                     <th>{{ __('messages.gender') }}</th>

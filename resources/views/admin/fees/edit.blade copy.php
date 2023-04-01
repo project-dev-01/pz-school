@@ -11,7 +11,7 @@ use \App\Http\Controllers\AdminController;
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h2 class="page-title">Fees Details</h2>
+                <h2 class="page-title">{{ __('messages.fees_details') }}</h2>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@ use \App\Http\Controllers\AdminController;
                                 <label class="mb-4">{{ __('messages.student_name') }} : <span class="text-muted mr-2">{{$student['name']}}</span></label>
                             </div>
                             <div class="col-md-4">
-                                <label class="mb-4">Grade : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.grade') }} : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
                             </div>
                             <div class="col-md-4">
                                 <label class="mb-4">{{ __('messages.class') }} : <span class="text-muted mr-2">{{$student['section_name']}}</span></label>
@@ -82,13 +82,13 @@ use \App\Http\Controllers\AdminController;
                             <thead class="">
                                 <tr>
                                     <th>#</th>
-                                    <th>Fees Group</th>
-                                    <th>Fees Type</th>
+                                    <th>{{ __('messages.fees_group') }}</th>
+                                    <th>{{ __('messages.fees_type') }}</th>
                                     <th>Payment Mode</th>
                                     <th>Due Date</th>
                                     <th>Paid Date</th>
                                     <th>Status</th>
-                                    <th>Amount</th>
+                                    <th>{{ __('messages.amount') }}</th>
                                     <!-- <th>Discount</th> -->
                                     <!-- <th>Fine</th> -->
                                     <th>Paid</th>
@@ -225,7 +225,7 @@ use \App\Http\Controllers\AdminController;
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="amount">Amount<span class="text-danger">*</span></label>
+                                                        <label for="amount">{{ __('messages.amount') }}<span class="text-danger">*</span></label>
                                                         <input type="hidden" value="" id="yearFeesGroupDetailsID" name="fees[1][fees_group_details_id]">
                                                         <input type="text" id="yearAmt" name="fees[1][amount]" readonly class="fees_amount_1 initialEmpty form-control">
                                                     </div>
@@ -238,7 +238,7 @@ use \App\Http\Controllers\AdminController;
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="payment_status">Payment Status<span class="text-danger">*</span></label>
+                                                        <label for="payment_status">{{ __('messages.payment_status') }}<span class="text-danger">*</span></label>
                                                         <select class="form-control initialEmpty" id="yearPaySts" name="fees[1][payment_status]">
                                                             <option value="">Select Payment Status</option>
                                                             @forelse ($payment_status as $status)
@@ -250,7 +250,7 @@ use \App\Http\Controllers\AdminController;
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="memo">Memo</label>
+                                                        <label for="memo">{{ __('messages.memo') }}</label>
                                                         <textarea class="form-control initialEmpty" id="yearMemo" name="fees[1][memo]" placeholder="Enter Memo"></textarea>
                                                     </div>
                                                 </div>
@@ -283,12 +283,12 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>{{ __('messages.semester') }}
                                                                 </th>
-                                                                <th>Amount<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.amount') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Payment
                                                                     Status<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Memo</th>
+                                                                <th>{{ __('messages.memo') }}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -353,12 +353,12 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>{{ __('messages.month') }}
                                                                 </th>
-                                                                <th>Amount<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.amount') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>Payment
                                                                     Status<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Memo</th>
+                                                                <th>{{ __('messages.memo') }}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

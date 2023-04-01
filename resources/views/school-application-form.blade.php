@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>School Application Form</title>
+    <title>{{ __('messages.school_application_from') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -62,7 +62,7 @@
                                 </span>
                             </a>
                         </div>
-                        <h3 class="text-center" style="color:#596368">Student Application Form</h3>
+                        <h3 class="text-center" style="color:#596368">{{ __('messages.student_application_form') }}</h3>
                     </div>
                     <hr style="border:1px solid #6FC6CC">
                     <div class="card">
@@ -103,7 +103,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Age<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.age') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="sage" id="age" require="" placeholder="Eg:3">
                                             </div>
                                         </div>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Phone Number<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="phone" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            School Information
+                                        {{ __('messages.school_information') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -197,7 +197,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">School Year<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.school_year') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Choose School Year</option>
                                                     <option value="">2021-2022</option>
@@ -207,7 +207,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">School Last Attended<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.school_last_attended') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="pin" placeholder="School Last Attend" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -215,13 +215,13 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">School Address1<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.school_address1') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="sadd" placeholder="Address 1" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">School Address2<span class="text-danger">*</span><br></label>
+                                                <label for="heard">{{ __('messages.school_address2') }}<span class="text-danger">*</span><br></label>
                                                 <input type="text" class="form-control" id="sadd2" placeholder="Address 2" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -291,7 +291,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Phone Number<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="pnumber" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -336,7 +336,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Phone Number<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -358,7 +358,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            Emergency Contact Details
+                                        {{ __('messages.emergency_contact_details') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -366,7 +366,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Emergency Contact Person<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="ename" placeholder="John Leo" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
@@ -386,7 +386,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Phone Number<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>

@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Fees group</h4>
+                <h4 class="page-title">{{ __('messages.fees_group') }}</h4>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                         <input type="hidden" name="id" value="{{$fees_group['id']}}">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Fees Group Name <span class="text-danger">*</span></label>
+                                <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="Enter Fees Group Name">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
@@ -62,7 +62,7 @@
                                     <p>
                                     <div>
                                         <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#English" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            <i class="fas fa-check-square"></i> Fees Details
+                                            <i class="fas fa-check-square"></i> {{ __('messages.fees_details') }}
                                         </a>
                                     </div>
                                     </p>
@@ -99,7 +99,7 @@
                                                                                     <tr>
                                                                                         <th> #</th>
                                                                                         <th>Due Date</th>
-                                                                                        <th>Amount</th>
+                                                                                        <th>{{ __('messages.amount') }}</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
@@ -130,7 +130,7 @@
                                                                                         <tr>
                                                                                             <th> #</th>
                                                                                             <th>Due Date</th>
-                                                                                            <th>Amount</th>
+                                                                                            <th>{{ __('messages.amount') }}</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -161,7 +161,7 @@
                                                                                         <tr>
                                                                                             <th> #</th>
                                                                                             <th>Due Date</th>
-                                                                                            <th>Amount</th>
+                                                                                            <th>{{ __('messages.amount') }}</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>

@@ -64,7 +64,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Report Card List
+                        {{ __('messages.report_card_list') }}
                             <h4>
                     </li>
                 </ul><br>

@@ -34,9 +34,9 @@
                                     <thead>
                                         <tr>
                                             <th>Leave type</th>
-                                            <th>Total Leave</th>
-                                            <th>Used Leave</th>
-                                            <th>Remaining Leave</th>
+                                            <th>{{ __('messages.total_leave') }}</th>
+                                            <th>{{ __('messages.used_leave') }}</th>
+                                            <th>{{ __('messages.remaining_leave') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,7 +153,7 @@
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                                    <label class="custom-file-label" for="document">Choose file</label>
+                                                    <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                                                 </div>
                                             </div>
                                             <span id="file_name"></span>
@@ -195,8 +195,8 @@
                                                         <th>#</th>
                                                         <th>{{ __('messages.name') }}</th>
                                                         <th>Leave Type</th>
-                                                        <th>Leave From</th>
-                                                        <th>To From</th>
+                                                        <th>{{ __('messages.leave_from') }}</th>
+                                                        <th>{{ __('messages.to_from') }}</th>
                                                         <th>{{ __('messages.reason') }}</th>
                                                         <th>Document</th>
                                                         <th>Status</th>

@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Section<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.section') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="All">All</option>
                                         <option value="1">1</option>

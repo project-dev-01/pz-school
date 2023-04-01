@@ -12,7 +12,7 @@
                 </div>
                 <div class="ml-left tt-col-right">
                     <div class="tt-col-item">
-                        <h2 class="tt-value"><a href="{{route('teacher.forum.page-single-user')}}">Threads</a></h2>
+                        <h2 class="tt-value"><a href="{{route('teacher.forum.page-single-user')}}">{{ __('messages.threads') }}</a></h2>
                     </div>
                     <div class="tt-col-item">
                         <a href="#" class="tt-btn-icon">
@@ -63,12 +63,12 @@
         </div>
         <div class="tt-topic-list">
             <div class="tt-list-header">
-                <div class="tt-col-topic">Topic</div>
+                <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                 <div class="tt-col-category">{{ __('messages.category') }}</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
-                <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.likes') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.replies') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.views') }}</div>
+                <div class="tt-col-value">{{ __('messages.activity') }}</div>
             </div>
             @if(!empty($forum_category))
             @foreach($forum_category as $value)

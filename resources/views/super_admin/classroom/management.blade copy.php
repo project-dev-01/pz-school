@@ -21,7 +21,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4  class="nav-link">
-                            Classroom details
+                        {{ __('messages.classroom_details') }}
                         <h4>
                     </li>
                 </ul><br>								

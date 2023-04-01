@@ -11,7 +11,7 @@
                 </svg>
             </div>
         </div>
-        <div class="mm-backbtn">Back</div>
+        <div class="mm-backbtn">{{ __('messages.back') }}</div>
     </div>
 </nav>
 <header id="tt-header">

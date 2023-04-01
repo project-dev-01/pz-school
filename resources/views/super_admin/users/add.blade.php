@@ -89,7 +89,7 @@
                                 <textarea class="form-control" id="address" name="address" rows="5" placeholder="Address"></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="age">Age</label>
+                                <label for="age">{{ __('messages.age') }}</label>
                                 <input class="form-control" id="age" type="number" name="age" placeholder="Age">
                             </div>
                             <button type="submit" class="btn btn-primary waves-effect waves-light">{{ __('messages.submit') }}</button>

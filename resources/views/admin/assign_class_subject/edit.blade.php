@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" id="assign_class_sub_id" name="assign_class_sub_id">
                     <div class="form-group">
-                        <label for="editchangeClassName">Grade<span class="text-danger">*</span></label>
+                        <label for="editchangeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="editchangeClassName" name="class_name">
                             <option value="">Choose Grade</option>
                             @forelse($classDetails as $class)

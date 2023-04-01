@@ -380,7 +380,7 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv"> Homework List
+                                        <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -490,7 +490,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Section </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.section') }}</div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="ttSectionID" name="section_id">
@@ -647,7 +647,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv">Test Score Analysis
+                    <h4 class="navv">{{ __('messages.test_score_analysis') }}
                         <h4>
                 </li>
             </ul><br>

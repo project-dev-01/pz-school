@@ -12,7 +12,7 @@
                     <li class="breadcrumb-item active">Tabs & Accordions</li>
                 </ol>
             </div>
-            <h4 class="page-title">SOAP</h4>
+            <h4 class="page-title">{{ __('messages.soap') }}</h4>
         </div>
     </div>
 </div>
@@ -26,37 +26,37 @@
             <ul class="nav nav-pills navtab-bg nav-justified">
                 <li class="nav-item">
                     <a href="#d1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                        Dashboard
+                    {{ __('messages.dashboard') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#pi1" data-toggle="tab" aria-expanded="true" class="nav-link ">
-                        Personal Info
+                    {{ __('messages.personal_info') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#subjective" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        S-Subjective
+                    {{ __('messages.s_subjective') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#objective" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        O-Objective
+                    {{ __('messages.o_objective') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#assessment" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        A-Assessment
+                    {{ __('messages.a_assessment') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#plan" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        P-Plan
+                    {{ __('messages.p_plan') }}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#l1" data-toggle="tab" aria-expanded="true" class="nav-link">
-                        logs
+                    {{ __('messages.logs') }}
                     </a>
                 </li>
             </ul>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
 
-                                <h4 class="header-title mb-3">Old Records</h4>
+                                <h4 class="header-title mb-3">{{ __('messages.old_records') }}</h4>
                                 <div class="table-responsive">
                                     <table class="table table-borderless table-hover table-nowrap table-centered m-0">
 
@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
 
-                                <h4 class="header-title mb-3">New Records</h4>
+                                <h4 class="header-title mb-3">{{ __('messages.new_records') }}</h4>
                                 <div class="table-responsive">
                                     <table class="table table-borderless table-hover table-nowrap table-centered m-0">
 
@@ -922,7 +922,7 @@
                                     <table class="table table-bordered table-centered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th>{{ __('messages.no') }}</th>
                                                 <th>Family Details</th>
                                             </tr>
                                         </thead>

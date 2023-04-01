@@ -11,7 +11,7 @@
                 </svg>
             </div>
         </div>
-        <div class="mm-backbtn">Back</div>
+        <div class="mm-backbtn">{{ __('messages.back') }}</div>
     </div>
 </nav>
 <header id="tt-header">
@@ -294,7 +294,7 @@
             </div>
             <div class="col-auto ml-auto">
                 <div class="tt-account-btn">
-                    <a href="{{ route('super_admin.dashboard') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('super_admin.dashboard') }}" class="btn btn-secondary">{{ __('messages.back') }}</a>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
             <ul class="nav nav-tabs" >
                 <li class="nav-item">
                     <h4 class="nav-link">
-                        Report Card List
+                    {{ __('messages.report_card_list') }}
                         <h4>
                 </li>
             </ul><br>
@@ -30,9 +30,9 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>{{ __('messages.subject') }}</th>
-                                                                    <th>Score</th>
+                                                                    <th>{{ __('messages.score') }}</th>
                                                                     <th>{{ __('messages.grade') }}</th>
-                                                                    <th>Ranking</th>
+                                                                    <th>{{ __('messages.ranking') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -131,9 +131,9 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>{{ __('messages.subject') }}</th>
-                                                                    <th>Score</th>
+                                                                    <th>{{ __('messages.score') }}</th>
                                                                     <th>{{ __('messages.grade') }}</th>
-                                                                    <th>Ranking</th>
+                                                                    <th>{{ __('messages.ranking') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>

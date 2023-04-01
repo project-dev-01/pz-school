@@ -380,7 +380,7 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv"> Homework List
+                                        <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -495,7 +495,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Grade </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.grade') }}</div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="setCurDate" name="date">
@@ -710,7 +710,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">Choose file</label>
+                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                                         </div>
                                     </div>
                                     <span id="file_name"></span>
@@ -749,8 +749,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>Leave From</th>
-                                    <th>To From</th>
+                                    <th>{{ __('messages.leave_from') }}</th>
+                                    <th>{{ __('messages.to_from') }}</th>
                                     <th>Teacher remarks</th>
                                     <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>

@@ -220,7 +220,7 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <p class="mb-1 text-truncate">Excused</p>
+                                    <p class="mb-1 text-truncate">{{ __('messages.excused') }}</p>
                                 </div>
                             </div>
                             <div class="col-6">

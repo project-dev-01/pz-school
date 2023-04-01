@@ -5,7 +5,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Log List
+                        {{ __('messages.log_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -17,11 +17,11 @@
                                     <table class="table table-bordered table-nowrap table-hover table-centered m-0" id="log-table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th>{{ __('messages.no') }}</th>
                                                 <th>{{ __('messages.title') }}</th>
-                                                <th>Soap Type</th>
-                                                <th>Action By</th>
-                                                <th>Action Type</th>
+                                                <th>{{ __('messages.soap_type') }}</th>
+                                                <th>{{ __('messages.action_by') }}</th>
+                                                <th>{{ __('messages.action_type') }}</th>
                                                 <th>{{ __('messages.date') }}</th>
                                             </tr>
                                         </thead>

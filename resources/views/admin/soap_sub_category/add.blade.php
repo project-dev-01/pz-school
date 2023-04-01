@@ -3,14 +3,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddSoapSubCategoryModalLabel">Add Sub Category</h4>
+                <h4 class="modal-title" id="myaddSoapSubCategoryModalLabel">{{ __('messages.add_sub_category') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <form id="soapSubCategoryForm" method="post" action="{{ route('admin.soap_sub_category.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="soap_type_id">Soap Type<span class="text-danger">*</span></label>
+                        <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="soap_type_id" class="form-control" name="soap_type_id">
                             <option value="">Select Soap Type</option>
                             <option value="1">Subjective</option>
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Sub Category Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.sub_category_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Sub Category Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
@@ -36,7 +36,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" id="photo" class="custom-file-input" name="photo" accept="image/png, image/gif, image/jpeg" >
-                                <label class="custom-file-label" for="document">Choose file</label>
+                                <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                             </div>
                         </div>
                         <span id="photo_name"></span>

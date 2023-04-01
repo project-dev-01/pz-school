@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Payment Status</h4>
+                <h4 class="page-title">{{ __('messages.payment_status') }}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Payment Status<h4>
+                        <h4 class="nav-link">{{ __('messages.payment_status') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">

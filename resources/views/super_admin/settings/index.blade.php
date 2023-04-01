@@ -66,7 +66,7 @@
                 <ul class="nav nav-pills navtab-bg nav-justified">
                     <li class="nav-item">
                         <a href="#settings" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                            Settings
+                        {{ __('messages.settings') }}
                         </a>
                     </li>
                     <li class="nav-item">
@@ -78,7 +78,7 @@
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
                         <form method="POST" action="{{ route('settings.updateProfileInfo') }}" id="updateProfileInfo">
-                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.personal_info') }}</h5>
                             <div class="row">
                             <input type="hidden" name="id" value="{{ $user_details['id'] }}">
                                 <div class="col-md-6">
@@ -131,7 +131,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="newpassword">New Password</label>
+                                        <label for="newpassword">{{ __('messages.new_password') }}</label>
                                         <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter new password">
                                         <span class="text-danger error-text newpassword_error"></span>
                                     </div>
@@ -140,7 +140,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="cnewpassword">Confirm New Password</label>
+                                        <label for="cnewpassword">{{ __('messages.confirm_new_password') }}</label>
                                         <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="ReEnter new password">
                                         <span class="text-danger error-text cnewpassword_error"></span>
                                     </div>

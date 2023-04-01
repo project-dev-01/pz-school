@@ -96,7 +96,7 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" id="homework_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">Choose file</label>
+                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                                         </div>
                                     </div>
                                     <span id="file_name"></span>
@@ -135,8 +135,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>Leave From</th>
-                                    <th>To From</th>
+                                    <th>{{ __('messages.leave_from') }}</th>
+                                    <th>{{ __('messages.to_from') }}</th>
                                     <th>Teacher remarks</th>
                                     <th>{{ __('messages.reason') }}</th>
                                     <th>Document</th>

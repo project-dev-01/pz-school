@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="said">
                     <div class="form-group">
-                        <label for="class_name">Class Name</label>
+                        <label for="class_name">{{ __('messages.class_Name') }}</label>
                         <select class="form-control" id="class_name" name="class_name">
                             <!-- <option value="">Choose Class</option> -->
                             @foreach($classDetails as $class)

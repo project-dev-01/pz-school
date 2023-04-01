@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="soap_type_id">Soap Type<span class="text-danger">*</span></label>
+                        <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="edit_soap_type_id" class="form-control" name="soap_type_id">
                             <option value="">Select Soap Type</option>
                             <option value="1">Subjective</option>
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Sub Category Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.sub_category_name') }} <span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Sub Category Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>
@@ -38,7 +38,7 @@
                             <div class="custom-file">
                                 <input type="file" id="edit_photo" class="custom-file-input" name="photo" accept="image/png, image/gif, image/jpeg" >
                                 <input type="hidden"  name="old_photo" >
-                                <label class="custom-file-label" for="document">Choose file</label>
+                                <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                             </div>
                         </div>
                         <a href="" target="_blank"><span id="edit_photo_name"></span></a>

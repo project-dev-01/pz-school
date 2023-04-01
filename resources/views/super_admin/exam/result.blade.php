@@ -94,7 +94,7 @@
                                             <td>William</td>
                                         </tr>
                                         <tr>
-                                            <td>DOB</td>
+                                            <td>{{ __('messages.dob') }}</td>
                                             <td>01-01-2002</td>
                                         </tr>
                                         <tr>
@@ -102,7 +102,7 @@
                                             <td>XI</td>
                                         </tr>
                                         <tr>
-                                            <td>Class Name</td>
+                                            <td>{{ __('messages.class_Name') }}</td>
                                             <td>A</td>
                                         </tr>
                                     </table>

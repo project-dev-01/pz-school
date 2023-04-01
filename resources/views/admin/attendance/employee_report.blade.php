@@ -220,7 +220,7 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <p class="mb-1 text-truncate">Excused</p>
+                                    <p class="mb-1 text-truncate">{{ __('messages.excused') }}</p>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -265,7 +265,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Excused</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i>{{ __('messages.excused') }}</button></th>
                                                 </tr>
                                             </table>
                                         </div>

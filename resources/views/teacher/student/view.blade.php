@@ -589,7 +589,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">Category<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                                 <select id="categy" name="categy" class="form-control">
                                                     <option value="">Choose..</option>
                                                     <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>

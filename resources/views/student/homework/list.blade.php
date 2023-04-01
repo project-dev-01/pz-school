@@ -41,12 +41,12 @@
                     <div class="col-6">
                         <div class="text-right">
                             <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
-                            <p class="text-muted mb-1 text-truncate">On Time Submission</p>
+                            <p class="text-muted mb-1 text-truncate">{{ __('messages.on_time_submission') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
                     <div class="progress progress-sm m-0">
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
                             <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
@@ -67,12 +67,12 @@
                     <div class="col-6">
                         <div class="text-right">
                             <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
-                            <p class="text-muted mb-1 text-truncate">Late Submission </p>
+                            <p class="text-muted mb-1 text-truncate">{{ __('messages.late_submission') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">Target <span class="float-right">{{$count['late_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['late_percentage']}}%</span></h6>
                     <div class="progress progress-sm m-0">
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
                             <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
@@ -88,7 +88,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            HomeWork List
+                        {{ __('messages.homework_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -101,11 +101,11 @@
                                     <div class="row">
                                         <div class="form-check ">
                                             <input type="radio" class="form-check-input" name="status" value="1">
-                                            <label class="form-check-label font-weight-bold" for="materialInline1">Completed</label>
+                                            <label class="form-check-label font-weight-bold" for="materialInline1">{{ __('messages.completed') }}</label>
                                         </div> &nbsp;&nbsp;
                                         <div class="form-check col-md-offset-4">
                                             <input type="radio" class="form-check-input" name="status" value="0">
-                                            <label class="form-check-label font-weight-bold" for="materialInline2">Incompleted</label>
+                                            <label class="form-check-label font-weight-bold" for="materialInline2">{{ __('messages.incompleted') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv" id="title">
-                            HomeWork List (All Subjects)
+                        {{ __('messages.homework_list') }} (All Subjects)
                             <h4>
                     </li>
                 </ul><br>

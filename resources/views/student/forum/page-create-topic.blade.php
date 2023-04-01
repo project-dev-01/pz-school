@@ -96,7 +96,7 @@ border-bottom: 1px solid #E9D528;
     <div class="container card" style="background:white;">
         <div class="tt-wrapper-inner" id="createpostForumreset">
             <h1 class="tt-title-border" style="border-bottom: 1px solid #E9D528;">
-               <label style="margin-top: 10px;">Create New Topic</label>
+               <label style="margin-top: 10px;">{{ __('messages.create_new_topic') }}</label>
             </h1>
             <form class="form-default form-create-topic" id="createpostForum" method="post" action="{{ route('student.forum.create-topic') }}" autocomplete="off">
                 @csrf
@@ -309,7 +309,7 @@ border-bottom: 1px solid #E9D528;
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Create Post</button>
+                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">{{ __('messages.create_post') }}</button>
                         </div>
                     </div>
                 </div>
@@ -343,12 +343,12 @@ border-bottom: 1px solid #E9D528;
         <div class="table-responsive">
             <table class="table w-100 nowrap">
             <div class="tt-list-header tt-border-bottom">
-                <div class="tt-col-topic">Topic</div>
+                <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                 <div class="tt-col-category">{{ __('messages.category') }}</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
-                <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.likes') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.replies') }}</div>
+                <div class="tt-col-value hide-mobile">{{ __('messages.views') }}</div>
+                <div class="tt-col-value">{{ __('messages.activity') }}</div>
                 <div class="tt-col-value">{{ __('messages.action') }}</div>
             </div>
 

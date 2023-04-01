@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Staff Leave Assign</h4>
+                <h4 class="page-title">{{ __('messages.staff_leave_assign') }}</h4>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Staff Leave Assign
+                        <h4 class="navv"> {{ __('messages.staff_leave_assign') }}
                             <h4>
                     </li>
                 </ul><br>

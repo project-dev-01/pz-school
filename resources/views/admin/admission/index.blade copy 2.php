@@ -80,7 +80,7 @@ extends('layouts.admin-layout')
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="section_id">Class Name<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">Select Class Name</option>
                                     </select>
@@ -271,7 +271,7 @@ extends('layouts.admin-layout')
                                     <label for="document" class="col-form-label">{{ __('messages.photo') }}</label>
                                     <div class="col-12">
                                         <input type="file" class="custom-file-input" name="photo">
-                                        <label class="custom-file-label" for="document">Choose file</label>
+                                        <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
                                         <span id="file_name"></span>
                                     </div>
                                 </div>

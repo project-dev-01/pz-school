@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-md-3">
                     <div class="form-group">
-                        <label for="heard">Section<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.section') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
                             <option value="">Choose..</option>
                             <option value="press">Press</option>

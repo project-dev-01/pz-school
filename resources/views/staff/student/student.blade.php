@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Class Name<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Class Name</option>
                                     <option value="press">A</option>
@@ -108,7 +108,7 @@
                                                 <th>Roll</th>
                                                 <th>{{ __('messages.register_no') }}</th>
                                                 <th>{{ __('messages.class') }}</th>
-                                                <th>Section</th>
+                                                <th>{{ __('messages.section') }}</th>
                                                 <th>{{ __('messages.guardian_name') }}</th>
 
                                             </tr>

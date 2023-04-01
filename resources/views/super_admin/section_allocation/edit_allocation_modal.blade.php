@@ -21,7 +21,7 @@
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="class_name">Class Name<span class="text-danger">*</span></label>
+                        <label for="class_name">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="class_name" name="class_name">
                             <option value="">Choose Class</option>
                         </select>

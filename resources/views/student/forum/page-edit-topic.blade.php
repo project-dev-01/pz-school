@@ -78,7 +78,7 @@ border-bottom: 1px solid #E9D528;
     <div class="container card" style="background:white;">
         <div class="tt-wrapper-inner" id="updatepostForumreset" style="border-bottom: 1px solid #E9D528;">
             <h1 class="tt-title-border">
-                <label style="margin-top: 10px;">Create New Topic</label>
+                <label style="margin-top: 10px;">{{ __('messages.create_new_topic') }}</label>
             </h1>
             <form class="form-default form-update-topic" id="updatepostForum" method="post" action="{{ route('student.forum.update-topic') }}" autocomplete="off">
                 @csrf

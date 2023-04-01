@@ -41,7 +41,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Timetable</h4>
+                <h4 class="page-title">{{ __('messages.timetable') }}</h4>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                                     <tbody id="timetable">
                                         @if($timetable>0)
                                         
-                                        <tr><td class="center" style="color:#ed1833;">Day/Period</td>
+                                        <tr><td class="center" style="color:#ed1833;">{{ __('messages.day') }}/{{ __('messages.period') }}</td>
                                         @for ($i = 1; $i <= $max; $i++)
                                             <td class="centre">{{ $i }}</td>
                                         @endfor

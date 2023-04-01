@@ -126,9 +126,9 @@
                         <thead>
                             <tr>
                                 <th>Leave type</th>
-                                <th>Total Leave</th>
-                                <th>Used Leave</th>
-                                <th>Remaining Leave</th>
+                                <th>{{ __('messages.total_leave') }}</th>
+                                <th>{{ __('messages.used_leave') }}</th>
+                                <th>{{ __('messages.remaining_leave') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -151,7 +151,7 @@
                                 <td id="leaveDates"></td>
                             </tr>
                             <tr>
-                                <td>No.Of.Days</td>
+                                <td>{{ __('messages.no._of._days') }}</td>
                                 <td>:</td>
                                 <td id="noOfDays"></td>
                             </tr>

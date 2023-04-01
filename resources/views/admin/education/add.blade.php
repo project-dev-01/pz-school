@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddEducationModalLabel">Add Education</h4>
+                <h4 class="modal-title" id="myaddEducationModalLabel">{{ __('messages.add_education') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,7 +11,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="name">Education Name<span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.education_name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter Education Name">
                         <span class="text-danger error-text name_error"></span>
                     </div>

@@ -16,7 +16,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="soap_type_id">Soap Type<span class="text-danger">*</span></label>
+                        <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="soap_type_id" class="form-control" name="soap_type_id">
                             <option value="">Select Soap Type</option>
                             <option value="1">Subjective</option>

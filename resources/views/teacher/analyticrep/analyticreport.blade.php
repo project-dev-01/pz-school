@@ -129,7 +129,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            HomeWork Report
+                        {{ __('messages.homeWork_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -212,7 +212,7 @@
     <div class="card" id="subject_average_card" style="display:none">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <h4 class="navv">Subject Average
+                <h4 class="navv">{{ __('messages.subject_average') }}
                     <h4>
             </li>
         </ul><br>
@@ -226,7 +226,7 @@
                             <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
                             <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                         </div>
-                        <h4 class="header-title mb-0">Subject Average</h4>
+                        <h4 class="header-title mb-0">{{ __('messages.subject_average') }}</h4>
 
                         <div id="cardCollpase4" class="collapse pt-3 show" dir="ltr">
                             <div id="subject-avg-chart-student" class="apex-charts" data-colors="#f672a7"></div>

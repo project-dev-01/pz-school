@@ -27,7 +27,7 @@
                     <div class="col-12">
                         <div class="col-sm-12 col-md-12">
                             <div class="dt-buttons" style="float:right;"> 
-                                <a href="{{asset('uploads/Sample Employee Master.csv')}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>Download Sample Csv</span></button></a>
+                                <a href="{{asset('uploads/Sample Employee Master.csv')}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         {{ csrf_field() }}
                         <div class="form-group" style="text-align: center;">
                            <div class="card-body" style="margin-left: 17px;">
-                               <label style="margin-right:10px;">Select File for Upload</label>
+                               <label style="margin-right:10px;">{{ __('messages.Select_file_for_upload') }}</label>
                                         <input type="file" name="file" />
                             </div>  
                             <input type="submit" name="upload" class="btn btn-success" value="Upload">   
