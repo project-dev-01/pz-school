@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff_id">Staff Name</label>
+                                    <label for="staff_id">{{ __('messages.staff_name') }}</label>
                                     <input type="hidden" name="staff_id" value="{{$staff['staff_id']}}">
                                     <input type="text"  value="{{$staff['staff_name']}}" class="form-control" >
                                 </div>
@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Leave Type<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -74,7 +74,7 @@
                             @endforeach
                         <div class="form-group">
                             <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">{{ __('messages.back') }}</a>
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                         </div>
 
                     </form>

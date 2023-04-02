@@ -91,8 +91,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Staff Name </th>
-                                    <th>Leave Type </th>
+                                    <th>{{ __('messages.staff_name') }} </th>
+                                    <th>{{ __('messages.leave_type') }} </th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

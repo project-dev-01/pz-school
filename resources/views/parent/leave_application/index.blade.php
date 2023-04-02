@@ -12,7 +12,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div> -->
-                <h4 class="page-title">Leave Application</h4>
+                <h4 class="page-title">{{ __('messages.leave_application') }}</h4>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Leave Application
+                        <h4 class="navv"> {{ __('messages.leave_application') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">Leave From<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">To<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Reason(s)<span class="text-danger">*</span></label>
+                                    <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
                                         <option value="">Select Student</option>
                                         @forelse ($get_leave_reasons_dashboard as $res)
@@ -106,7 +106,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Apply
+                            {{ __('messages.apply') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
@@ -124,7 +124,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Leave status
+                        <h4 class="navv">{{ __('messages.leave_status') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -137,11 +137,11 @@
                                     <th>{{ __('messages.student_name') }}</th>
                                     <th>{{ __('messages.leave_from') }}</th>
                                     <th>{{ __('messages.to_from') }}</th>
-                                    <th>Teacher remarks</th>
+                                    <th>{{ __('messages.teacher_remarks') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <th>Document</th>
-                                    <th>Status</th>
-                                    <th>Apply Date</th>
+                                    <th>{{ __('messages.document') }}</th>
+                                    <th>{{ __('messages.status') }}</th>
+                                    <th>{{ __('messages.apply_date') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

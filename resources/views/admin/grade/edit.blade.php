@@ -27,10 +27,10 @@
                         <input type="text" id="max_mark" name="max_mark" class="form-control" placeholder="Enter Maximum Percentage">
                     </div>
                     <div class="form-group">
-                        <label for="status">Status<span class="text-danger">*</span></label>
+                        <label for="status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="status">
-                            <option value="Pass">Pass</option>
-                            <option value="Fail">Fail</option>
+                            <option value="Pass">{{ __('messages.pass') }}</option>
+                            <option value="Fail">{{ __('messages.fail') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                     </div>
 
                 </form>

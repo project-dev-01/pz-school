@@ -121,7 +121,7 @@
                                                 <th>#</th>
                                                 <th>{{ __('messages.name') }}</th>
                                                 <th>{{ __('messages.staff_id') }}</th>
-                                                <th>Status</th>
+                                                <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>
 
                                             </tr>

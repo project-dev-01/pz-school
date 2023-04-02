@@ -9,6 +9,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <!-- item-->
+                    
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-right">
@@ -43,6 +44,16 @@
 
                     </div>
             </li>
+            <li class="dropdown d-none d-lg-inline-block allChild">
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
+                            margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                        <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                    </select>
+                </div>
+            </li>
             <!-- <li class="dropdown d-none d-lg-inline-block">
                 <div class="form-group ">
                     <label class="control-label"></label>
@@ -59,6 +70,7 @@
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
             </li>
+            
             @endif
             @if(Session::get('role_id') == '5')
             <li class="dropdown d-none d-lg-inline-block allChild">
@@ -96,39 +108,39 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome ! {{ Session::get('name') }}</h6>
+                        <h6 class="text-overflow m-0">{{ __('messages.welcome') }} ! {{ Session::get('name') }}</h6>
                     </div>
 
                     <!-- item-->
                     @if(Session::get('role_id') == '1')
                     <a href="{{ route('super_admin.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '3')
                     <a href="{{ route('staff.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '4')
                     <a href="{{ route('teacher.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '5')
                     <a href="{{ route('parent.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '6')
                     <a href="{{ route('student.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @else
                     <a href="{{ route('admin.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
                     @endif
 
@@ -143,7 +155,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
                         <i class="fe-log-out"></i>
-                        <span>Logout</span>
+                        <span>{{ __('messages.logout') }}</span>
                     </a>
                     @if(Session::get('role_id') == '1')
                     <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">

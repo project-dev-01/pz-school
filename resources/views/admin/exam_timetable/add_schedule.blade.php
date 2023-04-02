@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exam_id">Exam<span class="text-danger">*</span></label>
+                                    <label for="exam_id">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="exam_id" class="form-control" name="exam_id">
                                         <option value="">Select Exam</option>
                                         @foreach($exam as $exa)

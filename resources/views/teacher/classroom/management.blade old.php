@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="changeClassName">Standard<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">Select Class</option>
                                         @forelse ($teacher_class as $class)

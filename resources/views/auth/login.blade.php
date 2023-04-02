@@ -44,14 +44,14 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
-                         <div class="form-group" style="text-align:right;">
-                    <label class="control-label"></label>
-                    <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
-			  margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
-                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                        <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
-                    </select>
-                </div>
+                        <div class="form-group" style="text-align:right;">
+                            <label class="control-label"></label>
+                            <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
+                                    margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                            </select>
+                        </div>
 
                         <!-- Logo -->
                         <div class="auth-brand text-center text-lg-left">
@@ -70,7 +70,7 @@
                         <!-- form -->
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
-                                <h1 class="welcomeback">Welcome back,</h1>
+                                <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                                 <input type="hidden" name="branch_id" value="1">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
@@ -106,12 +106,12 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <label class="sign custom-control-label" for="checkbox-signin">Remember me</label>
-                                        <a href="{{route('forgot_password')}}" class="forget float-right"><small>Forgot your password?</small></a>
+                                        <label class="sign custom-control-label" for="checkbox-signin">{{ __('messages.remember_me') }}</label>
+                                        <a href="{{route('forgot_password')}}" class="forget float-right"><small>{{ __('messages.forgot_your_password') }}?</small></a>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-block signin" type="submit">Sign In </button>
+                                    <button class="btn btn-block signin" type="submit">{{ __('messages.sign_in') }} </button>
                                 </div>
 
                             </form>

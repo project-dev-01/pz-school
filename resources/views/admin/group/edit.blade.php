@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Group</h4>
+                <h4 class="page-title">{{ __('messages.group') }}</h4>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Group Name<span class="text-danger">*</span></label>
+                                    <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name" value="{{$group['name']}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff">Add Staff</label>
+                                    <label for="staff">{{ __('messages.add_staff') }}</label>
                                     <input type="text" id="staff" name="staff" class="form-control" placeholder="Enter Staff Name">
                                     <div id="staff_list"></div>
                                     <span class="text-danger error-text staff_error"></span>
@@ -62,8 +62,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Staff Name</th>
-                                                <th>Staff Department</th>
+                                                <th>{{ __('messages.staff_name') }}</th>
+                                                <th>{{ __('messages.staff_department') }}</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
@@ -92,7 +92,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="student">Add Student</label>
+                                    <label for="student">{{ __('messages.add_student') }}</label>
                                     <input type="text" id="student" name="student" class="form-control" placeholder="Enter Student Name">
                                     <div id="student_list"></div>
                                     <span class="text-danger error-text student_error"></span>
@@ -138,7 +138,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="parent">Add Parent</label>
+                                    <label for="parent">{{ __('messages.add_parent') }}</label>
                                     <input type="text" id="parents" name="parent" class="form-control" placeholder="Enter Parent Name">
                                     <div id="parent_list"></div>
                                     <span class="text-danger error-text parent_error"></span>
@@ -151,7 +151,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Parent Name</th>
+                                                <th>{{ __('messages.parent_name') }}</th>
                                                 <th>{{ __('messages.email') }}</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>
@@ -181,7 +181,7 @@
                         
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Update
+                            {{ __('messages.update') }}
                             </button>
                         </div>
                     </form>

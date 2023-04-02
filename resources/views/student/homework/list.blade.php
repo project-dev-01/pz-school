@@ -49,7 +49,7 @@
                     <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
                     <div class="progress progress-sm m-0">
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
-                            <span class="sr-only">{{$count['ontime_percentage']}}% Complete</span>
+                            <span class="sr-only">{{$count['ontime_percentage']}}% {{ __('messages.complete') }}</span>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['late_percentage']}}%</span></h6>
                     <div class="progress progress-sm m-0">
                         <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
-                            <span class="sr-only">{{$count['late_percentage']}}% Complete</span>
+                            <span class="sr-only">{{$count['late_percentage']}}% {{ __('messages.complete') }}</span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                         <div class="row ml-1">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="row"><label for="status">Status<span class="text-danger">*</span></label> </div>
+                                    <div class="row"><label for="status">{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
                                     <div class="row">
                                         <div class="form-check ">
                                             <input type="radio" class="form-check-input" name="status" value="1">
@@ -186,7 +186,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Status</span>@if($work['status'] == 1) Completed @else Incomplete @endif</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.status') }}</span>@if($work['status'] == 1) Completed @else Incomplete @endif</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,7 +223,7 @@
                                                 @if(file_exists( public_path().'/teacher/homework/'.$work['document'] ))
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Document</span><a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a></p>
                                                     </div>
@@ -231,7 +231,7 @@
                                                 @else
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Document</span></p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span></p>
                                                     </div>
                                                 </div>
                                                 @endif

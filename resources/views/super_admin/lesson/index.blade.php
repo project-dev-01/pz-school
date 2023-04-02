@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
                 <h4 class="page-title">Assign Time Table</h4>
@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Standard</th>
+                                <th>{{ __('messages.standard') }}</th>
                                 <th>{{ __('messages.class') }}</th>
                                 <th>{{ __('messages.teacher') }}</th>
                                 <th>Week Days</th>

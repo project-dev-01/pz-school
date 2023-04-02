@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Standard</option>
                                         <option>I</option>
@@ -237,7 +237,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="message">Present Address</label>
+                                <label for="message">{{ __('messages.present_address') }}</label>
                                 <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                         </textarea>
                             </div>

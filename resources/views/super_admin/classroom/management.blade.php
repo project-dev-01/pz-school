@@ -269,7 +269,7 @@
                                                                 <th data-field="name">Attentance</th>
                                                                 <th data-field="date">{{ __('messages.remarks') }}</th>
                                                                 <th data-field="amount">Rating</th>
-                                                                <th data-field="user-status">Short Test
+                                                                <th data-field="user-status">{{ __('messages.short_test') }}
                                                                 </th>
                                                             </tr>
                                                         </thead>

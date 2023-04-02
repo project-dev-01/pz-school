@@ -98,7 +98,7 @@
                                             <td>01-01-2002</td>
                                         </tr>
                                         <tr>
-                                            <td>Standard</td>
+                                            <td>{{ __('messages.standard') }}</td>
                                             <td>XI</td>
                                         </tr>
                                         <tr>

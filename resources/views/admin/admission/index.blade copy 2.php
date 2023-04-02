@@ -252,7 +252,7 @@ extends('layouts.admin-layout')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="txtarea_paddress">Present Address</label>
+                                    <label for="txtarea_paddress">{{ __('messages.present_address') }}</label>
                                     <textarea id="txtarea_paddress" class="form-control" name="txtarea_paddress">
                                         </textarea>
                                 </div>

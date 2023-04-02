@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Assign Leave approval</h4>
+                <h4 class="page-title">{{ __('messages.assign_leave_approval') }}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Assign Leave approval
+                            {{ __('messages.assign_leave_approval') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -45,7 +45,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Employee Name</th>
+                                    <th>{{ __('messages.employee_name') }}</th>
                                     <th>{{ __('messages.department_name') }}</th>
                                     <th>Approval Head</th>
                                     <th>{{ __('messages.action') }}</th>

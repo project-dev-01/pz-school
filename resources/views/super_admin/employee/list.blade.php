@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                         </ol>
                     </div>
-                    <h4 class="page-title"> List</h4>
+                    <h4 class="page-title"> {{ __('messages.list') }}</h4>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                                         <th>{{ __('messages.joining_date') }}</th>
                                         <th>{{ __('messages.department') }}</th>
                                         <th>{{ __('messages.designation') }}</th>
-                                        <th>Present Address</th>
+                                        <th>{{ __('messages.present_address') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>

@@ -81,6 +81,10 @@
 @if(Session::get('role_id') == '4')
 @elseif(Session::get('role_id') == '5')
 <script src="{{ asset('public/js/custom/parent_calendar.js') }}"></script>
+<script>
+// update child session
+    var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
+    </script>
 @else
 <!-- <script src="{{ asset('public/js/pages/calendar.init.js') }}"></script> -->
 @endif
@@ -165,6 +169,8 @@
     var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
+    var downloadcsv = "{{ __('messages.download_csv') }}";
+    var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
     var studentID = "{{ Session::get('student_id') }}";
     // academic_session_id
@@ -196,12 +202,17 @@
 
     //forum permission
     var getuserid = "{{config('constants.api.dbvsgetbranchid')}}";
-    // update child session
-    var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
     // notifications
     var readNotifications = "{{ config('constants.api.mark_as_read') }}";
     var allNotifications = "{{ route('unread_notifications') }}";
     var allLogout = "{{ route('all_logout') }}";
+</script>
+<script type="text/javascript">
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function() {
+        window.location.href = url + "?lang=" + $(this).val();
+    });
 </script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
@@ -348,11 +359,4 @@
             });
         }, 60000 * 60);
     };
-</script>
-<script type="text/javascript">
-    var url = "{{ route('changeLang') }}";
-
-    $(".changeLang").change(function() {
-        window.location.href = url + "?lang=" + $(this).val();
-    });
 </script>

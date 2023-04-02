@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Exam</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Exam</h4>
+                <h4 class="page-title">{{ __('messages.exam') }}</h4>
             </div>
         </div>
     </div>

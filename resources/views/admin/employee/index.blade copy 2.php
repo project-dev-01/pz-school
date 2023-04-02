@@ -128,7 +128,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Present Address<span class="text-danger">*</span></label>
+                                    <label for="present_address">{{ __('messages.present_address') }}<span class="text-danger">*</span></label>
                                     <textarea class="form-control" name="present_address" id="present_address">
                                     </textarea>
                                 </div>

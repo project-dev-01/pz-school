@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Leave Status</label>
+                                    <label for="heard">{{ __('messages.leave_status') }}</label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Approved</option>
                                         <option value="">Pending</option>
@@ -67,7 +67,7 @@
                     <li class="nav-item">
                         <h4 class="nav-link">
                         <span class="fas fa-stream" id="span-parent"></span>
-                         Leave List
+                        {{ __('messages.leave_list') }}
                             <h4>
                     </li>
                 </ul><br>           
@@ -82,9 +82,9 @@
                                                 <th class="text-center">S.no</th>
                                                 <th class="text-center"> Name</th>
                                                 <th class="text-center">{{ __('messages.no._of._days') }}</th>                                                                                             
-                                                <th class="text-center">Reason(s)</th>  
+                                                <th class="text-center">{{ __('messages.reason(s)') }}</th>  
                                                 <th class="text-center">Admin Remarks</th>                                                                                                
-                                                <th class="text-center">Leave Status</th>                                                
+                                                <th class="text-center">{{ __('messages.leave_status') }}</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>

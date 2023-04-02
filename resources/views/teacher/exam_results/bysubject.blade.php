@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                    <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="examnames">
                                         <option value="">Select Exams</option>
                                     </select>

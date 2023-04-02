@@ -49,7 +49,7 @@
                                         <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">98%</span></h6>
                                         <div class="progress progress-sm m-0">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">
-                                                <span class="sr-only">98% Complete</span>
+                                                <span class="sr-only">98% {{ __('messages.complete') }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">2%</span></h6>
                                         <div class="progress progress-sm m-0">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 2%">
-                                                <span class="sr-only">2% Complete</span>
+                                                <span class="sr-only">2% {{ __('messages.complete') }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                         <div class="row ml-1">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="row"><label for="heard">Status<span class="text-danger">*</span></label> </div>
+                                    <div class="row"><label for="heard">{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
 
                                     <div class="row">
                                         <div class="form-check ">
@@ -184,7 +184,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Status :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.status') }} :</div>
                                                         <div class="col-md-6">Complete</div>
                                                     </div>
                                                 </div>
@@ -224,7 +224,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Document :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.document') }} :</div>
                                                         <div class="col-md-6">
                                                             <a href="~/resources/views/Guide.pdf" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -295,7 +295,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Status :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.status') }} :</div>
                                                         <div class="ml-2">InComplete</div>
                                                     </div>
                                                 </div>
@@ -335,7 +335,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Document :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.document') }} :</div>
                                                         <div class="ml-2">
                                                             <a href="~/resources/views/Guide.pdf" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -408,7 +408,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Status :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.status') }} :</div>
                                                         <div class="ml-2">InComplete</div>
                                                     </div>
                                                 </div>
@@ -449,7 +449,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Document :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.document') }} :</div>
                                                         <div class="ml-2">
                                                             <a href="~/resources/views/Guide.pdf" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>

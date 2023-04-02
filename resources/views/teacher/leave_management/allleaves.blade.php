@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeLeaveSts">Leave Status</label>
+                                    <label for="changeLeaveSts">{{ __('messages.leave_status') }}</label>
                                     <select id="changeLeaveSts" class="form-control" required="">
                                         <option value="All">All</option>
                                         <option value="Approve">Approved</option>
@@ -60,7 +60,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Leave List
+                        {{ __('messages.leave_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -72,16 +72,16 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Employee Name</th>
-                                        <th>Leave Type</th>
+                                        <th>{{ __('messages.employee_name') }}</th>
+                                        <th>{{ __('messages.leave_type') }}</th>
                                         <th>{{ __('messages.no._of._days') }}</th>
-                                        <th>From Leave</th>
-                                        <th>To Leave</th>
+                                        <th>{{ __('messages.from_leave') }}</th>
+                                        <th>{{ __('messages.to_leave') }}</th>
                                         <th>{{ __('messages.reason') }}</th>
-                                        <th>Document</th>
-                                        <th>Status</th>
+                                        <th>{{ __('messages.document') }}</th>
+                                        <th>{{ __('messages.status') }}</th>
                                         <!-- <th>Remarks</th> -->
-                                        <th>Applied Date</th>
+                                        <th>{{ __('messages.applied_date') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>

@@ -178,9 +178,9 @@
                                                 <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
                                                 <th class="text-center" width="20%">{{ __('messages.score') }}</th>
                                                 <th class="text-center" width="15%">{{ __('messages.grade') }}</th>
-                                                <th class="text-center" width="15%">Pass/Fail</th>
+                                                <th class="text-center" width="15%">{{ __('messages.pass') }}/{{ __('messages.fail') }}</th>
                                                 <th class="text-center" width="15%">{{ __('messages.ranking') }}</th>
-                                                <th class="text-center" width="15%">Status</th>
+                                                <th class="text-center" width="15%">{{ __('messages.status') }}</th>
                                                 <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
                                             </tr>
 

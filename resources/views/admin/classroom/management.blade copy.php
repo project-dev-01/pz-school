@@ -408,7 +408,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#shortest" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    Short Test
+                                {{ __('messages.short_test') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -662,7 +662,7 @@
                                                 <div id="dynamic-field-1" class="form-group dynamic-field">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
+                                                            <label for="field" class="font-weight-bold">Short test<span class="text-danger">*</span></label>
                                                             <input type="text" id="field" class="form-control shortTestAdd short_test_name" name="field1" />
                                                             <!-- <span id="shortTestError"></span> -->
                                                         </div>

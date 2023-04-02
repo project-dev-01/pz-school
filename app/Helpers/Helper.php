@@ -86,19 +86,20 @@ class Helper
         $timezone = date("e");
         /* If the time is less than 1200 hours, show good morning */
         if ($time < "12") {
-            $greetings = "Good Morning";
+            $greetings = __('messages.good_morning') ;
         } else {
             /* If the time is grater than or equal to 1200 hours, but less than 1700 hours, so good afternoon */
             if ($time >= "12" && $time < "17") {
-                $greetings = "Good Afternoon";
+                $greetings = __('messages.good_afternoon') ;
             } else {
                 /* Should the time be between or equal to 1700 and 1900 hours, show good evening */
                 if ($time >= "17" && $time < "19") {
-                    $greetings = "Good Evening";
+                   
+                    $greetings =  __('messages.good_evening') ;
                 } else {
                     /* Finally, show good night if the time is greater than or equal to 1900 hours */
                     if ($time >= "19") {
-                        $greetings = "Good Night";
+                        $greetings = __('messages.good_night') ;
                     }
                 }
             }

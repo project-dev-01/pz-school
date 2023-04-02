@@ -676,7 +676,7 @@
                                 <th>Sudent Name</th>
                                 <th>{{ __('messages.grade') }}</th>
                                 <th>{{ __('messages.exam_name') }}</th>
-                                <th>Total Marks</th>
+                                <th>{{ __('messages.total_marks') }}</th>
                                 <th>{{ __('messages.exam_marks') }}</th>
                                 <th>{{ __('messages.remarks') }}</th>
                             </tr>
@@ -795,7 +795,7 @@
                                 <th rowspan="2">{{ __('messages.grade') }}</th>
                                 <th rowspan="2">{{ __('messages.exam_name') }}</th>
                                 <th rowspan="2">Total Subject</th>
-                                <th rowspan="2">Total Marks</th>
+                                <th rowspan="2">{{ __('messages.total_marks') }}</th>
                                 <th colspan="9">Subject Marks</th>
                                 <th rowspan="2">{{ __('messages.remarks') }}</th>
                             </tr>
@@ -959,7 +959,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Student Ranking class & Subject</h4>
+                    <h4 class="navv"> {{ __('messages.student_ranking_class') }} & {{ __('messages.subject') }}</h4>
                 </li>
             </ul><br>
             <div class="card-body">
@@ -1006,7 +1006,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sr_examnames">Test Name<span class="text-danger">*</span></label>
+                            <label for="sr_examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                             <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                 <option value="">Select Exams</option>
                             </select>
@@ -1036,7 +1036,7 @@
                     </div>
                     <div class="col-md-3 form-inline">
                         <div class="form-group">
-                            <label for=""><b> Class Rank : <span id="class_rank"></span> <br>Total Marks: <span id="class_total"></span></b></label>
+                            <label for=""><b> {{ __('messages.class_rank') }} : <span id="class_rank"></span> <br>{{ __('messages.total_marks') }}: <span id="class_total"></span></b></label>
                         </div>
                     </div>
                 </div><br>
@@ -1048,7 +1048,7 @@
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
                                 <th>Marks</th>
-                                <th>Subject Position</th>
+                                <th>{{ __('messages.subject_position') }}</th>
                             </tr>
                         </thead>
                         <tbody id="student_rank_body">
@@ -1066,7 +1066,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv">Semester Wise Exam Marks
+                    <h4 class="navv">{{ __('messages.semester_wise_exam_marks') }}
                         <h4>
                 </li>
             </ul><br>
@@ -1133,7 +1133,7 @@
             
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Exam Marks Status
+                    <h4 class="navv"> {{ __('messages.exam_marks_status') }}
                         <h4>
                 </li>
             </ul><br>
@@ -1183,17 +1183,17 @@
                 <ul class="nav nav-tab nav-bordered float-right">
                     <li class="nav-item">
                         <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                            <b style="font-size:12px">Marks in class each exam</b>
+                            <b style="font-size:12px">{{ __('messages.marks_in_class_each_exam') }}</b>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#rcex" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            <b style="font-size:12px">Rank in class each exam</b>
+                            <b style="font-size:12px">{{ __('messages.rank_in_class_each_exam') }}</b>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#score-class" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            <b style="font-size:12px">Score in class</b>
+                            <b style="font-size:12px">{{ __('messages.score_in_class') }}</b>
                         </a>
                     </li>
                 </ul>
@@ -1238,7 +1238,7 @@
                         <div class="card-body" dir="ltr">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examID">Test Name<span class="text-danger">*</span></label>
+                                    <label for="examID">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="scoreExamID" class="form-control" name="examID">
                                         <option value="">Select Exams</option>
                                     </select>
@@ -1288,7 +1288,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Student Top 10 Ranking</h4>
+                    <h4 class="navv"> {{ __('messages.student_top_10_ranking') }}</h4>
                 </li>
             </ul><br>
             <div class="card-body">
@@ -1349,7 +1349,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="st10_examnames">Test Name<span class="text-danger">*</span></label>
+                            <label for="st10_examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                             <select id="st10_examnames" class="form-control studentTop" name="examnames">
                                 <option value="">Select Exams</option>
                             </select>
@@ -1362,9 +1362,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.student_name') }}</th>
-                                <th>Total Marks</th>
+                                <th>{{ __('messages.total_marks') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
-                                <th>Rank</th>
+                                <th>{{ __('messages.rank') }}</th>
                             </tr>
                         </thead>
                         <tbody id="top_student_table">
@@ -1382,7 +1382,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Student Bottom 10 Ranking</h4>
+                    <h4 class="navv"> {{ __('messages.student_bottom_10_ranking') }}</h4>
                 </li>
             </ul><br>
             <div class="card-body">
@@ -1443,7 +1443,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="sb10_examnames">Test Name<span class="text-danger">*</span></label>
+                            <label for="sb10_examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                             <select id="sb10_examnames" class="form-control studentBottom" name="examnames">
                                 <option value="">Select Exams</option>
                             </select>
@@ -1457,9 +1457,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.student_name') }}</th>
-                                <th>Total Marks</th>
+                                <th>{{ __('messages.total_marks') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
-                                <th>Rank</th>
+                                <th>{{ __('messages.rank') }}</th>
                             </tr>
                         </thead>
                         <tbody id="bottom_student_table">

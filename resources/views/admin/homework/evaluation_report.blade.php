@@ -142,7 +142,7 @@
                                                                 <th>{{ __('messages.title') }}</th>
                                                                 <th>{{ __('messages.date_of_homework') }}</th>
                                                                 <th>{{ __('messages.date_of_submission') }}</th>
-                                                                <th>Complete/Incomplete</th>
+                                                                <th>{{ __('messages.complete') }}/{{ __('messages.incomplete') }}</th>
                                                                 <th>{{ __('messages.total_student') }}</th>
                                                                 <th>{{ __('messages.action') }}</th>
 

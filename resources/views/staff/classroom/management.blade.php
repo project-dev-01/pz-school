@@ -408,7 +408,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#shortest" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    Short Test
+                                {{ __('messages.short_test') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -541,11 +541,11 @@
                                                                 <tr>
                                                                     <th>#</th>
                                                                     <th>{{ __('messages.student_name') }}</th>
-                                                                    <th>From Leave</th>
-                                                                    <th>To Leave</th>
+                                                                    <th>{{ __('messages.from_leave') }}</th>
+                                                                    <th>{{ __('messages.to_leave') }}</th>
                                                                     <th>{{ __('messages.reason') }}</th>
-                                                                    <th>Document</th>
-                                                                    <th>Status</th>
+                                                                    <th>{{ __('messages.document') }}</th>
+                                                                    <th>{{ __('messages.status') }}</th>
                                                                     <th>{{ __('messages.remarks') }}</th>
                                                                     <th>{{ __('messages.action') }}</th>
                                                                 </tr>
@@ -662,12 +662,12 @@
                                                 <div id="dynamic-field-1" class="form-group dynamic-field">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <label for="field" class="font-weight-bold">Short Test<span class="text-danger">*</span></label>
+                                                            <label for="field" class="font-weight-bold">{{ __('messages.short_test') }}<span class="text-danger">*</span></label>
                                                             <input type="text" id="field" class="form-control shortTestAdd" id="Hours" name="field[]" />
                                                             <span id="shortTestError"></span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="grade" class="font-weight-bold">Status<span class="text-danger">*</span></label>
+                                                            <label for="grade" class="font-weight-bold">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                             <select id="grade" class="form-control" name="grade[]">
                                                                 <option value="marks">Marks</option>
                                                                 <option value="grade">Grade</option>
@@ -698,8 +698,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>S.no</th>
-                                                                    <th>Short Test Name</th>
-                                                                    <th>Status</th>
+                                                                    <th>{{ __('messages.short_test_name') }}</th>
+                                                                    <th>{{ __('messages.status') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="shortTestAppend">

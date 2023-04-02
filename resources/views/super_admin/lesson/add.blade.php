@@ -19,7 +19,7 @@
                         <span class="text-danger error-text branch_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="title">Standard<span class="text-danger">*</span></label>
+                        <label for="title">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
                             <option value="selct">Select Standard</option>
                             <option>I</option>

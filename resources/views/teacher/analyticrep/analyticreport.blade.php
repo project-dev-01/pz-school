@@ -13,7 +13,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div> -->
-                <h4 class="page-title">Analytic Report</h4>
+                <h4 class="page-title">{{ __('messages.analytic_report') }}</h4>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Attitude
+                        {{ __('messages.attitude') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -172,7 +172,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Short Test
+                        {{ __('messages.short_test') }}
                             <h4>
                     </li>
                 </ul><br>

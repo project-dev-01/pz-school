@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option>Select Standard</option>
                                         <option>I</option>

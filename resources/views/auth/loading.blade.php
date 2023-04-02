@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center bground">
-                    <p class="loadtext">Welcome Onboard,</p>
+                    <p class="loadtext">{{ __('messages.welcome_onboard') }},</p>
                 </div>
             </div>
         </div>

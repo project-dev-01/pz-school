@@ -63,7 +63,7 @@
                         <div class="tt-list-header">
                             <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                             <div class="tt-col-value-large hide-mobile">{{ __('messages.category') }}</div>
-                            <div class="tt-col-value-large hide-mobile">Status</div>
+                            <div class="tt-col-value-large hide-mobile">{{ __('messages.status') }}</div>
                             <div class="tt-col-value-large hide-mobile">{{ __('messages.activity') }}</div>
                         </div>
                         <div class="tt-item">
@@ -310,7 +310,7 @@
                                 <div class="row align-items-center no-gutters hide-desktope">
                                     <div class="col-9">
                                         <ul class="tt-list-badge">
-                                            <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">Exam</span></a></li>
+                                            <li class="show-mobile"><a href="#"><span class="tt-color06 tt-badge">{{ __('messages.exam') }}</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="col-3 ml-auto show-mobile">

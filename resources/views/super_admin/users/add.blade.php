@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('users.user')}}">List</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('users.user')}}">{{ __('messages.list') }}</a></li>
                         <li class="breadcrumb-item active">Add User</li>
                     </ol>
                 </div>

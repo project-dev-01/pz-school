@@ -78,7 +78,7 @@
                                                             <th>#</th>
                                                             <th>{{ __('messages.student') }}</th>
                                                             <th>{{ __('messages.register_no') }}</th>
-                                                            <th>Status</th>
+                                                            <th>{{ __('messages.status') }}</th>
                                                             <th data-field="user-status">{{ __('messages.score') }}</th>
                                                             <th>{{ __('messages.remarks') }}</th>
                                                             <th>Submission</th>

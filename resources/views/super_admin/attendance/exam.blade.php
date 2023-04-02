@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Exam<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option value="">Select Exam</option>
                                         <option value="">Quater yearly</option>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Standard</option>
                                         <option>I</option>
@@ -154,7 +154,7 @@
                                                 <th>{{ __('messages.name') }}</th>
                                                 <th>Roll</th>
                                                 <th>{{ __('messages.register_no') }}</th>
-                                                <th>Status</th>
+                                                <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>
 
                                             </tr>

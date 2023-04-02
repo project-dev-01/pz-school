@@ -59,11 +59,11 @@
                                             <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="heard">Status</label>
+                                                            <label for="heard">{{ __('messages.status') }}</label>
                                                             <select id="heard" class="form-control" required="">
                                                                 <option value="">Choose Filter</option>
-                                                                <option value="">Complete</option>
-                                                                <option value="">Incomplete</option>
+                                                                <option value="">{{ __('messages.complete') }}</option>
+                                                                <option value="">{{ __('messages.incomplete') }}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -88,7 +88,7 @@
                                                             <th>{{ __('messages.student') }}</th>
                                                             <th>{{ __('messages.register_no') }}</th>
                                                             <th>{{ __('messages.subject') }}</th>
-                                                            <th>Status</th>
+                                                            <th>{{ __('messages.status') }}</th>
                                                             <th data-field="user-status">{{ __('messages.score') }}</th>
                                                             <th>{{ __('messages.remarks') }}</th>
                                                             <th>Submission</th>
@@ -105,7 +105,7 @@
                                                             <td><button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light">Incomplete</button></td>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <label for="heard">Status</label>
+                                                                    <label for="heard">{{ __('messages.status') }}</label>
                                                                     <select id="heard" class="form-control" required="">
                                                                         <option value="">Marks</option>
                                                                         <option value="press">Grade</option>
@@ -136,7 +136,7 @@
                                                             <td><button type="button" class="btn btn-outline-success btn-rounded waves-effect waves-light">Complete</button></td>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <label for="heard">Status</label>
+                                                                    <label for="heard">{{ __('messages.status') }}</label>
                                                                     <select id="heard" class="form-control" required="">
                                                                         <option value="">Marks</option>
                                                                         <option value="press">Grade</option>

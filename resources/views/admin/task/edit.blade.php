@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group">
                             <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary"></a>{{ __('messages.back') }}
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                         </div>
 
                     </form>

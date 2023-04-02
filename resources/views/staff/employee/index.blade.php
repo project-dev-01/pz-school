@@ -182,7 +182,7 @@
                         <div class="row">
                         <div class="col-md-6">
                     <div class="form-group">
-                        <label for="message">Present Address</label>
+                        <label for="message">{{ __('messages.present_address') }}</label>
                         <textarea id="message" class="form-control" name="message"
                             data-parsley-trigger="keyup" data-parsley-minlength="20"
                             data-parsley-maxlength="100"

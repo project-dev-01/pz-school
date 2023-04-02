@@ -46,7 +46,7 @@ $(function () {
         buttons: [
             {
                 extend: 'csv',
-                text: 'Download CSV',
+                text: downloadcsv,
                 extension: '.csv',
                 exportOptions: {
                     columns: 'th:not(:last-child)'
@@ -54,7 +54,7 @@ $(function () {
             },
             {
                 extend: 'pdf',
-                text: 'Download PDF',
+                text: downloadpdf,
                 extension: '.pdf',
                 exportOptions: {
                     columns: 'th:not(:last-child)'

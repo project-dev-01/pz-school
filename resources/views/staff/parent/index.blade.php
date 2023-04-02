@@ -29,7 +29,7 @@
                 <div class="card-body">
 
                     <span class=" fas fa-user-circle" id="parent" style=""></span>
-                    <span class="header-title mb-3" id="parent">Add Parent</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.add_parent') }}</span>
                 <hr>						
                 <form id="demo-form" data-parsley-validate="" autocomplete="off">
                     <span class="fas fa-user-check  " id="span-parent"></span>

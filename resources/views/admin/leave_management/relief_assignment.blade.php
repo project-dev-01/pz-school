@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Relief Assignment</h4>
+                <h4 class="page-title">{{ __('messages.relief_assignment') }}</h4>
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Leave List
+                        <h4 class="navv"> {{ __('messages.leave_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -29,11 +29,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Employee Name</th>
-                                        <th>Leave Type</th>
+                                        <th>{{ __('messages.employee_name') }}</th>
+                                        <th>{{ __('messages.leave_type') }}</th>
                                         <th>{{ __('messages.no._of._days') }}</th>
-                                        <th>From Leave</th>
-                                        <th>To Leave</th>
+                                        <th>{{ __('messages.from_leave') }}</th>
+                                        <th>{{ __('messages.to_leave') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>

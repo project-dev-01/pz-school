@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">Profile</li>
+                        <li class="breadcrumb-item active">{{ __('messages.profile') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Profile</h4>
+                <h4 class="page-title">{{ __('messages.profile') }}</h4>
             </div>
         </div>
     </div>
@@ -28,15 +28,15 @@
                     <form method="post" id="upload_form" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label class="btn btn-block" style="background-color: #0ABAB5; color: #fff;"> <b>Change picture</b>
+                            <label class="btn btn-block" style="background-color: #0ABAB5; color: #fff;"> <b>{{ __('messages.change_picture') }}</b>
                                 <input type="file" name="profile_image" id="profile_image" style="opacity: 0;height:1px;display:none" />
                             </label>
                         </div>
                     </form>
                 </div>
                 <div class="text-left mt-3">
-                    <h4 class="font-13 text-uppercase">About Me :</h4>
-                    <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
+                    <h4 class="font-13 text-uppercase">{{ __('messages.about_me') }} :</h4>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
                     <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
                     <p class="text-muted mb-2 font-13"><strong>Mobile No :</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
                 </div>
@@ -53,7 +53,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#changePassword" data-toggle="tab" aria-expanded="true" class="nav-link">
-                            Change Password
+                        {{ __('messages.change_password') }}
                         </a>
                     </li>
                 </ul>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Email Address</label>
+                                        <label for="email">{{ __('messages.email_address') }}</label>
                                         <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter The Email">
                                         <span class="text-danger error-text email_error"></span>
                                     </div>
@@ -94,14 +94,14 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="present_address">Present Address</label>
+                                        <label for="present_address">{{ __('messages.present_address') }}</label>
                                         <textarea type="textarea" class="form-control" name="present_address" rows="4" id="present_address">{{ $user_details['present_address']}}</textarea>
                                         <span class="text-danger error-text present_address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Update</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.update') }}</button>
                             </div>
                         </form>
                     </div>
@@ -109,7 +109,7 @@
                     <div class="tab-pane" id="changePassword">
                         <!-- comment box -->
                         <form action="{{ route('teacher.settings.changeNewPassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
-                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> Change Password</h5>
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.change_password') }}</h5>
                             <div class="row">
                                 <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
                                 <div class="col-md-9">

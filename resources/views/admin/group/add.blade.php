@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Group</h4>
+                <h4 class="page-title">{{ __('messages.group') }}</h4>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Add Group
+                        <h4 class="navv">{{ __('messages.add_group') }}
                             <h4>
                     </li>
                 </ul>
@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Group Name<span class="text-danger">*</span></label>
+                                    <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="staff">Add Staff<span class="text-danger">*</span></label>
+                                    <label for="staff">{{ __('messages.add_staff') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="staff" name="staff" class="form-control" placeholder="Enter Staff Name">
                                     <div id="staff_list"></div>
                                     <span class="text-danger error-text staff_error"></span>
@@ -62,8 +62,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Staff Name</th>
-                                                <th>Staff Department</th>
+                                                <th>{{ __('messages.staff_name') }}</th>
+                                                <th>{{ __('messages.staff_department') }}</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="student">Add Student<span class="text-danger">*</span></label>
+                                    <label for="student">{{ __('messages.add_student') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="student" name="student" class="form-control" placeholder="Enter Student Name">
                                     <div id="student_list"></div>
                                     <span class="text-danger error-text student_error"></span>
@@ -94,8 +94,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>{{ __('messages.student_name') }}</th>
-                                                <th>Student Class</th>
-                                                <th>Student Section</th>
+                                                <th>{{ __('messages.student_Class') }}</th>
+                                                <th>{{ __('messages.student_section') }}</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>
                                         </thead>
@@ -113,7 +113,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="parent">Add Parent<span class="text-danger">*</span></label>
+                                    <label for="parent">{{ __('messages.add_parent') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="parents" name="parent" class="form-control" placeholder="Enter Parent Name">
                                     <div id="parent_list"></div>
                                     <span class="text-danger error-text parent_error"></span>
@@ -126,7 +126,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Parent Name</th>
+                                                <th>{{ __('messages.parent_name') }}</th>
                                                 <th>{{ __('messages.email') }}</th>
                                                 <th>{{ __('messages.action') }}</th>
                                             </tr>

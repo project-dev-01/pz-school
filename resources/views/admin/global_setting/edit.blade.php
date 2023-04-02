@@ -22,13 +22,13 @@
                         <span class="text-danger error-text year_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="footer_text">Footer Text<span class="text-danger">*</span></label> 
+                        <label for="footer_text">{{ __('messages.footer_text') }}<span class="text-danger">*</span></label> 
                         <textarea  id="footer_text" class="form-control"  placeholder="Enter Footer Text" name="footer_text" >
                         </textarea>
                         <span class="text-danger error-text footer_text_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="timezone">TimeZone<span class="text-danger">*</span></label>
+                        <label for="timezone">{{ __('messages.timeZone') }}<span class="text-danger">*</span></label>
                         <select id="timezone" class="form-control" name="timezone">
                             <option value="">Choose TimeZone</option>
                             @forelse($timezone as $tz)
@@ -39,28 +39,28 @@
                         <span class="text-danger error-text timezone_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="facebook_url">Facebook Url<span class="text-danger">*</span></label>
+                        <label for="facebook_url">{{ __('messages.facebook_url') }}<span class="text-danger">*</span></label>
                         <input type="text" id="facebook_url" name="facebook_url" class="form-control" placeholder="Enter Facebook Url">
                         <span class="text-danger error-text facebook_url_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="twitter_url">Twitter Url<span class="text-danger">*</span></label>
+                        <label for="twitter_url">{{ __('messages.twitter_url') }}<span class="text-danger">*</span></label>
                         <input type="text" id="twitter_url" name="twitter_url" class="form-control" placeholder="Enter Twitter Url">
                         <span class="text-danger error-text twitter_url_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="linkedin_url">LinkedIn Url<span class="text-danger">*</span></label>
+                        <label for="linkedin_url">{{ __('messages.linkedIn_url') }}<span class="text-danger">*</span></label>
                         <input type="text" id="linkedin_url" name="linkedin_url" class="form-control" placeholder="Enter LinkedIn Url">
                         <span class="text-danger error-text linkedin_url_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="youtube_url">Youtube Url<span class="text-danger">*</span></label>
+                        <label for="youtube_url">{{ __('messages.youtube_url') }}<span class="text-danger">*</span></label>
                         <input type="text" id="youtube_url" name="youtube_url" class="form-control" placeholder="Enter Youtube Url">
                         <span class="text-danger error-text youtube_url_error"></span>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                     </div>
 
                 </form>

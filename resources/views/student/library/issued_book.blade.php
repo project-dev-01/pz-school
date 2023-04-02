@@ -56,7 +56,7 @@
                                             <th> Date of Expiry</th>
                                             <th>Return Date</th>
                                             <th>Fine</th>
-                                            <th>Status</th>
+                                            <th>{{ __('messages.status') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

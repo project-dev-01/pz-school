@@ -411,7 +411,7 @@
                                                                     <div class="mt-3 mt-sm-0">
                                                                         <ul class="list-inline font-13 text-sm-right">
                                                                             <li class="list-inline-item" style="margin-right: 45px; margin-left:25px;margin-bottom: 10px;">
-                                                                                <span class="badge badge-soft-danger" style="padding:8px 22px;">InComplete</span>
+                                                                                <span class="badge badge-soft-danger" style="padding:8px 22px;">{{ __('messages.incomplete') }}</span>
                                                                             </li>
                                                                             <li class="list-inline-item pr-1">
                                                                                 <i class='mdi mdi-calendar-month-outline font-16'></i>
@@ -475,7 +475,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Standard </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.standard') }} </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="setCurDate" name="date">
@@ -688,7 +688,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Student Ranking class & Subject</h4>
+                    <h4 class="navv"> {{ __('messages.student_ranking_class') }} & {{ __('messages.subject') }}</h4>
                 </li>
             </ul><br>
             <div class="card-body">
@@ -717,7 +717,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                            <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                             <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                 <option value="">Select Exams</option>
                                 @foreach($exams as $exam)
@@ -728,7 +728,7 @@
                     </div>
                     <div class="col-md-3 form-inline">
                         <div class="form-group">
-                            <label for=""><b> Class Rank : <span id="class_rank"></span> <br>Total Marks: <span id="class_total"></span></b></label>
+                            <label for=""><b> {{ __('messages.class_rank') }} : <span id="class_rank"></span> <br>{{ __('messages.total_marks') }}: <span id="class_total"></span></b></label>
                         </div>
                     </div>
                 </div><br>
@@ -739,7 +739,7 @@
                                 <th>#</th>
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
-                                <th>Subject Position</th>
+                                <th>{{ __('messages.subject_position') }}</th>
                             </tr>
                         </thead>
                         <tbody id="student_rank_body">
@@ -756,7 +756,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv">Semester Wise Exam Marks
+                    <h4 class="navv">{{ __('messages.semester_wise_exam_marks') }}
                         <h4>
                 </li>
             </ul><br>
@@ -815,7 +815,7 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Exam Marks Status
+                    <h4 class="navv"> {{ __('messages.exam_marks_status') }}
                         <h4>
                 </li>
             </ul><br>
@@ -823,17 +823,17 @@
                 <ul class="nav nav-tab nav-bordered float-right">
                     <li class="nav-item">
                         <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                            <b style="font-size:12px">Marks in class each exam</b>
+                            <b style="font-size:12px">{{ __('messages.marks_in_class_each_exam') }}</b>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#rcex" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            <b style="font-size:12px">Rank in class each exam</b>
+                            <b style="font-size:12px">{{ __('messages.rank_in_class_each_exam') }}</b>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#score-class" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            <b style="font-size:12px">Score in class</b>
+                            <b style="font-size:12px">{{ __('messages.score_in_class') }}</b>
                         </a>
                     </li>
                 </ul>
@@ -878,7 +878,7 @@
                         <div class="card-body" dir="ltr">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="examID">Test Name<span class="text-danger">*</span></label>
+                                    <label for="examID">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="scoreExamID" class="form-control" name="examID">
                                         <option value="">Select Exams</option>
                                         @foreach($exams as $exam)

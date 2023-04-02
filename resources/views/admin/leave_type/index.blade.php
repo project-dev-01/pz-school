@@ -25,7 +25,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Leave Type
+                        <h4 class="navv">{{ __('messages.leave_type') }}
                             <h4>
                     </li>
                 </ul><br>

@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{ __('messages.event') }}</h4>

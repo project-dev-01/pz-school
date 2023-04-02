@@ -650,7 +650,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            Change Password
+                                        {{ __('messages.change_password') }}
                                             <h4>
                                     </li>
                                 </ul>
@@ -687,7 +687,7 @@
                             </div> <!-- end card-->
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Update
+                                {{ __('messages.update') }}
                                 </button>
                                 <a href="{{ route('admin.parent') }}" class="btn btn-primary-bl waves-effect waves-light">
                                     Back
@@ -730,7 +730,7 @@
                                                 </div>
                                                 <br>
                                                 <div class="profile">
-                                                    <a class="text-mutedd mail-subj" style="color: #0ABAB5;" href="{{route('admin.student.details',$child['id'])}}" target="_blank">Profile</a>
+                                                    <a class="text-mutedd mail-subj" style="color: #0ABAB5;" href="{{route('admin.student.details',$child['id'])}}" target="_blank">{{ __('messages.profile') }}</a>
                                                 </div>
                                             </div>
                                         </div>

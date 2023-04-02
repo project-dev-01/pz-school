@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="examnames">Test Name<span class="text-danger">*</span></label>
+                                            <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                             <select id="examnames" class="form-control" name="exam_id">
                                                 <option value="">Select Exams</option>
                                             </select>
@@ -157,9 +157,9 @@
                                                 <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
                                                 <th class="text-center" width="20%">{{ __('messages.score') }}</th>
                                                 <th class="text-center" width="15%">{{ __('messages.grade') }}</th>
-                                                <th class="text-center" width="15%">Pass/Fail</th>
+                                                <th class="text-center" width="15%">{{ __('messages.pass') }}/{{ __('messages.fail') }}</th>
                                                 <th class="text-center" width="15%">{{ __('messages.ranking') }}</th>
-                                                <th class="text-center" width="15%">Status</th>
+                                                <th class="text-center" width="15%">{{ __('messages.status') }}</th>
                                                 <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
                                             </tr>
 

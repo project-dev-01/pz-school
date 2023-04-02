@@ -21,7 +21,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="leave_type">Leave Type<span class="text-danger">*</span></label>
+                        <label for="leave_type">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="leave_type" name="leave_type">
                             <option value="">Choose Leave Type</option>
                             @forelse($leave_type as $type)

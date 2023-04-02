@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active">Datatables</li>
                         </ol>
                     </div> -->
-                <h4 class="page-title">Student Leave Details</h4>
+                <h4 class="page-title">{{ __('messages.student_leave_details') }}</h4>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Student Leave Details List
+                            {{ __('messages.student_leave_details_list') }}
                             <h4>
                     </li>
                 </ul>
@@ -69,7 +69,7 @@
             <div class="card studentLeaveShow" style="display: none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student Leave Details List
+                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}
                             <h4>
                     </li>
                 </ul>
@@ -80,14 +80,14 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>Standard</th>
+                                    <th>{{ __('messages.standard') }}</th>
                                     <th>{{ __('messages.class') }}</th>
-                                    <th>Leave from</th>
-                                    <th>To Leave</th>
-                                    <th>Status</th>
+                                    <th>{{ __('messages.from_leave') }}</th>
+                                    <th>{{ __('messages.to_leave') }}</th>
+                                    <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <th>Document</th>
-                                    <th>Teacher Remarks</th>
+                                    <th>{{ __('messages.document') }}</th>
+                                    <th>{{ __('messages.teacher_remarks') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

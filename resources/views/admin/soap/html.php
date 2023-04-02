@@ -544,8 +544,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="Passport">Passport
-                                                                    Number</label>
+                                                                <label for="Passport">{{ __('messages.passport_number') }}</label>
                                                                 <input type="text" maxlength="50" class="form-control alloptions" placeholder="Passport Number" name="txt_passport">
                                                             </div>
                                                         </div>
@@ -553,8 +552,7 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="txt_nric">NRIC
-                                                                    Number</label>
+                                                                <label for="txt_nric">{{ __('messages.nric_number') }}</label>
                                                                 <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
                                                             </div>
                                                         </div>
@@ -711,7 +709,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                                                <label for="class_id">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                                                 <select id="class_id" class="form-control" name="class_id">
                                                                     <option value="">Select Standard
                                                                     </option>

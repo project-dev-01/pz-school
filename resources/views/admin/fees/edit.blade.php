@@ -55,7 +55,7 @@ use \App\Http\Controllers\AdminController;
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="mb-4">Parent Name : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.parent_name') }} : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ use \App\Http\Controllers\AdminController;
                                     <th>Payment Mode</th>
                                     <th>{{ __('messages.due_date') }}</th>
                                     <th>Paid Date</th>
-                                    <th>Status</th>
+                                    <th>{{ __('messages.short_test_name') }}</th>
                                     <th>{{ __('messages.amount') }}</th>
                                     <!-- <th>Discount</th> -->
                                     <!-- <th>Fine</th> -->
@@ -268,8 +268,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>{{ __('messages.amount') }}<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Payment
-                                                                    Status<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.payment_status') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>{{ __('messages.memo') }}</th>
                                                             </tr>
@@ -338,8 +337,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </th>
                                                                 <th>{{ __('messages.amount') }}<span class="text-danger">*</span>
                                                                 </th>
-                                                                <th>Payment
-                                                                    Status<span class="text-danger">*</span>
+                                                                <th>{{ __('messages.payment_status') }}<span class="text-danger">*</span>
                                                                 </th>
                                                                 <th>{{ __('messages.memo') }}</th>
                                                             </tr>

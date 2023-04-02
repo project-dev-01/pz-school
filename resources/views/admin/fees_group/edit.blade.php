@@ -293,7 +293,7 @@
                         @endforelse
                         <div class="form-group">
                             <a href="{{ route('admin.fees_group') }}" class="btn btn-light">{{ __('messages.back') }}</a>
-                            <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                         </div>
                     </form>
                 </div> <!-- end card-body -->

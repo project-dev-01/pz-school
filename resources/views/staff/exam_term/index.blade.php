@@ -10,11 +10,11 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>
-                <h4 class="page-title">Exam Term List</h4>
+                <h4 class="page-title">{{ __('messages.exam_term_list') }}</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">Exam Term List</h4>
+                <h4 class="header-title">{{ __('messages.exam_term_list') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">

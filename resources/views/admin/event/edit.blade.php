@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-md-4" id="edit_group_row" {{$gro}}>
                                 <div class="form-group">
-                                    <label for="group">Group</label>
+                                    <label for="group">{{ __('messages.group') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="group[]" id="edit_group" multiple="multiple" data-placeholder="Choose ...">
                                         @forelse($group as $gro)
                                         @php
@@ -181,7 +181,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Update
+                            {{ __('messages.update') }}
                             </button>
                         </div>
                     </form>

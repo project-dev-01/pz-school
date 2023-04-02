@@ -28,8 +28,8 @@
                     <div class="form-group">
                         <label for="status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="status">
-                            <option value="Pass">Pass</option>
-                            <option value="Fail">Fail</option>
+                            <option value="Pass">{{ __('messages.pass') }}</option>
+                            <option value="Fail">{{ __('messages.fail') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

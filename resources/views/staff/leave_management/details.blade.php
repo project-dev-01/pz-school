@@ -120,12 +120,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h4 class="header-title">Already Taken Leave Details</h4>
+                <h4 class="header-title">{{ __('messages.already_taken_leave_details') }}</h4>
                 <div class="table-responsive">
                     <table id="alreadyTakenLeave" class="table table-centered table-borderless table-striped mb-0">
                         <thead>
                             <tr>
-                                <th>Leave type</th>
+                                <th>{{ __('messages.leave_type') }}</th>
                                 <th>{{ __('messages.total_leave') }}</th>
                                 <th>{{ __('messages.used_leave') }}</th>
                                 <th>{{ __('messages.remaining_leave') }}</th>
@@ -156,12 +156,12 @@
                                 <td id="noOfDays"></td>
                             </tr>
                             <tr>
-                                <td>Apply Date</td>
+                                <td>{{ __('messages.apply_date') }}</td>
                                 <td>:</td>
                                 <td id="applyDate"></td>
                             </tr>
                             <tr>
-                                <td>Leave Type</td>
+                                <td>{{ __('messages.leave_type') }}</td>
                                 <td>:</td>
                                 <td id="leaveType"></td>
                             </tr>
@@ -171,7 +171,7 @@
                                 <td id="reason"></td>
                             </tr>
                             <tr>
-                                <td>Documents</td>
+                                <td>{{ __('messages.document') }}</td>
                                 <td>:</td>
                                 <td id="documents"></td>
                             </tr>
@@ -181,7 +181,7 @@
                                 <td id="remarks"></td>
                             </tr>
                             <tr>
-                                <td>Status</td>
+                                <td>{{ __('messages.status') }}</td>
                                 <td>:</td>
                                 <td id="leave_status"></td>
                             </tr>
@@ -193,7 +193,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Leave Status</td>
+                                <td>{{ __('messages.leave_status') }}</td>
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="leave_id" id="leave_id">
@@ -211,13 +211,8 @@
                 <hr>
             </div>
             <div class="modal-footer">
-<<<<<<< HEAD
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
-                <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">Save</button>
-=======
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" id="approvedLeave" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
->>>>>>> 11a536e8f1d63d7ffa9b7f2fa6a8a49a55044f49
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

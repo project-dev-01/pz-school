@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Standard<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Standard</option>
                                         <option value="">All</option>
@@ -118,7 +118,7 @@
                                         <th class="text-center">C</th>
                                         <th class="text-center">D</th>
                                         <th class="text-center">E</th>
-                                        <th class="text-center">PASS</th>
+                                        <th class="text-center">{{ __('messages.pass') }}</th>
                                         <th class="text-center">G</th>
                                         <th class="text-center">Avg. grade of subject</th>
                                         <th class="text-center">%</th>

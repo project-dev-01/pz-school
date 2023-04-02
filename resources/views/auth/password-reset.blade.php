@@ -41,8 +41,8 @@
                                             </span>
                                         </a>
                                     </div><br>
-									<h3 class="passrecov">Renew Password</h3>
-                                    <p class="text-muted opoos">Dear user of teachxxxxx@suzen.com from SMK Kubang Keriang. <br>Your old password has been resetted. Kindly input the new password.</p>
+									<h3 class="passrecov">{{ __('messages.renew_password') }}</h3>
+                                    <p class="text-muted opoos">Dear user of teachxxxxx@suzen.com from SMK Kubang Keriang. <br>{{ __('messages.your_old_password_resetted') }}</p>
                                 </div>
                                 <form id="LoginAuth" action="{{ route('reset_password_validation') }}" method="post">
                                     @if ( Session::get('success'))
@@ -86,7 +86,7 @@
                                         </div>
                                     </div><br>
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-block signin" type="submit">Confirm</button>
+                                        <button class="btn btn-block signin" type="submit">{{ __('messages.confirm') }}</button>
                                     </div><br>
 
                                 </form>

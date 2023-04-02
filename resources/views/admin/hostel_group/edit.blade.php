@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Hostel Group</h4>
+                <h4 class="page-title">{{ __('messages.hostel_group') }}</h4>
             </div>
         </div>
     </div>
@@ -33,14 +33,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Group Name<span class="text-danger">*</span></label>
+                                    <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name" value="{{$group['name']}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="incharge_staff">Incharge Staff</label>
+                                    <label for="incharge_staff">{{ __('messages.incharge_staff') }}</label>
                                     <select class="form-control" name="incharge_staff">
                                         <option value="">Select Incharge Staff</option>
                                         @forelse($staff as $st)
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="incharge_student">Incharge Student</label>
+                                    <label for="incharge_student">{{ __('messages.incharge_student') }}</label>
                                     <select class="form-control" name="incharge_student">
                                         <option value="">Select Incharge Student</option>
                                         @forelse($student as $stu)
@@ -84,7 +84,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Update
+                            {{ __('messages.update') }}
                             </button>
                         </div>
                     </form>

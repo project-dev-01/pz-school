@@ -10,10 +10,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">FAQs</li>
+                        <li class="breadcrumb-item active">{{ __('messages.faqs') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">FAQs</h4>
+                <h4 class="page-title">{{ __('messages.faqs') }}</h4>
             </div>
         </div>
     </div>
@@ -25,9 +25,9 @@
                 <div class="col-12">
                     <div class="text-center">
                         <i class="h1 mdi mdi-comment-multiple-outline text-muted"></i>
-                        <h3 class="mb-3">Frequently Asked Questions</h3>
-                        <p class="text-muted"> Have questions? Look no further. Our Frequently Asked Questions (FAQ) make it easy for you to find answers to your most pressing inquiries<br> into the School of Education. If you can't find your answer here, please feel free to contact us or use our site search to find the information you need.</p>
-                        <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>Email us your question</button>
+                        <h3 class="mb-3">{{ __('messages.frequently_asked_questions') }}</h3>
+                        <p class="text-muted">{{ __('messages.have_questions_look') }}</p>
+                        <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>{{ __('messages.email_us_your_question') }}</button>
                     </div>
                 </div><!-- end col -->
             </div><!-- end row -->
@@ -38,29 +38,29 @@
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question" data-wow-delay=".1s">What is the admission procedure?</h4>
+                        <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_admission') }}</h4>
                         <p class="faq-answer mb-4">For those seeking admissions, an informal interaction will be conducted in which pupil and both the parents have to be present. The final decision of the admission committee will be binding..</p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">Other than a PTM, when can a parent interact with the teacher?</h4>
-                        <p class="faq-answer mb-4">School considers parents as partners in the education process and parents are free to meet teachers, with prior appointment, as and when necessary.</p>
+                        <h4 class="faq-question">{{ __('messages.other_than_a_ptm') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.school_considers_parents') }}</p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">What will be the school timings?</h4>
-                        <p class="faq-answer mb-4">School timings are: 7:30 am to 1:30 pm </p>
+                        <h4 class="faq-question">{{ __('messages.what_will_be') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.school_timings_are') }} </p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question" data-wow-delay=".1s">What is the fee structure?</h4>
-                        <p class="faq-answer mb-4">Please call the school for fee details</p>
+                        <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_fee') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.please_call_the_school') }}</p>
                     </div>
 
                 </div>
@@ -70,29 +70,29 @@
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">Will the school authorities be taking adequate measures to ensure hygiene in the school?</h4>
-                        <p class="faq-answer mb-4">School maintains a high standard of cleanliness and hygiene. There are regular checks and monitoring by the school administration as well as the principal of the school.</p>
+                        <h4 class="faq-question">{{ __('messages.will_the_school') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.school_maintains_a_high') }}</p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">What is the kind of security offered to the students?</h4>
-                        <p class="faq-answer mb-4">The school has installed CCTV in all classrooms. Students are always accompanied by teachers or the class monitors when they are moving from one block to the other.</p>
+                        <h4 class="faq-question">{{ __('messages.what_is_the_kind') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.the_school_has_installed') }}</p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">How many terms will the school have?</h4>
-                        <p class="faq-answer mb-4">We will be having only two semesters as per CBSE </p>
+                        <h4 class="faq-question">{{ __('messages.how_many_terms') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.we_will_be_having') }} </p>
                     </div>
 
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">How many students will be there per division?</h4>
-                        <p class="faq-answer mb-4">We strive to maintain a ratio of 30 Students in each class.</p>
+                        <h4 class="faq-question">{{ __('messages.how_many_students') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.we_strive_to_maintain') }}</p>
                     </div>
 
                 </div>

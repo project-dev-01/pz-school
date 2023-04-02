@@ -50,7 +50,7 @@
                                 <th>Date of Issue</th>
                                 <th>Date of Expiry</th>
                                 <th>Fine</th>
-                                <th>Status</th>
+                                <th>{{ __('messages.status') }}</th>
                             </tr>
                         </thead>
                         <tbody>

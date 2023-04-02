@@ -134,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="present_address">Present Address</label>
+                                    <label for="present_address">{{ __('messages.present_address') }}</label>
                                     <textarea class="form-control" name="present_address" id="present_address" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>

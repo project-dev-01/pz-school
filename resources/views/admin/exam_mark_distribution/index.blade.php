@@ -10,7 +10,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
+                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                         <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
                     </ol>
                 </div>

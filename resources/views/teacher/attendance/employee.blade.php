@@ -98,7 +98,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('messages.date') }}</th>
-                                                    <th>Status</th>
+                                                    <th>{{ __('messages.status') }}</th>
                                                     <th>{{ __('messages.check_in') }}</th>
                                                     <th>{{ __('messages.check_out') }}</th>
                                                     <th>{{ __('messages.total_hours') }}</th>

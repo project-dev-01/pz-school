@@ -92,8 +92,8 @@
                                         </span>
                                     </a>
                                 </div><br>
-                                <h3 class="passrecov">Password Recovery</h3>
-                                <p class="text-muted opoos">Opops! Looks like you have forgetten your password. Do not worry because we will help younger back into your account</p>
+                                <h3 class="passrecov">{{ __('messages.password_recovery') }}</h3>
+                                <p class="text-muted opoos">{{ __('messages.oops_back_your_account') }}</p>
                             </div>
                             <form id="LoginAuth" action="{{ route('reset_password') }}" method="post">
                                 <div class="form-group">
@@ -115,10 +115,10 @@
                                     <input class="form-control" type="email" name="email" id="emailaddress" placeholder="Enter your email">
                                 </div><br>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-block signin" id="send" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Please Wait">Sent link</button>
+                                    <button class="btn btn-block signin" id="send" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Please Wait">{{ __('messages.sent_link') }}</button>
                                 </div><br>
                                 <div class="form-group mb-0 text-center">
-                                    <a href="{{ url()->previous() }}"><button class="btn btn-block cancel" type="button">Cancel</button></a>
+                                    <a href="{{ url()->previous() }}"><button class="btn btn-block cancel" type="button">{{ __('messages.cancel') }}</button></a>
                                 </div>
 
                             </form>

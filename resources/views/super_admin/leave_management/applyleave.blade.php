@@ -146,7 +146,7 @@
                         <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> Leave Application
+                                    <span data-feather="folder" class="icon-dual" id="span-parent"></span> {{ __('messages.leave_application') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">Leave From<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -181,7 +181,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">To<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -196,7 +196,7 @@
                                 <!--2st row-->
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <label for="message">Reason(s)<span class="text-danger">*</span></label>
+                                        <label for="message">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                         <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                                     </div>
@@ -232,7 +232,7 @@
                         <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4 class="nav-link">
-                                    <span data-feather="bookmark" class="icon-dual" id="span-parent"></span> Leave History
+                                    <span data-feather="bookmark" class="icon-dual" id="span-parent"></span> {{ __('messages.leave_history') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -245,11 +245,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">S.no</th>
-                                                        <th class="text-center">Leave Type</th>
+                                                        <th class="text-center">{{ __('messages.leave_type') }}</th>
                                                         <th class="text-center">Date</th>
-                                                        <th class="text-center">Reason(s)</th>
+                                                        <th class="text-center">{{ __('messages.reason(s)') }}</th>
                                                         <th class="text-center">Admin Remarks</th>
-                                                        <th class="text-center">Leave Status</th>
+                                                        <th class="text-center">{{ __('messages.leave_status') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
