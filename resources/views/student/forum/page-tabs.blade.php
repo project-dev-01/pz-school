@@ -28,14 +28,13 @@
                     <div class="tt-layout-tab">
                         <div class="tt-wrapper-inner">
                             <h2 class="tt-title">
-                                About Forum 
+                            {{ __('messages.about_forum') }}
                             </h2>
-                            <p> is a community of creatives who come together to share ideas and help each other succeed.</p>
+                            <p> {{ __('messages.is_a_community') }}</p>
                             <h3 class="tt-title">
-                            As the basis for our educational delivery system
+                            {{ __('messages.as_the_basis') }}
                             </h3>
-                            <p>Forum paves the path for global, high-impact new and expanded programs. Rather than a one-way conduit for information sharing or a repurposed business conferencing tool, the learning environment offers a deeply engaging digital experience for learners and instructors alike. Its robust features, varied learning modalities, and data gathering and management tools offer capabilities and insights not available in any other platform.</p>
-                            <!-- <h3 class="tt-title">
+                            <p>{{ __('messages.forum_paves_the') }}</p><!-- <h3 class="tt-title">
                                 Admins
                             </h3>
                             <div class="tt-list-avatar">
@@ -319,9 +318,9 @@
                         
                         <div class="tt-wrapper-inner tt-indent-top">
                             <h4 class="tt-title">
-                                Contact Us
+                            {{ __('messages.contact_us') }}
                             </h4>
-                            Please feel free to leave us a message at sample@sample.com
+                            {{ __('messages.please_feel') }}
                         </div>
                     </div>
                
