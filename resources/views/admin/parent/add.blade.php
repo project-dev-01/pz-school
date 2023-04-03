@@ -319,13 +319,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" class="form-control" placeholder="Passport Number" name="passport">
+                                    <input type="text" class="form-control" placeholder="{{ __('messages.passport_number') }}" name="passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" class="form-control" name="nric" placeholder="NRIC Number" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="nric" placeholder="{{ __('messages.nric_number') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>

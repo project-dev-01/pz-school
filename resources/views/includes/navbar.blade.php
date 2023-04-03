@@ -47,8 +47,9 @@
             <li class="dropdown d-none d-lg-inline-block allChild">
                 <div class="form-group">
                     <label class="control-label"></label>
+                    <!-- <input type="text" class="form-control changeLang" name="country" id="countryLang" placeholder="Country" data-parsley-trigger="change"> -->
                     <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
-                            margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                            margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required> -->
                         <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                         <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                     </select>

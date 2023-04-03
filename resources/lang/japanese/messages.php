@@ -737,4 +737,10 @@ return [
     "notification" => "通知",
     "mark_all_as_read" => "すべて既読にする",
     //PlaceHolder Messages
+    "ahmad_ali" => "Ahmad Ali",
+    "khan" => "Khan",
+    "yyyy-mm-dd" => "YYYY-MM-DD",
+    "pick_blood_type" => "Pick Blood Type",
+    "pick_blood_type" => "Enter Qualification",
+    "enter_homework_title" => "Enter Homework Title",
 ];

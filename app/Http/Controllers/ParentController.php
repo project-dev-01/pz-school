@@ -649,13 +649,13 @@ class ParentController extends Controller
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         
 
-        // dd($get_student_by_all_subjects);
+        // dd($homework);
         return view(
             'parent.homework.list',
             [
-                'homework' => $homework['data']['homeworks'],
+                'homework' => isset($homework['data']['homeworks']) ? $homework['data']['homeworks'] : [],
                 'subject' => $get_student_by_all_subjects['data'],
-                'count' => $homework['data']['count'],
+                'count' => isset($homework['data']['count']) ? $homework['data']['count'] : 0,
             ]
         );
     }

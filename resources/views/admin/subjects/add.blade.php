@@ -43,7 +43,7 @@
                         <input type="number" id="times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>
                     <div class="form-group">
-                        <label for="subjectColor">{{ __('messages.subject_color') }}</label>
+                        <label for="subjectColor">{{ __('messages.subject_colour') }}</label>
                         <input type="text" id="subjectColor" name="subject_color_calendor" class="form-control subjectColor" value="#4a81d4">
                     </div>
                     <div class="form-group">

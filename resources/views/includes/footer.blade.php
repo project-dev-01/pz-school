@@ -150,6 +150,8 @@
 <!-- <script src="{{ asset('public/js/pages/bootstrap-tables.init.js') }}"></script> -->
 <!-- Init js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
+<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
     $.ajaxSetup({
@@ -359,4 +361,12 @@
             });
         }, 60000 * 60);
     };
+</script>
+<script>
+
+    $("#countryLang").countrySelect({
+  onlyCountries: ['us','jp'],
+
+        responsiveDropdown: true
+    });
 </script>

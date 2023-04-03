@@ -155,7 +155,7 @@ return [
     "bank_name" => "Bank Name",
     "account_holder" => "Account Holder",
     "bank_branch" => "Bank Branch",
-    "bank address" => "Bank Address",
+    "bank_address" => "Bank Address",
     "ifsc_code" => "IFSC Code",
     "account_number" => "Account Number",
     "account_no" => "Account No",
@@ -173,7 +173,7 @@ return [
     "class_allocation" => "Class Allocation",
     "add_class_allocation" => "Add Class Allocation",
     "Capacity" => "Capacity",
-    "capacty" => "Capacty",
+    "capacity" => "Capacity",
     "assign_grade_teacher" => "Assign Grade Teacher",
     "assign_teacher" => "Assign Teacher",
     "add_assign_teacher" => "Add Assign Teacher",
@@ -432,7 +432,7 @@ return [
     "new_records" => "New Records",
     "s.no." => "S.no.",
     "personal_info" => "Personal Info",
-    "mobile_no." => "Mobile No.",
+    "mobile_no" => "Mobile No.",
     "class_Name" => "Class Name",
     "parent" => "Parent",
     "guardian_relation" => "Guardian Relation",
@@ -733,4 +733,14 @@ return [
     "good_night" => "Good Night",
     "notification" => "Notification",
     "mark_all_as_read" => "Mark All as Read",
+
+    //place
+    "ahmad_ali" => "Ahmad Ali",
+    "khan" => "Khan",
+    "yyyy-mm-dd" => "YYYY-MM-DD",
+    "pick_blood_type" => "Pick Blood Type",
+    "enter_homework_title" => "Enter Homework Title",
+    "enter_password_number" => "Enter Passport Number",
+    "" => "",
+    
 ];
