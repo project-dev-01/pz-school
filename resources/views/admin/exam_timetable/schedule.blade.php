@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">{{ __('messages.grade') }<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">Select Grade</option>
                                         @foreach($class as $cla)

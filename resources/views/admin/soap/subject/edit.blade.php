@@ -164,21 +164,20 @@
                                         @csrf
                                         <input type="hidden" value="{{$soapsubject['id']}}" name="id">
                                         <div class="form-group">
-                                            <label for="title">Topic Title</label>
+                                            <label for="title">{{ __('messages.topic_title') }}</label>
                                             <div class="tt-value-wrapper">
                                                 <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic" value="{{$soapsubject['title']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
-                                            <div class="tt-note">Describe your topic well, while keeping
-                                                the subject as short as possible.</div>
+                                            <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="header">Topic Header</label>
+                                            <label for="header">{{ __('messages.topic_header') }}</label>
                                             <div class="tt-value-wrapper">
                                                 <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic" value="{{$soapsubject['header']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
-                                            <div class="tt-note">Describe your topic header..</div>
+                                            <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
                                         </div>
                                         <div class="pt-editor">
                                             <h6 class="pt-title">Topic Body</h6>

@@ -84,16 +84,16 @@ border-bottom: 1px solid #E9D528;
                 @csrf
                 <input type="hidden" name="id" value="{{$forum_edit['id']}}">
                 <div class="form-group">
-                    <label for="inputTopicTitle">Topic Title</label>
+                    <label for="inputTopicTitle">{{ __('messages.topic_title') }}</label>
                     <div class="tt-value-wrapper">
                         <input type="text" name="inputTopicTitle" value="{{$forum_edit['topic_title']}}" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
                         <span class="tt-value-input"></span>
                     </div>
-                    <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
+                    <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
                 </div>
                 <div class="form-group" id="selectedtpy">
                     <input type="hidden" id="topictype" name="topictype" value="{{$forum_edit['types']}}">
-                    <label>Topic Type</label>
+                    <label>{{ __('messages.topic_type') }}</label>
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
                             <div class="col-4 col-lg-3 col-xl-3">
@@ -103,7 +103,7 @@ border-bottom: 1px solid #E9D528;
                                             <use xlink:href="#icon-discussion"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Discussion</span>
+                                    <span class="tt-text">{{ __('messages.discussion') }}</span>
                                 </a>
                             </div>
                             <div class="col-4 col-lg-3 col-xl-3">
@@ -113,7 +113,7 @@ border-bottom: 1px solid #E9D528;
                                             <use xlink:href="#Question"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Question</span>
+                                    <span class="tt-text">{{ __('messages.question') }}</span>
                                 </a>
                             </div>
                             <div class="col-4 col-lg-3 col-xl-3">
@@ -123,7 +123,7 @@ border-bottom: 1px solid #E9D528;
                                             <use xlink:href="#Poll"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Technology</span>
+                                    <span class="tt-text">{{ __('messages.technology') }}</span>
                                 </a>
                             </div>
                             <!--  <div class="col-4 col-lg-3 col-xl-2">
@@ -160,12 +160,12 @@ border-bottom: 1px solid #E9D528;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputTopicHeader">Topic Header</label>
+                    <label for="inputTopicHeader">{{ __('messages.topic_header') }}</label>
                     <div class="tt-value-wrapper">
                         <input type="text" name="inputTopicHeader" value="{{$forum_edit['topic_header']}}" class="form-control" id="inputTopicHeader" placeholder="Header of your topic">
                         <span class="tt-value-input"></span>
                     </div>
-                    <div class="tt-note">Describe your topic header..</div>
+                    <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">Topic Body</h6>
