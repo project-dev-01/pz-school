@@ -14,9 +14,9 @@
                         <h5 class="m-0">
                             <span class="float-right">
                                 <a href="javascript:void(0)" class="text-dark" id="mark-all-read">
-                                    <small>Mark all as read</small>
+                                    <small>{{ __('messages.mark_all_as_read') }}</small>
                                 </a>
-                            </span>Notification
+                            </span>{{ __('messages.notification') }}
                         </h5>
                     </div>
 

@@ -731,4 +731,6 @@ return [
     "good_afternoon" => "Good Afternoon",
     "good_evening" => "Good Evening",
     "good_night" => "Good Night",
+    "notification" => "Notification",
+    "mark_all_as_read" => "Mark All as Read",
 ];
