@@ -478,7 +478,7 @@
                                                                             <span class="fas fa-user-graduate"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -491,7 +491,7 @@
                                                                             <span class="fas fa-user-graduate"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="{{ __('messages.muhammad_jaafar') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -499,11 +499,11 @@
                                                             <div class="form-group">
                                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                                 <select id="gender" name="gender" class="form-control">
-                                                                    <option value="">Select Gender
+                                                                    <option value="">{{ __('messages.select_gender') }}
                                                                     </option>
-                                                                    <option value="Male">Male
+                                                                    <option value="Male">{{ __('messages.male') }}
                                                                     </option>
-                                                                    <option value="Female">Female
+                                                                    <option value="Female">{{ __('messages.female') }}
                                                                     </option>
                                                                 </select>
                                                             </div>
@@ -545,7 +545,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                                <input type="text" maxlength="50" class="form-control alloptions" placeholder="Passport Number" name="txt_passport">
+                                                                <input type="text" maxlength="50" class="form-control alloptions" placeholder="{{ __('messages.enter_passport_number') }}" name="txt_passport">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -581,7 +581,7 @@
                                                             <div class="form-group">
                                                                 <label for="txt_caste">{{ __('messages.race') }}</label>
                                                                 <select class="form-control" name="txt_race" id="addRace">
-                                                                    <option value="">Choose Race
+                                                                    <option value="">{{ __('messages.select_race') }}
                                                                     </option>
                                                                     <option value="">Melayu</option>
                                                                     <option value="">Cina</option>
@@ -631,14 +631,14 @@
                                                             <div class="form-group">
                                                                 <label for="txtarea_paddress">Address
                                                                     1</label>
-                                                                <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="Address 1" name="txtarea_paddress" data-parsley-trigger="change">
+                                                                <input type="text" maxlength="255" id="txtarea_paddress" class="form-control alloptions" placeholder="{{ __('messages.enter_address_1') }}" name="txtarea_paddress" data-parsley-trigger="change">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="txtarea_permanent_address">Address
                                                                     2</label>
-                                                                <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="Address 2" name="txtarea_permanent_address" data-parsley-trigger="change">
+                                                                <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="{{ __('messages.enter_address_2') }}" name="txtarea_permanent_address" data-parsley-trigger="change">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -687,7 +687,7 @@
                                                             <div class="form-group">
                                                                 <label for="txt_roll_no">Roll
                                                                     No<span class="text-danger">*</span></label>
-                                                                <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="Roll No" data-parsley-trigger="change">
+                                                                <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_roll_no') }}" data-parsley-trigger="change">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -801,7 +801,7 @@
                                                             <div class="form-group">
                                                                 <label for="father_name">Father
                                                                     Name</label>
-                                                                <input type="text" class="form-control" id="father_name" placeholder="John Leo" aria-describedby="inputGroupPrepend">
+                                                                <input type="text" class="form-control" id="father_name" placeholder="{{ __('messages.john_leo') }}" aria-describedby="inputGroupPrepend">
                                                                 <input type="hidden" name="father_id" id="father_id">
                                                                 <div id="father_list">
                                                                 </div>
@@ -811,7 +811,7 @@
                                                             <div class="form-group">
                                                                 <label for="mother_name">Mother
                                                                     Name</label>
-                                                                <input type="text" class="form-control" id="mother_name" placeholder="Aisha Mal" aria-describedby="inputGroupPrepend">
+                                                                <input type="text" class="form-control" id="mother_name" placeholder="{{ __('messages.aisha_mal') }}" aria-describedby="inputGroupPrepend">
                                                                 <input type="hidden" name="mother_id" id="mother_id">
                                                                 <div id="mother_list">
                                                                 </div>
@@ -822,7 +822,7 @@
                                                             <div class="form-group">
                                                                 <label for="guardian_name">Guardian
                                                                     Name</label>
-                                                                <input type="text" class="form-control" id="guardian_name" placeholder="Amir Shan" aria-describedby="inputGroupPrepend">
+                                                                <input type="text" class="form-control" id="guardian_name" placeholder="{{ __('messages.amir_shan') }}" aria-describedby="inputGroupPrepend">
                                                                 <input type="hidden" name="guardian_id" id="guardian_id">
                                                                 <div id="guardian_list">
                                                                 </div>
@@ -833,7 +833,7 @@
                                                                 <label for="relation">Guardian
                                                                     Relation</label>
                                                                 <select class="form-control" name="relation">
-                                                                    <option value="">Choose Relation
+                                                                    <option value="">{{ __('messages.select_relation') }}
                                                                     </option>
                                                                     <option value="">Uncle</option>
                                                                     <option value="">Father</option>

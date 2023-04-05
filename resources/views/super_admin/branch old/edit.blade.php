@@ -40,7 +40,7 @@
                                             <div class="form-group row">
                                                 <label for="name" class="col-3 col-form-label">Branch Name<span class="text-danger">*</span></label>
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{$branch['name']}}" placeholder="Enter Branch Name">
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{$branch['name']}}" placeholder="{{ __('messages.enter_branch_name') }}">
                                                     <span class="text-danger error-text name_error"></span>
                                                 </div>
                                             </div>
@@ -76,7 +76,7 @@
                                             <div class="form-group row">
                                                 <label for="currency" class="col-3 col-form-label">Currency<span class="text-danger">*</span></label>
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="currency" name="currency" value="{{$branch['currency']}}" placeholder="Enter Currency">
+                                                    <input type="text" class="form-control" id="currency" name="currency" value="{{$branch['currency']}}" placeholder="{{ __('messages.enter_currency') }}">
                                                     <span class="text-danger error-text currency_error"></span>
                                                 </div>
                                             </div>

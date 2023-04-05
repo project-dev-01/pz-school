@@ -121,7 +121,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="YYYY-MM-DD" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}">
+                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}">
                                     </div>
                                 </div>
                                 <span class="text-danger error-text start_date_error"></span>
@@ -135,7 +135,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="YYYY-MM-DD" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
+                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>

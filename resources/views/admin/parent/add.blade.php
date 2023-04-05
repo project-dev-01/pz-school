@@ -274,7 +274,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="first_name" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="first_name" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -312,20 +312,20 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date_of_birth" placeholder="YYYY-MM-DD" id="date_of_birth">
+                                        <input type="text" class="form-control" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="date_of_birth">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" class="form-control" placeholder="{{ __('messages.passport_number') }}" name="passport">
+                                    <input type="text" class="form-control" placeholder="{{ __('messages.enter_passport_number') }}" name="passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" class="form-control" name="nric" placeholder="{{ __('messages.nric_number') }}" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="nric" placeholder="{{ __('messages.enter_nric_number') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -370,7 +370,7 @@
                                 <div class="form-group">
                                     <label for="race">{{ __('messages.race') }}</label>
                                     <select class="form-control" name="race">
-                                        <option value="">Choose race</option>
+                                        <option value="">{{ __('messages.select_race') }}</option>
                                         @forelse($races as $r)
                                         <option value="{{$r['id']}}">{{$r['races_name']}}</option>
                                         @empty
@@ -440,13 +440,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="address" id="address" placeholder="Address 1">
+                                    <input class="form-control" name="address" id="address" placeholder="{{ __('messages.enter_address_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address_2">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="address_2" id="address_2" placeholder="Address 2">
+                                    <input class="form-control" name="address_2" id="address_2" placeholder="{{ __('messages.enter_address_2') }}">
                                 </div>
                             </div>
                         </div>

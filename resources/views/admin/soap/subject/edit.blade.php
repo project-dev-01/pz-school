@@ -174,13 +174,13 @@
                                         <div class="form-group">
                                             <label for="header">{{ __('messages.topic_header') }}</label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic" value="{{$soapsubject['header']}}">
+                                                <input type="text" name="header" class="form-control" id="header" placeholder="{{ __('messages.header_of_your_topic') }}" value="{{$soapsubject['header']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
                                         </div>
                                         <div class="pt-editor">
-                                            <h6 class="pt-title">Topic Body</h6>
+                                            <h6 class="pt-title">{{ __('messages.topic_body') }}</h6>
                                             <div class="pt-row">
                                                 <!-- basic summernote-->
                                                 <textarea class="summernote" name="body">{{$soapsubject['title']}}</textarea>

@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="footer_text">{{ __('messages.footer_text') }}<span class="text-danger">*</span></label> 
-                        <textarea  id="footer_text" class="form-control"  placeholder="Enter Footer Text" name="footer_text" >
+                        <textarea  id="footer_text" class="form-control"  placeholder="{{ __('messages.enter_footer_text') }}" name="footer_text" >
                         </textarea>
                         <span class="text-danger error-text footer_text_error"></span>
                     </div>
@@ -40,22 +40,22 @@
                     </div>
                     <div class="form-group">
                         <label for="facebook_url">{{ __('messages.facebook_url') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="facebook_url" name="facebook_url" class="form-control" placeholder="Enter Facebook Url">
+                        <input type="text" id="facebook_url" name="facebook_url" class="form-control" placeholder="{{ __('messages.enter_facebook_url') }}">
                         <span class="text-danger error-text facebook_url_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="twitter_url">{{ __('messages.twitter_url') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="twitter_url" name="twitter_url" class="form-control" placeholder="Enter Twitter Url">
+                        <input type="text" id="twitter_url" name="twitter_url" class="form-control" placeholder="{{ __('messages.enter_twitter_url') }}">
                         <span class="text-danger error-text twitter_url_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="linkedin_url">{{ __('messages.linkedIn_url') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="linkedin_url" name="linkedin_url" class="form-control" placeholder="Enter LinkedIn Url">
+                        <input type="text" id="linkedin_url" name="linkedin_url" class="form-control" placeholder="{{ __('messages.enter_linkedIn_url') }}">
                         <span class="text-danger error-text linkedin_url_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="youtube_url">{{ __('messages.youtube_url') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="youtube_url" name="youtube_url" class="form-control" placeholder="Enter Youtube Url">
+                        <input type="text" id="youtube_url" name="youtube_url" class="form-control" placeholder="{{ __('messages.enter_youtube_url') }}">
                         <span class="text-danger error-text youtube_url_error"></span>
                     </div>
                     <div class="form-group">

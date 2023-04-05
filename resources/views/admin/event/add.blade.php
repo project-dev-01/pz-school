@@ -89,7 +89,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                     <span class="text-danger error-text start_date_error"></span>
                                 </div>
@@ -103,7 +103,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>
@@ -112,7 +112,7 @@
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
                                         <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" checked>
-                                        <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }</label>
+                                        <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }}</label>
                                     </div>
                                 </div>
                             </div>

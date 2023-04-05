@@ -179,7 +179,7 @@
                                         <div class="form-group">
                                             <label for="header">{{ __('messages.topic_header') }}<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic">
+                                                <input type="text" name="header" class="form-control" id="header" placeholder="{{ __('messages.header_of_your_topic') }}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>

@@ -80,13 +80,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="Ahmad Ali" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="Muhammad Jaafar" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="{{ __('messages.muhammad_jaafar') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -111,7 +111,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="name" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend" required>
+                                                    <input type="text" class="form-control" id="name" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" required>
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -137,13 +137,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.address_1') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="Address 1" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="name" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.address_2') }}<span class="text-danger">*</span><br></label>
-                                                <input type="text" class="form-control" id="address" placeholder="Address 2" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="address" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -208,7 +208,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.school_last_attended') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder="School Last Attend" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="pin" placeholder="{{ __('messages.school_last_attend') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -216,13 +216,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.school_address1') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="sadd" placeholder="Address 1" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="sadd" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.school_address2') }}<span class="text-danger">*</span><br></label>
-                                                <input type="text" class="form-control" id="sadd2" placeholder="Address 2" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="sadd2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -267,7 +267,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Parent /Guardian's Name<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.parent') }}/{{ __('messages.guardians_name') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Select Parent /Guardian's Name</option>
                                                     <option value="">Parent</option>
@@ -278,13 +278,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="firstname" placeholder="John" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="firstname" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lastname" placeholder="Leo" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lastname" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -312,11 +312,11 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Parent/Guardian's Name - Secondary<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.parent_guardian_secondary') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Parent/Guardian's Name - Secondary</option>
-                                                    <option value="">Parent</option>
-                                                    <option value="">Guardian's</option>
+                                                    <option value="">{{ __('messages.select_parent_guardian_secondary') }}</option>
+                                                    <option value="">{{ __('messages.parent') }}</option>
+                                                    <option value="">{{ __('messages.guardia') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -367,19 +367,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ename" placeholder="John Leo" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ename" placeholder="{{ __('messages.john_leo') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="John" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="Leo" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div> <br>
@@ -396,7 +396,7 @@
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                                    <label class="custom-control-label" for="customCheck11">I agree to {terms & conditions} provided by the school. I also certify that all information in this form is true and accurate.</label>
+                                                    <label class="custom-control-label" for="customCheck11">{{ __('messages.i_agree_to_terms_conditions') }}</label>
                                                 </div>
                                             </div>
                                         </div>

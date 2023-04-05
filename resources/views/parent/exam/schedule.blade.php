@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Schedule List
+                        {{ __('messages.schedule_list') }} 
                             <h4>
                     </li>
                 </ul><br>

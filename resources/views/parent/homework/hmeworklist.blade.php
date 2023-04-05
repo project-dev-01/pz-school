@@ -204,7 +204,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Evalution Date :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.evalution_date') }} :</div>
                                                         <div class="col-md-6">23 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -218,7 +218,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="col-md-6 font-weight-bold">Rank Out Of 5 :</div>
+                                                        <div class="col-md-6 font-weight-bold">{{ __('messages.rank_out_of_5') }} :</div>
                                                         <div class="col-md-6">N/A</div>
                                                     </div>
                                                 </div>
@@ -235,12 +235,12 @@
                                             </div><br />
                                             <hr>
                                             <div class="row">
-                                                <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                                <div class="col-md-12 font-weight-bold">{{ __('messages.submission_process_here') }} :- </div>
                                             </div><br>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-md-6 col-form-label">Note :</label>
+                                                        <label for="inputEmail3" class="col-md-6 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="col-md-6 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
@@ -315,7 +315,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Evalution Date :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.evalution_date') }} :</div>
                                                         <div class="ml-2">23 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -329,7 +329,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Rank Out Of 5:</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.rank_out_of_5') }}:</div>
                                                         <div class="ml-2">N/A</div>
                                                     </div>
                                                 </div>
@@ -347,13 +347,13 @@
                                             </div> <br />
                                             <hr>
                                             <div class="row">
-                                                <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                                <div class="col-md-12 font-weight-bold">{{ __('messages.submission_process_here') }} :- </div>
 
                                             </div><br>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Note :</label>
+                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="ml-2 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
@@ -429,7 +429,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Evalution Date :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.evalution_date') }} :</div>
                                                         <div class="ml-2">23 Jan 2022</div>
                                                     </div>
                                                 </div>
@@ -443,7 +443,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="row">
-                                                        <div class="mb-2 font-weight-bold">Rank Out Of 5 :</div>
+                                                        <div class="mb-2 font-weight-bold">{{ __('messages.rank_out_of_5') }} :</div>
                                                         <div class="ml-2">N/A</div>
                                                     </div>
                                                 </div>
@@ -461,13 +461,13 @@
                                             </div><br />
                                             <hr>
                                             <div class="row">
-                                                <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                                <div class="col-md-12 font-weight-bold">{{ __('messages.submission_process_here') }} :- </div>
 
                                             </div><br>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">Note :</label>
+                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="ml-2 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>

@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
 
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_homework" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="YYYY-MM-DD" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control homeWorkAdd" name="date_of_submission" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

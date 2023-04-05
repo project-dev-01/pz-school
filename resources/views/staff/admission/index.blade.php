@@ -167,7 +167,7 @@
                     <div class="form-group">
                         <label for="heard">{{ __('messages.blood_group') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Blood Group</option>
+                            <option value="">{{ __('messages.select_blood_group') }}</option>
                             <option value="press">O+</option>
                             <option value="net">A+</option>
                             <option value="mouth">B+</option>

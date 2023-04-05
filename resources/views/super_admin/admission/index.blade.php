@@ -100,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         <option>Management</option>
                                         <option>Government</option>
                                     </select>
@@ -160,7 +160,7 @@
                             <div class="form-group">
                                 <label for="heard">{{ __('messages.blood_group') }}<span class="text-danger">*</span></label>
                                 <select id="heard" class="form-control" required="">
-                                    <option value="">Select Blood Group</option>
+                                    <option value="">{{ __('messages.select_blood_group') }}</option>
                                     <option>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>

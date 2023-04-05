@@ -98,7 +98,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> The Next Session Was Transferred To The Student<h4>
+                        <h4 class="navv">{{ __('messages.the_next_session_was_transferred') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -107,7 +107,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_year">Promote to academic year<span class="text-danger">*</span></label>
+                                    <label for="promote_year">{{ __('messages.promote_to_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="promote_year" class="form-control" name="promote_year">
                                         <option value="">Choose Academic Year</option>
                                         @forelse($academic_year_list as $r)
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_semester_id">Promote to semester<span class="text-danger">*</span></label>
+                                    <label for="promote_semester_id">{{ __('messages.promote_to_semester') }}<span class="text-danger">*</span></label>
                                     <select id="promote_semester_id" class="form-control" name="promote_semester_id">
                                         <option value="">Select Semester</option>
                                         @foreach($semester as $sem)
@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_session_id">Promote to session<span class="text-danger">*</span></label>
+                                    <label for="promote_session_id">{{ __('messages.promote_to_session') }}<span class="text-danger">*</span></label>
                                     <select id="promote_session_id" class="form-control" name="promote_session_id">
                                         <option value="">Select Session</option>
                                         @foreach($session as $ses)
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div><br>
-                        ( Note : Student will not appear on the list after a Student has been Promoted )<br>
+                        {{ __('messages.student_will_not_appear') }}<br>
                         <div class="table-responsive">
                             <table class="table table-bordered w-100 nowrap" id="showStudentDetails">
                                 <thead>
@@ -161,7 +161,7 @@
                                         <th>#</th>
                                         <th>{{ __('messages.student_name') }}</th>
                                         <th>{{ __('messages.register_no') }}</th>
-                                        <th>Promote to Class</th>
+                                        <th>{{ __('messages.promote_to_class') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

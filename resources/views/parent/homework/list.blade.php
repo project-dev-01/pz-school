@@ -208,7 +208,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Evalution Date</span>@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.evalution_date') }}</span>@if($work['evaluation_date']){{ date('F j , Y', strtotime($work['evaluation_date'])) }}@endif</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -220,7 +220,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">Rank Out Of 5 </span>@if($work['remarks']) {{$work['rank']}} @endif</p>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.rank_out_of_5') }} </span>@if($work['remarks']) {{$work['rank']}} @endif</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -235,14 +235,14 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="row">
-                                                        <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                                        <div class="col-md-12 font-weight-bold">{{ __('messages.submission_process_here') }} :- </div>
                                                     </div>
                                                 </div>
                                             </div><br>
                                             <div class="row">
                                                 <input type="hidden" name="homework_id" value="{{$work['id']}}">
                                                 <div class="col-md-6">
-                                                    <p class="col-md-12"><span class="font-weight-semibold">Note </span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                    <p class="col-md-12"><span class="font-weight-semibold">{{ __('messages.note') }} </span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                                    @if($work['remarks']) {{$work['remarks']}} @endif</textarea></p>
 
                                                 </div>

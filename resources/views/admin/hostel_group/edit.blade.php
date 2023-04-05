@@ -34,7 +34,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name" value="{{$group['name']}}">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{$group['name']}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="student">{{ __('messages.student') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="Choose The Student">
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_student') }}">
                                         <option value="">Select Student</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>

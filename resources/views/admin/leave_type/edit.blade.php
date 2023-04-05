@@ -28,10 +28,10 @@
                     <div class="form-group">
                         <label for="gender">{{ __('messages.gender') }}</label>
                         <select class="form-control" id="gender" name="gender">
-                            <option value="">Select Gender</option>
-                            <option value="All">All</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="">{{ __('messages.select_gender') }}</option>
+                            <option value="All">{{ __('messages.all') }}</option>
+                            <option value="Male">{{ __('messages.male') }}</option>
+                            <option value="Female">{{ __('messages.female') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

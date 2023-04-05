@@ -31,7 +31,7 @@
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">A parent’s love is whole no matter how many times divided</p>
+                        <p class="mb-3 text-white text">{{ __('messages.a_parent’s_love_is') }}</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>

@@ -251,7 +251,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="first_name" placeholder="Ahmad Ali" id="firstName">
+                                        <input type="text" class="form-control shortNameChange" name="first_name" placeholder="{{ __('messages.ahmad_ali') }}" id="firstName">
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +302,7 @@
                                 <div class="form-group">
                                     <label for="race">{{ __('messages.race') }}</label>
                                     <select class="form-control" name="race" id="addRace">
-                                        <option value="">Choose race</option>
+                                        <option value="">{{ __('messages.select_race') }}</option>
                                         @forelse($races as $r)
                                         <option value="{{$r['id']}}">{{$r['races_name']}}</option>
                                         @empty
@@ -315,13 +315,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" class="form-control" placeholder="Passport Number" name="passport" id="Passport">
+                                    <input type="text" class="form-control" placeholder="{{ __('messages.enter_passport_number') }}" name="passport" id="Passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" class="form-control" name="nric_number" placeholder="NRIC Number" id="nricNumber">
+                                    <input type="text" class="form-control" name="nric_number" placeholder="{{ __('messages.enter_nric_number') }}" id="nricNumber">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -333,7 +333,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" placeholder="YYYY-MM-DD" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
                                     </div>
                                 </div>
                             </div>
@@ -390,13 +390,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="present_address" id="present_address" placeholder="Address 1">
+                                    <input class="form-control" name="present_address" id="present_address" placeholder="{{ __('messages.enter_address_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" placeholder="Address 2">
+                                    <input class="form-control" name="permanent_address" id="permanent_address" placeholder="{{ __('messages.enter_address_2') }}">
                                 </div>
                             </div>
                         </div>
@@ -430,7 +430,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                 </div>
                             </div>
@@ -487,7 +487,7 @@
                                 <div class="form-group">
                                     <label for="staff_category">{{ __('messages.staff_category') }}</label>
                                     <select class="form-control" id="staffCategory" name="staff_category">
-                                        <option value="">Select Category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         @forelse($staff_categories as $r)
                                         <option value="{{$r['id']}}">{{$r['staff_categories_name']}}</option>
                                         @empty

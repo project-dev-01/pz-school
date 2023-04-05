@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.semester_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Semester Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_semester_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="year">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
-                        <select id="btwyears" class="form-control" name="year" placeholder="Enter Acadenic Year">
+                        <select id="btwyears" class="form-control" name="year" placeholder="{{ __('messages.enter_acadenic_year') }}">
                             <option value="">Choose Academic Year</option>
                             @forelse($academic_year_list as $r)
                             <option value="{{$r['id']}}" >{{$r['name']}}</option>

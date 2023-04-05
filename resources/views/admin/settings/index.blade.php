@@ -67,28 +67,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name">{{ __('messages.first_name') }}</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="Enter The First Name">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="{{ __('messages.enter_the_first_name') }}">
                                         <span class="text-danger error-text first_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('messages.last_name') }}</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="Enter The Last Name">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="{{ __('messages.enter_the_last_name') }}">
                                         <span class="text-danger error-text last_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email_address') }}</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter The Email">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="{{ __('messages.enter_the_email') }}">
                                         <span class="text-danger error-text email_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
-                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="Enter The Mobile No">
+                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
                                         <span class="text-danger error-text mobile_no_error"></span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i>{{ __('messages.Update') }}</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i>{{ __('messages.update') }}</button>
                             </div>
                         </form>
                     </div>
@@ -139,7 +139,7 @@
                                 </div>
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}Save</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}</button>
                             </div>
                         </form>
                         <!-- end comment box -->

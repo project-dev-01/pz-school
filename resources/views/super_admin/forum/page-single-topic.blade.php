@@ -215,7 +215,7 @@
                 </div>
                 <form action="" method="POST" id="postreplie">
                     <div class="form-group">
-                        <textarea name="message" class="form-control clrtext" rows="5" id="repliesinput" placeholder="Lets get started"></textarea>
+                        <textarea name="message" class="form-control clrtext" rows="5" id="repliesinput" placeholder="{{ __('messages.lets_get_started') }}"></textarea>
                     </div>
                     <div class="pt-row">
 

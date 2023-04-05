@@ -112,7 +112,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select Category</option>
+                            <option value="">{{ __('messages.select_category') }}</option>
                             <option value="net">Eco</option>
                             <option value="mouth">Cheap</option>
                             <option value="other">Party</option>

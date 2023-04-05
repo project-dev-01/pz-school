@@ -31,7 +31,7 @@
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">Even the greatest were beginners</p>
+                        <p class="mb-3 text-white text">{{ __('messages.even_the_greatest') }}</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>

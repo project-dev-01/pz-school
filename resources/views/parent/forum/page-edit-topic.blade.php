@@ -162,13 +162,13 @@ border-bottom: 1px solid #E9D528;
                 <div class="form-group">
                     <label for="inputTopicHeader">{{ __('messages.topic_header') }}</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicHeader" value="{{$forum_edit['topic_header']}}" class="form-control" id="inputTopicHeader" placeholder="Header of your topic">
+                        <input type="text" name="inputTopicHeader" value="{{$forum_edit['topic_header']}}" class="form-control" id="inputTopicHeader" placeholder="{{ __('messages.header_of_your_topic') }}">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
                 </div>
                 <div class="pt-editor">
-                    <h6 class="pt-title">Topic Body</h6>
+                    <h6 class="pt-title">{{ __('messages.topic_body') }}</h6>
                     <div class="">
                         <div class="">
                             <ul class="pt-edit-btn">
@@ -242,7 +242,7 @@ border-bottom: 1px solid #E9D528;
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started" style="height:20px"> {{$forum_edit['body_content']}} </textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="{{ __('messages.lets_get_started') }}" style="height:20px"> {{$forum_edit['body_content']}} </textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -250,7 +250,7 @@ border-bottom: 1px solid #E9D528;
                                 <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
-                                        <option value="">Select category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         @if(!empty($category))
                                         @foreach($category as $c)
                                         <option value="{{$c['id']}}"  {{$c['id'] == $forum_edit['category'] ? "Selected" : "" }}>{{$c['category_names']}}</option>

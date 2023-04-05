@@ -114,9 +114,9 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.gender') }}</label>
                         <select id="heard" class="form-control" required="">
-                        <option value="">Select Gender</option>
-                            <option value="">Male</option>
-                            <option value="press">Female</option>
+                        <option value="">{{ __('messages.select_gender') }}</option>
+                            <option value="">{{ __('messages.male') }}</option>
+                            <option value="press">{{ __('messages.femlae') }}</option>
                             </select>
                     </div>                                       
                     </div>
@@ -126,7 +126,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.religion') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Religion</option>
+                            <option value="">{{ __('messages.select_religion') }}</option>
                             <option value="">Christian</option>
                             <option value="press">Muslim</option>                            
                             <option value="press">Hindu</option>
@@ -137,7 +137,7 @@
                     <div class="form-group">
                         <label for="heard">{{ __('messages.blood_group') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Blood group</option>
+                            <option value="">{{ __('messages.select_blood_group') }}</option>
                             <option value="press">O+</option>
                             <option value="net">A+</option>
                             <option value="mouth">B+</option>

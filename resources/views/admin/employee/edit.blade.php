@@ -306,7 +306,7 @@
                                 <div class="form-group">
                                     <label for="race">{{ __('messages.race') }}</label>
                                     <select class="form-control" name="race" id="addRace">
-                                        <option value="">Choose race</option>
+                                        <option value="">{{ __('messages.select_race') }}</option>
                                         @forelse($races as $r)
                                         <option value="{{$r['id']}}" {{$employee['race'] == $r['id'] ? 'selected' : ''}}>{{$r['races_name']}}</option>
                                         @empty
@@ -320,13 +320,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="Passport Number">
+                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="{{ __('messages.enter_passport_number') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="NRIC Number">
+                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="{{ __('messages.enter_nric_number') }}">
                                 </div>
                             </div>
 
@@ -339,7 +339,7 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="YYYY-MM-DD" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
                                     </div>
                                 </div>
                             </div>
@@ -393,13 +393,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="present_address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="Address 1">
+                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="{{ __('messages.enter_address_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="permanent_address">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="Address 2">
+                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="{{ __('messages.enter_address_2') }}">
                                 </div>
                             </div>
                         </div>
@@ -446,7 +446,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                 </div>
                             </div>
@@ -522,7 +522,7 @@
                                 <div class="form-group">
                                     <label for="staff_category">{{ __('messages.staff_category') }}</label>
                                     <select class="form-control" id="staffCategory" name="staff_category">
-                                        <option value="">Select Category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         @forelse($staff_categories as $r)
                                         <option value="{{$r['id']}}" {{$employee['staff_category'] == $r['id'] ? 'Selected':''}}>{{$r['staff_categories_name']}}</option>
                                         @empty

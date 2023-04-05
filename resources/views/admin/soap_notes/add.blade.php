@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="soap_type_id" class="form-control" name="soap_type_id">
-                            <option value="">Select Soap Type</option>
+                            <option value="">{{ __('messages.select_soap_type') }}</option>
                             <option value="1">Subjective</option>
                             <option value="2">Objective</option>
                             <option value="3">Assessment</option>
@@ -22,19 +22,19 @@
                     <div class="form-group">
                         <label for="soap_category_id">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <select id="soap_category_id" class="form-control" name="soap_category_id">
-                            <option value="">Select Category</option>
+                            <option value="">{{ __('messages.select_category') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="soap_sub_category_id">{{ __('messages.sub_category') }} <span class="text-danger">*</span></label>
                         <select id="soap_sub_category_id" class="form-control" name="soap_sub_category_id">
-                            <option value="">Select Sub Category</option>
+                            <option value="">{{ __('messages.select_sub_category') }}</option>
                         </select>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="notes"> Notes<span class="text-danger">*</span></label>
+                        <label for="notes"> {{ __('messages.notes') }}<span class="text-danger">*</span></label>
                         <input type="text" id="notes" name="notes" class="form-control" placeholder="Enter Notes">
                         <span class="text-danger error-text notes_error"></span>
                     </div>

@@ -233,7 +233,7 @@ use \App\Http\Controllers\AdminController;
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="student Name">Date<span class="text-danger">*</span></label>
-                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker initialEmpty" placeholder="YYYY-MM-DD">
+                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -297,7 +297,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <td class="semester-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$sem['id']}} initialEmpty" id="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][status]">
                                                                     <input type="hidden" value="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][semester]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[2][{{$sem['id']}}][date]">
+                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}} initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}" name="fees[2][{{$sem['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$sem['name']}}
                                                                 </td>
@@ -367,7 +367,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <td class="month-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$mon['id']}} initialEmpty" id="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][status]">
                                                                     <input type="hidden" value="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][month]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[3][{{$mon['id']}}][date]">
+                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}" name="fees[3][{{$mon['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$mon['name']}}
                                                                 </td>

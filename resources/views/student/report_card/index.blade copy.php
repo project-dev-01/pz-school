@@ -134,7 +134,7 @@
                     <div class="form-group text-center">
 
 
-                        <h4>No records found...</h4>
+                        <h4>{{ __('messages.no_records_found') }}</h4>
 
 
 

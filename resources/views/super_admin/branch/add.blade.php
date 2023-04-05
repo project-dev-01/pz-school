@@ -17,7 +17,7 @@
                                     <span class="fas fa-user-graduate"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control shortNameChange" name="first_name" placeholder="Ahmad Ali" id="firstName">
+                            <input type="text" class="form-control shortNameChange" name="first_name" placeholder="{{ __('messages.ahmad_ali') }}" id="firstName">
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="branch_name">Branch Name</label>
-                        <input type="text" maxlength="50" name="branch_name" class="form-control" placeholder="Enter Branch Name" name="txt_branchname">
+                        <input type="text" maxlength="50" name="branch_name" class="form-control" placeholder="{{ __('messages.enter_branch_name') }}" name="txt_branchname">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -61,7 +61,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="school_code">School Code</label>
-                        <input type="text" maxlength="50" name="school_code" class="form-control" placeholder="Enter School Code">
+                        <input type="text" maxlength="50" name="school_code" class="form-control" placeholder="{{ __('messages.enter_school_code') }}">
                     </div>
                 </div>
             </div>
@@ -69,13 +69,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="passport">{{ __('messages.passport_number') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Passport Number" name="passport" id="Passport">
+                        <input type="text" class="form-control" placeholder="{{ __('messages.enter_passport_number') }}" name="passport" id="Passport">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="nric_number">{{ __('messages.nric_number') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="nric_number" placeholder="nric number" id="nricNumber">
+                        <input type="text" class="form-control" name="nric_number" placeholder="{{ __('messages.enter_nric_number') }}" id="nricNumber">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -89,7 +89,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="currency">Currency<span class="text-danger">*</span></label>
-                        <input type="text" maxlength="50" name="currency" class="form-control" placeholder="Enter Currency" data-parsley-trigger="change">
+                        <input type="text" maxlength="50" name="currency" class="form-control" placeholder="{{ __('messages.enter_currency') }}" data-parsley-trigger="change">
                     </div>
                 </div>
                 <div class="col-md-4">

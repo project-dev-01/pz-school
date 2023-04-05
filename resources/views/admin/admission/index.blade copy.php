@@ -163,9 +163,9 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select id="gender" name="gender" class="form-control">
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
+                                        <option value="Male">{{ __('messages.male') }}</option>
+                                        <option value="Female">{{ __('messages.female') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
                                 <div class="form-group">
                                     <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                     <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                        <option value="">Select Blood Group</option>
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
                                         <option>O+</option>
                                         <option>A+</option>
                                         <option>B+</option>
@@ -515,7 +515,7 @@
                                     <label for="drp_transport_route">{{ __('messages.transport_route') }}</label>
 
                                     <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                        <option value="">Select Transport</option>
+                                        <option value="">{{ __('messages.select_transport') }}</option>
                                         @foreach($transport as $trans)
                                         <option value="{{$trans['id']}}">{{$trans['name']}}</option>
                                         @endforeach

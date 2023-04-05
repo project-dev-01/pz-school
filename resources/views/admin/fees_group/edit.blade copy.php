@@ -30,7 +30,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="Enter Fees Group Name">
+                                <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="{{ __('messages.enter_fees_group_name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>

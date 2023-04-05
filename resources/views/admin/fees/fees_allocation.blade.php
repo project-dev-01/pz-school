@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="group_id">{{ __('messages.fees_group') }}<span class="text-danger">*</span></label>
                                     <select id="group_id" class="form-control" name="group_id">
-                                        <option value="">Select Fees Group</option>
+                                        <option value="">{{ __('messages.select_fees_group') }}</option>
                                         @forelse ($fees_group_list as $group_list)
                                         <option value="{{ $group_list['id'] }}">{{ $group_list['name'] }}</option>
                                         @empty

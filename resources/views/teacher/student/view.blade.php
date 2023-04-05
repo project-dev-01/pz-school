@@ -388,9 +388,9 @@
                                             <div class="form-group">
                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                 <select id="gender" name="gender" class="form-control">
-                                                    <option value="">Select Gender</option>
-                                                    <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>Male</option>
-                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>Female</option>
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
+                                                    <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -400,7 +400,7 @@
                                             <div class="form-group">
                                                 <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                                 <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                                    <option value="">Select Blood Group</option>
+                                                    <option value="">{{ __('messages.select_blood_group') }}</option>
                                                     <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
                                                     <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
                                                     <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
@@ -428,7 +428,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                <input type="text" class="form-control" name="txt_passport" placeholder="Passport Number" value="{{$student['passport']}}">
+                                                <input type="text" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{$student['passport']}}">
                                             </div>
                                         </div>
                                     </div>
@@ -455,7 +455,7 @@
                                             <div class="form-group">
                                                 <label for="txt_caste">{{ __('messages.race') }}</label>
                                                 <select class="form-control" name="txt_race" id="addRace">
-                                                    <option value="">Choose race</option>
+                                                    <option value="">{{ __('messages.select_race') }}</option>
                                                     @forelse($races as $r)
                                                     <option value="{{$r['id']}}" {{$student['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
                                                     @empty
@@ -1042,7 +1042,7 @@
                                             <div class="form-group">
                                                 <label for="relation">{{ __('messages.relation') }}</label>
                                                 <select class="form-control" name="relation">
-                                                    <option value="">Choose Relation</option>
+                                                    <option value="">{{ __('messages.select_relation') }}</option>
                                                     @forelse($relation as $r)
                                                     <option value="{{$r['id']}}" {{$student['relation'] == $r['id'] ? "selected" : ""}}>{{$r['name']}}</option>
                                                     @empty
@@ -1227,7 +1227,7 @@
                                                 <label for="drp_transport_route">{{ __('messages.transport_route') }}</label>
 
                                                 <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                                    <option value="">Select Transport</option>
+                                                    <option value="">{{ __('messages.select_transport') }}</option>
                                                     @foreach($transport as $trans)
                                                     <option value="{{$trans['id']}}" {{$student['route_id'] == $trans['id'] ? "Selected" : "" }}>{{$trans['name']}}</option>
                                                     @endforeach

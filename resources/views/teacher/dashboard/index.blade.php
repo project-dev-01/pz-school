@@ -968,7 +968,7 @@
                         <div class="form-group">
                             <label for="sr_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="sr_btwyears" class="form-control studentRank" name="year">
-                                <option value="">Select Academic Year</option>
+                                <option value="">{{ __('messages."select_academic_year') }}</option>
                                 @forelse($academic_year_list as $r)
                                 <option value="{{$r['id']}}">{{$r['name']}}</option>
                                 @empty
@@ -1076,7 +1076,7 @@
                         <div class="form-group">
                             <label for="st_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="st_btwyears" class="form-control studentSemester" name="year">
-                                <option value="">Select Academic Year</option>
+                                <option value="">{{ __('messages."select_academic_year') }}</option>
                                 @forelse($academic_year_list as $r)
                                 <option value="{{$r['id']}}">{{$r['name']}}</option>
                                 @empty
@@ -1143,7 +1143,7 @@
                         <div class="form-group">
                             <label for="ems_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="ems_btwyears" class="form-control examMarkStatus" name="year">
-                                <option value="">Select Academic Year</option>
+                                <option value="">{{ __('messages."select_academic_year') }}</option>
                                 @forelse($academic_year_list as $r)
                                 <option value="{{$r['id']}}">{{$r['name']}}</option>
                                 @empty
@@ -1297,7 +1297,7 @@
                         <div class="form-group">
                             <label for="st10_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="st10_btwyears" class="form-control studentTop" name="year">
-                                <option value="">Select Academic Year</option>
+                                <option value="">{{ __('messages."select_academic_year') }}</option>
                                 @forelse($academic_year_list as $r)
                                 <option value="{{$r['id']}}">{{$r['name']}}</option>
                                 @empty
@@ -1391,7 +1391,7 @@
                         <div class="form-group">
                             <label for="sb10_btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                             <select id="sb10_btwyears" class="form-control studentBottom" name="year">
-                                <option value="">Select Academic Year</option>
+                                <option value="">{{ __('messages."select_academic_year') }}</option>
                                 @forelse($academic_year_list as $r)
                                 <option value="{{$r['id']}}">{{$r['name']}}</option>
                                 @empty
