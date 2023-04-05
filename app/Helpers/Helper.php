@@ -35,7 +35,7 @@ class Helper
     // get api call
     public static function GetMethod($url)
     {
-        $response = Http::get($url, [
+        $response = Http::withToken(session()->get('token'))->get($url, [
             'token' => session()->get('token'),
             'branch_id' => session()->get('branch_id')
         ]);
@@ -46,7 +46,7 @@ class Helper
     {
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
-        $response = Http::get($url, $data);
+        $response = Http::withToken(session()->get('token'))->get($url, $data);
         return $response->json();
     }
     // post api call
@@ -54,7 +54,7 @@ class Helper
     {
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
-        $response = Http::post($url, $data);
+        $response = Http::withToken(session()->get('token'))->post($url, $data);
         return $response->json();
     }
 
@@ -63,7 +63,7 @@ class Helper
     {
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
-        $response = Http::get($url, $data);
+        $response = Http::withToken(session()->get('token'))->get($url, $data);
         return $response->json();
     }
     // decrypt string
@@ -112,7 +112,7 @@ class Helper
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
         return $data;
-        $response = Http::post($url, $data);
+        $response = Http::withToken(session()->get('token'))->post($url, $data);
         return $response->json();
 
      }

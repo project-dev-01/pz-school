@@ -113,7 +113,7 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">{{ __('messages.back') }}</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
                         </div>
 

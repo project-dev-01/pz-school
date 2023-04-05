@@ -232,13 +232,12 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
-
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
-
+        // dd($response->json());
         $userDetails = $response->json();
         $school_name_url = "";
         $user_name = "";

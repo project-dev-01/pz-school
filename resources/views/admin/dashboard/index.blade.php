@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title', 'Dashboard')
+@section('title','Dashboard')
 @section('calendar')
 <!-- full calendar css start-->
 <link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
@@ -287,7 +287,8 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}
+                                    <h4>
                             </li>
                         </ul>
                         <div class="card-body">
@@ -433,7 +434,7 @@
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
                                             <h5 class="">
-                                                <i class='mdi mdi-chevron-down font-18'></i>  {{ __('messages.past') }} <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.past') }} <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
                                             </h5>
                                         </a>
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)

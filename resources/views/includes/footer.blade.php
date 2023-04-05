@@ -82,9 +82,9 @@
 @elseif(Session::get('role_id') == '5')
 <script src="{{ asset('public/js/custom/parent_calendar.js') }}"></script>
 <script>
-// update child session
+    // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
-    </script>
+</script>
 @else
 <!-- <script src="{{ asset('public/js/pages/calendar.init.js') }}"></script> -->
 @endif
@@ -153,10 +153,12 @@
 
 <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 <script>
+    var token = "{{ Session::get('token') }}";
     toastr.options.preventDuplicates = true;
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Authorization': 'Bearer ' + token
         }
     });
 
@@ -168,7 +170,6 @@
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
-    var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     var downloadcsv = "{{ __('messages.download_csv') }}";
@@ -363,9 +364,8 @@
     };
 </script>
 <script>
-
     $("#countryLang").countrySelect({
-  onlyCountries: ['us','jp'],
+        onlyCountries: ['us', 'jp'],
 
         responsiveDropdown: true
     });
