@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Branch</th>
+                                <th>{{ __('messages.branch') }}</th>
                                 <th>{{ __('messages.event_type_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>

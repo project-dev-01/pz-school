@@ -10,7 +10,7 @@
                 <form id="eventTypeForm" method="post" action="" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
                             <option value="">Select Branch</option>
                             <option value="">Malaysia</option>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="date">{{ __('messages.teacher') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select Teacher</option>
+                            <option value="selct">{{ __('messages.select_teacher') }}</option>
                             <option>Smith</option>
                             <option>Taylor</option>
                             <option>David</option>

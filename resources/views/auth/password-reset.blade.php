@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="password"  class="form-control" name="password" placeholder="New password">
+                                            <input type="password"  class="form-control" name="password" placeholder="{{ __('messages.new_password') }}">
                                             <div class="input-group-append" data-password="false">
                                                 <div class="input-group-text">
                                                     <span class="password-eye"></span>

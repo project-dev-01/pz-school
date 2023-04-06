@@ -12,7 +12,7 @@
                  
                     <div class="form-group">
                         <label for="vehicle_no">{{ __('messages.vehicle_number') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="vehicle_no" name="vehicle_no" class="form-control" placeholder="Enter Vehicle Number">
+                        <input type="text" id="vehicle_no" name="vehicle_no" class="form-control" placeholder="{{ __('messages.enter_vehicle_number') }}">
                         <span class="text-danger error-text vehicle_no_error"></span>
                     </div>
                     <div class="form-group">
@@ -22,22 +22,22 @@
                     </div>
                     <div class="form-group">
                         <label for="insurance_renewal">{{ __('messages.insurance_renewal') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="insurance_renewal" class="form-control" placeholder="Enter Insurance Renewal">
+                        <input type="text"  name="insurance_renewal" class="form-control" placeholder="{{ __('messages.enter_insurance_renewal') }}">
                         <span class="text-danger error-text insurance_renewal_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="driver_name">{{ __('messages.driver_name') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="driver_name" class="form-control" placeholder="Enter Driver Name">
+                        <input type="text"  name="driver_name" class="form-control" placeholder="{{ __('messages.enter_driver_name') }}">
                         <span class="text-danger error-text driver_name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="driver_phone">{{ __('messages.driver_phone') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="driver_phone" class="form-control" placeholder="Enter Driver Phone">
+                        <input type="text"  name="driver_phone" class="form-control" placeholder="{{ __('messages.enter_driver_phone') }}">
                         <span class="text-danger error-text driver_phone_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="driver_license">{{ __('messages.driver_license_no') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="driver_license" class="form-control" placeholder="Enter Driver License No">
+                        <input type="text"  name="driver_license" class="form-control" placeholder="{{ __('messages.enter_driver_license_no') }}">
                         <span class="text-danger error-text driver_license_error"></span>
                     </div>
                     <div class="form-group">

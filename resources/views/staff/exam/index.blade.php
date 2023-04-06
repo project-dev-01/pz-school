@@ -76,7 +76,7 @@
                                 <div class="col-md-8">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Branch<span class="text-danger">*</span></label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">Select Branch</option>
@@ -99,7 +99,7 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Term</option>
+                                                    <option value="">{{ __('messages.select_term') }}</option>
                                                     <option value="">Ist Term</option>
                                                     <option value="">Half Yearly</option>
                                                     <option value="">Quater Yearly</option>

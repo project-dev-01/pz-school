@@ -65,19 +65,19 @@
                 <li>
                     <a href="#sidebarBranch" data-toggle="collapse">
                         <i class="fe-git-branch"></i>
-                        <span> Branch </span>
+                        <span>{{ __('messages.branch') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarBranch">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('branch.index')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                                    <span> Branch List </span>
+                                    <span>{{ __('messages.branch_list') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('branch.create')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                                    <span> Create Branch </span>
+                                    <span> {{ __('messages.create_branch') }} </span>
                                 </a>
                             </li>
                         </ul>

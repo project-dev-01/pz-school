@@ -11,7 +11,7 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="branch_id">Branch</label>
+                        <label for="branch_id">{{ __('messages.branch') }}</label>
                         <select class="form-control" id="branch_id" name="branch_id">
                             <option value="">Choose Branch</option>
                             @foreach($branches as $b)

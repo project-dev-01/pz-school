@@ -16,15 +16,15 @@
                     </div>
                     <div class="form-group">
                         <label for="grade_point">{{ __('messages.grade_point') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="grade_point" name="grade_point" class="form-control" placeholder="Enter Grade Point">
+                        <input type="text" id="grade_point" name="grade_point" class="form-control" placeholder="{{ __('messages.enter_grade_point') }}">
                     </div>
                     <div class="form-group">
                         <label for="min_mark">{{ __('messages.minimum_percentage') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="min_mark" name="min_mark" class="form-control" placeholder="Enter Minimun Percentage">
+                        <input type="text" id="min_mark" name="min_mark" class="form-control" placeholder="{{ __('messages.enter_minimun_percentage') }}">
                     </div>
                     <div class="form-group">
                         <label for="max_mark">{{ __('messages.maximum_percentage') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="max_mark" name="max_mark" class="form-control" placeholder="Enter Maximum Percentage">
+                        <input type="text" id="max_mark" name="max_mark" class="form-control" placeholder="{{ __('messages.enter_maximum_percentage') }}">
                     </div>
                     <div class="form-group">
                         <label for="status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="grade_category">{{ __('messages.grade_category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="grade_category">
-                            <option value="">Select Grade Category</option>
+                            <option value="">{{ __('messages.select_grade_category') }}</option>
                             @forelse($grade_category as $gc)
                             <option value="{{$gc['id']}}">{{$gc['name']}}</option>
                             @empty
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="notes">{{ __('messages.notes') }}</label>
-                        <input type="text" name="notes" class="form-control" placeholder="Enter Notes">
+                        <input type="text" name="notes" class="form-control" placeholder="{{ __('messages.enter_notes') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

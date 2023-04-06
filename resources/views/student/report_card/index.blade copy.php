@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label for="examnames">{{ __('messages.exam_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         @forelse ($allexams as $exam)
                                         <option value="{{ $exam['id'] }}">{{ $exam['name'] }}</option>
                                         @empty

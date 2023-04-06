@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         <option value="">Half yearly</option>
                                     </select>
                                 </div>

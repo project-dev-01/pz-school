@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Branch Name <span class="text-danger">*</span></label>
+                                    <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="branch_id" id="empBranchName">
                                         <option value="">Select Branch</option>
                                         <option>Malaysia</option>

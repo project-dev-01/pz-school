@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                         @forelse ($teacher_class as $class)
                                         <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
@@ -357,7 +357,7 @@
                                                 <div class="form-group">
                                                     <label for="changeAttendance">{{ __('messages.select_attendance') }}</label>
                                                     <select id="changeAttendance" class="form-control">
-                                                        <option value="">Not Selected</option>
+                                                        <option value="">{{ __('messages.not_selected') }}</option>
                                                         <option value="present">Present</option>
                                                         <option value="absent">Absent</option>
                                                         <option value="late">{{ __('messages.late') }}</option>

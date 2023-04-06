@@ -35,7 +35,7 @@
 
                     <div class="form-group">
                         <label for="notes"> {{ __('messages.notes') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="notes" name="notes" class="form-control" placeholder="Enter Notes">
+                        <input type="text" id="notes" name="notes" class="form-control" placeholder="{{ __('messages.enter_notes') }}">
                         <span class="text-danger error-text notes_error"></span>
                     </div>
                     <div class="form-group">

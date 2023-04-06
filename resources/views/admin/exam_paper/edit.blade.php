@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="editchangeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="editchangeClassName" name="class_id">
-                            <option value="">Choose Grade</option>
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -28,12 +28,12 @@
                     </div>
                     <div class="form-group">
                         <label for="paper_name">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="paper_name" class="form-control" placeholder="Enter Paper Name">
+                        <input type="text" name="paper_name" class="form-control" placeholder="{{ __('messages.enter_paper_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="paper_type">{{ __('messages.paper_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="paper_type" name="paper_type">
-                            <option value="">Select Paper Type</option>
+                            <option value="">{{ __('messages.select_paper_type') }}</option>
                             @forelse($get_paper_type as $gpt)
                             <option value="{{$gpt['id']}}">{{$gpt['name']}}</option>
                             @empty
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label for="grade_category">{{ __('messages.grade_category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="grade_category">
-                            <option value="">Select Grade Category</option>
+                            <option value="">{{ __('messages.select_grade_category') }}</option>
                             @forelse($grade_category as $gc)
                             <option value="{{$gc['id']}}">{{$gc['name']}}</option>
                             @empty
@@ -52,11 +52,11 @@
                     </div>
                     <div class="form-group">
                         <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
-                        <input type="number" name="subject_weightage" class="form-control" placeholder="Enter Subject Weightage">
+                        <input type="number" name="subject_weightage" class="form-control" placeholder="{{ __('messages.enter_subject_weightage') }}">
                     </div>
                     <div class="form-group">
                         <label for="notes">{{ __('messages.notes') }}</label>
-                        <textarea name="notes" class="form-control" maxlength="255" placeholder="Enter Notes"></textarea>
+                        <textarea name="notes" class="form-control" maxlength="255" placeholder="{{ __('messages.enter_notes') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

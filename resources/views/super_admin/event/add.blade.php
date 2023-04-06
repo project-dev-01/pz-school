@@ -10,7 +10,7 @@
                 <form id="eventForm" method="post" action="{{ route('event.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select id="branch_id"  class="form-control"name="branch_id">
                             <option value="">Choose Branch</option>
                             @foreach($branches as $b)

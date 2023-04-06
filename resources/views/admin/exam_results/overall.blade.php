@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classnames as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -88,7 +88,7 @@
                                 <div class="form-group">
                                     <label for="examnames">{{ __('messages.exam_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         @forelse ($allexams as $exam)
                                         <option value="{{ $exam['id'] }}">{{ $exam['name'] }}</option>
                                         @empty

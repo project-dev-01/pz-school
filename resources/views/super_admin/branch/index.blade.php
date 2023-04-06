@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item active">Datatables</li> -->
                         </ol>
                     </div>
-                    <h4 class="page-title">Branch</h4>
+                    <h4 class="page-title">{{ __('messages.branch') }}</h4>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span> Branch List
+                                <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.branch_list') }}
                                 <h4>
                         </li>
                     </ul>
@@ -80,7 +80,7 @@
                     <ul class="nav nav-tabs" >
                         <li class="nav-item">
                             <h4 class="nav-link">
-                                <span data-feather="" class="icon-dual" id="span-parent"></span> Branch List
+                                <span data-feather="" class="icon-dual" id="span-parent"></span> {{ __('messages.branch_list') }}
                                 <h4>
                         </li>
                     </ul>
@@ -92,9 +92,9 @@
                                         <th>#</th>
                                         <th>{{ __('messages.school_name') }}</th>
                                         <th>{{ __('messages.email') }}</th>
-                                        <th>Mobile No</th>
-                                        <th>Currency</th>
-                                        <th>Symbol</th>
+                                        <th>{{ __('messages.mobile_no') }}</th>
+                                        <th>{{ __('messages.currency') }}</th>
+                                        <th>{{ __('messages.symbol') }}</th>
                                         <th>{{ __('messages.country') }}</th>
                                         <th>State</th>
                                         <th>City</th>

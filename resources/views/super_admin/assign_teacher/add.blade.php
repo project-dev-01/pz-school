@@ -10,7 +10,7 @@
                 <form id="addAssignTeacherForm" method="post" action="{{ route('assign_teacher.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select id="add_branch_id"  class="form-control" name="branch_id">
                             <option value="">Choose Branch</option>
                             <option value="">Malaysia</option>

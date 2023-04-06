@@ -113,7 +113,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach

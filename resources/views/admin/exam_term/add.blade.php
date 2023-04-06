@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('messages.term_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Term Name">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_term_name') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

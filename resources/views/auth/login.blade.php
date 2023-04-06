@@ -65,10 +65,12 @@
                                 <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
                                 <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">Jap</option>
                             </select>
-                            <div class="col-4 " style="float: right; margin-top:-15px;">
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
-                                <div class="b" style="text-align:justify">
-                                    <ul id="a"></ul>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;">
+
+                                    </ul>
                                 </div>
                             </div> -->
                             <!-- <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">

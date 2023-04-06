@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="term_id" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                         <select  class="form-control" name="term_id">
-                            <option value="">Select Term</option>
+                            <option value="">{{ __('messages.select_term') }}</option>
                             @foreach($term as $t)
                                 <option value="{{$t['id']}}">{{$t['name']}}</option>
                             @endforeach

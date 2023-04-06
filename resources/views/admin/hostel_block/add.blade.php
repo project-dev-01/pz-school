@@ -12,7 +12,7 @@
 
                     <div class="form-group">
                         <label for="block_name">{{ __('messages.block_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="block_name" name="block_name" class="form-control" placeholder="Enter The Block Name">
+                        <input type="text" id="block_name" name="block_name" class="form-control" placeholder="{{ __('messages.enter_the_block_name') }}">
                         <span class="text-danger error-text block_name_error"></span>
                     </div>
                     <div class="form-group">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="total_floor">{{ __('messages.total_floor') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="total_floor" class="form-control" placeholder="Enter The Total Floor">
+                        <input type="text" name="total_floor" class="form-control" placeholder="{{ __('messages.enter_the_total_floor') }}">
                         <span class="text-danger error-text total_floor_error"></span>
                     </div>
                     <div class="form-group">

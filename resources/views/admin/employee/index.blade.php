@@ -718,7 +718,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">{{ __('messages.bank_branch') }}<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="Branch Name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="{{ __('messages.branch_name') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>

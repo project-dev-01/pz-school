@@ -38,7 +38,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Branch</th>
+                                <th>{{ __('messages.branch') }}</th>
                                 <th>{{ __('messages.hall_no') }}</th>
                                 <th>{{ __('messages.no_of_seats') }}</th>
                                 <th>{{ __('messages.action') }}</th>

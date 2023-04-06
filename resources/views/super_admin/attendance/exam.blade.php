@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Branch</option>
                                         <option value="">Malaysia</option>
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         <option value="">Quater yearly</option>
                                         <option value="">Half yearly</option>
                                         <option value="">Annual</option>
