@@ -10,7 +10,7 @@
                 <form id="sectionAllocationForm" method="post" action="{{ route('section_allocation.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select id="addSecAllBranchId" class="form-control" name="branch_id">
                             <option value="">Select Branch</option>
                             @foreach($branches as $b)

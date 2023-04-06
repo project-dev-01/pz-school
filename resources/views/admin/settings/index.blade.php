@@ -115,7 +115,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="old">{{ __('messages.old_password') }} :</label>
-                                        <input type="password" class="form-control" id="old" name="old" placeholder="Old Password">
+                                        <input type="password" class="form-control" id="old" name="old" placeholder="{{ __('messages.old_password') }}">
                                         <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.new_password') }}">
                                         <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="confirmed">{{ __('messages.confirm_new_password') }} :</label>
-                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="Confirm New Password">
+                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="{{ __('messages.confirm_new_password') }}">
                                         <span class="text-danger error-text confirmed_error"></span>
                                     </div>
                                 </div>

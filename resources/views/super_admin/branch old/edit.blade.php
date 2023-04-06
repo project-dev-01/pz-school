@@ -38,7 +38,7 @@
                                         <input type="hidden" class="form-control" name="id" value="{{$id}}">
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="name" class="col-3 col-form-label">Branch Name<span class="text-danger">*</span></label>
+                                                <label for="name" class="col-3 col-form-label">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="name" name="name" value="{{$branch['name']}}" placeholder="{{ __('messages.enter_branch_name') }}">
                                                     <span class="text-danger error-text name_error"></span>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group row">
-                                                <label for="currency" class="col-3 col-form-label">Currency<span class="text-danger">*</span></label>
+                                                <label for="currency" class="col-3 col-form-label">{{ __('messages.currency') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <input type="text" class="form-control" id="currency" name="currency" value="{{$branch['currency']}}" placeholder="{{ __('messages.enter_currency') }}">
                                                     <span class="text-danger error-text currency_error"></span>
@@ -85,7 +85,7 @@
                                             <div class="form-group row">
                                                 <label for="symbol" class="col-3 col-form-label">Currency Symbol<span class="text-danger">*</span></label>
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="symbol" name="symbol" value="{{$branch['symbol']}}" placeholder="Enter Currency Symbol">
+                                                    <input type="text" class="form-control" id="symbol" name="symbol" value="{{$branch['symbol']}}" placeholder="{{ __('messages.enter_currency_symbol') }}">
                                                     <span class="text-danger error-text symbol_error"></span>
                                                 </div>
                                             </div>

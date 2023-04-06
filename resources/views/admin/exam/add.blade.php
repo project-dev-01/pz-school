@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="term_id" class="col-3 col-form-label" style="margin: 0px 0px 0px -12px;"> {{ __('messages.term') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="term_id">
-                            <option value="">Select Term</option>
+                            <option value="">{{ __('messages.select_term') }}</option>
                             @foreach($term as $t)
                             <option value="{{$t['id']}}">{{$t['name']}}</option>
                             @endforeach

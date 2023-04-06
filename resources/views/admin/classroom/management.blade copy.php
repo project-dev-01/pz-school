@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">Standard<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                         @forelse ($class as $cla)
                                         <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
                                         @empty
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                         @endforeach
@@ -452,7 +452,7 @@
                                                         <div class="form-group">
                                                             <label for="changeAttendance">{{ __('messages.select_attendance') }}</label>
                                                             <select id="changeAttendance" class="form-control">
-                                                                <option value="">Not Selected</option>
+                                                                <option value="">{{ __('messages.not_selected') }}</option>
                                                                 <option value="present">Present</option>
                                                                 <option value="absent">Absent</option>
                                                                 <option value="late">Lsate</option>

@@ -11,7 +11,7 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="branch_name">Branch Name</label>
+                        <label for="branch_name">{{ __('messages.branch_name') }}</label>
                         <select class="form-control" id="branch_name" name="branch_name">
                             <option value="">Choose Branch</option>
                         </select>

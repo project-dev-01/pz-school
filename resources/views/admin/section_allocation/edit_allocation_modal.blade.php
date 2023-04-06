@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="editClassID" name="class_id">
-                            <option value="">Choose Grade</option>
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty

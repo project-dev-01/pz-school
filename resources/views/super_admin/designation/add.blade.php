@@ -10,7 +10,7 @@
                 <form id="designation-form" method="post" action="{{ route('designation.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="branch_id">
                             <option value="">Select Branch</option>
                             @foreach($branches as $b)

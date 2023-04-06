@@ -50,9 +50,9 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group row">
-                    <label for="currency" class="col-3 col-form-label">Currency<span class="text-danger">*</span></label>
+                    <label for="currency" class="col-3 col-form-label">{{ __('messages.currency') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="currency" name="currency" placeholder="Enter Currency">
+                        <input type="text" class="form-control" id="currency" name="currency" placeholder="{{ __('messages.enter_currency') }}">
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="form-group row">
                     <label for="symbol" class="col-3 col-form-label">Currency Symbol<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="symbol" name="symbol" placeholder="Enter Currency Symbol">
+                        <input type="text" class="form-control" id="symbol" name="symbol" placeholder="{{ __('messages.enter_currency_symbol') }}">
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div class="form-group row">
                     <label for="db_name" class="col-3 col-form-label">Database Name<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="db_name" name="db_name" placeholder="Enter Database Name">
+                        <input type="text" class="form-control" id="db_name" name="db_name" placeholder="{{ __('messages.enter_database_name') }}">
                     </div>
                 </div>
             </div>

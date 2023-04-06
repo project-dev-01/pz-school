@@ -260,8 +260,6 @@
                                         <input type="file" name="photo" id="photo" class="file-input">Choose File
                                     </button>
                                 </div>
-
-
                             </div>
                         </div> -->
                         <div class="row">
@@ -295,9 +293,9 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender">
-                                        <option value="">Choose Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
+                                        <option value="Male">{{ __('messages.male') }}</option>
+                                        <option value="Female">{{ __('messages.female') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -334,7 +332,7 @@
                                 <div class="form-group">
                                     <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                     <select class="form-control" name="blood_group">
-                                        <option value="">Pick Blood Type</option>
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
                                         <option>O+</option>
                                         <option>A+</option>
                                         <option>B+</option>
@@ -356,7 +354,7 @@
                                 <div class="form-group">
                                     <label for="religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="religion">
-                                        <option value="">Choose Religion</option>
+                                        <option value="">{{ __('messages.select_religion') }}</option>
                                         @forelse($religion as $r)
                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
                                         @empty
@@ -382,7 +380,7 @@
                                 <div class="form-group">
                                     <label for="education">{{ __('messages.education') }}</label>
                                     <select class="form-control" name="education">
-                                        <option value="">Choose Education</option>
+                                        <option value="">{{ __('messages.select_education') }}</option>
                                         @forelse($education as $e)
                                         <option value="{{$e['id']}}">{{$e['name']}}</option>
                                         @empty
@@ -393,7 +391,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="occupation" placeholder="Occupation" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="occupation" placeholder="{{ __('messages.occupation') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -407,7 +405,7 @@
                                                 <span class="fas fa-calculator"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="income" placeholder="Income" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="income" placeholder="{{ __('messages.enter_income') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -420,7 +418,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                    <input type="text" class="form-control" name="state" placeholder="State/Province" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>
@@ -428,13 +426,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">{{ __('messages.city') }}</label>
-                                    <input type="text" class="form-control" name="city" placeholder="City" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="city" placeholder="{{ __('messages.enter_city') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.zip') }}/{{ __('messages.postal_code') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -535,7 +533,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" placeholder="Fb.com" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -548,7 +546,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" placeholder="Twiter.com" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -561,7 +559,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" placeholder="Linkedin" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

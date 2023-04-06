@@ -964,6 +964,8 @@ return [
     "create_branch" => "Create Branch",
     "branch_name" => "Branch Name",
     "showing" => "Showing",
+    "select_block" => "Select Block",
+    "choose_file" => "Choose file",
     //PlaceHolder Messages End
     "topic_body" => "Topic Body",
     "chat" => "Chat",

@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" id="assign_teacher_id" name="assign_teacher_id">
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select id="edit_branch_id"  class="form-control" name="branch_id">
                             <option value="">Choose Branch</option>
                             @foreach($branches as $b)

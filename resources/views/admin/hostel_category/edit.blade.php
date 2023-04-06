@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">           
                     <div class="form-group">
                         <label for="name">{{ __('messages.category_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Category Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_category_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

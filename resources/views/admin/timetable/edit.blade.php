@@ -106,7 +106,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]" {{$bulk}}>
-                                                            <option value="">Select Teacher</option>
+                                                            <option value="">{{ __('messages.select_teacher') }}</option>
                                                             @if($table['bulk_id'])
                                                             @php
                                                             $all = "";

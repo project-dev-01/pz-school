@@ -968,6 +968,8 @@ return [
      "create_branch" => "支店を作成する",
      "branch_name" => "支店名",
      "showing" => "表示中",
+     "select_block" => "ブロックを選択してください",
+     "choose_file" => "ファイルを選択またはドラッグ＆ドロップしてください",
       //PlaceHolder Messages End
      "topic_body" => "トピック本文",
      "chat" => "チャット",

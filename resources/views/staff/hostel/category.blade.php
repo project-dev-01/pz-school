@@ -76,7 +76,7 @@
                     
                     <div class="form-group">
                         <label for="Category_name">{{ __('messages.category_name') }}</label>
-                        <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="Enter Category name">
+                        <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="{{ __('messages.enter_category_name') }}">
                         <span class="text-danger error-text Category_name_error"></span>
                     </div>
                     <div class="form-group">

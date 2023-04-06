@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                         <option>Select Branch</option>
                                         <option value="">Malysia</option>
@@ -114,7 +114,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Branch</th>
+                                                <th>{{ __('messages.branch') }}</th>
                                                 <th>{{ __('messages.exam_name') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>
 

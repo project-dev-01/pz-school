@@ -15,7 +15,7 @@
                         <ol class="breadcrumb m-0">
                         </ol>
                     </div>
-                    <h4 class="page-title">Rolls</h4>
+                    <h4 class="page-title">{{ __('messages.rolls') }}</h4>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="state">School Names<span class="text-danger">*</span></label>
+                                        <label for="state">{{ __('messages.school_names') }}<span class="text-danger">*</span></label>
                                         <select id="getbranchid" class="form-control" name="getbranchid">
                                             <option value="">Select..</option>
                                             @if(!empty($dbnames))

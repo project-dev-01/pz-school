@@ -270,7 +270,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="branch_name">Branch Name</label>
+                                    <label for="branch_name">{{ __('messages.branch_name') }}</label>
                                     <input type="text" maxlength="50" name="branch_name" value="{{$branch['branch_name']}}" class="form-control" placeholder="{{ __('messages.enter_branch_name') }}" name="txt_branchname">
                                 </div>
                             </div>
@@ -310,14 +310,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="currency">Currency<span class="text-danger">*</span></label>
+                                    <label for="currency">{{ __('messages.currency') }}<span class="text-danger">*</span></label>
                                     <input type="text" maxlength="50" value="{{$branch['currency']}}" name="currency" class="form-control" placeholder="{{ __('messages.enter_currency') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="symbol">Currency Symbol<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="Enter Currency Symbol" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="{{ __('messages.enter_currency_symbol') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">

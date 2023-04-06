@@ -62,7 +62,7 @@
                                     <td>{{$value['department_name']}}</td>
                                     <td>
                                         <select id="staffID_{{$value['id']}}" class="form-control">
-                                            <option value="">Select Staff</option>
+                                            <option value="">{{ __('messages.select_staff') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['assigner_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>

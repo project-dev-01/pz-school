@@ -64,7 +64,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="MM-YYYY">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="{{ __('messages.mm_yyyy') }}">
                                     </div>
                                 </div>
                             </div>
