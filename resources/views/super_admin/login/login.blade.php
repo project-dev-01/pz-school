@@ -42,6 +42,18 @@
         <div class="col-md-6">
             <div class="">
                 <div class="card-body" style="margin:0px 55px 0px 30px;">
+                        <div class="form-group" style="text-align:right;">
+                             <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
+                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JAP</option>
+                            </select>
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                </div>
+                            </div>
+                        </div>
                     <!-- Logo -->
                     <div class="">
                         <div class="auth-logo">
@@ -66,20 +78,20 @@
                             </div>
                             @endif
                             @csrf
-                            <h1 class="welcomeback">Welcome back,</h1>
+                            <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                             <div class="form-group">
                                 <span class="badge badge-secondary smk"><img src="{{ asset('public/images/logo-pz-01.png') }}" class="mr-2 rounded-circle" alt="">Paxsuzen</span>
                             </div>
 
                             <div class="form-group">
-                                <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="Enter your email">
+                                <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                             </div>
                             <!-- <div class="form-group">
                                         <input class="form-control login-email" type="password" required="" id="password" placeholder="Enter your password">
                                     </div>-->
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                                     <div class="input-group-append" data-password="false">
                                         <div class="input-group-text">
                                             <span class="password-eye"></span>
@@ -90,13 +102,13 @@
                             <div class="form-group mb-3">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="checkbox-signin">
-                                    <label class="custom-control-label sign" for="checkbox-signin">Remember me</label>
-                                    <a href="{{route('forgot_password')}}" class="float-right forget"><small>Forgot your password?</small></a>
+                                    <label class="custom-control-label sign" for="checkbox-signin">{{ __('messages.remember_me') }}</label>
+                                    <a href="{{route('forgot_password')}}" class="float-right forget"><small>{{ __('messages.forgot_your_password') }}?</small></a>
                                 </div>
                             </div>
 
                             <div class="form-group mb-0 text-center">
-                                <button class="btn btn-block signin" type="submit">Sign In </button>
+                                <button class="btn btn-block signin" type="submit">{{ __('messages.sign_in') }} </button>
                             </div>
 
                         </form>
@@ -127,6 +139,67 @@
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
 
+    <script type="text/javascript">
+        
+
+        var locale = "{{ Session::get('locale') }}";
+        var url = "{{ route('changeLang') }}";
+        var langArray = [];
+        $('.vodiapicker option').each(function(){
+            var img = $(this).attr("data-thumbnail");
+            var text = this.innerText;
+            var value = $(this).val();
+            var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+            langArray.push(item);
+            })
+
+            $('#a').html(langArray);
+
+            //Set the button value to the first el of the array
+            $('.btn-select').html(langArray[0]);
+            $('.btn-select').attr('value', 'en');
+
+            //change button stuff on click
+            $('#a li').click(function(){
+                
+            var img = $(this).find('img').attr("src");
+            var value = $(this).find('img').attr('value');
+            
+        console.log('value',value)
+            window.location.href = url + "?lang=" + value;
+            var text = this.innerText;
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+            $(".b").toggle();
+            //console.log(value);
+        });
+
+        console.log('1',locale)
+        $(".btn-select").click(function(){
+                $(".b").toggle();
+            });
+
+        //check local storage for the lang
+        var sessionLang = locale;
+        // console.log('en',sessionLang)
+        if (locale=="japanese"){
+            //find an item with value of sessionLang\
+            var img = "{{ asset('public/images/JPN.png') }}";
+            var value = "japanese";
+            var text = "JAP";
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ asset('public/images/USA.png') }}";
+            var value = "en";
+            var text = "EN";
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    </script>
 </body>
 
 </html>

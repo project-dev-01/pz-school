@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="class_name">{{ __('messages.class_Name') }}</label>
                         <select class="form-control" id="classNameFilter" name="class_name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             @foreach($classDetails as $class)
                             <option value="{{$class->id}}">{{$class->name}}</option>
                             @endforeach
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label for="class_teacher">Class Teacher</label>
                         <select class="form-control" id="class_teacher" name="class_teacher">
-                            <option value="">Choose Teacher</option>
+                            <option value="">{{ __('messages.select_teacher') }}</option>
                             @foreach($teacherDetails as $teacher)
                             <option value="{{$teacher->id}}">{{$teacher->name}}</option>
                             @endforeach

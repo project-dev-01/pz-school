@@ -73,7 +73,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">                                       
-                                            <option value="">Select Subject</option>
+                                            <option value="">{{ __('messages.select_subject') }}</option>
                                             <option value="press">English</option>
                                             <option value="">Mathematics</option>
                                             <option value="press">History</option>
@@ -145,7 +145,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.homework') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                            <textarea class="form-control" id="product-description" rows="5" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -82,7 +82,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                                             @endforeach
@@ -94,7 +94,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
                                                             @endforeach

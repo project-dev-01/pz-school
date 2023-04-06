@@ -10,7 +10,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Student Import</h4>
+                <h4 class="page-title">{{ __('messages.student_import') }}</h4>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <div class="card mb-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Student Import<h4>
+                        <h4 class="nav-link">{{ __('messages.student_import') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">

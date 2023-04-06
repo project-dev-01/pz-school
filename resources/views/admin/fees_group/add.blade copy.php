@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                             </div>
                         </div>
 

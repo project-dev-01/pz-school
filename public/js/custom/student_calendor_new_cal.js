@@ -65,7 +65,7 @@ $(document).ready(function () {
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
         },
-        locale: langCalendar,
+        locale: calLang,
         // events: t,
         editable: !0,
         droppable: !0,

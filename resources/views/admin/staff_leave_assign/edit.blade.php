@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" id="leave_days" name="leave[{{$key}}][leave_days]" value="{{$leave['leave_days']}}" class="form-control leave_days" placeholder="Enter Leave Days">
+                                        <input type="text" id="leave_days" name="leave[{{$key}}][leave_days]" value="{{$leave['leave_days']}}" class="form-control leave_days" placeholder="{{ __('messages.enter_leave_days') }}">
                                         <span class="text-danger error-text leave_days_error"></span>
                                     </div>
                                 </div>

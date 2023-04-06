@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="btwyears"> {{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">{{ __('messages."select_academic_year') }}</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                         @endforeach

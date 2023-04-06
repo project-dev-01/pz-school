@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="grade">{{ __('messages.grade_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="grade" class="form-control" placeholder="Enter Grade Name">
+                        <input type="text" name="grade" class="form-control" placeholder="{{ __('messages.enter_grade_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="grade_point">{{ __('messages.grade_point') }}<span class="text-danger">*</span></label>

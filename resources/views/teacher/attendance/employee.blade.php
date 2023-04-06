@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach

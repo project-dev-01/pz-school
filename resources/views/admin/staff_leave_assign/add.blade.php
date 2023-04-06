@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
-                        <input type="text" id="leave_days" name="leave_days" class="form-control" placeholder="Enter Leave Days">
+                        <input type="text" id="leave_days" name="leave_days" class="form-control" placeholder="{{ __('messages.enter_leave_days') }}">
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>
                     <div class="form-group">

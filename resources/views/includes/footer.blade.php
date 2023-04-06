@@ -187,8 +187,8 @@
     var day = "{{ __('messages.day') }}";
     var list = "{{ __('messages.list') }}";
     var locale = "{{ Session::get('locale') }}";
-    var langCalendar = "{{ __('messages.calendar_lang') }}";
-
+    var calLang = "{{ __('messages.calendar_lang') }}";
+    console.log('123',calLang)
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
@@ -263,6 +263,7 @@
         var img = $(this).find('img').attr("src");
         var value = $(this).find('img').attr('value');
         
+    console.log('value',value)
         window.location.href = url + "?lang=" + value;
         var text = this.innerText;
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
@@ -277,16 +278,12 @@
         });
 
     //check local storage for the lang
-    var sessionLang = locale;
-    console.log('en',sessionLang)
-    //check local storage for the lang
-    // var sessionLang = locale;
-    // console.log('en',sessionLang)
-    if (sessionLang=="japanese"){
+    console.log('en',locale)
+    if (locale=="japanese"){
         //find an item with value of sessionLang\
         var img = "{{ asset('public/images/JPN.png') }}";
         var value = "japanese";
-        var text = "Jap";
+        var text = "JAP";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);

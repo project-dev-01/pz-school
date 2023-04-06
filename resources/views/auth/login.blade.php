@@ -44,7 +44,6 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
-                        
                         <div class="form-group" style="text-align:right;">
                             <!-- <label class="control-label"></label>
                             <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
@@ -52,17 +51,39 @@
                                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                             </select> -->
-                            
-                            <select class="vodiapicker">
+                             <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
+                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JAP</option>
+                            </select>
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                </div>
+                            </div>
+                            <!-- <select class="vodiapicker">
                                 <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
                                 <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">Jap</option>
                             </select>
-                            <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">
+                            <div class="col-4 " style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
-                                <div class="b">
+                                <div class="b" style="text-align:justify">
                                     <ul id="a"></ul>
                                 </div>
-                            </div>
+                            </div> -->
+                            <!-- <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">
+                                <button class="btn-select" value="en"><li><img src="http://localhost/school_new/public/images/USA.png" alt=""><span>EN</span></li></button>
+                                <div class="b">
+                                    <ul id="a">
+                                        <li>
+                                            <img src="http://localhost/school_new/public/images/USA.png" alt="" value="en"><span>EN</span>
+                                        </li>
+                                        <li>
+                                            <img src="http://localhost/school_new/public/images/JPN.png" alt="" value="japanese"><span>JAP</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
                         </div>
 
                         <!-- Logo -->
@@ -103,12 +124,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="Enter your email">
+                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -211,15 +232,12 @@
 
     //check local storage for the lang
     var sessionLang = locale;
-    console.log('en',sessionLang)
-    //check local storage for the lang
-    // var sessionLang = locale;
     // console.log('en',sessionLang)
-    if (sessionLang=="japanese"){
+    if (locale=="japanese"){
         //find an item with value of sessionLang\
         var img = "{{ asset('public/images/JPN.png') }}";
         var value = "japanese";
-        var text = "Jap";
+        var text = "JAP";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);

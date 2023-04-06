@@ -7,7 +7,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-3 col-form-label">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.enter_name') }}">
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <div class="form-group row">
                     <label for="school_name" class="col-3 col-form-label">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="school_name" name="school_name" placeholder="Enter School Name">
+                        <input type="text" class="form-control" id="school_name" name="school_name" placeholder="{{ __('messages.enter_school_name') }}">
                     </div>
                 </div>
             </div>

@@ -747,8 +747,8 @@ return [
     "showing_entries" => "Showing _START_ to _END_ of _TOTAL_ entries", 
     "show_entries" => "Show _MENU_ entries",  
     "calendar_lang" => "en",  
-     
-       //PlaceHolder Messages start
+
+       //PlaceHolder Messages start 
     "ahmad_ali" => "Ahmad Ali",
     "muhammad_jaafar" => "Muhammad Jaafar",
     "select_gender" => "Select Gender",
@@ -826,7 +826,7 @@ return [
     "choose" => "Choose",
     "add_checklists" => "Add Checklists/Sub-tasks",
     "enter_task_description" => "Enter Task Description",
-    "teacher_portal" => "Teacher portal",
+    "teacher_portal" => "Teacher Portal",
     "perfect" => "Perfect",
     "average" => "Average",
     "below" => "Below",
@@ -982,4 +982,6 @@ return [
     "promote_to_session" => "Promote to Session",
     "student_will_not_appear" => "( Note : Student will not appear on the list after a Student has been Promoted )",
     "promote_to_class" => "Promote to Class",
+    "enter_your_email" => "Enter Your Email",
+    "enter_your_password" => "Enter Your Password", 
 ];

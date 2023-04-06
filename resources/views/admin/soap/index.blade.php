@@ -133,7 +133,7 @@
                                                     <div class="form-group">
                                                         <label for="old_session_id">{{ __('messages.session') }}</label>
                                                         <select id="old_session_id" class="form-control"  name="session_id">                              
-                                                        <option value="">Select Session</option>
+                                                        <option value="">{{ __('messages.select_session') }}</option>
                                                             @foreach($session as $ses)
                                                                 <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                                             @endforeach
@@ -228,7 +228,7 @@
                                                     <div class="form-group">
                                                         <label for="session_id">{{ __('messages.session') }}</label>
                                                         <select id="session_id" class="form-control"  name="session_id">                              
-                                                        <option value="">Select Session</option>
+                                                        <option value="">{{ __('messages.select_session') }}</option>
                                                             @foreach($session as $ses)
                                                                 <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                                             @endforeach
@@ -586,7 +586,7 @@
                                                                 <div class="form-group">
                                                                     <label for="std_session_id">{{ __('messages.session') }}</label>
                                                                     <select id="std_session_id" class="form-control" name="std_session_id" disabled>
-                                                                        <option value="0">Select Session</option>
+                                                                        <option value="0">{{ __('messages.select_session') }}</option>
                                                                         @foreach($session as $ses)
                                                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                                                         @endforeach

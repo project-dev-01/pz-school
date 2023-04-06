@@ -80,7 +80,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option>Select Subject</option>
+                                    <option>{{ __('messages.select_subject') }}</option>
                                         <option value="press">English</option>
                                         <option value="">Mathematics</option>
                                         <option value="press">History</option>

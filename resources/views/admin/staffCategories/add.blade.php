@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('messages.staff_category') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Staff Category">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_staff_category') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

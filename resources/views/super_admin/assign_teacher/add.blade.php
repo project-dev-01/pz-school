@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label for="class_teacher">Class Teacher</label>
                         <select class="form-control" id="class_teacher" name="class_teacher">
-                            <option value="">Choose Teacher</option>
+                            <option value="">{{ __('messages.select_teacher') }}</option>
                             <option>Taylor</option>
                             <option>Smith</option>
                             <option>David</option>

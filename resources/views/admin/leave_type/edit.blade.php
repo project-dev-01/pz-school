@@ -17,12 +17,12 @@
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}</label>
-                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="{{ __('messages.enter_short_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
-                        <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="Enter Leave Days">
+                        <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="{{ __('messages.enter_leave_days') }}">
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>
                     <div class="form-group">

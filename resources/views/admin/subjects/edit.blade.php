@@ -12,15 +12,15 @@
                     <input type="hidden" id="editsubjectID" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="Enter Subject Name">
+                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="{{ __('messages.enter_subject_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="{{ __('messages.enter_short_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="subject_code">{{ __('messages.subject_code') }}</label>
-                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
+                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="{{ __('messages.enter_subject_code') }}">
                     </div>
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_1') }}</label>

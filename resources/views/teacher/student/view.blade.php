@@ -601,7 +601,7 @@
                                             <div class="form-group">
                                                 <label for="session_id">{{ __('messages.session') }}</label>
                                                 <select id="session_id" class="form-control" name="session_id">
-                                                    <option value="0">Select Session</option>
+                                                    <option value="0">{{ __('messages.select_session') }}</option>
                                                     @foreach($session as $ses)
                                                     <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
                                                     @endforeach

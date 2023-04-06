@@ -142,7 +142,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.homework') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description">Write 5 Sums in Addition, Subtraction, Multiplication and Divison</textarea>
+                                            <textarea class="form-control" id="product-description" rows="5" placeholder="{{ __('messages.enter_description') }}">Write 5 Sums in Addition, Subtraction, Multiplication and Divison</textarea>
                                         </div>
                                     </div>
                                 </div>

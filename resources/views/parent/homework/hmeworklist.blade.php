@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                         <option>All </option>
                                         <option value="press">English</option>
                                         <option value="">Mathematics</option>

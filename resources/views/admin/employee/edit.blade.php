@@ -454,7 +454,7 @@
                                 <div class="form-group">
                                     <label for="designation_id">{{ __('messages.designation') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="Choose The Designation">
-                                        <option value="">Select Designation</option>
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
                                         @forelse($designation as $des)
                                         @php
                                         $selected = "";
@@ -479,7 +479,7 @@
                                 <div class="form-group">
                                     <label for="department_id">{{ __('messages.department') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose The Department">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.choose_department') }}</option>
                                         @forelse($department as $dep)
                                         @php
                                         $selected = "";
@@ -556,7 +556,7 @@
                                 <div class="form-group">
                                     <label for="stream_type">{{ __('messages.stream_type') }}</label>
                                     <select class="form-control" id="streamType" name="stream_type">
-                                        <option value="">Select Stream Type</option>
+                                        <option value="">{{ __('messages.select_stream_type') }}</option>
                                         @forelse($stream_types as $r)
                                         <option value="{{$r['id']}}" {{$employee['stream_type_id'] == $r['id'] ? 'Selected':''}}>{{$r['stream_types_name']}}</option>
                                         @empty
@@ -758,7 +758,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="holder_name">{{ __('messages.account_holder') }}<span class="text-danger">*</span></label>
-                                        <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" placeholder="Ali" data-parsley-trigger="change">
+                                        <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" placeholder="{{ __('messages.ali') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label for="department_name">{{ __('messages.department_name') }}</label>
-                        <input type="text" id="department_name" name="department_name" class="form-control" placeholder="Enter Department name">
+                        <input type="text" id="department_name" name="department_name" class="form-control" placeholder="{{ __('messages.enter_department_name') }}">
                         <span class="text-danger error-text department_name_error"></span>
                     </div>
                     <div class="form-group">

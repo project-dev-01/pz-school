@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-sm-6"><h5>{{ __('messages.mobile_no.') }} :</h5></div>
+                                    <div class="col-sm-6"><h5>{{ __('messages.mobile_no') }} :</h5></div>
                                     <div class="col-sm-5"><h4 class="font-weight-bold">9600787841</h4></div>
                                 </div>             
                             </div>                            

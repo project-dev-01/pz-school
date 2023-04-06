@@ -71,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="designation">{{ __('messages.designation') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDesignation" name="designation">
-                                        <option value="">Select Designation</option>
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
                                         <option>BEd</option>
                                         <option>MEd</option>
                                         <option>BElEd</option>
@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDepartment" name="department">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.choose_department') }}</option>
                                         <option value="press">Accounting and Finance Department</option>
                                         <option value="net">Human Performance</option>
                                         <option value="mouth">Health Promotion</option>

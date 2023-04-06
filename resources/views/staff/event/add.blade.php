@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">{{ __('messages.title') }}</label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name">
+                        <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         <span class="text-danger error-text title_error"></span>
                     </div>
                     <div class="form-group">

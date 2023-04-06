@@ -750,7 +750,7 @@ return [
     "datatable_search" => "検索：",   
     "showing_entries" => "表示中 _START_ to _END_ of _TOTAL_ 件／ページ", 
     "show_entries" => "表示 _MENU_ 件／ページ",  
-    "calendar_lang" => "japanese",  
+    "calendar_lang" => "ja",  
     //PlaceHolder Messages
     "ahmad_ali" => "アフマド・アリ",
      "muhammad_jaafar" => "ムハンマド・ジャーファル",
@@ -986,4 +986,6 @@ return [
      "promote_to_session" => "セッションに進級する",
      "student_will_not_appear" => "（注意：学生が進級した後は、リストに表示されなくなります）",
      "promote_to_class" => "クラスに進級する",
+     "enter_your_email" => "Enter Your Email",
+     "enter_your_password" => "Enter Your Password",
 ];

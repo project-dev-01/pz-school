@@ -235,7 +235,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" />
+                                        <input type="file" class="dropify" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -284,7 +284,7 @@
                                 <div class="form-group">
                                     <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                     <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                        <option value="">Pick Blood Type</option>
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
                                         <option>O+</option>
                                         <option>A+</option>
                                         <option>B+</option>
@@ -320,7 +320,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="Identifaction Number" name="txt_nric" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="{{ __('messages.enter_nric_number') }}" name="txt_nric" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -353,7 +353,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_mobile_no">{{ __('messages.mobile_no.') }}<span class="text-danger">*</span></label>
+                                    <label for="txt_mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no"  placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -1292,4 +1292,15 @@
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 <!-- <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/admission.js') }}"></script>
+<!-- <script>
+    $('.dropify').dropify();
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or ss',
+            'replace': 'Drag and drop or click to replacesss',
+            'remove':  'Removedsss',
+            'error':   'Ooops, something wrong happended.'
+        }
+    });
+</script> -->
 @endsection

@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name"> Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="term_id" class="col-3 col-form-label">{{ __('messages.term') }} </label>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks"> Remarks</label>
-                        <textarea type="text"  name="remarks" class="form-control" placeholder="Enter Remarks"></textarea>
+                        <textarea type="text"  name="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

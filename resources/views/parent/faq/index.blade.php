@@ -39,7 +39,7 @@
                     <div>
                         <div class="faq-question-q-box">Q.</div>
                         <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_admission') }}</h4>
-                        <p class="faq-answer mb-4">For those seeking admissions, an informal interaction will be conducted in which pupil and both the parents have to be present. The final decision of the admission committee will be binding..</p>
+                        <p class="faq-answer mb-4">{{ __('messages.for_those_seeking_admissions') }}..</p>
                     </div>
 
                     <!-- Question/Answer -->

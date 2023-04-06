@@ -123,7 +123,7 @@
                                 <div class="form-group">
                                     <label for="subjectID">Subject<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -410,7 +410,7 @@
                                                 <div class="modal-body">
                                                     <label for="heard">{{ __('messages.remarks') }}</label>
                                                     <input type="hidden" id="studenetID" />
-                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
+                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -458,7 +458,7 @@
                                             <div class="modal-body">
                                                 <label for="heard">{{ __('messages.remarks') }}</label>
                                                 <input type="hidden" id="studenet_leave_tbl_id" />
-                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
+                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -476,7 +476,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="daily_report">Report<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="Please enter description"></textarea>
+                                                <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">

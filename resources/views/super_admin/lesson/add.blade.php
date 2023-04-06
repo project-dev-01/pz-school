@@ -58,16 +58,16 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Weekday<span class="text-danger">*</span></label>
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <input type="text" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="description">Start Time<span class="text-danger">*</span></label>
-                        <input type="number" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div><div class="form-group">
                         <label for="description">End Time<span class="text-danger">*</span></label>
-                        <input type="number" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">

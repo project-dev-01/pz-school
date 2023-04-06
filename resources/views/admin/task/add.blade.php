@@ -59,7 +59,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         </div>
 
                         <div class="form-group">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group">
                             <label for="task_description">{{ __('messages.task_description') }}<span class="text-danger">*</span></label>
-                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="Enter Description"></textarea>
+                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="attachment">{{ __('messages.attachment') }}</label>

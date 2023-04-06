@@ -39,7 +39,7 @@
                             <div class="form-group mb-3">
                                 <label for="teacher_id">Assign Role</label>
                                 <select class="form-control" id="role_name" name="role_name">
-                                    <option value="">Choose Role</option>
+                                    <option value="">{{ __('messages.choose_role') }}</option>
                                     @if (count($roleDetails) > 1)
                                     @foreach ($roleDetails as $role)
                                     <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="name">{{ __('messages.name') }}</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                             <div class="form-group mb-3">

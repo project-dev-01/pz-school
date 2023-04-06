@@ -383,7 +383,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="heard">Report<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                                <textarea class="form-control" id="product-description" rows="5" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group text-right m-b-0">

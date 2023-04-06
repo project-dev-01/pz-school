@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label for="assignClassTeacher">{{ __('messages.grade_teacher') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
-                            <option value="">Choose Grade Teacher</option>
+                            <option value="">{{ __('messages.select_grade_teacher') }}</option>
                             @forelse($getAllTeacherList as $teacher)
                             <option value="{{ $teacher['id'] }}">{{$teacher['name']}} ({{$teacher['role_name']}})</option>
                             @empty

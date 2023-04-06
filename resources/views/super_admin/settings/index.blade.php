@@ -84,7 +84,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.name') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="{{ __('messages.enter_name') }}">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>

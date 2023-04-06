@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label for="department">Department<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDepartment" name="department_id">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.choose_department') }}</option>
                                         @foreach($department as $dep)
                                         <option value="{{$dep['id']}}" {{$employee['department_id'] == $dep['id'] ? 'Selected':''}}>{{$dep['name']}}</option>
                                         @endforeach

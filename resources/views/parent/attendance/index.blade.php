@@ -52,7 +52,7 @@
                                 <div class="form-group">
                                     <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                         @forelse ($subjects as $sub)
                                         <option value="{{ $sub['subject_id'] }}">{{ $sub['subject_name'] }}</option>
                                         @empty

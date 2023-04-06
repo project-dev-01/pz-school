@@ -88,7 +88,7 @@
                                     <input type="hidden" name="leave_id" id="leave_id">
                                     <select id="leave_status_name" name="leave_status_name" class="form-control">
                                         <option value="">Select Leave Type</option>
-                                        <option value="Approve">Approve</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
                                         <option value="Reject">Reject</option>
                                         <option value="Pending">Pending</option>
                                     </select>
@@ -198,10 +198,10 @@
                                 <td>
                                     <input type="hidden" name="leave_id" id="leave_id">
                                     <select id="leave_status_name" name="leave_status_name" class="form-control">
-                                        <option value="">Select Leave Type</option>
-                                        <option value="Approve">Approve</option>
-                                        <option value="Reject">Reject</option>
-                                        <option value="Pending">Pending</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
                                     </select>
                                 </td>
                             </tr>

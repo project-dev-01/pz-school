@@ -393,7 +393,7 @@
                                                             <h3 class="text-dark mt-1"><span data-plugin="counterup">78</span>%
                                                             </h3>
                                                             <p class="text-muted mb-1 text-truncate">
-                                                                Homework Status</p>
+                                                                {{ __('messages.homework_status') }}</p>
                                                         </div>
                                                     </div>
                                                 </div> <!-- end row-->
@@ -761,7 +761,7 @@
                                                             <div class="form-group">
                                                                 <label for="session_id">{{ __('messages.session') }}</label>
                                                                 <select id="session_id" class="form-control" name="session_id">
-                                                                    <option value="0">Select Session
+                                                                    <option value="0">{{ __('messages.select_session') }}
                                                                     </option>
                                                                     <option value="0">Morning
                                                                     </option>

@@ -58,7 +58,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.designation') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Designation</option>
+                            <option value="">{{ __('messages.choose_designation') }}</option>
                             <option value="press">Academic coordinator</option>
                             <option value="net">Academic adviser</option>
                             <option value="mouth">Registrar</option>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label for="heard">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Department</option>
+                            <option value="">{{ __('messages.choose_department') }}</option>
                             <option value="press">Accounting and Finance Department</option>
                             <option value="net">Human Performance</option>
                             <option value="mouth">Health Promotion</option>

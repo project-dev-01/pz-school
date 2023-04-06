@@ -252,7 +252,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="last_name" value="{{$branch['last_name']}}" placeholder="Ali" id="lastName">
+                                        <input type="text" class="form-control shortNameChange" name="last_name" value="{{$branch['last_name']}}" placeholder="{{ __('messages.ali') }}" id="lastName">
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +277,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_name">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="Enter School Name">
+                                    <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="{{ __('messages.enter_school_name') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">

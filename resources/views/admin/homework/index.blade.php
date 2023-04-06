@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">{{ __('messages.homework_title') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="title" placeholder="Enter Homework Title">
+                                    <input type="text" class="form-control" name="title" placeholder="{{ __('messages.enter_homework_title') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -140,7 +140,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">{{ __('messages.description') }}<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" name="description" placeholder="Please enter Description"></textarea>
+                                    <textarea class="form-control" name="description" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4" id="schedule" style="display:none">

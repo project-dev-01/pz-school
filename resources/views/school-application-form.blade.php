@@ -299,7 +299,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Occupation</option>
+                                                    <option value="">{{ __('messages.select_occupation') }}</option>
                                                     <option value="">Business</option>
                                                     <option value="">IT/ Software</option>
                                                     <option value="">Civil department</option>

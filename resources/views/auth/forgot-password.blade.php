@@ -112,7 +112,7 @@
                                 @endif
                                 @csrf
                                 <div class="form-group">
-                                    <input class="form-control" type="email" name="email" id="emailaddress" placeholder="Enter your email">
+                                    <input class="form-control" type="email" name="email" id="emailaddress" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div><br>
                                 <div class="form-group mb-0 text-center">
                                     <button class="btn btn-block signin" id="send" type="submit" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Please Wait">{{ __('messages.sent_link') }}</button>

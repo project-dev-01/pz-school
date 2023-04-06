@@ -79,7 +79,7 @@
                                         <div class="form-group">
                                             <label for="leave_type">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                             <select id="leave_type" name="leave_type" class="form-control">
-                                                <option value="">Select Leave Type</option>
+                                                <option value="">{{ __('messages.select_leave_type') }}</option>
                                                 @forelse ($get_leave_types as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty

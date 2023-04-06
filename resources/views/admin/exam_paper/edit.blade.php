@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                         <select id="subjectID" class="form-control" name="subject_id">
-                            <option value="">Select Subject</option>
+                            <option value="">{{ __('messages.select_subject') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

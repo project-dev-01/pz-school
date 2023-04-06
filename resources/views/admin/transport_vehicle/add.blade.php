@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="capacity">{{ __('messages.capacity') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="capacity" class="form-control" placeholder="Enter Capacity">
+                        <input type="text"  name="capacity" class="form-control" placeholder="{{ __('messages.enter_capacity') }}">
                         <span class="text-danger error-text capacity_error"></span>
                     </div>
                     <div class="form-group">

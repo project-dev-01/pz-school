@@ -108,7 +108,7 @@
                 <div class="modal-body">
                     <label for="heard">{{ __('messages.remarks') }}</label>
                     <input type="hidden" id="studenet_leave_tbl_id" />
-                    <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
+                    <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_leave_remarks"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

@@ -22,12 +22,12 @@
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('messages.name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="capacity">{{ __('messages.capacity') }}</label>
-                        <input type="text" id="capacity" name="capacity" class="form-control" placeholder="Enter capacity">
+                        <input type="text" id="capacity" name="capacity" class="form-control" placeholder="{{ __('messages.enter_capacity') }}">
                         <span class="text-danger error-text capacity_error"></span>
                     </div>
                     <div class="form-group">

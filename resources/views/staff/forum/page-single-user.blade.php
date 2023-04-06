@@ -171,7 +171,7 @@
                             <div class="tt-col-value hide-mobile">
                                 <h4 class="tt-title">
                                     @if($value['threads_status']=== 1)
-                                    <span class="tt-color05 tt-badge">Pending</span>
+                                    <span class="tt-color05 tt-badge">{{ __('messages.pending') }}</span>
                                     @elseif($value['threads_status']=== 2)
                                     <span class="tt-color13 tt-badge">Active</span>
                                     @elseif($value['threads_status']=== 3)

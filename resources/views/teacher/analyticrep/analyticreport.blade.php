@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                         @endforeach
