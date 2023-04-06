@@ -44,13 +44,25 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
+                        
                         <div class="form-group" style="text-align:right;">
-                            <label class="control-label"></label>
+                            <!-- <label class="control-label"></label>
                             <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
                                     margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
                                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                            </select> -->
+                            
+                            <select class="vodiapicker">
+                                <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
+                                <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">Jap</option>
                             </select>
+                            <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b">
+                                    <ul id="a"></ul>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Logo -->
@@ -150,12 +162,75 @@
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
-    <script type="text/javascript">
-    var url = "{{ route('changeLang') }}";
+    <!-- <script type="text/javascript">
+        var url = "{{ route('changeLang') }}";
 
-    $(".changeLang").change(function() {
-        window.location.href = url + "?lang=" + $(this).val();
+        $(".changeLang").change(function() {
+            window.location.href = url + "?lang=" + $(this).val();
+        });
+    </script> -->
+    
+<script type="text/javascript">
+    
+
+    var locale = "{{ Session::get('locale') }}";
+    var url = "{{ route('changeLang') }}";
+    var langArray = [];
+    $('.vodiapicker option').each(function(){
+        var img = $(this).attr("data-thumbnail");
+        var text = this.innerText;
+        var value = $(this).val();
+        var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+        langArray.push(item);
+        })
+
+        $('#a').html(langArray);
+
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
+
+        //change button stuff on click
+        $('#a li').click(function(){
+            
+        var img = $(this).find('img').attr("src");
+        var value = $(this).find('img').attr('value');
+        
+        window.location.href = url + "?lang=" + value;
+        var text = this.innerText;
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+        $(".b").toggle();
+        //console.log(value);
     });
+
+    $(".btn-select").click(function(){
+            $(".b").toggle();
+        });
+
+    //check local storage for the lang
+    var sessionLang = locale;
+    console.log('en',sessionLang)
+    //check local storage for the lang
+    // var sessionLang = locale;
+    // console.log('en',sessionLang)
+    if (sessionLang=="japanese"){
+        //find an item with value of sessionLang\
+        var img = "{{ asset('public/images/JPN.png') }}";
+        var value = "japanese";
+        var text = "Jap";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    } else {
+        var img = "{{ asset('public/images/USA.png') }}";
+        var value = "en";
+        var text = "EN";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    }
 </script>
 
 </body>

@@ -97,7 +97,18 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
-            dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             paging: false,
             "bSort": false,
             buttons: [],

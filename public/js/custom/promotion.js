@@ -158,6 +158,15 @@ function bindStudents(dataSetNew) {
         bDestroy: true,
         info: true,
         dom: 'lrt',
+        "language": {
+            "info": showing_entries,
+            "lengthMenu": show_entries,
+            "search": datatable_search,
+            "paginate": {
+                "next": next,
+                "previous": previous
+            },
+        },
         paging: false,
         searching: false,
         data: dataSetNew,

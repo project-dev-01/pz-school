@@ -747,6 +747,10 @@ return [
     "technology" => "技術",
     "other" => "その他",
     "describe_your_topic_header" => "トピックヘッダーを記述する",
+    "datatable_search" => "検索：",   
+    "showing_entries" => "表示中 _START_ to _END_ of _TOTAL_ 件／ページ", 
+    "show_entries" => "表示 _MENU_ 件／ページ",  
+    "calendar_lang" => "japanese",  
     //PlaceHolder Messages
     "ahmad_ali" => "アフマド・アリ",
      "muhammad_jaafar" => "ムハンマド・ジャーファル",

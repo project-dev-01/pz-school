@@ -742,7 +742,12 @@ return [
     "question" => "Question",
     "technology" => "Technology",
     "other" => "Other",
-    "describe_your_topic_header" => "Describe your topic header",    
+    "describe_your_topic_header" => "Describe your topic header",
+    "datatable_search" => "Search:",   
+    "showing_entries" => "Showing _START_ to _END_ of _TOTAL_ entries", 
+    "show_entries" => "Show _MENU_ entries",  
+    "calendar_lang" => "en",  
+     
        //PlaceHolder Messages start
     "ahmad_ali" => "Ahmad Ali",
     "muhammad_jaafar" => "Muhammad Jaafar",

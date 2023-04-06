@@ -170,8 +170,25 @@
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
+    var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
+    
+    var showing_entries = "{{ __('messages.showing_entries') }}";
+    var show_entries = "{{ __('messages.show_entries') }}";
+    var datatable_search = "{{ __('messages.datatable_search') }}";
+    var show = "{{ __('messages.show') }}";
+    var entries = "{{ __('messages.entries') }}";
+    var previous = "{{ __('messages.previous') }}";
+    var next = "{{ __('messages.next') }}";
+    var month = "{{ __('messages.month') }}";
+    var today = "{{ __('messages.today') }}";
+    var week = "{{ __('messages.week') }}";
+    var day = "{{ __('messages.day') }}";
+    var list = "{{ __('messages.list') }}";
+    var locale = "{{ Session::get('locale') }}";
+    var langCalendar = "{{ __('messages.calendar_lang') }}";
+
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
@@ -210,13 +227,6 @@
     var allNotifications = "{{ route('unread_notifications') }}";
     var allLogout = "{{ route('all_logout') }}";
 </script>
-<script type="text/javascript">
-    var url = "{{ route('changeLang') }}";
-
-    $(".changeLang").change(function() {
-        window.location.href = url + "?lang=" + $(this).val();
-    });
-</script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
 <!-- <script src="{{ asset('public/js/custom/user_list.js') }}"></script> -->
@@ -227,6 +237,92 @@
 <!-- <script src="{{ asset('public/js/custom/iconchart.js') }}"></script> -->
 <!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+
+<script type="text/javascript">
+    
+
+    var url = "{{ route('changeLang') }}";
+    var langArray = [];
+    $('.vodiapicker option').each(function(){
+        var img = $(this).attr("data-thumbnail");
+        var text = this.innerText;
+        var value = $(this).val();
+        var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+        langArray.push(item);
+        })
+
+        $('#a').html(langArray);
+
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
+
+        //change button stuff on click
+        $('#a li').click(function(){
+            
+        var img = $(this).find('img').attr("src");
+        var value = $(this).find('img').attr('value');
+        
+        window.location.href = url + "?lang=" + value;
+        var text = this.innerText;
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+        $(".b").toggle();
+        //console.log(value);
+    });
+
+    $(".btn-select").click(function(){
+            $(".b").toggle();
+        });
+
+    //check local storage for the lang
+    var sessionLang = locale;
+    console.log('en',sessionLang)
+    //check local storage for the lang
+    // var sessionLang = locale;
+    // console.log('en',sessionLang)
+    if (sessionLang=="japanese"){
+        //find an item with value of sessionLang\
+        var img = "{{ asset('public/images/JPN.png') }}";
+        var value = "japanese";
+        var text = "Jap";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    } else {
+        var img = "{{ asset('public/images/USA.png') }}";
+        var value = "en";
+        var text = "EN";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    }
+</script>
+<!-- <script>
+    
+
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function() {
+        if($(this).val()=="United States"){
+                var lang = "en";
+        }else{
+            var lang = "japanese";
+        }
+        window.location.href = url + "?lang=" + lang;
+    });
+        if(locale=="en"){
+            var selectedCountry = "us"x
+        }else if(locale=="japanese"){
+            var selectedCountry = "jp"
+        }
+    $("#countryLang").countrySelect({
+        onlyCountries: ['us','jp'],
+        defaultCountry:selectedCountry,
+        responsiveDropdown: true
+    });
+</script> -->
 <script>
     function sendMarkRequest(id = null) {
         return $.ajax(readNotifications, {
@@ -362,11 +458,4 @@
             });
         }, 60000 * 60);
     };
-</script>
-<script>
-    $("#countryLang").countrySelect({
-        onlyCountries: ['us', 'jp'],
-
-        responsiveDropdown: true
-    });
 </script>

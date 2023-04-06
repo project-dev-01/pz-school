@@ -262,6 +262,15 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             //dom: 'lBfrtip',
+            "language": {
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
