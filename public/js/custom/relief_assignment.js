@@ -148,7 +148,7 @@ $(function () {
                                     reliefDetailsTable += '<td>' + start + '</td>';
                                     reliefDetailsTable += '<td>' + end + '</td>';
                                     reliefDetailsTable += '<td><select class="form-control" id="relief_assignment_teacher_id' + resp.id + '">';
-                                    reliefDetailsTable += '<option value="">Select Subject</option>';
+                                    reliefDetailsTable += '<option value="">'+select_subject+'</option>';
                                     // reliefDetailsTable += allStaffList;
                                     // console.log(resp.start + '' + resp.end);
                                     // console.log(resp.end);

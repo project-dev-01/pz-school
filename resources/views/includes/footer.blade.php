@@ -193,6 +193,23 @@
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
     var studentID = "{{ Session::get('student_id') }}";
+    var select_class = "{{ __('messages.select_class') }}";
+    var select_section = "{{ __('messages.select_section') }}";
+    var select_subject = "{{ __('messages.select_subject') }}";
+    var select_paper = "{{ __('messages.select_paper') }}";
+    var select_student = "{{ __('messages.select_student') }}";
+    var select_exam = "{{ __('messages.select_exam') }}";
+    var select_reason = "{{ __('messages.select_reason') }}";
+    var select_status = "{{ __('messages.select_status') }}";
+    var select_state = "{{ __('messages.select_state') }}";
+    var select_city = "{{ __('messages.select_city') }}";
+    var select_type = "{{ __('messages.select_type') }}";
+    var select_floor = "{{ __('messages.select_floor') }}";
+    var select_hall = "{{ __('messages.select_hall') }}";
+    var select_department = "{{ __('messages.select_department') }}";
+    var select_designation = "{{ __('messages.select_designation') }}";
+    var select = "{{ __('messages.select') }}";
+    var choose = "{{ __('messages.choose') }}";
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details

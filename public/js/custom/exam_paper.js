@@ -15,7 +15,7 @@ $(function () {
     function getSubjects(class_id, IDnames, subject_id) {
 
         $(IDnames).find("#subjectID").empty();
-        $(IDnames).find("#subjectID").append('<option value="">Select Subject</option>');
+        $(IDnames).find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(classesByAllSubjects, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

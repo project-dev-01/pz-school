@@ -203,10 +203,10 @@ $(function () {
         var class_id = $(this).val();
         
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class</option>');
+        $("#section_id").append('<option value="">'+select_class+'</option>');
         
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="">Select Subject</option>');
+        $("#subject_id").append('<option value="">'+select_subject+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -222,7 +222,7 @@ $(function () {
         var class_id = $("#class_id").val();
         
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="">Select Subject</option>');
+        $("#subject_id").append('<option value="">'+select_subject+'</option>');
         $.post(subjectByClass, { class_id: class_id, section_id: section_id }, function (res) {
             console.log('data',res)
             if (res.code == 200) {

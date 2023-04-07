@@ -4,7 +4,7 @@ $(function () {
         e.preventDefault();
         var class_id = $(this).val();
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class Name</option>');
+        $("#section_id").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

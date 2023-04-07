@@ -117,12 +117,10 @@
     }
 
     .switch input+span strong:before {
-        content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
 
     .switch input+span strong:after {
-        content: 'Lock';
         opacity: 0;
         visibility: hidden;
         position: absolute;
@@ -205,6 +203,31 @@
         display: block;
     }
 </style>
+
+@if(Session::get('locale')=="en")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'Unlock';
+    }
+
+    .switch input+span strong:after {
+        content: 'Lock';
+    }
+    </style>
+@endif
+@if(Session::get('locale')=="japanese")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'アンロック';
+    }
+
+    .switch input+span strong:after {
+        content: 'ロック';
+    }
+</style>
+@endif
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -272,9 +295,9 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
-                                        <option value="">Choose Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
+                                        <option value="Male">{{ __('messages.male') }}</option>
+                                        <option value="Female">{{ __('messages.female') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -290,7 +313,7 @@
                                 <div class="form-group">
                                     <label for="religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="religion" id="religion">
-                                        <option value="">Choose Religion</option>
+                                        <option value="">{{ __('messages.select_religion') }}</option>
                                         @forelse($religion as $r)
                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
                                         @empty
@@ -350,12 +373,12 @@
                                 <div class="form-group">
                                     <label for="employment_status">{{ __('messages.employment_status') }}</label>
                                     <select class="form-control" name="employment_status" id="employment_status">
-                                        <option value="">Choose employment status</option>
-                                        <option value="Under_Probation">Under Probation</option>
-                                        <option value="Employed">Employed</option>
-                                        <option value="Transferred">Transferred</option>
-                                        <option value="Resign">Resign</option>
-                                        <option value="Retired">Retired</option>
+                                        <option value="">{{ __('messages.select_employment_status') }}</option>
+                                        <option value="Under_Probation">{{ __('messages.under_probation') }}</option>
+                                        <option value="Employed">{{ __('messages.employed') }}</option>
+                                        <option value="Transferred">{{ __('messages.transferred') }}</option>
+                                        <option value="Resign">{{ __('messages.resign') }}</option>
+                                        <option value="Retired">{{ __('messages.retired') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -370,19 +393,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                    <input type="text" class="form-control" name="state" id="State" placeholder="State/Province">
+                                    <input type="text" class="form-control" name="state" id="State" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}/{{ __('messages.province') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">{{ __('messages.city') }}</label>
-                                    <input type="text" class="form-control" name="city" id="City" placeholder="City">
+                                    <input type="text" class="form-control" name="city" id="City" placeholder="{{ __('messages.enter_city') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="Zip/Postal code">
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.enter') }} {{ __('messages.zip') }}/{{ __('messages.postal_code') }}">
                                 </div>
                             </div>
                         </div>
@@ -413,8 +436,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="Choose The Role">
-                                        <option value="">Select Role</option>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach
@@ -437,7 +459,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="designation_id">{{ __('messages.designation') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="Choose The Designation">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
                                         <option value="">{{ __('messages.choose_designation') }}</option>
                                         @if(!empty($emp_designation))
                                         @foreach($emp_designation as $r)
@@ -453,7 +475,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="department_id">{{ __('messages.department') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="Choose The Department">
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
                                         <option value="">{{ __('messages.choose_department') }}</option>
                                         @forelse($emp_department as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -466,7 +488,7 @@
                                 <div class="form-group">
                                     <label for="staff_position">{{ __('messages.staff_position') }}</label>
                                     <select class="form-control" id="staffPosition" name="staff_position">
-                                        <option value="">Select Position</option>
+                                        <option value="">{{ __('messages.select_staff_position') }}</option>
                                         @forelse($staff_positions as $r)
                                         <option value="{{$r['id']}}">{{$r['staff_positions_name']}}</option>
                                         @empty
@@ -477,7 +499,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
-                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="Salary Grade">
+                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
                         </div>
@@ -498,8 +520,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="qualifications">{{ __('messages.staff_qualification') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="Choose The Qualification">
-                                        <option value="">Select Qualification</option>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="staffQualification" name="staff_qualification_id" multiple="multiple" data-placeholder="{{ __('messages.choose_staff_qualification') }}">
+                                        <option value="">{{ __('messages.choose_staff_qualification') }}</option>
                                         @forelse($qualifications as $r)
                                         <option value="{{$r['id']}}">{{$r['qualification_name']}}</option>
                                         @empty
@@ -602,7 +624,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url" placeholder="Fb.com">
+                                        <input type="text" class="form-control" name="facebook_url" id="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -615,7 +637,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="Twitter.com">
+                                        <input type="text" class="form-control" name="twitter_url" id="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -628,7 +650,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="Linked.com">
+                                        <input type="text" class="form-control" name="linkedin_url" id="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -653,26 +675,26 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">{{ __('messages.height') }}</label>
-                                        <input type="text" id="height" class="form-control" name="height" placeholder="Height" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">{{ __('messages.weight') }}</label>
-                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="Weight" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">{{ __('messages.allergy') }}</label>
-                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="Allergy" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                         <select class="form-control" name="blood_group" id="blood_group">
-                                            <option value="">Choose Blood Group</option>
+                                            <option value="">{{ __('messages.select_blood_group') }}</option>
                                             <option value="A+">A+</option>
                                             <option value="A-">A-</option>
                                             <option value="AB+">AB+</option>
@@ -706,19 +728,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_name">{{ __('messages.bank_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="Bank Name" data-parsley-trigger="change">
+                                        <input type="text" id="bank_name" class="form-control" name="bank_name" placeholder="{{ __('messages.enter_bank_name') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="holder_name">{{ __('messages.account_holder') }}<span class="text-danger">*</span></label>
-                                        <input type="text" id="holder_name" class="form-control" name="holder_name" placeholder="{{ __('messages.ali') }}" data-parsley-trigger="change">
+                                        <input type="text" id="holder_name" class="form-control" name="holder_name" placeholder="{{ __('messages.enter_account_holder') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="bank_branch">{{ __('messages.bank_branch') }}<span class="text-danger">*</span></label>
-                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="{{ __('messages.branch_name') }}" data-parsley-trigger="change">
+                                        <input type="text" id="bank_branch" class="form-control" name="bank_branch" placeholder="{{ __('messages.enter_bank_branch') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -726,19 +748,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="bank_address">{{ __('messages.bank_address') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="Bank Address" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="bank_address" name="bank_address" placeholder="{{ __('messages.enter_bank_address') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="ifsc_code">{{ __('messages.ifsc_code') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="IFSC Code" aria-describedby="">
+                                        <input type="text" class="form-control" id="ifsc_code" name="ifsc_code" placeholder="{{ __('messages.enter_ifsc_code') }}" aria-describedby="">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="">{{ __('messages.account_no') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="Account Number" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="account_no" name="account_no" placeholder="{{ __('messages.enter_account_no') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

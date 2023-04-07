@@ -4,7 +4,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#copyeditTimetableForm").find("#sectionID").empty();
-        $("#copyeditTimetableForm").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#copyeditTimetableForm").find("#sectionID").append('<option value="">'+select_class+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -108,7 +108,7 @@ $(function () {
         var class_id = $(this).val();
 
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class</option>');
+        $("#section_id").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -134,9 +134,9 @@ $(function () {
 
             $("#timetable").hide("slow");
             $(".teacher").empty();
-            $(".teacher").append('<option value="">Select Teacher</option>');
+            $(".teacher").append('<option value="">'+select_teacher+'</option>');
             $(".subject").empty();
-            $(".subject").append('<option value="">Select Subject</option>');
+            $(".subject").append('<option value="">'+select_subject+'</option>');
 
             // var table = document.getElementById("timetable_table");
             // var length = table.tBodies[0].rows.length
@@ -518,7 +518,7 @@ $(function () {
         row += '</label></div></td>';
         row += '<td width="20%" ><div class="form-group">';
         row += '<select  class="form-control subject"  name="timetable[' + count + '][subject]">';
-        row += '<option value="">Select Subject</option>';
+        row += '<option value="">'+select_subject+'</option>';
         $.each(subject, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });
@@ -527,7 +527,7 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group main">';
         row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
-        row += '<option value="">Select Teacher</option>';
+        row += '<option value="">'+select_teacher+'</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });
@@ -541,7 +541,7 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group">';
         row += '<select  class="form-control class_room"  name="timetable[' + count + '][class_room]" class="form-control">';
-        row += '<option value="">Select Hall</option>';
+        row += '<option value="">'+select_hall+'</option>';
         $.each(exam_hall, function (key, val) {
             row += '<option value="' + val.id + '">' + val.hall_no + '</option>';
         });

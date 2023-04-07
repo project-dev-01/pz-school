@@ -5,7 +5,7 @@ $(function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#assignClassSubFilter").find("#filtersectionID").empty();
-        $("#assignClassSubFilter").find("#filtersectionID").append('<option value="">Select Class</option>');
+        $("#assignClassSubFilter").find("#filtersectionID").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -32,7 +32,7 @@ $(function () {
         console.log('class_id',class_id)
         console.log('section_id',section_id)
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
+        $(IDnames).find("#sectionID").append('<option value="">'+select_class+'</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {

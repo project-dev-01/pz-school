@@ -109,13 +109,13 @@ $(function () {
         $(".testResultHideSHow").hide();
         var class_id = $(this).val();
         $("#testresultFilter").find("#sectionID").empty();
-        $("#testresultFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#testresultFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#testresultFilter").find("#examnames").empty();
-        $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#testresultFilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -136,11 +136,11 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#testresultFilter").find("#examnames").empty();
-        $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#testresultFilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -164,9 +164,9 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var teacher_id = teacherID;
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $.post(examBySubjects, {
             token: token,
             branch_id: branchID,
@@ -189,7 +189,7 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var exam_id = $("#examnames").val();
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         // paper list
         $.post(subjectByPapers, {
             token: token,
@@ -710,7 +710,7 @@ $(function () {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
                         var att_status = '<select class="form-control attendance_status" id="' + row.student_id + '" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
-                            '<option value="">Choose</option>' +
+                            '<option value="">'+choose+'</option>' +
                             '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Present</option>' +
                             '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Absent</option>' +
                             '</select>';
@@ -1049,7 +1049,7 @@ $(function () {
         })
         // var attendanceType = $('#attendance' + studenetID).val();
         // $('#reasons' + studenetID).empty();
-        // $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        // $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         // $.post(getAbsentLateExcuse, {
         //     token: token,
         //     branch_id: branchID,

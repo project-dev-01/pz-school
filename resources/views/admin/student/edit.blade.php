@@ -118,12 +118,10 @@
     }
 
     .switch input+span strong:before {
-        content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
 
     .switch input+span strong:after {
-        content: 'Lock';
         opacity: 0;
         visibility: hidden;
         position: absolute;
@@ -206,6 +204,30 @@
         display: block;
     }
 </style>
+@if(Session::get('locale')=="en")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'Unlock';
+    }
+
+    .switch input+span strong:after {
+        content: 'Lock';
+    }
+    </style>
+@endif
+@if(Session::get('locale')=="japanese")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'アンロック';
+    }
+
+    .switch input+span strong:after {
+        content: 'ロック';
+    }
+</style>
+@endif
 @endsection
 <div class="container-fluid">
     <!-- start page title -->
@@ -1138,7 +1160,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                                    <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
@@ -1179,7 +1201,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="validationCustomUsername">State/Province</label>
+                                                    <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                                     <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="State/Province" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
@@ -1235,9 +1257,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="drp_transport_vechicleno">Vechicle No</label>
+                                                <label for="drp_transport_vechicleno">{{ __('messages.vehicle_number') }}</label>
                                                 <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
-                                                    <option value="">First select the Transport</option>
+                                                    <option value="">{{ __('messages.select_vehicle_number') }}</option>
 
                                                     @foreach($vehicle as $veh)
                                                     <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
@@ -1260,7 +1282,7 @@
                                             <div class="form-group">
                                                 <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                                 <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
-                                                    <option value="">Select Hostel</option>
+                                                    <option value="">{{ __('messages.select_hostel_name') }}</option>
                                                     @foreach($hostel as $hos)
                                                     <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
                                                     @endforeach
@@ -1271,7 +1293,7 @@
                                             <div class="form-group">
                                                 <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
-                                                    <option value="">First select the hostel</option>
+                                                    <option value="">{{ __('messages.select_room_name') }}</option>
 
                                                     @foreach($room as $roo)
                                                     <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>

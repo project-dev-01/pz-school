@@ -117,12 +117,10 @@
     }
 
     .switch input+span strong:before {
-        content: 'Unlock';
         transition: all 0.3s ease 0.2s;
     }
 
     .switch input+span strong:after {
-        content: 'Lock';
         opacity: 0;
         visibility: hidden;
         position: absolute;
@@ -205,6 +203,30 @@
         display: block;
     }
 </style>
+@if(Session::get('locale')=="en")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'Unlock';
+    }
+
+    .switch input+span strong:after {
+        content: 'Lock';
+    }
+    </style>
+@endif
+@if(Session::get('locale')=="japanese")
+<style>
+    
+    .switch input+span strong:before {
+        content: 'アンロック';
+    }
+
+    .switch input+span strong:after {
+        content: 'ロック';
+    }
+</style>
+@endif
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -1150,7 +1172,7 @@
                                 <div class="form-group">
                                     <label for="drp_transport_vechicleno">{{ __('messages.vehicle_number') }}</label>
                                     <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
-                                        <option value="0">First select the branch</option>
+                                        <option value="0">{{ __('messages.select_vehicle_number') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1169,7 +1191,7 @@
                                 <div class="form-group">
                                     <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                     <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
-                                        <option value="0">Select Hostel</option>
+                                        <option value="0">{{ __('messages.select_hostel_name') }}</option>
                                         @foreach($hostel as $hos)
                                         <option value="{{$hos['id']}}">{{$hos['name']}}</option>
                                         @endforeach
@@ -1180,7 +1202,7 @@
                                 <div class="form-group">
                                     <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                     <select id="drp_roomname" name="drp_roomname" class="form-control">
-                                        <option value="0">First select the hostel</option>
+                                        <option value="0">{{ __('messages.select_room_name') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1285,6 +1307,8 @@
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.student.index') }}";
+    var select_vehicle_number = "{{ __('messages.select_vehicle_number') }}";
+    var select_room_name = "{{ __('messages.select_room_name') }}";
 </script>
 
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>

@@ -219,7 +219,7 @@ $(document).ready(function () {
             //   "render": function (data, type, row, meta) {
             //     row.att_status
             //     var att_status = '<select class="form-control changeAttendanceSelect" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
-            //       '<option value="">Choose</option>' +
+            //       '<option value="">'+choose+'</option>' +
             //       '<option value="present" ' + (row.att_status == "present" ? "selected" : "") + '>Present</option>' +
             //       '<option value="absent" ' + (row.att_status == "absent" ? "selected" : "") + '>Absent</option>' +
             //       '<option value="late" ' + (row.att_status == "late" ? "selected" : "") + '>Late</option>' +

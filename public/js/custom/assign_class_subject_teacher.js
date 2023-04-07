@@ -15,9 +15,9 @@ $(function () {
     function getSections(class_id, IDnames, section_id) {
 
         $(IDnames).find("#assignSubjects").empty();
-        $(IDnames).find("#assignSubjects").append('<option value="">Choose Subject</option>');
+        $(IDnames).find("#assignSubjects").append('<option value="">'+select_subject+'</option>');
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">Select Class</option>');
+        $(IDnames).find("#sectionID").append('<option value="">'+select_class+'</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -47,7 +47,7 @@ $(function () {
     });
     function getSectionsBySub(class_id, IDnames, section_id, subject_id) {
         $(IDnames).find("#assignSubjects").empty();
-        $(IDnames).find("#assignSubjects").append('<option value="">Choose Subject</option>');
+        $(IDnames).find("#assignSubjects").append('<option value="">'+select_subject+'</option>');
 
         $.post(getAssignClassSubjUrl, {
             token: token,

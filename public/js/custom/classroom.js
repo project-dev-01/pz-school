@@ -81,9 +81,9 @@ $(function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#classroomFilter").find("#sectionID").empty();
-        $("#classroomFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#classroomFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -98,7 +98,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -465,7 +465,7 @@ $(function () {
                             status = row.att_status;
                         }
                         var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
-                            '<option value="">Choose</option>' +
+                            '<option value="">'+choose+'</option>' +
                             '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>Present</option>' +
                             '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>Absent</option>' +
                             '<option value="late" ' + (status == "late" ? "selected" : "") + '>Late</option>' +
@@ -492,7 +492,7 @@ $(function () {
                             onLoadReasons(row, meta);
                         }
                         var reasons = '<select id="reasons' + row.student_id + '" class="form-control list-mode-table" name="attendance[' + meta.row + '][reasons]">' +
-                            '<option value="">Choose</option>' +
+                            '<option value="">'+choose+'</option>' +
                             '</select>';
                         return reasons;
                     }
@@ -659,7 +659,7 @@ $(function () {
         var studenetID = $(this).data('id');
         var attendanceType = $('#attendance' + studenetID).val();
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         $.post(getAbsentLateExcuse, {
             token: token,
             branch_id: branchID,
@@ -686,7 +686,7 @@ $(function () {
             attendanceType = row.att_status;
         }
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         if (attendanceType) {
             $.post(getAbsentLateExcuse, {
                 token: token,

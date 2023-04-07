@@ -10,9 +10,9 @@ $(function () {
     $('#country').on('change', function () {
         var country_id = $(this).val();
         $("#filter").find("#state").empty();
-        $("#filter").find("#state").append('<option value="">Select State</option>');
+        $("#filter").find("#state").append('<option value="">'+select_state+'</option>');
         $("#filter").find("#city").empty();
-        $("#filter").find("#city").append('<option value="">Select City</option>');
+        $("#filter").find("#city").append('<option value="">'+select_city+'</option>');
         $.post(getStates, { country_id: country_id }, function (res) {
             console.log('df', res)
             if (res.code == 200) {
@@ -20,7 +20,7 @@ $(function () {
                     $("#filter").find("#state").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getState").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');
@@ -28,16 +28,16 @@ $(function () {
     $('#getCountry').on('change', function () {
         var country_id = $(this).val();
         $("#branch-form").find("#getState").empty();
-        $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+        $("#branch-form").find("#getState").append('<option value="">'+select_state+'</option>');
         $("#branch-form").find("#getCity").empty();
-        $("#branch-form").find("#getCity").append('<option value="">Select City</option>');
+        $("#branch-form").find("#getCity").append('<option value="">'+select_city+'</option>');
         $.post(getStates, { country_id: country_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#branch-form").find("#getState").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getState").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');
@@ -45,16 +45,16 @@ $(function () {
     $('#editGetCountry').on('change', function () {
         var country_id = $(this).val();
         $("#edit-branch-form").find("#editGetState").empty();
-        $("#edit-branch-form").find("#editGetState").append('<option value="">Select State</option>');
+        $("#edit-branch-form").find("#editGetState").append('<option value="">'+select_state+'</option>');
         $("#edit-branch-form").find("#editGetCity").empty();
-        $("#edit-branch-form").find("#editGetCity").append('<option value="">Select City</option>');
+        $("#edit-branch-form").find("#editGetCity").append('<option value="">'+select_city+'</option>');
         $.post(getStates, { country_id: country_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#edit-branch-form").find("#editGetState").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getState").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getState").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');
@@ -63,14 +63,14 @@ $(function () {
     $('#state').on('change', function () {
         var state_id = $(this).val();
         $("#filter").find("#city").empty();
-        $("#filter").find("#city").append('<option value="">Select City</option>');
+        $("#filter").find("#city").append('<option value="">'+select_city+'</option>');
         $.post(getCity, { state_id: state_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#filter").find("#city").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getCity").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getCity").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');
@@ -79,14 +79,14 @@ $(function () {
     $('#getState').on('change', function () {
         var state_id = $(this).val();
         $("#branch-form").find("#getCity").empty();
-        $("#branch-form").find("#getCity").append('<option value="">Select City</option>');
+        $("#branch-form").find("#getCity").append('<option value="">'+select_city+'</option>');
         $.post(getCity, { state_id: state_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#branch-form").find("#getCity").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getCity").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getCity").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');
@@ -95,14 +95,14 @@ $(function () {
     $('#editGetState').on('change', function () {
         var state_id = $(this).val();
         $("#edit-branch-form").find("#editGetCity").empty();
-        $("#edit-branch-form").find("#editGetCity").append('<option value="">Select City</option>');
+        $("#edit-branch-form").find("#editGetCity").append('<option value="">'+select_city+'</option>');
         $.post(getCity, { state_id: state_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#edit-branch-form").find("#editGetCity").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
                 // if(country_id == ''){
-                //     $("#branch-form").find("#getCity").append('<option value="">Select State</option>');
+                //     $("#branch-form").find("#getCity").append('<option value="">'+select_state+'</option>');
                 // }                    
             }
         }, 'json');

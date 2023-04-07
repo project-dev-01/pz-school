@@ -5,7 +5,7 @@ $(function () {
         $(".studentLeaveShow").hide();
         var class_id = $(this).val();
         $("#studentLeaveList").find("#sectionID").empty();
-        $("#studentLeaveList").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
 
         $.post(sectionByClassUrl, {
             token: token,
@@ -27,7 +27,7 @@ $(function () {
     //     $(".studentLeaveShow").hide();
     //     var class_id = $(this).val();
     //     $("#studentLeaveList").find("#sectionID").empty();
-    //     $("#studentLeaveList").find("#sectionID").append('<option value="">Select Section</option>');
+    //     $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
 
     //     $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id, teacher_id: ref_user_id }, function (res) {
     //         if (res.code == 200) {
@@ -225,7 +225,7 @@ $(function () {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
                         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
-                            '<option value="">Choose</option>' +
+                            '<option value="">'+choose+'</option>' +
                             '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
                             '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
                             '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'

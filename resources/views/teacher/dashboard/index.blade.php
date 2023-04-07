@@ -198,13 +198,13 @@
 
                                                                     <li class="list-inline-item mt-3 mt-sm-0">
                                                                         @if($today['priority'] == "Low")
-                                                                        <span class="badge badge-soft-success p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "Medium")
-                                                                        <span class="badge badge-soft-info p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "High")
-                                                                        <span class="badge badge-soft-danger p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                         @endif
                                                                     </li>
                                                                 </ul>
@@ -266,13 +266,13 @@
 
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -335,13 +335,13 @@
 
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($old['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>

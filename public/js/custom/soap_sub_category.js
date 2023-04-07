@@ -30,7 +30,7 @@ $(function () {
     function getCategory(soap_type_id, IDnames, category_id) {
 
         $(IDnames).find("#soap_category_id").empty();
-        $(IDnames).find("#soap_category_id").append('<option value="">Choose Category</option>');
+        $(IDnames).find("#soap_category_id").append('<option value="">'+select_category+'</option>');
 
         $.post(categoryList, { token: token, branch_id: branchID, soap_type_id: soap_type_id }, function (res) {
             if (res.code == 200) {

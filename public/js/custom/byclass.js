@@ -4,9 +4,9 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#byclassfilter").find("#subjectID").empty();
-        $("#byclassfilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#byclassfilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#byclassfilter").find("#examnames").empty();
-        $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#byclassfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id, academic_session_id: academic_session_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -25,7 +25,7 @@ $(function () {
         var yyyy = today.getFullYear();
         today = yyyy + '-' + mm + '-' + dd;
         $("#byclassfilter").find("#examnames").empty();
-        $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#byclassfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(examsByclassandsubject, {
             token: token,
             branch_id: branchID,

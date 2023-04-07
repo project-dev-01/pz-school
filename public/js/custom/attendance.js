@@ -20,7 +20,7 @@ $(function () {
         
         var reason = $(this).closest('tr').find('.reason');
         reason.empty();
-        reason.append('<option value="">Select Reason</option>');
+        reason.append('<option value="">'+select_reason+'</option>');
         $.post(getTeacherAbsentExcuse, {
             token: token,
             branch_id: branchID,
@@ -82,7 +82,7 @@ $(function () {
         e.preventDefault();
         var department = $(this).val();
         $("#employee").empty();
-        $("#employee").append('<option value="">Select Employee</option>');
+        $("#employee").append('<option value="">'+select_employee+'</option>');
         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -96,7 +96,7 @@ $(function () {
         e.preventDefault();
         var department = $(this).val();
         $("#employeeReportEmployee").empty();
-        $("#employeeReportEmployee").append('<option value="">Select Employee</option>');
+        $("#employeeReportEmployee").append('<option value="">'+select_employee+'</option>');
         $("#employeeReportEmployee").append('<option value="All">All</option>');
         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
             if (res.code == 200) {
@@ -471,7 +471,7 @@ $(function () {
             row += '<td width="10%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
-            row += '<option value="">Select Status</option>';
+            row += '<option value="">'+select_status+'</option>';
             if (val.leave) {
                 row += '<option value="present">Present</option>';
                 row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>Absent</option>';
@@ -509,7 +509,7 @@ $(function () {
             row += '<td width="15%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
-            row += '<option value="">Select Reasons</option>';
+            row += '<option value="">'+select_reason+'s</option>';
             if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";

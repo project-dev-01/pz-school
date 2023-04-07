@@ -118,9 +118,9 @@ $(function () {
 
         var Selector = '#addEmployeeForm';
         $(Selector).find("#empDesignation").empty();
-        $(Selector).find("#empDesignation").append('<option value="">Choose Designation</option>');
+        $(Selector).find("#empDesignation").append('<option value="">'+select_designation+'</option>');
         $(Selector).find("#empDepartment").empty();
-        $(Selector).find("#empDepartment").append('<option value="">Choose Department</option>');
+        $(Selector).find("#empDepartment").append('<option value="">'+select_department+'</option>');
         $.post(empDesignation, { branch_id: branchId, token: token }, function (res) {
             console.log('res', res)
             if (res.code == 200) {

@@ -4,7 +4,7 @@ $(function () {
         e.preventDefault();
         var department = $(this).val();
         $("#employee").empty();
-        $("#employee").append('<option value="">Select Employee</option>');
+        $("#employee").append('<option value="">'+select_employee+'</option>');
         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

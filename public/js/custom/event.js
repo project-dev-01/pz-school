@@ -502,11 +502,11 @@ $(function () {
     function branchEvent(branch_id, Selector) {
 
         $(Selector).find("#type").empty();
-        $(Selector).find("#type").append('<option value="">Select Type</option>');
+        $(Selector).find("#type").append('<option value="">'+select_type+'</option>');
         $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">Choose Class</option>');
+        $(Selector).find("#class_name").append('<option value="">'+select_class+'</option>');
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Select Section</option>');
+        $(Selector).find("#section_name").append('<option value="">'+select_section+'</option>');
         $.post(branchByEvent, { branch_id: branch_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data.eventType, function (key, val) {

@@ -13,7 +13,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#promotionFilter").find("#sectionID").empty();
-        $("#promotionFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#promotionFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -26,7 +26,7 @@ $(function () {
     $('#promoteClassID').on('change', function () {
         var class_id = $(this).val();
         $("#promoteStudentForm").find(".promoteSectionID").empty();
-        $("#promoteStudentForm").find(".promoteSectionID").append('<option value="">Select Class</option>');
+        $("#promoteStudentForm").find(".promoteSectionID").append('<option value="">'+select_class+'</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -224,7 +224,7 @@ function bindStudents(dataSetNew) {
             {
                 "targets": 4,
                 "render": function (data, type, row, meta) {
-                    var drop = '<div class="form-group"><select class="form-control promoteSectionID" name="promotion[' + meta.row + '][promote_section_id]"><option value="">Select Class</option></select></div>';
+                    var drop = '<div class="form-group"><select class="form-control promoteSectionID" name="promotion[' + meta.row + '][promote_section_id]"><option value="">'+select_class+'</option></select></div>';
                     return drop;
                 }
             }

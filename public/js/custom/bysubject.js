@@ -3,11 +3,11 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bysubjectfilter").find("#examnames").empty();
-        $("#bysubjectfilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
 
         $("#bysubjectfilter").find("#sectionID").empty();
 
-        $("#bysubjectfilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#bysubjectfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
 
 
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
@@ -31,7 +31,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#bysubjectfilter").find("#examnames").empty();
-        $("#bysubjectfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,

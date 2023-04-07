@@ -5,11 +5,11 @@ $(function () {
         $(".testResultHideSHow").hide();
         var class_id = $(this).val();
         $("#resultsByPaper").find("#sectionID").empty();
-        $("#resultsByPaper").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#resultsByPaper").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#resultsByPaper").find("#examnames").empty();
-        $("#resultsByPaper").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#resultsByPaper").find("#subjectID").empty();
-        $("#resultsByPaper").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -30,9 +30,9 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#resultsByPaper").find("#examnames").empty();
-        $("#resultsByPaper").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#resultsByPaper").find("#subjectID").empty();
-        $("#resultsByPaper").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -56,7 +56,7 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var teacher_id = teacherID;
         $("#resultsByPaper").find("#subjectID").empty();
-        $("#resultsByPaper").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(examBySubjects, {
             token: token,
             branch_id: branchID,

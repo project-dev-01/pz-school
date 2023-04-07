@@ -5,9 +5,9 @@ $(function () {
         console.log(class_id);
 
         $("#byexamfilter").find("#sectionID").empty();
-        $("#byexamfilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#byexamfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#byexamfilter").find("#examnames").empty();
-        $("#byexamfilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#byexamfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
 
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
             if (res.code == 200) {
@@ -29,7 +29,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#byexamfilter").find("#examnames").empty();
-        $("#byexamfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#byexamfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,

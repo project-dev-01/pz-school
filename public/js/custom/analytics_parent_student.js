@@ -250,11 +250,11 @@ $(function () {
         // $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#analyticCrepFilter").find("#sectionID").empty();
-        $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#analyticCrepFilter").find("#sectionID").append('<option value="">'+select_section+'</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#analyticCrepFilter").find("#studentID").empty();
-        $("#analyticCrepFilter").find("#studentID").append('<option value="">Select Student</option>');
+        $("#analyticCrepFilter").find("#studentID").append('<option value="">'+select_student+'</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -268,7 +268,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,

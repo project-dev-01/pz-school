@@ -6,7 +6,7 @@ $(function () {
     //     console.log(class_id);
     //     if (class_id != "All") {
     //         $("#byoverallfilter").find("#sectionID").empty();
-    //         $("#byoverallfilter").find("#sectionID").append('<option value="">Select Subject</option>');
+    //         $("#byoverallfilter").find("#sectionID").append('<option value="">'+select_subject+'</option>');
 
     //         $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
     //             if (res.code == 200) {
@@ -19,7 +19,7 @@ $(function () {
     //     }
     //     else if (class_id == "All") {
     //         $("#byoverallfilter").find("#sectionID").empty();
-    //         $("#byoverallfilter").find("#sectionID").append('<option value="">Select Subject</option>');
+    //         $("#byoverallfilter").find("#sectionID").append('<option value="">'+select_subject+'</option>');
 
     //         $.get(getbysubjectnamesall, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
     //             if (res.code == 200) {
