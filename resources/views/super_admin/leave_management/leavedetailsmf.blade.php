@@ -11,12 +11,12 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="row">
-                                <div class="col-sm-6"><h5>Emp Name :</h5></div>
-                                <div class="col-sm-5"><h4 class="font-weight-bold">Hajmal</h4></div></div>
+                                <div class="col-sm-6"><h5>{{ __('messages.emp_name') }} :</h5></div>
+                                <div class="col-sm-5"><h4 class="font-weight-bold">{{ __('messages.hajmal') }}</h4></div></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-sm-6"><h5>Emp Id :</h5></div>
+                                    <div class="col-sm-6"><h5>{{ __('messages.emp_id') }} :</h5></div>
                                     <div class="col-sm-5"><h4 class="font-weight-bold">1010</h4></div>
                                 </div>                            
                             </div>                            

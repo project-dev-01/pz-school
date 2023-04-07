@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="emapasswordil" class="col-3 col-form-label">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                     <div class="col-9 input-group input-group-merge">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                        <input type="password" id="password" class="form-control" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                         <div class="input-group-append" data-password="false">
                             <div class="input-group-text">
                                 <span class="password-eye"></span>

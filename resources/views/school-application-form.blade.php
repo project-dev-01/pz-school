@@ -323,13 +323,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ffname" placeholder="Aisha" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ffname" placeholder="{{ __('messages.aisha') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="llname" placeholder="Mal" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="llname" placeholder="{{ __('messages.mal') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>

@@ -562,7 +562,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Teacher Name </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.teacher_name') }}</div>
                                         </div>
                                         <div class="col-6">
                                             <div class="col-md-12" id="teacher-name"></div>

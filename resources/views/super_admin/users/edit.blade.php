@@ -62,7 +62,7 @@
                             <div class="form-group mb-3">
                                 <label for="password">{{ __('messages.password') }}</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                                     <div class="input-group-append" data-password="false">
                                         <div class="input-group-text">
                                             <span class="password-eye"></span>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="occupation">{{ __('messages.occupation') }}</label>
-                                <input type="text" id="occupation" name="occupation" class="form-control" placeholder="Occupation">
+                                <input type="text" id="occupation" name="occupation" class="form-control" placeholder="{{ __('messages.enter_occupation') }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="student_id">Student ID</label>

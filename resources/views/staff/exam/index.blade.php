@@ -41,11 +41,11 @@
                             <table class="table table-bordered mb-0">
                                 <thead>
                                     <tr>
-                                        <th>S.No</th>
+                                        <th>{{ __('messages.s._no') }}</th>
                                         <th>{{ __('messages.exam_name') }}</th>
-                                        <th>Exam Type</th>
+                                        <th>{{ __('messages.exam_type') }}</th>
                                         <th>{{ __('messages.term') }}</th>
-                                        <th>Mark Distribution</th>
+                                        <th>{{ __('messages.mark_distribution') }}</th>
                                         <th>{{ __('messages.remarks') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Exam Type </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.exam_type') }}</label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">                                                    
                                                 <option value="">Select Exam Type</option>
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Mark Distribution </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.mark_distribution') }}</label>
                                             <div class="col-9">
                                                 <input type="text" required parsley-type="email" class="form-control" id="inputEmail3" placeholder="">
                                             </div>

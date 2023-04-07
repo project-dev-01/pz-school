@@ -1044,4 +1044,10 @@ return [
     "volley_ball" => "Volley Ball",
     "sports" => "Sports",
     "enjoy" => "Enjoy",
+    "Parent_Guardian_Profile" => "Parent/Guardian Profile",
+    "student_profile" => "Student Profile",
+    "basic_details" => "Basic Details",
+    "roll" => "Roll",
+    "student_information" => "Student Information",
+    "parent_information" => "Parent Information",  
 ];

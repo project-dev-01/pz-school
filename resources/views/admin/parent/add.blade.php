@@ -413,7 +413,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="occupation" placeholder="{{ __('messages.occupation') }}" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                         </div>

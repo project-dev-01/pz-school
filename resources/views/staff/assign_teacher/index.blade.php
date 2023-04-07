@@ -38,7 +38,7 @@
                                 <th>#</th>
                                 <th>{{ __('messages.class_Name') }}</th>
                                 <th>{{ __('messages.section_name') }}</th>
-                                <th>Teacher Name</th>
+                                <th>{{ __('messages.teacher_name') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
