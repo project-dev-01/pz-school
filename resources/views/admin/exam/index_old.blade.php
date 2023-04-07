@@ -41,7 +41,7 @@
                             <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
-                                        <th>S.No</th>
+                                        <th>{{ __('messages.s._no') }}</th>
                                         <th>{{ __('messages.exam_name') }}</th>
                                         <th>Exam Type</th>
                                         <th>{{ __('messages.term') }}</th>

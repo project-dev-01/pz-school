@@ -67,7 +67,7 @@
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Class Name</option>     
-                                        <option value="All">All</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         <option>A</option>
                                         <option>B</option>
                                         <option>C</option>

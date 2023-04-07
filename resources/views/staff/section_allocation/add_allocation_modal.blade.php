@@ -20,7 +20,7 @@
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name</label>
+                        <label for="section_name">{{ __('messages.section_name') }}</label>
                         <select class="form-control" id="section_name" name="section_name">
                             <option value="">Choose Section</option>
                             @foreach($sectionDetails as $section)

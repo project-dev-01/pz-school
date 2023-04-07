@@ -49,7 +49,7 @@
                         <span class="text-danger error-text section_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="class_teacher">Class Teacher</label>
+                        <label for="class_teacher">{{ __('messages.class_teacher') }}</label>
                         <select class="form-control" id="class_teacher" name="class_teacher">
                             <option value="">{{ __('messages.select_teacher') }}</option>
                             <option>Taylor</option>

@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label for="changeLeaveSts">{{ __('messages.leave_status') }}</label>
                                     <select id="changeLeaveSts" class="form-control" required="">
-                                        <option value="All">All</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         <option value="Approve">{{ __('messages.approved') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
                                         <option value="Reject">{{ __('messages.reject') }}</option>

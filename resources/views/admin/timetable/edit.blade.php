@@ -116,7 +116,7 @@
                                                             }
                                                             }
                                                             @endphp
-                                                            <option value="0" {{ $all }}>All</option>
+                                                            <option value="0" {{ $all }}>{{ __('messages.all') }}</option>
                                                             @endif
                                                             @forelse($teacher as $teach)
                                                             @php

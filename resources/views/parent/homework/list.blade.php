@@ -117,7 +117,7 @@
                                     <label for="subject">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject" class="form-control" required="" name="subject">
                                         <option value="">{{ __('messages.select_subject') }}</option>
-                                        <option value="All">All</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         @foreach($subject as $sub)
                                         <option value="{{$sub['subject_id']}}">{{$sub['subject_name']}}</option>
                                         @endforeach

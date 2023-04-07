@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Copy To Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.copy_to_grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         <!-- <option value="All">All</option> -->
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">Copy To Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID">{{ __('messages.copy_to_class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Copy To Semester<span class="text-danger">*</span></label>
+                                    <label for="semester_id">{{ __('messages.copy_to_semester') }}<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Copy To Session<span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.copy_to_session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
@@ -173,7 +173,7 @@
                                                             }
                                                             }
                                                             @endphp
-                                                            <option value="0" {{ $all }}>All</option>
+                                                            <option value="0" {{ $all }}>{{ __('messages.all') }}</option>
                                                             @endif
                                                             @forelse($teacher as $teach)
                                                             @php

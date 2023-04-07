@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" style="width:750px;margin:1.75rem auto !important;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold" id="myleavedetailsModalLabel">Leave Details</h4>
+                <h4 class="modal-title font-weight-bold" id="myleavedetailsModalLabel">{{ __('messages.leave_details') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">

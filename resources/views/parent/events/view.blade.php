@@ -42,7 +42,7 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.audience') }}</td>
-                                        <td class="audience">All</td>
+                                        <td class="audience">{{ __('messages.all') }}</td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
