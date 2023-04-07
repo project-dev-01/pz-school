@@ -26,11 +26,11 @@
                                 <table class="table mb-0">
                                     <tr>
                                         <td>{{ __('messages.title') }}</td>
-                                        <td class="title">Volley Ball</td>
+                                        <td class="title">{{ __('messages.volley_ball') }}</td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.type') }}</td>
-                                        <td class="type">Sports</td>
+                                        <td class="type">{{ __('messages.sports') }}</td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.start_date') }}</td>
@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
-                                        <td class="description">Enjoy</td>
+                                        <td class="description">{{ __('messages.enjoy') }}</td>
                                     </tr>
                                 </table>
                             </div>

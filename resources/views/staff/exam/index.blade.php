@@ -41,7 +41,7 @@
                             <table class="table table-bordered mb-0">
                                 <thead>
                                     <tr>
-                                        <th>S.No</th>
+                                        <th>{{ __('messages.s._no') }}</th>
                                         <th>{{ __('messages.exam_name') }}</th>
                                         <th>{{ __('messages.exam_type') }}</th>
                                         <th>{{ __('messages.term') }}</th>

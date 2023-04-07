@@ -324,7 +324,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-8">
-                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_detail" role="button" aria-expanded="false" aria-controls="basic_detail"><i class="fas fa-user-edit"></i> Student Information</span>
+                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_detail" role="button" aria-expanded="false" aria-controls="basic_detail"><i class="fas fa-user-edit"></i> {{ __('messages.student_information') }}</span>
                         </div>
                         <div class="col-lg-4">
                             <!-- <div class="text-lg-right mt-3 mt-lg-0">
@@ -786,7 +786,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                                    <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1374,7 +1374,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#parent_detail" role="button" aria-expanded="false" aria-controls="parent_detail"><i class="fas fa-users"></i> Parent Information</span>
+                    <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#parent_detail" role="button" aria-expanded="false" aria-controls="parent_detail"><i class="fas fa-users"></i>{{ __('messages.parent_information') }}</span>
                     <br><br>
                     <div class="collapse" id="parent_detail">
 

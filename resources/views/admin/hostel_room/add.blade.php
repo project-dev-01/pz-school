@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks">{{ __('messages.remarks') }}</label>
-                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter The Remarks"> </textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="{{ __('messages.enter_the_remarks') }}"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">

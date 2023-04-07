@@ -406,7 +406,7 @@ extends('layouts.admin-layout')
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Occupation<span class="text-danger">*</span></label>
+                                        <label for="">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                         <input type="" id="txt_occupation" class="form-control" name="txt_occupation" data-parsley-trigger="change">
                                     </div>
                                 </div>

@@ -1007,7 +1007,6 @@ return [
      "teaching_is_the_greatest" => "Teaching is the greatest",
      "act_of_optimism" => "act of optimism",
      "khan" => "Khan",
-     "enter_the_occupation" => "Enter the Occupation",
      "select_Parent" => "Select Parent/Guardian's Name - Secondary",
      "promote_to_standard" => "Promote to standard",
      "enter_confirm_new_password" => "Enter Confirm New Password",
@@ -1072,7 +1071,10 @@ return [
      "select_exam_type" => "Select Exam Type",
      "create_exam" => "Create Exam",
      "select_exam_name" => "Select Exam Name",
-     
-     
-     
+     "Parent_Guardian_Profile" => "Parent/Guardian Profile",
+    "student_profile" => "Student Profile",
+    "basic_details" => "Basic Details",
+    "roll" => "Roll",
+    "student_information" => "Student Information",
+    "parent_information" => "Parent Information",  
 ];

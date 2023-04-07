@@ -799,13 +799,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_first_name" placeholder="Aisha" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_first_name" placeholder="{{ __('messages.aisha') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="Mal" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="{{ __('messages.mal') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -898,7 +898,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="mother_occupation" class="form-control" placeholder="Developer" placeholder="Occupation" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="mother_occupation" class="form-control" placeholder="Developer" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -992,13 +992,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_first_name" placeholder="Amir" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_first_name" placeholder="{{ __('messages.amir') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="Shan" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="{{ __('messages.shan') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1091,7 +1091,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="Engineer" data-parsley-trigger="change" readonly>
+                                        <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1232,7 +1232,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">{{ __('messages.remarks') }}</label>
-                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter The Remarks " name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                         </div>
                         <div class="form-group text-right m-b-0">
