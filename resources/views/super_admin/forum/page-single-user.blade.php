@@ -170,7 +170,7 @@
                             </div>
                             <div class="tt-col-value hide-mobile">                            
                             <a href="javescript:void(0)" class="tt-color15 tt-badge threadapproved" data-id="{{$value['id']}}">{{ __('messages.approve') }}</a>
-                            <a href="javescript:void(0)"  class="tt-color08 tt-badge threaddecline" data-id="{{$value['id']}}">Decline</a>
+                            <a href="javescript:void(0)"  class="tt-color08 tt-badge threaddecline" data-id="{{$value['id']}}">{{ __('messages.decline') }}</a>
 
                             </div>                        
                         </div>

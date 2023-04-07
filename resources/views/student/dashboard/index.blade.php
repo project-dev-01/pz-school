@@ -415,7 +415,7 @@
                                                                             </li>
                                                                             <li class="list-inline-item pr-1">
                                                                                 <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                Submission Date : {{$homework['date_of_submission']}}
+                                                                                {{ __('messages.submission_date') }} : {{$homework['date_of_submission']}}
                                                                             </li>
                                                                             <li class="list-inline-item text-danger">
                                                                             </li>

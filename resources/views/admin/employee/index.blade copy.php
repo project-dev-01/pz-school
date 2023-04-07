@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="religion" id="religion">
-                                        <option value="">Choose Religion</option>
+                                        <option value="">{{ __('messages.select_religion') }}</option>
                                         <option value="Hindu">Hindu</option>
                                         <option value="Muslim">Muslim</option>
                                         <option value="Christain">Christain</option>

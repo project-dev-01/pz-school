@@ -46,7 +46,7 @@
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select  class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        <option value="All">All</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach

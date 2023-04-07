@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="sectionID">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">{{ __('messages.select_Section') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -679,11 +679,11 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-success text-uppercase shadow-sm">
-                                                            <i class="fe-plus-circle"></i> Add</button>
+                                                            <i class="fe-plus-circle"></i>{{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-danger text-uppercase" disabled="disabled">
-                                                            <i class="fe-minus-circle"></i> Remove</button>
+                                                            <i class="fe-minus-circle"></i>{{ __('messages.remove') }}</button>
                                                         <button type="submit" id="save-button" class="btn btn-info waves-effect waves-light text-uppercase">
-                                                            <i class="fe-save"></i> Save</button>
+                                                            <i class="fe-save"></i>{{ __('messages.save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.section') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="All">All</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         <option value="1">1</option>
                                     </select>
                                 </div>

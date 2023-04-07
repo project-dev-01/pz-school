@@ -29,14 +29,14 @@
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name</label>
+                        <label for="section_name">{{ __('messages.section_name') }}</label>
                         <select class="form-control" id="section_name" name="section_name">
                             <option value="">Choose Section</option>
                         </select>
                         <span class="text-danger error-text section_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="class_teacher">Class Teacher</label>
+                        <label for="class_teacher">{{ __('messages.class_teacher') }}</label>
                         <select class="form-control" id="class_teacher" name="class_teacher">
                             <option value="">{{ __('messages.select_teacher') }}</option>
                             

@@ -560,7 +560,7 @@
                                                             <div class="form-group">
                                                                 <label for="txt_religion">{{ __('messages.religion') }}</label>
                                                                 <select class="form-control" name="txt_religion" id="religion">
-                                                                    <option value="">Choose Religion
+                                                                    <option value="">{{ __('messages.select_religion') }}
                                                                     </option>
                                                                     <option value="">Islam</option>
                                                                     <option value="">Hindu</option>

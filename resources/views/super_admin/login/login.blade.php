@@ -32,7 +32,7 @@
 
                     <div class="">
                         <div class="auth-user-testimonial bg">
-                            <h2 class="mb-3 text-white text">Teaching is the greatest act of optimism</h2>
+                            <h2 class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}</h2>
                         </div> <!-- end auth-user-testimonial-->
                     </div>
                 </div>

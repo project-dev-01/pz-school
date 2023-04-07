@@ -285,7 +285,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="last_name" placeholder="Khan" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('messages.khan') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

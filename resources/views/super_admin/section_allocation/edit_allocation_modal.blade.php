@@ -28,7 +28,7 @@
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name<span class="text-danger">*</span></label>
+                        <label for="section_name">{{ __('messages.section_name') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="section_name" name="section_name">
                             <option value="">Choose Section</option>
                         </select>

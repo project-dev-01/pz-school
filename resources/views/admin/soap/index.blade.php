@@ -429,7 +429,7 @@
                                                                 <div class="form-group">
                                                                     <label for="txt_religion">{{ __('messages.religion') }}</label>
                                                                     <select class="form-control" name="txt_religion" id="religion" disabled>
-                                                                        <option value="">Choose Religion</option>
+                                                                        <option value="">{{ __('messages.select_religion') }}</option>
                                                                         @forelse($religion as $r)
                                                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
                                                                         @empty

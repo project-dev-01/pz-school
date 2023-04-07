@@ -34,7 +34,7 @@
                                     <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
                                     <option value="">Select Standard</option>
-                                        <option value="">All</option>
+                                        <option value="">{{ __('messages.all') }}</option>
                                         <option value="">I</option>
                                         <option value="press">II</option>
                                         <option value="">III</option>

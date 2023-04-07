@@ -390,7 +390,7 @@
                                                             <span class="far fa-user"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" placeholder="Khan" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" placeholder="{{ __('messages.khan') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -460,7 +460,7 @@
                                             <div class="form-group">
                                                 <label for="religion">{{ __('messages.religion') }}</label>
                                                 <select class="form-control" name="religion">
-                                                    <option value="">Choose Religion</option>
+                                                    <option value="">{{ __('messages.select_religion') }}</option>
                                                     @forelse($religion as $r)
                                                     <option value="{{$r['id']}}" {{$parent['religion'] == $r['id'] ? "selected" : ""}}>{{$r['religions_name']}}</option>
                                                     @empty

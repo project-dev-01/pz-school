@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">All</option>
+                                        <option value="">{{ __('messages.all') }}</option>
                                         <option value="">I</option>
                                         <option value="press">II</option>
                                         <option value="">III</option>

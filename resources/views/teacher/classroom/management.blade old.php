@@ -115,7 +115,7 @@
                                 <div class="form-group">
                                     <label for="sectionID">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">{{ __('messages.select_Section') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -556,11 +556,11 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-secondary text-uppercase shadow-sm">
-                                                            <i class="fas fa-plus fa-fw"></i> Add</button>
+                                                            <i class="fas fa-plus fa-fw"></i>{{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-secondary text-uppercase" disabled="disabled">
-                                                            <i class="fas fa-minus fa-fw"></i> Remove</button>
+                                                            <i class="fas fa-minus fa-fw"></i>{{ __('messages.remove') }}</button>
                                                         <button type="submit" id="save-button" class="btn btn-primary-bl text-uppercase">
-                                                            Save</button>
+                                                        {{ __('messages.save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>
