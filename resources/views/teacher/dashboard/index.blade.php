@@ -651,7 +651,7 @@
                         <div class="form-group">
                             <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Choose Class</option>
+                                <option value="">{{ __('messages.select_class') }}</option>
                                 <option value="">class 1</option>
                                 <option value="">class 1</option>
                             </select>
@@ -661,7 +661,7 @@
                         <div class="form-group">
                             <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Choose Student</option>
+                                <option value="">{{ __('messages.select_student') }}</option>
                                 <option value="">Sheelu</option>
                                 <option value="">Veena</option>
                             </select>
@@ -768,7 +768,7 @@
                         <div class="form-group">
                             <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Choose Class</option>
+                                <option value="">{{ __('messages.select_class') }}</option>
                                 <option value="">class 1</option>
                                 <option value="">class 1</option>
                             </select>
@@ -778,7 +778,7 @@
                         <div class="form-group">
                             <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                             <select id="" class="form-control" name="">
-                                <option value="">Choose Student</option>
+                                <option value="">{{ __('messages.select_student') }}</option>
                                 <option value="">Sheelu</option>
                                 <option value="">Veena</option>
                             </select>
@@ -1000,7 +1000,7 @@
                         <div class="form-group">
                             <label for="sr_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="sr_student_id" class="form-control studentRank" name="student_id">
-                                <option value="">Select Student</option>
+                                <option value="">{{ __('messages.select_student') }}</option>
                             </select>
                         </div>
                     </div>
@@ -1108,7 +1108,7 @@
                         <div class="form-group">
                             <label for="st_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="st_student_id" class="form-control studentSemester" name="student_id">
-                                <option value="">Select Student</option>
+                                <option value="">{{ __('messages.select_student') }}</option>
                             </select>
                         </div>
                     </div>
@@ -1175,7 +1175,7 @@
                         <div class="form-group">
                             <label for="ems_student_id">{{ __('messages.student') }}<span class="text-danger">*</span></label>
                             <select id="ems_student_id" class="form-control examMarkStatus" name="student_id">
-                                <option value="">Select Student</option>
+                                <option value="">{{ __('messages.select_student') }}</option>
                             </select>
                         </div>
                     </div>

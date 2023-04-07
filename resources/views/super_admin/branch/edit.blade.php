@@ -260,7 +260,7 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
-                                        <option value="">Choose Gender</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
                                         <option value="Male" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Male</option>
                                         <option value="Female" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Female</option>
                                     </select>
@@ -342,7 +342,7 @@
                                 <div class="form-group">
                                     <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                     <select id="editGetState" class="form-control" name="state">
-                                        <option value="">Select State</option>
+                                        <option value="">{{ __('messages.select_state') }}</option>
                                         @foreach($states as $s)
                                         @if($branch['state_id'] == $s['id'])
                                         <option value="{{$s['id']}}" selected>{{$s['name']}}</option>
@@ -358,7 +358,7 @@
                                 <div class="form-group">
                                     <label for="city">{{ __('messages.city') }}</label>
                                     <select id="editGetCity" class="form-control" name="city">
-                                        <option value="">Select City</option>
+                                        <option value="">{{ __('messages.select_city') }}</option>
                                         @foreach($cities as $c)
                                         @if($branch['city_id'] == $c['id'])
                                         <option value="{{$c['id']}}" selected>{{$c['name']}}</option>

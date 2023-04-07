@@ -441,7 +441,7 @@
                                     <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <!-- <select class="form-control" name="role_id" id="role_id"> -->
                                     <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @forelse($roles as $r)
                                         @php
                                         $selected = "";

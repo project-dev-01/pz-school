@@ -547,7 +547,7 @@
                                             <div class="form-group">
                                                 <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                                 <select id="btwyears" class="form-control" name="year">
-                                                    <option value="">Choose Academic Year</option>
+                                                    <option value="">{{ __('messages.select_academic_year') }}</option>
                                                     @forelse($academic_year_list as $r)
                                                     <option value="{{$r['id']}}" {{$student['year'] == $r['id'] ? "Selected" : "" }}>{{$r['name']}}</option>
                                                     @empty
@@ -721,7 +721,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="father_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -902,7 +902,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="mother_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -1096,7 +1096,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="guardian_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>

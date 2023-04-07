@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="incharge_staff">{{ __('messages.incharge_staff') }}</label>
                                     <select class="form-control" name="incharge_staff">
-                                        <option value="">Select Incharge Staff</option>
+                                        <option value="">{{ __('messages.select_incharge_staff') }}</option>
                                         @forelse($staff as $st)
                                         <option value="{{$st['id']}}">{{$st['name']}}</option>
                                         @empty
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="incharge_student">{{ __('messages.incharge_student') }}</label>
                                     <select class="form-control" name="incharge_student">
-                                        <option value="">Select Incharge Student</option>
+                                        <option value="">{{ __('messages.select_incharge_student') }}</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
                                         @empty
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label for="student">{{ __('messages.student') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_student') }}">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
                                         @empty

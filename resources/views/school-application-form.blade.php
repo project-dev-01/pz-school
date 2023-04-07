@@ -93,7 +93,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Choose Gender</option>
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
                                                     <option value="">Male</option>
                                                     <option value="press">Female</option>
                                                 </select>
@@ -152,7 +152,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select City</option>
+                                                    <option value="">{{ __('messages.select_city') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -162,7 +162,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select State</option>
+                                                    <option value="">{{ __('messages.select_state') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -199,7 +199,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.school_year') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Choose School Year</option>
+                                                    <option value="">{{ __('messages.select') }} {{ __('messages.school_year') }}</option>
                                                     <option value="">2021-2022</option>
                                                     <option value="press">2022-2023</option>
                                                 </select>
@@ -229,7 +229,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select City</option>
+                                                    <option value="">{{ __('messages.select_city') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -241,7 +241,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select State</option>
+                                                    <option value="">{{ __('messages.select_state') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="press">Singapore</option>
                                                 </select>
@@ -259,7 +259,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            Parent /Guardian's Information
+                                        {{ __('messages.parent_guardian_information') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -269,7 +269,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.parent') }}/{{ __('messages.guardians_name') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Parent /Guardian's Name</option>
+                                                    <option value="">{{ __('messages.select_parent_guardian_name') }}</option>
                                                     <option value="">Parent</option>
                                                     <option value="">Guardian's</option>
                                                 </select>
@@ -344,7 +344,7 @@
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Choose Occupation</option>
+                                                    <option value="">{{ __('messages.select_occupation') }}</option>
                                                     <option value="">Business</option>
                                                     <option value="">IT/ Software</option>
                                                     <option value="">Civil department</option>

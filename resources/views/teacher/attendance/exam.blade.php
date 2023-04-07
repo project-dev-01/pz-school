@@ -110,7 +110,7 @@
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.select_for_everyone') }}<span class="text-danger">*</span></label>
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">{{ __('messages.present') }}</option>
                                                 <option value="press">{{ __('messages.absent') }}</option>
@@ -125,7 +125,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>{{ __('messages.name') }}</th>
-                                                <th>Roll</th>
+                                                <th>{{ __('messages.roll_number') }}</th>
                                                 <th>{{ __('messages.register_no') }}</th>
                                                 <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>

@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="branch_name">{{ __('messages.branch_name') }}</label>
                         <select class="form-control" id="branch_name" name="branch_name">
-                            <option value="">Choose Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                         </select>
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>

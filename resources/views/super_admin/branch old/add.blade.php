@@ -82,7 +82,7 @@
                     <label for="state" class="col-3 col-form-label">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
                         <select id="getState" class="form-control" name="state">
-                            <option value="">Select State</option>
+                            <option value="">{{ __('messages.select_state') }}</option>
                         </select>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <label for="city" class="col-3 col-form-label">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
                         <select id="getCity" class="form-control" name="city">
-                            <option value="">Select City</option>
+                            <option value="">{{ __('messages.select_city') }}</option>
                         </select>
                     </div>
                 </div>

@@ -105,7 +105,7 @@
                     <div class="form-group">
                         <label for="branch_name">{{ __('messages.branch_name') }}</label>
                         <select class="form-control" id="branch_name" name="branch_name">
-                            <option value="">Choose Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             <option value="">Malaysia</option>
                             <option value="">Singapore</option>
                         </select>

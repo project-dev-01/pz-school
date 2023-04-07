@@ -17,7 +17,7 @@
                         $lastYear = $firstYear + 20;
                         @endphp
                         <select class="form-control" id="editacademicYear" name="name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             @for ($i=$firstYear;$i<=$lastYear;$i++) <option value="{{$i}}-{{$i+1}}">{{$i}}-{{$i+1}}</option>
                                 @endfor
                         </select>

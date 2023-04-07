@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
-                                        <option value="">Choose Gender</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
@@ -171,7 +171,7 @@
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role_id" id="role_id">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach

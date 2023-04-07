@@ -420,7 +420,7 @@
                                             <div class="form-group">
                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                 <select class="form-control" name="gender">
-                                                    <option value="">Choose Gender</option>
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
                                                     <option value="Male" {{$parent['gender'] == "Male" ? "selected" : ""}}>Male</option>
                                                     <option value="Female" {{$parent['gender'] == "Female" ? "selected" : ""}}>Female</option>
                                                 </select>
@@ -508,7 +508,7 @@
                                             <div class="form-group">
                                                 <label for="education">{{ __('messages.education') }}</label>
                                                 <select class="form-control" name="education">
-                                                    <option value="">Choose Education</option>
+                                                    <option value="">{{ __('messages.select_education') }}</option>
                                                     @forelse($education as $e)
                                                     <option value="{{$e['id']}}" {{$parent['education'] == $e['id'] ? "selected" : ""}}>{{$e['name']}}</option>
                                                     @empty

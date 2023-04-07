@@ -10,9 +10,9 @@
                 <form id="edit-staff-leave-assign-form" method="post" action="{{ route('admin.staff_leave_assign.update') }}" autocomplete="off">
                     @csrf
                     <input type="hidden" name="id"><div class="form-group">
-                        <label for="staff_id">Staff<span class="text-danger">*</span></label>
+                        <label for="staff_id">{{ __('messages.staff') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="staff_id" id="staff_id">
-                            <option value="">Choose Staff</option>
+                            <option value="">{{ __('messages.select_staff') }}</option>
                             @forelse($staff as $s)
                             <option value="{{$s['id']}}">{{$s['name']}}</option>
                             @empty
@@ -20,9 +20,9 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="leave_type">Leave Type<span class="text-danger">*</span></label>
+                        <label for="leave_type">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="leave_type" name="leave_type">
-                            <option value="0">Choose Leave Type</option>
+                            <option value="0">{{ __('messages.select_leave_type') }}</option>
                             @forelse($leave_type as $type)
                             <option value="{{$type['id']}}">{{$type['name']}}</option>
                             @empty
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="academic_session_id">Academic Year<span class="text-danger">*</span></label>
                         <select class="form-control" id="academic_session_id" name="academic_session_id">
-                            <option value="0">Choose Academic Year</option>
+                            <option value="0">{{ __('messages.select_academic_year') }}</option>
                             @forelse($academic_year as $ay)
                             <option value="{{$ay['id']}}">{{$ay['name']}}</option>
                             @empty

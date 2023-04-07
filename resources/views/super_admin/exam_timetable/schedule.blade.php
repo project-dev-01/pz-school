@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Select Branch</option>
+                                        <option>{{ __('messages.select_branch') }}</option>
                                         <option value="">Malysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Select Standard</option>
+                                        <option>{{ __('messages.select_standard') }}</option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Select Class Name</option>
+                                        <option>{{ __('messages.select_class') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
                                         <option>A</option>
                                         <option>B</option>

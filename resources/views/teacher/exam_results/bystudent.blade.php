@@ -104,7 +104,7 @@
                                 <div class="form-group">
                                     <label for="student_id">{{ __('messages.student') }}</label>
                                     <select id="student_id" class="form-control" name="student_id">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                     </select>
                                 </div>
                             </div>

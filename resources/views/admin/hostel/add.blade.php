@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="watchman">{{ __('messages.warden_name') }}<span class="text-danger">*</span></label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_warden_name') }}">
-                            <option value="">Select Warden</option>
+                            <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
                             @empty

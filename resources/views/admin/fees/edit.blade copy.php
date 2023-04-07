@@ -84,7 +84,7 @@ use \App\Http\Controllers\AdminController;
                                     <th>#</th>
                                     <th>{{ __('messages.fees_group') }}</th>
                                     <th>{{ __('messages.fees_type') }}</th>
-                                    <th>Payment Mode</th>
+                                    <th>{{ __('messages.payment_mode') }}</th>
                                     <th>Due Date</th>
                                     <th>Paid Date</th>
                                     <th>Status</th>
@@ -206,10 +206,10 @@ use \App\Http\Controllers\AdminController;
                         <input type="hidden" value="{{ $student['academic_id'] }}" name="academic_year" id="academicYear" class="form-control">
                         <div class="col-md-5">
                             <div class="form-group" style="margin: 25px 6px;">
-                                <label for="payment_mode">Payment Mode</label>
+                                <label for="payment_mode">{{ __('messages.payment_mode') }}</label>
                                 <input type="hidden" class="form-control payment_mode_onload" name="payment_mode_onload" value="" />
                                 <select id="payment_mode{{$fee['fees_type_id']}}" class="form-control payment_mode" name="payment_mode">
-                                    <option value="">Select Payment Mode</option>
+                                    <option value="">{{ __('messages.select_payment_mode') }}</option>
                                     @forelse ($payment_mode as $mode)
                                     <option value="{{ $mode['id'] }}">{{ $mode['name'] }}</option>
                                     @empty
@@ -240,7 +240,7 @@ use \App\Http\Controllers\AdminController;
                                                     <div class="form-group">
                                                         <label for="payment_status">{{ __('messages.payment_status') }}<span class="text-danger">*</span></label>
                                                         <select class="form-control initialEmpty" id="yearPaySts" name="fees[1][payment_status]">
-                                                            <option value="">Select Payment Status</option>
+                                                            <option value="">{{ __('messages.select_payment_status') }}</option>
                                                             @forelse ($payment_status as $status)
                                                             <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                             @empty
@@ -307,7 +307,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </td>
                                                                 <td>
                                                                     <select class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterPaySts{{$sem['id']}}" name="fees[2][{{$sem['id']}}][payment_status]">
-                                                                        <option value="">Choose Payment Status</option>
+                                                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty
@@ -376,7 +376,7 @@ use \App\Http\Controllers\AdminController;
                                                                     <input type="text" name="fees[3][{{$mon['id']}}][amount]" id="monthPayAmt{{$mon['id']}}" readonly class="fees_amount_3 initialEmpty form-control">
                                                                 </td>
                                                                 <td><select class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthPaySts{{$mon['id']}}" name="fees[3][{{$mon['id']}}][payment_status]">
-                                                                        <option value="">Choose Payment Status</option>
+                                                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty

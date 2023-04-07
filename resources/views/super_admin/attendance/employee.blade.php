@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Branch</option>
+                                    <option value="">{{ __('messages.select_branch') }}</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Role</option>
+                                    <option value="">{{ __('messages.select_role') }}</option>
                                         <option value="">Teacher</option>
                                         <option value="press">Student</option>
                                         <option value="net">Staff</option>
@@ -105,7 +105,7 @@
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.select_for_everyone') }}<span class="text-danger">*</span></label>
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">{{ __('messages.present') }}</option>
                                                 <option value="press">{{ __('messages.absent') }}</option>

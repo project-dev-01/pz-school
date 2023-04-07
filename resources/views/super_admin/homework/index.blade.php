@@ -35,7 +35,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Standard</option>
+                                                <option value="">{{ __('messages.select_standard') }}</option>
                                                 <option>I</option>
                                                 <option>II</option>
                                                 <option>III</option>
@@ -55,7 +55,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Class Name</option>
+                                                <option value="">{{ __('messages.select_class') }}</option>
                                                 <option>A</option>
                                                 <option>B</option>
                                                 <option>C</option>

@@ -711,7 +711,7 @@
                                                             <div class="form-group">
                                                                 <label for="class_id">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                                                 <select id="class_id" class="form-control" name="class_id">
-                                                                    <option value="">Select Standard
+                                                                    <option value="">{{ __('messages.select_standard') }}
                                                                     </option>
                                                                     <option value="">PPK 1</option>
                                                                     <option value="">Tingkatan 1

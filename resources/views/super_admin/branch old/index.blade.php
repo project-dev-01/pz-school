@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <label for="state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                                         <select id="state" class="form-control" name="state" required="">
-                                            <option value="">Select State</option>
+                                            <option value="">{{ __('messages.select_state') }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     <div class="form-group">
                                         <label for="city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                                         <select id="city" class="form-control" required="">
-                                            <option value="">Select City</option>
+                                            <option value="">{{ __('messages.select_city') }}</option>
                                         </select>
                                     </div>
                                 </div>

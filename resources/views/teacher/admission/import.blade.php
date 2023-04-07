@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Select CSV File<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.select_csv_file') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <div class="fallback">
                         <input name="file" type="file" multiple />

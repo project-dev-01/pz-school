@@ -92,7 +92,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select Branch Name</option>
+                            <option value="">{{ __('messages.select_branch') }} Name</option>
                             <option value="">Malaysia</option>
                             <option value="">Singapore</option>
                         </div>

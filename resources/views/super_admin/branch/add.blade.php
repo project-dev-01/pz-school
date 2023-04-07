@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="gender">{{ __('messages.gender') }}</label>
                         <select class="form-control" name="gender" id="gender">
-                            <option value="">Choose Gender</option>
+                            <option value="">{{ __('messages.select_gender') }}</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -116,7 +116,7 @@
                     <div class="form-group">
                         <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                         <select id="getState" class="form-control" name="state">
-                            <option value="">Select State</option>
+                            <option value="">{{ __('messages.select_state') }}</option>
                         </select>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                     <div class="form-group">
                         <label for="city">{{ __('messages.city') }}</label>
                         <select id="getCity" class="form-control" name="city">
-                            <option value="">Select City</option>
+                            <option value="">{{ __('messages.select_city') }}</option>
                         </select>
                     </div>
                 </div>

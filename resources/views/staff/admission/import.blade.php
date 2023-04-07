@@ -38,7 +38,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">                                
-                            <option value="">Select Standard</option>                            
+                            <option value="">{{ __('messages.select_standard') }}</option>                            
                             <option value="press">I</option>
                             <option value="net">II</option>
                             <option value="mouth">III</option>
@@ -58,7 +58,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select Class Name</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             <option value="press">A</option>
                             <option value="net">B</option>
                             <option value="mouth">C</option>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Select CSV File<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.select_csv_file') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <div class="fallback">
                         <input name="file" type="file" multiple />

@@ -31,7 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Create Exam
+                            {{ __('messages.create_exam') }}
                         </a>
                     </li>
                 </ul>
@@ -43,9 +43,9 @@
                                     <tr>
                                         <th>S.No</th>
                                         <th>{{ __('messages.exam_name') }}</th>
-                                        <th>Exam Type</th>
+                                        <th>{{ __('messages.exam_type') }}</th>
                                         <th>{{ __('messages.term') }}</th>
-                                        <th>Mark Distribution</th>
+                                        <th>{{ __('messages.mark_distribution') }}</th>
                                         <th>{{ __('messages.remarks') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
@@ -79,7 +79,7 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Branch</option>
+                                                    <option value="">{{ __('messages.select_branch') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="">Singapore</option>
                                                 </select>
@@ -109,10 +109,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Exam Type </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.exam_type') }} </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">                                                    
-                                                <option value="">Select Exam Type</option>
+                                                <option value="">{{ __('messages.select_exam_type') }}</option>
                                                     <option value="">Internal</option>
                                                     <option value="">Model</option>
                                                     <option value="">Main</option>
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Mark Distribution </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.mark_distribution') }}</label>
                                             <div class="col-9">
                                                 <input type="text" required parsley-type="email" class="form-control" id="inputEmail3" placeholder="">
                                             </div>

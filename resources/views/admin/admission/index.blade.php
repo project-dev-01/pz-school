@@ -433,7 +433,7 @@
                                 <div class="form-group">
                                     <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -1316,15 +1316,4 @@
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 <!-- <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/admission.js') }}"></script>
-<!-- <script>
-    $('.dropify').dropify();
-    $('.dropify').dropify({
-        messages: {
-            'default': 'Drag and drop a file here or ss',
-            'replace': 'Drag and drop or click to replacesss',
-            'remove':  'Removedsss',
-            'error':   'Ooops, something wrong happended.'
-        }
-    });
-</script> -->
 @endsection

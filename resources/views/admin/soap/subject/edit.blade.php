@@ -190,7 +190,7 @@
                                             <label for="soap_type_id" class="">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                                             <div class="col-9">
                                                 <select id="soap_type_id" class="col-md-6 form-control" name="soap_type_id">
-                                                    <option value="">Select Type</option>
+                                                    <option value="">{{ __('messages.select_type') }}</option>
                                                     <option value="1" {{$soapsubject['soap_type_id']=="1" ? 'Selected':''}}>S - Subjective</option>
                                                     <option value="2" {{$soapsubject['soap_type_id']=="2" ? 'Selected':''}}>O - Objective</option>
                                                     <option value="3" {{$soapsubject['soap_type_id']=="3" ? 'Selected':''}}>A - Assessment</option>

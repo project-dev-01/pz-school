@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_1') }}</label>
                         <select class="form-control" id="subjectType" name="subject_type">
-                            <option value="">Choose Subject Type 1</option>
+                            <option value="">{{ __('messages.select_subject_type_1') }}</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
                             <option value="Task">Task</option>
@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_2') }}</label>
                         <select class="form-control" id="subjectTypeTwo" name="subject_type_2">
-                            <option value="">Choose Subject type 2</option>
+                            <option value="">{{ __('messages.select_subject_type_2') }}</option>
                             <option value="Theory">Theory</option>
                             <option value="Practical">Practical</option>
                         </select>

@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="academic_session_id">>{{ __('messages.copy_from_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="academic_session_id" class="form-control" name="academic_session_id">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label for="copy_academic_session_id">{{ __('messages.copy_to_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="copy_academic_session_id" class="form-control" name="copy_academic_session_id">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty

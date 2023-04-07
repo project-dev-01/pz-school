@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="route_id">{{ __('messages.route') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="route_id">
-                            <option value="">Select Route</option>
+                            <option value="">{{ __('messages.select_route') }}</option>
                             @forelse($route as $rou)
                             <option value="{{$rou['id']}}">{{ $rou['name'] }}</option>
                             @empty
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="stoppage_id">{{ __('messages.stoppage') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="stoppage_id">
-                            <option value="">Select Stoppage</option>
+                            <option value="">{{ __('messages.select_stoppage') }}</option>
                             @forelse($stoppage as $stop)
                             <option value="{{$stop['id']}}">{{ $stop['stop_position'] }}</option>
                             @empty
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label for="vehicle_id">{{ __('messages.vehicle') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="vehicle_id">
-                            <option value="">Select Vehicle</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             @forelse($vehicle as $veh)
                             <option value="{{$veh['id']}}">{{ $veh['vehicle_no'] }}</option>
                             @empty

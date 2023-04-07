@@ -591,7 +591,7 @@
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                                 <select id="categy" name="categy" class="form-control">
-                                                    <option value="">Choose..</option>
+                                                    <option value="">Cho{{ __('messages.select_category') }}</option>
                                                     <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>
                                                     <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
                                                 </select>
@@ -700,7 +700,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="father_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -881,7 +881,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="mother_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -1075,7 +1075,7 @@
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="guardian_gender" disabled>
-                                                        <option value="">Choose Gender</option>
+                                                        <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
@@ -1261,7 +1261,7 @@
                                             <div class="form-group">
                                                 <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                                 <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
-                                                    <option value="">Select Hostel</option>
+                                                    <option value="">{{ __('messages.select_hostel_name') }}</option>
                                                     @foreach($hostel as $hos)
                                                     <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
                                                     @endforeach
@@ -1272,7 +1272,7 @@
                                             <div class="form-group">
                                                 <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
-                                                    <option value="">First select the hostel</option>
+                                                    <option value="">{{ __('messages.select_room_name') }}</option>
 
                                                     @foreach($room as $roo)
                                                     <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>

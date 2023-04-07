@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Standard</option>                            
+                            <option value="">{{ __('messages.select_standard') }}</option>                            
                             <option value="press">I</option>
                             <option value="net">II</option>
                             <option value="mouth">III</option>
@@ -98,7 +98,7 @@
                     <div class="form-group">
                         <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">Select Class Name</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             <option value="press">A</option>
                             <option value="net">B</option>
                             <option value="mouth">C</option>
@@ -487,7 +487,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.transport_route') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -499,7 +499,7 @@
                         <div class="form-group">
                         <label for="heard">Vechicle No<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -516,7 +516,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.hostel_name') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -528,7 +528,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.room_name') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the hostel</option>
+                            <option value="">{{ __('messages.select_room_name') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>

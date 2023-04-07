@@ -113,7 +113,7 @@
                                                 <label for="state" class="col-3 col-form-label">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <select id="editGetState" class="form-control" name="state">
-                                                        <option value="">Select State</option>
+                                                        <option value="">{{ __('messages.select_state') }}</option>
                                                         @foreach($states as $s)
                                                         @if($branch['state_id'] == $s['id'])
                                                         <option value="{{$s['id']}}" selected>{{$s['name']}}</option>
@@ -132,7 +132,7 @@
                                                 <label for="city" class="col-3 col-form-label">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                                                 <div class="col-9">
                                                     <select id="editGetCity" class="form-control" name="city">
-                                                        <option value="">Select City</option>
+                                                        <option value="">{{ __('messages.select_city') }}</option>
                                                         @foreach($cities as $c)
                                                         @if($branch['city_id'] == $c['id'])
                                                         <option value="{{$c['id']}}" selected>{{$c['name']}}</option>

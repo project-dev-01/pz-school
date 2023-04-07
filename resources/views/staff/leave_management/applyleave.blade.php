@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                             <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                                <option value="">Select Option</option>
+                                                <option value="">{{ __('messages.select_reason') }}</option>
                                                 @forelse ($get_leave_reasons as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="total_leave">Total Leave Days<span class="text-danger">*</span></label>
+                                            <label for="total_leave">{{ __('messages.total_leave_days') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>

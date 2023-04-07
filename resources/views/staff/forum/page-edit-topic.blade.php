@@ -264,8 +264,8 @@ border-bottom: 1px solid #E9D528;
                             <div class="form-group">
                                 <label for="inputTopic" class="col-3 col-form-label">User</label>
                                 
-                                <select class="form-control select2-multiple" data-toggle="select2" id="selectedusers" name="tags[]" multiple="multiple" data-placeholder="Select User">
-                                    <option value="">Select User</option>
+                                <select class="form-control select2-multiple" data-toggle="select2" id="selectedusers" name="tags[]" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">
+                                    <option value="">{{ __('messages.select_user') }}</option>
                                     @forelse($usernames as $user)
                                     @php
                                     $selected = "";

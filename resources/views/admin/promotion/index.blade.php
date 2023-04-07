@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -109,7 +109,7 @@
                                 <div class="form-group">
                                     <label for="promote_year">{{ __('messages.promote_to_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="promote_year" class="form-control" name="promote_year">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -121,7 +121,7 @@
                                 <div class="form-group">
                                     <label for="promoteClassID">Promote to standard<span class="text-danger">*</span></label>
                                     <select id="promoteClassID" class="form-control" name="promote_class_id">
-                                        <option value="">Select Standard</option>
+                                        <option value="">{{ __('messages.select_standard') }}</option>
                                         @forelse ($classes as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty

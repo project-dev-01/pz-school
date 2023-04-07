@@ -173,7 +173,7 @@
                     <div class="form-group">
                         <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                         <select id="day" class="form-control" name="day">
-                            <option value="">Select Day</option>
+                            <option value="">{{ __('messages.select_day') }}</option>
                             <option value="sunday">Sunday</option>
                             <option value="monday">Monday</option>
                             <option value="tuesday">Tuesday</option>

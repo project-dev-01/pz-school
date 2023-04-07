@@ -91,7 +91,7 @@
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>{{ __('messages.no') }}</th>
                                         <th>{{ __('messages.student_name') }}</th>
-                                        <th>Payment Mode</th>
+                                        <th>{{ __('messages.payment_mode') }}</th>
                                         <th>{{ __('messages.gender') }}</th>
                                         <th>{{ __('messages.register_no') }}</th>
                                         <th>{{ __('messages.email') }}</th>

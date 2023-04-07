@@ -475,7 +475,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.transport_route') }}<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -487,7 +487,7 @@
                         <div class="form-group">
                         <label for="heard">Vechicle No<span class="text-danger">*</span></label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -504,7 +504,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.hostel_name') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the branch</option>
+                            <option value="">{{ __('messages.select_vehicle_number') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -516,7 +516,7 @@
                         <div class="form-group">
                         <label for="heard">{{ __('messages.room_name') }}</label>
                         <select id="heard" class="form-control" required="">
-                            <option value="">First select the hostel</option>
+                            <option value="">{{ __('messages.select_room_name') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>

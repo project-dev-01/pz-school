@@ -43,7 +43,7 @@
                             <tr>
                                 <th>S.No</th>
                                 <th>{{ __('messages.branch_name') }}</th>
-                                <th>Vehicle No</th>
+                                <th>{{ __('messages.vehicle_number') }}</th>
                                 <th>{{ __('messages.capacity') }}</th>
                                 <th>{{ __('messages.driver_name') }}</th>
                                 <th>{{ __('messages.driver_phone') }}</th>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Vehicle No<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.vehicle_number') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

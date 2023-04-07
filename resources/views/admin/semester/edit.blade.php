@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="year">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                         <select id="btwyears" class="form-control" name="year" placeholder="{{ __('messages.enter_acadenic_year') }}">
-                            <option value="">Choose Academic Year</option>
+                            <option value="">{{ __('messages.select_academic_year') }}</option>
                             @forelse($academic_year_list as $r)
                             <option value="{{$r['id']}}" >{{$r['name']}}</option>
                             @empty

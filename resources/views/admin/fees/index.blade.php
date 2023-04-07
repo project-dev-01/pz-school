@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label for="student_id">{{ __('messages.student') }}</label>
                                     <select id="student_id" class="form-control" name="student_id">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <label for="payment_status">{{ __('messages.payment_status') }}</label>
                                     <select id="payment_status" class="form-control" name="payment_status">
-                                        <option value="">Select Payment Status</option>
+                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                         @forelse ($payment_status as $status)
                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                         @empty
@@ -121,7 +121,7 @@
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.student_name') }}</th>
                                     <th>{{ __('messages.fees_group') }}</th>
-                                    <!-- <th>Payment Status</th> -->
+                                    <!-- <th>{{ __('messages.payment_status') }}</th> -->
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

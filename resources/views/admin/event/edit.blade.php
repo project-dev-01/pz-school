@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="type">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="type" name="type">
-                                        <option value="">Select The Type</option>
+                                        <option value="">{{ __('messages.select_type') }}</option>
                                         @foreach($type as $typ)
                                         <option value="{{$typ['id']}}" {{$event['type'] == $typ['id'] ? 'Selected':''}}>{{$typ['name']}}</option>
                                         @endforeach
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="audience">{{ __('messages.audience') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="edit_audience" name="audience">
-                                        <option value="">Select The Audience</option>
+                                        <option value="">{{ __('messages.select_audience') }}</option>
                                         <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
                                         <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Grade</option>
                                         <option value="3" {{$event['audience'] == "3" ? 'Selected':''}}>Selected Group</option>

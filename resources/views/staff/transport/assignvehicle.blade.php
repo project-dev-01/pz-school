@@ -46,7 +46,7 @@
                                 <th>{{ __('messages.stoppage') }}</th>
                                 <th>{{ __('messages.stop_place') }}</th>
                                 <th>{{ __('messages.route_fare') }}</th>
-                                <th>Vehicle No</th>
+                                <th>{{ __('messages.vehicle_number') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,7 +99,7 @@
                     
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Vehicle No<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.vehicle_number') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">

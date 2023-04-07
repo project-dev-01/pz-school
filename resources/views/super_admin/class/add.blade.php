@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="branch_id">{{ __('messages.branch') }}</label>
                         <select class="form-control" id="branch_id" name="branch_id">
-                            <option value="">Choose Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             @foreach($branches as $b)
                             <option value="{{$b['id']}}">{{$b['name']}}</option>
                             @endforeach

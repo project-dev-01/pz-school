@@ -654,7 +654,7 @@
                                 <div class="form-group">
                                     <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse ($get_std_names_dashboard as $std)
                                         <option value="{{ $std['id'] }}" data-classid="{{ $std['class_id'] }}" data-sectionid="{{ $std['section_id'] }}" {{ Session::get('student_id') == $std['id'] ? 'selected' : ''}}>{{ $std['name'] }}</option>
                                         @empty
@@ -695,7 +695,7 @@
                                 <div class="form-group">
                                     <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse ($get_leave_reasons_dashboard as $res)
                                         <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                         @empty

@@ -258,7 +258,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" />
+                                        <input type="file" name="photo" id="photo" class="dropify-fr" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" data-remove="Rewm" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -785,6 +785,7 @@
 @section('scripts')
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+
 <script>
     var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
@@ -806,6 +807,7 @@
         responsiveDropdown: true
     });
 </script>
+
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
@@ -816,4 +818,14 @@
 </script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
+<script>
+    $('.dropify').dropify({
+        messages: {
+            default: 'Drag and drop a file here or Check',
+            replace: 'Drag and drop or click to replacesss',
+            remove:  'Removedsss',
+            error:   'Ooops, something wrong happended.'
+        }
+    });
+</script>
 @endsection

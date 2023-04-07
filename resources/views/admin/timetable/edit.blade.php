@@ -150,7 +150,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control" name="timetable[{{$row}}][class_room]" {{$bulk}}>
-                                                            <option value="">Select Hall</option>
+                                                            <option value="">{{ __('messages.select_hall') }}</option>
                                                             @forelse($hall_list as $list)
                                                             <option value="{{$list['id']}}" {{ $list['id'] == $table['class_room'] ? 'selected' : ''}}>{{ $list['hall_no'] }}</option>
                                                             @empty

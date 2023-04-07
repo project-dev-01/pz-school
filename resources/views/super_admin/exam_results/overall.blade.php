@@ -56,7 +56,7 @@
                             </div>  
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Choose Subject<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.select_subject') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">                                          
                                         <option value="press">English</option>    
                                         <option value="">Mathematics</option>

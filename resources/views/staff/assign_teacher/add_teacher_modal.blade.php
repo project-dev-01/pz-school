@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="section_name">{{ __('messages.section_name') }}</label>
                         <select class="form-control" id="section_name" name="section_name">
-                            <option value="">Choose Section</option>
+                            <option value="">{{ __('messages.select_section') }}</option>
                         </select>
                         <span class="text-danger error-text section_name_error"></span>
                     </div>

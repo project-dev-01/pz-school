@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="branch_id" id="empBranchName">
-                                        <option value="">Select Branch</option>
+                                        <option value="">{{ __('messages.select_branch') }}</option>
                                         <option>Malaysia</option>
                                         <option>Singapore</option>
                                     </select>
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="role">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach

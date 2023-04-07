@@ -47,7 +47,7 @@
                                         <th>#</th>
                                         <th>{{ __('messages.fees_type') }}</th>
                                         <th>Due Date</th>
-                                        <th>Payment Mode</th>
+                                        <th>{{ __('messages.payment_mode') }}</th>
                                         <th>{{ __('messages.amount') }}</th>
                                     </tr>
                                 </thead>

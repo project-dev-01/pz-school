@@ -194,7 +194,7 @@
                                         <div class="form-group">
                                             <label for="soap_type_id" class="">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                                             <select id="soap_type_id" class="col-md-6 form-control" name="soap_type_id">
-                                                <option value="">Select Type</option>
+                                                <option value="">{{ __('messages.select_type') }}</option>
                                                 <option value="1">S - Subjective</option>
                                                 <option value="2">O - Objective</option>
                                                 <option value="3">A - Assessment</option>
