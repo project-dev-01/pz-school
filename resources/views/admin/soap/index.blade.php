@@ -481,7 +481,7 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="drp_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                                                    <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
                                                                     <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="Zip/Postal_Code" name="drp_post_code" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>

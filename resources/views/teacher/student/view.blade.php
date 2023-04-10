@@ -494,7 +494,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="drp_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                                <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
                                                 <input type="" id="drp_post_code" class="form-control" name="drp_post_code" data-parsley-trigger="change" value="{{$student['post_code']}}">
                                             </div>
                                         </div>
@@ -819,7 +819,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="father_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                                    <label for="father_post_code">{{ __('messages.zip_postal_code') }}</label>
                                                     <input type="text" class="form-control" id="father_post_code" readonly>
                                                 </div>
                                             </div>
@@ -1000,7 +1000,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="mother_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                                    <label for="mother_post_code">{{ __('messages.zip_postal_code') }}</label>
                                                     <input type="text" class="form-control" id="mother_post_code" readonly>
                                                 </div>
                                             </div>
@@ -1194,7 +1194,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="guardian_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                                    <label for="guardian_post_code">{{ __('messages.zip_postal_code') }}</label>
                                                     <input type="text" class="form-control" id="guardian_post_code" readonly>
                                                 </div>
                                             </div>
@@ -1427,7 +1427,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.city') }}</th>
                                                 <td width="25%" class="father_city"></td>
-                                                <th width="25%">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</th>
+                                                <th width="25%">{{ __('messages.zip_postal_code') }}</th>
                                                 <td width="25%" class="father_postal_code"></td>
                                             </tr>
                                             <tr class="quick-address">
@@ -1490,7 +1490,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.city') }}</th>
                                                 <td width="25%" class="mother_city"></td>
-                                                <th width="25%">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</th>
+                                                <th width="25%">{{ __('messages.zip_postal_code') }}</th>
                                                 <td width="25%" class="mother_postal_code"></td>
                                             </tr>
                                             <tr class="quick-address">
@@ -1553,7 +1553,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.city') }}</th>
                                                 <td width="25%" class="guardian_city"></td>
-                                                <th width="25%">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</th>
+                                                <th width="25%">{{ __('messages.zip_postal_code') }}</th>
                                                 <td width="25%" class="guardian_postal_code"></td>
                                             </tr>
                                             <tr class="quick-address">

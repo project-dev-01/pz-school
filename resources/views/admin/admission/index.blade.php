@@ -273,7 +273,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +286,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="{{ __('messages.muhammad_jaafar') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -401,8 +401,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="drp_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="{{ __('messages.zip') }}/{{ __('messages.postal_code') }}" name="drp_post_code" data-parsley-trigger="change">
+                                    <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
+                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -748,8 +748,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="father_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                        <input type="text" class="form-control" placeholder="{{ __('messages.zip') }}/{{ __('messages.postal_code') }}" id="father_post_code" readonly>
+                                        <label for="father_post_code">{{ __('messages.zip_postal_code') }}</label>
+                                        <input type="text" class="form-control" placeholder="{{ __('messages.zip_postal_code') }}" id="father_post_code" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -931,8 +931,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="mother_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                        <input type="text" class="form-control" id="mother_post_code" placeholder="{{ __('messages.zip') }}/{{ __('messages.postal_code') }}" readonly>
+                                        <label for="mother_post_code">{{ __('messages.zip_postal_code') }}</label>
+                                        <input type="text" class="form-control" id="mother_post_code" placeholder="{{ __('messages.zip_postal_code') }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1124,7 +1124,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="guardian_post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                        <label for="guardian_post_code">{{ __('messages.zip_postal_code') }}</label>
                                         <input type="text" class="form-control" id="guardian_post_code" readonly>
                                     </div>
                                 </div>

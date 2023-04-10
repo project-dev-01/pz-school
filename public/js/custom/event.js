@@ -263,6 +263,7 @@ $(function () {
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             //dom: 'lBfrtip',
             "language": {
+                "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,
                 "search": datatable_search,

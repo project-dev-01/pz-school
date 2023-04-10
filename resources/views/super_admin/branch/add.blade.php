@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                        <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
                         <input type="text" class="form-control" name="post_code" id="postCode" placeholder="000000">
                     </div>
                 </div>

@@ -52,8 +52,8 @@
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                             </select> -->
                              <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
-                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JAP</option>
+                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -239,14 +239,14 @@
         //find an item with value of sessionLang\
         var img = "{{ asset('public/images/JPN.png') }}";
         var value = "japanese";
-        var text = "JAP";
+        var text = "JPN";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
         var img = "{{ asset('public/images/USA.png') }}";
         var value = "en";
-        var text = "EN";
+        var text = "ENG";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);

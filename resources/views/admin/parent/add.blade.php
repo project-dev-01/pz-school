@@ -294,7 +294,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="first_name" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +307,7 @@
                                                 <span class="far fa-user"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('messages.khan') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -453,8 +453,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
-                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.zip') }}/{{ __('messages.postal_code') }}">
+                                    <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
+                                    <input type="text" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.zip_postal_code') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">

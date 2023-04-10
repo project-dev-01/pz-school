@@ -51,8 +51,8 @@
             
             <li class="dropdown notification-list topbar-dropdown">
                 <select class="vodiapicker">
-                    <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
-                    <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">JAP</option>
+                    <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
+                    <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
                 </select>
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>

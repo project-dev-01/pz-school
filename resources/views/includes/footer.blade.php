@@ -174,6 +174,7 @@
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     
+    var showing_zero_entries = "{{ __('messages.showing_zero_entries') }}";
     var showing_entries = "{{ __('messages.showing_entries') }}";
     var show_entries = "{{ __('messages.show_entries') }}";
     var datatable_search = "{{ __('messages.datatable_search') }}";
@@ -300,14 +301,14 @@
         //find an item with value of sessionLang\
         var img = "{{ asset('public/images/JPN.png') }}";
         var value = "japanese";
-        var text = "JAP";
+        var text = "JPN";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
         var img = "{{ asset('public/images/USA.png') }}";
         var value = "en";
-        var text = "EN";
+        var text = "ENG";
         var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);

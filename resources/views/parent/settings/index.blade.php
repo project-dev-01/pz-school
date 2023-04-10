@@ -1,5 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<style>
+
+.iti {
+    display: block;
+}
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -88,7 +97,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
-                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
+                                        <input type="text" class="form-control number_validation" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
                                         <span class="text-danger error-text mobile_no_error"></span>
                                     </div>
                                 </div>
@@ -153,6 +162,24 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script>
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+</script>
 <script>
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
