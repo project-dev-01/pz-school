@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('messages.qualification') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Qualificaiton">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_qualification') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

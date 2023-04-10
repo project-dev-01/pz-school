@@ -412,7 +412,7 @@
                                                 <select id="gender" name="gender" class="form-control">
                                                     <option value="">{{ __('messages.select_gender') }}</option>
                                                     <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>{{ __('messages.male') }}</option>
-                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>{{ __('messages.femlae') }}</option>
+                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -497,7 +497,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_country">{{ __('messages.country') }}</label>
-                                                <input type="" id="drp_country" placeholder="Country" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
+                                                <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -821,7 +821,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}</label>
-                                                    <input type="text" class="form-control" placeholder="Country" id="father_country" data-parsley-trigger="change" readonly>
+                                                    <input type="text" class="form-control" placeholder="{{ __('messages.country') }}" id="father_country" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1002,7 +1002,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}</label>
-                                                    <input type="text" class="form-control" id="mother_country" placeholder="Country" data-parsley-trigger="change" readonly>
+                                                    <input type="text" class="form-control" id="mother_country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1315,7 +1315,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txt_prev_schname">{{ __('messages.school_name') }}</label>
-                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" placeholder="('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{$student['school_name']}}">
+                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{$student['school_name']}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -1424,7 +1424,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="father_email"></td>
-                                                <th width="25%">Mobile No</th>
+                                                <th width="25%">{{ __('messages.mobile_no') }}</th>
                                                 <td width="25%" class="father_mobile_no"></td>
                                             </tr>
                                             <tr>
@@ -1487,7 +1487,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="mother_email"></td>
-                                                <th width="25%">Mobile No</th>
+                                                <th width="25%">{{ __('messages.mobile_no') }}</th>
                                                 <td width="25%" class="mother_mobile_no"></td>
                                             </tr>
                                             <tr>
@@ -1548,9 +1548,9 @@
                                                 <td width="25%" class="guardian_nric"></td>
                                             </tr>
                                             <tr>
-                                                <th width="25%">Email</th>
+                                                <th width="25%">{{ __('messages.email') }}</th>
                                                 <td width="25%" class="guardian_email"></td>
-                                                <th width="25%">Mobile No</th>
+                                                <th width="25%">{{ __('messages.mobile_no') }}</th>
                                                 <td width="25%" class="guardian_mobile_no"></td>
                                             </tr>
                                             <tr>

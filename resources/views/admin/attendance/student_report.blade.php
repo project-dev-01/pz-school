@@ -110,7 +110,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_date">Month/Year<span class="text-danger">*</span></label>
+                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="class_date" id="classDate" placeholder="{{ __('messages.mm_yyyy') }}">
                                 </div>
                             </div>

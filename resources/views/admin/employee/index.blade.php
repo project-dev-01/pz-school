@@ -385,7 +385,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" class="form-control" placeholder="Country" name="country" id="Country">
+                                    <input type="text" class="form-control" placeholder="{{ __('messages.country') }}" name="country" id="Country">
                                 </div>
                             </div>
                         </div>

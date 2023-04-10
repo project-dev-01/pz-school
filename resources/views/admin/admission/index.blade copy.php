@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12 addadmission">
             <div class="page-title-box">
-                <h4 class="page-title">Student Admission</h4>
+                <h4 class="page-title">{{ __('messages.student_admission') }}</h4>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="class_id">Standard<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_standard') }}</option>
                                         @foreach($class as $cla)
@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                     <select id="categy" name="categy" class="form-control">
-                                        <option value="">Choose..</option>
+                                        <option value="">{{ __('messages.choose') }}</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                     </select>
@@ -204,7 +204,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">Mother Tongue</label>
+                                    <label for="">{{ __('messages.mother_tongue') }}</label>
                                     <input type="" id="txt_mothertongue" class="form-control" name="txt_mothertongue" data-parsley-trigger="change">
                                 </div>
                             </div>

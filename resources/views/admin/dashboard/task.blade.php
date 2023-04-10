@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddTasksModalLabel" style="color: #6FC6CC">Add</h4>
+                <h4 class="modal-title" id="myaddTasksModalLabel" style="color: #6FC6CC">{{ __('messages.add') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body" style="background-color: #8adfee14;">
