@@ -104,7 +104,7 @@
                 <ul class="nav nav-tabs" >
                             <li class="nav-item">
                                 <h4  class="nav-link">
-                                    Student Lists
+                                {{ __('messages.student_lists') }}
                                 <h4>
                             </li>
                         </ul><br>								
@@ -165,7 +165,7 @@
                                         </div>
                                         </div>
                                         </td>
-                                <td>  <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+                                <td>  <input type="remarks" id="query" name="q" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"></td>
                                     
                         </tr>
                         </tbody>
@@ -178,7 +178,7 @@
                     <!-- end row-->
                 <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
+                        {{ __('messages.save') }}
                         </button>
                         <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

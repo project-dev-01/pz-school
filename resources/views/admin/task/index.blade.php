@@ -91,7 +91,7 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addToDoTask">Add</button> -->
-                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.task.create')}}">Add</a>
+                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.task.create')}}">{{ __('messages.add') }}</a>
                     </div>
                 </div>
                 <div class="card-body">

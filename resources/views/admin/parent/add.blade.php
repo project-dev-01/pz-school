@@ -434,7 +434,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" class="form-control" name="country" id="country" placeholder="Country" data-parsley-trigger="change">
+                                    <input type="text" class="form-control" name="country" id="country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">

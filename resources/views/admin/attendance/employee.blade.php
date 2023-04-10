@@ -172,7 +172,7 @@
                                 <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                 </div>
                             </div>
-                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
@@ -234,7 +234,7 @@
                                 <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                 </div>
                             </div>
-                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
@@ -265,7 +265,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Excused</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i>{{ __('messages.excused') }}</button></th>
                                                 </tr>
                                             </table>
                                         </div>

@@ -237,7 +237,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Edit Employee</h4>
+                <h4 class="page-title">{{ __('messages.edit_employee') }}</h4>
             </div>
         </div>
     </div>
@@ -369,7 +369,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="mobile_no">Mobile No</label>
+                                <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
                                 <input type="text" class="form-control number_validation" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">   
                             </div>
                             <div class="col-md-4">
@@ -388,7 +388,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="Country">
+                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="{{ __('messages.country') }}">
                                 </div>
                             </div>
                         </div>
@@ -607,7 +607,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-envelope-open"></span>
-                                            </div>
+                                            </div>      
                                         </div>
                                         <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
                                     </div>
@@ -657,7 +657,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Social Link<h4>
+                            <h4 class="navv">{{ __('messages.social_link') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditSubjectModelLabel">Edit Subject</h4>
+                <h4 class="modal-title" id="myeditSubjectModelLabel">{{ __('messages.edit_subject') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -44,7 +44,7 @@
                         <input type="number" id="edit_times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>
                     <div class="form-group">
-                        <label for="editsubjectColor">Subject Color</label>
+                        <label for="editsubjectColor">{{ __('messages.subject_color') }}</label>
                         <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="Select Color" class="form-control subjectColor">
                     </div>
                     <div class="form-group">

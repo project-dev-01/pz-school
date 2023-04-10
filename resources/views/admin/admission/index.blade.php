@@ -382,7 +382,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="drp_country">{{ __('messages.country') }}</label>
-                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="Country" name="drp_country" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="{{ __('messages.country') }}" name="drp_country" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">

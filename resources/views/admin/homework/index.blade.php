@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-md-4" id="schedule" style="display:none">
                                 <div class="form-group">
-                                    <label for="schedule_date">Schedule Date<span class="text-danger">*</span></label>
+                                    <label for="schedule_date">{{ __('messages.schedule_date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                 </div>
