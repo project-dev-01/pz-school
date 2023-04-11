@@ -168,7 +168,7 @@ use \App\Http\Controllers\AdminController;
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="9">No data available</td>
+                                    <td class="text-center" colspan="9">{{ __('messages.no_data_available') }}</td>
                                 </tr>
                                 @endforelse
                             </tbody>

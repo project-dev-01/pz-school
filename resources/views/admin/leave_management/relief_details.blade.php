@@ -3,13 +3,13 @@
     <div class="modal-dialog modal-full-width" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="reliefDetailsModalTitle">Assign Relief Assignment</h5>
+                <h5 class="modal-title" id="reliefDetailsModalTitle">{{ __('messages.assign_relief_assignment') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h4 class="header-title">Relief Assignment Details</h4>
+                <h4 class="header-title">{{ __('messages.relief_assignment_details') }}</h4>
                 <div class="table-responsive">
                     <table id="alreadyTakenLeave" class="table table-centered table-borderless table-striped mb-0">
                         <tbody>

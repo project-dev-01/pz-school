@@ -61,7 +61,7 @@
 
                                                     <tbody id="subjective-category-{{ $category['id'] }}" class="subjective-category-table" data-type="1">
                                                         <tr >
-                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                            <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -100,7 +100,7 @@
 
                                                     <tbody id="subjective-subject-table">
                                                         <tr >
-                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                            <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

@@ -55,7 +55,7 @@
                                             </tr>
                                             @empty
                                             <tr>
-                                                <td colspan="3" class="text-center"> No Data Available</td>
+                                                <td colspan="3" class="text-center"> {{ __('messages.no_data_available') }}</td>
                                             </tr>
                                             @endforelse
                                         </tbody>

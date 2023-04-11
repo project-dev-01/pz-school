@@ -86,7 +86,7 @@ border-bottom: 1px solid #E9D528;
                 <div class="form-group">
                     <label for="inputTopicTitle">{{ __('messages.topic_title') }}</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicTitle" value="{{$forum_edit['topic_title']}}" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
+                        <input type="text" name="inputTopicTitle" value="{{$forum_edit['topic_title']}}" class="form-control" id="inputTopicTitle" placeholder="{{ __('messages.subject_of_your_topic') }}">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
@@ -153,7 +153,7 @@ border-bottom: 1px solid #E9D528;
                                             <use xlink:href="#Others"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Other</span>
+                                    <span class="tt-text">{{ __('messages.other') }}</span>
                                 </a>
                             </div>
                         </div>
@@ -262,7 +262,7 @@ border-bottom: 1px solid #E9D528;
                         </div>
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                <label for="inputTopic" class="col-3 col-form-label">User</label>
+                                <label for="inputTopic" class="col-3 col-form-label">{{ __('messages.user') }}</label>
                                 
                                 <select class="form-control select2-multiple" data-toggle="select2" id="selectedusers" name="tags[]" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">
                                     <option value="">{{ __('messages.select_user') }}</option>
@@ -305,7 +305,7 @@ border-bottom: 1px solid #E9D528;
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Update Post</button>
+                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">{{ __('messages.update_post') }}</button>
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@ border-bottom: 1px solid #E9D528;
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">{{ __('messages.suggested_topics') }}</div>
                 <!-- tt-search -->
                 <div class="tt-search">
                     <form class="search-wrapper">

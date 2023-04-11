@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Assign Leave approval</h4>
+                <h4 class="page-title">{{ __('messages.assign_leave_approval') }}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
                     <li class="nav-item">
                         <h4 class="nav-link">
                             <span class="fas fa-stream" id="span-parent"></span>
-                            Assign Leave approval
+                            {{ __('messages.assign_leave_approval') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -37,9 +37,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Employee Name</th>
+                                        <th>{{ __('messages.employee_name') }}</th>
                                         <th>{{ __('messages.department_name') }}</th>
-                                        <th>Approval Head</th>
+                                        <th>{{ __('messages.approval_head') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>

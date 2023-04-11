@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditExamModalLabel">Edit Exam </h4>
+                <h4 class="modal-title" id="myeditExamModalLabel">{{ __('messages.edit_exam') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,7 +11,7 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="name"> Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                     </div>
                     <div class="form-group">
@@ -24,7 +24,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="remarks"> Remarks</label>
+                        <label for="remarks">{{ __('messages.remarks') }}</label>
                         <textarea type="text"  name="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"></textarea>
                     </div>
                     <div class="form-group">

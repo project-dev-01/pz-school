@@ -56,7 +56,7 @@
 
                                                     <tbody id="plan-category-{{ $category['id'] }}" class="plan-category-table" data-type="4">
                                                         <tr >
-                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                            <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -96,7 +96,7 @@
 
                                                     <tbody id="plan-subject-table">
                                                         <tr >
-                                                            <td colspan="5" class="text-center">No Data Available</td>
+                                                            <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditHostelFloorModalLabel">Edit Floor</h4>
+                <h4 class="modal-title" id="myeditHostelFloorModalLabel">{{ __('messages.edit_floor') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group"  id="floor_warden_div">
                         <label for="floor_warden">{{ __('messages.floor_warden') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">
                             <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group" id="floor_leader_div">
                         <label for="floor_leader" >{{ __('messages.floor_leader') }}</label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">
                             <option value="">{{ __('messages.select_leader') }}</option>
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>

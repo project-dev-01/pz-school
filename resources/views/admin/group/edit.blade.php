@@ -80,7 +80,7 @@
                                                 @endforeach
                                             @else     
                                                 <tr>
-                                                    <td colspan="4">No Data Available</td>
+                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -125,7 +125,7 @@
                                                 @endforeach 
                                             @else     
                                                 <tr>
-                                                    <td colspan="5">No Data Available</td>
+                                                    <td colspan="5">{{ __('messages.no_data_available') }}</td>
                                                 </tr> 
                                             @endif
                                         </tbody>
@@ -169,7 +169,7 @@
                                                 @endforeach  
                                             @else     
                                                 <tr>
-                                                    <td colspan="4">No Data Available</td>
+                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                                 </tr>
                                             @endif
                                         </tbody>

@@ -30,7 +30,7 @@
                             </button>
                             <form class="search-wrapper">
                                 <div class="search-form">
-                                    <input type="text" class="tt-search__input" placeholder="Search in politics">
+                                    <input type="text" class="tt-search__input" placeholder="{{ __('messages.search_in _politics') }}">
                                     <button class="tt-search__btn" type="submit">
                                         <svg class="tt-icon">
                                             <use xlink:href="#icon-search"></use>

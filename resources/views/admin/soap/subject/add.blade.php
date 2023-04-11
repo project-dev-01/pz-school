@@ -171,7 +171,7 @@
                                         <div class="form-group">
                                             <label for="title">{{ __('messages.topic_title') }}<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic">
+                                                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('messages.subject_of_your_topic') }}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
@@ -203,8 +203,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-auto ml-md-auto">
-                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">Create
-                                                    Post</button>
+                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">{{ __('messages.create_post') }}</button>
                                             </div>
                                         </div>
                                     </form>

@@ -28,7 +28,7 @@
 
                                         <tbody id="log-body">
                                             <tr >
-                                                <td colspan="6" class="text-center">No Data Available</td>
+                                                <td colspan="6" class="text-center">{{ __('messages.no_data_available') }}</td>
                                             </tr>
                                         </tbody>
                                     </table>

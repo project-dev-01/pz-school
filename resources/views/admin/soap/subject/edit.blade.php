@@ -159,14 +159,14 @@
                         <div class="tab-pane show active" id="home">
                             <div class="container">
                                 <div class="tt-wrapper-inner editSoapSubject">
-                                    <h1 class="tt-title-border">Edit Topic</h1>
+                                    <h1 class="tt-title-border">{{ __('messages.edit_topic') }}</h1>
                                     <form id="editSoapSubjectForm" method="post" action="{{ route('admin.soap_subject.update') }}">
                                         @csrf
                                         <input type="hidden" value="{{$soapsubject['id']}}" name="id">
                                         <div class="form-group">
                                             <label for="title">{{ __('messages.topic_title') }}</label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic" value="{{$soapsubject['title']}}">
+                                                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('messages.subject_of_your_topic') }}" value="{{$soapsubject['title']}}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
@@ -201,8 +201,7 @@
 
                                         <div class="row">
                                             <div class="col-auto ml-md-auto">
-                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">Update
-                                                    Post</button>
+                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">{{ __('messages.update_post') }}</button>
                                             </div>
                                         </div>
                                     </form>

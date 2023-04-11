@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="block_id">{{ __('messages.block') }}</label>
                         <select class="form-control" name="block_id">
-                            <option value="">{{ __('messages.Select_block') }}</option>
+                            <option value="">{{ __('messages.select_block') }}</option>
                             @foreach($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
                             @endforeach
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="floor_warden">{{ __('messages.floor_warden') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">
                             <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="floor_leader">{{ __('messages.floor_leader') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">
                             <option value="">{{ __('messages.select_leader') }}</option>
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>

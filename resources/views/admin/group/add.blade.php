@@ -69,7 +69,7 @@
                                         </thead>
                                         <tbody id="staff_table">
                                             <tr>
-                                                <td colspan="4">No Data Available</td>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                             </tr> 
                                         </tbody>
                                     </table>
@@ -101,7 +101,7 @@
                                         </thead>
                                         <tbody id="student_table">
                                             <tr>
-                                                <td colspan="5">No Data Available</td>
+                                                <td colspan="5">{{ __('messages.no_data_available') }}</td>
                                             </tr>   
                                         </tbody>
                                     </table>
@@ -133,7 +133,7 @@
                                         </thead>
                                         <tbody id="parent_table">
                                             <tr>
-                                                <td colspan="4">No Data Available</td>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                             </tr> 
                                         </tbody>
                                     </table>

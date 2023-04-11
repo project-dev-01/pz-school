@@ -15,19 +15,19 @@
             <div class="tt-wrapper-inner">
                 <ul class="nav nav-tabs pt-tabs-default" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link show active" data-toggle="tab" href="#tt-tab-01" role="tab"><span>About</span></a>
+                        <a class="nav-link show active" data-toggle="tab" href="#tt-tab-01" role="tab"><span>{{ __('messages.about') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>Guidelines</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>{{ __('messages.guidelines') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>FAQ</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.faq') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>Terms of Service</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>{{ __('messages.terms_of_service') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>Privacy</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>{{ __('messages.privacy') }}</span></a>
                     </li>
                 </ul>
             </div>

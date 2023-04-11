@@ -47,7 +47,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.employee_name') }}</th>
                                     <th>{{ __('messages.department_name') }}</th>
-                                    <th>Approval Head</th>
+                                    <th>{{ __('messages.approval_head') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -75,7 +75,7 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-primary-bl waves-effect waves-light assignLeaveApprove" data-id="{{$value['id']}}" type="button">
-                                            Save
+                                        {{ __('messages.save') }}
                                         </button>
                                     </td>
                                 </tr>
