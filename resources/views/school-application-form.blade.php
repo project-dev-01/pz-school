@@ -80,13 +80,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="{{ __('messages.muhammad_jaafar') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -278,13 +278,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="firstname" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="firstname" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lastname" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="lastname" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -323,13 +323,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ffname" placeholder="{{ __('messages.aisha') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ffname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="llname" placeholder="{{ __('messages.mal') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="llname" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div><br>
@@ -367,13 +367,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ename" placeholder="{{ __('messages.john_leo') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="ename" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">

@@ -968,7 +968,7 @@ return [
      "showing" => "表示中",
      "select_block" => "ブロックを選択してください",
      "choose_file" => "ファイルを選択またはドラッグ＆ドロップしてください",
-     "drag_and_drop" => "ドラッグ＆ドロップまたはクリックして置き換えてください",
+     "drag_and_drop_to_replace" => "ドラッグ＆ドロップまたはクリックして置き換えてください",
       //PlaceHolder Messages End
      "topic_body" => "トピック本文",
      "chat" => "チャット",
@@ -1079,6 +1079,8 @@ return [
     "showing_zero_entries" => "表示中 0 to 0 of 0 件／ページ",
     "yamamoto"=>"山本",
     "yukio"=>"幸夫",
+    "sato"=>"佐藤",
+    "akari"=>"あかり",
     //--10/4/2023--//
     "mark_as_completed" => "完了済みとしてマークする",
     "this_is_a_task" => "タスクの説明",
@@ -1128,5 +1130,10 @@ return [
     "reasons_count" => "Reasons Count", 
     "exam_attendance" => "Exam Attendance", 
     "set_attendance" => "Set Attendance",
+    "no_data_available" => "No Data Available",
+    "filter_from_total_entries" => "(filtered from _MAX_ total entries)",
+    "no_matching_records_found" => "No matching records found",
+    "drag_and_drop_to_check" => " Drag and drop a file here or Check",
+    "oops_went_wrong" => " Ooops, something wrong happended",
 ];
 

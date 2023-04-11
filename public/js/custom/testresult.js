@@ -590,6 +590,10 @@ $(function () {
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             paging: false,
             "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
                 "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,
@@ -727,7 +731,7 @@ $(function () {
                             attribue = "disabled";
                         }
                         var memo = '<textarea style="display:none;" maxlength="50" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="subjectmarks[' + meta.row + '][memo]">' + (data !== "null" ? data : "") + '</textarea>' +
-                            '<button type="button" ' + attribue + ' data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn addRemarks' + row.student_id + '" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" ' + attribue + ' data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn addRemarks' + row.student_id + '" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">'+add_remarks+'</button>';
                         return memo;
 
                     }

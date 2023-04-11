@@ -174,6 +174,13 @@
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     
+    var remove = "{{ __('messages.remove') }}";
+    var drag_and_drop_to_replace = "{{ __('messages.drag_and_drop_to_replace') }}";
+    var drag_and_drop_to_check = "{{ __('messages.drag_and_drop_to_check') }}";
+    var oops_went_wrong = "{{ __('messages.oops_went_wrong') }}";
+    var no_data_available = "{{ __('messages.no_data_available') }}";
+    var filter_from_total_entries = "{{ __('messages.filter_from_total_entries') }}";
+    var no_matching_records_found = "{{ __('messages.no_matching_records_found') }}";
     var showing_zero_entries = "{{ __('messages.showing_zero_entries') }}";
     var showing_entries = "{{ __('messages.showing_entries') }}";
     var show_entries = "{{ __('messages.show_entries') }}";
@@ -211,6 +218,11 @@
     var select_designation = "{{ __('messages.select_designation') }}";
     var select = "{{ __('messages.select') }}";
     var choose = "{{ __('messages.choose') }}";
+    var add_remarks = "{{ __('messages.add_remarks') }}";
+    var update = "{{ __('messages.update') }}";
+    var untaken = "{{ __('messages.untaken') }}";
+    var taken = "{{ __('messages.taken') }}";
+    var total_strength = "{{ __('messages.total_strength') }}";
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details

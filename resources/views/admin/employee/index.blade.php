@@ -258,7 +258,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" class="dropify-fr" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" data-remove="Rewm" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" data-remove="Rewm" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -819,12 +819,12 @@
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
 <script>
-    $('.dropify').dropify({
+    $('.dropify-im').dropify({
         messages: {
-            default: 'Drag and drop a file here or Check',
-            replace: 'Drag and drop or click to replacesss',
-            remove:  'Removedsss',
-            error:   'Ooops, something wrong happended.'
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove:  remove,
+            error: oops_went_wrong
         }
     });
 </script>

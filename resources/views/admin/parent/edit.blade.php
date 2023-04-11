@@ -363,7 +363,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('public/users/images/').'/'.$parent['photo'] ? asset('public/users/images/').'/'.$parent['photo'] : asset('public/images/users/default.jpg') }}" />
+                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('public/users/images/').'/'.$parent['photo'] ? asset('public/users/images/').'/'.$parent['photo'] : asset('public/images/users/default.jpg') }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -803,9 +803,19 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
+<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/parent.js') }}"></script>
+<script>
+    $('.dropify-im').dropify({
+        messages: {
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove:  remove,
+            error: oops_went_wrong
+        }
+    });
+</script>
 @endsection

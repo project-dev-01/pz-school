@@ -17,7 +17,7 @@
                                     <span class="fas fa-user-graduate"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control shortNameChange" name="first_name" placeholder="{{ __('messages.ahmad_ali') }}" id="firstName">
+                            <input type="text" class="form-control shortNameChange" name="first_name" placeholder="{{ __('messages.yamamoto') }}" id="firstName">
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                     <span class="fas fa-user-graduate"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control shortNameChange" name="last_name" placeholder="{{ __('messages.ali') }}" id="lastName">
+                            <input type="text" class="form-control shortNameChange" name="last_name" placeholder="{{ __('messages.yukio') }}" id="lastName">
                         </div>
                     </div>
                 </div>

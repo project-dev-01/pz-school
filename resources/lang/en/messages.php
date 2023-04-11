@@ -965,7 +965,7 @@ return [
     "showing" => "Showing",
     "select_block" => "Select Block",
     "choose_file" => "Choose file",
-    "drag_and_drop" => "Drag and drop or click to replace",
+    "drag_and_drop_to_replace" => "Drag and drop or click to replace",
     //PlaceHolder Messages End
     "topic_body" => "Topic Body",
     "chat" => "Chat",
@@ -1076,6 +1076,9 @@ return [
     "showing_zero_entries" => "Showing 0 to 0 of 0 entries",
     "yamamoto"=>"YAMAMOTO",
     "yukio"=>"Yukio",
+    "sato"=>"SATŌ",
+    "akari"=>"Akari",
+    
     //--10/4/2023--//
     "mark_as_completed" => "Mark as completed",
     "this_is_a_task" => "This is a task Description",
@@ -1125,4 +1128,12 @@ return [
     "reasons_count" => "Reasons Count", 
     "exam_attendance" => "Exam Attendance", 
     "set_attendance" => "Set Attendance",
+    "no_data_available" => "No Data Available",
+    "filter_from_total_entries" => "(filtered from _MAX_ total entries)",
+    "no_matching_records_found" => "No matching records found",
+    "drag_and_drop_to_check" => " Drag and drop a file here or Check",
+    "oops_went_wrong" => " Ooops, something wrong happended",
+    
+    
+   
 ];

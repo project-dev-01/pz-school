@@ -217,10 +217,10 @@ $(function () {
                 if (response.data.taken_attentance_status) {
                     var taken_attentance_status = response.data.taken_attentance_status.status;
                     if (taken_attentance_status) {
-                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">Taken</p>';
+                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">'+taken+'</p>';
                         $("#attendaceTakenSts").append(taken);
                     } else {
-                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">Untaken</p>';
+                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">'+untaken+'</p>';
                         $("#attendaceTakenSts").append(unTaken);
                     }
                 }
@@ -361,6 +361,10 @@ $(function () {
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                 
             "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
                 "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,
@@ -481,7 +485,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">'+add_remarks+'</button>';
                         return att_remark;
                     }
                 },
@@ -766,7 +770,7 @@ $(function () {
                     var avg_attendance = (attpresentCount / (totalDate * totalStudentCnt) * 100);
 
                     $("#perfectAttendance").html((perfectAttendancePer ? Math.round(perfectAttendancePer) : 0) + "%");
-                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
                     $("#belowAttendance").html((belowAttendance ? Math.round(belowAttendance) : 0) + "%");
                     $("#avg_attendance").html((avg_attendance ? Math.round(avg_attendance) : 0) + "%");
                     // getReportRemarks(dataSetNew)
@@ -776,7 +780,7 @@ $(function () {
                     $("#lateCount").html(lateCnt);
                     $("#excuseCount").html(excusedCnt);
                     $("#perfectAttendance").html(perfectAttendance + "%");
-                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
                     $("#belowAttendance").html(0 + "%");
                     $("#avg_attendance").html(0 + "%");
 
@@ -800,6 +804,10 @@ $(function () {
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
                 "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,
@@ -1173,6 +1181,10 @@ $(function () {
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
                 "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,

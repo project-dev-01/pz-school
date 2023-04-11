@@ -373,7 +373,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && asset('public/users/images/').'/'.$student['photo'] ? asset('public/users/images/').'/'.$student['photo'] : asset('public/images/users/default.jpg') }}" />
+                                                    <input type="file" name="photo" id="photo"  class="dropify-im"  data-plugins="dropify" data-default-file="{{ $student['photo'] && asset('public/users/images/').'/'.$student['photo'] ? asset('public/users/images/').'/'.$student['photo'] : asset('public/images/users/default.jpg') }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -708,13 +708,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="father_first_name" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="father_last_name" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -889,13 +889,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_first_name" placeholder="{{ __('messages.aisha') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_first_name" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="{{ __('messages.mal') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1083,13 +1083,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="guardian_first_name" placeholder="{{ __('messages.amir') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_first_name" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="{{ __('messages.shan') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1636,4 +1636,14 @@
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/student.js') }}"></script>
+<script>
+    $('.dropify-im').dropify({
+        messages: {
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove:  remove,
+            error: oops_went_wrong
+        }
+    });
+</script>
 @endsection

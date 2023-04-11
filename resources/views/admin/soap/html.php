@@ -478,7 +478,7 @@
                                                                             <span class="fas fa-user-graduate"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="{{ __('messages.ahmad_ali') }}" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" name="fname" class="form-control alloptions" maxlength="50" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -491,7 +491,7 @@
                                                                             <span class="fas fa-user-graduate"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="{{ __('messages.muhammad_jaafar') }}" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" name="lname" class="form-control alloptions" maxlength="50" id="lname" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>

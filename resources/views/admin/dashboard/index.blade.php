@@ -402,6 +402,8 @@
                                                                         </li>
                                                                         <li class="list-inline-item pr-1">
                                                                             <i class='mdi mdi-calendar-month-outline font-16'></i>
+                                                                            <?php     setlocale(LC_ALL, 'ja.UTF-8');                                                
+                                                                            ?>              
                                                                             {{ date('j F y g a', strtotime($old['due_date']));}}
 
                                                                         </li>

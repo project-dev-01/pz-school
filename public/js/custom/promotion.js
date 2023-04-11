@@ -159,7 +159,11 @@ function bindStudents(dataSetNew) {
         info: true,
         dom: 'lrt',
         "language": {
-            "infoEmpty": showing_zero_entries,
+            
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,

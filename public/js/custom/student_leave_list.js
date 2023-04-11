@@ -142,6 +142,10 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
                 "infoEmpty": showing_zero_entries,
                 "info": showing_entries,
                 "lengthMenu": show_entries,
@@ -251,14 +255,14 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
+                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">'+add_remarks+'</button>';
                         return addremarks;
                     }
                 },
                 {
                     "targets": 10,
                     "render": function (data, type, row, meta) {
-                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">Update</button>';
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">'+update+'</button>';
                         return submitbtn;
                     }
                 },
