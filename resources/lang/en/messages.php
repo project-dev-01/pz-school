@@ -1132,7 +1132,7 @@ return [
     "filter_from_total_entries" => "(filtered from _MAX_ total entries)",
     "no_matching_records_found" => "No matching records found",
     "drag_and_drop_to_check" => " Drag and drop a file here or Check",
-    "oops_went_wrong" => " Ooops, something wrong happended",
+    "oops_went_wrong" => "Ooops, something wrong happended",
     
     
    
