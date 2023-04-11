@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Event
+                        <h4 class="navv">{{ __('messages.edit_event') }}
                             <h4>
                     </li>
                 </ul>
@@ -150,14 +150,14 @@
                             </div>
                             <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
                                 <div class="form-group">
-                                    <label>Start Time</label>
+                                    <label>{{ __('messages.start_time') }}</label>
                                     <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{$event['end_time']}}">
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
                                 <div class="form-group">
-                                    <label>End Time</label>
+                                    <label>{{ __('messages.end_time') }}</label>
                                     <input type="text" class="form-control edittimepicker" name="end_time" id="edit_end_time" placeholder="00:00" value="{{$event['end_time']}}">
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditSoapNotesModalLabel">Edit Soap Notes</h4>
+                <h4 class="modal-title" id="myeditSoapNotesModalLabel">{{ __('messages.edit_soap_notes') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">

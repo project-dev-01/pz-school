@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditStaffLeaveAssignModalLabel">Edit Staff Leave Assign</h4>
+                <h4 class="modal-title" id="myeditStaffLeaveAssignModalLabel">{{ __('messages.edit_staff_leave_assign') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -31,12 +31,12 @@
                         <span class="text-danger error-text category_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
+                        <label for="leave_days">{{ __('messages.leave_days') }}<span class="text-danger">*</span></label>
                         <input type="text" id="leave_days" name="leave_days" class="form-control" placeholder="{{ __('messages.enter_leave_days') }}">
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="academic_session_id">Academic Year<span class="text-danger">*</span></label>
+                        <label for="academic_session_id">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="academic_session_id" name="academic_session_id">
                             <option value="0">{{ __('messages.select_academic_year') }}</option>
                             @forelse($academic_year as $ay)

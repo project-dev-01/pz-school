@@ -31,7 +31,7 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" id="addHostelFloor" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addHostelFloorModal">Add</button>
+                        <button type="button" id="addHostelFloor" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addHostelFloorModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditLeaveTypeModalLabel">Edit Leave Type</h4>
+                <h4 class="modal-title" id="myeditLeaveTypeModalLabel">{{ __('messages.edit_leave_type') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -21,7 +21,7 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
+                        <label for="leave_days">{{ __('messages.leave_days') }}<span class="text-danger">*</span></label>
                         <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="{{ __('messages.enter_leave_days') }}">
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>

@@ -13,10 +13,10 @@
                 </div>
                 <div class="tt-col-title">
                     <div class="tt-title">
-                        <a href="#">Dylan89</a>
+                        <a href="#">{{ __('messages.dylan89') }}</a>
                     </div>
                     <ul class="tt-list-badge">
-                        <li><a href="#"><span class="tt-color14 tt-badge">LVL : 26</span></a></li>
+                        <li><a href="#"><span class="tt-color14 tt-badge">{{ __('messages.lvl') }}</span></a></li>
                     </ul>
                 </div>
                 <div class="tt-col-btn" id="js-settings-btn">
@@ -26,8 +26,8 @@
                               <use xlink:href="#icon-settings_fill"></use>
                             </svg>
                         </a>
-                        <a href="#" class="btn btn-primary">Message</a>
-                        <a href="#" class="btn btn-secondary">Follow</a>
+                        <a href="#" class="btn btn-primary">{{ __('messages.message') }}</a>
+                        <a href="#" class="btn btn-secondary">{{ __('messages.follow') }}</a>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.replies') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>5 Followers</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>{{ __('messages.5_followers') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>10 Following</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>{{ __('messages.10 Following') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
                         <a class="nav-link active" data-toggle="tab" href="#tt-tab-06" role="tab"><span>{{ __('messages.categories') }}</span></a>

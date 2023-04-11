@@ -32,7 +32,7 @@
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
                         <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addLeaveTypeModal">Add</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addLeaveTypeModal">{{ __('messages.add') }}</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,7 +43,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.leave_type_name') }}</th>
                                     <th>{{ __('messages.short_name') }}</th>
-                                    <th>Leave Days</th>
+                                    <th>{{ __('messages.leave_days') }}</th>
                                     <th>{{ __('messages.gender') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

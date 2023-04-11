@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditSoapCategoryModalLabel">Edit Soap Category</h4>
+                <h4 class="modal-title" id="myeditSoapCategoryModalLabel">{{ __('messages.edit_soap_category') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,7 +12,7 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name"> {{ __('messages.category_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_soap_sategory_name') }}">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_soap_category_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

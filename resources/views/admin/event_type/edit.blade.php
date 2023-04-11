@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditEventTypeModalLabel">Edit Event Type</h4>
+                <h4 class="modal-title" id="myeditEventTypeModalLabel">{{ __('messages.edit_event_type') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -16,8 +16,8 @@
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="color"> Color <span class="text-danger">*</span></label>
-                        <input type="text" id="color" name="color" class="form-control color" placeholder="Choose Color">
+                        <label for="color">{{ __('messages.color') }}<span class="text-danger">*</span></label>
+                        <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

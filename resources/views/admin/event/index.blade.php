@@ -42,7 +42,7 @@
                     <div class="form-group pull-right">
                         <div class="col-xs-2 col-sm-2">
                             <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                            <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">Add</a>
+                            <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">{{ __('messages.add') }}</a>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -55,7 +55,7 @@
                                     <th>{{ __('messages.audience') }}</th>
                                     <th>{{ __('messages.start_date') }}</th>
                                     <th>{{ __('messages.end_date') }}</th>
-                                    <th>Publish</th>
+                                    <th>{{ __('messages.publish') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

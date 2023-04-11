@@ -26,12 +26,12 @@
                 <ul class="nav nav-tabs nav-bordered">
                     <li class="nav-item">
                         <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                            Room List
+                        {{ __('messages.room_list') }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Create Room
+                        {{ __('messages.create_room') }}
                         </a>
                     </li> 
                 </ul>
@@ -41,7 +41,7 @@
                         <table class="table w-100 nowrap">
                         <thead>
                             <tr>
-                                <th>S.No</th>
+                                <th>{{ __('messages.s._no') }}</th>
                                 <th>{{ __('messages.room_name') }}</th>
                                 <th>{{ __('messages.category') }}</th>
                                 <th>{{ __('messages.no_of_beds') }}</th>
@@ -81,7 +81,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">select</option>
+                            <option value="">{{ __('messages.select') }}</option>
                             <option value="press">Press</option>
                             <option value="net">Internet</option>
                             <option value="mouth">Word of mouth</option>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Watchman Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.watchman_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <input type="email" required parsley-type="email" class="form-control"
                                     id="inputEmail3" placeholder="">
@@ -124,7 +124,7 @@
                 </form>
                 <div class="col-8 offset-4" style="margin-left:34%;">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }} 
                             </button>
                             
                         </div> 
