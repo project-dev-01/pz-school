@@ -185,7 +185,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="#rp" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                        Daily Report
+                                    {{ __('messages.daily_report') }}
                                     </a>
                                 </li>
                             </ul>
@@ -382,7 +382,7 @@
                                     <div class="tab-pane" id="rp">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="heard">Report<span class="text-danger">*</span></label>
+                                                <label for="heard">{{ __('messages.report') }}<span class="text-danger">*</span></label>
                                                 <textarea class="form-control" id="product-description" rows="5" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                             </div>
                                         </div>

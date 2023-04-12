@@ -52,7 +52,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Schedule List</h4>
+                <h4 class="page-title"> {{ __('messages.schedule_list') }}</h4>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@
                             </a>
                         </div> -->
                         <h4 class="nav-link">
-                            Schedule List
+                        {{ __('messages.schedule_list') }}
                         </h4>
                     </li>
                 </ul><br>

@@ -314,7 +314,7 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
+                                        <button type="button" class="btn btn-danger" id="btn-delete-event">{{ __('messages.delete') }}</button>
                                     </div>
                                     <div class="col-6 text-right">
                                         <button type="button" class="btn btn-light mr-1" data-dismiss="modal">{{ __('messages.close') }}</button>

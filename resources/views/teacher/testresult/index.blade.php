@@ -131,7 +131,7 @@
             <div class="card" id="mark_by_subject_card" style="display:none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Marks By Subject
+                        <h4 class="navv"> {{ __('messages.marks_by_subject') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -171,7 +171,7 @@
                                     <div class="form-group text-right m-b-0">
 
                                         <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                            Save
+                                        {{ __('messages.save') }} 
                                         </button>
                                     </div>
                                 </div>
@@ -235,11 +235,11 @@
                                     <div class="row mt-2">
                                         <div class="col-6">
                                             <h3 data-plugin="">{{ __('messages.number_of_student') }}</h3>
-                                            <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
+                                            <p class="text-muted font-13 mb-0 text-truncate">{{ __('messages.y_axis') }}</p>
                                         </div>
                                         <div class="col-6">
                                             <h3 data-plugin="">{{ __('messages.grade') }}</h3>
-                                            <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
+                                            <p class="text-muted font-13 mb-0 text-truncate">{{ __('messages.x_axis') }}</p>
                                         </div>
                                     </div> <!-- end row -->
                                     <div id="test-bar-chart" style="height: 270px;" class="morris-chart mt-3"></div>
@@ -253,7 +253,7 @@
             <div class="card" id="graphs_card" style="display:none">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Graphs
+                        <h4 class="navv">{{ __('messages.graphs') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -325,7 +325,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Marks by Subject </h4>
+                                <h4 class="header-title">{{ __('messages.marks_by_subject') }} </h4>
                                 <div class="mt-4 chartjs-chart">
                                     <div id="student-subject-mark" class="apex-charts" data-colors="#f672a7"></div>
                                     <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->

@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                     <span class=" fas fa-user-graduate  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Copy Homework</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.copy_homework') }}</span>
                     <hr>
 
                     <form id="demo-form" data-parsley-validate="">
@@ -38,7 +38,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
+                                                <option value=""> {{ __('messages.select_standard') }}</option>
                                                 <option Selected>I</option>
                                                 <option>II</option>
                                                 <option>III</option>
@@ -58,7 +58,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select</option>
+                                                <option value=""> {{ __('messages.select_class') }}</option>
                                                 <option Selected>A</option>
                                                 <option>B</option>
                                                 <option>C</option>
@@ -121,14 +121,14 @@
                                         <div class="checkbox checkbox-purple">
                                             <input id="checkbox6" type="checkbox">
                                             <label for="checkbox6">
-                                                Published later
+                                            {{ __('messages.published_later') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Schedule Date<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.schedule_date') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -167,7 +167,7 @@
                                         <div class="checkbox checkbox-purple">
                                             <input id="checkbox6" type="checkbox">
                                             <label for="checkbox6">
-                                                Send Notification Sms
+                                            {{ __('messages.send_notification_sms') }}
                                             </label>
                                         </div>
                                     </div>
@@ -179,7 +179,7 @@
                     </form>
                     <div class="col-8 offset-4">
                         <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                            Save
+                        {{ __('messages.save') }}
                         </button>
 
                     </div>

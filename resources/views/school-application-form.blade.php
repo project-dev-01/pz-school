@@ -170,8 +170,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.zip_postal_code') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder=" {{ __('messages.zip_postal_code') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="pin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -249,8 +249,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Postal Code<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="spin" placeholder="Postal Code" aria-describedby="inputGroupPrepend" required>
+                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="spin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>

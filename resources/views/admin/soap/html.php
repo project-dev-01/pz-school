@@ -538,7 +538,7 @@
                                                                             <span class="fas fa-birthday-cake"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" name="dob" class="form-control" id="dob" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" name="dob" class="form-control" id="dob" placeholder="{{ __('messages.dd_mm_yyyy') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -703,7 +703,7 @@
                                                                             <span class="far fa-calendar-alt"></span>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="DD-MM-YYYY" aria-describedby="inputGroupPrepend">
+                                                                    <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" aria-describedby="inputGroupPrepend">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -951,7 +951,7 @@
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" id="remove_notes">Delete</button>
+                                <button type="button" class="btn btn-danger" id="remove_notes">{{ __('messages.delete') }}</button>
                             </div>
                         </div>
                     </div>

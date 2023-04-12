@@ -60,8 +60,8 @@
                                         <td>Test</td>
                                         <td>
                                             <div class="button-list">
-                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">{{ __('messages.view') }}</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">{{ __('messages.delete') }}</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -142,7 +142,7 @@
                         </form>
                         <div class="col-8 offset-4" style="margin-left:34%;">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
 
                         </div>

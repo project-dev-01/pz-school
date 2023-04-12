@@ -586,7 +586,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -612,11 +612,11 @@
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
-                                                <td>Start Time</td>
+                                                <td>{{ __('messages.start_time') }}</td>
                                                 <td id="start_time"></td>
                                             </tr>
                                             <tr id="end_time_row" style="display:none">
-                                                <td>End Time</td>
+                                                <td>{{ __('messages.end_time') }}</td>
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>

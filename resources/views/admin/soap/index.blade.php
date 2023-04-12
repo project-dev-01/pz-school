@@ -152,7 +152,7 @@
 
                                             <thead class="">
                                                     <tr>
-                                                        <th>{{ __('messages.s._no') }}</th>
+                                                        <th>{{ __('messages.s.no') }}</th>
                                                         <th colspan="2">{{ __('messages.student_name') }}</th>
                                                         <th>{{ __('messages.email') }}</th>
                                                         <th>{{ __('messages.grade') }}</th>
@@ -248,7 +248,7 @@
 
                                                 <thead class="">
                                                     <tr>
-                                                        <th>{{ __('messages.s._no') }}</th>
+                                                        <th>{{ __('messages.s.no') }}</th>
                                                         <th colspan="2">{{ __('messages.student_name') }}</th>
                                                         <th>{{ __('messages.email') }}</th>
                                                         <th>{{ __('messages.grade') }}</th>
@@ -525,7 +525,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="txt_regiter_no">{{ __('messages.register_number') }}<span class="text-danger">*</span></label>
-                                                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="{{ __('messages.enter_register_number') }}" data-parsley-trigger="change" readonly>
+                                                                    <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="{{ __('messages.enter_register_no') }}" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -546,7 +546,7 @@
                                                                                 <span class="far fa-calendar-alt"></span>
                                                                             </div>
                                                                         </div>
-                                                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.dd-mm-yyyy') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" aria-describedby="inputGroupPrepend" readonly>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -685,7 +685,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Title Details</h4>
+                                    <h4 class="modal-title">{{ __('messages.title_details') }}</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                 <div class="modal-body p-4" id="modal-body">
@@ -699,7 +699,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Family Details</h4>
+                                    <h4 class="modal-title">{{ __('messages.family_details') }}</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 </div>
                                 <input type="hidden" id="notes-category-id">
@@ -710,7 +710,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('messages.no') }}</th>
-                                                    <th>Family Details</th>
+                                                    <th>{{ __('messages.family_details') }}</th>
                                                 </tr>
                                             </thead>
 
@@ -731,16 +731,15 @@
                         <div class="modal-dialog modal-confirm">
                             <div class="modal-content">
                                 <div class="modal-header flex-column">
-                                    <h4 class="modal-title w-100">Are you sure?</h4>
+                                    <h4 class="modal-title w-100">{{ __('messages.are_you_sure?') }}</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Do you really want to delete these record? This process cannot
-                                        be undone.</p>
+                                    <p>{{ __('messages.do_you_really') }}</p>
                                 </div>
                                 <div class="modal-footer justify-content-center">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-danger" id="remove_notes">Delete</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.cancel') }}</button>
+                                    <button type="button" class="btn btn-danger" id="remove_notes">{{ __('messages.delete') }}</button>
                                 </div>
                             </div>
                         </div>

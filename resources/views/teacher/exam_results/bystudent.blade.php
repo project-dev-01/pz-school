@@ -131,7 +131,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Student
+                        {{ __('messages.student') }}
                             <h4>
                     </li>
                 </ul><br>

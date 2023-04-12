@@ -413,7 +413,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    Daily Report
+                                {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -491,7 +491,7 @@
                                                                 <th>{{ __('messages.student_name') }}</th>
                                                                 <th>{{ __('messages.attendance') }}</th>
                                                                 <th>{{ __('messages.remarks') }}</th>
-                                                                <th>Reasons</th>
+                                                                <th>{{ __('messages.reasons') }}</th>
                                                                 <th>{{ __('messages.student_behaviour') }}</th>
                                                                 <th>{{ __('messages.class_behaviour') }}</th>
                                                             </tr>
@@ -504,7 +504,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -588,7 +588,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <label for="daily_report">Report<span class="text-danger">*</span></label>
+                                                    <label for="daily_report">{{ __('messages.report') }}<span class="text-danger">*</span></label>
                                                     <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                                 </div>
                                                 <div class="row">
@@ -602,7 +602,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -638,7 +638,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                            Save
+                                                        {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>

@@ -40,8 +40,8 @@
                                 <th>{{ __('messages.class') }}</th>
                                 <th>{{ __('messages.teacher') }}</th>
                                 <th>Week Days</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
+                                <th>{{ __('messages.start_time') }}</th>
+                                <th>{{ __('messages.end_time') }}</th>
                                 <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>

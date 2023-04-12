@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.classroom_management') }}/h4>
+                <h4 class="page-title">{{ __('messages.classroom_management') }}</h4>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="DD-MM-YYYY" id="classDate" require="">
+                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
                                 </div>
                             </div>
                         </div>
@@ -491,7 +491,7 @@
                                                                 <th>{{ __('messages.student_name') }}</th>
                                                                 <th>{{ __('messages.attendance') }}</th>
                                                                 <th>{{ __('messages.remarks') }}</th>
-                                                                <th>{{ __('messages.reason') }}</th>
+                                                                <th>{{ __('messages.reasons') }}</th>
                                                                 <th>{{ __('messages.student_behaviour') }}</th>
                                                                 <th>{{ __('messages.class_behaviour') }}</th>
                                                             </tr>
@@ -695,7 +695,7 @@
                                                         <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>S.no</th>
+                                                                    <th> {{ __('messages.s.no') }}</th>
                                                                     <th>{{ __('messages.short_test_name') }}</th>
                                                                     <th>{{ __('messages.status') }}</th>
                                                                 </tr>

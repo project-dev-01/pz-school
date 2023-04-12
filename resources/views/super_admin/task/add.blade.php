@@ -26,7 +26,7 @@
                     
                     <div class="form-group">
                         <label for="date">{{ __('messages.date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="Enter Date & Time">
+                        <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="{{ __('messages.enter_date _time') }}">
                         <span class="text-danger error-text date_error"></span>
                     </div>
                     

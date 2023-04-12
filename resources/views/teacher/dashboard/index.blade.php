@@ -401,7 +401,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> {{ __('messages.event_details') }} </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -427,11 +427,11 @@
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
-                                                <td>Start Time</td>
+                                                <td>{{ __('messages.start_time') }}</td>
                                                 <td id="start_time"></td>
                                             </tr>
                                             <tr id="end_time_row" style="display:none">
-                                                <td>End Time</td>
+                                                <td>{{ __('messages.end_time') }}</td>
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>
@@ -456,7 +456,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                        <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.birthday') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -464,7 +464,7 @@
                             <div class="col">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                        <p class="text-center"> {{ __('messages.happy_birthday') }} <span id="name"></span></p>
                                     </div>
                                 </div> <!-- end card-box -->
                             </div> <!-- end col -->
@@ -478,7 +478,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                        <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.details') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -486,7 +486,7 @@
                             <div class="col">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                        <p class="text-center">{{ __('messages.name') }} :<span id="bulk_name"></span></p><br>
                                     </div>
                                 </div> <!-- end card-box -->
                             </div> <!-- end col -->
@@ -550,7 +550,7 @@
                                 <div class="col-12">
                                     <div class="row hover1">
                                         <div class="col-6">
-                                            <div class="col-md-12 font-weight-bold">Timing </div>
+                                            <div class="col-md-12 font-weight-bold">{{ __('messages.timing') }} </div>
                                         </div>
                                         <div class="col-6">
                                             <input type="hidden" id="ttDate">
@@ -572,7 +572,7 @@
                                 <div class="col-12">
                                     <!-- <div class="form-group"> -->
                                     <!-- <label class="control-label font-weight-bold">Notes :</label> -->
-                                    <textarea class="form-control" style="margin: 5px 0px 10px 0px;" placeholder="Enter your notes" id="calNotes" name="daily_report"></textarea>
+                                    <textarea class="form-control" style="margin: 5px 0px 10px 0px;" placeholder="{{ __('messages.enter_your_notes') }}" id="calNotes" name="daily_report"></textarea>
                                     <!-- </div> -->
                                 </div>
                             </div>
@@ -585,7 +585,7 @@
                                 </div>
                                 <div class="col-6 text-right">
                                     <!-- <button type="button" class="btn btn-light mr-1" data-dismiss="modal">{{ __('messages.close') }}</button> -->
-                                    <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">Go to Classroom</button>
+                                    <button type="button" id="goToClassRoom" class="btn btn-primary width-xs waves-effect waves-light">{{ __('messages.go_to_classroom') }}</button>
                                 </div>
                             </div>
                     </div>
@@ -1047,7 +1047,7 @@
                                 <th>#</th>
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
-                                <th>Marks</th>
+                                <th>{{ __('messages.marks') }}</th>
                                 <th>{{ __('messages.subject_position') }}</th>
                             </tr>
                         </thead>

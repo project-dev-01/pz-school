@@ -22,7 +22,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Hostel Group
+                        <h4 class="navv">{{ __('messages.edit_hostel_group') }}
                             <h4>
                     </li>
                 </ul>
@@ -76,8 +76,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="color"> Color <span class="text-danger">*</span></label>
-                                    <input type="text" id="color" name="color" class="form-control color" placeholder="Choose Color" value="#4a81d4">
+                                    <label for="color"> {{ __('messages.color') }} <span class="text-danger">*</span></label>
+                                    <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}" value="#4a81d4">
                                 </div>
                             </div>
                         </div>

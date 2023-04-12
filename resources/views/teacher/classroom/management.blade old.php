@@ -315,7 +315,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="navv">
-                                    Daily Report
+                                {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -382,7 +382,7 @@
                                                             <th>{{ __('messages.student_name') }}</th>
                                                             <th>Attentance</th>
                                                             <th>{{ __('messages.remarks') }}</th>
-                                                            <th>Reasons</th>
+                                                            <th>{{ __('messages.reasons') }}</th>
                                                             <th>{{ __('messages.student_behaviour') }}</th>
                                                             <th>{{ __('messages.class_behaviour') }}</th>
 
@@ -475,7 +475,7 @@
                                         <input type="hidden" name="date" id="dailyReportSelectedDate">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="daily_report">Report<span class="text-danger">*</span></label>
+                                                <label for="daily_report">{{ __('messages.report') }}<span class="text-danger">*</span></label>
                                                 <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                             </div>
                                             <div class="row">

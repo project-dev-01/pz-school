@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-body">
                 <span class="fas fa-user-circle" id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Multiple Import</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.multiple_import') }}</span>
                 <hr>
                     
                     <form id="demo-form" data-parsley-validate="">                                         
@@ -78,7 +78,7 @@
                 </form>
                     <div class="col-8 offset-4">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Import
+                            {{ __('messages.import') }}
                             </button>
                             
                         </div>                                     

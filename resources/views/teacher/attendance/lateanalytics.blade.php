@@ -12,7 +12,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Reasons Count</h4>
+                                <h4 class="header-title">{{ __('messages.reasons_count') }}</h4>
                                 <div class="mt-4 chartjs-chart">
                                     <canvas id="reason-chart" data-colors="#39afd1"></canvas>
                                     <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
