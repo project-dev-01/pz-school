@@ -174,6 +174,10 @@
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
     
+    
+    var select_employee = "{{ __('messages.select_employee') }}";
+    var all_lang = "{{ __('messages.all') }}";
+    var all_lang = "{{ __('messages.all') }}";
     var remove = "{{ __('messages.remove') }}";
     var drag_and_drop_to_replace = "{{ __('messages.drag_and_drop_to_replace') }}";
     var drag_and_drop_to_check = "{{ __('messages.drag_and_drop_to_check') }}";
@@ -223,6 +227,42 @@
     var untaken = "{{ __('messages.untaken') }}";
     var taken = "{{ __('messages.taken') }}";
     var total_strength = "{{ __('messages.total_strength') }}";
+    var subject_average = "{{ __('messages.subject_average') }}";
+    var average = "{{ __('messages.average') }}";
+    var sl_no_lang = "{{ __('messages.s.no') }}";
+    var mark_lang = "{{ __('messages.mark') }}";
+    var grade_lang = "{{ __('messages.grade') }}";
+    var class_lang = "{{ __('messages.class') }}";
+    var student_name_lang = "{{ __('messages.student_name') }}";
+    var subject_name_lang = "{{ __('messages.subject_name') }}";
+    var total_student_lang = "{{ __('messages.total_student') }}";
+    var class_teacher_name_lang = "{{ __('messages.class_teacher_name') }}";
+    var subject_teacher_name_lang = "{{ __('messages.subject_teacher_name') }}";
+    var pass_lang = "{{ __('messages.pass') }}";
+    var g_lang = "{{ __('messages.g') }}";
+    var gpa_lang = "{{ __('messages.gpa') }}";
+    var name_lang = "{{ __('messages.name') }}";
+    var roll_no_lang = "{{ __('messages.roll_no') }}";
+    var dob_lang = "{{ __('messages.DOB') }}";
+    var present_lang = "{{ __('messages.present') }}";
+    var absent_lang = "{{ __('messages.absent') }}";
+    var late_lang = "{{ __('messages.late') }}";
+    var excused_lang = "{{ __('messages.excused') }}";
+    var current_month_lang = "{{ __('messages.current_month') }}";
+    var engaging_lang = "{{ __('messages.engaging') }}";
+    var hyperactive_lang = "{{ __('messages.hyperactive') }}";
+    var quiet_lang = "{{ __('messages.quiet') }}";
+    var sleepy_lang = "{{ __('messages.sleeply') }}";
+    var uninterested_lang = "{{ __('messages.uninterested') }}";
+    var attitude_lang = "{{ __('messages.attitude') }}";
+    var all_subject_lang = "{{ __('messages.all_subject') }}";
+    var homework_list_lang = "{{ __('messages.homework_list') }}";
+    var complete_lang = "{{ __('messages.complete') }}";
+    var incomplete_lang = "{{ __('messages.incomplete') }}";
+    var late_submission_lang = "{{ __('messages.late_submission') }}";
+    var short_test_name_lang = "{{ __('messages.short_test_name') }}";
+    
+    
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details

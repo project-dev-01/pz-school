@@ -356,7 +356,7 @@ class StudentController extends Controller
 
     public function viewExamTimetable(Request $request)
     {
-
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'student_id' => session()->get('ref_user_id'),
             'exam_id' => $request->exam_id
@@ -393,7 +393,7 @@ class StudentController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7" class="text-center"> No Data Available</td>
+                                <td colspan="7" class="text-center"> '.$no_data_available_lang.'</td>
                             </tr>';
             }
 

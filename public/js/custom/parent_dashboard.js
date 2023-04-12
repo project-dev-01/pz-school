@@ -57,7 +57,7 @@ $(function () {
                 bySubject += '</tr>';
             });
         } else {
-            bySubject += '<tr><td colspan="4">No data available</td></tr>';
+            bySubject += '<tr><td colspan="4">'+no_data_available+'</td></tr>';
         }
         $("#student_rank_body").append(bySubject);
     }

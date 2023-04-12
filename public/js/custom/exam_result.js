@@ -154,23 +154,23 @@ function examresult_details(datasetnew) {
         '<table  class="table table-bordered mb-0" id="tbl_general_details">' +
         '<thead>';
     byStudGenDetails += '<tr>' +
-        '<th>Roll No</th>' +
+        '<th>'+roll_no_lang+'</th>' +
         '<td>' + student_details.register_no + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>Name</th>' +
+        '<th>'+name_lang+'</th>' +
         '<td>' + student_details.student_name + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>DOB</th>' +
+        '<th>'+dob_lang+'</th>' +
         '<td>' + student_details.birthday + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>Grade</th>' +
+        '<th>'+grade_lang+'</th>' +
         '<td>' + student_details.class_name + '</td>' +
         '</tr>';
     byStudGenDetails += '<tr>' +
-        '<th>Class</th>' +
+        '<th>'+class_lang+'</th>' +
         '<td>' + student_details.section_name + '</td>' +
         '</tr>';
     byStudGenDetails += '</thead></table>' +
@@ -181,12 +181,12 @@ function examresult_details(datasetnew) {
         '<table class="table w-100 nowrap table-bordered table-striped table2excel">' +
         '<thead>';
     bysubjectAllTable += '<tr>' +
-        '<th>S.no.</th>' +
-        '<th>Student Name</th>';
+        '<th>'+sl_no_lang+'.</th>' +
+        '<th>'+student_name_lang+'</th>';
     headers.forEach(function (resps) {
         bysubjectAllTable += '<th>' + resps.subject_name + '</th>';
     });
-    bysubjectAllTable += '<th rowspan="2">GPA</th>';
+    bysubjectAllTable += '<th rowspan="2">'+gpa_lang+'</th>';
 
     bysubjectAllTable += '</tr>';
     bysubjectAllTable += '</thead><tbody>';

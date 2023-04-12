@@ -9,7 +9,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                 </div>
-                <h4 class="page-title">Report Card</h4>
+                <h4 class="page-title">{{ __('messages.report_card') }}</h4>
             </div>
         </div>
     </div>

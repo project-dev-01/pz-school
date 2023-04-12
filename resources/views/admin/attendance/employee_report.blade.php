@@ -56,6 +56,7 @@
                                 <div class="form-group">
                                     <label for="employee">{{ __('messages.employee') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="employee" id="employeeReportEmployee">
+                                    <option value="">{{ __('messages.select_employee') }}</option>
                                     </select>
                                 </div>
                             </div>

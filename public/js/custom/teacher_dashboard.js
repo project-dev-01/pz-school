@@ -99,7 +99,7 @@ $(function () {
                 bySubject += '</tr>';
             });
         } else {
-            bySubject += '<tr><td colspan="4">No data available</td></tr>';
+            bySubject += '<tr><td colspan="4">'+no_data_available+'</td></tr>';
         }
         $("#student_rank_body").append(bySubject);
     }
@@ -401,7 +401,7 @@ $(function () {
                     }
                 });
             } else {
-                byStudent += '<tr><td colspan="5">No data available</td></tr>';
+                byStudent += '<tr><td colspan="5">'+no_data_available+'</td></tr>';
             }
             $('#'+type+'_student_table').append(byStudent);
         }

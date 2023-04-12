@@ -74,9 +74,9 @@ function bystudentdetails_class(datasetnew) {
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
         '<thead>';
     bysubjectAllTable += '<tr>' +
-        '<th class="align-top" rowspan="3">S.no.</th>' +
-        '<th class="align-top" rowspan="3">Student Name</th>' +
-        '<th class="text-center" colspan="' + headercount + '">Subject Name</th>' +
+        '<th class="align-top" rowspan="3">'+sl_no_lang+'</th>' +
+        '<th class="align-top" rowspan="3">'+student_name_lang+'</th>' +
+        '<th class="text-center" colspan="' + headercount + '">'+subject_name_lang+'</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
@@ -85,8 +85,8 @@ function bystudentdetails_class(datasetnew) {
     bysubjectAllTable += '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
-        bysubjectAllTable += ' <th class="text-center">Mark</th>' +
-            '<th class="text-center">Grade</th>';
+        bysubjectAllTable += ' <th class="text-center">'+mark_lang+'</th>' +
+            '<th class="text-center">'+grade_lang+'</th>';
     });
     bysubjectAllTable += '</tr></thead><tbody>';
     grade_list_master.forEach(function (res) {

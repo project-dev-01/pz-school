@@ -279,7 +279,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -299,15 +299,15 @@ $(function () {
                             });
                         }
                         chart.updateSeries([{
-                            name: "PRESENT",
+                            name: present_lang,
                             type: "line",
                             data: presentData
                         }, {
-                            name: "LATE",
+                            name: late_lang,
                             type: "line",
                             data: lateData
                         }, {
-                            name: "Absent",
+                            name: absent_lang,
                             type: "line",
                             data: absentData
                         }]);
@@ -746,7 +746,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -923,16 +923,16 @@ $(function () {
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
             row += '<option value="">'+select_status+'</option>';
             if (val.leave) {
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>Absent</option>';
-                row += '<option value="late">Late</option>';
-                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>Excused</option>';
+                row += '<option value="present">'+present_lang+'</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
+                row += '<option value="late">'+late_lang+'</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
                 disabled = "readonly";
             } else {
-                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>Present</option>';
-                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>Absent</option>';
-                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>Late</option>';
-                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>Excused</option>';
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>'+present_lang+'</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>'+late_lang+'</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
             }
             row += '</select>';
             row += '</div>';

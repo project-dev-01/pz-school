@@ -260,7 +260,7 @@ $(function () {
 
                         });
                     } else {
-                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> No Data Available</td></tr>';
+                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
 
                     }
                     $('#alreadyTakenLeave tbody').append(takenLeaveDetails);

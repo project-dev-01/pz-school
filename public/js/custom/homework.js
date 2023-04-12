@@ -65,10 +65,10 @@ $(function () {
                     $("#homeworks").show("slow");
                     if(data.subject!="All")
                     {
-                        var sub = 'HomeWork List ('+data.subject+')';
+                        var sub = homework_list_lang+' ('+data.subject+')';
                         
                     }else{
-                        var sub = 'HomeWork List (All Subjects)';
+                        var sub = homework_list_lang+' ('+all_subject_lang+')';
                     }
                     $("#title").html(sub);
                     $("#homework_list").html(data.list);
@@ -312,7 +312,7 @@ $(function () {
                 offsetX: 0,
                 offsetY: 7
             },
-            labels: [ "Complete", "Incomplete"],
+            labels: [ complete_lang,incomplete_lang],
             colors: colors,
             responsive: [{
                 breakpoint: 600,

@@ -2578,6 +2578,9 @@ class AdminController extends Controller
     // get Homework
     public function getHomework(Request $request)
     {
+        
+        $details_lang = __('messages.details');
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -2612,13 +2615,13 @@ class AdminController extends Controller
                                     <td>' . $work['date_of_submission'] . '</td>
                                     <td>' . $completed . '/' . $incompleted . '</td>
                                     <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">Details</span></a></td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">'.$details_lang.'</span></a></td>
                                 </tr>';
                     $row++;
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="7"> No Data Available</td>
+                                    <td colspan="7"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
 
@@ -2631,6 +2634,7 @@ class AdminController extends Controller
     // view Homework
     public function viewHomework(Request $request)
     {
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'homework_id' => $request->homework_id,
             'semester_id' => $request->semester_id,
@@ -2741,7 +2745,7 @@ class AdminController extends Controller
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="9"> No Data Available</td>
+                                    <td colspan="9"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
             $homework['table'] = $response;
@@ -3245,7 +3249,7 @@ class AdminController extends Controller
 
     public function timetableExam(Request $request)
     {
-
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -3276,7 +3280,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                    <td colspan="3" class="text-center"> No Data Available</td>
+                                    <td colspan="3" class="text-center"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
 
@@ -3298,6 +3302,11 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id'),
             'exam_id' => $request->exam_id,
         ];
+        $select_hall = __('messages.select_hall');
+        $select_teacher = __('messages.select_teacher');
+        $internal=__('messages.internal');
+        $external=__('messages.external');
+        $no_data_available_lang = __('messages.no_data_available');
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
         $teacher = Helper::PostMethod(config('constants.api.teacher_list'), $data);
@@ -3345,7 +3354,7 @@ class AdminController extends Controller
                     if ($exam['distributor_type'] == "1") {
                         $dist .= ' <select  class="form-control " name="exam[' . $row . '][distributor]">';
                         foreach ($teacher['data'] as $teach) {
-                            $dist .= '<option value="">Select Teacher</option>';
+                            $dist .= '<option value="">'.$select_teacher.'</option>';
                             if ($teach['id'] == $exam['distributor_id']) {
                                 $dist .= '<option value="' . $teach['id'] . '" selected>' . $teach['name'] . '</option>';
                             } else {
@@ -3357,7 +3366,7 @@ class AdminController extends Controller
                         $dist .= '<input type="text" name="exam[' . $row . '][distributor]" class="form-control"  value="' . $exam['distributor'] . '" placeholder="Distributor Name">';
                     } else {
                         $dist .= ' <select  class="form-control " name="exam[' . $row . '][distributor]">';
-                        $dist .= '<option value="">Select Teacher</option>';
+                        $dist .= '<option value="">'.$select_teacher.'</option>';
                         foreach ($teacher['data'] as $teach) {
                             $dist .= '<option value="' . $teach['id'] . '">' . $teach['name'] . '</option>';
                         }
@@ -3407,7 +3416,7 @@ class AdminController extends Controller
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <select class="form-control" name="exam[' . $row . '][hall_id]" placeholder="Select">
-                                                        <option value="">Choose Hall</option>' . $hall . '</select>
+                                                        <option value=""> ' .$select_hall . '</option>' . $hall . '</select>
                                                 </div>
                                             </div>
                                         </div>
@@ -3417,8 +3426,8 @@ class AdminController extends Controller
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <select  class="form-control distributor_type" data-id="' . $row . '" name="exam[' . $row . '][distributor_type]">
-                                                        <option value="1" ' . $dist_type1 . '>Internal</option>
-                                                        <option value="2" ' . $dist_type2 . '>External</option>
+                                                        <option value="1" ' . $dist_type1 . '>'.$internal.'</option>
+                                                        <option value="2" ' . $dist_type2 . '>'.$external.'</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6 distributor">
@@ -3432,7 +3441,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7" class="text-center"> No Data Available</td>
+                                <td colspan="7" class="text-center"> '.$no_data_available_lang.'</td>
                             </tr>';
             }
 
@@ -3476,7 +3485,9 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.exam_timetable_get'), $data);
-
+        $no_data_available_lang = __('messages.no_data_available');
+        $internal=__('messages.internal');
+        $external=__('messages.external');
         // dd($response);  
         if ($response['code'] == "200") {
 
@@ -3486,9 +3497,9 @@ class AdminController extends Controller
                 foreach ($response['data']['exam'] as $exam) {
 
                     if ($exam['distributor_type'] == "1") {
-                        $type = "Internal";
+                        $type = $internal;
                     } elseif ($exam['distributor_type'] == "2") {
-                        $type = "External";
+                        $type = $external;
                     } else {
                         $type = "NILL";
                     }
@@ -3507,7 +3518,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="5"> No Data Available</td>
+                                <td colspan="5"> '.$no_data_available_lang.'</td>
                             </tr>';
             }
 
@@ -3521,7 +3532,7 @@ class AdminController extends Controller
 
     public function deleteExamTimetable(Request $request)
     {
-
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -3553,7 +3564,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                    <td colspan="3" class="text-center"> No Data Available</td>
+                                    <td colspan="3" class="text-center"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
 
@@ -4103,6 +4114,7 @@ class AdminController extends Controller
     // DELETE Student Details
     public function deleteStudent(Request $request)
     {
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'id' => $request->id
         ];
@@ -4138,7 +4150,7 @@ class AdminController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7"> No Data Available</td>
+                                <td colspan="7"> '.$no_data_available_lang.'</td>
                             </tr>';
             }
             $student['table'] = $output;

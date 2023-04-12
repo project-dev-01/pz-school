@@ -433,7 +433,7 @@
                                         </div> <!-- end col -->
                                     </div> <!-- Maths row -->
                                     @empty
-                                    <p class="text-center">No Homework data available</p>
+                                    <p class="text-center">{{ __('messages.no_data_available') }}</p>
                                     @endforelse
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->

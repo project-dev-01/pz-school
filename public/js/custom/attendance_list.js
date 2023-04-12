@@ -146,7 +146,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -410,7 +410,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -430,15 +430,15 @@ $(function () {
                             });
                         }
                         chart.updateSeries([{
-                            name: "PRESENT",
+                            name: present_lang,
                             type: "line",
                             data: presentData
                         }, {
-                            name: "LATE",
+                            name: late_lang,
                             type: "line",
                             data: lateData
                         }, {
-                            name: "Absent",
+                            name: absent_lang,
                             type: "line",
                             data: absentData
                         }]);

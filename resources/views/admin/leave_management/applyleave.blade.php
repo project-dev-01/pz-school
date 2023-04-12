@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>{{ __('messages.leave_type') }}</th>
                                             <th>{{ __('messages.total_leave') }}</th>
-                                            <th></th>
+                                            <th>{{ __('messages.used_leave') }}</th>
                                             <th>{{ __('messages.remaining_leave') }}</th>
                                         </tr>
                                     </thead>

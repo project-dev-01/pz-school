@@ -177,12 +177,12 @@ $(function () {
             '<table class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
             '<thead>' +
             '<tr>' +
-            '<th class="align-top">S.no.</th>' +
-            '<th class="align-top">Student Name</th>';
+            '<th class="align-top">'+sl_no_lang+'</th>' +
+            '<th class="align-top">'+student_name_lang+'</th>';
         headers.forEach(function (resp) {
             bysubjectAllTable += '<th class="text-center">' + resp.paper_name + '</th>';
         });
-        bysubjectAllTable += '<th class="align-middle">Grade</th>' +
+        bysubjectAllTable += '<th class="align-middle">'+grade_lang+'</th>' +
             '</tr>';
         bysubjectAllTable += '</thead><tbody>';
         get_subject_paper_marks.forEach(function (res) {

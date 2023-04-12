@@ -139,7 +139,7 @@
                                         @endforeach
                                         @else
                                         <tr>
-                                            <td class="text-center">No timetable Available</td>
+                                            <td class="text-center">{{ __('messages.no_data_available') }}</td>
                                         </tr>
                                         @endif
                                     </tbody>

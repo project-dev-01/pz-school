@@ -24,13 +24,13 @@ $(function () {
             curve: "smooth"
         },
         series: [{
-            name: "Average",
+            name: average,
             // data: [65,87,65,87]
             data: []
 
         }],
         title: {
-            text: "Subject Average",
+            text: subject_average,
             align: "left",
             style: {
                 fontSize: "14px",
@@ -64,7 +64,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: "Average"
+                text: average
             }
         },
         grid: {
@@ -716,8 +716,8 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var att_status = '<select class="form-control attendance_status" id="' + row.student_id + '" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
                             '<option value="">'+choose+'</option>' +
-                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Present</option>' +
-                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Absent</option>' +
+                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>'+present_lang+'</option>' +
+                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>' +
                             '</select>';
                         return att_status;
                     }

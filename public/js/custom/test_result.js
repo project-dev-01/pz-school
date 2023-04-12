@@ -163,11 +163,11 @@ var options = {
     },
     
     series: [{
-        name: "Average",
+        name: average,
         data: [90,65,75,99,84,57]
     }],
     title: {
-        text: "Subject Averages",
+        text: subject_average,
         align: "left",
         style: {
             fontSize: "14px",
@@ -191,7 +191,7 @@ var options = {
     },
     yaxis: {
         title: {
-            text: "Average"
+            text: average
         },
         min: 0,
         max: 100
@@ -251,11 +251,11 @@ var options = {
     },
     
     series: [{
-        name: "Average",
+        name: average,
         data: [90,65,75,99,84,57]
     }],
     title: {
-        text: "Subject Average",
+        text: subject_average,
         align: "left",
         style: {
             fontSize: "14px",
@@ -279,7 +279,7 @@ var options = {
     },
     yaxis: {
         title: {
-            text: "Average"
+            text: average
         },
         min: 40,
         max: 100

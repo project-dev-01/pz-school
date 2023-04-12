@@ -24,7 +24,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Home work</h4>
+                <h4 class="page-title">{{ __('messages.homework') }}</h4>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link" id="title">
-                        {{ __('messages.homework_list') }} (All Subjects)
+                        {{ __('messages.homework_list') }} ({{ __('messages.all_subject') }})
                         <h4>
                     </li>
                 </ul><br>

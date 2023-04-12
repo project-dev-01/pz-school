@@ -471,10 +471,10 @@ $(function () {
                         }
                         var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">'+choose+'</option>' +
-                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>Present</option>' +
-                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>Absent</option>' +
-                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>Late</option>' +
-                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>Excused</option>' +
+                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>'+present_lang+'</option>' +
+                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>' +
+                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>'+late_lang+'</option>' +
+                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>' +
                             '</select>';
                         return att_status;
                     }

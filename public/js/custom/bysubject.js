@@ -135,20 +135,20 @@ function bysubjectdetails_class(datasetnew) {
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
         '<thead>' +
         '<tr>' +
-        '<th class="align-top" rowspan="2">S.no.</th>' +
-        '<th class="align-top" rowspan="2">Grade</th>' +
-        '<th class="align-top" rowspan="2">Class</th>' +
-        '<th class="align-top" rowspan="2">Subject Name</th>' +
-        '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +
-        '<th class="align-top" rowspan="2">Absent</th>' +
-        '<th class="align-top" rowspan="2">Present</th>' +
-        '<th class="align-top" rowspan="2">Subject Teacher Name</th>';
+        '<th class="align-top" rowspan="2">'+sl_no_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+grade_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+class_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+subject_name_lang+'</th>' +
+        '<th class="align-top th-sm - 6 rem" rowspan="2">'+total_student_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+absent_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+present_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+subject_teacher_name_lang+'</th>';
     headers.forEach(function (resp) {
         bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
     });
-    bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
-        '<th class="align-middle" rowspan="2">G</th>' +
-        '<th class="align-middle" rowspan="2">GPA</th>' +
+    bysubjectAllTable += '<th class="align-middle" rowspan="2">'+pass_lang+'</th>' +
+        '<th class="align-middle" rowspan="2">'+g_lang+'</th>' +
+        '<th class="align-middle" rowspan="2">'+gpa_lang+'</th>' +
         '<th class="align-middle" rowspan="2">%</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';

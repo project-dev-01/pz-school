@@ -72,7 +72,7 @@ $(function () {
             offsetX: 0,
             offsetY: 7
         },
-        labels: ["Complete", "Incomplete", "Late Submission"],
+        labels: [complete_lang,incomplete_lang,late_submission_lang],
         colors: colors,
         responsive: [{
             breakpoint: 600,
@@ -105,7 +105,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Attitude'
+            text: attitude_lang,
         },
         tooltip: {
             formatter: function () {
@@ -179,13 +179,13 @@ $(function () {
             curve: "smooth"
         },
         series: [{
-            name: "Average",
+            name: average,
             // data: [65,87,65,87]
             data: []
 
         }],
         title: {
-            text: "Subject Average",
+            text:subject_average,
             align: "left",
             style: {
                 fontSize: "14px",
@@ -219,7 +219,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: "Average"
+                text: average
             }
         },
         grid: {
@@ -473,11 +473,11 @@ $(function () {
                         //     ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', tiredCount]
                         // ], true);
                         attitudeChart.series[0].setData([
-                            ['Engaging', EngagingCount],
-                            ['Hyperactive', HyperactiveCount],
-                            ['Quiet', QuietCount],
-                            ['Sleepy', SleepyCount],
-                            ['Uninterested', tiredCount]
+                            [engaging_lang, EngagingCount],
+                            [hyperactive_lang, HyperactiveCount],
+                            [quiet_lang, QuietCount],
+                            [sleepy_lang, SleepyCount],
+                            [uninterested_lang, tiredCount]
                         ], true);
                     } else {
                         $('#attitude_card').hide();
@@ -545,7 +545,7 @@ $(function () {
                             }
                         });
                     } else {
-                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> No Data Available</td></tr>';
+                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
                     }
                     newRowContent += '</tbody>' +
                         '</table>' +

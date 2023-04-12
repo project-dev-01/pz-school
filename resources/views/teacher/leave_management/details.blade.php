@@ -136,7 +136,7 @@
                     </table>
                 </div>
                 <hr>
-                <h4 class="header-title">Leave Details</h4>
+                <h4 class="header-title">{{ __('messages.leave_details') }} </h4>
                 <div class="table-responsive">
                     <table class="table table-centered table-borderless table-striped mb-0">
                         <tbody>

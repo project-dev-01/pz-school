@@ -419,7 +419,7 @@ $(function () {
                         output += '</tr>';
                     });
                 } else {
-                    output += '<tr><td>No Data Available</td></tr>';
+                    output += '<tr><td>'+no_data_available+'</td></tr>';
                 }
 
                 $("#old_student_body").append(output);
@@ -468,7 +468,7 @@ $(function () {
                         output += '</tr>';
                     });
                 } else {
-                    output += '<tr><td>No Data Available</td></tr>';
+                    output += '<tr><td>'+no_data_available+'</td></tr>';
                 }
 
                 $("#new_student_body").append(output);
@@ -484,7 +484,7 @@ $(function () {
         $.post(subCategoryList, { token: token, branch_id: branchID, soap_category_id: soap_category_id }, function (data) {
             // console.log('data',data)
             if (data.data == "") {
-                row += ' <div class="col"><a class="dropdown-icon-item" href="#" data-toggle="modal"  data-target="#fh"><span>No Data Available</span></a></div>';
+                row += ' <div class="col"><a class="dropdown-icon-item" href="#" data-toggle="modal"  data-target="#fh"><span>'+no_data_available+'</span></a></div>';
             } else {
                 $.each(data.data, function (index, value) {
                     if (value.photo) {
@@ -514,7 +514,7 @@ $(function () {
         $.post(notesList, { token: token, branch_id: branchID, soap_category_id: soap_category_id, soap_sub_category_id: soap_sub_category_id }, function (data) {
             // console.log('notes',data)
             if (data.data == "") {
-                row += ' <tr ><td  class="text-center" colspan="2">No Data Available</td></tr>';
+                row += ' <tr ><td  class="text-center" colspan="2">'+no_data_available+'</td></tr>';
             } else {
                 $.each(data.data, function (index, value) {
                     index++;

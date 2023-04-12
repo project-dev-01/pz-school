@@ -809,6 +809,8 @@ class TeacherController extends Controller
     // get Homework
     public function getHomework(Request $request)
     {
+        $details_lang = __('messages.details');
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -842,13 +844,13 @@ class TeacherController extends Controller
                                     <td>' . $work['date_of_submission'] . '</td>
                                     <td>' . $completed . '/' . $incompleted . '</td>
                                     <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">Details</span></a></td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">'.$details_lang.'</span></a></td>
                                 </tr>';
                     $row++;
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="7"> No Data Available</td>
+                                    <td colspan="7"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
 
@@ -859,6 +861,7 @@ class TeacherController extends Controller
     // view Homework
     public function viewHomework(Request $request)
     {
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'homework_id' => $request->homework_id,
             'semester_id' => $request->semester_id,
@@ -969,7 +972,7 @@ class TeacherController extends Controller
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="9"> No Data Available</td>
+                                    <td colspan="9"> '.$no_data_available_lang.'</td>
                                 </tr>';
             }
             $homework['table'] = $response;

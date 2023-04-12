@@ -158,7 +158,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv" id="title">
-                        {{ __('messages.homework_list') }} (All Subjects)
+                        {{ __('messages.homework_list') }} ({{ __('messages.all_subject') }})
                             <h4>
                     </li>
                 </ul><br>

@@ -4805,7 +4805,7 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_data);
-        return DataTables::of($response['data'])
+        return DataTables::of($response['data'],)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">

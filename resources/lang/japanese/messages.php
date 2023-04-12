@@ -651,7 +651,7 @@ return [
     "teachers_remarks" => "先生からのコメント",
     "view_timetable" => "時間割を確認",
     "monday" => "月曜日",
-    "Tuesday" => "火曜日",
+    "tuesday" => "火曜日",
     "wednesday" => "水曜日",
     "thursday" => "木曜日",
     "friday" => "金曜日",
@@ -1140,7 +1140,6 @@ return [
     "edit_leave_type" => "Edit Leave Type", 
     "add_leave_type" => "Add Leave Type", 
     "edit_staff_leave_assign" => "Edit Staff Leave Assign", 
-    "no_data_available" => "No data available", 
     "assign_relief_assignment" => "Assign Relief Assignment", 
     "relief_assignment_details" => "Relief Assignment Details", 
     "edit_exam_term" => "Edit Exam Term", 
@@ -1190,5 +1189,10 @@ return [
     "edit_sub_category" => "Edit Sub Category", 
     "edit_soap_notes" => "Edit Soap Notes", 
     "edit_topic" => "Edit Topic", 
+    "internal" => "Internal", 
+    "external" => "External", 
+    "subject_teacher_name" => "Subject Teacher Name",
+    "text" => "Text",  
+    "all_subject" => "All Subjects",  
 ];
 

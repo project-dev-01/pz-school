@@ -191,7 +191,7 @@ $(function () {
                             '</tr>' +
                             '</thead>' +
                             '<tbody>';
-                        reliefDetailsTable += '<tr><td colspan="8" class="text-center">No data available</td></tr>';
+                        reliefDetailsTable += '<tr><td colspan="8" class="text-center">'+no_data_available+'</td></tr>';
                         reliefDetailsTable += '</tbody>' +
                             '</table></div>';
                     }

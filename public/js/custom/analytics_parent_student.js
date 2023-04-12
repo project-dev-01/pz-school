@@ -12,7 +12,7 @@ $(function () {
             type: "pie"
         },
         series: [],
-        labels: ["Present", "Absent", "Late"],
+        labels: [present_lang, absent_lang, late_lang],
         colors: colors,
         legend: {
             show: !0,
@@ -25,7 +25,7 @@ $(function () {
             offsetY: 7
         },
         title: {
-            text: "Current Month",
+            text: current_month_lang,
             align: 'left',
             margin: 10,
             offsetX: 0,
@@ -72,7 +72,7 @@ $(function () {
             offsetX: 0,
             offsetY: 7
         },
-        labels: ["Complete", "Incomplete", "Late Submission"],
+        labels: [complete_lang, incomplete_lang,late_submission_lang],
         colors: colors,
         responsive: [{
             breakpoint: 600,
@@ -105,7 +105,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Attitude'
+            text:attitude_lang
         },
         tooltip: {
             formatter: function () {
@@ -142,7 +142,7 @@ $(function () {
             type: 'pie',
             name: 'Attitude',
             data: [
-                ['Engaging', 0],
+                [engaging_lang, 0],
                 ['Hyperactive', 0],
                 ['Quiet', 0],
                 ['Sleepy', 0],
@@ -179,13 +179,13 @@ $(function () {
             curve: "smooth"
         },
         series: [{
-            name: "Average",
+            name: average,
             // data: [65,87,65,87]
             data: []
 
         }],
         title: {
-            text: "Subject Average",
+            text: subject_average,
             align: "left",
             style: {
                 fontSize: "14px",
@@ -219,7 +219,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: "Average"
+                text: average
             }
         },
         grid: {
@@ -443,11 +443,11 @@ $(function () {
 
                         // based on order we push
                         attitudeChart.series[0].setData([
-                            ['Engaging', EngagingCount],
-                            ['Hyperactive', HyperactiveCount],
-                            ['Quiet', QuietCount],
-                            ['Sleepy', SleepyCount],
-                            ['Uninterested', UninterestedCount]
+                            [engaging_lang, EngagingCount],
+                            [hyperactive_lang, HyperactiveCount],
+                            [quiet_lang, QuietCount],
+                            [sleepy_lang, SleepyCount],
+                            [uninterested_lang, UninterestedCount]
                         ], true);
                     } else {
                         $('#attitude_card').hide();
@@ -479,10 +479,10 @@ $(function () {
                         '<table class="table table-striped table-nowrap">' +
                         '<thead>' +
                         '<tr>' +
-                        '<th>S.no</th>' +
-                        '<th>Short Test Name</th>' +
-                        '<th>Grade</th>' +
-                        '<th>Mark</th>' +
+                        '<th>'+sl_no_lang+'</th>' +
+                        '<th>'+short_test_name_lang+'</th>' +
+                        '<th>'+grade_lang+'</th>' +
+                        '<th>'+mark_lang+'</th>' +
                         '</tr>' +
                         '</thead>' +
                         '<tbody>';
@@ -513,7 +513,7 @@ $(function () {
                             }
                         });
                     } else {
-                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> No Data Available</td></tr>';
+                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
                     }
                     newRowContent += '</tbody>' +
                         '</table>' +
