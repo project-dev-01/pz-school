@@ -241,7 +241,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>
@@ -308,7 +308,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>
@@ -378,7 +378,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>

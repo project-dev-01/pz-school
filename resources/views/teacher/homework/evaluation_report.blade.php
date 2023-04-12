@@ -131,7 +131,7 @@
                                                     <div class="col-md-8"></div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Search">
+                                                            <input type="text" class="form-control" placeholder=" {{ __('messages.search') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,7 +164,7 @@
                                                     <div class="col-md-8"></div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="Search">
+                                                            <input type="text" class="form-control" placeholder=" {{ __('messages.search') }}">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -98,7 +98,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group text-right m-b-0">
                                                 <button class="btn btn-primary-b1 waves-effect waves-light" type="submit">
-                                                    Save
+                                                {{ __('messages.save') }}
                                                 </button>
                                             </div>
                                         </div>

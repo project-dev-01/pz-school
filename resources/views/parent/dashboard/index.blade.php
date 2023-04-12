@@ -575,7 +575,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -601,11 +601,11 @@
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
-                                                <td>Start Time</td>
+                                                <td>{{ __('messages.start_time') }}</td>
                                                 <td id="start_time"></td>
                                             </tr>
                                             <tr id="end_time_row" style="display:none">
-                                                <td>End Time</td>
+                                                <td>{{ __('messages.end_time') }}</td>
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>
@@ -671,7 +671,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="DD-MM-YYYY">
+                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
                                     </div>
                                 </div>
                             </div>
@@ -684,7 +684,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="DD-MM-YYYY">
+                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
                                     </div>
                                 </div>
                             </div>

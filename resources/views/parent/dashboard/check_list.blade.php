@@ -17,7 +17,7 @@
                         <div class="custom-control custom-checkbox float-left">
                             <input type="checkbox" checked class="custom-control-input" id="completedCheck">
                             <label class="custom-control-label" for="completedCheck">
-                                Mark as completed
+                            {{ __('messages.mark_as_completed') }}
                             </label>
                         </div> <!-- end custom-checkbox-->
                         <div class="clearfix"></div>
@@ -61,7 +61,7 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <div id="bubble-editor">
-                                    <p>This is a task Description </p>
+                                    <p>{{ __('messages.this_is_a_task') }}</p>
                                     <div id="dashTaskDesc"></div>
                                 </div>
                             </div> <!-- end col -->
@@ -89,7 +89,7 @@
                             <div class="col">
                                 <div class="border rounded">
                                     <form id="submitComment" action="" method="post">
-                                        <textarea rows="3" name="comment" id="replyComment" class="form-control border-0 resize-none" placeholder="Your comment...."></textarea>
+                                        <textarea rows="3" name="comment" id="replyComment" class="form-control border-0 resize-none" placeholder="{{ __('messages.your_comment....') }}"></textarea>
 
                                         <input type="hidden" name="to_do_list_id" id="toDoListId">
                                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">

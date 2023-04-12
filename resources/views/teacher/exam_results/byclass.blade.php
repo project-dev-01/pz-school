@@ -122,7 +122,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Class
+                        {{ __('messages.class') }} 
                             <h4>
                     </li>
                 </ul><br>

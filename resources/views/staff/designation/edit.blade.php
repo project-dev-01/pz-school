@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditDesignationModalLabel">Edit Designation</h4>
+                <h4 class="modal-title" id="myeditDesignationModalLabel">{{ __('messages.edit_designation') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('messages.designation_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Designation name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_designation_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

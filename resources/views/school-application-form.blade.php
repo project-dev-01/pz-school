@@ -94,8 +94,8 @@
                                                 <label for="heard">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
                                                 <select id="heard" class="form-control" required="">
                                                     <option value="">{{ __('messages.select_gender') }}</option>
-                                                    <option value="">Male</option>
-                                                    <option value="press">Female</option>
+                                                    <option value="">{{ __('messages.male') }}</option>
+                                                    <option value="press">{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -131,7 +131,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="heard">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="email" placeholder="Email id" aria-describedby="inputGroupPrepend" required>
+                                                <input type="text" class="form-control" id="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -170,8 +170,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Postal Code<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder="Postal Code" aria-describedby="inputGroupPrepend" required>
+                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="pin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -249,8 +249,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">Postal Code<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="spin" placeholder="Postal Code" aria-describedby="inputGroupPrepend" required>
+                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="spin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>

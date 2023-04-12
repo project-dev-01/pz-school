@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.classroom_management') }}/h4>
+                <h4 class="page-title">{{ __('messages.classroom_management') }}</h4>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="DD-MM-YYYY" id="classDate" require="">
+                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    Daily Report
+                                {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -491,7 +491,7 @@
                                                                 <th>{{ __('messages.student_name') }}</th>
                                                                 <th>{{ __('messages.attendance') }}</th>
                                                                 <th>{{ __('messages.remarks') }}</th>
-                                                                <th>Reasons</th>
+                                                                <th>{{ __('messages.reasons') }}</th>
                                                                 <th>{{ __('messages.student_behaviour') }}</th>
                                                                 <th>{{ __('messages.class_behaviour') }}</th>
                                                             </tr>
@@ -504,7 +504,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -586,7 +586,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <label for="daily_report">Report<span class="text-danger">*</span></label>
+                                                    <label for="daily_report">{{ __('messages.report') }}<span class="text-danger">*</span></label>
                                                     <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                                 </div>
                                                 <div class="row">
@@ -600,7 +600,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -636,7 +636,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                            Save
+                                                        {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -695,7 +695,7 @@
                                                         <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>S.no</th>
+                                                                    <th> {{ __('messages.s.no') }}</th>
                                                                     <th>{{ __('messages.short_test_name') }}</th>
                                                                     <th>{{ __('messages.status') }}</th>
                                                                 </tr>

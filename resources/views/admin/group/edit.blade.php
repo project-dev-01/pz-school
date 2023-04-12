@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Group
+                        <h4 class="navv">{{ __('messages.edit_group') }}
                             <h4>
                     </li>
                 </ul>

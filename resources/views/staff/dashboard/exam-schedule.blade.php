@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myexamScheduleModalLabel">Exam Details</h4>
+                <h4 class="modal-title" id="myexamScheduleModalLabel">{{ __('messages.exam_details') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -29,7 +29,7 @@
                                         <td id="examSubject"></td>
                                     </tr>
                                     <tr>
-                                        <td>Exam Time</td>
+                                        <td>{{ __('messages.exam_time') }}</td>
                                         <td id="examTiming"></td>
                                     </tr>
                                 </table>

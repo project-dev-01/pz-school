@@ -62,11 +62,11 @@
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="description">Start Time<span class="text-danger">*</span></label>
+                        <label for="description">{{ __('messages.start_time') }}<span class="text-danger">*</span></label>
                         <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div><div class="form-group">
-                        <label for="description">End Time<span class="text-danger">*</span></label>
+                        <label for="description">{{ __('messages.end_time') }}<span class="text-danger">*</span></label>
                         <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>

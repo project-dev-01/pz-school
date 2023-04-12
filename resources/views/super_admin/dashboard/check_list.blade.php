@@ -17,7 +17,7 @@
                         <div class="custom-control custom-checkbox float-left">
                             <input type="checkbox" checked class="custom-control-input" id="completedCheck">
                             <label class="custom-control-label" for="completedCheck">
-                                Mark as completed
+                            {{ __('messages.mark_as_completed') }}
                             </label>
                         </div> <!-- end custom-checkbox-->
                         <div class="clearfix"></div>
@@ -63,7 +63,7 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <div id="bubble-editor" style="height: 120px;">
-                                    <p>This is a task Description </p>
+                                    <p>{{ __('messages.this_is_a_task') }}</p>
                                     <ul>
                                         <li>Allocate a teacher or assistant to each station as an overall leader with another to supervise and help run each station - older pupils are often very keen to help with this, it's a brilliant chance to give them some responsibility </li>
                                         <li>Have a clipboard, pen and score sheet for each station </li>
@@ -192,7 +192,7 @@
                             <div class="col">
                                 <div class="border rounded">
                                     <form action="#">
-                                        <textarea rows="3" class="form-control border-0 resize-none" placeholder="Your comment...."></textarea>
+                                        <textarea rows="3" class="form-control border-0 resize-none" placeholder="{{ __('messages.your_comment....') }}"></textarea>
                                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">
                                             <div>
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-cloud-upload-outline"></i></a>
@@ -233,7 +233,7 @@
                         <div class="custom-control custom-checkbox float-left">
                             <input type="checkbox" checked class="custom-control-input" id="completedCheck">
                             <label class="custom-control-label" for="completedCheck">
-                                Mark as completed
+                            {{ __('messages.mark_as_completed') }}
                             </label>
                         </div> <!-- end custom-checkbox-->
                         <div class="clearfix"></div>
@@ -279,7 +279,7 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <div id="bubble-editor" style="height: 120px;">
-                                    <p>This is a task Description </p>
+                                    <p>{{ __('messages.this_is_a_task') }}</p>
                                     <ul>
                                         <li>Portion will be from Lesson 1 to Lesson 3 </li>
                                         <li>Exam Marks will be 50 </li>
@@ -407,7 +407,7 @@
                             <div class="col">
                                 <div class="border rounded">
                                     <form action="#">
-                                        <textarea rows="3" class="form-control border-0 resize-none" placeholder="Your comment...."></textarea>
+                                        <textarea rows="3" class="form-control border-0 resize-none" placeholder="{{ __('messages.your_comment....') }}"></textarea>
                                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">
                                             <div>
                                                 <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-cloud-upload-outline"></i></a>

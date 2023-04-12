@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Exam
+                        {{ __('messages.exam') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -119,7 +119,7 @@
                             <div class="table-responsive" id="tbl_std_subject_marks_division">
                            
                             <hr>
-                            <header><b>Subject Division</b></header>
+                            <header><b>{{ __('messages.subject_division') }}</b></header>
                                 <table class="table table-bordered mb-0">
                                     <thead id="tbl_std_subject_marks_division_header">
                                        

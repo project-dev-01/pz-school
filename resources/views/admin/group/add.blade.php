@@ -143,7 +143,7 @@
                         <br>
                         <div class="form-group text-center m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                     </form>

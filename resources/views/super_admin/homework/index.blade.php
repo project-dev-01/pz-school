@@ -119,14 +119,14 @@
                                         <div class="checkbox checkbox-purple">
                                             <input id="checkbox6" type="checkbox">
                                             <label for="checkbox6">
-                                                Published later
+                                            {{ __('messages.published_later') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Schedule Date<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.schedule_date') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
