@@ -1216,6 +1216,5 @@ return [
     "new_password_to_access_your_account" => "Your new password has been created. You can now use the new password to gain access to your account again", 
     
     "child_details" => "Child Details", 
-    "upload_validation_error" => "Upload Validation Error", 
-    "all"=>"all",
+    "upload_validation_error" => "Upload Validation Error",
 ];
