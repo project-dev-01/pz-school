@@ -336,7 +336,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-8">
-                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_details" role="button" aria-expanded="false" aria-controls="basic_details"><i class="fas fa-user-edit"></i> Basic Details</span>
+                            <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_details" role="button" aria-expanded="false" aria-controls="basic_details"><i class="fas fa-user-edit"></i>{{ __('messages.basic_details') }}</span>
                         </div>
                         <div class="col-lg-4">
                             <!-- <div class="text-lg-right mt-3 mt-lg-0">
@@ -729,7 +729,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#child_detail" role="button" aria-expanded="false" aria-controls="child_detail"><i class="fas fa-user-graduate"></i> Child Details </span>
+                    <span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#child_detail" role="button" aria-expanded="false" aria-controls="child_detail"><i class="fas fa-user-graduate"></i>{{ __('messages.child_details') }} </span>
                     <br><br>
                     <div class="collapse" id="child_detail">
                         <div class="row">

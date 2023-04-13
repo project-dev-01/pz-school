@@ -99,7 +99,7 @@ return [
     "occupation" => "職業",
     "income" => "年収",
     "login_details" => "ログイン詳細",
-    "social_links" => "SNS",
+    "social_links" => "ソーシャルリンク",
     "facebook" => "Facebook",
     "twitter" => "Twitter",
     "linkedin" => "Linkedin",
@@ -1209,5 +1209,8 @@ return [
     "select_parent_guardian_secondary" => "保護者（第二選択）を選択", 
     "copy_message" => "メッセージをコピーする", 
     "permanent_address" => "Permanent Address", 
+    "child_details" => "Child Details", 
+    "upload_validation_error" => "Upload Validation Error", 
+    "all"=>"すべての項目",
 ];
 

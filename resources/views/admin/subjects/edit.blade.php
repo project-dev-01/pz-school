@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="editsubjectColor">{{ __('messages.subject_color') }}</label>
-                        <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="Select Color" class="form-control subjectColor">
+                        <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="{{ __('messages.choose_color') }}" class="form-control subjectColor">
                     </div>
                     <div class="form-group">
                         <div class="checkbox checkbox-success form-check-inline">

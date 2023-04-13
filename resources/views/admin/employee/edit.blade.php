@@ -310,7 +310,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="short_name">{{ __('messages.short_name') }}</label>
-                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="AHMAD ABDULLAH">
+                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="{{ __('messages.yamamoto') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">

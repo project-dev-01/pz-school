@@ -658,7 +658,7 @@ return [
     "student_application_form" => "Student Application Form",
     "employee_bulk_upload" => "Employee Bulk Upload",
     "employee_import" => "Employee Import",
-    "Select_file_for_upload" => "Select file for upload",
+    "select_file_for_upload" => "Select file for upload",
     "choose_file" => "Choose file",
     "no_file_choosen" => "No file choosen",
     "upload" => "Upload",
@@ -1206,4 +1206,7 @@ return [
     "select_parent_guardian_secondary" => "Select Parent Guardian Secondary", 
     "copy_message" => "Copy Message", 
     "permanent_address" => "Permanent Address", 
+    "child_details" => "Child Details", 
+    "upload_validation_error" => "Upload Validation Error", 
+    "all"=>"all",
 ];
