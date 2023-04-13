@@ -473,6 +473,7 @@
                     <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
                     <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
                     <script src="{{ asset('public/js/custom/ckeditor.js') }}"></script>
+                    <script src="{{ asset('public/js/custom/translations/de.js') }}"></script>
                     <script src="{{asset('public/js/custom/bootstrap-tokenfield.js')}}"></script>
 
 

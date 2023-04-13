@@ -182,6 +182,19 @@ class StudentController extends Controller
     //Filter  Homework
     public function filterHomework(Request $request)
     {
+         $title_lang = __('messages.title');
+        $status_lang = __('messages.status');
+        $date_of_homework_lang = __('messages.date_of_homework');
+        $date_of_submission_lang = __('messages.date_of_submission');
+        $evalution_date_lang = __('messages.evalution_date');
+        $remarks_lang = __('messages.remarks');
+        $rank_out_of_5_lang = __('messages.rank_out_of_5');
+        $document_lang = __('messages.document');
+        $submission_process_here_lang = __('messages.submission_process_here');
+        $note_lang = __('messages.note');
+        $attachment_file = __('messages.attachment_file');
+        $submit_lang = __('messages.submit');
+
         $student = session()->get('ref_user_id');
         $data = [
             'status' => $request->status,
@@ -208,7 +221,7 @@ class StudentController extends Controller
                     if ($work['status'] == 1) {
                         $file = '<div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                            <div class="col-md-5 font-weight-bold">'.$attachment_file.': </div>
                             <div class="col-md-3">
                                 <a href="' . asset('student/homework/') . '/' . $work['file'] . '" download>
                                     <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -219,7 +232,7 @@ class StudentController extends Controller
                     } else {
                         $file = '<div class="col-md-4">
                             <div class="row">
-                                <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                                <div class="col-md-5 font-weight-bold">'.$attachment_file.' : </div>
                                 <div class="col-md-5">
                                     <input type="file"  name="file">
                                 </div>
@@ -227,7 +240,7 @@ class StudentController extends Controller
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Submit
+                                '.$submit_lang.'
                             </button>
                         </div>';
                     }
@@ -248,19 +261,19 @@ class StudentController extends Controller
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Title :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$title_lang.' :</div>
                                                     <div class="col-md-3">' . $work['title'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Status :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$status_lang.'  :</div>
                                                     <div class="col-md-3">' . $status . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$date_of_homework_lang.' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
                                                 </div>
                                             </div>
@@ -270,19 +283,19 @@ class StudentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$date_of_submission_lang.' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Evalution Date :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$evalution_date_lang.' :</div>
                                                     <div class="col-md-3">' . $evaluation_date . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Remarks :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$remarks_lang.' :</div>
                                                     <div class="col-md-3">' . $work['description'] . '</div>
                                                 </div>
                                             </div>
@@ -291,13 +304,13 @@ class StudentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$rank_out_of_5_lang.' :</div>
                                                     <div class="col-md-3">' . $work['rank'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Document :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$document_lang.' :</div>
                                                     <div class="col-md-3">
                                                         <a href="' . asset('teacher/homework/') . '/' . $work['document'] . '" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -308,14 +321,14 @@ class StudentController extends Controller
                                         </div><br />
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                            <div class="col-md-12 font-weight-bold">'.$submission_process_here_lang.' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Note : </div>
+                                                    <div class="col-md-5 font-weight-bold">'.$note_lang.' : </div>
                                                     <div class="col-md-5">
                                                         <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
                                                     </div>

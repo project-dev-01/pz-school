@@ -54,7 +54,7 @@
                     <li class="nav-item">
                         <h4 class="navv">
                             @if($timetable>0)
-                            Class {{ $details['class']['class_name'] }} (Section: {{ $details['section']['section_name'] }}) (Semester: {{ $details['semester']['semester_name'] }}) (Session: {{ $details['session']['session_name'] }})
+                            {{ __('messages.class') }} {{ $details['class']['class_name'] }} ({{ __('messages.section') }}: {{ $details['section']['section_name'] }}) ({{ __('messages.semester') }}: {{ $details['semester']['semester_name'] }}) ({{ __('messages.session') }}: {{ $details['session']['session_name'] }})
                             @endif
                         </h4>
 
@@ -77,7 +77,7 @@
                                         @if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday"))
                                         @else
                                         <tr>
-                                            <td class="center" style="color:#ed1833;">{{strtoupper($day)}}</td>
+                                            <td class="center" style="color:#ed1833;">{{__('messages.'.$day) }}</td>
                                             @php $row=0; @endphp
                                             @foreach($timetable as $table)
                                             @if($table['day'] == $day)

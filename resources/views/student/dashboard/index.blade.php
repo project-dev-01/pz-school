@@ -772,7 +772,7 @@
                                 $countsub = count($scores['exam_marks']);
                                 @endphp
                                 @if($ddkey =='0')
-                                <th colspan="{{$countsub}}">Subjects</th>
+                                <th colspan="{{$countsub}}">{{ __('messages.subject') }}</th>
                                 @endif
                                 @empty
                                 @endforelse
