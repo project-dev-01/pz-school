@@ -36,7 +36,7 @@
                     
                     @if(count($errors) > 0)
                     <div class="alert alert-danger">
-                        Upload Validation Error<br><br>
+                    {{ __('messages.upload_validation_error') }}<br><br>
                         <ul>
                             @foreach($errors as $error)
                             <li>{{ $error }}</li>

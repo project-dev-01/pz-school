@@ -99,7 +99,7 @@ return [
     "occupation" => "職業",
     "income" => "年収",
     "login_details" => "ログイン詳細",
-    "social_links" => "SNS",
+    "social_links" => "ソーシャルリンク",
     "facebook" => "Facebook",
     "twitter" => "Twitter",
     "linkedin" => "Linkedin",
@@ -1212,9 +1212,12 @@ return [
     "checked" => "Checked", 
     "unchecked" => "Unchecked", 
     "no_events_to_display" => "No events to displays",
-    "all" => "すべての項目", 
     "seconds" => "Seconds", 
     "login_page" => "Login Page", 
     "new_password_to_access_your_account" => "Your new password has been created. You can now use the new password to gain access to your account again", 
+    "permanent_address" => "Permanent Address", 
+    "child_details" => "Child Details", 
+    "upload_validation_error" => "Upload Validation Error", 
+    "all"=>"すべての項目",
 ];
 

@@ -36,7 +36,7 @@
                     
                     @if(count($errors) > 0)
                     <div class="alert alert-danger">
-                        Upload Validation Error<br><br>
+                    {{ __('messages.upload_validation_error') }}<br><br>
                         <ul>
                             @foreach($errors as $error)
                             <li>{{ $error }}</li>
@@ -55,7 +55,7 @@
                         {{ csrf_field() }}
                         <div class="form-group" style="text-align: center;">
                            <div class="card-body" style="margin-left: 17px;">
-                               <label style="margin-right:10px;">{{ __('messages.Select_file_for_upload') }}</label>
+                               <label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
                                         <input type="file" name="file" />
                             </div>  
                             <input type="submit" name="upload" class="btn btn-success" value="Upload">   

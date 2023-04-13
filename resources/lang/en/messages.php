@@ -658,7 +658,7 @@ return [
     "student_application_form" => "Student Application Form",
     "employee_bulk_upload" => "Employee Bulk Upload",
     "employee_import" => "Employee Import",
-    "Select_file_for_upload" => "Select file for upload",
+    "select_file_for_upload" => "Select file for upload",
     "choose_file" => "Choose file",
     "no_file_choosen" => "No file choosen",
     "upload" => "Upload",
@@ -1215,4 +1215,7 @@ return [
     "login_page" => "Login Page", 
     "new_password_to_access_your_account" => "Your new password has been created. You can now use the new password to gain access to your account again", 
     
+    "child_details" => "Child Details", 
+    "upload_validation_error" => "Upload Validation Error", 
+    "all"=>"all",
 ];
