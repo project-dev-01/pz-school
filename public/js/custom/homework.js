@@ -351,7 +351,7 @@ $(function () {
                 offsetX: 0,
                 offsetY: 7
             },
-            labels: [ "Checked", "Unchecked"],
+            labels: [ checked_lang, unchecked_lang],
             colors: colors,
             responsive: [{
                 breakpoint: 600,

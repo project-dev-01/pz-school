@@ -982,7 +982,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">{{ __('messages.education') }}</label>
-                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="mother_education" placeholder="{{ __('messages.enter_education') }}" readonly>
+                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="mother_education" placeholder="{{ __('messages.enter_education_name') }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1176,7 +1176,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">{{ __('messages.education') }}</label>
-                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" placeholder="{{ __('messages.enter_education') }}" readonly>
+                                                    <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" placeholder="{{ __('messages.enter_education_name') }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1631,7 +1631,7 @@
     var indexAdmission = "{{ route('admin.admission') }}";
 </script>
 
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>

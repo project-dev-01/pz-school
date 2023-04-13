@@ -591,7 +591,7 @@
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                                 <select id="categy" name="categy" class="form-control">
-                                                    <option value="">Cho{{ __('messages.select_category') }}</option>
+                                                    <option value="">{{ __('messages.select_category') }}</option>
                                                     <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>
                                                     <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
                                                 </select>
@@ -805,7 +805,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="validationCustomUsername">{{ __('messages.state') }/{{ __('messages.province') }}}</label>
+                                                    <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                                     <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
@@ -987,7 +987,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
                                                     <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state') }{{ __('messages.province') }}}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1077,7 +1077,7 @@
                                                     <select class="form-control" id="guardian_gender" disabled>
                                                         <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male">{{ __('messages.male') }}</option>
-                                                        <option value="Female">{{ __('messages.frmale') }}</option>
+                                                        <option value="Female">{{ __('messages.female') }}</option>
                                                     </select>
                                                 </div>
                                             </div>

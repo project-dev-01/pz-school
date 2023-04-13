@@ -132,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
+                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
                                         <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.new_password') }}">
                                         <span class="text-danger error-text password_error"></span>
                                     </div>

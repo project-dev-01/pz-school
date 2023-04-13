@@ -861,6 +861,12 @@ class TeacherController extends Controller
     // view Homework
     public function viewHomework(Request $request)
     {
+        $marks_lang = __('messages.marks');
+        $grade_lang = __('messages.grade');
+        $text_lang = __('messages.text');
+        $completed_lang = __('messages.completed');
+        $incompleted_lang = __('messages.incompleted');
+
         $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'homework_id' => $request->homework_id,
@@ -886,27 +892,27 @@ class TeacherController extends Controller
                     $disabled = "";
                     if ($work['score_name'] == "Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option Selected>Marks</option>
-                                                <option>Grade</option>
-                                                <option>Text</option>
+                                                <option value="Marks" Selected>'.$marks_lang.'</option>
+                                                <option value="Grade">'.$grade_lang.'</option>
+                                                <option value="Text">'.$text_lang.'</option>
                                             </select>';
                     } elseif ($work['score_name'] == "Grade") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                            <option>Marks</option>
-                                            <option Selected>Grade</option>
-                                            <option>Text</option>
+                                            <option value="Marks">'.$marks_lang.'</option>
+                                            <option value="Grade" Selected>'.$grade_lang.'</option>
+                                            <option value="Text">'.$text_lang.'</option>
                                         </select>';
                     } elseif ($work['score_name'] == "Text") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option>Marks</option>
-                                                <option>Grade</option>
-                                                <option Selected>Text</option>
+                                                <option value="Marks">'.$marks_lang.'</option>
+                                                <option value="Grade">'.$grade_lang.'</option>
+                                                <option value="Text" Selected>'.$text_lang.'</option>
                                             </select>';
                     } else {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option>Marks</option>
-                                                <option>Grade</option>
-                                                <option>Text</option>
+                                                <option value="Marks">'.$marks_lang.'</option>
+                                                <option value="Grade">'.$grade_lang.'</option>
+                                                <option value="Text">'.$text_lang.'</option>
                                             </select>';
                     }
 
@@ -922,10 +928,10 @@ class TeacherController extends Controller
                     }
 
                     if ($work['status'] == "1") {
-                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">Completed</button>';
+                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">'.$completed_lang.'</button>';
                         $complete++;
                     } else {
-                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">Incomplete</button>';
+                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">'.$incompleted_lang.'</button>';
                         $incomplete++;
                     }
 
@@ -1403,12 +1409,12 @@ class TeacherController extends Controller
             'friday',
             'saturday'
         );
-
+       
         if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
             $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
+            $response .= '<tr><td class="center" style="color:#ed1833;">'.__('messages.day') .'/'. __('messages.period') .'</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre">' . $i . '</td>';
             }
@@ -1418,7 +1424,7 @@ class TeacherController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' .  __('messages.'.$day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {

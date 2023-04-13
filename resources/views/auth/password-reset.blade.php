@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="email"  class="form-control" name="email" placeholder="Email">
+                                            <input type="email"  class="form-control" name="email" placeholder="{{ __('messages.enter_the_email') }}">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">

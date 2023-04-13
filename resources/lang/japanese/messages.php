@@ -1208,6 +1208,13 @@ return [
     "postal_code" => "郵便番号", 
     "select_parent_guardian_secondary" => "保護者（第二選択）を選択", 
     "copy_message" => "メッセージをコピーする", 
-    "permanent_address" => "Permanent Address", 
+    "permanent_address" => "Permanent Address",  
+    "checked" => "Checked", 
+    "unchecked" => "Unchecked", 
+    "no_events_to_display" => "No events to displays",
+    "all" => "すべての項目", 
+    "seconds" => "Seconds", 
+    "login_page" => "Login Page", 
+    "new_password_to_access_your_account" => "Your new password has been created. You can now use the new password to gain access to your account again", 
 ];
 

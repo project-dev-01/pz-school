@@ -261,6 +261,12 @@
     var incomplete_lang = "{{ __('messages.incomplete') }}";
     var late_submission_lang = "{{ __('messages.late_submission') }}";
     var short_test_name_lang = "{{ __('messages.short_test_name') }}";
+    var checked_lang = "{{ __('messages.checked') }}";
+    var unchecked_lang = "{{ __('messages.unchecked') }}";
+    var no_events_to_display_lang = "{{ __('messages.no_events_to_display') }}";
+    var approve_lang = "{{ __('messages.approve') }}";
+    var reject_lang = "{{ __('messages.reject') }}";
+    var pending_lang = "{{ __('messages.pending') }}";
     
     
     // academic_session_id

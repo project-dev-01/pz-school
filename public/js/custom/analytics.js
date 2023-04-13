@@ -481,10 +481,10 @@ $(function () {
                         '<table class="table table-striped table-nowrap">' +
                         '<thead>' +
                         '<tr>' +
-                        '<th>S.no</th>' +
-                        '<th>Short Test Name</th>' +
-                        '<th>Grade</th>' +
-                        '<th>Mark</th>' +
+                        '<th>'+sl_no_lang+'</th>' +
+                        '<th>'+short_test_name_lang+'</th>' +
+                        '<th>'+grade_lang+'</th>' +
+                        '<th>'+mark_lang+'</th>' +
                         '</tr>' +
                         '</thead>' +
                         '<tbody>';
@@ -555,7 +555,7 @@ $(function () {
                             }
                         });
                         subAvgChart.updateSeries([{
-                            name: "Average",
+                            name: average,
                             data: averageData
                         }]);
                         // subject avg chart update series end

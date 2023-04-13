@@ -414,7 +414,7 @@ $(function () {
                             }
                         });
                         chart.updateSeries([{
-                            name: "Average",
+                            name: average,
                             data: averageData
                         }]);
                     } else {

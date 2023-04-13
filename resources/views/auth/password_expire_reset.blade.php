@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                    <label for="password">{{ __('messages.note') }} : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
+                                    <label for="password">{{ __('messages.note') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
                                         <input type="password" class="form-control" name="password" placeholder="Enter New Password">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">

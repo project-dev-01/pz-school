@@ -42,8 +42,8 @@
                                             </span>
                                         </a>
                                     </div><br>
-									<h3 class="passrecov">Successful</h3>
-                                    <p class="text-muted opoos">Your new password has been created. You can now use the new password <br>to gain access to your account again.</p>
+									<h3 class="passrecov">{{ __('messages.success') }}</h3>
+                                    <p class="text-muted opoos">{{ __('messages.new_password_to_access_your_account') }}</p>
                                 </div>
 
                                 <!-- <form action="#"> -->
@@ -55,7 +55,7 @@
                                 
                                 
                                 <div class="loadingRing">
-                                    <span id="greetingRingCnt">5</span>	 <br>Seconds
+                                    <span id="greetingRingCnt">5</span>	 <br>{{ __('messages.seconds') }}
                                 </div>
                                 <div class="row" id="hideGreeting">
                                 </div>
@@ -64,7 +64,7 @@
 								 <p style="text-align:center">OR</p>
 								 
                                     <div class="form-group mb-0 text-center">
-                                    <a href="{{$redirect_route}}"><button class="btn btn-block signin">Login Page</button></a>
+                                    <a href="{{$redirect_route}}"><button class="btn btn-block signin">{{ __('messages.login_page') }}</button></a>
                                         <input type="hidden" id="redirect_route" value="{{ $redirect_route }}" />
                                     </div><br>
 									

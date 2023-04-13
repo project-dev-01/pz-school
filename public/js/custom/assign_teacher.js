@@ -29,7 +29,7 @@ $(function () {
         $(Selector).find("#section_name").empty();
         $(Selector).find("#section_name").append('<option value="">'+select_class+'</option>');
         $(Selector).find("#class_teacher").empty();
-        $(Selector).find("#class_teacher").append('<option value="">Class Teacher</option>');
+        $(Selector).find("#class_teacher").append('<option value="">'+select_teacher+'</option>');
         $.post(branchbyAssignTeacher, { branch_id: branch_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data.teacher, function (key, val) {

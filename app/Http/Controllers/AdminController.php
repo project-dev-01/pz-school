@@ -1714,6 +1714,7 @@ class AdminController extends Controller
     // get subject and Teacher
     public function getSubject(Request $request)
     {
+        $select_teacher_lang = __('messages.select_teacher');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -1802,7 +1803,7 @@ class AdminController extends Controller
                     $response .=  '<td width="20%" >';
                     $response .=  '<div class="form-group">';
                     $response .=  '<select  class="form-control select2-multiple teacher" id="teacher' . $row . '" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]" ' . $bulk . '>';
-                    $response .=  '<option value="">Select Teacher</option>';
+                    $response .=  '<option value="">'.$select_teacher_lang.'</option>';
                     $response .=  $teacher;
                     $response .=  '</select>';
                     $response .=  '</div>';
@@ -1866,7 +1867,7 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-
+        $select_teacher_lang = __('messages.select_teacher');
         $timetable = Helper::PostMethod(config('constants.api.timetable_subject_bulk'), $data);
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         if ($timetable['code'] == "200") {
@@ -1917,7 +1918,7 @@ class AdminController extends Controller
                     $response .=  '<td width="20%"  > ';
                     $response .=  '<div class="form-group">';
                     $response .=  '<select  class="form-control select2-multiple teacher" id="teacher' . $row . '" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' . $row . '][teacher][]">';
-                    $response .=  '<option value="">Select Teacher</option>';
+                    $response .=  '<option value="">'.$select_teacher_lang.'</option>';
                     $response .=  $teacher;
                     $response .=  '</select>';
                     $response .=  '</div>';
@@ -2134,7 +2135,7 @@ class AdminController extends Controller
             $max = $timetable['data']['max'];
 
             $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
+            $response .= '<tr><td class="center" style="color:#ed1833;">'.__('messages.day') .'/'. __('messages.period') .'</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre">' . $i . '</td>';
             }
@@ -2144,7 +2145,7 @@ class AdminController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.'.$day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
@@ -2570,7 +2571,6 @@ class AdminController extends Controller
             'created_by' => $created_by,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.homework_add'), $data);
         // dd($response);
         return $response;
@@ -2634,6 +2634,11 @@ class AdminController extends Controller
     // view Homework
     public function viewHomework(Request $request)
     {
+        $marks_lang = __('messages.marks');
+        $grade_lang = __('messages.grade');
+        $text_lang = __('messages.text');
+        $completed_lang = __('messages.completed');
+        $incompleted_lang = __('messages.incompleted');
         $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'homework_id' => $request->homework_id,
@@ -2659,27 +2664,27 @@ class AdminController extends Controller
                     $disabled = "";
                     if ($work['score_name'] == "Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option Selected>Marks</option>
-                                                <option>Grade</option>
-                                                <option>Text</option>
+                                            <option value="Marks" Selected>'.$marks_lang.'</option>
+                                            <option value="Grade">'.$grade_lang.'</option>
+                                            <option value="Text">'.$text_lang.'</option>
                                             </select>';
                     } elseif ($work['score_name'] == "Grade") {
-                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                            <option>Marks</option>
-                                            <option Selected>Grade</option>
-                                            <option>Text</option>
+                                            $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
+                                            <option value="Marks" >'.$marks_lang.'</option>
+                                            <option value="Grade" Selected>'.$grade_lang.'</option>
+                                            <option value="Text">'.$text_lang.'</option>
                                         </select>';
                     } elseif ($work['score_name'] == "Text") {
-                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option>Marks</option>
-                                                <option>Grade</option>
-                                                <option Selected>Text</option>
+                                            $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
+                                            <option value="Marks" >'.$marks_lang.'</option>
+                                            <option value="Grade">'.$grade_lang.'</option>
+                                            <option value="Text" Selected>'.$text_lang.'</option>
                                             </select>';
                     } else {
-                        $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option>Marks</option>
-                                                <option>Grade</option>
-                                                <option>Text</option>
+                                            $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
+                                            <option value="Marks" Selected>'.$marks_lang.'</option>
+                                            <option value="Grade">'.$grade_lang.'</option>
+                                            <option value="Text">'.$text_lang.'</option>
                                             </select>';
                     }
 
@@ -2695,10 +2700,10 @@ class AdminController extends Controller
                     }
 
                     if ($work['status'] == "1") {
-                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">Completed</button>';
+                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">'.$completed_lang.'</button>';
                         $complete++;
                     } else {
-                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">Incomplete</button>';
+                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">'.$incompleted_lang.'</button>';
                         $incomplete++;
                     }
 

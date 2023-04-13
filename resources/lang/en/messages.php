@@ -1206,4 +1206,13 @@ return [
     "select_parent_guardian_secondary" => "Select Parent Guardian Secondary", 
     "copy_message" => "Copy Message", 
     "permanent_address" => "Permanent Address", 
+    "checked" => "Checked", 
+    "unchecked" => "Unchecked", 
+    "no_events_to_display" => "No event to display",
+    "all" => "All", 
+    "password_contain_8_charcs" => "password atleast 8 characters and contain both numbers & letters/special characters", 
+    "seconds" => "Seconds", 
+    "login_page" => "Login Page", 
+    "new_password_to_access_your_account" => "Your new password has been created. You can now use the new password to gain access to your account again", 
+    
 ];

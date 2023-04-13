@@ -37,7 +37,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="student_name">{{ __('messages.student_name') }}</label>
-                                    <input type="text" name="student_name" class="form-control" id="student_name" placeholder="ADAM IRFAN">
+                                    <input type="text" name="student_name" class="form-control" id="student_name" placeholder="{{ __('messages.yamamoto') }}">
                                 </div>
                             </div>                       
                             <div class="col-md-3">

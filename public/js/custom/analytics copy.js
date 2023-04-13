@@ -585,7 +585,7 @@ $(function () {
                             }
                         });
                         subAvgChart.updateSeries([{
-                            name: "Average",
+                            name: average,
                             data: averageData
                         }]);
                         // subject avg chart update series end

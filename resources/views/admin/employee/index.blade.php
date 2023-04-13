@@ -808,7 +808,7 @@
     });
 </script>
 
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 

@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title','Parent Import')
 @section('content')
 <!-- Page Content -->
 <div class="content container-fluid">

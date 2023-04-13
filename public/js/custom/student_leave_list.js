@@ -231,9 +231,9 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
                             '<option value="">'+choose+'</option>' +
-                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
-                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
-                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
+                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>'+approve_lang+'</option>' +
+                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>'+reject_lang+'</option>' +
+                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>'+pending_lang+'</option>'
                         '</select>';
                         return status;
                     }
