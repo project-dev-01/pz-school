@@ -35,7 +35,7 @@
                     <div class="row">										
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="">Role<span class="text-danger">*</span></label>
+                        <label for="">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                         <input type="" id="" class="form-control" name=""
                                 data-parsley-trigger="change" required="">
                     </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="heard">Quatification<span class="text-danger">*</span></label>
+                        <label for="heard">{{ __('messages.qualification') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="name" placeholder="" aria-describedby="inputGroupPrepend"
                                     required>
                     </div>
@@ -166,7 +166,7 @@
                     </div>
                         <div class="row">
                         <div class="col-md-12">
-                                <label for="">Mobile No<span class="text-danger">*</span></label>
+                                <label for="">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
                             <div class="input-group input-group-merge">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
@@ -193,7 +193,7 @@
                     </div>
                     <div class="col-md-6">
                     <div class="form-group">
-                        <label for="message">Permanent Address</label>
+                        <label for="message">{{ __('messages.permanent_address') }}</label>
                         <textarea id="message" class="form-control" name="message"
                             data-parsley-trigger="keyup" data-parsley-minlength="20"
                             data-parsley-maxlength="100"
@@ -206,7 +206,7 @@
                         <div class="row">
                         <div class="col-md-12">
                     <div class="form-group">
-                        <label for="message">Profile Picture</label>
+                        <label for="message">{{ __('messages.profile_picture') }}</label>
                         <textarea id="message" class="form-control" name="message"
                             data-parsley-trigger="keyup" data-parsley-minlength="20"
                             data-parsley-maxlength="100"
@@ -368,7 +368,7 @@
                         
                         <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
+                        {{ __('messages.save') }}
                         </button>
                         <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

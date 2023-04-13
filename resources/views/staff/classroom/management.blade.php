@@ -456,7 +456,7 @@
                                                                 <option value="present">{{ __('messages.present') }}</option>
                                                                 <option value="absent">{{ __('messages.absent') }}</option>
                                                                 <option value="late">{{ __('messages.late') }}</option>
-                                                                <option value="excused">Excused</option>
+                                                                <option value="excused">{{ __('messages.excused') }}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -504,7 +504,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -602,7 +602,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -638,7 +638,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                            Save
+                                                        {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -697,7 +697,7 @@
                                                         <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>S.no</th>
+                                                                    <th>{{ __('messages.s.no') }}</th>
                                                                     <th>{{ __('messages.short_test_name') }}</th>
                                                                     <th>{{ __('messages.status') }}</th>
                                                                 </tr>

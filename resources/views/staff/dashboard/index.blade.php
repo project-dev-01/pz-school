@@ -162,7 +162,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p class="mb-1 text-truncate">Employee</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.employee') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -213,7 +213,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
 
@@ -273,7 +273,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
         </div> <!-- end col-->
@@ -596,7 +596,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> {{ __('messages.details') }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -604,7 +604,7 @@
                                 <div class="col">
                                     <div class="card-box">
                                         <div class="table-responsive">
-                                            <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                            <p class="text-center"> {{ __('messages.name') }} :<span id="bulk_name"></span></p><br>
                                         </div>
                                     </div> <!-- end card-box -->
                                 </div> <!-- end col -->

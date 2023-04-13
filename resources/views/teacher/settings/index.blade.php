@@ -47,7 +47,7 @@
                     <h4 class="font-13 text-uppercase">{{ __('messages.about_me') }} :</h4>
                     <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
                     <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
-                    <p class="text-muted mb-2 font-13"><strong>Mobile No :</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.mobile_no') }}:</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col-->
@@ -148,7 +148,7 @@
                                 </div>
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}</button>
                             </div>
                         </form>
                         <!-- end comment box -->

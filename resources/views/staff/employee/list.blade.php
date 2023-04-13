@@ -57,7 +57,7 @@
                                         <td>21,KL</td>
                                         <td>
                                             <div class="button-list">
-                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">{{ __('messages.view') }}</a>
                                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">{{ __('messages.delete') }}</a>
                                             </div>
                                         </td>

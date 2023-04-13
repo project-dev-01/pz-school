@@ -224,7 +224,7 @@
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">{{ __('messages.suggested_topics') }}</div>
                 <!-- tt-search 
                 <div class="tt-search">
                     <form class="search-wrapper">

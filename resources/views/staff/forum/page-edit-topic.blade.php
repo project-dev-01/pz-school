@@ -153,7 +153,7 @@ border-bottom: 1px solid #E9D528;
                                             <use xlink:href="#Others"></use>
                                         </svg>
                                     </span>
-                                    <span class="tt-text">Other</span>
+                                    <span class="tt-text">{{ __('messages.other') }}</span>
                                 </a>
                             </div>
                         </div>
@@ -305,7 +305,7 @@ border-bottom: 1px solid #E9D528;
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">Update Post</button>
+                            <button type="submit" id="search" class="btn btn-secondary btn-width-lg">{{ __('messages.update_post') }}</button>
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@ border-bottom: 1px solid #E9D528;
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">{{ __('messages.suggested_topics') }}</div>
                 <!-- tt-search -->
                 <div class="tt-search">
                     <form class="search-wrapper">

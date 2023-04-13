@@ -34,10 +34,10 @@
                             <br>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary" id="editEventBtn" type="button">
-                                    Edit
+                                {{ __('messages.edit') }}
                                 </button>
                                 <button class="btn btn-danger" id="deleteEventBtn" type="button">
-                                    Delete
+                                {{ __('messages.delete') }}
                                 </button>
                             </div>
                         </div> <!-- end card-box -->

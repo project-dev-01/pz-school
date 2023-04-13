@@ -1132,8 +1132,7 @@ return [
     "filter_from_total_entries" => "(filtered from _MAX_ total entries)",
     "no_matching_records_found" => "No matching records found",
     "drag_and_drop_to_check" => " Drag and drop a file here or Check",
-    "oops_went_wrong" => "Ooops, something wrong happended",
-    //--11/4/2023--//
+    "oops_went_wrong" => "sorry, something wrong happended",
     "leave_days" => "Leave Days", 
     "edit_leave_type" => "Edit Leave Type", 
     "add_leave_type" => "Add Leave Type", 
@@ -1192,7 +1191,6 @@ return [
     "subject_teacher_name" => "Subject Teacher Name", 
     "text" => "Text", 
     "all_subject" => "All Subjects", 
-    //12.4.2023
     "title_details" => "Title Details", 
     "family_details" => "Family Details", 
     "are_you_sure?" => "Are you sure?", 
@@ -1216,5 +1214,5 @@ return [
     "postal_code" => "Postal Code", 
     "select_parent_guardian_secondary" => "Select Parent Guardian Secondary", 
     "copy_message" => "Copy Message", 
-
+    "permanent_address" => "Permanent Address", 
 ];
