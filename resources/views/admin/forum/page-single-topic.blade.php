@@ -195,12 +195,12 @@
 
         </div>
         <div class="tt-wrapper-inner">
-            <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
+            <h4 class="tt-title-separator"><span>{{ __('messages.you’ve_reached_the') }}</span></h4>
         </div>
 
         <div class="tt-wrapper-inner">
             <div class="pt-editor form-default">
-                <h6 class="pt-title">Post Your Reply</h6>
+                <h6 class="pt-title">{{ __('messages.post_your_reply') }}</h6>
                 <div class="pt-row">
                     <div class="col-left">
 
@@ -216,7 +216,7 @@
                     <div class="pt-row">
 
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
+                            <button type="submit" class="btn btn-secondary btn-width-lg">{{ __('messages.reply') }}</button>
                         </div>
                     </div>
                 </form>
@@ -224,7 +224,7 @@
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">{{ __('messages.suggested_topics') }}</div>
                 <!-- tt-search 
                 <div class="tt-search">
                     <form class="search-wrapper">
