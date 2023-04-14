@@ -612,7 +612,7 @@
                         @if(Session::get('role_id') == '1')
                         <a href="{{ route('super_admin.dashboard') }}" class="btn btn-secondary">{{ __('messages.dashboard') }}</a>
                         @elseif(Session::get('role_id') == '2')
-                        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">{{ __('messages.dashboard') }}</a>
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="font-size:10px;">{{ __('messages.dashboard') }}</a>
                         @elseif(Session::get('role_id') == '3')
                         <a href="{{ route('staff.dashboard') }}" class="btn btn-secondary">{{ __('messages.dashboard') }}</a>
                         @elseif(Session::get('role_id') == '4')

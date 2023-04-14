@@ -328,54 +328,53 @@
                 <div class="tab-pane" id="tt-tab-02" role="tabpanel">
                     <div class="tt-wrapper-inner tt-layout-tab">
                         <h6 class="tt-title tt-size-lg">
-                            The Concept of School Management
+                        {{ __('messages.the_concept_of_school_management') }}
                         </h6>
-                        <p> Students attend school in order to receive intellectual and moral education. Teachers, administrators, parents, community and principal all play either a direct or indirect role in affecting such development. These key players need to realize the importance of their influence and responsibilities.</p>
+                        <p> {{ __('messages.students_attend_school') }}</p>
                         <p>
-                        The principal is the head of the school, having to play the role of manager in order to elevate the efficiency of administration, promote the professional growth of teachers, respect the educational choice of parents and bring together all the key players into a cooperative mode. All is done with the aim of fostering student development and growth in every aspect so that they gain essential knowledge and cultivate the concept of lifelong learning.
+                        {{ __('messages.the_principal_is_the_head') }}
                         </p>
                         <dl class="dl-layout-01">
-                            <dt>The notion and ways of interaction between schools, teachers, parents, the community and society</dt>
+                            <dt>{{ __('messages.the_notion_and_ways') }}</dt>
                             <dd>
-                            In recent years, educational reforms of all sorts and new laws have been on the rage, resulting in immense changes in school education--- from a centrally controlled closed system with restrictions on teachers’ professionalism to the sharing of power in an open system where teachers have the right to develop professionally in their own way. 
+                            {{ __('messages.in_recent_years_educational') }} 
                             </dd>
                             <dt>
-                            Place students and teaching as top priority
+                            {{ __('messages.place_students_and_teaching') }}
                             </dt>
                             <dd>
-                            Everything done in the school should revolve around the students’ welfare and needs, be it the allocation of resources or the planning of activities and teaching content. Since teaching is the most important agenda in a school, the administration should provide the necessary support, be concerned with teaching and assist the teachers in upgrading the quality of teaching.
+                            {{ __('messages.everything_done_in_the_school') }}
                             </dd>                            
                         </dl>
-                        <h6 class="tt-title">Principles to Build a active Parent-Teacher Relationship:</h6>
+                        <h6 class="tt-title">{{ __('messages.principles_to_build') }}</h6>
                         <ul class="tt-list-dot tt-indent-top01">
-                            <li>To reinforce a proper attitude in teachers with the teacher body. Parents play
-                            an important partnership with teachers in educating the next generation; hence, each school should value parental participation, and make full use of parental assistance, so that the desired educational goals may be achieved.</li>
-                            <li>To initiate parental involvement in all school activities and events.</li>
-                            <li>To construct an appropriate role with the parents. Whenever possible, replace negative criticism with constructive compliments.</li>
-                            <li>To assist parents in understanding and finding their importance to school so that they realize the need of getting involved with school more and more.</li>
-                            <li>To reach the common ground of understanding each other; to be respectful and supportive emotionally.</li>                           </ul>
+                            <li>{{ __('messages.to_reinforce_a_proper') }}</li>
+                            <li>{{ __('messages.to_initiate_parental') }}</li>
+                            <li>{{ __('messages.to_construct_an_appropriate') }}</li>
+                            <li>{{ __('messages.to_assist_parents_in_understanding') }}</li>
+                            <li>{{ __('messages.to_reach_the_common') }}</li>                           </ul>
                         <p class="tt-indent-top02">
-                            We believe all ideas can (and should) be scrutinised, constructively.
+                        {{ __('messages.we_believe_all_ideas') }}
                         </p>
                     </div>
                 </div>
                 <div class="tab-pane" id="tt-tab-03" role="tabpanel">
                     <div class="tt-wrapper-inner tt-layout-tab">
                         <h6 class="tt-title tt-size-lg">
-                            What is SchoolEye?
+                        {{ __('messages.what_is_schooleye') }}
                         </h6>
-                        <p> SchoolEye is a school management software which can be used for several purposes. Records like student admission details, fee structure of different courses, complete details of teaching staff, etc., can be obtained in a structured manner within few minutes. It is web-based software which can be accessed from anywhere.</p>
+                        <p>{{ __('messages.schooleye_is_a_school_management') }}</p>
    
                         <dl class="dl-layout-01">
-                            <dt>Which kind of education institution can use SchoolEye software?</dt>
+                            <dt>{{ __('messages.which_kind_of_education_institution') }}</dt>
                             <dd>
-                            Any education institution where there is a need of proper management, SchoolEye is the best to use there. The SchoolEye software is suitable for small, medium-sized and large schools. Moreover, the software works quite well when used even at university levels.
+                            {{ __('messages.any_education_institution') }}
                             </dd>                           
                         </dl>
-                        <h6 class="tt-title">Will our data remain safe and secure in SchoolEye?</h6>
+                        <h6 class="tt-title">{{ __('messages.will_our_data_remain') }}</h6>
                         <ul class="tt-list-dot tt-indent-top01">
-                            <li>Yes, clients’ data will remain 100% secure and confidential in SchoolEye software. </li>
-                            <li>The software is inbuilt with data back-up facility, which can be retrieved by our clients easily.</li>
+                            <li>{{ __('messages.clients’_data_will_remain_100%') }}</li>
+                            <li>{{ __('messages.the_software_is_inbuilt') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -383,26 +382,25 @@
                     <div class="tt-wrapper-inner tt-layout-tab">
                  
                         <h6 class="tt-title tt-size-lg">
-                            USE OF THE SERVICES.
+                        {{ __('messages.use_of_the_services') }}
                         </h6>
-                        <p> The Services are intended to guide high school students in their post-secondary pursuits. The Services enable students to search for and learn about collegiate, scholarship, and career opportunities; to engage with high school counselors and college admissions representatives during the college selection and admissions process; to solicit from high school faculty and administrators the creation and delivery of application-related documents; and to promote and manage their applications to institutions of higher education. </p>
+                        <p> {{ __('messages.the_services_are_intended') }} </p>
    
                         <dl class="dl-layout-01">                            
                             <dd>
-                            The Services include a college guidance management system that enables high schools and affiliated organizations to monitor and assist students in their post-secondary planning; to engage and collaborate with students, parents and guardians, and college admissions representatives; to manage the creation and delivery of application-related documents to colleges; and to collect, analyze, and report on student engagement, academic achievements, and application outcomes.
+                            {{ __('messages.the_services_include') }}
                             </dd>                           
                         </dl>
                         <h6 class="tt-title">{{ __('messages.term') }}</h6>
-                        <p>  This Agreement shall become effective on the date of Client’s acceptance hereof and shall continue for the period set forth in the Order Form (“Initial Term”). At the end of the Initial Term, and each subsequent anniversary thereof, this Agreement shall automatically renew for an additional one-year period </p>
+                        <p>  {{ __('messages.this_agreement_shall_become_effective') }} </p>
                     </div>
                     
                 </div>
                 <div class="tab-pane" id="tt-tab-05" role="tabpanel">
                     <div class="tt-wrapper-inner tt-layout-tab">
-                        <p>Personal information is recorded information or opinion, whether true or not, about a person whose identity is apparent, or can reasonably be ascertained, from the information. The information or opinion can be recorded in any form. A person's name, address, phone number and date of birth (age) are all examples of personal information.</p>
-                        <p>Sensitive information is a type of personal information with stronger legal protections due to the risk of discrimination. It includes information or opinion about an identifiable person’s racial or ethnic origin, political opinions or affiliations, religious beliefs or affiliations, philosophical beliefs, sexual orientation or practices, criminal record, or membership of a trade union.
-                        Personal and sensitive information is regulated in Victoria under the Privacy and Data Protection Act 2014 (Vic).</p>
-                        <P>The Family Educational Rights and Privacy Act (FERPA) (20 U.S.C. § 1232g; 34 CFR Part 99) is a Federal law that protects the privacy of student education records. ... Parents or eligible students have the right to request that a school correct records which they believe to be inaccurate or misleading</P>
+                        <p>{{ __('messages.personal_information_is_recorded') }}</p>
+                        <p>{{ __('messages.sensitive_information') }}</p>
+                        <P>{{ __('messages.the_family_educational') }}</P>
                     </div>
                 </div>
             </div>
