@@ -48,7 +48,7 @@
 
                                 <!-- <form action="#"> -->
 								<div class="form-group">
-                                        <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kubang Keriang</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                  </div>
                                     
 								<br>

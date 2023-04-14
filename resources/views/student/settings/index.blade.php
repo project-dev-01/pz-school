@@ -35,7 +35,7 @@
             <div class="card-box text-center">
                 <img src="{{asset('public/users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
-                <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
+                <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
 
                 <div class="text-left mt-3">
                     <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">

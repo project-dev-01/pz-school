@@ -626,7 +626,7 @@ $(function () {
                         if (row.document) {
                             return '-';
                         } else {
-                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">Upload</a></div>';
+                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">'+upload_lang+'</a></div>';
                         }
                     }
                 },

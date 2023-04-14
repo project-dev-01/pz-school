@@ -466,6 +466,7 @@ border-bottom: 1px solid #E9D528;
     
         .create(document.querySelector('#tpbody'), {
             extraPlugins: [SimpleUploadAdapterPlugin],
+            language: calLang,
             language: {
             // The UI will be English.
 

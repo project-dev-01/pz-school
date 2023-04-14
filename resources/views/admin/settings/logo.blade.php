@@ -40,7 +40,7 @@
                             <div class="mt-3">
                                 <form method="post" id="upload_form" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <input type="file" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && asset('public/images/sub-logo/'.Session::get('school_logo')) ? asset('public/images/sub-logo/'.Session::get('school_logo')) : asset('public/images/users/default.jpg') }}" />
+                                    <input type="file" class="dropify-im" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && asset('public/images/sub-logo/'.Session::get('school_logo')) ? asset('public/images/sub-logo/'.Session::get('school_logo')) : asset('public/images/users/default.jpg') }}" />
                                     <p class="text-muted text-center mt-2 mb-0">{{ Session::get('school_name') }}</p>
                                 </form>
 
@@ -56,7 +56,7 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
+<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 
@@ -66,4 +66,14 @@
     var updateLogoSession = "{{ route('settings.update.logo') }}";
 </script>
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
+<script>
+    $('.dropify-im').dropify({
+        messages: {
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove:  remove,
+            error: oops_went_wrong
+        }
+    });
+</script>
 @endsection

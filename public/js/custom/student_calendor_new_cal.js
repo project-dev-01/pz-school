@@ -55,6 +55,8 @@ $(document).ready(function () {
             prev: previous,
             next: next
         },
+        allDayText: allday_lang,
+        noEventsMessage: no_events_to_display_lang,
         // defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
         defaultView: "timeGridWeek",
         displayEventTime: false,

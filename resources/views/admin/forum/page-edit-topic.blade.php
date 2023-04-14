@@ -358,6 +358,7 @@ border-bottom: 1px solid #E9D528;
     ClassicEditor
         .create(document.querySelector('#tpbody'), {
             extraPlugins: [SimpleUploadAdapterPlugin],
+            language: calLang,
 
             // ...
         })

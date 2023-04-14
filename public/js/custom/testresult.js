@@ -957,7 +957,7 @@ $(function () {
                 offsetX: 0,
                 offsetY: 7
             },
-            labels: ["Pass", "Fail", "Inprogress"],
+            labels: [pass_lang, fail_lang, inprogress_lang],
             colors: colors,
             responsive: [{
                 breakpoint: 600,

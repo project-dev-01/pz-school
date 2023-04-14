@@ -32,7 +32,7 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
                 <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-                <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
+                <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
                 <div class="text-left mt-3">
                     <form method="post" id="upload_form" enctype="multipart/form-data">
                         {{ csrf_field() }}

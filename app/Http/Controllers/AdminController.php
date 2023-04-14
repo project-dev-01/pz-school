@@ -4825,8 +4825,9 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">Details</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">'.$details_lang.'</a>
                             </div>';
             })
 
@@ -4884,11 +4885,12 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $upload_lang = __('messages.upload');
                 // if ($row['status'] != "Approve") {
                 // if ($row['document'] != "Approve") {
                 if (is_null($row['document'])) {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">'.$upload_lang.'</i></a>
             </div>';
                 } else {
                     return '-';

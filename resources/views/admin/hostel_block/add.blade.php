@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="block_warden">{{ __('messages.block_warden') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="block_warden[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="block_warden[]" multiple="multiple" data-placeholder="{{ __('messages.select_warden') }}">
                             <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="block_leader">{{ __('messages.block_leader') }}</label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="Choose ...">
+                        <select class="form-control select2-multiple" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="{{ __('messages.block_leader') }}">
                             <option value="">{{ __('messages.select_leader') }}</option>
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>

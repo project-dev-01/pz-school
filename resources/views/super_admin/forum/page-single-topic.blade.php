@@ -346,6 +346,7 @@
     ClassicEditor
         .create(document.querySelector('#repliesinput'), {
             extraPlugins: [SimpleUploadAdapterPlugin],
+            language: calLang,
 
             // ...
         })

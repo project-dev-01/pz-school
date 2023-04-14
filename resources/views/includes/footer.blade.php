@@ -267,6 +267,11 @@
     var approve_lang = "{{ __('messages.approve') }}";
     var reject_lang = "{{ __('messages.reject') }}";
     var pending_lang = "{{ __('messages.pending') }}";
+    var upload_lang = "{{ __('messages.upload') }}";
+    var allday_lang = "{{ __('messages.all-day') }}";
+    var exam_lang = "{{ __('messages.exam') }}";
+    var fail_lang = "{{ __('messages.fail') }}";
+    var inprogress_lang = "{{ __('messages.inprogress') }}";
     
     
     // academic_session_id

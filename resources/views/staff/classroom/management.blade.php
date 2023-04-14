@@ -669,9 +669,9 @@
                                                         <div class="col-md-3">
                                                             <label for="grade" class="font-weight-bold">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                             <select id="grade" class="form-control" name="grade[]">
-                                                                <option value="marks">Marks</option>
-                                                                <option value="grade">Grade</option>
-                                                                <option value="text">Text</option>
+                                                                <option value="marks">{{ __('messages.marks') }}</option>
+                                                                <option value="grade">{{ __('messages.grade') }}</option>
+                                                                <option value="text">{{ __('messages.text') }}</option>
                                                             </select>
                                                         </div>
                                                     </div>
