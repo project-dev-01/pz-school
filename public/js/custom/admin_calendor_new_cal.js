@@ -15,14 +15,16 @@ $(document).ready(function () {
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
         buttonText: {
-            today: "Today",
-            month: "Month",
-            week: "Week",
-            day: "Day",
-            list: "List",
-            prev: "Prev",
-            next: "Next"
+            today: today,
+            month: month,
+            week: week,
+            day: day,
+            list: list,
+            prev: previous,
+            next: next
         },
+        allDayText: allday_lang,
+        noEventsMessage: no_events_to_display_lang,
         defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
         displayEventTime: false,
         handleWindowResize: !0,
@@ -32,6 +34,7 @@ $(document).ready(function () {
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
         },
+        locale: calLang,
         // events: t,
         editable: !0,
         // editable: true,

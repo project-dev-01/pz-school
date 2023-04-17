@@ -33,7 +33,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="incharge_staff">{{ __('messages.incharge_staff') }}</label>
                                     <select class="form-control" name="incharge_staff">
-                                        <option value="">Select Incharge Staff</option>
+                                        <option value="">{{ __('messages.select_incharge_staff') }}</option>
                                         @forelse($staff as $st)
                                         <option value="{{$st['id']}}">{{$st['name']}}</option>
                                         @empty
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="incharge_student">{{ __('messages.incharge_student') }}</label>
                                     <select class="form-control" name="incharge_student">
-                                        <option value="">Select Incharge Student</option>
+                                        <option value="">{{ __('messages.select_incharge_student') }}</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
                                         @empty
@@ -64,8 +64,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="student">{{ __('messages.student') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="Choose The Student">
-                                        <option value="">Select Student</option>
+                                    <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_student') }}">
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse($student as $stu)
                                         <option value="{{$stu['id']}}">{{$stu['name']}}</option>
                                         @empty
@@ -82,7 +82,7 @@
                         </div>
                         <div class="form-group text-center m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                     </form>

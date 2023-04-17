@@ -42,7 +42,7 @@
                         <thead>
                             <tr>
                                 <th>S.No</th>
-                                <th>Branch Name</th>
+                                <th>{{ __('messages.branch_name') }}</th>
                                 <th>{{ __('messages.room_name') }}</th>
                                 <th>{{ __('messages.category') }}</th>
                                 <th>{{ __('messages.no_of_beds') }}</th>
@@ -89,10 +89,10 @@
                     <div class="col-md-8">
                     <div class="col-md-12">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3 col-form-label">Branch Name<span class="text-danger">*</span></label>
+                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select Branch Name</option>
+                            <option value="">{{ __('messages.select_branch') }} Name</option>
                             <option value="">Malaysia</option>
                             <option value="">Singapore</option>
                         </div>
@@ -112,7 +112,7 @@
                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <div class="col-9">
                             <select id="heard" class="form-control" required="">
-                            <option value="">Select Category</option>
+                            <option value="">{{ __('messages.select_category') }}</option>
                             <option value="net">Eco</option>
                             <option value="mouth">Cheap</option>
                             <option value="other">Party</option>

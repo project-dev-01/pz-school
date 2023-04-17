@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditTransportRouteModalLabel">Edit Route</h4>
+                <h4 class="modal-title" id="myeditTransportRouteModalLabel">{{ __('messages.edit_route') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,22 +12,22 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.route_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter The Route Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_the_route_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="start_place">{{ __('messages.start_place') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="start_place" class="form-control" placeholder="Enter The Start Place">
+                        <input type="text" name="start_place" class="form-control" placeholder="{{ __('messages.enter_the_start_place') }}">
                         <span class="text-danger error-text start_place_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="stop_place">{{ __('messages.stop_place') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="stop_place" class="form-control" placeholder="Enter The Stop Place">
+                        <input type="text" name="stop_place" class="form-control" placeholder="{{ __('messages.enter_the_stop_place') }}">
                         <span class="text-danger error-text stop_place_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="remarks">{{ __('messages.remarks') }}</label>
-                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">

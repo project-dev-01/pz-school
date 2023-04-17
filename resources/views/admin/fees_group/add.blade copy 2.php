@@ -30,14 +30,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="Enter Fees Group Name">
+                                <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="{{ __('messages.enter_fees_group_name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description">{{$fees_group['description']}}</textarea>
+                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{$fees_group['description']}}</textarea>
                             </div>
                         </div>
                 </div>

@@ -33,10 +33,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Branch Name</th>
+                                        <th>{{ __('messages.branch_name') }}</th>
                                         <th> Name</th>
                                         <th>{{ __('messages.email') }}</th>
-                                        <th>Mobile No</th>
+                                        <th>{{ __('messages.mobile_no') }}</th>
                                         <th>{{ __('messages.date_of_birth') }}</th>
                                         <th>{{ __('messages.joining_date') }}</th>
                                         <th>{{ __('messages.department') }}</th>

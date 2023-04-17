@@ -215,7 +215,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Create Branch</h4>
+                <h4 class="page-title">{{ __('messages.create_branch') }}</h4>
             </div>
         </div>
     </div>

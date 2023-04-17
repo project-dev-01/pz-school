@@ -22,9 +22,9 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>                                               
-                                                <th class="text-center">S.no</th>
-                                                <th class="text-center"> Name</th>
-                                                <th class="text-center">Leave Date From</th>                                                
+                                                <th class="text-center">{{ __('messages.s._no') }}</th>
+                                                <th class="text-center">{{ __('messages.name') }}</th>
+                                                <th class="text-center">{{ __('messages.leave_date_from') }}</th>                                                
                                                 <th class="text-center">{{ __('messages.no._of._days') }}</th>
                                                 <th class="text-center">{{ __('messages.reason(s)') }}</th>                                                
                                                 <th class="text-center">{{ __('messages.action') }}</th>                                                

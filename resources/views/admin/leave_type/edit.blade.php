@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditLeaveTypeModalLabel">Edit Leave Type</h4>
+                <h4 class="modal-title" id="myeditLeaveTypeModalLabel">{{ __('messages.edit_leave_type') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,26 +12,26 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.leave_type_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Leave Type Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_leave_type_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}</label>
-                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <input type="text" id="short_name" name="short_name" class="form-control" placeholder="{{ __('messages.enter_short_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="leave_days">Leave Days<span class="text-danger">*</span></label>
-                        <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="Enter Leave Days">
+                        <label for="leave_days">{{ __('messages.leave_days') }}<span class="text-danger">*</span></label>
+                        <input type="text" id="leave_days" name="leave_days" class="form-control number_validation" placeholder="{{ __('messages.enter_leave_days') }}">
                         <span class="text-danger error-text leave_days_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="gender">{{ __('messages.gender') }}</label>
                         <select class="form-control" id="gender" name="gender">
-                            <option value="">Select Gender</option>
-                            <option value="All">All</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
+                            <option value="">{{ __('messages.select_gender') }}</option>
+                            <option value="All">{{ __('messages.all') }}</option>
+                            <option value="Male">{{ __('messages.male') }}</option>
+                            <option value="Female">{{ __('messages.female') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

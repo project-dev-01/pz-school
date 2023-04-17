@@ -4,9 +4,9 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#byclassfilter").find("#subjectID").empty();
-        $("#byclassfilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#byclassfilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#byclassfilter").find("#examnames").empty();
-        $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#byclassfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(getbySubjectnames, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id, academic_session_id: academic_session_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -25,7 +25,7 @@ $(function () {
         var yyyy = today.getFullYear();
         today = yyyy + '-' + mm + '-' + dd;
         $("#byclassfilter").find("#examnames").empty();
-        $("#byclassfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#byclassfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $.post(examsByclassandsubject, {
             token: token,
             branch_id: branchID,
@@ -134,18 +134,18 @@ function bysubjectdetails(datasetnew) {
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel">' +
         '<thead>' +
         '<tr>' +
-        '<th class="align-top" rowspan="2">S.no.</th>' +
-        '<th class="align-top" rowspan="2">Grade</th>' +
-        '<th class="align-top th-sm - 6 rem" rowspan="2">Tot. Students</th>' +
-        '<th class="align-top" rowspan="2">Absent</th>' +
-        '<th class="align-top" rowspan="2">Present</th>' +
-        '<th class="align-top" rowspan="2">Class Teacher Name</th>';
+        '<th class="align-top" rowspan="2">'+sl_no_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+grade_lang+'</th>' +
+        '<th class="align-top th-sm - 6 rem" rowspan="2">'+total_student_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+absent_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+present_lang+'</th>' +
+        '<th class="align-top" rowspan="2">'+class_teacher_name_lang+'</th>';
     headers.forEach(function (resp) {
         bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
     });
-    bysubjectAllTable += '<th class="align-middle" rowspan="2">PASS</th>' +
-        '<th class="align-middle" rowspan="2">G</th>' +
-        '<th class="align-middle" rowspan="2">GPA</th>' +
+    bysubjectAllTable += '<th class="align-middle" rowspan="2">'+pass_lang+'</th>' +
+        '<th class="align-middle" rowspan="2">'+g_lang+'</th>' +
+        '<th class="align-middle" rowspan="2">'+gpa_lang+'</th>' +
         '<th class="align-middle" rowspan="2">%</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';

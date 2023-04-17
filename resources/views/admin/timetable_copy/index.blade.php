@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="class_id"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="section_id"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <label for="semester_id"> {{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -95,7 +95,7 @@
                                 <div class="form-group">
                                     <label for="session_id"> {{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -173,7 +173,7 @@
                     <div class="form-group">
                         <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                         <select id="day" class="form-control" name="day">
-                            <option value="">Select Day</option>
+                            <option value="">{{ __('messages.select_day') }}</option>
                             <option value="sunday">Sunday</option>
                             <option value="monday">Monday</option>
                             <option value="tuesday">Tuesday</option>

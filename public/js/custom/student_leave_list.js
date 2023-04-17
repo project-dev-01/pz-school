@@ -5,7 +5,7 @@ $(function () {
         $(".studentLeaveShow").hide();
         var class_id = $(this).val();
         $("#studentLeaveList").find("#sectionID").empty();
-        $("#studentLeaveList").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
 
         $.post(sectionByClassUrl, {
             token: token,
@@ -27,7 +27,7 @@ $(function () {
     //     $(".studentLeaveShow").hide();
     //     var class_id = $(this).val();
     //     $("#studentLeaveList").find("#sectionID").empty();
-    //     $("#studentLeaveList").find("#sectionID").append('<option value="">Select Section</option>');
+    //     $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
 
     //     $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id, teacher_id: ref_user_id }, function (res) {
     //         if (res.code == 200) {
@@ -141,6 +141,20 @@ $(function () {
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
@@ -216,10 +230,10 @@ $(function () {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
                         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
-                            '<option value="">Choose</option>' +
-                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
-                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
-                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'
+                            '<option value="">'+choose+'</option>' +
+                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>'+approve_lang+'</option>' +
+                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>'+reject_lang+'</option>' +
+                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>'+pending_lang+'</option>'
                         '</select>';
                         return status;
                     }
@@ -241,14 +255,14 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">Add Remarks</button>';
+                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">'+add_remarks+'</button>';
                         return addremarks;
                     }
                 },
                 {
                     "targets": 10,
                     "render": function (data, type, row, meta) {
-                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">Update</button>';
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">'+update+'</button>';
                         return submitbtn;
                     }
                 },

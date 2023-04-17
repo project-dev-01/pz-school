@@ -118,9 +118,9 @@ $(function () {
 
         var Selector = '#addEmployeeForm';
         $(Selector).find("#empDesignation").empty();
-        $(Selector).find("#empDesignation").append('<option value="">Choose Designation</option>');
+        $(Selector).find("#empDesignation").append('<option value="">'+select_designation+'</option>');
         $(Selector).find("#empDepartment").empty();
-        $(Selector).find("#empDepartment").append('<option value="">Choose Department</option>');
+        $(Selector).find("#empDepartment").append('<option value="">'+select_department+'</option>');
         $.post(empDesignation, { branch_id: branchId, token: token }, function (res) {
             console.log('res', res)
             if (res.code == 200) {
@@ -439,6 +439,20 @@ $(function () {
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',

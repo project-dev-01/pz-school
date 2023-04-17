@@ -11,15 +11,15 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="branch_name">Branch Name</label>
+                        <label for="branch_name">{{ __('messages.branch_name') }}</label>
                         <select class="form-control" id="branch_name" name="branch_name">
-                            <option value="">Choose Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                         </select>
                         <span class="text-danger error-text branch_name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="department_name">{{ __('messages.department_name') }}</label>
-                        <input type="text" id="department_name" name="department_name" class="form-control" placeholder="Enter Department name">
+                        <input type="text" id="department_name" name="department_name" class="form-control" placeholder="{{ __('messages.enter_department_name') }}">
                         <span class="text-danger error-text department_name_error"></span>
                     </div>
                     <div class="form-group">

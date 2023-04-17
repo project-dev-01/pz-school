@@ -30,9 +30,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Branch Name <span class="text-danger">*</span></label>
+                                    <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="branch_id" id="empBranchName">
-                                        <option value="">Select Branch</option>
+                                        <option value="">{{ __('messages.select_branch') }}</option>
                                         <option>Malaysia</option>
                                         <option>Singapore</option>
                                     </select>
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="role">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach
@@ -71,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="designation">{{ __('messages.designation') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDesignation" name="designation">
-                                        <option value="">Select Designation</option>
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
                                         <option>BEd</option>
                                         <option>MEd</option>
                                         <option>BElEd</option>
@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDepartment" name="department">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.choose_department') }}</option>
                                         <option value="press">Accounting and Finance Department</option>
                                         <option value="net">Human Performance</option>
                                         <option value="mouth">Health Promotion</option>

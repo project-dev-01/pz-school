@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                         @endforeach
@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                         @endforeach
@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <label for="exam_id">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="exam_id" class="form-control" name="exam_id">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         @foreach($exam as $exa)
                                         <option value="{{$exa['id']}}">{{$exa['name']}} ( {{$exa['term_id']}} )</option>
                                         @endforeach
@@ -154,7 +154,7 @@
                         <!-- end row-->
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel

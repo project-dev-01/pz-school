@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditHostelRoomModalLabel">Edit Hostel Room</h4>
+                <h4 class="modal-title" id="myeditHostelRoomModalLabel">{{ __('messages.edit_hostel_room') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,13 +12,13 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.room_number') }}</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter The Room Number">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_the_room_number') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="hostel">{{ __('messages.hostel') }}</label>
                         <select class="form-control" id="hostel" name="hostel_id">
-                            <option value="">Select The Hostel</option>
+                            <option value="">{{ __('messages.select_the_hostel') }}</option>
                             @foreach($hostel as $hos)
                             <option value="{{$hos['id']}}">{{$hos['name']}}</option>
                             @endforeach
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="block">{{ __('messages.select_block') }}</label>
                         <select class="form-control" id="edit_block" name="block">
-                            <option value="">Select The Block</option>
+                            <option value="">{{ __('messages.select_the_block') }}</option>
                             @foreach($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
                             @endforeach
@@ -38,24 +38,24 @@
                     <div class="form-group">
                         <label for="floor">{{ __('messages.floor') }}</label>
                         <select class="form-control" id="edit_floor" name="floor">
-                            <option value="">Select The Floor</option>
+                            <option value="">{{ __('messages.select_the_floor') }}</option>
                         </select>
                         <span class="text-danger error-text floor_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="no_of_beds">{{ __('messages.capacity') }}</label>
-                        <input type="text" name="no_of_beds" class="form-control" placeholder="Enter The Capacity">
+                        <input type="text" name="no_of_beds" class="form-control" placeholder="{{ __('messages.enter_the_capacity') }}">
                         <span class="text-danger error-text no_of_beds_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="bed_fee">{{ __('messages.cost_per_bed') }}</label>
-                        <input type="text" name="bed_fee" class="form-control" placeholder="Enter The Cost Per Bed">
+                        <input type="text" name="bed_fee" class="form-control" placeholder="{{ __('messages.enter_the_cost_per_bed') }}">
                         <span class="text-danger error-text bed_fee_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="remarks">{{ __('messages.remarks') }}</label>
-                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter The Remarks"> </textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="{{ __('messages.enter_the_remarks') }}"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">

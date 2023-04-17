@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">Select Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         <!-- <option value="All">All</option> -->
                                         @forelse ($classnames as $class)
 
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="form-group">
                                     <label for="student_id">{{ __('messages.student') }}</label>
                                     <select id="student_id" class="form-control" name="student_id">
-                                        <option value="">Select Student</option>
+                                        <option value="">{{ __('messages.select_student') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <label for="payment_status">{{ __('messages.payment_status') }}</label>
                                     <select id="payment_status" class="form-control" name="payment_status">
-                                        <option value="">Select Payment Status</option>
+                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                         @forelse ($payment_status as $status)
                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                         @empty
@@ -121,7 +121,7 @@
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.student_name') }}</th>
                                     <th>{{ __('messages.fees_group') }}</th>
-                                    <!-- <th>Payment Status</th> -->
+                                    <!-- <th>{{ __('messages.payment_status') }}</th> -->
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

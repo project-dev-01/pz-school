@@ -47,7 +47,7 @@
                                     <th>#</th>
                                     <th>{{ __('messages.employee_name') }}</th>
                                     <th>{{ __('messages.department_name') }}</th>
-                                    <th>Approval Head</th>
+                                    <th>{{ __('messages.approval_head') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -62,7 +62,7 @@
                                     <td>{{$value['department_name']}}</td>
                                     <td>
                                         <select id="staffID_{{$value['id']}}" class="form-control">
-                                            <option value="">Select Staff</option>
+                                            <option value="">{{ __('messages.select_staff') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['assigner_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
@@ -75,7 +75,7 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-primary-bl waves-effect waves-light assignLeaveApprove" data-id="{{$value['id']}}" type="button">
-                                            Save
+                                        {{ __('messages.save') }}
                                         </button>
                                     </td>
                                 </tr>

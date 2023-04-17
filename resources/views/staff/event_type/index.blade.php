@@ -49,7 +49,7 @@
                                 <td>
                                     <div class="button-list">
                                         <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="#">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="#">Delete</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="#">{{ __('messages.delete') }}</a>
                                     </div>
                                 </td>
                             </tr>

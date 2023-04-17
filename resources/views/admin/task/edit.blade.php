@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="page-title-box">
 
-                <h4 class="page-title">Task</h4>
+                <h4 class="page-title">{{ __('messages.task') }}</h4>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Task
+                        <h4 class="navv">{{ __('messages.edit_task') }}
                             <h4>
                     </li>
                 </ul>
@@ -29,16 +29,16 @@
                         <input type="hidden" name="id" id="id" value={{$to_do_row['id']}}>
                         <div class="form-group">
                             <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="title" name="title" value={{$to_do_row['title']}} class="form-control" placeholder="Enter Title">
+                            <input type="text" id="title" name="title" value={{$to_do_row['title']}} class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="dueDate">{{ __('messages.due_date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="dueDate" name="due_date" value={{$to_do_row['due_date']}} class="form-control" placeholder="Enter Date & Time">
+                            <input type="text" id="dueDate" name="due_date" value={{$to_do_row['due_date']}} class="form-control" placeholder="{{ __('messages.enter_date _time') }}">
                         </div>
                         <div class="form-group">
                             <label for="assign_to">{{ __('messages.assigned_to') }}<span class="text-danger">*</span></label>
-                            <select class="form-control select2-multiple" data-toggle="select2" id="assign_to" name="assign_to" multiple="multiple" data-placeholder="Choose ...">
+                            <select class="form-control select2-multiple" data-toggle="select2" id="assign_to" name="assign_to" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">
                                 
 
                                 @forelse($allocate_section_list as $sec)
@@ -67,17 +67,17 @@
                         </div>
                         <div class="form-group">
                             <label for="check_list">{{ __('messages.checklists') }}/{{ __('messages.sub-tasks') }}</label>
-                            <input type="text" class="form-control"  name="check_list[]" id="addCheckList" placeholder="Add CheckList">
+                            <input type="text" class="form-control"  name="check_list[]" id="addCheckList" placeholder="{{ __('messages.add_checkList') }}">
                             <input type="hidden" name="old_check_list" id="old_check_list" value="{{$to_do_row['check_list']}}">
 
                         </div>
                         <div class="form-group">
-                            <button type="button" id="addBtn" class="btn btn-blue btn-sm waves-effect waves-light">Add</button>
+                            <button type="button" id="addBtn" class="btn btn-blue btn-sm waves-effect waves-light">{{ __('messages.add') }}</button>
                             <ul id="taskList"></ul>
                         </div>
                         <div class="form-group">
                             <label for="task_description">{{ __('messages.task_description') }}<span class="text-danger">*</span></label>
-                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="Enter Description">{{$to_do_row['task_description']}}</textarea>
+                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{$to_do_row['task_description']}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="attachment">{{ __('messages.attachment') }}</label>

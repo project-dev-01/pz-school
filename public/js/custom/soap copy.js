@@ -50,7 +50,7 @@ $(function () {
         e.preventDefault();
         var class_id = $(this).val();
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class</option>');
+        $("#section_id").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -63,7 +63,7 @@ $(function () {
         e.preventDefault();
         var class_id = $(this).val();
         $("#old_section_id").empty();
-        $("#old_section_id").append('<option value="">Select Class</option>');
+        $("#old_section_id").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -142,6 +142,20 @@ $(function () {
                     dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-4'><'col-sm-4'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                    "language": {
+                        
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                        "info": showing_entries,
+                        "lengthMenu": show_entries,
+                        "search": datatable_search,
+                        "paginate": {
+                            "next": next,
+                            "previous": previous
+                        },
+                    },
                     buttons: [],
                     oLanguage: {
                         sProcessing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
@@ -405,7 +419,7 @@ $(function () {
                         output += '</tr>';
                     });
                 } else {
-                    output += '<tr><td>No Data Available</td></tr>';
+                    output += '<tr><td>'+no_data_available+'</td></tr>';
                 }
 
                 $("#old_student_body").append(output);
@@ -454,7 +468,7 @@ $(function () {
                         output += '</tr>';
                     });
                 } else {
-                    output += '<tr><td>No Data Available</td></tr>';
+                    output += '<tr><td>'+no_data_available+'</td></tr>';
                 }
 
                 $("#new_student_body").append(output);
@@ -470,7 +484,7 @@ $(function () {
         $.post(subCategoryList, { token: token, branch_id: branchID, soap_category_id: soap_category_id }, function (data) {
             // console.log('data',data)
             if (data.data == "") {
-                row += ' <div class="col"><a class="dropdown-icon-item" href="#" data-toggle="modal"  data-target="#fh"><span>No Data Available</span></a></div>';
+                row += ' <div class="col"><a class="dropdown-icon-item" href="#" data-toggle="modal"  data-target="#fh"><span>'+no_data_available+'</span></a></div>';
             } else {
                 $.each(data.data, function (index, value) {
                     if (value.photo) {
@@ -500,7 +514,7 @@ $(function () {
         $.post(notesList, { token: token, branch_id: branchID, soap_category_id: soap_category_id, soap_sub_category_id: soap_sub_category_id }, function (data) {
             // console.log('notes',data)
             if (data.data == "") {
-                row += ' <tr ><td  class="text-center" colspan="2">No Data Available</td></tr>';
+                row += ' <tr ><td  class="text-center" colspan="2">'+no_data_available+'</td></tr>';
             } else {
                 $.each(data.data, function (index, value) {
                     index++;

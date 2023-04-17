@@ -12,14 +12,14 @@
 
                     <div class="form-group">
                         <label for="floor_name">{{ __('messages.floor_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="floor_name" name="floor_name" class="form-control" placeholder="Enter The Floor Name">
+                        <input type="text" id="floor_name" name="floor_name" class="form-control" placeholder="{{ __('messages.enter_the_floor_name') }}">
                         <span class="text-danger error-text floor_name_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="block_id">{{ __('messages.block') }}</label>
                         <select class="form-control" name="block_id">
-                            <option value="">Select Block</option>
+                            <option value="">{{ __('messages.select_block') }}</option>
                             @foreach($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
                             @endforeach
@@ -28,8 +28,8 @@
                     </div>
                     <div class="form-group">
                         <label for="floor_warden">{{ __('messages.floor_warden') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="Choose ...">
-                            <option value="">Select Warden</option>
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_warden[]" multiple="multiple" data-placeholder="{{ __('messages.select_warden') }}">
+                            <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
                             @empty
@@ -39,8 +39,8 @@
                     </div>
                     <div class="form-group">
                         <label for="floor_leader">{{ __('messages.floor_leader') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="Choose ...">
-                            <option value="">Select Leader</option>
+                        <select class="form-control select2-multiple" data-toggle="select2" name="floor_leader[]" multiple="multiple" data-placeholder="{{ __('messages.select_leader') }}">
+                            <option value="">{{ __('messages.select_leader') }}</option>
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>
                             @empty
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="total_room">{{ __('messages.total_room') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="total_room" class="form-control" placeholder="Enter The Total Room">
+                        <input type="text" name="total_room" class="form-control" placeholder="{{ __('messages.enter_the_total_room') }}">
                         <span class="text-danger error-text total_room_error"></span>
                     </div>
                     <div class="form-group">

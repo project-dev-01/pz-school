@@ -35,9 +35,9 @@
                         <div class="row">      
                              <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="department">Department<span class="text-danger">*</span></label>
+                                    <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="department" id="department">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.select_department') }}</option>
                                         @foreach($department as $dep)
                                         <option value="{{$dep['id']}}">{{$dep['name']}}</option>
                                         @endforeach
@@ -46,9 +46,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="employee">Employee</label>
+                                    <label for="employee">{{ __('messages.employee') }}</label>
                                     <select class="form-control" name="employee" id="employee">
-                                        <option value="">Select Employee</option>
+                                        <option value="">{{ __('messages.select_employee') }}</option>
                                     </select>
                                 </div>
                             </div>

@@ -10,7 +10,7 @@
                                 </div>
                                 <div class="">
                                     <div class="text-lg-right mt-3 mt-lg-0">
-                                        <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>Add</a>
+                                        <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1"><i class="mdi mdi-plus-circle mr-1"></i>{{ __('messages.add') }}</a>
                                     </div>
                                 </div>
                                 <!-- end col-->

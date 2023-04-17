@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditacademicYearModalLabel">Edit</h4>
+                <h4 class="modal-title" id="myeditacademicYearModalLabel">{{ __('messages.edit') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -17,7 +17,7 @@
                         $lastYear = $firstYear + 20;
                         @endphp
                         <select class="form-control" id="editacademicYear" name="name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             @for ($i=$firstYear;$i<=$lastYear;$i++) <option value="{{$i}}-{{$i+1}}">{{$i}}-{{$i+1}}</option>
                                 @endfor
                         </select>

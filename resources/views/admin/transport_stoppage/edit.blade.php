@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditTransportStoppageModalLabel">Edit Stoppage</h4>
+                <h4 class="modal-title" id="myeditTransportStoppageModalLabel">{{ __('messages.edit_stoppage') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,17 +12,17 @@
                     <input type="hidden" name="id">           
                     <div class="form-group">
                         <label for="stop_position">{{ __('messages.stop_position') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="stop_position" name="stop_position" class="form-control" placeholder="Enter Stop Position ">
+                        <input type="text" id="stop_position" name="stop_position" class="form-control" placeholder="{{ __('messages.enter_stop_position') }}">
                         <span class="text-danger error-text stop_position_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="stop_time">{{ __('messages.stop_time') }}<span class="text-danger">*</span></label>
-                        <input type="time"  name="stop_time" class="form-control" placeholder="Enter Stop Time">
+                        <input type="time"  name="stop_time" class="form-control" placeholder="{{ __('messages.enter_stop_time') }}">
                         <span class="text-danger error-text stop_time_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="route_fare">{{ __('messages.route_fare') }}<span class="text-danger">*</span></label>
-                        <input type="text"  name="route_fare" class="form-control" placeholder="Enter Route Fare">
+                        <input type="text"  name="route_fare" class="form-control" placeholder="{{ __('messages.enter_route_fare') }}">
                         <span class="text-danger error-text route_fare_error"></span>
                     </div>
                     <div class="form-group">

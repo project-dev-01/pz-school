@@ -65,19 +65,19 @@
                 <li>
                     <a href="#sidebarBranch" data-toggle="collapse">
                         <i class="fe-git-branch"></i>
-                        <span> Branch </span>
+                        <span>{{ __('messages.branch') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarBranch">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('branch.index')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                                    <span> Branch List </span>
+                                    <span>{{ __('messages.branch_list') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('branch.create')}}" class="nav-link {{ (request()->is('super_admin/branch*')) ? 'active' : '' }}">
-                                    <span> Create Branch </span>
+                                    <span> {{ __('messages.create_branch') }} </span>
                                 </a>
                             </li>
                         </ul>
@@ -944,9 +944,8 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#sidebarFees" data-toggle="collapse">
-                        <!--<i class="fas fa-map"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_354_1194)">
                                 <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
@@ -967,7 +966,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarFees">
-                        <ul class="nav-second-level">
+                        <ul class="nav-second-level"> -->
                             <!-- <li>
                                 <a href="{{ route('admin.payment_mode')}}" class="nav-link {{ (request()->is('admin/payment_mode*')) ? 'active' : '' }}">
                                     <span>Payment Mode </span>
@@ -978,7 +977,7 @@
                                     <span>Payment Status </span>
                                 </a>
                             </li> -->
-                            <li>
+                            <!-- <li>
                                 <a href="{{ route('admin.fees_type')}}" class="nav-link {{ (request()->is('admin/fees_type*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.fees_type') }}</span>
                                 </a>
@@ -1000,7 +999,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sideBarSettings" data-toggle="collapse">
                         <!-- <i data-feather="settings" class="icon-dual"></i> -->
@@ -1538,13 +1537,13 @@
                         <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
 
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
 
@@ -1712,12 +1711,12 @@
                         <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

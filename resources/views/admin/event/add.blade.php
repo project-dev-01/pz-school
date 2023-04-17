@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Add Event
+                        <h4 class="navv">{{ __('messages.add_event') }}
                             <h4>
                     </li>
                 </ul>
@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title name">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="type">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="type" name="type">
-                                        <option value="">Select</option>
+                                        <option value="">{{ __('messages.select') }}</option>
                                         @foreach($type as $typ)
                                         <option value="{{$typ['id']}}">{{$typ['name']}}</option>
                                         @endforeach
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="audience">{{ __('messages.audience') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="audience" name="audience">
-                                        <option value="">Select</option>
+                                        <option value="">{{ __('messages.select') }}</option>
                                         <option value="1">EveryBody</option>
                                         <option value="2">Selected Grade</option>
                                         <option value="3">Selected Group</option>
@@ -89,7 +89,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="start_date" id="event_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                     <span class="text-danger error-text start_date_error"></span>
                                 </div>
@@ -103,7 +103,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="YYYY-MM-DD">
+                                        <input type="text" class="form-control" name="end_date" id="event_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>
@@ -112,7 +112,7 @@
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
                                         <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" checked>
-                                        <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }</label>
+                                        <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -126,14 +126,14 @@
                             </div>
                             <div class="col-md-3 time" style="display:none">
                                 <div class="form-group">
-                                    <label>Start Time</label>
+                                    <label>{{ __('messages.start_time') }}</label>
                                     <input type="text" class="form-control timepicker" name="start_time" id="add_start_time">
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3 time" style="display:none">
                                 <div class="form-group">
-                                    <label>End Time</label>
+                                    <label>{{ __('messages.end_time') }}</label>
                                     <input type="text" class="form-control timepicker" name="end_time" id="add_end_time">
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>
@@ -149,7 +149,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                     </form>

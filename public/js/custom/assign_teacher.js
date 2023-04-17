@@ -25,11 +25,11 @@ $(function () {
     function branchTeacherAllocation(branch_id, Selector, class_id, teacher_id) {
 
         $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">Choose Grade</option>');
+        $(Selector).find("#class_name").append('<option value="">'+select_grade+'</option>');
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Choose Class</option>');
+        $(Selector).find("#section_name").append('<option value="">'+select_class+'</option>');
         $(Selector).find("#class_teacher").empty();
-        $(Selector).find("#class_teacher").append('<option value="">Class Teacher</option>');
+        $(Selector).find("#class_teacher").append('<option value="">'+select_teacher+'</option>');
         $.post(branchbyAssignTeacher, { branch_id: branch_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data.teacher, function (key, val) {
@@ -71,7 +71,7 @@ $(function () {
     function sectionAllocation(class_id, Selector, sectionID) {
 
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Choose Class</option>');
+        $(Selector).find("#section_name").append('<option value="">'+select_class+'</option>');
         $.post(getsectionAllocation, { class_id: class_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -127,6 +127,20 @@ $(function () {
         dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        "language": {
+            
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+            "info": showing_entries,
+            "lengthMenu": show_entries,
+            "search": datatable_search,
+            "paginate": {
+                "next": next,
+                "previous": previous
+            },
+        },
         buttons: [
             {
                 extend: 'csv',

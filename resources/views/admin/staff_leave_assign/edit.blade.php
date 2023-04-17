@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Staff Leave Assign
+                        <h4 class="navv">{{ __('messages.edit_staff_leave_assign') }}
                             <h4>
                     </li>
                 </ul>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Leave Days<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.leave_days') }}<span class="text-danger">*</span></label>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input type="text" id="leave_days" name="leave[{{$key}}][leave_days]" value="{{$leave['leave_days']}}" class="form-control leave_days" placeholder="Enter Leave Days">
+                                        <input type="text" id="leave_days" name="leave[{{$key}}][leave_days]" value="{{$leave['leave_days']}}" class="form-control leave_days" placeholder="{{ __('messages.enter_leave_days') }}">
                                         <span class="text-danger error-text leave_days_error"></span>
                                     </div>
                                 </div>

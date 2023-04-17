@@ -179,13 +179,13 @@ border-bottom: 1px solid #E9D528;
                 <div class="form-group">
                     <label for="inputTopicHeader">{{ __('messages.topic_header') }}</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="Header of your topic">
+                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="{{ __('messages.header_of_your_topic') }}">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
                 </div>
                 <div class="pt-editor">
-                    <h6 class="pt-title">Topic Body</h6>
+                    <h6 class="pt-title">{{ __('messages.topic_body') }}</h6>
                     <div class="">
                         <div class="">
                             <ul class="pt-edit-btn">
@@ -259,7 +259,7 @@ border-bottom: 1px solid #E9D528;
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="Lets get started" style="height:20px"></textarea>
+                        <textarea name="tpbody" id="tpbody" class="form-control" rows="5" placeholder="{{ __('messages.lets_get_started') }}" style="height:20px"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -267,7 +267,7 @@ border-bottom: 1px solid #E9D528;
                                 <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
-                                        <option value="">Select category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         @if(!empty($category))
                                         @foreach($category as $c)
                                         <option value="{{$c['id']}}">{{$c['category_names']}}</option>
@@ -279,8 +279,8 @@ border-bottom: 1px solid #E9D528;
                         </div>
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                <label for="inputTopic" class="col-3 col-form-label">User</label>
-                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
+                                <label for="inputTopic" class="col-3 col-form-label">{{ __('messages.user') }}</label>
+                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">>
                                     <option value=""></option>
                                     @foreach($usernames as $c)
                                     <option value="{{$c['id']}}">{{$c['name']}}</option>
@@ -317,7 +317,7 @@ border-bottom: 1px solid #E9D528;
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">{{ __('messages.suggested_topics') }}</div>
                 <!-- tt-search -->
                 <div class="tt-search">
                     <form class="search-wrapper">
@@ -463,9 +463,15 @@ border-bottom: 1px solid #E9D528;
     var myEditor;
 
     ClassicEditor
+    
         .create(document.querySelector('#tpbody'), {
             extraPlugins: [SimpleUploadAdapterPlugin],
+            language: calLang,
+            language: {
+            // The UI will be English.
 
+            // But the content will be edited in Arabic.
+        }
             // ...
         })
         .then(editor => {

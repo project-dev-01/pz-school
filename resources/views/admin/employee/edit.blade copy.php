@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
                     <span class=" fas fa-user-circle  " id="parent"></span>
-                    <span class="header-title mb-3" id="parent">Edit Employee</span>
+                    <span class="header-title mb-3" id="parent">{{ __('messages.edit_employee') }}</span>
                     <hr>
                     <span class="fas fa-home  " id="span-parent"></span>
                     <span class="header-title mb-3" id="span-parent">{{ __('messages.academic_details') }}
@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="role">Role<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role_id" id="role_id">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}" {{$role['role_id'] == $r['id'] ? 'Selected':''}}>{{$r['role_name']}}</option>
                                         @endforeach
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label for="department">Department<span class="text-danger">*</span></label>
                                     <select class="form-control" id="empDepartment" name="department_id">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.choose_department') }}</option>
                                         @foreach($department as $dep)
                                         <option value="{{$dep['id']}}" {{$employee['department_id'] == $dep['id'] ? 'Selected':''}}>{{$dep['name']}}</option>
                                         @endforeach

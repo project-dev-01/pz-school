@@ -81,9 +81,9 @@ $(function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#classroomFilter").find("#sectionID").empty();
-        $("#classroomFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#classroomFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -98,7 +98,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -217,10 +217,10 @@ $(function () {
                 if (response.data.taken_attentance_status) {
                     var taken_attentance_status = response.data.taken_attentance_status.status;
                     if (taken_attentance_status) {
-                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">Taken</p>';
+                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">'+taken+'</p>';
                         $("#attendaceTakenSts").append(taken);
                     } else {
-                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">Untaken</p>';
+                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">'+untaken+'</p>';
                         $("#attendaceTakenSts").append(unTaken);
                     }
                 }
@@ -359,6 +359,21 @@ $(function () {
             // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
@@ -455,11 +470,11 @@ $(function () {
                             status = row.att_status;
                         }
                         var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
-                            '<option value="">Choose</option>' +
-                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>Present</option>' +
-                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>Absent</option>' +
-                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>Late</option>' +
-                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>Excused</option>' +
+                            '<option value="">'+choose+'</option>' +
+                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>'+present_lang+'</option>' +
+                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>' +
+                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>'+late_lang+'</option>' +
+                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>' +
                             '</select>';
                         return att_status;
                     }
@@ -470,7 +485,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">'+add_remarks+'</button>';
                         return att_remark;
                     }
                 },
@@ -482,7 +497,7 @@ $(function () {
                             onLoadReasons(row, meta);
                         }
                         var reasons = '<select id="reasons' + row.student_id + '" class="form-control list-mode-table" name="attendance[' + meta.row + '][reasons]">' +
-                            '<option value="">Choose</option>' +
+                            '<option value="">'+choose+'</option>' +
                             '</select>';
                         return reasons;
                     }
@@ -649,7 +664,7 @@ $(function () {
         var studenetID = $(this).data('id');
         var attendanceType = $('#attendance' + studenetID).val();
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         $.post(getAbsentLateExcuse, {
             token: token,
             branch_id: branchID,
@@ -676,7 +691,7 @@ $(function () {
             attendanceType = row.att_status;
         }
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         if (attendanceType) {
             $.post(getAbsentLateExcuse, {
                 token: token,
@@ -755,7 +770,7 @@ $(function () {
                     var avg_attendance = (attpresentCount / (totalDate * totalStudentCnt) * 100);
 
                     $("#perfectAttendance").html((perfectAttendancePer ? Math.round(perfectAttendancePer) : 0) + "%");
-                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
                     $("#belowAttendance").html((belowAttendance ? Math.round(belowAttendance) : 0) + "%");
                     $("#avg_attendance").html((avg_attendance ? Math.round(avg_attendance) : 0) + "%");
                     // getReportRemarks(dataSetNew)
@@ -765,7 +780,7 @@ $(function () {
                     $("#lateCount").html(lateCnt);
                     $("#excuseCount").html(excusedCnt);
                     $("#perfectAttendance").html(perfectAttendance + "%");
-                    $("#totalStrength").html("Total Strength: " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
                     $("#belowAttendance").html(0 + "%");
                     $("#avg_attendance").html(0 + "%");
 
@@ -788,6 +803,20 @@ $(function () {
             // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
@@ -1151,6 +1180,20 @@ $(function () {
             // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',

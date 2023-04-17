@@ -40,7 +40,7 @@ $(function () {
     //             "targets": 3,
     //             "render": function (data, type, row, meta) {
     //                 var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success">' +
-    //                     '<option value="">Choose</option>' +
+    //                     '<option value="">'+choose+'</option>' +
     //                     '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>Approve</option>' +
     //                     '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>Reject</option>' +
     //                     '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>Pending</option>'

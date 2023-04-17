@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditSubjectModelLabel">Edit Subject</h4>
+                <h4 class="modal-title" id="myeditSubjectModelLabel">{{ __('messages.edit_subject') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,20 +12,20 @@
                     <input type="hidden" id="editsubjectID" name="id">
                     <div class="form-group">
                         <label for="name">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="Enter Subject Name">
+                        <input type="text" id="editsubjectName" name="name" class="form-control" placeholder="{{ __('messages.enter_subject_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <input type="text" id="editshortName" name="short_name" class="form-control" placeholder="{{ __('messages.enter_short_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="subject_code">{{ __('messages.subject_code') }}</label>
-                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
+                        <input type="text" id="editsubjectCode" name="subject_code" class="form-control" placeholder="{{ __('messages.enter_subject_code') }}">
                     </div>
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_1') }}</label>
                         <select class="form-control" id="editsubjectType" name="subject_type">
-                            <option value="">Choose Subject Type 1</option>
+                            <option value="">{{ __('messages.select_subject_type_1') }}</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
                             <option value="Task">Task</option>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_2') }}</label>
                         <select class="form-control" id="editsubjectTypeTwo" name="subject_type_2">
-                            <option value="">Choose Subject Type 2</option>
+                            <option value="">{{ __('messages.select_subject_type_2') }}</option>
                             <option value="Theory">Theory</option>
                             <option value="Practical">Practical</option>
                         </select>
@@ -44,8 +44,8 @@
                         <input type="number" id="edit_times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>
                     <div class="form-group">
-                        <label for="editsubjectColor">Subject Color</label>
-                        <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="Select Color" class="form-control subjectColor">
+                        <label for="editsubjectColor">{{ __('messages.subject_color') }}</label>
+                        <input type="text" id="editsubjectColor" name="subject_color_calendor" placeholder="{{ __('messages.choose_color') }}" class="form-control subjectColor">
                     </div>
                     <div class="form-group">
                         <div class="checkbox checkbox-success form-check-inline">

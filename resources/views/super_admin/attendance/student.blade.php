@@ -36,9 +36,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="heard">Branch<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">                                        
-                                        <option value="">Select Branch</option>
+                                        <option value="">{{ __('messages.select_branch') }}</option>
                                         <option value="">Malaysia</option>
                                         <option value="press">Singapore</option>
                                     </select>
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Select Standard</option>
+                                        <option>{{ __('messages.select_standard') }}</option>
                                         <option>I</option>
                                         <option>II</option>
                                         <option>III</option>
@@ -66,8 +66,8 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option>Select Class Name</option>
-                                        <option value="All">All</option>
+                                        <option>{{ __('messages.select_class') }}</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         <option>A</option>
                                         <option>B</option>
                                         <option>C</option>
@@ -126,7 +126,7 @@
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.select_for_everyone') }}<span class="text-danger">*</span></label>
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">{{ __('messages.present') }}</option>
                                                 <option value="press">{{ __('messages.absent') }}</option>
@@ -141,7 +141,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>{{ __('messages.name') }}</th>
-                                                <th>Roll</th>
+                                                <th>{{ __('messages.roll_number') }}</th>
                                                 <th>{{ __('messages.register_no') }}</th>
                                                 <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>

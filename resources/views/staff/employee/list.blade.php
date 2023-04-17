@@ -35,7 +35,7 @@
                                         <th>#</th>
                                         <th>{{ __('messages.employee_name') }}</th>
                                         <th>{{ __('messages.email') }}</th>
-                                        <th>Mobile No</th>
+                                        <th>{{ __('messages.mobile_no') }}</th>
                                         <th>{{ __('messages.date_of_birth') }}</th>
                                         <th>{{ __('messages.joining_date') }}</th>
                                         <th>{{ __('messages.department') }}</th>
@@ -57,8 +57,8 @@
                                         <td>21,KL</td>
                                         <td>
                                             <div class="button-list">
-                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">{{ __('messages.view') }}</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">{{ __('messages.delete') }}</a>
                                             </div>
                                         </td>
                                     <tr>

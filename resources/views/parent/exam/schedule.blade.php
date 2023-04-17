@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Schedule List
+                        {{ __('messages.schedule_list') }} 
                             <h4>
                     </li>
                 </ul><br>
@@ -55,7 +55,7 @@
                                             </tr>
                                             @empty
                                             <tr>
-                                                <td colspan="3" class="text-center"> No Data Available</td>
+                                                <td colspan="3" class="text-center"> {{ __('messages.no_data_available') }}</td>
                                             </tr>
                                             @endforelse
                                         </tbody>

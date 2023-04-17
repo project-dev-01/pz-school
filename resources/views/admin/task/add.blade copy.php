@@ -11,12 +11,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Title<span class="text-danger">*</span></label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
+                        <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                     </div>
 
                     <div class="form-group">
                         <label for="dueDate">Due Date & Time<span class="text-danger">*</span></label>
-                        <input type="text" id="dueDate" name="due_date" class="form-control" placeholder="Enter Date & Time">
+                        <input type="text" id="dueDate" name="due_date" class="form-control" placeholder="{{ __('messages.enter_date _time') }}">
                     </div>
                     <div class="form-group">
                         <label for="assign_to">Assigned To<span class="text-danger">*</span></label>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label for="task_description">Task Description<span class="text-danger">*</span></label>
-                        <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="Enter Description"></textarea>
+                        <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="attachment">Attachment</label>

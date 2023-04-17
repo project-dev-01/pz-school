@@ -11,7 +11,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Create Branch</h4>
+                <h4 class="page-title">{{ __('messages.create_branch') }}</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            <span data-feather="" class="icon-dual" id="span-parent"></span> Create Branch
+                            <span data-feather="" class="icon-dual" id="span-parent"></span>{{ __('messages.create_branch') }}
                             <h4>
                     </li>
                 </ul>

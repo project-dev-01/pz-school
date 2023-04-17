@@ -47,10 +47,10 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.replies') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>5 Followers</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>{{ __('messages.5_followers') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>10 Following</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-05" role="tab"><span>{{ __('messages.10_following') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-06" role="tab"><span>{{ __('messages.categories') }}</span></a>

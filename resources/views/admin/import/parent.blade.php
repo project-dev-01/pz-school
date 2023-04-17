@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title','Parent Import')
 @section('content')
 <!-- Page Content -->
 <div class="content container-fluid">
@@ -10,7 +11,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Parent Import</h4>
+                <h4 class="page-title">{{ __('messages.parent_import') }}</h4>
             </div>
         </div>
     </div>
@@ -20,7 +21,7 @@
             <div class="card mb-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Parent Import<h4>
+                        <h4 class="nav-link">{{ __('messages.parent_import') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -35,7 +36,7 @@
                     
                     @if(count($errors) > 0)
                     <div class="alert alert-danger">
-                        Upload Validation Error<br><br>
+                    {{ __('messages.upload_validation_error') }}<br><br>
                         <ul>
                             @foreach($errors as $error)
                             <li>{{ $error }}</li>

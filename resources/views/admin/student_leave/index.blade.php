@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="sectionID"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                 <div class="modal-body">
                     <label for="heard">{{ __('messages.remarks') }}</label>
                     <input type="hidden" id="studenet_leave_tbl_id" />
-                    <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
+                    <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_leave_remarks"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

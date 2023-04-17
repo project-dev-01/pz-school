@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddAssignClassSubjectModalLabel">{{ __('messages.add_subjects') }}</h4>
+                <h4 class="modal-title" id="myaddAssignClassSubjectModalLabel">{{ __('messages.add_subject') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="addchangeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="addchangeClassName" name="class_name">
-                            <option value="">Choose Grade</option>
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -23,13 +23,13 @@
                     <div class="form-group">
                         <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="assignSubjects">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
-                            <option value="">Choose Subject</option>
+                            <option value="">{{ __('messages.select_subject') }}</option>
                             @forelse($getSubjectList as $sub)
                             <option value="{{ $sub['id'] }}">{{$sub['name']}}</option>
                             @empty

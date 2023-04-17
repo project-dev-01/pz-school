@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="classID" name="class_id">
-                            <option value="">Choose Grade</option>
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="section_id">{{ __('messages.class') }} <span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_id">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                             @forelse($sectionDetails as $section)
                             <option value="{{$section['id']}}">{{$section['name']}}</option>
                             @empty
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="capacity">{{ __('messages.capacity') }}</label>
-                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="Enter Capacity">
+                        <input type="number" id="sectionCapacity" name="capacity" class="form-control" placeholder="{{ __('messages.enter_capacity') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

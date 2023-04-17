@@ -11,9 +11,9 @@
                     @csrf
                     <input type="hidden" id="event_type_id" name="event_type_id">
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select id="branch_id" class="form-control" name="branch_id">
-                            <option value="">Select Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             @foreach($branches as $b)
                             <option value="{{$b['id']}}">{{$b['name']}}</option>
                             @endforeach
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('messages.event_type_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Event Type name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_event_type_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

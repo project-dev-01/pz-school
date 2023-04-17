@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="department" id="employeeReportDepartment">
-                                        <option value="">Select Department</option>
+                                        <option value="">{{ __('messages.select_department') }}</option>
                                         @foreach($department as $dep)
                                         <option value="{{$dep['id']}}">{{$dep['name']}}</option>
                                         @endforeach
@@ -63,8 +63,8 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="employeeReportSession" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
-                                        <option value="All">All</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -80,7 +80,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="MM-YYYY">
+                                        <input type="text" class="form-control" name="date" id="employeeReportDate" placeholder="{{ __('messages.mm_yyyy') }}">
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                 <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                 </div>
                             </div>
-                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
@@ -234,7 +234,7 @@
                                 <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                 </div>
                             </div>
-                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                            <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                         </div>
                     </div> <!-- end card-box-->
                 </div> <!-- end col -->
@@ -265,7 +265,7 @@
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> Excused</button></th>
+                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-clock-outline"></i>{{ __('messages.excused') }}</button></th>
                                                 </tr>
                                             </table>
                                         </div>

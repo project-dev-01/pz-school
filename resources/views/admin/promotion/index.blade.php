@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="">Select Semester</option>
+                                        <option value="">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -98,7 +98,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> The Next Session Was Transferred To The Student<h4>
+                        <h4 class="navv">{{ __('messages.the_next_session_was_transferred') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -107,9 +107,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_year">Promote to academic year<span class="text-danger">*</span></label>
+                                    <label for="promote_year">{{ __('messages.promote_to_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="promote_year" class="form-control" name="promote_year">
-                                        <option value="">Choose Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -119,9 +119,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promoteClassID">Promote to standard<span class="text-danger">*</span></label>
+                                    <label for="promoteClassID">{{ __('messages.promote_to_standard') }}<span class="text-danger">*</span></label>
                                     <select id="promoteClassID" class="form-control" name="promote_class_id">
-                                        <option value="">Select Standard</option>
+                                        <option value="">{{ __('messages.select_standard') }}</option>
                                         @forelse ($classes as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -131,9 +131,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_semester_id">Promote to semester<span class="text-danger">*</span></label>
+                                    <label for="promote_semester_id">{{ __('messages.promote_to_semester') }}<span class="text-danger">*</span></label>
                                     <select id="promote_semester_id" class="form-control" name="promote_semester_id">
-                                        <option value="">Select Semester</option>
+                                        <option value="">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -142,9 +142,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="promote_session_id">Promote to session<span class="text-danger">*</span></label>
+                                    <label for="promote_session_id">{{ __('messages.promote_to_session') }}<span class="text-danger">*</span></label>
                                     <select id="promote_session_id" class="form-control" name="promote_session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div><br>
-                        ( Note : Student will not appear on the list after a Student has been Promoted )<br>
+                        {{ __('messages.student_will_not_appear') }}<br>
                         <div class="table-responsive">
                             <table class="table table-bordered w-100 nowrap" id="showStudentDetails">
                                 <thead>
@@ -161,7 +161,7 @@
                                         <th>#</th>
                                         <th>{{ __('messages.student_name') }}</th>
                                         <th>{{ __('messages.register_no') }}</th>
-                                        <th>Promote to Class</th>
+                                        <th>{{ __('messages.promote_to_class') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

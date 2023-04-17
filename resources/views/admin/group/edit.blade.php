@@ -19,7 +19,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Edit Group
+                        <h4 class="navv">{{ __('messages.edit_group') }}
                             <h4>
                     </li>
                 </ul>
@@ -31,7 +31,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name" value="{{$group['name']}}">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{$group['name']}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff">{{ __('messages.add_staff') }}</label>
-                                    <input type="text" id="staff" name="staff" class="form-control" placeholder="Enter Staff Name">
+                                    <input type="text" id="staff" name="staff" class="form-control" placeholder="{{ __('messages.enter_staff_name') }}">
                                     <div id="staff_list"></div>
                                     <span class="text-danger error-text staff_error"></span>
                                 </div>
@@ -80,7 +80,7 @@
                                                 @endforeach
                                             @else     
                                                 <tr>
-                                                    <td colspan="4">No Data Available</td>
+                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                                 </tr>
                                             @endif
                                         </tbody>
@@ -93,7 +93,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="student">{{ __('messages.add_student') }}</label>
-                                    <input type="text" id="student" name="student" class="form-control" placeholder="Enter Student Name">
+                                    <input type="text" id="student" name="student" class="form-control" placeholder="{{ __('messages.enter_student_name') }}">
                                     <div id="student_list"></div>
                                     <span class="text-danger error-text student_error"></span>
                                 </div>
@@ -125,7 +125,7 @@
                                                 @endforeach 
                                             @else     
                                                 <tr>
-                                                    <td colspan="5">No Data Available</td>
+                                                    <td colspan="5">{{ __('messages.no_data_available') }}</td>
                                                 </tr> 
                                             @endif
                                         </tbody>
@@ -139,7 +139,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="parent">{{ __('messages.add_parent') }}</label>
-                                    <input type="text" id="parents" name="parent" class="form-control" placeholder="Enter Parent Name">
+                                    <input type="text" id="parents" name="parent" class="form-control" placeholder="{{ __('messages.enter_parent_name') }}">
                                     <div id="parent_list"></div>
                                     <span class="text-danger error-text parent_error"></span>
                                 </div>
@@ -169,7 +169,7 @@
                                                 @endforeach  
                                             @else     
                                                 <tr>
-                                                    <td colspan="4">No Data Available</td>
+                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                                 </tr>
                                             @endif
                                         </tbody>

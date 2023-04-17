@@ -6,7 +6,7 @@ $(function () {
         var block_id = $(this).val();
         console.log('b', block_id)
         $("#hostelRoomForm").find("#floor").empty();
-        $("#hostelRoomForm").find("#floor").append('<option value="">Select Floor</option>');
+        $("#hostelRoomForm").find("#floor").append('<option value="">'+select_floor+'</option>');
 
         $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
             if (res.code == 200) {
@@ -21,7 +21,7 @@ $(function () {
         var block_id = $(this).val();
         console.log('b', block_id)
         $("#edit-hostel-room-form").find("#edit_floor").empty();
-        $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
+        $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">'+select_floor+'</option>');
 
         $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {
             if (res.code == 200) {
@@ -92,6 +92,20 @@ $(function () {
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
@@ -174,7 +188,7 @@ $(function () {
             $('.editHostelRoom').find('select[name="block"]').val(data.data.block);
 
             $("#edit-hostel-room-form").find("#edit_floor").empty();
-            $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">Select Floor</option>');
+            $("#edit-hostel-room-form").find("#edit_floor").append('<option value="">'+select_floor+'</option>');
             var block_id = data.data.block;
 
             $.post(floorByBlock, { token: token, branch_id: branchID, block_id: block_id }, function (res) {

@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Group Name">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff">{{ __('messages.add_staff') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="staff" name="staff" class="form-control" placeholder="Enter Staff Name">
+                                    <input type="text" id="staff" name="staff" class="form-control" placeholder="{{ __('messages.enter_staff_name') }}">
                                     <div id="staff_list"></div>
                                     <span class="text-danger error-text staff_error"></span>
                                 </div>
@@ -69,7 +69,7 @@
                                         </thead>
                                         <tbody id="staff_table">
                                             <tr>
-                                                <td colspan="4">No Data Available</td>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                             </tr> 
                                         </tbody>
                                     </table>
@@ -81,7 +81,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="student">{{ __('messages.add_student') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="student" name="student" class="form-control" placeholder="Enter Student Name">
+                                    <input type="text" id="student" name="student" class="form-control" placeholder="{{ __('messages.enter_student_name') }}">
                                     <div id="student_list"></div>
                                     <span class="text-danger error-text student_error"></span>
                                 </div>
@@ -101,7 +101,7 @@
                                         </thead>
                                         <tbody id="student_table">
                                             <tr>
-                                                <td colspan="5">No Data Available</td>
+                                                <td colspan="5">{{ __('messages.no_data_available') }}</td>
                                             </tr>   
                                         </tbody>
                                     </table>
@@ -114,7 +114,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="parent">{{ __('messages.add_parent') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="parents" name="parent" class="form-control" placeholder="Enter Parent Name">
+                                    <input type="text" id="parents" name="parent" class="form-control" placeholder="{{ __('messages.enter_parent_name') }}">
                                     <div id="parent_list"></div>
                                     <span class="text-danger error-text parent_error"></span>
                                 </div>
@@ -133,7 +133,7 @@
                                         </thead>
                                         <tbody id="parent_table">
                                             <tr>
-                                                <td colspan="4">No Data Available</td>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
                                             </tr> 
                                         </tbody>
                                     </table>
@@ -143,7 +143,7 @@
                         <br>
                         <div class="form-group text-center m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                     </form>

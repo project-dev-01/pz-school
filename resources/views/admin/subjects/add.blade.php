@@ -11,20 +11,20 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="subjectName" name="name" class="form-control" placeholder="Enter Subject Name">
+                        <input type="text" id="subjectName" name="name" class="form-control" placeholder="{{ __('messages.enter_subject_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="shortName" name="short_name" class="form-control" placeholder="Enter Short Name">
+                        <input type="text" id="shortName" name="short_name" class="form-control" placeholder="{{ __('messages.enter_short_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="subject_code">{{ __('messages.subject_code') }}</label>
-                        <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="Enter Subject Code">
+                        <input type="text" id="subjectCode" name="subject_code" class="form-control" placeholder="{{ __('messages.enter_subject_code') }}">
                     </div>
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_1') }}</label>
                         <select class="form-control" id="subjectType" name="subject_type">
-                            <option value="">Choose Subject Type 1</option>
+                            <option value="">{{ __('messages.select_subject_type_1') }}</option>
                             <option value="Optional">Optional</option>
                             <option value="Mandatory">Mandatory</option>
                             <option value="Task">Task</option>
@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.subject_type_2') }}</label>
                         <select class="form-control" id="subjectTypeTwo" name="subject_type_2">
-                            <option value="">Choose Subject type 2</option>
+                            <option value="">{{ __('messages.select_subject_type_2') }}</option>
                             <option value="Theory">Theory</option>
                             <option value="Practical">Practical</option>
                         </select>
@@ -43,7 +43,7 @@
                         <input type="number" id="times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>
                     <div class="form-group">
-                        <label for="subjectColor">{{ __('messages.subject_colour') }}</label>
+                        <label for="subjectColor">{{ __('messages.subject_color') }}</label>
                         <input type="text" id="subjectColor" name="subject_color_calendor" class="form-control subjectColor" value="#4a81d4">
                     </div>
                     <div class="form-group">

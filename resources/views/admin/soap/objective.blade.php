@@ -55,7 +55,7 @@
 
                                                                                 <tbody id="objective-category-{{ $category['id'] }}" class="objective-category-table" data-type="2">
                                                                                     <tr >
-                                                                                        <td colspan="5" class="text-center">No Data Available</td>
+                                                                                        <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
@@ -72,7 +72,7 @@
                     <div class="col-12">
                         <div class="text-lg-right mt-3 mt-lg-0">
                             <a href="{{ route('admin.soap_subject.create')}}" type="button" class="btn btn-white waves-effect waves-light mr-1" style="color:white;background-color:#00800082;border-color:#00800082;">
-                                <i class="mdi mdi-plus-circle mr-1"></i>Add</a>
+                                <i class="mdi mdi-plus-circle mr-1"></i>{{ __('messages.add') }}</a>
                         </div>
                     </div><!-- end col-->
                 </div>
@@ -93,7 +93,7 @@
 
                 <tbody id="objective-subject-table">
                     <tr >
-                        <td colspan="5" class="text-center">No Data Available</td>
+                        <td colspan="5" class="text-center">{{ __('messages.no_data_available') }}</td>
                     </tr>
                 </tbody>
             </table>

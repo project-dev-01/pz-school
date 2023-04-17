@@ -35,7 +35,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Standard</option>
+                                                <option value="">{{ __('messages.select_standard') }}</option>
                                                 <option>I</option>
                                                 <option>II</option>
                                                 <option>III</option>
@@ -55,7 +55,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Class Name</option>
+                                                <option value="">{{ __('messages.select_class') }}</option>
                                                 <option>A</option>
                                                 <option>B</option>
                                                 <option>C</option>
@@ -70,7 +70,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <select id="heard" class="form-control" required="">
-                                                <option value="">Select Subject</option>
+                                                <option value="">{{ __('messages.select_subject') }}</option>
                                                 <option value="press">English</option>
                                                 <option value="">Mathematics</option>
                                                 <option value="press">History</option>
@@ -119,14 +119,14 @@
                                         <div class="checkbox checkbox-purple">
                                             <input id="checkbox6" type="checkbox">
                                             <label for="checkbox6">
-                                                Published later
+                                            {{ __('messages.published_later') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-3 col-form-label">Schedule Date<span class="text-danger">*</span></label>
+                                        <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.schedule_date') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
@@ -143,7 +143,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.homework') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
-                                            <textarea class="form-control" id="product-description" rows="5" placeholder="Please enter description"></textarea>
+                                            <textarea class="form-control" id="product-description" rows="5" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -1,5 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<style>
+
+.iti {
+    display: block;
+}
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -26,7 +35,7 @@
             <div class="card-box text-center">
                 <img src="{{asset('public/users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
-                <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
+                <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
 
                 <div class="text-left mt-3">
                     <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
@@ -75,7 +84,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.name') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="{{ __('messages.enter_name') }}">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
@@ -92,7 +101,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="address">Address</label>
+                                        <label for="address">{{ __('messages.present_address') }}</label>
                                         <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address..."></textarea>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
@@ -113,7 +122,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="name">Old Passord</label>
+                                        <label for="name">{{ __('messages.old_password') }} :</label>
                                         <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>
@@ -155,4 +164,32 @@
     </div>
     <!-- end row-->
 
-</div> <!-- container -->@endsection
+</div> <!-- container -->
+@endsection
+@section('scripts')
+<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script>
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+</script>
+<script>
+    // settings url
+    var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
+    var profilePath = "{{ asset('public/users/images') }}";
+</script>
+<script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
+@endsection

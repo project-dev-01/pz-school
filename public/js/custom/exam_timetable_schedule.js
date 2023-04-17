@@ -13,8 +13,8 @@ $(function () {
             semester_id: semester_id, session_id: session_id
         }, function (res) {
             if (res.code == 200) {
-                var exam_name = "Exam : " + res.data.details.exam_name;
-                var class_section = "Grade : " + res.class_section;
+                var exam_name = ": " + res.data.details.exam_name;
+                var class_section = " : " + res.class_section;
                 $("#class-section").html(class_section);
                 $("#exam").html(exam_name);
                 $("#exam-timetable").html(res.table);

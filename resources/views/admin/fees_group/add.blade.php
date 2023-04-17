@@ -29,14 +29,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Fees Group Name">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_fees_group_name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">{{ __('messages.description') }}</label>
-                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                             </div>
                         </div>
                         @forelse ($fees_type as $key => $type)
@@ -92,7 +92,7 @@
                                                                                             <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][payment_mode_id]" value="{{$Yearly_ID}}">
                                                                                             <input type="hidden" name="fees[{{$key}}][yearly_fees_details][0][yearly]" value="1">
                                                                                             <!-- hiddent feilds end-->
-                                                                                            <input type="text" name="fees[{{$key}}][yearly_fees_details][0][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;">
+                                                                                            <input type="text" name="fees[{{$key}}][yearly_fees_details][0][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;">
                                                                                         </td>
                                                                                         <td> <input type="number" name="fees[{{$key}}][yearly_fees_details][0][amount]" class="form-control"></td>
                                                                                     </tr>
@@ -131,7 +131,7 @@
                                                                                                 <!-- hiddent feilds end-->
                                                                                                 <input type="text" disabled class="form-control" value="{{ $sem['name'] }}" style="width: 70%;">
                                                                                             </td>
-                                                                                            <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][semester_fees_details][{{$skey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>
                                                                                             <td> <input type="number" name="fees[{{$key}}][semester_fees_details][{{$skey}}][amount]" class="form-control"></td>
                                                                                         </tr>
                                                                                         @empty
@@ -170,7 +170,7 @@
                                                                                                 <!-- hiddent feilds end-->
                                                                                                 <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
                                                                                             </td>
-                                                                                            <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="YYYY-MM-DD" style="width: 70%;"></td>
+                                                                                            <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>
                                                                                             <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" class="form-control"></td>
                                                                                         </tr>
                                                                                         @empty

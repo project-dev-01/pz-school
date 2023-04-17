@@ -239,7 +239,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="first_name" value="{{$branch['first_name']}}" placeholder="Ahmad Ali" id="firstName">
+                                        <input type="text" class="form-control shortNameChange" name="first_name" value="{{$branch['first_name']}}" placeholder="{{ __('messages.yamamoto') }}" id="firstName">
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" name="last_name" value="{{$branch['last_name']}}" placeholder="Ali" id="lastName">
+                                        <input type="text" class="form-control shortNameChange" name="last_name" value="{{$branch['last_name']}}" placeholder="{{ __('messages.yukio') }}" id="lastName">
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
-                                        <option value="">Choose Gender</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
                                         <option value="Male" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Male</option>
                                         <option value="Female" {{$branch['gender'] =="Male" ? 'selected' : '' }}>Female</option>
                                     </select>
@@ -270,20 +270,20 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="branch_name">Branch Name</label>
-                                    <input type="text" maxlength="50" name="branch_name" value="{{$branch['branch_name']}}" class="form-control" placeholder="Enter Branch Name" name="txt_branchname">
+                                    <label for="branch_name">{{ __('messages.branch_name') }}</label>
+                                    <input type="text" maxlength="50" name="branch_name" value="{{$branch['branch_name']}}" class="form-control" placeholder="{{ __('messages.enter_branch_name') }}" name="txt_branchname">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_name">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="Enter School Name">
+                                    <input type="text" maxlength="50" name="school_name" value="{{$branch['school_name']}}" class="form-control" placeholder="{{ __('messages.enter_school_name') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_code">School Code</label>
-                                    <input type="text" maxlength="50" name="school_code" value="{{$branch['school_code']}}" class="form-control" placeholder="Enter School Code">
+                                    <input type="text" maxlength="50" name="school_code" value="{{$branch['school_code']}}" class="form-control" placeholder="{{ __('messages.enter_school_code') }}">
                                 </div>
                             </div>
                         </div>
@@ -291,13 +291,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="passport">{{ __('messages.passport_number') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="{{$branch['passport']}}" placeholder="Passport Number" name="passport" id="Passport">
+                                    <input type="text" class="form-control" value="{{$branch['passport']}}" placeholder="{{ __('messages.enter_passport_number') }}" name="passport" id="Passport">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">{{ __('messages.nric_number') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="{{$branch['nric_number']}}" name="nric_number" placeholder="nric number" id="nricNumber">
+                                    <input type="text" class="form-control" value="{{$branch['nric_number']}}" name="nric_number" placeholder="{{ __('messages.enter_nric_number') }}" id="nricNumber">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -310,14 +310,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="currency">Currency<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" value="{{$branch['currency']}}" name="currency" class="form-control" placeholder="Enter Currency" data-parsley-trigger="change">
+                                    <label for="currency">{{ __('messages.currency') }}<span class="text-danger">*</span></label>
+                                    <input type="text" maxlength="50" value="{{$branch['currency']}}" name="currency" class="form-control" placeholder="{{ __('messages.enter_currency') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="symbol">Currency Symbol<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="Enter Currency Symbol" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="{{ __('messages.enter_currency_symbol') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -342,7 +342,7 @@
                                 <div class="form-group">
                                     <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
                                     <select id="editGetState" class="form-control" name="state">
-                                        <option value="">Select State</option>
+                                        <option value="">{{ __('messages.select_state') }}</option>
                                         @foreach($states as $s)
                                         @if($branch['state_id'] == $s['id'])
                                         <option value="{{$s['id']}}" selected>{{$s['name']}}</option>
@@ -358,7 +358,7 @@
                                 <div class="form-group">
                                     <label for="city">{{ __('messages.city') }}</label>
                                     <select id="editGetCity" class="form-control" name="city">
-                                        <option value="">Select City</option>
+                                        <option value="">{{ __('messages.select_city') }}</option>
                                         @foreach($cities as $c)
                                         @if($branch['city_id'] == $c['id'])
                                         <option value="{{$c['id']}}" selected>{{$c['name']}}</option>
@@ -371,7 +371,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="post_code">{{ __('messages.zip') }}/{{ __('messages.postal_code') }}</label>
+                                    <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
                                     <input type="text" class="form-control" value="{{$branch['post_code']}}" name="post_code" id="postCode" placeholder="000000">
                                 </div>
                             </div>

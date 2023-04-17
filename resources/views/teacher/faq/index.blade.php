@@ -39,7 +39,7 @@
                     <div>
                         <div class="faq-question-q-box">Q.</div>
                         <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_admission') }}</h4>
-                        <p class="faq-answer mb-4">For those seeking admissions, an informal interaction will be conducted in which pupil and both the parents have to be present. The final decision of the admission committee will be binding..</p>
+                        <p class="faq-answer mb-4">{{ __('messages.for_those_seeking_admissions') }}..</p>
                     </div>
 
                     <!-- Question/Answer -->
@@ -108,7 +108,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Ask question ?</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">{{ __('messages.ask_question') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <hr>
@@ -121,17 +121,17 @@
                             <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
 
                         <div class="form-group">
-                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="Subject">
+                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div class="form-group">
                             <div class="summernote">
-                                <textarea class="form-control"   id="remarks" rows="5" placeholder="Questions type here " name="remarks"></textarea>
+                                <textarea class="form-control"   id="remarks" rows="5" placeholder="{{ __('messages.questions_type_here') }}" name="remarks"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group m-b-0">
                             <div class="text-right">
-                                <button class="btn btn-success waves-effect waves-light m-r-5"> <span>Send</span> <i class="mdi mdi-send ml-2"></i> </button>
+                                <button class="btn btn-success waves-effect waves-light m-r-5"> <span>{{ __('messages.send') }}</span> <i class="mdi mdi-send ml-2"></i> </button>
                             </div>
                         </div>
 

@@ -1453,6 +1453,7 @@ class StaffController extends Controller
         // $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        // dd($getclass);
         return view(
             'staff.timetable.index',
             [
@@ -1492,7 +1493,7 @@ class StaffController extends Controller
             $max = $timetable['data']['max'];
 
             $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">Day/Period</td>';
+            $response .= '<tr><td class="center" style="color:#ed1833;">'.__('messages.day') .'/'. __('messages.period') .'</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre">' . $i . '</td>';
             }
@@ -1502,7 +1503,7 @@ class StaffController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.'.$day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
@@ -1659,11 +1660,12 @@ class StaffController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $upload_lang = __('messages.upload');
                 // if ($row['status'] != "Approve") {
                 // if ($row['document'] != "Approve") {
                 if (is_null($row['document'])) {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">'.$upload_lang.'</a>
             </div>';
                 } else {
                     return '-';
@@ -1711,8 +1713,9 @@ class StaffController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">Details</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">'.$details_lang.'</a>
                             </div>';
             })
 

@@ -197,13 +197,13 @@
 
                                                                     <li class="list-inline-item mt-3 mt-sm-0">
                                                                         @if($today['priority'] == "Low")
-                                                                        <span class="badge badge-soft-success p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "Medium")
-                                                                        <span class="badge badge-soft-info p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "High")
-                                                                        <span class="badge badge-soft-danger p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                         @endif
                                                                     </li>
                                                                 </ul>
@@ -263,13 +263,13 @@
                                                                                 </li> -->
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -332,13 +332,13 @@
 
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($old['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -415,7 +415,7 @@
                                                                             </li>
                                                                             <li class="list-inline-item pr-1">
                                                                                 <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                                Submission Date : {{$homework['date_of_submission']}}
+                                                                                {{ __('messages.submission_date') }} : {{$homework['date_of_submission']}}
                                                                             </li>
                                                                             <li class="list-inline-item text-danger">
                                                                             </li>
@@ -433,7 +433,7 @@
                                         </div> <!-- end col -->
                                     </div> <!-- Maths row -->
                                     @empty
-                                    <p class="text-center">No Homework data available</p>
+                                    <p class="text-center">{{ __('messages.no_data_available') }}</p>
                                     @endforelse
                                 </div> <!-- end card-body -->
                             </div> <!-- end card -->
@@ -527,7 +527,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">Teacher Name </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.teacher_name') }} </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="col-md-12" id="teacher-name"></div>
@@ -586,7 +586,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                        <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -612,11 +612,11 @@
                                                 <td id="end_date"></td>
                                             </tr>
                                             <tr id="start_time_row" style="display:none">
-                                                <td>Start Time</td>
+                                                <td>{{ __('messages.start_time') }}</td>
                                                 <td id="start_time"></td>
                                             </tr>
                                             <tr id="end_time_row" style="display:none">
-                                                <td>End Time</td>
+                                                <td>{{ __('messages.end_time') }}</td>
                                                 <td id="end_time"></td>
                                             </tr>
                                             <tr>
@@ -697,7 +697,7 @@
                         <div class="form-group">
                             <label for="semester_id">{{ __('messages.semester') }}</label>
                             <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
-                                <option value="0">Select Semester</option>
+                                <option value="0">{{ __('messages.select_semester') }}</option>
                                 @foreach($semester as $sem)
                                 <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                 @endforeach
@@ -708,7 +708,7 @@
                         <div class="form-group">
                             <label for="session_id">{{ __('messages.session') }}</label>
                             <select id="sr_session_id" class="form-control studentRank" name="session_id">
-                                <option value="0">Select Session</option>
+                                <option value="0">{{ __('messages.select_session') }}</option>
                                 @foreach($session as $ses)
                                 <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                 @endforeach
@@ -719,7 +719,7 @@
                         <div class="form-group">
                             <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                             <select id="sr_examnames" class="form-control studentRank" name="examnames">
-                                <option value="">Select Exams</option>
+                                <option value="">{{ __('messages.select_exams') }}</option>
                                 @foreach($exams as $exam)
                                 <option value="{{$exam['id']}}">{{$exam['name']}}</option>
                                 @endforeach
@@ -772,7 +772,7 @@
                                 $countsub = count($scores['exam_marks']);
                                 @endphp
                                 @if($ddkey =='0')
-                                <th colspan="{{$countsub}}">Subjects</th>
+                                <th colspan="{{$countsub}}">{{ __('messages.subject') }}</th>
                                 @endif
                                 @empty
                                 @endforelse
@@ -880,7 +880,7 @@
                                 <div class="form-group">
                                     <label for="examID">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="scoreExamID" class="form-control" name="examID">
-                                        <option value="">Select Exams</option>
+                                        <option value="">{{ __('messages.select_exams') }}</option>
                                         @foreach($exams as $exam)
                                         <option value="{{$exam['id']}}">{{$exam['name']}}</option>
                                         @endforeach

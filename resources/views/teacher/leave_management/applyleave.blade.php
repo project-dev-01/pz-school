@@ -49,7 +49,7 @@
                                         </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="4" style="text-align: center;">No data available</td>
+                                            <td colspan="4" style="text-align: center;">{{ __('messages.no_data_available') }}</td>
                                         </tr>
                                         @endforelse
                                     </tbody>
@@ -77,7 +77,7 @@
                                         <div class="form-group">
                                             <label for="leave_type">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                             <select id="leave_type" name="leave_type" class="form-control">
-                                                <option value="">Select Leave Type</option>
+                                                <option value="">{{ __('messages.select_leave_type') }}</option>
                                                 @forelse ($get_leave_types as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty
@@ -94,7 +94,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="DD-MM-YYYY">
+                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="DD-MM-YYYY">
+                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                             <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                                <option value="">Select Reason</option>
+                                                <option value="">{{ __('messages.select_reason') }}</option>
                                                 @forelse ($get_leave_reasons as $res)
                                                 <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
                                                 @empty
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="total_leave">Total Leave Days<span class="text-danger">*</span></label>
+                                            <label for="total_leave">{{ __('messages.total_leave_days') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>

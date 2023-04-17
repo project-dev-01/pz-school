@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="gender" id="gender">
-                                        <option value="">Choose Gender</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="religion" id="religion">
-                                        <option value="">Choose Religion</option>
+                                        <option value="">{{ __('messages.select_religion') }}</option>
                                         @forelse($religion as $r)
                                         <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
                                         @empty
@@ -77,7 +77,7 @@
                                 <div class="form-group">
                                     <label for="race">{{ __('messages.race') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="race" id="addRace">
-                                        <option value="">Choose race</option>
+                                        <option value="">{{ __('messages.select_race') }}</option>
                                         @forelse($races as $r)
                                         <option value="{{$r['id']}}">{{$r['races_name']}}</option>
                                         @empty
@@ -166,7 +166,7 @@
                                 <div class="form-group">
                                     <label for="role_id">Role<span class="text-danger">*</span></label>
                                     <select class="form-control" name="role_id" id="role_id">
-                                        <option value="">Select Role</option>
+                                        <option value="">{{ __('messages.select_role') }}</option>
                                         @foreach($roles as $r)
                                         <option value="{{$r['id']}}">{{$r['role_name']}}</option>
                                         @endforeach
@@ -239,7 +239,7 @@
                                 <div class="form-group">
                                     <label for="staff_category">Staff Category</label>
                                     <select class="form-control" id="staffCategory" name="staff_category">
-                                        <option value="">Select Category</option>
+                                        <option value="">{{ __('messages.select_category') }}</option>
                                         @forelse($staff_categories as $r)
                                         <option value="{{$r['id']}}">{{$r['staff_categories_name']}}</option>
                                         @empty
@@ -467,7 +467,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

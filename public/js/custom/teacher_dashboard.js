@@ -2,11 +2,11 @@ $(function () {
     $('#sr_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#sr_section_id").empty();
-        $("#sr_section_id").append('<option value="">Select Class</option>');
+        $("#sr_section_id").append('<option value="">'+select_class+'</option>');
         $("#sr_examnames").empty();
-        $("#sr_examnames").append('<option value="">Select Exams</option>');
+        $("#sr_examnames").append('<option value="">'+select_exam+'</option>');
         $("#sr_student_id").empty();
-        $("#sr_student_id").append('<option value="">Select Student</option>');
+        $("#sr_student_id").append('<option value="">'+select_student+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -28,9 +28,9 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#sr_examnames").empty();
-        $("#sr_examnames").append('<option value="">Select Exams</option>');
+        $("#sr_examnames").append('<option value="">'+select_exam+'</option>');
         $("#sr_student_id").empty();
-        $("#sr_student_id").append('<option value="">Select Student</option>');
+        $("#sr_student_id").append('<option value="">'+select_student+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -99,7 +99,7 @@ $(function () {
                 bySubject += '</tr>';
             });
         } else {
-            bySubject += '<tr><td colspan="4">No data available</td></tr>';
+            bySubject += '<tr><td colspan="4">'+no_data_available+'</td></tr>';
         }
         $("#student_rank_body").append(bySubject);
     }
@@ -107,9 +107,9 @@ $(function () {
     $('#st_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#st_section_id").empty();
-        $("#st_section_id").append('<option value="">Select Class</option>');
+        $("#st_section_id").append('<option value="">'+select_class+'</option>');
         $("#st_student_id").empty();
-        $("#st_student_id").append('<option value="">Select Student</option>');
+        $("#st_student_id").append('<option value="">'+select_student+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -131,7 +131,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#st_student_id").empty();
-        $("#st_student_id").append('<option value="">Select Student</option>');
+        $("#st_student_id").append('<option value="">'+select_student+'</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: academic_session_id, section_id: section_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -203,9 +203,9 @@ $(function () {
     $('#ems_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#ems_section_id").empty();
-        $("#ems_section_id").append('<option value="">Select Class</option>');
+        $("#ems_section_id").append('<option value="">'+select_class+'</option>');
         $("#ems_student_id").empty();
-        $("#ems_student_id").append('<option value="">Select Student</option>');
+        $("#ems_student_id").append('<option value="">'+select_student+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -227,7 +227,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#ems_student_id").empty();
-        $("#ems_student_id").append('<option value="">Select Student</option>');
+        $("#ems_student_id").append('<option value="">'+select_student+'</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: academic_session_id, section_id: section_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -240,9 +240,9 @@ $(function () {
     $('#st10_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#st10_section_id").empty();
-        $("#st10_section_id").append('<option value="">Select Class</option>');
+        $("#st10_section_id").append('<option value="">'+select_class+'</option>');
         $("#st10_examnames").empty();
-        $("#st10_examnames").append('<option value="">Select Exams</option>');
+        $("#st10_examnames").append('<option value="">'+select_exam+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -264,7 +264,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#st10_examnames").empty();
-        $("#st10_examnames").append('<option value="">Select Exams</option>');
+        $("#st10_examnames").append('<option value="">'+select_exam+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -313,9 +313,9 @@ $(function () {
     $('#sb10_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#sb10_section_id").empty();
-        $("#sb10_section_id").append('<option value="">Select Class</option>');
+        $("#sb10_section_id").append('<option value="">'+select_class+'</option>');
         $("#sb10_examnames").empty();
-        $("#sb10_examnames").append('<option value="">Select Exams</option>');
+        $("#sb10_examnames").append('<option value="">'+select_exam+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -337,7 +337,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#sb10_examnames").empty();
-        $("#sb10_examnames").append('<option value="">Select Exams</option>');
+        $("#sb10_examnames").append('<option value="">'+select_exam+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -401,7 +401,7 @@ $(function () {
                     }
                 });
             } else {
-                byStudent += '<tr><td colspan="5">No data available</td></tr>';
+                byStudent += '<tr><td colspan="5">'+no_data_available+'</td></tr>';
             }
             $('#'+type+'_student_table').append(byStudent);
         }

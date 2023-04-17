@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditSoapSubCategoryModalLabel">Edit Sub Category</h4>
+                <h4 class="modal-title" id="myeditSoapSubCategoryModalLabel">{{ __('messages.edit_sub_category') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="edit_soap_type_id" class="form-control" name="soap_type_id">
-                            <option value="">Select Soap Type</option>
+                            <option value="">{{ __('messages.select_soap_type') }}</option>
                             <option value="1">Subjective</option>
                             <option value="2">Objective</option>
                             <option value="3">Assessment</option>
@@ -23,13 +23,13 @@
                     <div class="form-group">
                         <label for="soap_category_id">{{ __('messages.category') }} <span class="text-danger">*</span></label>
                         <select id="soap_category_id" class="form-control" name="soap_category_id">
-                            <option value="">Select Category</option>
+                            <option value="">{{ __('messages.select_category') }}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="name">{{ __('messages.sub_category_name') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Sub Category Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_sub_category_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

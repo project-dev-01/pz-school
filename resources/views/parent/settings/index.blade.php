@@ -1,5 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<style>
+
+.iti {
+    display: block;
+}
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -23,7 +32,7 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
                 <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-                <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
+                <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
                 <div class="text-left mt-3">
                     <form method="post" id="upload_form" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -38,7 +47,7 @@
                     <h4 class="font-13 text-uppercase">{{ __('messages.about_me') }} :</h4>
                     <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name"> {{ $user_details['first_name'] }} {{ $user_details['last_name'] }} </span></p>
                     <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
-                    <p class="text-muted mb-2 font-13"><strong>Mobile No :</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.mobile_no') }}:</strong> <span class="ml-2 "> {{ $user_details['mobile_no'] }}</span></p>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col-->
@@ -67,28 +76,28 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name">{{ __('messages.first_name') }}</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="Enter The First Name">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user_details['first_name'] }}" placeholder="{{ __('messages.enter_the_first_name') }}">
                                         <span class="text-danger error-text first_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="last_name">{{ __('messages.last_name') }}</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="Enter The Last Name">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $user_details['last_name'] }}" placeholder="{{ __('messages.enter_the_last_name') }}">
                                         <span class="text-danger error-text last_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email_address') }}</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter The Email">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="{{ __('messages.enter_the_email') }}">
                                         <span class="text-danger error-text email_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile_no">mobile_no</label>
-                                        <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="Enter The Mobile No">
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
+                                        <input type="text" class="form-control number_validation" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
                                         <span class="text-danger error-text mobile_no_error"></span>
                                     </div>
                                 </div>
@@ -115,7 +124,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="old">{{ __('messages.old_password') }} :</label>
-                                        <input type="password" class="form-control" id="old" name="old" placeholder="Old Password">
+                                        <input type="password" class="form-control" id="old" name="old" placeholder="{{ __('messages.old_password') }}">
                                         <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
@@ -123,8 +132,8 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
+                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.new_password') }}">
                                         <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
@@ -133,13 +142,13 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="confirmed">{{ __('messages.confirm_new_password') }} :</label>
-                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="Confirm New Password">
+                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="{{ __('messages.confirm_new_password') }}">
                                         <span class="text-danger error-text confirmed_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}</button>
                             </div>
                         </form>
                         <!-- end comment box -->
@@ -153,6 +162,24 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script>
+    var input = document.querySelector("#mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        utilsScript: "js/utils.js"
+    });
+</script>
 <script>
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";

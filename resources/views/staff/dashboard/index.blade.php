@@ -162,7 +162,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p class="mb-1 text-truncate">Employee</p>
+                            <p class="mb-1 text-truncate">{{ __('messages.employee') }}</p>
                         </div>
                     </div>
                     <div class="col-6">
@@ -213,7 +213,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
 
@@ -273,7 +273,7 @@
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                     </div>
-                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">Total Strength</span></h6>
+                    <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
             </div> <!-- end card-box-->
         </div> <!-- end col-->
@@ -294,7 +294,7 @@
                             <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> Today <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
+                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
@@ -336,13 +336,13 @@
 
                                                                     <li class="list-inline-item mt-3 mt-sm-0">
                                                                         @if($today['priority'] == "Low")
-                                                                        <span class="badge badge-soft-success p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "Medium")
-                                                                        <span class="badge badge-soft-info p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                         @endif
                                                                         @if($today['priority'] == "High")
-                                                                        <span class="badge badge-soft-danger p-1">{{$today['priority']}}</span>
+                                                                        <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                         @endif
                                                                     </li>
                                                                 </ul>
@@ -404,13 +404,13 @@
 
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($upcoming['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($upcoming['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$upcoming['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -473,13 +473,13 @@
 
                                                                         <li class="list-inline-item mt-3 mt-sm-0">
                                                                             @if($old['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
                                                                             @endif
                                                                             @if($old['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{$old['priority']}}</span>
+                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
                                                                             @endif
                                                                         </li>
                                                                     </ul>
@@ -537,7 +537,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i> Event Details </h4>
+                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -568,11 +568,11 @@
                                                     <td id="end_date"></td>
                                                 </tr>
                                                 <tr id="start_time_row" style="display:none">
-                                                    <td>Start Time</td>
+                                                    <td>{{ __('messages.start_time') }}</td>
                                                     <td id="start_time"></td>
                                                 </tr>
                                                 <tr id="end_time_row" style="display:none">
-                                                    <td>End Time</td>
+                                                    <td>{{ __('messages.end_time') }}</td>
                                                     <td id="end_time"></td>
                                                 </tr>
                                                 <tr>
@@ -596,7 +596,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> Details </h4>
+                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i> {{ __('messages.details') }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -604,7 +604,7 @@
                                 <div class="col">
                                     <div class="card-box">
                                         <div class="table-responsive">
-                                            <p class="text-center"> Name :<span id="bulk_name"></span></p><br>
+                                            <p class="text-center"> {{ __('messages.name') }} :<span id="bulk_name"></span></p><br>
                                         </div>
                                     </div> <!-- end card-box -->
                                 </div> <!-- end col -->
@@ -617,7 +617,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> Birthday </h4>
+                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i> {{ __('messages.birthday') }} </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -625,7 +625,7 @@
                                 <div class="col">
                                     <div class="card-box">
                                         <div class="table-responsive">
-                                            <p class="text-center"> Happy Birthday <span id="name"></span></p>
+                                            <p class="text-center">{{ __('messages.happy_birthday') }}<span id="name"></span></p>
                                         </div>
                                     </div> <!-- end card-box -->
                                 </div> <!-- end col -->

@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                         @forelse ($teacher_class as $class)
                                         <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
@@ -115,7 +115,7 @@
                                 <div class="form-group">
                                     <label for="sectionID">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Section</option>
+                                        <option value="">{{ __('messages.select_Section') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 <div class="form-group">
                                     <label for="subjectID">Subject<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -315,7 +315,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="navv">
-                                    Daily Report
+                                {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -357,7 +357,7 @@
                                                 <div class="form-group">
                                                     <label for="changeAttendance">{{ __('messages.select_attendance') }}</label>
                                                     <select id="changeAttendance" class="form-control">
-                                                        <option value="">Not Selected</option>
+                                                        <option value="">{{ __('messages.not_selected') }}</option>
                                                         <option value="present">Present</option>
                                                         <option value="absent">Absent</option>
                                                         <option value="late">{{ __('messages.late') }}</option>
@@ -382,7 +382,7 @@
                                                             <th>{{ __('messages.student_name') }}</th>
                                                             <th>Attentance</th>
                                                             <th>{{ __('messages.remarks') }}</th>
-                                                            <th>Reasons</th>
+                                                            <th>{{ __('messages.reasons') }}</th>
                                                             <th>{{ __('messages.student_behaviour') }}</th>
                                                             <th>{{ __('messages.class_behaviour') }}</th>
 
@@ -410,7 +410,7 @@
                                                 <div class="modal-body">
                                                     <label for="heard">{{ __('messages.remarks') }}</label>
                                                     <input type="hidden" id="studenetID" />
-                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
+                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -458,7 +458,7 @@
                                             <div class="modal-body">
                                                 <label for="heard">{{ __('messages.remarks') }}</label>
                                                 <input type="hidden" id="studenet_leave_tbl_id" />
-                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
+                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -475,8 +475,8 @@
                                         <input type="hidden" name="date" id="dailyReportSelectedDate">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="daily_report">Report<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="Please enter description"></textarea>
+                                                <label for="daily_report">{{ __('messages.report') }}<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -556,11 +556,11 @@
                                                 <div class="form-group">
                                                     <div>
                                                         <button type="button" id="add-button" class="btn btn-secondary text-uppercase shadow-sm">
-                                                            <i class="fas fa-plus fa-fw"></i> Add</button>
+                                                            <i class="fas fa-plus fa-fw"></i>{{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-secondary text-uppercase" disabled="disabled">
-                                                            <i class="fas fa-minus fa-fw"></i> Remove</button>
+                                                            <i class="fas fa-minus fa-fw"></i>{{ __('messages.remove') }}</button>
                                                         <button type="submit" id="save-button" class="btn btn-primary-bl text-uppercase">
-                                                            Save</button>
+                                                        {{ __('messages.save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

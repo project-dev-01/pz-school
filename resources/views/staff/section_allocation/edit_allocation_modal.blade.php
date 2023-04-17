@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="class_name">{{ __('messages.class_Name') }}</label>
                         <select class="form-control" id="class_name" name="class_name">
-                            <!-- <option value="">Choose Class</option> -->
+                            <!-- <option value="">{{ __('messages.select_class') }}</option> -->
                             @foreach($classDetails as $class)
                             <option value="{{$class->id}}">{{$class->name}}</option>
                             @endforeach
@@ -21,9 +21,9 @@
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name</label>
+                        <label for="section_name">{{ __('messages.section_name') }}</label>
                         <select class="form-control" id="section_name" name="section_name">
-                            <option value="">Choose Section</option>
+                            <option value="">{{ __('messages.select_section') }}</option>
                             @foreach($sectionDetails as $section)
                             <option value="{{$section->id}}">{{$section->name}}</option>
                             @endforeach

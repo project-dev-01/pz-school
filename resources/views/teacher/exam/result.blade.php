@@ -22,7 +22,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Exam
+                        {{ __('messages.exam') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>                    
+                                        <option value="">{{ __('messages.select_grade') }}</option>                    
                                         @forelse ($classnames as $class)
 
                                         <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="sectionID" id="lblsectionId">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                     <select id="examnames" class="form-control" name="exam_id">
-                                        <option value="">Select Exams</option>
+                                        <option value="">{{ __('messages.select_exams') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                             <div class="table-responsive" id="tbl_std_subject_marks_division">
                            
                             <hr>
-                            <header><b>Subject Division</b></header>
+                            <header><b>{{ __('messages.subject_division') }}</b></header>
                                 <table class="table table-bordered mb-0">
                                     <thead id="tbl_std_subject_marks_division_header">
                                        

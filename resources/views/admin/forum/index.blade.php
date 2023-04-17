@@ -75,7 +75,7 @@
             @empty 
             @endforelse
             @else
-            <div class="text-justify">  No records found..</div>
+            <div class="text-justify"> {{ __('messages.no_records_found') }}</div>
             @endif
 
             <!-- <div class="tt-row-btn">

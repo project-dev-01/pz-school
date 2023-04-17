@@ -146,7 +146,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -222,9 +222,9 @@ $(function () {
         $(".attendanceReport").hide();
         var class_id = $(this).val();
         $("#attendanceFilter").find("#sectionID").empty();
-        $("#attendanceFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#attendanceFilter").find("#sectionID").append('<option value="">'+select_section+'</option>');
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -239,7 +239,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -410,7 +410,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -430,15 +430,15 @@ $(function () {
                             });
                         }
                         chart.updateSeries([{
-                            name: "PRESENT",
+                            name: present_lang,
                             type: "line",
                             data: presentData
                         }, {
-                            name: "LATE",
+                            name: late_lang,
                             type: "line",
                             data: lateData
                         }, {
-                            name: "Absent",
+                            name: absent_lang,
                             type: "line",
                             data: absentData
                         }]);

@@ -9,10 +9,10 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">Chat</li>
+                        <li class="breadcrumb-item active">{{ __('messages.chat') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Chat</h4>
+                <h4 class="page-title">{{ __('messages.chat') }}</h4>
             </div>
         </div>
     </div>
@@ -44,13 +44,13 @@
                     <!-- start search box -->
                     <form class="search-bar mb-3">
                         <div class="position-relative">
-                            <input type="text" class="form-control form-control-light" placeholder="People, groups & messages...">
+                            <input type="text" class="form-control form-control-light" placeholder="{{ __('messages.people_group') }}">
                             <span class="mdi mdi-magnify"></span>
                         </div>
                     </form>
                     <!-- end search box -->
 
-                    <h6 class="font-13 text-muted text-uppercase">Group Chats</h6>
+                    <h6 class="font-13 text-muted text-uppercase">{{ __('messages.group_chat') }}</h6>
                     <div class="p-2">
                         @foreach($group_list as $group)
                         <a href="javascript: void(0);" class="text-reset mb-2 d-block">
@@ -86,7 +86,7 @@
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
                     </div>
-                    <h6 class="font-13 text-muted text-uppercase mb-2">Teacher Contacts</h6>
+                    <h6 class="font-13 text-muted text-uppercase mb-2">{{ __('messages.teacher_contacts') }}</h6>
 
                     <!-- users -->
                     <div class="row">
@@ -160,8 +160,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -183,8 +183,8 @@
 
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -206,8 +206,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -229,8 +229,8 @@
 
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -252,8 +252,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -275,8 +275,8 @@
 
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -298,8 +298,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -321,8 +321,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
                                 </div>
                             </div>
                         </li>
@@ -334,7 +334,7 @@
                                 <form class="needs-validation" novalidate="" name="chat-form" id="chat-form">
                                     <div class="row">
                                         <div class="col mb-2 mb-sm-0">
-                                            <input type="text" class="form-control border-0" placeholder="Enter your text" required="">
+                                            <input type="text" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
                                             <div class="invalid-feedback">
                                                 Please enter your messsage
                                             </div>

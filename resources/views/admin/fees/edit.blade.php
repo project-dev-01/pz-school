@@ -84,7 +84,7 @@ use \App\Http\Controllers\AdminController;
                                     <th>#</th>
                                     <th>{{ __('messages.fees_group') }}</th>
                                     <th>{{ __('messages.fees_type') }}</th>
-                                    <th>Payment Mode</th>
+                                    <th>{{ __('messages.payment_mode') }}</th>
                                     <th>{{ __('messages.due_date') }}</th>
                                     <th>Paid Date</th>
                                     <th>{{ __('messages.short_test_name') }}</th>
@@ -151,7 +151,7 @@ use \App\Http\Controllers\AdminController;
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="9">No data available</td>
+                                    <td class="text-center" colspan="9">{{ __('messages.no_data_available') }}</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -189,10 +189,10 @@ use \App\Http\Controllers\AdminController;
                         <input type="hidden" value="{{ $student['academic_id'] }}" name="academic_year" id="academicYear" class="form-control">
                         <div class="col-md-5">
                             <div class="form-group" style="margin: 25px 6px;">
-                                <label for="payment_mode">Payment Mode</label>
+                                <label for="payment_mode">{{ __('messages.payment_status') }}</label>
                                 <input type="hidden" class="form-control payment_mode_onload" name="payment_mode_onload" value="" />
                                 <select id="payment_mode{{$fee['fees_type_id']}}" class="form-control payment_mode" name="payment_mode">
-                                    <option value="">Select Payment Mode</option>
+                                    <option value="">{{ __('messages.payment_status') }}</option>
                                     @forelse ($payment_mode as $mode)
                                     <option value="{{ $mode['id'] }}">{{ $mode['name'] }}</option>
                                     @empty
@@ -215,15 +215,15 @@ use \App\Http\Controllers\AdminController;
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="student Name">Date<span class="text-danger">*</span></label>
-                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker initialEmpty" placeholder="YYYY-MM-DD">
+                                                        <label for="student Name">{{ __('messages.date') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="yearDate" name="fees[1][date]" class="form-control date-picker initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="payment_status">{{ __('messages.payment_status') }}<span class="text-danger">*</span></label>
                                                         <select class="form-control initialEmpty" id="yearPaySts" name="fees[1][payment_status]">
-                                                            <option value="">Select Payment Status</option>
+                                                            <option value="">{{ __('messages.select_payment_status') }}</option>
                                                             @forelse ($payment_status as $status)
                                                             <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                             @empty
@@ -241,7 +241,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>
@@ -279,7 +279,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <td class="semester-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$sem['id']}} initialEmpty" id="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][status]">
                                                                     <input type="hidden" value="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][semester]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[2][{{$sem['id']}}][date]">
+                                                                <td><input type="text" disabled id="semesterDate{{$sem['id']}}" class="form-control date-picker checkbx_{{$sem['id']}} initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}" name="fees[2][{{$sem['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$sem['name']}}
                                                                 </td>
@@ -289,7 +289,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </td>
                                                                 <td>
                                                                     <select class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterPaySts{{$sem['id']}}" name="fees[2][{{$sem['id']}}][payment_status]">
-                                                                        <option value="">Choose Payment Status</option>
+                                                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty
@@ -308,7 +308,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>
@@ -348,7 +348,7 @@ use \App\Http\Controllers\AdminController;
                                                                 <td class="month-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$mon['id']}} initialEmpty" id="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][status]">
                                                                     <input type="hidden" value="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][month]">
                                                                 </td>
-                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="YYYY-MM-DD" name="fees[3][{{$mon['id']}}][date]">
+                                                                <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}" name="fees[3][{{$mon['id']}}][date]">
                                                                 </td>
                                                                 <td>{{$mon['name']}}
                                                                 </td>
@@ -357,7 +357,7 @@ use \App\Http\Controllers\AdminController;
                                                                     <input type="text" name="fees[3][{{$mon['id']}}][amount]" id="monthPayAmt{{$mon['id']}}" readonly class="fees_amount_3 initialEmpty form-control">
                                                                 </td>
                                                                 <td><select class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthPaySts{{$mon['id']}}" name="fees[3][{{$mon['id']}}][payment_status]">
-                                                                        <option value="">Choose Payment Status</option>
+                                                                        <option value="">{{ __('messages.select_payment_status') }}</option>
                                                                         @forelse ($payment_status as $status)
                                                                         <option value="{{ $status['id'] }}">{{ $status['name'] }}</option>
                                                                         @empty
@@ -378,7 +378,7 @@ use \App\Http\Controllers\AdminController;
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                Save
+                                            {{ __('messages.save') }}
                                             </button>
                                         </div>
                                     </div>

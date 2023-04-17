@@ -10,9 +10,9 @@
                 <form id="eventTypeForm" method="post" action="" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
-                            <option value="">Select Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             <option value="">Malaysia</option>
                             <option value="press">Singapore</option>
                         </select>
@@ -21,7 +21,7 @@
                     <div class="form-group">
                         <label for="title">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select Standard</option>
+                            <option value="selct">{{ __('messages.select_standard') }}</option>
                             <option>I</option>
                             <option>II</option>
                             <option>III</option>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="title">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select Class Name</option>
+                            <option value="selct">{{ __('messages.select_class') }}</option>
                             <option>A</option>
                             <option>B</option>
                             <option>C</option>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="date">{{ __('messages.teacher') }}<span class="text-danger">*</span></label>
                         <select id="priority" class="form-control" required="">
-                            <option value="selct">Select Teacher</option>
+                            <option value="selct">{{ __('messages.select_teacher') }}</option>
                             <option>Smith</option>
                             <option>Taylor</option>
                             <option>David</option>
@@ -58,16 +58,16 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Weekday<span class="text-danger">*</span></label>
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <input type="text" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="description">Start Time<span class="text-danger">*</span></label>
-                        <input type="number" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <label for="description">{{ __('messages.start_time') }}<span class="text-danger">*</span></label>
+                        <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div><div class="form-group">
-                        <label for="description">End Time<span class="text-danger">*</span></label>
-                        <input type="number" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <label for="description">{{ __('messages.end_time') }}<span class="text-danger">*</span></label>
+                        <input type="number" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">

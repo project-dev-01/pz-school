@@ -33,8 +33,8 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Standard</option>
-                                        <option value="">All</option>
+                                    <option value="">{{ __('messages.select_standard') }}</option>
+                                        <option value="">{{ __('messages.all') }}</option>
                                         <option value="">I</option>
                                         <option value="press">II</option>
                                         <option value="">III</option>
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Class Name</option>
+                                    <option value="">{{ __('messages.select_class') }}</option>
                                         <option value="">A</option>
                                         <option value="">B</option>
                                         <option value="press">C</option>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.exam_name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                    <option value="">Select Exam</option>
+                                    <option value="">{{ __('messages.select_exam') }}</option>
                                         <option value="">Annual</option>
                                         <option value="">Quarterly</option>
                                     </select>

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditExamModalLabel">Edit Exam </h4>
+                <h4 class="modal-title" id="myeditExamModalLabel">{{ __('messages.edit_exam') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,21 +11,21 @@
                     @csrf
                     <input type="hidden" name="id">
                     <div class="form-group">
-                        <label for="name"> Name <span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+                        <label for="name">{{ __('messages.name') }}<span class="text-danger">*</span></label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="term_id" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                         <select  class="form-control" name="term_id">
-                            <option value="">Select Term</option>
+                            <option value="">{{ __('messages.select_term') }}</option>
                             @foreach($term as $t)
                                 <option value="{{$t['id']}}">{{$t['name']}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="remarks"> Remarks</label>
-                        <textarea type="text"  name="remarks" class="form-control" placeholder="Enter Remarks"></textarea>
+                        <label for="remarks">{{ __('messages.remarks') }}</label>
+                        <textarea type="text"  name="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

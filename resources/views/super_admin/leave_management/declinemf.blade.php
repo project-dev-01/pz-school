@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" style="width:750px;margin:1.75rem auto !important;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold" id="declineleaveModelLabel">Leave Decline Confirmation</h4>
+                <h4 class="modal-title font-weight-bold" id="declineleaveModelLabel">{{ __('messages.leave_decline_confirmation') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,12 +11,12 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="row">
-                                <div class="col-sm-6"><h5>Emp Name :</h5></div>
-                                <div class="col-sm-5"><h4 class="font-weight-bold">Hajmal</h4></div></div>
+                                <div class="col-sm-6"><h5>{{ __('messages.emp_name') }} :</h5></div>
+                                <div class="col-sm-5"><h4 class="font-weight-bold">{{ __('messages.hajmal') }}</h4></div></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-sm-6"><h5>Emp Id :</h5></div>
+                                    <div class="col-sm-6"><h5>{{ __('messages.emp_id') }} :</h5></div>
                                     <div class="col-sm-5"><h4 class="font-weight-bold">1010</h4></div>
                                 </div>                            
                             </div>                            
@@ -24,7 +24,7 @@
                         <div class="row">                          
                             <div class="col-md-12">                              
                             
-                                    <label for="message">Admin Reason(s)<span class="text-danger">*</span></label>
+                                    <label for="message">{{ __('messages.admin_reasons') }}<span class="text-danger">*</span></label>
                                     <textarea id="message" class="form-control" name="message"
                                     data-parsley-trigger="keyup" data-parsley-minlength="20"
                                     data-parsley-maxlength="100"
@@ -35,7 +35,7 @@
                         </div>  <br/>   
                         <div class="row">
                             <div class="col-md-6">                            
-                            <button type="button" class="btn btn-success waves-effect waves-light" data-dismiss="modal" aria-hidden="true">Confirm</button>
+                            <button type="button" class="btn btn-success waves-effect waves-light" data-dismiss="modal" aria-hidden="true">{{ __('messages.confirm') }}</button>
                             </div>
                         </div>                  
                 </form>

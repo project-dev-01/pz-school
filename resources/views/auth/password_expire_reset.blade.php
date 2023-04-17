@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                    <label for="password">Note : <span style="color:blue;">(password atleast 8 characters and contain both numbers & letters/special characters.):</span></label>
+                                    <label for="password">{{ __('messages.note') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
                                         <input type="password" class="form-control" name="password" placeholder="Enter New Password">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" class="form-control" name="password_confirmation" placeholder="Enter Confirm New Password">
+                                        <input type="password" class="form-control" name="password_confirmation" placeholder="{{ __('messages.enter_confirm_new_password') }}">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -91,7 +91,7 @@
                                     </div>
                                 </div><br>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-block signin" type="submit">Confirm</button>
+                                    <button class="btn btn-block signin" type="submit">{{ __('messages.confirm') }}</button>
                                 </div><br>
 
                             </form>

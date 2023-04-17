@@ -71,7 +71,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="class_id">Standard<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Standard</option>
+                                        <option value="">{{ __('messages.select_standard') }}</option>
                                         @foreach($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @endforeach
@@ -82,7 +82,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="section_id">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class Name</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -113,7 +113,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -163,9 +163,9 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select id="gender" name="gender" class="form-control">
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="">{{ __('messages.select_gender') }}</option>
+                                        <option value="Male">{{ __('messages.male') }}</option>
+                                        <option value="Female">{{ __('messages.female') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                     <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                        <option value="">Select Blood Group</option>
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
                                         <option>O+</option>
                                         <option>A+</option>
                                         <option>B+</option>
@@ -406,7 +406,7 @@ extends('layouts.admin-layout')
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="">Occupation<span class="text-danger">*</span></label>
+                                        <label for="">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                         <input type="" id="txt_occupation" class="form-control" name="txt_occupation" data-parsley-trigger="change">
                                     </div>
                                 </div>
@@ -515,7 +515,7 @@ extends('layouts.admin-layout')
                                     <label for="drp_transport_route">{{ __('messages.transport_route') }}</label>
 
                                     <select id="drp_transport_route" name="drp_transport_route" class="form-control">
-                                        <option value="">Select Transport</option>
+                                        <option value="">{{ __('messages.select_transport') }}</option>
                                         @foreach($transport as $trans)
                                         <option value="{{$trans['id']}}">{{$trans['name']}}</option>
                                         @endforeach
@@ -526,7 +526,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="drp_transport_vechicleno">Vechicle No</label>
                                     <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
-                                        <option value="">First select the branch</option>
+                                        <option value="">{{ __('messages.select_vehicle_number') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -558,7 +558,7 @@ extends('layouts.admin-layout')
                                 <div class="form-group">
                                     <label for="drp_roomname">{{ __('messages.room_name') }}</label>
                                     <select id="drp_roomname" name="drp_roomname" class="form-control">
-                                        <option value="">First select the hostel</option>
+                                        <option value="">{{ __('messages.select_room_name') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -595,7 +595,7 @@ extends('layouts.admin-layout')
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel

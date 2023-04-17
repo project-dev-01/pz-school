@@ -171,7 +171,7 @@
                                         <div class="form-group">
                                             <label for="title">{{ __('messages.topic_title') }}<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="title" class="form-control" id="title" placeholder="Subject of your topic">
+                                                <input type="text" name="title" class="form-control" id="title" placeholder="{{ __('messages.subject_of_your_topic') }}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>
@@ -179,7 +179,7 @@
                                         <div class="form-group">
                                             <label for="header">{{ __('messages.topic_header') }}<span class="text-danger">*</span></label>
                                             <div class="tt-value-wrapper">
-                                                <input type="text" name="header" class="form-control" id="header" placeholder="Header of your topic">
+                                                <input type="text" name="header" class="form-control" id="header" placeholder="{{ __('messages.header_of_your_topic') }}">
                                                 <span class="tt-value-input"></span>
                                             </div>
                                             <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
@@ -194,7 +194,7 @@
                                         <div class="form-group">
                                             <label for="soap_type_id" class="">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                                             <select id="soap_type_id" class="col-md-6 form-control" name="soap_type_id">
-                                                <option value="">Select Type</option>
+                                                <option value="">{{ __('messages.select_type') }}</option>
                                                 <option value="1">S - Subjective</option>
                                                 <option value="2">O - Objective</option>
                                                 <option value="3">A - Assessment</option>
@@ -203,8 +203,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-auto ml-md-auto">
-                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">Create
-                                                    Post</button>
+                                                <button type="submit" id="search" class="btn btn-secondary" style="background-color: #2172cd;">{{ __('messages.create_post') }}</button>
                                             </div>
                                         </div>
                                     </form>

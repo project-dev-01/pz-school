@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Exam Attendance</h4>
+                <h4 class="page-title">{{ __('messages.exam_attendance') }}</h4>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.exam') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Select Exam</option>
+                                        <option value="">{{ __('messages.select_exam') }}</option>
                                         <option value="">Half yearly</option>
                                     </select>
                                 </div>
@@ -48,8 +48,8 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.standard') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">                             
-                                    <option value="">Select Standard</option>
-                                    <option value="">All</option>
+                                    <option value="">{{ __('messages.select_standard') }}</option>
+                                    <option value="">{{ __('messages.all') }}</option>
                                     <option value="">I</option>
                                     <option value="press">II</option>
                                     <option value="">III</option>
@@ -65,8 +65,8 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                                     <select id="heard" class="form-control" required="">                              
-                                    <option value="">Select Class Name</option>
-                                    <option value="All">All</option>
+                                    <option value="">{{ __('messages.select_class') }}</option>
+                                    <option value="All">{{ __('messages.all') }}</option>
                                     <option value="">A</option>
                                     <option value="">B</option>
                                     <option value="press">C</option>
@@ -113,7 +113,7 @@
                 <ul class="nav nav-tabs" >
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Set Attendance
+                        {{ __('messages.set_attendance') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -125,7 +125,7 @@
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">Select for Everyone<span class="text-danger">*</span></label>
+                                            <label for="heard">{{ __('messages.select_for_everyone') }}<span class="text-danger">*</span></label>
                                             <select id="heard" class="form-control" required="">
                                                 <option value="">{{ __('messages.present') }}</option>
                                                 <option value="press">{{ __('messages.absent') }}</option>
@@ -140,7 +140,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>{{ __('messages.name') }}</th>
-                                                <th>Roll</th>
+                                                <th>{{ __('messages.roll_number') }}</th>
                                                 <th>{{ __('messages.register_no') }}</th>
                                                 <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.remarks') }}</th>
@@ -172,7 +172,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="Remarks"></td>
+                                                <td> <input type="remarks" id="query" name="q" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"></td>
 
                                             </tr>
                                         </tbody>
@@ -185,7 +185,7 @@
                     <!-- end row-->
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
+                        {{ __('messages.save') }}
                         </button>
                         <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

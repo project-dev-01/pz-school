@@ -11,9 +11,9 @@
                     @csrf
                     <input type="hidden" name="sid">
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select id="branch_id" class="form-control" name="branch_id">
-                            <option value="">Select Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             @foreach($branches as $b)
                             <option value="{{$b['id']}}">{{$b['name']}}</option>
                             @endforeach
@@ -22,12 +22,12 @@
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('messages.name') }}</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="capacity">{{ __('messages.capacity') }}</label>
-                        <input type="text" id="capacity" name="capacity" class="form-control" placeholder="Enter capacity">
+                        <input type="text" id="capacity" name="capacity" class="form-control" placeholder="{{ __('messages.enter_capacity') }}">
                         <span class="text-danger error-text capacity_error"></span>
                     </div>
                     <div class="form-group">

@@ -12,13 +12,13 @@
 
                     <div class="form-group">
                         <label for="name"> {{ __('messages.category_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Soap Category Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_soap_category_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="soap_type_id">{{ __('messages.soap_type') }}<span class="text-danger">*</span></label>
                         <select id="soap_type_id" class="form-control" name="soap_type_id">
-                            <option value="">Select Soap Type</option>
+                            <option value="">{{ __('messages.select_soap_type') }}</option>
                             <option value="1">Subjective</option>
                             <option value="2">Objective</option>
                             <option value="3">Assessment</option>

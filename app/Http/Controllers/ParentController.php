@@ -133,9 +133,10 @@ class ParentController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $upload_lang = __('messages.upload');
                 if ($row['status'] != "Approve") {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Upload</a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Hello</a>
             </div>';
                 } else {
                     return '-';
@@ -251,7 +252,7 @@ class ParentController extends Controller
 
     public function viewExamTimetable(Request $request)
     {
-
+        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'student_id' => session()->get('student_id'),
             'exam_id' => $request->exam_id
@@ -288,7 +289,7 @@ class ParentController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7" class="text-center"> No Data Available</td>
+                                <td colspan="7" class="text-center"> '.$no_data_available_lang.'</td>
                             </tr>';
             }
 
@@ -665,6 +666,19 @@ class ParentController extends Controller
     //Filter  Homework
     public function filterHomework(Request $request)
     {
+        
+        $title_lang = __('messages.title');
+        $status_lang = __('messages.status');
+        $date_of_homework_lang = __('messages.date_of_homework');
+        $date_of_submission_lang = __('messages.date_of_submission');
+        $evalution_date_lang = __('messages.evalution_date');
+        $remarks_lang = __('messages.remarks');
+        $rank_out_of_5_lang = __('messages.rank_out_of_5');
+        $document_lang = __('messages.document');
+        $submission_process_here_lang = __('messages.submission_process_here');
+        $note_lang = __('messages.note');
+        $attachment_file = __('messages.attachment_file');
+        
         $student = session()->get('student_id');
         $data = [
             'status' => $request->status,
@@ -692,7 +706,7 @@ class ParentController extends Controller
                     if ($work['status'] == 1) {
                         $file = '<div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-5 font-weight-bold">Attachment File: </div>
+                            <div class="col-md-5 font-weight-bold">'.$attachment_file.': </div>
                             <div class="col-md-3">
                                 <a href="~/resources/views/Guide.pdf" download>
                                     <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -720,19 +734,19 @@ class ParentController extends Controller
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Title :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$title_lang.' :</div>
                                                     <div class="col-md-3">' . $work['title'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Status :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$status_lang.' :</div>
                                                     <div class="col-md-3">' . $status . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Date Of Homework :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$date_of_homework_lang.' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
                                                 </div>
                                             </div>
@@ -742,19 +756,19 @@ class ParentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Date Of Submission :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$date_of_submission_lang.' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Evalution Date :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$evalution_date_lang.' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['evaluation_date'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Remarks :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$remarks_lang.' :</div>
                                                     <div class="col-md-3">' . $work['description'] . '</div>
                                                 </div>
                                             </div>
@@ -763,13 +777,13 @@ class ParentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Rank Out Of 5 :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$rank_out_of_5_lang.' :</div>
                                                     <div class="col-md-3">' . $work['rank'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Document :</div>
+                                                    <div class="col-md-5 font-weight-bold">'.$document_lang.' :</div>
                                                     <div class="col-md-3">
                                                         <a href="~/resources/views/Guide.pdf" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -780,14 +794,14 @@ class ParentController extends Controller
                                         </div><br />
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold">Submission Process Here :- </div>
+                                            <div class="col-md-12 font-weight-bold">'.$submission_process_here_lang.' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">Note : </div>
+                                                    <div class="col-md-5 font-weight-bold">'.$note_lang.' : </div>
                                                     <div class="col-md-5">
                                                         <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
                                                     </div>
@@ -833,7 +847,7 @@ class ParentController extends Controller
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
         $get_class_section_by_student = Helper::PostMethod(config('constants.api.get_class_section_by_student'), $data);
 
-        // dd($get_class_section_by_student);
+        // dd($data);
         return view(
             'parent.analyticrep.analyticreport',
             [

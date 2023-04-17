@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                             <select id="changeClassName" class="form-control" name="class_id">
-                                                <option value="">Select Grade</option>
+                                                <option value="">{{ __('messages.select_grade') }}</option>
                                                 @forelse ($teacher_class as $class)
                                                 <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                                 @empty
@@ -64,7 +64,7 @@
                                         <div class="form-group">
                                             <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                             <select id="sectionID" class="form-control" name="section_id">
-                                                <option value="">Select Class</option>
+                                                <option value="">{{ __('messages.select_class') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                         <div class="form-group">
                                             <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                             <select id="examnames" class="form-control" name="exam_id">
-                                                <option value="">Select Exams</option>
+                                                <option value="">{{ __('messages.select_exams') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                         <div class="form-group">
                                             <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                             <select id="subjectID" class="form-control" name="subject_id">
-                                                <option value="">Select Subject</option>
+                                                <option value="">{{ __('messages.select_subject') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                         <div class="form-group">
                                             <label for="paperID">{{ __('messages.paper_name') }}</label>
                                             <select id="paperID" class="form-control" name="paper_id">
-                                                <option value="">Select Paper</option>
+                                                <option value="">{{ __('messages.select_paper') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                         <div class="form-group">
                                             <label for="semester_id">{{ __('messages.semester') }}</label>
                                             <select id="semester_id" class="form-control" name="semester_id">
-                                                <option value="0">Select Semester</option>
+                                                <option value="0">{{ __('messages.select_semester') }}</option>
                                                 @foreach($semester as $sem)
                                                 <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                                 @endforeach
@@ -107,7 +107,7 @@
                                         <div class="form-group">
                                             <label for="session_id">{{ __('messages.session') }}</label>
                                             <select id="session_id" class="form-control" name="session_id">
-                                                <option value="0">Select Session</option>
+                                                <option value="0">{{ __('messages.select_session') }}</option>
                                                 @foreach($session as $ses)
                                                 <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                                 @endforeach
@@ -131,7 +131,7 @@
             <div class="card" id="mark_by_subject_card" style="display:none;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Marks By Subject
+                        <h4 class="navv"> {{ __('messages.marks_by_subject') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -171,7 +171,7 @@
                                     <div class="form-group text-right m-b-0">
 
                                         <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                            Save
+                                        {{ __('messages.save') }} 
                                         </button>
                                     </div>
                                 </div>
@@ -235,11 +235,11 @@
                                     <div class="row mt-2">
                                         <div class="col-6">
                                             <h3 data-plugin="">{{ __('messages.number_of_student') }}</h3>
-                                            <p class="text-muted font-13 mb-0 text-truncate">Y Axis</p>
+                                            <p class="text-muted font-13 mb-0 text-truncate">{{ __('messages.y_axis') }}</p>
                                         </div>
                                         <div class="col-6">
                                             <h3 data-plugin="">{{ __('messages.grade') }}</h3>
-                                            <p class="text-muted font-13 mb-0 text-truncate">X Axis</p>
+                                            <p class="text-muted font-13 mb-0 text-truncate">{{ __('messages.x_axis') }}</p>
                                         </div>
                                     </div> <!-- end row -->
                                     <div id="test-bar-chart" style="height: 270px;" class="morris-chart mt-3"></div>
@@ -253,7 +253,7 @@
             <div class="card" id="graphs_card" style="display:none">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Graphs
+                        <h4 class="navv">{{ __('messages.graphs') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -325,7 +325,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Marks by Subject </h4>
+                                <h4 class="header-title">{{ __('messages.marks_by_subject') }} </h4>
                                 <div class="mt-4 chartjs-chart">
                                     <div id="student-subject-mark" class="apex-charts" data-colors="#f672a7"></div>
                                     <!-- <canvas id="marksChart" height="350" data-colors="#39afd1,#a17fe0"></canvas> -->
@@ -346,7 +346,7 @@
             <div class="modal-body">
                 <label for="heard">{{ __('messages.remarks') }}</label>
                 <input type="hidden" id="studenetID" />
-                <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="Enter memo here" name="student_remarks"></textarea>
+                <textarea class="form-control" id="student_remarks" maxlength="50" rows="5" placeholder="{{ __('messages.enter_memo_here') }}" name="student_remarks"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

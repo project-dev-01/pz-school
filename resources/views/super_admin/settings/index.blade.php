@@ -1,5 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('css')
+<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<style>
+
+.iti {
+    display: block;
+}
+</style>
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -84,7 +93,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.name') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="Enter name">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="{{ __('messages.enter_name') }}">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
@@ -101,7 +110,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="address">Address</label>
+                                        <label for="address">{{ __('messages.present_address') }}</label>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
@@ -122,7 +131,7 @@
                                 <input type="hidden" name="id" value="{{ $user_details['id'] }}">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="name">Old Passord</label>
+                                        <label for="name">{{ __('messages.old_password') }}</label>
                                         <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>

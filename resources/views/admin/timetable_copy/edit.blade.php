@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="btwyears" class="form-control" name="year">
-                                        <option value="">Select Academic Year</option>
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
@@ -57,9 +57,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">Copy To Grade<span class="text-danger">*</span></label>
+                                    <label for="changeClassName">{{ __('messages.copy_to_grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         <!-- <option value="All">All</option> -->
                                         @forelse ($classnames as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
@@ -70,17 +70,17 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">Copy To Class<span class="text-danger">*</span></label>
+                                    <label for="sectionID">{{ __('messages.copy_to_class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">Copy To Semester<span class="text-danger">*</span></label>
+                                    <label for="semester_id">{{ __('messages.copy_to_semester') }}<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="">Select Semester</option>
+                                        <option value="">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @endforeach
@@ -89,9 +89,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">Copy To Session<span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.copy_to_session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -139,7 +139,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                                             @endforeach
@@ -151,7 +151,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
                                                             @endforeach
@@ -163,7 +163,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]" {{$bulk}}>
-                                                            <option value="">Select Teacher</option>
+                                                            <option value="">{{ __('messages.select_teacher') }}</option>
                                                             @if($table['bulk_id'])
                                                             @php
                                                             $all = "";
@@ -173,7 +173,7 @@
                                                             }
                                                             }
                                                             @endphp
-                                                            <option value="0" {{ $all }}>All</option>
+                                                            <option value="0" {{ $all }}>{{ __('messages.all') }}</option>
                                                             @endif
                                                             @forelse($teacher as $teach)
                                                             @php
@@ -207,7 +207,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control" name="timetable[{{$row}}][class_room]" {{$bulk}}>
-                                                            <option value="">Select Hall</option>
+                                                            <option value="">{{ __('messages.select_hall') }}</option>
                                                             @forelse($hall_list as $list)
                                                             <option value="{{$list['id']}}" {{ $list['id'] == $table['class_room'] ? 'selected' : ''}}>{{ $list['hall_no'] }}</option>
                                                             @empty

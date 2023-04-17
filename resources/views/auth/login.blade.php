@@ -31,7 +31,7 @@
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">Teaching is the greatest<br> act of optimism</p>
+                        <p class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}<br>{{ __('messages.act_of_optimism') }}</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>
@@ -45,12 +45,47 @@
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
-                            <label class="control-label"></label>
+                            <!-- <label class="control-label"></label>
                             <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
                                     margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
                                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                            </select> -->
+                             <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
                             </select>
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                </div>
+                            </div>
+                            <!-- <select class="vodiapicker">
+                                <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
+                                <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">Jap</option>
+                            </select>
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;">
+
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">
+                                <button class="btn-select" value="en"><li><img src="http://localhost/school_new/public/images/USA.png" alt=""><span>EN</span></li></button>
+                                <div class="b">
+                                    <ul id="a">
+                                        <li>
+                                            <img src="http://localhost/school_new/public/images/USA.png" alt="" value="en"><span>EN</span>
+                                        </li>
+                                        <li>
+                                            <img src="http://localhost/school_new/public/images/JPN.png" alt="" value="japanese"><span>JAP</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
                         </div>
 
                         <!-- Logo -->
@@ -91,12 +126,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" id="email" name="email" required="" placeholder="Enter your email">
+                                    <input class="form-control login-email" type="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" name="password" placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -151,13 +186,73 @@
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var url = "{{ route('changeLang') }}";
 
         $(".changeLang").change(function() {
             window.location.href = url + "?lang=" + $(this).val();
         });
-    </script>
+    </script> -->
+    
+<script type="text/javascript">
+    
+
+    var locale = "{{ Session::get('locale') }}";
+    var url = "{{ route('changeLang') }}";
+    var langArray = [];
+    $('.vodiapicker option').each(function(){
+        var img = $(this).attr("data-thumbnail");
+        var text = this.innerText;
+        var value = $(this).val();
+        var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+        langArray.push(item);
+        })
+
+        $('#a').html(langArray);
+
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
+
+        //change button stuff on click
+        $('#a li').click(function(){
+            
+        var img = $(this).find('img').attr("src");
+        var value = $(this).find('img').attr('value');
+        
+        window.location.href = url + "?lang=" + value;
+        var text = this.innerText;
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+        $(".b").toggle();
+        //console.log(value);
+    });
+
+    $(".btn-select").click(function(){
+            $(".b").toggle();
+        });
+
+    //check local storage for the lang
+    var sessionLang = locale;
+    // console.log('en',sessionLang)
+    if (locale=="japanese"){
+        //find an item with value of sessionLang\
+        var img = "{{ asset('public/images/JPN.png') }}";
+        var value = "japanese";
+        var text = "JPN";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    } else {
+        var img = "{{ asset('public/images/USA.png') }}";
+        var value = "en";
+        var text = "ENG";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    }
+</script>
 
 </body>
 

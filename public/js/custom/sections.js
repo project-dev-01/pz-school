@@ -54,6 +54,20 @@ $(function () {
         // dom:"<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-4'><'col-sm-4'f>>" +
         //             "<'row'<'col-sm-12'tr>>" +
         //             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        "language": {
+            
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+            "info": showing_entries,
+            "lengthMenu": show_entries,
+            "search": datatable_search,
+            "paginate": {
+                "next": next,
+                "previous": previous
+            },
+        },
         buttons: [
             {
                 extend: 'csv',

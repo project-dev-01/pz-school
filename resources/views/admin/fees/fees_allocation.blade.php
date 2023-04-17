@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classnames as $class)
                                         <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="group_id">{{ __('messages.fees_group') }}<span class="text-danger">*</span></label>
                                     <select id="group_id" class="form-control" name="group_id">
-                                        <option value="">Select Fees Group</option>
+                                        <option value="">{{ __('messages.select_fees_group') }}</option>
                                         @forelse ($fees_group_list as $group_list)
                                         <option value="{{ $group_list['id'] }}">{{ $group_list['name'] }}</option>
                                         @empty
@@ -91,7 +91,7 @@
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
                                         <th>{{ __('messages.no') }}</th>
                                         <th>{{ __('messages.student_name') }}</th>
-                                        <th>Payment Mode</th>
+                                        <th>{{ __('messages.payment_mode') }}</th>
                                         <th>{{ __('messages.gender') }}</th>
                                         <th>{{ __('messages.register_no') }}</th>
                                         <th>{{ __('messages.email') }}</th>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                         </div>
                     </form>

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.classroom_management') }}/h4>
+                <h4 class="page-title">{{ __('messages.classroom_management') }}</h4>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">Select Grade</option>
+                                        <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($teacher_class as $class)
                                         <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">Select Class</option>
+                                        <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -51,14 +51,14 @@
                                 <div class="form-group">
                                     <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="DD-MM-YYYY" id="classDate" require="">
+                                    <input type="text" class="form-control value=" <?php echo date('d-m-Y'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
-                                        <option value="0">Select Semester</option>
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
                                         @foreach($semester as $sem)
                                         <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                         @endforeach
@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="0">Select Session</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
                                         @endforeach
@@ -312,7 +312,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-user-graduate font-24"></i><br><br>
-                                            <p class="mb-1">Perfect<br>{{ __('messages.attendance') }}</p>
+                                            <p class="mb-1">{{ __('messages.perfect') }}<br>{{ __('messages.attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -338,7 +338,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="  fas fa-user-tie  font-24"></i><br><br>
-                                            <p class="mb-1">Average<br>{{ __('messages.attendance') }}</p>
+                                            <p class="mb-1">{{ __('messages.average') }}<br>{{ __('messages.attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -364,7 +364,7 @@
                                     <div class="col-6">
                                         <div class="">
                                             <i class="fas fa-chalkboard-teacher font-24"></i><br><br>
-                                            <p class="mb-1">Below<br>{{ __('messages.attendance') }}</p>
+                                            <p class="mb-1">{{ __('messages.below') }}<br>{{ __('messages.attendance') }}</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -413,7 +413,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    Daily Report
+                                {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -452,7 +452,7 @@
                                                         <div class="form-group">
                                                             <label for="changeAttendance">{{ __('messages.select_attendance') }}</label>
                                                             <select id="changeAttendance" class="form-control">
-                                                                <option value="">Not Selected</option>
+                                                                <option value="">{{ __('messages.not_selected') }}</option>
                                                                 <option value="present">{{ __('messages.present') }}</option>
                                                                 <option value="absent">{{ __('messages.absent') }}</option>
                                                                 <option value="late">{{ __('messages.late') }}</option>
@@ -491,7 +491,7 @@
                                                                 <th>{{ __('messages.student_name') }}</th>
                                                                 <th>{{ __('messages.attendance') }}</th>
                                                                 <th>{{ __('messages.remarks') }}</th>
-                                                                <th>Reasons</th>
+                                                                <th>{{ __('messages.reasons') }}</th>
                                                                 <th>{{ __('messages.student_behaviour') }}</th>
                                                                 <th>{{ __('messages.class_behaviour') }}</th>
                                                             </tr>
@@ -504,7 +504,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -516,7 +516,7 @@
                                                 <div class="modal-body">
                                                     <label for="heard">{{ __('messages.remarks') }}</label>
                                                     <input type="hidden" id="studenetID" />
-                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="Enter remarks here" name="student_remarks"></textarea>
+                                                    <textarea class="form-control" id="student_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_remarks"></textarea>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -566,7 +566,7 @@
                                             <div class="modal-body">
                                                 <label for="heard">{{ __('messages.remarks') }}</label>
                                                 <input type="hidden" id="studenet_leave_tbl_id" />
-                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="Enter remarks here" name="student_leave_remarks"></textarea>
+                                                <textarea class="form-control" id="student_leave_remarks" rows="5" placeholder="{{ __('messages.enter_remarks') }}" name="student_leave_remarks"></textarea>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
@@ -586,8 +586,8 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <label for="daily_report">Report<span class="text-danger">*</span></label>
-                                                    <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="Please enter description"></textarea>
+                                                    <label for="daily_report">{{ __('messages.report') }}<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" id="daily_report" rows="5" name="daily_report" placeholder="{{ __('messages.enter_description') }}"></textarea>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -600,7 +600,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        Save
+                                                    {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -622,7 +622,7 @@
                                                                 <tr>
                                                                     <th>#</th>
                                                                     <th>{{ __('messages.student_name') }}</th>
-                                                                    <th>Student Remarks</th>
+                                                                    <th>{{ __('messages.student_remarks') }}</th>
                                                                     <th>{{ __('messages.remarks') }}</th>
                                                                 </tr>
                                                             </thead>
@@ -636,7 +636,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                            Save
+                                                        {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -667,9 +667,9 @@
                                                         <div class="col-md-3">
                                                             <label for="grade" class="font-weight-bold">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                             <select id="grade" class="form-control" name="grade[]">
-                                                                <option value="marks">Marks</option>
-                                                                <option value="grade">Grade</option>
-                                                                <option value="text">Text</option>
+                                                                <option value="marks">{{ __('messages.mark') }}</option>
+                                                                <option value="grade">{{ __('messages.grade') }}</option>
+                                                                <option value="text">{{ __('messages.text') }}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -679,9 +679,9 @@
                                                         <button type="button" id="add-button" class="btn btn-success text-uppercase shadow-sm">
                                                             <i class="fe-plus-circle"></i> {{ __('messages.add') }}</button>
                                                         <button type="button" id="remove-button" class="btn btn-danger text-uppercase" disabled="disabled">
-                                                            <i class="fe-minus-circle"></i> Remove</button>
+                                                            <i class="fe-minus-circle"></i>{{ __('messages.remove') }}</button>
                                                         <button type="submit" id="save-button" class="btn btn-info waves-effect waves-light text-uppercase">
-                                                            <i class="fe-save"></i> Save</button>
+                                                            <i class="fe-save"></i>{{ __('messages.save') }}</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -695,7 +695,7 @@
                                                         <table class="table dt-responsive nowrap w-100">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>S.no</th>
+                                                                    <th> {{ __('messages.s.no') }}</th>
                                                                     <th>{{ __('messages.short_test_name') }}</th>
                                                                     <th>{{ __('messages.status') }}</th>
                                                                 </tr>

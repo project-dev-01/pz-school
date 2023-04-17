@@ -10,9 +10,9 @@
                 <form id="sectionAllocationForm" method="post" action="{{ route('section_allocation.add') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select id="addSecAllBranchId" class="form-control" name="branch_id">
-                            <option value="">Select Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             @foreach($branches as $b)
                             <option value="{{$b['id']}}">{{$b['name']}}</option>
                             @endforeach
@@ -23,14 +23,14 @@
                     <div class="form-group">
                         <label for="class_name">{{ __('messages.class_Name') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="class_name" name="class_name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                         </select>
                         <span class="text-danger error-text class_name_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="section_name">Section Name<span class="text-danger">*</span></label>
+                        <label for="section_name">{{ __('messages.section_name') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="section_name" name="section_name">
-                            <option value="">Choose Section</option>
+                            <option value="">{{ __('messages.select_section') }}</option>
                         </select>
                         <span class="text-danger error-text section_name_error"></span>
                     </div>

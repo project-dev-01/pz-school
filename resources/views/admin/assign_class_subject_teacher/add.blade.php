@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="changeClassName" name="class_name">
-                            <option value="">Choose Grade</option>
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                             @forelse($classDetails as $class)
                             <option value="{{$class['id']}}">{{$class['name']}}</option>
                             @empty
@@ -23,19 +23,19 @@
                     <div class="form-group">
                         <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="sectionID" name="section_name">
-                            <option value="">Choose Class</option>
+                            <option value="">{{ __('messages.select_class') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="assignSubjects">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignSubjects" name="subject_id">
-                            <option value="">Choose Subject</option>
+                            <option value="">{{ __('messages.select_subject') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="assignClassTeacher">{{ __('messages.grade_teacher') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="assignClassTeacher" name="class_teacher">
-                            <option value="">Choose Grade Teacher</option>
+                            <option value="">{{ __('messages.select_grade_teacher') }}</option>
                             @forelse($getAllTeacherList as $teacher)
                             <option value="{{ $teacher['id'] }}">{{$teacher['name']}} ({{$teacher['role_name']}})</option>
                             @empty

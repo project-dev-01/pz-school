@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditClassModalLabel">Edit Class</h4>
+                <h4 class="modal-title" id="myeditClassModalLabel">{{ __('messages.edit_class') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,9 +11,9 @@
                     @csrf
                     <input type="hidden" name="class_id">
                     <div class="form-group">
-                        <label for="name">Branch Name <span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.branch_name') }}<span class="text-danger">*</span></label>
                         <select id="branch_id" class="form-control" name="branch_id">
-                            <option value="">Select Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             @foreach($branches as $b)
                             <option value="{{$b['id']}}">{{$b['name']}}</option>
                             @endforeach
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">{{ __('messages.name') }}</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

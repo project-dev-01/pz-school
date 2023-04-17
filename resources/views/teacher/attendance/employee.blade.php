@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">Select Session</option>
+                                        <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
                                         @endforeach
@@ -49,14 +49,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="date">Month/Year<span class="text-danger">*</span></label>
+                                    <label for="date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="date" placeholder="MM-YYYY" id="employeeDate">
+                                        <input type="text" class="form-control" name="date" placeholder="{{ __('messages.mm_yyyy') }}" id="employeeDate">
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                         <input type="hidden" id="employee_form_session_id" name="session_id">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                Save
+                            {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

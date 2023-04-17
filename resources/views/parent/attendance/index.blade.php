@@ -27,7 +27,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Attendance
+                        {{ __('messages.attendance') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="attendanceList">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge text-center">
-                                        <input type="text" id="attendanceList" class="form-control" name="year_month" placeholder="MM-YYYY" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
+                                        <input type="text" id="attendanceList" class="form-control" name="year_month" placeholder="{{ __('messages.mm_yyyy') }}" data-provide="datepicker" data-date-format="MM yyyy" data-date-min-view-mode="1">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
@@ -52,7 +52,7 @@
                                 <div class="form-group">
                                     <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subject_id" class="form-control" name="subject_id">
-                                        <option value="">Select Subject</option>
+                                        <option value="">{{ __('messages.select_subject') }}</option>
                                         @forelse ($subjects as $sub)
                                         <option value="{{ $sub['subject_id'] }}">{{ $sub['subject_name'] }}</option>
                                         @empty

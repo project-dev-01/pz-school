@@ -88,7 +88,7 @@
                                     <input type="hidden" name="leave_id" id="leave_id">
                                     <select id="leave_status_name" name="leave_status_name" class="form-control">
                                         <option value="">Select Leave Type</option>
-                                        <option value="Approve">Approve</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
                                         <option value="Reject">Reject</option>
                                         <option value="Pending">Pending</option>
                                     </select>
@@ -114,7 +114,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="DetailsModalTitle">Staff Leave Details</h5>
+                <h5 class="modal-title" id="DetailsModalTitle">{{ __('messages.staff_leave_details') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -136,7 +136,7 @@
                     </table>
                 </div>
                 <hr>
-                <h4 class="header-title">Leave Details</h4>
+                <h4 class="header-title">{{ __('messages.leave_details') }}</h4>
                 <div class="table-responsive">
                     <table class="table table-centered table-borderless table-striped mb-0">
                         <tbody>
@@ -146,7 +146,7 @@
                                 <td id="staffName"></td>
                             </tr>
                             <tr>
-                                <td>Leave Date</td>
+                                <td>{{ __('messages.leave_date') }}</td>
                                 <td>:</td>
                                 <td id="leaveDates"></td>
                             </tr>
@@ -176,7 +176,7 @@
                                 <td id="documents"></td>
                             </tr>
                             <tr>
-                                <td>Staff Remarks</td>
+                                <td>{{ __('messages.staff_remarks') }}</td>
                                 <td>:</td>
                                 <td id="remarks"></td>
                             </tr>
@@ -186,7 +186,7 @@
                                 <td id="leave_status"></td>
                             </tr>
                             <tr>
-                                <td>Your Remarks</td>
+                                <td>{{ __('messages.your_remarks') }}</td>
                                 <td>:</td>
                                 <td><textarea maxlength="255" id="assiner_remarks" class="form-control alloptions" placeholder="Enter the text..." name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
@@ -198,10 +198,10 @@
                                 <td>
                                     <input type="hidden" name="leave_id" id="leave_id">
                                     <select id="leave_status_name" name="leave_status_name" class="form-control">
-                                        <option value="">Select Leave Type</option>
-                                        <option value="Approve">Approve</option>
-                                        <option value="Reject">Reject</option>
-                                        <option value="Pending">Pending</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
                                     </select>
                                 </td>
                             </tr>

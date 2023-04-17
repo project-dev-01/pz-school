@@ -47,11 +47,11 @@
                                 <td>1</td>
                                 <td>{{ __('messages.category') }}</td>
                                 <td>{{ __('messages.type') }}</td>
-                                <td>Good</td>
+                                <td>{{ __('messages.good') }}</td>
                                 <td>
                                     <div class="button-list">
-                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                        <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">{{ __('messages.view') }}</a>
+                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">{{ __('messages.delete') }}</a>
                                     </div>
                                 </td>
                             </tr>
@@ -76,7 +76,7 @@
                     
                     <div class="form-group">
                         <label for="Category_name">{{ __('messages.category_name') }}</label>
-                        <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="Enter Category name">
+                        <input type="text" id="Category_name" name="Category_name" class="form-control" placeholder="{{ __('messages.enter_category_name') }}">
                         <span class="text-danger error-text Category_name_error"></span>
                     </div>
                     <div class="form-group">

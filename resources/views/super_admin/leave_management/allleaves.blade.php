@@ -42,9 +42,9 @@
                                 <div class="form-group">
                                     <label for="heard">{{ __('messages.leave_status') }}</label>
                                     <select id="heard" class="form-control" required="">
-                                        <option value="">Approved</option>
-                                        <option value="">Pending</option>
-                                        <option value="">Decline</option>
+                                        <option value="">{{ __('messages.approved') }}</option>
+                                        <option value="">{{ __('messages.pending') }}</option>
+                                        <option value="">{{ __('messages.reject') }}</option>
                                     </select>
                                 </div>
                             </div>                                                   

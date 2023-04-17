@@ -12,13 +12,13 @@
 
                     <div class="form-group">
                         <label for="name">{{ __('messages.hostel_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter The Hostel Name">
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_the_hostel_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="category">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="category" name="category">
-                            <option value="">Select The Category</option>
+                            <option value="">{{ __('messages.select_the_category') }}</option>
                             @foreach($category as $cat)
                             <option value="{{$cat['id']}}">{{$cat['name']}}</option>
                             @endforeach
@@ -27,8 +27,8 @@
                     </div>
                     <div class="form-group">
                         <label for="watchman">{{ __('messages.warden_name') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="Choose The Warden Name">
-                            <option value="">Select Warden</option>
+                        <select class="form-control select2-multiple" data-toggle="select2" name="watchman[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_warden_name') }}">
+                            <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
                             @empty
@@ -38,12 +38,12 @@
                     </div>
                     <div class="form-group">
                         <label for="address">{{ __('messages.hostel_address') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="address" class="form-control" placeholder="Enter Hostel Address">
+                        <input type="text" name="address" class="form-control" placeholder="{{ __('messages.enter_hostel_address') }}">
                         <span class="text-danger error-text address_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="remarks">{{ __('messages.remarks') }}</label>
-                        <textarea type="text" name="remarks" class="form-control" placeholder="Enter Remarks"> </textarea>
+                        <textarea type="text" name="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}"> </textarea>
                         <span class="text-danger error-text remarks_error"></span>
                     </div>
                     <div class="form-group">

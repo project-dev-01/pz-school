@@ -7,7 +7,7 @@
                 <div class="form-group row">
                     <label for="name" class="col-3 col-form-label">{{ __('messages.name') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.enter_name') }}">
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <div class="form-group row">
                     <label for="school_name" class="col-3 col-form-label">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="school_name" name="school_name" placeholder="Enter School Name">
+                        <input type="text" class="form-control" id="school_name" name="school_name" placeholder="{{ __('messages.enter_school_name') }}">
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="form-group row">
                     <label for="emapasswordil" class="col-3 col-form-label">{{ __('messages.password') }}<span class="text-danger">*</span></label>
                     <div class="col-9 input-group input-group-merge">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                        <input type="password" id="password" class="form-control" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                         <div class="input-group-append" data-password="false">
                             <div class="input-group-text">
                                 <span class="password-eye"></span>
@@ -50,9 +50,9 @@
             </div>
             <div class="col-md-12">
                 <div class="form-group row">
-                    <label for="currency" class="col-3 col-form-label">Currency<span class="text-danger">*</span></label>
+                    <label for="currency" class="col-3 col-form-label">{{ __('messages.currency') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="currency" name="currency" placeholder="Enter Currency">
+                        <input type="text" class="form-control" id="currency" name="currency" placeholder="{{ __('messages.enter_currency') }}">
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="form-group row">
                     <label for="symbol" class="col-3 col-form-label">Currency Symbol<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="symbol" name="symbol" placeholder="Enter Currency Symbol">
+                        <input type="text" class="form-control" id="symbol" name="symbol" placeholder="{{ __('messages.enter_currency_symbol') }}">
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                     <label for="state" class="col-3 col-form-label">{{ __('messages.state') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
                         <select id="getState" class="form-control" name="state">
-                            <option value="">Select State</option>
+                            <option value="">{{ __('messages.select_state') }}</option>
                         </select>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <label for="city" class="col-3 col-form-label">{{ __('messages.city') }}<span class="text-danger">*</span></label>
                     <div class="col-9">
                         <select id="getCity" class="form-control" name="city">
-                            <option value="">Select City</option>
+                            <option value="">{{ __('messages.select_city') }}</option>
                         </select>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                 <div class="form-group row">
                     <label for="db_name" class="col-3 col-form-label">Database Name<span class="text-danger">*</span></label>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="db_name" name="db_name" placeholder="Enter Database Name">
+                        <input type="text" class="form-control" id="db_name" name="db_name" placeholder="{{ __('messages.enter_database_name') }}">
                     </div>
                 </div>
             </div>

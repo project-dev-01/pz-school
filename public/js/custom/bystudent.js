@@ -6,11 +6,11 @@ $(function () {
     // $('#btwyears').on('change', function () {
     //     var class_id = $(this).val();
     //     $("#bystudentfilter").find("#sectionID").empty();
-    //     $("#bystudentfilter").find("#sectionID").append('<option value="">Select Class</option>');
+    //     $("#bystudentfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
     //     $("#bystudentfilter").find("#examnames").empty();
-    //     $("#bystudentfilter").find("#examnames").append('<option value="">Select Exam</option>');
+    //     $("#bystudentfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
     //     $("#bystudentfilter").find("#student_id").empty();
-    //     $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+    //     $("#bystudentfilter").find("#student_id").append('<option value="">'+select_student+'</option>');
     //     $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
     //         if (res.code == 200) {
     //             $.each(res.data, function (key, val) {
@@ -24,11 +24,11 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bystudentfilter").find("#sectionID").empty();
-        $("#bystudentfilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#bystudentfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#bystudentfilter").find("#examnames").empty();
-        $("#bystudentfilter").find("#examnames").append('<option value="">Select Exam</option>');
+        $("#bystudentfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#bystudentfilter").find("#student_id").empty();
-        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+        $("#bystudentfilter").find("#student_id").append('<option value="">'+select_student+'</option>');
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -48,11 +48,11 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#bystudentfilter").find("#examnames").empty();
-        $("#bystudentfilter").find("#examnames").append('<option value="">Select exams</option>');
+        $("#bystudentfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#bystudentfilter").find("#student_id").empty();
-        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+        $("#bystudentfilter").find("#student_id").append('<option value="">'+select_student+'</option>');
         $("#bystudentfilter").find("#student_id").empty();
-        $("#bystudentfilter").find("#student_id").append('<option value="">Select Student</option>');
+        $("#bystudentfilter").find("#student_id").append('<option value="">'+select_student+'</option>');
         $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,
@@ -73,7 +73,7 @@ $(function () {
     function getbyStudentDetails(year, class_id, section_id){
         // var year = $("#btwyears").val();
         $("#student_id").empty();
-        $("#student_id").append('<option value="">Select Student</option>');
+        $("#student_id").append('<option value="">'+select_student+'</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: year, section_id: section_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -177,10 +177,10 @@ function bystudentdetails_class(datasetnew) {
         '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
         '<thead>';
     bysubjectAllTable += '<tr>' +
-        '<th class="align-top" rowspan="3" style="padding-top:72px;">S.no.</th>' +
-        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">Student Name</th>' +
-        '<th class="text-center" colspan="' + headercount + '" style="padding: 20px 100px 20px 0px;">Subject Name</th>' +
-        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">GPA</th>' +
+        '<th class="align-top" rowspan="3" style="padding-top:72px;">'+sl_no_lang+'</th>' +
+        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">'+student_name_lang+'</th>' +
+        '<th class="text-center" colspan="' + headercount + '" style="padding: 20px 100px 20px 0px;">'+subject_name_lang+'</th>' +
+        '<th class="align-top" rowspan="3" style="padding: 71px 0px 0px 8px;">'+gpa_lang+'</th>' +
         '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
@@ -189,8 +189,8 @@ function bystudentdetails_class(datasetnew) {
     bysubjectAllTable += '</tr>';
     bysubjectAllTable += '<tr>';
     headers.forEach(function (resp) {
-        bysubjectAllTable += ' <th class="text-center">Mark</th>' +
-            '<th class="text-center">Grade</th>';
+        bysubjectAllTable += ' <th class="text-center">'+mark_lang+'</th>' +
+            '<th class="text-center">'+grade_lang+'</th>';
     });
     bysubjectAllTable += '</tr></thead><tbody>';
     grade_list_master.forEach(function (res) {

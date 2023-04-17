@@ -83,9 +83,9 @@ $(function () {
         $(".attendanceReport").hide();
         var class_id = $(this).val();
         $("#attendanceFilter").find("#sectionID").empty();
-        $("#attendanceFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#attendanceFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -100,7 +100,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -279,7 +279,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -299,15 +299,15 @@ $(function () {
                             });
                         }
                         chart.updateSeries([{
-                            name: "PRESENT",
+                            name: present_lang,
                             type: "line",
                             data: presentData
                         }, {
-                            name: "LATE",
+                            name: late_lang,
                             type: "line",
                             data: lateData
                         }, {
-                            name: "Absent",
+                            name: absent_lang,
                             type: "line",
                             data: absentData
                         }]);
@@ -453,7 +453,7 @@ $(function () {
 
         var reason = $(this).closest('tr').find('.reason');
         reason.empty();
-        reason.append('<option value="">Select Reason</option>');
+        reason.append('<option value="">'+select_reason+'</option>');
         $.post(getTeacherAbsentExcuse, {
             token: token,
             branch_id: branchID,
@@ -515,7 +515,7 @@ $(function () {
     //     e.preventDefault(); 
     //     var department = $(this).val();
     //     $("#employee").empty();
-    //     $("#employee").append('<option value="">Select Employee</option>');
+    //     $("#employee").append('<option value="">'+select_employee+'</option>');
     //     $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
     //         if (res.code == 200) {
     //             $.each(res.data, function (key, val) {
@@ -529,7 +529,7 @@ $(function () {
     //     e.preventDefault(); 
     //     var department = $(this).val();
     //     $("#employeeReportEmployee").empty();
-    //     $("#employeeReportEmployee").append('<option value="">Select Employee</option>');
+    //     $("#employeeReportEmployee").append('<option value="">'+select_employee+'</option>');
     //     $("#employeeReportEmployee").append('<option value="All">All</option>');
     //     $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
     //         if (res.code == 200) {
@@ -746,7 +746,7 @@ $(function () {
                         } else {
                             attendanceListShow += '<div class="row">' +
                                 '<div class="col-md-12 text-center">' +
-                                'No data found' +
+                                no_data_available +
                                 '</div>'
                             '</div>';
                         }
@@ -921,18 +921,18 @@ $(function () {
             row += '<td width="10%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
-            row += '<option value="">Select Status</option>';
+            row += '<option value="">'+select_status+'</option>';
             if (val.leave) {
-                row += '<option value="present">Present</option>';
-                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>Absent</option>';
-                row += '<option value="late">Late</option>';
-                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>Excused</option>';
+                row += '<option value="present">'+present_lang+'</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
+                row += '<option value="late">'+late_lang+'</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
                 disabled = "readonly";
             } else {
-                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>Present</option>';
-                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>Absent</option>';
-                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>Late</option>';
-                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>Excused</option>';
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>'+present_lang+'</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>'+late_lang+'</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
             }
             row += '</select>';
             row += '</div>';
@@ -959,7 +959,7 @@ $(function () {
             row += '<td width="15%">';
             row += '<div class="form-group">';
             row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
-            row += '<option value="">Select Reasons</option>';
+            row += '<option value="">'+select_reason+'s</option>';
             if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";

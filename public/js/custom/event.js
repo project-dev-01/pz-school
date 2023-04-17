@@ -262,6 +262,20 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             //dom: 'lBfrtip',
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [
                 {
                     extend: 'csv',
@@ -493,11 +507,11 @@ $(function () {
     function branchEvent(branch_id, Selector) {
 
         $(Selector).find("#type").empty();
-        $(Selector).find("#type").append('<option value="">Select Type</option>');
+        $(Selector).find("#type").append('<option value="">'+select_type+'</option>');
         $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">Choose Class</option>');
+        $(Selector).find("#class_name").append('<option value="">'+select_class+'</option>');
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">Select Section</option>');
+        $(Selector).find("#section_name").append('<option value="">'+select_section+'</option>');
         $.post(branchByEvent, { branch_id: branch_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data.eventType, function (key, val) {

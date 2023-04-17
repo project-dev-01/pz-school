@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" style="width:750px;margin:1.75rem auto !important;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold" id="myleavedetailsModalLabel">Leave Details</h4>
+                <h4 class="modal-title font-weight-bold" id="myleavedetailsModalLabel">{{ __('messages.leave_details') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -11,12 +11,12 @@
                         <div class="row">
                             <div class="col-md-6"> 
                                 <div class="row">
-                                <div class="col-sm-6"><h5>Emp Name :</h5></div>
-                                <div class="col-sm-5"><h4 class="font-weight-bold">Hajmal</h4></div></div>
+                                <div class="col-sm-6"><h5>{{ __('messages.emp_name') }} :</h5></div>
+                                <div class="col-sm-5"><h4 class="font-weight-bold">{{ __('messages.hajmal') }}</h4></div></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-sm-6"><h5>Emp Id :</h5></div>
+                                    <div class="col-sm-6"><h5>{{ __('messages.emp_id') }} :</h5></div>
                                     <div class="col-sm-5"><h4 class="font-weight-bold">1010</h4></div>
                                 </div>                            
                             </div>                            
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-sm-6"><h5>{{ __('messages.mobile_no.') }} :</h5></div>
+                                    <div class="col-sm-6"><h5>{{ __('messages.mobile_no') }} :</h5></div>
                                     <div class="col-sm-5"><h4 class="font-weight-bold">9600787841</h4></div>
                                 </div>             
                             </div>                            

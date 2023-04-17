@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditExamHallModalLabel">Edit Location</h4>
+                <h4 class="modal-title" id="myeditExamHallModalLabel">{{ __('messages.edit_location') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,11 +12,11 @@
                     <input type="hidden" name="id">
                     <div class="form-group">
                         <label for="hall_no">{{ __('messages.location_name') }}</label>
-                        <input type="text"  name="hall_no" class="form-control" placeholder="Enter Location Name">
+                        <input type="text"  name="hall_no" class="form-control" placeholder="{{ __('messages.enter_location_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="no_of_seats">{{ __('messages.no_of_seats') }}</label>
-                        <input type="text"  name="no_of_seats" class="form-control" placeholder="Enter No of Seats">
+                        <input type="text"  name="no_of_seats" class="form-control" placeholder="{{ __('messages.enter_no_of_seats') }}">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

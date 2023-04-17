@@ -72,7 +72,7 @@ $(function () {
             offsetX: 0,
             offsetY: 7
         },
-        labels: ["Complete", "Incomplete", "Late Submission"],
+        labels: [complete_lang,incomplete_lang,late_submission_lang],
         colors: colors,
         responsive: [{
             breakpoint: 600,
@@ -105,7 +105,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Attitude'
+            text: attitude_lang,
         },
         tooltip: {
             formatter: function () {
@@ -179,13 +179,13 @@ $(function () {
             curve: "smooth"
         },
         series: [{
-            name: "Average",
+            name: average,
             // data: [65,87,65,87]
             data: []
 
         }],
         title: {
-            text: "Subject Average",
+            text:subject_average,
             align: "left",
             style: {
                 fontSize: "14px",
@@ -219,7 +219,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: "Average"
+                text: average
             }
         },
         grid: {
@@ -250,13 +250,13 @@ $(function () {
         // $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#analyticCrepFilter").find("#sectionID").empty();
-        $("#analyticCrepFilter").find("#sectionID").append('<option value="">Select Section</option>');
+        $("#analyticCrepFilter").find("#sectionID").append('<option value="">'+select_section+'</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#analyticCrepFilter").find("#paperID").empty();
-        $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $("#analyticCrepFilter").find("#studentID").empty();
-        $("#analyticCrepFilter").find("#studentID").append('<option value="">Select Student</option>');
+        $("#analyticCrepFilter").find("#studentID").append('<option value="">'+select_student+'</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -270,7 +270,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -304,7 +304,7 @@ $(function () {
         var subject_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#analyticCrepFilter").find("#paperID").empty();
-        $("#analyticCrepFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         // paper list
         $.post(subjectByPapers, {
             token: token,
@@ -473,11 +473,11 @@ $(function () {
                         //     ['<i class="far fa-tired" style="font-size:20px;color:#ea2522"> tired</i> ', tiredCount]
                         // ], true);
                         attitudeChart.series[0].setData([
-                            ['Engaging', EngagingCount],
-                            ['Hyperactive', HyperactiveCount],
-                            ['Quiet', QuietCount],
-                            ['Sleepy', SleepyCount],
-                            ['Uninterested', tiredCount]
+                            [engaging_lang, EngagingCount],
+                            [hyperactive_lang, HyperactiveCount],
+                            [quiet_lang, QuietCount],
+                            [sleepy_lang, SleepyCount],
+                            [uninterested_lang, tiredCount]
                         ], true);
                     } else {
                         $('#attitude_card').hide();
@@ -545,7 +545,7 @@ $(function () {
                             }
                         });
                     } else {
-                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> No Data Available</td></tr>';
+                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
                     }
                     newRowContent += '</tbody>' +
                         '</table>' +
@@ -585,7 +585,7 @@ $(function () {
                             }
                         });
                         subAvgChart.updateSeries([{
-                            name: "Average",
+                            name: average,
                             data: averageData
                         }]);
                         // subject avg chart update series end

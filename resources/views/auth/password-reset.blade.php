@@ -58,16 +58,16 @@
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $token }}">
                                     <div class="form-group">
-                                            <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kubang Keriang</span>
+                                        <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="email"  class="form-control" name="email" placeholder="Email">
+                                            <input type="email"  class="form-control" name="email" placeholder="{{ __('messages.enter_the_email') }}">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge">
-                                            <input type="password"  class="form-control" name="password" placeholder="New password">
+                                            <input type="password"  class="form-control" name="password" placeholder="{{ __('messages.new_password') }}">
                                             <div class="input-group-append" data-password="false">
                                                 <div class="input-group-text">
                                                     <span class="password-eye"></span>

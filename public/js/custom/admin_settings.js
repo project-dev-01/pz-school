@@ -1,5 +1,14 @@
 $(function () {
 
+    $(".number_validation").keypress(function(event){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     // update profile details
     $('#updateProfileInfo').on('submit', function (e) {
         e.preventDefault();

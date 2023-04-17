@@ -82,7 +82,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
                                                             @endforeach
@@ -94,7 +94,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
-                                                            <option value="">Select Subject</option>
+                                                            <option value="">{{ __('messages.select_subject') }}</option>
                                                             @foreach($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
                                                             @endforeach
@@ -106,7 +106,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control teacher teacher select2-multiple-plus" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[{{$row}}][teacher][]" {{$bulk}}>
-                                                            <option value="">Select Teacher</option>
+                                                            <option value="">{{ __('messages.select_teacher') }}</option>
                                                             @if($table['bulk_id'])
                                                             @php
                                                             $all = "";
@@ -116,7 +116,7 @@
                                                             }
                                                             }
                                                             @endphp
-                                                            <option value="0" {{ $all }}>All</option>
+                                                            <option value="0" {{ $all }}>{{ __('messages.all') }}</option>
                                                             @endif
                                                             @forelse($teacher as $teach)
                                                             @php
@@ -150,7 +150,7 @@
                                                 <td width="20%">
                                                     <div class="form-group">
                                                         <select class="form-control" name="timetable[{{$row}}][class_room]" {{$bulk}}>
-                                                            <option value="">Select Hall</option>
+                                                            <option value="">{{ __('messages.select_hall') }}</option>
                                                             @forelse($hall_list as $list)
                                                             <option value="{{$list['id']}}" {{ $list['id'] == $table['class_room'] ? 'selected' : ''}}>{{ $list['hall_no'] }}</option>
                                                             @empty

@@ -170,12 +170,110 @@
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";
     var branchBySection = "{{ config('constants.api.branch_by_section') }}";
 
+    var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
+    
+    
+    var select_employee = "{{ __('messages.select_employee') }}";
+    var all_lang = "{{ __('messages.all') }}";
+    var all_lang = "{{ __('messages.all') }}";
+    var remove = "{{ __('messages.remove') }}";
+    var drag_and_drop_to_replace = "{{ __('messages.drag_and_drop_to_replace') }}";
+    var drag_and_drop_to_check = "{{ __('messages.drag_and_drop_to_check') }}";
+    var oops_went_wrong = "{{ __('messages.oops_went_wrong') }}";
+    var no_data_available = "{{ __('messages.no_data_available') }}";
+    var filter_from_total_entries = "{{ __('messages.filter_from_total_entries') }}";
+    var no_matching_records_found = "{{ __('messages.no_matching_records_found') }}";
+    var showing_zero_entries = "{{ __('messages.showing_zero_entries') }}";
+    var showing_entries = "{{ __('messages.showing_entries') }}";
+    var show_entries = "{{ __('messages.show_entries') }}";
+    var datatable_search = "{{ __('messages.datatable_search') }}";
+    var show = "{{ __('messages.show') }}";
+    var entries = "{{ __('messages.entries') }}";
+    var previous = "{{ __('messages.previous') }}";
+    var next = "{{ __('messages.next') }}";
+    var month = "{{ __('messages.month') }}";
+    var today = "{{ __('messages.today') }}";
+    var week = "{{ __('messages.week') }}";
+    var day = "{{ __('messages.day') }}";
+    var list = "{{ __('messages.list') }}";
+    var locale = "{{ Session::get('locale') }}";
+    var calLang = "{{ __('messages.calendar_lang') }}";
+    console.log('123',calLang)
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
     var studentID = "{{ Session::get('student_id') }}";
+    var select_class = "{{ __('messages.select_class') }}";
+    var select_section = "{{ __('messages.select_section') }}";
+    var select_subject = "{{ __('messages.select_subject') }}";
+    var select_paper = "{{ __('messages.select_paper') }}";
+    var select_student = "{{ __('messages.select_student') }}";
+    var select_exam = "{{ __('messages.select_exam') }}";
+    var select_reason = "{{ __('messages.select_reason') }}";
+    var select_status = "{{ __('messages.select_status') }}";
+    var select_state = "{{ __('messages.select_state') }}";
+    var select_city = "{{ __('messages.select_city') }}";
+    var select_type = "{{ __('messages.select_type') }}";
+    var select_floor = "{{ __('messages.select_floor') }}";
+    var select_hall = "{{ __('messages.select_hall') }}";
+    var select_department = "{{ __('messages.select_department') }}";
+    var select_designation = "{{ __('messages.select_designation') }}";
+    var select = "{{ __('messages.select') }}";
+    var choose = "{{ __('messages.choose') }}";
+    var add_remarks = "{{ __('messages.add_remarks') }}";
+    var update = "{{ __('messages.update') }}";
+    var untaken = "{{ __('messages.untaken') }}";
+    var taken = "{{ __('messages.taken') }}";
+    var total_strength = "{{ __('messages.total_strength') }}";
+    var subject_average = "{{ __('messages.subject_average') }}";
+    var average = "{{ __('messages.average') }}";
+    var sl_no_lang = "{{ __('messages.s.no') }}";
+    var mark_lang = "{{ __('messages.mark') }}";
+    var grade_lang = "{{ __('messages.grade') }}";
+    var class_lang = "{{ __('messages.class') }}";
+    var student_name_lang = "{{ __('messages.student_name') }}";
+    var subject_name_lang = "{{ __('messages.subject_name') }}";
+    var total_student_lang = "{{ __('messages.total_student') }}";
+    var class_teacher_name_lang = "{{ __('messages.class_teacher_name') }}";
+    var subject_teacher_name_lang = "{{ __('messages.subject_teacher_name') }}";
+    var pass_lang = "{{ __('messages.pass') }}";
+    var g_lang = "{{ __('messages.g') }}";
+    var gpa_lang = "{{ __('messages.gpa') }}";
+    var name_lang = "{{ __('messages.name') }}";
+    var roll_no_lang = "{{ __('messages.roll_no') }}";
+    var dob_lang = "{{ __('messages.DOB') }}";
+    var present_lang = "{{ __('messages.present') }}";
+    var absent_lang = "{{ __('messages.absent') }}";
+    var late_lang = "{{ __('messages.late') }}";
+    var excused_lang = "{{ __('messages.excused') }}";
+    var current_month_lang = "{{ __('messages.current_month') }}";
+    var engaging_lang = "{{ __('messages.engaging') }}";
+    var hyperactive_lang = "{{ __('messages.hyperactive') }}";
+    var quiet_lang = "{{ __('messages.quiet') }}";
+    var sleepy_lang = "{{ __('messages.sleeply') }}";
+    var uninterested_lang = "{{ __('messages.uninterested') }}";
+    var attitude_lang = "{{ __('messages.attitude') }}";
+    var all_subject_lang = "{{ __('messages.all_subject') }}";
+    var homework_list_lang = "{{ __('messages.homework_list') }}";
+    var complete_lang = "{{ __('messages.complete') }}";
+    var incomplete_lang = "{{ __('messages.incomplete') }}";
+    var late_submission_lang = "{{ __('messages.late_submission') }}";
+    var short_test_name_lang = "{{ __('messages.short_test_name') }}";
+    var checked_lang = "{{ __('messages.checked') }}";
+    var unchecked_lang = "{{ __('messages.unchecked') }}";
+    var no_events_to_display_lang = "{{ __('messages.no_events_to_display') }}";
+    var approve_lang = "{{ __('messages.approve') }}";
+    var reject_lang = "{{ __('messages.reject') }}";
+    var pending_lang = "{{ __('messages.pending') }}";
+    var upload_lang = "{{ __('messages.upload') }}";
+    var allday_lang = "{{ __('messages.all-day') }}";
+    var exam_lang = "{{ __('messages.exam') }}";
+    var fail_lang = "{{ __('messages.fail') }}";
+    var inprogress_lang = "{{ __('messages.inprogress') }}";
+    
+    
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details
@@ -210,13 +308,6 @@
     var allNotifications = "{{ route('unread_notifications') }}";
     var allLogout = "{{ route('all_logout') }}";
 </script>
-<script type="text/javascript">
-    var url = "{{ route('changeLang') }}";
-
-    $(".changeLang").change(function() {
-        window.location.href = url + "?lang=" + $(this).val();
-    });
-</script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
 <!-- <script src="{{ asset('public/js/custom/user_list.js') }}"></script> -->
@@ -227,6 +318,89 @@
 <!-- <script src="{{ asset('public/js/custom/iconchart.js') }}"></script> -->
 <!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+
+<script type="text/javascript">
+    
+
+    var url = "{{ route('changeLang') }}";
+    var langArray = [];
+    $('.vodiapicker option').each(function(){
+        var img = $(this).attr("data-thumbnail");
+        var text = this.innerText;
+        var value = $(this).val();
+        var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+        langArray.push(item);
+        })
+
+        $('#a').html(langArray);
+
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
+
+        //change button stuff on click
+        $('#a li').click(function(){
+            
+        var img = $(this).find('img').attr("src");
+        var value = $(this).find('img').attr('value');
+        
+    console.log('value',value)
+        window.location.href = url + "?lang=" + value;
+        var text = this.innerText;
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+        $(".b").toggle();
+        //console.log(value);
+    });
+
+    $(".btn-select").click(function(){
+            $(".b").toggle();
+        });
+
+    //check local storage for the lang
+    console.log('en',locale)
+    if (locale=="japanese"){
+        //find an item with value of sessionLang\
+        var img = "{{ asset('public/images/JPN.png') }}";
+        var value = "japanese";
+        var text = "JPN";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    } else {
+        var img = "{{ asset('public/images/USA.png') }}";
+        var value = "en";
+        var text = "ENG";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    }
+</script>
+<!-- <script>
+    
+
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function() {
+        if($(this).val()=="United States"){
+                var lang = "en";
+        }else{
+            var lang = "japanese";
+        }
+        window.location.href = url + "?lang=" + lang;
+    });
+        if(locale=="en"){
+            var selectedCountry = "us"x
+        }else if(locale=="japanese"){
+            var selectedCountry = "jp"
+        }
+    $("#countryLang").countrySelect({
+        onlyCountries: ['us','jp'],
+        defaultCountry:selectedCountry,
+        responsiveDropdown: true
+    });
+</script> -->
 <script>
     function sendMarkRequest(id = null) {
         return $.ajax(readNotifications, {
@@ -337,11 +511,4 @@
             });
         }, 60000 * 60);
     };
-</script>
-<script>
-    $("#countryLang").countrySelect({
-        onlyCountries: ['us', 'jp'],
-
-        responsiveDropdown: true
-    });
 </script>

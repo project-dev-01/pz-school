@@ -6,6 +6,20 @@ $(function () {
         dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        "language": {
+            
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+            "info": showing_entries,
+            "lengthMenu": show_entries,
+            "search": datatable_search,
+            "paginate": {
+                "next": next,
+                "previous": previous
+            },
+        },
         buttons: [
             {
                 extend: 'csv',
@@ -139,7 +153,7 @@ $(function () {
                                     reliefDetailsTable += '<td>' + start + '</td>';
                                     reliefDetailsTable += '<td>' + end + '</td>';
                                     reliefDetailsTable += '<td><select class="form-control" id="relief_assignment_teacher_id' + resp.id + '">';
-                                    reliefDetailsTable += '<option value="">Select Subject</option>';
+                                    reliefDetailsTable += '<option value="">'+select_subject+'</option>';
                                     // reliefDetailsTable += allStaffList;
                                     // console.log(resp.start + '' + resp.end);
                                     // console.log(resp.end);
@@ -177,7 +191,7 @@ $(function () {
                             '</tr>' +
                             '</thead>' +
                             '<tbody>';
-                        reliefDetailsTable += '<tr><td colspan="8" class="text-center">No data available</td></tr>';
+                        reliefDetailsTable += '<tr><td colspan="8" class="text-center">'+no_data_available+'</td></tr>';
                         reliefDetailsTable += '</tbody>' +
                             '</table></div>';
                     }

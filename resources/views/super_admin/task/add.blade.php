@@ -10,9 +10,9 @@
                 <form id="eventTypeForm" method="post" action="" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="branch_id">Branch<span class="text-danger">*</span></label>
+                        <label for="branch_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="branch_id" name="branch_id">
-                            <option value="">Choose Branch</option>
+                            <option value="">{{ __('messages.select_branch') }}</option>
                             <option value="">Malaysia</option>
                             <option value="press">Singapore</option>
                         </select>
@@ -20,13 +20,13 @@
                     </div>
                     <div class="form-group">
                         <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
+                        <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         <span class="text-danger error-text title_error"></span>
                     </div>
                     
                     <div class="form-group">
                         <label for="date">{{ __('messages.date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="Enter Date & Time">
+                        <input type="text" id="date" name="date" class="form-control homeWorkAdd" placeholder="{{ __('messages.enter_date _time') }}">
                         <span class="text-danger error-text date_error"></span>
                     </div>
                     
@@ -42,7 +42,7 @@
                     
                     <div class="form-group">
                         <label for="description">{{ __('messages.description') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Enter Description">
+                        <input type="text" id="description" name="description" class="form-control" placeholder="{{ __('messages.enter_description') }}">
                         <span class="text-danger error-text description_error"></span>
                     </div>
                     <div class="form-group">

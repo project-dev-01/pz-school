@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myupdateTasksModalLabel" style="color: #6FC6CC">Edit</h4>
+                <h4 class="modal-title" id="myupdateTasksModalLabel" style="color: #6FC6CC">{{ __('messages.edit') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body" style="background-color: #8adfee14;">
@@ -12,12 +12,12 @@
                     <input type="hidden" id="calendorID" name="calendar_id" class="form-control">
                     <div class="form-group">
                         <label for="title">{{ __('messages.title') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="taskTitle" name="title" class="form-control" placeholder="Enter title">
+                        <input type="text" id="taskTitle" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         <span id="titleError" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label for="description">{{ __('messages.description') }}</label>
-                        <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+                        <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="startEndDate">{{ __('messages.start_date') }}</label>

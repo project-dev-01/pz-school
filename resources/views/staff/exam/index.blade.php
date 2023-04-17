@@ -31,7 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Create Exam
+                            {{ __('messages.create_exam') }}
                         </a>
                     </li>
                 </ul>
@@ -41,11 +41,11 @@
                             <table class="table table-bordered mb-0">
                                 <thead>
                                     <tr>
-                                        <th>S.No</th>
+                                        <th>{{ __('messages.s._no') }}</th>
                                         <th>{{ __('messages.exam_name') }}</th>
-                                        <th>Exam Type</th>
+                                        <th>{{ __('messages.exam_type') }}</th>
                                         <th>{{ __('messages.term') }}</th>
-                                        <th>Mark Distribution</th>
+                                        <th>{{ __('messages.mark_distribution') }}</th>
                                         <th>{{ __('messages.remarks') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
@@ -61,7 +61,7 @@
                                         <td>
                                             <div class="button-list">
                                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="" id="viewEventBtn">View</a>
-                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">Delete</a>
+                                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="" id="deleteEventBtn">{{ __('messages.delete') }}</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -76,10 +76,10 @@
                                 <div class="col-md-8">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Branch<span class="text-danger">*</span></label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Branch</option>
+                                                    <option value="">{{ __('messages.select_branch') }}</option>
                                                     <option value="">Malaysia</option>
                                                     <option value="">Singapore</option>
                                                 </select>
@@ -99,7 +99,7 @@
                                             <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.term') }} </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">
-                                                    <option value="">Select Term</option>
+                                                    <option value="">{{ __('messages.select_term') }}</option>
                                                     <option value="">Ist Term</option>
                                                     <option value="">Half Yearly</option>
                                                     <option value="">Quater Yearly</option>
@@ -109,10 +109,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Exam Type </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.exam_type') }} </label>
                                             <div class="col-9">
                                                 <select id="heard" class="form-control" required="">                                                    
-                                                <option value="">Select Exam Type</option>
+                                                <option value="">{{ __('messages.select_exam_type') }}</option>
                                                     <option value="">Internal</option>
                                                     <option value="">Model</option>
                                                     <option value="">Main</option>
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-3 col-form-label">Mark Distribution </label>
+                                            <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.mark_distribution') }}</label>
                                             <div class="col-9">
                                                 <input type="text" required parsley-type="email" class="form-control" id="inputEmail3" placeholder="">
                                             </div>

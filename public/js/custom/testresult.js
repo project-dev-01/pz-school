@@ -24,13 +24,13 @@ $(function () {
             curve: "smooth"
         },
         series: [{
-            name: "Average",
+            name: average,
             // data: [65,87,65,87]
             data: []
 
         }],
         title: {
-            text: "Subject Average",
+            text: subject_average,
             align: "left",
             style: {
                 fontSize: "14px",
@@ -64,7 +64,7 @@ $(function () {
             min: 0,
             max: 100,
             title: {
-                text: "Average"
+                text: average
             }
         },
         grid: {
@@ -109,13 +109,13 @@ $(function () {
         $(".testResultHideSHow").hide();
         var class_id = $(this).val();
         $("#testresultFilter").find("#sectionID").empty();
-        $("#testresultFilter").find("#sectionID").append('<option value="">Select Class</option>');
+        $("#testresultFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
         $("#testresultFilter").find("#examnames").empty();
-        $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#testresultFilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -136,11 +136,11 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#testresultFilter").find("#examnames").empty();
-        $("#testresultFilter").find("#examnames").append('<option value="">Select Exams</option>');
+        $("#testresultFilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -164,9 +164,9 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var teacher_id = teacherID;
         $("#testresultFilter").find("#subjectID").empty();
-        $("#testresultFilter").find("#subjectID").append('<option value="">Select Subject</option>');
+        $("#testresultFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $.post(examBySubjects, {
             token: token,
             branch_id: branchID,
@@ -189,7 +189,7 @@ $(function () {
         var class_id = $("#changeClassName").val();
         var exam_id = $("#examnames").val();
         $("#testresultFilter").find("#paperID").empty();
-        $("#testresultFilter").find("#paperID").append('<option value="">Select Paper</option>');
+        $("#testresultFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
         // paper list
         $.post(subjectByPapers, {
             token: token,
@@ -414,7 +414,7 @@ $(function () {
                             }
                         });
                         chart.updateSeries([{
-                            name: "Average",
+                            name: average,
                             data: averageData
                         }]);
                     } else {
@@ -585,8 +585,24 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
-            dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             paging: false,
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             buttons: [],
             data: dataSetNew,
             "pageLength": 10,
@@ -699,9 +715,9 @@ $(function () {
                     "targets": 6,
                     "render": function (data, type, row, meta) {
                         var att_status = '<select class="form-control attendance_status" id="' + row.student_id + '" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][status]">' +
-                            '<option value="">Choose</option>' +
-                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Present</option>' +
-                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Absent</option>' +
+                            '<option value="">'+choose+'</option>' +
+                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>'+present_lang+'</option>' +
+                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>' +
                             '</select>';
                         return att_status;
                     }
@@ -715,7 +731,7 @@ $(function () {
                             attribue = "disabled";
                         }
                         var memo = '<textarea style="display:none;" maxlength="50" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="subjectmarks[' + meta.row + '][memo]">' + (data !== "null" ? data : "") + '</textarea>' +
-                            '<button type="button" ' + attribue + ' data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn addRemarks' + row.student_id + '" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">Add Remarks</button>';
+                            '<button type="button" ' + attribue + ' data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn addRemarks' + row.student_id + '" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">'+add_remarks+'</button>';
                         return memo;
 
                     }
@@ -941,7 +957,7 @@ $(function () {
                 offsetX: 0,
                 offsetY: 7
             },
-            labels: ["Pass", "Fail", "Inprogress"],
+            labels: [pass_lang, fail_lang, inprogress_lang],
             colors: colors,
             responsive: [{
                 breakpoint: 600,
@@ -1038,7 +1054,7 @@ $(function () {
         })
         // var attendanceType = $('#attendance' + studenetID).val();
         // $('#reasons' + studenetID).empty();
-        // $('#reasons' + studenetID).append('<option value="">Choose</option>');
+        // $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
         // $.post(getAbsentLateExcuse, {
         //     token: token,
         //     branch_id: branchID,

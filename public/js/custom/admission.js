@@ -278,7 +278,7 @@ $(function () {
         e.preventDefault(); 
         var class_id = $(this).val();
         $("#section_id").empty();
-        $("#section_id").append('<option value="">Select Class Name</option>');
+        $("#section_id").append('<option value="">'+select_class+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -292,7 +292,7 @@ $(function () {
         e.preventDefault(); 
         var route_id = $(this).val();
         $("#drp_transport_vechicleno").empty();
-        $("#drp_transport_vechicleno").append('<option value="">Select Vehicle</option>');
+        $("#drp_transport_vechicleno").append('<option value="">'+select_vehicle_number+'</option>');
         $.post(vehicleByRoute, { route_id: route_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -308,7 +308,7 @@ $(function () {
         e.preventDefault(); 
         var hostel_id = $(this).val();
         $("#drp_roomname").empty();
-        $("#drp_roomname").append('<option value="">Select Room</option>');
+        $("#drp_roomname").append('<option value="">'+select_room_name+'</option>');
         $.post(roomByHostel, { hostel_id: hostel_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

@@ -31,7 +31,7 @@
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">Teaching is the greatest<br> act of optimism</p>
+                        <p class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}<br>{{ __('messages.act_of_optimism') }}</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>
@@ -44,7 +44,18 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
-
+                        <div class="form-group" style="text-align:right;">
+                             <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
+                            </select>
+                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Logo -->
                         <div class="auth-brand text-center text-lg-left">
                             <div class="auth-logo">
@@ -61,7 +72,7 @@
                         <!-- form -->
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('teacher.authenticate') }}" method="post">
-                                <h1 class="welcomeback">Welcome back,</h1>
+                                <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                                 <input type="hidden" name="branch_id" value="1">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
@@ -82,12 +93,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" id="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" name="email" required="" placeholder="Enter your email">
+                                    <input class="form-control login-email" type="email" id="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
+                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" name="password" placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" name="password" placeholder="{{ __('messages.enter_your_password') }}">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -103,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-block signin" type="submit">Sign In </button>
+                                    <button class="btn btn-block signin" type="submit">{{ __('messages.sign_in') }} </button>
                                 </div>
 
                             </form>
@@ -143,6 +155,67 @@
     <script src="{{ asset('public/js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
 
+    <script type="text/javascript">
+        
+
+        var locale = "{{ Session::get('locale') }}";
+        var url = "{{ route('changeLang') }}";
+        var langArray = [];
+        $('.vodiapicker option').each(function(){
+            var img = $(this).attr("data-thumbnail");
+            var text = this.innerText;
+            var value = $(this).val();
+            var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+            langArray.push(item);
+            })
+
+            $('#a').html(langArray);
+
+            //Set the button value to the first el of the array
+            $('.btn-select').html(langArray[0]);
+            $('.btn-select').attr('value', 'en');
+
+            //change button stuff on click
+            $('#a li').click(function(){
+                
+            var img = $(this).find('img').attr("src");
+            var value = $(this).find('img').attr('value');
+            
+        console.log('value',value)
+            window.location.href = url + "?lang=" + value;
+            var text = this.innerText;
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+            $(".b").toggle();
+            //console.log(value);
+        });
+
+        console.log('1',locale)
+        $(".btn-select").click(function(){
+                $(".b").toggle();
+            });
+
+        //check local storage for the lang
+        var sessionLang = locale;
+        // console.log('en',sessionLang)
+        if (locale=="japanese"){
+            //find an item with value of sessionLang\
+            var img = "{{ asset('public/images/JPN.png') }}";
+            var value = "japanese";
+            var text = "JPN";
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ asset('public/images/USA.png') }}";
+            var value = "en";
+            var text = "ENG";
+            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    </script>
 </body>
 
 </html>

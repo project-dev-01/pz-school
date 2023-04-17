@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="student Name">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
-                                    <option value="">Select Grade</option>
+                                    <option value="">{{ __('messages.select_grade') }}</option>
                                     <option value="">Tingkatan 1</option>
                                     <option value="">Tingkatan 2</option>
                                     <option value="">Tingkatan 3</option>
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label for="student Name">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
-                                    <option value="">Select Class</option>
+                                    <option value="">{{ __('messages.select_class') }}</option>
                                     <option value="">Unggul</option>
                                     <option value="">Wawasan</option>
                                     <option value="">Iltizam</option>
@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="student Name">Subject<span class="text-danger">*</span></label>
                                 <select id="student Name" class="form-control" name="class_id">
-                                    <option value="">Select Subject</option>
+                                    <option value="">{{ __('messages.select_subject') }}</option>
                                     <option value="">Pengurusan Kelas</option>
                                     <option value="">Pendidikan Jasmani & Pendidikan Kesihatan</option>
                                 </select>
