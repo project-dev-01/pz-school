@@ -37,7 +37,7 @@ Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:cache');
     Artisan::call('config:cache');
-    // return what you want
+    return "clear artisan cache";
 });
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -125,6 +125,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
     });
 });
 
+// Route::get('/auth/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
+
 // Route::get('login', 'AuthController@login');
 // Route::get('logout', 'AuthController@logout');
 Route::get('/employee/punchcard/{branch}/{session}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
@@ -151,6 +153,13 @@ Route::post('update-setting-session', [CommonController::class, 'updateSettingSe
 Route::get('/password/expired/reset/{token}', [AuthController::class, 'passwordExpireReset'])->name('password.expired.reset');
 Route::get('password/expired', [AuthController::class, 'passwordExpired'])->name('password.expired');
 Route::post('password/post_expired', [AuthController::class, 'resetExpirePassword'])->name('password.post_expired');
+
+// 2 fa check
+Route::post('2fa/checkotp', [AuthController::class, 'twoFACheckOtp'])->name('2fa.post');
+Route::get('/2fa/checktwofa', [AuthController::class, 'twoFACheckView'])->name('2fa.view');
+Route::get('/2fa/checktwofaregister', [AuthController::class, 'twoFACheckRegister'])->name('2fa.register');
+Route::post('2fa/register', [AuthController::class, 'twoFACheckOTPRegister'])->name('complete.registration');
+
 // admin routes start
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
@@ -513,6 +522,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // faq        
         Route::get('faq/index', [AdminController::class, 'faqIndex'])->name('admin.faq.index');
+        // 2fa
+        Route::get('twofa/index', [AdminController::class, 'twoFA'])->name('admin.twofa');
         //Task routes
         Route::get('task/index', [AdminController::class, 'taskIndex'])->name('admin.task');
         Route::get('task/create', [AdminController::class, 'createTask'])->name('admin.task.create');
@@ -778,7 +789,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('fees/add_fees_allocation', [AdminController::class, 'addFeesAllocation'])->name('admin.fees.add_fees_allocation');
         Route::post('fees/fees_delete', [AdminController::class, 'feesDelete'])->name('admin.fees.fees_delete');
 
-        
+
         // employee master import routes
         Route::get('employee/import', [AdminController::class, 'employeeImport'])->name('admin.employee.import');
         Route::post('employee/import/add', [AdminController::class, 'employeeImportAdd'])->name('admin.employee.import.add');

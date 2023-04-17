@@ -64,7 +64,7 @@
                                     </a>
                                 </div>
                             </div>
-                           
+
                         </div>
 
                         <!-- form -->
@@ -91,12 +91,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="Enter your email">
+                                    <input class="form-control login-email" type="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" id="email" name="email" required="" placeholder="Enter your email">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" name="password" placeholder="Enter your password">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -106,6 +106,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="remember" value="1" {{ Cookie::get('remember') ? 'checked' : '' }} id="checkbox-signin">
                                         <label class="sign custom-control-label" for="checkbox-signin">{{ __('messages.remember_me') }}</label>
                                         <a href="{{route('forgot_password')}}" class="forget float-right"><small>{{ __('messages.forgot_your_password') }}?</small></a>
                                     </div>
@@ -151,12 +152,12 @@
     <script src="{{ asset('public/js/app.min.js') }}"></script>
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
     <script type="text/javascript">
-    var url = "{{ route('changeLang') }}";
+        var url = "{{ route('changeLang') }}";
 
-    $(".changeLang").change(function() {
-        window.location.href = url + "?lang=" + $(this).val();
-    });
-</script>
+        $(".changeLang").change(function() {
+            window.location.href = url + "?lang=" + $(this).val();
+        });
+    </script>
 
 </body>
 

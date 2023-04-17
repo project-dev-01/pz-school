@@ -82,12 +82,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="Enter your email">
+                                    <input class="form-control login-email" type="email" id="email" name="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" required="" placeholder="Enter your email">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                        <input type="password" id="password" class="form-control" name="password" value="{{ Cookie::get('password') ? Cookie::get('password'):'' }}" placeholder="Enter your password">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">
                                                 <span class="password-eye"></span>
@@ -97,8 +97,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <label class="sign custom-control-label" for="checkbox-signin">Remember me</label>
-                                        <a href="{{route('forgot_password')}}" class="forget float-right"><small>Forgot your password?</small></a>
+                                        <input type="checkbox" class="custom-control-input" name="remember" value="1" {{ Cookie::get('remember') ? 'checked' : '' }} id="checkbox-signin">
+                                        <label class="sign custom-control-label" for="checkbox-signin">{{ __('messages.remember_me') }}</label>
+                                        <a href="{{route('forgot_password')}}" class="forget float-right"><small>{{ __('messages.forgot_your_password') }}?</small></a>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 text-center">

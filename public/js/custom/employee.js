@@ -194,6 +194,10 @@ $(function () {
             if ($("#skip_medical_history").prop('checked') == true) {
                 skip_medical_history = 0;
             }
+            var google2fa_secret_enable = 0;
+            if ($("#google2fa_secret_enable").prop('checked') == true) {
+                google2fa_secret_enable = 1;
+            }
             var status = $('#status:checked').val();
             var formData = new FormData();
             formData.append('role_id', $('#role_id').val());
@@ -234,6 +238,7 @@ $(function () {
             formData.append('stream_type_id', $('#streamType').val());
             formData.append('race', $('#addRace').val());
             formData.append('skip_medical_history', skip_medical_history);
+            formData.append('google2fa_secret_enable', google2fa_secret_enable);
             formData.append('height', $('#height').val());
             formData.append('weight', $('#weight').val());
             formData.append('allergy', $('#allergy').val());
@@ -334,6 +339,10 @@ $(function () {
             if ($("#skip_medical_history").prop('checked') == true) {
                 skip_medical_history = 0;
             }
+            var google2fa_secret_enable = 0;
+            if ($("#google2fa_secret_enable").prop('checked') == true) {
+                google2fa_secret_enable = 1;
+            }
             var status = $('#edit_status:checked').val();
             var formData = new FormData();
             formData.append('id', $('#id').val());
@@ -377,6 +386,7 @@ $(function () {
             formData.append('race', $('#addRace').val());
             formData.append('old_photo', $('#oldPhoto').val());
             formData.append('skip_medical_history', skip_medical_history);
+            formData.append('google2fa_secret_enable', google2fa_secret_enable);
             formData.append('height', $('#height').val());
             formData.append('weight', $('#weight').val());
             formData.append('allergy', $('#allergy').val());

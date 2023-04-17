@@ -8,13 +8,14 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use App\Helpers\Helper;
 use Carbon\Carbon;
-
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-    //
+
     public function showLoginForm(Request $request)
     {
+
         if (session()->has('role_id')) {
             $role_id = session()->get('role_id');
             if ($role_id == 2) {
@@ -29,6 +30,15 @@ class AuthController extends Controller
                 return redirect()->route('student.dashboard');
             }
         }
+        // remove temp session
+        session()->pull('two_fa_email');
+        session()->pull('two_fa_pass');
+        session()->pull('two_branch_id');
+        session()->pull('google2fa_secret');
+        session()->pull('routePrefix');
+        // session()->pull('error');
+        // session(['error'=>'Logout Successfully']);
+        // return redirect()->route('admin.login')->with('error', 'Logout Successfully');
         return view('auth.login');
     }
     public function teacherLoginForm(Request $request)
@@ -39,6 +49,12 @@ class AuthController extends Controller
                 return redirect()->route('teacher.dashboard');
             }
         }
+        // remove temp session
+        session()->pull('two_fa_email');
+        session()->pull('two_fa_pass');
+        session()->pull('two_branch_id');
+        session()->pull('google2fa_secret');
+        session()->pull('routePrefix');
         return view('auth.teacher_login');
     }
     public function staffLoginForm(Request $request)
@@ -49,6 +65,12 @@ class AuthController extends Controller
                 return redirect()->route('staff.dashboard');
             }
         }
+        // remove temp session
+        session()->pull('two_fa_email');
+        session()->pull('two_fa_pass');
+        session()->pull('two_branch_id');
+        session()->pull('google2fa_secret');
+        session()->pull('routePrefix');
         return view('auth.staff_login');
     }
     public function parentLoginForm(Request $request)
@@ -230,8 +252,16 @@ class AuthController extends Controller
         }
         return view('super_admin.login.login');
     }
+    public function setCookie(Request $request)
+    {
+        $minutes = 60;
+        $response = new Response('Set Cookie');
+        $response->withCookie(cookie('name', 'MyValue', $minutes));
+        return $response;
+    }
     public function authenticate(Request $request)
     {
+        // dd($request);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -239,6 +269,7 @@ class AuthController extends Controller
         ]);
         // dd($response->json());
         $userDetails = $response->json();
+        // dd($userDetails);
         $school_name_url = "";
         $user_name = "";
         $request->session()->regenerate();
@@ -249,7 +280,26 @@ class AuthController extends Controller
             // if (Carbon::now()->diffInDays($password_changed_at) >= 1) {
             //     return redirect()->route('password.expired')->with('error', 'Your password is expired');
             // } else {
-                if ($userDetails['data']['subsDetails']) {
+            if ($userDetails['data']['subsDetails']) {
+                // check 2 FA Enable
+                $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
+                // add remember me
+                $this->rememberMe($request);
+                if ($twoFaEnable == 1) {
+                    $google2fa_secret = isset($userDetails['data']['user']['google2fa_secret']) ? $userDetails['data']['user']['google2fa_secret'] : null;
+                    $routePrefix = trim($request->route()->getPrefix(), '/');
+                    // set session for 2fa
+                    $request->session()->put('two_fa_email', $request->email);
+                    $request->session()->put('two_fa_pass', $request->password);
+                    $request->session()->put('two_branch_id', $request->branch_id);
+                    $request->session()->put('google2fa_secret', $google2fa_secret);
+                    $request->session()->put('routePrefix', $routePrefix);
+                    if (is_null($google2fa_secret)) {
+                        return redirect()->route('2fa.register');
+                    } else {
+                        return redirect()->route('2fa.view');
+                    }
+                } else {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                     $matchRoleIndex = array_search('2', $role_ids, true);
@@ -263,9 +313,10 @@ class AuthController extends Controller
                     } else {
                         return redirect()->route('admin.login')->with('error', 'Invalid Credential');
                     }
-                } else {
-                    return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
                 }
+            } else {
+                return redirect()->route('admin.login')->with('error', 'Access denied please contact admin');
+            }
             // }
         } else {
             return redirect()->route('admin.login')->with('error', $userDetails['message']);
@@ -285,18 +336,38 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                // multiple roles same account
-                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
-                $matchRoleIndex = array_search('4', $role_ids, true);
-                $roleID = $role_ids[$matchRoleIndex];
-                if ($roleID == 4) {
-                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
-                }
-                if ($userDetails['data']['user']['role_id'] == 4) {
-                    $redirect_route = route('teacher.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                // check 2 FA Enable
+                $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
+                // add remember me
+                $this->rememberMe($request);
+                if ($twoFaEnable == 1) {
+                    $google2fa_secret = isset($userDetails['data']['user']['google2fa_secret']) ? $userDetails['data']['user']['google2fa_secret'] : null;
+                    $routePrefix = trim($request->route()->getPrefix(), '/');
+                    // set session for 2fa
+                    $request->session()->put('two_fa_email', $request->email);
+                    $request->session()->put('two_fa_pass', $request->password);
+                    $request->session()->put('two_branch_id', $request->branch_id);
+                    $request->session()->put('google2fa_secret', $google2fa_secret);
+                    $request->session()->put('routePrefix', $routePrefix);
+                    if (is_null($google2fa_secret)) {
+                        return redirect()->route('2fa.register');
+                    } else {
+                        return redirect()->route('2fa.view');
+                    }
                 } else {
-                    return redirect()->route('teacher.login')->with('error', 'Invalid Credential');
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('4', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 4) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 4) {
+                        $redirect_route = route('teacher.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('teacher.login')->with('error', 'Invalid Credential');
+                    }
                 }
             } else {
                 return redirect()->route('teacher.login')->with('error', 'Access denied please contact admin');
@@ -315,22 +386,43 @@ class AuthController extends Controller
         ]);
 
         $userDetails = $response->json();
+        // dd($userDetails);
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
-                // multiple roles same account
-                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
-                $matchRoleIndex = array_search('3', $role_ids, true);
-                $roleID = $role_ids[$matchRoleIndex];
-                if ($roleID == 3) {
-                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
-                }
-                if ($userDetails['data']['user']['role_id'] == 3) {
-                    $redirect_route = route('staff.dashboard');
-                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                // check 2 FA Enable
+                $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
+                // add remember me
+                $this->rememberMe($request);
+                if ($twoFaEnable == 1) {
+                    $google2fa_secret = isset($userDetails['data']['user']['google2fa_secret']) ? $userDetails['data']['user']['google2fa_secret'] : null;
+                    $routePrefix = trim($request->route()->getPrefix(), '/');
+                    // set session for 2fa
+                    $request->session()->put('two_fa_email', $request->email);
+                    $request->session()->put('two_fa_pass', $request->password);
+                    $request->session()->put('two_branch_id', $request->branch_id);
+                    $request->session()->put('google2fa_secret', $google2fa_secret);
+                    $request->session()->put('routePrefix', $routePrefix);
+                    if (is_null($google2fa_secret)) {
+                        return redirect()->route('2fa.register');
+                    } else {
+                        return redirect()->route('2fa.view');
+                    }
                 } else {
-                    return redirect()->route('staff.login')->with('error', 'Invalid Credential');
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('3', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 3) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 3) {
+                        $redirect_route = route('staff.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('staff.login')->with('error', 'Invalid Credential');
+                    }
                 }
             } else {
                 return redirect()->route('staff.login')->with('error', 'Access denied please contact admin');
@@ -353,6 +445,8 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
+                // add remember me
+                $this->rememberMe($request);
                 // multiple roles same account
                 $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                 $matchRoleIndex = array_search('5', $role_ids, true);
@@ -360,7 +454,7 @@ class AuthController extends Controller
                 if ($roleID == 5) {
                     $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
-                if ($userDetails['data']['user']['role_id'] == 5) {
+                if ($roleID == 5) {
                     $redirect_route = route('parent.dashboard');
                     return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } else {
@@ -387,6 +481,8 @@ class AuthController extends Controller
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {
+                // add remember me
+                $this->rememberMe($request);
                 // multiple roles same account
                 $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                 $matchRoleIndex = array_search('6', $role_ids, true);
@@ -394,7 +490,7 @@ class AuthController extends Controller
                 if ($roleID == 6) {
                     $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                 }
-                if ($userDetails['data']['user']['role_id'] == 6) {
+                if ($roleID == 6) {
                     $redirect_route = route('student.dashboard');
                     return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                 } else {
@@ -559,6 +655,7 @@ class AuthController extends Controller
         ]);
 
         $userDetails = $response->json();
+        // dd($userDetails);
         if ($userDetails['code'] == 200) {
 
             $role_ids = explode(",", $userDetails['data']['role_id']);
@@ -626,6 +723,7 @@ class AuthController extends Controller
     // common logout
     public function logoutCommon($req)
     {
+        Helper::GetMethod(config('constants.api.logout'));
         session()->pull('role_id');
         session()->pull('token');
         session()->pull('picture');
@@ -634,6 +732,7 @@ class AuthController extends Controller
         session()->pull('role_name');
         session()->pull('user_id');
         session()->pull('branch_id');
+        session()->pull('session_id');
         session()->pull('ref_user_id');
         session()->pull('student_id');
         session()->pull('school_name');
@@ -642,6 +741,22 @@ class AuthController extends Controller
         session()->pull('academic_session_id');
         // session()->pull('password_changed_at');
         $req->session()->flush();
+    }
+    public function rememberMe($req)
+    {
+        // remember me set start
+        $hour = time() + 3600 * 24 * 30;
+        if (isset($req->remember)) {
+            Cookie::queue(Cookie::make('email', $req->email, $hour));
+            Cookie::queue(Cookie::make('password', $req->password, $hour));
+            Cookie::queue(Cookie::make('remember', $req->remember, $hour));
+        } else {
+            Cookie::queue(Cookie::forget('email'));
+            Cookie::queue(Cookie::forget('password'));
+            Cookie::queue(Cookie::forget('remember'));
+        }
+        // remember me set end
+        return true;
     }
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
@@ -654,6 +769,7 @@ class AuthController extends Controller
         $req->session()->put('name', $userDetails['data']['user']['name']);
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
+        $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
@@ -684,11 +800,10 @@ class AuthController extends Controller
     public function allLogout(Request $request)
     {
 
-        $token = session()->get('token');
-        $id = session()->get('user_id');
+        // $token = session()->get('token');
+        $session_id = session()->get('session_id');
         $data = [
-            'token' => $token,
-            'id' => $id
+            'session_id' => $session_id,
         ];
         $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
         $role = session()->get('role_id');
@@ -697,5 +812,116 @@ class AuthController extends Controller
             $this->logoutCommon($request);
         }
         return $response;
+    }
+    //
+    public function twoFACheckView(Request $request)
+    {
+        return view('auth.google2fa.2fa');
+    }
+    public function twoFACheckRegister(Request $request)
+    {
+        $data = [
+            'email' => session()->get('two_fa_email'),
+            'branch_id' => session()->get('two_branch_id'),
+        ];
+        $response = Http::post(config('constants.api.two_fa_generate_secret_qr'), $data);
+        $output = $response->json();
+        $secret = isset($output['data']['secret']) ? $output['data']['secret'] : "";
+        $encrypt_key = isset($output['data']['encrypt_key']) ? $output['data']['encrypt_key'] : "";
+        $qr_url = isset($output['data']['qr_url']) ? $output['data']['qr_url'] : "";
+        //unset session
+        session()->pull('google2fa_secret');
+        return view('auth.google2fa.register', ['secret' => $secret, 'encrypt_key' => $encrypt_key, 'qr_url' => $qr_url]);
+    }
+    //
+    public function twoFACheckOTPRegister(Request $request)
+    {
+        $request->session()->put('google2fa_secret', $request->secret);
+        return redirect()->route('2fa.view');
+        // dd($request);
+    }
+    public function twoFACheckOtp(Request $request)
+    {
+        $data = [
+            'otp' => $request->otp,
+            'email' => session()->get('two_fa_email'),
+            'password' => session()->get('two_fa_pass'),
+            'branch_id' => session()->get('two_branch_id'),
+            'google2fa_secret' => session()->get('google2fa_secret')
+        ];
+        // dd($data);
+        $google2fa_secret = session()->get('google2fa_secret');
+        $response = Http::post(config('constants.api.two_fa_otp_valid'), $data);
+        // dd($response);
+        $userDetails = $response->json();
+        if ($userDetails['code'] == 200) {
+            if (isset($google2fa_secret)) {
+                // here update google auth secret
+                $googleSecData = [
+                    'email' => session()->get('two_fa_email'),
+                    'google2fa_secret' => session()->get('google2fa_secret')
+                ];
+                Http::post(config('constants.api.update_two_fa_secret'), $googleSecData);
+            }
+            $routePref = session()->get('routePrefix');
+            // admin
+            if ($routePref == "admin") {
+                // multiple roles same account
+                $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                $matchRoleIndex = array_search('2', $role_ids, true);
+                $roleID = $role_ids[$matchRoleIndex];
+                if ($roleID == 2) {
+                    $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                }
+                if ($roleID == 2) {
+                    $redirect_route = route('admin.dashboard');
+                    return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                } else {
+                    return redirect()->route('admin.login')->with('error', 'Invalid Credential');
+                }
+            }
+            // staff
+            if ($routePref == "staff") {
+                if ($userDetails['data']['subsDetails']) {
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('3', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 3) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 3) {
+                        $redirect_route = route('staff.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('staff.login')->with('error', 'Invalid Credential');
+                    }
+                } else {
+                    return redirect()->route('staff.login')->with('error', 'Access denied please contact admin');
+                }
+            }
+            // teacher
+            if ($routePref == "teacher") {
+                if ($userDetails['data']['subsDetails']) {
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('4', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 4) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 4) {
+                        $redirect_route = route('teacher.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('teacher.login')->with('error', 'Invalid Credential');
+                    }
+                } else {
+                    return redirect()->route('staff.login')->with('error', 'Access denied please contact admin');
+                }
+            }
+        } else {
+            return redirect()->route('2fa.view')->with('error', 'Invalid Otp');
+        }
     }
 }

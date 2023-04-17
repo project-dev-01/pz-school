@@ -227,7 +227,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.personal_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.personal_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -405,7 +406,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.employee_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.employee_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -526,7 +528,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.login_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.login_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -588,7 +591,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.SNS') }}<h4>
+                            <h4 class="navv">{{ __('messages.SNS') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -638,7 +642,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.medical_history') }}<h4>
+                            <h4 class="navv">{{ __('messages.medical_history') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -691,7 +696,27 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.bank_details') }}<h4>
+                            <h4 class="navv">Enable Two Factor Authentication
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="header-title">Turn On / Turn Off</h4>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
+                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">{{ __('messages.bank_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -746,7 +771,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.save') }}
+                                {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

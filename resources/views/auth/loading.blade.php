@@ -121,13 +121,13 @@
 
         //arg1 -> step length
         //arg2 -> time(ms)
-        pb.startTo(5, 500);
+        pb.startTo(5, 100);
 
         //end to progress after 5s
         setTimeout(() => {
             pb.end()
             window.location.href = redirectUrl;
-        }, 3000)
+        }, 1000)
     </script>
 
 

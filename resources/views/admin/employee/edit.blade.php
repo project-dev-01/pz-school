@@ -228,7 +228,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="nav-link">{{ __('messages.personal_details') }}<h4>
+                            <h4 class="nav-link">{{ __('messages.personal_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -347,7 +348,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="mobile_no">Mobile No</label>
-                                <input type="text" class="form-control number_validation" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">   
+                                <input type="text" class="form-control number_validation" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -408,7 +409,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.employee_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.employee_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -571,7 +573,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.login_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.login_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -684,7 +687,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.medical_history') }}<h4>
+                            <h4 class="navv">{{ __('messages.medical_history') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -737,7 +741,27 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.bank_details') }}<h4>
+                            <h4 class="navv">Enable Two Factor Authentication
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="header-title">Turn On / Turn Off</h4>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" {{ $role['google2fa_secret_enable'] == "1" ? "checked" : "" }}>
+                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">{{ __('messages.bank_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -791,7 +815,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.update') }}
+                                {{ __('messages.update') }}
                             </button>
                             <a href="{{ route('admin.listemployee') }}" class="btn btn-primary-bl waves-effect waves-light">
                                 Back

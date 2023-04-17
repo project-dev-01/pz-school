@@ -1,9 +1,11 @@
 <?php
-$url = "http://localhost/school-management-system/api";
+// $url = "http://localhost/school-management-system/api";
+$url = "http://localhost/paxsuzen-api-dev/api";
+
 // $url = "http://localhost/school-management-system/api";
 // $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
-    'main_db'=>'school-management-system',
+    // 'main_db'=>'school-management-system',
     // 'main_db'=>'paxsuzen_pz-school',
     'api' => [
         // login url
@@ -650,6 +652,7 @@ return [
  
          //all logout
          'all_logout' => $url.'/all_logout',
+         'logout' => $url.'/logout',
          // copy academic to next session
          'acdemic_copy_assign_teacher' => $url.'/acdemic/copy/assign_teacher',
          'acdemic_copy_grade_assign' => $url.'/acdemic/copy/grade_assign',
@@ -768,6 +771,10 @@ return [
         
         'get_like_column_name'=> $url.'/get_like_column_name',
         'faq_email'=> $url.'/faq/email',
+        // 2fa
+        'two_fa_generate_secret_qr'=> $url.'/2fa/two_fa_generate_secret_qr',
+        'two_fa_otp_valid'=> $url.'/2fa/two_fa_otp_valid',
+        'update_two_fa_secret'=> $url.'/2fa/update_two_fa_secret'
         ]
 
 ];

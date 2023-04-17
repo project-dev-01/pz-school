@@ -310,6 +310,22 @@ class AdminController extends Controller
     //
     public function index()
     {
+        // session()->pull('role_id');
+        // session()->pull('token');
+        // session()->pull('picture');
+        // session()->pull('name');
+        // session()->pull('email');
+        // session()->pull('role_name');
+        // session()->pull('user_id');
+        // session()->pull('branch_id');
+        // session()->pull('ref_user_id');
+        // session()->pull('student_id');
+        // session()->pull('school_name');
+        // session()->pull('school_logo');
+        // session()->pull('all_child');
+        // session()->pull('academic_session_id');
+        // // session()->pull('password_changed_at');
+        // $req->session()->flush();
         // echo "ff";exit;
         // dd(session('school_name_url'));
         $user_id = session()->get('user_id');
@@ -1479,10 +1495,9 @@ class AdminController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'country' => $request->country,
-            'post_code' => $request->post_code
-
+            'post_code' => $request->post_code,
+            'google2fa_secret_enable' => $request->google2fa_secret_enable
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
@@ -1652,7 +1667,8 @@ class AdminController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'country' => $request->country,
-            'post_code' => $request->post_code
+            'post_code' => $request->post_code,
+            'google2fa_secret_enable' => $request->google2fa_secret_enable
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
@@ -7223,5 +7239,21 @@ class AdminController extends Controller
                 return redirect()->route('admin.student.import')->with('errors', $response['data']);
             }
         }
+    }
+    public function twoFA()
+    {
+        // $data = [
+        //     'email' => session()->get('email'),
+        //     'name' => session()->get('name'),
+        //     'role_name' => session()->get('role_name')
+
+        // ];
+        // dd($data);
+        return view(
+            'admin.twofa.index'
+            // [
+            //     'data' => $data,
+            // ]
+        );
     }
 }
