@@ -94,7 +94,6 @@
 
                                 <div class="form-group">
                                     <input class="form-control login-email" type="email" id="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
-                                    <input class="form-control login-email" type="email" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
