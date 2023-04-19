@@ -113,6 +113,33 @@
                         </div> <!-- end col-->
                     </div>
                     <!-- end row-->
+                    <div class="form-group text-right m-b-0">
+
+                        <form method="post" action="{{ route('parent.attendance.student_excel')}}">
+                            @csrf
+                            <input type="hidden" name="subject" id="excelSubject">
+                            <input type="hidden" name="student" id="excelStudent">
+                            <input type="hidden" name="date" id="excelDate">
+                            <div class="clearfix float-right">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.download') }}
+                                </button>
+                            </div>
+                        </form>
+                        <form method="post" action="{{ route('parent.attendance.student_pdf')}}">
+                            @csrf
+                            
+                            <input type="hidden" name="subject_id" id="downExcelSubject">
+                            <input type="hidden" name="student_id" id="downExcelStudent">
+                            <input type="hidden" name="year_month" id="downExcelDate">
+                            <div class="clearfix float-right">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.pdf') }}
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
                     <!-- <div class="form-group text-right m-b-0">
                         <button id="exportAttendance" class="btn btn-primary-bl waves-effect waves-light" type="Save">
                             {{ __('messages.download') }}

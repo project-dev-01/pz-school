@@ -500,7 +500,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Attendance routes
         Route::get('attendance/student_report', [AdminController::class, 'studentAttendanceReport'])->name('admin.attendance.student_report');
-        Route::post('attendance/student_excel', [TeacherController::class, 'studentAttendanceExcel'])->name('admin.attendance.student_excel');
+        Route::post('attendance/student_excel', [AdminController::class, 'studentAttendanceExcel'])->name('admin.attendance.student_excel');
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
         Route::get('attendance/exam_entry', [AdminController::class, 'examEntry'])->name('admin.attendance.exam_entry');
@@ -1222,6 +1222,9 @@ Route::group(['prefix' => 'parent'], function () {
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
         Route::get('/student_leaves', [ParentController::class, 'studentLeaves'])->name('parent.student_leaves');
+        //student report
+        Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf_parent'])->name('parent.attendance.student_pdf');
+        Route::post('attendance/student_excel', [ParentController::class, 'studentAttendanceExcel'])->name('parent.attendance.student_excel');
     });
 });
 

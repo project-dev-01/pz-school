@@ -58,7 +58,7 @@
                                <label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
                                         <input type="file" name="file" />
                             </div>  
-                            <input type="submit" name="upload" class="btn btn-success" value="Upload">   
+                            <input type="submit" name="upload" class="btn btn-success" value="{{ __('messages.upload') }}">   
                         </div>
                     </form>
                 </div>

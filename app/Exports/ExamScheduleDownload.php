@@ -15,7 +15,7 @@ use App\Models\User;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Helpers\Helper;
 
-class ExamScheduleDownload extends BaseController implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+class ExamScheduleDownload  implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
      * @return \Illuminate\Support\Collection

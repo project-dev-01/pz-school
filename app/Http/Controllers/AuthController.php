@@ -267,9 +267,7 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
-        // dd($response->json());
         $userDetails = $response->json();
-        // dd($userDetails);
         $school_name_url = "";
         $user_name = "";
         $request->session()->regenerate();
@@ -333,6 +331,7 @@ class AuthController extends Controller
 
         $userDetails = $response->json();
         $user_name = "";
+        // dd($userDetails);
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {

@@ -10,11 +10,12 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use App\Helpers\Helper;
 Use DB;
 // base controller add
 use App\Http\Controllers\Api\BaseController as BaseController;
 
-class StudentAttendanceExport  extends BaseController implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -39,99 +40,22 @@ class StudentAttendanceExport  extends BaseController implements FromCollection,
     }
     public function collection()
     {
-        $branch = $this->branch;
-        $class = $this->class;
-        $section = $this->section;
-        $subject = $this->subject;
-        $semester = $this->semester;
-        $session = $this->session;
-        $date = $this->date;
-        $month_year = explode("-", $date);
-        $m = $month_year[0];
-        $y = $month_year[1];
-
         
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            "branch_id" => $this->branch,
+            "class_id" => $this->class,
+            "section_id" => $this->section,
+            "subject_id" => $this->subject,
+            "semester_id" => $this->semester,
+            "session_id" => $this->session,
+            "date" => $this->date,
+        ];
+        // dd(config('constants.api.staff_attendance_export'));   
+        $response = Helper::PostMethod(config('constants.api.student_attendance_export'), $data);
+        $excel = $response['data']['attendance'];
         
-        $start = $y.'-'.$m.'-01';
-        $end = date('Y-m-t', strtotime($start));
-        //
-        $startDate = new DateTime($start);
-        $endDate = new DateTime($end);
-          
-        $date='';
-        $tot=[];
-        while ($startDate <= $endDate) {
-            
-            $dat = $startDate->format('Y-m-d');
-            array_push($tot,$dat);
-            $date.= $dat.',';
-            $startDate->modify('+1 day');
-        }
-        // dd($date);
-        $trimdate = rtrim($date,",");
-        $attend = \DB::raw($trimdate);
-        $Connection = $this->createNewConnection($branch);
-
-        $excel = $Connection->table('student_attendances as sa')
-                ->select(
-                    'sa.student_id',
-                    \DB::raw("CONCAT(stud.first_name, ' ', stud.last_name) as name"),
-                    $attend,
-                    DB::raw('COUNT(CASE WHEN sa.status = "present" then 1 ELSE NULL END) as "presentCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.status = "absent" then 1 ELSE NULL END) as "absentCount"'),
-                    DB::raw('COUNT(CASE WHEN sa.status = "late" then 1 ELSE NULL END) as "lateCount"'),
-
-                )
-                ->join('enrolls as en', 'sa.student_id', '=', 'en.student_id')
-                ->join('students as stud', 'sa.student_id', '=', 'stud.id')
-                ->where([
-                    ['sa.class_id', '=', $class],
-                    ['sa.section_id', '=', $section],
-                    ['sa.subject_id', '=', $subject],
-                    ['sa.semester_id', '=', $semester],
-                    ['sa.session_id', '=', $session]
-                ])
-                ->whereMonth('sa.date', $m)
-                ->whereYear('sa.date', $y)
-                ->groupBy('sa.student_id')
-                ->get();
-
-
-        if(!empty($excel)) {
-
-            foreach($excel as $key=>$li) {
-                // dd($li);
-                $student_id = $li->student_id;
-                foreach($tot as $t) {
-                    $in_date = $Connection->table('student_attendances as sa')
-                                ->where('sa.student_id', $student_id)
-                                ->where('sa.date',$t)
-                                ->where('sa.semester_id', $semester)
-                                ->where('sa.session_id', $session)
-                                ->first();
-                                if ($in_date) {
-                                    if ($in_date->status == "present") {
-                                        $li->$t = "P";
-                                    } else if ($in_date->status == "absent") {
-                                        $li->$t = "X";
-                                    } else if ($in_date->status == "late") {
-                                        $li->$t = "L";
-                                    } else {
-                                        $li->$t = 0;
-                                    } 
-                                } else {
-                                    $li->$t = 0;
-                                }
-                    
-                    
-                }
-                $excel[$key] = $li;
-            }
-        }
-        
-                
-            // dd($excel);            
-        return $excel;
+        return collect($excel);
     }
 
     

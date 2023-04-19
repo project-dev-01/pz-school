@@ -268,6 +268,8 @@ return [
         'get_attendance_list' => $url.'/get_attendance_list',
         'get_child_subjects' => $url.'/get_child_subjects',
         'get_attendance_list_teacher' => $url.'/get_attendance_list_teacher',
+        'get_attendance_list_parent' => $url.'/get_attendance_list_parent',
+        
         'get_reasons_by_student' => $url.'/get_reasons_by_student',
         'get_birthday_calendor_teacher' => $url.'/get_birthday_calendor_teacher',
         'get_birthday_calendor_admin' => $url.'/get_birthday_calendor_admin',
@@ -698,7 +700,8 @@ return [
          'get_exam_paper_res' => $url.'/get_exam_paper_results',
           // download excel
          'exam_timetable_list_download' => $url.'/exam_timetable/list/download',
-
+         'staff_attendance_export' => $url.'/staff_attendance/export',
+         'student_attendance_export' => $url.'/student_attendance/export',
          
          'old_soap_student_list' => $url.'/old_soap_student/list',
          'soap_student_list' => $url.'/soap_student/list',

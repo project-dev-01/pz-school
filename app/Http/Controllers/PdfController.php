@@ -852,6 +852,7 @@ class PdfController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        // dd($get_attendance_list_teacher);
         if ($get_attendance_list_teacher['code'] == "200") {
             $student_details = $get_attendance_list_teacher['data']['student_details'];
             $year_month = "01-" . $request->year_month;
@@ -1025,6 +1026,98 @@ class PdfController extends Controller
         $now = now();
         $name = strtotime($now);
         $fileName = "staff_attendance" . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+
+    public function attendance_student_pdf_parent(Request $request)
+    {
+        $data = [
+            'subject_id' => $request->subject_id,
+            'student_id' => $request->student_id,
+            'year_month' => $request->year_month,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        if ($get_attendance_list_teacher['code'] == "200") {
+            $student_details = $get_attendance_list_teacher['data']['student_details'];
+            $year_month = "01-" . $request->year_month;
+            // First day of the month.
+            $startDate = date('Y-m-01', strtotime($year_month));
+            // Last day of the month.
+            $endDate = date('Y-m-t', strtotime($year_month));
+            $begin = new DateTime($startDate);
+            $end = new DateTime($endDate);
+
+            $end = $end->modify('+1 day');
+
+            $interval = new DateInterval('P1D');
+            $daterange = new DatePeriod($begin, $interval, $end);
+            $response = "";
+            $response .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Id</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>';
+            foreach ($daterange as $date) {
+                $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
+            }
+            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">Total Present</th>>
+            <th class="align-top" style="border: 1px solid; padding:12px;">Total Absent</th>>
+            <th class="align-top" style="border: 1px solid; padding:12px;">Total Late</th>>';
+
+            $response .= '</tr></thead><tbody>';
+            foreach ($student_details as $key => $res) {
+                $attendance_details = $res['attendance_details'];
+                $response .= '<tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['student_id'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
+                foreach ($daterange as $dat) {
+                    $checkMatch = 0;
+                    foreach ($attendance_details as $att) {
+                        $loopDate = $dat->format("Y-m-d");
+                        $attDate = $att['date'];
+                        if ($loopDate == $attDate) {
+                            // dd($attDate);
+                            $status = "";
+                            if ($att['status'] == "present") {
+                                $status = "P";
+                            }
+                            if ($att['status'] == "absent") {
+                                $status = "A";
+                            }
+                            if ($att['status'] == "late") {
+                                $status = "L";
+                            }
+                            $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $status . '</td>';
+                            $checkMatch = 1;
+                        }
+                    }
+                    if ($checkMatch == 0) {
+                        $response .= '<td class="text-center" style="border: 1px solid; padding:12px;"></td>';
+                        $checkMatch = 1;
+                    }
+                }
+                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['presentCount'] . '</td>';
+                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['absentCount'] . '</td>';
+                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['lateCount'] . '</td>';
+                $response .= '</tr>';
+            }
+            $response .= '</tbody></table></div>';
+        }
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = "student_attendance" . $name . ".pdf";
         return $pdf->download($fileName);
     }
 }

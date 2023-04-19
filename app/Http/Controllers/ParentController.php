@@ -8,6 +8,8 @@ use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Task;
 use DataTables;
+use Excel;
+use App\Exports\ParentAttendanceExport;
 
 class ParentController extends Controller
 {
@@ -941,5 +943,11 @@ class ParentController extends Controller
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
         );
+    }
+    
+    public function studentAttendanceExcel(Request $request)
+    {
+        // dd($request);
+        return Excel::download(new ParentAttendanceExport(1, $request->student,$request->subject, $request->date), 'Student_Attendance.xlsx');
     }
 }

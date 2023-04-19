@@ -10,29 +10,27 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use App\Helpers\Helper;
 Use DB;
 // base controller add
 use App\Http\Controllers\Api\BaseController as BaseController;
-use App\Helpers\Helper;
 
-class StaffAttendanceExport  implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
+class ParentAttendanceExport implements FromCollection, WithHeadings, ShouldAutoSize, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     
     protected $branch;
-    protected $staff;
-    protected $session;
+    protected $student;
+    protected $subject;
     protected $date;
-    protected $department;
 
-    function __construct($branch,$staff,$session,$date,$department) {
+    function __construct($branch,$student,$subject,$date) {
         $this->branch = $branch;
-        $this->staff = $staff;
-        $this->session = $session;
+        $this->student = $student;
+        $this->subject = $subject;
         $this->date = $date;
-        $this->department = $department;
     }
     public function collection()
     {
@@ -40,13 +38,12 @@ class StaffAttendanceExport  implements FromCollection, WithHeadings, ShouldAuto
         $data = [
             "academic_session_id" => session()->get('academic_session_id'),
             "branch_id" => $this->branch,
-            "staff_id" => $this->staff,
-            "session_id" => $this->session,
+            "student_id" => $this->student,
+            "subject_id" => $this->subject,
             "date" => $this->date,
-            "department_id" => $this->department
         ];
-        // dd(config('constants.api.staff_attendance_export'));   
-        $response = Helper::PostMethod(config('constants.api.staff_attendance_export'), $data);
+        // dd(config('constants.api.staff_attendance_export'));  
+        $response = Helper::PostMethod(config('constants.api.student_attendance_export'), $data);
         $excel = $response['data']['attendance'];
         
         return collect($excel);
@@ -60,7 +57,7 @@ class StaffAttendanceExport  implements FromCollection, WithHeadings, ShouldAuto
         $m = $month_year[0];
         $y = $month_year[1];
 
-        $final = ['Employee Id','Session','Employee Name'];
+        $final = ['Student Id','Student Name'];
 
         
         
@@ -101,7 +98,7 @@ class StaffAttendanceExport  implements FromCollection, WithHeadings, ShouldAuto
                 $tot = date('t', strtotime($year.'-'.$month.'-01'));
                 // dd($tot);
                 $num = $event->sheet->getHighestRow();
-                $cellRange = 'A1:AK1'; // All headers
+                $cellRange = 'A1:AJ1'; // All headers
                 $cellRange2 = 'A1:A'.($num+1);
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange2)->getFont()->setSize(12)->setBold(true);

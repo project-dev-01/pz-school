@@ -50,6 +50,14 @@ $(function () {
 
             var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+            $("#excelSubject").val(subject_id);
+            $("#excelStudent").val(student_id);
+            $("#excelDate").val(year_month);
+            
+            $("#downExcelSubject").val(subject_id);
+            $("#downExcelStudent").val(student_id);
+            $("#downExcelDate").val(year_month);
+
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
