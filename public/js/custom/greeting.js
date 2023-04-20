@@ -1,7 +1,7 @@
 $(function () {
     if ($("#hideGreeting").length > 0) {
         //it  exist
-        var counter = 5;
+        var counter = 3;
         var myCounter = setInterval(myFunction, 1000);
 
         function myFunction() {

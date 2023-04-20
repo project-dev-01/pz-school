@@ -132,7 +132,7 @@
                     <div class="col-6">
                         <div class="float-right">
                             <div class="greetingCntRing">
-                                <span id="greetingRingCnt">5</span>
+                                <span id="greetingRingCnt">3</span>
                             </div>
                         </div>
                     </div>
