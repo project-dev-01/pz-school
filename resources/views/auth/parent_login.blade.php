@@ -22,7 +22,18 @@
     <link href="{{ asset('public/css/custom/parent_login.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 </head>
-
+<style>
+        
+    .parentlogin {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    align-items: stretch;
+    background: url('<?= asset('public/images/school-type/') . '/'.$school_type . '/parent.webp'?>');
+    background-size: cover;
+    }
+</style>
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
@@ -74,7 +85,7 @@
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
-                                <input type="hidden" name="branch_id" value="1">
+                                <input type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -89,7 +100,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/').'/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 

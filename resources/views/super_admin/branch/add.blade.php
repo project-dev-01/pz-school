@@ -136,13 +136,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="post_code">School Type<span class="text-danger">*</span></label>
+                        <select class="form-control" name="school_type" id="school_type">
+                            <option value="">Select School Type</option>
+                            <option value="Local">Local</option>
+                            <option value="International">International</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Islamic">Islamic</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="address">Address Line 1<span class="text-danger">*</span></label>
                         <input class="form-control" name="address" id="address" placeholder="johor">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="address1">Address Line 2</label>
                         <input class="form-control" name="address1" id="address1" placeholder="johor">
@@ -244,6 +256,20 @@
                             </div>
                             <input type="text" name="db_password" class="form-control" id="db_password" placeholder="*********" aria-describedby="inputGroupPrepend">
                         </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="db_port">Database Port<span class="text-danger">*</span></label>
+                        <input type="text" maxlength="50" class="form-control" placeholder="Enter Database Port" name="db_port">
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="db_host">Database Host<span class="text-danger">*</span></label>
+                        <input type="text" maxlength="50" class="form-control" placeholder="Enter Database Host" name="db_host">
                     </div>
                 </div>
 

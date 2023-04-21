@@ -3,10 +3,13 @@
 $url = "http://localhost/paxsuzen-api-dev/api";
 // $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
-    // 'main_db'=>'school-management-system',
-    // 'main_db'=>'paxsuzen_pz-school',
+    'branch_id'=>'1',
+    'school_name'=>'SMK Kiaramas',
+    'school_image'=>'school.jpg',
+    
     'api' => [
         // login url
+      'branch_id'=>'1',
         'login' => $url.'/login',
         'loginSA' => $url.'/loginSA',
         'login_branch' => $url.'/login_branch',
@@ -775,7 +778,9 @@ return [
         // 2fa
         'two_fa_generate_secret_qr'=> $url.'/2fa/two_fa_generate_secret_qr',
         'two_fa_otp_valid'=> $url.'/2fa/two_fa_otp_valid',
-        'update_two_fa_secret'=> $url.'/2fa/update_two_fa_secret'
-        ]
+        'update_two_fa_secret'=> $url.'/2fa/update_two_fa_secret',
+        
+        'get_school_type'=> $url.'/get_school_type',
+      ]
 
 ];

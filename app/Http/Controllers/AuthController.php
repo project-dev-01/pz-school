@@ -20,14 +20,6 @@ class AuthController extends Controller
             $role_id = session()->get('role_id');
             if ($role_id == 2) {
                 return redirect()->route('admin.dashboard');
-            } elseif ($role_id == 3) {
-                return redirect()->route('staff.dashboard');
-            } elseif ($role_id == 4) {
-                return redirect()->route('teacher.dashboard');
-            } elseif ($role_id == 5) {
-                return redirect()->route('parent.dashboard');
-            } elseif ($role_id == 6) {
-                return redirect()->route('student.dashboard');
             }
         }
         // remove temp session
@@ -36,10 +28,24 @@ class AuthController extends Controller
         session()->pull('two_branch_id');
         session()->pull('google2fa_secret');
         session()->pull('routePrefix');
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        return view(
+            'auth.login',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'school_type' => $schoolDetails['data']['school_type']
+            ]
+        );
         // session()->pull('error');
         // session(['error'=>'Logout Successfully']);
         // return redirect()->route('admin.login')->with('error', 'Logout Successfully');
-        return view('auth.login');
+        return view('auth.login')->with('details',$data);
     }
     public function teacherLoginForm(Request $request)
     {
@@ -55,7 +61,21 @@ class AuthController extends Controller
         session()->pull('two_branch_id');
         session()->pull('google2fa_secret');
         session()->pull('routePrefix');
-        return view('auth.teacher_login');
+
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        return view(
+            'auth.teacher_login',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'school_type' => $schoolDetails['data']['school_type']
+            ]
+        );
     }
     public function staffLoginForm(Request $request)
     {
@@ -71,7 +91,20 @@ class AuthController extends Controller
         session()->pull('two_branch_id');
         session()->pull('google2fa_secret');
         session()->pull('routePrefix');
-        return view('auth.staff_login');
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        return view(
+            'auth.staff_login',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'school_type' => $schoolDetails['data']['school_type']
+            ]
+        );
     }
     public function parentLoginForm(Request $request)
     {
@@ -81,7 +114,20 @@ class AuthController extends Controller
                 return redirect()->route('parent.dashboard');
             }
         }
-        return view('auth.parent_login');
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        return view(
+            'auth.parent_login',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'school_type' => $schoolDetails['data']['school_type']
+            ]
+        );
     }
     public function studentLoginForm(Request $request)
     {
@@ -91,15 +137,35 @@ class AuthController extends Controller
                 return redirect()->route('student.dashboard');
             }
         }
-        return view('auth.student_login');
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        return view(
+            'auth.student_login',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'school_type' => $schoolDetails['data']['school_type']
+            ]
+        );
     }
     public function showLoadingForm(Request $request)
     {
         return view('auth.loading');
     }
 
-    public function employeePunchCardLogin(Request $request, $branch, $session)
+    public function employeePunchCardLogin(Request $request,$session)
     {
+        
+        $datas = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $school = Http::post(config('constants.api.get_school_type'), $datas);
+        $schoolDetails = $school->json();
+
         $email = $request->cookie('email');
         $password = $request->cookie('password');
 
@@ -123,15 +189,21 @@ class AuthController extends Controller
                     'punchcard' => $output['data'],
                     'session' => $session,
                     'temp_user_name' => isset($user_name) ? $user_name : '-',
-                    'greetings' => $greetings
+                    'greetings' => $greetings,
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'school_type' => $schoolDetails['data']['school_type']
                 ]
             );
         } else {
             return view(
                 'auth.punch-card-login',
                 [
-                    'branch_id' => $branch,
-                    'session' => $session
+                    'branch_id' => config('constants.branch_id'),
+                    'session' => $session,
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'school_type' => $schoolDetails['data']['school_type']
                 ]
             )->with('session', $session);
         }

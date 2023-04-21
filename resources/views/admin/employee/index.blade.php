@@ -613,7 +613,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.SNS') }}
+                            <h4 class="navv">{{ __('messages.social_links') }}
                                 <h4>
                         </li>
                     </ul>
