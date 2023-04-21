@@ -129,7 +129,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
 
 // Route::get('login', 'AuthController@login');
 // Route::get('logout', 'AuthController@logout');
-Route::get('/employee/punchcard/{branch}/{session}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
+Route::get('/employee/punchcard/{session}', [AuthController::class, 'employeePunchCardLogin'])->name('employee.punchcard.login');
 Route::post('/employee/punchcards/', [AuthController::class, 'employeePunchCard'])->name('employee.punchcard');
 Route::post('/punchcarddetails', [AuthController::class, 'punchCardDetails'])->name('employee.punchcarddetails');
 Route::get('/loading', [AuthController::class, 'showLoadingForm'])->name('admin.loading');

@@ -19,6 +19,17 @@
     <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 </head>
+<style>
+    .teacherlogin {
+        position: relative;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: row;
+        align-items: stretch;
+        background: url('<?= $image_url ?>');
+        background-size: cover;
+    }
+</style>
 
 
 <body class="loading auth-fluid-pages pb-0">
@@ -84,7 +95,7 @@
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/').'/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                 </div>
                                 <input class="form-control" type="hidden" name="session" value="{{$session}}">
                                 <input class="form-control" type="hidden" name="branch_id" value="{{$branch_id}}">
