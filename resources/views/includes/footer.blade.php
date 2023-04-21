@@ -85,41 +85,22 @@
 @endif
 <!-- Plugins js-->
 <script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
-<!-- <script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script> -->
-
 <script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
-
 <!-- Chart JS -->
 <script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
-
 <script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
 <script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
-<!-- Init  -->
-<!-- <script src="{{ asset('public/js/pages/chartjs.init.js') }}"></script> -->
-<!-- Dashboar 1 init js-->
-<!-- <script src="{{ asset('public/js/pages/dashboard-1.init.js') }}"></script> -->
-<!-- App js-->
-<script src="{{ asset('public/js/app.min.js') }}"></script>
 
+<script src="{{ asset('public/js/app.min.js') }}"></script>
 <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('public/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<!-- Add croptool plugin -->
-<!-- <script src="{{ asset('public/ijaboCropTool/ijaboCropTool.min.js') }}"></script> -->
-<!-- Add date picker -->
-<!-- <script src="{{ asset('public/date-picker/jquery-3.6.0.js') }}"></script> -->
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
 
-<!-- <script src="{{ asset('public/js/validation/validation.js') }}"></script> -->
-<!-- test js for datatable download -->
-<!-- <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script> -->
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<!-- button js added -->
 <script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
@@ -127,21 +108,11 @@
 <script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- Bootstrap Tables js -->
 <script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<!-- ApexChart  Js-->
-<!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
-<!-- ApeDate Picker  Js-->
-<!-- <script src="{{ asset('public/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> -->
-<!-- Datepicker -->
-<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
 <!-- Table Editable plugin-->
 <script src="{{ asset('public/libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
-<!-- hightcharts js -->
-<!-- <script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script> -->
 <!-- add date range picker -->
 <script type="text/javascript" src="{{ asset('public/js/daterangepicker/daterangepicker.min.js') }}"></script>
 
-<!-- add jquery validation -->
-<!-- <script src="{{ asset('public/js/pages/bootstrap-tables.init.js') }}"></script> -->
 <!-- Init js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 
@@ -155,7 +126,6 @@
             'Authorization': 'Bearer ' + token
         }
     });
-
     // get states
     var get_roll_id = "{{Session::get('role_id')}}";
 
@@ -194,7 +164,6 @@
     var list = "{{ __('messages.list') }}";
     var locale = "{{ Session::get('locale') }}";
     var calLang = "{{ __('messages.calendar_lang') }}";
-    console.log('123', calLang)
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
@@ -304,14 +273,8 @@
 </script>
 <!-- custom js  -->
 <script src="{{ asset('public/js/custom/settings.js') }}"></script>
-<!-- <script src="{{ asset('public/js/custom/user_list.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/dashboard.js') }}"></script>
-<!-- <script src="{{ asset('public/js/custom/test_result.js') }}"></script> -->
-<!-- <script src="{{ asset('public/js/custom/apex-mixed.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/common.js') }}"></script>
-<!-- <script src="{{ asset('public/js/custom/iconchart.js') }}"></script> -->
-<!-- <script src="{{ asset('public/js/apexChart/apexcharts.js') }}"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
 <script type="text/javascript">
     var url = "{{ route('changeLang') }}";
@@ -330,20 +293,18 @@
     $('.btn-select').html(langArray[0]);
     $('.btn-select').attr('value', 'en');
 
-    //change button stuff on click
+    // change button stuff on click
     $('#a li').click(function() {
 
         var img = $(this).find('img').attr("src");
         var value = $(this).find('img').attr('value');
 
-        console.log('value', value)
         window.location.href = url + "?lang=" + value;
         var text = this.innerText;
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
         $(".b").toggle();
-        //console.log(value);
     });
 
     $(".btn-select").click(function() {
@@ -369,30 +330,6 @@
         $('.btn-select').attr('value', value);
     }
 </script>
-<!-- <script>
-    
-
-    var url = "{{ route('changeLang') }}";
-
-    $(".changeLang").change(function() {
-        if($(this).val()=="United States"){
-                var lang = "en";
-        }else{
-            var lang = "japanese";
-        }
-        window.location.href = url + "?lang=" + lang;
-    });
-        if(locale=="en"){
-            var selectedCountry = "us"x
-        }else if(locale=="japanese"){
-            var selectedCountry = "jp"
-        }
-    $("#countryLang").countrySelect({
-        onlyCountries: ['us','jp'],
-        defaultCountry:selectedCountry,
-        responsiveDropdown: true
-    });
-</script> -->
 <script>
     function sendMarkRequest(id = null) {
         return $.ajax(readNotifications, {
@@ -400,9 +337,16 @@
             data: {
                 token,
                 id
+            },
+            success: function(res) {
+                // console.log("eror")
+                // console.log(err)
+            },
+            error: function(err) {
+                // console.log("eror")
+                // console.log(err)
             }
         });
-
     }
     $(document).ready(function() {
 
@@ -486,6 +430,8 @@
     var timeout;
     document.onmousemove = function() {
         clearTimeout(timeout);
+        // var logoutTime = 60000;  // 1 minute
+        var logoutTime = 900000;  // 15 minute
         timeout = setTimeout(function() {
             var formData = new FormData();
             formData.append("idle_timeout", "idle_timeout");
@@ -501,6 +447,6 @@
                     window.location.href = response.redirect_url;
                 }
             });
-        }, 60000 * 60);
+        }, logoutTime);
     };
 </script>

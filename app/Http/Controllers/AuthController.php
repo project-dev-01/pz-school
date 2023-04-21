@@ -837,6 +837,8 @@ class AuthController extends Controller
             'session_id' => $session_id,
         ];
         $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
+        return $response;
+
         $role = session()->get('role_id');
         $response['role'] = $role;
         if ($response['code'] == 200) {
