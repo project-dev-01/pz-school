@@ -73,43 +73,129 @@ $(document).ready(function () {
         droppable: !0,
         eventLimit: !0,
         selectable: !0,
-        eventSources: [{
-            url: getTimetableCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
-            type: 'get',
-            success: function (response) {
-                t = response.data;
-                return t;
+        eventSources: [
+            // calendor events
+            {
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getTimetableCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            s = response.data;
+                            successCallback(s);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
+            },
+            {
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getEventCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            t = response.data;
+                            successCallback(t);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
+            },
+            {
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getEventGroupCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            m = response.data;
+                            successCallback(m);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
+            },
+            {
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            g = response.data;
+                            successCallback(g);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
+            },
+            {
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            b = response.data;
+                            successCallback(b);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
             }
-        }, {
-            url: getEventCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
-            type: 'get',
-            success: function (response) {
-                m = response.data;
-                return m;
-            }
-        }, {
-            url: getEventGroupCalendorStudent + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
-            type: 'get',
-            success: function (response) {
-                g = response.data;
-                return g;
-            }
-        }, {
-            url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
-            type: 'get',
-            success: function (response) {
-                c = response.data;
-                return c;
-            }
-        }, {
-            url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID + '&student_id=' + student_id,
-            type: 'get',
-            success: function (response) {
-                dd = response.data;
-                return dd;
-            }
-        }],
-        // selectable: true,
+        ],
         selectHelper: true,
         editable: true,
         eventClick: function (e) {

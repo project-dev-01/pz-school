@@ -205,5 +205,5 @@
     <link href="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- add daterangepicker -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/daterangepicker/daterangepicker.css') }}" />
-    
-<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">

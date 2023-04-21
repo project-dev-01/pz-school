@@ -55,7 +55,7 @@
                                 
                                 
                                 <div class="loadingRing">
-                                    <span id="greetingRingCnt">5</span>	 <br>{{ __('messages.seconds') }}
+                                    <span id="greetingRingCnt">3</span>	 <br>{{ __('messages.seconds') }}
                                 </div>
                                 <div class="row" id="hideGreeting">
                                 </div>

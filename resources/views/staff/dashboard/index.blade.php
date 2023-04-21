@@ -77,6 +77,14 @@
             margin: 0px -65px 0px -70px;
             word-wrap: break-word;
         }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
     }
 
     @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
@@ -87,6 +95,18 @@
 
         .eventpopup {
             margin: 0px -30px 0px -27px;
+        }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
+
+        .fc-head-container {
+            width: 205px;
         }
     }
 
@@ -131,7 +151,7 @@
                     <div class="col-6">
                         <div class="float-right">
                             <div class="greetingCntRing">
-                                <span id="greetingRingCnt">5</span>
+                                <span id="greetingRingCnt">3</span>
                             </div>
                         </div>
                     </div>
@@ -287,7 +307,8 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}
+                                    <h4>
                             </li>
                         </ul>
                         <div class="card-body">

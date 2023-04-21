@@ -75,18 +75,12 @@
         return [year, month, day].join('-');
     }
 </script>
-<!-- Calendar init -->
-<!-- <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script> -->
 @if(Session::get('role_id'))
-@if(Session::get('role_id') == '4')
-@elseif(Session::get('role_id') == '5')
-<script src="{{ asset('public/js/custom/parent_calendar.js') }}"></script>
+@if(Session::get('role_id') == '5')
 <script>
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
 </script>
-@else
-<!-- <script src="{{ asset('public/js/pages/calendar.init.js') }}"></script> -->
 @endif
 @endif
 <!-- Plugins js-->
@@ -173,8 +167,8 @@
     var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
-    
-    
+
+
     var select_employee = "{{ __('messages.select_employee') }}";
     var all_lang = "{{ __('messages.all') }}";
     var all_lang = "{{ __('messages.all') }}";
@@ -200,7 +194,7 @@
     var list = "{{ __('messages.list') }}";
     var locale = "{{ Session::get('locale') }}";
     var calLang = "{{ __('messages.calendar_lang') }}";
-    console.log('123',calLang)
+    console.log('123', calLang)
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
     var userID = "{{ Session::get('user_id') }}";
@@ -272,8 +266,8 @@
     var exam_lang = "{{ __('messages.exam') }}";
     var fail_lang = "{{ __('messages.fail') }}";
     var inprogress_lang = "{{ __('messages.inprogress') }}";
-    
-    
+
+
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     // branch details
@@ -320,59 +314,57 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 
 <script type="text/javascript">
-    
-
     var url = "{{ route('changeLang') }}";
     var langArray = [];
-    $('.vodiapicker option').each(function(){
+    $('.vodiapicker option').each(function() {
         var img = $(this).attr("data-thumbnail");
         var text = this.innerText;
         var value = $(this).val();
-        var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+        var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
         langArray.push(item);
-        })
+    })
 
-        $('#a').html(langArray);
+    $('#a').html(langArray);
 
-        //Set the button value to the first el of the array
-        $('.btn-select').html(langArray[0]);
-        $('.btn-select').attr('value', 'en');
+    //Set the button value to the first el of the array
+    $('.btn-select').html(langArray[0]);
+    $('.btn-select').attr('value', 'en');
 
-        //change button stuff on click
-        $('#a li').click(function(){
-            
+    //change button stuff on click
+    $('#a li').click(function() {
+
         var img = $(this).find('img').attr("src");
         var value = $(this).find('img').attr('value');
-        
-    console.log('value',value)
+
+        console.log('value', value)
         window.location.href = url + "?lang=" + value;
         var text = this.innerText;
-        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
         $(".b").toggle();
         //console.log(value);
     });
 
-    $(".btn-select").click(function(){
-            $(".b").toggle();
-        });
+    $(".btn-select").click(function() {
+        $(".b").toggle();
+    });
 
     //check local storage for the lang
-    console.log('en',locale)
-    if (locale=="japanese"){
+    console.log('en', locale)
+    if (locale == "japanese") {
         //find an item with value of sessionLang\
         var img = "{{ asset('public/images/JPN.png') }}";
         var value = "japanese";
         var text = "JPN";
-        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
         var img = "{{ asset('public/images/USA.png') }}";
         var value = "en";
         var text = "ENG";
-        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     }
