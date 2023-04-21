@@ -16,6 +16,22 @@ class ParentController extends Controller
     //
     public function index(Request $request)
     {
+        //  session()->pull('role_id');
+        // session()->pull('token');
+        // session()->pull('picture');
+        // session()->pull('name');
+        // session()->pull('email');
+        // session()->pull('role_name');
+        // session()->pull('user_id');
+        // session()->pull('branch_id');
+        // session()->pull('ref_user_id');
+        // session()->pull('student_id');
+        // session()->pull('school_name');
+        // session()->pull('school_logo');
+        // session()->pull('all_child');
+        // session()->pull('academic_session_id');
+        // session()->pull('password_changed_at');
+        // $req->session()->flush();
         // $request->session()->put('children_id', "1");
 
         $user_id = session()->get('user_id');
@@ -42,22 +58,22 @@ class ParentController extends Controller
         // dd($get_to_do_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
-        
-        
+
+
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        // dd($all_exam_subject_scores['data']);
+        // dd($get_to_do_list_dashboard);
         return view(
             'parent.dashboard.index',
             [
-                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
-                'get_std_names_dashboard' => $get_std_names_dashboard['data'],
-                'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
-                'all_exam_subject_scores' => $all_exam_subject_scores['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'greetings' => $greetings,
-                'exams' => $exam_by_student['data'],
+                'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
+                'get_homework_list_dashboard' => isset($get_homework_list_dashboard['data']) ? $get_homework_list_dashboard['data'] : [],
+                'get_std_names_dashboard' => isset($get_std_names_dashboard['data']) ? $get_std_names_dashboard['data'] : [],
+                'get_leave_reasons_dashboard' => isset($get_leave_reasons_dashboard['data']) ? $get_leave_reasons_dashboard['data'] : [],
+                'all_exam_subject_scores' => isset($all_exam_subject_scores['data']) ? $all_exam_subject_scores['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'greetings' => isset($greetings) ? $greetings : "",
+                'exams' => isset($exam_by_student['data']) ? $exam_by_student['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
@@ -221,7 +237,7 @@ class ParentController extends Controller
 
     public function faqIndex()
     {
-        
+
         $data = [
             'email' => session()->get('email'),
             'name' => session()->get('name'),
@@ -291,7 +307,7 @@ class ParentController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7" class="text-center"> '.$no_data_available_lang.'</td>
+                                <td colspan="7" class="text-center"> ' . $no_data_available_lang . '</td>
                             </tr>';
             }
 
@@ -415,7 +431,7 @@ class ParentController extends Controller
         $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id,
-            'id'=>$id
+            'id' => $id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
@@ -530,7 +546,7 @@ class ParentController extends Controller
         $adminid = 2;
         $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
-            'id'=> $request->id,
+            'id' => $request->id,
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
@@ -650,7 +666,7 @@ class ParentController extends Controller
         // dd($data);
         $homework = Helper::PostMethod(config('constants.api.homework_student'), $data);
         $get_student_by_all_subjects = Helper::PostMethod(config('constants.api.get_student_by_all_subjects'), $data);
-        
+
 
         // dd($homework);
         return view(
@@ -668,7 +684,7 @@ class ParentController extends Controller
     //Filter  Homework
     public function filterHomework(Request $request)
     {
-        
+
         $title_lang = __('messages.title');
         $status_lang = __('messages.status');
         $date_of_homework_lang = __('messages.date_of_homework');
@@ -680,7 +696,7 @@ class ParentController extends Controller
         $submission_process_here_lang = __('messages.submission_process_here');
         $note_lang = __('messages.note');
         $attachment_file = __('messages.attachment_file');
-        
+
         $student = session()->get('student_id');
         $data = [
             'status' => $request->status,
@@ -708,7 +724,7 @@ class ParentController extends Controller
                     if ($work['status'] == 1) {
                         $file = '<div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-5 font-weight-bold">'.$attachment_file.': </div>
+                            <div class="col-md-5 font-weight-bold">' . $attachment_file . ': </div>
                             <div class="col-md-3">
                                 <a href="~/resources/views/Guide.pdf" download>
                                     <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -736,19 +752,19 @@ class ParentController extends Controller
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$title_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $title_lang . ' :</div>
                                                     <div class="col-md-3">' . $work['title'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$status_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $status_lang . ' :</div>
                                                     <div class="col-md-3">' . $status . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$date_of_homework_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $date_of_homework_lang . ' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
                                                 </div>
                                             </div>
@@ -758,19 +774,19 @@ class ParentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$date_of_submission_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $date_of_submission_lang . ' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$evalution_date_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $evalution_date_lang . ' :</div>
                                                     <div class="col-md-3">' . date('F j , Y', strtotime($work['evaluation_date'])) . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$remarks_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $remarks_lang . ' :</div>
                                                     <div class="col-md-3">' . $work['description'] . '</div>
                                                 </div>
                                             </div>
@@ -779,13 +795,13 @@ class ParentController extends Controller
                                             
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$rank_out_of_5_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $rank_out_of_5_lang . ' :</div>
                                                     <div class="col-md-3">' . $work['rank'] . '</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$document_lang.' :</div>
+                                                    <div class="col-md-5 font-weight-bold">' . $document_lang . ' :</div>
                                                     <div class="col-md-3">
                                                         <a href="~/resources/views/Guide.pdf" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
@@ -796,14 +812,14 @@ class ParentController extends Controller
                                         </div><br />
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold">'.$submission_process_here_lang.' :- </div>
+                                            <div class="col-md-12 font-weight-bold">' . $submission_process_here_lang . ' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$note_lang.' : </div>
+                                                    <div class="col-md-5 font-weight-bold">' . $note_lang . ' : </div>
                                                     <div class="col-md-5">
                                                         <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
                                                     </div>
@@ -923,8 +939,8 @@ class ParentController extends Controller
         // dd($get_homework_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
-        
-        
+
+
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($all_exam_subject_scores['data']);
         return view(
@@ -944,10 +960,10 @@ class ParentController extends Controller
             ]
         );
     }
-    
+
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new ParentAttendanceExport(1, $request->student,$request->subject, $request->date), 'Student_Attendance.xlsx');
+        return Excel::download(new ParentAttendanceExport(1, $request->student, $request->subject, $request->date), 'Student_Attendance.xlsx');
     }
 }

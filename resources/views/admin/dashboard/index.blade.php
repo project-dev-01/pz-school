@@ -77,6 +77,14 @@
             margin: 0px -65px 0px -70px;
             word-wrap: break-word;
         }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
     }
 
     @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
@@ -87,6 +95,18 @@
 
         .eventpopup {
             margin: 0px -30px 0px -27px;
+        }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
+
+        .fc-head-container {
+            width: 205px;
         }
     }
 
@@ -402,8 +422,8 @@
                                                                         </li>
                                                                         <li class="list-inline-item pr-1">
                                                                             <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                            <?php     setlocale(LC_ALL, 'ja.UTF-8');                                                
-                                                                            ?>              
+                                                                            <?php setlocale(LC_ALL, 'ja.UTF-8');
+                                                                            ?>
                                                                             {{ date('j F y g a', strtotime($old['due_date']));}}
 
                                                                         </li>

@@ -77,6 +77,14 @@
             margin: 0px -65px 0px -70px;
             word-wrap: break-word;
         }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
     }
 
     @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
@@ -87,6 +95,18 @@
 
         .eventpopup {
             margin: 0px -30px 0px -27px;
+        }
+
+        .fc-toolbar {
+            text-align: center;
+        }
+
+        .fc-scroller {
+            height: 315px !important;
+        }
+
+        .fc-head-container {
+            width: 205px;
         }
     }
 
@@ -149,7 +169,8 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}<h4>
+                                <h4 class="navv">{{ __('messages.to_do_list') }}
+                                    <h4>
                             </li>
                         </ul>
                         <div class="card-body">
@@ -1114,8 +1135,8 @@
                     </div>
                 </div><br>
                 <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" >
-                        
+                    <table class="table table-bordered w-100 nowrap">
+
                         <thead id="st_semester_wise_head">
                         </thead>
                         <tbody id="st_semester_wise_body">
@@ -1130,7 +1151,7 @@
     <div class="col-xl-12 col-md-12">
         <!-- Portlet card -->
         <div class="card">
-            
+
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <h4 class="navv"> {{ __('messages.exam_marks_status') }}
@@ -1515,7 +1536,7 @@
     var calendorUpdateTaskCalendor = "{{ config('constants.api.calendor_update_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
 
-    
+
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
 
@@ -1525,7 +1546,7 @@
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var all_exam_subject_scores = "{{ config('constants.api.all_exam_subject_scores') }}";
 
-    
+
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     // all exam subject scores
     var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
@@ -1533,8 +1554,6 @@
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
     var examByStudent = "{{ config('constants.api.exam_by_student') }}";
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
-    
-    
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('public/js/custom/teacher_calendor.js') }}"></script> -->

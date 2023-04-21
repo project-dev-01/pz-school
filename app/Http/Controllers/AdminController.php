@@ -4239,11 +4239,13 @@ class AdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'photo' => $base64,
+            'google2fa_secret_enable' => $request->google2fa_secret_enable,
             'file_extension' => $extension,
             'facebook_url' => $request->facebook_url,
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
         ];
+        //  dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
         // dd($response);
         return $response;
@@ -4274,7 +4276,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
-
+        // dd($response);
         return view(
             'admin.parent.edit',
             [
@@ -4283,6 +4285,7 @@ class AdminController extends Controller
                 'education' => $education['data'],
                 'parent' => $response['data']['parent'],
                 'childs' => $response['data']['childs'],
+                'user' => isset($response['data']['user'])?$response['data']['user']:[],
             ]
         );
     }
@@ -4332,6 +4335,7 @@ class AdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'old_photo' => $request->old_photo,
+            'google2fa_secret_enable' => $request->google2fa_secret_enable,
             'photo' => $base64,
             'file_extension' => $extension,
             'facebook_url' => $request->facebook_url,
