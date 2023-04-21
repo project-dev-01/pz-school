@@ -29,7 +29,7 @@
     min-height: 100vh;
     flex-direction: row;
     align-items: stretch;
-    background: url('<?= asset('public/images/school-type/') . '/'.$school_type . '/student.webp'?>');
+    background: url('<?= $image_url ?>');
     background-size: cover;
     }
 </style>

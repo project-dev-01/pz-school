@@ -28,13 +28,15 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/admin.webp";
+        // dd($image_url);
         return view(
             'auth.login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
-                'school_type' => $schoolDetails['data']['school_type']
+                'image_url' => $image_url
             ]
         );
     }
@@ -53,13 +55,14 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/teacher.webp";
         return view(
             'auth.teacher_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
-                'school_type' => $schoolDetails['data']['school_type']
+                'image_url' => $image_url
             ]
         );
     }
@@ -77,13 +80,14 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/staff.webp";
         return view(
             'auth.staff_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
-                'school_type' => $schoolDetails['data']['school_type']
+                'image_url' => $image_url
             ]
         );
     }
@@ -101,13 +105,14 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/parent.webp";
         return view(
             'auth.parent_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
-                'school_type' => $schoolDetails['data']['school_type']
+                'image_url' => $image_url
             ]
         );
     }
@@ -125,13 +130,14 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/student.webp";
         return view(
             'auth.student_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
-                'school_type' => $schoolDetails['data']['school_type']
+                'image_url' => $image_url
             ]
         );
     }
@@ -156,6 +162,7 @@ class AuthController extends Controller
         ];
         $school = Http::post(config('constants.api.get_school_type'), $datas);
         $schoolDetails = $school->json();
+        $image_url =  config('constants.image_url').$schoolDetails['data']['school_type']."/staff.webp";
 
         $email = $request->cookie('email');
         $password = $request->cookie('password');
@@ -183,7 +190,7 @@ class AuthController extends Controller
                     'greetings' => $greetings,
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
-                    'school_type' => $schoolDetails['data']['school_type']
+                    'image_url' => $image_url
                 ]
             );
         } else {
@@ -194,7 +201,7 @@ class AuthController extends Controller
                     'session' => $session,
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
-                    'school_type' => $schoolDetails['data']['school_type']
+                    'image_url' => $image_url
                 ]
             )->with('session', $session);
         }
