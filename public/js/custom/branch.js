@@ -148,7 +148,10 @@ $(function () {
             city: "required",
             db_name: "required",
             db_username: "required",
-            address: "required"
+            address: "required",
+            db_host: "required",
+            db_port: "required",
+            school_type: "required"
         }
     });
     //
@@ -346,6 +349,7 @@ $(function () {
                 minlength: 5,
                 equalTo: "#password"
             },
+            school_type: "required",
             city: "required"
         }
     });

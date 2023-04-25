@@ -660,7 +660,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.social_link') }}<h4>
+                            <h4 class="navv">{{ __('messages.social_links') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">

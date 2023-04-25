@@ -156,7 +156,10 @@ class SuperAdminController extends Controller
             'status' => $request->status,
             'db_name' => $request->db_name,
             'db_username' => $request->db_username,
-            'db_password' => $request->db_password
+            'db_password' => $request->db_password,
+            'school_type' => $request->school_type,
+            'db_host' => $request->db_host,
+            'db_port' => $request->db_port
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.branch_add'), $data);
@@ -255,7 +258,8 @@ class SuperAdminController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
-            'status' => $request->status
+            'status' => $request->status,
+            'school_type' => $request->school_type,
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.branch_update'), $data);
