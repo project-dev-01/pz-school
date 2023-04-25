@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Hostel')
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->

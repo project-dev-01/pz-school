@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Soap Sub Category')
 @section('css')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
 .dot {
   height: 25px;

@@ -2,6 +2,7 @@
 @section('title','Subjects')
 @section('css')
 <link href="{{ asset('public/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->

@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Semester')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker {
       z-index: 1600 !important; /* has to be larger than 1050 */

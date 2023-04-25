@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile_no">">{{ __('messages.mobile_no') }}</label>
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
                                         <input type="text" class="form-control number_validation" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
                                         <span class="text-danger error-text mobile_no_error"></span>
                                     </div>

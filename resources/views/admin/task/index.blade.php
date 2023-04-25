@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','To Do List')
 @section('css')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- <style>
     /* checklist css start  */
     li>p {

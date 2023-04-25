@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Leave Management')
 @section('content')
-
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
     <!-- start page title -->

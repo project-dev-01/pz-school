@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Assign')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
