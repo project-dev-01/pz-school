@@ -121,9 +121,10 @@
                             <div class="col-md-4">
                                 <label for="document">{{ __('messages.attachment_file') }}<span class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <div class="custom-file">
+                                    <div class="">
                                         <input type="file" id="homework_file" class="custom-file-input" name="file">
                                         <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                            <span id="file_name"></span>
                                     </div>
                                 </div>
                                 <span id="file_name"></span>

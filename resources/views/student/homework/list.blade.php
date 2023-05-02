@@ -223,7 +223,7 @@
                                                 @if(file_exists( public_path().'/teacher/homework/'.$work['document'] ))
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{asset('public/teacher/homework/')}}/{{$work['document']}}" download>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{ config('constants.image_url').'/public/teacher/homework/'}}/{{$work['document'] }}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a></p>
                                                     </div>
@@ -257,7 +257,7 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} <span class="text-danger">*</span> :</div>
                                                     <div class="col-md-6">
-                                                        <a href="{{asset('public/student/homework/')}}/{{$work['file']}}" download>
+                                                        <a href="{{ config('constants.image_url').'/public/student/homework/'}}/{{$work['file'] }}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                         </a>
                                                     </div>
@@ -266,7 +266,13 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} <span class="text-danger">*</span>:</div>
                                                     <div class="col-md-6">
-                                                        <input type="file" name="file">
+                                                        <div class="input-group">
+                                                            <div class="">
+                                                                <input type="file" id="homework_file" class="custom-file-input homework_file" name="file">
+                                                                <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                                                <span id="file_name"></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif

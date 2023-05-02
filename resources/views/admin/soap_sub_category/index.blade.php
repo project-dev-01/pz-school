@@ -76,7 +76,7 @@
 
 <script>
     //soapSubCategory routes
-    var imageUrl = "{{ asset('public/soap/images/') }}";
+    var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
     var soapSubCategoryList = "{{ route('admin.soap_sub_category.list') }}";
     var soapSubCategoryDetails = "{{ route('admin.soap_sub_category.details') }}";
     var soapSubCategoryDelete = "{{ route('admin.soap_sub_category.delete') }}";

@@ -154,7 +154,7 @@
                                         <label for="inputEmail3" class="col-3 col-form-label">{{ __('messages.attachment_file') }}<span class="text-danger">*</span></label>
                                         <div class="col-9">
                                             <div class="input-group">
-                                                <div class="custom-file">
+                                                <div class="">
                                                     <input type="file" class="custom-file-input" id="inputGroupFile04">
                                                     <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_file') }}</label>
                                                 </div>

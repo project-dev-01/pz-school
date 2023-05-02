@@ -217,8 +217,8 @@
 
 
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    var studentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
 </script>
 <script src="{{ asset('public/js/custom/analytics_parent_student.js') }}"></script>
 @endsection

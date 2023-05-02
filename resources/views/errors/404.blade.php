@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+	<link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
 	<title>404</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -97,7 +97,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="errorbackgroundd img">
-					<img src="{{ asset('public/images/Illustration.jpg') }}">
+					<img src="{{ config('constants.image_url').'/public/images/Illustration.jpg' }}">
 					<h1 class="eopppss">Oppps. Something <br>went wrong </h1>
 					<p class="errortext">This page is currently not available. We are working<br> on the problem & appreciate your patience
 						<a href="{{url('/')}}" class="link_404">Go to Home</a>

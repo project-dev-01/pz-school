@@ -167,7 +167,7 @@
                                                                 {{$key}}
                                                             </td>
                                                             <td style="width: 36px;">
-                                                                <img src="{{ $student['photo'] && asset('public/users/images/'.$student['photo']) ? asset('public/users/images/'.$student['photo']) : asset('public/images/users/default.jpg') }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                                                <img src="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : {{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
                                                             </td>
                                                             <td class="stu-name">
                                                                 <h5 class="m-0 font-weight-normal ">{{$student['name']}}</h5>
@@ -801,8 +801,8 @@
 <script>
     //soapCategory routes
     var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var imageUrl = "{{ asset('public/soap/images/') }}";
-    var userImageUrl = "{{ asset('public/user/images/') }}";
+    var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
+    var userImageUrl = "{{ config('constants.image_url').'/public/users/images/' }}";
     var subCategoryList = "{{ config('constants.api.sub_category_list_by_category') }}";
     var notesList = "{{ config('constants.api.notes_list_by_sub_category') }}";
     var soapDelete = "{{ config('constants.api.soap_delete') }}";
@@ -818,7 +818,7 @@
     var user_name = "{{ Session::get('name') }}";
     var user_id = "{{ Session::get('ref_user_id') }}";
     var soapLogList = "{{ route('admin.soap_log.list') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var soapStudentIDUrl = "{{ route('admin.settings.soap_student_id') }}";
     
 </script>

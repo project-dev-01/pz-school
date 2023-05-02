@@ -266,7 +266,8 @@
     var exam_lang = "{{ __('messages.exam') }}";
     var fail_lang = "{{ __('messages.fail') }}";
     var inprogress_lang = "{{ __('messages.inprogress') }}";
-
+    var select_category = "{{ __('messages.select_category') }}";
+    
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
@@ -354,14 +355,14 @@
     console.log('en', locale)
     if (locale == "japanese") {
         //find an item with value of sessionLang\
-        var img = "{{ asset('public/images/JPN.png') }}";
+        var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
         var value = "japanese";
         var text = "JPN";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
-        var img = "{{ asset('public/images/USA.png') }}";
+        var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
         var value = "en";
         var text = "ENG";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

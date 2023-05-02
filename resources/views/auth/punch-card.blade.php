@@ -44,7 +44,7 @@
 
                                 <li class="dropdown notification-list topbar-dropdown">
                                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
-                                        <img src="{{ Session::get('picture') && asset('public/images/staffs/'.Session::get('picture')) ? asset('public/images/staffs/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" style="height:50px;width:50px" alt="user-image" class="rounded-circle admin_picture">
+                                        <img src="{{ Session::get('picture') && config('constants.image_url').'/public/images/staffs/'.Session::get('picture') ? config('constants.image_url').'/public/images/staffs/'.Session::get('picture') : config('constants.image_url').'/public/images/users/default.jpg' }}" style="height:50px;width:50px" alt="user-image" class="rounded-circle admin_picture">
                                         <span class="pro-user-name ml-1 user_name">
                                             <i class="mdi mdi-chevron-down"></i>
                                         </span>
@@ -70,7 +70,7 @@
                                 <a href="javascript:void(0)" class="logo logo-dark text-left">
                                     <span class="logo-lg">
                                         <div class="form-group">
-                                            <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                            <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                         </div>
                                     </span>
                                 </a>

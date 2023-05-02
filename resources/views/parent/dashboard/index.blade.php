@@ -198,7 +198,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
@@ -265,7 +265,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -333,7 +333,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -729,12 +729,12 @@
                                     <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                     <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                        <div class="">
+                                            <input type="file" id="leave_file" class="custom-file-input" name="file">
                                             <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                            <span id="file_name"></span>
                                         </div>
                                     </div>
-                                    <span id="file_name"></span>
 
                                 </div>
                             </div>
@@ -1039,7 +1039,7 @@
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ asset('public/images/todolist/') }}";
+    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     var UserName = "{{ Session::get('name') }}";
@@ -1057,7 +1057,7 @@
     // exam subject mark high low avg
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
     // leave apply
-    var StudentDocUrl = "{{ asset('public/teacher/student-leaves/') }}";
+    var StudentDocUrl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>

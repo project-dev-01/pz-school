@@ -66,7 +66,7 @@
                         @endphp
                         <div class="tt-item">
                             <div class="tt-col-avatar">
-                                <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                                <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                                 {{ $value['user_name'] }}
                             </div>
                             <div class="tt-col-description">
@@ -137,7 +137,7 @@
                         @endphp
                         <div class="tt-item">
                             <div class="tt-col-avatar">
-                            <img src="{{ asset('public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="40" />
+                            <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                                 {{ $value['user_name'] }}
                             </div>
                             <div class="tt-col-description">

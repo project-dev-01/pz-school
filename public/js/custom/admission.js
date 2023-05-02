@@ -52,7 +52,7 @@ $(function () {
                 required: true,
                 minlength: 6,
                 equalTo: "#txt_pwd"
-            },       
+            },      
         }
     });
 

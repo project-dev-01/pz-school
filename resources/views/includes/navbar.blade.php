@@ -51,8 +51,8 @@
             
             <li class="dropdown notification-list topbar-dropdown">
                 <select class="vodiapicker">
-                    <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
-                    <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
+                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">ENG</option>
+                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">JPN</option>
                 </select>
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>
@@ -113,7 +113,7 @@
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
+                    <img src="{{ Session::get('picture') && config('constants.image_url').'/public/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/users/images/'.Session::get('picture') : config('constants.image_url').'/public/images/users/default.jpg' }}" alt="user-image" class="rounded-circle admin_picture">
                     <span class="pro-user-name ml-1 user_name">
                         <i class="mdi mdi-chevron-down"></i>
                     </span>
@@ -204,10 +204,10 @@
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="22">
+                    <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="22">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ asset('public/images/Logo.png') }}" alt="" height="45">
+                    <img src="{{ config('constants.image_url').'/public/images/Logo.png' }}" alt="" height="45">
                 </span>
             </a>
         </div>

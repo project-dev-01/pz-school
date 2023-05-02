@@ -337,7 +337,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
@@ -404,7 +404,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
 
                                                                 <div class="mt-3 mt-sm-0">
@@ -474,7 +474,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -682,7 +682,7 @@
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ asset('public/images/todolist/') }}";
+    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 

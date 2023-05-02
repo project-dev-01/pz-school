@@ -66,8 +66,8 @@
 @endsection
 @section('scripts')
 <script>
-    var parentImg = "{{ asset('public/users/images/') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var parentList = "{{ route('admin.parent.list') }}";
     var parentDelete = "{{ route('admin.parent.delete') }}";
 </script>

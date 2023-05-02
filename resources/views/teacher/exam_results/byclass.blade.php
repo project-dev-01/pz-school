@@ -185,7 +185,7 @@
         var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
         var teacher_id = "{{ Session::get('ref_user_id') }}";
         // default image test
-        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+        var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     </script>
     <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
     @endsection

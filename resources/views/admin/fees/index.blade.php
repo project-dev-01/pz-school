@@ -233,8 +233,8 @@
     var getFeesAllocatedStudents = "{{ config('constants.api.get_fees_allocated_students') }}";
     var feesTypeGroupUrl = "{{ config('constants.api.fees_type_group') }}";
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    var studentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
     var editFeesPageUrl = '{{ route("admin.fees.edit", ":id") }}';
     var feesDelete = '{{ route("admin.fees.fees_delete") }}';
 </script>

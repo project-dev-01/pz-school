@@ -123,10 +123,10 @@
 <script>
     var sectionByClassUrl = "{{ config('constants.api.class_teacher_sections') }}";
     var allStutdentLeaveList = "{{ config('constants.api.get_all_student_leaves') }}";
-    var studentDocUrl = "{{ asset('public/teacher/student-leaves/') }}";
+    var studentDocUrl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/student_leave_list.js') }}"></script>
 @endsection

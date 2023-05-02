@@ -139,8 +139,8 @@
 @section('scripts')
 <script>
     
-    var studentImg = "{{ asset('public/users/images/') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var studentList = "{{ route('teacher.student.list') }}";

@@ -45,8 +45,40 @@ $(function () {
 
     $('#homework_file').change(function() {
         // var i = $(this).prev('label').clone();
-        var file = $('#homework_file')[0].files[0].name;
-        $('#file_name').text(file);
+        var file = $('#homework_file')[0].files[0];
+        // var size = $('#homework_file')[0].files[0].size;
+        if(file.size > 2097152) {
+            $('#file_name').text("File greater than 2Mb");
+            $("#file_name").addClass("error");
+            $('#homework_file').val('');
+        } else {
+            $("#file_name").removeClass("error");
+            $('#file_name').text(file.name);
+        }
+    });
+
+    // $(document).on('change', '.student_homework_file', function () {
+    //     // var i = $(this).prev('label').clone();
+    //     var file = $(this)[0].files[0];
+    //     // var size = $('#homework_file')[0].files[0].size;
+    //     if(file.size > 2097152) {
+    //         $(this).parent().text("File greater than 2Mb");
+    //         $(this).parent().addClass("error");
+    //         $('#homework_file').val('');
+    //     } else {
+    //         $(this).parent().removeClass("error");
+    //         $(this).parent().text(file.name);
+    //     }
+    // });
+
+    
+    $(document).on('change', '.homework_file', function () {
+        console.log(12343333)
+        var file = $(this)[0].files[0];
+        if(file.size > 2097152) {
+            toastr.error("File greater than 2Mb");
+            $(this).val('');
+        }
     });
     
     $('#studentHomeworkFilter').on('submit', function (e) {

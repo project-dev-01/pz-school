@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{asset('public/users/images/default-img.jpg')}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{ config('constants.image_url').'/public/users/images/default-img.jpg'}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
 
@@ -189,7 +189,7 @@
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    var profilePath = "{{ asset('public/users/images') }}";
+    var profilePath = "{{ config('constants.image_url').'/public/users/images' }}";
 </script>
 <script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
 @endsection

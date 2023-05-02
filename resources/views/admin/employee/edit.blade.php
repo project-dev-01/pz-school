@@ -261,7 +261,7 @@
                                 <div class="col-lg-3">
                                     <div class="mt-3">
                                         <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
-                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-default-file="{{ $employee['photo'] && asset('public/images/staffs/').'/'.$employee['photo'] ? asset('public/images/staffs/').'/'.$employee['photo'] : asset('public/images/users/default.jpg') }}" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-max-file-size="2M"  data-default-file="{{ $employee['photo'] && config('constants.image_url').'/public/users/images/'.$employee['photo'] ? config('constants.image_url').'/public/users/images/'.$employee['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>

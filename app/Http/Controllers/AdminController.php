@@ -5383,7 +5383,7 @@ class AdminController extends Controller
         $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
 
         $student = Helper::PostMethod(config('constants.api.student_list'), []);
-        // dd($getEmployee);
+        dd($getEmployee);
         return view(
             'admin.hostel_block.index',
             [

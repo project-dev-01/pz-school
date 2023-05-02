@@ -6,7 +6,7 @@
     <title>Forum </title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ asset('public/forum/build/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
