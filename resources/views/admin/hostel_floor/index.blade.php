@@ -71,6 +71,12 @@
     var hostelFloorList = "{{ route('admin.hostel_floor.list') }}";
     var hostelFloorDetails = "{{ route('admin.hostel_floor.details') }}";
     var hostelFloorDelete = "{{ route('admin.hostel_floor.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_hostel_floor') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/hostel_floor.js') }}"></script>

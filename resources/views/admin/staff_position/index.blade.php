@@ -64,6 +64,12 @@
     var staffPositionList = "{{ route('admin.staff_position.list') }}";
     var staffPositionDetails = "{{ route('admin.staff_position.details') }}";
     var staffPositionDelete = "{{ route('admin.staff_position.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_staff_position') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/staff_position.js') }}"></script>

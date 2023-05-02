@@ -64,6 +64,12 @@
     var absentReasonList = "{{ route('admin.absent_reason.list') }}";
     var absentReasonDetails = "{{ route('admin.absent_reason.details') }}";
     var absentReasonDelete = "{{ route('admin.absent_reason.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_absent_reason') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/absent_reason.js') }}"></script>

@@ -303,7 +303,7 @@
                                 </ul><br>
                                 <div class="card-body">
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
-                                    <div class="row mt-4" data-plugin="dragula" data-containers='["homework-list-show"]'>
+                                    <div class="row" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
                                             <a class="text-dark" data-toggle="collapse" href="#hmenv{{$key}}" aria-expanded="false" aria-controls="hmenv{{$key}}">
                                                 <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{$homework['title']}}<span class="text-muted font-14"></span></h5>

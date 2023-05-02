@@ -82,6 +82,12 @@
     var eventDetails = "{{ route('admin.event.details') }}";
     var eventDelete = "{{ route('admin.event.delete') }}";
     var eventPublish = "{{ route('admin.event.publish') }}";
+     // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>

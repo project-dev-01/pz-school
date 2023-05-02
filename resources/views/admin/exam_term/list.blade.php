@@ -64,6 +64,12 @@
     var examTermList = "{{ route('admin.exam_term.list') }}";
     var examTermDetails = "{{ route('admin.exam_term.details') }}";
     var examTermDelete = "{{ route('admin.exam_term.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_exam_term') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/exam_term.js') }}"></script>
 @endsection

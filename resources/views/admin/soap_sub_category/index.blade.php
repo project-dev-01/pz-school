@@ -82,6 +82,12 @@
     var soapSubCategoryDetails = "{{ route('admin.soap_sub_category.details') }}";
     var soapSubCategoryDelete = "{{ route('admin.soap_sub_category.delete') }}";
     var categoryList = "{{ config('constants.api.category_list_by_soap_type') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/soap_sub_category.js') }}"></script>

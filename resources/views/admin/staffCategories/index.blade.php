@@ -65,6 +65,12 @@
     var staffcategoryList = "{{ route('admin.staffcategory.list') }}";
     var staffcategoryDetails = "{{ route('admin.staffcategory.details') }}";
     var staffcategoryDelete = "{{ route('admin.staffcategory.delete') }}";
+     // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_department') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/staffcategory.js') }}"></script>

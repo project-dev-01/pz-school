@@ -96,8 +96,8 @@
                                         <th>{{ __('messages.currency') }}</th>
                                         <th>{{ __('messages.symbol') }}</th>
                                         <th>{{ __('messages.country') }}</th>
-                                        <th>State</th>
-                                        <th>City</th>
+                                        <th>{{ __('messages.state') }}</th>
+                                        <th>{{ __('messages.city') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
@@ -118,5 +118,13 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script>
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_branch') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
+</script>
 <script src="{{ asset('public/js/custom/branch.js') }}"></script>
 @endsection

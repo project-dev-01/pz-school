@@ -64,6 +64,12 @@
     var streamTypeList = "{{ route('admin.stream_type.list') }}";
     var streamTypeDetails = "{{ route('admin.stream_type.details') }}";
     var streamTypeDelete = "{{ route('admin.stream_type.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_stream_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/stream_type.js') }}"></script>

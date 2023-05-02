@@ -66,6 +66,12 @@
     var hostelCategoryList = "{{ route('admin.hostel_category.list') }}";
     var hostelCategoryDetails = "{{ route('admin.hostel_category.details') }}";
     var hostelCategoryDelete = "{{ route('admin.hostel_category.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/hostel_category.js') }}"></script>

@@ -69,6 +69,12 @@
     var transportStoppageList = "{{ route('admin.transport_stoppage.list') }}";
     var transportStoppageDetails = "{{ route('admin.transport_stoppage.details') }}";
     var transportStoppageDelete = "{{ route('admin.transport_stoppage.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_transport_stoppage') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/transport_stoppage.js') }}"></script>

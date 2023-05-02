@@ -63,6 +63,12 @@
     var departmentList = "{{ route('admin.department.list') }}";
     var departmentDetails = "{{ route('admin.department.details') }}";
     var departmentDelete = "{{ route('admin.department.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_department') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/department.js') }}"></script>

@@ -64,6 +64,12 @@
     var examHallList = "{{ route('admin.exam_hall.list') }}";
     var examHallDetails = "{{ route('admin.exam_hall.details') }}";
     var examHallDelete = "{{ route('admin.exam_hall.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_exam_hall') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/exam_hall.js') }}"></script>
 @endsection

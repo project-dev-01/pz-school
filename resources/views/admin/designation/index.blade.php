@@ -61,6 +61,13 @@
     var designationList = "{{ route('admin.designation.list') }}";
     var designationDetails = "{{ route('admin.designation.details') }}";
     var designationDelete = "{{ route('admin.designation.delete') }}";
+    var studentList = "{{ route('admin.student.list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_designation') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/designation.js') }}"></script>
 @endsection

@@ -384,12 +384,12 @@ $(function () {
         var id = $(this).data('id');
         var url = deleteBranch;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this branch <br> <b>*Note:</b> This data will be permanently deleted',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

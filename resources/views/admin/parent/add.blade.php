@@ -557,7 +557,7 @@
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">
-                                {{ __('messages.SNS') }}
+                                {{ __('messages.social_links') }}
                                 <h4>
                         </li>
                     </ul>

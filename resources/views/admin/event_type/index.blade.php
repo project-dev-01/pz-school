@@ -82,6 +82,12 @@
     var eventTypeList = "{{ route('admin.event_type.list') }}";
     var eventTypeDetails = "{{ route('admin.event_type.details') }}";
     var eventTypeDelete = "{{ route('admin.event_type.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/event_type.js') }}"></script>

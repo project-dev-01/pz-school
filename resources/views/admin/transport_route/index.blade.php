@@ -70,6 +70,12 @@
     var transportRouteList = "{{ route('admin.transport_route.list') }}";
     var transportRouteDetails = "{{ route('admin.transport_route.details') }}";
     var transportRouteDelete = "{{ route('admin.transport_route.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_transport_route') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/transport_route.js') }}"></script>

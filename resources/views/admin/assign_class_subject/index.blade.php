@@ -118,11 +118,15 @@
     var classAssignGetRowUrl = "{{ config('constants.api.class_assign_details') }}";
     var classAssignUpdateUrl = "{{ config('constants.api.class_assign_update') }}";
     var classAssignDeleteUrl = "{{ config('constants.api.class_assign_delete') }}";
-
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
-
     var classAssignSubList = "{{ route('admin.class_assign_subject.list') }}";
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_assigned_grade_subject') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/assign_class_subject.js') }}"></script>
 @endsection

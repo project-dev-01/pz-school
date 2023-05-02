@@ -69,6 +69,12 @@
     var transportAssignList = "{{ route('admin.transport_assign.list') }}";
     var transportAssignDetails = "{{ route('admin.transport_assign.details') }}";
     var transportAssignDelete = "{{ route('admin.transport_assign.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_transport_assign') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/transport_assign.js') }}"></script>

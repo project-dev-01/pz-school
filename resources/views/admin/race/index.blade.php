@@ -64,6 +64,12 @@
     var raceList = "{{ route('admin.race.list') }}";
     var raceDetails = "{{ route('admin.race.details') }}";
     var raceDelete = "{{ route('admin.race.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_race') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/race.js') }}"></script>

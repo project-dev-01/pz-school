@@ -81,6 +81,12 @@
     var employeeImg = "{{ asset('public/images/staffs/') }}";
     // default image test
     var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_employee') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection
