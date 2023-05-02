@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Semester')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker {
       z-index: 1600 !important; /* has to be larger than 1050 */
@@ -71,6 +72,12 @@
     var semesterList = "{{ route('admin.semester.list') }}";
     var semesterDetails = "{{ route('admin.semester.details') }}";
     var semesterDelete = "{{ route('admin.semester.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_semester') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/semester.js') }}"></script>

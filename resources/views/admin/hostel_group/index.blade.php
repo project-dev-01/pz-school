@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Hostel Group')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -65,6 +66,12 @@
     var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
     var hostelGroupDetails = "{{ route('admin.hostel_group.details') }}";
     var hostelGroupDelete = "{{ route('admin.hostel_group.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_hostel_group') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>

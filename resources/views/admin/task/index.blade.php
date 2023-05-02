@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','To Do List')
 @section('css')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- <style>
     /* checklist css start  */
     li>p {
@@ -124,6 +125,12 @@
     var gettoDoListURL = "{{ route('admin.task.get') }}";
     var getToDORowURL = "{{ config('constants.api.get_to_do_row') }}";
     var deleteToDoList = "{{ config('constants.api.delete_to_do_list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_list') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/to-do-list.js') }}"></script>
 

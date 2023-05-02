@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Exam')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -65,6 +66,12 @@
     var examList = "{{ route('admin.exam.list') }}";
     var examDetails = "{{ route('admin.exam.details') }}";
     var examDelete = "{{ route('admin.exam.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_exam') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/exam.js') }}"></script>
 @endsection

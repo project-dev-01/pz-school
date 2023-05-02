@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Employee')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <style>
     /* table css*/
@@ -80,6 +81,12 @@
     var employeeImg = "{{ config('constants.image_url').'/public/users/images/' }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_employee') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

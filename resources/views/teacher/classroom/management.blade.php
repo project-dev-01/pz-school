@@ -2,7 +2,7 @@
 @section('title','Class Room Management')
 @section('css')
 <link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->

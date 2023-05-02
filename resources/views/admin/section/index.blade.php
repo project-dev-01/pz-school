@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Class')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -66,6 +67,12 @@
     var sectionDeleteUrl = "{{ config('constants.api.section_delete') }}";
 
     var sectionList = "{{ route('admin.section.list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_class') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/sections.js') }}"></script>
 

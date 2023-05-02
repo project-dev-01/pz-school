@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Soap Notes')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -67,6 +68,12 @@
     var soapNotesDelete = "{{ route('admin.soap_notes.delete') }}";
     var categoryList = "{{ config('constants.api.category_list_by_soap_type') }}";
     var subCategoryList = "{{ config('constants.api.sub_category_list_by_category') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/soap_notes.js') }}"></script>

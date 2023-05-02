@@ -12,111 +12,8 @@
 @section('css')
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
-<style>
-    .badge-soft-success {
-        background-color: #77D9B0;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
+<link href="{{ asset('public/css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
 
-    .badge-soft-info {
-        background-color: #E2C181;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
-
-    .badge-soft-danger {
-        background-color: #E45555;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
-
-    .pr-2 {
-        width: 150px;
-    }
-
-    .table td {
-        border-top: none;
-        text-align: center;
-    }
-
-    .table th {
-        text-align: center;
-    }
-
-    .homework-list {
-        display: inline-block;
-        position: relative;
-        padding-right: 10px;
-    }
-
-    .homework-list::after {
-        content: ":";
-        position: absolute;
-        right: 10px;
-    }
-
-    .hover1:hover {
-        background-color: #D1E9EF;
-    }
-
-    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -70px;
-            word-wrap: break-word;
-        }
-
-        .fc-toolbar {
-            text-align: center;
-        }
-
-        .fc-scroller {
-            height: 315px !important;
-        }
-    }
-
-    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
-        .popupresponsive {
-            margin: 0px -78px 0px -78px;
-
-        }
-
-        .eventpopup {
-            margin: 0px -30px 0px -27px;
-        }
-
-        .fc-toolbar {
-            text-align: center;
-        }
-
-        .fc-scroller {
-            height: 315px !important;
-        }
-
-        .fc-head-container {
-            width: 205px;
-        }
-    }
-
-    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -65px;
-        }
-
-    }
-</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -250,14 +147,14 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                            <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['today'])}} )</span></h5>
+                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-
+                                    @if(!empty($get_to_do_list_dashboard['today']))
                                     @forelse ($get_to_do_list_dashboard['today'] as $today)
                                     <div class="collapse show" id="todayTasks">
                                         <div class="card mb-0 shadow-none">
@@ -317,14 +214,15 @@
                                     @empty
                                     <p></p>
                                     @endforelse
-
+                                    @endif
                                     <!-- upcoming tasks -->
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                             <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{count($get_to_do_list_dashboard['upcoming'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['upcoming'])?count($get_to_do_list_dashboard['upcoming']):0 }} )</span>
                                             </h5>
                                         </a>
+                                        @if(!empty($get_to_do_list_dashboard['upcoming']))
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
                                         <div class="collapse" id="upcomingTasks">
                                             <div class="card mb-0 shadow-none">
@@ -385,16 +283,17 @@
                                         @empty
                                         <p></p>
                                         @endforelse
-
+                                        @endif
                                     </div>
                                     <!-- end upcoming tasks -->
                                     <!-- old tasks -->
                                     <div class="mt-4">
                                         <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
                                             <h5 class="">
-                                                <i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.past') }} <span class="text-muted font-14">( {{count($get_to_do_list_dashboard['old'])}} )</span>
+                                                <i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.past') }} <span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['old'])?count($get_to_do_list_dashboard['old']):0 }} )</span>
                                             </h5>
                                         </a>
+                                        @if(!empty($get_to_do_list_dashboard['old']))
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)
                                         <div class="collapse" id="pastTasks">
                                             <div class="card mb-0 shadow-none">
@@ -456,7 +355,7 @@
                                         @empty
                                         <p></p>
                                         @endforelse
-
+                                        @endif
                                     </div>
                                     <!-- end old tasks -->
                                 </div> <!-- end col -->

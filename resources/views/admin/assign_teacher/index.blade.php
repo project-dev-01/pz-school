@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Assign Teacher')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -66,9 +67,14 @@
     var assignTeacherUpdateUrl = "{{ config('constants.api.assign_teacher_update') }}";
     var assignTeacherDeleteUrl = "{{ config('constants.api.assign_teacher_delete') }}";
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
-
     var assignTeacherList = "{{ route('admin.assign_teacher.list') }}";
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_assign_teacher') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/teacher-allocation.js') }}"></script>
 @endsection

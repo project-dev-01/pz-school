@@ -205,7 +205,6 @@
 </style>
 @if(Session::get('locale')=="en")
 <style>
-    
     .switch input+span strong:before {
         content: 'Unlock';
     }
@@ -213,11 +212,10 @@
     .switch input+span strong:after {
         content: 'Lock';
     }
-    </style>
+</style>
 @endif
 @if(Session::get('locale')=="japanese")
 <style>
-    
     .switch input+span strong:before {
         content: 'アンロック';
     }
@@ -249,7 +247,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.student_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.student_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -376,7 +375,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no"  placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                    <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -528,7 +527,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.student_login_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.student_login_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -591,7 +591,27 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.father_details') }}<h4>
+                            <h4 class="navv">Enable Two Factor Authentication
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="header-title">Turn On / Turn Off</h4>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
+                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">{{ __('messages.father_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -638,14 +658,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="birthday">{{ __('messages.date_of_birth') }}/label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-birthday-cake"></span>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-birthday-cake"></span>
+                                                    </div>
                                                 </div>
+                                                <input type="text" class="form-control" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="father_date_of_birth" readonly>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="father_date_of_birth" readonly>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -774,7 +794,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.mother_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.mother_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -955,7 +976,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.guardian_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.guardian_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -1150,7 +1172,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.transport_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.transport_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -1182,7 +1205,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.hostel_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.hostel_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -1212,7 +1236,8 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.previous_school_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.previous_school_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -1237,7 +1262,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            {{ __('messages.save') }}
+                                {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
@@ -1321,7 +1346,7 @@
         messages: {
             default: drag_and_drop_to_check,
             replace: drag_and_drop_to_replace,
-            remove:  remove,
+            remove: remove,
             error: oops_went_wrong
         }
     });

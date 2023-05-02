@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Staff Leave Assign')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -116,6 +117,12 @@
     var staffLeaveAssignList = "{{ route('admin.staff_leave_assign.list') }}";
     var staffLeaveAssignDetails = "{{ route('admin.staff_leave_assign.details') }}";
     var staffLeaveAssignDelete = "{{ route('admin.staff_leave_assign.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_leave_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/staff_leave_assign.js') }}"></script>

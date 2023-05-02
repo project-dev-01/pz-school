@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Hostel Room')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -72,6 +73,12 @@
     var hostelRoomDetails = "{{ route('admin.hostel_room.details') }}";
     var hostelRoomDelete = "{{ route('admin.hostel_room.delete') }}";
     var floorByBlock = "{{ config('constants.api.floor_by_block') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_hostel_room') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/hostel_room.js') }}"></script>

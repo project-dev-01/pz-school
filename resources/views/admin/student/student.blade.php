@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Student List')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -144,6 +145,12 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var studentDelete = "{{ route('admin.student.delete') }}";
     var studentList = "{{ route('admin.student.list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_student') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/student.js') }}"></script>
 @endsection

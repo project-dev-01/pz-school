@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Assign Subjects Teacher')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -67,12 +68,16 @@
     var classAssignTeacherGetRowUrl = "{{ config('constants.api.teacher_assign_sub_details') }}";
     var classAssignTeacherUpdateUrl = "{{ config('constants.api.teacher_assign_sub_update') }}";
     var classAssignTeacherDeleteUrl = "{{ config('constants.api.teacher_assign_sub_delete') }}";
-
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var getAssignClassSubjUrl = "{{ config('constants.api.get_assign_class_subjects') }}";
-
     var classAssignTeacherSubList = "{{ route('admin.teacher_assign_subject.list') }}";
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_assign_subject_teacher') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/assign_class_subject_teacher.js') }}"></script>
 @endsection

@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Hostel')
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -72,6 +72,12 @@
     var hostelList = "{{ route('admin.hostel.list') }}";
     var hostelDetails = "{{ route('admin.hostel.details') }}";
     var hostelDelete = "{{ route('admin.hostel.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_hostel') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/hostel.js') }}"></script>

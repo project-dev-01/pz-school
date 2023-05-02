@@ -2,6 +2,7 @@
 @section('title','Subjects')
 @section('css')
 <link href="{{ asset('public/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -71,8 +72,13 @@
     var subjectsGetRowUrl = "{{ config('constants.api.subject_details') }}";
     var subjectsUpdateUrl = "{{ config('constants.api.subject_update') }}";
     var subjectsDeleteUrl = "{{ config('constants.api.subject_delete') }}";
-
     var subjectsList = "{{ route('admin.subjects.list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_subject') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/subjects.js') }}"></script>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Grade Category')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -58,6 +59,12 @@
     var gradeCategoryDetails = "{{ config('constants.api.grade_category_details') }}";
     var gradeCategoryUpdate = "{{ config('constants.api.grade_category_update') }}";
     var gradeCategoryDelete = "{{ config('constants.api.grade_category_delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_grade_category') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/grade_category.js') }}"></script>
 @endsection

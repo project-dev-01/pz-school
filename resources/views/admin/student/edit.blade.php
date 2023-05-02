@@ -206,7 +206,6 @@
 </style>
 @if(Session::get('locale')=="en")
 <style>
-    
     .switch input+span strong:before {
         content: 'Unlock';
     }
@@ -214,11 +213,10 @@
     .switch input+span strong:after {
         content: 'Lock';
     }
-    </style>
+</style>
 @endif
 @if(Session::get('locale')=="japanese")
 <style>
-    
     .switch input+span strong:before {
         content: 'アンロック';
     }
@@ -684,7 +682,27 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">{{ __('messages.father_details') }}<h4>
+                                        <h4 class="navv">Enable Two Factor Authentication
+                                            <h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="header-title">Turn On / Turn Off</h4>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" {{ $role['google2fa_secret_enable'] == "1" ? "checked" : "" }}>
+                                                <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">{{ __('messages.father_details') }}
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -864,7 +882,8 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">{{ __('messages.mother_details') }}<h4>
+                                        <h4 class="navv">{{ __('messages.mother_details') }}
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -1045,7 +1064,8 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">{{ __('messages.guardian_details') }}<h4>
+                                        <h4 class="navv">{{ __('messages.guardian_details') }}
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -1339,7 +1359,8 @@
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">{{ __('messages.change_password') }}<h4>
+                                        <h4 class="navv">{{ __('messages.change_password') }}
+                                            <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -1375,10 +1396,10 @@
                             </div> <!-- end card-->
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                {{ __('messages.update') }}
+                                    {{ __('messages.update') }}
                                 </button>
                                 <a href="{{ route('admin.student.index') }}" class="btn btn-primary-bl waves-effect waves-light">
-                                {{ __('messages.back') }}
+                                    {{ __('messages.back') }}
                                 </a>
                                 <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
@@ -1641,7 +1662,7 @@
         messages: {
             default: drag_and_drop_to_check,
             replace: drag_and_drop_to_replace,
-            remove:  remove,
+            remove: remove,
             error: oops_went_wrong
         }
     });

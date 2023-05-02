@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Excused Reason')
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -63,6 +64,12 @@
     var excusedReasonList = "{{ route('admin.excused_reason.list') }}";
     var excusedReasonDetails = "{{ route('admin.excused_reason.details') }}";
     var excusedReasonDelete = "{{ route('admin.excused_reason.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_excused_reason') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/excused_reason.js') }}"></script>

@@ -153,6 +153,12 @@
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var viewExamTimetable = "{{ route('admin.exam_timetable.view') }}";
     var examDelete = "{{ route('admin.exam_timetable.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_exam_timetable') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/exam_timetable.js') }}"></script>
 
