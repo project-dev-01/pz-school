@@ -5382,10 +5382,12 @@ class AdminController extends Controller
     // index Hostel Block
     public function hostelBlock()
     {
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
         $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
 
-        $student = Helper::PostMethod(config('constants.api.student_list'), []);
-        dd($getEmployee);
+        $student = Helper::PostMethod(config('constants.api.student_list'), $data);
         return view(
             'admin.hostel_block.index',
             [
@@ -5458,9 +5460,12 @@ class AdminController extends Controller
     // index Hostel Floor
     public function hostelFloor()
     {
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
         $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
         $block = Helper::GetMethod(config('constants.api.hostel_block_list'));
-        $student = Helper::PostMethod(config('constants.api.student_list'), []);
+        $student = Helper::PostMethod(config('constants.api.student_list'), $data);
         // dd($getEmployee);
         return view(
             'admin.hostel_floor.index',
@@ -5707,8 +5712,11 @@ class AdminController extends Controller
     public function createHostelGroup()
     {
 
+        $studdata = [
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
         $staff = Helper::GetMethod(config('constants.api.employee_list'));
-        $student = Helper::PostMethod(config('constants.api.student_list'), []);
+        $student = Helper::PostMethod(config('constants.api.student_list'), $studdata);
         // dd($staff);
         return view(
             'admin.hostel_group.add',
@@ -5725,10 +5733,13 @@ class AdminController extends Controller
         $data = [
             'id' => $id,
         ];
-        // dd($data);
+        
+        $studdata = [
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
         $hostel_group = Helper::PostMethod(config('constants.api.hostel_group_details'), $data);
         $staff = Helper::GetMethod(config('constants.api.employee_list'));
-        $student = Helper::PostMethod(config('constants.api.student_list'), []);
+        $student = Helper::PostMethod(config('constants.api.student_list'), $studdata);
         // dd($hostel_group);
         return view(
             'admin.hostel_group.edit',

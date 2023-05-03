@@ -44,7 +44,7 @@
                                     <select class="form-control" name="incharge_staff">
                                         <option value="">{{ __('messages.select_incharge_staff') }}</option>
                                         @forelse($staff as $st)
-                                        <option value="{{$st['id']}}">{{$st['name']}}</option>
+                                        <option value="{{$st['id']}}" {{ $group['incharge_staff'] == $st['id'] ? "Selected" : ""}}>{{$st['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -56,7 +56,7 @@
                                     <select class="form-control" name="incharge_student">
                                         <option value="">{{ __('messages.select_incharge_student') }}</option>
                                         @forelse($student as $stu)
-                                        <option value="{{$stu['id']}}">{{$stu['name']}}</option>
+                                        <option value="{{$stu['id']}}" {{ $group['incharge_student'] == $stu['id'] ? "Selected" : ""}}>{{$stu['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -68,7 +68,17 @@
                                     <select class="form-control select2-multiple" data-toggle="select2" name="student[]" multiple="multiple" data-placeholder="{{ __('messages.choose_the_student') }}">
                                         <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse($student as $stu)
-                                        <option value="{{$stu['id']}}">{{$stu['name']}}</option>
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $group['student']) as $info)
+                                        @if($stu['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        <option value="{{$stu['id']}}" {{ $selected }}>{{$stu['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -77,7 +87,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="color"> {{ __('messages.color') }} <span class="text-danger">*</span></label>
-                                    <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}" value="#4a81d4">
+                                    <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}" value="{{$group['color']}}">
                                 </div>
                             </div>
                         </div>
@@ -97,7 +107,7 @@
 @section('scripts')
 <script>
     //HostelGroup routes
-    var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
+    var hostelGroupList = "{{ route('admin.hostel_group') }}";
     var hostelGroupDetails = "{{ route('admin.hostel_group.details') }}";
     var hostelGroupDelete = "{{ route('admin.hostel_group.delete') }}";
 </script>

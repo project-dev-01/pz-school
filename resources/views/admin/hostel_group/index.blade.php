@@ -61,6 +61,8 @@
 
 @endsection
 @section('scripts')
+<script src="{{ asset('public/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-pickers.init.js') }}"></script>
 <script>
     //HostelGroup routes
     var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
@@ -74,9 +76,6 @@
     // lang change name end
 </script>
 
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/hostel_group.js') }}"></script>
 
 @endsection

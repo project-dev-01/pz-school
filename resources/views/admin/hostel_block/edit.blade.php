@@ -1,5 +1,5 @@
 <!-- Center modal content -->
-<div class="modal fade editHostelBlock" id="editHostelBlockModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade editHostelBlock" id="editHostelBlockModal"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,9 +15,9 @@
                         <input type="text" id="block_name" name="block_name" class="form-control" placeholder="{{ __('messages.enter_the_block_name') }}">
                         <span class="text-danger error-text block_name_error"></span>
                     </div>
-                    <div class="form-group" id="block_warden_div">
+                    <div class="form-group" id="block_warden_div" class="">
                         <label for="block_warden">{{ __('messages.block_warden') }}<span class="text-danger">*</span></label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="block_warden[]" multiple="multiple" data-placeholder="{{ __('messages.select_warden') }}">
+                        <select class="form-control select2-multiple block_warden" data-toggle="select2" name="block_warden[]" multiple="multiple" data-placeholder="{{ __('messages.select_warden') }}">
                             <option value="">{{ __('messages.select_warden') }}</option>
                             @forelse($warden as $war)
                             <option value="{{$war['id']}}">{{$war['name']}}</option>
@@ -33,8 +33,8 @@
                     </div>
                     <div class="form-group" id="block_leader_div">
                         <label for="block_leader">{{ __('messages.block_leader') }}</label>
-                        <select class="form-control select2-multiple" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="{{ __('messages.block_leader') }}">
-                            <option value="">{{ __('messages.select_leader') }}</option>
+                        <select class="form-control select2-multiple block_leader" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="{{ __('messages.block_leader') }}">
+                           
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>
                             @empty

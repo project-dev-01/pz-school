@@ -95,7 +95,7 @@
 @section('scripts')
 <script>
     //HostelGroup routes
-    var hostelGroupList = "{{ route('admin.hostel_group.list') }}";
+    var hostelGroupList = "{{ route('admin.hostel_group') }}";
     var hostelGroupDetails = "{{ route('admin.hostel_group.details') }}";
     var hostelGroupDelete = "{{ route('admin.hostel_group.delete') }}";
 </script>

@@ -773,11 +773,6 @@
                                                 <span> {{ __('messages.hostel_master') }} </span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.hostel_room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
-                                                <span> {{ __('messages.hostel_room') }} </span>
-                                            </a>
-                                        </li>
 
                                         <li>
                                             <a href="{{ route('admin.hostel_block')}}" class="nav-link {{ (request()->is('admin/hostel/block')) ? 'active' : '' }}">
@@ -788,6 +783,11 @@
                                         <li>
                                             <a href="{{ route('admin.hostel_floor')}}" class="nav-link {{ (request()->is('admin/hostel/floor')) ? 'active' : '' }}">
                                                 <span> {{ __('messages.hostel_floor') }} </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.hostel_room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
+                                                <span> {{ __('messages.hostel_room') }} </span>
                                             </a>
                                         </li>
                                     </ul>

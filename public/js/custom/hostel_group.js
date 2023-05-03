@@ -10,6 +10,7 @@ $(function () {
     $("#hostelGroupForm").validate({
         rules: {
             name: "required",
+            color: "required",
         }
     });
     $('#hostelGroupForm').on('submit', function (e) {
@@ -39,6 +40,7 @@ $(function () {
     $("#hostelGroupEditForm").validate({
         rules: {
             name: "required",
+            color: "required",
         }
     });
     $('#hostelGroupEditForm').on('submit', function (e) {
@@ -158,7 +160,8 @@ $(function () {
 
     // delete Group Type
     $(document).on('click', '#deleteHostelGroupBtn', function () {
-        var group_id = $(this).data('id');
+        var id = $(this).data('id');
+        var url = hostelGroupDelete;
         swal.fire({
             title: deleteTitle + '?',
             html: deleteHtml,
@@ -172,7 +175,9 @@ $(function () {
             allowOutsideClick: false
         }).then(function (result) {
             if (result.value) {
-                $.post(hostelGroupDelete, { id: group_id }, function (data) {
+                $.post(url, {
+                    id: id
+                }, function (data) {
                     if (data.code == 200) {
                         $('#hostel-group-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
