@@ -152,32 +152,20 @@ $(function () {
             $('.editHostelFloor').find('input[name="total_room"]').val(data.data.total_room);
             // $('.editHostelFloor').find('input[name="floor_leader"]').val(data.data.floor_leader);
 
-            var arr = data.data.floor_warden.split(',');
+            var warden_arr = [];
             if(data.data.floor_warden) {
-                var arr = data.data.floor_warden.split(',');
-            }else {
-                var arr = "";
+                var warden_arr = data.data.floor_warden.split(',');
             }
-            $('.editHostelFloor').find('select[name="floor_warden[]"]').val(arr);
+            $(".floor_warden").select2();
+            $(".floor_warden").val(warden_arr).trigger("change");
 
-            var output = "";
-            $.each(arr, function (index, value) {
-
-                var name = $("#floor_warden_div option[value='" + value + "']").text();
-                output += '<li class="select2-selection__choice" title="' + name + ' " data-select2-id="' + value + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name + ' </li>';
-
-            });
-            $('#floor_warden_div .select2-selection__rendered').html(output);
-            var arr2 = data.data.floor_leader.split(',');
-            $('.editHostelFloor').find('select[name="floor_leader[]"]').val(arr2);
-            var output2 = "";
-            $.each(arr2, function (index2, value2) {
-
-                var name2 = $("#floor_leader_div option[value='" + value2 + "']").text();
-                output2 += '<li class="select2-selection__choice" title="' + name2 + ' " data-select2-id="' + value2 + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name2 + ' </li>';
-
-            });
-            $('#floor_leader_div .select2-selection__rendered').html(output2);
+            var leader_arr = [];
+            if(data.data.floor_leader) {
+                var leader_arr = data.data.floor_leader.split(',');
+            }
+            
+            $(".floor_leader").select2();
+            $(".floor_leader").val(leader_arr).trigger("change");
             $('.editHostelFloor').modal('show');
         }, 'json');
     });
@@ -223,12 +211,12 @@ $(function () {
         var id = $(this).data('id');
         var url = hostelFloorDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Hostel Floor',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

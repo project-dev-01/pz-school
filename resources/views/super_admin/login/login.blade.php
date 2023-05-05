@@ -9,7 +9,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
@@ -44,8 +44,8 @@
                 <div class="card-body" style="margin:0px 55px 0px 30px;">
                         <div class="form-group" style="text-align:right;">
                              <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
-                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">JPN</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -59,7 +59,7 @@
                         <div class="auth-logo">
                             <a href="" class="logo logo-dark">
                                 <span class="logo-lg">
-                                    <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="60px">
+                                    <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                 </span>
                             </a>
                         </div>
@@ -80,7 +80,7 @@
                             @csrf
                             <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                             <div class="form-group">
-                                <span class="badge badge-secondary smk"><img src="{{ asset('public/images/logo-pz-01.png') }}" class="mr-2 rounded-circle" alt="">Paxsuzen</span>
+                                <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/logo-pz-01.png' }}" class="mr-2 rounded-circle" alt="">Paxsuzen</span>
                             </div>
 
                             <div class="form-group">
@@ -185,14 +185,14 @@
         // console.log('en',sessionLang)
         if (locale=="japanese"){
             //find an item with value of sessionLang\
-            var img = "{{ asset('public/images/JPN.png') }}";
+            var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
             var value = "japanese";
             var text = "JPN";
             var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ asset('public/images/USA.png') }}";
+            var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
             var value = "en";
             var text = "ENG";
             var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';

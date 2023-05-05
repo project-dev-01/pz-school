@@ -18,7 +18,7 @@
 @endsection
 @section('css')
 <link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -791,13 +791,13 @@
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
     // student leave apply
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
-    var imgurl = "{{ asset('public/teacher/student-leaves/') }}";
+    var imgurl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     var getAbsentLateExcuse = "{{ config('constants.api.get_absent_late_excuse') }}";
 
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    var studentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
 </script>
 <script src="{{ asset('public/js/custom/classroom.js') }}"></script>
 <script src="{{ asset('public/js/custom/short-test.js') }}"></script>

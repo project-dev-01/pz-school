@@ -22,6 +22,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker{ z-index:99999 !important; }
 </style>

@@ -160,21 +160,12 @@ $(function () {
             $('.editHostel').find('input[name="name"]').val(data.data.name);
             $('.editHostel').find('select[name="category"]').val(data.data.category_id);
 
-            // $('#watch').focus();
-            var arr = data.data.watchman.split(',');
-            if (data.data.watchman) {
-                var arr = data.data.watchman.split(',');
-            } else {
-                var arr = "";
+            var warden_arr = [];
+            if(data.data.watchman) {
+                var warden_arr = data.data.watchman.split(',');
             }
-            $('.editHostel').find('select[name="watchman[]"]').val(arr);
-            var output = "";
-            $.each(arr, function (index, value) {
-
-                var name = $("#watchman option[value='" + value + "']").text();
-                output += '<li class="select2-selection__choice" title="' + name + ' " data-select2-id="' + value + '"><span class="select2-selection__choice__remove" role="presentation">×</span>' + name + ' </li>';
-            });
-            $('.select2-selection__rendered').html(output);
+            $(".watchman").select2();
+            $(".watchman").val(warden_arr).trigger("change");
             $('.editHostel').find('input[name="address"]').val(data.data.address);
             $('.editHostel').find('textarea[name="remarks"]').text(data.data.remarks);
             $('.editHostel').modal('show');
@@ -224,12 +215,12 @@ $(function () {
         var id = $(this).data('id');
         var url = hostelDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Hostel',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

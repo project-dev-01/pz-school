@@ -10,7 +10,7 @@
     <meta content="Paxsuzen" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
 
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -36,7 +36,7 @@
                                 <div class="auth-logo">
                                     <a href="javascript:void(0)" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="40px">
+                                            <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="40px">
                                         </span>
                                     </a>
                                 </div><br>
@@ -57,7 +57,7 @@
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">

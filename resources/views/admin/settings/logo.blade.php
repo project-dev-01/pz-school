@@ -46,7 +46,7 @@
                             <div class="mt-3">
                                 <form method="post" id="upload_form" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <input type="file" class="dropify-im" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && asset('public/images/sub-logo/'.Session::get('school_logo')) ? asset('public/images/sub-logo/'.Session::get('school_logo')) : asset('public/images/users/default.jpg') }}" />
+                                    <input type="file" class="dropify-im" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && config('constants.image_url').'/public/images/sub-logo/'.Session::get('school_logo') ? config('constants.image_url').'/public/images/sub-logo/'.Session::get('school_logo') : config('constants.image_url').'/public/images/users/default.jpg' }}" />
                                     <p class="text-muted text-center mt-2 mb-0">{{ Session::get('school_name') }}</p>
                                 </form>
 
@@ -73,7 +73,7 @@
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 
 <script>
-    var subLogoPath = "{{ asset('public/images/sub-logo') }}";
+    var subLogoPath = "{{ config('constants.image_url').'/public/images/sub-logo' }}";
     var changeLogoUrl = "{{ config('constants.api.change_logo') }}";
     var updateLogoSession = "{{ route('settings.update.logo') }}";
 </script>

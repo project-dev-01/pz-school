@@ -345,8 +345,8 @@
 <script>
     var getEmployeAttendanceReportList = "{{ config('constants.api.employee_attendance_report') }}";
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    var staffImg = "{{ asset('public/images/staffs') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var staffImg = "{{ config('constants.image_url').'/public/users/images' }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
 </script>
 

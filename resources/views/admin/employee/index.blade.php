@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
 <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -268,7 +269,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" data-remove="Rewm" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/public/images/700x500.png' }}" data-remove="Rewm" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>

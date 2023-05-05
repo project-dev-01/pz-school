@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="block_leader">{{ __('messages.block_leader') }}</label>
                         <select class="form-control select2-multiple" data-toggle="select2" name="block_leader[]" multiple="multiple" data-placeholder="{{ __('messages.block_leader') }}">
-                            <option value="">{{ __('messages.select_leader') }}</option>
+                            
                             @forelse($leader as $lead)
                             <option value="{{$lead['id']}}">{{$lead['name']}}</option>
                             @empty

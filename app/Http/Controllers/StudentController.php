@@ -194,6 +194,7 @@ class StudentController extends Controller
         $note_lang = __('messages.note');
         $attachment_file = __('messages.attachment_file');
         $submit_lang = __('messages.submit');
+        $choose_file_lang = __('messages.choose_file');
 
         $student = session()->get('ref_user_id');
         $data = [
@@ -219,26 +220,30 @@ class StudentController extends Controller
 
 
                     if ($work['status'] == 1) {
-                        $file = '<div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-5 font-weight-bold">'.$attachment_file.': </div>
-                            <div class="col-md-3">
+                        $file = '<div class="col-md-6">
+                            <div class="col-md-6 font-weight-bold">'.$attachment_file.': </div>
+                            <div class="col-md-6">
                                 <a href="' . asset('student/homework/') . '/' . $work['file'] . '" download>
                                     <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                 </a>
                             </div>
-                        </div>
+                    </div>
                     </div>';
                     } else {
-                        $file = '<div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-5 font-weight-bold">'.$attachment_file.' : </div>
-                                <div class="col-md-5">
-                                    <input type="file"  name="file">
+                        $file = '<div class="col-md-6">
+                                <div class="col-md-6 font-weight-bold">'.$attachment_file.' : </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <div class="">
+                                            <input type="file" id="homework_file" class="custom-file-input " name="file">
+                                            <label class="custom-file-label" for="document">'.$choose_file_lang.'</label>
+                                            <span id="file_name"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
-                        <div class="col-md-4">
+                        </div>
+                        <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                                 '.$submit_lang.'
                             </button>
@@ -326,16 +331,12 @@ class StudentController extends Controller
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$note_lang.' : </div>
-                                                    <div class="col-md-5">
-                                                        <textarea  name="remarks" rows="4" cols="25">' . $work['remarks'] . '</textarea>
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-6">
+                                                <p class="col-md-12"><span class="font-weight-semibold">'.$note_lang.' <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                ' . $work['remarks'] . '</textarea></p>
+
                                             </div>
                                             ' . $file . '
-                                        </div>
                                     </div>
                                 </div>
                             </div>

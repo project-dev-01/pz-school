@@ -224,10 +224,14 @@ $(function () {
                                     '<td class="text-left studentRow" style="display:grid;">' +
                                     // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                    '<input type="hidden" value="' + res.student_id + '">' +
+                                    '<input type="hidden" value="' + res.student_id + '">';
                                     // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                    '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">' +
-                                    '</a>' + res.first_name + ' ' + res.last_name +
+                                    if (res.photo) {
+                                        attendanceListShow += '<img src="' + studentImg + '/' + res.photo + '" alt="user-image" class="rounded-circle">';
+                                    } else {
+                                        attendanceListShow += '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
+                                    }
+                                    attendanceListShow += '</a>' + res.first_name + ' ' + res.last_name +
                                     '</td>';
 
                                 var attendance_details = res.attendance_details;
@@ -266,7 +270,7 @@ $(function () {
                                 firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
 
                                 attendanceListShow += '<td>' + res.presentCount + '</td>' +
-                                    '<td>' + res.absentCount + '</td>' +
+                                    '<td>' + res.absentCount +res.photo+ '</td>' +
                                     '<td>' + res.lateCount + '</td>' +
                                     '</tr>';
                             });

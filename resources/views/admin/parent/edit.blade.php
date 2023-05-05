@@ -261,9 +261,9 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($parent['photo'])
-                        <img src="{{ asset('public/users/images//') }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ config('constants.image_url').'/public/users/images/' }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                        <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
 
                     </div> <!-- end col -->
@@ -372,7 +372,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-default-file="{{ $parent['photo'] && asset('public/users/images/').'/'.$parent['photo'] ? asset('public/users/images/').'/'.$parent['photo'] : asset('public/images/users/default.jpg') }}" />
+                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M"  data-plugins="dropify" data-default-file="{{ $parent['photo'] && config('constants.image_url').'/public/users/images/'.$parent['photo'] ? config('constants.image_url').'/public/users/images/'.$parent['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -637,7 +637,7 @@
                                         <div class="col-md-6">
                                             <h4 class="header-title">Turn On / Turn Off</h4>
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" {{ $user['google2fa_secret_enable'] == "1" ? "checked" : "" }}>
+                                                <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" >
                                                 <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
                                             </div>
                                         </div>
@@ -768,9 +768,9 @@
                                         <div class="row">
                                             <div class="col-sm-4 text-center">
                                                 @if($child['photo'])
-                                                <img src="{{ asset('public/users/images//') }}/{{$child['photo']}}" alt="" class="avatar-xl">
+                                                <img src="{{ config('constants.image_url').'/public/users/images/' }}/{{$child['photo']}}" alt="" class="avatar-xl">
                                                 @else
-                                                <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="avatar-xl">
+                                                <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="" class="avatar-xl">
                                                 @endif
                                             </div>
                                             <div class="col-sm-8">

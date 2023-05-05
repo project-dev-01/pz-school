@@ -132,7 +132,7 @@
     var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
     // default image test
     var teacher_id = null;
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
 @endsection

@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -96,8 +97,13 @@
     var secAlloGetRowUrl = "{{ config('constants.api.allocate_section_details') }}";
     var secAlloUpdateUrl = "{{ config('constants.api.allocate_section_update') }}";
     var secAlloDeleteUrl = "{{ config('constants.api.allocate_section_delete') }}";
-
     var secAlloList = "{{ route('admin.section_allocation.list') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_class_allocation') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/js/custom/section_allocation.js') }}"></script>
 @endsection

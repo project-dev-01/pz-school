@@ -6,7 +6,7 @@ return [
     'branch_id'=>'1',
     'school_name'=>'SMK Kiaramas',
     'school_image'=>'school.jpg',
-    'image_url' => "http://localhost/paxsuzen-api-dev/public/images/school-type/",
+    'image_url' => "http://localhost/paxsuzen-api-dev",
     
     'api' => [
         // login url

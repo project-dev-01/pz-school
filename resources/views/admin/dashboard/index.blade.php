@@ -18,111 +18,8 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
-<style>
-    .badge-soft-success {
-        background-color: #77D9B0;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
+<link href="{{ asset('public/css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
 
-    .badge-soft-info {
-        background-color: #E2C181;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
-
-    .badge-soft-danger {
-        background-color: #E45555;
-        color: black;
-        display: inline-block;
-        padding: 8px 30px;
-        width: 97px;
-        height: 24px;
-        border-radius: 5px;
-    }
-
-    .pr-2 {
-        width: 150px;
-    }
-
-    .table td {
-        border-top: none;
-        text-align: center;
-    }
-
-    .table th {
-        text-align: center;
-    }
-
-    .homework-list {
-        display: inline-block;
-        position: relative;
-        padding-right: 10px;
-    }
-
-    .homework-list::after {
-        content: ":";
-        position: absolute;
-        right: 10px;
-    }
-
-    .hover1:hover {
-        background-color: #D1E9EF;
-    }
-
-    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -70px;
-            word-wrap: break-word;
-        }
-
-        .fc-toolbar {
-            text-align: center;
-        }
-
-        .fc-scroller {
-            height: 315px !important;
-        }
-    }
-
-    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
-        .popupresponsive {
-            margin: 0px -78px 0px -78px;
-
-        }
-
-        .eventpopup {
-            margin: 0px -30px 0px -27px;
-        }
-
-        .fc-toolbar {
-            text-align: center;
-        }
-
-        .fc-scroller {
-            height: 315px !important;
-        }
-
-        .fc-head-container {
-            width: 205px;
-        }
-    }
-
-    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .popupresponsive {
-            margin: 0px -65px 0px -65px;
-        }
-
-    }
-</style>
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -256,7 +153,7 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <div class="row mt-4" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                            <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
                                         <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }} )</span></h5>
@@ -281,7 +178,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
-                                                                <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
@@ -349,7 +246,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
 
                                                                 <div class="mt-3 mt-sm-0">
@@ -420,7 +317,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ asset('public/images/users/12.jpg') }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -644,7 +541,7 @@
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ asset('public/images/todolist/') }}";
+    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 

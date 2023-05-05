@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
     <!-- jquery -->
     <script src="{{ asset('public/jquery/jquery-3.6.0.min.js') }}"></script>
     <!-- App css -->

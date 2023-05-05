@@ -276,7 +276,7 @@
             </div>
             <div class="form-group text-right m-b-0">
                 <button class="btn btn-primary-bl waves-effect waves-light" id="saveBranch" type="submit">
-                    Save
+                {{ __('messages.save') }} 
                 </button>
             </div>
         </div>

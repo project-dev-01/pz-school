@@ -224,7 +224,7 @@ $(document).ready(function() {
 $   ('.summernote').summernote();
 });
     //soapCategory routes
-    var imageUrl = "{{ asset('public/soap/images/') }}";
+    var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
     var soapIndex = "{{ route('admin.soap') }}";
     var soapDelete = "{{ config('constants.api.soap_delete') }}";
 </script>

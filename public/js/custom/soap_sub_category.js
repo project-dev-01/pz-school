@@ -46,13 +46,27 @@ $(function () {
 
     $('#photo').change(function() {
         // var i = $(this).prev('label').clone();
-        var file = $('#photo')[0].files[0].name;
-        $('#photo_name').text(file);
+        var file = $('#photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#photo_name').text("File greater than 2Mb");
+            $("#photo_name").addClass("error");
+            $('#photo').val('');
+        } else {
+            $("#photo_name").removeClass("error");
+            $('#photo_name').text(file.name);
+        }
     });
     $('#edit_photo').change(function() {
         // var i = $(this).prev('label').clone();
-        var file = $('#edit_photo')[0].files[0].name;
-        $('#edit_photo_name').text(file);
+        var file = $('#edit_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#edit_photo_name').text("File greater than 2Mb");
+            $("#edit_photo_name").addClass("error");
+            $('#edit_photo').val('');
+        } else {
+            $("#edit_photo_name").removeClass("error");
+            $('#edit_photo_name').text(file.name);
+        }
     });
 
     $('#addSoapSubCategoryModal').on('hidden.bs.modal', function () {
@@ -230,12 +244,12 @@ $(function () {
         var id = $(this).data('id');
         var url = soapSubCategoryDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Event Type',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

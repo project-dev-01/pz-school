@@ -19,6 +19,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker {
         z-index: 99999 !important;
@@ -110,6 +111,12 @@
     var groupList = "{{ route('admin.group.list') }}";
     var groupDetails = "{{ route('admin.group.details') }}";
     var groupDelete = "{{ route('admin.group.delete') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_group') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>

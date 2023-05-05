@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
@@ -63,9 +63,9 @@
                                 <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                             </select> -->
-                            <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
-                                <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
+                             <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">JPN</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -106,7 +106,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -133,7 +133,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/').'/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 
@@ -239,30 +239,26 @@
             //console.log(value);
         });
 
-        $(".btn-select").click(function() {
-            $(".b").toggle();
-        });
-
-        //check local storage for the lang
-        var sessionLang = locale;
-        // console.log('en',sessionLang)
-        if (locale == "japanese") {
-            //find an item with value of sessionLang\
-            var img = "{{ asset('public/images/JPN.png') }}";
-            var value = "japanese";
-            var text = "JPN";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
-        } else {
-            var img = "{{ asset('public/images/USA.png') }}";
-            var value = "en";
-            var text = "ENG";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
-        }
-    </script>
+    //check local storage for the lang
+    var sessionLang = locale;
+    // console.log('en',sessionLang)
+    if (locale=="japanese"){
+        //find an item with value of sessionLang\
+        var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
+        var value = "japanese";
+        var text = "JPN";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    } else {
+        var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
+        var value = "en";
+        var text = "ENG";
+        var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+    }
+</script>
 
 </body>
 

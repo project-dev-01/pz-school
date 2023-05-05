@@ -267,7 +267,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" class="dropify-im" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ asset('public/images/700x500.png') }}" />
+                                        <input type="file" class="dropify-im" name="photo" id="photo" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/public/images/700x500.png' }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -1350,8 +1350,8 @@
     });
 </script>
 <script>
-    var parentImg = "{{ asset('public/users/images/') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
     var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";

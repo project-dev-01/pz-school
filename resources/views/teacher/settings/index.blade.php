@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{ Session::get('picture') && asset('public/users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{ Session::get('picture') && config('constants.image_url').'/public/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/users/images/'.Session::get('picture') : config('constants.image_url').'/public/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
                 <div class="text-left mt-3">
                     <form method="post" id="upload_form" enctype="multipart/form-data">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile_no">">{{ __('messages.mobile_no') }}</label>
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
                                         <input type="text" class="form-control number_validation" id="mobile_no" name="mobile_no" value="{{ $user_details['mobile_no'] }}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
                                         <span class="text-danger error-text mobile_no_error"></span>
                                     </div>
@@ -196,7 +196,7 @@
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    var profilePath = "{{ asset('public/users/images') }}";
+    var profilePath = "{{ config('constants.image_url').'/public/users/images' }}";
 </script>
 <script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
 @endsection

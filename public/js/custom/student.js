@@ -1,6 +1,6 @@
 $(function () {
 
-    $(".number_validation").keypress(function(){
+    $(".number_validation").keypress(function () {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
@@ -321,11 +321,11 @@ $(function () {
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
                 "language": {
-                    
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+                    "emptyTable": no_data_available,
+                    "infoFiltered": filter_from_total_entries,
+                    "zeroRecords": no_matching_records_found,
+                    "infoEmpty": showing_zero_entries,
                     "info": showing_entries,
                     "lengthMenu": show_entries,
                     "search": datatable_search,
@@ -428,7 +428,7 @@ $(function () {
         e.preventDefault();
         var class_id = $(this).val();
         $("#section_id").empty();
-        $("#section_id").append('<option value="">'+select_class+'</option>');
+        $("#section_id").append('<option value="">' + select_class + '</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -441,7 +441,7 @@ $(function () {
 
     $("#editadmission").validate({
         rules: {
-            session_id:"required",
+            session_id: "required",
             year: "required",
             txt_regiter_no: "required",
             txt_emailid: {
@@ -505,12 +505,12 @@ $(function () {
         var id = $(this).data('id');
         var url = studentDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Student',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,
@@ -537,7 +537,7 @@ $(function () {
         e.preventDefault();
         var route_id = $(this).val();
         $("#drp_transport_vechicleno").empty();
-        $("#drp_transport_vechicleno").append('<option value="">'+select_vehicle_number+'</option>');
+        $("#drp_transport_vechicleno").append('<option value="">' + select_vehicle_number + '</option>');
         $.post(vehicleByRoute, { route_id: route_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -553,7 +553,7 @@ $(function () {
         e.preventDefault();
         var hostel_id = $(this).val();
         $("#drp_roomname").empty();
-        $("#drp_roomname").append('<option value="">'+select_room_name+'</option>');
+        $("#drp_roomname").append('<option value="">' + select_room_name + '</option>');
         $.post(roomByHostel, { hostel_id: hostel_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

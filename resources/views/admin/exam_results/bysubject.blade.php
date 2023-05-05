@@ -205,7 +205,7 @@
     var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
     var teacher_id = null;
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/bysubject.js') }}"></script>
 @endsection

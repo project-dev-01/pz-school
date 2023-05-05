@@ -4,7 +4,7 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ asset('public/images/users/default.jpg') }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+            <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
             <div class="dropdown">
                 <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">Geneva Kennedy</a>
                 <div class="dropdown-menu user-pro-dropdown">
@@ -789,8 +789,6 @@
                                                 <span> {{ __('messages.hostel_room') }} </span>
                                             </a>
                                         </li>
-
-
                                     </ul>
                                 </div>
                             </li>

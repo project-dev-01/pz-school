@@ -61,15 +61,26 @@
                     {{ csrf_field() }}
                     <div class="form-group" style="text-align: center;">
                         <div class="card-body" style="margin-left: 17px;">
-                            <label style="margin-right:10px;">{{ __('messages.Select_file_for_upload') }}</label>
+                            <label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
                             <input type="file" name="file" />
                         </div>
                         <input type="submit" name="upload" class="btn btn-success" value="{{ __('messages.upload') }}">
                     </div>
                 </form>
             </div>
+            <form method="post" enctype="multipart/form-data" action="{{ route('admin.parent.import.add') }}">
+                {{ csrf_field() }}
+                <div class="form-group" style="text-align: center;">
+                    <div class="card-body" style="margin-left: 17px;">
+                        <label style="margin-right:10px;">{{ __('messages.Select_file_for_upload') }}</label>
+                        <input type="file" name="file" />
+                    </div>
+                    <input type="submit" name="upload" class="btn btn-success" value="{{ __('messages.upload') }}">
+                </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <!-- /Content End -->
 <!-- content start  -->

@@ -188,12 +188,12 @@ $(function () {
         var id = $(this).data('id');
         var url = leaveTypeDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Leave Type',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,
@@ -222,12 +222,12 @@ $(function () {
         var gender = $(this).data('gender');
         var url = leaveTypeRestore;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>Restore</b> this Leave Type',
+            title: deleteTitle + '?',
+            html: deleteHtmlrestore,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

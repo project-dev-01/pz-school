@@ -141,7 +141,7 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
 @endsection

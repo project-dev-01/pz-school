@@ -16,6 +16,7 @@
 
 @endsection
 @section('css')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
 .dot {
   height: 25px;
@@ -108,11 +109,17 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     //soapSubCategory routes
-    var imageUrl = "{{ asset('public/soap/images/') }}";
+    var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
     var soapSubCategoryList = "{{ route('admin.soap_sub_category.list') }}";
     var soapSubCategoryDetails = "{{ route('admin.soap_sub_category.details') }}";
     var soapSubCategoryDelete = "{{ route('admin.soap_sub_category.delete') }}";
     var categoryList = "{{ config('constants.api.category_list_by_soap_type') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 
 <script src="{{ asset('public/js/custom/soap_sub_category.js') }}"></script>

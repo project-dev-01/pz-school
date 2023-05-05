@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
 <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .switch {
         height: 24px;
@@ -241,9 +242,9 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($student['photo'])
-                        <img src="{{ asset('public/users/images//') }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ config('constants.image_url').'/public/users/images/' }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                        <img src="{{ asset('public/images/users/default.jpg') }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
 
                     </div> <!-- end col -->
@@ -362,7 +363,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && asset('public/users/images/').'/'.$student['photo'] ? asset('public/users/images/').'/'.$student['photo'] : asset('public/images/users/default.jpg') }}" />
+                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -1624,8 +1625,8 @@
     });
 </script>
 <script>
-    var parentImg = "{{ asset('public/users/images/') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
     var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";

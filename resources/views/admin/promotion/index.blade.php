@@ -222,8 +222,8 @@
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     var getStudentListByClassSectionUrl = "{{ config('constants.api.get_student_by_class_section_sem_ses') }}";
     // default image test
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    var studentImg = "{{ asset('public/users/images/') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
 </script>
 <script src="{{ asset('public/js/custom/promotion.js') }}"></script>
 @endsection

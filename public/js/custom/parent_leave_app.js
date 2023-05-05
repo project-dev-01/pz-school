@@ -90,11 +90,27 @@ $(function () {
             });
         };
     });
-    $('#homework_file').change(function () {
-        // var i = $(this).prev('label').clone();
-        var file = $('#homework_file')[0].files[0].name;
-        $('#file_name').html(file);
+    $('#leave_file').change(function () {
+        var file = $('#leave_file')[0].files[0];
+        if(file.size > 2097152) {
+            $('#file_name').text("File greater than 2Mb");
+            $("#file_name").addClass("error");
+            $('#leave_file').val('');
+        } else {
+            $("#file_name").removeClass("error");
+            $('#file_name').text(file.name);
+        }
     });
+
+    $(document).on('change', '.reissue_file', function () {
+        console.log(12343333)
+        var file = $(this)[0].files[0];
+        if(file.size > 2097152) {
+            toastr.error("File greater than 2Mb");
+            $(this).val('');
+        }
+    });
+    
     // reverse dob
     function convertDigitIn(str) {
         return str.split('-').reverse().join('-');
@@ -228,7 +244,7 @@ $(function () {
                             document = '<a href="' + StudentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                         } else {
                             document = '<div>' +
-                                '<input type="file" id="reissue_file' + row.id + '" name="file">' +
+                                '<input type="file" id="reissue_file' + row.id + '" name="file" class="reissue_file">' +
                                 '</div>';
                         }
                         return document;

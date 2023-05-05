@@ -1,68 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Renew Password</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
 
-<head>
-    <meta charset="utf-8" />
-    <title>Renew Password</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
-    <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
-    <meta content="Paxsuzen" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
+		<!-- App css -->
+		<link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+		<link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+		<!-- icons -->
+		<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" /> -->
-    <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
+    </head>
 
-</head>
+    <body class="body">
 
-<body class="body">
+        <div class="account-pages mt-5 mb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card">
 
-    <div class="account-pages mt-5 mb-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card">
-
-                        <div class="card-body">
-
-                            <div class="text-center">
-                                <div class="auth-logo">
-                                    <a href="index.html" class="logo logo-dark text-center">
-                                        <span class="logo-lg">
-                                            <img src="{{ asset('public/images/Suzen-app-logo.png') }}" alt="" height="40px">
-                                        </span>
-                                    </a>
-                                </div><br>
-                                <h3 class="passrecov">{{ __('messages.renew_password') }}</h3>
-                                <p class="text-muted opoos">Dear user of teachxxxxx@suzen.com from SMK Kiaramas. <br>{{ __('messages.your_old_password_resetted') }}</p>
-                            </div>
-                            <form id="LoginAuth" action="{{ route('reset_password_validation') }}" method="post">
-                                @if ( Session::get('success'))
-                                <div class="alert alert-success">
-                                    {{ Session::get('success') }}
+                            <div class="card-body">
+                                
+                                <div class="text-center">
+                                    <div class="auth-logo">
+                                        <a href="index.html" class="logo logo-dark text-center">
+                                            <span class="logo-lg">
+                                                <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="40px">
+                                            </span>
+                                        </a>
+                                    </div><br>
+									<h3 class="passrecov">{{ __('messages.renew_password') }}</h3>
+                                    <p class="text-muted opoos">Dear user of teachxxxxx@suzen.com from SMK Kiaramas. <br>{{ __('messages.your_old_password_resetted') }}</p>
                                 </div>
-                                @endif
-                                @if ( Session::get('error'))
-                                <div class="alert alert-danger">
-                                    {{ Session::get('error') }}
-                                </div>
-                                @endif
-                                @csrf
-                                <input type="hidden" name="token" value="{{ $token }}">
-                                <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <div class="input-group input-group-merge">
-                                        <input type="email" class="form-control" name="email" placeholder="{{ __('messages.enter_the_email') }}">
+                                <form id="LoginAuth" action="{{ route('reset_password_validation') }}" method="post">
+                                    @if ( Session::get('success'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                    </div>
+                                    @endif
+                                    @if ( Session::get('error'))
+                                    <div class="alert alert-danger">
+                                        {{ Session::get('error') }}
+                                    </div>
+                                    @endif
+                                    @csrf
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    <div class="form-group">
+                                        <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge">
+                                            <input type="email"  class="form-control" name="email" placeholder="{{ __('messages.enter_the_email') }}">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">

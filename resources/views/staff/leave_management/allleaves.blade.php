@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -150,7 +151,7 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var AllLeaveList = "{{ route('staff.leave_management.leave_approval_history_by_staff') }}";
-    var leaveFilesUrl = "{{ asset('public/admin-documents/leaves/') }}";
+    var leaveFilesUrl = "{{ config('constants.image_url').'/public/admin-documents/leaves/' }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
     // $(function() {

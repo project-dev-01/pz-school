@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- Start Content-->
 <div class="container-fluid">
@@ -166,12 +167,12 @@
                                             <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                             <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="homework_file" class="custom-file-input" name="file">
+                                                <div class="">
+                                                    <input type="file" id="leave_file" class="custom-file-input" name="file">
                                                     <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                                    <span id="file_name"></span>
                                                 </div>
                                             </div>
-                                            <span id="file_name"></span>
 
                                         </div>
                                     </div>
@@ -256,7 +257,7 @@
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
-    var StaffDocUrl = "{{ asset('public/admin-documents/leaves/') }}";
+    var StaffDocUrl = "{{ config('constants.image_url').'/public/admin-documents/leaves/' }}";
     var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
     var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
 </script>

@@ -207,7 +207,7 @@
     var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
     // default image test
     var teacher_id = "{{ Session::get('ref_user_id') }}";
-    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>

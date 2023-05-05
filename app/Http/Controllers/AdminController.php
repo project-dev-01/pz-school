@@ -5382,18 +5382,16 @@ class AdminController extends Controller
     // index Hostel Block
     public function hostelBlock()
     {
-        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
-
         $data = [
             "academic_session_id" => session()->get('academic_session_id')
         ];
+        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-        // dd($getEmployee);
         return view(
             'admin.hostel_block.index',
             [
                 'warden' => !empty($getEmployee) ? $getEmployee['data'] : $getEmployee,
-                'leader' => !empty($student) ? $student['data'] : $student,
+                'leader' => !empty($student) ? $student['data'] : $student
             ]
         );
     }
@@ -5461,11 +5459,11 @@ class AdminController extends Controller
     // index Hostel Floor
     public function hostelFloor()
     {
-        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
-        $block = Helper::GetMethod(config('constants.api.hostel_block_list'));
         $data = [
             "academic_session_id" => session()->get('academic_session_id')
         ];
+        $getEmployee = Helper::GetMethod(config('constants.api.employee_list'), []);
+        $block = Helper::GetMethod(config('constants.api.hostel_block_list'));
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
         // dd($getEmployee);
         return view(
@@ -5738,7 +5736,7 @@ class AdminController extends Controller
         $hostel_group = Helper::PostMethod(config('constants.api.hostel_group_details'), $data);
         $staff = Helper::GetMethod(config('constants.api.employee_list'));
         $student = Helper::PostMethod(config('constants.api.student_list'), $data);
-        // dd($staff);
+        // dd($hostel_group);
         return view(
             'admin.hostel_group.edit',
             [

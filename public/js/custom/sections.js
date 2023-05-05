@@ -175,12 +175,12 @@ $(function () {
     $(document).on('click', '#deleteSectionBtn', function () {
         var sid = $(this).data('id');
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Class',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

@@ -3,6 +3,7 @@ $(function () {
     $("#hostelGroupForm").validate({
         rules: {
             name: "required",
+            color: "required",
         }
     });
     $('#hostelGroupForm').on('submit', function (e) {
@@ -32,6 +33,7 @@ $(function () {
     $("#hostelGroupEditForm").validate({
         rules: {
             name: "required",
+            color: "required",
         }
     });
     $('#hostelGroupEditForm').on('submit', function (e) {
@@ -149,21 +151,24 @@ $(function () {
 
     // delete Group Type
     $(document).on('click', '#deleteHostelGroupBtn', function () {
-        var group_id = $(this).data('id');
+        var id = $(this).data('id');
+        var url = hostelGroupDelete;
         swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Hostel Group',
+            title: deleteTitle + '?',
+            html: deleteHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,
             allowOutsideClick: false
         }).then(function (result) {
             if (result.value) {
-                $.post(hostelGroupDelete, { id: group_id }, function (data) {
+                $.post(url, {
+                    id: id
+                }, function (data) {
                     if (data.code == 200) {
                         $('#hostel-group-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
