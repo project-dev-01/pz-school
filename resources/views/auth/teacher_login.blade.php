@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
+    <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
+    <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
+    <meta content="Paxsuzen" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -17,8 +18,11 @@
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" /> -->
+    <link href="{{ asset('public/css/custom-minified/login.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+
 </head>
 <style>
     .teacherlogin {
@@ -53,7 +57,7 @@
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
-                             <select class="vodiapicker">
+                            <select class="vodiapicker">
                                 <option value="en" data-thumbnail="{{ asset('public/images/USA.png') }}">ENG</option>
                                 <option value="japanese" data-thumbnail="{{ asset('public/images/JPN.png') }}">JPN</option>
                             </select>
@@ -81,7 +85,7 @@
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('teacher.authenticate') }}" method="post">
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
-                                <input type="hidden" name="branch_id" value="{{$branch_id}}" >
+                                <input type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -163,62 +167,60 @@
     <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
 
     <script type="text/javascript">
-        
-
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
         var langArray = [];
-        $('.vodiapicker option').each(function(){
+        $('.vodiapicker option').each(function() {
             var img = $(this).attr("data-thumbnail");
             var text = this.innerText;
             var value = $(this).val();
-            var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+            var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
             langArray.push(item);
-            })
+        })
 
-            $('#a').html(langArray);
+        $('#a').html(langArray);
 
-            //Set the button value to the first el of the array
-            $('.btn-select').html(langArray[0]);
-            $('.btn-select').attr('value', 'en');
+        //Set the button value to the first el of the array
+        $('.btn-select').html(langArray[0]);
+        $('.btn-select').attr('value', 'en');
 
-            //change button stuff on click
-            $('#a li').click(function(){
-                
+        //change button stuff on click
+        $('#a li').click(function() {
+
             var img = $(this).find('img').attr("src");
             var value = $(this).find('img').attr('value');
-            
-        console.log('value',value)
+
+            console.log('value', value)
             window.location.href = url + "?lang=" + value;
             var text = this.innerText;
-            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
             $(".b").toggle();
             //console.log(value);
         });
 
-        console.log('1',locale)
-        $(".btn-select").click(function(){
-                $(".b").toggle();
-            });
+        console.log('1', locale)
+        $(".btn-select").click(function() {
+            $(".b").toggle();
+        });
 
         //check local storage for the lang
         var sessionLang = locale;
         // console.log('en',sessionLang)
-        if (locale=="japanese"){
+        if (locale == "japanese") {
             //find an item with value of sessionLang\
             var img = "{{ asset('public/images/JPN.png') }}";
             var value = "japanese";
             var text = "JPN";
-            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
             var img = "{{ asset('public/images/USA.png') }}";
             var value = "en";
             var text = "ENG";
-            var item = '<li><img src="'+ img +'" alt="" /><span >'+ text +'</span></li>';
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         }

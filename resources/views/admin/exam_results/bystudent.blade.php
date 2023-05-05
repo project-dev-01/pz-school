@@ -1,5 +1,13 @@
 @extends('layouts.admin-layout')
 @section('title','By Student')
+@section('component_css')
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <style>
     .btn-primary-bl {
@@ -177,6 +185,13 @@
 
 @endsection
 @section('scripts')
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";

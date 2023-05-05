@@ -1,5 +1,19 @@
 @extends('layouts.admin-layout')
 @section('title','Copy Exam Setup')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+<link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -30,7 +44,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="academic_session_id">>{{ __('messages.copy_from_academic_year') }}<span class="text-danger">*</span></label>
+                                    <label for="academic_session_id">{{ __('messages.copy_from_academic_year') }}<span class="text-danger">*</span></label>
                                     <select id="academic_session_id" class="form-control" name="academic_session_id">
                                         <option value="">{{ __('messages.select_academic_year') }}</option>
                                         @forelse($academic_year_list as $r)
@@ -75,6 +89,24 @@
 <!-- end row -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var copySessionUrl = "{{ config('constants.api.exam_master_copy_exam_setup') }}";
 </script>

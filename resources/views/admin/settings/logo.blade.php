@@ -1,5 +1,11 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('component_css')
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
@@ -56,7 +62,13 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
 

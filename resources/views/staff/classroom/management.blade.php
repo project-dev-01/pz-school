@@ -1,8 +1,19 @@
 @extends('layouts.admin-layout')
 @section('title','Class Room Management')
-@section('css')
-<link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
 
+<link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -748,6 +759,25 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";

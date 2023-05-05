@@ -1,5 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Exam Marks')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <style>
     .ellipse {
@@ -117,7 +126,7 @@
                                 </div>
                                 <div class="form-group text-right m-b-0">
                                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    {{ __('messages.filter') }}
+                                        {{ __('messages.filter') }}
                                     </button>
                                     <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                                 Cancel
@@ -171,7 +180,7 @@
                                     <div class="form-group text-right m-b-0">
 
                                         <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                        {{ __('messages.save') }} 
+                                            {{ __('messages.save') }}
                                         </button>
                                     </div>
                                 </div>
@@ -357,6 +366,26 @@
 </div><!-- /.modal -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+
+<script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
+<!-- Chart JS -->
+<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<!-- hightcharts js -->
+<!-- <script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script> -->
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     // var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";

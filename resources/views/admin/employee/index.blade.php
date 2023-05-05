@@ -1,5 +1,16 @@
 @extends('layouts.admin-layout')
 @section('title','Add Employee')
+@section('component_css')
+<link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
@@ -206,7 +217,6 @@
 
 @if(Session::get('locale')=="en")
 <style>
-    
     .switch input+span strong:before {
         content: 'Unlock';
     }
@@ -214,11 +224,10 @@
     .switch input+span strong:after {
         content: 'Lock';
     }
-    </style>
+</style>
 @endif
 @if(Session::get('locale')=="japanese")
 <style>
-    
     .switch input+span strong:before {
         content: 'アンロック';
     }
@@ -613,6 +622,25 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
+                            <h4 class="navv">Enable Two Factor Authentication
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="header-title">Turn On / Turn Off</h4>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
+                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
                             <h4 class="navv">{{ __('messages.social_links') }}
                                 <h4>
                         </li>
@@ -718,25 +746,6 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Enable Two Factor Authentication
-                                <h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="header-title">Turn On / Turn Off</h4>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
-                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
                             <h4 class="navv">{{ __('messages.bank_details') }}
                                 <h4>
                         </li>
@@ -808,6 +817,20 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 
@@ -848,7 +871,7 @@
         messages: {
             default: drag_and_drop_to_check,
             replace: drag_and_drop_to_replace,
-            remove:  remove,
+            remove: remove,
             error: oops_went_wrong
         }
     });

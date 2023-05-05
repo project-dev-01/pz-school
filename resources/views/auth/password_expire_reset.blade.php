@@ -5,8 +5,9 @@
     <meta charset="utf-8" />
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
+    <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
+    <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
+    <meta content="Paxsuzen" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
@@ -17,8 +18,8 @@
 
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
-
+    <!-- <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />--> -->
+    <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="body">
@@ -66,7 +67,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge">
-                                    <label for="password">{{ __('messages.note') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
+                                        <label for="password">{{ __('messages.note') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
                                         <input type="password" class="form-control" name="password" placeholder="Enter New Password">
                                         <div class="input-group-append" data-password="false">
                                             <div class="input-group-text">

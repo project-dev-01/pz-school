@@ -3,7 +3,7 @@ $(function () {
     staffcategoryTable();
     $("#addstaffcategory").validate({
         rules: {
-            department_name: "required"
+            name: "required"
         }
     });
     $("#edit-staffcategory-form").validate({

@@ -1,5 +1,13 @@
 @extends('layouts.admin-layout')
 @section('title','By Class')
+@section('component_css')
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <style>
     .btn-primary-bl {
@@ -28,7 +36,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -102,7 +110,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.get') }}
+                                {{ __('messages.get') }}
                             </button>
                         </div>
                     </form>
@@ -122,7 +130,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.class') }} 
+                            {{ __('messages.class') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -173,19 +181,26 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div> -->
-    @endsection
-    @section('scripts')
-    <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+        </div>-->
+</div>
+@endsection
+@section('scripts')
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 
-    <script>
-        var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
-        var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
-        var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
-        var teacher_id = "{{ Session::get('ref_user_id') }}";
-        // default image test
-        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    </script>
-    <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
-    @endsection
+<script>
+    var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";
+    var getbyClass = "{{ config('constants.api.tot_grade_calcu_byclass') }}";
+    var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
+    var teacher_id = "{{ Session::get('ref_user_id') }}";
+    // default image test
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+</script>
+<script src="{{ asset('public/js/custom/byclass.js') }}"></script>
+@endsection

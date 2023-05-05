@@ -54,7 +54,7 @@
     min-height: 100vh;
     flex-direction: row;
     align-items: stretch;
-    background: url(../assets/images/bg-auth.jpg);
+    /* background: url(../assets/images/bg-auth.jpg); */
     background-size: cover;
 }
 
@@ -64,7 +64,7 @@
     min-height: 100vh;
     flex-direction: row;
     align-items: stretch;
-    background: url(../assets/images/bg-auth-student.jpg);
+    /* background: url(../assets/images/bg-auth-student.jpg); */
     background-size: cover;
 }
 
@@ -74,7 +74,7 @@
     min-height: 100vh;
     flex-direction: row;
     align-items: stretch;
-    background: url(../assets/images/bg-auth-partent.jpg);
+    /* background: url(../assets/images/bg-auth-partent.jpg); */
     background-size: cover;
 }
 

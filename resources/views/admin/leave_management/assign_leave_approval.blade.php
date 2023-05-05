@@ -1,5 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Assign Leave approval')
+@section('component_css')
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<!-- Bootstrap Tables css -->
+<link href="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -30,14 +40,14 @@
                 </ul><br>
                 <div class="card-body">
                     <label class="form-inline mb-3">
-                    {{ __('messages.show') }}
+                        {{ __('messages.show') }}
                         <select id="demo-show-entries" class="form-control form-control-sm ml-1 mr-1">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="15">15</option>
                             <option value="20">20</option>
                         </select>
-                    {{ __('messages.entries') }}
+                        {{ __('messages.entries') }}
                     </label>
 
                     <div class="table-responsive">
@@ -75,7 +85,7 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-primary-bl waves-effect waves-light assignLeaveApprove" data-id="{{$value['id']}}" type="button">
-                                        {{ __('messages.save') }}
+                                            {{ __('messages.save') }}
                                         </button>
                                     </td>
                                 </tr>
@@ -100,15 +110,26 @@
 
     </div>
     <!-- container -->
-    @endsection
-    @section('scripts')
-    <script src="{{ asset('public/libs/footable/footable.all.min.js') }}"></script>
-    <script src="{{ asset('public/js/pages/foo-tables.init.js') }}"></script>
+</div>
+@endsection
+@section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<!-- Bootstrap Tables js -->
+<script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('public/libs/footable/footable.all.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/foo-tables.init.js') }}"></script>
 
-    <script>
-        var assignLeaveApprovalUrl = "{{ config('constants.api.assign_leave_approval') }}";
-    </script>
-    <!-- <script src="{{ asset('public/js/custom/sections.js') }}"></script> -->
-    <script src="{{ asset('public/js/custom/assign_leave_approval.js') }}"></script>
+<script>
+    var assignLeaveApprovalUrl = "{{ config('constants.api.assign_leave_approval') }}";
+</script>
+<!-- <script src="{{ asset('public/js/custom/sections.js') }}"></script> -->
+<script src="{{ asset('public/js/custom/assign_leave_approval.js') }}"></script>
 
-    @endsection
+@endsection

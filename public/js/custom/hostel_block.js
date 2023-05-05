@@ -9,9 +9,16 @@ $(function () {
     });
     $("#edit-hostel-block-form").validate({
         rules: {
-            block_name: "required",
-            block_warden: "required",
-            total_floor: "required",
+            "block_name": "required",
+            "block_warden[]": "required",
+            "total_floor": "required"
+        }
+    });
+    $("#hostelBlockForm").validate({
+        rules: {
+            "block_name": "required",
+            "block_warden[]": "required",
+            "total_floor": "required"
         }
     });
     // add hostelBlock
@@ -164,6 +171,13 @@ $(function () {
               $('#block_leader_div .select2-selection__rendered').html(output2);
             $('.editHostelBlock').modal('show');
         }, 'json');
+    });
+    $("#edit-hostel-block-form").validate({
+        rules: {
+            block_name: "required",
+            block_warden: "required",
+            total_floor: "required"
+        }
     });
     // update HostelBlock
     $('#edit-hostel-block-form').on('submit', function (e) {

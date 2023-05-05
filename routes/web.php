@@ -973,7 +973,6 @@ Route::group(['prefix' => 'staff'], function () {
 
         // Attendance routes
         Route::get('attendance/student_entry', [StaffController::class, 'studentEntry'])->name('staff.attendance.student_entry');
-        Route::get('attendance/employee_entry', [StaffController::class, 'employeeEntry'])->name('staff.attendance.employee_entry');
         Route::get('attendance/exam_entry', [StaffController::class, 'examEntry'])->name('staff.attendance.exam_entry');
 
         //Task routes

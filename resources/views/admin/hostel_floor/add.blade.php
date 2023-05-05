@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="block_id">{{ __('messages.block') }}</label>
+                        <label for="block_id">{{ __('messages.block') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="block_id">
                             <option value="">{{ __('messages.select_block') }}</option>
                             @foreach($block as $blo)

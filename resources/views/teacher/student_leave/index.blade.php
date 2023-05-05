@@ -1,5 +1,15 @@
 @extends('layouts.admin-layout')
 @section('title','Student Leave Details')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -120,6 +130,18 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+     toastr.options.preventDuplicates = true;
+</script>
 <script>
     var sectionByClassUrl = "{{ config('constants.api.class_teacher_sections') }}";
     var allStutdentLeaveList = "{{ config('constants.api.get_all_student_leaves') }}";

@@ -9,7 +9,13 @@
 <link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- full calendar css end-->
 @endsection
-@section('css')
+@section('component_css')
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
@@ -609,6 +615,20 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<!-- <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script> -->
+
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <!-- full calendar js start -->
 <script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>

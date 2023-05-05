@@ -1,5 +1,21 @@
 @extends('layouts.admin-layout')
 @section('title','Class Room Management')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+
+<link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+
+@endsection
 @section('css')
 <link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
 
@@ -242,7 +258,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -398,22 +414,22 @@
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                {{ __('messages.layout_mode') }}
+                                    {{ __('messages.layout_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                {{ __('messages.list_mode') }}
+                                    {{ __('messages.list_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#shortest" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                {{ __('messages.short_test') }}
+                                    {{ __('messages.short_test') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                {{ __('messages.daily_report') }}
+                                    {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -504,7 +520,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                    {{ __('messages.save') }}
+                                                        {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -600,7 +616,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                    {{ __('messages.save') }}
+                                                        {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -636,7 +652,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        {{ __('messages.save') }}
+                                                            {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -746,6 +762,26 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";

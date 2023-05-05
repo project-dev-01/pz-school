@@ -1,5 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('component_css')
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
 <style>
@@ -162,6 +167,12 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script>
     var input = document.querySelector("#mobile_no");
@@ -177,7 +188,7 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
+        // utilsScript: "js/utils.js"
     });
 </script>
 <script>

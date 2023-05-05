@@ -9,7 +9,9 @@
 <link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- full calendar css end-->
 @endsection
-@section('css')
+@section('component_css')
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <style>
@@ -617,364 +619,6 @@
     </div>
 </div>
 <!-- end col-12 -->
-
-
-<!-- <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">
-                        Top Scoreres of class
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="mt-4 chartjs-chart">
-                    <div id="chart-hor-stack-bar-chart" style="min-height: 365px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- <div class="row">
-    <div class="col-xl-12 col-md-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">Student marks Semester Wise
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Choose Year</option>
-                                <option value="">2021-2022</option>
-                                <option value="">2022-2023</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Choose Grade</option>
-                                <option value="">Tingatan1</option>
-                                <option value="">Tingatan2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">{{ __('messages.select_class') }}</option>
-                                <option value="">class 1</option>
-                                <option value="">class 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">{{ __('messages.select_student') }}</option>
-                                <option value="">Sheelu</option>
-                                <option value="">Veena</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap" id="">
-                        <thead>
-                            <tr>
-                                <th>{{ __('messages.semester') }}</th>
-                                <th>Sudent Name</th>
-                                <th>{{ __('messages.grade') }}</th>
-                                <th>{{ __('messages.exam_name') }}</th>
-                                <th>{{ __('messages.total_marks') }}</th>
-                                <th>{{ __('messages.exam_marks') }}</th>
-                                <th>{{ __('messages.remarks') }}</th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th rowspan="3" style="background:#E9D528;vertical-align: middle;">Semester 1</th>
-                                <td>Shasha</td>
-                                <td>Tingatan 1</td>
-                                <td>Penilaian Sumatif 1</td>
-                                <td>300</td>
-                                <td>250</td>
-                                <th>Good</th>
-                            </tr>
-                            <tr>
-                                <td>Shailu</td>
-                                <td>Tingatan 2</td>
-                                <td>Penilaian Sumatif 2</td>
-                                <td>300</td>
-                                <td>240</td>
-                                <th>Good</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #fcefd9;">
-                                <td>Priya</td>
-                                <td>Tingatan 1</td>
-                                <td>Penilaian Sumatif 1</td>
-                                <td>300</td>
-                                <td>150</td>
-                                <th>Work Hard</th>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 2</th>
-                                <td>Sri</td>
-                                <td>Tingatan 1</td>
-                                <td>Penilaian Sumatif 3</td>
-                                <td>200</td>
-                                <td>120</td>
-                                <th>Good</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #fcefd9;">
-                                <td>Moonu</td>
-                                <td>Tingatan 1</td>
-                                <td>Penilaian Sumatif 3</td>
-                                <td>200</td>
-                                <td>170</td>
-                                <th>Good</th>
-                            </tr>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> 
-</div>  -->
-<!-- <div class="row">
-    <div class="col-xl-12 col-md-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">Student marks Subject Wise
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Acedamic Year<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Choose Year</option>
-                                <option value="">2021-2022</option>
-                                <option value="">2022-2023</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">Grade<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">Choose Grade</option>
-                                <option value="">Tingatan1</option>
-                                <option value="">Tingatan2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">{{ __('messages.select_class') }}</option>
-                                <option value="">class 1</option>
-                                <option value="">class 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
-                            <select id="" class="form-control" name="">
-                                <option value="">{{ __('messages.select_student') }}</option>
-                                <option value="">Sheelu</option>
-                                <option value="">Veena</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-
-                    <table class="table table-bordered w-100 nowrap" id="">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">{{ __('messages.semester') }}</th>
-                                <th rowspan="2">Sudent Name</th>
-                                <th rowspan="2">{{ __('messages.grade') }}</th>
-                                <th rowspan="2">{{ __('messages.exam_name') }}</th>
-                                <th rowspan="2">Total Subject</th>
-                                <th rowspan="2">{{ __('messages.total_marks') }}</th>
-                                <th colspan="9">Subject Marks</th>
-                                <th rowspan="2">{{ __('messages.remarks') }}</th>
-                            </tr>
-                            <tr>
-
-                                <th>English</th>
-                                <th>Maths</th>
-                                <th>Csc</th>
-                                <th>DS</th>
-                                <th>DM</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 1</th>
-                                <td>Shasha</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>5</td>
-                                <td>500</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <th>Good</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #fcefd9;">
-                                <td>sheelu</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>5</td>
-                                <td>500</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <th>Good</th>
-                            </tr>
-                            <tr>
-                                <th colspan="6"></th>
-
-                                <th>English</th>
-                                <th>Maths</th>
-                                <th>Csc</th>
-                                <th>DS</th>
-                                <th>DM</th>
-                                <th>CC</th>
-                                <th>Mc</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 2</th>
-                                <td>veena</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>7</td>
-                                <td>700</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td>95</td>
-                                <td>85</td>
-                                <td></td>
-                                <td></td>
-                                <th>Work hard</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #fcefd9;">
-                                <td>sheelu</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>7</td>
-                                <td>700</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td>85</td>
-                                <td>64</td>
-                                <td></td>
-                                <td></td>
-                                <th>Good</th>
-                            </tr>
-                            <tr>
-                                <th colspan="6"></th>
-
-                                <th>English</th>
-                                <th>Maths</th>
-                                <th>Csc</th>
-                                <th>DS</th>
-                                <th>DM</th>
-                                <th>CC</th>
-                                <th>Mc</th>
-                                <th>CC</th>
-                                <th>Mc</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th rowspan="2" style="background:#E9D528;vertical-align: middle;">Semester 3</th>
-                                <td>veena</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>7</td>
-                                <td>700</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td>95</td>
-                                <td>85</td>
-                                <td>95</td>
-                                <td>85</td>
-                                <th>Work hard</th>
-                            </tr>
-                            <tr style="border-bottom: 2px solid #fcefd9;">
-                                <td>sheelu</td>
-                                <td>Tingatan 1</td>
-                                <td>Unggul 1</td>
-                                <td>7</td>
-                                <td>700</td>
-                                <td>95</td>
-                                <td>92</td>
-                                <td>89</td>
-                                <td>98</td>
-                                <td>98</td>
-                                <td>85</td>
-                                <td>64</td>
-                                <td>85</td>
-                                <td>64</td>
-                                <th>Good</th>
-                            </tr>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> 
-</div>  -->
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
@@ -1287,23 +931,6 @@
         </div> <!-- end card-->
     </div> <!-- end col-->
 </div>
-<!-- <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">Test Score Analysis
-                        <h4>
-                </li>
-            </ul><br>
-            <div class="card-body">
-                <div class="mt-4 chartjs-chart">
-                    <canvas id="radar-chart-test-marks" data-colors="#39afd1,#a17fe0"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
@@ -1493,8 +1120,6 @@
     </div> <!-- end card-->
 </div> <!-- end col -->
 </div> <!-- end row -->
-
-
 @include('teacher.dashboard.check_list')
 @include('teacher.dashboard.task')
 @include('teacher.dashboard.task-show')
@@ -1504,6 +1129,16 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<!-- validation -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<!-- full calendar js end -->
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+     toastr.options.preventDuplicates = true;
+</script>
 <!-- full calendar js start -->
 <script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
@@ -1511,7 +1146,7 @@
 <script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
-<!-- full calendar js end -->
+
 <script>
     // calendor js
 

@@ -1,5 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Employee Import')
+@section('component_css')
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <!-- Page Content -->
 <div class="content container-fluid">
@@ -70,4 +75,12 @@
 
 </div>
 <!-- /Page Content -->
-@stop
+@endsection
+@section('scripts')
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+@endsection

@@ -1,7 +1,8 @@
 @extends('layouts.punchcard-layout')
 @section('title','Punch Card')
 @section('content')
-<link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('public/css/custom-minified/greeting.min.css') }}" rel="stylesheet" type="text/css" />
 <style>
     body[data-sidebar-size=condensed] .logo span.logo-lg {
         display: inline-block;

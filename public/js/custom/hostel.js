@@ -12,7 +12,7 @@ $(function () {
         rules: {
             name: "required",
             category: "required",
-            watchman: "required",
+            "watchman[]": "required",
             address: "required",
         }
     });
@@ -20,7 +20,7 @@ $(function () {
         rules: {
             name: "required",
             category: "required",
-            watchman: "required",
+            "watchman[]": "required",
             address: "required",
         }
     });

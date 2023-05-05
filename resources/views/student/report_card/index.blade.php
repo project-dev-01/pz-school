@@ -1,5 +1,20 @@
 @extends('layouts.admin-layout')
 @section('title','Report Card')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -19,7 +34,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -43,7 +58,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.get') }}
+                                {{ __('messages.get') }}
                             </button>
                         </div>
                     </form>
@@ -64,7 +79,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.report_card_list') }}
+                            {{ __('messages.report_card_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -102,12 +117,31 @@
             </div>
         </div>
     </div> -->
-    @endsection
-    @section('scripts')
-    <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
-    <script>
-        var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
-        var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
-    </script>
-    <script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
-    @endsection
+</div>
+@endsection
+@section('scripts')
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+<script>
+    var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
+    var defaultImg = "{{ asset('public/images/users/default.jpg') }}";
+</script>
+<script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
+@endsection

@@ -206,7 +206,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
@@ -349,7 +349,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                    {{ __('messages.grades') }}&{{ __('messages.classes') }}<span class="menu-arrow"></span>
+                                    {{ __('messages.grades') }} & {{ __('messages.classes') }}<span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
@@ -774,12 +774,6 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.hostel_room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
-                                                <span> {{ __('messages.hostel_room') }} </span>
-                                            </a>
-                                        </li>
-
-                                        <li>
                                             <a href="{{ route('admin.hostel_block')}}" class="nav-link {{ (request()->is('admin/hostel/block')) ? 'active' : '' }}">
                                                 <span> {{ __('messages.hostel_block') }} </span>
                                             </a>
@@ -790,6 +784,13 @@
                                                 <span> {{ __('messages.hostel_floor') }} </span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.hostel_room')}}" class="nav-link {{ (request()->is('admin/hostel/room')) ? 'active' : '' }}">
+                                                <span> {{ __('messages.hostel_room') }} </span>
+                                            </a>
+                                        </li>
+
+
                                     </ul>
                                 </div>
                             </li>
@@ -967,7 +968,7 @@
                     </a>
                     <div class="collapse" id="sidebarFees">
                         <ul class="nav-second-level"> -->
-                            <!-- <li>
+                <!-- <li>
                                 <a href="{{ route('admin.payment_mode')}}" class="nav-link {{ (request()->is('admin/payment_mode*')) ? 'active' : '' }}">
                                     <span>Payment Mode </span>
                                 </a>
@@ -977,7 +978,7 @@
                                     <span>Payment Status </span>
                                 </a>
                             </li> -->
-                            <!-- <li>
+                <!-- <li>
                                 <a href="{{ route('admin.fees_type')}}" class="nav-link {{ (request()->is('admin/fees_type*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.fees_type') }}</span>
                                 </a>
@@ -1120,7 +1121,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.settings')}}" class="nav-link {{ (request()->is('admin/settings')) ? 'active' : '' }}">
                                     <span> {{ __('messages.general_settings') }}</span>
                                 </a>
                             </li>
@@ -1130,7 +1131,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.settings.logo')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.settings.logo')}}" class="nav-link {{ (request()->is('admin/settings/logo')) ? 'active' : '' }}">
                                     <span> {{ __('messages.change_logo') }} </span>
                                 </a>
                             </li>

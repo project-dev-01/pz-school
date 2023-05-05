@@ -17,12 +17,14 @@
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
-    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <!-- <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" /> -->
 
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+	<link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 

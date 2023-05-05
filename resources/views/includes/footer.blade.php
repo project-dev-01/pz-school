@@ -22,42 +22,29 @@
 
 <!-- Vendor js -->
 <script src="{{ asset('public/js/vendor.min.js') }}"></script>
-<script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
-
-<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
-<!-- <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
-<script src="https://apexcharts.com/samples/assets/ohlc.js"></script> -->
-
-<!-- init js -->
-<!-- <script src="{{ asset('public/js/pages/apexcharts.init.js') }}"></script> -->
-
-<!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-
 @if(Session::get('role_id') == '1')
 <script>
-    var logoutIdle = "{{ route('super_admin.logout') }}";
+    var backToLogin = "{{ route('super_admin.login') }}";
 </script>
 @elseif(Session::get('role_id') == '3')
 <script>
-    var logoutIdle = "{{ route('staff.logout') }}";
+    var backToLogin = "{{ route('staff.login') }}";
 </script>
 @elseif(Session::get('role_id') == '4')
 <script>
-    var logoutIdle = "{{ route('teacher.logout') }}";
+    var backToLogin = "{{ route('teacher.login') }}";
 </script>
 @elseif(Session::get('role_id') == '5')
 <script>
-    var logoutIdle = "{{ route('parent.logout') }}";
+    var backToLogin = "{{ route('parent.login') }}";
 </script>
 @elseif(Session::get('role_id') == '6')
 <script>
-    var logoutIdle = "{{ route('student.logout') }}";
+    var backToLogin = "{{ route('student.login') }}";
 </script>
 @else
 <script>
-    var logoutIdle = "{{ route('admin.logout') }}";
+    var backToLogin = "{{ route('admin.login') }}";
 </script>
 @endif
 <script>
@@ -83,43 +70,15 @@
 </script>
 @endif
 @endif
-<!-- Plugins js-->
-<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
-<!-- Chart JS -->
-<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
-<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
 
 <script src="{{ asset('public/js/app.min.js') }}"></script>
 <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('public/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
-<!-- button js added -->
-<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
-<!-- Bootstrap Tables js -->
-<script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<!-- Table Editable plugin-->
-<script src="{{ asset('public/libs/jquery-tabledit/jquery.tabledit.min.js') }}"></script>
-<!-- add date range picker -->
-<script type="text/javascript" src="{{ asset('public/js/daterangepicker/daterangepicker.min.js') }}"></script>
-
-<!-- Init js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-
-<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
 <script>
     var token = "{{ Session::get('token') }}";
-    toastr.options.preventDuplicates = true;
+    // toastr.options.preventDuplicates = true;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -171,6 +130,7 @@
     var select_class = "{{ __('messages.select_class') }}";
     var select_section = "{{ __('messages.select_section') }}";
     var select_subject = "{{ __('messages.select_subject') }}";
+    var select_teacher = "{{ __('messages.select_teacher') }}";
     var select_paper = "{{ __('messages.select_paper') }}";
     var select_student = "{{ __('messages.select_student') }}";
     var select_exam = "{{ __('messages.select_exam') }}";
@@ -235,7 +195,8 @@
     var exam_lang = "{{ __('messages.exam') }}";
     var fail_lang = "{{ __('messages.fail') }}";
     var inprogress_lang = "{{ __('messages.inprogress') }}";
-
+    var select_category = "{{ __('messages.select_category') }}";
+    var select_sub_category = "{{ __('messages.select_sub_category') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
@@ -271,10 +232,6 @@
     var allNotifications = "{{ route('unread_notifications') }}";
     var allLogout = "{{ route('all_logout') }}";
 </script>
-<!-- custom js  -->
-<script src="{{ asset('public/js/custom/settings.js') }}"></script>
-<script src="{{ asset('public/js/custom/dashboard.js') }}"></script>
-<script src="{{ asset('public/js/custom/common.js') }}"></script>
 
 <script type="text/javascript">
     var url = "{{ route('changeLang') }}";
@@ -364,20 +321,8 @@
                     if (res.code == 200) {
                         toastr.error('Logout Successfully');
                         setTimeout(function() {
-                            if (res.role == 1) {
-                                window.location.href = "{{ route('super_admin.login')}}";
-                            } else if (res.role == 2) {
-                                window.location.href = "{{ route('admin.login')}}";
-                            } else if (res.role == 3) {
-                                window.location.href = "{{ route('staff.login')}}";
-                            } else if (res.role == 4) {
-                                window.location.href = "{{ route('teacher.login')}}";
-                            } else if (res.role == 5) {
-                                window.location.href = "{{ route('parent.login')}}";
-                            } else if (res.role == 6) {
-                                window.location.href = "{{ route('student.login')}}";
-                            }
-                        }, 2000);
+                            logoutFunc();
+                        }, 1000);
                     }
 
                 },
@@ -420,33 +365,48 @@
         });
     });
 </script>
-<script>
-    /*
-     *   this script is for manage the logout of timeout
-     *   if user is inactive for 15 min
-     *   he will be logout : 
-     *
-     * */
-    var timeout;
-    document.onmousemove = function() {
-        clearTimeout(timeout);
-        // var logoutTime = 60000;  // 1 minute
-        var logoutTime = 900000;  // 15 minute
-        timeout = setTimeout(function() {
-            var formData = new FormData();
-            formData.append("idle_timeout", "idle_timeout");
-            $.ajax({
-                cache: false,
-                url: logoutIdle,
-                data: formData,
-                method: "post",
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function(response) {
-                    window.location.href = response.redirect_url;
-                }
-            });
-        }, logoutTime);
-    };
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        var IDLE_TIMEOUT = 900; //seconds
+        var _idleSecondsTimer = null;
+        var _idleSecondsCounter = 0;
+        document.onclick = function() {
+            _idleSecondsCounter = 0;
+        };
+
+        document.onmousemove = function() {
+            _idleSecondsCounter = 0;
+        };
+
+        document.onkeypress = function() {
+            _idleSecondsCounter = 0;
+        };
+
+        _idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            _idleSecondsCounter++;
+            if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+                window.clearInterval(_idleSecondsTimer);
+                logoutFunc();
+            }
+        }
+    });
+
+    function logoutFunc() {
+        var formData = new FormData();
+        formData.append("idle_timeout", "idle_timeout");
+        $.ajax({
+            cache: false,
+            url: logoutIdle,
+            data: formData,
+            method: "post",
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(response) {
+                window.location.href = response.redirect_url;
+            }
+        });
+    }
 </script>

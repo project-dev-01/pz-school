@@ -3,7 +3,7 @@ $(function () {
     qualificationTable();
     $("#addqualify").validate({
         rules: {
-            department_name: "required"
+            name: "required"
         }
     });
     $("#edit-qualify-form").validate({
@@ -17,7 +17,6 @@ $(function () {
         var deptCheck = $("#addqualify").valid();
         if (deptCheck === true) {
             var form = this;
-            console.log('enterd');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),

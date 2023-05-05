@@ -17,9 +17,11 @@
 
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
 
+    <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="body bg">
