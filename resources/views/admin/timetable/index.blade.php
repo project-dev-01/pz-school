@@ -215,7 +215,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success waves-effect waves-light">Done</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.done') }}</button>
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                     </div>
 

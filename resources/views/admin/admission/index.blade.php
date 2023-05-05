@@ -602,17 +602,17 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Enable Two Factor Authentication
+                            <h4 class="navv">{{ __('messages.enable_two_factor_authentication') }}
                                 <h4>
                         </li>
                     </ul>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="header-title">Turn On / Turn Off</h4>
+                                <h4 class="header-title">{{ __('messages.turn_on') }} / {{ __('messages.turn_off') }}</h4>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
-                                    <label class="custom-control-label" for="google2fa_secret_enable">Enable Two Factor Authentication</label>
+                                    <label class="custom-control-label" for="google2fa_secret_enable">{{ __('messages.enable_two_factor_authentication') }}</label>
                                 </div>
                             </div>
                         </div>

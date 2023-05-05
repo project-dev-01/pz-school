@@ -379,9 +379,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="post_code">School Type<span class="text-danger">*</span></label>
+                                    <label for="post_code">{{ __('messages.school_type') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="school_type" id="school_type">
-                                        <option value="">Select School Type</option>
+                                        <option value="">{{ __('messages.select_school_type') }}</option>
                                         <option value="Local" {{$branch['school_type']=="Local" ? "Selected" : ""}}>Local</option>
                                         <option value="International" {{$branch['school_type']=="International" ? "Selected" : ""}}>International</option>
                                         <option value="Japanese" {{$branch['school_type']=="Japanese" ? "Selected" : ""}}>Japanese</option>
@@ -391,13 +391,13 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="address">Address Line 1<span class="text-danger">*</span></label>
+                                    <label for="address">{{ __('messages.address_line_1') }}<span class="text-danger">*</span></label>
                                     <input class="form-control" name="address" value="{{$branch['address']}}" id="address" placeholder="johor">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="address1">Address Line 2</label>
+                                    <label for="address1">{{ __('messages.address_line_2') }}</label>
                                     <input class="form-control" name="address1" value="{{$branch['address1']}}" id="address1" placeholder="johor">
                                 </div>
                             </div>

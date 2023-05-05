@@ -138,9 +138,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="post_code">School Type<span class="text-danger">*</span></label>
+                        <label for="post_code">{{ __('messages.school_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="school_type" id="school_type">
-                            <option value="">Select School Type</option>
+                            <option value="">{{ __('messages.select_school_type') }}</option>
                             <option value="Local">Local</option>
                             <option value="International">International</option>
                             <option value="Japanese">Japanese</option>
@@ -150,13 +150,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="address">Address Line 1<span class="text-danger">*</span></label>
+                        <label for="address">{{ __('messages.address_line_1') }}<span class="text-danger">*</span></label>
                         <input class="form-control" name="address" id="address" placeholder="johor">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="address1">Address Line 2</label>
+                        <label for="address1">{{ __('messages.address_line_2') }}</label>
                         <input class="form-control" name="address1" id="address1" placeholder="johor">
                     </div>
                 </div>
@@ -228,26 +228,26 @@
     <div class="card">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <h4 class="navv">Database Details<h4>
+                <h4 class="navv">{{ __('messages.database_details') }}<h4>
             </li>
         </ul>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="db_name">Database Name<span class="text-danger">*</span></label>
+                        <label for="db_name">{{ __('messages.database_name') }}<span class="text-danger">*</span></label>
                         <input type="text" maxlength="50" class="form-control" placeholder="{{ __('messages.enter_database_name') }}" name="db_name">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="db_username">Database User Name<span class="text-danger">*</span></label>
+                        <label for="db_username">{{ __('messages.database_user_name') }}<span class="text-danger">*</span></label>
                         <input type="text" maxlength="50" class="form-control" placeholder="{{ __('messages.enter_database_user_name') }}" name="db_username">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="db_password">Database Password</label>
+                        <label for="db_password">{{ __('messages.database_password') }}</label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -261,15 +261,15 @@
                 
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="db_port">Database Port<span class="text-danger">*</span></label>
-                        <input type="text" maxlength="50" class="form-control" placeholder="Enter Database Port" name="db_port">
+                        <label for="db_port">{{ __('messages.database_port') }}<span class="text-danger">*</span></label>
+                        <input type="text" maxlength="50" class="form-control" placeholder="{{ __('messages.enter_database_port') }}" name="db_port">
                     </div>
                 </div>
                 
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="db_host">Database Host<span class="text-danger">*</span></label>
-                        <input type="text" maxlength="50" class="form-control" placeholder="Enter Database Host" name="db_host">
+                        <label for="db_host">{{ __('messages.database_host') }}<span class="text-danger">*</span></label>
+                        <input type="text" maxlength="50" class="form-control" placeholder="{{ __('messages.enter_database_host') }}" name="db_host">
                     </div>
                 </div>
 

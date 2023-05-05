@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>TWO-FACTOR AUTHENTICATION</title>
+    <title>{{ __('messages.two_factor_authentication') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -100,7 +100,7 @@
                 <div class="row">
                     <div class="col-md-12 mt-4">
                         <div class="card card-default">
-                            <h4 class="card-heading text-center mt-4">Verification Code</h4>
+                            <h4 class="card-heading text-center mt-4">{{ __('messages.verification_code') }}</h4>
                             <div class="card-body" style="text-align: center;">
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -115,9 +115,9 @@
                                 <form class="form-horizontal" class="otp-form" name="otp-form" method="POST" action="{{ route('2fa.post') }}">
                                     {{ csrf_field() }}
                                     <div class="title">
-                                        <h3>TWO-FACTOR AUTHENTICATION</h3>
+                                        <h3>{{ __('messages.two_factor_authentication') }}</h3>
                                         <!-- <p class="info">An otp has been sent to ********k876@gmail.com</p> -->
-                                        <p class="msg">Enter 6-digit code from your authenticator application</p>
+                                        <p class="msg">{{ __('messages.enter_6-digit_code') }}</p>
                                     </div>
                                     <div class="otp-input-fields">
                                         <input type="number" class="otp__digit otp__field__1">
