@@ -199,7 +199,9 @@
             $(".b").toggle();
             //console.log(value);
         });
-
+    $(".btn-select").click(function(){
+        $(".b").toggle();
+    });
     //check local storage for the lang
     var sessionLang = locale;
     // console.log('en',sessionLang)
