@@ -17,6 +17,68 @@
 @endsection
 @section('content')
 <link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<style>
+.ui-datepicker
+ {
+width: 21.4em;
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
+{
+.ui-datepicker
+ {
+width: 14.4em;
+}
+}
+@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
+{
+.ui-datepicker
+ {
+width: 17.4em;
+}
+}
+@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
+{
+.ui-datepicker
+ {
+width: 18.6em;
+}
+}
+@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
+{
+.ui-datepicker
+ {
+width: 19.8em;
+}
+}
+@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
+{
+.ui-datepicker
+ {
+width: 21.5em;
+}
+}
+@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
+{
+.ui-datepicker
+ {
+width: 31.3em;
+}
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
+{
+.ui-datepicker
+ {
+width: 13.2em;
+}
+}
+@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
+{
+.ui-datepicker
+ {
+width: 14.3em;
+}
+}
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
     <!-- start page title -->
