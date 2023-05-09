@@ -943,7 +943,7 @@
                         </ul>
                     </div>
                 </li>
-                <!-- <li>
+                <li>
                     <a href="#sidebarFees" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_354_1194)">
@@ -965,8 +965,8 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarFees">
-                        <ul class="nav-second-level"> -->
-                <!-- <li>
+                        <ul class="nav-second-level">
+                <li>
                                 <a href="{{ route('admin.payment_mode')}}" class="nav-link {{ (request()->is('admin/payment_mode*')) ? 'active' : '' }}">
                                     <span>Payment Mode </span>
                                 </a>
@@ -975,8 +975,8 @@
                                 <a href="{{ route('admin.payment_status')}}" class="nav-link {{ (request()->is('admin/payment_status*')) ? 'active' : '' }}">
                                     <span>Payment Status </span>
                                 </a>
-                            </li> -->
-                <!-- <li>
+                            </li>
+                <li>
                                 <a href="{{ route('admin.fees_type')}}" class="nav-link {{ (request()->is('admin/fees_type*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.fees_type') }}</span>
                                 </a>
@@ -998,7 +998,7 @@
                             </li>
                         </ul>
                     </div>
-                </li> -->
+                </li>
                 <li>
                     <a href="#sideBarSettings" data-toggle="collapse">
                         <!-- <i data-feather="settings" class="icon-dual"></i> -->

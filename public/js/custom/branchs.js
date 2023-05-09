@@ -6,6 +6,7 @@ $(function () {
     branchTable(country_id, state_id, city_id);
 
 
+    console.log(123,'a');
     // change country
     $('#country').on('change', function () {
         var country_id = $(this).val();
