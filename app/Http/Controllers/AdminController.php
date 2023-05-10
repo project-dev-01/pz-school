@@ -6790,12 +6790,16 @@ class AdminController extends Controller
     // index Fees
     public function fees()
     {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
+        $fees_group_list = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
         return view(
             'admin.fees.index',
             [
@@ -6804,7 +6808,8 @@ class AdminController extends Controller
                 'session' => $session['data'],
                 'academic_year_list' => $academic_year_list['data'],
                 'fees_type' => $fees_type['data'],
-                'payment_status' => $payment_status['data']
+                'payment_status' => $payment_status['data'],
+                'fees_group_list' => $fees_group_list['data']
             ]
         );
     }
@@ -7103,8 +7108,8 @@ class AdminController extends Controller
                 $paidSts = 'paid';
                 $labelmode = 'badge-success';
             } else {
-                $paidSts = 'pending';
-                $labelmode = 'badge-warning';
+                $paidSts = 'unpaid';
+                $labelmode = 'badge-danger';
             }
         }
         // amount unpaid or delay
@@ -7121,8 +7126,8 @@ class AdminController extends Controller
                         $paidSts = 'delay';
                         $labelmode = 'badge-secondary';
                     } else {
-                        $paidSts = 'Pending';
-                        $labelmode = 'badge-warning';
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
                     }
                 } else {
                     // not match between semester date
@@ -7132,6 +7137,7 @@ class AdminController extends Controller
             }
             // semester payment
             if ($args['payment_mode_id'] == 2) {
+
                 $id = isset($current_semester['id']) ? $current_semester['id'] : 0;
                 $key = array_search($id, array_column($all_semester, 'id'));
                 if ((!empty($key)) || ($key === 0)) {
@@ -7147,8 +7153,8 @@ class AdminController extends Controller
                             $paidSts = 'delay';
                             $labelmode = 'badge-secondary';
                         } else {
-                            $paidSts = 'Pending';
-                            $labelmode = 'badge-warning';
+                            $paidSts = 'unpaid';
+                            $labelmode = 'badge-danger';
                         }
                     } else {
                         // not match between semester date
@@ -7174,8 +7180,8 @@ class AdminController extends Controller
                         $paidSts = 'delay';
                         $labelmode = 'badge-secondary';
                     } else {
-                        $paidSts = 'Pending';
-                        $labelmode = 'badge-warning';
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
                     }
                 } else {
                     // not match between semester date

@@ -60,8 +60,8 @@ $(function () {
             var year = $("#btwyears").val();
             var student_id = $("#student_id").val();
             var payment_status = $("#payment_status").val();
-            var fees_type = $("#fees_type").val();
-
+            var group_id = $("#group_id").val();
+            
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -70,9 +70,8 @@ $(function () {
             formData.append('academic_session_id', year);
             formData.append('student_id', student_id);
             formData.append('payment_status', payment_status);
-            formData.append('fees_type', fees_type);
+            formData.append('group_id', group_id);
             loadTable(formData);
-
         }
     });
     function loadTable(formData) {
@@ -194,8 +193,6 @@ $(function () {
 
                             var status = '<div class="badge label-table ' + status + '">' + paid_status + '</div>';
                             fsGroup += "(" + day['group_name'] + "<br>"
-                                + "- " + day['fees_type_name'] + "<br>"
-                                + "- " + day['dueDate'] + "<br>"
                                 + "- " + status + ")" + "<br>" ;
                         })
                         return fsGroup;

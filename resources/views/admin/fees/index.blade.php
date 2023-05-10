@@ -1,5 +1,18 @@
 @extends('layouts.admin-layout')
 @section('title','Fees')
+@section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+<!-- date picker -->
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -17,7 +30,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_details') }}<h4>
+                        <h4 class="navv">{{ __('messages.student_details') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -66,12 +80,15 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="fees_type">{{ __('messages.fees_type') }}</label>
-                                    <select id="fees_type" class="form-control" name="fees_type">
-
+                                    <label for="group_id">{{ __('messages.fees_group') }}</label>
+                                    <select id="group_id" class="form-control" name="group_id">
+                                        <option value="">{{ __('messages.select_fees_group') }}</option>
+                                        @forelse ($fees_group_list as $group_list)
+                                        <option value="{{ $group_list['id'] }}">{{ $group_list['name'] }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -91,7 +108,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -137,96 +154,24 @@
 <!-- container -->
 @endsection
 @section('scripts')
-
-<!-- <script>
-    document
-        .getElementById('target')
-        .addEventListener('change', function() {
-            'use strict';
-            var vis = document.querySelector('.vis'),
-                target = document.getElementById(this.value);
-            if (vis !== null) {
-                vis.className = 'inv';
-            }
-            if (target !== null) {
-                target.className = 'vis';
-            }
-        });
-        
-</script>
+<!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
 <script>
-    document
-        .getElementById('targett')
-        .addEventListener('change', function() {
-            'use strict';
-            var vis = document.querySelector('.vis'),
-                target = document.getElementById(this.value);
-            if (vis !== null) {
-                vis.className = 'invv';
-            }
-            if (target !== null) {
-                target.className = 'vis';
-            }
-        });
+    toastr.options.preventDuplicates = true;
 </script>
-<script>
-    document
-        .getElementById('targettt')
-        .addEventListener('change', function() {
-            'use strict';
-            var vis = document.querySelector('.vis'),
-                target = document.getElementById(this.value);
-            if (vis !== null) {
-                vis.className = 'invvv';
-            }
-            if (target !== null) {
-                target.className = 'vis';
-            }
-        });
-</script> -->
-<script>
-    // $(function() {
-    //     $(document).on('change', '#semester1', function() {
-    //         if ($(this).prop('checked') == false) {
-    //             $('.inputDateFld1').prop('disabled', true);
-    //             $('.dropDwn1').prop('disabled', true);
-    //         } else {
-    //             $('.inputDateFld1').prop('disabled', false);
-    //             $('.dropDwn1').prop('disabled', false);
-    //         }
-
-    //     });
-    // });
-</script>
-<script>
-    // $(function() {
-    //     $(document).on('change', '#semester2', function() {
-    //         if ($(this).prop('checked') == false) {
-    //             $('.inputDateFld2').prop('disabled', true);
-    //             $('.dropDwn2').prop('disabled', true);
-    //         } else {
-    //             $('.inputDateFld2').prop('disabled', false);
-    //             $('.dropDwn2').prop('disabled', false);
-    //         }
-
-    //     });
-    // });
-</script>
-<script>
-    // $(function() {
-    //     $(document).on('change', '#semester3', function() {
-    //         if ($(this).prop('checked') == false) {
-    //             $('.inputDateFld3').prop('disabled', true);
-    //             $('.dropDwn3').prop('disabled', true);
-    //         } else {
-    //             $('.inputDateFld3').prop('disabled', false);
-    //             $('.dropDwn3').prop('disabled', false);
-    //         }
-
-    //     });
-    // });
-</script>
-
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
