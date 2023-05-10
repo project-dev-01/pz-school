@@ -1,12 +1,25 @@
 <!-- Topbar Start -->
 <style>
-
+@media screen and (min-device-width: 280px) and (max-device-width: 653px) 
+{
+.responsive
+{
+    display: none!important;
+}
+.responsivenotification
+{
+    display: none!important;
+}
+.navbar-custom .button-menu-mobile {
+    width: 17px;
+}    
+}
 </style>
 
 <div class="navbar-custom" style="background-color:white;">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-            <li class="dropdown notification-list topbar-dropdown">
+            <li class="dropdown notification-list topbar-dropdown responsivenotification">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge badge-count">0</span>
@@ -78,7 +91,7 @@
                 </div>
             </li> -->
             @if(Session::get('role_id') != '1')
-            <li class="d-lg-inline-block" style="white-space: nowrap;width: 100px;overflow: hidden;text-overflow: ellipsis;">
+            <li class="d-lg-inline-block" style="white-space: nowrap;width: 70px;overflow: hidden;text-overflow: ellipsis;">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
@@ -104,7 +117,7 @@
             </li>
 
             @endif
-            <li class="dropdown d-lg-inline-block">
+            <li class="dropdown d-lg-inline-block responsive">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                     <i class="fe-maximize noti-icon"></i>
                 </a>
