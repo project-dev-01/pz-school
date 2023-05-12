@@ -12,7 +12,11 @@
 }
 .navbar-custom .button-menu-mobile {
     width: 17px;
-}    
+} 
+.logo-box {
+    width: 58px!important;
+    padding-right: 0!important;
+}   
 }
 </style>
 

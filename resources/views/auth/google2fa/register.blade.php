@@ -20,7 +20,43 @@
     <link href="{{ asset('public/css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 </head>
-
+<style>
+.news-app-promo-buttons__buttons 
+{
+  display: block;
+}
+.news-app-promo-buttons__logo 
+{
+  display: inline-block;
+}
+.news-app-promo-subsection 
+{
+  display: inline-block;
+  margin: 0 auto;
+  margin-right: 10px;
+}
+.authenticator_logo 
+{
+  display: inline-block;
+  width: 90px;
+  margin-bottom: 22px;
+  vertical-align: initial;
+}
+.news-app-promo__play-store,
+.news-app-promo__app-store
+ {
+  display: block;
+  width: 100px;
+  height: auto;
+}
+.btn-primary-bl {
+    color: #fff;
+    border-color: #0ABAB5;
+    background-color: #6FC6CC;
+    border-radius: 60px;
+    text-align: center;
+}
+</style>
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
@@ -44,14 +80,35 @@
                             <div class="card-body" style="text-align: center;">
                                 <p>{{ __('messages.set_up_your_two_factor_authentication') }} <strong>{{ $secret }}</strong></p>
                                 <div>
-                                    <img src="{!! $qr_url !!}" alt="image not found">
+                                    <img src="{!! $qr_url !!}" alt="image not found" style="height: 195px;">
                                 </div>
                                 <p>{{ __('messages.you_must_set_up_your_google_authenticator') }}</p>
-                                <form class="form-horizontal" method="POST" action="{{ route('complete.registration') }}">
+    
+                              <div id="" class="news-app-promo">
+                              <div class="news-app-promo__section">
+                                  <div class="news-app-promo-subsection">
+                                  <a class="" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_parent">
+                                  <img class="authenticator_logo" src="..\public\images\authenticator.png"> 
+                                  </a>
+                                  </div>
+                                  <div class="news-app-promo-subsection">
+                                      <a class="news-app-promo-subsection--link news-app-promo-subsection--playstore" href="https://play.google.com/store/search?q=google+authenticator&c=apps" target="_parent">
+                                        <img class="news-app-promo__play-store" src="..\public\images\Googleplay.png" style="height: 90px;margin-left: -15px; width: 130px;">
+                                        
+                                      </a>
+                                      <a class="news-app-promo-subsection--link news-app-promo-subsection--appstore" href="https://apps.apple.com/us/app/google-authenticator/id388497605" target="_parent">
+                                          <img class="news-app-promo__app-store" src="..\public\images\appstore.png" style="margin-bottom: 30px;margin-top: -15px;">
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="news-app-promo__section">
+                              </div>
+                              </div>
+                          <form class="form-horizontal" method="POST" action="{{ route('complete.registration') }}">
                                     {{ csrf_field() }}
                                     <input type="hidden" class="form-control" name="secret" value="{{ $secret }}">
                                     <div>
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                                         {{ __('messages.complete_registration') }}
                                         </button>
                                     </div>

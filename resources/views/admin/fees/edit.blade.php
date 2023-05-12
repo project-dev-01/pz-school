@@ -12,12 +12,12 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link href="{{ asset('public/css/custom/feesresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 @php
 use \App\Http\Controllers\AdminController;
 @endphp
-
 <!-- Start Content-->
 <div class="container-fluid">
     <!-- start page title -->
@@ -41,33 +41,33 @@ use \App\Http\Controllers\AdminController;
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <label class="mb-4">{{ __('messages.student_name') }} : <span class="text-muted mr-2">{{$student['name']}}</span></label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="mb-4">{{ __('messages.grade') }} : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="mb-4">{{ __('messages.class') }} : <span class="text-muted mr-2">{{$student['section_name']}}</span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <label class="mb-4">{{ __('messages.academic_year') }} : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="mb-4">{{ __('messages.email') }} : <span class="text-muted mr-2">{{$student['email']}}</span></label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="mb-4">Parent Phone No : <span class="text-muted mr-2"></span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <label class="mb-4">{{ __('messages.parent_name') }} : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
                             </div>
                         </div>
@@ -378,7 +378,7 @@ use \App\Http\Controllers\AdminController;
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="Enter Memo"></textarea>
+                                                                    <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="Enter Memo" style="height:35px;"></textarea>
                                                                 </td>
                                                             </tr>
                                                             @endforeach
