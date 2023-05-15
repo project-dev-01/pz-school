@@ -782,6 +782,8 @@ return [
         'update_two_fa_secret'=> $url.'/2fa/update_two_fa_secret',
         
         'get_school_type'=> $url.'/get_school_type',
+        'get_home_page_details'=> $url.'/get_home_page_details',
+        
       ]
 
 ];

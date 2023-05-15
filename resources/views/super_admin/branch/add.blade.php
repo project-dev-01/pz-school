@@ -156,8 +156,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="address1">{{ __('messages.address_line_2') }}</label>
-                        <input class="form-control" name="address1" id="address1" placeholder="johor">
+                        <label for="location">{{ __('messages.location') }}</label>
+                        <input class="form-control" name="location" id="location" placeholder="{{ __('messages.location') }}">
                     </div>
                 </div>
             </div>

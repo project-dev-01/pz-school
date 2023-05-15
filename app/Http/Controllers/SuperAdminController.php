@@ -154,6 +154,7 @@ class SuperAdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'status' => $request->status,
+            'location' => $request->location,
             'db_name' => $request->db_name,
             'db_username' => $request->db_username,
             'db_password' => $request->db_password,
@@ -259,6 +260,7 @@ class SuperAdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'status' => $request->status,
+            'location' => $request->location,
             'school_type' => $request->school_type,
         ];
         // dd($data);

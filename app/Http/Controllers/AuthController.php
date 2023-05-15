@@ -1071,4 +1071,44 @@ class AuthController extends Controller
             return redirect()->route('2fa.view')->with('error', 'Invalid Otp');
         }
     }
+
+    
+
+    public function home(Request $request)
+    {
+        $this->remove2FASession();
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+
+        $home_response = Http::post(config('constants.api.get_home_page_details'), $data);
+        $homeDetails = $home_response->json();
+        
+        $parent_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/parent.webp";
+        $student_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/student.webp";
+        $teacher_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/teacher.webp";
+        $application =  config('constants.image_url')."/public/images/application.jpg";
+        // dd($homeDetails);
+        return view(
+            'auth.home',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'parent_image' => $parent_image,
+                'student_image' => $student_image,
+                'teacher_image' => $teacher_image,
+                'application' => $application,
+                'home' => $homeDetails['data'],
+            ]
+        );
+    }
+
+    
+    public function application()
+    {
+        return view('auth.application');
+    }
 }

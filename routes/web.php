@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Artisan;
 //     return view('auth.login');
 // });
 Route::get('/', function () {
-    return redirect(route('admin.login'));
+    return redirect(route('home'));
 });
 
 Route::get('/clear-cache', function () {
@@ -39,6 +39,9 @@ Route::get('/clear-cache', function () {
     Artisan::call('config:cache');
     return "clear artisan cache";
 });
+
+Route::get('/home', [AuthController::class, 'home'])->name('home');
+Route::get('application/index', [AuthController::class, 'application'])->name('application');
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -54,7 +57,6 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
     Route::get('/login', [AuthController::class, 'showLoginFormSA'])->name('super_admin.login');
     Route::post('/authenticate', [AuthController::class, 'authenticateSA'])->name('super_admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutSA'])->name('super_admin.logout');
-
     //school app form
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('super_admin.schoolcrm.app.form');
     Route::post('/gretting', [CommonController::class, 'greettingSession'])->name('greetting.session');
