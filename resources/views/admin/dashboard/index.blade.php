@@ -11,6 +11,7 @@
 @endsection
 @section('component_css')
 <!-- date picker -->
+<link href="{{ asset('public/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
@@ -19,7 +20,13 @@
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
-
+<!-- <style>
+    svg {
+        height: 48px;
+        margin: 0 2em;
+        fill: darkorange;
+    }
+</style> -->
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -70,7 +77,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
-                            <i class="fe-users font-22 avatar-title text-pink"></i>
+                            <i class="mdi mdi-account-group font-22 avatar-title text-pink"></i>
                         </div>
                     </div>
                     <div class="col-6">
@@ -88,7 +95,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                            <i class="fe-user-check font-22 avatar-title text-success"></i>
+                            <i class="mdi mdi-school font-22 avatar-title text-success"></i>
                         </div>
                     </div>
                     <div class="col-6">
@@ -107,7 +114,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="avatar-lg rounded-circle bg-soft-info border-info border">
-                            <i class="fe-user font-22 avatar-title text-info"></i>
+                            <i class="mdi mdi-human-male-child font-22 avatar-title text-info"></i>
                         </div>
                     </div>
                     <div class="col-6">
@@ -125,7 +132,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                            <i class="fe-user-plus font-22 avatar-title text-warning"></i>
+                            <i class="mdi mdi-teach font-22 avatar-title text-warning"></i>
                         </div>
                     </div>
                     <div class="col-6">
@@ -534,6 +541,7 @@
 <script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
 <!-- full calendar js end -->
+<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";

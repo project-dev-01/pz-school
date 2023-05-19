@@ -1,5 +1,17 @@
 $(function () {
-    $(".number_validation").keypress(function(event){
+    // nric validation start
+    var $form_1 = $('#addadmission');
+    $form_1.validate({
+        debug: true
+    });
+
+    $('#txt_nric').rules("add", {
+        required: true
+    });
+
+    $('#txt_nric').mask("000000-00-0000", { reverse: true });
+    // nric validation end
+    $(".number_validation").keypress(function (event) {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
@@ -14,20 +26,20 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred years
+        yearRange: "-3:+6", // last hundred years
     });
     $("#dob").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred years
+        yearRange: "-60:+1", // last hundred years
         maxDate: 0
     });
     // rules validation
     $("#addadmission").validate({
         rules: {
-            session_id:"required",
+            session_id: "required",
             parent_id: "required",
             year: "required",
             txt_regiter_no: "required",
@@ -52,7 +64,7 @@ $(function () {
                 required: true,
                 minlength: 6,
                 equalTo: "#txt_pwd"
-            },      
+            },
         }
     });
 
@@ -83,36 +95,35 @@ $(function () {
     });
 
     // $("#class_id").on('change', function (e) {
-        // $("#users").bind("keydown change", function()
-    $('#guardian_name').bind("keydown change", function() {
+    // $("#users").bind("keydown change", function()
+    $('#guardian_name').bind("keydown change", function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#guardian_list').fadeIn();  
-                $('#guardian_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#guardian_list').fadeIn();
+                    $('#guardian_list').html(data);
+                }
             });
         }
     });
 
-    $('#guardian_list').on('click','li', function(){
-        
-        $('#guardian_name').val($(this).text());  
-        $('#guardian_list').fadeOut();  
+    $('#guardian_list').on('click', 'li', function () {
+
+        $('#guardian_name').val($(this).text());
+        $('#guardian_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#guardian_name').val("");  
+        if (value == "No results Found") {
+            $('#guardian_name').val("");
             $("#guardian_form").hide("slow");
             $("#guardian_photo").hide();
-         
+
         } else {
             var id = $(this).val();
-            $('#guardian_id').val(id);  
+            $('#guardian_id').val(id);
             $("#guardian_form").show("slow");
             $("#guardian_photo").show();
             $.post(parentDetails, { token: token, branch_id: branchID, id: id }, function (res) {
@@ -147,32 +158,31 @@ $(function () {
         }
     });
 
-    $('#father_name').keyup(function(){ 
+    $('#father_name').keyup(function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#father_list').fadeIn();  
-                $('#father_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#father_list').fadeIn();
+                    $('#father_list').html(data);
+                }
             });
         }
     });
 
-    $('#father_list').on('click','li', function(){
-        
-        $('#father_name').val($(this).text());  
-        $('#father_list').fadeOut();  
+    $('#father_list').on('click', 'li', function () {
+
+        $('#father_name').val($(this).text());
+        $('#father_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#father_name').val("");  
+        if (value == "No results Found") {
+            $('#father_name').val("");
             $("#father_form").hide("slow");
             $("#father_photo").hide();
-         
+
         } else {
             var id = $(this).val();
             $('#father_id').val(id);
@@ -211,32 +221,31 @@ $(function () {
     });
 
 
-    $('#mother_name').keyup(function(){ 
+    $('#mother_name').keyup(function () {
         var name = $(this).val();
-        if(name != '')
-        {
+        if (name != '') {
             $.ajax({
-            url:parentName,
-            method:"GET",
-            data:{token: token, branch_id: branchID, name: name },
-            success:function(data){
-                $('#mother_list').fadeIn();  
-                $('#mother_list').html(data);
-            }
+                url: parentName,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#mother_list').fadeIn();
+                    $('#mother_list').html(data);
+                }
             });
         }
     });
 
-    $('#mother_list').on('click','li', function(){
-        
-        $('#mother_name').val($(this).text());  
-        $('#mother_list').fadeOut();  
+    $('#mother_list').on('click', 'li', function () {
+
+        $('#mother_name').val($(this).text());
+        $('#mother_list').fadeOut();
         var value = $(this).text();
-        if(value=="No results Found") {
-            $('#mother_name').val("");  
+        if (value == "No results Found") {
+            $('#mother_name').val("");
             $("#mother_form").hide("slow");
             $("#mother_photo").hide();
-         
+
         } else {
             var id = $(this).val();
             $('#mother_id').val(id);
@@ -275,10 +284,10 @@ $(function () {
     });
 
     $("#class_id").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var class_id = $(this).val();
         $("#section_id").empty();
-        $("#section_id").append('<option value="">'+select_class+'</option>');
+        $("#section_id").append('<option value="">' + select_class + '</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -289,10 +298,10 @@ $(function () {
     });
 
     $("#drp_transport_route").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var route_id = $(this).val();
         $("#drp_transport_vechicleno").empty();
-        $("#drp_transport_vechicleno").append('<option value="">'+select_vehicle_number+'</option>');
+        $("#drp_transport_vechicleno").append('<option value="">' + select_vehicle_number + '</option>');
         $.post(vehicleByRoute, { route_id: route_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -305,10 +314,10 @@ $(function () {
 
 
     $("#drp_hostelnam").on('change', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         var hostel_id = $(this).val();
         $("#drp_roomname").empty();
-        $("#drp_roomname").append('<option value="">'+select_room_name+'</option>');
+        $("#drp_roomname").append('<option value="">' + select_room_name + '</option>');
         $.post(roomByHostel, { hostel_id: hostel_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {

@@ -30,14 +30,14 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred years
+        yearRange: "-3:+6", // last hundred years
     });
     $("#dob").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred years
+        yearRange: "-60:+1", // last hundred years
         maxDate: 0
     });
 
@@ -407,10 +407,13 @@ $(function () {
                         "targets": 1,
                         "className": "table-user",
                         "render": function (data, type, row, meta) {
-                            var currentImg = studentImg + '/' + row.photo;
+                            var currentImg = studentImg + row.photo;
+                            console.log(studentImg)
+                            console.log(row.photo)
+                            console.log(currentImg)
                             // var existUrl = UrlExists(currentImg);
                             // console.log(currentImg);
-                            var img = (row.photo != null) ? studentImg + '/' + row.photo : defaultImg;
+                            var img = (row.photo != null) ? currentImg : defaultImg;
                             var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
                                 '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                             return first_name;
@@ -562,4 +565,5 @@ $(function () {
             }
         }, 'json');
     });
+
 });

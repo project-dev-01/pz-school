@@ -20,13 +20,28 @@
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                     </div>
                     <div class="form-group">
+                        <label>{{ __('messages.date') }}<span class="text-danger">*</span></label>
+                        <input id="taskdateSlot" name="taskdateSlot" class="form-control taskdateSlot" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="form-group displayTimeSlot">
+                        <label>{{ __('messages.time') }}</label>
+                        <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="HH:MM">
+                        <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="HH:MM">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input allDayCheck" id="allDayCheck">
+                            <label class="custom-control-label" for="allDayCheck">All day</label>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
                         <label for="startEndDate">{{ __('messages.start_date') }}</label>
                         <p id="startDate"></p>
                     </div>
                     <div class="form-group">
                         <label for="endDate">{{ __('messages.end_date') }}</label>
                         <p id="endDate"></p>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="button" id="updateCalBtn" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>

@@ -1,5 +1,7 @@
 $(function () {
 
+
+    
     $(".number_validation").keypress(function () {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
@@ -16,7 +18,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred years
+        yearRange: "-100:+1", // last hundred years
         maxDate: 0
     });
     $("#addparent").validate({

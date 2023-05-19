@@ -68,8 +68,8 @@
             
             <li class="dropdown notification-list topbar-dropdown">
                 <select class="vodiapicker">
-                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">ENG</option>
-                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">JPN</option>
+                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">English</option>
+                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">日本語</option>
                 </select>
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>

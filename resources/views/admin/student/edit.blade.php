@@ -214,66 +214,58 @@
     .country-select {
         display: block;
     }
-    .ui-datepicker
- {
-width: 20.2em;
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
-{
-.ui-datepicker
- {
-width: 14em;
-}
-}
-@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
-{
-.ui-datepicker
- {
-width: 13.9em;
-}
-}
-@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
-{
-.ui-datepicker
- {
-width: 14.8em;
-}
-}
-@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
-{
-.ui-datepicker
- {
-width: 16em;
-}
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-.ui-datepicker
- {
-width: 17.8em;
-}
-}
-@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
-{
-.ui-datepicker
- {
-width: 27.6em;
-}
-}
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
-{
-.ui-datepicker
- {
-width: 13.2em;
-}
-}
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
-{
-.ui-datepicker
- {
-width: 13.3em;
-}
-}
+
+    .ui-datepicker {
+        width: 20.2em;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .ui-datepicker {
+            width: 14em;
+        }
+    }
+
+    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .ui-datepicker {
+            width: 13.9em;
+        }
+    }
+
+    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .ui-datepicker {
+            width: 14.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+        .ui-datepicker {
+            width: 16em;
+        }
+    }
+
+    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .ui-datepicker {
+            width: 17.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+        .ui-datepicker {
+            width: 27.6em;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ui-datepicker {
+            width: 13.2em;
+        }
+    }
+
+    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+        .ui-datepicker {
+            width: 13.3em;
+        }
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -442,7 +434,7 @@ width: 13.3em;
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo"  class="dropify-im" data-max-file-size="2M"  data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : config('constants.image_url').'/public/users/images/users/default.jpg' }}" />
+                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : config('constants.image_url').'/public/users/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -488,22 +480,6 @@ width: 13.3em;
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
-                                                <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                                    <option value="">{{ __('messages.select_blood_group') }}</option>
-                                                    <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
-                                                    <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
-                                                    <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
-                                                    <option {{$student['blood_group'] == "AB+" ? "Selected" : "" }}>AB+</option>
-                                                    <option {{$student['blood_group'] == "O-" ? "Selected" : "" }}>O-</option>
-                                                    <option {{$student['blood_group'] == "A-" ? "Selected" : "" }}>A-</option>
-                                                    <option {{$student['blood_group'] == "B-" ? "Selected" : "" }}>B-</option>
-                                                    <option {{$student['blood_group'] == "AB-" ? "Selected" : "" }}>AB-</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="">{{ __('messages.date_of_birth') }}</label>
                                                 <div class="input-group input-group-merge">
@@ -518,16 +494,28 @@ width: 13.3em;
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label for="txt_nric">{{ __('messages.nric_number') }}</label>
+                                                <input type="text" maxlength="20" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="999999-99-9999" name="txt_nric" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                <input type="text" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{$student['passport']}}">
+                                                <input type="text" maxlength="20" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{$student['passport']}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="{{ __('messages.enter_nric_number') }}" name="txt_nric" data-parsley-trigger="change">
+                                                <label for="txt_caste">{{ __('messages.race') }}</label>
+                                                <select class="form-control" name="txt_race" id="addRace">
+                                                    <option value="">{{ __('messages.select_race') }}</option>
+                                                    @forelse($races as $r)
+                                                    <option value="{{$r['id']}}" {{$student['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -544,51 +532,23 @@ width: 13.3em;
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="txt_caste">{{ __('messages.race') }}</label>
-                                                <select class="form-control" name="txt_race" id="addRace">
-                                                    <option value="">{{ __('messages.select_race') }}</option>
-                                                    @forelse($races as $r)
-                                                    <option value="{{$r['id']}}" {{$student['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
-                                                    @empty
-                                                    @endforelse
+                                                <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
+                                                <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                                    <option value="">{{ __('messages.select_blood_group') }}</option>
+                                                    <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
+                                                    <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
+                                                    <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
+                                                    <option {{$student['blood_group'] == "AB+" ? "Selected" : "" }}>AB+</option>
+                                                    <option {{$student['blood_group'] == "O-" ? "Selected" : "" }}>O-</option>
+                                                    <option {{$student['blood_group'] == "A-" ? "Selected" : "" }}>A-</option>
+                                                    <option {{$student['blood_group'] == "B-" ? "Selected" : "" }}>B-</option>
+                                                    <option {{$student['blood_group'] == "AB-" ? "Selected" : "" }}>AB-</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="drp_country">{{ __('messages.country') }}</label>
-                                                <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                                <input type="" id="drp_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="drp_city">{{ __('messages.city') }}</label>
-                                                <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
-                                                <input type="" id="drp_post_code" class="form-control" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change" value="{{$student['post_code']}}">
-                                            </div>
-                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txtarea_paddress">{{ __('messages.address_1') }}</label>
@@ -599,6 +559,39 @@ width: 13.3em;
                                             <div class="form-group">
                                                 <label for="txtarea_permanent_address">{{ __('messages.address_2') }}</label>
                                                 <input type="" id="txtarea_permanent_address" class="form-control" placeholder="{{ __('messages.enter_address_2') }}" name="txtarea_permanent_address" data-parsley-trigger="change" value="{{$student['permanent_address']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_city">{{ __('messages.city') }}</label>
+                                                <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
+                                                <input type="" id="drp_post_code" class="form-control" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change" value="{{$student['post_code']}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                                <input type="" id="drp_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drp_country">{{ __('messages.country') }}</label>
+                                                <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
@@ -1702,6 +1695,13 @@ width: 13.3em;
 </script>
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 
+<script src="{{ asset('public/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('public/libs/autonumeric/autoNumeric-min.js') }}"></script>
+
+<!-- Init js-->
+<script src="{{ asset('public/js/pages/form-masks.init.js') }}"></script>
+<script src="{{ asset('public/libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
+
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 <script>
@@ -1750,6 +1750,22 @@ width: 13.3em;
             remove: remove,
             error: oops_went_wrong
         }
+    });
+    $(function() {
+        // nric validation start
+        var $form_2 = $('#editadmission');
+        $form_2.validate({
+            debug: true
+        });
+
+        $('#txt_nric').rules("add", {
+            required: true
+        });
+
+        $('#txt_nric').mask("000000-00-0000", {
+            reverse: true
+        });
+        // nric validation end
     });
 </script>
 @endsection

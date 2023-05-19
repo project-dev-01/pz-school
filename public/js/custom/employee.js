@@ -23,7 +23,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-100:+50", // last hundred year
+        yearRange: "-60:+1", // last hundred year
         maxDate: 0
     });
     //

@@ -100,6 +100,7 @@
 <script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <script>
     var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";

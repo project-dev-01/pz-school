@@ -58,8 +58,8 @@
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
                              <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">ENG</option>
-                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">JPN</option>
+                             <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">English</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">日本語</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -199,8 +199,6 @@
             $(".b").toggle();
             //console.log(value);
         });
-
-        console.log('1', locale)
         $(".btn-select").click(function() {
             $(".b").toggle();
         });
@@ -212,14 +210,14 @@
             //find an item with value of sessionLang\
             var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
             var value = "japanese";
-            var text = "JPN";
+            var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
             var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
             var value = "en";
-            var text = "ENG";
+            var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);

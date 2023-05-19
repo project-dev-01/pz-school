@@ -213,66 +213,58 @@
     .country-select {
         display: block;
     }
-    .ui-datepicker
- {
-width: 21.4em;
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
-{
-.ui-datepicker
- {
-width: 14.4em;
-}
-}
-@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
-{
-.ui-datepicker
- {
-width: 17.4em;
-}
-}
-@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
-{
-.ui-datepicker
- {
-width: 18.6em;
-}
-}
-@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
-{
-.ui-datepicker
- {
-width: 19.8em;
-}
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-.ui-datepicker
- {
-width: 21.5em;
-}
-}
-@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
-{
-.ui-datepicker
- {
-width: 31.3em;
-}
-}
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
-{
-.ui-datepicker
- {
-width: 13.2em;
-}
-}
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
-{
-.ui-datepicker
- {
-width: 14.3em;
-}
-}
+
+    .ui-datepicker {
+        width: 21.4em;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .ui-datepicker {
+            width: 14.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .ui-datepicker {
+            width: 17.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .ui-datepicker {
+            width: 18.6em;
+        }
+    }
+
+    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+        .ui-datepicker {
+            width: 19.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .ui-datepicker {
+            width: 21.5em;
+        }
+    }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+        .ui-datepicker {
+            width: 31.3em;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ui-datepicker {
+            width: 13.2em;
+        }
+    }
+
+    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+        .ui-datepicker {
+            width: 14.3em;
+        }
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -373,22 +365,6 @@ width: 14.3em;
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
-                                    <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                        <option value="">{{ __('messages.select_blood_group') }}</option>
-                                        <option>O+</option>
-                                        <option>A+</option>
-                                        <option>B+</option>
-                                        <option>AB+</option>
-                                        <option>O-</option>
-                                        <option>A-</option>
-                                        <option>B-</option>
-                                        <option>AB-</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="dob">{{ __('messages.date_of_birth') }}</label>
                                     <div class="input-group input-group-merge">
@@ -403,16 +379,28 @@ width: 14.3em;
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="txt_nric">{{ __('messages.nric_number') }}</label>
+                                    <input type="text" maxlength="16" id="txt_nric" class="form-control alloptions" placeholder="999999-99-9999" name="txt_nric" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" maxlength="50" class="form-control alloptions" placeholder="{{ __('messages.enter_passport_number') }}" name="txt_passport">
+                                    <input type="text" maxlength="20" class="form-control alloptions" placeholder="{{ __('messages.enter_passport_number') }}" name="txt_passport">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" placeholder="{{ __('messages.enter_nric_number') }}" name="txt_nric" data-parsley-trigger="change">
+                                    <label for="txt_caste">{{ __('messages.race') }}</label>
+                                    <select class="form-control" name="txt_race" id="addRace">
+                                        <option value="">{{ __('messages.select_race') }}</option>
+                                        @forelse($races as $r)
+                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -429,52 +417,22 @@ width: 14.3em;
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_caste">{{ __('messages.race') }}</label>
-                                    <select class="form-control" name="txt_race" id="addRace">
-                                        <option value="">{{ __('messages.select_race') }}</option>
-                                        @forelse($races as $r)
-                                        <option value="{{$r['id']}}">{{$r['races_name']}}</option>
-                                        @empty
-                                        @endforelse
+                                    <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
+                                    <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
+                                        <option>O+</option>
+                                        <option>A+</option>
+                                        <option>B+</option>
+                                        <option>AB+</option>
+                                        <option>O-</option>
+                                        <option>A-</option>
+                                        <option>B-</option>
+                                        <option>AB-</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="txt_mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="drp_country">{{ __('messages.country') }}</label>
-                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="{{ __('messages.country') }}" name="drp_country" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" name="drp_state" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="drp_city">{{ __('messages.city') }}</label>
-                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
-                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change">
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txtarea_paddress">{{ __('messages.address_1') }}</label>
@@ -487,8 +445,39 @@ width: 14.3em;
                                     <input type="text" maxlength="255" id="txtarea_permanent_address" class="form-control alloptions" placeholder="{{ __('messages.enter_address_2') }}" name="txtarea_permanent_address" data-parsley-trigger="change">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drp_city">{{ __('messages.city') }}</label>
+                                    <input type="text" maxlength="50" id="drp_city" class="form-control alloptions" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change">
+                                </div>
+                            </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
+                                    <input type="text" maxlength="50" id="drp_post_code" class="form-control alloptions" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" name="drp_state" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drp_country">{{ __('messages.country') }}</label>
+                                    <input type="text" maxlength="50" id="drp_country" class="form-control alloptions" placeholder="{{ __('messages.country') }}" name="drp_country" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="txt_mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -560,23 +549,13 @@ width: 14.3em;
                             </div>
                         </div>
                         <div class="row">
-                            <!-- <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="categy">Category<span class="text-danger">*</span></label>
-                                    <select id="categy" name="categy" class="form-control">
-                                        <option value="">Choose the Category</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                    </select>
-                                </div>
-                            </div> -->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         @foreach($session as $ses)
-                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}" {{$ses['id'] == "1" ? "Selected" : "" }}>{{$ses['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -1384,6 +1363,7 @@ width: 14.3em;
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
@@ -1391,6 +1371,7 @@ width: 14.3em;
     });
 
     $("#drp_country").countrySelect({
+        defaultCountry: "my",
         responsiveDropdown: true
     });
 </script>
@@ -1425,7 +1406,7 @@ width: 14.3em;
 <!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
-<!-- <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script> -->
+<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('public/js/custom/admission.js') }}"></script>
 <script>
     $('.dropify-im').dropify({

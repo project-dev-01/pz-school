@@ -275,14 +275,14 @@
         //find an item with value of sessionLang\
         var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
         var value = "japanese";
-        var text = "JPN";
+        var text = "日本語";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
         var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
         var value = "en";
-        var text = "ENG";
+        var text = "English";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);

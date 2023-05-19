@@ -213,66 +213,58 @@
     .country-select {
         display: block;
     }
-    .ui-datepicker
- {
-width: 21.4em;
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
-{
-.ui-datepicker
- {
-width: 14.4em;
-}
-}
-@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
-{
-.ui-datepicker
- {
-width: 17.4em;
-}
-}
-@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
-{
-.ui-datepicker
- {
-width: 18.6em;
-}
-}
-@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
-{
-.ui-datepicker
- {
-width: 19.8em;
-}
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-.ui-datepicker
- {
-width: 21.5em;
-}
-}
-@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
-{
-.ui-datepicker
- {
-width: 31.3em;
-}
-}
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
-{
-.ui-datepicker
- {
-width: 13.2em;
-}
-}
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
-{
-.ui-datepicker
- {
-width: 14.3em;
-}
-}
+
+    .ui-datepicker {
+        width: 21.4em;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .ui-datepicker {
+            width: 14.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .ui-datepicker {
+            width: 17.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .ui-datepicker {
+            width: 18.6em;
+        }
+    }
+
+    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+        .ui-datepicker {
+            width: 19.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .ui-datepicker {
+            width: 21.5em;
+        }
+    }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+        .ui-datepicker {
+            width: 31.3em;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ui-datepicker {
+            width: 13.2em;
+        }
+    }
+
+    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+        .ui-datepicker {
+            width: 14.3em;
+        }
+    }
 </style>
 
 @if(Session::get('locale')=="en")
@@ -330,7 +322,7 @@ width: 14.3em;
                                 <div class="col-lg-3">
                                     <div class="mt-3">
                                         <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
-                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-max-file-size="2M"  data-default-file="{{ $employee['photo'] && config('constants.image_url').'/public/users/images/'.$employee['photo'] ? config('constants.image_url').'/public/users/images/'.$employee['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-max-file-size="2M" data-default-file="{{ $employee['photo'] && config('constants.image_url').'/public/users/images/'.$employee['photo'] ? config('constants.image_url').'/public/users/images/'.$employee['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -378,21 +370,36 @@ width: 14.3em;
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="short_name">{{ __('messages.short_name') }}</label>
-                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="{{ __('messages.yamamoto') }}">
+                                <div class="form-group mb-3">
+                                    <label for="birthday">{{ __('messages.date_of_birth') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-birthday-cake"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="religion">{{ __('messages.religion') }}</label>
-                                    <select class="form-control" name="religion" id="religion">
-                                        <option value="">{{ __('messages.select_religion') }}</option>
-                                        @forelse($religion as $r)
-                                        <option value="{{$r['id']}}" {{$employee['religion'] == $r['id'] ? 'selected' : ''}}>{{$r['religions_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
+                                    <label for="nric_number">{{ __('messages.nric_number') }}</label>
+                                    <input type="text" maxlength="16" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="999999-99-9999">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Passport">{{ __('messages.passport_number') }}</label>
+                                    <input type="text" maxlength="20" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="{{ __('messages.enter_passport_number') }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="short_name">{{ __('messages.short_name') }}</label>
+                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="{{ __('messages.yamamoto') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -407,35 +414,59 @@ width: 14.3em;
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="religion">{{ __('messages.religion') }}</label>
+                                    <select class="form-control" name="religion" id="religion">
+                                        <option value="">{{ __('messages.select_religion') }}</option>
+                                        @forelse($religion as $r)
+                                        <option value="{{$r['id']}}" {{$employee['religion'] == $r['id'] ? 'selected' : ''}}>{{$r['religions_name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="{{ __('messages.enter_passport_number') }}">
+                                    <label for="present_address">{{ __('messages.address_1') }}</label>
+                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="{{ __('messages.enter_address_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nric_number">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="{{ __('messages.enter_nric_number') }}">
+                                    <label for="permanent_address">{{ __('messages.address_2') }}</label>
+                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="{{ __('messages.enter_address_2') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="city">{{ __('messages.city') }}</label>
+                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="{{ __('messages.enter_city') }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
+                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.enter') }} {{ __('messages.zip_postal_code') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}/{{ __('messages.province') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="country">{{ __('messages.country') }}</label>
+                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="{{ __('messages.country') }}">
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="birthday">{{ __('messages.date_of_birth') }}</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-birthday-cake"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -453,46 +484,6 @@ width: 14.3em;
                                         <option value="Resign" {{$employee['employment_status'] =="Resign" ? 'selected' : '' }}>{{ __('messages.resign') }}</option>
                                         <option value="Retired" {{$employee['employment_status'] =="Retired" ? 'selected' : '' }}>{{ __('messages.retired') }}</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="{{ __('messages.country') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}/{{ __('messages.province') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="city">{{ __('messages.city') }}</label>
-                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="{{ __('messages.enter_city') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.enter') }} {{ __('messages.zip_postal_code') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="present_address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="{{ __('messages.enter_address_1') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="permanent_address">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="{{ __('messages.enter_address_2') }}">
                                 </div>
                             </div>
                         </div>
@@ -934,7 +925,12 @@ width: 14.3em;
     toastr.options.preventDuplicates = true;
 </script>
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('public/libs/autonumeric/autoNumeric-min.js') }}"></script>
 
+<!-- Init js-->
+<script src="{{ asset('public/js/pages/form-masks.init.js') }}"></script>
+<script src="{{ asset('public/libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
 <script>
@@ -948,6 +944,7 @@ width: 14.3em;
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
@@ -955,6 +952,7 @@ width: 14.3em;
     });
 
     $("#Country").countrySelect({
+        defaultCountry: "my",
         responsiveDropdown: true
     });
 </script>
@@ -976,6 +974,22 @@ width: 14.3em;
             remove: remove,
             error: oops_went_wrong
         }
+    });
+    $(function() {
+        // nric validation start
+        var $form_2 = $('#editEmployeeForm');
+        $form_2.validate({
+            debug: true
+        });
+
+        $('#nricNumber').rules("add", {
+            required: true
+        });
+
+        $('#nricNumber').mask("000000-00-0000", {
+            reverse: true
+        });
+        // nric validation end
     });
 </script>
 @endsection

@@ -1,4 +1,51 @@
 $(document).ready(function () {
+    // $("#taskdateSlot").flatpickr({
+    //     // enableTime: !0,
+    //     enableTime: true,
+    //     dateFormat: "Y-m-d"
+    // });
+    // $("#tasktimeSlot").flatpickr({
+    //     // enableTime: !0,
+    //     enableTime: true,
+    //     dateFormat: "H:i"
+    // });
+    $(".taskdateSlot").flatpickr();
+    // $("#tasktimeSlotStart").flatpickr({ enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45" });
+    // $("#tasktimeSlotEnd").flatpickr({ enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45" });
+    $('.allDayCheck').on('change', function (e) {
+        if ($(this).is(':checked')) {
+            $(".displayTimeSlot").hide();
+        } else {
+            $(".displayTimeSlot").show();
+        }
+    });
+    // check min data validation
+    var check_in_date = flatpickr("#tasktimeSlotStart", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45",
+        onChange: function (selectedDates, dateStr, instance) {
+            check_out_date.set('minTime', selectedDates[0]);
+            $("#tasktimeSlotEnd").val("");
+        }
+    });
+
+    var check_out_date = flatpickr("#tasktimeSlotEnd", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45"
+    });
+    //
+    // check min data validation
+    var edit_check_in_date = flatpickr("#editTasktimeSlotStart", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i",
+        onChange: function (selectedDates, dateStr, instance) {
+            edit_check_out_date.set('minTime', selectedDates[0]);
+            $("#editTasktimeSlotEnd").val("");
+        }
+    });
+
+    var edit_check_out_date = flatpickr("#editTasktimeSlotEnd", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i"
+    });
+
+    // ("#minmax-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i",minDate:"16:00",maxDate:"22:30"})
     // check wether mobile or not
     window.mobilecheck = function () {
         var check = false;
@@ -10,8 +57,8 @@ $(document).ready(function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
         slotDuration: "00:15:00",
-        // minTime: "08:00:00",
-        // maxTime: "19:00:00",
+        minTime: "08:00:00",
+        maxTime: "24:00:00",
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
         buttonText: {
@@ -194,26 +241,69 @@ $(document).ready(function () {
             // var title = prompt('Event Title:');
             $('#addTasksModal').modal('toggle');
             $('.addTasks').find('form')[0].reset();
-            var start_dt = moment(e.start).format('DD-MM-YYYY');
-            // var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
-            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY');
-            // var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+            $("#displayTimeSlot").show();
+            var selected_date = moment(e.start).format('YYYY-MM-DD');
+            var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
+            // var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
 
             // var end_dt = moment(e.end).format('DD-MM-YYYY dddd hh:mm A');
-            $("#startDate").html(start_dt);
-            $("#endDate").html(subonesec);
-            // save
-            $('#saveBtn').click(function () {
-                var title = $('#taskTitle').val();
-                // var start_date = moment(start).format('YYYY-MM-DD');
-                // var end_date = moment(end).format('YYYY-MM-DD');
-                var start = e.start;
-                var end = e.end;
-                var start_date = moment(start).format('YYYY-MM-DD HH:mm:ss');
-                var end_date = moment(end).format('YYYY-MM-DD HH:mm:ss');
-                var description = $("#taskDescription").val();
+            $("#taskdateSlot").val(selected_date);
+            // $("#startDate").html(start_dt);
+            // $("#endDate").html(subonesec);
 
-                if (title) {
+            // save
+            // rules validation
+            $("#taskAdd").validate({
+                rules: {
+                    title: "required",
+                    taskdateSlot: "required"
+                }
+            });
+            // $('#taskAdd').click(function () {
+            $('#taskAdd').on('submit', function (event) {
+                event.preventDefault();
+                var taskAdd = $("#taskAdd").valid();
+                if (taskAdd === true) {
+                    var title = $('#taskTitle').val();
+                    // var start_date = moment(start).format('YYYY-MM-DD');
+                    // var end_date = moment(end).format('YYYY-MM-DD');
+                    var start = e.start;
+                    var end = e.end;
+                    // var startDt = moment(start).format('YYYY-MM-DD HH:mm:ss');
+                    // var endDt = moment(end).format('YYYY-MM-DD HH:mm:ss');
+                    console.log("startDt" + start);
+                    console.log("endDt" + end);
+                    var description = $("#taskDescription").val();
+                    var taskdateSlot = $("#taskdateSlot").val();
+                    var tasktimeSlotStart = $("#tasktimeSlotStart").val();
+                    var tasktimeSlotEnd = $("#tasktimeSlotEnd").val();
+                    var allDayCheck = $('#allDayCheck').is(':checked');
+
+                    if (allDayCheck === true) {
+                        var start_date = moment(start).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(end).format('YYYY-MM-DD HH:mm:ss');
+                        console.log("start_date" + start_date);
+                        console.log("end_date" + end_date);
+                    } else {
+                        var startdate = taskdateSlot + " " + tasktimeSlotStart + ":00";
+                        var startend = taskdateSlot + " " + tasktimeSlotEnd + ":00";
+                        console.log("startdate" + startdate);
+                        console.log("startend" + startend);
+                        // var start_dates = moment(taskdateSlot).format('YYYY-MM-DD HH:mm:ss');
+                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(startend).add(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+                        // var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+
+                        console.log("start_date" + start_date);
+                        console.log("end_date" + end_date);
+                        console.log("false");
+                    }
+                    console.log(title);
+                    console.log(description);
+                    console.log(userID);
+                    console.log(allDayCheck);
+                    // return false;
                     $.ajax({
                         url: calendorAddTaskCalendor,
                         type: "POST",
@@ -225,6 +315,7 @@ $(document).ready(function () {
                             start: start_date,
                             end: end_date,
                             login_id: userID,
+                            all_day: allDayCheck,
                             description: description
                         },
                         success: function (response) {
@@ -242,11 +333,8 @@ $(document).ready(function () {
                             calendar.addEvent(eventObject);
                         }
                     });
-                } else {
-                    $('#titleError').html("Enter title here");
+                    calendar.unselect();
                 }
-                calendar.unselect();
-
             });
 
 
@@ -306,10 +394,15 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else {
-                var start_dt = moment(e.event.start).format('DD-MM-YYYY');
-                // var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
-                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY');
-                // var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                console.log("00000")
+                console.log(e.event)
+                console.log(e.event.start)
+                console.log(e.event.end)
+                // var start_dt = moment(e.event.start).format('DD-MM-YYYY');
+                var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                // var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                // var subonesec = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
 
                 $('#showTasksModal').modal('toggle');
                 $("#calendorID").val(e.event.id);
@@ -336,13 +429,23 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response.code == 200) {
-                            var start_dt = moment(response.data.start).format('DD-MM-YYYY');
-                            var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                            var startdt = moment(response.data.start).format('YYYY-MM-DD');
+                            var starthminutes = moment(response.data.start).format('hh:mm');
+                            var endhminutes = moment(response.data.start).format('hh:mm');
+                            console.log(starthminutes)
+                            console.log(endhminutes)
+                            var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
+                            // var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
+                            var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
                             $("#updateTasksModal").find("#calendorID").val(response.data.id);
                             $("#updateTasksModal").find("#taskTitle").val(response.data.title);
+                            $("#updateTasksModal").find("#taskdateSlot").val(startdt);
+                            $("#updateTasksModal").find("#editTasktimeSlotStart").val(starthminutes);
+                            // edit_check_in_date.set('defaultDate', starthminutes);
+                            $("#updateTasksModal").find("#editTasktimeSlotEnd").val(endhminutes);
                             $("#updateTasksModal").find("#taskDescription").val(response.data.description);
-                            $("#updateTasksModal").find("#startDate").html(start_dt);
-                            $("#updateTasksModal").find("#endDate").html(subonesec);
+                            // $("#updateTasksModal").find("#startDate").html(start_dt);
+                            // $("#updateTasksModal").find("#endDate").html(subonesec);
                         } else {
                             toastr.error(response.message);
                         }
@@ -437,7 +540,7 @@ $(document).ready(function () {
     calendar.render();
     // unbind model
     $("#addTasksModal").on("hidden.bs.modal", function () {
-        $('#saveBtn').unbind();
+        $('#taskAdd').unbind();
     });
     // unbind model
     // $("#updateTasksModal").on("hidden.bs.modal", function () {
