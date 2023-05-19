@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 use DateTime;
 use App\Helpers\Helper;
 use Excel;
@@ -49,7 +50,72 @@ class CommonController extends Controller
     }
     public function showApplicationForm()
     {
-        return view('school-application-form');
+        
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
+        $relation = $relation_response->json();
+
+        $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
+        $academic_year_list = $academic_year_list_response->json();
+        return view(
+            'school-application-form',
+            [
+                'relation' => $relation['data'],
+                'academic_year_list' => $academic_year_list['data']
+            ]
+        );
+    }
+    
+    public function addApplicationForm(Request $request)
+    {
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'address_1' => $request->address_1,
+            'address_2' => $request->address_2,
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'grade' => $request->grade,
+            'school_year' => $request->school_year,
+            'school_last_attended' => $request->school_last_attended,
+            'school_address_1' => $request->school_address_1,
+            'school_address_2' => $request->school_address_2,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            'parent_type' => $request->parent_type,
+            'parent_relation' => $request->parent_relation,
+            'parent_first_name' => $request->parent_first_name,
+            'parent_last_name' => $request->parent_last_name,
+            'parent_phone_number' => $request->parent_phone_number,
+            'parent_occupation' => $request->parent_occupation,
+            'parent_email' => $request->parent_email,
+            'secondary_type' => $request->secondary_type,
+            'secondary_relation' => $request->secondary_relation,
+            'secondary_first_name' => $request->secondary_first_name,
+            'secondary_last_name' => $request->secondary_last_name,
+            'secondary_phone_number' => $request->secondary_phone_number,
+            'secondary_occupation' => $request->secondary_occupation,
+            'secondary_email' => $request->secondary_email,
+            'emergency_contact_person' => $request->emergency_contact_person,
+            'emergency_contact_first_name' => $request->emergency_contact_first_name,
+            'emergency_contact_last_name' => $request->emergency_contact_last_name,
+            'emergency_contact_phone_number' => $request->emergency_contact_phone_number,
+
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.application_add'), $data);
+        return $response;
     }
     function DBMigrationCall()
     {

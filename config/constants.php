@@ -10,7 +10,7 @@ return [
     
     'api' => [
         // login url
-      'branch_id'=>'1',
+        'branch_id'=>'1',
         'login' => $url.'/login',
         'loginSA' => $url.'/loginSA',
         'login_branch' => $url.'/login_branch',
@@ -783,6 +783,15 @@ return [
         
         'get_school_type'=> $url.'/get_school_type',
         'get_home_page_details'=> $url.'/get_home_page_details',
+
+        
+        'application_add'=> $url.'/application_add',
+        'student_application_list'=> $url.'/student_application_list',
+        'student_application'=> $url.'/student_application',
+        'application_relation_list'=> $url.'/application/relation/list',
+        'application_academic_year_list'=> $url.'/application/academic_year/list',
+       
+        
         
       ]
 

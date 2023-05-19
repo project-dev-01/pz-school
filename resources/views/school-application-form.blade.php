@@ -9,7 +9,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'public/images/favicon.ico'}}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico'}}">
 
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -24,6 +24,21 @@
     <link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
+    
+    <!-- date picker -->
+    <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+    <!-- toaster alert -->
+    <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body class="loading" style="background-color:#2F2F8F">
@@ -74,25 +89,26 @@
                                         <h4>
                                 </li>
                             </ul><br>
-                            <form>
+                            <form id="addApplication" method="post" action="{{ route('application.add') }}" enctype="multipart/form-data" autocomplete="off">
+                                @csrf
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="fname" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lname" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="gender">{{ __('messages.gender') }}</label>
+                                                <select id="gender" name="gender" class="form-control" >
                                                     <option value="">{{ __('messages.select_gender') }}</option>
                                                     <option value="Male">{{ __('messages.male') }}</option>
                                                     <option value="Female">{{ __('messages.female') }}</option>
@@ -103,15 +119,9 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.age') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="sage" id="age" require="" placeholder="Eg:3">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="heard">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
+                                                <label for="date_of_birth">{{ __('messages.date_of_birth') }}</label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="name" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" required>
+                                                    <input type="text" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" >
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -122,56 +132,54 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="phone" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
+                                                <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control number_validation mobile_no" id="mobile_no" name="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="address_1">{{ __('messages.address_1') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="address_1" name="address_1" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.address_1') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="address_2">{{ __('messages.address_2') }}<br></label>
+                                                <input type="text" class="form-control" id="address_2" name="address_2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.address_2') }}<span class="text-danger">*</span><br></label>
-                                                <input type="text" class="form-control" id="address" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="50" id="country" class="form-control country" placeholder="{{ __('messages.country') }}" name="country" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">{{ __('messages.select_city') }}</option>
-                                                    <option value="">Malaysia</option>
-                                                    <option value="press">Singapore</option>
-                                                </select>
+                                                <label for="state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="state" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">{{ __('messages.select_state') }}</option>
-                                                    <option value="Malaysia">Malaysia</option>
-                                                    <option value="press">Singapore</option>
-                                                </select>
+                                                <label for="city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="city" name="city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div>
@@ -187,70 +195,66 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">{{ __('messages.select_grade') }}</option>
-                                                    <option value="">I</option>
-                                                    <option value="press">II</option>
-                                                </select>
+                                                <label for="grade">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="grade" name="grade" placeholder="{{ __('messages.enter') }} {{ __('messages.grade') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.school_year') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="school_year">{{ __('messages.school_year') }}<span class="text-danger">*</span></label>
+                                                <select id="school_year" name="school_year" class="form-control" >
                                                     <option value="">{{ __('messages.select') }} {{ __('messages.school_year') }}</option>
-                                                    <option value="">2021-2022</option>
-                                                    <option value="press">2022-2023</option>
+                                                    @forelse($academic_year_list as $r)
+                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.school_last_attended') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pin" placeholder="{{ __('messages.school_last_attend') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="school_last_attended">{{ __('messages.school_last_attended') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_last_attended" name="school_last_attended" placeholder="{{ __('messages.enter') }} {{ __('messages.school_last_attend') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.school_address1') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="sadd" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="school_address_1">{{ __('messages.school_address1') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_address_1" name="school_address_1" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.school_address2') }}<span class="text-danger">*</span><br></label>
-                                                <input type="text" class="form-control" id="sadd2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="school_address_2">{{ __('messages.school_address2') }}<br></label>
+                                                <input type="text" class="form-control" id="school_address_2" name="school_address_2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">{{ __('messages.select_city') }}</option>
-                                                    <option value="">Malaysia</option>
-                                                    <option value="press">Singapore</option>
-                                                </select>
+                                                <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="50" id="school_country" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
-                                                    <option value="">{{ __('messages.select_state') }}</option>
-                                                    <option value="">Malaysia</option>
-                                                    <option value="press">Singapore</option>
-                                                </select>
+                                                <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="spin" placeholder="{{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_postal_code" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div>
@@ -265,90 +269,127 @@
                                 </ul><br>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.parent') }}/{{ __('messages.guardians_name') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="parent_type">{{ __('messages.guardians_name') }}<span class="text-danger">*</span></label>
+                                                <select id="parent_type" name="parent_type" class="form-control" >
                                                     <option value="">{{ __('messages.select_parent_guardian_name') }}</option>
-                                                    <option value="">Parent</option>
-                                                    <option value="">Guardian's</option>
+                                                    <option value="parent">{{ __('messages.parent') }}</option>
+                                                    <option value="guardian">{{ __('messages.guardian') }}</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="firstname" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="parent_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+                                                <select id="parent_relation" name="parent_relation" class="form-control" >
+                                                    <option value="">{{ __('messages.select_relation') }}</option>
+                                                    @forelse($relation as $r)
+                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="lastname" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="parent_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="parent_first_name" name="parent_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="parent_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="parent_last_name" name="parent_last_name"parent_last_name placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
+                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="pnumber" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
+                                                <label for="parent_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="parent_email" name="parent_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="parent_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="parent_phone_number" name="parent_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="parent_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                <select id="parent_occupation" name="parent_occupation" class="form-control" >
                                                     <option value="">{{ __('messages.select_occupation') }}</option>
-                                                    <option value="">Business</option>
-                                                    <option value="">IT/ Software</option>
-                                                    <option value="">Civil department</option>
-                                                    <option value="">Others</option>
+                                                    <option>Business</option>
+                                                    <option>IT/ Software</option>
+                                                    <option>Civil department</option>
+                                                    <option>Others</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.parent_guardian_secondary') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="secondary_type">{{ __('messages.parent_guardian_secondary') }}<span class="text-danger">*</span></label>
+                                                <select id="secondary_type" name="secondary_type" class="form-control" >
                                                     <option value="">{{ __('messages.select_parent_guardian_secondary') }}</option>
-                                                    <option value="">{{ __('messages.parent') }}</option>
-                                                    <option value="">{{ __('messages.guardia') }}</option>
+                                                    <option value="parent">{{ __('messages.parent') }}</option>
+                                                    <option value="guardian">{{ __('messages.guardian') }}</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ffname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="secondary_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+                                                <select id="secondary_relation" name="secondary_relation" class="form-control" >
+                                                    <option value="">{{ __('messages.select_relation') }}</option>
+                                                    @forelse($relation as $r)
+                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="llname" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="secondary_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="secondary_first_name" name="secondary_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="secondary_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="secondary_last_name" name="secondary_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
+                                                <label for="secondary_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="secondary_email" name="secondary_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                <select id="heard" class="form-control" required="">
+                                                <label for="secondary_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="secondary_phone_number" name="secondary_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="secondary_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                <select id="secondary_occupation" name="secondary_occupation" class="form-control" >
                                                     <option value="">{{ __('messages.select_occupation') }}</option>
-                                                    <option value="">Business</option>
-                                                    <option value="">IT/ Software</option>
-                                                    <option value="">Civil department</option>
-                                                    <option value="">Others</option>
+                                                    <option>Business</option>
+                                                    <option>IT/ Software</option>
+                                                    <option>Civil department</option>
+                                                    <option>Others</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -366,28 +407,28 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="ename" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="emergency_contact_person">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
+                                                <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="emergency_contact_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" name="emergency_contact_first_name" class="form-control" id="emergency_contact_first_name" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="elname" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" required>
+                                                <label for="emergency_contact_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" name="emergency_contact_last_name" class="form-control" id="emergency_contact_last_name" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div> <br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="heard">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" required>
+                                                <label for="emergency_contact_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" name="emergency_contact_phone_number" class="form-control" id="emergency_contact_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
@@ -395,8 +436,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                                    <label class="custom-control-label" for="customCheck11">{{ __('messages.i_agree_to_terms_conditions') }}</label>
+                                                    <input type="checkbox" name="terms_condition" class="custom-control-input" id="terms_condition">
+                                                    <label class="custom-control-label" for="terms_condition">{{ __('messages.i_agree_to_terms_conditions') }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -404,19 +445,19 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="">{{ __('messages.date') }}<span class="text-danger">*</span>: 09-02-2022</label>
+                                                <label for="">{{ __('messages.date') }}<span class="text-danger">*</span>: {{ date('Y-m-d') }}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                            </form>
-                            <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                {{ __('messages.submit') }}
-                                </button>
-                            </div>
+                                <div class="form-group text-right m-b-0">
+                                    <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit" disabled>
+                                    {{ __('messages.submit') }}
+                                    </button>
+                                </div>
 
+                            </form>
                         </div>
                     </div>
                 </div> <!-- end card-->
@@ -439,6 +480,41 @@
 
         <!-- App js -->
         <script src="{{ asset('public/js/app.min.js')}}"></script>
+        
+        <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+
+        <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+        <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+        <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+        <script src="{{ asset('public/js/validation/validation.js') }}"></script>
+        <script src="{{ asset('public/js/custom/student_application.js') }}"></script>
+        <!-- Init js-->
+        <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+        <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+        
+        <script>
+            
+            var application = "{{ route('schoolcrm.app.form') }}";
+            var input = document.querySelector(".mobile_no");
+            intlTelInput(input, {
+                allowExtensions: true,
+                autoFormat: false,
+                autoHideDialCode: false,
+                autoPlaceholder: false,
+                defaultCountry: "auto",
+                ipinfoToken: "yolo",
+                nationalMode: false,
+                numberType: "MOBILE",
+                //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+                //preferredCountries: ['cn', 'jp'],
+                preventInvalidNumbers: true,
+                // utilsScript: "js/utils.js"
+            });
+
+            $(".country").countrySelect({
+                responsiveDropdown: true
+            });
+        </script>
 
 </body>
 

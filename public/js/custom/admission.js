@@ -326,4 +326,118 @@ $(function () {
             }
         }, 'json');
     });
+
+    var student_id = $("#student_id").val();
+    if (student_id) {
+        student(student_id);
+    }
+    $('#student_name').keyup(function () {
+        var name = $(this).val();
+        if (name != '') {
+            $.ajax({
+                url: studentList,
+                method: "GET",
+                data: { token: token, branch_id: branchID, name: name },
+                success: function (data) {
+                    $('#student_list').fadeIn();
+                    $('#student_list').html(data);
+                }
+            });
+        }
+    });
+
+    function student(id) {
+
+        $('#student_id').val(id);
+        $.post(studentDetails, { token: token, branch_id: branchID, id: id }, function (res) {
+            console.log('dara',res)
+            if (res.code == 200) {
+                var data = res.data;
+                var name = data.first_name + " " + data.last_name;
+                
+                $('#sudent_application_id').val(id);
+                $('#fname').val(data.first_name);
+                $("#lname").val(data.last_name);
+                $("#txt_emailid").val(data.email);
+                $("#gender").val(data.gender);
+                $("#dob").val(data.date_of_birth);
+                $("#drp_country").val(data.country);
+                $("#drp_state").val(data.state);
+                $("#drp_city").val(data.city);
+                $("#drp_post_code").val(data.postal_code);
+                $("#txtarea_paddress").val(data.address_1);
+                $("#txtarea_permanent_address").val(data.address_2);
+                $("#txt_prev_schname").val(data.school_last_attended);
+                $("#txt_prev_qualify").val(data.grade);
+                $("#education").val(data.education);
+                $("#txt_mobile_no").val(data.mobile_no);
+                $("#address").val(data.address);
+
+
+
+                if(data.parent_type=="parent"){
+                    if(data.parent_relation==2){
+                        $("#father_form").show("slow");
+                        $("#father_info").show();
+                        $("#father_photo").show();
+                        var parent_name = data.parent_first_name + " " + data.parent_last_name;
+                        $('#father_name').val(parent_name);
+                        $("#father_first_name").val(data.parent_first_name);
+                        $("#father_last_name").val(data.parent_last_name);
+                        $("#father_mobile_no").val(data.parent_phone_number);
+                        $("#father_occupation").val(data.parent_occupation);
+                        $("#father_email").val(data.parent_email);
+                    }
+                    if(data.parent_relation==3){
+                        $("#mother_form").show("slow");
+                        $("#mother_info").show();
+                        $("#mother_photo").show();
+                        var parent_name = data.parent_first_name + " " + data.parent_last_name;
+                        $('#mother_name').val(parent_name);
+                        $("#mother_first_name").val(data.parent_first_name);
+                        $("#mother_last_name").val(data.parent_last_name);
+                        $("#mother_mobile_no").val(data.parent_phone_number);
+                        $("#mother_occupation").val(data.parent_occupation);
+                        $("#mother_email").val(data.parent_email);
+                    }
+                }
+
+                if(data.secondary_type){
+                    if(data.secondary_relation){
+                        $("#guardian_form").show("slow");
+                        $("#guardian_info").show();
+                        $("#guardian_photo").show();
+                        var guadrian_name = data.secondary_first_name + " " + data.secondary_last_name;
+                        $('#guardian_name').val(guadrian_name);
+                        $('#guardian_relation').val(data.secondary_relation);
+                        $("#guardian_first_name").val(data.secondary_first_name);
+                        $("#guardian_last_name").val(data.secondary_last_name);
+                        $("#guardian_mobile_no").val(data.secondary_phone_number);
+                        $("#guardian_occupation").val(data.secondary_occupation);
+                        $("#guardian_email").val(data.secondary_email);
+                    }
+                }
+                
+            }
+        }, 'json');
+    }
+
+    $('#student_list').on('click', 'li', function () {
+
+        
+        $('#addadmission')[0].reset();
+        $('#student_name').val($(this).text());
+        $('#student_list').fadeOut();
+        $("#father_form").hide("slow");
+        $("#mother_form").hide("slow");
+        $("#guardian_form").hide("slow");
+
+        var value = $(this).text();
+        if (value == "No results Found" || value == "") {
+            $('#student_name').val("");
+        } else {
+            var id = $(this).val();
+            student(id);
+        }
+    });
 });

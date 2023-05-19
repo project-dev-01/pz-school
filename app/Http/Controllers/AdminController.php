@@ -1030,7 +1030,6 @@ class AdminController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
 
-        // dd($gethostel);
         return view(
             'admin.admission.index',
             [
@@ -3782,6 +3781,8 @@ class AdminController extends Controller
             'google2fa_secret_enable' => $request->google2fa_secret_enable,
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
+            'sudent_application_id' => $request->sudent_application_id,
+            
 
         ];
 

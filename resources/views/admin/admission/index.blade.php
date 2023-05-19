@@ -295,8 +295,21 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12 addadmission">
-            <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.student_admission') }}</h4>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ __('messages.student_admission') }}</h4>
+                    </div>
+                </div>
+                <div class="col-md-6 pt-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="student_name" placeholder="Search" aria-describedby="inputGroupPrepend">
+                        <input type="hidden" name="student_id" id="student_id">
+                        <div id="student_list">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -307,11 +320,10 @@
             <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
-                <div class="card">
+ <input type="hidden" name="sudent_application_id" id="sudent_application_id">                <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.student_details') }}
-                                <h4>
+                            <h4 class="navv">{{ __('messages.student_details') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -691,7 +703,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <label for="heard">{{ __('messages.last_name') }}</label>
                                         <input type="text" class="form-control" maxlength="50" id="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
@@ -875,7 +887,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <label for="heard">{{ __('messages.last_name') }}</label>
                                         <input type="text" class="form-control" maxlength="50" id="mother_last_name" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
@@ -995,7 +1007,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
                                         <label for="validationCustomUsername">{{ __('messages.city') }}</label>
-                                        <input type="text" class="form-control" maxlength"50" id="mother_city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend" readonly>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1044,7 +1056,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="relation">{{ __('messages.relation') }}</label>
-                                    <select class="form-control" name="relation">
+                                    <select class="form-control" name="relation" id="guardian_relation">
                                         <option value="">{{ __('messages.select_relation') }}</option>
                                         @forelse($relation as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -1069,7 +1081,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <label for="heard">{{ __('messages.last_name') }}</label>
                                         <input type="text" class="form-control" maxlength="50" id="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
@@ -1394,6 +1406,8 @@
     var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
+    var studentList = "{{ config('constants.api.student_application_list') }}";
+    var studentDetails = "{{ config('constants.api.student_application') }}";
     var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";

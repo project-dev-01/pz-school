@@ -144,6 +144,7 @@ Route::post('/reset-password-validation', [AuthController::class, 'resetPassword
 
 //school app form
 Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
+Route::post('/application-form/add', [CommonController::class, 'addApplicationForm'])->name('application.add');
 Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 // notifications
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
