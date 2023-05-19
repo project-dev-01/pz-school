@@ -1322,4 +1322,6 @@ return [
     "select_school_type" => "Select school type", 
     "enter_database_port" => "Enter Database Port", 
     "enter_database_host" => "Enter Database Host",  
+    "start_time" => "Start Time",  
+    "end_time" => "End Time"
 ];

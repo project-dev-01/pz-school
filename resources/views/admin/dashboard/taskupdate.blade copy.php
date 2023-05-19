@@ -28,16 +28,9 @@
                         </div>
                     </div>
                     <div class="form-group displayTimeSlot">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label>{{ __('messages.start_time') }}</label>
-                                <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="HH:MM">
-                            </div>
-                            <div class="col-sm-6">
-                                <label>{{ __('messages.end_time') }}</label>
-                                <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="HH:MM">
-                            </div>
-                        </div>
+                        <label>{{ __('messages.time') }}</label>
+                        <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="HH:MM">
+                        <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="HH:MM">
                     </div>
                     <div class="form-group mb-3">
                         <div class="custom-control custom-checkbox">

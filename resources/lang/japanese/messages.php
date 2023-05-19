@@ -1322,6 +1322,8 @@ return [
     "database_host" => "データベースホスト", 
     "select_school_type" => "学校の種類を選択してください。", 
     "enter_database_port" => "データベースポートを入力してください。", 
-    "enter_database_host" => "データベースホストを入力してください。", 
+    "enter_database_host" => "データベースホストを入力してください。",
+    "start_time" => "開始時間",  
+    "end_time" => "終了時間"
 ];
 

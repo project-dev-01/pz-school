@@ -19,13 +19,24 @@
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                        <input id="taskdateSlot" name="taskdateSlot" class="form-control taskdateSlot" placeholder="YYYY-MM-DD">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>{{ __('messages.date') }}<span class="text-danger">*</span></label>
+                                <input id="taskdateSlot" name="taskdateSlot" class="form-control taskdateSlot" placeholder="YYYY-MM-DD">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group displayTimeSlot">
-                        <label>{{ __('messages.time') }}</label>
-                        <input id="tasktimeSlotStart" name="tasktimeSlotStart" class="form-control" placeholder="HH:MM">
-                        <input id="tasktimeSlotEnd" name="tasktimeSlotEnd" class="form-control" placeholder="HH:MM">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.start_time') }}</label>
+                                <input id="tasktimeSlotStart" name="tasktimeSlotStart" class="form-control" placeholder="HH:MM">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.end_time') }}</label>
+                                <input id="tasktimeSlotEnd" name="tasktimeSlotEnd" class="form-control" placeholder="HH:MM">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group mb-3">
                         <div class="custom-control custom-checkbox">

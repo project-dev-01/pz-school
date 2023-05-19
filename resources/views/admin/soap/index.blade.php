@@ -180,7 +180,7 @@
                                                                 {{$key}}
                                                             </td>
                                                             <td style="width: 36px;">
-                                                                <img src="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : {{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                                                <img src="{{ $student['photo'] }} && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : {{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
                                                             </td>
                                                             <td class="stu-name">
                                                                 <h5 class="m-0 font-weight-normal ">{{$student['name']}}</h5>
