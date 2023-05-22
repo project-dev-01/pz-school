@@ -473,8 +473,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" name="drp_state" data-parsley-trigger="change">
+                                    <label for="drp_state">{{ __('messages.state_province') }}</label>
+                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state_province') }}" name="drp_state" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -660,7 +660,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="header-title">{{ __('messages.turn_on') }} / {{ __('messages.turn_off') }}</h4>
+                                <h4 class="header-title">{{ __('messages.turn_on_turn_off') }}</h4>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable">
                                     <label class="custom-control-label" for="google2fa_secret_enable">{{ __('messages.enable_two_factor_authentication') }}</label>
@@ -816,8 +816,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
+                                        <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
+                                        <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="{{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1000,8 +1000,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                        <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
+                                        <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1194,8 +1194,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                        <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder=">{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
+                                        <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
+                                        <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder=">{{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

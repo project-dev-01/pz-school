@@ -221,19 +221,19 @@
                             <li>
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
-                                    <span>{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}</span>
+                                    <span>{{ __('messages.parent_guardian_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.add_parent') }}/{{ __('messages.guardian') }}</span>
+                                                <span>{{ __('messages.add_parent_guardian') }}</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.parent') }}/ {{ __('messages.guardian_list') }}</span>
+                                                <span>{{ __('messages.parent_guardian_list') }}</span>
                                             </a>
                                         </li>
                                         <li>

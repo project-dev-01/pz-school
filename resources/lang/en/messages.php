@@ -1058,7 +1058,7 @@ return [
     "select_exam_type" => "Select Exam Type",
     "create_exam" => "Create Exam",
     "select_exam_name" => "Select Exam Name",
-    "Parent_Guardian_Profile" => "Parent/Guardian Profile",
+    "parent_guardian_profile" => "Parent/Guardian Profile",
     "student_profile" => "Student Profile",
     "basic_details" => "Basic Details",
     "roll" => "Roll",
@@ -1069,7 +1069,6 @@ return [
     "yukio"=>"Yukio",
     "sato"=>"SATŌ",
     "akari"=>"Akari",
-    
     //--10/4/2023--//
     "mark_as_completed" => "Mark as completed",
     "this_is_a_task" => "This is a task Description",
@@ -1323,5 +1322,10 @@ return [
     "enter_database_port" => "Enter Database Port", 
     "enter_database_host" => "Enter Database Host",  
     "start_time" => "Start Time",  
-    "end_time" => "End Time"
+    "end_time" => "End Time",
+    "state_province"  =>"State/Province",
+    "turn_on_turn_off"  =>"Turn on/Turn off",
+    "parent_guardian_details"  =>"Parent/Guardian Details",
+    "add_parent_guardian"  =>"Add/Parent Guardian",
+    "parent_guardian_list"  =>"Parent/Guardian List",
 ];

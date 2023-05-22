@@ -492,7 +492,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                                <label for="drp_state">{{ __('messages.state_province') }}</label>
                                                 <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
                                             </div>
                                         </div>
@@ -817,7 +817,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                                    <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
                                                     <input type="text" class="form-control " maxlength="50" id="father_state" placeholder="state" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
@@ -998,8 +998,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="mother_state" placeholder="{{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1192,8 +1192,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group mb-3">
-                                                    <label for="validationCustomUsername">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                                    <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" aria-describedby="inputGroupPrepend" readonly>
+                                                    <label for="validationCustomUsername">{{ __('messages.state_province') }}</label>
+                                                    <input type="text" class="form-control" maxlength="50" id="guardian_state" placeholder="{{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1433,7 +1433,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.country') }}</th>
                                                 <td width="25%" class="father_country"></td>
-                                                <th width="25%">{{ __('messages.state') }}/{{ __('messages.province') }}</th>
+                                                <th width="25%">{{ __('messages.state_province') }}</th>
                                                 <td width="25%" class="father_state"></td>
                                             </tr>
                                             <tr>
@@ -1496,7 +1496,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.country') }}</th>
                                                 <td width="25%" class="mother_country"></td>
-                                                <th width="25%">{{ __('messages.state') }}/{{ __('messages.province') }}</th>
+                                                <th width="25%">{{ __('messages.state_province') }}</th>
                                                 <td width="25%" class="mother_state"></td>
                                             </tr>
                                             <tr>
@@ -1559,7 +1559,7 @@
                                             <tr>
                                                 <th width="25%">{{ __('messages.country') }}</th>
                                                 <td width="25%" class="guardian_country"></td>
-                                                <th width="25%">{{ __('messages.state') }}/{{ __('messages.province') }}</th>
+                                                <th width="25%">{{ __('messages.state_province') }}</th>
                                                 <td width="25%" class="guardian_state"></td>
                                             </tr>
                                             <tr>

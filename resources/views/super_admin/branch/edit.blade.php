@@ -353,7 +353,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
+                                    <label for="state">{{ __('messages.state_province') }}</label>
                                     <select id="editGetState" class="form-control" name="state">
                                         <option value="">{{ __('messages.select_state') }}</option>
                                         @foreach($states as $s)

@@ -480,8 +480,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="drp_state">{{ __('messages.state') }}/{{ __('messages.province') }}</label>
-                                                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state') }}/{{ __('messages.province') }}" name="drp_state" data-parsley-trigger="change" readonly>
+                                                                    <label for="drp_state">{{ __('messages.state_province') }}</label>
+                                                                    <input type="text" maxlength="50" id="drp_state" class="form-control alloptions" placeholder="{{ __('messages.state_province') }}" name="drp_state" data-parsley-trigger="change" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -623,7 +623,7 @@
                                                 <div class="card">
                                                     <ul class="nav nav-tabs">
                                                         <li class="nav-item">
-                                                            <h4 class="navv">{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}<h4>
+                                                            <h4 class="navv">{{ __('messages.parent_guardian_details') }}<h4>
                                                         </li>
                                                     </ul>
                                                     <div class="card-body">

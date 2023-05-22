@@ -27,10 +27,10 @@
 </head>
 <body class="loading auth-fluid-pages pb-0">
     <section class="features-list" >
-        <div class="col-md-12">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="row">
                     <div class="text-center">
                         <div class="form-group mt-2">
@@ -48,7 +48,7 @@
                         <span class="badge badge-secondary smk text-center schl"><img src="{{ config('constants.image_url').'/public/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                         </div>
                         <div class="row hero-content">
-                            <div class="col-md-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <h2 class="animated fadeInDown">Welcome To {{$school_name}} School</h2>
                                 <p class="color-white" style="margin-left: 30px; margin-right: 30px;margin-bottom: 3px;">To learn as much as I can, attain good grades and advance my education further.<br> I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.</p>
                             </div>
@@ -57,16 +57,16 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <h3 class="mb-3 text-center">Contact Us<span class="text-uppercase margin-l-20"></span></h3>
                     </div>
                 </div>
                 <div class=" contact">
                 <div class="row">
-                    <div  class="col-md-2"></div>
-                    <div class="col-md-8 contactresponsive">
+                    <div  class="col-sm-2 col-md-2 col-lg-2 col-xl-2"></div>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 contactresponsive">
                           <div class="row">
-                            <div  class="col-sm-12 col-md-12 col-lg-12">
+                            <div  class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <div class="icon-item" style="margin-bottom: 5px;">
                             <i class="fa fa-map-marker"></i>
                             <span style="margin-left: 12px;">{{$home['address']}}</span>
@@ -74,7 +74,7 @@
                         </div>
                         </div>
                         <div class="row">
-                            <div  class="col-sm-8 col-md-8 col-lg-8">
+                            <div  class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                             <div class="icon-item" style="margin-bottom: 5px;">
                             <i class="fa fa-phone"></i>
                             <span style="margin-left: 10px;">{{$home['mobile_no']}}</span>
@@ -82,7 +82,7 @@
                         </div>
                         </div>
                         <div class="row">
-                            <div  class="col-sm-8 col-md-8 col-lg-8">
+                            <div  class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                             <div class="icon-item" style="margin-bottom: 5px;">
                             <i class="fa fa-envelope"></i>
                             <span style="margin-left: 7px;">{{$home['email']}}</span>
@@ -95,7 +95,7 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <h3 class="text-center mb-3" style="margin-top: 10px;">Location<span class="text-uppercase margin-l-20"></span></h3>
 						  <!-- Google Map -->
 						<div class="map">
@@ -107,11 +107,11 @@
             <!-- end Auth fluid right content -->
 
             <!--Auth fluid left content -->
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="">
                 <div class="row">
                     <!-- <div class="col-md-1 pt-2"></div> -->
-                    <div class="col-md-6 pt-2">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
                                 <!-- Simple card -->
                         <div class="card">
                             <a href="{{ route('parent.login') }}">
@@ -122,7 +122,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 pt-2">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
                                 <!-- Simple card -->
                         <div class="card">
                             <a href="{{ route('student.login') }}">
@@ -133,7 +133,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <!-- Simple card -->
                         <div class="card">
                             <a href="{{ route('teacher.login') }}">
@@ -144,7 +144,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                 <!-- Simple card -->
                         <div class="card">
                             <a href="{{ route('schoolcrm.app.form') }}">

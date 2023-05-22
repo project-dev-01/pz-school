@@ -1061,7 +1061,7 @@ return [
      "select_exam_type" => "テストタイプを選択",
      "create_exam" => "テストの作成",
      "select_exam_name" => "テスト名の選択",
-     "Parent_Guardian_Profile" => "親・保護者のプロフィール",
+     "parent_guardian_profile" => "親・保護者のプロフィール",
     "student_profile" => "生徒プロフィール",
     "basic_details" => "基本詳細",
     "roll" => "役割",
@@ -1324,6 +1324,11 @@ return [
     "enter_database_port" => "データベースポートを入力してください。", 
     "enter_database_host" => "データベースホストを入力してください。",
     "start_time" => "開始時間",  
-    "end_time" => "終了時間"
+    "end_time" => "終了時間",
+    "state_province"  =>"State/Province",
+    "turn_on_turn_off"  =>"Turn on/Turn off",
+    "parent_guardian_details"  =>"Parent/Guardian Details",
+    "add_parent_guardian"  =>"Add/Parent Guardian",
+    "parent_guardian_list"  =>"Parent/Guardian List",
 ];
 
