@@ -20,13 +20,17 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label>{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                <input id="taskdateSlot" name="taskdateSlot" class="form-control taskdateSlot" placeholder="YYYY-MM-DD">
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.from') }}<span class="text-danger">*</span></label>
+                                <input id="taskfromDate" name="taskfromDate" class="form-control taskfromDate" placeholder="YYYY-MM-DD">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                <input id="taskToDate" name="taskToDate" class="form-control taskToDate" placeholder="YYYY-MM-DD">
                             </div>
                         </div>
                     </div>
-                    <div class="form-group displayTimeSlot">
+                    <div class="form-group displayTimeSlot" id="addTimeSlot">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>{{ __('messages.start_time') }}</label>

@@ -270,6 +270,7 @@ return [
     "already_taken_leave_details" => "取得済",
     "leave_application" => "休暇申請",
     "leave_from" => "休暇開始",
+    "from" => "からして",
     "to" => "休暇終了",
     "reason(s)" => "理由",
     "apply" => "申請",
