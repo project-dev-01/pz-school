@@ -168,7 +168,7 @@
                         <span> {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
-                <li>
+                <li class="{{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarAdmission" data-toggle="collapse">
                         <!--<i class="fe-edit"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,23 +190,23 @@
                         <span>{{ __('messages.admission') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarAdmission">
+                    <div class="collapse {{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarAdmission">
                         <ul class="nav-second-level" style="padding-left: 30px;">
-                            <li>
+                            <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarStudentDetails" data-toggle="collapse">
                                     <!--<i class="fas fa-user-graduate"></i>-->
                                     <span>{{ __('messages.student_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarStudentDetails">
+                                <div class="collapse {{  (request()->is('admin/student/student-details*')) ? 'show' : '' }}" id="sidebarStudentDetails">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.admission')}}" class="nav-link {{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.new_admission') }}</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student')) ? 'active' : '' }}">
+                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
@@ -218,22 +218,22 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li>
+                            <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
-                                    <span>{{ __('messages.parent_guardian_details') }}</span>
+                                    <span>{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarParent">
+                                <div class="collapse {{  (request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.add_parent_guardian') }}</span>
+                                                <span>{{ __('messages.add_parent') }}/{{ __('messages.guardian') }}</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.parent_guardian_list') }}</span>
+                                        <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent') || request()->is('admin/parent/parent-details*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.parent') }}/ {{ __('messages.guardian_list') }}</span>
                                             </a>
                                         </li>
                                         <li>

@@ -40,7 +40,7 @@ Route::get('/clear-cache', function () {
     return "clear artisan cache";
 });
 
-Route::get('/home', [AuthController::class, 'home'])->name('home');
+Route::any('home', [AuthController::class, 'home'])->name('home');
 Route::get('application/index', [AuthController::class, 'application'])->name('application');
 // Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -174,7 +174,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         // student details
-        Route::get('/student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
+        Route::get('student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
         Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');

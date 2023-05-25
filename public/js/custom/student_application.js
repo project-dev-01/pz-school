@@ -50,27 +50,28 @@ $(function () {
             school_city: "required",
             school_state: "required",
             school_postal_code: "required",
-            parent_type: "required",
-            parent_relation: "required",
-            parent_first_name: "required",
-            parent_phone_number: "required",
-            parent_occupation: "required",
-            parent_email: {
+            father_first_name: "required",
+            father_phone_number: "required",
+            father_occupation: "required",
+            father_email: {
                 required: true,
                 email: true
             },
-            secondary_type: "required",
-            secondary_relation: "required",
-            secondary_first_name: "required",
-            secondary_phone_number: "required",
-            secondary_occupation: "required",
-            secondary_email: {
+            mother_first_name: "required",
+            mother_phone_number: "required",
+            mother_occupation: "required",
+            mother_email: {
                 required: true,
                 email: true
             },
-            emergency_contact_person: "required",
-            emergency_contact_first_name: "required",
-            emergency_contact_phone_number: "required",
+            guardian_first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: "required",
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
 
         }
     });

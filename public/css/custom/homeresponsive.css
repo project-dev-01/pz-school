@@ -1,5 +1,3 @@
-.col-md-6 {
-}
 .auth-brand {
     position: absolute;
     padding-left: 50px;
@@ -8,32 +6,63 @@
 .card-body {
     padding: 8px;
 }
+.logo
+{
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 13px;
+}
+.smk {
+    height: 65px;
+    background: #D2EDEF;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    text-align: left;
+    color: #16191D;
+    width: 100%;
+    padding-left: 10px;
+}
 .img-fluid {
     max-width: 100%;
-    height: 250px;
     margin-top: 0px;
     padding: 10px;
+	height: 38vh;
+    overflow: hidden;     
+}
+.map
+{
+    height:38vh;
+    width:100%;
+    overflow: hidden;
+    
+}
+txt
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 3px;
 }
 .schl
 {
-    width:52%;
+    width:35%;
 }
 .contactresponsive
 {
     margin-left:100px;
 }
-
 @media screen and (min-device-width: 280px) and (max-device-width: 653px) 
 {
 .schl
 {
-width: 68%;
-    margin-left: 83px;
+    width: 70%;
+    margin-left: 50px;
 }
 .logo
 {
-    width:35px;
+    width: 35px;
+    margin-left: -15px;
 }
+
 .contactresponsive 
 {
     margin-left: 36px;
@@ -41,56 +70,220 @@ width: 68%;
 }
 @media screen and (min-device-width: 320px) and (max-device-width: 660px) 
 {
-.schl
+.txt
 {
-    width: 60%;
-    margin-left: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 3px;
 }
-.logo
-{
-    width:35px;
 }
-.contact
+@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
 {
-    margin-left: 55px;
+.txt
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 3px;
 }
-.responsive
-{
-    margin-top: 10px;
+.contactresponsive {
+    margin-left: 68px;
 }
-.contactresponsive
-{
-    margin-left:0px;
 }
-}//
-@media screen and (min//////////-device-width: 360px) and (max-device-width: 740px) 
+@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
 {
-    .h2, h2 {
-        font-size: 1.6rem;
+    .schl {
+        width: 55%;
+        margin-left: 40px;
     }
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-    .h2, h2 {
-        font-size: 1.6rem;
+    .logo {
+        width: 40px;
+        margin-left: 0px;
+        margin-top: 10px;
     }
-    .contactresponsive 
+    
+.txt
 {
-    margin-left: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 3px;
+}
+.contactresponsive {
+    margin-left: 88px;
+}
+}
+@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
+{
+    .schl {
+        width: 50%;
+        margin-left: 40px;
+    }
+    .logo {
+        width: 46px;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    
+.txt
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 3px;
+}
+.contactresponsive {
+    margin-left: 88px;
+}
+}
+@media screen and (min-device-width: 414px) and (max-device-width: 896px) 
+{
+    .schl {
+        width: 47%;
+        margin-left: 40px;
+    }
+    .logo {
+        width: 46px;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    
+.txt
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 3px;
+}
+.contactresponsive {
+    margin-left: 88px;
+}
+}
+@media screen and (min-device-width: 540px) and (max-device-width: 720px)
+
+{
+.txt {
+    margin-left: 95px;
+    margin-right: 95px;
+}
+.contactresponsive {
+    margin-left: 133px;
 }
 }
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
 {
     .img-fluid {
         max-width: 100%;
-        height: 280px;
         margin-top: 0px;
         padding: 10px;
+        height: 36vh;
+        overflow: hidden;     
+    }
+    .map
+    {
+        height:38vh;
+        width:100%;
+        overflow: hidden;
+        
     }
     .logo
     {
         width:30px;
     }
+    .schl {
+        width: 51%;
+        margin-left: 40px;
+    }
 }
-
-
+@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
+{
+    .img-fluid {
+        
+            max-width: 100%;
+            margin-top: 0px;
+            padding: 10px;
+            height: 33vh;
+            overflow: hidden;
+        }
+    .map
+    {
+        height:38vh;
+        width:100%;
+        overflow: hidden;
+        
+    }
+    .logo
+    {
+        width:30px;
+    }
+    .schl {
+    width: 51%;
+    margin-left: 40px;
+}
+}
+@media screen and (min-device-width: 912px) and (max-device-width: 1368px) 
+{
+    .img-fluid {
+        
+            max-width: 100%;
+            margin-top: 0px;
+            padding: 10px;
+            height: 31vh;
+            overflow: hidden;
+        }
+    .map
+    {
+        height:38vh;
+        width:100%;
+        overflow: hidden;
+        
+    }
+   
+    .schl {
+    width: 51%;
+    margin-left: 40px;
+}
+}
+@media screen and (min-device-width: 1024px) 
+{
+    .img-fluid 
+    {
+        max-width: 100%;
+        margin-top: 0px;
+        padding: 10px;
+        height: 43vh;
+        overflow: hidden;     
+    }
+    
+}
+@media screen and (min-device-width: 1280px) 
+{
+    .img-fluid 
+    {
+        max-width: 100%;
+        margin-top: 0px;
+        padding: 10px;
+        height: 38vh;
+        overflow: hidden;     
+    }
+    .map
+    {
+        height:38vh;
+        width:100%;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-device-width: 1920px) 
+{
+    .img-fluid 
+    {
+        max-width: 100%;
+        margin-top: 0px;
+        padding: 10px;
+        height: 41vh;
+        overflow: hidden;     
+    }
+    .map
+    {
+        height:41vh;
+        width:100%;
+        overflow: hidden;
+    }
+}

@@ -263,128 +263,42 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                        {{ __('messages.parent_guardian_information') }}
+                                        {{ __('messages.mother_details') }}
                                             <h4>
                                     </li>
                                 </ul><br>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="parent_type">{{ __('messages.guardians_name') }}<span class="text-danger">*</span></label>
-                                                <select id="parent_type" name="parent_type" class="form-control" >
-                                                    <option value="">{{ __('messages.select_parent_guardian_name') }}</option>
-                                                    <option value="parent">{{ __('messages.parent') }}</option>
-                                                    <option value="guardian">{{ __('messages.guardian') }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="parent_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
-                                                <select id="parent_relation" name="parent_relation" class="form-control" >
-                                                    <option value="">{{ __('messages.select_relation') }}</option>
-                                                    @forelse($relation as $r)
-                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="parent_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="parent_first_name" name="parent_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="parent_last_name">{{ __('messages.last_name') }}</label>
-                                                <input type="text" class="form-control" id="parent_last_name" name="parent_last_name"parent_last_name placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
-                                            </div>
-                                        </div>
-                                    </div><br>
-                                    <div class="row">
-                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="parent_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="parent_email" name="parent_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
+                                                <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="mother_first_name" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="parent_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="parent_phone_number" name="parent_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                                <label for="mother_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="mother_last_name" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="parent_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                <select id="parent_occupation" name="parent_occupation" class="form-control" >
-                                                    <option value="">{{ __('messages.select_occupation') }}</option>
-                                                    <option>Business</option>
-                                                    <option>IT/ Software</option>
-                                                    <option>Civil department</option>
-                                                    <option>Others</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="secondary_type">{{ __('messages.parent_guardian_secondary') }}<span class="text-danger">*</span></label>
-                                                <select id="secondary_type" name="secondary_type" class="form-control" >
-                                                    <option value="">{{ __('messages.select_parent_guardian_secondary') }}</option>
-                                                    <option value="parent">{{ __('messages.parent') }}</option>
-                                                    <option value="guardian">{{ __('messages.guardian') }}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="secondary_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
-                                                <select id="secondary_relation" name="secondary_relation" class="form-control" >
-                                                    <option value="">{{ __('messages.select_relation') }}</option>
-                                                    @forelse($relation as $r)
-                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="secondary_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="secondary_first_name" name="secondary_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="secondary_last_name">{{ __('messages.last_name') }}</label>
-                                                <input type="text" class="form-control" id="secondary_last_name" name="secondary_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                                <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="mother_email" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="secondary_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="secondary_email" name="secondary_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
+                                                <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="mother_phone_number" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="secondary_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="secondary_phone_number" name="secondary_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="secondary_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                <select id="secondary_occupation" name="secondary_occupation" class="form-control" >
+                                                <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                <select id="mother_occupation" name="mother_occupation" class="form-control" >
                                                     <option value="">{{ __('messages.select_occupation') }}</option>
                                                     <option>Business</option>
                                                     <option>IT/ Software</option>
@@ -399,7 +313,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                        {{ __('messages.emergency_contact_details') }}
+                                        {{ __('messages.father_details') }}
                                             <h4>
                                     </li>
                                 </ul><br>
@@ -407,31 +321,106 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="emergency_contact_person">{{ __('messages.emergency_contact_person') }}<span class="text-danger">*</span></label>
-                                                <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" >
+                                                <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="father_first_name" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="emergency_contact_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" name="emergency_contact_first_name" class="form-control" id="emergency_contact_first_name" placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" >
+                                                <label for="father_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="father_last_name" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="emergency_contact_last_name">{{ __('messages.last_name') }}</label>
-                                                <input type="text" name="emergency_contact_last_name" class="form-control" id="emergency_contact_last_name" placeholder="{{ __('messages.leo') }}" aria-describedby="inputGroupPrepend" >
-                                            </div>
-                                        </div>
-                                    </div> <br>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="emergency_contact_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                <input type="text" name="emergency_contact_phone_number" class="form-control" id="emergency_contact_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                                <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="father_email" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
                                             </div>
                                         </div>
                                     </div><br>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="father_phone_number" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                <select id="father_occupation" name="father_occupation" class="form-control" >
+                                                    <option value="">{{ __('messages.select_occupation') }}</option>
+                                                    <option>Business</option>
+                                                    <option>IT/ Software</option>
+                                                    <option>Civil department</option>
+                                                    <option>Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">
+                                        {{ __('messages.guardian_details') }}
+                                            <h4>
+                                    </li>
+                                </ul><br>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="guardian_first_name" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_last_name">{{ __('messages.last_name') }}</label>
+                                                <input type="text" class="form-control" id="guardian_last_name" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+                                                <select id="guardian_relation" name="guardian_relation" class="form-control" >
+                                                    <option value="">{{ __('messages.select_relation') }}</option>
+                                                    @forelse($relation as $r)
+                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div><br>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="guardian_email" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="guardian_phone_number" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="guardian_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                <select id="guardian_occupation" name="guardian_occupation" class="form-control" >
+                                                    <option value="">{{ __('messages.select_occupation') }}</option>
+                                                    <option>Business</option>
+                                                    <option>IT/ Software</option>
+                                                    <option>Civil department</option>
+                                                    <option>Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">

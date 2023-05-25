@@ -139,6 +139,9 @@ $(document).ready(function () {
                             'Authorization': 'Bearer ' + token
                         },
                         success: function (response) {
+                            console.log("test");
+                            console.log(response.data);
+
                             s = response.data;
                             successCallback(s);
                         },
@@ -272,6 +275,9 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
         select: function (e) {
+            console.log("selected")
+            console.log(e.start)
+            console.log(e.end)
             let starthminutes = moment(e.start).format('HH:mm');
             let endhminutes = moment(e.end).format('HH:mm');
             let allDay = e.allDay;
@@ -280,6 +286,15 @@ $(document).ready(function () {
             $('.addTasks').find('form')[0].reset();
             var selected_start = moment(e.start).format('YYYY-MM-DD');
             var selected_end = moment(e.end).subtract(1, 'seconds').format('YYYY-MM-DD');
+            // let dateArray = [];
+            // dateArray[0] = selected_start;
+            // dateArray[1] = selected_end;
+            // console.log(form_date_from)
+
+            // form_date_from.setDate([moment(e.start).format('YYYY-MM-DD'),moment(e.end).format('YYYY-MM-DD')]);
+            // form_date_from.setDate([selected_start,selected_end]);
+            // let start_end = selected_start + " to " + selected_end;
+            // console.log(dateArray)
 
             $("#taskAdd").find("#taskfromDate").val(selected_start);
             $("#taskAdd").find("#taskToDate").val(selected_end);
@@ -311,16 +326,38 @@ $(document).ready(function () {
                     var tasktimeSlotEnd = $("#tasktimeSlotEnd").val();
                     var allDayCheck = $('#allDayCheck').is(':checked');
                     if (allDayCheck === true) {
+                        // var datFm = new Date(taskfromDate);
+                        // var datTo = new Date(taskToDate);
+                        // var startOfDayDate = new Date(datFm.getFullYear()
+                        //     , datFm.getMonth()
+                        //     , datFm.getDate()
+                        //     , 00, 00, 01); // start day
+                        // var endOfDayDate = new Date(datTo.getFullYear()
+                        //     , datTo.getMonth()
+                        //     , datTo.getDate()
+                        //     , 23, 59, 00); // end of day
                         var startdate = taskfromDate + " " + "00:00:00";
-                        var startend = taskToDate + " " + "24:00:00";
+                        var startend = taskToDate + " " + "23:59:00";
+
                         var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
                         var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        // var start_date = moment(e.start).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(e.end).format('YYYY-MM-DD HH:mm:ss');
                     } else {
+                        // var startdate = taskdateSlot + " " + tasktimeSlotStart + ":00";
+                        // var startend = taskdateSlot + " " + tasktimeSlotEnd + ":00";
+                        // var chooseDate = moment(taskfromDate).format('YYYY-MM-DD');
+                        // var chooseDate = moment(taskToDate).format('YYYY-MM-DD');
+
                         var startdate = taskfromDate + " " + tasktimeSlotStart + ":00";
                         var startend = taskToDate + " " + tasktimeSlotEnd + ":00";
                         var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
                         var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(startend).add(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
                     }
+                    // console.log(start_date);
+                    // console.log(end_date);
+                    // return false;
                     $.ajax({
                         url: calendorAddTaskCalendor,
                         type: "POST",
@@ -337,6 +374,9 @@ $(document).ready(function () {
                         },
                         success: function (response) {
                             var newData = response.data;
+                            console.log("response");
+                            console.log(response);
+                            console.log(newData.allDay);
                             $('#addTasksModal').modal('hide')
                             $('.addTasks').find('form')[0].reset();
                             let eventObject = {
@@ -359,6 +399,8 @@ $(document).ready(function () {
         },
         eventClick: function (e) {
             //
+            console.log("e")
+                console.log(e)
             if (e.event.extendedProps.event_id) {
                 $('#admin-modal').modal('toggle');
                 var start = e.event.start_date;
@@ -412,42 +454,12 @@ $(document).ready(function () {
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
             } else if (e.event.extendedProps.calendor_id) {
+                console.log("event details")
+                console.log(e)
+                console.log(e.event);
+                console.log(e.event.start);
+                console.log(e.event.end);
                 var calendor_id = e.event.extendedProps.calendor_id;
-                if (calendor_id) {
-                    $.ajax({
-                        url: calendorEditTaskCalendor,
-                        type: "GET",
-                        dataType: 'json',
-                        data: {
-                            token: token,
-                            branch_id: branchID,
-                            calendor_id: calendor_id
-                        },
-                        success: function (response) {
-                            if (response.code == 200) {
-                                var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
-                                var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-                                $('#showTasksModal').modal('toggle');
-                                $("#showTasksModal").find("#calendorID").val(calendor_id);
-                                $("#startDateDetails").html(start_dt);
-                                $("#endDateDetails").html(subonesec);
-                                $("#taskShowTit").html(response.data.title);
-                                $("#taskShowDesc").html(response.data.description);
-                            } else {
-                                toastr.error(response.message);
-                            }
-                        }, error: function (err) {
-                            toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
-                        }
-                    });
-                }
-
-            }
-            $("#editEventBtn").unbind().click(function () {
-                $('#taskUpdate')[0].reset();
-                $('#showTasksModal').modal('hide');
-                $('#updateTasksModal').modal('show');
-                var calendor_id = $("#calendorID").val();
                 $.ajax({
                     url: calendorEditTaskCalendor,
                     type: "GET",
@@ -459,6 +471,42 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response.code == 200) {
+                            var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
+                            var subonesec = moment(response.data.end).format('DD-MM-YYYY dddd hh:mm A');
+                            $('#showTasksModal').modal('toggle');
+                            $("#showTasksModal").find("#calendorID").val(calendor_id);
+                            $("#startDateDetails").html(start_dt);
+                            $("#endDateDetails").html(subonesec);
+                            $("#taskShowTit").html(response.data.title);
+                            $("#taskShowDesc").html(response.data.description);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    }, error: function (err) {
+                        toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    }
+                });
+
+            }
+            $("#editEventBtn").unbind().click(function () {
+                $('#taskUpdate')[0].reset();
+                $('#showTasksModal').modal('hide');
+                $('#updateTasksModal').modal('show');
+                var calendor_id = $("#calendorID").val();
+                console.log("calendor_id" + calendor_id);
+                $.ajax({
+                    url: calendorEditTaskCalendor,
+                    type: "GET",
+                    dataType: 'json',
+                    data: {
+                        token: token,
+                        branch_id: branchID,
+                        calendor_id: calendor_id
+                    },
+                    success: function (response) {
+                        console.log("response");
+                        console.log(response);
+                        if (response.code == 200) {
                             if (response.data.all_day == "1") {
                                 $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
                                 $("#updateTasksModal").find("#editTimeSlot").hide();
@@ -467,9 +515,17 @@ $(document).ready(function () {
                                 $("#updateTasksModal").find("#editTimeSlot").show();
                             }
                             var startdt = moment(response.data.start).format('YYYY-MM-DD');
-                            var enddt = moment(response.data.end).subtract(1, 'seconds').format('YYYY-MM-DD');
+                            var enddt = moment(response.data.end).format('YYYY-MM-DD');
                             var starthminutes = moment(response.data.start).format('HH:mm');
                             var endhminutes = moment(response.data.end).format('HH:mm');
+
+                            // var selected_start = moment(response.data.start).format('YYYY-MM-DD');
+                            // var selected_end = moment(response.data.end).format('YYYY-MM-DD');
+                            // let start_end = selected_start + " to " + selected_end;
+                            // console.log(start_end)
+
+                            // $("#taskAdd").find("#taskdateSlot").val(start_end);
+
                             $("#updateTasksModal").find("#calendorID").val(response.data.calendor_id);
                             $("#updateTasksModal").find("#taskTitle").val(response.data.title);
                             $("#updateTasksModal").find("#edittaskfromDate").val(startdt);
@@ -477,6 +533,11 @@ $(document).ready(function () {
                             $("#updateTasksModal").find("#editTasktimeSlotStart").val(starthminutes);
                             $("#updateTasksModal").find("#editTasktimeSlotEnd").val(endhminutes);
                             $("#updateTasksModal").find("#taskDescription").val(response.data.description);
+                            // if (response.data.all_day == "1") {
+                            //     $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
+                            // } else {
+                            //     $("#updateTasksModal").find("#editAllDayCheck").prop('checked', false);
+                            // }
 
                         } else {
                             toastr.error(response.message);
@@ -564,15 +625,24 @@ $(document).ready(function () {
                         // var start_date = moment(e.start).format('YYYY-MM-DD HH:mm:ss');
                         // var end_date = moment(e.end).format('YYYY-MM-DD HH:mm:ss');
                         var startdate = edittaskfromDate + " " + "00:00:00";
-                        var startend = edittaskToDate + " " + "24:00:00";
+                        var startend = edittaskToDate + " " + "23:59:00";
 
                         var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
                         var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
                     } else {
+                        // var startdate = edittaskfromDate + " " + tasktimeSlotStart + ":00";
+                        // var startend = edittaskToDate + " " + tasktimeSlotEnd + ":00";
+                        // var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(startend).add(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
                         var startdate = edittaskfromDate + " " + tasktimeSlotStart + ":00";
                         var startend = edittaskToDate + " " + tasktimeSlotEnd + ":00";
                         var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
                         var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        // console.log(start_date)
+                        // console.log(end_date)
+                        // console.log(allDayCheck)
+                        // return false;
                     }
                     $.ajax({
                         url: calendorUpdateTaskCalendor,
@@ -590,6 +660,8 @@ $(document).ready(function () {
                         },
                         success: function (response) {
                             var datas = response.data;
+                            console.log("after update")
+                            console.log(response)
                             $('#updateTasksModal').modal('hide')
                             $('#taskUpdate')[0].reset();
                             let obj = {
@@ -601,6 +673,8 @@ $(document).ready(function () {
                                 className: datas.className,
                                 allDay: datas.allDay
                             };
+                            console.log(obj)
+
                             calendar.addEvent(obj);
                         }
                     });

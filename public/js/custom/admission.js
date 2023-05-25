@@ -350,11 +350,9 @@ $(function () {
 
         $('#student_id').val(id);
         $.post(studentDetails, { token: token, branch_id: branchID, id: id }, function (res) {
-            console.log('dara',res)
             if (res.code == 200) {
                 var data = res.data;
                 var name = data.first_name + " " + data.last_name;
-                
                 $('#sudent_application_id').val(id);
                 $('#fname').val(data.first_name);
                 $("#lname").val(data.last_name);
@@ -375,49 +373,44 @@ $(function () {
 
 
 
-                if(data.parent_type=="parent"){
-                    if(data.parent_relation==2){
-                        $("#father_form").show("slow");
-                        $("#father_info").show();
-                        $("#father_photo").show();
-                        var parent_name = data.parent_first_name + " " + data.parent_last_name;
-                        $('#father_name').val(parent_name);
-                        $("#father_first_name").val(data.parent_first_name);
-                        $("#father_last_name").val(data.parent_last_name);
-                        $("#father_mobile_no").val(data.parent_phone_number);
-                        $("#father_occupation").val(data.parent_occupation);
-                        $("#father_email").val(data.parent_email);
-                    }
-                    if(data.parent_relation==3){
-                        $("#mother_form").show("slow");
-                        $("#mother_info").show();
-                        $("#mother_photo").show();
-                        var parent_name = data.parent_first_name + " " + data.parent_last_name;
-                        $('#mother_name').val(parent_name);
-                        $("#mother_first_name").val(data.parent_first_name);
-                        $("#mother_last_name").val(data.parent_last_name);
-                        $("#mother_mobile_no").val(data.parent_phone_number);
-                        $("#mother_occupation").val(data.parent_occupation);
-                        $("#mother_email").val(data.parent_email);
-                    }
+                if(data.father_first_name){
+                    $("#father_form").show("slow");
+                    $("#father_info").show();
+                    $("#father_photo").show();
+                    var father_name = data.father_first_name + " " + data.father_last_name;
+                    $('#father_name').val(father_name);
+                    $("#father_first_name").val(data.father_first_name);
+                    $("#father_last_name").val(data.father_last_name);
+                    $("#father_mobile_no").val(data.father_phone_number);
+                    $("#father_occupation").val(data.father_occupation);
+                    $("#father_email").val(data.father_email);
+                }
+                if(data.father_first_name){
+                    $("#mother_form").show("slow");
+                    $("#mother_info").show();
+                    $("#mother_photo").show();
+                    var mother_name = data.mother_first_name + " " + data.mother_last_name;
+                    $('#mother_name').val(mother_name);
+                    $("#mother_first_name").val(data.mother_first_name);
+                    $("#mother_last_name").val(data.mother_last_name);
+                    $("#mother_mobile_no").val(data.mother_phone_number);
+                    $("#mother_occupation").val(data.mother_occupation);
+                    $("#mother_email").val(data.mother_email);
                 }
 
-                if(data.secondary_type){
-                    if(data.secondary_relation){
-                        $("#guardian_form").show("slow");
-                        $("#guardian_info").show();
-                        $("#guardian_photo").show();
-                        var guadrian_name = data.secondary_first_name + " " + data.secondary_last_name;
-                        $('#guardian_name').val(guadrian_name);
-                        $('#guardian_relation').val(data.secondary_relation);
-                        $("#guardian_first_name").val(data.secondary_first_name);
-                        $("#guardian_last_name").val(data.secondary_last_name);
-                        $("#guardian_mobile_no").val(data.secondary_phone_number);
-                        $("#guardian_occupation").val(data.secondary_occupation);
-                        $("#guardian_email").val(data.secondary_email);
-                    }
+                if(data.guardian_relation){
+                    $("#guardian_form").show("slow");
+                    $("#guardian_info").show();
+                    $("#guardian_photo").show();
+                    var guardian_name = data.guardian_first_name + " " + data.guardian_last_name;
+                    $('#guardian_name').val(guardian_name);
+                    $('#guardian_relation').val(data.guardian_relation);
+                    $("#guardian_first_name").val(data.guardian_first_name);
+                    $("#guardian_last_name").val(data.guardian_last_name);
+                    $("#guardian_mobile_no").val(data.guardian_phone_number);
+                    $("#guardian_occupation").val(data.guardian_occupation);
+                    $("#guardian_email").val(data.guardian_email);
                 }
-                
             }
         }, 'json');
     }

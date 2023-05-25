@@ -1089,7 +1089,7 @@ class AuthController extends Controller
         $parent_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/Parent.webp";
         $student_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/Student.webp";
         $teacher_image =  config('constants.image_url')."/public/images/school-type/".$schoolDetails['data']['school_type']."/Teacher.webp";
-        $application =  config('constants.image_url')."/public/images/application.jpg";
+        $application =  config('constants.image_url')."/public/images/application.webp";
         // dd($homeDetails);
         return view(
             'auth.home',

@@ -269,6 +269,7 @@ return [
     "already_taken_leave_details" => "Already Taken Leave Details",
     "leave_application" => "Leave Application",
     "leave_from" => "Leave From",
+    "from" => "From",
     "to" => "To",
     "reason(s)" => "Reason(s)",
     "apply" => "Apply",
