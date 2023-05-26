@@ -338,7 +338,6 @@ class AdminController extends Controller
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
         $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
-        // dd($employee_count);
         $count['employee_count'] = isset($employee_count['data']) ? $employee_count['data'] : 0;
         $count['student_count'] = isset($student_count['data']) ? $student_count['data'] : 0;
         $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
@@ -1029,20 +1028,20 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-
+        // dd($academic_year_list);
         return view(
             'admin.admission.index',
             [
-                'class' => $getclass['data'],
-                'transport' => $gettransport['data'],
-                'hostel' => $gethostel['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
-                'parent' => $parent['data'],
-                'religion' => $religion['data'],
-                'races' => $races['data'],
-                'relation' => $relation['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'class' => isset($getclass['data'])?$getclass['data']:[],
+                'transport' => isset($gettransport['data'])?$gettransport['data']:[],
+                'hostel' => isset($gethostel['data'])?$gethostel['data']:[],
+                'session' => isset($session['data'])?$session['data']:[],
+                'semester' => isset($semester['data'])?$semester['data']:[],
+                'parent' => isset($parent['data'])?$parent['data']:[],
+                'religion' => isset($religion['data'])?$religion['data']:[],
+                'races' => isset($races['data'])?$races['data']:[],
+                'relation' => isset($relation['data'])?$relation['data']:[],
+                'academic_year_list' => isset($academic_year_list['data'])?$academic_year_list['data']:[]
             ]
         );
         // return view('admin.admission.index');
@@ -1497,6 +1496,7 @@ class AdminController extends Controller
             'post_code' => $request->post_code,
             'google2fa_secret_enable' => $request->google2fa_secret_enable
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
         return $response;
     }
@@ -2355,9 +2355,9 @@ class AdminController extends Controller
         return view(
             'admin.student.student',
             [
-                'classes' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
+                'classes' => isset($getclass['data'])?$getclass['data']:[],
+                'semester' => isset($semester['data'])?$semester['data']:[],
+                'session' => isset($session['data'])?$session['data']:[]
             ]
         );
     }

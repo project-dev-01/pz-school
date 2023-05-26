@@ -936,14 +936,14 @@
     });
     $(function() {
         // nric validation start
-        var $form_2 = $('#addEmployeeForm');
-        $form_2.validate({
-            debug: true
-        });
+        // var $form_2 = $('#addEmployeeForm');
+        // $form_2.validate({
+        //     debug: true
+        // });
 
-        $('#nricNumber').rules("add", {
-            required: true
-        });
+        // $('#nricNumber').rules("add", {
+        //     required: true
+        // });
 
         $('#nricNumber').mask("000000-00-0000", {
             reverse: true

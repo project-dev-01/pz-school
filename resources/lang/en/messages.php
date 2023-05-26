@@ -1302,7 +1302,7 @@ return [
     "enable_two_factor_authentication" => "Enable Two Factor Authentication", 
     "turn_on" => "Turn on", 
     "turn_off" => "Turn off", 
-    "done" => "done",
+    "done" => "Done",
     "two_factor_authentication" => "TWO-FACTOR AUTHENTICATION", 
     "verification_code" => "Verification Code", 
     "enter_6-digit_code" => "Enter 6-digit code from your authenticator application", 

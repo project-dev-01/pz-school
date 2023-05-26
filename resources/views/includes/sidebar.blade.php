@@ -247,7 +247,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/employee/edit*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarEmployee" data-toggle="collapse">
                         <!--<i class="fas fa-users"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,7 +268,7 @@
                         <span> {{ __('messages.employee') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarEmployee">
+                    <div class="collapse {{  (request()->is('admin/employee/edit*')) ? 'show' : '' }}" id="sidebarEmployee">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarEmpMasters" data-toggle="collapse">
@@ -315,7 +315,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.listemployee')}}" class="nav-link {{ (request()->is('admin/listemployee')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.listemployee')}}" class="nav-link {{ (request()->is('admin/listemployee') || request()->is('admin/employee/edit*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.employee_list') }}</span>
                                 </a>
                             </li>
@@ -327,7 +327,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/timetable/edit') || request()->is('admin/timetable/edit/copy')) ? 'menuitem-active' : '' }}">
                     <a href="#sideBarAcademic" data-toggle="collapse">
                         <!--<i data-feather="home"></i>-->
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -345,7 +345,7 @@
                         <span>{{ __('messages.academic') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sideBarAcademic">
+                    <div class="collapse {{  (request()->is('admin/timetable/edit') || request()->is('admin/timetable/edit/copy')) ? 'show' : '' }}" id="sideBarAcademic">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
@@ -400,13 +400,13 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li>
+                            <li class="{{  (request()->is('admin/timetable/edit') || request()->is('admin/timetable/edit/copy')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebartimeTable" data-toggle="collapse">
                                     <!-- <i class="far fa-calendar-alt"></i>-->
                                     <span>{{ __('messages.time_tables') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebartimeTable">
+                                <div class="collapse {{  (request()->is('admin/timetable/edit') || request()->is('admin/timetable/edit/copy')) ? 'show' : '' }}" id="sidebartimeTable">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.timetable.create')}}" class="nav-link {{ (request()->is('admin/timetable/create')) ? 'active' : '' }}">
@@ -414,7 +414,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.timetable')}}" class="nav-link {{ (request()->is('admin/timetable') || request()->is('admin/timetable/edit')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.time_table') }}</span>
                                             </a>
                                         </li>
@@ -424,7 +424,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.timetable.copy')}}" class="nav-link {{ (request()->is('timetable/copy')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.timetable.copy')}}" class="nav-link {{ (request()->is('timetable/copy') || request()->is('admin/timetable/edit/copy')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.time_table_copy') }}</span>
                                             </a>
                                         </li>
@@ -469,7 +469,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/task*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarTasks" data-toggle="collapse">
                         <!-- <i data-feather="external-link" class="icon-dual"></i> -->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -478,7 +478,7 @@
                         <span> {{ __('messages.tasks') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarTasks">
+                    <div class="collapse {{  (request()->is('admin/task*')) ? 'show' : '' }}" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.task')}}" class="nav-link {{ (request()->is('admin/task*')) ? 'active' : '' }}">
@@ -855,7 +855,7 @@
                         </ul>
                     </div>
                 </li> -->
-                <li>
+                <li class="{{  (request()->is('admin/event*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarEvents" data-toggle="collapse">
                         <!--<i class="fas fa-map"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -872,7 +872,7 @@
                         <span> {{ __('messages.events') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarEvents">
+                    <div class="collapse {{  (request()->is('admin/event*')) ? 'show' : '' }}" id="sidebarEvents">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.event_type')}}" class="nav-link {{ (request()->is('admin/event_type/*')) ? 'active' : '' }}">
@@ -880,7 +880,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event/*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.event')}}" class="nav-link {{ (request()->is('admin/event*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.events') }} </span>
                                 </a>
                             </li>
@@ -896,7 +896,7 @@
                         <span>{{ __('messages.forum') }}</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/soap_subject/create')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarSoap" data-toggle="collapse">
                         <!--<i class="fas fa-map"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -918,7 +918,7 @@
                         <span> {{ __('messages.soap') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarSoap">
+                    <div class="collapse {{  (request()->is('admin/soap_subject/create')) ? 'show' : '' }}" id="sidebarSoap">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.soap_category')}}" class="nav-link {{ (request()->is('admin/soap_category*')) ? 'active' : '' }}">
@@ -936,14 +936,14 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.soap')}}" class="nav-link {{ (request()->is('admin/soap/*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.soap')}}" class="nav-link {{ (request()->is('admin/soap/*') || request()->is('admin/soap_subject/create')) ? 'active' : '' }}">
                                     <span> {{ __('messages.soap') }} </span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarFees" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_354_1194)">
@@ -964,7 +964,7 @@
                         <span>{{ __('messages.fees') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarFees">
+                    <div class="collapse {{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'show' : '' }}" id="sidebarFees">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.fees_type')}}" class="nav-link {{ (request()->is('admin/fees_type*')) ? 'active' : '' }}">
@@ -982,14 +982,14 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/index')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.fees')}}" class="nav-link {{ (request()->is('admin/fees/index') || request()->is('admin/fees/edit*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.fees') }}</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li class="{{  (request()->is('admin/group*') || request()->is('admin/hostel_group*')) ? 'menuitem-active' : '' }}">
                     <a href="#sideBarSettings" data-toggle="collapse">
                         <!-- <i data-feather="settings" class="icon-dual"></i> -->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1007,7 +1007,7 @@
                         <span>{{ __('messages.settings') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sideBarSettings">
+                    <div class="collapse {{  (request()->is('admin/group*') || request()->is('admin/hostel_group*')) ? 'show' : '' }}" id="sideBarSettings">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarSettingMasters" data-toggle="collapse">

@@ -732,14 +732,14 @@
     $(function() {
 
         // nric validation start
-        var $form_2 = $('#addparent');
-        $form_2.validate({
-            debug: true
-        });
+        // var $form_2 = $('#addparent');
+        // $form_2.validate({
+        //     debug: true
+        // });
 
-        $('#nric').rules("add", {
-            required: true
-        });
+        // $('#nric').rules("add", {
+        //     required: true
+        // });
 
         $('#nric').mask("000000-00-0000", {
             reverse: true

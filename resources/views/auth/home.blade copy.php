@@ -51,16 +51,6 @@
         right: 0;
     }
 
-    .auth-fluid .auth-fluid-form-box {
-        max-width: 100%;
-        border-radius: 0;
-        z-index: 2;
-        background-color: #fff;
-        position: relative;
-        width: 100%;
-        height: auto;
-    }
-
     @media screen and (min-device-width: 600px) and (max-device-width: 1024px) {
         .auth-fluid .auth-fluid-right {
             padding: 3rem 1rem;
@@ -69,6 +59,7 @@
         .auth-fluid .auth-fluid-form-box {
             padding: 2rem 0rem;
         }
+
     }
 
     @media screen and (min-device-width: 1920px) and (max-device-width: 1080px) {
@@ -79,24 +70,12 @@
         .auth-fluid .auth-fluid-form-box {
             padding: 4rem 0rem;
         }
-    }
 
-    body {
-        -ms-overflow-style: none;
-        /* for Internet Explorer, Edge */
-        scrollbar-width: none;
-        /* for Firefox */
-        overflow-y: scroll;
-    }
-
-    body::-webkit-scrollbar {
-        display: none;
-        /* for Chrome, Safari, and Opera */
     }
 </style>
 
-<body class="loading auth-fluid-pages pb-0">
-    <div class="auth-fluid responsive" style="height:200px;">
+<body class="loading auth-fluid-pages pb-0" style=" overflow: visible;">
+    <div class="auth-fluid" style="height:150px;">
 
         <!-- Auth fluid right content -->
         <div class="col-md-6 auth-fluid-right" style="background-color:#8b848414;color:black;">
@@ -116,7 +95,7 @@
                         <!-- Logo -->
                         <div class="auth-logo">
                             <div class="auth-logo">
-                                <a href="javascript:void(0)" class="logo logo-dark">
+                                <a href="" class="logo logo-dark">
                                     <span class="logo-lg">
                                         <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="50px">
                                     </span>
@@ -176,7 +155,7 @@
                                 <a href="{{ route('parent.login') }}">
                                     <img src="{{$parent_image}}" style="height:200px" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Parent Login</h6>
+                                        <h5 class="card-title text-center" style="margin-bottom: 0px;" style="margin-bottom: 0px;">Parent Login</h5>
                                     </div>
                             </div>
                         </div>
@@ -185,7 +164,7 @@
                                 <a href="{{ route('student.login') }}">
                                     <img src="{{$student_image}}" style="height:200px" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h6>
+                                        <h5 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h5>
                                     </div>
                             </div>
                         </div>
@@ -196,7 +175,7 @@
                                 <a href="{{ route('teacher.login') }}">
                                     <img src="{{$teacher_image}}" style="height:200px" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h6>
+                                        <h5 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h5>
                                     </div>
                             </div>
                         </div>
@@ -205,11 +184,17 @@
                                 <a href="{{ route('schoolcrm.app.form') }}">
                                     <img src="{{$application}}" style="height:200px" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Application</h6>
+                                        <h5 class="card-title text-center" style="margin-bottom: 0px;">Application</h5>
                                     </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Footer-->
+                    <footer class="footer">
+                        <p class="text-muted">2020 - <script>
+                                document.write(new Date().getFullYear())
+                            </script> &copy; by <a href="javascript: void(0);" class="text-muted">Paxsuzen</a> </p>
+                    </footer>
                 </div> <!-- end .card-body -->
             </div> <!-- end .align-items-center.d-flex.h-100-->
         </div>

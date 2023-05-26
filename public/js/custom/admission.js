@@ -1,13 +1,13 @@
 $(function () {
     // nric validation start
-    var $form_1 = $('#addadmission');
-    $form_1.validate({
-        debug: true
-    });
+    // var $form_1 = $('#addadmission');
+    // $form_1.validate({
+    //     debug: true
+    // });
 
-    $('#txt_nric').rules("add", {
-        required: true
-    });
+    // $('#txt_nric').rules("add", {
+    //     required: true
+    // });
 
     $('#txt_nric').mask("000000-00-0000", { reverse: true });
     // nric validation end

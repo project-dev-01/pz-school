@@ -1753,14 +1753,14 @@
     });
     $(function() {
         // nric validation start
-        var $form_2 = $('#editadmission');
-        $form_2.validate({
-            debug: true
-        });
+        // var $form_2 = $('#editadmission');
+        // $form_2.validate({
+        //     debug: true
+        // });
 
-        $('#txt_nric').rules("add", {
-            required: true
-        });
+        // $('#txt_nric').rules("add", {
+        //     required: true
+        // });
 
         $('#txt_nric').mask("000000-00-0000", {
             reverse: true

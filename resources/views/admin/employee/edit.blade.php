@@ -902,7 +902,7 @@
                                 {{ __('messages.update') }}
                             </button>
                             <a href="{{ route('admin.listemployee') }}" class="btn btn-primary-bl waves-effect waves-light">
-                                Back
+                                {{ __('messages.back') }}
                             </a>
                         </div>
                     </div>
@@ -977,14 +977,14 @@
     });
     $(function() {
         // nric validation start
-        var $form_2 = $('#editEmployeeForm');
-        $form_2.validate({
-            debug: true
-        });
+        // var $form_2 = $('#editEmployeeForm');
+        // $form_2.validate({
+        //     debug: true
+        // });
 
-        $('#nricNumber').rules("add", {
-            required: true
-        });
+        // $('#nricNumber').rules("add", {
+        //     required: true
+        // });
 
         $('#nricNumber').mask("000000-00-0000", {
             reverse: true
