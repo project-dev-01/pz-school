@@ -197,7 +197,7 @@
     var getbySubjectnames = "{{ config('constants.api.exam_results_get_subject_by_class') }}";
     var teacher_id = null;
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
 @endsection

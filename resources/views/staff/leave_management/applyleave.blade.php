@@ -318,7 +318,7 @@ width: 14.3em;
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
-    var StaffDocUrl = "{{ config('constants.image_url').'/public/admin-documents/leaves/' }}";
+    var StaffDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var StaffLeaveList = "{{ route('staff.leave_management.list') }}";
     var reuploadFileUrl = "{{ route('staff.reupload_file.add') }}";
 </script>

@@ -1633,38 +1633,30 @@ class SuperAdminController extends Controller
     }
     public function imagestore(Request $request)
     {
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('upload');
         if ($request->hasFile('upload')) {
-
-            //get filename with extension
-
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
-
-            //get filename without extension
-
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
-
-            $extension = $request->file('upload')->getClientOriginalExtension();
-
-
-
-            //filename to store
-
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
-
-
-
-            //upload file
-
-            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
-
-
-
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+            
+            $data = [
+                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'photo' => $base64,
+                'file_extension' => $extension,
+            ];
+            // dd($data);
+            
+            $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
+            // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
 
-                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
+                'default' => config('constants.image_url') . $response['path'] . $response['file_name'],
 
-                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
+                '500' =>  config('constants.image_url') . $response['path'] . $response['file_name'],
 
             ]);
         }

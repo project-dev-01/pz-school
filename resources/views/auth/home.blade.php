@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" /> -->
     <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
@@ -102,44 +102,45 @@
         <div class="col-md-6 auth-fluid-right" style="background-color:#8b848414;color:black;">
             <div class="auth-user-testimonial">
                 <div class="">
-                    <div class="form-group">
-                        <select class="vodiapicker">
-                            <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">English</option>
-                            <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">日本語</option>
-                        </select>
-                        <div class="lang-select" style="float: right;">
-                            <button class="btn-select" value=""></button>
-                            <div class="b" style="text-align:justify;">
-                                <ul id="a" style="margin-bottom:0px;"></ul>
+                        <div class="form-group">
+                            <select class="vodiapicker">
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
+                            </select>
+                            <div class="lang-select" style="float: right;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                </div>
                             </div>
                         </div>
                         <!-- Logo -->
                         <div class="auth-logo">
                             <div class="auth-logo">
-                                <a href="javascript:void(0)" class="logo logo-dark">
-                                    <span class="logo-lg">
-                                        <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="50px">
-                                    </span>
-                                </a>
+                                <div class="auth-logo">
+                                    <a href="" class="logo logo-dark">
+                                        <span class="logo-lg">
+                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="50px">
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- form -->
-                    <div class="form">
-                        <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
-                            <div class="form-group">
-                                <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
-                                <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
-                            </div>
+                        <!-- form -->
+                        <div class="form">
+                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                                <div class="form-group">
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
+                                </div>
 
-                            <h3 class="animated fadeInDown" style="text-align: center;">Welcome To {{$school_name}} School</h3>
-                            <p class="card-text" style="text-align: center;">
-                                To learn as much as I can, attain good grades and advance my education further.
-                                I believe that self-motivation and a strict routine has helped me achieve my goals so far,
-                                and I will use the same method in the future.</p>
-                            <h3 class="mb-2 text-center">Contact Us</h3>
-                            <div class="icon-item" style="margin-bottom: 5px; margin-left: 150px;">
+                                <h3 class="animated fadeInDown" style="text-align: center;">{{ __('messages.welcome_to') }} {{$school_name}} {{ __('messages.school') }}</h3>
+                                <p class="card-text" style="text-align: center;">
+                                {{ __('messages.to_learn_as_much_as_i_can') }}
+                                </p>
+                                <h3 class="mb-2 text-center">{{ __('messages.contact_us') }}</h3>
+                                <div class="icon-item" style="margin-bottom: 5px; margin-left: 150px;">
                                 <i class="fa fa-map-marker"></i>
                                 <span style="margin-left: 12px;">{{$home['address']}}</span>
                             </div>
@@ -150,16 +151,72 @@
                             <div class="icon-item" style="margin-bottom: 5px; margin-left: 150px;">
                                 <i class="fa fa-envelope"></i>
                                 <span style="margin-left: 7px;">{{$home['email']}}</span>
-                            </div>
-                            <h3 class="text-center mb-2">Location</h3>
-                            <!-- Google Map -->
-
-                            <div class="maps">
-                                <iframe src="{{$home['location']}}" frameborder="0" style="border:0;" allowfullscreen class="map"></iframe>
-                            </div>
-                        </form>
-                    </div>
-
+                                </div>
+                                <h3 class="text-center mb-2">{{ __('messages.location') }}</h3>
+						  <!-- Google Map -->
+                          
+						<div class="maps">
+						    <iframe src="{{$home['location']}}" frameborder="0" style="border:0;" allowfullscreen class="map"></iframe>
+						</div>
+                            </form>
+                        </div> 
+                            
+                    </div> <!-- end .align-items-center.d-flex.h-100-->
+                </div> <!-- end auth-user-testimonial-->
+            </div>
+            <!-- end Auth fluid right content -->
+            
+            <!--Auth fluid left content -->
+            <div class="col-md-6 auth-fluid-form-box" style="background-color:#8b848414;">
+                <div class="align-items-center d-flex h-100">
+                    <div class="card-body">
+                        <!-- Logo -->
+                       <div class="row">
+					   <div class="col-md-6" style="padding:10px">
+                        <div class="card">
+                        <a href="{{ route('parent.login') }}">
+							<img src="{{$parent_image}}" style="height:200px" class="card-img-top" alt="...">
+							  <div class="card-body">
+                              <h6 class="card-title text-center" style="margin-bottom: 0px;">{{ __('messages.parent_login') }}</h6>
+								 </div>
+							</div>
+						</div>
+						<div class="col-md-6" style="padding:10px">
+						 <div class="card">
+                         <a href="{{ route('student.login') }}">
+							<img src="{{$student_image}}" style="height:200px" class="card-img-top" alt="...">
+							  <div class="card-body">
+							  <h6 class="card-title text-center"style="margin-bottom: 0px;">{{ __('messages.student_login') }}</h6>
+								 </div>
+								 </div>
+								 </div>
+						</div>
+						<div class="row">
+						<div class="col-md-6" style="padding:10px">
+						 <div class="card">
+                         <a href="{{ route('teacher.login') }}">
+							<img src="{{$teacher_image}}" style="height:200px" class="card-img-top" alt="...">
+							  <div class="card-body">
+							  <h6 class="card-title text-center"style="margin-bottom: 0px;">{{ __('messages.teacher_login') }}</h6>
+								 </div>
+						 </div>
+						 </div>
+						 <div class="col-md-6" style="padding:10px">
+						 <div class="card">                          
+                         <a href="{{ route('schoolcrm.app.form') }}">
+							<img src="{{$application}}" style="height:200px" class="card-img-top" alt="...">
+							  <div class="card-body">
+							  <h6 class="card-title text-center"style="margin-bottom: 0px;">{{ __('messages.application') }}</h6>
+								 </div>						  </div>
+								 </div>
+						</div>
+                        <!-- Footer-->
+                        <footer class="footer">
+                                <p class="text-muted">2020 - <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> &copy; by <a href="javascript: void(0);" class="text-muted">Paxsuzen</a> </p>
+                            </footer>
+                    </div> <!-- end .card-body -->
                 </div> <!-- end .align-items-center.d-flex.h-100-->
             </div> <!-- end auth-user-testimonial-->
         </div>
@@ -278,14 +335,14 @@
         // console.log('en',sessionLang)
         if (locale == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

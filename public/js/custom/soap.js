@@ -347,7 +347,7 @@ $(function () {
                         output += '<td style="width: 36px;">';
 
                         if (data.photo) {
-                            var src = userImageUrl + "/" + data.photo;
+                            var src = userImageUrl + data.photo;
                         } else {
                             var src = defaultImg;
                         }
@@ -395,7 +395,7 @@ $(function () {
                         output += '<td style="width: 36px;">';
 
                         if (data.photo) {
-                            var src = userImageUrl + "/" + data.photo;
+                            var src = userImageUrl + data.photo;
                         } else {
                             var src = defaultImg;
                         }
@@ -434,12 +434,12 @@ $(function () {
             } else {
                 $.each(data.data, function (index, value) {
                     if (value.photo) {
-                        var img = imageUrl + "/" + value.photo;
+                        var img = imageUrl +  value.photo;
                     } else {
                         var img = defaultImg;
                     }
 
-                    row += ' <div class="col-3"><a class="dropdown-icon-item sub_category" href="#" data-toggle="modal" data-sub-category="' + value.id + '" data-category="' + soap_category_id + '" data-target="#notes-modal"><img src="' + img + '" alt="slack"><span>' + value.name + '</span></a></div>';
+                    row += ' <div class="col-3"><a class="dropdown-icon-item sub_category" href="#" data-toggle="modal" data-sub-category="' + value.id + '" data-category="' + soap_category_id + '" data-target="#notes-modal"><img src="' + img + '" alt="image"><span>' + value.name + '</span></a></div>';
                 });
             }
             // console.log('row',row);

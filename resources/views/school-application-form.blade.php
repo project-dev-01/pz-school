@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ __('messages.school_application_from') }}</title>
+    <title>School Application Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico'}}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico'}}">
 
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
@@ -73,7 +73,7 @@
                         <div class="auth-logo">
                             <a href="" class="logo logo-dark text-center">
                                 <span class="logo-lg">
-                                    <img src="{{ config('constants.image_url').'/public/images/logo-dark.png'}}" alt="" height="50">
+                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/logo-dark.png'}}" alt="" height="50">
                                 </span>
                             </a>
                         </div>

@@ -167,7 +167,7 @@ width: 14.3em;
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
-                                                                <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                <img src="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
@@ -234,7 +234,7 @@ width: 14.3em;
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -302,7 +302,7 @@ width: 14.3em;
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ config('constants.image_url').'/public/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -1034,7 +1034,7 @@ width: 14.3em;
     // todo list js
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/images/todolist/' }}";
+    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     var UserName = "{{ Session::get('name') }}";
@@ -1052,7 +1052,7 @@ width: 14.3em;
     // exam subject mark high low avg
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
     // leave apply
-    var StudentDocUrl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
+    var StudentDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>

@@ -69,7 +69,7 @@
                                 @foreach($parent_list as $parent)
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ $parent['photo'] && config('constants.image_url').'/public/users/images/'.$parent['photo'] ? config('constants.image_url').'/public/users/images/'.$parent['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42"/>
+                                        <img src="{{ $parent['photo'] && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42"/>
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
@@ -95,7 +95,7 @@
                                 @foreach($teacher_list as $teacher)
                                 <a href="javascript:void(0);" class="text-body">
                                     <div class="media p-2">
-                                        <img src="{{ $teacher['photo'] && config('constants.image_url').'/public/users/images/'.$teacher['photo'] ? config('constants.image_url').'/public/users/images/'.$teacher['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
+                                        <img src="{{ $teacher['photo'] && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14">
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>

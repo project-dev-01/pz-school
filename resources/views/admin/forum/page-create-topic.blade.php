@@ -372,7 +372,7 @@ border-bottom: 1px solid #E9D528;
                         <!-- <svg class="tt-icon">
                             <use xlink:href="#icon-ava-n"></use>
                         </svg>-->
-                        <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                         {{ $value['user_name'] }}
                     </div>
                     <div class="tt-col-description">

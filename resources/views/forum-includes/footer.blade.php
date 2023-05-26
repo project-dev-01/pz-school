@@ -514,5 +514,5 @@
                         // default image test
 
                         var calLang = "{{ __('messages.calendar_lang') }}";
-                        var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+                        var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
                     </script>

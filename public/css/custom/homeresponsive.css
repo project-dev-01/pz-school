@@ -287,3 +287,25 @@ txt
         overflow: hidden;
     }
 }
+
+@media screen and (min-device-width: 1920px) and (max-device-width: 1080px)
+
+{
+
+ .auth-fluid .auth-fluid-right {
+
+ padding: 5rem 1rem;
+
+}
+
+.auth-fluid .auth-fluid-form-box {
+
+padding: 4rem 0rem;
+}
+
+
+
+
+}
+
+

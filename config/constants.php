@@ -794,6 +794,7 @@ return [
         'application_relation_list'=> $url.'/application/relation/list',
         'application_academic_year_list'=> $url.'/application/academic_year/list',
        
+        'forum_image_store'=> $url.'/forum_image_store',
         
         
       ]

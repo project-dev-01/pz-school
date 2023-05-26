@@ -242,7 +242,7 @@ $(function () {
                 "render": function (data, type, row, meta) {
                     var document = "";
                     if (data) {
-                        document = '<a href="' + StaffDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        document = '<a href="' + StaffDocUrl  + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                     } else {
                         document = '<div>' +
                             '<input type="file" id="reissue_file' + row.id + '" name="file" class="reissue_file">' +

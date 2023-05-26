@@ -109,7 +109,7 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     //soapSubCategory routes
-    var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
+    var imageUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/soap/images/' }}";
     var soapSubCategoryList = "{{ route('admin.soap_sub_category.list') }}";
     var soapSubCategoryDetails = "{{ route('admin.soap_sub_category.details') }}";
     var soapSubCategoryDelete = "{{ route('admin.soap_sub_category.delete') }}";

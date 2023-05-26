@@ -792,8 +792,8 @@
     var getAbsentLateExcuse = "{{ config('constants.api.get_absent_late_excuse') }}";
 
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
-    var studentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
 </script>
 <script src="{{ asset('public/js/custom/classroom.js') }}"></script>
 <script src="{{ asset('public/js/custom/short-test.js') }}"></script>

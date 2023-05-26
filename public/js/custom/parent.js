@@ -196,7 +196,7 @@ $(function () {
                         var currentImg = defaultImg;
                     }
                     var img = currentImg;
-                    var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle" alt="No Image">' +
+                    var first_name = '<img src="' + img + '" class="mr-2 rounded-circle" alt="No Image">' +
                         '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
                     return first_name;
                 }

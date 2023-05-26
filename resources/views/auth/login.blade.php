@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
     <!-- App css -->
     <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
@@ -64,8 +64,8 @@
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                             </select> -->
                             <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">English</option>
-                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">日本語</option>
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -106,7 +106,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -133,7 +133,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 
@@ -247,14 +247,14 @@
         // console.log('en',sessionLang)
         if (locale == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

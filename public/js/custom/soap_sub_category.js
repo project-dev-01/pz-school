@@ -193,7 +193,7 @@ $(function () {
             var soap_type_id = data.data.soap_type_id;
             var IDnames = "#edit-soap-sub-category-form";
             var category_id = data.data.soap_category_id;
-            var img = imageUrl + "/" + data.data.photo;
+            var img = imageUrl + data.data.photo;
             getCategory(soap_type_id, IDnames, category_id);
             $('.editSoapSubCategory').find('input[name="id"]').val(data.data.id);
             $('.editSoapSubCategory').find('input[name="name"]').val(data.data.name);
