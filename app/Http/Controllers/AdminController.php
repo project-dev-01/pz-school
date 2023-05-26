@@ -229,81 +229,69 @@ class AdminController extends Controller
     }
     public function imagestore(Request $request)
     {
-
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('upload');
         if ($request->hasFile('upload')) {
-
-            //get filename with extension
-
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
-
-            //get filename without extension
-
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
-
-            $extension = $request->file('upload')->getClientOriginalExtension();
-
-
-
-            //filename to store
-
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
-
-
-
-            //upload file
-
-            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
-
-
-            // dd($filenametostore);
-
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+            
+            $data = [
+                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'photo' => $base64,
+                'file_extension' => $extension,
+            ];
+            // dd($data);
+            
+            $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
 
-                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
+                'default' => config('constants.image_url') . $response['path'] . $response['file_name'],
 
-                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
+                '500' =>  config('constants.image_url') . $response['path'] . $response['file_name'],
 
             ]);
         }
-    }
-    public function crtimgeastore(Request $request)
-    {
-        if ($request->hasFile('upload')) {
 
-            //get filename with extension
+        // if ($request->hasFile('upload')) {
 
-            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+        //     //get filename with extension
 
-            //get filename without extension
+        //     $filenamewithextension = $request->file('upload')->getClientOriginalName();
 
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-            //get file extension
+        //     //get filename without extension
 
-            $extension = $request->file('upload')->getClientOriginalExtension();
+        //     $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+        //     //get file extension
+
+        //     $extension = $request->file('upload')->getClientOriginalExtension();
 
 
 
-            //filename to store
+        //     //filename to store
 
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
-
-
-
-            //upload file
-
-            $request->file('upload')->storeAs('public/forumupload', $filenametostore);
+        //     $filenametostore = $filename . '_' . time() . '.' . $extension;
 
 
 
-            echo json_encode([
+        //     //upload file
 
-                'default' => asset('storage/app/public/forumupload/' . $filenametostore),
+        //     $request->file('upload')->storeAs('public/forumupload', $filenametostore);
 
-                '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
 
-            ]);
-        }
+        //     // dd($filenametostore);
+
+        //     echo json_encode([
+
+        //         'default' => asset('storage/app/public/forumupload/' . $filenametostore),
+
+        //         '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
+
+        //     ]);
+        // }
     }
 
     // forum screen pages end
@@ -2751,7 +2739,7 @@ class AdminController extends Controller
 									</div>
 									<td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('public/student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
+                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('public/'.config('constants.branch_id').'student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
                                     <td>

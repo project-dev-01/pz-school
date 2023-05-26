@@ -155,7 +155,7 @@
 
 <script>
     var AllLeaveList = "{{ route('teacher.leave_management.leave_approval_history_by_staff') }}";
-    var leaveFilesUrl = "{{ config('constants.image_url').'/public/admin-documents/leaves/' }}";
+    var leaveFilesUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
     // $(function() {

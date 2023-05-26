@@ -323,7 +323,7 @@ width: 14.3em;
 
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
-    var StaffDocUrl = "{{ config('constants.image_url').'/public/admin-documents/leaves/' }}";
+    var StaffDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>

@@ -68,8 +68,8 @@
             
             <li class="dropdown notification-list topbar-dropdown">
                 <select class="vodiapicker">
-                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/images/USA.png' }}">English</option>
-                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/images/JPN.png' }}">日本語</option>
+                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
+                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
                 </select>
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>
@@ -130,7 +130,7 @@
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ Session::get('picture') && config('constants.image_url').'/public/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/users/images/'.Session::get('picture') : config('constants.image_url').'/public/images/users/default.jpg' }}" alt="user-image" class="rounded-circle admin_picture">
+                    <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" alt="user-image" class="rounded-circle admin_picture">
                     <span class="pro-user-name ml-1 user_name">
                         <i class="mdi mdi-chevron-down"></i>
                     </span>
@@ -221,10 +221,10 @@
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src="{{ config('constants.image_url').'/public/images/Suzen-app-logo.png' }}" alt="" height="22">
+                    <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="22">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ config('constants.image_url').'/public/images/Logo.png' }}" alt="" height="45">
+                    <img src="{{ config('constants.image_url').'/public/common-asset/images/Logo.png' }}" alt="" height="45">
                 </span>
             </a>
         </div>

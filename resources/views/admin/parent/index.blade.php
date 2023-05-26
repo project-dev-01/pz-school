@@ -102,8 +102,8 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 
 <script>
-    var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var parentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var parentList = "{{ route('admin.parent.list') }}";
     var parentDelete = "{{ route('admin.parent.delete') }}";
     // lang change name start

@@ -116,9 +116,9 @@
     // employee
     var employeeList = "{{ route('admin.employee.list') }}";
     var employeeDelete = "{{ route('admin.employee.delete') }}";
-    var employeeImg = "{{ config('constants.image_url').'/public/users/images/' }}";
+    var employeeImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
     var deleteHtml = "{{ __('messages.delete_this_employee') }}";

@@ -146,10 +146,10 @@
 <script>
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var allStutdentLeaveList = "{{ config('constants.api.get_all_student_leaves') }}";
-    var studentDocUrl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
+    var studentDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/student_leave_list.js') }}"></script>
 @endsection

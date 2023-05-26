@@ -242,9 +242,9 @@
                 <div class="row">
                     <div class="col-xl-3">
                         @if($student['photo'])
-                        <img src="{{ config('constants.image_url').'/public/users/images/' }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
+                        <img src="{{ config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/' }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                        <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ config('constants.image_url').'/public/'. config('constants.branch_id').'/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
 
                     </div> <!-- end col -->
@@ -363,7 +363,7 @@
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
                                                     <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/users/images/'.$student['photo'] ? config('constants.image_url').'/public/users/images/'.$student['photo'] : config('constants.image_url').'/public/images/users/default.jpg' }}" />
+                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] ? config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] : config('constants.image_url').'/public/'. config('constants.branch_id').'/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -1625,8 +1625,8 @@
     });
 </script>
 <script>
-    var parentImg = "{{ config('constants.image_url').'/public/users/images/' }}";
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var parentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
     var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";

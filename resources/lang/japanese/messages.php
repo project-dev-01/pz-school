@@ -1331,5 +1331,14 @@ return [
     "parent_guardian_details"  =>"Parent/Guardian Details",
     "add_parent_guardian"  =>"Add/Parent Guardian",
     "parent_guardian_list"  =>"Parent/Guardian List",
+    "parent_login" => "Parent Login",
+    "teacher_login" => "Teacher Login",
+    "student_login" => "Student Login",
+    "application" => "Application",
+    "welcome_to" => "Welcome To",
+    "school" => "School",
+    "to_learn_as_much_as_i_can" => "To learn as much as I can, attain good grades and advance my education further. 
+    I believe that self-motivation and a strict routine has helped me achieve my goals so far,
+    and I will use the same method in the future.",
 ];
 

@@ -273,14 +273,14 @@
     console.log('en', locale)
     if (locale == "japanese") {
         //find an item with value of sessionLang\
-        var img = "{{ config('constants.image_url').'/public/images/JPN.png' }}";
+        var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
         var value = "japanese";
         var text = "日本語";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
         $('.btn-select').html(item);
         $('.btn-select').attr('value', value);
     } else {
-        var img = "{{ config('constants.image_url').'/public/images/USA.png' }}";
+        var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
         var value = "en";
         var text = "English";
         var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

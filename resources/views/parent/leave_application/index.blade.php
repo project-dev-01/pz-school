@@ -259,7 +259,7 @@ width: 14.3em;
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";
     // leave apply
-    var StudentDocUrl = "{{ config('constants.image_url').'/public/teacher/student-leaves/' }}";
+    var StudentDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_leave_app.js') }}"></script>

@@ -228,10 +228,10 @@
                                                         <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.rank_out_of_5') }} </span>@if($work['remarks']) {{$work['rank']}} @endif</p>
                                                     </div>
                                                 </div>
-                                                @if(file_exists( public_path().'/teacher/homework/'.$work['document'] ))
+                                                @if($work['document'] )
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{ config('constants.image_url').'/public/teacher/homework/'}}/{{$work['document'] }}" download>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/homework/'}}/{{$work['document'] }}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a></p>
                                                     </div>
@@ -265,7 +265,7 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} <span class="text-danger">*</span> :</div>
                                                     <div class="col-md-6">
-                                                        <a href="{{ config('constants.image_url').'/public/student/homework/'}}/{{$work['file'] }}" download>
+                                                        <a href="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/student/homework/'}}/{{$work['file'] }}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                         </a>
                                                     </div>

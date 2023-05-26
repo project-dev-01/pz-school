@@ -190,7 +190,7 @@
 
     var teacherID = null;
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('public/js/custom/paper_wise_result.js') }}"></script>
 @endsection

@@ -4,7 +4,7 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ config('constants.image_url').'/public/images/users/default.jpg' }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+            <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
             <div class="dropdown">
                 <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">Geneva Kennedy</a>
                 <div class="dropdown-menu user-pro-dropdown">
@@ -221,19 +221,19 @@
                             <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
-                                    <span>{{ __('messages.parent') }}/{{ __('messages.guardian_details') }}</span>
+                                    <span>{{ __('messages.parent_guardian_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse {{  (request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.add_parent') }}/{{ __('messages.guardian') }}</span>
+                                                <span>{{ __('messages.add_parent_guardian') }}</span>
                                             </a>
                                         </li>
                                         <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent') || request()->is('admin/parent/parent-details*')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.parent') }}/ {{ __('messages.guardian_list') }}</span>
+                                                <span>{{ __('messages.parent_guardian_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
