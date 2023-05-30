@@ -34,7 +34,7 @@
                     <div class="col-12">
                         <div class="col-sm-12 col-md-12">
                             <div class="dt-buttons" style="float:right;">
-                                <a href="{{asset('uploads/Sample Parent.csv')}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
+                                <a href="{{ config('constants.image_url').'/public/common-asset/uploads/Sample Parent.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
                             </div>
                         </div>
                     </div>
