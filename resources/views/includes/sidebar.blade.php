@@ -875,7 +875,7 @@
                     <div class="collapse {{  (request()->is('admin/event*')) ? 'show' : '' }}" id="sidebarEvents">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.event_type')}}" class="nav-link {{ (request()->is('admin/event_type/*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.event_type')}}" class="nav-link {{ (request()->is('admin/all_event_type/*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.event_type') }} </span>
                                 </a>
                             </li>

@@ -221,56 +221,6 @@
             </div> <!-- end auth-user-testimonial-->
         </div>
         <!-- end Auth fluid right content -->
-
-        <!--Auth fluid left content -->
-        <div class="col-md-6 auth-fluid-form-box" style="background-color:#8b848414;">
-            <div class="align-items-center d-flex h-100">
-                <div class="card-body">
-                    <!-- Logo -->
-                    <div class="row">
-                        <div class="col-md-6" style="padding:10px">
-                            <div class="card">
-                                <a href="{{ route('parent.login') }}">
-                                    <img src="{{$parent_image}}" style="height:200px" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Parent Login</h6>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="padding:10px">
-                            <div class="card">
-                                <a href="{{ route('student.login') }}">
-                                    <img src="{{$student_image}}" style="height:200px" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h6>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6" style="padding:10px">
-                            <div class="card">
-                                <a href="{{ route('teacher.login') }}">
-                                    <img src="{{$teacher_image}}" style="height:200px" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Teacher Login</h6>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="padding:10px">
-                            <div class="card">
-                                <a href="{{ route('schoolcrm.app.form') }}">
-                                    <img src="{{$application}}" style="height:200px" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h6 class="card-title text-center" style="margin-bottom: 0px;">Application</h6>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- end .card-body -->
-            </div> <!-- end .align-items-center.d-flex.h-100-->
-        </div>
-        <!-- end auth-fluid-form-box-->
     </div>
     <!-- end auth-fluid-->
     <!-- Vendor js -->

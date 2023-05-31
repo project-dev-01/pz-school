@@ -207,12 +207,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('teacher_assign/list', [AdminController::class, 'ClassAssignSubTeacherList'])->name('admin.teacher_assign_subject.list');
 
         // Event Type routes
-        Route::get('event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');
-        Route::get('event_type/list', [AdminController::class, 'getEventTypeList'])->name('admin.event_type.list');
-        Route::post('event_type/add', [AdminController::class, 'addEventType'])->name('admin.event_type.add');
-        Route::post('event_type/event_type-details', [AdminController::class, 'getEventTypeDetails'])->name('admin.event_type.details');
-        Route::post('event_type/update', [AdminController::class, 'updateEventType'])->name('admin.event_type.update');
-        Route::post('event_type/delete', [AdminController::class, 'deleteEventType'])->name('admin.event_type.delete');
+        Route::get('all_event_type/index', [AdminController::class, 'eventType'])->name('admin.event_type');
+        Route::get('all_event_type/list', [AdminController::class, 'getEventTypeList'])->name('admin.event_type.list');
+        Route::post('all_event_type/add', [AdminController::class, 'addEventType'])->name('admin.event_type.add');
+        Route::post('all_event_type/event_type-details', [AdminController::class, 'getEventTypeDetails'])->name('admin.event_type.details');
+        Route::post('all_event_type/update', [AdminController::class, 'updateEventType'])->name('admin.event_type.update');
+        Route::post('all_event_type/delete', [AdminController::class, 'deleteEventType'])->name('admin.event_type.delete');
 
 
         // Event routes
