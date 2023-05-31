@@ -27,7 +27,7 @@
                         <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ __('messages.grade') }}</h4>
+                <h4 class="page-title">{{ __('messages.grade_range') }}</h4>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card-box">
-                <h4 class="header-title">{{ __('messages.grade') }}</h4>
+                <h4 class="header-title">{{ __('messages.grade_range') }}</h4>
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
