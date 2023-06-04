@@ -25,26 +25,32 @@
 @if(Session::get('role_id') == '1')
 <script>
     var backToLogin = "{{ route('super_admin.login') }}";
+    var logoutIdle = "{{ route('super_admin.logout') }}";
 </script>
 @elseif(Session::get('role_id') == '3')
 <script>
     var backToLogin = "{{ route('staff.login') }}";
+    var logoutIdle = "{{ route('staff.logout') }}";
 </script>
 @elseif(Session::get('role_id') == '4')
 <script>
     var backToLogin = "{{ route('teacher.login') }}";
+    var logoutIdle = "{{ route('teacher.logout') }}";
 </script>
 @elseif(Session::get('role_id') == '5')
 <script>
     var backToLogin = "{{ route('parent.login') }}";
+    var logoutIdle = "{{ route('parent.logout') }}";
 </script>
 @elseif(Session::get('role_id') == '6')
 <script>
     var backToLogin = "{{ route('student.login') }}";
+    var logoutIdle = "{{ route('student.logout') }}";
 </script>
 @else
 <script>
     var backToLogin = "{{ route('admin.login') }}";
+    var logoutIdle = "{{ route('admin.logout') }}";
 </script>
 @endif
 <script>
@@ -197,7 +203,10 @@
     var inprogress_lang = "{{ __('messages.inprogress') }}";
     var select_category = "{{ __('messages.select_category') }}";
     var select_sub_category = "{{ __('messages.select_sub_category') }}";
-    
+    var class_start_lang = "{{ __('messages.class_start') }}";
+    var class_end_lang = "{{ __('messages.class_end') }}";
+    var assign_to_lang = "{{ __('messages.assign_to') }}";
+    var action_lang = "{{ __('messages.action') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

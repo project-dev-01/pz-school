@@ -459,7 +459,7 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response.code == 200) {
-                            if (response.data.all_day == "1") {
+                            if (response.data.allDay == "1") {
                                 $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
                                 $("#updateTasksModal").find("#editTimeSlot").hide();
                             } else {

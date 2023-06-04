@@ -728,7 +728,7 @@ class AdminController extends Controller
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
-
+        // dd($getAllTeacherList);
         return view('admin.assign_class_subject_teacher.index', [
             'classDetails' => $getClasses['data'],
             'getAllTeacherList' => $getAllTeacherList['data'],
@@ -895,7 +895,7 @@ class AdminController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'holiday' => $request->holiday,
-            'description' => $request->description
+            'created_by' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.event_add'), $data);
         // dd($response);
@@ -977,7 +977,8 @@ class AdminController extends Controller
             'holiday' => $request->holiday,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'description' => $request->description
+            'description' => $request->description,
+            'created_by' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.event_update'), $data);
         return $response;
@@ -4854,9 +4855,10 @@ class AdminController extends Controller
         return DataTables::of($response['data'])
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
+                $rel_ass_lan = __('messages.relief_assign');
                 return '<div class="button-list">
                                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" 
-                                    data-from_date="' . $row['from_leave'] . '" data-to_date="' . $row['to_leave'] . '" id="reliefAssign">Relief Assign</a>
+                                    data-from_date="' . $row['from_leave'] . '" data-to_date="' . $row['to_leave'] . '" id="reliefAssign">' . $rel_ass_lan . '</a>
                             </div>';
             })
 
@@ -4946,6 +4948,7 @@ class AdminController extends Controller
     public function assignLeaveApprover()
     {
         $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+        // dd($get_all_staff_details);
         return view('admin.leave_management.assign_leave_approval', [
             'get_all_staff_details' => $get_all_staff_details['data']
         ]);

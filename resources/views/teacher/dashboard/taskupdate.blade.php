@@ -20,16 +20,46 @@
                         <textarea id="taskDescription" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}"></textarea>
                     </div>
                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.from') }}<span class="text-danger">*</span></label>
+                                <input id="edittaskfromDate" name="edittaskfromDate" class="form-control taskfromDate" placeholder="YYYY-MM-DD">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                <input id="edittaskToDate" name="edittaskfromDate" class="form-control taskToDate" placeholder="YYYY-MM-DD">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group displayTimeSlot" id="editTimeSlot">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.start_time') }}</label>
+                                <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="HH:MM">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>{{ __('messages.end_time') }}</label>
+                                <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="HH:MM">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input allDayCheck" id="editAllDayCheck">
+                            <label class="custom-control-label" for="editAllDayCheck">All day</label>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
                         <label for="startEndDate">{{ __('messages.start_date') }}</label>
                         <p id="startDate"></p>
                     </div>
                     <div class="form-group">
                         <label for="endDate">{{ __('messages.end_date') }}</label>
                         <p id="endDate"></p>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                        <button type="button" id="updateCalBtn" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
+                        <button type="submit" id="updateCalBtn" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                     </div>
 
                 </form>

@@ -32,7 +32,7 @@
                     <div class="text-center">
                         <i class="h1 mdi mdi-comment-multiple-outline text-muted"></i>
                         <h3 class="mb-3">{{ __('messages.frequently_asked_questions') }}</h3>
-                        <p class="text-muted">{{ __('messages.have_questions_look') }} </p>
+                        <p class="text-muted">{{ __('messages.have_questions_look') }}</p>
                         <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>{{ __('messages.email_us_your_question') }}</button>
                     </div>
                 </div><!-- end col -->
@@ -45,7 +45,7 @@
                     <div>
                         <div class="faq-question-q-box">Q.</div>
                         <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_admission') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.for_those_seeking') }}</p>
+                        <p class="faq-answer mb-4">{{ __('messages.for_those_seeking_admissions') }}..</p>
                     </div>
 
                     <!-- Question/Answer -->
@@ -59,7 +59,7 @@
                     <div>
                         <div class="faq-question-q-box">Q.</div>
                         <h4 class="faq-question">{{ __('messages.what_will_be') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.school_timings_are') }}</p>
+                        <p class="faq-answer mb-4">{{ __('messages.school_timings_are') }} </p>
                     </div>
 
                     <!-- Question/Answer -->
@@ -91,7 +91,7 @@
                     <div>
                         <div class="faq-question-q-box">Q.</div>
                         <h4 class="faq-question">{{ __('messages.how_many_terms') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.we_will_be_having') }}</p>
+                        <p class="faq-answer mb-4">{{ __('messages.we_will_be_having') }} </p>
                     </div>
 
                     <!-- Question/Answer -->
@@ -122,16 +122,16 @@
 
                 <div class="mt-4">
                     <form id="sendFaqMail" method="post" enctype="multipart/form-data" autocomplete="off">
-                            <input type="hidden" name="email" id="email" value="{{$data['email']}}">
-                            <input type="hidden" name="name" id="name" value="{{$data['name']}}">
-                            <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
+                        <input type="hidden" name="email" id="email" value="{{$data['email']}}">
+                        <input type="hidden" name="name" id="name" value="{{$data['name']}}">
+                        <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
 
                         <div class="form-group">
-                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="{{ __('messages.subject') }}">
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div class="form-group">
                             <div class="summernote">
-                                <textarea class="form-control"   id="remarks" rows="5" placeholder="{{ __('messages.questions_type_here') }}" name="remarks"></textarea>
+                                <textarea class="form-control" id="remarks" rows="5" placeholder="{{ __('messages.questions_type_here') }}" name="remarks"></textarea>
                             </div>
                         </div>
 

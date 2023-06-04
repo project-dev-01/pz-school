@@ -10,6 +10,11 @@
 <!-- full calendar css end-->
 @endsection
 @section('component_css')
+<!-- date picker -->
+<link href="{{ asset('public/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
@@ -1027,14 +1032,15 @@
 @section('scripts')
 <!-- plugin js -->
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<!-- validation -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <!-- full calendar js end -->
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
+<!-- validation -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <!-- full calendar js start -->
 <script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
@@ -1042,7 +1048,8 @@
 <script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
-
+<!-- full calendar js end -->
+<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     // calendor js
 

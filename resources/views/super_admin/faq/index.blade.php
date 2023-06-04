@@ -1,5 +1,11 @@
 @extends('layouts.admin-layout')
 @section('title','FAQs')
+@section('component_css')
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -108,7 +114,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Ask question ?</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">{{ __('messages.ask_question') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <hr>
@@ -116,21 +122,21 @@
 
                 <div class="mt-4">
                     <form id="sendFaqMail" method="post" enctype="multipart/form-data" autocomplete="off">
-                            <input type="hidden" name="email" id="email" value="{{$data['email']}}">
-                            <input type="hidden" name="name" id="name" value="{{$data['name']}}">
-                            <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
+                        <input type="hidden" name="email" id="email" value="{{$data['email']}}">
+                        <input type="hidden" name="name" id="name" value="{{$data['name']}}">
+                        <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
                         <div class="form-group">
-                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="Subject">
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div class="form-group">
                             <div class="summernote">
-                                <textarea class="form-control"   id="remarks" rows="5" placeholder="Questions type here " name="remarks"></textarea>
+                                <textarea class="form-control" id="remarks" rows="5" placeholder="{{ __('messages.questions_type_here') }}" name="remarks"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group m-b-0">
                             <div class="text-right">
-                                <button class="btn btn-success waves-effect waves-light m-r-5"> <span>Send</span> <i class="mdi mdi-send ml-2"></i> </button>
+                                <button class="btn btn-success waves-effect waves-light m-r-5"> <span>{{ __('messages.send') }}</span> <i class="mdi mdi-send ml-2"></i> </button>
                             </div>
                         </div>
 
@@ -144,7 +150,12 @@
 </div><!-- /.modal -->
 @endsection
 @section('scripts')
-
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var faqEmail = "{{ config('constants.api.faq_email') }}";
 </script>

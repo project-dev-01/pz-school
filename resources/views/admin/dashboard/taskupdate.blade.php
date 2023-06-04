@@ -9,7 +9,7 @@
             <div class="modal-body" style="background-color: #8adfee14;">
                 <form id="taskUpdate" autocomplete="off">
                     @csrf
-                    <input type="text" id="calendorID" name="calendar_id" class="form-control">
+                    <input type="hidden" id="calendorID" name="calendar_id" class="form-control">
                     <div class="form-group">
                         <label for="title">{{ __('messages.title') }} <span class="text-danger">*</span></label>
                         <input type="text" id="taskTitle" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}">

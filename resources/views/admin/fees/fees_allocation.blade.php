@@ -89,7 +89,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student Fees Allocation<h4>
+                        <h4 class="navv">{{ __('messages.student_fees_allocation') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">

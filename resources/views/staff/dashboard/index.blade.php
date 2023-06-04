@@ -9,8 +9,9 @@
 <link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- full calendar css end-->
 @endsection
-@section('css')
+@section('component_css')
 <!-- date picker -->
+<link href="{{ asset('public/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
@@ -560,11 +561,11 @@
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
-    @include('admin.dashboard.check_list')
-    @include('admin.dashboard.task')
-    @include('admin.dashboard.task-show')
-    @include('admin.dashboard.exam-schedule')
-    @include('admin.dashboard.taskupdate')
+    @include('staff.dashboard.check_list')
+    @include('staff.dashboard.task')
+    @include('staff.dashboard.task-show')
+    @include('staff.dashboard.exam-schedule')
+    @include('staff.dashboard.taskupdate')
 
 </div> <!-- container -->
 @endsection
@@ -591,6 +592,7 @@
 <script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
 <!-- full calendar js end -->
+<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";

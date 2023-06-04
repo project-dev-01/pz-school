@@ -1,4 +1,73 @@
 $(document).ready(function () {
+    var date1 = $("#taskfromDate").flatpickr({
+        dateFormat: "Y-m-d",
+        onChange: function (selectedDates, dateStr, instance) {
+            date2.set('minDate', dateStr)
+        }
+    });
+
+    var date2 = $("#taskToDate").flatpickr({
+        dateFormat: "Y-m-d",
+        onChange: function (selectedDates, dateStr, instance) {
+            date1.set('maxDate', dateStr)
+        }
+    });
+
+    var editdate1 = $("#edittaskfromDate").flatpickr({
+        dateFormat: "Y-m-d",
+        onChange: function (selectedDates, dateStr, instance) {
+            editdate2.set('minDate', dateStr)
+        }
+    });
+
+    var editdate2 = $("#edittaskToDate").flatpickr({
+        dateFormat: "Y-m-d",
+        onChange: function (selectedDates, dateStr, instance) {
+            editdate1.set('maxDate', dateStr)
+        }
+    });
+    // $(".taskdateSlot").flatpickr({mode:"range"});
+    // var form_date_from = $(".taskdateSlot").flatpickr({
+    //     mode: 'range'
+    // });
+    // $("#tasktimeSlotStart").flatpickr({ enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45" });
+    // $("#tasktimeSlotEnd").flatpickr({ enableTime: !0, noCalendar: !0, dateFormat: "H:i", defaultDate: "01:45" });
+    $('.allDayCheck').on('change', function (e) {
+        if ($(this).is(':checked')) {
+            // let fromDateval = $(".taskfromDate").val();
+            // $(".taskToDate").val(fromDateval);
+            $(".displayTimeSlot").hide();
+        } else {
+            $(".displayTimeSlot").show();
+        }
+    });
+    // check min data validation
+    var check_in_date = flatpickr("#tasktimeSlotStart", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i",
+        onChange: function (selectedDates, dateStr, instance) {
+            check_out_date.set('minTime', selectedDates[0]);
+            $("#tasktimeSlotEnd").val("");
+        }
+    });
+
+    var check_out_date = flatpickr("#tasktimeSlotEnd", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i"
+    });
+    //
+    // check min data validation
+    var edit_check_in_date = flatpickr("#editTasktimeSlotStart", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i",
+        onChange: function (selectedDates, dateStr, instance) {
+            edit_check_out_date.set('minTime', selectedDates[0]);
+            $("#editTasktimeSlotEnd").val("");
+        }
+    });
+
+    var edit_check_out_date = flatpickr("#editTasktimeSlotEnd", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i"
+    });
+
+    // ("#minmax-timepicker").flatpickr({enableTime:!0,noCalendar:!0,dateFormat:"H:i",minDate:"16:00",maxDate:"22:30"})
     // check wether mobile or not
     window.mobilecheck = function () {
         var check = false;
@@ -263,26 +332,55 @@ $(document).ready(function () {
         // selectable: true,
         selectHelper: true,
         select: function (e) {
+            let starthminutes = moment(e.start).format('HH:mm');
+            let endhminutes = moment(e.end).format('HH:mm');
+            let allDay = e.allDay;
             // var title = prompt('Event Title:');
             $('#addTasksModal').modal('toggle');
             $('.addTasks').find('form')[0].reset();
-            var start_dt = moment(e.start).format('DD-MM-YYYY dddd hh:mm A');
-            var subonesec = moment(e.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-            // var end_dt = moment(e.end).format('DD-MM-YYYY dddd hh:mm A');
-            $("#startDate").html(start_dt);
-            $("#endDate").html(subonesec);
+            var selected_start = moment(e.start).format('YYYY-MM-DD');
+            var selected_end = moment(e.end).subtract(1, 'seconds').format('YYYY-MM-DD');
 
-            $('#saveBtn').click(function () {
-                var title = $('#taskTitle').val();
-                // var start_date = moment(start).format('YYYY-MM-DD');
-                // var end_date = moment(end).format('YYYY-MM-DD');
-                var start = e.start;
-                var end = e.end;
-                var start_date = moment(start).format('YYYY-MM-DD HH:mm:ss');
-                var end_date = moment(end).format('YYYY-MM-DD HH:mm:ss');
-                var description = $("#taskDescription").val();
-
-                if (title) {
+            $("#taskAdd").find("#taskfromDate").val(selected_start);
+            $("#taskAdd").find("#taskToDate").val(selected_end);
+            $("#taskAdd").find("#tasktimeSlotStart").val(starthminutes);
+            $("#taskAdd").find("#tasktimeSlotEnd").val(endhminutes);
+            if (allDay === true) {
+                $("#taskAdd").find("#allDayCheck").prop('checked', true);
+                $("#taskAdd").find("#addTimeSlot").hide();
+            } else {
+                $("#taskAdd").find("#allDayCheck").prop('checked', false);
+                $("#taskAdd").find("#addTimeSlot").show();
+            }
+            // rules validation
+            $("#taskAdd").validate({
+                rules: {
+                    title: "required",
+                    taskdateSlot: "required"
+                }
+            });
+            $('#taskAdd').on('submit', function (event) {
+                event.preventDefault();
+                var taskAdd = $("#taskAdd").valid();
+                if (taskAdd === true) {
+                    var title = $('#taskTitle').val();
+                    var description = $("#taskDescription").val();
+                    var taskfromDate = $("#taskfromDate").val();
+                    var taskToDate = $("#taskToDate").val();
+                    var tasktimeSlotStart = $("#tasktimeSlotStart").val();
+                    var tasktimeSlotEnd = $("#tasktimeSlotEnd").val();
+                    var allDayCheck = $('#allDayCheck').is(':checked');
+                    if (allDayCheck === true) {
+                        var startdate = taskfromDate + " " + "00:00:00";
+                        var startend = taskToDate + " " + "24:00:00";
+                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                    } else {
+                        var startdate = taskfromDate + " " + tasktimeSlotStart + ":00";
+                        var startend = taskToDate + " " + tasktimeSlotEnd + ":00";
+                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                    }
                     $.ajax({
                         url: calendorAddTaskCalendor,
                         type: "POST",
@@ -294,6 +392,7 @@ $(document).ready(function () {
                             start: start_date,
                             end: end_date,
                             login_id: userID,
+                            all_day: allDayCheck,
                             description: description
                         },
                         success: function (response) {
@@ -301,21 +400,19 @@ $(document).ready(function () {
                             $('#addTasksModal').modal('hide')
                             $('.addTasks').find('form')[0].reset();
                             let eventObject = {
-                                id: newData.id,
+                                calendor_id: newData.calendor_id,
                                 title: newData.title,
                                 start: newData.start,
                                 end: newData.end,
                                 description: newData.description,
-                                className: newData.className
+                                className: newData.className,
+                                allDay: newData.allDay
                             };
                             calendar.addEvent(eventObject);
                         }
                     });
-                } else {
-                    $('#titleError').html("Enter title here");
+                    calendar.unselect();
                 }
-                calendar.unselect();
-
             });
 
         },
@@ -396,19 +493,81 @@ $(document).ready(function () {
                 $("#examClass").html(e.event.extendedProps.section_name);
                 $("#examSubject").html(e.event.extendedProps.subject_name);
                 $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
-            } else {
-                var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
-                var subonesec = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-
-                $('#showTasksModal').modal('toggle');
-                $("#calendorID").val(e.event.id);
-                $("#startDateDetails").html(start_dt);
-                $("#endDateDetails").html(subonesec);
-                $("#taskShowTit").html(e.event.title);
-                $("#taskShowDesc").html(e.event.extendedProps.description);
-
+            } else if (e.event.extendedProps.calendor_id) {
+                var calendor_id = e.event.extendedProps.calendor_id;
+                if (calendor_id) {
+                    $.ajax({
+                        url: calendorEditTaskCalendor,
+                        type: "GET",
+                        dataType: 'json',
+                        data: {
+                            token: token,
+                            branch_id: branchID,
+                            calendor_id: calendor_id
+                        },
+                        success: function (response) {
+                            if (response.code == 200) {
+                                var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
+                                var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                                $('#showTasksModal').modal('toggle');
+                                $("#showTasksModal").find("#calendorID").val(calendor_id);
+                                $("#startDateDetails").html(start_dt);
+                                $("#endDateDetails").html(subonesec);
+                                $("#taskShowTit").html(response.data.title);
+                                $("#taskShowDesc").html(response.data.description);
+                            } else {
+                                toastr.error(response.message);
+                            }
+                        }, error: function (err) {
+                            toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                        }
+                    });
+                }
 
             }
+            $("#editEventBtn").unbind().click(function () {
+                $('#taskUpdate')[0].reset();
+                $('#showTasksModal').modal('hide');
+                $('#updateTasksModal').modal('show');
+                var calendor_id = $("#calendorID").val();
+                $.ajax({
+                    url: calendorEditTaskCalendor,
+                    type: "GET",
+                    dataType: 'json',
+                    data: {
+                        token: token,
+                        branch_id: branchID,
+                        calendor_id: calendor_id
+                    },
+                    success: function (response) {
+                        if (response.code == 200) {
+                            if (response.data.allDay == "1") {
+                                $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
+                                $("#updateTasksModal").find("#editTimeSlot").hide();
+                            } else {
+                                $("#updateTasksModal").find("#editAllDayCheck").prop('checked', false);
+                                $("#updateTasksModal").find("#editTimeSlot").show();
+                            }
+                            var startdt = moment(response.data.start).format('YYYY-MM-DD');
+                            var enddt = moment(response.data.end).subtract(1, 'seconds').format('YYYY-MM-DD');
+                            var starthminutes = moment(response.data.start).format('HH:mm');
+                            var endhminutes = moment(response.data.end).format('HH:mm');
+                            $("#updateTasksModal").find("#calendorID").val(response.data.calendor_id);
+                            $("#updateTasksModal").find("#taskTitle").val(response.data.title);
+                            $("#updateTasksModal").find("#edittaskfromDate").val(startdt);
+                            $("#updateTasksModal").find("#edittaskToDate").val(enddt);
+                            $("#updateTasksModal").find("#editTasktimeSlotStart").val(starthminutes);
+                            $("#updateTasksModal").find("#editTasktimeSlotEnd").val(endhminutes);
+                            $("#updateTasksModal").find("#taskDescription").val(response.data.description);
+
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    }, error: function (err) {
+                        toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    }
+                });
+            });
             // delete
             $("#deleteEventBtn").unbind().click(function () {
                 var id = $("#calendorID").val();
@@ -449,13 +608,54 @@ $(document).ready(function () {
                     }
                 });
             });
+            // rules validation
+            $("#taskUpdate").validate({
+                rules: {
+                    title: "required",
+                    taskdateSlot: "required"
+                }
+            });
             // update
-            $("#updateCalBtn").unbind().click(function () {
-                e.event.remove();
-                let calendor_id = $("#updateTasksModal").find("#calendorID").val();
-                let title = $("#updateTasksModal").find("#taskTitle").val();
-                let description = $("#updateTasksModal").find("#taskDescription").val();
-                if (title) {
+            $('#taskUpdate').unbind().on('submit', function (event) {
+                event.preventDefault();
+                var taskUpdate = $("#taskUpdate").valid();
+                if (taskUpdate === true) {
+                    // $("#updateCalBtn").unbind().click(function () {
+                    e.event.remove();
+                    let calendor_id = $("#updateTasksModal").find("#calendorID").val();
+                    let title = $("#updateTasksModal").find("#taskTitle").val();
+                    let description = $("#updateTasksModal").find("#taskDescription").val();
+                    let edittaskfromDate = $("#updateTasksModal").find("#edittaskfromDate").val();
+                    let edittaskToDate = $("#updateTasksModal").find("#edittaskToDate").val();
+                    let tasktimeSlotStart = $("#updateTasksModal").find("#editTasktimeSlotStart").val();
+                    let tasktimeSlotEnd = $("#updateTasksModal").find("#editTasktimeSlotEnd").val();
+                    var allDayCheck = $("#updateTasksModal").find('#editAllDayCheck').is(':checked');
+                    if (allDayCheck === true) {
+                        // var datFm = new Date(edittaskfromDate);
+                        // var datTo = new Date(edittaskToDate);
+                        // var startOfDayDate = new Date(datFm.getFullYear()
+                        //     , datFm.getMonth()
+                        //     , datFm.getDate()
+                        //     , 00, 00, 01); // start day
+                        // var endOfDayDate = new Date(datTo.getFullYear()
+                        //     , datTo.getMonth()
+                        //     , datTo.getDate()
+                        //     , 23, 59, 59); // end of day
+                        // var start_date = moment(startOfDayDate).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(endOfDayDate).format('YYYY-MM-DD HH:mm:ss');
+                        // var start_date = moment(e.start).format('YYYY-MM-DD HH:mm:ss');
+                        // var end_date = moment(e.end).format('YYYY-MM-DD HH:mm:ss');
+                        var startdate = edittaskfromDate + " " + "00:00:00";
+                        var startend = edittaskToDate + " " + "24:00:00";
+
+                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                    } else {
+                        var startdate = edittaskfromDate + " " + tasktimeSlotStart + ":00";
+                        var startend = edittaskToDate + " " + tasktimeSlotEnd + ":00";
+                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                    }
                     $.ajax({
                         url: calendorUpdateTaskCalendor,
                         type: "POST",
@@ -465,61 +665,29 @@ $(document).ready(function () {
                             branch_id: branchID,
                             title: title,
                             calendor_id: calendor_id,
-                            description: description
+                            description: description,
+                            start: start_date,
+                            end: end_date,
+                            all_day: allDayCheck
                         },
                         success: function (response) {
                             var datas = response.data;
                             $('#updateTasksModal').modal('hide')
                             $('#taskUpdate')[0].reset();
                             let obj = {
-                                id: datas.id,
+                                calendor_id: datas.calendor_id,
                                 title: datas.title,
                                 start: datas.start,
                                 end: datas.end,
                                 description: datas.description,
-                                className: datas.className
+                                className: datas.className,
+                                allDay: datas.allDay
                             };
                             calendar.addEvent(obj);
                         }
                     });
-                } else {
-                    $('#titleError').html("Enter title here");
+                    calendar.unselect();
                 }
-                calendar.unselect();
-
-            });
-            $("#editEventBtn").unbind().click(function () {
-                $('#taskUpdate')[0].reset();
-                // $(document).on('click', '#deleteEventBtn', function () {
-                // var id = $("#calendorID").val();
-                $('#showTasksModal').modal('hide');
-                $('#updateTasksModal').modal('show');
-                var calendor_id = $("#calendorID").val();
-                $.ajax({
-                    url: calendorEditTaskCalendor,
-                    type: "GET",
-                    dataType: 'json',
-                    data: {
-                        token: token,
-                        branch_id: branchID,
-                        calendor_id: calendor_id
-                    },
-                    success: function (response) {
-                        if (response.code == 200) {
-                            var start_dt = moment(response.data.start).format('DD-MM-YYYY');
-                            var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY');
-                            $("#updateTasksModal").find("#calendorID").val(response.data.id);
-                            $("#updateTasksModal").find("#taskTitle").val(response.data.title);
-                            $("#updateTasksModal").find("#taskDescription").val(response.data.description);
-                            $("#updateTasksModal").find("#startDate").html(start_dt);
-                            $("#updateTasksModal").find("#endDate").html(subonesec);
-                        } else {
-                            toastr.error(response.message);
-                        }
-                    }, error: function (err) {
-                        toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
-                    }
-                });
             });
         }
     });
@@ -527,7 +695,7 @@ $(document).ready(function () {
     calendar.render();
     // unbind model
     $("#addTasksModal").on("hidden.bs.modal", function () {
-        $('#saveBtn').unbind();
+        $('#taskAdd').unbind();
     });
 
 

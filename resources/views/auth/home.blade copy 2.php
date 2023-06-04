@@ -23,7 +23,7 @@
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
     <link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('public/css/custom/home.css') }}" type="text/css" />
+    <link href="{{ asset('public/css/custom/homeresponsive.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="loading auth-fluid-pages pb-0">
