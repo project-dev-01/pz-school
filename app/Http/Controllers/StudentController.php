@@ -741,13 +741,13 @@ class StudentController extends Controller
         ];
 
         $days = array(
-            'sunday',
             'monday',
             'tuesday',
             'wednesday',
             'thursday',
             'friday',
-            'saturday'
+            'saturday',
+            'sunday',
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);

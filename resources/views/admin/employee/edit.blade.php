@@ -515,7 +515,7 @@
                                         @endphp
                                         @endif
                                         @endforeach
-                                        <option value="{{$r['id']}}" {{ $selected }}>{{$r['role_name']}}</option>
+                                        <option value="{{$r['id']}}" {{ $selected }}>{{ __('messages.' . strtolower($r['role_name'])) }}</option>
                                         @empty
                                         @endforelse
 

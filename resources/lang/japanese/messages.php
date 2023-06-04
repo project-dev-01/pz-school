@@ -1341,5 +1341,13 @@ return [
     私は、自己の動機づけと厳しいルーティンが、これまでの目標達成に役立ってきたと信じています。
     そして、将来も同じ方法を使い続けるつもりです。",
     "student_fees_allocation" => "学生料金の配分",
-    "relief_assign" => "クラスリリーフアサイン"
+    "relief_assign" => "クラスリリーフアサイン",
+    "relief_assign" => "Relief Assign", 
+    "class_start" => "Class Start", 
+    "class_end" => "Class End",
+    "assign_to" => "Assign To",
+    "main" => "メイン",
+    "alternative" => "サブ",
+    "order_code" => "Order Code",
+    "enter_order_code" => "Enter Order Code",
 ];

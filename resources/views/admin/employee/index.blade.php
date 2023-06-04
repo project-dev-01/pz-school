@@ -500,9 +500,10 @@
                                 <div class="form-group">
                                     <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
-                                        @foreach($roles as $r)
-                                        <option value="{{$r['id']}}">{{$r['role_name']}}</option>
-                                        @endforeach
+                                        @forelse($roles as $r)
+                                        <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['role_name'])) }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -524,11 +525,10 @@
                                     <label for="designation_id">{{ __('messages.designation') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
                                         <option value="">{{ __('messages.choose_designation') }}</option>
-                                        @if(!empty($emp_designation))
-                                        @foreach($emp_designation as $r)
+                                        @forelse($emp_designation as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @endforeach
-                                        @endif
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

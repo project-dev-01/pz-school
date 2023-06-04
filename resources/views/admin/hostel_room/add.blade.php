@@ -19,9 +19,10 @@
                         <label for="hostel">{{ __('messages.hostel') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="hostel" name="hostel_id">
                             <option value="">{{ __('messages.select_the_hostel') }}</option>
-                            @foreach($hostel as $hos)
+                            @forelse($hostel as $hos)
                             <option value="{{$hos['id']}}">{{$hos['name']}}</option>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </select>
                         <span class="text-danger error-text hostel_error"></span>
                     </div>
@@ -30,9 +31,10 @@
                         <label for="block">{{ __('messages.select_block') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="block" name="block">
                             <option value="">{{ __('messages.select_the_block') }}</option>
-                            @foreach($block as $blo)
+                            @forelse($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </select>
                         <span class="text-danger error-text block_error"></span>
                     </div>

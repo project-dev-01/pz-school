@@ -54,6 +54,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="order_code">{{ __('messages.order_code') }}</label>
+                        <input type="text" id="edit_order_code" name="order_code" class="form-control" placeholder="{{ __('messages.enter_order_code') }}">
+                    </div>
+                    <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
                         <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
                     </div>

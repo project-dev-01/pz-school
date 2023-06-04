@@ -58,9 +58,10 @@
                                     <select  class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
-                                        @foreach($class as $cla)
+                                        @forelse($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -69,13 +70,13 @@
                                     <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                                     <select id="day" class="form-control" name="day">
                                         <option value="">{{ __('messages.select_day') }}</option>
-                                        <option value="sunday">{{ __('messages.sunday') }}</option>
                                         <option value="monday">{{ __('messages.monday') }}</option>
                                         <option value="tuesday">{{ __('messages.tuesday') }}</option>
                                         <option value="wednesday">{{ __('messages.wednesday') }}</option>
                                         <option value="thursday">{{ __('messages.thursday') }}</option>
                                         <option value="friday">{{ __('messages.friday') }}</option>
                                         <option value="saturday">{{ __('messages.saturday') }}</option>
+                                        <option value="sunday">{{ __('messages.sunday') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -85,9 +86,11 @@
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
-                                        @foreach($semester as $sem)
+                                        @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}" {{$current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        @endforeach
+                                        
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -97,9 +100,10 @@
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
-                                        @foreach($session as $ses)
+                                        @forelse($session as $ses)
                                         <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

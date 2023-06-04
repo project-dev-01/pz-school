@@ -283,7 +283,7 @@ border-bottom: 1px solid #E9D528;
                                 <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">>
                                     <option value=""></option>
                                     @foreach($usernames as $c)
-                                    <option value="{{$c['id']}}">{{$c['name']}}</option>
+                                    <option value="{{$c['id']}}">{{ __('messages.' . strtolower($c['name'])) }}</option>
                                     @endforeach
 
                                 </select>

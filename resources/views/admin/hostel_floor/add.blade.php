@@ -20,9 +20,10 @@
                         <label for="block_id">{{ __('messages.block') }}<span class="text-danger">*</span></label>
                         <select class="form-control" name="block_id">
                             <option value="">{{ __('messages.select_block') }}</option>
-                            @foreach($block as $blo)
+                            @forelse($block as $blo)
                             <option value="{{$blo['id']}}">{{$blo['block_name']}}</option>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </select>
                         <span class="text-danger error-text block_id_error"></span>
                     </div>

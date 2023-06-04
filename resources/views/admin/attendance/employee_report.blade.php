@@ -56,9 +56,10 @@
                                     <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="department" id="employeeReportDepartment">
                                         <option value="">{{ __('messages.select_department') }}</option>
-                                        @foreach($department as $dep)
+                                        @forelse($department as $dep)
                                         <option value="{{$dep['id']}}">{{$dep['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -76,9 +77,10 @@
                                     <select id="employeeReportSession" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
-                                        @foreach($session as $ses)
+                                        @forelse($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

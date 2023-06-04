@@ -40,9 +40,9 @@
                     <div class="form-group">
                         <label for="subjectType">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="subjectType" name="type">
-                            <option value="0">Main</option>
+                            <option value="0">{{ __('messages.main') }}</option>
                             <option value="2">Sub</option>
-                            <option value="3">Alternative</option>
+                            <option value="3">{{ __('messages.alternative') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

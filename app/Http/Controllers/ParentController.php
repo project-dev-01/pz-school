@@ -359,13 +359,13 @@ class ParentController extends Controller
         ];
         // dd($data);
         $days = array(
-            'sunday',
             'monday',
             'tuesday',
             'wednesday',
             'thursday',
             'friday',
-            'saturday'
+            'saturday',
+            'sunday',
         );
 
         $timetable = Helper::PostMethod(config('constants.api.timetable_parent'), $data);

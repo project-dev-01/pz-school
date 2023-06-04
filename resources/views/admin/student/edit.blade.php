@@ -649,9 +649,11 @@
                                                 <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                                 <select id="class_id" class="form-control" name="class_id">
                                                     <option value="">{{ __('messages.select_grade') }}</option>
-                                                    @foreach($class as $cla)
+                                                    @forelse($class as $cla)
                                                     <option value="{{$cla['id']}}" {{$student['class_id'] == $cla['id'] ? "Selected" : "" }}>{{$cla['name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -660,9 +662,11 @@
                                                 <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                                 <select id="section_id" class="form-control" name="section_id">
                                                     <option value="">{{ __('messages.select_class') }}</option>
-                                                    @foreach($section as $sec)
+                                                    @forelse($section as $sec)
                                                     <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -685,9 +689,11 @@
                                                 <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                                 <select id="session_id" class="form-control" name="session_id">
                                                     <option value="">{{ __('messages.select_session') }}</option>
-                                                    @foreach($session as $ses)
+                                                    @forelse($session as $ses)
                                                     <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -696,9 +702,11 @@
                                                 <label for="semester_id">{{ __('messages.semester') }}</label>
                                                 <select id="semester_id" class="form-control" name="semester_id">
                                                     <option value="0">{{ __('messages.select_semester') }}</option>
-                                                    @foreach($semester as $sem)
+                                                    @forelse($semester as $sem)
                                                     <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1333,9 +1341,11 @@
 
                                                 <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                                     <option value="">{{ __('messages.select_transport') }}</option>
-                                                    @foreach($transport as $trans)
+                                                    @forelse($transport as $trans)
                                                     <option value="{{$trans['id']}}" {{$student['route_id'] == $trans['id'] ? "Selected" : "" }}>{{$trans['name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1345,9 +1355,11 @@
                                                 <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
                                                     <option value="">{{ __('messages.select_vehicle_number') }}</option>
 
-                                                    @foreach($vehicle as $veh)
+                                                    @forelse($vehicle as $veh)
                                                     <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1367,9 +1379,11 @@
                                                 <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                                 <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
                                                     <option value="">{{ __('messages.select_hostel_name') }}</option>
-                                                    @foreach($hostel as $hos)
+                                                    @forelse($hostel as $hos)
                                                     <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
-                                                    @endforeach
+                                                    
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1379,9 +1393,10 @@
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
                                                     <option value="">{{ __('messages.select_room_name') }}</option>
 
-                                                    @foreach($room as $roo)
+                                                    @forelse($room as $roo)
                                                     <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>
-                                                    @endforeach
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>

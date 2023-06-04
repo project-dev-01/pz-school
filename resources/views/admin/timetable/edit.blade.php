@@ -94,9 +94,10 @@
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden" {{$bulk}}>
                                                             <option value="">{{ __('messages.select_subject') }}</option>
-                                                            @foreach($subject as $sub)
+                                                            @forelse($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
-                                                            @endforeach
+                                                            @empty
+                                                            @endforelse
                                                         </select>
                                                         <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" value="{{$table['break_type']}}" {{$bulk}}></input>
                                                     </div>
@@ -106,9 +107,11 @@
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
                                                             <option value="">{{ __('messages.select_subject') }}</option>
-                                                            @foreach($subject as $sub)
+                                                            @forelse($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
-                                                            @endforeach
+                                                            
+                                                            @empty
+                                                            @endforelse
                                                         </select>
                                                         <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" disabled hidden="hidden" {{$bulk}}></input>
                                                     </div>

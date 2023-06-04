@@ -758,13 +758,13 @@ class PdfController extends Controller
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
         // dd($timetable);
         $days = array(
-            'sunday',
             'monday',
             'tuesday',
             'wednesday',
             'thursday',
             'friday',
-            'saturday'
+            'saturday',
+            'sunday',
         );
 
         if ($timetable['code'] == "200") {

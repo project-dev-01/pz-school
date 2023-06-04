@@ -19,9 +19,10 @@
                         <label for="category">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="category" name="category">
                             <option value="">{{ __('messages.select_the_category') }}</option>
-                            @foreach($category as $cat)
+                            @forelse($category as $cat)
                             <option value="{{$cat['id']}}">{{$cat['name']}}</option>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </select>
                         <span class="text-danger error-text category_error"></span>
                     </div>

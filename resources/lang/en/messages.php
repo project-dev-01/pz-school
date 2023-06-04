@@ -1338,5 +1338,12 @@ return [
     "to_learn_as_much_as_i_can" => "To learn as much as I can, attain good grades and advance my education further. 
     I believe that self-motivation and a strict routine has helped me achieve my goals so far,
     and I will use the same method in the future.",
-    "relief_assign" => "Relief Assign"
+    "relief_assign" => "Relief Assign", 
+    "class_start" => "Class Start", 
+    "class_end" => "Class End",
+    "assign_to" => "Assign To",
+    "main" => "Main",
+    "alternative" => "Alternative",
+    "order_code" => "Order Code",
+    "enter_order_code" => "Enter Order Code",
 ];

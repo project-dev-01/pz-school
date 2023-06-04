@@ -127,11 +127,11 @@
                         <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
 
                         <div class="form-group">
-                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
+                            <input type="text" name="subject" id="subject"  class="form-control" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div class="form-group">
                             <div class="summernote">
-                                <textarea class="form-control" id="remarks" rows="5" placeholder="Questions type here " name="remarks"></textarea>
+                                <textarea class="form-control"   id="remarks" rows="5" placeholder="{{ __('messages.questions_type_here') }}" name="remarks"></textarea>
                             </div>
                         </div>
 

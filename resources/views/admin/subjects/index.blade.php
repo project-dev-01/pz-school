@@ -59,6 +59,7 @@
                                     <th>{{ __('messages.short_name') }}</th>
                                     <th>{{ __('messages.subject_code') }}</th>
                                     <th>{{ __('messages.subject_type') }}</th>
+                                    <th>{{ __('messages.order_code') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

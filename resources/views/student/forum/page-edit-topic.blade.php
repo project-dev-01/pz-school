@@ -277,7 +277,7 @@ border-bottom: 1px solid #E9D528;
                                     @endphp
                                     @endif
                                     @endforeach
-                                    <option value="{{$user['id']}}" {{ $selected }}>{{$user['name']}}</option>
+                                    <option value="{{$user['id']}}" {{ $selected }}>{{ __('messages.' . strtolower($user['name'])) }}</option>
                                     @empty
                                     @endforelse
                                 </select>

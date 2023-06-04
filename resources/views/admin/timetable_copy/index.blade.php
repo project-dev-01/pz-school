@@ -185,13 +185,13 @@
                         <label for="day">{{ __('messages.day') }}<span class="text-danger">*</span></label>
                         <select id="day" class="form-control" name="day">
                             <option value="">{{ __('messages.select_day') }}</option>
-                            <option value="sunday">{{ __('messages.sunday') }}</option>
                             <option value="monday">{{ __('messages.monday') }}</option>
                             <option value="tuesday">{{ __('messages.tuesday') }}</option>
                             <option value="wednesday">{{ __('messages.wednesday') }}</option>
                             <option value="thursday">{{ __('messages.thursday') }}</option>
                             <option value="friday">{{ __('messages.friday') }}</option>
                             <option value="saturday">{{ __('messages.saturday') }}</option>
+                            <option value="sunday">{{ __('messages.sunday') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
