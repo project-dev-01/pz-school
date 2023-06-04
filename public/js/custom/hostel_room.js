@@ -111,6 +111,8 @@ $(function () {
                     extend: 'csv',
                     text: downloadcsv,
                     extension: '.csv',
+                    charset: 'utf-8',
+                    bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
@@ -119,6 +121,8 @@ $(function () {
                     extend: 'pdf',
                     text: downloadpdf,
                     extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }

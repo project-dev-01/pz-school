@@ -109,6 +109,12 @@
 <script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Italic.ttf"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Medium.ttf"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-MediumItalic.ttf"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/encoding-japanese/2.0.0/encoding.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script> -->
 <script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>

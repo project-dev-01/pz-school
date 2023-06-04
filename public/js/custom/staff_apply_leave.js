@@ -37,7 +37,7 @@ $(function () {
             to_ldate: "required",
             frm_ldate: "required",
             changelevReasons: "required",
-            total_leave:"required"
+            total_leave: "required"
         }
     });
 
@@ -117,7 +117,7 @@ $(function () {
     // });
     $('#leave_file').change(function () {
         var file = $('#leave_file')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#file_name').text("File greater than 2Mb");
             $("#file_name").addClass("error");
             $('#leave_file').val('');
@@ -126,12 +126,12 @@ $(function () {
             $('#file_name').text(file.name);
         }
     });
-    
+
 
     $(document).on('change', '.reissue_file', function () {
         console.log(12343333)
         var file = $(this)[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             toastr.error("File greater than 2Mb");
             $(this).val('');
         }
@@ -152,11 +152,11 @@ $(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
         "language": {
-            
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,
@@ -170,6 +170,8 @@ $(function () {
                 extend: 'csv',
                 text: downloadcsv,
                 extension: '.csv',
+                charset: 'utf-8',
+                bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                 }
@@ -178,6 +180,8 @@ $(function () {
                 extend: 'pdf',
                 text: downloadpdf,
                 extension: '.pdf',
+                charset: 'utf-8',
+                bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                 }
@@ -242,7 +246,7 @@ $(function () {
                 "render": function (data, type, row, meta) {
                     var document = "";
                     if (data) {
-                        document = '<a href="' + StaffDocUrl  + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        document = '<a href="' + StaffDocUrl + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                     } else {
                         document = '<div>' +
                             '<input type="file" id="reissue_file' + row.id + '" name="file" class="reissue_file">' +
@@ -315,5 +319,30 @@ $(function () {
             }
         });
     });
+    const getBusinessDays = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const current = new Date(startDate);
+        const dates = [];
 
+        while (current <= end) {
+            if (current.getDay() !== 6 && current.getDay() !== 0) {
+                dates.push(new Date(current));
+            }
+
+            current.setDate(current.getDate() + 1);
+        }
+
+        return dates.length;
+    }
+    $("#to_ldate").on('change', function () {
+        let frm_ldate = $("#frm_ldate").val();
+        let to_ldate = $("#to_ldate").val();
+        const businessDays = getBusinessDays(convertDigitIn(frm_ldate), convertDigitIn(to_ldate));
+        $("#total_leave").val(businessDays);
+    });
+    // reverse dob
+    function convertDigitIn(str) {
+        return str.split('-').reverse().join('-');
+    }
 });

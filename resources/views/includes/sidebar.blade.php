@@ -354,13 +354,13 @@
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('admin.section')}}" class="nav-link {{ (request()->is('admin/section*')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.classes') }}</span>
+                                            <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.grades') }}</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.classes')}}" class="nav-link {{ (request()->is('admin/classes*')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.grades') }}</span>
+                                            <a href="{{ route('admin.section')}}" class="nav-link {{ (request()->is('admin/section*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.classes') }}</span>
                                             </a>
                                         </li>
                                         <li>

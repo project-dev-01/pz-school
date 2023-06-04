@@ -766,13 +766,59 @@ class PdfController extends Controller
             'saturday',
             'sunday',
         );
-
+// $fonturl = asset('public/public/fonts/japanese/ipag.ttf');
+        // $fonturl = asset('public/fonts/japanese/ipag.ttf');
+        $fonturl = storage_path('fonts/ipag.ttf');
+        // dd($fonturl);
+        // $response = "";
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        // $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        //     $response .='<style>';
+        //     // $response .='* { font-family: Firefly Sung, DejaVu Sans, sans-serif; }';
+        //     $response .='@font-face {
+        //         font-family: ipag;
+        //         font-style: normal;
+        //         font-weight: normal;
+        //         src: url("'.$fonturl.'");
+        //    }
+        //    body{ font-family: ipag !important;}';
+        //     // $response .="@font-face {
+        //     //     font-family: 'Firefly Sung';
+        //     //     font-style: normal;
+        //     //     font-weight: 400;
+        //     //     src: url(http://eclecticgeek.com/dompdf/fonts/cjk/fireflysung.ttf) format('truetype');
+        //     //   }
+        //     //   * {
+        //     //     font-family: Firefly Sung, DejaVu Sans, sans-serif;
+        //     //   }";
+        //     $response .='</style>';
+        //     // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        //     $test .='@font-face {
+        //         font-family: ipag;
+        //         font-style: normal;
+        //         font-weight: normal;
+        //         src: url("'.$fonturl.'");
+        //    }
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+       }
+       body{ font-family: ipag !important;}';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "</body>";
         if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
-            $response = "";
+            // $response = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>";
             $response .= '<div class="table-responsive">
-        <table width="100%" style="border-collapse: collapse; border: 0px;">';
+        <table >';
             $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">Day/Period</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre" style="border: 1px solid; padding:12px;">' . $i . '</td>';
@@ -824,21 +870,53 @@ class PdfController extends Controller
             }
             $response .= '</table></div>';
 
-            $response;
+            // $response;
         }
-        // dd($response);
+        $response .= "</body></html>";
+
+        //     $test = '<!DOCTYPE html>';
+        //     $test .='<html>';
+        //     $test .='<head>';
+        //     $test .='<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        //     $test .='<style>';
+        //     // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        //     $test .='@font-face {
+        //         font-family: ipag;
+        //         font-style: normal;
+        //         font-weight: normal;
+        //         src: url("'.$fonturl.'");
+        //    }
+        //    body{ font-family: ipag !important;}';
+        //     $test .='</style>';
+        //     $test .='</head>';
+        //     $test .='<body>';
+        //     $test .='<p> 朝読書（朝学習）朝読書（朝学習）朝読書（朝学習）</p>';
+        //     $test .='</body>';
+        //     $test .='</html>';
+
+
+        // dd($test);
         $pdf = \App::make('dompdf.wrapper');
+        // $pdf = \App::make('dompdf.wrapper','UTF-8');
+        // $pdf = mb_convert_encoding(\App::make('dompdf.wrapper', $response), 'HTML-ENTITIES', 'UTF-8');
+
         // set size
         $customPaper = array(0, 0, 2880.00, 1620.00);
         $pdf->set_paper($customPaper);
+        // $pdf->set_option('isFontSubsettingEnabled', true);
+        // $pdf->autoScriptToLang = true;
+
         // $paper_size = array(0, 0, 360, 360);
         // $pdf->set_paper($paper_size);
+
         $pdf->loadHTML($response);
         // filename
         $now = now();
         $name = strtotime($now);
         $fileName = "timetable" . $name . ".pdf";
         return $pdf->download($fileName);
+        // return $pdf->stream($fileName);
+
     }
     public function attendance_student_pdf(Request $request)
     {
