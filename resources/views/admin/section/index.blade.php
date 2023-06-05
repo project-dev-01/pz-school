@@ -87,6 +87,7 @@
 <script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<!-- <script src="{{ asset('public/buttons-datatables/pdfmake.js') }}"></script> -->
 <script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->

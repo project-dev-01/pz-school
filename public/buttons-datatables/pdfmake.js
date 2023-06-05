@@ -12677,7 +12677,7 @@ var saveAs = FileSaver.saveAs;
 
 var defaultClientFonts = {
 	Estedad: {
-		normal: 'Estedad-Medium.ttf',
+		normal: 'IPAexGothic.ttf',
 		bold: 'Estedad-Bold.ttf',
 	}
 };

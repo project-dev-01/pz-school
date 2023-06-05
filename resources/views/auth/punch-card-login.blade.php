@@ -97,7 +97,7 @@
                                 </div>
                                 @endif
                                 @csrf
-                                <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
+                                <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">BERJAYA</span> -->
                                     <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>

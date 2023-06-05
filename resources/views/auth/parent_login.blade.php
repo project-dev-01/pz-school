@@ -84,7 +84,7 @@
                         <!-- form -->
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
-                                <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
+                                <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
                                 <input type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))

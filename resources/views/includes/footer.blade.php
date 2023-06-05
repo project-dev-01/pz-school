@@ -54,6 +54,9 @@
 </script>
 @endif
 <script>
+    var fonturl = "http://localhost/school-management-system/storage/fonts/ipag.ttf";
+    console.log("fonturl");
+    console.log(fonturl);
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
