@@ -812,14 +812,13 @@ class PdfController extends Controller
        body{ font-family: ipag !important;}';
         $response .= '</style>';
         $response .= "</head>";
-        $response .= "</body>";
+        $response .= "<body>";
         if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
             // $response = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>";
-            $response .= '<div class="table-responsive">
-        <table >';
-            $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">Day/Period</td>';
+            $response .= '<table >';
+            $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">'. __('messages.day') . '/' . __('messages.period') .'</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre" style="border: 1px solid; padding:12px;">' . $i . '</td>';
             }
@@ -829,18 +828,18 @@ class PdfController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">' . strtoupper($day) . '</td>';
+                    $response .= '<tr><td class="center" style="border: 1px solid; padding:12px;">' . __('messages.' . $day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
                             $start_time = date('H:i', strtotime($table['time_start']));
                             $end_time = date('H:i', strtotime($table['time_end']));
-                            $response .= '<td style="border: 1px solid; padding:12px;">';
+                            $response .= '<td style="border: 1px solid; padding:12px;">' ;
                             if ($table['break'] == "1") {
-                                $response .= '<b>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                $response .= (isset($table['break_type']) ? $table['break_type'] : "") . '<br>';
                                 $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
                                 if (isset($table['hall_no'])) {
-                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                    $response .= $table['hall_no'] . '<br>';
                                 }
                             } else {
                                 if ($table['subject_name']) {
@@ -848,13 +847,13 @@ class PdfController extends Controller
                                 } else {
                                     $subject = (isset($table['break_type']) ? $table['break_type'] : "");
                                 }
-                                $response .= '<b>' . $subject . '</b><br>';
+                                $response .= $subject .'<br>';
                                 $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
                                 if ($table['teacher_name']) {
-                                    $response .= '<b>' . $table['teacher_name'] . '</b><br>';
+                                    $response .=   $table['teacher_name'] . '<br>';
                                 }
                                 if (isset($table['hall_no'])) {
-                                    $response .= '<b>' . $table['hall_no'] . '</b><br>';
+                                    $response .= $table['hall_no'] . '<br>';
                                 }
                             }
                             $response .= '</td>';
@@ -868,7 +867,7 @@ class PdfController extends Controller
                     $response .= '</tr>';
                 }
             }
-            $response .= '</table></div>';
+            $response .= '</table>';
 
             // $response;
         }
@@ -946,6 +945,23 @@ class PdfController extends Controller
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
             $response = "";
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $response = "<!DOCTYPE html>";
+            $response .= "<html><head>";
+            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $response .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $response .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+        }
+        body{ font-family: ipag !important;}';
+            $response .= '</style>';
+            $response .= "</head>";
+            $response .= "<body>";
+        
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
@@ -998,6 +1014,9 @@ class PdfController extends Controller
             }
             $response .= '</tbody></table></div>';
         }
+
+        $response .= "</body></html>";
+        
         // dd($response);
         $pdf = \App::make('dompdf.wrapper');
         // set size
@@ -1038,6 +1057,22 @@ class PdfController extends Controller
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
             $response = "";
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $response = "<!DOCTYPE html>";
+            $response .= "<html><head>";
+            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $response .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $response .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+        }
+        body{ font-family: ipag !important;}';
+            $response .= '</style>';
+            $response .= "</head>";
+            $response .= "<body>";
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
@@ -1092,6 +1127,8 @@ class PdfController extends Controller
             }
             $response .= '</tbody></table></div>';
         }
+        
+        $response .= "</body></html>";
         // dd($response);
         $pdf = \App::make('dompdf.wrapper');
         // set size
@@ -1132,6 +1169,22 @@ class PdfController extends Controller
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
             $response = "";
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $response = "<!DOCTYPE html>";
+            $response .= "<html><head>";
+            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $response .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $response .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+        }
+        body{ font-family: ipag !important;}';
+            $response .= '</style>';
+            $response .= "</head>";
+            $response .= "<body>";
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
@@ -1184,6 +1237,7 @@ class PdfController extends Controller
             }
             $response .= '</tbody></table></div>';
         }
+        $response .= "</body></html>";
         // dd($response);
         $pdf = \App::make('dompdf.wrapper');
         // set size
