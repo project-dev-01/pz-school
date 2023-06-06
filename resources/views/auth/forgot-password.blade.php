@@ -23,7 +23,7 @@
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!--<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
-	<link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
@@ -97,7 +97,7 @@
                             </div>
                             <form id="LoginAuth" action="{{ route('reset_password') }}" method="post">
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
                                 @if ( Session::get('success'))

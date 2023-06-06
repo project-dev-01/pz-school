@@ -28,7 +28,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
         // dd($image_url);
         return view(
             'auth.login',
@@ -55,7 +55,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Teacher.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Teacher.webp";
         return view(
             'auth.teacher_login',
             [
@@ -80,7 +80,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Staff.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Staff.webp";
         return view(
             'auth.staff_login',
             [
@@ -105,7 +105,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Parent.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Parent.webp";
         return view(
             'auth.parent_login',
             [
@@ -130,7 +130,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Student.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Student.webp";
         return view(
             'auth.student_login',
             [
@@ -154,15 +154,15 @@ class AuthController extends Controller
         session()->pull('routePrefix');
         return true;
     }
-    public function employeePunchCardLogin(Request $request,$session)
+    public function employeePunchCardLogin(Request $request, $session)
     {
-        
+
         $datas = [
             'branch_id' => config('constants.branch_id')
         ];
         $school = Http::post(config('constants.api.get_school_type'), $datas);
         $schoolDetails = $school->json();
-        $image_url =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Staff.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Staff.webp";
 
         $email = $request->cookie('email');
         $password = $request->cookie('password');
@@ -746,7 +746,22 @@ class AuthController extends Controller
     }
     public function forgotPassword(Request $request)
     {
-        return view('auth.forgot-password');
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+        // dd($image_url);
+        return view(
+            'auth.forgot-password',
+            [
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'image_url' => $image_url
+            ]
+        );
     }
     public function passwordExpired(Request $request)
     {
@@ -754,14 +769,23 @@ class AuthController extends Controller
     }
     public function resetPassword(Request $request)
     {
-
-        $response = Http::post(config('constants.api.reset_password'), [
+        $data = [
             'email' => $request->email,
-        ]);
+            'sent_link' => url('/')
+        ];
+        $response = Http::post(config('constants.api.reset_password'), $data);
 
         $userDetails = $response->json();
         // dd($userDetails);
         if ($userDetails['code'] == 200) {
+
+            $data = [
+                'branch_id' => config('constants.branch_id')
+            ];
+            $response = Http::post(config('constants.api.get_school_type'), $data);
+            $schoolDetails = $response->json();
+            $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+            // dd($image_url);
 
             $role_ids = explode(",", $userDetails['data']['role_id']);
             $role = $role_ids['0'];
@@ -779,7 +803,16 @@ class AuthController extends Controller
             } elseif ($role == 6) {
                 $redirect_route = route('student.login');
             }
-            return view('auth.success', ['redirect_route' => $redirect_route]);
+            return view(
+                'auth.success',
+                [
+                    'redirect_route' => $redirect_route,
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'image_url' => $image_url
+                ]
+            );
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }
@@ -787,7 +820,22 @@ class AuthController extends Controller
 
     public function passwordrest($token)
     {
-        return view('auth.password-reset', ['token' => $token]);
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+        return view(
+            'auth.password-reset',
+            [
+                'token' => $token,
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'image_url' => $image_url
+            ]
+        );
     }
     public function passwordExpireReset($token)
     {
@@ -1072,7 +1120,7 @@ class AuthController extends Controller
         }
     }
 
-    
+
 
     public function home(Request $request)
     {
@@ -1085,11 +1133,11 @@ class AuthController extends Controller
 
         $home_response = Http::post(config('constants.api.get_home_page_details'), $data);
         $homeDetails = $home_response->json();
-        
-        $parent_image =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Parent.webp";
-        $student_image =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Student.webp";
-        $teacher_image =  config('constants.image_url')."/public/common-asset/images/school-type/".$schoolDetails['data']['school_type']."/Teacher.webp";
-        $application =  config('constants.image_url')."/public/common-asset/images/application.webp";
+
+        $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Parent.webp";
+        $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Student.webp";
+        $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Teacher.webp";
+        $application =  config('constants.image_url') . "/public/common-asset/images/application.webp";
         // dd($homeDetails);
         return view(
             'auth.home',
@@ -1106,7 +1154,7 @@ class AuthController extends Controller
         );
     }
 
-    
+
     public function application()
     {
         return view('auth.application');

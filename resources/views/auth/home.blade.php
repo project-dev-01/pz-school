@@ -23,7 +23,7 @@
     <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
     <link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('public/css/custom/home.css') }}" type="text/css" />
+    <link href="{{ asset('public/css/custom/home.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="loading auth-fluid-pages pb-0">
@@ -60,14 +60,14 @@
                     <div class="col-md-5">
                         <!-- form -->
                         <div class="form">
-                            <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
+                            <form id="LoginAuth">
                                 <div class="form-group">
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
                                     <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                     <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 
-                                <h3 class="animated fadeInDown">{{ __('messages.welcome_to') }} {{$school_name}} {{ __('messages.school') }}</h3>
+                                <h3 class="animated fadeInDown" style="font-size:22px;">{{ __('messages.welcome_to') }} {{$school_name}} {{ __('messages.school') }}</h3>
                                 <p class="card-text para">
                                     {{ __('messages.to_learn_as_much_as_i_can') }}
                                 </p>
@@ -76,7 +76,7 @@
                                     <i class="fa fa-map-marker"></i>
                                     <span style="margin-left: 12px;">{{$home['address']}}</span>
                                 </div>
-                                <div class="icon-item">
+                                <div class="icon-item" style="margin-right: 25px;">
                                     <i class="fa fa-phone"></i>
                                     <span style="margin-left: 10px;">{{$home['mobile_no']}}</span>
                                 </div>
@@ -84,7 +84,7 @@
                                     <i class="fa fa-envelope"></i>
                                     <span style="margin-left: 7px;">{{$home['email']}}</span>
                                 </div>
-                                <h3 class="text-center mb-2">{{ __('messages.location') }}</h3>
+                                <h3 class="text-center mb-2" style="margin-top: 20px;">{{ __('messages.location') }}</h3>
                                 <!-- Google Map -->
 
                                 <div class="maps">
@@ -100,7 +100,7 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('parent.login') }}">
-                                        <img class="card-img-top img-fluid" src="{{$parent_image}}" style="height:200px" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$parent_image}}" alt="Card image cap">
                                         <div class="card-body">
                                             <h6 class="card-title text-center" style="margin-bottom: 0px;">{{ __('messages.parent_login') }}</h6>
                                         </div>
@@ -109,9 +109,9 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('student.login') }}">
-                                        <img class="card-img-top img-fluid" src="{{$student_image}}" style="height:200px" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$student_image}}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h6 class="card-title text-center" style="margin-bottom: 0px;">{{ __('messages.student_login') }}</h6>
+                                            <h6 class="card-title text-center sfont" style="margin-bottom: 0px;">{{ __('messages.student_login') }}</h6>
                                         </div>
                                 </div>
                             </div>
@@ -120,16 +120,16 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('teacher.login') }}">
-                                        <img class="card-img-top img-fluid" src="{{$teacher_image}}" style="height:200px" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$teacher_image}}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h6 class="card-title text-center" style="margin-bottom: 0px;">{{ __('messages.teacher_login') }}</h6>
+                                            <h6 class="card-title text-center tfont" style="margin-bottom: 0px;">{{ __('messages.teacher_login') }}</h6>
                                         </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('schoolcrm.app.form') }}">
-                                        <img class="card-img-top img-fluid" src="{{$application}}" style="height:200px" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$application}}" alt="Card image cap">
                                         <div class="card-body">
                                             <h6 class="card-title text-center" style="margin-bottom: 0px;">{{ __('messages.application') }}</h6>
                                         </div>
