@@ -15,7 +15,24 @@ $(function () {
         time_24hr: !0,
     });
 
-
+    $(".flatpickr-hour").keypress(function () {
+        console.log(123)
+        if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,2}$/)) {
+            // block the input if result does not match
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
+    $(".flatpickr-minute").keypress(function () {
+        console.log(123)
+        if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,2}$/)) {
+            // block the input if result does not match
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
 
     // all day checkbox
     $("#allDay").on("change", function () {

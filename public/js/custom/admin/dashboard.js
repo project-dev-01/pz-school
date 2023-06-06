@@ -1,4 +1,22 @@
 $(function () {
+    $(".flatpickr-hour").keypress(function () {
+        console.log(123)
+        if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,2}$/)) {
+            // block the input if result does not match
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
+    $(".flatpickr-minute").keypress(function () {
+        console.log(123)
+        if (!`${event.target.value}${event.key}`.match(/^[0-9]{0,2}$/)) {
+            // block the input if result does not match
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    });
     var getOldComCount = 0;
     // mark as read
     $(".admintaskListDashboard").on('click', function () {
