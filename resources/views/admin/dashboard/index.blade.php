@@ -440,14 +440,6 @@
                                                     <td>{{ __('messages.end_date') }}</td>
                                                     <td id="end_date"></td>
                                                 </tr>
-                                                <tr id="start_time_row" style="display:none">
-                                                    <td>{{ __('messages.start_time') }}</td>
-                                                    <td id="start_time"></td>
-                                                </tr>
-                                                <tr id="end_time_row" style="display:none">
-                                                    <td>{{ __('messages.end_time') }}</td>
-                                                    <td id="end_time"></td>
-                                                </tr>
                                                 <tr>
                                                     <td>{{ __('messages.audience') }}</td>
                                                     <td id="audience"></td>

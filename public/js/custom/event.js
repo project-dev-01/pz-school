@@ -196,6 +196,7 @@ $(function () {
         e.preventDefault();
 
 
+        console.log('123')
         if ($("#edit_audience").val() == "2") {
             var classes = ($("#edit_classes").val()).length;
             if (classes == 0) {
@@ -206,7 +207,7 @@ $(function () {
             }
         }
         if ($("#edit_audience").val() == "3") {
-            var group = ($("#edit_group_row").val()).length;
+            var group = ($("#edit_group").val()).length;
             if (group == 0) {
                 $(form).find('span.group_error').text("This field is required.");
                 return false;

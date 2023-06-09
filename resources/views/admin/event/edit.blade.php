@@ -223,7 +223,7 @@
                             <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
                                 <div class="form-group">
                                     <label>{{ __('messages.start_time') }}</label>
-                                    <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{$event['end_time']}}">
+                                    <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{$event['start_time']}}">
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>

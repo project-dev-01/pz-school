@@ -360,23 +360,24 @@ $(document).ready(function () {
         eventClick: function (e) {
             //
             if (e.event.extendedProps.event_id) {
+                console.log('jd',e.event.start)
+                console.log('end',e.event)
+                console.log('ee',e.event.extendedProps)
                 $('#admin-modal').modal('toggle');
                 var start = e.event.start_date;
                 var end = e.event.end_date;
                 var setCurDate = formatDate(end);
+                if (e.event.allDay == "1") {
+                    var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                    var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                }  else {
+                    var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                    var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
+                }
                 $("#title").html(e.event.title);
                 $("#type").html(e.event.extendedProps.event_type);
-                $("#start_date").html(e.event.extendedProps.start_date);
-                $("#end_date").html(e.event.extendedProps.end_date);
-                if (e.event.extendedProps.all_day == null) {
-                    $("#start_time").html(e.event.extendedProps.start_time);
-                    $("#end_time").html(e.event.extendedProps.end_time);
-                    $("#start_time_row").show();
-                    $("#end_time_row").show();
-                } else {
-                    $("#start_time_row").hide();
-                    $("#end_time_row").hide();
-                }
+                $("#start_date").html(start_dt);
+                $("#end_date").html(end_dt);
                 if (e.event.extendedProps.audience == "1") {
                     var aud = e.event.extendedProps.class_name;
                 } else if (e.event.extendedProps.audience == "2") {

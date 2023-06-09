@@ -415,10 +415,11 @@ $(function () {
     var radarSubjectAvgHighLow;
     
     $('.examMarkStatus').on('change', function () {
+            
+        $("#scoreExamID").empty();
         var student_id = $("#ems_student_id").val();
         var academic_id = $("#ems_btwyears").val();
         if(student_id) {
-            
             $.get(examByStudent, { token: token, branch_id: branchID, student_id: student_id, academic_session_id: academic_id}, function (res) {
                 if (res.code == 200) {
                     console.log('123',res)

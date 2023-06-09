@@ -350,14 +350,6 @@
                                                 <td>{{ __('messages.end_date') }}</td>
                                                 <td id="end_date"></td>
                                             </tr>
-                                            <tr id="start_time_row" style="display:none">
-                                                <td>{{ __('messages.start_time') }}</td>
-                                                <td id="start_time"></td>
-                                            </tr>
-                                            <tr id="end_time_row" style="display:none">
-                                                <td>{{ __('messages.end_time') }}</td>
-                                                <td id="end_time"></td>
-                                            </tr>
                                             <tr>
                                                 <td>{{ __('messages.audience') }}</td>
                                                 <td id="audience"></td>
@@ -1035,6 +1027,10 @@
 <!-- full calendar js end -->
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<!-- Chart JS -->
+<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>

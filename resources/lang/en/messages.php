@@ -508,7 +508,7 @@ return [
     "student_section" => "student Section",
     "add_parent" => "Add Parent",
     "parent_name" => "Parent Name",
-    "no._of_members" => "No. of Members",
+    "no_of_members" => "No. of Members",
     "hostel_group" => "Hostel Group",
     "add_hostel_group" => "Add Hostel Group",
     "incharge_staff" => "Incharge Staff",
