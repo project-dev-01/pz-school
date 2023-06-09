@@ -45,7 +45,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -55,7 +55,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                    <select  class="form-control" name="class_id" id="bulk_class_id">
+                                    <select class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
                                         @forelse($class as $cla)
@@ -87,8 +87,8 @@
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}" {{$current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        
+                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -101,7 +101,7 @@
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -131,7 +131,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.add_bulk_schedule') }}
+                            {{ __('messages.add_bulk_schedule') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -216,7 +216,7 @@
                         <input type="hidden" id="form_day" name="day">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            {{ __('messages.save') }}
+                                {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Exception;
+use Illuminate\Http\Client\PendingRequest;
+
 class Helper
 {
 
@@ -43,27 +48,50 @@ class Helper
                 // ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
-            return $response->json();
-            //Check for any error 400 or 500 level status code
-            // if ($response->failed()) {
-            //     // process the failure
-            //     return $response->failed();
-            // }
+            // Determine if the status code is >= 200 and < 300...
+            if ($response->successful()) {
+                // process the failure
+                return $response->json();
+            }
+            // //Check for any error 400 or 500 level status code
+            if ($response->failed()) {
+                // process the failure
+                $datas = [
+                    'data' => [
+                        'message' => 'Failed'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.404')->with([
+                //     'message' => 'Failed.',
+                // ]);
+            }
             // //Check if response has error with 500 level status code
-            // if ($response->serverError()) {
-            //     //process on server error
-            //     return $response->serverError();
-            // }
+            if ($response->serverError()) {
+                //process on server error
+                $datas = [
+                    'data' => [
+                        'message' => 'serverError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.500')->with([
+                //     'message' => 'serverError.',
+                // ]);
+            }
             // //Check if response has error with 400 level status code
-            // if ($response->clientError()) {
-            //     //process on client error
-            //     return $response->clientError();
-            // }
-            // // It also allows to throw exceptions on the $response
-            // //If there's no error then the chain will continue and json() will be invoked
-            // return $response->throw(function ($response, $e) {
-            //     //do your thing
-            // })->json();
+            if ($response->clientError()) {
+                //process on client error
+                $datas = [
+                    'data' => [
+                        'message' => 'clientError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.503')->with([
+                //     'message' => 'clientError.',
+                // ]);
+            }
         } catch (\Exception $e) {
             return $e->getMessage();
             // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
@@ -80,27 +108,50 @@ class Helper
                 // ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
-            return $response->json();
-            //Check for any error 400 or 500 level status code
-            // if ($response->failed()) {
-            //     // process the failure
-            //     return $response->failed();
-            // }
+            // Determine if the status code is >= 200 and < 300...
+            if ($response->successful()) {
+                // process the failure
+                return $response->json();
+            }
+            // //Check for any error 400 or 500 level status code
+            if ($response->failed()) {
+                // process the failure
+                $datas = [
+                    'data' => [
+                        'message' => 'Failed'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.404')->with([
+                //     'message' => 'Failed.',
+                // ]);
+            }
             // //Check if response has error with 500 level status code
-            // if ($response->serverError()) {
-            //     //process on server error
-            //     return $response->serverError();
-            // }
+            if ($response->serverError()) {
+                //process on server error
+                $datas = [
+                    'data' => [
+                        'message' => 'serverError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.500')->with([
+                //     'message' => 'serverError.',
+                // ]);
+            }
             // //Check if response has error with 400 level status code
-            // if ($response->clientError()) {
-            //     //process on client error
-            //     return $response->clientError();
-            // }
-            // // It also allows to throw exceptions on the $response
-            // //If there's no error then the chain will continue and json() will be invoked
-            // return $response->throw(function ($response, $e) {
-            //     //do your thing
-            // })->json();
+            if ($response->clientError()) {
+                //process on client error
+                $datas = [
+                    'data' => [
+                        'message' => 'clientError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.503')->with([
+                //     'message' => 'clientError.',
+                // ]);
+            }
         } catch (\Exception $e) {
             return $e->getMessage();
             // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
@@ -117,27 +168,50 @@ class Helper
                 // ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->post($url, $data);
-            return $response->json();
-            //Check for any error 400 or 500 level status code
-            // if ($response->failed()) {
-            //     // process the failure
-            //     return $response->failed();
-            // }
+            // Determine if the status code is >= 200 and < 300...
+            if ($response->successful()) {
+                // process the failure
+                return $response->json();
+            }
+            // //Check for any error 400 or 500 level status code
+            if ($response->failed()) {
+                // process the failure
+                $datas = [
+                    'data' => [
+                        'message' => 'Failed'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.404')->with([
+                //     'message' => 'Failed.',
+                // ]);
+            }
             // //Check if response has error with 500 level status code
-            // if ($response->serverError()) {
-            //     //process on server error
-            //     return $response->serverError();
-            // }
+            if ($response->serverError()) {
+                //process on server error
+                $datas = [
+                    'data' => [
+                        'message' => 'serverError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.500')->with([
+                //     'message' => 'serverError.',
+                // ]);
+            }
             // //Check if response has error with 400 level status code
-            // if ($response->clientError()) {
-            //     //process on client error
-            //     return $response->clientError();
-            // }
-            // It also allows to throw exceptions on the $response
-            //If there's no error then the chain will continue and json() will be invoked
-            // return $response->throw(function ($response, $e) {
-            //     //do your thing
-            // })->json();
+            if ($response->clientError()) {
+                //process on client error
+                $datas = [
+                    'data' => [
+                        'message' => 'clientError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.503')->with([
+                //     'message' => 'clientError.',
+                // ]);
+            }
         } catch (\Exception $e) {
             return $e->getMessage();
             // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
@@ -155,27 +229,50 @@ class Helper
                 // ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
-            return $response->json();
+            // Determine if the status code is >= 200 and < 300...
+            if ($response->successful()) {
+                // process the failure
+                return $response->json();
+            }
             // //Check for any error 400 or 500 level status code
-            // if ($response->failed()) {
-            //     // process the failure
-            //     return $response->failed();
-            // }
+            if ($response->failed()) {
+                // process the failure
+                $datas = [
+                    'data' => [
+                        'message' => 'Failed'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.404')->with([
+                //     'message' => 'Failed.',
+                // ]);
+            }
             // //Check if response has error with 500 level status code
-            // if ($response->serverError()) {
-            //     //process on server error
-            //     return $response->serverError();
-            // }
+            if ($response->serverError()) {
+                //process on server error
+                $datas = [
+                    'data' => [
+                        'message' => 'serverError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.500')->with([
+                //     'message' => 'serverError.',
+                // ]);
+            }
             // //Check if response has error with 400 level status code
-            // if ($response->clientError()) {
-            //     //process on client error
-            //     return $response->clientError();
-            // }
-            // // It also allows to throw exceptions on the $response
-            // //If there's no error then the chain will continue and json() will be invoked
-            // return $response->throw(function ($response, $e) {
-            //     //do your thing
-            // })->json();
+            if ($response->clientError()) {
+                //process on client error
+                $datas = [
+                    'data' => [
+                        'message' => 'clientError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.503')->with([
+                //     'message' => 'clientError.',
+                // ]);
+            }
         } catch (\Exception $e) {
             return $e->getMessage();
             // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
@@ -227,8 +324,59 @@ class Helper
     {
         $data["token"] = session()->get('token');
         $data["branch_id"] = session()->get('branch_id');
-        // return $data;
-        $response = Http::withToken(session()->get('token'))->post($url, $data);
-        return $response->json();
+        try {
+            $response = Http::withToken(session()->get('token'))
+                // ->accept('application/json')
+                // ->retry(3, 2000)->timeout(12)
+                // ->withBody("dummy body content", "application/json")
+                ->post($url, $data);
+            // Determine if the status code is >= 200 and < 300...
+            if ($response->successful()) {
+                // process the failure
+                return $response->json();
+            }
+            // //Check for any error 400 or 500 level status code
+            if ($response->failed()) {
+                // process the failure
+                $datas = [
+                    'data' => [
+                        'message' => 'Failed'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.404')->with([
+                //     'message' => 'Failed.',
+                // ]);
+            }
+            // //Check if response has error with 500 level status code
+            if ($response->serverError()) {
+                //process on server error
+                $datas = [
+                    'data' => [
+                        'message' => 'serverError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.500')->with([
+                //     'message' => 'serverError.',
+                // ]);
+            }
+            // //Check if response has error with 400 level status code
+            if ($response->clientError()) {
+                //process on client error
+                $datas = [
+                    'data' => [
+                        'message' => 'clientError'
+                    ]
+                ];
+                return $datas;
+                // return view('errors.503')->with([
+                //     'message' => 'clientError.',
+                // ]);
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+        }
     }
 }

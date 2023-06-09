@@ -1159,4 +1159,21 @@ class AuthController extends Controller
     {
         return view('auth.application');
     }
+    public function failed_logout(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('admin.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('admin.login');
+            }
+        } else {
+            return redirect()->route('admin.login');
+        }
+    }
 }

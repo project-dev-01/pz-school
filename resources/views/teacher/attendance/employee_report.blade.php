@@ -60,7 +60,7 @@
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
                                         @foreach($session as $ses)
-                                        <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                         @endforeach
                                     </select>
                                 </div>

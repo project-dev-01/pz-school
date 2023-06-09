@@ -53,7 +53,7 @@ class TeacherController extends Controller
             'staff_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'),$data);
+        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'), $data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
         return view('teacher.leave_management.applyleave', [
             'get_leave_types' => $get_leave_types['data'],
@@ -107,7 +107,7 @@ class TeacherController extends Controller
                 // if ($row['document'] != "Approve") {
                 if (is_null($row['document'])) {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">'.$upload_lang.'</a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">' . $upload_lang . '</a>
             </div>';
                 } else {
                     return '-';
@@ -119,7 +119,7 @@ class TeacherController extends Controller
     }
     public function studentLeaveShow()
     {
-        
+
         $staff_data = [
             'teacher_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
@@ -146,7 +146,7 @@ class TeacherController extends Controller
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">'.$details_lang.'</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
                             </div>';
             })
 
@@ -236,12 +236,14 @@ class TeacherController extends Controller
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.student.student',
             [
                 'classes' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -314,7 +316,7 @@ class TeacherController extends Controller
         $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id,
-            'id'=>$id
+            'id' => $id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
@@ -405,7 +407,7 @@ class TeacherController extends Controller
     // forum create post 
     public function createpost(Request $request)
     {
-        
+
         $current_user = session()->get('role_id');
         $rollid_tags = implode(",", $request->tags);
         $adminid = 2;
@@ -433,7 +435,7 @@ class TeacherController extends Controller
         $adminid = 2;
         $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
-            'id'=> $request->id,
+            'id' => $request->id,
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
@@ -491,14 +493,14 @@ class TeacherController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-            
+
             $data = [
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
@@ -516,7 +518,7 @@ class TeacherController extends Controller
 
     public function faqIndex()
     {
-        
+
         $data = [
             'email' => session()->get('email'),
             'name' => session()->get('name'),
@@ -623,14 +625,16 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.exam_results.byclass',
             [
                 'classnames' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -644,13 +648,16 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.exam_results.bysubject',
             [
                 'classnames' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -664,13 +671,16 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.exam_results.bystudent',
             [
                 'classnames' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -752,7 +762,7 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
-
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
 
         // dd($response);
         // $getclass = Helper::GetMethod(config('constants.api.class_list'));
@@ -762,6 +772,8 @@ class TeacherController extends Controller
                 'class' => $response['data'],
                 'session' => $session['data'],
                 'semester' => $semester['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -838,13 +850,13 @@ class TeacherController extends Controller
                                     <td>' . $work['date_of_submission'] . '</td>
                                     <td>' . $completed . '/' . $incompleted . '</td>
                                     <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">'.$details_lang.'</span></a></td>
+                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">' . $details_lang . '</span></a></td>
                                 </tr>';
                     $row++;
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="7"> '.$no_data_available_lang.'</td>
+                                    <td colspan="7"> ' . $no_data_available_lang . '</td>
                                 </tr>';
             }
 
@@ -886,27 +898,27 @@ class TeacherController extends Controller
                     $disabled = "";
                     if ($work['score_name'] == "Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option value="Marks" Selected>'.$marks_lang.'</option>
-                                                <option value="Grade">'.$grade_lang.'</option>
-                                                <option value="Text">'.$text_lang.'</option>
+                                                <option value="Marks" Selected>' . $marks_lang . '</option>
+                                                <option value="Grade">' . $grade_lang . '</option>
+                                                <option value="Text">' . $text_lang . '</option>
                                             </select>';
                     } elseif ($work['score_name'] == "Grade") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                            <option value="Marks">'.$marks_lang.'</option>
-                                            <option value="Grade" Selected>'.$grade_lang.'</option>
-                                            <option value="Text">'.$text_lang.'</option>
+                                            <option value="Marks">' . $marks_lang . '</option>
+                                            <option value="Grade" Selected>' . $grade_lang . '</option>
+                                            <option value="Text">' . $text_lang . '</option>
                                         </select>';
                     } elseif ($work['score_name'] == "Text") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option value="Marks">'.$marks_lang.'</option>
-                                                <option value="Grade">'.$grade_lang.'</option>
-                                                <option value="Text" Selected>'.$text_lang.'</option>
+                                                <option value="Marks">' . $marks_lang . '</option>
+                                                <option value="Grade">' . $grade_lang . '</option>
+                                                <option value="Text" Selected>' . $text_lang . '</option>
                                             </select>';
                     } else {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
-                                                <option value="Marks">'.$marks_lang.'</option>
-                                                <option value="Grade">'.$grade_lang.'</option>
-                                                <option value="Text">'.$text_lang.'</option>
+                                                <option value="Marks">' . $marks_lang . '</option>
+                                                <option value="Grade">' . $grade_lang . '</option>
+                                                <option value="Text">' . $text_lang . '</option>
                                             </select>';
                     }
 
@@ -922,10 +934,10 @@ class TeacherController extends Controller
                     }
 
                     if ($work['status'] == "1") {
-                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">'.$completed_lang.'</button>';
+                        $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">' . $completed_lang . '</button>';
                         $complete++;
                     } else {
-                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">'.$incompleted_lang.'</button>';
+                        $status = '<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" style="border:none;">' . $incompleted_lang . '</button>';
                         $incomplete++;
                     }
 
@@ -972,7 +984,7 @@ class TeacherController extends Controller
                 }
             } else {
                 $response .= '<tr>
-                                    <td colspan="9"> '.$no_data_available_lang.'</td>
+                                    <td colspan="9"> ' . $no_data_available_lang . '</td>
                                 </tr>';
             }
             $homework['table'] = $response;
@@ -1207,11 +1219,13 @@ class TeacherController extends Controller
     {
         $employee = session()->get('ref_user_id');
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.attendance.employee',
             [
                 'employee' => $employee,
-                'session' => $session['data']
+                'session' => $session['data'],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1269,11 +1283,13 @@ class TeacherController extends Controller
     {
         $employee = session()->get('ref_user_id');
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.attendance.employee_report',
             [
                 'employee' => $employee,
-                'session' => $session['data']
+                'session' => $session['data'],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1369,12 +1385,15 @@ class TeacherController extends Controller
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'teacher.timetable.index',
             [
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1403,12 +1422,12 @@ class TeacherController extends Controller
             'saturday',
             'sunday',
         );
-       
+
         if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
             $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">'.__('messages.day') .'/'. __('messages.period') .'</td>';
+            $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.day') . '/' . __('messages.period') . '</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre">' . $i . '</td>';
             }
@@ -1418,7 +1437,7 @@ class TeacherController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' .  __('messages.'.$day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' .  __('messages.' . $day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {

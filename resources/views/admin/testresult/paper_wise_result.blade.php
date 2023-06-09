@@ -98,7 +98,7 @@
                                             <select id="session_id" class="form-control" name="session_id">
                                                 <option value="0">{{ __('messages.select_session') }}</option>
                                                 @forelse($session as $ses)
-                                                <option value="{{$ses['id']}}" {{'1' == $ses['id'] ? 'selected' : ''}}>{{$ses['name']}}</option>
+                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                                 @empty
                                                 @endforelse
                                             </select>

@@ -837,7 +837,7 @@ class PdfController extends Controller
                             $response .= '<td style="border: 1px solid; padding:12px;">' ;
                             if ($table['break'] == "1") {
                                 $response .= (isset($table['break_type']) ? $table['break_type'] : "") . '<br>';
-                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )</b><br>';
                                 if (isset($table['hall_no'])) {
                                     $response .= $table['hall_no'] . '<br>';
                                 }
@@ -848,7 +848,7 @@ class PdfController extends Controller
                                     $subject = (isset($table['break_type']) ? $table['break_type'] : "");
                                 }
                                 $response .= $subject .'<br>';
-                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                $response .= '<b>(' . $start_time . ' - ' . $end_time . ' )</b><br>';
                                 if ($table['teacher_name']) {
                                     $response .=   $table['teacher_name'] . '<br>';
                                 }

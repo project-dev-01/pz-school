@@ -148,7 +148,7 @@ class StaffController extends Controller
         $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id,
-            'id'=>$id
+            'id' => $id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
@@ -271,7 +271,7 @@ class StaffController extends Controller
         $adminid = 2;
         $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
-            'id'=> $request->id,
+            'id' => $request->id,
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
@@ -336,18 +336,17 @@ class StaffController extends Controller
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
-    
+
                 'default' => config('constants.image_url') . $response['path'] . $response['file_name'],
-    
+
                 '500' =>  config('constants.image_url') . $response['path'] . $response['file_name'],
-    
+
             ]);
         }
-        
     }
     // forum screen pages end
 
@@ -355,7 +354,7 @@ class StaffController extends Controller
 
     public function faqIndex()
     {
-        
+
         $data = [
             'email' => session()->get('email'),
             'name' => session()->get('name'),
@@ -1445,6 +1444,7 @@ class StaffController extends Controller
         // $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($getclass);
         return view(
             'staff.timetable.index',
@@ -1452,6 +1452,8 @@ class StaffController extends Controller
                 'class' => $getclass['data'],
                 'semester' => $semester['data'],
                 'session' => $session['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1485,7 +1487,7 @@ class StaffController extends Controller
             $max = $timetable['data']['max'];
 
             $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">'.__('messages.day') .'/'. __('messages.period') .'</td>';
+            $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.day') . '/' . __('messages.period') . '</td>';
             for ($i = 1; $i <= $max; $i++) {
                 $response .= '<td class="centre">' . $i . '</td>';
             }
@@ -1495,7 +1497,7 @@ class StaffController extends Controller
                 if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
                 } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.'.$day) . '</td>';
+                    $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.' . $day) . '</td>';
                     $row = 0;
                     foreach ($timetable['data']['timetable'] as $table) {
                         if ($table['day'] == $day) {
@@ -1548,11 +1550,13 @@ class StaffController extends Controller
     {
         $employee = session()->get('ref_user_id');
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'staff.attendance.employee',
             [
                 'employee' => $employee,
-                'session' => $session['data']
+                'session' => $session['data'],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1587,11 +1591,13 @@ class StaffController extends Controller
     {
         $employee = session()->get('ref_user_id');
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'staff.attendance.employee_report',
             [
                 'employee' => $employee,
-                'session' => $session['data']
+                'session' => $session['data'],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -1602,7 +1608,7 @@ class StaffController extends Controller
             'staff_id' => session()->get('ref_user_id'),
             "academic_session_id" => session()->get('academic_session_id')
         ];
-        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'),$data);
+        $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'), $data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
 
         return view('staff.leave_management.applyleave', [
@@ -1657,7 +1663,7 @@ class StaffController extends Controller
                 // if ($row['document'] != "Approve") {
                 if (is_null($row['document'])) {
                     return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">'.$upload_lang.'</a>
+                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">' . $upload_lang . '</a>
             </div>';
                 } else {
                     return '-';
@@ -1707,7 +1713,7 @@ class StaffController extends Controller
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">'.$details_lang.'</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
                             </div>';
             })
 

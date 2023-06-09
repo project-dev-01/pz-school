@@ -238,14 +238,14 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-            
+
             $data = [
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
 
@@ -321,6 +321,7 @@ class AdminController extends Controller
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
+        // dd($get_to_do_list_dashboard);
         $greetings = Helper::greetingMessage();
         $employee_count = Helper::GetMethod(config('constants.api.employee_count'));
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
@@ -621,11 +622,13 @@ class AdminController extends Controller
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getSections = Helper::GetMethod(config('constants.api.section_list'));
-        return view('admin.section_allocation.allocation', 
-        [
-            'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
-            'sectionDetails' => isset($getSections['data']) ? $getSections['data'] : [],
-        ]);
+        return view(
+            'admin.section_allocation.allocation',
+            [
+                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                'sectionDetails' => isset($getSections['data']) ? $getSections['data'] : [],
+            ]
+        );
     }
 
 
@@ -652,11 +655,13 @@ class AdminController extends Controller
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
-        return view('admin.assign_teacher.index', 
-        [
-            'classDetails' => $getClasses['data'], 
-            'getAllTeacherList' => $getAllTeacherList['data']
-        ]);
+        return view(
+            'admin.assign_teacher.index',
+            [
+                'classDetails' => $getClasses['data'],
+                'getAllTeacherList' => $getAllTeacherList['data']
+            ]
+        );
     }
 
 
@@ -711,11 +716,13 @@ class AdminController extends Controller
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getSubjectList = Helper::GetMethod(config('constants.api.subject_list'));
-        return view('admin.assign_class_subject.index', 
-        [
-            'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [], 
-            'getSubjectList' => isset($getSubjectList['data']) ? $getSubjectList['data'] : []
-        ]);
+        return view(
+            'admin.assign_class_subject.index',
+            [
+                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                'getSubjectList' => isset($getSubjectList['data']) ? $getSubjectList['data'] : []
+            ]
+        );
     }
     public function ClassAssignSubList(Request $request)
     {
@@ -1038,16 +1045,16 @@ class AdminController extends Controller
         return view(
             'admin.admission.index',
             [
-                'class' => isset($getclass['data'])?$getclass['data']:[],
-                'transport' => isset($gettransport['data'])?$gettransport['data']:[],
-                'hostel' => isset($gethostel['data'])?$gethostel['data']:[],
-                'session' => isset($session['data'])?$session['data']:[],
-                'semester' => isset($semester['data'])?$semester['data']:[],
-                'parent' => isset($parent['data'])?$parent['data']:[],
-                'religion' => isset($religion['data'])?$religion['data']:[],
-                'races' => isset($races['data'])?$races['data']:[],
-                'relation' => isset($relation['data'])?$relation['data']:[],
-                'academic_year_list' => isset($academic_year_list['data'])?$academic_year_list['data']:[]
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
             ]
         );
         // return view('admin.admission.index');
@@ -2017,14 +2024,17 @@ class AdminController extends Controller
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($semester);
         return view(
             'admin.promotion.index',
             [
-                'classes' =>isset($getclass['data']) ? $getclass['data'] : [],
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2107,12 +2117,15 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.timetable.index',
             [
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'session' =>isset($session['data']) ? $session['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2122,12 +2135,15 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.timetable_copy.index',
             [
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2156,64 +2172,64 @@ class AdminController extends Controller
             'saturday',
             'sunday',
         );
-        if(isset($timetable['data'])){
-        if ($timetable['code'] == "200") {
-            $max = $timetable['data']['max'];
+        if (isset($timetable['data'])) {
+            if ($timetable['code'] == "200") {
+                $max = $timetable['data']['max'];
 
-            $response = "";
-            $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.day') . '/' . __('messages.period') . '</td>';
-            for ($i = 1; $i <= $max; $i++) {
-                $response .= '<td class="centre">' . $i . '</td>';
-            }
-            $response .= '</tr>';
-            foreach ($days as $day) {
+                $response = "";
+                $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.day') . '/' . __('messages.period') . '</td>';
+                for ($i = 1; $i <= $max; $i++) {
+                    $response .= '<td class="centre">' . $i . '</td>';
+                }
+                $response .= '</tr>';
+                foreach ($days as $day) {
 
-                if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
-                } else {
+                    if (!isset($timetable['data']['week'][$day]) && ($day == "saturday" || $day == "sunday")) {
+                    } else {
 
-                    $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.' . $day) . '</td>';
-                    $row = 0;
-                    foreach ($timetable['data']['timetable'] as $table) {
-                        if ($table['day'] == $day) {
-                            $start_time = date('H:i', strtotime($table['time_start']));
-                            $end_time = date('H:i', strtotime($table['time_end']));
-                            $response .= '<td>';
-                            if ($table['break'] == "1") {
-                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
-                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
-                                if (isset($table['hall_no'])) {
-                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
-                                }
-                            } else {
-                                if ($table['subject_name']) {
-                                    $subject = $table['subject_name'];
+                        $response .= '<tr><td class="center" style="color:#ed1833;">' . __('messages.' . $day) . '</td>';
+                        $row = 0;
+                        foreach ($timetable['data']['timetable'] as $table) {
+                            if ($table['day'] == $day) {
+                                $start_time = date('H:i', strtotime($table['time_start']));
+                                $end_time = date('H:i', strtotime($table['time_end']));
+                                $response .= '<td>';
+                                if ($table['break'] == "1") {
+                                    $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="dripicons-bell"></i></div>' . (isset($table['break_type']) ? $table['break_type'] : "") . '</b><br>';
+                                    $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                    if (isset($table['hall_no'])) {
+                                        $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                    }
                                 } else {
-                                    $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                    if ($table['subject_name']) {
+                                        $subject = $table['subject_name'];
+                                    } else {
+                                        $subject = (isset($table['break_type']) ? $table['break_type'] : "");
+                                    }
+                                    $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>' . $subject . '</b><br>';
+                                    $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
+                                    if ($table['teacher_name']) {
+                                        $response .= '<b><div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>' . $table['teacher_name'] . '</b><br>';
+                                    }
+                                    if (isset($table['hall_no'])) {
+                                        $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
+                                    }
                                 }
-                                $response .= '<b><div style="color:#2d28e9;display:inline-block;padding-right:10px;"> <i class="icon-book-open"></i></div>' . $subject . '</b><br>';
-                                $response .= '<b><div style="color:#179614;display:inline-block;padding-right:10px;"><i class="icon-speedometer"></i></div>(' . $start_time . ' - ' . $end_time . ' )<b><br>';
-                                if ($table['teacher_name']) {
-                                    $response .= '<b><div style="color:#28dfe9;display:inline-block;padding-right:10px;"> <i class=" fas fa-book-reader"></i></div>' . $table['teacher_name'] . '</b><br>';
-                                }
-                                if (isset($table['hall_no'])) {
-                                    $response .= '<b><div style="color:#ff0000;display:inline-block;padding-right:10px;"> <i class="icon-location-pin"></i> </div>' . $table['hall_no'] . '</b><br>';
-                                }
+                                $response .= '</td>';
+                                $row++;
                             }
-                            $response .= '</td>';
+                        }
+                        while ($row < $max) {
+                            $response .= '<td class="center">N/A</td>';
                             $row++;
                         }
+                        $response .= '</tr>';
                     }
-                    while ($row < $max) {
-                        $response .= '<td class="center">N/A</td>';
-                        $row++;
-                    }
-                    $response .= '</tr>';
                 }
-            }
 
-            $timetable['timetable'] = $response;
+                $timetable['timetable'] = $response;
+            }
         }
-    }
         $timetable['class_id'] = $request->class_id;
         $timetable['section_id'] = $request->section_id;
         $timetable['semester_id'] = $request->semester_id;
@@ -2347,11 +2363,13 @@ class AdminController extends Controller
 
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.attendance.employee',
             [
                 'department' => isset($getdepartment['data']) ? $getdepartment['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : []
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2364,12 +2382,15 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($session);
         return view(
             'admin.student.student',
             [
-                'classes' => isset($getclass['data'])?$getclass['data']:[],
-                'semester' => isset($semester['data'])?$semester['data']:[],
-                'session' => isset($session['data'])?$session['data']:[]
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2562,12 +2583,15 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.homework.evaluation_report',
             [
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -2764,7 +2788,7 @@ class AdminController extends Controller
 									</div>
 									<td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('public/'.config('constants.branch_id').'student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
+                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('public/' . config('constants.branch_id') . 'student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
                                     <td>
@@ -3798,7 +3822,7 @@ class AdminController extends Controller
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
             'sudent_application_id' => $request->sudent_application_id,
-            
+
 
         ];
 
@@ -3813,13 +3837,16 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam_results.byclass',
             [
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -3830,13 +3857,16 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam_results.bysubject',
             [
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -3846,13 +3876,16 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam_results.bystudent',
             [
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -3866,6 +3899,7 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam_results.overall',
             [
@@ -3873,7 +3907,9 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -3885,13 +3921,16 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.exam.result',
             [
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -4209,9 +4248,9 @@ class AdminController extends Controller
         return view(
             'admin.parent.add',
             [
-                'religion' => isset($religion['data'])?$religion['data']:[],
-                'races' => isset($races['data'])?$races['data']:[],
-                'education' => isset($education['data'])?$education['data']:[],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'education' => isset($education['data']) ? $education['data'] : [],
             ]
         );
     }
@@ -5044,11 +5083,13 @@ class AdminController extends Controller
 
         $session = Helper::GetMethod(config('constants.api.session'));
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.attendance.employee_report',
             [
                 'department' => isset($getdepartment['data']) ? $getdepartment['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : []
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
@@ -5685,7 +5726,7 @@ class AdminController extends Controller
         return view('admin.exam_paper.list', [
             'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
             'grade_category' => isset($grade_category['data']) ? $grade_category['data'] : [],
-            'get_paper_type' =>isset($get_paper_type['data']) ? $get_paper_type['data'] : []
+            'get_paper_type' => isset($get_paper_type['data']) ? $get_paper_type['data'] : []
         ]);
     }
     // get Exam paper list
@@ -6276,6 +6317,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'admin.soap.index',
             [
@@ -6294,7 +6336,9 @@ class AdminController extends Controller
                 'religion' => $religion['data'],
                 'races' => $races['data'],
                 'relation' => $relation['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => $academic_year_list['data'],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }

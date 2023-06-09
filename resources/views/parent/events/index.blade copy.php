@@ -51,38 +51,45 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card-box">
-                <h4 class="header-title">{{ __('messages.event') }}</h4>
-                <p class="sub-header">
-                <!-- <div class="form-group pull-right">
-                    <div class="col-xs-2 col-sm-2">
-                        <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">Add</a>
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">{{ __('messages.event') }}
+                            <h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <div class="form-group pull-right">
+                        <div class="col-xs-2 col-sm-2">
+                            <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
+                            <a type="button" class="btn add-btn btn-rounded waves-effect waves-light" href="{{ route('admin.event.create')}}">{{ __('messages.add') }}</a>
+                        </div>
                     </div>
-                </div> -->
-                </p>
-                
-                <div class="table-responsive">
-                    <table class="table w-100 nowrap" id="event-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>{{ __('messages.title') }}</th>
-                                <th>{{ __('messages.type') }}</th>
-                                <th>{{ __('messages.audience') }}</th>
-                                <th>{{ __('messages.start_date') }}</th>
-                                <th>{{ __('messages.end_date') }}</th>
-                                <th>{{ __('messages.action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table w-100 nowrap" id="event-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ __('messages.title') }}</th>
+                                    <th>{{ __('messages.type') }}</th>
+                                    <th>{{ __('messages.audience') }}</th>
+                                    <th>{{ __('messages.start_date') }}</th>
+                                    <th>{{ __('messages.end_date') }}</th>
+                                    <th>{{ __('messages.publish') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div> <!-- end card-box -->
         </div> <!-- end col -->
     </div>
     <!--- end row -->
-    @include('parent.events.view')
+    @include('admin.event.view')
+    @include('admin.event.publish')
 </div>
 <!-- container -->
 
@@ -111,14 +118,21 @@
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
-  //event routes
-    var eventList = "{{ route('parent.event.list') }}";
-    var eventDetails = "{{ route('parent.event.details') }}";
-    
+    //event routes
+    var eventList = "{{ route('admin.event.list') }}";
+    var eventDetails = "{{ route('admin.event.details') }}";
+    var eventDelete = "{{ route('admin.event.delete') }}";
+    var eventPublish = "{{ route('admin.event.publish') }}";
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_event') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    // lang change name end
 </script>
 <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('public/js/custom/student_event.js') }}"></script>
+<script src="{{ asset('public/js/custom/event.js') }}"></script>
 
 @endsection

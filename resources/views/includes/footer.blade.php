@@ -54,9 +54,6 @@
 </script>
 @endif
 <script>
-    var fonturl = "http://localhost/school-management-system/storage/fonts/ipag.ttf";
-    console.log("fonturl");
-    console.log(fonturl);
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -318,65 +315,65 @@
             }
         });
     }
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-        // $('.notification-list-show').css('display', 'none');
+    //     // $('.notification-list-show').css('display', 'none');
 
-        // var sTimeOut = setInterval(function() {
-        //     getNotifications();
-        // }, 2000);
+    //     // var sTimeOut = setInterval(function() {
+    //     //     getNotifications();
+    //     // }, 2000);
 
-        var sTimeOut = setInterval(function() {
-            $.ajax({
-                type: 'GET',
-                url: allLogout,
-                success: function(res) {
-                    if (res.code == 200) {
-                        toastr.error('Logout Successfully');
-                        setTimeout(function() {
-                            logoutFunc();
-                        }, 1000);
-                    }
+    //     var sTimeOut = setInterval(function() {
+    //         $.ajax({
+    //             type: 'GET',
+    //             url: allLogout,
+    //             success: function(res) {
+    //                 if (res.code == 200) {
+    //                     toastr.error('Logout Successfully');
+    //                     setTimeout(function() {
+    //                         logoutFunc();
+    //                     }, 1000);
+    //                 }
 
-                },
-                error: function(err) {
-                    // console.log("eror")
-                    // console.log(err)
-                }
-            });
-        }, 8000);
+    //             },
+    //             error: function(err) {
+    //                 // console.log("eror")
+    //                 // console.log(err)
+    //             }
+    //         });
+    //     }, 8000);
 
-        getNotifications();
+    //     getNotifications();
 
-        function getNotifications() {
-            $.ajax({
-                type: 'GET',
-                url: allNotifications,
-                success: function(res) {
-                    $(".notification-list-show").html(res.notificationlist);
-                    $(".badge-count").text(res.count);
-                },
-                error: function(err) {
-                    // console.log("eror")
-                    // console.log(err)
-                }
-            });
-        }
-        // martk as to read
-        $(document).on('click', '.mark-as-read', function() {
-            let request = sendMarkRequest($(this).data('id'));
-            request.done(() => {
-                getNotifications();
-            });
-        });
-        // martk all read
-        $(document).on('click', '#mark-all-read', function() {
-            let request = sendMarkRequest();
-            request.done(() => {
-                getNotifications();
-            })
-        });
-    });
+    //     function getNotifications() {
+    //         $.ajax({
+    //             type: 'GET',
+    //             url: allNotifications,
+    //             success: function(res) {
+    //                 $(".notification-list-show").html(res.notificationlist);
+    //                 $(".badge-count").text(res.count);
+    //             },
+    //             error: function(err) {
+    //                 // console.log("eror")
+    //                 // console.log(err)
+    //             }
+    //         });
+    //     }
+    //     // martk as to read
+    //     $(document).on('click', '.mark-as-read', function() {
+    //         let request = sendMarkRequest($(this).data('id'));
+    //         request.done(() => {
+    //             getNotifications();
+    //         });
+    //     });
+    //     // martk all read
+    //     $(document).on('click', '#mark-all-read', function() {
+    //         let request = sendMarkRequest();
+    //         request.done(() => {
+    //             getNotifications();
+    //         })
+    //     });
+    // });
 </script>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {

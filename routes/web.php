@@ -169,7 +169,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::any('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
-
+    Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
+    
     Route::group(['middleware' => 'isAdmin'], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');

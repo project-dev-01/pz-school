@@ -148,7 +148,7 @@
                                                         <select id="old_session_id" class="form-control"  name="session_id">                              
                                                         <option value="">{{ __('messages.select_session') }}</option>
                                                             @foreach($session as $ses)
-                                                                <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -243,7 +243,7 @@
                                                         <select id="session_id" class="form-control"  name="session_id">                              
                                                         <option value="">{{ __('messages.select_session') }}</option>
                                                             @foreach($session as $ses)
-                                                                <option value="{{$ses['id']}}">{{$ses['name']}}</option>
+                                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -584,16 +584,6 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="categy">{{ __('messages.category') }}<span class="text-danger">*</span></label>
-                                                                    <select id="categy" name="categy" class="form-control" disabled>
-                                                                        <option value="">{{ __('messages.select_category') }}</option>
-                                                                        <option value="1">One</option>
-                                                                        <option value="2">Two</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="std_session_id">{{ __('messages.session') }}</label>
