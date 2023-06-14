@@ -1102,6 +1102,17 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
+        //Route::post('storetchat', [TeacherController::class, 'storetchat'])->name('teacher.storetchat');
+        
+        Route::post('chat/chat_save', [TeacherController::class, 'savechat'])->name('teacher.chat.add');
+        Route::post('chat/parentlist', [TeacherController::class, 'parentlist'])->name('teacher.chat.parentlist');
+        
+        Route::post('chat/teacherlist', [TeacherController::class, 'teacherlist'])->name('teacher.chat.teacherlist');
+        
+        Route::post('chat/chat_remove', [TeacherController::class, 'deletechat'])->name('teacher.chat.del');
+       
+        Route::post('chat/showlist', [TeacherController::class, 'chatshowlist'])->name('teacher.chat.showlist');
+       // Route::post('chat/groupshowlist', [TeacherController::class, 'chatgroupshowlist'])->name('teacher.chat.groupshowlist');
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
         Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
@@ -1216,6 +1227,12 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('children', [ParentController::class, 'children'])->name('parent.children');
         // chat app    
         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
+        Route::post('chat/chat_save', [ParentController::class, 'savechat'])->name('parent.chat.add');
+        
+        
+        Route::post('chat/teacherlist', [ParentController::class, 'teacherlist'])->name('parent.chat.teacherlist');
+        Route::post('chat/chat_remove', [ParentController::class, 'deletechat'])->name('parent.chat.del');
+        Route::post('chat/showlist', [ParentController::class, 'chatshowlist'])->name('parent.chat.showlist');
 
         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
         // student leave 

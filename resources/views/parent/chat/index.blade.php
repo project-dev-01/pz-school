@@ -1,5 +1,9 @@
 @extends('layouts.admin-layout')
 @section('title','Chat')
+
+<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -23,12 +27,12 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card">
                 <div class="card-body">
-
+                @php $url="http://localhost/paxsuzen-api-dev"; @endphp
                     <div class="media mb-3">
-                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-5.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith">
+                        <img src="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="42" >
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
-                                <a href="javascript: void(0);" class="text-reset">James Zavel</a>(Parent)
+                                <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-14">
                                 <small class="mdi mdi-circle text-success"></small> Online
@@ -44,7 +48,7 @@
                     <!-- start search box -->
                     <form class="search-bar mb-3">
                         <div class="position-relative">
-                            <input type="text" class="form-control form-control-light" placeholder="{{ __('messages.people_group') }}">
+                            <input type="text" id="searchuser" onkeyup="search_user()" class="form-control form-control-light" placeholder="{{ __('messages.people_group') }}">
                             <span class="mdi mdi-magnify"></span>
                         </div>
                     </form>
@@ -52,10 +56,14 @@
 
                     <h6 class="font-13 text-muted text-uppercase">{{ __('messages.group_chat') }}</h6>
                     <div class="p-2">
-                        <a href="javascript: void(0);" class="text-reset mb-2 d-block">
+                       
+                        @foreach($group_list as $group)
+                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','','Group')">
                             <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-                            <span class="mb-0 mt-1">Grade A Group</span>
+                            <span class="mb-0 mt-1">{{$group['name']}} Group</span>
+                            <input type="hidden" id="username{{ $group['id'] }}Group" value="{{$group['name']}}">
                         </a>
+                        @endforeach
                     </div>
 
                     <h6 class="font-13 text-muted text-uppercase mb-2">{{ __('messages.teacher_contacts') }}</h6>
@@ -63,38 +71,10 @@
                     <!-- users -->
                     <div class="row">
                         <div class="col">
-                            <div data-simplebar style="max-height: 375px">
-                                <a href="javascript:void(0);" class="text-body">
-                                    <div class="media p-2">
-                                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-2.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Brandon Smith" />
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-0 font-14">
-                                                <span class="float-right text-muted font-weight-normal font-12">4:30am</span>
-                                                Brandon Smith
-                                            </h5>
-                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-danger">3</span></span>
-                                                <span class="w-75">What academic standard do you use?</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
+                        <div data-simplebar style="max-height: 500px;overflow-y: scroll;" id="teacherlistshow">
+                                @foreach($teacher_list as $teacher)
 
-                                <a href="javascript:void(0);" class="text-body">
-                                    <div class="media p-2">
-                                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-7.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
-                                        <div class="media-body">
-                                            <h5 class="mt-0 mb-0 font-14">
-                                                <span class="float-right text-muted font-weight-normal font-12">Thu</span>
-                                                Maria C
-                                            </h5>
-                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-danger">2</span></span>
-                                                <span class="w-75">Thanks</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
+                                @endforeach
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
                     </div>
@@ -107,243 +87,537 @@
         <!-- chat area -->
         <div class="col-xl-9 col-lg-8">
 
+ @php $k=0; @endphp 
+ @foreach($teacher_list as $teacher)
+								@php $k++; @endphp
+								@if($k==1)
             <div class="card">
                 <div class="card-body py-2 px-3 border-bottom border-light">
                     <div class="media py-1">
-                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-1.jpg' }}" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+                        <img src="{{ $teacher['photo'] && url($url.'/public/users/images/'.$teacher['photo']) ? url($url.'/public/users/images/'.$teacher['photo']) : url($url.'/public/images/users/default.jpg') }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
-                                <a href="javascript: void(0);" class="text-reset">Geneva McKnight</a>(Teacher)
+                                <a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $teacher['name'] }}</span></a> (<span id="usertype">Teacher</span>)
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-12">
                                 <small class="mdi mdi-circle text-success"></small> Online
                             </p>
                         </div>
                         <div>
-                            <a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Chat">
-                                <i class="fe-trash-2"></i>
-                            </a>
+                        <form class="search-bar mb-3">
+                        <div class="position-relative">
+                            <input type="text" id="searchbar" onkeyup="search_keyword()" class="form-control form-control-light" placeholder="Search keyword..">
+                            <span class="mdi mdi-magnify"></span>
                         </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <ul class="conversation-list" data-simplebar style="max-height: 460px">
+                    </form>
                         
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-5.jpg' }}" class="rounded" alt="James Z" />
-                                <i>10:01</i>
+                            <!--<a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Chat">
+                                <i class="fe-trash-2"></i>
+                            </a>-->
                             </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>James Z</i>
-                                    <p>
-                                    Actually I wanted to know about the progress of my child
-                                    </p>
                                 </div>
                             </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
+                <div class="card-body" style="max-height: 460px;overflow-y: scroll;">
+                    <div class="row">
+                    <div class="col">
+                    <ul class="conversation-list" id="showchat" data-simplebar >
 
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="chat-avatar">
-                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-1.jpg' }}" class="rounded" alt="Geneva M" />
-                                <i>10:00</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>Geneva M</i>
-                                    <p>
-                                    Karan is doing well in all the subjects except mathematics
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-5.jpg' }}" class="rounded" alt="James Z" />
-                                <i>10:02</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>James Z</i>
-                                    <p>
-                                    He needs more attention on that
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="chat-avatar">
-                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/user-1.jpg' }}" class="rounded" alt="Geneva M" />
-                                <i>10:01</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>Geneva M</i>
-                                    <p>
-                                    But mathematics is a subject he practices a lot.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
-                                <i>10:03</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>James Z</i>
-                                    <p>
-                                    Don’t worry, I had a word with his mathematics teacher and I discussed his problem with her.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="chat-avatar">
-                                <img src="{{ asset('public/images/users/user-1.jpg') }}" alt="Geneva M" class="rounded" />
-                                <i>10:02</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>Geneva M</i>
-                                    <p>
-                                    Sure, we will focus on him but I want that more attention should be given to him in his class so that he can score good grades
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
-                                <i>10:04</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>James Z</i>
-                                    <p>
-                                        Thank you so much
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="clearfix odd">
-                            <div class="chat-avatar">
-                                <img src="{{ asset('public/images/users/user-5.jpg') }}" alt="James Z" class="rounded" />
-                                <i>10:04</i>
-                            </div>
-                            <div class="conversation-text">
-                                <div class="ctext-wrap">
-                                    <i>James Z</i>
-                                    <p>
-                                    Please don’t mention that.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="conversation-actions dropdown">
-                                <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class='mdi mdi-dots-vertical font-16'></i></button>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Copy Message</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.edit') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('messages.delete') }}</a>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
-
+                                </div>
+                            </div>
                     <div class="row">
                         <div class="col">
                             <div class="mt-2 bg-light p-3 rounded">
-                                <form class="needs-validation" novalidate="" name="chat-form" id="chat-form">
+                               
+                                    <input type="hidden" name="chat_fromid" id="chat_fromid" value="{{$tid}}">                                    
+                                    <input type="hidden" name="chat_fromname" id="chat_fromname"  value="{{$name}}">  
+                                    <input type="hidden" name="chat_fromuser" id="chat_fromuser"  value="{{$role}}">
+                                    <input type="hidden" name="chat_toid" id="chat_toid" value="{{$teacher['staff_id']}}">
+                                    <input type="hidden" name="chat_toname" id="chat_toname" value="{{$teacher['name']}}">                                   
+                                    <input type="hidden" name="chat_touser" id="chat_touser" value="Teacher">
+                                    <input type="hidden" name="branch_id" id="branch_id" value="1">
                                     <div class="row">
                                         <div class="col mb-2 mb-sm-0">
-                                            <input type="text" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
+                                            <input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
                                             <div class="invalid-feedback">
                                                 Please enter your messsage
                                             </div>
+                                            <span id="status"></span>
                                         </div>
                                         <div class="col-sm-auto">
                                             <div class="btn-group">
-                                                <a href="javascript: void(0);" class="btn btn-light"><i class="fe-paperclip"></i></a>
-                                                <button type="submit" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
+                                            
+                                            <input type="file" id="homework_file" name="file" hidden onchange="Filevalidation()">    
+                                                <a href="javascript: void(0);" id='emoji' class="btn btn-light">&#128512;</a>
+                                                <a href="javascript: void(0);" id='buttonid' class="btn btn-light"><i class="fe-paperclip"></i></a>
+                                                <button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
                                             </div>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
-                                </form>
                             </div>
                         </div> <!-- end col-->
                     </div>
                     <!-- end row -->
                 </div> <!-- end card-body -->
             </div> <!-- end card -->
+			@endif
+			@endforeach
         </div>
         <!-- end chat area-->
 
     </div> <!-- end row-->
 </div> <!-- container -->
+@endsection
+
+@section('scripts')
+
+<script src="{{ asset('public/emoji/emoji_keyboard.js') }}"></script>
+
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+   
+
+    let imgurl="{{ url($url.'/public/users/images/')}}";
+    var toimg='default.jpg';
+   let fromimg="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}";
+
+   function my_function(toid,toimage,touser)
+    {
+       var toname= $('#username'+toid+touser).val();
+        $('#toname').html(toname);
+        $('#usertype').html(touser);
+        
+        $('#chat_toid').val(toid);
+        $('#chat_toname').val(toname);
+        $('#chat_touser').val(touser);
+        
+        toimg=(toimage!='')?toimage:'default.jpg';
+        $('#toimage').prop('src', imgurl+toimg)
+    getchatlist();
+
+    }
+    document.getElementById('buttonid').addEventListener('click', openDialog);
+                function openDialog() {
+                    document.getElementById('homework_file').click();
+                }
+    </script>
+
+<script>
+    
+    var tchatUrl = "{{ route('parent.chat.add') }}";
+    $('#chat_save').on('click', function (e) {
+        e.preventDefault();
+
+       
+            var form = this;
+            var chat_fromid = $("#chat_fromid").val();
+            var chat_fromname = $("#chat_fromname").val();
+            var chat_fromuser = $("#chat_fromuser").val();
+            var chat_toid = $("#chat_toid").val();
+            var chat_toname = $("#chat_toname").val();
+            var chat_touser = $("#chat_touser").val();
+            var chat_content = $("#chat_content").val();
+            var branch_id = $("#branch_id").val();
+          
+            var formData = new FormData();
+            formData.append('chat_fromid', chat_fromid);
+            formData.append('chat_fromname', chat_fromname);
+            formData.append('chat_fromuser', chat_fromuser);
+            formData.append('chat_toid', chat_toid);
+            formData.append('chat_toname', chat_toname);
+            formData.append('chat_touser', chat_touser);
+            formData.append('chat_content', chat_content);
+            formData.append('branch_id', branch_id);
+			
+            // formData.append('file', file);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+            // Display the key/value pairs
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
+            // return false;
+            //
+           
+            $.ajax({
+                url: tchatUrl,
+                method:'post',
+                // data: new FormData(form),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                   // alert(response.code);
+                    if (response.code == 200) {
+                        
+                        $("#chat_content").val("");
+                        getchatlist();
+                    } else {                       
+                    }
+                }
+            });
+        
+    });
+    </script>
+    
+<script>
+    
+    var tchatdelUrl = "{{ route('parent.chat.del') }}";
+    function deletechat(id)
+        {
+        var url = tchatdelUrl;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this Exam Term',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    chat_id: id
+                }, function (data) {
+                    if (data.code == 200) {
+                        $("#chat_content").val("");
+                        getchatlist();
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    }
+    </script>
+
+    <script>
+    window.addEventListener('focus', startTimer);
+
+// Inactive
+window.addEventListener('blur', stopTimer);
+
+     // where X is your every X SEC
+    function  startTimer()
+    {
+    var interval = 1000 * 5;
+    setInterval(getchatlist, interval);
+    setInterval(getteacherlist, interval);
+    }
+    function  stopTimer()
+    {
+    var interval = 1000 * 60 * 5;
+    setInterval(getchatlist, interval);
+    setInterval(getteacherlist, interval);
+    }
+    var chatlistUrl = "{{ route('parent.chat.showlist') }}";
+    function getchatlist()
+    {
+       // alert(1);
+        
+            var form = this;
+            var chat_fromid = $("#chat_fromid").val();
+            var chat_fromname = $("#chat_fromname").val();
+            var chat_fromuser = $("#chat_fromuser").val();
+            var chat_toid = $("#chat_toid").val();
+            var chat_toname = $("#chat_toname").val();
+            var chat_touser = $("#chat_touser").val();
+            var chat_content = $("#chat_content").val();
+            var branch_id = $("#branch_id").val();
+           
+            var formData = new FormData();
+            formData.append('chat_fromid', chat_fromid);
+            formData.append('chat_fromname', chat_fromname);
+            formData.append('chat_fromuser', chat_fromuser);
+            formData.append('chat_toid', chat_toid);
+            formData.append('chat_toname', chat_toname);
+            formData.append('chat_touser', chat_touser);
+			
+            // formData.append('file', file);
+            ///formData.append('file', $('input[type=file]')[0].files[0]);
+            // Display the key/value pairs
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
+            // return false;
+            //
+            var searchbar = $("#searchbar").val();
+            if(searchbar=='')
+            {
+            $.ajax({
+                url: chatlistUrl,
+                method:'post',
+                // data: new FormData(form),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    
+                    if (response.code == 200) {
+                        let chatfile="";
+                        let msgread="";
+                        let  chatdatearr=[];
+                        let chat_li = "";
+                        let chatarray =response.data;
+                        chatarray .reverse();
+                        
+                        $.each( chatarray, function (i, item) {   
+                            chatfile="";   
+                            if(item.chat_status=='Unread')
+                            {
+                                msgread='<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="'+item.chat_status+'" />';
+                            }
+                            else
+                            {
+                                msgread='<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="'+item.chat_status+'" />';
+                            }                       
+                            if(($.inArray(item.chatdate, chatdatearr))<0)
+                            {                            
+                                chat_li +=' <li class="clearfix"> <center> '+item.chatdate+'</center></li>'; 
+                                chatdatearr.push(item.chatdate);                        
+                            }
+
+                            if(item.chat_document!=null)
+                            {
+                                chatfile='<br><button type="button" onclick=showfile("'+item.chat_document+'") class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></button>';
+                            }
+                            if(chat_fromid==item.chat_fromid && chat_fromuser==item.chat_fromuser)
+                            {
+                            chat_li +='<li class="clearfix odd">';
+                            chat_li +='<div class="chat-avatar">';
+                            chat_li +=' <img src="'+fromimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+                            chat_li +='     <i>'+tConvert(item.chattime)+'</i>';
+                            chat_li +=msgread;
+                            chat_li +='     <i class="fe-trash-2" onclick="deletechat('+item.id+')"></i>';
+                            chat_li +=' </div>';
+                            chat_li +=' <div class="conversation-text">';
+                            chat_li +='    <div class="ctext-wrap">';
+                            chat_li +='        <i>'+item.chat_fromname+'</i>';
+                            chat_li +='        <p>'+item.chat_content+' '+chatfile+'</p>';
+                            chat_li +='     </div>';
+                            chat_li +=' </div>';
+                            chat_li +='<div class="conversation-actions dropdown">';
+                            chat_li +='  <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical font-16"></i></button>';
+                            chat_li +=' <div class="dropdown-menu dropdown-menu-right">';
+                            chat_li +='     <a class="dropdown-item" href="#">Copy Message</a>';
+                            chat_li +='   <a class="dropdown-item" href="#">Edit</a>';
+                            chat_li +='   <a class="dropdown-item" href="#">Delete</a>';
+                            chat_li +='  </div>';
+                            chat_li +='  </div>';
+                            chat_li +='</li>';
+                            }
+                            else
+                            {
+                                chat_li +='<li class="clearfix ">';
+                            chat_li +='<div class="chat-avatar">';
+                            chat_li +=' <img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+                            chat_li +='     <i>'+tConvert(item.chattime)+'<br> </i>';
+                           
+                            chat_li +=' </div>';
+                            chat_li +=' <div class="conversation-text">';
+                            chat_li +='    <div class="ctext-wrap">';
+                            chat_li +='        <i>'+item.chat_fromname+'</i>';
+                            chat_li +='        <p>'+item.chat_content+' '+chatfile+'</p>';
+                            chat_li +='     </div>';
+                            chat_li +=' </div>';
+                            chat_li +='<div class="conversation-actions dropdown">';
+                            chat_li +='  <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical font-16"></i></button>';
+                            chat_li +=' <div class="dropdown-menu dropdown-menu-right">';
+                            chat_li +='     <a class="dropdown-item" href="#">Copy Message</a>';
+                            chat_li +='   <a class="dropdown-item" href="#">Edit</a>';
+                            chat_li +='   <a class="dropdown-item" href="#">Delete</a>';
+                            chat_li +='  </div>';
+                            chat_li +='  </div>';
+                            chat_li +='</li>';
+                            }
+                        }); 
+                        //alert(chatdatearr);
+                            $('#showchat').html(chat_li);                               
+                    } else {                       
+                    }
+                }
+            });
+            }
+    }
+    var teacherlisttUrl = "{{ route('parent.chat.teacherlist') }}";
+	getteacherlist();
+	var teacherphotourl = "{{ url($url.'/public/images/users/default.jpg') }}";
+	function getteacherlist()
+    {
+		
+        
+		var form = this;
+		var chat_fromid = $("#chat_fromid").val();
+		var chat_fromname = $("#chat_fromname").val();
+		var chat_fromuser = $("#chat_fromuser").val();
+		var branch_id = $("#branch_id").val();
+		
+		var formData = new FormData();
+		formData.append('chat_fromid', chat_fromid);
+		formData.append('chat_fromname', chat_fromname);
+		formData.append('chat_fromuser', chat_fromuser);
+		$.ajax({
+                url: teacherlisttUrl,
+                method:'post',
+                // data: new FormData(form),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    
+                    if (response.code == 200) {
+                        
+                        let teacher_li = "";
+                        let teacherarray =response.data;
+						teacherarray = teacherarray.sort((a, b) => {
+						if (a.msgcount < b.msgcount) {
+							return -1;
+						}
+						});
+						teacherarray.reverse();
+                        $.each(teacherarray, function (i, item) { 
+							var photo=(item.photo==null || item.photo=='' )?'default.jpg':item.photo;
+                            
+							teacher_li +=`<a href="javascript:void(0);" class="text-body chatusers" onclick=my_function('`+item.staff_id+`','`+photo+`','Teacher')>`;
+							teacher_li +='<div class="media p-2">';
+							teacher_li +='<img src="'+imgurl+photo+'" class="mr-2 rounded-circle" height="42"/>';
+                            teacher_li += '<div class="media-body">';
+                            teacher_li += '<h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12" ></span>'+item.name+'</h5>';
+							if(parseInt(item.msgcount)>0) 
+                            {
+							teacher_li += '<p class="mt-1 mb-0 text-muted font-14">';
+							teacher_li += '<span class="w-25 float-right text-right"><span class="badge badge-soft-success">'+item.msgcount+'</span></span>';
+							teacher_li += '<!--<span class="w-75">Thanks</span>-->';
+							teacher_li += '</p>';
+							}
+							teacher_li +='<input type="hidden" id="username'+item.staff_id+'Teacher" value="'+item.name+'"></div>';
+							teacher_li +='</div>';
+							teacher_li +='</a> ';
+                            
+                            
+						}); 
+						$('#teacherlistshow').html(teacher_li);                               
+						} else {                       
+					}
+				}
+			});
+		
+	}
+    function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
+function showfile(filename)
+{
+    window.open('http://localhost/paxsuzen-api-dev/public/admin-documents/chats/'+filename,'popup','width=600,height=600,scrollbars=no,resizable=no'); return false;
+}
+
+    </script>
+    <script>
+		Filevalidation = () => {
+			const fi = document.getElementById('homework_file');
+			// Check if any file is selected.
+			if (fi.files.length > 0) {
+				for (const i = 0; i <= fi.files.length - 1; i++) {
+		
+					const fsize = fi.files.item(i).size;
+					const file = Math.round((fsize / 1024));
+					// The size of the file.
+					if (file >= 10240) {
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'File too Big',
+                        text: 'Please select a file less than 10MB.!'
+                        })
+						
+					} 
+				}
+			}
+		}
+        
+function search_keyword() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('clearfix');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
+function search_user() {
+    let input = document.getElementById('searchuser').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('chatusers');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
+	</script>
+
+<script>
+     
+        const zone = document.getElementById("chat_content");
+        
+        var emojiKeyboard = new EmojiKeyboard;
+        
+        /* you can edit a few attributes:
+            - callback: function called when a user clicks on an emoji, with the emoji and a boolean telling if the window got closed
+            - auto_reconstruction: boolean if we should recreate the keyboard when we cannot find it
+            - default_placeholder: placeholder text in the search bar
+            - resizable: boolean if the window can be resized (left side)
+        */
+        emojiKeyboard.callback = (emoji, closed) => {
+            console.info(emoji, closed)
+            zone.value += emoji.emoji;
+            
+           
+        };
+        
+        emojiKeyboard.resizable = true;
+        emojiKeyboard.default_placeholder = "You are the best";
+        emojiKeyboard.instantiate(document.getElementById("emoji"));
+        
+        
+    </script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  Filevalidation();
+</script>
 @endsection

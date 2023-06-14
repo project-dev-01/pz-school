@@ -775,7 +775,11 @@ return [
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
-        
+        'chat_parentgroup_list'=> $url.'/chat/get_parentgroup_list',
+        'tchat'=> $url.'/chat/storechat',
+		    'tdelchat'=> $url.'/chat/deletechat',
+        'chatlists'=> $url.'/chat/chatlist',		
+        'groupchatlists'=> $url.'/chat/groupchatlists',
         
         'get_like_column_name'=> $url.'/get_like_column_name',
         'faq_email'=> $url.'/faq/email',

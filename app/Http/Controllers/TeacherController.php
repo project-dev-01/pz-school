@@ -576,21 +576,138 @@ class TeacherController extends Controller
     public function chatShow()
     {
         $data = [
-            'staff_id' => session()->get('ref_user_id')
+            'staff_id' => session()->get('ref_user_id'),
+			'to_id' => session()->get('ref_user_id'),
+			'role'=> "Teacher"
         ];
+       
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
-        $parent_list = Helper::GetMethod(config('constants.api.chat_parent_list'));
-        $teacher_list = Helper::GetMethod(config('constants.api.chat_teacher_list'));
-        // dd($teacher_list);
+        $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
+        $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
+    //dd($parent_list);
         return view('teacher.chat.index', [
             'teacher_list' => $teacher_list['data'],
             'parent_list' => $parent_list['data'],
             'group_list' => $group_list['data'],
             'name' => session()->get('name'),
             'role' => "Teacher",
+            'tid' => session()->get('ref_user_id'),
         ]);
-        return view('teacher..index');
+        return view('teacher.chat.index');
     }
+    //GetParent List
+    public function parentlist()
+    {
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+			'to_id' => session()->get('ref_user_id'),
+			'role'=> "Teacher"
+        ];
+       
+        $response = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
+        return $response;
+    
+    }
+   //Get Teacher List
+   public function teacherlist()
+   {
+       $data = [
+           'staff_id' => session()->get('ref_user_id'),
+           'to_id' => session()->get('ref_user_id'),
+           'role'=> "Teacher"
+       ];
+       $response = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
+       
+       return $response;
+   
+   }
+  
+    // Save Chat
+    
+    public function savechat(Request $request)
+    {
+        
+        $file = $request->file('file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $status = "Unread";
+        $data = [
+            'chat_fromid' => $request->chat_fromid,
+            'chat_fromname' => $request->chat_fromname,
+            'chat_fromuser' => $request->chat_fromuser,
+            'chat_toid' => $request->chat_toid,
+            'chat_toname' => $request->chat_toname,
+            'chat_touser' => $request->chat_touser,
+            'chat_content' => $request->chat_content,
+            'chat_status' => $status,
+            'chat_document' => $base64,
+            'chat_file_extension' => $extension
+        ];
+       // dd($data);       
+        $response = Helper::PostMethod(config('constants.api.tchat'), $data);
+       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        //dd($response);
+        return $response;
+    }
+    // Save Chat
+    
+    public function deletechat(Request $request)
+    {
+        $data = [
+            'chat_id' => $request->chat_id
+                ];
+       // dd($data);       
+        $response = Helper::PostMethod(config('constants.api.tdelchat'), $data);
+       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        //dd($response);
+        return $response;
+    }
+    // Delete Chat
+    
+    public function chatshowlist(Request $request)
+    {
+        
+                $data = [
+            'chat_fromid' => $request->chat_fromid,
+            'chat_fromname' => $request->chat_fromname,
+            'chat_fromuser' => $request->chat_fromuser,
+            'chat_toid' => $request->chat_toid,
+            'chat_toname' => $request->chat_toname,
+            'chat_touser' => $request->chat_touser
+        ];
+        //dd($data);       
+       
+        
+         $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
+        //dd($response);
+        return $response;
+    }
+    public function chatgroupshowlist(Request $request)
+    {
+        
+                $data = [
+            'chat_fromid' => $request->chat_fromid,
+            'chat_fromname' => $request->chat_fromname,
+            'chat_fromuser' => $request->chat_fromuser,
+            'chat_toid' => $request->chat_toid,
+            'chat_toname' => $request->chat_toname,
+            'chat_touser' => $request->chat_touser
+        ];
+        //dd($data);       
+       
+        
+         $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
+        //dd($response);
+        return $response;
+    }
+
     public function taskIndex()
     {
         return view('teacher.task.index');
