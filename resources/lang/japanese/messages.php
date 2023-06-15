@@ -1349,4 +1349,6 @@ return [
     "alternative" => "サブ",
     "order_code" => "注文コード",
     "enter_order_code" => "注文コードを入力してください",
+    "apply_now" => "入学申請はこちらへ",
+    "language" => "言語"
 ];

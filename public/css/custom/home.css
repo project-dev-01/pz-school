@@ -4,7 +4,7 @@
 
 .lang-select {
     float: right;
-    margin-right: 80px;
+    margin-right: 75px;
     margin-top: 10px;
 }
 
@@ -56,10 +56,6 @@
 
 
 @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
-    .account-pages {
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
 
     .lang-select {
         margin-right: 0px;
@@ -92,6 +88,13 @@
         height: auto;
         text-align: left;
     }
+
+    .img-fluidapply {
+        width: 351px;
+        height: 451px;
+        text-align: left;
+    }
+
 }
 
 
@@ -127,6 +130,13 @@
         max-width: 100%;
         height: auto;
     }
+
+    .img-fluidapply {
+        width: 100%;
+        height: 451px;
+        text-align: left;
+    }
+
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -161,6 +171,12 @@
         margin-bottom: 5px;
         text-align: left;
         font-size: 11px;
+    }
+
+    .img-fluidapply {
+        width: 100%;
+        height: 220px;
+        text-align: left;
     }
 }
 
@@ -198,12 +214,18 @@
         font-size: 12px;
     }
 
+    .img-fluidapply {
+        width: 100%;
+        height: 220px;
+        text-align: left;
+    }
+
 }
 
 @media screen and (min-device-width: 912px) and (max-device-width: 1368px) {
 
     .lang-select {
-        margin-right: 63px;
+        margin-right: 75px;
     }
 
     .para {
@@ -224,4 +246,9 @@
         text-align: left;
     }
 
+    .img-fluidapply {
+        width: 100%;
+        height: 208px;
+        text-align: left;
+    }
 }

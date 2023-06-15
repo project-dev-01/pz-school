@@ -49,7 +49,6 @@ Route::get('application/index', [AuthController::class, 'application'])->name('a
 // Route::get('lang/home', [LangController::class, 'index']);
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 
-
 Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () {
 
     // Route::get('login', 'AuthController@login');
@@ -170,7 +169,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::any('/authenticate', [AuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
-    
+
     Route::group(['middleware' => 'isAdmin'], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -1103,16 +1102,16 @@ Route::group(['prefix' => 'teacher'], function () {
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Route::post('storetchat', [TeacherController::class, 'storetchat'])->name('teacher.storetchat');
-        
+
         Route::post('chat/chat_save', [TeacherController::class, 'savechat'])->name('teacher.chat.add');
         Route::post('chat/parentlist', [TeacherController::class, 'parentlist'])->name('teacher.chat.parentlist');
-        
+
         Route::post('chat/teacherlist', [TeacherController::class, 'teacherlist'])->name('teacher.chat.teacherlist');
-        
+
         Route::post('chat/chat_remove', [TeacherController::class, 'deletechat'])->name('teacher.chat.del');
-       
+
         Route::post('chat/showlist', [TeacherController::class, 'chatshowlist'])->name('teacher.chat.showlist');
-       // Route::post('chat/groupshowlist', [TeacherController::class, 'chatgroupshowlist'])->name('teacher.chat.groupshowlist');
+        // Route::post('chat/groupshowlist', [TeacherController::class, 'chatgroupshowlist'])->name('teacher.chat.groupshowlist');
         //Task routes
         Route::get('task/index', [TeacherController::class, 'taskIndex'])->name('teacher.task');
         Route::post('subjectmarksAdd', [TeacherController::class, 'subjectmarks'])->name('teacher.subjectmarks.add');
@@ -1157,6 +1156,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('teacher.timetable.pdf');
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf'])->name('teacher.attendance.student_pdf');
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('teacher.attendance.employee_pdf');
+        // set cookie
+        Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('teacher.classroom.setcookie');
     });
 });
 // TEACHER CONTROLLER END
@@ -1228,8 +1229,8 @@ Route::group(['prefix' => 'parent'], function () {
         // chat app    
         Route::get('chat', [ParentController::class, 'chatShow'])->name('parent.chat');
         Route::post('chat/chat_save', [ParentController::class, 'savechat'])->name('parent.chat.add');
-        
-        
+
+
         Route::post('chat/teacherlist', [ParentController::class, 'teacherlist'])->name('parent.chat.teacherlist');
         Route::post('chat/chat_remove', [ParentController::class, 'deletechat'])->name('parent.chat.del');
         Route::post('chat/showlist', [ParentController::class, 'chatshowlist'])->name('parent.chat.showlist');

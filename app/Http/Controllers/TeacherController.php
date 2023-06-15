@@ -10,6 +10,7 @@ use DataTables;
 use Excel;
 use App\Exports\StaffAttendanceExport;
 use App\Exports\StudentAttendanceExport;
+use Illuminate\Support\Facades\Cookie;
 
 class TeacherController extends Controller
 {
@@ -549,7 +550,13 @@ class TeacherController extends Controller
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
+            'teacher_classroom_class_id' => Cookie::get('teacher_classroom_class_id'),
+            'teacher_classroom_section_id' => Cookie::get('teacher_classroom_section_id'),
+            'teacher_classroom_subject_id' => Cookie::get('teacher_classroom_subject_id'),
+            'teacher_classroom_date' => Cookie::get('teacher_classroom_date'),
+            'teacher_classroom_semester' => Cookie::get('teacher_classroom_semester'),
+            'teacher_classroom_session' => Cookie::get('teacher_classroom_session')
         ]);
     }
     // faq screen pages end
@@ -579,14 +586,14 @@ class TeacherController extends Controller
     {
         $data = [
             'staff_id' => session()->get('ref_user_id'),
-			'to_id' => session()->get('ref_user_id'),
-			'role'=> "Teacher"
+            'to_id' => session()->get('ref_user_id'),
+            'role' => "Teacher"
         ];
-       
+
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-    //dd($parent_list);
+        //dd($parent_list);
         return view('teacher.chat.index', [
             'teacher_list' => $teacher_list['data'],
             'parent_list' => $parent_list['data'],
@@ -602,33 +609,31 @@ class TeacherController extends Controller
     {
         $data = [
             'staff_id' => session()->get('ref_user_id'),
-			'to_id' => session()->get('ref_user_id'),
-			'role'=> "Teacher"
+            'to_id' => session()->get('ref_user_id'),
+            'role' => "Teacher"
         ];
-       
+
         $response = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
         return $response;
-    
     }
-   //Get Teacher List
-   public function teacherlist()
-   {
-       $data = [
-           'staff_id' => session()->get('ref_user_id'),
-           'to_id' => session()->get('ref_user_id'),
-           'role'=> "Teacher"
-       ];
-       $response = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-       
-       return $response;
-   
-   }
-  
+    //Get Teacher List
+    public function teacherlist()
+    {
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'to_id' => session()->get('ref_user_id'),
+            'role' => "Teacher"
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
+
+        return $response;
+    }
+
     // Save Chat
-    
+
     public function savechat(Request $request)
     {
-        
+
         $file = $request->file('file');
         if ($file) {
             $path = $file->path();
@@ -652,31 +657,31 @@ class TeacherController extends Controller
             'chat_document' => $base64,
             'chat_file_extension' => $extension
         ];
-       // dd($data);       
+        // dd($data);       
         $response = Helper::PostMethod(config('constants.api.tchat'), $data);
-       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
         //dd($response);
         return $response;
     }
     // Save Chat
-    
+
     public function deletechat(Request $request)
     {
         $data = [
             'chat_id' => $request->chat_id
-                ];
-       // dd($data);       
+        ];
+        // dd($data);       
         $response = Helper::PostMethod(config('constants.api.tdelchat'), $data);
-       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
         //dd($response);
         return $response;
     }
     // Delete Chat
-    
+
     public function chatshowlist(Request $request)
     {
-        
-                $data = [
+
+        $data = [
             'chat_fromid' => $request->chat_fromid,
             'chat_fromname' => $request->chat_fromname,
             'chat_fromuser' => $request->chat_fromuser,
@@ -685,16 +690,16 @@ class TeacherController extends Controller
             'chat_touser' => $request->chat_touser
         ];
         //dd($data);       
-       
-        
-         $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
+
+
+        $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
         //dd($response);
         return $response;
     }
     public function chatgroupshowlist(Request $request)
     {
-        
-                $data = [
+
+        $data = [
             'chat_fromid' => $request->chat_fromid,
             'chat_fromname' => $request->chat_fromname,
             'chat_fromuser' => $request->chat_fromuser,
@@ -703,9 +708,9 @@ class TeacherController extends Controller
             'chat_touser' => $request->chat_touser
         ];
         //dd($data);       
-       
-        
-         $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
+
+
+        $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
         //dd($response);
         return $response;
     }
@@ -1157,7 +1162,7 @@ class TeacherController extends Controller
         return view('teacher.analyticrep.analyticreport', [
             'teacher_class' => isset($response['data']) ? $response['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
-            'session' =>isset($session['data']) ? $session['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);

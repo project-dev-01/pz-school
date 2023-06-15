@@ -60,7 +60,8 @@ $(document).ready(function () {
         noEventsMessage: no_events_to_display_lang,
         // defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
         defaultView: "timeGridWeek",
-        displayEventTime: false,
+        // displayEventTime: false,
+        displayEventTime: true,
         handleWindowResize: !0,
         // height: (window).height() - 200,
         header: {
@@ -72,7 +73,8 @@ $(document).ready(function () {
         // events: t,
         editable: !0,
         droppable: !0,
-        eventLimit: !0,
+        // eventLimit: !0,
+        eventLimit: 3, // set limit to show
         selectable: !0,
         eventSources: [
             // calendor events

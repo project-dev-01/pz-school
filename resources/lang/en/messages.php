@@ -1346,4 +1346,6 @@ return [
     "alternative" => "Alternative",
     "order_code" => "Order Code",
     "enter_order_code" => "Enter Order Code",
+    "apply_now" => "Apply Now",
+    "language" => "Language"
 ];

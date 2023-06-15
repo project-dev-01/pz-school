@@ -52,45 +52,6 @@ $(function () {
     var radarSubjectAvgHighLow;
     callRadarChart();
     function callRadarChart() {
-        $.post(getTestScore, {
-            token: token,
-            branch_id: branchID,
-            student_id: ref_user_id,
-            academic_session_id: academic_session_id
-        }, function (response) {
-            if (response.code == 200) {
-                // var marks = response.data.marks;
-                // var subjects = response.data.subjects;
-                var subjects = response.data.headers;
-                var marks = response.data.allbyStudent;
-                var data = [];
-                var label = [];
-                if (subjects.length > 0 && marks.length) {
-                    subjects.forEach(function (res) {
-                        label.push(res.subject_name);
-                    });
-                    $.each(marks, function (key, value) {
-                        var randcol = getRandomColor();
-                        var obj = {};
-                        var score = [];
-                        obj["label"] = value.exam_name;
-                        obj["backgroundColor"] = hexToRGB(randcol, 0.3);
-                        obj["borderColor"] = randcol;
-                        obj["pointBackgroundColor"] = randcol;
-                        obj["pointBorderColor"] = "#fff";
-                        obj["pointHoverBackgroundColor"] = "#fff";
-                        obj["pointHoverBorderColor"] = randcol;
-                        $.each(value.student_class, function (keys, val) {
-                            let mark = parseInt(val.marks);
-                            score.push(mark);
-                        });
-                        obj["data"] = score;
-                        data.push(obj);
-                    });
-                    testScoreAnalysisChart(label, data);
-                }
-            }
-        }, 'json');
         // all exam subject scores
         $.post(allExamSubjectScores, {
             token: token,
@@ -169,22 +130,6 @@ $(function () {
                 }
             }
         }, 'json');
-    }
-    function testScoreAnalysisChart(labels, obj) {
-        if (radar) {
-            radar.data.labels = labels;
-            radar.data.datasets = obj;
-            radar.update();
-        } else {
-            var ctx = document.getElementById("radar-chart-test-marks").getContext('2d');
-            radar = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: labels,
-                    datasets: obj
-                },
-            });
-        }
     }
     // Test Score Analysis end
     // all exam subject scores start

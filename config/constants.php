@@ -799,7 +799,7 @@ return [
         'application_academic_year_list'=> $url.'/application/academic_year/list',
        
         'forum_image_store'=> $url.'/forum_image_store',
-        
+        'get_languages'=> $url.'/get_languages'
         
       ]
 

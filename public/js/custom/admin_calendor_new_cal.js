@@ -107,7 +107,7 @@ $(document).ready(function () {
         allDayText: allday_lang,
         noEventsMessage: no_events_to_display_lang,
         defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
-        displayEventTime: false,
+        displayEventTime: true,
         handleWindowResize: !0,
         // height: (window).height() - 200,
         header: {
@@ -120,7 +120,8 @@ $(document).ready(function () {
         editable: !0,
         // editable: true,
         droppable: !0,
-        eventLimit: !0,
+        // eventLimit: !0,
+        eventLimit: 3, // set limit to show
         selectable: !0,
         eventSources: [
             // calendor events

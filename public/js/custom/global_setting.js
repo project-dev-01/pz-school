@@ -147,6 +147,7 @@ $(function () {
             $('.editGlobalSetting').find('select[name="year_id"]').val(data.data.year_id);
             $('.editGlobalSetting').find('textarea[name="footer_text"]').val(data.data.footer_text);
             $('.editGlobalSetting').find('select[name="timezone"]').val(data.data.timezone);
+            $('.editGlobalSetting').find('select[name="language_id"]').val(data.data.language_id);
             $('.editGlobalSetting').find('input[name="facebook_url"]').val(data.data.facebook_url);
             $('.editGlobalSetting').find('input[name="twitter_url"]').val(data.data.twitter_url);
             $('.editGlobalSetting').find('input[name="linkedin_url"]').val(data.data.linkedin_url);
@@ -192,33 +193,33 @@ $(function () {
         }
     });
     // delete GlobalSettingDelete
-    $(document).on('click', '#deleteGlobalSettingBtn', function () {
-        var id = $(this).data('id');
-        var url = globalSettingDelete;
-        swal.fire({
-            title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Leave Type',
-            showCancelButton: true,
-            showCloseButton: true,
-            cancelButtonText: 'Cancel',
-            confirmButtonText: 'Yes, Delete',
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#556ee6',
-            width: 400,
-            allowOutsideClick: false
-        }).then(function (result) {
-            if (result.value) {
-                $.post(url, {
-                    id: id
-                }, function (data) {
-                    if (data.code == 200) {
-                        $('#global-setting-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }, 'json');
-            }
-        });
-    });
+    // $(document).on('click', '#deleteGlobalSettingBtn', function () {
+    //     var id = $(this).data('id');
+    //     var url = globalSettingDelete;
+    //     swal.fire({
+    //         title: 'Are you sure?',
+    //         html: 'You want to <b>delete</b> this Leave Type',
+    //         showCancelButton: true,
+    //         showCloseButton: true,
+    //         cancelButtonText: 'Cancel',
+    //         confirmButtonText: 'Yes, Delete',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonColor: '#556ee6',
+    //         width: 400,
+    //         allowOutsideClick: false
+    //     }).then(function (result) {
+    //         if (result.value) {
+    //             $.post(url, {
+    //                 id: id
+    //             }, function (data) {
+    //                 if (data.code == 200) {
+    //                     $('#global-setting-table').DataTable().ajax.reload(null, false);
+    //                     toastr.success(data.message);
+    //                 } else {
+    //                     toastr.error(data.message);
+    //                 }
+    //             }, 'json');
+    //         }
+    //     });
+    // });
 });

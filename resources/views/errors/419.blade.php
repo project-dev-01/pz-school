@@ -3,7 +3,7 @@
 
 <head>
 	<link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
-	<title>Error Page</title>
+	<title>419</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,8 +18,8 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-12" style="margin-top:30px; margin-bottom:30px;">
 				<div class="text-center">
-					<h1 class="eoppps">Oppps. Something went wrong </h1>
-					<p class="etext">This page is currently not available. We are working on the problem & <br>appreciate your patience</p>
+					<h1 class="eoppps">Page is expired </h1>
+					<p class="etext">Sorry, Your page is expired.<br>please refresh and try again</p>
 					<a href="{{url('/')}}" class="link_404">Go to Home</a>
 				</div>
 				<!-- end row -->

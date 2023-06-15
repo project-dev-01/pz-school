@@ -1,23 +1,23 @@
 <!-- Topbar Start -->
 <style>
-@media screen and (min-device-width: 280px) and (max-device-width: 653px) 
-{
-.responsive
-{
-    display: none!important;
-}
-.responsivenotification
-{
-    display: none!important;
-}
-.navbar-custom .button-menu-mobile {
-    width: 17px;
-} 
-.logo-box {
-    width: 58px!important;
-    padding-right: 0!important;
-}   
-}
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .responsive {
+            display: none !important;
+        }
+
+        .responsivenotification {
+            display: none !important;
+        }
+
+        .navbar-custom .button-menu-mobile {
+            width: 17px;
+        }
+
+        .logo-box {
+            width: 58px !important;
+            padding-right: 0 !important;
+        }
+    }
 </style>
 
 <div class="navbar-custom" style="background-color:white;">
@@ -30,7 +30,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <!-- item-->
-                    
+
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-right">
@@ -65,16 +65,15 @@
 
                     </div>
             </li>
-            
+
             <li class="dropdown notification-list topbar-dropdown">
-                <select class="vodiapicker">
-                    <option value="en"  data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
-                    <option value="japanese"  data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
-                </select>
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>
                     <div class="b">
-                        <ul id="a"></ul>
+                        <ul id="a">
+                            <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                            <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                        </ul>
                     </div>
                 </div>
             </li>
@@ -100,7 +99,7 @@
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
             </li>
-            
+
             @endif
             @if(Session::get('role_id') == '5')
             <li class="dropdown d-none d-lg-inline-block allChild">

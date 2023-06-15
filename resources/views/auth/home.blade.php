@@ -33,14 +33,14 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select class="vodiapicker">
-                            <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
-                            <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
-                        </select>
                         <div class="lang-select">
                             <button class="btn-select" value=""></button>
                             <div class="b" style="text-align:justify;">
-                                <ul id="a" style="margin-bottom:0px;"></ul>
+                                <ul id="a" style="margin-bottom:0px;">
+                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -79,12 +79,12 @@
                                 </div>
                                 <div class="icon-item" style="margin-right: 25px;">
                                     <i class="fa fa-phone"></i>
-                                    <!-- <span style="margin-left: 10px;"><a href="tel:03-7846-5939">{{$home['mobile_no']}}</a></span> -->
+                                    <!-- <span style="margin-left: 10px;"><a href="tel:123-456-7890">{{$home['mobile_no']}}</a></span> -->
                                     <span style="margin-left: 10px;"><a href="tel:03-7846-5939">03-7846-5939</a></span>
                                 </div>
                                 <div class="icon-item">
                                     <i class="fa fa-envelope"></i>
-                                    <span style="margin-left: 7px;"><a href="mailto:jskl2@jskl.edu.my">jskl2@jskl.edu.my</a></span>
+                                    <span style="margin-left: 11px;"><a href="mailto:jskl2@jskl.edu.my">jskl2@jskl.edu.my</a></span>
                                 </div>
                                 <h3 class="text-center mb-2">{{ __('messages.location') }}</h3>
                                 <div class="maps">
@@ -100,7 +100,7 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('parent.login') }}">
-                                        <img class="card-img-top img-fluid" src="https://api.suzen.school/public/common-asset/images/school-type/Japanese/Parent.webp" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$parent_image}}" alt="Card image cap">
                                         <div class="card-body" style="padding: 15px;">
                                             <h6 class="card-title text-center sfont">{{ __('messages.parent_login') }}</h6>
                                         </div>
@@ -110,7 +110,7 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('student.login') }}">
-                                        <img class="card-img-top img-fluid" src="https://api.suzen.school/public/common-asset/images/school-type/Japanese/Student.webp" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$student_image}}" alt="Card image cap">
                                         <div class="card-body" style="padding: 15px;">
                                             <h6 class="card-title text-center sfont">{{ __('messages.student_login') }}</h6>
                                         </div>
@@ -121,7 +121,7 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('teacher.login') }}">
-                                        <img class="card-img-top img-fluid" src="https://api.suzen.school/public/common-asset/images/school-type/Japanese/Teacher.webp"" alt=" Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$teacher_image}}" alt=" Card image cap">
                                         <div class="card-body" style="padding: 15px;">
                                             <h6 class="card-title text-center sfont">{{ __('messages.teacher_login') }}</h6>
                                         </div>
@@ -131,7 +131,7 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('schoolcrm.app.form') }}">
-                                        <img class="card-img-top img-fluid" src="https://api.suzen.school/public/common-asset/images/application.webp" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" src="{{$application}}" alt="Card image cap">
                                         <div class="card-body" style="padding: 15px;">
                                             <h6 class="card-title text-center sfont">{{ __('messages.application') }}</h6>
                                         </div>
@@ -167,69 +167,77 @@
 
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
-    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
-    <!-- <script type="text/javascript">
-        var url = "{{ route('changeLang') }}";
-
-        $(".changeLang").change(function() {
-            window.location.href = url + "?lang=" + $(this).val();
-        });
-    </script> -->
-
     <script type="text/javascript">
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
-        var langArray = [];
-        $('.vodiapicker option').each(function() {
-            var img = $(this).attr("data-thumbnail");
-            var text = this.innerText;
-            var value = $(this).val();
-            var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
-            langArray.push(item);
-        })
-
-        $('#a').html(langArray);
-
-        //Set the button value to the first el of the array
-        $('.btn-select').html(langArray[0]);
-        $('.btn-select').attr('value', 'en');
-
         //change button stuff on click
         $('#a li').click(function() {
-
             var img = $(this).find('img').attr("src");
             var value = $(this).find('img').attr('value');
-
             window.location.href = url + "?lang=" + value;
             var text = this.innerText;
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
             $(".b").toggle();
-            //console.log(value);
         });
 
         $(".btn-select").click(function() {
             $(".b").toggle();
         });
-        //check local storage for the lang
-        var sessionLang = locale;
-        // console.log('en',sessionLang)
-        if (locale == "japanese") {
-            //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
-            var value = "japanese";
-            var text = "日本語";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
+        var locale_lang = "{{ Cookie::get('locale') }}";
+        var language_name = "{{ $language_name }}";
+        if (locale_lang) {
+            if (locale_lang == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
+        } else if (language_name) {
+            if (language_name == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
-            var value = "en";
-            var text = "English";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
+            if (locale == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
         }
     </script>
 

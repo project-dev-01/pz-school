@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Class')
+@section('title',' ' . __('messages.class') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -12,6 +12,22 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<style>
+    * {
+        font-family: DejaVu Sans, sans-serif;
+    }
+
+    @font-face {
+        font-family: ipag;
+        font-style: normal;
+        font-weight: normal;
+        src: url("{{ asset('storage/fonts/ipag.ttf') }}");
+    }
+
+    body {
+        font-family: ipag !important;
+    }
+</style>;
 @endsection
 @section('content')
 <link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
@@ -38,7 +54,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.class') }}<h4>
+                        <h4 class="navv">{{ __('messages.class') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -49,7 +66,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="section-table">
+                        <table class="table dt-responsive nowrap w-100" id="section-table" style="font-family: 'Arial Unicode MS'; border:1px solid black">
                             <thead>
                                 <tr>
                                     <th>#</th>

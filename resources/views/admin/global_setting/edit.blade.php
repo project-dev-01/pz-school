@@ -9,8 +9,8 @@
             <div class="modal-body">
                 <form id="edit-global-setting-form" method="post" action="{{ route('admin.global_setting.update') }}" autocomplete="off">
                     @csrf
-                    <input type="hidden" name="id">     
-                 
+                    <input type="hidden" name="id">
+
                     <div class="form-group">
                         <label for="year_id">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label><select id="year_id" class="form-control" name="year_id">
                             <option value="">{{ __('messages.select_academic_year') }}</option>
@@ -22,8 +22,8 @@
                         <span class="text-danger error-text year_id_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="footer_text">{{ __('messages.footer_text') }}<span class="text-danger">*</span></label> 
-                        <textarea  id="footer_text" class="form-control"  placeholder="{{ __('messages.enter_footer_text') }}" name="footer_text" >
+                        <label for="footer_text">{{ __('messages.footer_text') }}<span class="text-danger">*</span></label>
+                        <textarea id="footer_text" class="form-control" placeholder="{{ __('messages.enter_footer_text') }}" name="footer_text">
                         </textarea>
                         <span class="text-danger error-text footer_text_error"></span>
                     </div>
@@ -32,11 +32,20 @@
                         <select id="timezone" class="form-control" name="timezone">
                             <option value="">{{ __('messages.select_timeZone') }}</option>
                             @forelse($timezone as $tz)
-                            <option >{{$tz}}</option>
+                            <option>{{$tz}}</option>
                             @empty
                             @endforelse
                         </select>
                         <span class="text-danger error-text timezone_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="language_id">{{ __('messages.language') }}<span class="text-danger">*</span></label>
+                        <select id="language_id" class="form-control" name="language_id">
+                            @forelse($get_languages as $lg)
+                            <option value="{{$lg['id']}}">{{$lg['name']}}</option>
+                            @empty
+                            @endforelse
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="facebook_url">{{ __('messages.facebook_url') }}<span class="text-danger">*</span></label>

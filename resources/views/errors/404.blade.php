@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+	<link rel="shortcut icon" href="{{ asset('public/images/favicon.ico') }}">
 	<title>404</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

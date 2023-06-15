@@ -47,6 +47,8 @@ $(function () {
             formData.append('class_id', classID);
             formData.append('section_id', sectionID);
             formData.append('subject_id', subjectID);
+            formData.append('semester_id', semesterID);
+            formData.append('session_id', sessionID);
             formData.append('academic_session_id', academic_session_id);
             formData.append('date', convertDigitIn(format_date));
             // list mode
@@ -59,6 +61,84 @@ $(function () {
             getShortTestData(formData);
             // student leave apply
             studentleave(formData);
+        }
+    }
+    // if cookie
+    if ((teacher_classroom_class_id) && (classroom_details === null)) {
+        console.log("it come inside class");
+        var classID, sectionID, subjectID, classDate, semesterID, sessionID;
+        // classroomDetails.forEach(function (user) {
+        classID = teacher_classroom_class_id;
+        sectionID = teacher_classroom_section_id;
+        subjectID = teacher_classroom_subject_id;
+        classDate = (teacher_classroom_date ? teacher_classroom_date : formatDate(new Date()));
+        semesterID = (teacher_classroom_semester ? teacher_classroom_semester : "0");
+        sessionID = (teacher_classroom_session ? teacher_classroom_session : "0");
+        //     sectionName = user.section_name;
+        //     subjectName = user.subject_name;
+        // });
+        // var format_date = formatDate(classDate);
+
+        // $('#changeClassName').val(classID);
+        if (classID) {
+            $(".classRoomHideSHow").hide();
+            $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: classID }, function (res) {
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $("#classroomFilter").find("#sectionID").append('<option value="' + val.section_id + '" ' + (sectionID == val.section_id ? "selected" : "") + '>' + val.section_name + '</option>');
+                    });
+                }
+                // check both class and section
+                if (classID && sectionID) {
+                    $.post(teacherSubjectUrl, {
+                        token: token,
+                        branch_id: branchID,
+                        teacher_id: ref_user_id,
+                        class_id: classID,
+                        section_id: sectionID,
+                        academic_session_id: academic_session_id,
+                    }, function (res) {
+                        if (res.code == 200) {
+                            $.each(res.data, function (key, val) {
+                                $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '" ' + (subjectID == val.subject_id ? "selected" : "") + '>' + val.subject_name + '</option>');
+                            });
+                        }
+                        // after set filter
+                        $("#classroomFilter").find("#semester_id").val(semesterID);
+                        $("#classroomFilter").find("#session_id").val(sessionID);
+                        $('#classDate').val(classDate);
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('subject_id', subjectID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        formData.append('academic_session_id', academic_session_id);
+                        formData.append('date', convertDigitIn(classDate));
+                        var classObj = {
+                            classID: classID,
+                            sectionID: sectionID,
+                            subjectID: subjectID,
+                            semesterID: semesterID,
+                            sessionID: sessionID,
+                            academic_session_id: academic_session_id,
+                            classDate: classDate
+                        };
+                        // list mode
+                        listModeAjax(formData, classObj);
+                        // daily report
+                        getDailyReportRemarksAjax(formData);
+                        // widget Show
+                        widgetShow(formData);
+                        // get Short test
+                        getShortTestData(formData);
+                        // student leave apply
+                        studentleave(formData);
+                    }, 'json');
+                }
+            }, 'json');
         }
     }
     // onload show start
@@ -81,9 +161,9 @@ $(function () {
         $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#classroomFilter").find("#sectionID").empty();
-        $("#classroomFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#classroomFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -98,7 +178,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#classroomFilter").find("#subjectID").empty();
-        $("#classroomFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#classroomFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -158,7 +238,8 @@ $(function () {
             formData.append('session_id', sessionID);
             formData.append('academic_session_id', academic_session_id);
             formData.append('date', convertDigitIn(classDate));
-
+            // set cookie selected
+            setCookieForClassroom(classObj);
             // list mode
             listModeAjax(formData, classObj);
             // student leave apply
@@ -173,7 +254,76 @@ $(function () {
             //  $("#overlay").fadeOut(300);
         }
     });
-
+    function setCookieForClassroom(classObj) {
+        console.log("classObj")
+        console.log(classObj)
+        // Display the key/value pairs
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+        $.ajax({
+            // type: "POST",
+            // url: setCookieClassRoomUrl,
+            // // data: { picture: data.data.file_name },
+            // data: {
+            //     "class_id": classObj.classID,
+            //     "section_id": classObj.sectionID,
+            //     "subject_id": classObj.subjectID
+            // },
+            // success: function (res) {
+            //     console.log("--------")
+            //     console.log(res)
+            // }
+            type: "get",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: setCookieClassRoomUrl,
+            data: {// change data to this object
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                class_id: classObj.classID,
+                section_id: classObj.sectionID,
+                subject_id: classObj.subjectID,
+                class_date: classObj.classDate,
+                semester_id: classObj.semesterID,
+                session_id: classObj.sessionID
+            },
+            dataType: "text",
+            success: function (resultData) { console.log("Save Complete") }
+        });
+        // $.ajax({
+        //     url: setCookieClassRoomUrl,
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //         'Authorization': 'Bearer ' + token
+        //     },
+        //     method: "post",
+        //     data: formData,
+        //     processData: false,
+        //     dataType: 'json',
+        //     contentType: false,
+        //     success: function (response) {
+        //         console.log("set cookie response");
+        //         console.log(response);
+        //     }
+        // });
+        // $.ajax({
+        //     type: "POST",
+        //     url: setCookieClassRoomUrl,
+        //     data: {
+        //         "_token": _token,
+        //         "class_id": classObj.classID,
+        //         "section_id": classObj.sectionID,
+        //         "subject_id": classObj.subjectID
+        //     },
+        //     success: function (res) {
+        //         console.log("--------")
+        //         console.log(res)
+        //         console.log("set cookie response");
+        //         console.log(response);
+        //     }
+        // });
+    }
     // function
     function getDailyReportRemarksAjax(formData) {
 
@@ -217,11 +367,11 @@ $(function () {
                 if (response.data.taken_attentance_status) {
                     var taken_attentance_status = response.data.taken_attentance_status.status;
                     if (taken_attentance_status) {
-                        var taken = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">'+taken+'</p>';
-                        $("#attendaceTakenSts").append(taken);
+                        var takenAtt = '<p class="badge bg-soft-success text-success" style="padding: 1.00em 3.4em;font-size: 85%;">' + taken + '</p>';
+                        $("#attendaceTakenSts").append(takenAtt);
                     } else {
-                        var unTaken = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">'+untaken+'</p>';
-                        $("#attendaceTakenSts").append(unTaken);
+                        var unTakenAtt = '<p class="badge bg-soft-danger text-danger" style="padding: 1.00em 3.4em;font-size: 85%;">' + untaken + '</p>';
+                        $("#attendaceTakenSts").append(unTakenAtt);
                     }
                 }
                 var currentDate = convertDigitIn($("#classDate").val());
@@ -359,9 +509,9 @@ $(function () {
             // dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                
+
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -474,11 +624,11 @@ $(function () {
                             status = row.att_status;
                         }
                         var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
-                            '<option value="">'+choose+'</option>' +
-                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>'+present_lang+'</option>' +
-                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>' +
-                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>'+late_lang+'</option>' +
-                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>' +
+                            '<option value="">' + choose + '</option>' +
+                            '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>' + present_lang + '</option>' +
+                            '<option value="absent" ' + (status == "absent" ? "selected" : "") + '>' + absent_lang + '</option>' +
+                            '<option value="late" ' + (status == "late" ? "selected" : "") + '>' + late_lang + '</option>' +
+                            '<option value="excused" ' + (status == "excused" ? "selected" : "") + '>' + excused_lang + '</option>' +
                             '</select>';
                         return att_status;
                     }
@@ -489,7 +639,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
 
                         var att_remark = '<textarea style="display:none;" class="addRemarks" data-id="' + row.student_id + '" id="addRemarks' + row.student_id + '" name="attendance[' + meta.row + '][att_remark]">' + (row.att_remark !== "null" ? row.att_remark : "") + '</textarea>' +
-                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">'+add_remarks+'</button>';
+                            '<button type="button" data-id="' + row.student_id + '" class="btn btn-outline-info waves-effect waves-light list-mode-btn" data-toggle="modal" data-target="#stuRemarksPopup" id="editRemarksStudent">' + add_remarks + '</button>';
                         return att_remark;
                     }
                 },
@@ -501,7 +651,7 @@ $(function () {
                             onLoadReasons(row, meta);
                         }
                         var reasons = '<select id="reasons' + row.student_id + '" class="form-control list-mode-table" name="attendance[' + meta.row + '][reasons]">' +
-                            '<option value="">'+choose+'</option>' +
+                            '<option value="">' + choose + '</option>' +
                             '</select>';
                         return reasons;
                     }
@@ -668,7 +818,7 @@ $(function () {
         var studenetID = $(this).data('id');
         var attendanceType = $('#attendance' + studenetID).val();
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
+        $('#reasons' + studenetID).append('<option value="">' + choose + '</option>');
         $.post(getAbsentLateExcuse, {
             token: token,
             branch_id: branchID,
@@ -695,7 +845,7 @@ $(function () {
             attendanceType = row.att_status;
         }
         $('#reasons' + studenetID).empty();
-        $('#reasons' + studenetID).append('<option value="">'+choose+'</option>');
+        $('#reasons' + studenetID).append('<option value="">' + choose + '</option>');
         if (attendanceType) {
             $.post(getAbsentLateExcuse, {
                 token: token,
@@ -774,7 +924,7 @@ $(function () {
                     var avg_attendance = (attpresentCount / (totalDate * totalStudentCnt) * 100);
 
                     $("#perfectAttendance").html((perfectAttendancePer ? Math.round(perfectAttendancePer) : 0) + "%");
-                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength + ": " + totalStudentCnt);
                     $("#belowAttendance").html((belowAttendance ? Math.round(belowAttendance) : 0) + "%");
                     $("#avg_attendance").html((avg_attendance ? Math.round(avg_attendance) : 0) + "%");
                     // getReportRemarks(dataSetNew)
@@ -784,7 +934,7 @@ $(function () {
                     $("#lateCount").html(lateCnt);
                     $("#excuseCount").html(excusedCnt);
                     $("#perfectAttendance").html(perfectAttendance + "%");
-                    $("#totalStrength").html(total_strength+": " + totalStudentCnt);
+                    $("#totalStrength").html(total_strength + ": " + totalStudentCnt);
                     $("#belowAttendance").html(0 + "%");
                     $("#avg_attendance").html(0 + "%");
 
@@ -808,7 +958,7 @@ $(function () {
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -1189,7 +1339,7 @@ $(function () {
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,

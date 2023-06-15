@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\App;
 
 class AuthController extends Controller
 {
@@ -28,14 +29,23 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
-        // dd($image_url);
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -55,13 +65,23 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Teacher.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Teacher.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.teacher_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -80,13 +100,23 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Staff.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Staff.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.staff_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -105,13 +135,23 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Parent.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Parent.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.parent_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -130,13 +170,23 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Student.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Student.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.student_login',
             [
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -893,7 +943,11 @@ class AuthController extends Controller
         session()->pull('all_child');
         session()->pull('academic_session_id');
         // session()->pull('password_changed_at');
+        $defalutLang = session()->get('locale');
         $req->session()->flush();
+        // $req->session()->put('locale', $defalutLang);
+        $hour = time() + 3600 * 24 * 30;
+        Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
     }
     public function rememberMe($req)
     {
@@ -936,8 +990,12 @@ class AuthController extends Controller
         // set academic session id
         if (isset($userDetails['data']['academicSession'])) {
             $req->session()->put('academic_session_id', $userDetails['data']['academicSession']['year_id']);
+            $req->session()->put('language_name', $userDetails['data']['academicSession']['language_name']);
+            $req->session()->put('footer_text', $userDetails['data']['academicSession']['footer_text']);
         } else {
             $req->session()->put('academic_session_id', 0);
+            $req->session()->put('language_name', "en");
+            $req->session()->put('footer_text', "");
         }
         if (isset($userDetails['data']['StudentID'])) {
             $req->session()->put('student_id', isset($userDetails['data']['StudentID'][0]['id']) ? $userDetails['data']['StudentID'][0]['id'] : 0);
@@ -1134,10 +1192,21 @@ class AuthController extends Controller
         $home_response = Http::post(config('constants.api.get_home_page_details'), $data);
         $homeDetails = $home_response->json();
 
-        $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Parent.webp";
-        $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Student.webp";
-        $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Teacher.webp";
-        $application =  config('constants.image_url') . "/public/common-asset/images/application.webp";
+        $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Parent.webp";
+        $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Student.webp";
+        $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Teacher.webp";
+        $application =  config('constants.image_url') . "/public/common-asset/images/application.png";
+
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
+
         // dd($homeDetails);
         return view(
             'auth.home',
@@ -1149,6 +1218,7 @@ class AuthController extends Controller
                 'student_image' => $student_image,
                 'teacher_image' => $teacher_image,
                 'application' => $application,
+                'language_name' => $setLang,
                 'home' => $homeDetails['data'],
             ]
         );

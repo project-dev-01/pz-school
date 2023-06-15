@@ -210,6 +210,8 @@
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
+    var language_name = "{{ Session::get('language_name') }}";
+    var locale_lang = "{{ Cookie::get('locale') }}";
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
@@ -245,20 +247,20 @@
 
 <script type="text/javascript">
     var url = "{{ route('changeLang') }}";
-    var langArray = [];
-    $('.vodiapicker option').each(function() {
-        var img = $(this).attr("data-thumbnail");
-        var text = this.innerText;
-        var value = $(this).val();
-        var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
-        langArray.push(item);
-    })
+    // var langArray = [];
+    // $('.vodiapicker option').each(function() {
+    //     var img = $(this).attr("data-thumbnail");
+    //     var text = this.innerText;
+    //     var value = $(this).val();
+    //     var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
+    //     langArray.push(item);
+    // })
 
-    $('#a').html(langArray);
+    // $('#a').html(langArray);
 
-    //Set the button value to the first el of the array
-    $('.btn-select').html(langArray[0]);
-    $('.btn-select').attr('value', 'en');
+    // //Set the button value to the first el of the array
+    // $('.btn-select').html(langArray[0]);
+    // $('.btn-select').attr('value', 'en');
 
     // change button stuff on click
     $('#a li').click(function() {
@@ -279,22 +281,67 @@
     });
 
     //check local storage for the lang
-    console.log('en', locale)
-    if (locale == "japanese") {
-        //find an item with value of sessionLang\
-        var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
-        var value = "japanese";
-        var text = "日本語";
-        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-        $('.btn-select').html(item);
-        $('.btn-select').attr('value', value);
+    console.log('locale', locale)
+    console.log('globale setting', language_name)
+    console.log('cookie lang', locale_lang)
+    if (locale_lang) {
+        console.log("&&&&&locale lang");
+        console.log(locale_lang);
+        // console.log(locale_lang)
+        if (locale_lang == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    } else if (language_name) {
+        console.log("-----language_name");
+        console.log(language_name);
+        if (language_name == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
     } else {
-        var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
-        var value = "en";
-        var text = "English";
-        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-        $('.btn-select').html(item);
-        $('.btn-select').attr('value', value);
+        console.log("*****locale");
+        console.log(locale);
+        if (locale == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
     }
 </script>
 <script>

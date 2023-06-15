@@ -4,7 +4,9 @@
 .fc-list-item-title {
     color: #852d2d;
 }
-
+.fc-time{
+    display: none;
+}
 .btn-primary {
     color: #fff;
     border-color: #0ABAB5;

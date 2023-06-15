@@ -10,6 +10,8 @@ use DateTime;
 use App\Helpers\Helper;
 use Excel;
 use App\Exports\ExamScheduleDownload;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Response;
 
 class CommonController extends Controller
 {
@@ -50,7 +52,7 @@ class CommonController extends Controller
     }
     public function showApplicationForm()
     {
-        
+
         $data = [
             'branch_id' => config('constants.branch_id')
         ];
@@ -67,7 +69,7 @@ class CommonController extends Controller
             ]
         );
     }
-    
+
     public function addApplicationForm(Request $request)
     {
         $data = [
@@ -255,7 +257,7 @@ class CommonController extends Controller
     }
     public function examScheduleDownloadExcel(Request $request)
     {
-        return Excel::download(new ExamScheduleDownload($request->exam_name,$request->class_section_name,$request->class_id, $request->section_id, $request->exam_id, $request->semester_id, $request->session_id), 'ExamSchedule.xlsx');
+        return Excel::download(new ExamScheduleDownload($request->exam_name, $request->class_section_name, $request->class_id, $request->section_id, $request->exam_id, $request->semester_id, $request->session_id), 'ExamSchedule.xlsx');
     }
     public function soapStudentID(Request $request)
     {
@@ -267,5 +269,25 @@ class CommonController extends Controller
         } else {
             return false;
         }
+    }
+    public function teacherClassroomSetCookie(Request $request)
+    {
+        $minutes = 180000;
+        // $minutes = 5;
+        // $response = new Response('teacher_classroom_filter');
+        // $response->withCookie(cookie('teacher_classroom_class_id', $request->class_id, $minutes));
+        // $response->withCookie(cookie('teacher_classroom_section_id', $request->section_id, $minutes));
+        // $response->withCookie(cookie('teacher_classroom_subject_id', $request->subject_id, $minutes));
+        // $response->withCookie(cookie('teacher_classroom_date', $request->class_date, $minutes));
+        // $response->withCookie(cookie('teacher_classroom_semester', $request->subject_id, $minutes));
+        // $response->withCookie(cookie('teacher_classroom_session', $request->subject_id, $minutes));
+        // dd($request);
+        Cookie::queue(Cookie::make('teacher_classroom_class_id', $request->class_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_classroom_section_id', $request->section_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_classroom_subject_id', $request->subject_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_classroom_date', $request->class_date, $minutes));
+        Cookie::queue(Cookie::make('teacher_classroom_semester', $request->semester_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_classroom_session', $request->session_id, $minutes));
+        return true;
     }
 }

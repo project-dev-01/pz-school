@@ -57,14 +57,13 @@
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
-                             <select class="vodiapicker">
-                             <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
-                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
-                            </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
-                                    <ul id="a" style="margin-bottom:0px;"></ul>
+                                    <ul id="a" style="margin-bottom:0px;">
+                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -164,63 +163,78 @@
 
     <!-- App js -->
     <script src="{{ asset('public/js/app.min.js') }}"></script>
-    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
 
     <script type="text/javascript">
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
-        var langArray = [];
-        $('.vodiapicker option').each(function() {
-            var img = $(this).attr("data-thumbnail");
-            var text = this.innerText;
-            var value = $(this).val();
-            var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
-            langArray.push(item);
-        })
-
-        $('#a').html(langArray);
-
-        //Set the button value to the first el of the array
-        $('.btn-select').html(langArray[0]);
-        $('.btn-select').attr('value', 'en');
-
         //change button stuff on click
         $('#a li').click(function() {
-
             var img = $(this).find('img').attr("src");
             var value = $(this).find('img').attr('value');
-
-            console.log('value', value)
             window.location.href = url + "?lang=" + value;
             var text = this.innerText;
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
             $(".b").toggle();
-            //console.log(value);
         });
+
         $(".btn-select").click(function() {
             $(".b").toggle();
         });
-
-        //check local storage for the lang
-        var sessionLang = locale;
-        // console.log('en',sessionLang)
-        if (locale == "japanese") {
-            //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
-            var value = "japanese";
-            var text = "日本語";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
+        var locale_lang = "{{ Cookie::get('locale') }}";
+        var language_name = "{{ $language_name }}";
+        if (locale_lang) {
+            if (locale_lang == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
+        } else if (language_name) {
+            if (language_name == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
-            var value = "en";
-            var text = "English";
-            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
-            $('.btn-select').html(item);
-            $('.btn-select').attr('value', value);
+            if (locale == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
         }
     </script>
 </body>

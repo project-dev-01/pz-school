@@ -422,6 +422,7 @@
                                                 <style>
                                                     .table td {
                                                         border-top: none;
+                                                        text-align: justify;
                                                     }
                                                 </style>
                                                 <tr>

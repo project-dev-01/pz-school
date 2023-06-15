@@ -657,7 +657,7 @@ class AdminController extends Controller
         return view(
             'admin.assign_teacher.index',
             [
-                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [], 
+                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
                 'getAllTeacherList' => isset($getAllTeacherList['data']) ? $getAllTeacherList['data'] : []
             ]
         );
@@ -1043,16 +1043,16 @@ class AdminController extends Controller
         return view(
             'admin.admission.index',
             [
-                'class' => isset($getclass['data'])?$getclass['data']:[],
-                'transport' => isset($gettransport['data'])?$gettransport['data']:[],
-                'hostel' => isset($gethostel['data'])?$gethostel['data']:[],
-                'session' => isset($session['data'])?$session['data']:[],
-                'semester' => isset($semester['data'])?$semester['data']:[],
-                'parent' => isset($parent['data'])?$parent['data']:[],
-                'religion' => isset($religion['data'])?$religion['data']:[],
-                'races' => isset($races['data'])?$races['data']:[],
-                'relation' => isset($relation['data'])?$relation['data']:[],
-                'academic_year_list' => isset($academic_year_list['data'])?$academic_year_list['data']:[]
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
             ]
         );
         // return view('admin.admission.index');
@@ -6153,6 +6153,7 @@ class AdminController extends Controller
             [
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'timezone' => isset($timezone_identifiers) ? $timezone_identifiers : [],
+                'get_languages' => isset($get_languages['data']) ? $get_languages['data'] : [],
             ]
         );
     }
@@ -6201,6 +6202,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'year_id' => $request->year_id,
             'footer_text' => $request->footer_text,
+            'language_id' => $request->language_id,
             'timezone' => $request->timezone,
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
@@ -6321,7 +6323,7 @@ class AdminController extends Controller
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'soap_category_list' => isset($soap_category_list['data']) ? $soap_category_list['data'] : [],
                 'soap_list' => isset($soap_list['data']) ? $soap_list['data'] : [],
-                'soap_subject_list' =>isset($soap_subject_list['data']) ? $soap_subject_list['data'] : [],
+                'soap_subject_list' => isset($soap_subject_list['data']) ? $soap_subject_list['data'] : [],
                 'soap_student_list' => isset($soap_student_list['data']) ? $soap_student_list['data'] : [],
                 'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
                 'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
