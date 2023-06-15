@@ -1262,7 +1262,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('homework/submit', [StudentController::class, 'submitHomework'])->name('student.homework.submit');
         Route::post('homework/filter', [StudentController::class, 'filterHomework'])->name('student.homework.filter');
         // Settings
-        Route::get('settings', [SuperAdminController::class, 'settings'])->name('student.settings');
+        Route::get('settings', [StudentController::class, 'settings'])->name('student.settings');
         // faq        
         Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index');
         // Exam

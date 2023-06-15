@@ -35,7 +35,7 @@
 
                 <tbody>
                     
-                    @foreach($soap_subject_list as $list)
+                    @forelse($soap_subject_list as $list)
                     
                         @php $count=1; @endphp
                         @if($list['soap_type_id']=="1")
@@ -53,7 +53,8 @@
                                 </tr>
                             @php $count++; @endphp
                         @endif
-                    @endforeach
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div> <!-- end .table-responsive-->

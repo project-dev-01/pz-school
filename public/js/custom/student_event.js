@@ -119,8 +119,10 @@ $(function () {
             $('.viewEvent').find('.end_date').text(data.data.end_date);
             if (data.data.audience == 1) {
                 $('.viewEvent').find('.audience').text("Everyone");
-            } else {
-                $('.viewEvent').find('.audience').text("Class " + data.data.classname);
+            }else if (data.data.audience == 2) {
+                $('.viewEvent').find('.audience').text("Grade :" + data.data.class_name);
+            }else if (data.data.audience == 3) {
+                $('.viewEvent').find('.audience').text("Group : " + data.data.group_name);
             }
 
             $('.viewEvent').find('.description').text(data.data.remarks);

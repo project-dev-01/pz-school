@@ -47,71 +47,22 @@ class StudentController extends Controller
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
         
         
-        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'student.dashboard.index',
             [
-                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
-                'greetings' => $greetings,
-                'all_exam_subject_scores' => $all_exam_subject_scores['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'exams' => $exam_by_student['data'],
+                'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
+                'get_homework_list_dashboard' => isset($get_homework_list_dashboard['data']) ? $get_homework_list_dashboard['data'] : [],
+                'greetings' => isset($greetings) ? $greetings : "",
+                'all_exam_subject_scores' => isset($all_exam_subject_scores['data']) ? $all_exam_subject_scores['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'exams' => isset($exam_by_student['data']) ? $exam_by_student['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
         );
     }
-    // public function index(Request $request)
-    // {
-    //     // $request->session()->put('children_id', "1");
-
-    //     $user_id = session()->get('user_id');
-    //     $student_id = session()->get('student_id');
-    //     $parent_id = session()->get('ref_user_id');
-
-    //     $data = [
-    //         'user_id' => $user_id,
-    //         'student_id' => $student_id,
-    //         'academic_session_id' => session()->get('academic_session_id')
-    //     ];
-    //     $parent_ids = [
-    //         'parent_id' => $parent_id,
-    //     ];
-    //     // dd($data);
-
-    //     $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
-    //     $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
-    //     $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
-    //     $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
-    //     $greetings = Helper::greetingMessage();
-    //     $semester = Helper::GetMethod(config('constants.api.semester'));
-    //     $session = Helper::GetMethod(config('constants.api.session'));
-    //     // dd($get_homework_list_dashboard);
-    //     $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
-    //     $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
-        
-        
-    //     $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-    //     // dd($all_exam_subject_scores['data']);
-    //     return view(
-    //         'parent.dashboard.index',
-    //         [
-    //             'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-    //             'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
-    //             'get_std_names_dashboard' => $get_std_names_dashboard['data'],
-    //             'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
-    //             'all_exam_subject_scores' => $all_exam_subject_scores['data'],
-    //             'semester' => $semester['data'],
-    //             'session' => $session['data'],
-    //             'greetings' => $greetings,
-    //             'exams' => $exam_by_student['data'],
-    //             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-    //             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
-    //         ]
-    //     );
-    // }
     function addDailyReportRemarks(Request $request)
     {
         $data = [
@@ -146,7 +97,7 @@ class StudentController extends Controller
         return view(
             'student.faq.index',
             [
-                'data' => $data,
+                'data' => isset($data) ? $data : [],
             ]
         );
     }
@@ -165,9 +116,9 @@ class StudentController extends Controller
         return view(
             'student.homework.list',
             [
-                'homework' => $homework['data']['homeworks'],
-                'subject' => $get_student_by_all_subjects['data'],
-                'count' => $homework['data']['count'],
+                'homework' => isset($homework['data']['homeworks']) ? $homework['data']['homeworks'] : [],
+                'subject' => isset($get_student_by_all_subjects['data']) ? $get_student_by_all_subjects['data'] : [],
+                'count' => isset($homework['data']['count']) ? $homework['data']['count'] : 0,
             ]
         );
     }
@@ -380,7 +331,7 @@ class StudentController extends Controller
         return view(
             'student.exam.schedule',
             [
-                'schedule_exam_list' => $response['data']
+                'schedule_exam_list' => isset($response['data']) ? $response['data'] : []
             ]
         );
     }
@@ -445,7 +396,7 @@ class StudentController extends Controller
         return view(
             'student.report_card.index',
             [
-                'allexams' => $allexams['data']
+                'allexams' => isset($allexams['data']) ? $allexams['data'] : []
             ]
         );
     }
@@ -725,16 +676,14 @@ class StudentController extends Controller
         return view(
             'student.analyticrep.analyticreport',
             [
-                'get_student_by_all_subjects' => $get_student_by_all_subjects['data'],
-                'get_class_section_by_student' => $get_class_section_by_student['data']
+                'get_student_by_all_subjects' => isset($get_student_by_all_subjects['data']) ? $get_student_by_all_subjects['data'] : [],
+                'get_class_section_by_student' => isset($get_class_section_by_student['data']) ? $get_class_section_by_student['data'] : []
             ]
         );
     }
 
     public function timetable(Request $request)
     {
-
-        // dd($student);
         $data = [
             'student_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
@@ -751,25 +700,16 @@ class StudentController extends Controller
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
-        if ($timetable['code'] == "200") {
-            return view(
-                'student.timetable.index',
-                [
-                    'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
-                    'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
-                    'days' => $days,
-                    'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
+        return view(
+            'student.timetable.index',
+            [
+                'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
+                'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
+                'days' => isset($days) ? $days : [],
+                'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
 
-                ]
-            );
-        } else {
-            return view(
-                'student.timetable.index',
-                [
-                    'timetable' => "",
-                ]
-            );
-        }
+            ]
+        );
     }
 
     public function getEventList(Request $request)
@@ -779,7 +719,8 @@ class StudentController extends Controller
         ];
         $response = Helper::GETMethodWithData(config('constants.api.event_list_student'), $data);
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];

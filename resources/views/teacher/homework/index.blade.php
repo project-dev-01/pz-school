@@ -116,9 +116,10 @@ width: 14.3em;
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @foreach($class as $cla)
+                                        @forelse($class as $cla)
                                         <option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

@@ -241,16 +241,16 @@
             <div class="card-box" style="background-color:powderblue;">
                 <div class="row">
                     <div class="col-xl-3">
-                        @if($student['photo'])
+                        @if(isset($student['photo']))
                         <img src="{{ config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/' }}/{{$student['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
-                        <img src="{{ config('constants.image_url').'/public/'. config('constants.branch_id').'/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
+                        <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
                         @endif
 
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">
-                            <h1 class="mb-3">{{$student['first_name']}} {{$student['last_name']}}</h5>
+                            <h1 class="mb-3">{{ isset($student['first_name']) ? $student['first_name'] : ''}} {{ isset($student['last_name']) ? $student['last_name'] : ''}}</h5>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <div>
@@ -271,7 +271,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$student['birthday']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['birthday']) ? $student['birthday'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -282,7 +282,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$student['class_name']}} ({{$student['section_name']}})</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['class_name']) ? $student['class_name'] : ''}} ({{ isset($student['section_name']) ? $student['section_name'] : ''}})</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -294,7 +294,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$student['mobile_no']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -305,7 +305,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$student['email']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['email']) ? $student['email'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -316,7 +316,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$student['current_address']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['current_address']) ? $student['current_address'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -348,7 +348,7 @@
                     <div class="collapse" id="basic_detail">
                         <form id="editadmission" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                             @csrf
-                            <input type="hidden" name="student_id" value="{{$student['id']}}">
+                            <input type="hidden" name="student_id" value="{{ isset($student['id']) ? $student['id'] : ''}}">
 
 
                             <div class="card">
@@ -362,8 +362,8 @@
                                         <div class="col-md-12">
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
-                                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $student['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ $student['photo'] && config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] ? config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] : config('constants.image_url').'/public/'. config('constants.branch_id').'/images/users/default.jpg' }}" />
+                                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ isset($student['photo']) ? $student['photo'] : ''}}" />
+                                                    <input type="file" name="photo" id="photo" data-plugins="dropify" data-default-file="{{ isset($student['photo']) && config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] ? config('constants.image_url').'/public/'. config('constants.branch_id').'/users/images/'.$student['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -379,7 +379,7 @@
                                                             <span class="fas fa-user-graduate"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" name="fname" class="form-control" value="{{$student['first_name']}}" id="fname" placeholder="" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -392,7 +392,7 @@
                                                             <span class="fas fa-user-graduate"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" name="lname" class="form-control" id="lname" value="{{$student['last_name']}}" placeholder="" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -401,8 +401,8 @@
                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                 <select id="gender" name="gender" class="form-control">
                                                     <option value="">{{ __('messages.select_gender') }}</option>
-                                                    <option value="Male" {{$student['gender'] == "Male" ? "Selected" : "" }}>{{ __('messages.male') }}</option>
-                                                    <option value="Female" {{$student['gender'] == "Female" ? "Selected" : "" }}>{{ __('messages.female') }}</option>
+                                                    <option value="Male" {{isset($student['gender']) ? $student['gender'] == "Male" ? "Selected" : "" : "" }}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{isset($student['gender']) ? $student['gender'] == "Female" ? "Selected" : "" : "" }}>{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -413,14 +413,14 @@
                                                 <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                                 <select id="blooddgrp" name="blooddgrp" class="form-control">
                                                     <option value="">{{ __('messages.select_blood_group') }}</option>
-                                                    <option {{$student['blood_group'] == "O+" ? "Selected" : "" }}>O+</option>
-                                                    <option {{$student['blood_group'] == "A+" ? "Selected" : "" }}>A+</option>
-                                                    <option {{$student['blood_group'] == "B+" ? "Selected" : "" }}>B+</option>
-                                                    <option {{$student['blood_group'] == "AB+" ? "Selected" : "" }}>AB+</option>
-                                                    <option {{$student['blood_group'] == "O-" ? "Selected" : "" }}>O-</option>
-                                                    <option {{$student['blood_group'] == "A-" ? "Selected" : "" }}>A-</option>
-                                                    <option {{$student['blood_group'] == "B-" ? "Selected" : "" }}>B-</option>
-                                                    <option {{$student['blood_group'] == "AB-" ? "Selected" : "" }}>AB-</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "O+" ? "Selected" : "" : "" }}>O+</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "A+" ? "Selected" : "" : "" }}>A+</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "B+" ? "Selected" : "" : "" }}>B+</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "AB+" ? "Selected" : "" : "" }}>AB+</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "O-" ? "Selected" : "" : "" }}>O-</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "A-" ? "Selected" : "" : "" }}>A-</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "B-" ? "Selected" : "" : "" }}>B-</option>
+                                                    <option {{isset($student['blood_group']) ? $student['blood_group'] == "AB-" ? "Selected" : "" : "" }}>AB-</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -433,14 +433,14 @@
                                                             <span class="fas fa-birthday-cake"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" name="dob" class="form-control" value="{{$student['birthday']}}" id="dob" placeholder="" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" name="dob" class="form-control" value="{{ isset($student['birthday']) ? $student['birthday'] : ''}}" id="dob" placeholder="" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                <input type="text" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{$student['passport']}}">
+                                                <input type="text" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($student['passport']) ? $student['passport'] : ''}}">
                                             </div>
                                         </div>
                                     </div>
@@ -448,7 +448,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{$student['nric']}}" placeholder="{{ __('messages.enter_nric_number') }}" name="txt_nric" data-parsley-trigger="change">
+                                                <input type="text" maxlength="50" id="txt_nric" class="form-control alloptions" value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="{{ __('messages.enter_nric_number') }}" name="txt_nric" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -457,7 +457,7 @@
                                                 <select class="form-control" name="txt_religion" id="religion">
                                                     <option value="">{{ __('messages.select_religion') }}</option>
                                                     @forelse($religion as $r)
-                                                    <option value="{{$r['id']}}" {{$student['religion'] == $r['id'] ? "selected" : ""}}>{{$r['religions_name']}}</option>
+                                                    <option value="{{$r['id']}}" {{isset($student['religion']) ? $student['religion'] == $r['id'] ? "selected" : "" : "" }}>{{$r['religions_name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -469,7 +469,7 @@
                                                 <select class="form-control" name="txt_race" id="addRace">
                                                     <option value="">{{ __('messages.select_race') }}</option>
                                                     @forelse($races as $r)
-                                                    <option value="{{$r['id']}}" {{$student['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
+                                                    <option value="{{$r['id']}}" {{isset($student['race']) ? $student['race'] == $r['id'] ? "selected" : "" : "" }}>{{$r['races_name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -481,19 +481,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                                <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" value="{{$student['mobile_no']}}" data-parsley-trigger="change">
+                                                <input type="tel" class="form-control" name="txt_mobile_no" id="txt_mobile_no" value="{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_country">{{ __('messages.country') }}</label>
-                                                <input type="" id="drp_country" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{$student['country']}}">
+                                                <input type="" id="drp_country" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_state">{{ __('messages.state_province') }}</label>
-                                                <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{$student['state']}}">
+                                                <input type="" id="drp_state" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{ isset($student['state']) ? $student['state'] : ''}}">
                                             </div>
                                         </div>
                                     </div>
@@ -501,25 +501,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_city">{{ __('messages.city') }}</label>
-                                                <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{$student['city']}}">
+                                                <input type="" id="drp_city" class="form-control" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
-                                                <input type="" id="drp_post_code" class="form-control" name="drp_post_code" data-parsley-trigger="change" value="{{$student['post_code']}}">
+                                                <input type="" id="drp_post_code" class="form-control" name="drp_post_code" data-parsley-trigger="change" value="{{ isset($student['post_code']) ? $student['post_code'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txtarea_paddress">{{ __('messages.address_1') }}</label>
-                                                <input type="" id="txtarea_paddress" class="form-control" name="txtarea_paddress" data-parsley-trigger="change" value="{{$student['current_address']}}">
+                                                <input type="" id="txtarea_paddress" class="form-control" name="txtarea_paddress" data-parsley-trigger="change" value="{{ isset($student['current_address']) ? $student['current_address'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="txtarea_permanent_address">{{ __('messages.address_2') }}</label>
-                                                <input type="" id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address" data-parsley-trigger="change" value="{{$student['permanent_address']}}">
+                                                <input type="" id="txtarea_permanent_address" class="form-control" name="txtarea_permanent_address" data-parsley-trigger="change" value="{{ isset($student['permanent_address']) ? $student['permanent_address'] : ''}}">
                                             </div>
                                         </div>
                                     </div>
@@ -537,25 +537,25 @@
                                             <div class="form-group">
                                                 <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                                 <select id="btwyears" class="form-control" name="year">
-                                                    <option {{$student['year'] == "2021-2022" ? "Selected" : "" }}>2021-2022</option>
-                                                    <option {{$student['year'] == "2020-2021" ? "Selected" : "" }}>2020-2021</option>
-                                                    <option {{$student['year'] == "2019-2020" ? "Selected" : "" }}>2019-2020</option>
-                                                    <option {{$student['year'] == "2018-2019" ? "Selected" : "" }}>2018-2019</option>
-                                                    <option {{$student['year'] == "2017-2018" ? "Selected" : "" }}>2017-2018</option>
-                                                    <option {{$student['year'] == "2016-2017" ? "Selected" : "" }}>2016-2017</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2021-2022" ? "Selected" : "" : "" }}>2021-2022</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2020-2021" ? "Selected" : "" : "" }}>2020-2021</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2019-2020" ? "Selected" : "" : "" }}>2019-2020</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2018-2019" ? "Selected" : "" : "" }}>2018-2019</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2017-2018" ? "Selected" : "" : "" }}>2017-2018</option>
+                                                    <option {{isset($student['year']) ? $student['year'] == "2016-2017" ? "Selected" : "" : "" }}>2016-2017</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.register_no') }}<span class="text-danger">*</span></label>
-                                                <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{$student['register_no']}}" data-parsley-trigger="change">
+                                                <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.roll') }}<span class="text-danger">*</span></label>
-                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" value="{{$student['roll_no']}}" data-parsley-trigger="change">
+                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" value="{{ isset($student['roll_no']) ? $student['roll_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
@@ -569,7 +569,7 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="admission_date" value="{{$student['admission_date']}}" name="admission_date" placeholder="" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="admission_date" value="{{ isset($student['admission_date']) ? $student['admission_date'] : ''}}" name="admission_date" placeholder="" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -578,9 +578,10 @@
                                                 <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                                 <select id="class_id" class="form-control" name="class_id">
                                                     <option value="">{{ __('messages.select_grade') }}</option>
-                                                    @foreach($class as $cla)
-                                                    <option value="{{$cla['id']}}" {{$student['class_id'] == $cla['id'] ? "Selected" : "" }}>{{$cla['name']}}</option>
-                                                    @endforeach
+                                                    @forelse($class as $cla)
+                                                    <option value="{{$cla['id']}}" {{isset($student['class_id']) ? $student['class_id'] == $cla['id'] ? "Selected" : "" : "" }}>{{$cla['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -589,9 +590,10 @@
                                                 <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                                 <select id="section_id" class="form-control" name="section_id">
                                                     <option value="">{{ __('messages.select_class') }}</option>
-                                                    @foreach($section as $sec)
-                                                    <option value="{{$sec['section_id']}}" {{$student['section_id'] == $sec['section_id'] ? "Selected" : "" }}>{{$sec['section_name']}}</option>
-                                                    @endforeach
+                                                    @forelse($section as $sec)
+                                                    <option value="{{$sec['section_id']}}" {{isset($student['section_id']) ? $student['section_id'] == $sec['section_id'] ? "Selected" : "" : "" }}>{{$sec['section_name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -604,8 +606,8 @@
                                                 <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                                 <select id="categy" name="categy" class="form-control">
                                                     <option value="">{{ __('messages.select_category') }}</option>
-                                                    <option value="1" {{$student['category_id'] == 1 ? "Selected" : "" }}>One</option>
-                                                    <option value="2" {{$student['category_id'] == 2 ? "Selected" : "" }}>Two</option>
+                                                    <option value="1" {{isset($student['category_id']) ? $student['category_id'] == 1 ? "Selected" : "" : "" }}>One</option>
+                                                    <option value="2" {{isset($student['category_id']) ? $student['category_id'] == 2 ? "Selected" : "" : "" }}>Two</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -614,9 +616,10 @@
                                                 <label for="session_id">{{ __('messages.session') }}</label>
                                                 <select id="session_id" class="form-control" name="session_id">
                                                     <option value="0">{{ __('messages.select_session') }}</option>
-                                                    @foreach($session as $ses)
-                                                    <option value="{{$ses['id']}}" {{$student['session_id'] == $ses['id'] ? "Selected" : "" }}>{{$ses['name']}}</option>
-                                                    @endforeach
+                                                    @forelse($session as $ses)
+                                                    <option value="{{$ses['id']}}" {{isset($student['session_id']) ? $student['session_id'] == $ses['id'] ? "Selected" : "" : "" }}>{{$ses['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -625,9 +628,10 @@
                                                 <label for="semester_id">{{ __('messages.semester') }}</label>
                                                 <select id="semester_id" class="form-control" name="semester_id">
                                                     <option value="0">{{ __('messages.select_semester') }}</option>
-                                                    @foreach($semester as $sem)
-                                                    <option value="{{$sem['id']}}" {{$student['semester_id'] == $sem['id'] ? "Selected" : "" }}>{{$sem['name']}}</option>
-                                                    @endforeach
+                                                    @forelse($semester as $sem)
+                                                    <option value="{{$sem['id']}}" {{isset($student['semester_id']) ? $student['semester_id'] == $sem['id'] ? "Selected" : "" : "" }}>{{$sem['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -653,7 +657,7 @@
                                                             <span class="far fa-envelope-open"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{$student['email']}}">
+                                                    <input type="text" name="txt_emailid" class="form-control" id="txt_emailid" placeholder="" aria-describedby="inputGroupPrepend" value="{{ isset($student['email']) ? $student['email'] : ''}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -661,7 +665,7 @@
                                             <div class="form-group mb-3">
                                                 <label class="switch">{{ __('messages.authentication') }}
 
-                                                    <input id="edit_status" name="status" type="checkbox" {{ $student['status'] == "1" ? "checked" : "" }}>
+                                                    <input id="edit_status" name="status" type="checkbox" {{ isset($student['status']) ? $student['status'] == "1" ? "checked" : "" : "" }}>
                                                     <span>
                                                         <em></em>
                                                         <strong></strong>
@@ -684,7 +688,7 @@
                                             <div class="form-group">
                                                 <label for="father_name">{{ __('messages.father_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="father_name" aria-describedby="inputGroupPrepend">
-                                                <input type="hidden" name="father_id" id="father_id" value="{{$student['father_id']}}">
+                                                <input type="hidden" name="father_id" id="father_id" value="{{ isset($student['father_id']) ? $student['father_id'] : ''}}">
                                                 <div id="father_list">
                                                 </div>
                                             </div>
@@ -864,7 +868,7 @@
                                             <div class="form-group">
                                                 <label for="mother_name">{{ __('messages.mother_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="mother_name" aria-describedby="inputGroupPrepend">
-                                                <input type="hidden" name="mother_id" id="mother_id" value="{{$student['mother_id']}}">
+                                                <input type="hidden" name="mother_id" id="mother_id" value="{{ isset($student['mother_id']) ? $student['mother_id'] : ''}}">
                                                 <div id="mother_list">
                                                 </div>
                                             </div>
@@ -1045,7 +1049,7 @@
                                             <div class="form-group">
                                                 <label for="guardian_name">{{ __('messages.guardian_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="guardian_name" aria-describedby="inputGroupPrepend">
-                                                <input type="hidden" name="guardian_id" id="guardian_id" value="{{$student['guardian_id']}}">
+                                                <input type="hidden" name="guardian_id" id="guardian_id" value="{{ isset($student['guardian_id']) ? $student['guardian_id'] : ''}}">
                                                 <div id="guardian_list">
                                                 </div>
                                             </div>
@@ -1056,7 +1060,7 @@
                                                 <select class="form-control" name="relation">
                                                     <option value="">{{ __('messages.select_relation') }}</option>
                                                     @forelse($relation as $r)
-                                                    <option value="{{$r['id']}}" {{$student['relation'] == $r['id'] ? "selected" : ""}}>{{$r['name']}}</option>
+                                                    <option value="{{$r['id']}}" {{isset($student['relation']) ? $student['relation'] == $r['id'] ? "selected" : "" : "" }}>{{$r['name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1240,9 +1244,10 @@
 
                                                 <select id="drp_transport_route" name="drp_transport_route" class="form-control">
                                                     <option value="">{{ __('messages.select_transport') }}</option>
-                                                    @foreach($transport as $trans)
-                                                    <option value="{{$trans['id']}}" {{$student['route_id'] == $trans['id'] ? "Selected" : "" }}>{{$trans['name']}}</option>
-                                                    @endforeach
+                                                    @forelse($transport as $trans)
+                                                    <option value="{{$trans['id']}}" {{ isset($student['route_id']) ? $student['route_id'] == $trans['id'] ? "Selected" : "" : "" }}>{{$trans['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1252,9 +1257,10 @@
                                                 <select id="drp_transport_vechicleno" name="drp_transport_vechicleno" class="form-control">
                                                     <option value="">{{ __('messages.first_select_the_transport') }}</option>
 
-                                                    @foreach($vehicle as $veh)
-                                                    <option value="{{$veh['vehicle_id']}}" {{$student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" }}>{{$veh['vehicle_no']}}</option>
-                                                    @endforeach
+                                                    @forelse($vehicle as $veh)
+                                                    <option value="{{$veh['vehicle_id']}}" {{ isset($student['vehicle_id']) ? $student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" : "" }}>{{$veh['vehicle_no']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1274,9 +1280,10 @@
                                                 <label for="drp_hostelnam">{{ __('messages.hostel_name') }}</label>
                                                 <select id="drp_hostelnam" name="drp_hostelnam" class="form-control">
                                                     <option value="">{{ __('messages.select_hostel_name') }}</option>
-                                                    @foreach($hostel as $hos)
-                                                    <option value="{{$hos['id']}}" {{$student['hostel_id'] == $hos['id'] ? "Selected" : "" }}>{{$hos['name']}}</option>
-                                                    @endforeach
+                                                    @forelse($hostel as $hos)
+                                                    <option value="{{$hos['id']}}" {{ isset($student['hostel_id']) ? $student['hostel_id'] == $hos['id'] ? "Selected" : "" : "" }}>{{$hos['name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1286,9 +1293,10 @@
                                                 <select id="drp_roomname" name="drp_roomname" class="form-control">
                                                     <option value="">{{ __('messages.select_room_name') }}</option>
 
-                                                    @foreach($room as $roo)
-                                                    <option value="{{$roo['room_id']}}" {{$student['room_id'] == $roo['room_id'] ? "Selected" : "" }}>{{$roo['room_name']}}</option>
-                                                    @endforeach
+                                                    @forelse($room as $roo)
+                                                    <option value="{{$roo['room_id']}}" {{ isset($student['room_id']) ? $student['room_id'] == $roo['room_id'] ? "Selected" : "" : "" }}>{{$roo['room_name']}}</option>
+                                                    @empty
+                                                    @endforelse
                                                 </select>
                                             </div>
                                         </div>
@@ -1306,19 +1314,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txt_prev_schname">{{ __('messages.school_names') }}</label>
-                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{$student['school_name']}}">
+                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txt_prev_qualify">{{ __('messages.qualification') }}</label>
-                                                <input type="text" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{$student['qualification']}}">
+                                                <input type="text" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" data-parsley-trigger="change" value="{{ isset($student['qualification']) ? $student['qualification'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="txtarea_prev_remarks">{{ __('messages.remarks') }}</label>
-                                                <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{$student['remarks']}}
+                                                <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks">{{ isset($student['remarks']) ? $student['remarks'] : ''}}
                                                 </textarea>
                                             </div>
                                         </div>
@@ -1519,7 +1527,7 @@
                         <div class="card" id="guardian_info" style="display:none">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <h4 class="navv">{{ __('messages.guardian_details') }} ({{$student['relation']}})</h4>
+                                    <h4 class="navv">{{ __('messages.guardian_details') }} ({{ isset($student['relation']) ? $student['relation'] : ''}})</h4>
                                 </li>
                             </ul>
                             <div class="card-body">

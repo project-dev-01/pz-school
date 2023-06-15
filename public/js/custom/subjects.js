@@ -83,7 +83,7 @@ $(function () {
             $('.editSubjectModel').find('select[name="subject_type_2"]').val(data.data.subject_type_2);
             $('.editSubjectModel').find('input[name="times_per_week"]').val(data.data.times_per_week);
             $('.editSubjectModel').find('input[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
-            $('.editSubjectModel').find('input[name="oder_code"]').val(data.data.oder_code);
+            $('.editSubjectModel').find('input[name="order_code"]').val(data.data.oder_code);
             if (data.data.exam_exclude == "1") {
                 $('.editSubjectModel').find('input[name="exam_exclude"]').prop('checked', true);
             } else {
@@ -269,6 +269,10 @@ $(function () {
             {
                 data: 'order_code',
                 name: 'order_code'
+            },
+            {
+                data: 'subject_color_calendor',
+                name: 'subject_color_calendor'
             },
             {
                 data: 'actions',

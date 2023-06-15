@@ -42,12 +42,12 @@
                 <div class="card-body">
                     <form id="groupEditForm" method="post" action="{{ route('admin.group.update') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{$group['id']}}">   
+                        <input type="hidden" name="id" value="{{isset($group['id']) ? $group['id'] : ''}}">   
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{$group['name']}}">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{isset($group['name']) ? $group['name'] : ''}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">{{ __('messages.description') }}</label>
-                                    <textarea class="form-control" name="description">{{$group['description']}}</textarea>
+                                    <textarea class="form-control" name="description">{{isset($group['description']) ? $group['description'] : ''}}</textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div> 
                             </div>
@@ -84,21 +84,19 @@
                                             </tr>
                                         </thead>
                                         <tbody id="staff_table">
-                                            @if($staff)
-                                                @foreach($staff as $key => $st)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <input type="hidden"  name="staff_id[]" value="{{$st['id']}}">
-                                                    <td>{{$st['name']}}</td>
-                                                    <td>{{$st['department_name']}}</td>
-                                                    <td ></div><button type="button" class=" btn btn-danger removeStaff"><i class="fe-trash-2"></i> </button></td>
-                                                </tr> 
-                                                @endforeach
-                                            @else     
-                                                <tr>
-                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
-                                                </tr>
-                                            @endif
+                                            @forelse($staff as $key => $st)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <input type="hidden"  name="staff_id[]" value="{{$st['id']}}">
+                                                <td>{{$st['name']}}</td>
+                                                <td>{{$st['department_name']}}</td>
+                                                <td ></div><button type="button" class=" btn btn-danger removeStaff"><i class="fe-trash-2"></i> </button></td>
+                                            </tr> 
+                                            @empty
+                                            <tr>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -128,22 +126,20 @@
                                             </tr>
                                         </thead>
                                         <tbody id="student_table">
-                                            @if($student)
-                                                @foreach($student as $key => $stu)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <input type="hidden"  name="student_id[]" value="{{$stu['id']}}">
-                                                    <td>{{$stu['name']}}</td>
-                                                    <td>{{$stu['class_name']}}</td>
-                                                    <td>{{$stu['section_name']}}</td>
-                                                    <td ></div><button type="button" class=" btn btn-danger removeStudent"><i class="fe-trash-2"></i> </button></td>
-                                                </tr> 
-                                                @endforeach 
-                                            @else     
-                                                <tr>
-                                                    <td colspan="5">{{ __('messages.no_data_available') }}</td>
-                                                </tr> 
-                                            @endif
+                                            @forelse($student as $key => $stu)
+                                            <tr>
+                                                <td>{{$key+1}}</td>
+                                                <input type="hidden"  name="student_id[]" value="{{$stu['id']}}">
+                                                <td>{{$stu['name']}}</td>
+                                                <td>{{$stu['class_name']}}</td>
+                                                <td>{{$stu['section_name']}}</td>
+                                                <td ></div><button type="button" class=" btn btn-danger removeStudent"><i class="fe-trash-2"></i> </button></td>
+                                            </tr> 
+                                            @empty     
+                                            <tr>
+                                                <td colspan="5">{{ __('messages.no_data_available') }}</td>
+                                            </tr> 
+                                            @endforelse 
                                         </tbody>
                                     </table>
                                 </div>
@@ -173,21 +169,19 @@
                                             </tr>
                                         </thead>
                                         <tbody id="parent_table">
-                                            @if($parent)
-                                                @foreach($parent as $key => $p)
-                                                    <tr>
-                                                        <td>{{$key+1}}</td>
-                                                        <input type="hidden"  name="parent_id[]" value="{{$p['id']}}">
-                                                        <td>{{$p['name']}}</td>
-                                                        <td>{{$p['email']}}</td>
-                                                        <td ></div><button type="button" class=" btn btn-danger removeParent"><i class="fe-trash-2"></i> </button></td>
-                                                    </tr> 
-                                                @endforeach  
-                                            @else     
+                                            @forelse($parent as $key => $p)
                                                 <tr>
-                                                    <td colspan="4">{{ __('messages.no_data_available') }}</td>
-                                                </tr>
-                                            @endif
+                                                    <td>{{$key+1}}</td>
+                                                    <input type="hidden"  name="parent_id[]" value="{{$p['id']}}">
+                                                    <td>{{$p['name']}}</td>
+                                                    <td>{{$p['email']}}</td>
+                                                    <td ></div><button type="button" class=" btn btn-danger removeParent"><i class="fe-trash-2"></i> </button></td>
+                                                </tr> 
+                                            @empty
+                                            <tr>
+                                                <td colspan="4">{{ __('messages.no_data_available') }}</td>
+                                            </tr>
+                                            @endforelse 
                                         </tbody>
                                     </table>
                                 </div>

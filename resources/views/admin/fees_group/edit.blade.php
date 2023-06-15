@@ -39,18 +39,18 @@
                 <div class="card-body">
                     <form id="edit-fees-group-form" method="post" action="{{ route('admin.fees_group.update') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{$fees_group['id']}}">
+                        <input type="hidden" name="id" value="{{isset($fees_group['id']) ? $fees_group['id'] : ''}}">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">{{ __('messages.fees_group_name') }}<span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="name" value="{{$fees_group['name']}}" class="form-control" placeholder="{{ __('messages.enter_fees_group_name') }}">
+                                <input type="text" id="name" name="name" value="{{isset($fees_group['name']) ? $fees_group['name'] : ''}}" class="form-control" placeholder="{{ __('messages.enter_fees_group_name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">{{ __('messages.description') }}</label>
-                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{$fees_group['description']}}</textarea>
+                                <textarea id="description" name="description" rows="3" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{isset($fees_group['description']) ? $fees_group['description'] : ''}}</textarea>
                             </div>
                         </div>
                         @forelse ($fees_type_fees_group_details as $key => $type)

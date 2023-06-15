@@ -62,8 +62,8 @@ class CommonController extends Controller
         return view(
             'school-application-form',
             [
-                'relation' => $relation['data'],
-                'academic_year_list' => $academic_year_list['data']
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
             ]
         );
     }

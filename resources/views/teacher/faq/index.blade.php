@@ -122,9 +122,9 @@
 
                 <div class="mt-4">
                     <form id="sendFaqMail" method="post" enctype="multipart/form-data" autocomplete="off">
-                        <input type="hidden" name="email" id="email" value="{{$data['email']}}">
-                        <input type="hidden" name="name" id="name" value="{{$data['name']}}">
-                        <input type="hidden" name="role_name" id="role_name" value="{{$data['role_name']}}">
+                        <input type="hidden" name="email" id="email" value="{{ isset($data['email']) ? $data['email'] : ''}}">
+                        <input type="hidden" name="name" id="name" value="{{ isset($data['name']) ? $data['name'] : ''}}">
+                        <input type="hidden" name="role_name" id="role_name" value="{{ isset($data['role_name']) ? $data['role_name'] : ''}}">
                         <div class="form-group">
                             <input type="text" name="subject" id="subject" class="form-control" placeholder="{{ __('messages.subject') }}">
                         </div>

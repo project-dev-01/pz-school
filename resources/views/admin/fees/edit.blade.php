@@ -42,23 +42,23 @@ use \App\Http\Controllers\AdminController;
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-5">
-                                <label class="mb-4">{{ __('messages.student_name') }} : <span class="text-muted mr-2">{{$student['name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.student_name') }} : <span class="text-muted mr-2">{{isset($student['name']) ? $student['name'] : ''}}</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label class="mb-4">{{ __('messages.grade') }} : <span class="text-muted mr-2">{{$student['class_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.grade') }} : <span class="text-muted mr-2">{{isset($student['class_name']) ? $student['class_name'] : ''}}</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label class="mb-4">{{ __('messages.class') }} : <span class="text-muted mr-2">{{$student['section_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.class') }} : <span class="text-muted mr-2">{{isset($student['section_name']) ? $student['section_name'] : ''}}</span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-5">
-                                <label class="mb-4">{{ __('messages.academic_year') }} : <span class="text-muted mr-2">{{$student['academic_year']}}</span></label>
+                                <label class="mb-4">{{ __('messages.academic_year') }} : <span class="text-muted mr-2">{{isset($student['academic_year']) ? $student['academic_year'] : ''}}</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label class="mb-4">{{ __('messages.email') }} : <span class="text-muted mr-2">{{$student['email']}}</span></label>
+                                <label class="mb-4">{{ __('messages.email') }} : <span class="text-muted mr-2">{{isset($student['email']) ? $student['email'] : ''}}</span></label>
                             </div>
                             <div class="col-md-3">
                                 <label class="mb-4">Parent Phone No : <span class="text-muted mr-2"></span></label>
@@ -68,7 +68,7 @@ use \App\Http\Controllers\AdminController;
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-5">
-                                <label class="mb-4">{{ __('messages.parent_name') }} : <span class="text-muted mr-2">{{$student['parent_name']}}</span></label>
+                                <label class="mb-4">{{ __('messages.parent_name') }} : <span class="text-muted mr-2">{{isset($student['parent_name']) ? $student['parent_name'] : ''}}</span></label>
                             </div>
                         </div>
                     </div>
@@ -187,24 +187,25 @@ use \App\Http\Controllers\AdminController;
                 <div class="card-body">
                     <div class="col-10">
                         <ul class="nav nav-pills navtab-bg nav-justified" id="apptabs">
-                            @foreach($fees as $key=>$fee)
+                            @forelse($fees as $key=>$fee)
                             <li class="nav-item" id="{{$fee['fees_type_id']}}" data-payment_mode_id="{{$fee['payment_mode_id']}}" data-fees_group_id="{{$fee['id']}}" data-allocation_id="{{$fee['allocation_id']}}" data-paid_amount="{{$fee['paid_amount']}}">
                                 <a href="#fee{{$fee['fees_type_id']}}" data-toggle="tab" aria-expanded="false" class="nav-link  {{ ($key==0) ? 'active' : '' }}">
                                     {{$fee['fees_name']}}
                                 </a>
                             </li>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </ul>
                     </div>
                     <form id="editFeesForm" method="post" action="{{ route('admin.fees.update') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" value="{{ $student_id }}" name="student_id" id="studentID" class="form-control">
-                        <input type="hidden" value="{{ $student['academic_id'] }}" name="academic_year" id="academicYear" class="form-control">
+                        <input type="hidden" value="{{isset($student_id) ? $student_id : ''}}" name="student_id" id="studentID" class="form-control">
+                        <input type="hidden" value="{{isset($student['academic_id']) ? $student['academic_id'] : ''}}" name="academic_year" id="academicYear" class="form-control">
                         <div class="col-md-5">
                             <div class="form-group" style="margin: 25px 6px;">
                                 <label for="payment_mode">{{ __('messages.payment_status') }}</label>
                                 <input type="hidden" class="form-control payment_mode_onload" name="payment_mode_onload" value="" />
-                                <select id="payment_mode{{$fee['fees_type_id']}}" class="form-control payment_mode" name="payment_mode">
+                                <select id="payment_mode{{isset($fee['fees_type_id']) ? $fee['fees_type_id'] : ''}}" class="form-control payment_mode" name="payment_mode">
                                     <option value="">{{ __('messages.payment_status') }}</option>
                                     @forelse ($payment_mode as $mode)
                                     <option value="{{ $mode['id'] }}">{{ $mode['name'] }}</option>
@@ -287,7 +288,7 @@ use \App\Http\Controllers\AdminController;
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach($semester as $sem)
+                                                            @forelse($semester as $sem)
                                                             <tr>
                                                                 <td class="semester-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$sem['id']}} initialEmpty" id="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][status]">
                                                                     <input type="hidden" value="{{$sem['id']}}" name="fees[2][{{$sem['id']}}][semester]">
@@ -313,7 +314,11 @@ use \App\Http\Controllers\AdminController;
                                                                     <textarea class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterMemo{{$sem['id']}}" name="fees[2][{{$sem['id']}}][memo]" placeholder="Enter Memo"></textarea>
                                                                 </td>
                                                             </tr>
-                                                            @endforeach
+                                                            @empty
+                                                            <tr>
+                                                                <td colspan="6">{{ __('messages.no_data_available') }}</td>
+                                                            </tr>
+                                                            @endforelse
 
                                                     </table>
                                                 </div>
@@ -356,7 +361,7 @@ use \App\Http\Controllers\AdminController;
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach($month as $mon)
+                                                            @forelse($month as $mon)
                                                             <tr>
                                                                 <td class="month-checked-area"><input type="checkbox" class="currentCheckBox isChecked_{{$mon['id']}} initialEmpty" id="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][status]">
                                                                     <input type="hidden" value="{{$mon['id']}}" name="fees[3][{{$mon['id']}}][month]">
@@ -381,7 +386,11 @@ use \App\Http\Controllers\AdminController;
                                                                     <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="Enter Memo" style="height:35px;"></textarea>
                                                                 </td>
                                                             </tr>
-                                                            @endforeach
+                                                            @empty
+                                                            <tr>
+                                                                <td colspan="6">{{ __('messages.no_data_available') }}</td>
+                                                            </tr>
+                                                            @endforelse
                                                         </tbody>
                                                     </table>
 

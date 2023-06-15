@@ -39,16 +39,16 @@ class StaffController extends Controller
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
         $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
-        $count['employee_count'] = $employee_count['data'];
-        $count['student_count'] = $student_count['data'];
-        $count['parent_count'] = $parent_count['data'];
-        $count['teacher_count'] = $teacher_count['data'];
+        $count['employee_count'] = isset($employee_count['data']) ? $employee_count['data'] : 0;
+        $count['student_count'] = isset($student_count['data']) ? $student_count['data'] : 0;
+        $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
+        $count['teacher_count'] = isset($teacher_count['data']) ? $teacher_count['data'] : 0;
         // dd($get_to_do_list_dashboard);
         return view(
             'staff.dashboard.index',
             [
-                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'greetings' => $greetings,
+                'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
+                'greetings' => isset($greetings) ? $greetings : [],
                 'count' => $count
             ]
         );
@@ -62,7 +62,7 @@ class StaffController extends Controller
         return view(
             'staff.settings.index',
             [
-                'user_details' => $staff_profile_info['data']
+                'user_details' => isset($staff_profile_info['data']) ? $staff_profile_info['data'] : []
             ]
         );
     }
@@ -364,7 +364,7 @@ class StaffController extends Controller
         return view(
             'staff.faq.index',
             [
-                'data' => $data,
+                'data' => isset($data) ? $data : [],
             ]
         );
     }
@@ -663,7 +663,8 @@ class StaffController extends Controller
     {
         $response = Helper::GetMethod(config('constants.api.qualification_list'));
 
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -766,7 +767,8 @@ class StaffController extends Controller
     {
         $response = Helper::GetMethod(config('constants.api.staffcategory_list'));
 
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -1449,9 +1451,9 @@ class StaffController extends Controller
         return view(
             'staff.timetable.index',
             [
-                'class' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -1554,8 +1556,8 @@ class StaffController extends Controller
         return view(
             'staff.attendance.employee',
             [
-                'employee' => $employee,
-                'session' => $session['data'],
+                'employee' => isset($employee) ? $employee : "",
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
@@ -1595,8 +1597,8 @@ class StaffController extends Controller
         return view(
             'staff.attendance.employee_report',
             [
-                'employee' => $employee,
-                'session' => $session['data'],
+                'employee' => isset($employee) ? $employee : "",
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
@@ -1612,9 +1614,9 @@ class StaffController extends Controller
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
 
         return view('staff.leave_management.applyleave', [
-            'get_leave_types' => $get_leave_types['data'],
-            'get_leave_reasons' => $get_leave_reasons['data'],
-            'leave_taken_history' => $leave_taken_history['data'],
+            'get_leave_types' => isset($get_leave_types['data']) ? $get_leave_types['data'] : [],
+            'get_leave_reasons' => isset($get_leave_reasons['data']) ? $get_leave_reasons['data'] : [],
+            'leave_taken_history' => isset($leave_taken_history['data']) ? $leave_taken_history['data'] : [],
         ]);
     }
     // staff leave 
@@ -1655,7 +1657,8 @@ class StaffController extends Controller
             "academic_session_id" => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $upload_lang = __('messages.upload');
@@ -1708,7 +1711,8 @@ class StaffController extends Controller
             "academic_session_id" => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
@@ -1736,9 +1740,9 @@ class StaffController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view('staff.classroom.management', [
-            'teacher_class' => $response['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);

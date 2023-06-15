@@ -13,7 +13,7 @@
                                         <div class="row">
                                             <div class="col-sm-2 col-xl-2 col-md-2">
                                                 <div class="nav flex-column nav-pills nav-pills-tab" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                    @foreach($soap_category_list as $key=>$category)
+                                                    @forelse($soap_category_list as $key=>$category)
                                                         @if($category['soap_type_id']=="3")
                                                             <li class="dropdown btn-group mb-2 dropright">
                                                                 <button class="nav-link btn btn-blue waves-effect waves-light dropdown-toggle category" data-toggle="dropdown" data-category = "{{$category['id']}}" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -27,7 +27,8 @@
                                                                 </div>
                                                             </li>
                                                         @endif
-                                                    @endforeach
+                                                    @empty
+                                                    @endforelse
                                                 </div>
                                             </div> <!-- end col-->
 
@@ -36,7 +37,7 @@
                                                     <div class="row">
                                                         <div class="col-xl-5 col-md-5 col-sm-5">
                                                             <div class="">
-                                                                @foreach($soap_category_list as $category)
+                                                                @forelse($soap_category_list as $category)
                                                                     @if($category['soap_type_id']=="3")
                                                                         <ul class="nav nav-tabs">
                                                                             <li class="nav-item">
@@ -64,7 +65,8 @@
                                                                         </div> <!-- end .table-responsive-->
                                                                         <br><br>
                                                                     @endif
-                                                                @endforeach
+                                                                @empty
+                                                                @endforelse
                                                             </div> <!-- end card-box-->
                                                         </div> <!-- end col --><div class="col-xl-7 col-md-7 col-sm-7">
     <div class="">

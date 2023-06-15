@@ -59,9 +59,10 @@
                                     <select id="employeeReportSession" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
-                                        @foreach($session as $ses)
+                                        @forelse($session as $ses)
                                         <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

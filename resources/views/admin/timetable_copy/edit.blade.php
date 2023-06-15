@@ -46,7 +46,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
-                            @if($timetable)Grade {{ $details['class']['class_name'] }} (Class: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
+                            @if($timetable)Grade {{ isset($details['class']['class_name']) ? $details['class']['class_name'] : "" }} (Class: {{ isset($details['section']['section_name']) ? $details['section']['section_name'] : "" }}) - {{ isset($details['day']) ? $details['day'] : "" }} - @endif Schedule Edit
                         </h4>
                     </li>
                 </ul><br>
@@ -92,9 +92,10 @@
                                     <label for="semester_id">{{ __('messages.copy_to_semester') }}<span class="text-danger">*</span></label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="">{{ __('messages.select_semester') }}</option>
-                                        @foreach($semester as $sem)
+                                        @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -103,9 +104,10 @@
                                     <label for="session_id">{{ __('messages.copy_to_session') }}<span class="text-danger">*</span></label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
-                                        @foreach($session as $ses)
+                                        @forelse($session as $ses)
                                         <option value="{{$ses['id']}}">{{$ses['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -151,9 +153,10 @@
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" disabled hidden="hidden" {{$bulk}}>
                                                             <option value="">{{ __('messages.select_subject') }}</option>
-                                                            @foreach($subject as $sub)
+                                                            @forelse($subject as $sub)
                                                             <option value="{{$sub['id']}}">{{$sub['name']}}</option>
-                                                            @endforeach
+                                                            @empty
+                                                            @endforelse
                                                         </select>
                                                         <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" value="{{$table['break_type']}}" {{$bulk}}></input>
                                                     </div>
@@ -163,9 +166,11 @@
                                                     <div class="form-group">
                                                         <select class="form-control subject" name="timetable[{{$row}}][subject]" {{$bulk}}>
                                                             <option value="">{{ __('messages.select_subject') }}</option>
-                                                            @foreach($subject as $sub)
+                                                            @forelse($subject as $sub)
                                                             <option value="{{$sub['id']}}" {{ $sub['id'] == $table['subject_id'] ? 'selected' : ''}}>{{$sub['name']}}</option>
-                                                            @endforeach
+                                                            
+                                                            @empty
+                                                            @endforelse
                                                         </select>
                                                         <input class="form-control break_type" type="text" name="timetable[{{$row}}][break_type]" disabled hidden="hidden" {{$bulk}}></input>
                                                     </div>
@@ -257,7 +262,7 @@
                         <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}"> -->
                         <!-- <input type="hidden" id="form_semester_id" name="semester_id" value="{{$details['semester']['semester_id']}}">
                         <input type="hidden" id="form_session_id" name="session_id" value="{{$details['session']['session_id']}}"> -->
-                        <input type="hidden" id="form_day" name="day" value="{{$details['day']}}">
+                        <input type="hidden" id="form_day" name="day" value="{{isset($details['day']) ? $details['day'] : ''}}">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 Copy

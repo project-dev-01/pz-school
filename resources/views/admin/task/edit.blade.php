@@ -38,15 +38,15 @@
                 <div class="card-body">
                     <form id="updateToDoList" method="post" action="" autocomplete="off" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" id="id" value={{$to_do_row['id']}}>
+                        <input type="hidden" name="id" id="id" value="{{isset($to_do_row['id']) ? $to_do_row['id'] : ''}}">
                         <div class="form-group">
                             <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="title" name="title" value={{$to_do_row['title']}} class="form-control" placeholder="{{ __('messages.enter_title') }}">
+                            <input type="text" id="title" name="title" value="{{isset($to_do_row['title']) ? $to_do_row['title'] : ''}}"class="form-control" placeholder="{{ __('messages.enter_title') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="dueDate">{{ __('messages.due_date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="dueDate" name="due_date" value={{$to_do_row['due_date']}} class="form-control" placeholder="{{ __('messages.enter_date _time') }}">
+                            <input type="text" id="dueDate" name="due_date" value="{{isset($to_do_row['due_date']) ? $to_do_row['due_date'] : ''}}" class="form-control" placeholder="{{ __('messages.enter_date _time') }}">
                         </div>
                         <div class="form-group">
                             <label for="assign_to">{{ __('messages.assigned_to') }}<span class="text-danger">*</span></label>
@@ -72,15 +72,15 @@
                         <div class="form-group">
                             <label for="priority">{{ __('messages.priority') }}<span class="text-danger">*</span></label>
                             <select id="priority" class="form-control" name="priority">
-                                <option value="Low" {{ $to_do_row['priority']=="Low" ? "Selected":""}}>{{ __('messages.low') }}</option>
-                                <option value="Medium" {{ $to_do_row['priority']=="Medium" ? "Selected":""}}>{{ __('messages.medium') }}</option>
-                                <option value="High" {{ $to_do_row['priority']=="High" ? "Selected":""}}>{{ __('messages.high') }}</option>
+                                <option value="Low" {{ isset($to_do_row['priority'])=="Low" ? "Selected":""}}>{{ __('messages.low') }}</option>
+                                <option value="Medium" {{ isset($to_do_row['priority'])=="Medium" ? "Selected":""}}>{{ __('messages.medium') }}</option>
+                                <option value="High" {{ isset($to_do_row['priority'])=="High" ? "Selected":""}}>{{ __('messages.high') }}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="check_list">{{ __('messages.checklists') }}/{{ __('messages.sub-tasks') }}</label>
                             <input type="text" class="form-control"  name="check_list[]" id="addCheckList" placeholder="{{ __('messages.add_checkList') }}">
-                            <input type="hidden" name="old_check_list" id="old_check_list" value="{{$to_do_row['check_list']}}">
+                            <input type="hidden" name="old_check_list" id="old_check_list" value="{{isset($to_do_row['check_list']) ? $to_do_row['check_list'] : ''}}">
 
                         </div>
                         <div class="form-group">
@@ -89,14 +89,14 @@
                         </div>
                         <div class="form-group">
                             <label for="task_description">{{ __('messages.task_description') }}<span class="text-danger">*</span></label>
-                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{$to_do_row['task_description']}}</textarea>
+                            <textarea id="task_description" rows="task_description" name="task_description" class="form-control" placeholder="{{ __('messages.enter_description') }}">{{isset($to_do_row['task_description']) ? $to_do_row['task_description'] : ''}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="attachment">{{ __('messages.attachment') }}</label>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">
-                                    <input type="hidden" name="old_file" id="old_file" value="{{$to_do_row['file']}}">
+                                    <input type="hidden" name="old_file" id="old_file" value="{{isset($to_do_row['file']) ? $to_do_row['file'] : ''}}">
                                     <label class="custom-file-label" for="attachment">{{ __('messages.choose_file') }}</label>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                             <p id="files-area">
                                 <span id="filesList">
                                     <span id="files-names">
-                                    @if($to_do_row['file'])
+                                    @if(isset($to_do_row['file']))
                                         @foreach(explode(',', $to_do_row['file']) as $file)
                                             <span class="file-block">
                                                 <span class="file-delete">

@@ -48,16 +48,16 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="my-1"><span data-plugin="counterup">{{$count['ontime']}}</span></h3>
+                            <h3 class="my-1"><span data-plugin="counterup">{{ isset($count['ontime']) ? $count['ontime'] : ''}}</span></h3>
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.on_time_submission') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['ontime_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{ isset($count['ontime_percentage']) ? $count['ontime_percentage'] : ''}}%</span></h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['ontime_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['ontime_percentage']}}%">
-                            <span class="sr-only">{{$count['ontime_percentage']}}% {{ __('messages.complete') }}</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ isset($count['ontime_percentage']) ? $count['ontime_percentage'] : ''}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ isset($count['ontime_percentage']) ? $count['ontime_percentage'] : ''}}%">
+                            <span class="sr-only">{{ isset($count['ontime_percentage']) ? $count['ontime_percentage'] : ''}}% {{ __('messages.complete') }}</span>
                         </div>
                     </div>
                 </div>
@@ -74,16 +74,16 @@
                     </div>
                     <div class="col-6">
                         <div class="text-right">
-                            <h3 class="my-1"><span data-plugin="counterup">{{$count['late']}}</span></h3>
+                            <h3 class="my-1"><span data-plugin="counterup">{{ isset($count['late']) ? $count['late'] : ''}}</span></h3>
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.late_submission') }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{$count['late_percentage']}}%</span></h6>
+                    <h6 class="text-uppercase">{{ __('messages.target') }}<span class="float-right">{{ isset($count['late_percentage']) ? $count['late_percentage'] : ''}}%</span></h6>
                     <div class="progress progress-sm m-0">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$count['late_percentage']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$count['late_percentage']}}%">
-                            <span class="sr-only">{{$count['late_percentage']}}% {{ __('messages.complete') }}</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ isset($count['late_percentage']) ? $count['late_percentage'] : ''}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ isset($count['late_percentage']) ? $count['late_percentage'] : ''}}%">
+                            <span class="sr-only">{{ isset($count['late_percentage']) ? $count['late_percentage'] : ''}}% {{ __('messages.complete') }}</span>
                         </div>
                     </div>
                 </div>

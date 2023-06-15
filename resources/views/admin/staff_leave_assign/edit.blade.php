@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                            @foreach($staff_leave as $key=>$leave)
+                            @forelse($staff_leave as $key=>$leave)
                             <input type="hidden" name="leave[{{$key}}][id]" value="{{$leave['id']}}">
                             <div class="row">
                                 <div class="col-md-4">
@@ -71,7 +71,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                            @empty
+                            @endforelse
                         <div class="form-group">
                             <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary">{{ __('messages.back') }}</a>
                             <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>

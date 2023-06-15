@@ -88,6 +88,7 @@
 
 @endsection
 @section('scripts')
+<!-- plugin js -->
 <script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
 <script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>

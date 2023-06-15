@@ -321,7 +321,6 @@ class AdminController extends Controller
             'user_id' => $user_id
         ];
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_list_dashboard'), $data);
-        // dd($get_to_do_list_dashboard);
         $greetings = Helper::greetingMessage();
         $employee_count = Helper::GetMethod(config('constants.api.employee_count'));
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
@@ -378,7 +377,7 @@ class AdminController extends Controller
         return view(
             'admin.settings.index',
             [
-                'user_details' => $staff_profile_info['data']
+                'user_details' => isset($staff_profile_info['data']) ? $staff_profile_info['data'] : []
             ]
         );
     }
@@ -658,8 +657,8 @@ class AdminController extends Controller
         return view(
             'admin.assign_teacher.index',
             [
-                'classDetails' => $getClasses['data'],
-                'getAllTeacherList' => $getAllTeacherList['data']
+                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [], 
+                'getAllTeacherList' => isset($getAllTeacherList['data']) ? $getAllTeacherList['data'] : []
             ]
         );
     }
@@ -871,12 +870,10 @@ class AdminController extends Controller
         ];
         $event = Helper::PostMethod(config('constants.api.event_details'), $data);
 
-        // dd($event);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
         $getgroup = Helper::GetMethod(config('constants.api.group_list'));
 
-        // dd($gettype);
         return view(
             'admin.event.edit',
             [
@@ -929,7 +926,8 @@ class AdminController extends Controller
     public function getEventList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.event_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];
@@ -1045,16 +1043,16 @@ class AdminController extends Controller
         return view(
             'admin.admission.index',
             [
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],
-                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : [],
-                'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'parent' => isset($parent['data']) ? $parent['data'] : [],
-                'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
+                'class' => isset($getclass['data'])?$getclass['data']:[],
+                'transport' => isset($gettransport['data'])?$gettransport['data']:[],
+                'hostel' => isset($gethostel['data'])?$gethostel['data']:[],
+                'session' => isset($session['data'])?$session['data']:[],
+                'semester' => isset($semester['data'])?$semester['data']:[],
+                'parent' => isset($parent['data'])?$parent['data']:[],
+                'religion' => isset($religion['data'])?$religion['data']:[],
+                'races' => isset($races['data'])?$races['data']:[],
+                'relation' => isset($relation['data'])?$relation['data']:[],
+                'academic_year_list' => isset($academic_year_list['data'])?$academic_year_list['data']:[]
             ]
         );
         // return view('admin.admission.index');
@@ -1564,19 +1562,19 @@ class AdminController extends Controller
         return view(
             'admin.employee.edit',
             [
-                'branches' => $getBranches['data'],
-                'roles' => $roles['data'],
-                'employee' => $staff['data']['staff'],
-                'bank' => $staff['data']['bank'],
-                'department' => $department['data'],
-                'designation' => $designation['data'],
-                'role' => $staff['data']['user'],
-                'qualifications' => $qualifications['data'],
-                'staff_categories' => $staff_categories['data'],
-                'staff_positions' => $staff_positions['data'],
-                'stream_types' => $stream_types['data'],
-                'religion' => $religion['data'],
-                'races' => $races['data'],
+                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'employee' => isset($staff['data']['staff']) ? $staff['data']['staff'] : [],
+                'bank' => isset($staff['data']['bank']) ? $staff['data']['bank'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'designation' => isset($designation['data']) ? $designation['data'] : [],
+                'role' => isset($staff['data']['user']) ? $staff['data']['user'] : [],
+                'qualifications' => isset($qualifications['data']) ? $qualifications['data'] : [],
+                'staff_categories' => isset($staff_categories['data']) ? $staff_categories['data'] : [],
+                'staff_positions' => isset($staff_positions['data']) ? $staff_positions['data'] : [],
+                'stream_types' => isset($stream_types['data']) ? $stream_types['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
             ]
         );
     }
@@ -2253,25 +2251,16 @@ class AdminController extends Controller
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
         // 
         // dd($timetable);
-        if ($timetable['code'] == "200") {
-            return view(
-                'admin.timetable.edit',
-                [
-                    'timetable' => $timetable['data']['timetable'],
-                    'details' => $timetable['data']['details'],
-                    'teacher' => $timetable['data']['teacher'],
-                    'subject' => $timetable['data']['subject'],
-                    'hall_list' => $timetable['data']['exam_hall']
-                ]
-            );
-        } else {
-            return view(
-                'admin.timetable.edit',
-                [
-                    'timetable' => NULL
-                ]
-            );
-        }
+        return view(
+            'admin.timetable.edit',
+            [
+                'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : [],
+                'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : [],
+                'teacher' => isset($timetable['data']['teacher']) ? $timetable['data']['teacher'] : [],
+                'subject' => isset($timetable['data']['subject']) ? $timetable['data']['subject'] : [],
+                'hall_list' => isset($timetable['data']['exam_hall']) ? $timetable['data']['exam_hall'] : [],
+            ]
+        );
     }
     // edit Timetable copy
     public function editTimetableCopy(Request $request)
@@ -2290,34 +2279,20 @@ class AdminController extends Controller
         $timetable = Helper::PostMethod(config('constants.api.timetable_edit'), $data);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($timetable);
-        if ($timetable['code'] == "200") {
-            return view(
-                'admin.timetable_copy.edit',
-                [
-                    'timetable' => $timetable['data']['timetable'],
-                    'details' => $timetable['data']['details'],
-                    'teacher' => $timetable['data']['teacher'],
-                    'subject' => $timetable['data']['subject'],
-                    'hall_list' => $timetable['data']['exam_hall'],
-                    'semester' => $semester['data'],
-                    'session' => $session['data'],
-                    'academic_year_list' => $academic_year_list['data'],
-                    'classnames' => $getclass['data']
-                ]
-            );
-        } else {
-            return view(
-                'admin.timetable.edit',
-                [
-                    'timetable' => NULL,
-                    'semester' => $semester['data'],
-                    'session' => $session['data'],
-                    'academic_year_list' => $academic_year_list['data'],
-                    'classnames' => $getclass['data']
-                ]
-            );
-        }
+        return view(
+            'admin.timetable_copy.edit',
+            [
+                'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : [],
+                'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : [],
+                'teacher' => isset($timetable['data']['teacher']) ? $timetable['data']['teacher'] : [],
+                'subject' => isset($timetable['data']['subject']) ? $timetable['data']['subject'] : [],
+                'hall_list' => isset($timetable['data']['exam_hall']) ? $timetable['data']['exam_hall'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : []
+            ]
+        );
     }
     public function updateTimetable(Request $request)
     {
@@ -2405,7 +2380,7 @@ class AdminController extends Controller
         return view(
             'admin.faq.index',
             [
-                'data' => $data,
+                'data' => isset($data) ? $data : [],
             ]
         );
     }
@@ -2429,7 +2404,7 @@ class AdminController extends Controller
         return view(
             'admin.task.add',
             [
-                'allocate_section_list' => $allocate_section_list['data']
+                'allocate_section_list' => isset($allocate_section_list['data']) ? $allocate_section_list['data'] : []
             ]
         );
     }
@@ -3044,7 +3019,8 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
 
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -3122,7 +3098,8 @@ class AdminController extends Controller
     {
 
         $response = Helper::GetMethod(config('constants.api.exam_hall_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
 
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -3208,7 +3185,8 @@ class AdminController extends Controller
         ];
         $response = Helper::GETMethodWithData(config('constants.api.exam_list'), $data);
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -3674,7 +3652,8 @@ class AdminController extends Controller
 
         $response = Helper::GetMethod(config('constants.api.grade_list'));
 
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
 
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -3844,7 +3823,7 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -3864,7 +3843,7 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -3883,7 +3862,7 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -3907,7 +3886,7 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -3928,7 +3907,7 @@ class AdminController extends Controller
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -4094,20 +4073,20 @@ class AdminController extends Controller
         return view(
             'admin.student.edit',
             [
-                'class' => $getclass['data'],
-                'parent' => $parent['data'],
-                'transport' => $gettransport['data'],
-                'hostel' => $gethostel['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
-                'student' => $student['data']['student'],
-                'section' => $student['data']['section'],
-                'vehicle' => $student['data']['vehicle'],
-                'room' => $student['data']['room'],
-                'religion' => $religion['data'],
-                'races' => $races['data'],
-                'relation' => $relation['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'role' => isset($student['data']['user']) ? $student['data']['user'] : []
 
             ]
@@ -4340,11 +4319,11 @@ class AdminController extends Controller
         return view(
             'admin.parent.edit',
             [
-                'religion' => $religion['data'],
-                'races' => $races['data'],
-                'education' => $education['data'],
-                'parent' => $response['data']['parent'],
-                'childs' => $response['data']['childs'],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'education' => isset($education['data']) ? $education['data'] : [],
+                'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
+                'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
             ]
         );
@@ -4550,7 +4529,8 @@ class AdminController extends Controller
     public function getReligionList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.religion_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -4607,7 +4587,8 @@ class AdminController extends Controller
     public function getRaceList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.race_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -4827,7 +4808,8 @@ class AdminController extends Controller
     public function getTransportRouteList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.transport_route_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -4885,9 +4867,9 @@ class AdminController extends Controller
         $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'), $data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
         return view('admin.leave_management.applyleave', [
-            'get_leave_types' => $get_leave_types['data'],
-            'get_leave_reasons' => $get_leave_reasons['data'],
-            'leave_taken_history' => $leave_taken_history['data'],
+            'get_leave_types' => isset($get_leave_types['data']) ? $get_leave_types['data'] : [],
+            'get_leave_reasons' => isset($get_leave_reasons['data']) ? $get_leave_reasons['data'] : [],
+            'leave_taken_history' => isset($leave_taken_history['data']) ? $leave_taken_history['data'] : [],
         ]);
     }
     public function approvalleave()
@@ -5111,7 +5093,8 @@ class AdminController extends Controller
     public function getEducationList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.education_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5266,7 +5249,8 @@ class AdminController extends Controller
     public function getTransportVehicleList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.transport_vehicle_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5331,7 +5315,8 @@ class AdminController extends Controller
     public function getTransportStoppageList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.transport_stoppage_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5384,9 +5369,9 @@ class AdminController extends Controller
         return view(
             'admin.transport_assign.index',
             [
-                'vehicle' => $vehicle['data'],
-                'route' => $route['data'],
-                'stoppage' => $stoppage['data'],
+                'vehicle' => isset($vehicle['data']) ? $vehicle['data'] : [],
+                'route' => isset($route['data']) ? $route['data'] : [],
+                'stoppage' => isset($stoppage['data']) ? $stoppage['data'] : [],
             ]
         );
     }
@@ -5404,7 +5389,8 @@ class AdminController extends Controller
     public function getTransportAssignList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.transport_assign_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5480,7 +5466,8 @@ class AdminController extends Controller
         $response = Helper::GetMethod(config('constants.api.hostel_block_list'));
 
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5539,7 +5526,7 @@ class AdminController extends Controller
             [
                 'warden' => !empty($getEmployee) ? $getEmployee['data'] : $getEmployee,
                 'leader' => !empty($student) ? $student['data'] : $student,
-                'block' => $block['data']
+                'block' => isset($block['data']) ? $block['data'] : []
             ]
         );
     }
@@ -5561,7 +5548,8 @@ class AdminController extends Controller
         $response = Helper::GetMethod(config('constants.api.hostel_floor_list'));
 
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5629,10 +5617,10 @@ class AdminController extends Controller
         return view(
             'admin.group.edit',
             [
-                'group' => $group['data']['group'],
-                'parent' => $group['data']['parent'],
-                'student' => $group['data']['student'],
-                'staff' => $group['data']['staff'],
+                'group' => isset($group['data']['group']) ? $group['data']['group'] : [],
+                'parent' => isset($group['data']['parent']) ? $group['data']['parent'] : [],
+                'student' => isset($group['data']['student']) ? $group['data']['student'] : [],
+                'staff' => isset($group['data']['staff']) ? $group['data']['staff'] : [],
             ]
         );
     }
@@ -5654,7 +5642,8 @@ class AdminController extends Controller
     public function getGroupList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.group_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('no_of_members', function ($row) {
                 $group_staff = 0;
@@ -5790,8 +5779,8 @@ class AdminController extends Controller
         return view(
             'admin.hostel_group.add',
             [
-                'student' => $student['data'],
-                'staff' => $staff['data'],
+                'student' => isset($student['data']) ? $student['data'] : [],
+                'staff' => isset($staff['data']) ? $staff['data'] : [],
             ]
         );
     }
@@ -5834,7 +5823,8 @@ class AdminController extends Controller
     {
         $response = Helper::GetMethod(config('constants.api.hostel_group_list'));
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5901,7 +5891,8 @@ class AdminController extends Controller
     public function getAbsentReasonList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.absent_reason_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -5958,7 +5949,8 @@ class AdminController extends Controller
     public function getLateReasonList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.late_reason_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6016,7 +6008,8 @@ class AdminController extends Controller
     public function getExcusedReasonList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.excused_reason_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6063,7 +6056,7 @@ class AdminController extends Controller
         return view(
             'admin.semester.index',
             [
-                'academic_year_list' => $academic_year_list['data']
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
 
             ]
         );
@@ -6083,7 +6076,8 @@ class AdminController extends Controller
     public function getSemesterList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.semester_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6134,7 +6128,8 @@ class AdminController extends Controller
     public function getAcademicYearList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.academic_year_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6156,8 +6151,8 @@ class AdminController extends Controller
         return view(
             'admin.global_setting.index',
             [
-                'academic_year_list' => $academic_year_list['data'],
-                'timezone' => $timezone_identifiers,
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'timezone' => isset($timezone_identifiers) ? $timezone_identifiers : [],
             ]
         );
     }
@@ -6179,7 +6174,8 @@ class AdminController extends Controller
     public function getGlobalSettingList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.global_setting_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6252,7 +6248,7 @@ class AdminController extends Controller
         return view(
             'admin.copy_acdemic_exam_module.assign_teacher',
             [
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
     }
@@ -6262,7 +6258,7 @@ class AdminController extends Controller
         return view(
             'admin.copy_acdemic_exam_module.grade_assign',
             [
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
     }
@@ -6272,7 +6268,7 @@ class AdminController extends Controller
         return view(
             'admin.copy_acdemic_exam_module.subject_teacher_assign',
             [
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
     }
@@ -6282,7 +6278,7 @@ class AdminController extends Controller
         return view(
             'admin.copy_acdemic_exam_module.exam_setup',
             [
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
     }
@@ -6292,7 +6288,7 @@ class AdminController extends Controller
         return view(
             'admin.copy_acdemic_exam_module.exam_paper',
             [
-                'academic_year_list' => $academic_year_list['data'],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
     }
@@ -6321,22 +6317,20 @@ class AdminController extends Controller
         return view(
             'admin.soap.index',
             [
-                'class' => $getclass['data'],
-                'session' => $session['data'],
-                'soap_category_list' => $soap_category_list['data'],
-                'soap_list' => $soap_list['data'],
-                'soap_subject_list' => $soap_subject_list['data'],
-                'soap_student_list' => $soap_student_list['data'],
-                'class' => $getclass['data'],
-                'transport' => $gettransport['data'],
-                'hostel' => $gethostel['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
-                'parent' => $parent['data'],
-                'religion' => $religion['data'],
-                'races' => $races['data'],
-                'relation' => $relation['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'soap_category_list' => isset($soap_category_list['data']) ? $soap_category_list['data'] : [],
+                'soap_list' => isset($soap_list['data']) ? $soap_list['data'] : [],
+                'soap_subject_list' =>isset($soap_subject_list['data']) ? $soap_subject_list['data'] : [],
+                'soap_student_list' => isset($soap_student_list['data']) ? $soap_student_list['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -6361,7 +6355,8 @@ class AdminController extends Controller
     public function getSoapCategoryList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.soap_category_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('soap_type_id', function ($row) {
                 if ($row['soap_type_id'] == "1") {
@@ -6447,7 +6442,8 @@ class AdminController extends Controller
     public function getSoapSubCategoryList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.soap_sub_category_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6521,7 +6517,8 @@ class AdminController extends Controller
     public function getSoapNotesList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.soap_notes_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6594,7 +6591,7 @@ class AdminController extends Controller
         return view(
             'admin.soap.subject.edit',
             [
-                'soapsubject' => $getsoapsubject['data'],
+                'soapsubject' => isset($getsoapsubject['data']) ? $getsoapsubject['data'] : [],
             ]
         );
     }
@@ -6620,7 +6617,8 @@ class AdminController extends Controller
     public function getSoapSubjectList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.soap_subject_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6667,7 +6665,8 @@ class AdminController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.soap_log_list'), $data);
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
 
             ->addIndexColumn()
             ->addColumn('soap_type', function ($row) {
@@ -6703,7 +6702,8 @@ class AdminController extends Controller
     public function getPaymentModeList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.payment_mode_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6761,7 +6761,8 @@ class AdminController extends Controller
     public function getPaymentStatusList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.payment_status_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6819,7 +6820,8 @@ class AdminController extends Controller
     public function getFeesTypeList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.fees_type_list'));
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
@@ -6876,13 +6878,13 @@ class AdminController extends Controller
         return view(
             'admin.fees.index',
             [
-                'classnames' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data'],
-                'fees_type' => $fees_type['data'],
-                'payment_status' => $payment_status['data'],
-                'fees_group_list' => $fees_group_list['data']
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'fees_type' => isset($fees_type['data']) ? $fees_type['data'] : [],
+                'payment_status' => isset($payment_status['data']) ? $payment_status['data'] : [],
+                'fees_group_list' => isset($fees_group_list['data']) ? $fees_group_list['data'] : []
             ]
         );
     }
@@ -6904,13 +6906,13 @@ class AdminController extends Controller
             'admin.fees.edit',
             [
                 'student_id' => $id,
-                'student' => $fees['data']['student'],
-                'fees' => $fees['data']['fees'],
-                'student_fees_history' => $student_fees_history['data'],
-                'semester' => $semester['data'],
-                'payment_mode' => $payment_mode['data'],
-                'payment_status' => $payment_status['data'],
-                'month' => $month
+                'student' => isset($fees['data']['student']) ? $fees['data']['student'] : [],
+                'fees' => isset($fees['data']['fees']) ? $fees['data']['fees'] : [],
+                'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'payment_mode' => isset($payment_mode['data']) ? $payment_mode['data'] : [],
+                'payment_status' => isset($payment_status['data']) ? $payment_status['data'] : [],
+                'month' => isset($month) ? $month : [],
             ]
         );
     }
@@ -6950,8 +6952,8 @@ class AdminController extends Controller
         return view(
             'admin.fees.fees_allocation',
             [
-                'classnames' => $getclass['data'],
-                'fees_group_list' => $fees_group_list['data']
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'fees_group_list' => isset($fees_group_list['data']) ? $fees_group_list['data'] : []
             ]
         );
     }
@@ -6981,9 +6983,9 @@ class AdminController extends Controller
         return view(
             'admin.fees_group.add',
             [
-                'fees_type' => $fees_type['data'],
-                'semester' => $semester['data'],
-                'month' => $month,
+                'fees_type' => isset($fees_type['data']) ? $fees_type['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'month' => isset($month) ? $month : [],
                 'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
                 'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
                 'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
@@ -7033,17 +7035,17 @@ class AdminController extends Controller
             'admin.fees_group.edit',
             [
                 // 'fees_type' => $fees_type['data'],
-                'semester' => $semester['data'],
-                'payment_mode' => $payment_mode['data'],
-                'month' => $month,
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'payment_mode' => isset($payment_mode['data']) ? $payment_mode['data'] : [],
+                'month' => isset($month) ? $month : [],
                 'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
                 'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
                 'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
                 'Semester_ID' => isset($payment_mode['data'][1]['id']) ? $payment_mode['data'][1]['id'] : '1',
                 'Monthly' => isset($payment_mode['data'][2]['name']) ? $payment_mode['data'][2]['name'] : '2',
                 'Monthly_ID' => isset($payment_mode['data'][2]['id']) ? $payment_mode['data'][2]['id'] : '2',
-                'fees_type_fees_group_details' => $fees_group['data']['fees_group_details'],
-                'fees_group' => $fees_group['data']['fees_group']
+                'fees_type_fees_group_details' => isset($fees_group['data']['fees_group_details']) ? $fees_group['data']['fees_group_details'] : [],
+                'fees_group' => isset($fees_group['data']['fees_group']) ? $fees_group['data']['fees_group'] : []
             ]
         );
     }
@@ -7054,7 +7056,8 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">

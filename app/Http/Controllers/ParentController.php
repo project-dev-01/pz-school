@@ -148,7 +148,8 @@ class ParentController extends Controller
         // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
 
         // return $response;
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $upload_lang = __('messages.upload');
@@ -172,7 +173,7 @@ class ParentController extends Controller
         return view(
             'parent.settings.index',
             [
-                'user_details' => $staff_profile_info['data']
+                'user_details' => isset($staff_profile_info['data']) ? $staff_profile_info['data'] : []
             ]
         );
     }
@@ -247,7 +248,7 @@ class ParentController extends Controller
         return view(
             'parent.faq.index',
             [
-                'data' => $data,
+                'data' => isset($data) ? $data : [],
             ]
         );
     }
@@ -263,7 +264,7 @@ class ParentController extends Controller
         return view(
             'parent.exam.schedule',
             [
-                'schedule_exam_list' => $response['data']
+                'schedule_exam_list' => isset($response['data']) ? $response['data'] : []
             ]
         );
     }
@@ -327,7 +328,7 @@ class ParentController extends Controller
         return view(
             'parent.report_card.index',
             [
-                'allexams' => $allexams['data']
+                'allexams' => isset($allexams['data']) ? $allexams['data'] : []
             ]
         );
     }
@@ -374,7 +375,7 @@ class ParentController extends Controller
             [
                 'timetable' => isset($timetable['data']['timetable']) ? $timetable['data']['timetable'] : 0,
                 'details' => isset($timetable['data']['details']) ? $timetable['data']['details'] : 0,
-                'days' => $days,
+                'days' => isset($days) ? $days : [],
                 'max' => isset($timetable['data']['max']) ? $timetable['data']['max'] : 0
 
             ]
@@ -641,7 +642,7 @@ class ParentController extends Controller
         return view(
             'parent.attendance.index',
             [
-                'subjects' => $subjects['data'],
+                'subjects' => isset($subjects['data']) ? $subjects['data'] : [],
                 'student_id' =>  session()->get('student_id')
             ]
         );
@@ -665,7 +666,7 @@ class ParentController extends Controller
             'parent.homework.list',
             [
                 'homework' => isset($homework['data']['homeworks']) ? $homework['data']['homeworks'] : [],
-                'subject' => $get_student_by_all_subjects['data'],
+                'subject' => isset($get_student_by_all_subjects['data']) ? $get_student_by_all_subjects['data'] : [],
                 'count' => isset($homework['data']['count']) ? $homework['data']['count'] : 0,
             ]
         );
@@ -957,8 +958,8 @@ class ParentController extends Controller
         return view(
             'parent.analyticrep.analyticreport',
             [
-                'get_student_by_all_subjects' => $get_student_by_all_subjects['data'],
-                'get_class_section_by_student' => $get_class_section_by_student['data']
+                'get_student_by_all_subjects' => isset($get_student_by_all_subjects['data']) ? $get_student_by_all_subjects['data'] : [],
+                'get_class_section_by_student' => isset($get_class_section_by_student['data']) ? $get_class_section_by_student['data'] : []
             ]
         );
     }
@@ -970,7 +971,8 @@ class ParentController extends Controller
         ];
         $response = Helper::GETMethodWithData(config('constants.api.event_list_student'), $data);
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('classname', function ($row) {
                 $audience = $row['audience'];
@@ -1034,15 +1036,15 @@ class ParentController extends Controller
         return view(
             'parent.leave_application.index',
             [
-                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'get_homework_list_dashboard' => $get_homework_list_dashboard['data'],
-                'get_std_names_dashboard' => $get_std_names_dashboard['data'],
-                'get_leave_reasons_dashboard' => $get_leave_reasons_dashboard['data'],
-                'all_exam_subject_scores' => $all_exam_subject_scores['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'greetings' => $greetings,
-                'exams' => $exam_by_student['data'],
+                'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
+                'get_homework_list_dashboard' => isset($get_homework_list_dashboard['data']) ? $get_homework_list_dashboard['data'] : [],
+                'get_std_names_dashboard' => isset($get_std_names_dashboard['data']) ? $get_std_names_dashboard['data'] : [],
+                'get_leave_reasons_dashboard' => isset($get_leave_reasons_dashboard['data']) ? $get_leave_reasons_dashboard['data'] : [],
+                'all_exam_subject_scores' => isset($all_exam_subject_scores['data']) ? $all_exam_subject_scores['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'greetings' => isset($greetings) ? $greetings : [],
+                'exams' => isset($exam_by_student['data']) ? $exam_by_student['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]

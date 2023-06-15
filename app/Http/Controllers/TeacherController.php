@@ -34,13 +34,13 @@ class TeacherController extends Controller
         return view(
             'teacher.dashboard.index',
             [
-                'classes' => $getclass['data'],
-                'get_to_do_list_dashboard' => $get_to_do_list_dashboard['data'],
-                'greetings' => $greetings,
-                'count' => $count,
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
+                'greetings' => isset($greetings) ? $greetings : [],
+                'count' => isset($count) ? $count : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
             ]
@@ -56,9 +56,9 @@ class TeacherController extends Controller
         $get_leave_types = Helper::GETMethodWithData(config('constants.api.get_leave_types'), $data);
         $leave_taken_history = Helper::PostMethod(config('constants.api.leave_taken_history'), $data);
         return view('teacher.leave_management.applyleave', [
-            'get_leave_types' => $get_leave_types['data'],
-            'get_leave_reasons' => $get_leave_reasons['data'],
-            'leave_taken_history' => $leave_taken_history['data'],
+            'get_leave_types' => isset($get_leave_types['data']) ? $get_leave_types['data'] : [],
+            'get_leave_reasons' => isset($get_leave_reasons['data']) ? $get_leave_reasons['data'] : [],
+            'leave_taken_history' => isset($leave_taken_history['data']) ? $leave_taken_history['data'] : [],
         ]);
     }
     // staff leave 
@@ -100,7 +100,8 @@ class TeacherController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_id);
         // dd($response);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $upload_lang = __('messages.upload');
@@ -126,7 +127,7 @@ class TeacherController extends Controller
         ];
         $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         return view('teacher.student_leave.index', [
-            'classes' => $getclass['data']
+            'classes' => isset($getclass['data']) ? $getclass['data'] : []
         ]);
     }
     public function allleaves()
@@ -141,7 +142,8 @@ class TeacherController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
@@ -162,7 +164,7 @@ class TeacherController extends Controller
         return view(
             'teacher.settings.index',
             [
-                'user_details' => $staff_profile_info['data']
+                'user_details' => isset($staff_profile_info['data']) ? $staff_profile_info['data'] : []
             ]
         );
     }
@@ -240,9 +242,9 @@ class TeacherController extends Controller
         return view(
             'teacher.student.student',
             [
-                'classes' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
@@ -528,7 +530,7 @@ class TeacherController extends Controller
         return view(
             'teacher.faq.index',
             [
-                'data' => $data,
+                'data' => isset($data) ? $data : [],
             ]
         );
     }
@@ -543,9 +545,9 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($sem);
         return view('teacher.classroom.management', [
-            'teacher_class' => $response['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
@@ -565,9 +567,9 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($sem);
         return view('teacher.testresult.index', [
-            'teacher_class' => $response['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             //   'get_exams' => $get_exams['data']
@@ -725,9 +727,9 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view('teacher.attendance.index', [
-            'teacher_class' => $response['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
@@ -746,10 +748,10 @@ class TeacherController extends Controller
         return view(
             'teacher.exam_results.byclass',
             [
-                'classnames' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -769,10 +771,10 @@ class TeacherController extends Controller
         return view(
             'teacher.exam_results.bysubject',
             [
-                'classnames' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -792,10 +794,10 @@ class TeacherController extends Controller
         return view(
             'teacher.exam_results.bystudent',
             [
-                'classnames' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
-                'academic_year_list' => $academic_year_list['data'],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -847,9 +849,9 @@ class TeacherController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view('teacher.testresult.paper_wise_result', [
-            'classes' => $getclass['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
@@ -865,9 +867,9 @@ class TeacherController extends Controller
         return view(
             'teacher.homework.index',
             [
-                'class' => $class['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
+                'class' => isset($class['data']) ? $class['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
             ]
         );
     }
@@ -886,9 +888,9 @@ class TeacherController extends Controller
         return view(
             'teacher.homework.evaluation_report',
             [
-                'class' => $response['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
+                'class' => isset($response['data']) ? $response['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
@@ -1153,9 +1155,9 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($sem);
         return view('teacher.analyticrep.analyticreport', [
-            'teacher_class' => $response['data'],
-            'semester' => $semester['data'],
-            'session' => $session['data'],
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' =>isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
@@ -1340,8 +1342,8 @@ class TeacherController extends Controller
         return view(
             'teacher.attendance.employee',
             [
-                'employee' => $employee,
-                'session' => $session['data'],
+                'employee' => isset($employee) ? $employee : "",
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
@@ -1404,8 +1406,8 @@ class TeacherController extends Controller
         return view(
             'teacher.attendance.employee_report',
             [
-                'employee' => $employee,
-                'session' => $session['data'],
+                'employee' => isset($employee) ? $employee : "",
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
@@ -1434,7 +1436,8 @@ class TeacherController extends Controller
 
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
-        return DataTables::of($response['data'])
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
 
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -1474,19 +1477,19 @@ class TeacherController extends Controller
         return view(
             'teacher.student.view',
             [
-                'class' => $getclass['data'],
-                'parent' => $parent['data'],
-                'transport' => $gettransport['data'],
-                'hostel' => $gethostel['data'],
-                'session' => $session['data'],
-                'semester' => $semester['data'],
-                'student' => $student['data']['student'],
-                'section' => $student['data']['section'],
-                'vehicle' => $student['data']['vehicle'],
-                'room' => $student['data']['room'],
-                'religion' => $religion['data'],
-                'races' => $races['data'],
-                'relation' => $relation['data'],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
 
             ]
         );
@@ -1506,9 +1509,9 @@ class TeacherController extends Controller
         return view(
             'teacher.timetable.index',
             [
-                'class' => $getclass['data'],
-                'semester' => $semester['data'],
-                'session' => $session['data'],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]

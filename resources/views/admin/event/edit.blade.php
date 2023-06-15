@@ -97,12 +97,12 @@
                 </ul>
                 <div class="card-body">
                     <form id="eventEditForm" method="post" action="{{ route('admin.event.update') }}" autocomplete="off">
-                        @csrf<input type="hidden" name="id" value="{{$event['id']}}">
+                        @csrf<input type="hidden" name="id" value="{{isset($event['id']) ? $event['id'] : ''}}">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="title">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}" value="{{$event['title']}}">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="{{ __('messages.enter_title') }}" value="{{isset($event['title']) ? $event['title'] : ''}}">
                                     <span class="text-danger error-text title_error"></span>
                                 </div>
                             </div>
@@ -111,9 +111,10 @@
                                     <label for="type">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="type" name="type">
                                         <option value="">{{ __('messages.select_type') }}</option>
-                                        @foreach($type as $typ)
-                                        <option value="{{$typ['id']}}" {{$event['type'] == $typ['id'] ? 'Selected':''}}>{{$typ['name']}}</option>
-                                        @endforeach
+                                        @forelse($type as $typ)
+                                        <option value="{{$typ['id']}}" {{ isset($event['type']) ? $event['type'] == $typ['id'] ? 'Selected':'' : "" }}>{{$typ['name']}}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                     <span class="text-danger error-text type_error"></span>
                                 </div>
@@ -123,21 +124,22 @@
                                     <label for="audience">{{ __('messages.audience') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="edit_audience" name="audience">
                                         <option value="">{{ __('messages.select_audience') }}</option>
-                                        <option value="1" {{$event['audience'] == "1" ? 'Selected':''}}>EveryBody</option>
-                                        <option value="2" {{$event['audience'] == "2" ? 'Selected':''}}>Selected Grade</option>
-                                        <option value="3" {{$event['audience'] == "3" ? 'Selected':''}}>Selected Group</option>
+                                        <option value="1" {{ isset($event['audience']) ? $event['audience'] == "1" ? 'Selected':'' : "" }}>EveryBody</option>
+                                        <option value="2" {{ isset($event['audience']) ? $event['audience'] == "2" ? 'Selected':'' : "" }}>Selected Grade</option>
+                                        <option value="3" {{ isset($event['audience']) ? $event['audience'] == "3" ? 'Selected':'' : "" }}>Selected Group</option>
                                         <!-- <option value="3">Selected Section</option> -->
                                     </select>
                                     <span class="text-danger error-text audience_error"></span>
                                 </div>
                             </div>
                             @php $cla = 'style=display:none'; $gro = 'style=display:none'; @endphp
-                            @if($event['audience']==2)
-                            @php $cla = ''; @endphp
-                            @endif
-
-                            @if($event['audience']==3)
-                            @php $gro = ''; @endphp
+                            @if(isset($event['audience']))
+                                @if($event['audience']==2)
+                                @php $cla = ''; @endphp
+                                @endif
+                                @if($event['audience']==3)
+                                @php $gro = ''; @endphp
+                                @endif
                             @endif
 
                             <div class="col-md-4" id="edit_class" {{$cla}}>
@@ -193,7 +195,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="start_date" id="edit_event_start_date" value="{{$event['start_date']}}">
+                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="start_date" id="edit_event_start_date" value="{{isset($event['start_date']) ? $event['start_date'] : ''}}">
                                     </div>
                                 </div>
                                 <span class="text-danger error-text start_date_error"></span>
@@ -207,7 +209,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="end_date" id="edit_event_end_date" value="{{$event['end_date']}}">
+                                        <input type="text" placeholder="{{ __('messages.yyyy_mm_dd') }}" class="form-control" name="end_date" id="edit_event_end_date" value="{{isset($event['end_date']) ? $event['end_date'] : ''}}">
                                     </div>
                                     <span class="text-danger error-text end_date_error"></span>
                                 </div>
@@ -215,29 +217,29 @@
                             <div class="col-md-2">
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
-                                        <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" {{$event['all_day'] == "on" ? 'checked':''}}>
+                                        <input type="checkbox" class="custom-control-input" name="all_day" id="allDay" {{ isset($event['all_day']) ? $event['all_day'] == "on" ? 'checked':'' : "" }}>
                                         <label class="custom-control-label" for="allDay">{{ __('messages.all_day') }}</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
+                            <div class="col-md-3 time" {{ isset($event['all_day']) ? $event['all_day'] == "on" ? 'style=display:none':'' : "" }}>
                                 <div class="form-group">
                                     <label>{{ __('messages.start_time') }}</label>
-                                    <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{$event['start_time']}}">
+                                    <input type="text" class="form-control edittimepicker" name="start_time" id="edit_start_time" placeholder="00:00" value="{{isset($event['start_time']) ? $event['start_time'] : ''}}">
                                     <span class="text-danger error-text start_time_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3 time" {{$event['all_day'] == "on" ? 'style=display:none':''}}>
+                            <div class="col-md-3 time" {{ isset($event['all_day']) ? $event['all_day'] == "on" ? 'style=display:none':'' : "" }}>
                                 <div class="form-group">
                                     <label>{{ __('messages.end_time') }}</label>
-                                    <input type="text" class="form-control edittimepicker" name="end_time" id="edit_end_time" placeholder="00:00" value="{{$event['end_time']}}">
+                                    <input type="text" class="form-control edittimepicker" name="end_time" id="edit_end_time" placeholder="00:00" value="{{isset($event['end_time']) ? $event['end_time'] : ''}}">
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
-                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" {{$event['holiday'] == "0" ? 'checked':''}}>
+                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" {{ isset($event['holiday']) ?  $event['holiday'] == "0" ? 'checked':'' : "" }}>
                                         <label class="custom-control-label" for="holiday">{{ __('messages.holiday') }}</label>
                                     </div>
                                 </div>
@@ -245,7 +247,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">{{ __('messages.description') }}</label>
-                                    <textarea class="form-control" name="description">{{$event['remarks']}}</textarea>
+                                    <textarea class="form-control" name="description">{{isset($event['remarks']) ? $event['remarks'] : ''}}</textarea>
                                     <span class="text-danger error-text description_error"></span>
                                 </div>
                             </div>

@@ -321,14 +321,14 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $employee['photo'] }}" />
-                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-max-file-size="2M" data-default-file="{{ $employee['photo'] && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$employee['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$employee['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
+                                        <input type="hidden" name="old_photo" id="oldPhoto" value="{{ isset($employee['photo']) ? $employee['photo'] : ''}}" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-plugins="dropify" data-max-file-size="2M" data-default-file="{{ isset($employee['photo']) && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$employee['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$employee['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div> <!-- end row -->
-                        <input type="hidden" class="form-control" id="id" name="id" value="{{$employee['id']}}">
+                        <input type="hidden" class="form-control" id="id" name="id" value="{{ isset($employee['id']) ? $employee['id'] : ''}}">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -339,7 +339,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" value="{{$employee['first_name']}}" name="first_name" id="firstName" placeholder="{{ __('messages.yamamoto') }}">
+                                        <input type="text" class="form-control shortNameChange" value="{{ isset($employee['first_name']) ? $employee['first_name'] : ''}}" name="first_name" id="firstName" placeholder="{{ __('messages.yamamoto') }}">
                                     </div>
                                 </div>
                             </div>
@@ -352,7 +352,7 @@
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control shortNameChange" value="{{$employee['last_name']}}" name="last_name" id="lastName" placeholder="{{ __('messages.yukio') }}">
+                                        <input type="text" class="form-control shortNameChange" value="{{ isset($employee['last_name']) ? $employee['last_name'] : ''}}" name="last_name" id="lastName" placeholder="{{ __('messages.yukio') }}">
                                     </div>
                                 </div>
                             </div>
@@ -361,8 +361,8 @@
                                     <label for="gender">{{ __('messages.gender') }}</label>
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">{{ __('messages.select_gender') }}</option>
-                                        <option value="Male" {{$employee['gender'] =="Male" ? 'selected' : '' }}>{{ __('messages.male') }}</option>
-                                        <option value="Female" {{$employee['gender'] == "Female" ? 'selected' : ''}}>{{ __('messages.female') }}</option>
+                                        <option value="Male" {{ isset($employee['gender']) ? $employee['gender'] =="Male" ? 'selected' : '' : '' }}>{{ __('messages.male') }}</option>
+                                        <option value="Female" {{ isset($employee['gender']) ? $employee['gender'] == "Female" ? 'selected' : '' : '' }}>{{ __('messages.female') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -378,20 +378,20 @@
                                                 <span class="fas fa-birthday-cake"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="birthday" value="{{$employee['birthday']}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                        <input type="text" class="form-control" name="birthday" value="{{ isset($employee['birthday']) ? $employee['birthday'] : ''}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nric_number">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" maxlength="16" class="form-control" name="nric_number" value="{{$employee['nric_number']}}" id="nricNumber" placeholder="999999-99-9999">
+                                    <input type="text" maxlength="16" class="form-control" name="nric_number" value="{{ isset($employee['nric_number']) ? $employee['nric_number'] : ''}}" id="nricNumber" placeholder="999999-99-9999">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" maxlength="20" class="form-control" name="passport" value="{{$employee['passport']}}" id="Passport" placeholder="{{ __('messages.enter_passport_number') }}">
+                                    <input type="text" maxlength="20" class="form-control" name="passport" value="{{ isset($employee['passport']) ? $employee['passport'] : ''}}" id="Passport" placeholder="{{ __('messages.enter_passport_number') }}">
                                 </div>
                             </div>
                         </div>
@@ -399,7 +399,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="short_name">{{ __('messages.short_name') }}</label>
-                                    <input type="text" value="{{$employee['short_name']}}" class="form-control" name="short_name" id="shortName" placeholder="{{ __('messages.yamamoto') }}">
+                                    <input type="text" value="{{ isset($employee['short_name']) ? $employee['short_name'] : ''}}" class="form-control" name="short_name" id="shortName" placeholder="{{ __('messages.yamamoto') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -408,7 +408,7 @@
                                     <select class="form-control" name="race" id="addRace">
                                         <option value="">{{ __('messages.select_race') }}</option>
                                         @forelse($races as $r)
-                                        <option value="{{$r['id']}}" {{$employee['race'] == $r['id'] ? 'selected' : ''}}>{{$r['races_name']}}</option>
+                                        <option value="{{$r['id']}}" {{ isset($employee['race']) ? $employee['race'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['races_name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -420,7 +420,7 @@
                                     <select class="form-control" name="religion" id="religion">
                                         <option value="">{{ __('messages.select_religion') }}</option>
                                         @forelse($religion as $r)
-                                        <option value="{{$r['id']}}" {{$employee['religion'] == $r['id'] ? 'selected' : ''}}>{{$r['religions_name']}}</option>
+                                        <option value="{{$r['id']}}" {{ isset($employee['religion']) ? $employee['religion'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['religions_name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -431,19 +431,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="present_address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="present_address" id="present_address" value="{{$employee['present_address']}}" placeholder="{{ __('messages.enter_address_1') }}">
+                                    <input class="form-control" name="present_address" id="present_address" value="{{ isset($employee['present_address']) ? $employee['present_address'] : ''}}" placeholder="{{ __('messages.enter_address_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="permanent_address">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{$employee['permanent_address']}}" placeholder="{{ __('messages.enter_address_2') }}">
+                                    <input class="form-control" name="permanent_address" id="permanent_address" value="{{ isset($employee['permanent_address']) ? $employee['permanent_address'] : ''}}" placeholder="{{ __('messages.enter_address_2') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="city">{{ __('messages.city') }}</label>
-                                    <input type="text" value="{{$employee['city']}}" class="form-control" name="city" id="City" placeholder="{{ __('messages.enter_city') }}">
+                                    <input type="text" value="{{ isset($employee['city']) ? $employee['city'] : ''}}" class="form-control" name="city" id="City" placeholder="{{ __('messages.enter_city') }}">
                                 </div>
                             </div>
                         </div>
@@ -451,19 +451,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                                    <input type="text" value="{{$employee['post_code']}}" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.enter') }} {{ __('messages.zip_postal_code') }}">
+                                    <input type="text" value="{{ isset($employee['post_code']) ? $employee['post_code'] : ''}}" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.enter') }} {{ __('messages.zip_postal_code') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="state">{{ __('messages.state_province') }}</label>
-                                    <input type="text" value="{{$employee['state']}}" class="form-control" name="state" id="State" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}">
+                                    <input type="text" value="{{ isset($employee['state']) ? $employee['state'] : ''}}" class="form-control" name="state" id="State" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" value="{{$employee['country']}}" class="form-control" name="country" id="Country" placeholder="{{ __('messages.country') }}">
+                                    <input type="text" value="{{ isset($employee['country']) ? $employee['country'] : ''}}" class="form-control" name="country" id="Country" placeholder="{{ __('messages.country') }}">
                                 </div>
                             </div>
 
@@ -471,18 +471,18 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
-                                <input type="text" class="form-control number_validation" value="{{$employee['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">
+                                <input type="text" class="form-control number_validation" value="{{ isset($employee['mobile_no']) ? $employee['mobile_no'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" name="mobile_no" id="mobile_no">
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="employment_status">{{ __('messages.employment_status') }}</label>
                                     <select class="form-control" name="employment_status" id="employment_status">
                                         <option value="">{{ __('messages.select_employment_status') }}</option>
-                                        <option value="Under_Probation" {{$employee['employment_status'] =="Under_Probation" ? 'selected' : '' }}>{{ __('messages.under_probation') }}</option>
-                                        <option value="Employed" {{$employee['employment_status'] =="Employed" ? 'selected' : '' }}>{{ __('messages.employed') }}</option>
-                                        <option value="Transferred" {{$employee['employment_status'] =="Transferred" ? 'selected' : '' }}>{{ __('messages.transferred') }}</option>
-                                        <option value="Resign" {{$employee['employment_status'] =="Resign" ? 'selected' : '' }}>{{ __('messages.resign') }}</option>
-                                        <option value="Retired" {{$employee['employment_status'] =="Retired" ? 'selected' : '' }}>{{ __('messages.retired') }}</option>
+                                        <option value="Under_Probation" {{ isset($employee['employment_status']) ? $employee['employment_status'] =="Under_Probation" ? 'selected' : '' : '' }}>{{ __('messages.under_probation') }}</option>
+                                        <option value="Employed" {{ isset($employee['employment_status']) ? $employee['employment_status'] =="Employed" ? 'selected' : '' : '' }}>{{ __('messages.employed') }}</option>
+                                        <option value="Transferred" {{ isset($employee['employment_status']) ? $employee['employment_status'] =="Transferred" ? 'selected' : '' : '' }}>{{ __('messages.transferred') }}</option>
+                                        <option value="Resign" {{ isset($employee['employment_status']) ? $employee['employment_status'] =="Resign" ? 'selected' : '' : '' }}>{{ __('messages.resign') }}</option>
+                                        <option value="Retired" {{ isset($employee['employment_status']) ? $employee['employment_status'] =="Retired" ? 'selected' : '' : '' }}>{{ __('messages.retired') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -531,7 +531,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" value="{{$employee['joining_date']}}" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                        <input type="text" class="form-control" value="{{ isset($employee['joining_date']) ? $employee['joining_date'] : ''}}" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
                                 </div>
                             </div>
@@ -588,7 +588,7 @@
                                     <select class="form-control" id="staffPosition" name="staff_position">
                                         <option value="">{{ __('messages.select_staff_position') }}</option>
                                         @forelse($staff_positions as $r)
-                                        <option value="{{$r['id']}}" {{$employee['staff_position'] == $r['id'] ? 'Selected':''}}>{{$r['staff_positions_name']}}</option>
+                                        <option value="{{$r['id']}}" {{  isset($employee['staff_position']) ? $employee['staff_position'] == $r['id'] ? 'Selected' : '' : '' }}>{{$r['staff_positions_name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -597,7 +597,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
-                                    <input type="number" value="{{$employee['salary_grade']}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
+                                    <input type="number" value="{{ isset($employee['salary_grade']) ? $employee['salary_grade'] : ''}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
                         </div>
@@ -609,7 +609,7 @@
                                     <select class="form-control" id="staffCategory" name="staff_category">
                                         <option value="">{{ __('messages.select_category') }}</option>
                                         @forelse($staff_categories as $r)
-                                        <option value="{{$r['id']}}" {{$employee['staff_category'] == $r['id'] ? 'Selected':''}}>{{$r['staff_categories_name']}}</option>
+                                        <option value="{{$r['id']}}" {{  isset($employee['staff_category']) ? $employee['staff_category'] == $r['id'] ? 'Selected' : '' : ''}}>{{$r['staff_categories_name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -643,7 +643,7 @@
                                     <select class="form-control" id="streamType" name="stream_type">
                                         <option value="">{{ __('messages.select_stream_type') }}</option>
                                         @forelse($stream_types as $r)
-                                        <option value="{{$r['id']}}" {{$employee['stream_type_id'] == $r['id'] ? 'Selected':''}}>{{$r['stream_types_name']}}</option>
+                                        <option value="{{$r['id']}}" {{ isset($employee['stream_type_id']) ? $employee['stream_type_id'] == $r['id'] ? 'Selected' : '' : '' }}>{{$r['stream_types_name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -662,7 +662,7 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" value="{{$role['id']}}" class="form-control" name="role_user_id" id="role_user_id">
+                            <input type="hidden" value="{{ isset($role['id']) ? $role['id'] : ''}}" class="form-control" name="role_user_id" id="role_user_id">
                             <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
@@ -672,7 +672,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" value="{{$role['email']}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
+                                        <input type="email" value="{{ isset($role['email']) ? $role['email'] : ''}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
                                     </div>
                                 </div>
                             </div>
@@ -693,7 +693,7 @@
                                 <div class="form-group mb-3">
                                     <label class="switch">{{ __('messages.authentication') }}
 
-                                        <input id="edit_status" name="status" type="checkbox" {{ $employee['status'] == "1" ? "checked" : "" }}>
+                                        <input id="edit_status" name="status" type="checkbox" {{  isset($employee['status']) ? $employee['status'] == "1" ? "checked" : ""  : ""}}>
                                         <span>
                                             <em></em>
                                             <strong></strong>
@@ -729,7 +729,7 @@
                             <div class="col-md-6">
                                 <h4 class="header-title">{{ __('messages.turn_on_turn_off') }}</h4>
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" {{ $role['google2fa_secret_enable'] == "1" ? "checked" : "" }}>
+                                    <input type="checkbox" class="custom-control-input" name="google2fa_secret_enable" id="google2fa_secret_enable" {{ isset($role['google2fa_secret_enable']) ? $role['google2fa_secret_enable'] == "1" ? "checked" : ""  : ""}}>
                                     <label class="custom-control-label" for="google2fa_secret_enable">{{ __('messages.enable_two_factor_authentication') }}</label>
                                 </div>
                             </div>
@@ -754,7 +754,7 @@
                                                 <span class="fab fa-facebook-f"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="facebook_url" value="{{$employee['facebook_url']}}" id="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}">
+                                        <input type="text" class="form-control" name="facebook_url" value="{{ isset($employee['facebook_url']) ? $employee['facebook_url'] : ''}}" id="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -767,7 +767,7 @@
                                                 <span class="fab fa-twitter"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="twitter_url" value="{{$employee['twitter_url']}}" id="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}">
+                                        <input type="text" class="form-control" name="twitter_url" value="{{ isset($employee['twitter_url']) ? $employee['twitter_url'] : ''}}" id="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -780,7 +780,7 @@
                                                 <span class="fab fa-linkedin-in"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="linkedin_url" value="{{$employee['linkedin_url']}}" id="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}">
+                                        <input type="text" class="form-control" name="linkedin_url" value="{{ isset($employee['linkedin_url']) ? $employee['linkedin_url'] : ''}}" id="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}">
                                     </div>
                                 </div>
                             </div>
@@ -806,19 +806,19 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">{{ __('messages.height') }}</label>
-                                        <input type="text" id="height" class="form-control" value="{{$employee['height']}}" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
+                                        <input type="text" id="height" class="form-control" value="{{ isset($employee['height']) ? $employee['height'] : ''}}" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="weight">{{ __('messages.weight') }}</label>
-                                        <input type="text" id="weight" class="form-control" value="{{$employee['weight']}}" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
+                                        <input type="text" id="weight" class="form-control" value="{{ isset($employee['weight']) ? $employee['weight'] : ''}}" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="allergy">{{ __('messages.allergy') }}</label>
-                                        <input type="text" id="allergy" class="form-control" value="{{$employee['allergy']}}" name="Allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
+                                        <input type="text" id="allergy" class="form-control" value="{{ isset($employee['allergy']) ? $employee['allergy'] : ''}}" name="Allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -826,14 +826,14 @@
                                         <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                         <select class="form-control" name="blood_group" id="blood_group">
                                             <option value="">{{ __('messages.select_blood_group') }}</option>
-                                            <option value="A+" {{$employee['blood_group'] == "A+" ? 'selected' : ''}}>A+</option>
-                                            <option value="A-" {{$employee['blood_group'] == "A-" ? 'selected' : ''}}>A-</option>
-                                            <option value="AB+" {{$employee['blood_group'] == "AB+" ? 'selected' : ''}}>AB+</option>
-                                            <option value="AB-" {{$employee['blood_group'] == "AB-" ? 'selected' : ''}}>AB-</option>
-                                            <option value="B+" {{$employee['blood_group'] == "B+" ? 'selected' : ''}}>B+</option>
-                                            <option value="B-" {{$employee['blood_group'] == "B-" ? 'selected' : ''}}>B-</option>
-                                            <option value="O+" {{$employee['blood_group'] == "O+" ? 'selected' : ''}}>O+</option>
-                                            <option value="O-" {{$employee['blood_group'] == "O-" ? 'selected' : ''}}>O-</option>
+                                            <option value="A+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A+" ? 'selected' : '' : '' }}>A+</option>
+                                            <option value="A-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A-" ? 'selected' : '' : '' }}>A-</option>
+                                            <option value="AB+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB+" ? 'selected' : '' : '' }}>AB+</option>
+                                            <option value="AB-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB-" ? 'selected' : '' : '' }}>AB-</option>
+                                            <option value="B+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B+" ? 'selected' : '' : '' }}>B+</option>
+                                            <option value="B-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B-" ? 'selected' : '' : '' }}>B-</option>
+                                            <option value="O+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O+" ? 'selected' : '' : '' }}>O+</option>
+                                            <option value="O-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O-" ? 'selected' : '' : '' }}>O-</option>
                                         </select>
                                     </div>
                                 </div>

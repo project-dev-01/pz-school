@@ -282,9 +282,10 @@ border-bottom: 1px solid #E9D528;
                                 <label for="inputTopic" class="col-3 col-form-label">{{ __('messages.user') }}</label>
                                 <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">>
                                     <option value=""></option>
-                                    @foreach($usernames as $c)
+                                    @forelse($usernames as $c)
                                     <option value="{{$c['id']}}">{{ __('messages.' . strtolower($c['name'])) }}</option>
-                                    @endforeach
+                                    @empty
+                                    @endforelse
 
                                 </select>
                                 <!-- <input type="hidden" id="tags" name="tags"> -->

@@ -47,12 +47,12 @@
                 <div class="card-body">
                     <form id="hostelGroupEditForm" method="post" action="{{ route('admin.hostel_group.update') }}" autocomplete="off">
                         @csrf
-                        <input type="hidden" name="id" value="{{$group['id']}}">
+                        <input type="hidden" name="id" value="{{isset($group['id']) ? $group['id'] : ''}}">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">{{ __('messages.group_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{$group['name']}}">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_group_name') }}" value="{{isset($group['name']) ? $group['name'] : ''}}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="color"> {{ __('messages.color') }} <span class="text-danger">*</span></label>
-                                    <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}" value="{{$group['color']}}">
+                                    <input type="text" id="color" name="color" class="form-control color" placeholder="{{ __('messages.choose_color') }}" value="{{isset($group['color']) ? $group['color'] : ''}}">
                                 </div>
                             </div>
                         </div>

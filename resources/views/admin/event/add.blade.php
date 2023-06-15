@@ -111,9 +111,10 @@
                                     <label for="type">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" id="type" name="type">
                                         <option value="">{{ __('messages.select') }}</option>
-                                        @foreach($type as $typ)
+                                        @forelse($type as $typ)
                                         <option value="{{$typ['id']}}">{{$typ['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                     <span class="text-danger error-text type_error"></span>
                                 </div>
@@ -134,9 +135,10 @@
                                 <div class="form-group">
                                     <label for="class">{{ __('messages.grade') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="class[]" id="classes" multiple="multiple" data-placeholder="Choose ...">
-                                        @foreach($class as $cla)
+                                        @forelse($class as $cla)
                                         <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                     <span class="text-danger error-text class_error"></span>
                                 </div>
@@ -145,9 +147,10 @@
                                 <div class="form-group">
                                     <label for="group">{{ __('messages.group') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" name="group[]" id="group" multiple="multiple" data-placeholder="Choose ...">
-                                        @foreach($group as $gro)
+                                        @forelse($group as $gro)
                                         <option value="{{$gro['id']}}">{{$gro['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                     <span class="text-danger error-text group_error"></span>
                                 </div>

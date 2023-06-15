@@ -46,7 +46,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link"><i class="far fa-clock"></i>
-                            @if($timetable)Grade {{ $details['class']['class_name'] }} (Class: {{ $details['section']['section_name'] }}) - {{ $details['day'] }} - @endif Schedule Edit
+                            @if($timetable)Grade {{ isset($details['class']['class_name']) ? $details['class']['class_name'] : "" }} (Class: {{ isset($details['section']['section_name']) ? $details['section']['section_name'] : "" }}) - {{ isset($details['day']) ? $details['day'] : "" }} - @endif Schedule Edit
                         </h4>
                     </li>
                 </ul><br>
@@ -199,11 +199,11 @@
 					<i class="fas fa-plus-circle"></i> Add More				</button> -->
                         <!-- end row-->
                         @if($timetable)
-                        <input type="hidden" id="form_class_id" name="class_id" value="{{$details['class']['class_id']}}">
-                        <input type="hidden" id="form_section_id" name="section_id" value="{{$details['section']['section_id']}}">
-                        <input type="hidden" id="form_semester_id" name="semester_id" value="{{$details['semester']['semester_id']}}">
-                        <input type="hidden" id="form_session_id" name="session_id" value="{{$details['session']['session_id']}}">
-                        <input type="hidden" id="form_day" name="day" value="{{$details['day']}}">
+                        <input type="hidden" id="form_class_id" name="class_id" value="{{ isset($details['class']['class_id']) ? $details['class']['class_id'] : '' }}">
+                        <input type="hidden" id="form_section_id" name="section_id" value="{{ isset($details['section']['section_id']) ? $details['section']['section_id'] : '' }}">
+                        <input type="hidden" id="form_semester_id" name="semester_id" value="{{ isset($details['semester']['semester_id']) ? $details['semester']['semester_id'] : '' }}">
+                        <input type="hidden" id="form_session_id" name="session_id" value="{{ isset($details['session']['session_id']) ? $details['session']['session_id'] : '' }}">
+                        <input type="hidden" id="form_day" name="day" value="{{isset($details['day']) ? $details['day'] : ''}}">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                 Update

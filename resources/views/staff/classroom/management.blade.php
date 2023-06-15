@@ -79,9 +79,10 @@
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
-                                        @foreach($semester as $sem)
+                                        @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -90,9 +91,10 @@
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
-                                        @foreach($session as $ses)
+                                        @forelse($session as $ses)
                                         <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

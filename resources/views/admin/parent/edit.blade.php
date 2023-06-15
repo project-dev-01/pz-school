@@ -312,7 +312,7 @@
             <div class="card-box" style="background-color:powderblue;">
                 <div class="row">
                     <div class="col-xl-3">
-                        @if($parent['photo'])
+                        @if(isset($parent['photo']))
                         <img src="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}/{{$parent['photo']}}" alt="" class="img-fluid mx-auto d-block rounded user-img">
                         @else
                         <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" alt="" class="img-fluid mx-auto d-block rounded">
@@ -321,7 +321,7 @@
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">
-                            <h1 class="mb-3">{{$parent['first_name']}} {{$parent['last_name']}}</h5>
+                            <h1 class="mb-3">{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}{{ isset($parent['last_name']) ? $parent['last_name'] : ''}}</h5>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <div>
@@ -332,7 +332,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['occupation']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($parent['occupation']) ? $parent['occupation'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -343,7 +343,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['income']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($parent['income']) ? $parent['income'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -355,7 +355,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['mobile_no']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -366,7 +366,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['email']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($parent['email']) ? $parent['email'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -377,7 +377,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{$parent['address']}}</a>
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($parent['address']) ? $parent['address'] : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -409,7 +409,7 @@
                     <div class="collapse" id="basic_details">
                         <form id="editParent" method="post" action="{{ route('admin.parent.update') }}" enctype="multipart/form-data" autocomplete="off">
                             @csrf
-                            <input type="hidden" name="id" value="{{$parent['id']}}">
+                            <input type="hidden" name="id" value="{{ isset($parent['id']) ? $parent['id'] : ''}}">
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
@@ -423,8 +423,8 @@
                                         <div class="col-md-12">
                                             <div class="col-lg-3">
                                                 <div class="mt-3">
-                                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ $parent['photo'] }}" />
-                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ $parent['photo'] && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
+                                                    <input type="hidden" name="old_photo" id="oldPhoto" value="{{ isset($parent['photo']) ? $parent['photo'] : ''}}" />
+                                                    <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ isset($parent['photo']) && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
                                                     <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                                 </div>
                                             </div>
@@ -440,7 +440,7 @@
                                                             <span class="far fa-user"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['first_name']}}" name="first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}" name="first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -453,7 +453,7 @@
                                                             <span class="far fa-user"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['last_name']}}" name="last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['last_name']) ? $parent['last_name'] : ''}}" name="last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -462,8 +462,8 @@
                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                 <select class="form-control" name="gender">
                                                     <option value="">{{ __('messages.select_gender') }}</option>
-                                                    <option value="Male" {{$parent['gender'] == "Male" ? "selected" : ""}}>{{ __('messages.male') }}</option>
-                                                    <option value="Female" {{$parent['gender'] == "Female" ? "selected" : ""}}>{{ __('messages.female') }}</option>
+                                                    <option value="Male" {{ isset($parent['gender']) ? $parent['gender'] == "Male" ? "selected" : "" : ""}}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{ isset($parent['gender']) ? $parent['gender'] == "Female" ? "selected" : "" : ""}}>{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -478,20 +478,20 @@
                                                             <span class="fas fa-birthday-cake"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" name="date_of_birth" value="{{$parent['date_of_birth']}}" id="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                                    <input type="text" class="form-control" name="date_of_birth" value="{{ isset($parent['date_of_birth']) ? $parent['date_of_birth'] : ''}}" id="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nric">{{ __('messages.nric_number') }}</label>
-                                                <input type="text" maxlength="16" class="form-control" value="{{$parent['nric']}}" id="nric" name="nric" placeholder="{{ __('messages.enter_nric_number') }}" data-parsley-trigger="change">
+                                                <input type="text" maxlength="16" class="form-control" value="{{ isset($parent['nric']) ? $parent['nric'] : ''}}" id="nric" name="nric" placeholder="{{ __('messages.enter_nric_number') }}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                <input type="text" maxlength="20" class="form-control" name="passport" placeholder="999999-99-9999" value="{{$parent['passport']}}">
+                                                <input type="text" maxlength="20" class="form-control" name="passport" placeholder="999999-99-9999" value="{{ isset($parent['passport']) ? $parent['passport'] : ''}}">
                                             </div>
                                         </div>
                                     </div>
@@ -502,7 +502,7 @@
                                                 <select class="form-control" name="race">
                                                     <option value="">{{ __('messages.select_race') }}</option>
                                                     @forelse($races as $r)
-                                                    <option value="{{$r['id']}}" {{$parent['race'] == $r['id'] ? "selected" : ""}}>{{$r['races_name']}}</option>
+                                                    <option value="{{$r['id']}}" {{ isset($parent['race']) ? $parent['race'] == $r['id'] ? "selected" : "" : "" }}>{{$r['races_name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -514,7 +514,7 @@
                                                 <select class="form-control" name="religion">
                                                     <option value="">{{ __('messages.select_religion') }}</option>
                                                     @forelse($religion as $r)
-                                                    <option value="{{$r['id']}}" {{$parent['religion'] == $r['id'] ? "selected" : ""}}>{{$r['religions_name']}}</option>
+                                                    <option value="{{$r['id']}}" {{ isset($parent['religion']) ? $parent['religion'] == $r['id'] ? "selected" : "" : "" }}>{{$r['religions_name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -525,14 +525,14 @@
                                                 <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
                                                 <select class="form-control" name="blood_group">
                                                     <option value="">{{ __('messages.select_blood_group') }}</option>
-                                                    <option {{$parent['blood_group'] == "O+" ? "selected" : ""}}>O+</option>
-                                                    <option {{$parent['blood_group'] == "A+" ? "selected" : ""}}>A+</option>
-                                                    <option {{$parent['blood_group'] == "B+" ? "selected" : ""}}>B+</option>
-                                                    <option {{$parent['blood_group'] == "AB+" ? "selected" : ""}}>AB+</option>
-                                                    <option {{$parent['blood_group'] == "O-" ? "selected" : ""}}>O-</option>
-                                                    <option {{$parent['blood_group'] == "A-" ? "selected" : ""}}>A-</option>
-                                                    <option {{$parent['blood_group'] == "B-" ? "selected" : ""}}>B-</option>
-                                                    <option {{$parent['blood_group'] == "AB-" ? "selected" : ""}}>AB-</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O+" ? "selected" : "" : "" }}>O+</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A+" ? "selected" : "" : "" }}>A+</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B+" ? "selected" : "" : "" }}>B+</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB+" ? "selected" : "" : "" }}>AB+</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O-" ? "selected" : "" : "" }}>O-</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A-" ? "selected" : "" : "" }}>A-</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B-" ? "selected" : "" : "" }}>B-</option>
+                                                    <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB-" ? "selected" : "" : "" }}>AB-</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -544,7 +544,7 @@
                                                 <select class="form-control" name="education">
                                                     <option value="">{{ __('messages.select_education') }}</option>
                                                     @forelse($education as $e)
-                                                    <option value="{{$e['id']}}" {{$parent['education'] == $e['id'] ? "selected" : ""}}>{{$e['name']}}</option>
+                                                    <option value="{{$e['id']}}" {{ isset($parent['education']) ? $parent['education'] == $e['id'] ? "selected" : "" : "" }}>{{$e['name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -553,7 +553,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" value="{{$parent['occupation']}}" name="occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
+                                                <input type="text" class="form-control" value="{{ isset($parent['occupation']) ? $parent['occupation'] : ''}}" name="occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -565,7 +565,7 @@
                                                             <span class="fas fa-calculator"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['income']}}" name="income" placeholder="{{ __('messages.enter_income') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['income']) ? $parent['income'] : ''}}" name="income" placeholder="{{ __('messages.enter_income') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -574,19 +574,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="address">{{ __('messages.address_1') }}</label>
-                                                <input class="form-control" name="address" id="address" value="{{$parent['address']}}" placeholder="{{ __('messages.enter_address_1') }}">
+                                                <input class="form-control" name="address" id="address" value="{{ isset($parent['address']) ? $parent['address'] : ''}}" placeholder="{{ __('messages.enter_address_1') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="address_2">{{ __('messages.address_2') }}</label>
-                                                <input class="form-control" name="address_2" id="address_2" value="{{$parent['address_2']}}" placeholder="{{ __('messages.enter_address_2') }}">
+                                                <input class="form-control" name="address_2" id="address_2" value="{{ isset($parent['address_2']) ? $parent['address_2'] : ''}}" placeholder="{{ __('messages.enter_address_2') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="city">{{ __('messages.city') }}</label>
-                                                <input type="text" class="form-control" value="{{$parent['city']}}" name="city" data-parsley-trigger="change" placeholder="{{ __('messages.enter_city') }}">
+                                                <input type="text" class="form-control" value="{{ isset($parent['city']) ? $parent['city'] : ''}}" name="city" data-parsley-trigger="change" placeholder="{{ __('messages.enter_city') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -594,25 +594,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                                                <input type="text" class="form-control" value="{{$parent['post_code']}}" name="post_code" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
+                                                <input type="text" class="form-control" value="{{ isset($parent['post_code']) ? $parent['post_code'] : ''}}" name="post_code" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="state">{{ __('messages.state_province') }}</label>
-                                                <input type="text" class="form-control" value="{{$parent['state']}}" name="state" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
+                                                <input type="text" class="form-control" value="{{ isset($parent['state']) ? $parent['state'] : ''}}" name="state" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">{{ __('messages.country') }}</label>
-                                                <input type="text" class="form-control" value="{{$parent['country']}}" name="country" id="country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                                <input type="text" class="form-control" value="{{ isset($parent['country']) ? $parent['country'] : ''}}" name="country" id="country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control number_validation" name="mobile_no" id="mobile_no" value="{{$parent['mobile_no']}}" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
+                                                <input type="text" class="form-control number_validation" name="mobile_no" id="mobile_no" value="{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
@@ -637,7 +637,7 @@
                                                             <span class="far fa-envelope-open"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['email']}}" name="email" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['email']) ? $parent['email'] : ''}}" name="email" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -645,7 +645,7 @@
                                             <div class="form-group mb-3">
                                                 <label class="switch">{{ __('messages.authentication') }}
 
-                                                    <input id="edit_status" name="status" type="checkbox" {{ $parent['status'] == "1" ? "checked" : "" }}>
+                                                    <input id="edit_status" name="status" type="checkbox" {{  isset($parent['status']) ? $parent['status'] == "1" ? "checked" : "" : "" }}>
                                                     <span>
                                                         <em></em>
                                                         <strong></strong>
@@ -694,7 +694,7 @@
                                                             <span class="fab fa-facebook-f"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['facebook_url']}}" name="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['facebook_url']) ? $parent['facebook_url'] : ''}}" name="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -707,7 +707,7 @@
                                                             <span class="fab fa-twitter"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['twitter_url']}}" name="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['twitter_url']) ? $parent['twitter_url'] : ''}}" name="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -720,7 +720,7 @@
                                                             <span class="fab fa-linkedin-in"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{$parent['linkedin_url']}}" name="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" value="{{ isset($parent['linkedin_url']) ? $parent['linkedin_url'] : ''}}" name="linkedin_url" placeholder="{{ __('messages.enter_linkedIn_url') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
