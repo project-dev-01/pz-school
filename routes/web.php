@@ -802,6 +802,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // student master import routes
         Route::get('student/import', [AdminController::class, 'studentImport'])->name('admin.student.import');
         Route::post('student/import/add', [AdminController::class, 'studentImportAdd'])->name('admin.student.import.add');
+        // set cookie
+        Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('admin.classroom.setcookie');
     });
 });
 // admin routes end
@@ -1019,6 +1021,8 @@ Route::group(['prefix' => 'staff'], function () {
         // download pdf
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('staff.timetable.pdf');
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('staff.attendance.employee_pdf');
+        // set cookie
+        Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('staff.classroom.setcookie');
     });
 });
 // TEACHER CONTROLLER START

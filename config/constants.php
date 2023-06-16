@@ -1,12 +1,17 @@
 <?php
 // $url = "http://localhost/school-management-system/api";
 $url = "http://localhost/paxsuzen-api-dev/api";
+// $url = "https://api.suzen.school/api";
+
+
 // $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
     'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
+    // 'image_url' => "https://api.suzen.school",
     'image_url' => "http://localhost/paxsuzen-api-dev",
+    
     // 'branch_id'=>'1',
     // 'school_name'=>'SMK Kiaramas',
     // 'school_image'=>'school.jpg',

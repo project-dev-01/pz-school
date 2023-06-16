@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 <link href="{{ asset('public/css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -46,7 +46,7 @@
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($class as $cla)
-                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
+                                        <option value="{{ $cla['id'] }}" {{ $teacher_classroom_class_id == $cla['id'] ? 'selected' : '' }}>{{ $cla['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -83,7 +83,7 @@
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -96,7 +96,7 @@
                                         <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
                                         <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -259,7 +259,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -415,22 +415,22 @@
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                {{ __('messages.layout_mode') }}
+                                    {{ __('messages.layout_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                {{ __('messages.list_mode') }}
+                                    {{ __('messages.list_mode') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#shortest" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                {{ __('messages.short_test') }}
+                                    {{ __('messages.short_test') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#dailyreport" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                {{ __('messages.daily_report') }}
+                                    {{ __('messages.daily_report') }}
                                 </a>
                             </li>
                         </ul><br>
@@ -521,7 +521,7 @@
                                                 <br>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" id="saveClassRoomAttendance" type="submit">
-                                                    {{ __('messages.save') }}
+                                                        {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end card-box-->
@@ -617,7 +617,7 @@
                                                 </div>
                                                 <div class="form-group text-right m-b-0">
                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                    {{ __('messages.save') }}
+                                                        {{ __('messages.save') }}
                                                     </button>
                                                 </div>
                                             </div> <!-- end col-->
@@ -653,7 +653,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        {{ __('messages.save') }}
+                                                            {{ __('messages.save') }}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -804,6 +804,14 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
+    // cookie variables
+    var setCookieClassRoomUrl = "{{ route('admin.classroom.setcookie') }}";
+    var teacher_classroom_class_id = "{{ $teacher_classroom_class_id }}";
+    var teacher_classroom_section_id = "{{ $teacher_classroom_section_id }}";
+    var teacher_classroom_subject_id = "{{ $teacher_classroom_subject_id }}";
+    var teacher_classroom_date = "{{ $teacher_classroom_date }}";
+    var teacher_classroom_semester = "{{ $teacher_classroom_semester }}";
+    var teacher_classroom_session = "{{ $teacher_classroom_session }}";
 </script>
 <script src="{{ asset('public/js/custom/classroom.js') }}"></script>
 <script src="{{ asset('public/js/custom/short-test.js') }}"></script>
