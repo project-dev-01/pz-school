@@ -222,6 +222,7 @@ return [
     "title" => "Title",
     "due_date" => "Due Date",
     "time" => "Time",
+    "time_table" => "Time Table",
     "assigned_to" => "Assigned To",
     "priority" => "Priority",
     "low" => "Low",

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Attendance')
+@section('title',' ' .  __('messages.attendance_reports') . '')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">

@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title',' ' .  __('messages.qualification') . '')
 @section('title','Qualification')
 @section('component_css')
 <!-- datatable -->
@@ -101,10 +102,12 @@
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
     var deleteHtml = "{{ __('messages.delete_this_department') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
-    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
-    // lang change name end
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";// Get PDF Footer Text
+     // Get PDF Footer Text
+     var header_txt="{{ __('messages.qualification') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
-
 <script src="{{ asset('public/js/custom/qualification.js') }}"></script>
 
 @endsection

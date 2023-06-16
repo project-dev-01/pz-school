@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Employee')
+@section('title',' ' .  __('messages.employee_list') . '')
 @section('component_css')
 <link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -131,6 +131,12 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // Get PDF Footer Text
+
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.employee_list') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/employee.js') }}"></script>
 @endsection

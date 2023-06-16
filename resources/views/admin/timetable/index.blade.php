@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Schedule List')
+@section('title',' ' .  __('messages.student_list') . '')
 @section('component_css')
 <link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />

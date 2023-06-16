@@ -86,45 +86,50 @@ $(function () {
                 charset: 'utf-8',
                 bom: true,
                 exportOptions: {
-                    columns: 'th:not(:last-child)'
+                columns: 'th:not(:last-child)'
                 },
-                customize: function (doc) {
-                    doc.pageMargins = [50, 50, 50, 50];
+
+            
+                    customize: function (doc) {
+                    doc.pageMargins = [50,50,50,50];
                     doc.defaultStyle.fontSize = 10;
                     doc.styles.tableHeader.fontSize = 12;
                     doc.styles.title.fontSize = 14;
                     // Remove spaces around page title
                     doc.content[0].text = doc.content[0].text.trim();
-                    // Create a Header
-                    doc['header'] = (function (page, pages) {
-                        return {
-                            columns: [
-
-                                {
-                                    // This is the right column
-                                    bold: true,
-                                    fontSize: 20,
-                                    color: 'Blue',
-                                    fillColor: '#fff',
-                                    alignment: 'center',
-                                    text: ['Suzen : Header Title']
-                                }
-                            ],
-                            margin: [50, 15, 0, 0]
-                        }
-                    });
+                    /*// Create a Header
+                doc['header']=(function(page, pages) {
+                    return {
+                        columns: [
+                            
+                            {
+                                // This is the right column
+                                bold: true,
+                                fontSize: 20,
+                                color: 'Blue',
+                                fillColor: '#fff',
+                                alignment: 'center',
+                                text: header_txt
+                            }
+                        ],
+                        margin:  [50, 15,0,0]
+                    }
+                });*/
+                // Create a footer
                     // Create a footer
-                    doc['footer'] = (function (page, pages) {
+                    doc['footer']=(function(page, pages) {
                         return {
                             columns: [
-                                'Suzen : Footer Title',
+                                { alignment: 'left', text: [ footer_txt ],width:400} ,
                                 {
                                     // This is the right column
                                     alignment: 'right',
-                                    text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }]
+                                    text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
+                                    width:100
+    
                                 }
                             ],
-                            margin: [50, 0]
+                            margin: [50, 0,0,0]
                         }
                     });
 

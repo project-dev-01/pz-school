@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Global Setting')
+@section('title',' ' .  __('messages.global_setting') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -103,8 +103,12 @@
     var globalSettingList = "{{ route('admin.global_setting.list') }}";
     var globalSettingDetails = "{{ route('admin.global_setting.details') }}";
     var globalSettingDelete = "{{ route('admin.global_setting.delete') }}";
+    
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.global_setting') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
-
 <script src="{{ asset('public/js/custom/global_setting.js') }}"></script>
 
 @endsection

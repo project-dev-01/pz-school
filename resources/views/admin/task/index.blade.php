@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','To Do List')
+@section('title',' ' .  __('messages.to_do_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -161,7 +161,11 @@
     var deleteHtml = "{{ __('messages.delete_this_list') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
-    // lang change name end
+    // lang change name end 
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.to_do_list') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/to-do-list.js') }}"></script>
 

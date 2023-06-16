@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Parent List')
+@section('title',' ' .  __('messages.parent_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -111,7 +111,11 @@
     var deleteHtml = "{{ __('messages.delete_this_Parent') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
-    // lang change name end
+    // lang change name end// Get PDF Footer Text
+ // Get PDF Footer Text
+    var header_txt="{{ __('messages.parent_list') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/parent.js') }}"></script>
 @endsection

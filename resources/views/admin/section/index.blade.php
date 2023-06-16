@@ -122,6 +122,12 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+      // Get PDF Header & Footer Text Start
+    var header_txt="{{ __('messages.religion') }}";
+    
+    var footer_txt="{{ session()->get('footer_text') }}";
+
+      // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/sections.js') }}"></script>
 

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Employee Attendance')
+@section('title',' ' .  __('messages.employee_attendance_report') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />

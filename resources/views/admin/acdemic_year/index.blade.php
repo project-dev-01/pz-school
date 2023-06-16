@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Academic Year')
+@section('title',' ' .  __('messages.academic_year') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -97,6 +97,13 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // Get PDF Footer Text
+
+    var header_txt="{{ __('messages.academic_year') }}";
+
+    var footer_txt="{{ session()->get('footer_text') }}";
+
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/academic_year.js') }}"></script>
 @endsection

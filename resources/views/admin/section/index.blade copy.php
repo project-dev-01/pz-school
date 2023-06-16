@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.leave_types') . '')
+@section('title',' ' .  __('messages.class') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -25,10 +25,9 @@
                 <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item active">List</li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">{{ __('messages.leave_types') }}</h4>
+                <h4 class="page-title">{{ __('messages.class') }}</h4>
             </div>
         </div>
     </div>
@@ -39,26 +38,22 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.leave_type') }}
-                            <h4>
+                        <h4 class="navv">{{ __('messages.class') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <!-- <a href="{{ route('admin.add_classes')}}" class="btn btn-primary btn-rounded waves-effect waves-light">Add Class</a> -->
-                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addLeaveTypeModal">{{ __('messages.add') }}</button>
+                        <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addSectionModal">{{ __('messages.add') }}</button>
+                        <!-- <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#">Add Section</button> -->
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="leave-type-table">
+                        <table class="table dt-responsive nowrap w-100" id="section-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.leave_type_name') }}</th>
-                                    <th>{{ __('messages.short_name') }}</th>
-                                    <th>{{ __('messages.leave_days') }}</th>
-                                    <th>{{ __('messages.gender') }}</th>
+                                    <th>{{ __('messages.name') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -66,17 +61,27 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div> <!-- end card-box -->
-        </div> <!-- end col -->
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
+        <!--- end row -->
+        @include('admin.section.add')
+        @include('admin.section.edit')
+
     </div>
-    <!--- end row -->
-    @include('admin.leave_type.add')
-    @include('admin.leave_type.edit')
 </div>
 <!-- container -->
 @endsection
 @section('scripts')
+<!-- jQuery 2.0.2 for PDF-->
+<script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script type="{{ asset('public/js/pdf/tableExport.js') }}"></script>
+<script type="{{ asset('public/js/pdf/jquery.base64.js') }}"></script>
+
+<script type="{{ asset('public/js/pdf/jspdf/jspdf.js') }}"></script>
+<script type="{{ asset('public/js/pdf/jspdf/libs/sprintf.js') }}"></script>
+<script type="{{ asset('public/js/pdf/jspdf/libs/base64.js') }}"></script>
+
 <!-- plugin js -->
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -91,28 +96,32 @@
 <script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<!-- <script src="{{ asset('public/buttons-datatables/pdfmake.js') }}"></script> -->
 <script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
-    //leaveType routes
-    var leaveTypeList = "{{ route('admin.leave_type.list') }}";
-    var leaveTypeDetails = "{{ route('admin.leave_type.details') }}";
-    var leaveTypeDelete = "{{ route('admin.leave_type.delete') }}";
-    var leaveTypeRestore = "{{ route('admin.leave_type.update') }}";
+    var sectionAddUrl = "{{ config('constants.api.section_add') }}";
+    var sectionGetRowUrl = "{{ config('constants.api.section_details') }}";
+    var sectionUpdateUrl = "{{ config('constants.api.section_update') }}";
+    var sectionDeleteUrl = "{{ config('constants.api.section_delete') }}";
+
+    var sectionList = "{{ route('admin.section.list') }}";
     // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
-    var deleteHtml = "{{ __('messages.delete_this_leave_type') }}";
+    var deleteHtml = "{{ __('messages.delete_this_class') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
-    var deleteHtmlrestore = "{{ __('messages.restore_this_leave_type') }}";
-    // lang change name end
-     // Get PDF Footer Text
-     var header_txt="{{ __('messages.leave_types') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
-    // Get PDF Header & Footer Text End
+    // Get PDF Footer Text
+
+    var globalSettingList = "{{ route('admin.global_setting.list') }}";
+    var header_txt="{{ __('messages.class') }}";
+
+    
 </script>
-<script src="{{ asset('public/js/custom/leave_type.js') }}"></script>
+<script src="{{ asset('public/js/custom/pdf_header_footer.js') }}"></script>
+<!-- PDF Footer text End -->
+<script src="{{ asset('public/js/custom/sections.js') }}"></script>
 
 @endsection

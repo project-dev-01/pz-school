@@ -1,5 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title','Designation')
+@section('title',' ' .  __('messages.designation') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -98,6 +99,10 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.designation') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/designation.js') }}"></script>
 @endsection

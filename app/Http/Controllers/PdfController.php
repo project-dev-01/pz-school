@@ -754,9 +754,9 @@ class PdfController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
 
-
+        
         $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
-        // dd($timetable);
+        $footer_text=session()->get('footer_text');
         $days = array(
             'monday',
             'tuesday',
@@ -808,11 +808,41 @@ class PdfController extends Controller
             font-style: normal;
             font-weight: normal;
             src: url("' . $fonturl . '");
-       }
-       body{ font-family: ipag !important;}';
+        }
+        body{ font-family: ipag !important;}
+        header {
+        position: fixed;
+        top: -60px;
+        left: 0px;
+        right: 0px;
+        height: 50px;
+        font-size: 20px !important;
+
+        /** Extra personal styles **/
+        background-color: #fff;
+        color:  #111;
+        text-align: center;
+        line-height: 35px;
+        }
+
+    footer {
+        position: fixed; 
+        bottom: -60px; 
+        left: 0px; 
+        right: 0px;
+        height: 50px; 
+        font-size: 20px !important;
+
+        /** Extra personal styles **/
+        background-color: #fff;
+        color: #111;
+        text-align: center;
+        line-height: 35px;
+    }';
         $response .= '</style>';
         $response .= "</head>";
-        $response .= "<body>";
+        $response .= "<body><header> ".  __('messages.schedule_list') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($timetable['code'] == "200") {
             $max = $timetable['data']['max'];
 
@@ -895,6 +925,8 @@ class PdfController extends Controller
 
 
         // dd($test);
+    
+
         $pdf = \App::make('dompdf.wrapper');
         // $pdf = \App::make('dompdf.wrapper','UTF-8');
         // $pdf = mb_convert_encoding(\App::make('dompdf.wrapper', $response), 'HTML-ENTITIES', 'UTF-8');
@@ -928,6 +960,7 @@ class PdfController extends Controller
             'year_month' => $request->year_month,
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        $footer_text=session()->get('footer_text');
         $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
         // dd($get_attendance_list_teacher);
         if ($get_attendance_list_teacher['code'] == "200") {
@@ -957,10 +990,39 @@ class PdfController extends Controller
                 font-weight: normal;
                 src: url("' . $fonturl . '");
         }
-        body{ font-family: ipag !important;}';
+        body{ font-family: ipag !important;}header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+    
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+    
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+    
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
             $response .= '</style>';
             $response .= "</head>";
-            $response .= "<body>";
+            $response .= "<body><header> ".  __('messages.attendance_reports') ."</header>
+            <footer>".$footer_text."</footer>";
         
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
@@ -1040,6 +1102,7 @@ class PdfController extends Controller
             'date' => $request->date,
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        $footer_text=session()->get('footer_text');
         $employee_attendance = Helper::PostMethod(config('constants.api.employee_attendance_report'), $data);
         // dd($employee_attendance);
         if ($employee_attendance['code'] == "200") {
@@ -1069,17 +1132,46 @@ class PdfController extends Controller
                 font-weight: normal;
                 src: url("' . $fonturl . '");
         }
-        body{ font-family: ipag !important;}';
+        body{ font-family: ipag !important;}header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+    
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+    
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+    
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
             $response .= '</style>';
             $response .= "</head>";
-            $response .= "<body>";
+            $response .= "<body><header> ".  __('messages.employee_attendance_report') ."</header>
+            <footer>".$footer_text."</footer>";
             $response .= '<div class="table-responsive">
-        <table width="100%" style="border-collapse: collapse; border: 0px;">
-           <thead>
-              <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Employee Id</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Session</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Employee Name</th>';
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+                <thead>
+                <tr>
+                <th class="align-top" style="border: 1px solid; padding:12px;">Employee Id</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">Session</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">Employee Name</th>';
             foreach ($daterange as $date) {
                 $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
             }

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Fees Group')
+@section('title',' ' .  __('messages.fees_group') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -93,8 +93,12 @@
     //feesGroup routes
     var feesGroupList = "{{ route('admin.fees_group.list') }}";
     var feesGroupDelete = "{{ route('admin.fees_group.delete') }}";
+    
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.fees_group') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
-
 <script src="{{ asset('public/js/custom/fees_group.js') }}"></script>
 
 @endsection

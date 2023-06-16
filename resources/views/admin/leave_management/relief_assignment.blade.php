@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Relief Assignment')
+@section('title',' ' .  __('messages.relief_assignment') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -88,6 +88,10 @@
     var getSubjectsByStaffIdWithDateUrl = "{{ config('constants.api.get_subjects_by_staff_id_with_date') }}";
     var reliefAssignmentOtherTeacher = "{{ config('constants.api.relief_assignment_other_teacher') }}";
     var getStaffListByTimeslot = "{{ config('constants.api.get_staff_list_by_timeslot') }}";
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.relief_assignment') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/relief_assignment.js') }}"></script>
 @endsection

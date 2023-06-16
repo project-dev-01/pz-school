@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Leave Management')
+@section('title',' ' .  __('messages.leave_management') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -321,6 +321,10 @@ width: 14.3em;
     var StaffDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
     var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.leave_management') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

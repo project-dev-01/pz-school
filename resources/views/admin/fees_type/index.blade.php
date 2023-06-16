@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Fees Type')
+@section('title',' ' .  __('messages.fees_type') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -94,6 +94,11 @@
     var feesTypeList = "{{ route('admin.fees_type.list') }}";
     var feesTypeDetails = "{{ route('admin.fees_type.details') }}";
     var feesTypeDelete = "{{ route('admin.fees_type.delete') }}";
+    
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.fees_type') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 
 <script src="{{ asset('public/js/custom/fees_type.js') }}"></script>
