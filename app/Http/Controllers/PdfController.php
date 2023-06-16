@@ -24,7 +24,57 @@ class PdfController extends Controller
             'academic_year' => $request->academic_year
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.tot_grade_calcu_byclass'), $data);
-        $output = "";
+        
+        $footer_text=session()->get('footer_text');
+        // dd($get_attendance_list_teacher);
+        
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.by_class') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
             $allbysubject = $tot_grade_calcu_byclass['data']['allbysubject'];
@@ -74,19 +124,19 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Grade</th>
-                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">Tot. Students</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Absent</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Present</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Class Teacher Name</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.grade') .'</th>
+                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.total_student') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.absent') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.present') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.class_teacher_name') .'</th>';
             foreach ($headers as $val) {
                 $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['grade'] . '</th>';
             }
-            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">PASS</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">G</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">GPA</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">%</th>
+            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.pass') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.g') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.gpa') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.%') .'</th>
               </tr>
               <tr>';
             foreach ($headers as $val) {
@@ -170,7 +220,54 @@ class PdfController extends Controller
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.tot_grade_calcu_bySubject'), $data);
         // dd($tot_grade_calcu_byclass);
-        $output = "";
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.by_subject') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
             $grade_list_master = $tot_grade_calcu_byclass['data']['grade_list_master'];
@@ -220,21 +317,21 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Grade</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Class</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Subject Name</th>
-                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">Tot. Students</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Absent</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Present</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Subject Teacher Name</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.grade') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.class') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.subject_name') .'</th>
+                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.total_student') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.absent') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.present') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.subject_teacher_name') .'</th>';
             foreach ($headers as $val) {
                 $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['grade'] . '</th>';
             }
-            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">PASS</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">G</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">GPA</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">%</th>
+            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.pass') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.g') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.gpa') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.%') .'</th>
               </tr>
               <tr>';
             foreach ($headers as $val) {
@@ -317,6 +414,54 @@ class PdfController extends Controller
             'academic_year' => $request->academic_year
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.tot_grade_calcu_byStudent'), $data);
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.by_student') ."</header>
+        <footer>".$footer_text."</footer>";
         // dd($tot_grade_calcu_byclass);
         $output = "";
         if ($tot_grade_calcu_byclass['code'] == "200") {
@@ -329,18 +474,18 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">Student Name</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" colspan="' . $headercount . '">Subject Name</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">GPA</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">'.  __('messages.student_name') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" colspan="' . $headercount . '">'.  __('messages.subject_name') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="3">'.  __('messages.gpa') .'</th>
              </tr><tr>';
             foreach ($headers as $val) {
                 $output .=  '<th colspan="2" class="text-center" style="border: 1px solid; padding:12px;">' . $val['subject_name'] . '</th>';
             }
             $output .= '</tr><tr>';
             foreach ($headers as $val) {
-                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">Mark</th>
-                    <th class="text-center" style="border: 1px solid; padding:12px;">Grade</th>';
+                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">'.  __('messages.mark') .'</th>
+                    <th class="text-center" style="border: 1px solid; padding:12px;">'.  __('messages.grade') .'</th>';
             }
             $output .= '</tr>
            </thead>
@@ -410,49 +555,58 @@ class PdfController extends Controller
             'academic_year' => $request->academic_year
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.tot_grade_calcu_overall'), $data);
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.overall') ."</header>
+        <footer>".$footer_text."</footer>";
         $output = "";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
             $allbysubject = $tot_grade_calcu_byclass['data']['allbysubject'];
-            $output .= '<html>
-                    <head>
-                <style>
-                    /** Define the margins of your page **/
-                    @page {
-                        margin: 100px 25px;
-                    }
-                    .page-break {
-                        page-break-after: always;
-                    }
-                    header {
-                        position: fixed;
-                        top: -60px;
-                        left: 0px;
-                        right: 0px;
-                        height: 50px;
-
-                        /** Extra personal styles **/
-                        background-color: #03a9f4;
-                        color: white;
-                        text-align: center;
-                        line-height: 35px;
-                    }
-
-                    footer {
-                        position: fixed; 
-                        bottom: -60px; 
-                        left: 0px; 
-                        right: 0px;
-                        height: 50px; 
-
-                        /** Extra personal styles **/
-                        background-color: #03a9f4;
-                        color: white;
-                        text-align: center;
-                        line-height: 35px;
-                    }
-                </style>
-            </head><body>';
             // $output .= '<!-- Define header and footer blocks before your content -->
             // <header>
             // Paxsuzen
@@ -462,18 +616,18 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Subject Name</th>
-                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">Tot. Students</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Absent</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">Present</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.subject_name') .'</th>
+                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.total_student') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.absent') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.present') .'</th>';
             foreach ($headers as $val) {
                 $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['grade'] . '</th>';
             }
-            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">PASS</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">G</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">GPA</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">%</th>
+            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.pass') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.g') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.gpa') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.%') .'</th>
               </tr>
               <tr>';
             foreach ($headers as $val) {
@@ -555,7 +709,54 @@ class PdfController extends Controller
         ];
         $tot_grade_calcu_byclass = Helper::PostMethod(config('constants.api.student_result'), $data);
         // dd($tot_grade_calcu_byclass);
-        $output = "";
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.individual_result') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $student_details = $tot_grade_calcu_byclass['data']['student_details'];
             $headers = $tot_grade_calcu_byclass['data']['headers'];
@@ -563,7 +764,7 @@ class PdfController extends Controller
             // student details
             $output .= '<div class="table-responsive">
                 <table  width="100%" style="border-collapse: collapse; border: 0px;"><thead>';
-            $output .= '<tr><th class="align-top" style="border: 1px solid; padding:12px;">Roll No</th>
+            $output .= '<tr><th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.roll_no') .'</th>
             <td class="text-center" style="border: 1px solid; padding:12px;">' . $student_details['register_no'] . '</td></tr>';
             $output .= '<tr><th class="align-top" style="border: 1px solid; padding:12px;">Name</th>
             <td class="text-center" style="border: 1px solid; padding:12px;">' . $student_details['student_name'] . '</td></tr>';
@@ -578,12 +779,12 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Name</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.student_name') .'</th>';
             foreach ($headers as $val) {
                 $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['subject_name'] . '</th>';
             }
-            $output .= '<th class="text-center" style="border: 1px solid; padding:12px;">GPA</th>';
+            $output .= '<th class="text-center" style="border: 1px solid; padding:12px;">'.  __('messages.gpa') .'</th>';
             $output .= '</tr></thead><tbody>';
             foreach ($allbyStudent as $key => $res) {
                 $key++;
@@ -646,7 +847,54 @@ class PdfController extends Controller
             'academic_session_id' => $request->academic_year
         ];
         $getExamPaperData = Helper::PostMethod(config('constants.api.get_exam_paper_res'), $data);
-        $output = "";
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.exam_paper_result') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($getExamPaperData['code'] == "200") {
             $headers = $getExamPaperData['data']['all_paper'];
             $get_subject_paper_marks = $getExamPaperData['data']['get_subject_paper_marks'];
@@ -654,12 +902,12 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">S.no.</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Name</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.student_name') .'</th>';
             foreach ($headers as $val) {
                 $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['paper_name'] . '</th>';
             }
-            $output .= '<th class="text-center" style="border: 1px solid; padding:12px;">Grade</th>';
+            $output .= '<th class="text-center" style="border: 1px solid; padding:12px;">'.  __('messages.grade') .'</th>';
             $output .= '</tr></thead><tbody>';
             foreach ($get_subject_paper_marks as $key => $res) {
                 $key++;
@@ -699,7 +947,54 @@ class PdfController extends Controller
             'academic_session_id' => $request->academic_session_id
         ];
         $getExamPaperData = Helper::PostMethod(config('constants.api.get_testresult_marks_subject_vs'), $data);
-        $output = "";
+        $footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> ".  __('messages.test') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($getExamPaperData['code'] == "200") {
             $get_subject_marks = $getExamPaperData['data']['get_subject_marks'];
             $output .= '<div class="table-responsive">
@@ -753,10 +1048,8 @@ class PdfController extends Controller
             'session_id' => $request->session_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-
-        
-        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
         $footer_text=session()->get('footer_text');
+        $timetable = Helper::PostMethod(config('constants.api.timetable_list'), $data);
         $days = array(
             'monday',
             'tuesday',
@@ -963,6 +1256,54 @@ class PdfController extends Controller
         $footer_text=session()->get('footer_text');
         $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
         // dd($get_attendance_list_teacher);
+        
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> ".  __('messages.attendance_report') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($get_attendance_list_teacher['code'] == "200") {
             $student_details = $get_attendance_list_teacher['data']['student_details'];
             $year_month = "01-" . $request->year_month;
@@ -977,52 +1318,6 @@ class PdfController extends Controller
 
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
-            $response = "";
-            $fonturl = storage_path('fonts/ipag.ttf');
-            $response = "<!DOCTYPE html>";
-            $response .= "<html><head>";
-            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-            $response .= '<style>';
-            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-            $response .= '@font-face {
-                font-family: ipag;
-                font-style: normal;
-                font-weight: normal;
-                src: url("' . $fonturl . '");
-        }
-        body{ font-family: ipag !important;}header {
-            position: fixed;
-            top: -60px;
-            left: 0px;
-            right: 0px;
-            height: 50px;
-            font-size: 20px !important;
-    
-            /** Extra personal styles **/
-            background-color: #fff;
-            color:  #111;
-            text-align: center;
-            line-height: 35px;
-            }
-    
-        footer {
-            position: fixed; 
-            bottom: -60px; 
-            left: 0px; 
-            right: 0px;
-            height: 50px; 
-            font-size: 20px !important;
-    
-            /** Extra personal styles **/
-            background-color: #fff;
-            color: #111;
-            text-align: center;
-            line-height: 35px;
-        }';
-            $response .= '</style>';
-            $response .= "</head>";
-            $response .= "<body><header> ".  __('messages.attendance_reports') ."</header>
-            <footer>".$footer_text."</footer>";
         
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
@@ -1104,6 +1399,55 @@ class PdfController extends Controller
         ];
         $footer_text=session()->get('footer_text');
         $employee_attendance = Helper::PostMethod(config('constants.api.employee_attendance_report'), $data);
+        // dd($get_attendance_list_teacher);
+        
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> ".  __('messages.employee_attendance_report') ."</header>
+        <footer>".$footer_text."</footer>";
         // dd($employee_attendance);
         if ($employee_attendance['code'] == "200") {
             $staff_details = $employee_attendance['data']['staff_details'];
@@ -1119,67 +1463,19 @@ class PdfController extends Controller
 
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
-            $response = "";
-            $fonturl = storage_path('fonts/ipag.ttf');
-            $response = "<!DOCTYPE html>";
-            $response .= "<html><head>";
-            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-            $response .= '<style>';
-            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-            $response .= '@font-face {
-                font-family: ipag;
-                font-style: normal;
-                font-weight: normal;
-                src: url("' . $fonturl . '");
-        }
-        body{ font-family: ipag !important;}header {
-            position: fixed;
-            top: -60px;
-            left: 0px;
-            right: 0px;
-            height: 50px;
-            font-size: 20px !important;
-    
-            /** Extra personal styles **/
-            background-color: #fff;
-            color:  #111;
-            text-align: center;
-            line-height: 35px;
-            }
-    
-        footer {
-            position: fixed; 
-            bottom: -60px; 
-            left: 0px; 
-            right: 0px;
-            height: 50px; 
-            font-size: 20px !important;
-    
-            /** Extra personal styles **/
-            background-color: #fff;
-            color: #111;
-            text-align: center;
-            line-height: 35px;
-        }';
-            $response .= '</style>';
-            $response .= "</head>";
-            $response .= "<body><header> ".  __('messages.employee_attendance_report') ."</header>
-            <footer>".$footer_text."</footer>";
             $response .= '<div class="table-responsive">
-            <table width="100%" style="border-collapse: collapse; border: 0px;">
-                <thead>
-                <tr>
-                <th class="align-top" style="border: 1px solid; padding:12px;">Employee Id</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">Session</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">Employee Name</th>';
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.employee_id') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.session') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.employee_name') .'</th>';
             foreach ($daterange as $date) {
                 $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
             }
-            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">Total Present</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Absent</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Late</th>>';
-
-            $response .= '</tr></thead><tbody>';
+            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_present') .'</th>>
+            <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_absent') .'</th>>
+            <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_late') .'</th>>';
             foreach ($staff_details as $key => $res) {
                 $attendance_details = $res['attendance_details'];
                 $response .= '<tr>
@@ -1245,7 +1541,54 @@ class PdfController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         // dd($data);
-        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);$footer_text=session()->get('footer_text');
+        
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> ".  __('messages.attendance_report') ."</header>
+        <footer>".$footer_text."</footer>";
         if ($get_attendance_list_teacher['code'] == "200") {
             $student_details = $get_attendance_list_teacher['data']['student_details'];
             $year_month = "01-" . $request->year_month;
@@ -1260,35 +1603,18 @@ class PdfController extends Controller
 
             $interval = new DateInterval('P1D');
             $daterange = new DatePeriod($begin, $interval, $end);
-            $response = "";
-            $fonturl = storage_path('fonts/ipag.ttf');
-            $response = "<!DOCTYPE html>";
-            $response .= "<html><head>";
-            $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-            $response .= '<style>';
-            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-            $response .= '@font-face {
-                font-family: ipag;
-                font-style: normal;
-                font-weight: normal;
-                src: url("' . $fonturl . '");
-        }
-        body{ font-family: ipag !important;}';
-            $response .= '</style>';
-            $response .= "</head>";
-            $response .= "<body>";
             $response .= '<div class="table-responsive">
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Id</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.student_id') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.name') .'</th>';
             foreach ($daterange as $date) {
                 $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
             }
-            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">Total Present</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Absent</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Late</th>>';
+            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_present') .'</th>
+            <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_absent') .'</th>
+            <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.total_late') .'</th>>';
 
             $response .= '</tr></thead><tbody>';
             foreach ($student_details as $key => $res) {

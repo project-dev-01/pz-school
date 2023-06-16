@@ -768,8 +768,9 @@
                                     <option value="0">{{ __('messages.select_semester') }}</option>
                                     @forelse($semester as $sem)
                                     <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                    @endforelse
                                     @empty
+                                    @endforelse
+                                    
                                 </select>
                             </div>
                         </div>
@@ -780,8 +781,9 @@
                                     <option value="0">{{ __('messages.select_session') }}</option>
                                     @forelse($session as $ses)
                                     <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                    @endforelse
+                                    
                                     @empty
+                                    @endforelse
                                 </select>
                             </div>
                         </div>
@@ -790,9 +792,10 @@
                                 <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                 <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                     <option value="">{{ __('messages.select_exams') }}</option>
-                                    @foreach($exams as $exam)
+                                    @forelse($exams as $exam)
                                     <option value="{{$exam['id']}}">{{$exam['name']}}</option>
-                                    @endforeach
+                                    @empty
+                                    @endforelse
                                 </select>
                             </div>
                         </div>
