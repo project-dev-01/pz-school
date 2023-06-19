@@ -273,21 +273,45 @@ class CommonController extends Controller
     public function teacherClassroomSetCookie(Request $request)
     {
         $minutes = 180000;
-        // $minutes = 5;
-        // $response = new Response('teacher_classroom_filter');
-        // $response->withCookie(cookie('teacher_classroom_class_id', $request->class_id, $minutes));
-        // $response->withCookie(cookie('teacher_classroom_section_id', $request->section_id, $minutes));
-        // $response->withCookie(cookie('teacher_classroom_subject_id', $request->subject_id, $minutes));
-        // $response->withCookie(cookie('teacher_classroom_date', $request->class_date, $minutes));
-        // $response->withCookie(cookie('teacher_classroom_semester', $request->subject_id, $minutes));
-        // $response->withCookie(cookie('teacher_classroom_session', $request->subject_id, $minutes));
-        // dd($request);
         Cookie::queue(Cookie::make('teacher_classroom_class_id', $request->class_id, $minutes));
         Cookie::queue(Cookie::make('teacher_classroom_section_id', $request->section_id, $minutes));
         Cookie::queue(Cookie::make('teacher_classroom_subject_id', $request->subject_id, $minutes));
         Cookie::queue(Cookie::make('teacher_classroom_date', $request->class_date, $minutes));
         Cookie::queue(Cookie::make('teacher_classroom_semester', $request->semester_id, $minutes));
         Cookie::queue(Cookie::make('teacher_classroom_session', $request->session_id, $minutes));
+        return true;
+    }
+    public function adminClassroomSetCookie(Request $request)
+    {
+        $minutes = 180000;
+        Cookie::queue(Cookie::make('admin_classroom_class_id', $request->class_id, $minutes));
+        Cookie::queue(Cookie::make('admin_classroom_section_id', $request->section_id, $minutes));
+        Cookie::queue(Cookie::make('admin_classroom_subject_id', $request->subject_id, $minutes));
+        Cookie::queue(Cookie::make('admin_classroom_date', $request->class_date, $minutes));
+        Cookie::queue(Cookie::make('admin_classroom_semester', $request->semester_id, $minutes));
+        Cookie::queue(Cookie::make('admin_classroom_session', $request->session_id, $minutes));
+        return true;
+    }
+    public function staffClassroomSetCookie(Request $request)
+    {
+        $minutes = 180000;
+        Cookie::queue(Cookie::make('staff_classroom_class_id', $request->class_id, $minutes));
+        Cookie::queue(Cookie::make('staff_classroom_section_id', $request->section_id, $minutes));
+        Cookie::queue(Cookie::make('staff_classroom_subject_id', $request->subject_id, $minutes));
+        Cookie::queue(Cookie::make('staff_classroom_date', $request->class_date, $minutes));
+        Cookie::queue(Cookie::make('staff_classroom_semester', $request->semester_id, $minutes));
+        Cookie::queue(Cookie::make('staff_classroom_session', $request->session_id, $minutes));
+        return true;
+    }
+    public function teacherAnalyticSetCookie(Request $request)
+    {
+        $minutes = 180000;
+        Cookie::queue(Cookie::make('teacher_analytic_class_id', $request->class_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_analytic_section_id', $request->section_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_analytic_subject_id', $request->subject_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_analytic_student_id', $request->student_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_analytic_semester', $request->semester_id, $minutes));
+        Cookie::queue(Cookie::make('teacher_analytic_session', $request->session_id, $minutes));
         return true;
     }
 }

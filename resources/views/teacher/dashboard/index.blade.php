@@ -933,7 +933,6 @@
         </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
-</div> <!-- end row -->
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
@@ -1030,6 +1029,7 @@
         </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
+</div> <!-- end row -->
 </div> <!-- end row -->
 @include('teacher.dashboard.check_list')
 @include('teacher.dashboard.task')

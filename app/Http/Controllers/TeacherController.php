@@ -1164,7 +1164,13 @@ class TeacherController extends Controller
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
+            'teacher_analytic_class_id' => Cookie::get('teacher_analytic_class_id'),
+            'teacher_analytic_section_id' => Cookie::get('teacher_analytic_section_id'),
+            'teacher_analytic_subject_id' => Cookie::get('teacher_analytic_subject_id'),
+            'teacher_analytic_student_id' => Cookie::get('teacher_analytic_student_id'),
+            'teacher_analytic_semester' => Cookie::get('teacher_analytic_semester'),
+            'teacher_analytic_session' => Cookie::get('teacher_analytic_session')
         ]);
         // return view('teacher.analyticrep.analyticreport', [
         //     'teacher_class' => $response['data']

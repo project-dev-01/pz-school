@@ -131,9 +131,9 @@
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('schoolcrm.app.form') }}">
-                                        <img class="card-img-top img-fluid" src="{{$application}}" alt="Card image cap">
+                                        <img class="card-img-top img-fluidapply" src="{{$application}}" alt="Card image cap">
                                         <div class="card-body" style="padding: 15px;">
-                                            <h6 class="card-title text-center sfont">{{ __('messages.application') }}</h6>
+                                            <h6 class="card-title text-center sfont">{{ __('messages.apply_now') }}</h6>
                                         </div>
                                 </div>
                             </div>

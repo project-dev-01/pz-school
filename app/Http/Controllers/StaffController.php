@@ -1745,12 +1745,12 @@ class StaffController extends Controller
             'session' => isset($session['data']) ? $session['data'] : [],
             'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
-            'teacher_classroom_class_id' => Cookie::get('teacher_classroom_class_id'),
-            'teacher_classroom_section_id' => Cookie::get('teacher_classroom_section_id'),
-            'teacher_classroom_subject_id' => Cookie::get('teacher_classroom_subject_id'),
-            'teacher_classroom_date' => Cookie::get('teacher_classroom_date'),
-            'teacher_classroom_semester' => Cookie::get('teacher_classroom_semester'),
-            'teacher_classroom_session' => Cookie::get('teacher_classroom_session')
+            'teacher_classroom_class_id' => Cookie::get('staff_classroom_class_id'),
+            'teacher_classroom_section_id' => Cookie::get('staff_classroom_section_id'),
+            'teacher_classroom_subject_id' => Cookie::get('staff_classroom_subject_id'),
+            'teacher_classroom_date' => Cookie::get('staff_classroom_date'),
+            'teacher_classroom_semester' => Cookie::get('staff_classroom_semester'),
+            'teacher_classroom_session' => Cookie::get('staff_classroom_session')
         ]);
     }
     function classroomPost(Request $request)

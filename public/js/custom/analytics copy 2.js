@@ -326,16 +326,6 @@ $(function () {
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
 
-            var classObj = {
-                classID: classID,
-                sectionID: sectionID,
-                subjectID: subjectID,
-                studentID: studentID,
-                semesterID: semester_id,
-                sessionID: session_id,
-                academic_session_id: academic_session_id
-            };
-
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -346,8 +336,6 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('academic_session_id', academic_session_id);
-            // set cookie selected
-            setCookieForAnalytic(classObj);
             // attendance report chart
             attendanceReport(formData);
             // homework report chart
@@ -365,28 +353,6 @@ $(function () {
 
         }
     });
-    
-    function setCookieForAnalytic(classObj) {
-       
-        $.ajax({
-            type: "get",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: setCookieAnalyticUrl,
-            data: {// change data to this object
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                class_id: classObj.classID,
-                section_id: classObj.sectionID,
-                subject_id: classObj.subjectID,
-                student_id: classObj.studentID,
-                semester_id: classObj.semesterID,
-                session_id: classObj.sessionID
-            },
-            dataType: "text",
-            success: function (resultData) { console.log("Save Analytic Complete") }
-        });
-    }
     // attendance report chart ajax
     function attendanceReport(formData) {
         $.ajax({

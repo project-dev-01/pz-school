@@ -279,6 +279,14 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    // cookie variables
+    var setCookieAnalyticUrl = "{{ route('teacher.analytic.setcookie') }}";
+    var teacher_analytic_class_id = "{{ $teacher_analytic_class_id }}";
+    var teacher_analytic_section_id = "{{ $teacher_analytic_section_id }}";
+    var teacher_analytic_subject_id = "{{ $teacher_analytic_subject_id }}";
+    var teacher_analytic_student_id = "{{ $teacher_analytic_student_id }}";
+    var teacher_analytic_semester = "{{ $teacher_analytic_semester }}";
+    var teacher_analytic_session = "{{ $teacher_analytic_session }}";
 </script>
 <script src="{{ asset('public/js/custom/analytics.js') }}"></script>
 @endsection

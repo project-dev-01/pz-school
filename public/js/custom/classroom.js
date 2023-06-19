@@ -255,25 +255,8 @@ $(function () {
         }
     });
     function setCookieForClassroom(classObj) {
-        console.log("classObj")
-        console.log(classObj)
-        // Display the key/value pairs
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0] + ', ' + pair[1]);
-        // }
+       
         $.ajax({
-            // type: "POST",
-            // url: setCookieClassRoomUrl,
-            // // data: { picture: data.data.file_name },
-            // data: {
-            //     "class_id": classObj.classID,
-            //     "section_id": classObj.sectionID,
-            //     "subject_id": classObj.subjectID
-            // },
-            // success: function (res) {
-            //     console.log("--------")
-            //     console.log(res)
-            // }
             type: "get",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -291,38 +274,6 @@ $(function () {
             dataType: "text",
             success: function (resultData) { console.log("Save Complete") }
         });
-        // $.ajax({
-        //     url: setCookieClassRoomUrl,
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //         'Authorization': 'Bearer ' + token
-        //     },
-        //     method: "post",
-        //     data: formData,
-        //     processData: false,
-        //     dataType: 'json',
-        //     contentType: false,
-        //     success: function (response) {
-        //         console.log("set cookie response");
-        //         console.log(response);
-        //     }
-        // });
-        // $.ajax({
-        //     type: "POST",
-        //     url: setCookieClassRoomUrl,
-        //     data: {
-        //         "_token": _token,
-        //         "class_id": classObj.classID,
-        //         "section_id": classObj.sectionID,
-        //         "subject_id": classObj.subjectID
-        //     },
-        //     success: function (res) {
-        //         console.log("--------")
-        //         console.log(res)
-        //         console.log("set cookie response");
-        //         console.log(response);
-        //     }
-        // });
     }
     // function
     function getDailyReportRemarksAjax(formData) {

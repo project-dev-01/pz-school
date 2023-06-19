@@ -803,7 +803,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('student/import', [AdminController::class, 'studentImport'])->name('admin.student.import');
         Route::post('student/import/add', [AdminController::class, 'studentImportAdd'])->name('admin.student.import.add');
         // set cookie
-        Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('admin.classroom.setcookie');
+        Route::get('classroom/setcookie', [CommonController::class, 'adminClassroomSetCookie'])->name('admin.classroom.setcookie');
     });
 });
 // admin routes end
@@ -1022,7 +1022,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('staff.timetable.pdf');
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('staff.attendance.employee_pdf');
         // set cookie
-        Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('staff.classroom.setcookie');
+        Route::get('classroom/setcookie', [CommonController::class, 'staffClassroomSetCookie'])->name('staff.classroom.setcookie');
     });
 });
 // TEACHER CONTROLLER START
@@ -1162,6 +1162,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('teacher.attendance.employee_pdf');
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('teacher.classroom.setcookie');
+        Route::get('analytic/setcookie', [CommonController::class, 'teacherAnalyticSetCookie'])->name('teacher.analytic.setcookie');
     });
 });
 // TEACHER CONTROLLER END
