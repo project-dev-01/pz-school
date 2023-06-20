@@ -212,8 +212,16 @@ class AuthController extends Controller
         ];
         $school = Http::post(config('constants.api.get_school_type'), $datas);
         $schoolDetails = $school->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Staff.webp";
-
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Staff.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         $email = $request->cookie('email');
         $password = $request->cookie('password');
 
@@ -240,6 +248,7 @@ class AuthController extends Controller
                     'greetings' => $greetings,
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
                     'image_url' => $image_url
                 ]
             );
@@ -251,6 +260,7 @@ class AuthController extends Controller
                     'session' => $session,
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
                     'image_url' => $image_url
                 ]
             )->with('session', $session);
@@ -801,7 +811,16 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         // dd($image_url);
         return view(
             'auth.forgot-password',
@@ -809,6 +828,7 @@ class AuthController extends Controller
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
@@ -834,7 +854,17 @@ class AuthController extends Controller
             ];
             $response = Http::post(config('constants.api.get_school_type'), $data);
             $schoolDetails = $response->json();
-            $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+            $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+            // set default language
+            if (Cookie::get('locale') !== null) {
+                $defalutLang = Cookie::get('locale');
+            } else {
+                $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+            }
+            $setLang = isset($defalutLang) ? $defalutLang : 'en';
+            App::setLocale($setLang);
+            session()->put('locale', $setLang);
+
             // dd($image_url);
 
             $role_ids = explode(",", $userDetails['data']['role_id']);
@@ -860,6 +890,7 @@ class AuthController extends Controller
                     'branch_id' => config('constants.branch_id'),
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
                     'image_url' => $image_url
                 ]
             );
@@ -875,7 +906,16 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type'] . "/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'auth.password-reset',
             [
@@ -883,6 +923,7 @@ class AuthController extends Controller
                 'branch_id' => config('constants.branch_id'),
                 'school_name' => config('constants.school_name'),
                 'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
                 'image_url' => $image_url
             ]
         );
