@@ -1,9 +1,11 @@
 @extends('layouts.admin-layout')
 @section('title','Chat')
-
-<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
+@section('component_css')
+<!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
+@endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -27,9 +29,9 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card">
                 <div class="card-body">
-                @php $url="http://localhost/paxsuzen-api-dev"; @endphp
-                    <div class="media mb-3">
-                        <img src="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="42" >
+                @php $url=config('constants.image_url'); @endphp
+					<div class="media mb-3">
+					    <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}"  class="mr-2 rounded-circle" height="42" >
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
@@ -71,10 +73,11 @@
                     <!-- users -->
                     <div class="row">
                         <div class="col">
-                        <div data-simplebar style="max-height: 500px;overflow-y: scroll;" id="teacherlistshow">
-                                @foreach($teacher_list as $teacher)
-
-                                @endforeach
+                            
+                        <div data-simplebar style="max-height: 200px;overflow-y: scroll;" id="teacherlistshow">
+                        <div id="parentlistshow">   
+                            </div>         
+                              
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
                     </div>
@@ -94,7 +97,7 @@
             <div class="card">
                 <div class="card-body py-2 px-3 border-bottom border-light">
                     <div class="media py-1">
-                        <img src="{{ $teacher['photo'] && url($url.'/public/users/images/'.$teacher['photo']) ? url($url.'/public/users/images/'.$teacher['photo']) : url($url.'/public/images/users/default.jpg') }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+                        <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Teacher">
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $teacher['name'] }}</span></a> (<span id="usertype">Teacher</span>)
@@ -117,10 +120,10 @@
                             </div>
                                 </div>
                             </div>
-                <div class="card-body" style="max-height: 460px;overflow-y: scroll;">
+                <div class="card-body" >
                     <div class="row">
                     <div class="col">
-                    <ul class="conversation-list" id="showchat" data-simplebar >
+                    <ul class="conversation-list" id="showchat" data-simplebar style="max-height:300px; overflow-x: hidden;">
 
                     </ul>
                                 </div>
@@ -146,11 +149,10 @@
                                         </div>
                                         <div class="col-sm-auto">
                                             <div class="btn-group">
-                                            
                                             <input type="file" id="homework_file" name="file" hidden onchange="Filevalidation()">    
                                                 <a href="javascript: void(0);" id='emoji' class="btn btn-light">&#128512;</a>
-                                                <a href="javascript: void(0);" id='buttonid' class="btn btn-light"><i class="fe-paperclip"></i></a>
-                                                <button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
+                                                <a href="javascript: void(0);" id='buttonid' class="btn btn-light"><i class="fe-paperclip" style="font-size:14px;color: #343a40;"></i></a>
+                                                <button type="button" id="chat_save" class="btn btn-success chat-send btn-block" onclick="save_chat()"><i class='fe-send'></i></button>
                                             </div>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
@@ -178,9 +180,10 @@
 <script>
    
 
-    let imgurl="{{ url($url.'/public/users/images/')}}";
-    var toimg='default.jpg';
-   let fromimg="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}";
+   let imgurl="{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
+	
+    var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+   let fromimg="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
 
    function my_function(toid,toimage,touser)
     {
@@ -190,12 +193,10 @@
         
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
-        $('#chat_touser').val(touser);
-        
-        toimg=(toimage!='')?toimage:'default.jpg';
-        $('#toimage').prop('src', imgurl+toimg)
-    getchatlist();
-
+        $('#chat_touser').val(touser);        
+        var toimg=(toimage==null || toimage=='' )?imgurl+toimage:defaultimg;
+        $('#toimage').prop('src', toimg)
+        getchatlist();
     }
     document.getElementById('buttonid').addEventListener('click', openDialog);
                 function openDialog() {
@@ -392,7 +393,7 @@ window.addEventListener('blur', stopTimer);
                             {
                             chat_li +='<li class="clearfix odd">';
                             chat_li +='<div class="chat-avatar">';
-                            chat_li +=' <img src="'+fromimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+                            //chat_li +=' <img src="'+fromimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
                             chat_li +='     <i>'+tConvert(item.chattime)+'</i>';
                             chat_li +=msgread;
                             chat_li +='     <i class="fe-trash-2" onclick="deletechat('+item.id+')"></i>';
@@ -417,7 +418,7 @@ window.addEventListener('blur', stopTimer);
                             {
                                 chat_li +='<li class="clearfix ">';
                             chat_li +='<div class="chat-avatar">';
-                            chat_li +=' <img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+                           // chat_li +=' <img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
                             chat_li +='     <i>'+tConvert(item.chattime)+'<br> </i>';
                            
                             chat_li +=' </div>';
@@ -485,11 +486,10 @@ window.addEventListener('blur', stopTimer);
 						});
 						teacherarray.reverse();
                         $.each(teacherarray, function (i, item) { 
-							var photo=(item.photo==null || item.photo=='' )?'default.jpg':item.photo;
-                            
+						    var photo=(item.photo==null || item.photo=='' )?defaultimg:imgurl+item.photo;
 							teacher_li +=`<a href="javascript:void(0);" class="text-body chatusers" onclick=my_function('`+item.staff_id+`','`+photo+`','Teacher')>`;
 							teacher_li +='<div class="media p-2">';
-							teacher_li +='<img src="'+imgurl+photo+'" class="mr-2 rounded-circle" height="42"/>';
+							teacher_li +='<img src="'+photo+'" class="mr-2 rounded-circle" height="42"/>';
                             teacher_li += '<div class="media-body">';
                             teacher_li += '<h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12" ></span>'+item.name+'</h5>';
 							if(parseInt(item.msgcount)>0) 

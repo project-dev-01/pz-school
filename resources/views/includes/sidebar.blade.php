@@ -1526,13 +1526,13 @@
                         <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
-               <!-- <li>
+                <li>
                     <a href="{{ route('teacher.chat')}}" class="nav-link {{ (request()->is('teacher/chat*')) ? 'active' : '' }}">
 
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li>  -->
+                </li>  
                 <li>
                     <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
 
@@ -1700,12 +1700,12 @@
                         <span>{{ __('messages.application_form') }}</span>
                     </a>
                 </li>
-                <!-- <li>
+                <li>
                     <a href="{{ route('parent.chat')}}" class="nav-link {{ (request()->is('parent/chat*')) ? 'active' : '' }}">
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li>  -->
+                </li> 
                 <li>
                     <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

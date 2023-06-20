@@ -1,9 +1,11 @@
 @extends('layouts.admin-layout')
 @section('title','Chat')
-<!---->
-<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
+@section('component_css')
+<!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
+@endsection
 @section('content')
 
 <!-- Start Content-->
@@ -28,9 +30,11 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card">
                 <div class="card-body">
-					@php $url="http://localhost/paxsuzen-api-dev"; @endphp
+					@php $url=config('constants.image_url'); @endphp
+					
                     <div class="media mb-3">
-                        <img src="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}" class="mr-2 rounded-circle" height="42" >
+						
+					    <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}"  class="mr-2 rounded-circle" height="42" >
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
@@ -71,7 +75,9 @@
                     <!-- users -->
                     <div class="row">
                         <div class="col">
-                            <div data-simplebar style="max-height: 375px;overflow-y: scroll;" id="parentlistshow">                            
+                            <div data-simplebar style="max-height: 100px;">   
+                            <div id="parentlistshow">   
+                            </div>                      
                                 @foreach($parent_list as $parent)
 								
                                 @endforeach
@@ -83,9 +89,11 @@
                     <!-- users -->
                     <div class="row">
                         <div class="col">
-                            <div data-simplebar style="max-height: 500px;overflow-y: scroll;" id="teacherlistshow">
+                            <div data-simplebar style="max-height: 100px;">
+                            <div id="teacherlistshow">
+                            </div>    
                                 @foreach($teacher_list as $teacher)
-                               
+
                                 @endforeach
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
@@ -104,7 +112,8 @@
             <div class="card">
                 <div class="card-body py-2 px-3 border-bottom border-light">
                     <div class="media py-1">
-                        <img src="{{ $teacher['photo'] && url($url.'/public/users/images/'.$teacher['photo']) ? url($url.'/public/users/images/'.$teacher['photo']) : url($url.'/public/images/users/default.jpg') }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+                        <img src="{{ $parent['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : $url.'/public/common-asset/images/users/default.jpg' }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $parent['name'] }}</span></a> (<span id="usertype">Parent</span>)
@@ -123,10 +132,12 @@
                     </div>
                 </div>
                             </div>
-                <div class="card-body" style="max-height: 460px;overflow-y: scroll;">
+                <div class="card-body">
                     <div class="row">
 						<div class="col">
-							<ul class="conversation-list" id="showchat" data-simplebar>
+							<ul class="conversation-list"  data-simplebar style="max-height:200px; overflow-x: hidden;">
+						<div id="showchat">
+</div>	
 							</ul>
                                 </div>
                             </div>
@@ -158,13 +169,16 @@
                                             </div>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
-                               
+
                             </div>
                         </div> <!-- end col-->
                     </div>
                     <!-- end row -->
                 </div> <!-- end card-body -->
             </div> <!-- end card -->
+			<script>
+				getchatlist();
+				</script>
 			@endif
 			@endforeach
         </div>
@@ -174,18 +188,16 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script>
-	
-	getchatlist();
-</script>
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+
 <script src="{{ asset('public/emoji/emoji_keyboard.js') }}"></script>
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
 	
-    let imgurl="{{ url($url.'/public/users/images/')}}";
-    var toimg='default.jpg';
-	let fromimg="{{ Session::get('picture') && url($url.'/public/users/images/'.Session::get('picture')) ? url($url.'/public/users/images/'.Session::get('picture')) : url($url.'/public/images/users/default.jpg') }}";
+    let imgurl="{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
+	
+    var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
 	
 	function my_function(toid,toimage,touser)
     {
@@ -196,9 +208,10 @@
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
-        
-		toimg=(toimage!='')?toimage:'default.jpg';
-        $('#toimage').prop('src', imgurl+toimg)
+        var toimg=(toimage==null || toimage=='' )?imgurl+toimage:defaultimg;
+							
+	
+        $('#toimage').prop('src', toimg)
 		getchatlist();
 		
 	}
@@ -298,7 +311,7 @@
         var url = tchatdelUrl;
         swal.fire({
             title: 'Are you sure?',
-            html: 'You want to <b>delete</b> this Exam Term',
+            html: 'You want to <b>delete</b> this Chat',
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: 'Cancel',
@@ -426,56 +439,57 @@
                             {
 								chat_li +='<li class="clearfix odd">';
 								chat_li +='<div class="chat-avatar">';
-								chat_li +=' <img src="'+fromimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
-								chat_li +='     <i>'+tConvert(item.chattime)+'</i>';
+								chat_li +='<i>'+tConvert(item.chattime)+'</i>';
 								chat_li +=msgread;
-								chat_li +='     <i class="fe-trash-2" onclick="deletechat('+item.id+')"></i>';
-								chat_li +=' </div>';
-								chat_li +=' <div class="conversation-text">';
-								chat_li +='    <div class="ctext-wrap">';
-								chat_li +='        <i>'+item.chat_fromname+'</i>';
-								chat_li +='        <p>'+item.chat_content+' '+chatfile+'</p>';
-								chat_li +='     </div>';
-								chat_li +=' </div>';
+								chat_li +='<i class="fe-trash-2" onclick="deletechat('+item.id+')"></i>';
+								chat_li +='</div>';
+								chat_li +='<div class="conversation-text">';
+								chat_li +='<div class="ctext-wrap">';
+								chat_li +='<i>'+item.chat_fromname+'</i>';
+								chat_li +='<p>'+item.chat_content+' '+chatfile+'</p>';
+								chat_li +='</div>';
+								chat_li +='</div>';
 								chat_li +='<div class="conversation-actions dropdown">';
-								chat_li +='  <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="true"><i class="mdi mdi-dots-vertical font-16"></i></button>';
-								chat_li +=' <div class="dropdown-menu dropdown-menu-right">';
-								chat_li +='     <a class="dropdown-item" href="#">Copy Message</a>';
-								chat_li +='   <a class="dropdown-item" href="#">Edit</a>';
-								chat_li +='   <a class="dropdown-item" href="#">Delete</a>';
-								chat_li +='  </div>';
-								chat_li +='  </div>';
+								chat_li +='<button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="true"><i class="mdi mdi-dots-vertical font-16"></i></button>';
+								chat_li +='<div class="dropdown-menu dropdown-menu-right">';
+								chat_li +='<a class="dropdown-item" href="#">Copy Message</a>';
+								chat_li +='<a class="dropdown-item" href="#">Edit</a>';
+								chat_li +='<a class="dropdown-item" href="#">Delete</a>';
+								chat_li +='</div>';
+								chat_li +='</div>';
 								chat_li +='</li>';
 							}
                             else
                             {
 								chat_li +='<li class="clearfix">';
 								chat_li +='<div class="chat-avatar">';
-								chat_li +=' <img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
-								chat_li +='     <i>'+tConvert(item.chattime)+'</i>';
-								
-								chat_li +=' </div>';
-								chat_li +=' <div class="conversation-text">';
-								chat_li +='    <div class="ctext-wrap">';
-								chat_li +='        <i>'+item.chat_fromname+'</i>';
-								chat_li +='        <p>'+item.chat_content+' '+chatfile+'</p>';
-								chat_li +='     </div>';
-								chat_li +=' </div>';
+								//chat_li +='<img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+								chat_li +='<i>'+tConvert(item.chattime)+'</i>';
+								chat_li +='</div>';
+								chat_li +='<div class="conversation-text">';
+								chat_li +='<div class="ctext-wrap">';
+								chat_li +='<i>'+item.chat_fromname+'</i>';
+								chat_li +='<p>'+item.chat_content+' '+chatfile+'</p>';
+								chat_li +='</div>';
+								chat_li +='</div>';
 								chat_li +='<div class="conversation-actions dropdown">';
-								chat_li +='  <button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical font-16"></i></button>';
-								chat_li +=' <div class="dropdown-menu dropdown-menu-right">';
-								chat_li +='     <a class="dropdown-item" href="#">Copy Message</a>';
-								chat_li +='   <a class="dropdown-item" href="#">Edit</a>';
-								chat_li +='   <a class="dropdown-item" href="#">Delete</a>';
-								chat_li +='  </div>';
-								chat_li +='  </div>';
+								chat_li +='<button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical font-16"></i></button>';
+								chat_li +='<div class="dropdown-menu dropdown-menu-right">';
+								chat_li +='<a class="dropdown-item" href="#">Copy Message</a>';
+								chat_li +='<a class="dropdown-item" href="#">Edit</a>';
+								chat_li +='<a class="dropdown-item" href="#">Delete</a>';
+								chat_li +='</div>';
+								chat_li +='</div>';
 								chat_li +='</li>';
 							}
-                            
-                            
+                                   
 						}); 
-						$('#showchat').html(chat_li);                               
-						} else {                       
+						$('#showchat').html(chat_li);    
+                        //$('#showchat').append(chat_li);                              
+						} 
+						else
+						{    
+							                  
 					}
 				}
 			});
@@ -483,7 +497,6 @@
 	}
 	var parentlisttUrl = "{{ route('teacher.chat.parentlist') }}";
 	getparentlist();
-	var parentphotourl = "{{ url($url.'/public/images/users/default.jpg') }}";
 	function getparentlist()
     {
 		
@@ -523,11 +536,10 @@
 						});
 						parentarray.reverse();
                         $.each(parentarray, function (i, item) { 
-							var photo=(item.photo==null || item.photo=='' )?'default.jpg':item.photo;
-                            
+							var photo=(item.photo==null || item.photo=='')?defaultimg:imgurl+item.photo;
 							parent_li +=`<a href="javascript:void(0);" class="text-body chatusers" onclick=my_function('`+item.id+`','`+photo+`','Parent')>`;
 							parent_li +='<div class="media p-2">';
-							parent_li +='<img src="'+imgurl+photo+'" class="mr-2 rounded-circle" height="42"/>';
+							parent_li +='<img src="'+photo+'" class="mr-2 rounded-circle" height="42"/>';
                             parent_li += '<div class="media-body">';
                             parent_li += '<h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12" ></span>'+item.name+'</h5>';
 							if(parseInt(item.msgcount)>0) 
@@ -543,7 +555,8 @@
                             
                             
 						}); 
-						$('#parentlistshow').html(parent_li);                               
+						//$('#parentlistshow').html(parent_li); 
+                        $('#parentlistshow').append(parent_li);                               
 						} else {                       
 					}
 				}
@@ -553,7 +566,6 @@
 	}
 	var teacherlisttUrl = "{{ route('teacher.chat.teacherlist') }}";
 	getteacherlist();
-	var teacherphotourl = "{{ url($url.'/public/images/users/default.jpg') }}";
 	function getteacherlist()
     {
 		
@@ -593,10 +605,10 @@
 						});
 						teacherarray.reverse();
                         $.each(teacherarray, function (i, item) { 
-							var photo=(item.photo==null || item.photo=='' )?'default.jpg':item.photo;
+							var photo=(item.photo==null || item.photo=='' )?defaultimg:imgurl+item.photo;
 							teacher_li +=`<a href="javascript:void(0);" class="text-body chatusers" onclick=my_function('`+item.staff_id+`','`+photo+`','Teacher')>`;
 							teacher_li +='<div class="media p-2">';
-							teacher_li +='<img src="'+imgurl+photo+'" class="mr-2 rounded-circle" height="42"/>';
+							teacher_li +='<img src="'+photo+'" class="mr-2 rounded-circle" height="42"/>';
                             teacher_li += '<div class="media-body">';
                             teacher_li += '<h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12" ></span>'+item.name+'</h5>';
 							if(parseInt(item.msgcount)>0) 
@@ -699,4 +711,5 @@
 	}
 	Filevalidation();
 </script>
+
 @endsection
