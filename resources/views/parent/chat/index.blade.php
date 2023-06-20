@@ -193,9 +193,10 @@
         
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
-        $('#chat_touser').val(touser);        
-        var toimg=(toimage==null || toimage=='' )?imgurl+toimage:defaultimg;
-        $('#toimage').prop('src', toimg)
+        $('#chat_touser').val(touser);   
+        //alert(toimage);  
+       // var toimg=(toimage==null || toimage=='')?imgurl+toimage:defaultimg;
+        $('#toimage').prop('src', toimage)
         getchatlist();
     }
     document.getElementById('buttonid').addEventListener('click', openDialog);

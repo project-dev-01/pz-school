@@ -208,10 +208,10 @@
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
-        var toimg=(toimage==null || toimage=='' )?imgurl+toimage:defaultimg;
+        //var toimg=(toimage==null || toimage=='' )?imgurl+toimage:defaultimg;
 							
 	
-        $('#toimage').prop('src', toimg)
+        $('#toimage').prop('src', toimage)
 		getchatlist();
 		
 	}
