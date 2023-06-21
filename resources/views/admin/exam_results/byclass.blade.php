@@ -192,6 +192,11 @@
 <script>
     toastr.options.preventDuplicates = true;
 </script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var examsByclassandsubject = "{{ config('constants.api.exam_by_classSubject') }}";

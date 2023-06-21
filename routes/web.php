@@ -1269,6 +1269,8 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('homework/filter', [StudentController::class, 'filterHomework'])->name('student.homework.filter');
         // Settings
         Route::get('settings', [StudentController::class, 'settings'])->name('student.settings');
+        Route::post('change-password', [StudentController::class, 'changeNewPassword'])->name('student.settings.changeNewPassword');
+        Route::post('update-profile-info', [StudentController::class, 'updateProfileInfo'])->name('student.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [StudentController::class, 'faqIndex'])->name('student.faq.Index');
         // Exam

@@ -227,16 +227,24 @@ $(function () {
                 }
             },
             {
-                extend: 'pdf',
+                extend: 'pdfHtml5',
                 text: downloadpdf,
                 extension: '.pdf',
                 charset: 'utf-8',
                 bom: true,
                 exportOptions: {
-                    columns: 'th:not(:last-child)'
+                    columns: 'th:not(:last-child)',
+                    // format: {
+                    //     header: function ( data ) {
+                    //         var n = data.indexOf("<select>");
+                    //         if (n > -1) {
+                    //         return data.substring(0, n);
+                    //         } else {
+                    //         return data;
+                    //         }
+                    //     }              
+                    // }    
                 },
-
-            
                 customize: function (doc) {
                 doc.pageMargins = [50,50,50,50];
                 doc.defaultStyle.fontSize = 10;

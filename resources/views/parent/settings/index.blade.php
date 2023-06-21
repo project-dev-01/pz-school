@@ -193,9 +193,9 @@
 </script>
 <script>
     // settings url
-    var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    var profileUpdateStg = "{{ config('constants.api.change_parent_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
 </script>
-<script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
+<script src="{{ asset('public/js/custom/parent_settings.js') }}"></script>
 @endsection

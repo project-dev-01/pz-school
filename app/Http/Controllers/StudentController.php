@@ -81,7 +81,17 @@ class StudentController extends Controller
     }
     public function settings()
     {
-        return view('student.settings.index');
+        
+        $data = [
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $student_profile_info = Helper::PostMethod(config('constants.api.student_profile_info'), $data);
+        return view(
+            'student.settings.index',
+            [
+                'user_details' => isset($student_profile_info['data']) ? $student_profile_info['data'] : []
+            ]
+        );
     }
     // faq screen pages start
 
@@ -748,4 +758,61 @@ class StudentController extends Controller
         $response = Helper::PostMethod(config('constants.api.event_details'), $data);
         return $response;
     }
+     // change password
+     public function changeNewPassword(Request $request)
+     {
+         //Validate form
+         $validator = \Validator::make($request->all(), [
+             'id' => "required",
+             'old' => "required",
+             'password' => [
+                 'required',
+                 'min:8',
+                 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+             ],
+             'confirmed' => 'required|same:password|min:8'
+         ]);
+ 
+         if (!$validator->passes()) {
+             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+         } else {
+             $data = [
+                 'id' => $request->id,
+                 'old' => $request->old,
+                 'password' => $request->password,
+                 'confirmed' => $request->confirmed
+             ];
+             $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+             return $response;
+         }
+     }
+     // update te profile
+     public function updateProfileInfo(Request $request)
+     {
+         //Validate form
+         $validator = \Validator::make($request->all(), [
+             'id' => "required",
+             'student_id' => "required",
+             'first_name' => "required",
+             'email' => "required",
+             'mobile_no' => "required",
+             'address' => "required",
+         ]);
+ 
+         if (!$validator->passes()) {
+             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+         } else {
+             $data = [
+                 'id' => $request->id,
+                 'student_id' => $request->student_id,
+                 'first_name' => $request->first_name,
+                 'last_name' => $request->last_name,
+                 'email' => $request->email,
+                 'mobile_no' => $request->mobile_no,
+                 'address' => $request->address
+             ];
+             $response = Helper::PostMethod(config('constants.api.update_student_profile_info'), $data);
+             return $response;
+         }
+     }
 }

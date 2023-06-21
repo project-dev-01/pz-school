@@ -466,4 +466,13 @@
             }
         });
     }
+    $(document).ready(function() {
+        
+        // $('.btn-select').attr('value', value);
+        $('ul#side-menu li a.active').parent().attr('id','scrollToView');
+        // console.log("b",b)
+        document.getElementById("scrollToView").scrollIntoView();
+
+    });
+ 
 </script>

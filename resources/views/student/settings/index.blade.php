@@ -1,5 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
+@section('component_css')
+<!-- toaster alert -->
+<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
 <style>
@@ -19,8 +24,6 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Extras</a></li> -->
                         <li class="breadcrumb-item active">{{ __('messages.profile') }}</li>
                     </ol>
                 </div>
@@ -33,34 +36,25 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <!-- <img src="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/default-img.jpg'}}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-                <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
-
                 <div class="text-left mt-3">
-                    <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>{{ __('messages.change_picture') }}</b></a>
+                    <form method="post" id="upload_form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="btn btn-block" style="background-color: #0ABAB5; color: #fff;"> <b>{{ __('messages.change_picture') }}</b>
+                                <input type="file" name="profile_image" id="profile_image" style="opacity: 0;height:1px;display:none" />
+                            </label>
+                        </div>
+                    </form>
                 </div>
-                <!-- <p class="text-muted">@webdesigner</p> -->
-
                 <div class="text-left mt-3">
                     <h4 class="font-13 text-uppercase">{{ __('messages.about_me') }} :</h4>
-                    <!-- <p class="text-muted font-13 mb-3">
-                        Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type.
-                    </p> -->
-                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name">{{ Session::get('name') }}</span></p>
-
-                    <!-- <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">(123)
-                            123 1234</span></p> -->
-
-                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 ">{{ Session::get('email') }}</span></p>
-
-                    <!-- <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span></p> -->
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name">{{isset($user_details['first_name']) ? $user_details['first_name'] : ''}}{{isset($user_details['last_name']) ? $user_details['last_name'] : ''}}  </span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{isset($user_details['email']) ? $user_details['email'] : ''}}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.mobile_no') }}:</strong> <span class="ml-2 "> {{isset($user_details['mobile_no']) ? $user_details['mobile_no'] : ''}}</span></p>
                 </div>
             </div> <!-- end card-box -->
-
         </div> <!-- end col-->
 
         <div class="col-lg-8 col-xl-8">
@@ -79,31 +73,43 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="settings">
-                        <form  method="POST" action="#" id="updateProfileInfo">
+                        <form method="POST" action="{{ route('student.settings.updateProfileInfo') }}" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.personal_info') }}</h5>
                             <div class="row">
+                                <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
+                                <input type="hidden" name="student_id" value="{{ Session::get('ref_user_id') }}">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">{{ __('messages.name') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="{{ __('messages.enter_name') }}">
-                                        <span class="text-danger error-text name_error"></span>
+                                        <label for="first_name">{{ __('messages.first_name') }}</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{isset($user_details['first_name']) ? $user_details['first_name'] : ''}}" placeholder="{{ __('messages.enter_the_first_name') }}">
+                                        <span class="text-danger error-text first_name_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="last_name">{{ __('messages.last_name') }}</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{isset($user_details['last_name']) ? $user_details['last_name'] : ''}}" placeholder="{{ __('messages.enter_the_last_name') }}">
+                                        <span class="text-danger error-text last_name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email_address') }}</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" name="email" value="{{isset($user_details['email']) ? $user_details['email'] : ''}}" placeholder="{{ __('messages.enter_the_email') }}">
                                         <span class="text-danger error-text email_error"></span>
-                                        <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
                                 </div>
-                            </div> <!-- end row -->
-
-                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}</label>
+                                        <input type="text" class="form-control number_validation" id="mobile_no" name="mobile_no" value="{{isset($user_details['mobile_no']) ? $user_details['mobile_no'] : ''}}" placeholder="{{ __('messages.enter_the_mobile_no') }}">
+                                        <span class="text-danger error-text mobile_no_error"></span>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="address">{{ __('messages.present_address') }}</label>
-                                        <textarea class="form-control" id="address" rows="4" name="address" placeholder="Enter Address..."></textarea>
+                                        <textarea type="textarea" class="form-control" name="address" rows="4" id="address">{{isset($user_details['address']) ? $user_details['address'] : ''}}</textarea>
                                         <span class="text-danger error-text address_error"></span>
                                     </div>
                                 </div> <!-- end col -->
@@ -114,60 +120,59 @@
                         </form>
                     </div>
                     <!-- end settings content-->
-
                     <div class="tab-pane" id="changePassword">
-
                         <!-- comment box -->
-                        <form action="#" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
-                        <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i>{{ __('messages.change_password') }}</h5>
+                        <form action="{{ route('student.settings.changeNewPassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
+                            <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.change_password') }}</h5>
                             <div class="row">
-                                <div class="col-md-12">
+                                <input type="hidden" name="id" value="{{ Session::get('user_id') }}">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="name">{{ __('messages.old_password') }} :</label>
-                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
-                                        <span class="text-danger error-text oldpassword_error"></span>
+                                        <label for="old">{{ __('messages.old_password') }} :</label>
+                                        <input type="password" class="form-control" id="old" name="old" placeholder="{{ __('messages.old_password') }}">
+                                        <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="newpassword">{{ __('messages.new_password') }}</label>
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter new password">
-                                        <span class="text-danger error-text newpassword_error"></span>
+                                        <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.new_password') }}">
+                                        <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="cnewpassword">{{ __('messages.confirm_new_password') }}</label>
-                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="ReEnter new password">
-                                        <span class="text-danger error-text cnewpassword_error"></span>
+                                        <label for="confirmed">{{ __('messages.confirm_new_password') }} :</label>
+                                        <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="{{ __('messages.confirm_new_password') }}">
+                                        <span class="text-danger error-text confirmed_error"></span>
                                     </div>
                                 </div>
                             </div> <!-- end row -->
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}</button>
                             </div>
                         </form>
                         <!-- end comment box -->
-
                     </div>
                     <!-- end changePassword content-->
-
-
-
                 </div> <!-- end tab-content -->
             </div> <!-- end card-box-->
-
         </div> <!-- end col -->
     </div>
     <!-- end row-->
-
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
 <script>
     var input = document.querySelector("#mobile_no");
@@ -183,14 +188,14 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
+        // utilsScript: "js/utils.js"
     });
 </script>
 <script>
     // settings url
-    var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    var profileUpdateStg = "{{ config('constants.api.change_student_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
 </script>
-<script src="{{ asset('public/js/custom/admin_settings.js') }}"></script>
+<script src="{{ asset('public/js/custom/student_settings.js') }}"></script>
 @endsection

@@ -124,23 +124,23 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.s.no') .'</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.grade') .'</th>
-                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.total_student') .'</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.absent') .'</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.present') .'</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.class_teacher_name') .'</th>';
+                 <th class="align-top" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.s.no') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.grade') .'</th>
+                 <th class="align-top th-sm - 6 rem" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.total_student') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.absent') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.present') .'</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.class_teacher_name') .'</th>';
             foreach ($headers as $val) {
-                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">' . $val['grade'] . '</th>';
+                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px; font-weight:italic;">' . $val['grade'] . '</th>';
             }
-            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.pass') .'</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.g') .'</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.gpa') .'</th>
-                 <th class="align-middle" style="border: 1px solid; padding:12px;" rowspan="2">'.  __('messages.%') .'</th>
+            $output .= '<th class="align-middle" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.pass') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.g') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.gpa') .'</th>
+                 <th class="align-middle" style="border: 1px solid; padding:12px; font-weight:italic;" rowspan="2">'.  __('messages.%') .'</th>
               </tr>
               <tr>';
             foreach ($headers as $val) {
-                $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">%</td>';
+                $output .=  '<td class="text-center" style="border: 1px solid; padding:12px; font-weight:italic;">%</td>';
             }
             $output .= '</tr>
            </thead>

@@ -223,6 +223,10 @@ return [
           'update_profile_info' => $url.'/update-profile-info',
           'parent_profile_info' => $url.'/settings/parent_profile_info',
           'update_parent_profile_info' => $url.'/update-parent-profile-info',
+          'student_profile_info' => $url.'/settings/student_profile_info',
+          'update_student_profile_info' => $url.'/update-student-profile-info',
+          'change_student_profile_picture' => $url.'/change-student-profile-picture',
+          'change_parent_profile_picture' => $url.'/change-parent-profile-picture',
 
         // report card 
         'get_by_reportcard' => $url.'/get_by_reportcard',
