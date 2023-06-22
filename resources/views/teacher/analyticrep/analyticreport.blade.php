@@ -28,7 +28,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -101,7 +101,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attendance_report') }}
+                            {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -135,7 +135,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.homeWork_report') }}
+                            {{ __('messages.homeWork_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -155,7 +155,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attitude') }}
+                            {{ __('messages.attitude') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -178,7 +178,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.short_test') }}
+                            {{ __('messages.short_test') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -199,7 +199,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.exam_result') }}
+                            {{ __('messages.exam_result') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -263,7 +263,7 @@
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
@@ -279,14 +279,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
-    // cookie variables
-    var setCookieAnalyticUrl = "{{ route('teacher.analytic.setcookie') }}";
-    var teacher_analytic_class_id = "{{ $teacher_analytic_class_id }}";
-    var teacher_analytic_section_id = "{{ $teacher_analytic_section_id }}";
-    var teacher_analytic_subject_id = "{{ $teacher_analytic_subject_id }}";
-    var teacher_analytic_student_id = "{{ $teacher_analytic_student_id }}";
-    var teacher_analytic_semester = "{{ $teacher_analytic_semester }}";
-    var teacher_analytic_session = "{{ $teacher_analytic_session }}";
+    // localStorage variables
+    var teacher_analytic_storage = localStorage.getItem('teacher_analytic_details');
 </script>
 <script src="{{ asset('public/js/custom/analytics.js') }}"></script>
 @endsection

@@ -63,82 +63,91 @@ $(function () {
             studentleave(formData);
         }
     }
-    // if cookie
-    if ((teacher_classroom_class_id) && (classroom_details === null)) {
-        console.log("it come inside class");
-        var classID, sectionID, subjectID, classDate, semesterID, sessionID;
-        // classroomDetails.forEach(function (user) {
-        classID = teacher_classroom_class_id;
-        sectionID = teacher_classroom_section_id;
-        subjectID = teacher_classroom_subject_id;
-        classDate = (teacher_classroom_date ? teacher_classroom_date : formatDate(new Date()));
-        semesterID = (teacher_classroom_semester ? teacher_classroom_semester : "0");
-        sessionID = (teacher_classroom_session ? teacher_classroom_session : "0");
-        //     sectionName = user.section_name;
-        //     subjectName = user.subject_name;
-        // });
-        // var format_date = formatDate(classDate);
-
-        // $('#changeClassName').val(classID);
-        if (classID) {
-            $(".classRoomHideSHow").hide();
-            $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: classID }, function (res) {
-                if (res.code == 200) {
-                    $.each(res.data, function (key, val) {
-                        $("#classroomFilter").find("#sectionID").append('<option value="' + val.section_id + '" ' + (sectionID == val.section_id ? "selected" : "") + '>' + val.section_name + '</option>');
-                    });
+    // if localStorage
+    if ((teacher_classroom_details) && (classroom_details === null)) {
+        if (teacher_classroom_details) {
+            var teacherClassroomDetails = JSON.parse(teacher_classroom_details);
+            if (teacherClassroomDetails.length == 1) {
+                var classID, sectionID, subjectID, classDate, semesterID, sessionID, userBranchID, userRoleID, userID;
+                teacherClassroomDetails.forEach(function (user) {
+                    classID = user.class_id;
+                    sectionID = user.section_id;
+                    subjectID = user.subject_id;
+                    semesterID = user.semester_id;
+                    sessionID = user.session_id;
+                    classDate = user.class_date;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                // check to avoid other user for localstorage
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    var dt = convertDigitIn(classDate);
+                    var format_date = formatDate(dt);
+                    $('#changeClassName').val(classID);
+                    if (classID) {
+                        $(".classRoomHideSHow").hide();
+                        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: classID }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    $("#classroomFilter").find("#sectionID").append('<option value="' + val.section_id + '" ' + (sectionID == val.section_id ? "selected" : "") + '>' + val.section_name + '</option>');
+                                });
+                            }
+                            // check both class and section
+                            if (classID && sectionID) {
+                                $.post(teacherSubjectUrl, {
+                                    token: token,
+                                    branch_id: branchID,
+                                    teacher_id: ref_user_id,
+                                    class_id: classID,
+                                    section_id: sectionID,
+                                    academic_session_id: academic_session_id,
+                                }, function (res) {
+                                    if (res.code == 200) {
+                                        $.each(res.data, function (key, val) {
+                                            $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '" ' + (subjectID == val.subject_id ? "selected" : "") + '>' + val.subject_name + '</option>');
+                                        });
+                                    }
+                                    // after set filter
+                                    $("#classroomFilter").find("#semester_id").val(semesterID);
+                                    $("#classroomFilter").find("#session_id").val(sessionID);
+                                    $('#classDate').val(classDate);
+                                    var formData = new FormData();
+                                    formData.append('token', token);
+                                    formData.append('branch_id', branchID);
+                                    formData.append('class_id', classID);
+                                    formData.append('section_id', sectionID);
+                                    formData.append('subject_id', subjectID);
+                                    formData.append('semester_id', semesterID);
+                                    formData.append('session_id', sessionID);
+                                    formData.append('academic_session_id', academic_session_id);
+                                    formData.append('date', convertDigitIn(classDate));
+                                    var classObjs = {
+                                        classID: classID,
+                                        sectionID: sectionID,
+                                        subjectID: subjectID,
+                                        semesterID: semesterID,
+                                        sessionID: sessionID,
+                                        academic_session_id: academic_session_id,
+                                        // classDate: format_date
+                                        classDate: classDate
+                                    };
+                                    // list mode
+                                    listModeAjax(formData, classObjs);
+                                    // daily report
+                                    getDailyReportRemarksAjax(formData);
+                                    // widget Show
+                                    widgetShow(formData);
+                                    // get Short test
+                                    getShortTestData(formData);
+                                    // student leave apply
+                                    studentleave(formData);
+                                }, 'json');
+                            }
+                        }, 'json');
+                    }
                 }
-                // check both class and section
-                if (classID && sectionID) {
-                    $.post(teacherSubjectUrl, {
-                        token: token,
-                        branch_id: branchID,
-                        teacher_id: ref_user_id,
-                        class_id: classID,
-                        section_id: sectionID,
-                        academic_session_id: academic_session_id,
-                    }, function (res) {
-                        if (res.code == 200) {
-                            $.each(res.data, function (key, val) {
-                                $("#classroomFilter").find("#subjectID").append('<option value="' + val.subject_id + '" ' + (subjectID == val.subject_id ? "selected" : "") + '>' + val.subject_name + '</option>');
-                            });
-                        }
-                        // after set filter
-                        $("#classroomFilter").find("#semester_id").val(semesterID);
-                        $("#classroomFilter").find("#session_id").val(sessionID);
-                        $('#classDate').val(classDate);
-                        var formData = new FormData();
-                        formData.append('token', token);
-                        formData.append('branch_id', branchID);
-                        formData.append('class_id', classID);
-                        formData.append('section_id', sectionID);
-                        formData.append('subject_id', subjectID);
-                        formData.append('semester_id', semesterID);
-                        formData.append('session_id', sessionID);
-                        formData.append('academic_session_id', academic_session_id);
-                        formData.append('date', convertDigitIn(classDate));
-                        var classObj = {
-                            classID: classID,
-                            sectionID: sectionID,
-                            subjectID: subjectID,
-                            semesterID: semesterID,
-                            sessionID: sessionID,
-                            academic_session_id: academic_session_id,
-                            classDate: classDate
-                        };
-                        // list mode
-                        listModeAjax(formData, classObj);
-                        // daily report
-                        getDailyReportRemarksAjax(formData);
-                        // widget Show
-                        widgetShow(formData);
-                        // get Short test
-                        getShortTestData(formData);
-                        // student leave apply
-                        studentleave(formData);
-                    }, 'json');
-                }
-            }, 'json');
+            }
         }
     }
     // onload show start
@@ -238,8 +247,8 @@ $(function () {
             formData.append('session_id', sessionID);
             formData.append('academic_session_id', academic_session_id);
             formData.append('date', convertDigitIn(classDate));
-            // set cookie selected
-            setCookieForClassroom(classObj);
+            // set local storage selected
+            setLocalStorageForClassroom(classObj);
             // list mode
             listModeAjax(formData, classObj);
             // student leave apply
@@ -254,26 +263,36 @@ $(function () {
             //  $("#overlay").fadeOut(300);
         }
     });
-    function setCookieForClassroom(classObj) {
-       
-        $.ajax({
-            type: "get",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: setCookieClassRoomUrl,
-            data: {// change data to this object
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                class_id: classObj.classID,
-                section_id: classObj.sectionID,
-                subject_id: classObj.subjectID,
-                class_date: classObj.classDate,
-                semester_id: classObj.semesterID,
-                session_id: classObj.sessionID
-            },
-            dataType: "text",
-            success: function (resultData) { console.log("Save Complete") }
-        });
+    function setLocalStorageForClassroom(classObj) {
+        var teacherClassDetails = new Object();
+        teacherClassDetails.class_id = classObj.classID;
+        teacherClassDetails.section_id = classObj.sectionID;
+        teacherClassDetails.subject_id = classObj.subjectID;
+        teacherClassDetails.class_date = classObj.classDate;
+        teacherClassDetails.semester_id = classObj.semesterID;
+        teacherClassDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        teacherClassDetails.branch_id = branchID;
+        teacherClassDetails.role_id = get_roll_id;
+        teacherClassDetails.user_id = ref_user_id;
+        var teacherClassroomArr = [];
+        teacherClassroomArr.push(teacherClassDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_classroom_details");
+            localStorage.setItem('admin_classroom_details', JSON.stringify(teacherClassroomArr));
+        }
+        if (get_roll_id == "3") {
+            // staff
+            localStorage.removeItem("staff_classroom_details");
+            localStorage.setItem('staff_classroom_details', JSON.stringify(teacherClassroomArr));
+        }
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_classroom_details");
+            localStorage.setItem('teacher_classroom_details', JSON.stringify(teacherClassroomArr));
+        }
+        return true;
     }
     // function
     function getDailyReportRemarksAjax(formData) {

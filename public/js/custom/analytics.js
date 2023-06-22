@@ -25,7 +25,7 @@ $(function () {
             offsetY: 7
         },
         title: {
-            text:current_month_lang,
+            text: current_month_lang,
             align: 'left',
             margin: 10,
             offsetX: 0,
@@ -72,7 +72,7 @@ $(function () {
             offsetX: 0,
             offsetY: 7
         },
-        labels: [complete_lang,incomplete_lang,late_submission_lang],
+        labels: [complete_lang, incomplete_lang, late_submission_lang],
         colors: colors,
         responsive: [{
             breakpoint: 600,
@@ -105,7 +105,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text:attitude_lang
+            text: attitude_lang
         },
         tooltip: {
             formatter: function () {
@@ -250,13 +250,13 @@ $(function () {
         // $(".classRoomHideSHow").hide();
         var class_id = $(this).val();
         $("#analyticCrepFilter").find("#sectionID").empty();
-        $("#analyticCrepFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#analyticCrepFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
         $("#analyticCrepFilter").find("#paperID").empty();
-        $("#analyticCrepFilter").find("#paperID").append('<option value="">'+select_paper+'</option>');
+        $("#analyticCrepFilter").find("#paperID").append('<option value="">' + select_paper + '</option>');
         $("#analyticCrepFilter").find("#studentID").empty();
-        $("#analyticCrepFilter").find("#studentID").append('<option value="">'+select_student+'</option>');
+        $("#analyticCrepFilter").find("#studentID").append('<option value="">' + select_student + '</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -270,7 +270,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#analyticCrepFilter").find("#subjectID").empty();
-        $("#analyticCrepFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#analyticCrepFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -346,8 +346,8 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('academic_session_id', academic_session_id);
-            // set cookie selected
-            setCookieForAnalytic(classObj);
+            // set localstorage selected
+            setLocalStorageForAnalytic(classObj);
             // attendance report chart
             attendanceReport(formData);
             // homework report chart
@@ -365,27 +365,38 @@ $(function () {
 
         }
     });
-    
-    function setCookieForAnalytic(classObj) {
-       
-        $.ajax({
-            type: "get",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: setCookieAnalyticUrl,
-            data: {// change data to this object
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                class_id: classObj.classID,
-                section_id: classObj.sectionID,
-                subject_id: classObj.subjectID,
-                student_id: classObj.studentID,
-                semester_id: classObj.semesterID,
-                session_id: classObj.sessionID
-            },
-            dataType: "text",
-            success: function (resultData) { console.log("Save Analytic Complete") }
-        });
+
+    function setLocalStorageForAnalytic(classObj) {
+
+        var analyticDetails = new Object();
+        analyticDetails.class_id = classObj.classID;
+        analyticDetails.section_id = classObj.sectionID;
+        analyticDetails.subject_id = classObj.subjectID;
+        analyticDetails.student_id = classObj.studentID;
+        analyticDetails.semester_id = classObj.semesterID;
+        analyticDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        analyticDetails.branch_id = branchID;
+        analyticDetails.role_id = get_roll_id;
+        analyticDetails.user_id = ref_user_id;
+        var analyticClassArr = [];
+        analyticClassArr.push(analyticDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_analytic_details");
+            localStorage.setItem('admin_analytic_details', JSON.stringify(analyticClassArr));
+        }
+        if (get_roll_id == "3") {
+            // staff
+            localStorage.removeItem("staff_analytic_details");
+            localStorage.setItem('staff_analytic_details', JSON.stringify(analyticClassArr));
+        }
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_analytic_details");
+            localStorage.setItem('teacher_analytic_details', JSON.stringify(analyticClassArr));
+        }
+        return true;
     }
     // attendance report chart ajax
     function attendanceReport(formData) {
@@ -516,10 +527,10 @@ $(function () {
                         '<table class="table table-striped table-nowrap">' +
                         '<thead>' +
                         '<tr>' +
-                        '<th>'+sl_no_lang+'</th>' +
-                        '<th>'+short_test_name_lang+'</th>' +
-                        '<th>'+grade_lang+'</th>' +
-                        '<th>'+mark_lang+'</th>' +
+                        '<th>' + sl_no_lang + '</th>' +
+                        '<th>' + short_test_name_lang + '</th>' +
+                        '<th>' + grade_lang + '</th>' +
+                        '<th>' + mark_lang + '</th>' +
                         '</tr>' +
                         '</thead>' +
                         '<tbody>';
@@ -550,7 +561,7 @@ $(function () {
                             }
                         });
                     } else {
-                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
+                        newRowContent += '<tr><td colspan="4" style="text-align: center;"> ' + no_data_available + '</td></tr>';
                     }
                     newRowContent += '</tbody>' +
                         '</table>' +
@@ -673,6 +684,101 @@ $(function () {
         }
         return color;
     }
+    // if localStorage
+    if ((teacher_analytic_storage)) {
+        if (teacher_analytic_storage) {
+            var teacherAnalyticStorage = JSON.parse(teacher_analytic_storage);
+            if (teacherAnalyticStorage.length == 1) {
+                var classID, sectionID, subjectID, studentID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                teacherAnalyticStorage.forEach(function (user) {
+                    classID = user.class_id;
+                    sectionID = user.section_id;
+                    subjectID = user.subject_id;
+                    semesterID = user.semester_id;
+                    sessionID = user.session_id;
+                    studentID = user.student_id;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    $('#changeClassName').val(classID);
+                    if (classID) {
+                        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: classID }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    $("#analyticCrepFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                });
+                                $("#analyticCrepFilter").find("#sectionID").val(sectionID);
+                                // check both class and section
+                                if (classID && sectionID) {
+                                    $.post(teacherSubjectUrl, {
+                                        token: token,
+                                        branch_id: branchID,
+                                        teacher_id: ref_user_id,
+                                        class_id: classID,
+                                        section_id: sectionID,
+                                        academic_session_id: academic_session_id,
+                                    }, function (res) {
+                                        if (res.code == 200) {
+                                            $.each(res.data, function (key, val) {
+                                                $("#analyticCrepFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                            });
+                                            // getStudentListByClassSection
+                                            $.post(getStudentListByClassSection, {
+                                                token: token,
+                                                branch_id: branchID,
+                                                class_id: classID,
+                                                section_id: sectionID,
+                                                academic_session_id: academic_session_id,
+                                            }, function (respon) {
+                                                if (respon.code == 200) {
+                                                    $.each(respon.data, function (key, val) {
+                                                        $("#analyticCrepFilter").find("#studentID").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                                    });
+                                                    $("#analyticCrepFilter").find("#studentID").val(studentID);
 
+                                                }
+                                            }, 'json');
+
+                                            $("#analyticCrepFilter").find("#subjectID").val(subjectID);
+                                            // after set filter
+                                            $("#analyticCrepFilter").find("#semester_id").val(semesterID);
+                                            $("#analyticCrepFilter").find("#session_id").val(sessionID);
+                                            // $("#analyticCrepFilter").find("#session_id").val(sessionID);
+                                            var formData = new FormData();
+                                            formData.append('token', token);
+                                            formData.append('branch_id', branchID);
+                                            formData.append('class_id', classID);
+                                            formData.append('section_id', sectionID);
+                                            formData.append('subject_id', subjectID);
+                                            formData.append('student_id', studentID);
+                                            formData.append('semester_id', semesterID);
+                                            formData.append('session_id', sessionID);
+                                            formData.append('academic_session_id', academic_session_id);
+                                            // attendance report chart
+                                            attendanceReport(formData);
+                                            // homework report chart
+                                            homeworkReport(formData);
+                                            // attitude report chart
+                                            getAttitudeReport(formData);
+                                            // short test report chart
+                                            getShortTestReport(formData);
+                                            // subject avg report chart
+                                            getSubjectAvgReport(formData);
+                                            // exam result radar chart start
+                                            getExamResultReport(formData);
+                                            // exam result radar chart end
+                                            $("#overlay").fadeOut(300);
+                                        }
+                                    }, 'json');
+                                }
+                            }
+                        }, 'json');
+                    }
+                }
+            }
+        }
+    }
 
 });

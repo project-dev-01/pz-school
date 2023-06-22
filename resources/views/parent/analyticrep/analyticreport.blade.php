@@ -28,7 +28,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -59,7 +59,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attendance_report') }}
+                            {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -93,7 +93,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.homeWork_report') }}
+                            {{ __('messages.homeWork_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -113,7 +113,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attitude') }}
+                            {{ __('messages.attitude') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -136,7 +136,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.short_test') }}
+                            {{ __('messages.short_test') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -157,7 +157,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.exam_result') }}
+                            {{ __('messages.exam_result') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -219,10 +219,8 @@
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
-<!-- hightcharts js -->
-<script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";

@@ -1,7 +1,6 @@
 $(function () {
 
     $(".number_validation").keypress(function () {
-        console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
@@ -457,9 +456,6 @@ $(function () {
                         "className": "table-user",
                         "render": function (data, type, row, meta) {
                             var currentImg = studentImg + row.photo;
-                            console.log(studentImg)
-                            console.log(row.photo)
-                            console.log(currentImg)
                             // var existUrl = UrlExists(currentImg);
                             // console.log(currentImg);
                             var img = (row.photo != null) ? currentImg : defaultImg;

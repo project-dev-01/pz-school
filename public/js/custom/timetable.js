@@ -4,7 +4,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#copyeditTimetableForm").find("#sectionID").empty();
-        $("#copyeditTimetableForm").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#copyeditTimetableForm").find("#sectionID").append('<option value="">' + select_class + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -108,7 +108,7 @@ $(function () {
         var class_id = $(this).val();
 
         $("#section_id").empty();
-        $("#section_id").append('<option value="">'+select_class+'</option>');
+        $("#section_id").append('<option value="">' + select_class + '</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -134,9 +134,9 @@ $(function () {
 
             $("#timetable").hide("slow");
             $(".teacher").empty();
-            $(".teacher").append('<option value="">'+select_teacher+'</option>');
+            $(".teacher").append('<option value="">' + select_teacher + '</option>');
             $(".subject").empty();
-            $(".subject").append('<option value="">'+select_subject+'</option>');
+            $(".subject").append('<option value="">' + select_subject + '</option>');
 
             // var table = document.getElementById("timetable_table");
             // var length = table.tBodies[0].rows.length
@@ -225,6 +225,13 @@ $(function () {
                 success: function (data) {
 
                     if (data.code == 200) {
+                        var classObj = {
+                            classID: data.class_id,
+                            sectionID: data.section_id,
+                            semesterID: data.semester_id,
+                            sessionID: data.session_id
+                        };
+                        setLocalStorageTimetableTeacher(classObj);
                         $("#edit-modal").attr("data-class_id", data.class_id);
                         $("#edit-modal").attr("data-section_id", data.section_id);
                         $("#edit-modal").attr("data-semester_id", data.semester_id);
@@ -246,6 +253,62 @@ $(function () {
             });
         }
     });
+    function setLocalStorageTimetableTeacher(classObj) {
+
+        var timetableDetails = new Object();
+        timetableDetails.class_id = classObj.classID;
+        timetableDetails.section_id = classObj.sectionID;
+        timetableDetails.semester_id = classObj.semesterID;
+        timetableDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        timetableDetails.branch_id = branchID;
+        timetableDetails.role_id = get_roll_id;
+        timetableDetails.user_id = ref_user_id;
+        var timeTableClassArr = [];
+        timeTableClassArr.push(timetableDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_timetable_details");
+            localStorage.setItem('teacher_timetable_details', JSON.stringify(timeTableClassArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof teacher_timetable_det !== 'undefined') {
+        // variable is come
+        if ((teacher_timetable_det)) {
+            if (teacher_timetable_det) {
+                var teacherTimeTableStorage = JSON.parse(teacher_timetable_det);
+                if (teacherTimeTableStorage.length == 1) {
+                    var classID, sectionID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    teacherTimeTableStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        console.log("f");
+                        $("#indexFilter").find("#class_id").val(classID);
+                        $.post(sectionByClass, { class_id: classID }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                });
+                                $("#indexFilter").find("#section_id").val(sectionID);
+                                $("#indexFilter").find("#semester_id").val(semesterID);
+                                $("#indexFilter").find("#session_id").val(sessionID);
+
+                            }
+                        }, 'json');
+                    }
+                }
+            }
+        }
+    }
 
     // update timetable
     $('#editTimetableForm').on('submit', function (e) {
@@ -518,7 +581,7 @@ $(function () {
         row += '</label></div></td>';
         row += '<td width="20%" ><div class="form-group">';
         row += '<select  class="form-control subject"  name="timetable[' + count + '][subject]">';
-        row += '<option value="">'+select_subject+'</option>';
+        row += '<option value="">' + select_subject + '</option>';
         $.each(subject, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });
@@ -527,7 +590,7 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group main">';
         row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
-        row += '<option value="">'+select_teacher+'</option>';
+        row += '<option value="">' + select_teacher + '</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });
@@ -541,7 +604,7 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group">';
         row += '<select  class="form-control class_room"  name="timetable[' + count + '][class_room]" class="form-control">';
-        row += '<option value="">'+select_hall+'</option>';
+        row += '<option value="">' + select_hall + '</option>';
         $.each(exam_hall, function (key, val) {
             row += '<option value="' + val.id + '">' + val.hall_no + '</option>';
         });

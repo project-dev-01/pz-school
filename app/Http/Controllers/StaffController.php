@@ -20,6 +20,7 @@ use App\Models\Task;
 use Excel;
 use App\Exports\StaffAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
+
 class StaffController extends Controller
 {
     //
@@ -76,6 +77,7 @@ class StaffController extends Controller
             'password' => [
                 'required',
                 'min:8',
+                // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
                 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'

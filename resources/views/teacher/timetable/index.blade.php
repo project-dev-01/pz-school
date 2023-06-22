@@ -204,6 +204,8 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
+    // localStorage variables
+    var teacher_timetable_det = localStorage.getItem('teacher_timetable_details');
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 @endsection

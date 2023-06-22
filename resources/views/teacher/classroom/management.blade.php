@@ -49,7 +49,7 @@
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($teacher_class as $class)
-                                        <option value="{{ $class['class_id'] }}" {{ $teacher_classroom_class_id == $class['class_id'] ? 'selected' : '' }}>{{ $class['class_name'] }}</option>
+                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -800,14 +800,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
-    // cookie variables
-    var setCookieClassRoomUrl = "{{ route('teacher.classroom.setcookie') }}";
-    var teacher_classroom_class_id = "{{ $teacher_classroom_class_id }}";
-    var teacher_classroom_section_id = "{{ $teacher_classroom_section_id }}";
-    var teacher_classroom_subject_id = "{{ $teacher_classroom_subject_id }}";
-    var teacher_classroom_date = "{{ $teacher_classroom_date }}";
-    var teacher_classroom_semester = "{{ $teacher_classroom_semester }}";
-    var teacher_classroom_session = "{{ $teacher_classroom_session }}";
+    // localStorage variables
+    var teacher_classroom_details = localStorage.getItem('teacher_classroom_details');
 </script>
 <script src="{{ asset('public/js/custom/classroom.js') }}"></script>
 <script src="{{ asset('public/js/custom/short-test.js') }}"></script>

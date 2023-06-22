@@ -219,8 +219,6 @@
 <script>
      toastr.options.preventDuplicates = true;
 </script>
-<!-- hightcharts js -->
-<script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";

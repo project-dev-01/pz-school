@@ -45,7 +45,7 @@ class Helper
         try {
             $response = Http::withToken(session()->get('token'))
                 // ->accept('application/json')
-                // ->retry(3, 2000)->timeout(12)
+                ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
             // Determine if the status code is >= 200 and < 300...
@@ -105,7 +105,7 @@ class Helper
         try {
             $response = Http::withToken(session()->get('token'))
                 // ->accept('application/json')
-                // ->retry(3, 2000)->timeout(12)
+                ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
             // Determine if the status code is >= 200 and < 300...
@@ -165,7 +165,7 @@ class Helper
         try {
             $response = Http::withToken(session()->get('token'))
                 // ->accept('application/json')
-                // ->retry(3, 2000)->timeout(12)
+                ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->post($url, $data);
             // Determine if the status code is >= 200 and < 300...
@@ -226,7 +226,7 @@ class Helper
         try {
             $response = Http::withToken(session()->get('token'))
                 // ->accept('application/json')
-                // ->retry(3, 2000)->timeout(12)
+                ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->get($url, $data);
             // Determine if the status code is >= 200 and < 300...
@@ -327,7 +327,7 @@ class Helper
         try {
             $response = Http::withToken(session()->get('token'))
                 // ->accept('application/json')
-                // ->retry(3, 2000)->timeout(12)
+                ->retry(3, 2000)->timeout(12)
                 // ->withBody("dummy body content", "application/json")
                 ->post($url, $data);
             // Determine if the status code is >= 200 and < 300...

@@ -17,6 +17,23 @@ class TeacherController extends Controller
     //
     public function index()
     {
+        // session()->pull('role_id');
+        // session()->pull('token');
+        // session()->pull('picture');
+        // session()->pull('name');
+        // session()->pull('email');
+        // session()->pull('role_name');
+        // session()->pull('user_id');
+        // session()->pull('branch_id');
+        // session()->pull('ref_user_id');
+        // session()->pull('student_id');
+        // session()->pull('school_name');
+        // session()->pull('school_logo');
+        // session()->pull('all_child');
+        // session()->pull('academic_session_id');
+        // // session()->pull('password_changed_at');
+        // session()->flush();
+        // echo "ff";exit;
         $user_id = session()->get('user_id');
         $teacher_id = session()->get('ref_user_id');
         $data = [
@@ -179,6 +196,7 @@ class TeacherController extends Controller
             'password' => [
                 'required',
                 'min:8',
+                // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
                 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'

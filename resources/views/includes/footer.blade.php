@@ -281,13 +281,7 @@
     });
 
     //check local storage for the lang
-    console.log('locale', locale)
-    console.log('globale setting', language_name)
-    console.log('cookie lang', locale_lang)
     if (locale_lang) {
-        console.log("&&&&&locale lang");
-        console.log(locale_lang);
-        // console.log(locale_lang)
         if (locale_lang == "japanese") {
             //find an item with value of sessionLang\
             var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
@@ -305,8 +299,6 @@
             $('.btn-select').attr('value', value);
         }
     } else if (language_name) {
-        console.log("-----language_name");
-        console.log(language_name);
         if (language_name == "japanese") {
             //find an item with value of sessionLang\
             var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
@@ -324,8 +316,6 @@
             $('.btn-select').attr('value', value);
         }
     } else {
-        console.log("*****locale");
-        console.log(locale);
         if (locale == "japanese") {
             //find an item with value of sessionLang\
             var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
@@ -466,15 +456,9 @@
             }
         });
     }
+    // active class scroll sticky
     $(document).ready(function() {
-        
-        // $('.btn-select').attr('value', value);
-
-        $('ul#side-menu li a.active').parent().attr('id','scrollToView');
-        // console.log("b",b)
-
+        $('ul#side-menu li a.active').parent().attr('id', 'scrollToView');
         document.getElementById("scrollToView").scrollIntoView();
-
     });
- 
 </script>
