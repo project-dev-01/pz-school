@@ -424,7 +424,7 @@
 </script>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-        var IDLE_TIMEOUT = 900; //seconds
+        var IDLE_TIMEOUT = 20; //seconds
         var _idleSecondsTimer = null;
         var _idleSecondsCounter = 0;
         document.onclick = function() {
@@ -469,8 +469,10 @@
     $(document).ready(function() {
         
         // $('.btn-select').attr('value', value);
+
         $('ul#side-menu li a.active').parent().attr('id','scrollToView');
         // console.log("b",b)
+
         document.getElementById("scrollToView").scrollIntoView();
 
     });

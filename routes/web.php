@@ -60,7 +60,7 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
     Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('super_admin.schoolcrm.app.form');
     Route::post('/gretting', [CommonController::class, 'greettingSession'])->name('greetting.session');
 
-    Route::group(['middleware' => ['isSuperAdmin']], function () {
+    Route::group(['middleware' => ['isSuperAdmin', 'logroute']], function () {
 
         // dashboard routes
         Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
@@ -170,7 +170,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
 
-    Route::group(['middleware' => 'isAdmin'], function () {
+    Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         // student details
@@ -815,7 +815,7 @@ Route::group(['prefix' => 'staff'], function () {
     Route::any('/authenticate', [AuthController::class, 'authenticateStaff'])->name('staff.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutStaff'])->name('staff.logout');
 
-    Route::group(['middleware' => ['isStaff']], function () {
+    Route::group(['middleware' => ['isStaff', 'logroute']], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
 
         // Forum routes
@@ -1031,7 +1031,7 @@ Route::group(['prefix' => 'teacher'], function () {
     Route::get('/login', [AuthController::class, 'teacherLoginForm'])->name('teacher.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateTeacher'])->name('teacher.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutTeacher'])->name('teacher.logout');
-    Route::group(['middleware' => 'isTeacher'], function () {
+    Route::group(['middleware' => ['isTeacher', 'logroute']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
         // Test Result Rotes
         Route::get('test_result', [TeacherController::class, 'testResult'])->name('teacher.test_result');
@@ -1173,7 +1173,7 @@ Route::group(['prefix' => 'parent'], function () {
     Route::get('/login', [AuthController::class, 'parentLoginForm'])->name('parent.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateParent'])->name('parent.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutParent'])->name('parent.logout');
-    Route::group(['middleware' => ['isParent']], function () {
+    Route::group(['middleware' => ['isParent', 'logroute']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
 
         // Settings
@@ -1260,7 +1260,7 @@ Route::group(['prefix' => 'student'], function () {
     Route::get('/login', [AuthController::class, 'studentLoginForm'])->name('student.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateStudent'])->name('student.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutStudent'])->name('student.logout');
-    Route::group(['middleware' => ['isStudent']], function () {
+    Route::group(['middleware' => ['isStudent', 'logroute']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
         Route::post('add_daily_report_remarks', [StudentController::class, 'addDailyReportRemarks'])->name('student.classroom.add_daily_report_remarks');
         // Homework routes
