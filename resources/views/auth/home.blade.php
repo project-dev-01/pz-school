@@ -79,8 +79,8 @@
                                 </div>
                                 <div class="icon-item" style="margin-right: 25px;">
                                     <i class="fa fa-phone"></i>
-                                    <!-- <span style="margin-left: 10px;"><a href="tel:123-456-7890">{{$home['mobile_no']}}</a></span> -->
-                                    <span style="margin-left: 10px;"><a href="tel:03-7846-5939">03-7846-5939</a></span>
+                                    <span style="margin-left: 10px;"><a href="tel:123-456-7890">{{ isset($home['mobile_no'])?$home['mobile_no']:''}}</a></span>
+                                    <!-- <span style="margin-left: 10px;"><a href="tel:03-7846-5939">03-7846-5939</a></span> -->
                                 </div>
                                 <div class="icon-item">
                                     <i class="fa fa-envelope"></i>
@@ -88,7 +88,7 @@
                                 </div>
                                 <h3 class="text-center mb-2">{{ __('messages.location') }}</h3>
                                 <div class="maps">
-                                    <iframe src="{{$home['location']}}" frameborder="0" style="border:0;" allowfullscreen class="map"></iframe>
+                                    <iframe src="{{ isset($home['location'])?$home['location']:''}}" frameborder="0" style="border:0;" allowfullscreen class="map"></iframe>
                                 </div>
 
                             </form>

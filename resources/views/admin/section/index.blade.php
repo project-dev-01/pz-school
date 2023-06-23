@@ -66,7 +66,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="section-table" style="font-family: 'Arial Unicode MS'; border:1px solid black">
+                        <table class="table dt-responsive nowrap w-100" id="section-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -122,12 +122,12 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
-      // Get PDF Header & Footer Text Start
-    var header_txt="{{ __('messages.religion') }}";
-    
-    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text Start
+    var header_txt = "{{ __('messages.religion') }}";
 
-      // Get PDF Header & Footer Text End
+    var footer_txt = "{{ session()->get('footer_text') }}";
+
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/sections.js') }}"></script>
 

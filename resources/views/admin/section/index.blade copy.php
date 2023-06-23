@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.class') . '')
+@section('title',' ' . __('messages.class') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -38,7 +38,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.class') }}<h4>
+                        <h4 class="navv">{{ __('messages.class') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -116,9 +117,7 @@
     // Get PDF Footer Text
 
     var globalSettingList = "{{ route('admin.global_setting.list') }}";
-    var header_txt="{{ __('messages.class') }}";
-
-    
+    var header_txt = "{{ __('messages.class') }}";
 </script>
 <script src="{{ asset('public/js/custom/pdf_header_footer.js') }}"></script>
 <!-- PDF Footer text End -->

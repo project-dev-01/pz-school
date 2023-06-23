@@ -43,7 +43,7 @@ class TeacherController extends Controller
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
-        $count['teacher_count'] = $teacher_count['data'];
+        $count['teacher_count'] = isset($teacher_count['data']) ? $teacher_count['data'] : 0;
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -613,9 +613,9 @@ class TeacherController extends Controller
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
         //dd($parent_list);
         return view('teacher.chat.index', [
-            'teacher_list' => $teacher_list['data'],
-            'parent_list' => $parent_list['data'],
-            'group_list' => $group_list['data'],
+            'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
+            'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],
+            'group_list' => isset($group_list['data']) ? $group_list['data'] : [],
             'name' => session()->get('name'),
             'role' => "Teacher",
             'tid' => session()->get('ref_user_id'),

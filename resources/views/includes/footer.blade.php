@@ -414,7 +414,7 @@
 </script>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-        var IDLE_TIMEOUT = 20; //seconds
+        var IDLE_TIMEOUT = 1500; //seconds
         var _idleSecondsTimer = null;
         var _idleSecondsCounter = 0;
         document.onclick = function() {

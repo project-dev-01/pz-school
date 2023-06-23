@@ -29,7 +29,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Admin.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -65,7 +65,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Teacher.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Teacher.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -100,7 +100,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Staff.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Staff.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -135,7 +135,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Parent.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Parent.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -170,7 +170,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Student.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Student.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -212,7 +212,7 @@ class AuthController extends Controller
         ];
         $school = Http::post(config('constants.api.get_school_type'), $datas);
         $schoolDetails = $school->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Staff.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Staff.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -811,7 +811,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Admin.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -854,7 +854,7 @@ class AuthController extends Controller
             ];
             $response = Http::post(config('constants.api.get_school_type'), $data);
             $schoolDetails = $response->json();
-            $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+            $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Admin.webp";
             // set default language
             if (Cookie::get('locale') !== null) {
                 $defalutLang = Cookie::get('locale');
@@ -906,7 +906,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Admin.webp";
+        $image_url =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Admin.webp";
         // set default language
         if (Cookie::get('locale') !== null) {
             $defalutLang = Cookie::get('locale');
@@ -1233,9 +1233,9 @@ class AuthController extends Controller
         $home_response = Http::post(config('constants.api.get_home_page_details'), $data);
         $homeDetails = $home_response->json();
 
-        $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Parent.webp";
-        $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Student.webp";
-        $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . $schoolDetails['data']['school_type']['school_type'] . "/Teacher.webp";
+        $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Parent.webp";
+        $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Student.webp";
+        $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type'])?$schoolDetails['data']['school_type']['school_type']:"") . "/Teacher.webp";
         $application =  config('constants.image_url') . "/public/common-asset/images/application.png";
 
         // set default language
