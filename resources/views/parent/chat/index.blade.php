@@ -4,7 +4,6 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/emoji/emoji_keyboard.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -60,10 +59,9 @@
                     <div class="p-2">
 
                         @foreach($group_list as $group)
-                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','','Group')">
+                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','{{$group['name']}}','','Group')">
                             <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
                             <span class="mb-0 mt-1">{{$group['name']}} Group</span>
-                            <input type="hidden" id="username{{ $group['id'] }}Group" value="{{$group['name']}}">
                         </a>
                         @endforeach
                     </div>
@@ -74,8 +72,25 @@
                     <div class="row">
                         <div class="col">
                             <div data-simplebar style="max-height: 200px;">
-                                <div id="teacherlistshow">
-                                </div>
+                            @foreach($teacher_list as $teacher)
+                                <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
+                                    <div class="media p-2">
+                                        <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-0 font-14">
+                                                <span class="float-right text-muted font-weight-normal font-12"></span>
+                                                {{$teacher['name']}}
+                                            </h5>
+                                            @if($teacher['msgcount']>0) 
+                                                <p class="mt-1 mb-0 text-muted font-14">
+                                                    <span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span></span>
+                                                    <!--<span class="w-75">Thanks</span>-->
+                                                </p> 
+                                            @endif
+                                        </div>
+                                    </div>
+                                </a>
+                                @endforeach
 
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
@@ -131,7 +146,6 @@
                     <div class="row">
                         <div class="col">
                             <div class="mt-2 bg-light p-3 rounded">
-
                                 <input type="hidden" name="chat_fromid" id="chat_fromid" value="{{$tid}}">
                                 <input type="hidden" name="chat_fromname" id="chat_fromname" value="{{$name}}">
                                 <input type="hidden" name="chat_fromuser" id="chat_fromuser" value="{{$role}}">
@@ -150,12 +164,13 @@
                                     <div class="col-sm-auto">
                                         <div class="btn-group">
                                             <input type="file" id="homework_file" name="file" hidden onchange="Filevalidation()">
-                                            <a href="javascript: void(0);" id='emoji' class="btn btn-light">&#128512;</a>
+                                            <a href="javascript: void(0);" class="emoji-btn btn btn-light">&#128512;</a>
                                             <a href="javascript: void(0);" id='buttonid' class="btn btn-light"><i class="fe-paperclip" style="font-size:14px;color: #343a40;"></i></a>
-                                            <button type="button" id="chat_save" class="btn btn-success chat-send btn-block" onclick="save_chat()"><i class='fe-send'></i></button>
+                                            <button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
                                         </div>
                                     </div> <!-- end col -->
                                 </div> <!-- end row-->
+                            
                             </div>
                         </div> <!-- end col-->
                     </div>
@@ -172,40 +187,42 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/emoji/emoji_keyboard.js') }}"></script>
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
     let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
-    var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
-    let fromimg = "{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
-
-    function my_function(toid, toimage, touser) {
-        var toname = $('#username' + toid + touser).val();
+    
+    var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+    function my_function(toid, toname,toimage, touser) 
+    {
         $('#toname').html(toname);
         $('#usertype').html(touser);
 
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
-        //alert(toimage);  
-        // var toimg=(toimage==null || toimage=='')?imgurl+toimage:defaultimg;
-        $('#toimage').prop('src', toimage)
+        toimg=(toimage && imgurl+toimage)?imgurl+toimage:defaultimg;
+        $('#toimage').prop('src', toimg)
         getchatlist();
     }
     document.getElementById('buttonid').addEventListener('click', openDialog);
-
     function openDialog() {
         document.getElementById('homework_file').click();
     }
+    window.addEventListener('focus', startTimer);
+    // Get Chat List Start(Set Interval 5 Sec)
+    function startTimer() {
+        var interval = 1000 * 5;
+        setInterval(getchatlist, interval);       
+    }
+// Get Chat List End(Set Interval 5 Sec)
 </script>
 
 <script>
+    // Save Chat Start
     var tchatUrl = "{{ route('parent.chat.add') }}";
     $('#chat_save').on('click', function(e) {
         e.preventDefault();
-
-
         var form = this;
         var chat_fromid = $("#chat_fromid").val();
         var chat_fromname = $("#chat_fromname").val();
@@ -217,6 +234,8 @@
         var branch_id = $("#branch_id").val();
 
         var formData = new FormData();
+        formData.append('token', token);        
+        formData.append('branch_id', branchID);
         formData.append('chat_fromid', chat_fromid);
         formData.append('chat_fromname', chat_fromname);
         formData.append('chat_fromuser', chat_fromuser);
@@ -224,7 +243,6 @@
         formData.append('chat_toname', chat_toname);
         formData.append('chat_touser', chat_touser);
         formData.append('chat_content', chat_content);
-        formData.append('branch_id', branch_id);
 
         // formData.append('file', file);
         formData.append('file', $('input[type=file]')[0].files[0]);
@@ -234,29 +252,36 @@
         // }
         // return false;
         //
-
-        $.ajax({
-            url: tchatUrl,
-            method: 'post',
-            // data: new FormData(form),
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function(response) {
-                // alert(response.code);
-                if (response.code == 200) {
-
-                    $("#chat_content").val("");
-                    getchatlist();
-                } else {}
-            }
-        });
-
+        if(chat_content!='')
+        {
+            $.ajax({
+                url: tchatUrl,
+                method: 'post',
+                // data: new FormData(form),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function(response) {
+                    // alert(response.code);
+                    if (response.code == 200) {
+                        toastr.success(response.message);
+                        $("#chat_content").val("");
+                        getchatlist();
+                    } else {}
+                }
+            });
+        }
+        else
+        {
+            toastr.error("Please Enter the message"); 
+        }
     });
+     // Save Chat End
 </script>
 
 <script>
+     // Delete Chat Start
     var tchatdelUrl = "{{ route('parent.chat.del') }}";
 
     function deletechat(id) {
@@ -288,30 +313,16 @@
             }
         });
     }
+    // Delete Chat End
 </script>
 
 <script>
-    window.addEventListener('focus', startTimer);
-
-    // Inactive
-    window.addEventListener('blur', stopTimer);
-
-    // where X is your every X SEC
-    function startTimer() {
-        var interval = 1000 * 5;
-        setInterval(getchatlist, interval);
-        setInterval(getteacherlist, interval);
-    }
-
-    function stopTimer() {
-        var interval = 1000 * 60 * 5;
-        setInterval(getchatlist, interval);
-        setInterval(getteacherlist, interval);
-    }
+    
+    // Get Chat List function Start
     var chatlistUrl = "{{ route('parent.chat.showlist') }}";
 
     function getchatlist() {
-        // alert(1);
+        
 
         var form = this;
         var chat_fromid = $("#chat_fromid").val();
@@ -321,9 +332,10 @@
         var chat_toname = $("#chat_toname").val();
         var chat_touser = $("#chat_touser").val();
         var chat_content = $("#chat_content").val();
-        var branch_id = $("#branch_id").val();
 
         var formData = new FormData();
+        formData.append('token', token);        
+        formData.append('branch_id', branchID);
         formData.append('chat_fromid', chat_fromid);
         formData.append('chat_fromname', chat_fromname);
         formData.append('chat_fromuser', chat_fromuser);
@@ -429,71 +441,14 @@
             });
         }
     }
-    var teacherlisttUrl = "{{ route('parent.chat.teacherlist') }}";
-    getteacherlist();
-    var teacherphotourl = "{{ url($url.'/public/images/users/default.jpg') }}";
-
-    function getteacherlist() {
-
-
-        var form = this;
-        var chat_fromid = $("#chat_fromid").val();
-        var chat_fromname = $("#chat_fromname").val();
-        var chat_fromuser = $("#chat_fromuser").val();
-        var branch_id = $("#branch_id").val();
-
-        var formData = new FormData();
-        formData.append('chat_fromid', chat_fromid);
-        formData.append('chat_fromname', chat_fromname);
-        formData.append('chat_fromuser', chat_fromuser);
-        $.ajax({
-            url: teacherlisttUrl,
-            method: 'post',
-            // data: new FormData(form),
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function(response) {
-                console.log(response);
-
-                if (response.code == 200) {
-
-                    let teacher_li = "";
-                    let teacherarray = response.data;
-                    teacherarray = teacherarray.sort((a, b) => {
-                        if (a.msgcount < b.msgcount) {
-                            return -1;
-                        }
-                    });
-                    teacherarray.reverse();
-                    $.each(teacherarray, function(i, item) {
-                        var photo = (item.photo == null || item.photo == '') ? defaultimg : imgurl + item.photo;
-                        teacher_li += `<a href="javascript:void(0);" class="text-body chatusers" onclick=my_function('` + item.staff_id + `','` + photo + `','Teacher')>`;
-                        teacher_li += '<div class="media p-2">';
-                        teacher_li += '<img src="' + photo + '" class="mr-2 rounded-circle" height="42"/>';
-                        teacher_li += '<div class="media-body">';
-                        teacher_li += '<h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12" ></span>' + item.name + '</h5>';
-                        if (parseInt(item.msgcount) > 0) {
-                            teacher_li += '<p class="mt-1 mb-0 text-muted font-14">';
-                            teacher_li += '<span class="w-25 float-right text-right"><span class="badge badge-soft-success">' + item.msgcount + '</span></span>';
-                            teacher_li += '<!--<span class="w-75">Thanks</span>-->';
-                            teacher_li += '</p>';
-                        }
-                        teacher_li += '<input type="hidden" id="username' + item.staff_id + 'Teacher" value="' + item.name + '"></div>';
-                        teacher_li += '</div>';
-                        teacher_li += '</a> ';
-
-
-                    });
-                    $('#teacherlistshow').html(teacher_li);
-                } else {}
-            }
-        });
-
+     // Get Chat List function End
+    function showfile(filename) {
+        var fileurl="{{ url($url.'/public/admin-documents/chats/') }}";
+        window.open(fileurl+ filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
+        return false;
     }
-
-    function tConvert(time) {
+    </script>
+    <script>  function tConvert(time) {
         // Check correct time format and split into components
         time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
@@ -505,12 +460,11 @@
         return time.join(''); // return adjusted time or original string
     }
 
-    function showfile(filename) {
-        window.open('http://localhost/paxsuzen-api-dev/public/admin-documents/chats/' + filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
-        return false;
-    }
+    
 </script>
+
 <script>
+    // Attach File Validation below 10 MB Start
     Filevalidation = () => {
         const fi = document.getElementById('homework_file');
         // Check if any file is selected.
@@ -531,7 +485,8 @@
             }
         }
     }
-
+    // Attach File Validation below 10 MB End
+     // Chat List Search Keywords Start
     function search_keyword() {
         let input = document.getElementById('searchbar').value
         input = input.toLowerCase();
@@ -545,7 +500,8 @@
             }
         }
     }
-
+// Chat List Search Keywords End
+// Chat Users Search Keywords Start
     function search_user() {
         let input = document.getElementById('searchuser').value
         input = input.toLowerCase();
@@ -559,44 +515,21 @@
             }
         }
     }
+// Chat Users Search Keywords End
 </script>
-
+<script src="{{ asset('public/EmojiPicker/EmojiPicker.js') }}"></script>
 <script>
-    const zone = document.getElementById("chat_content");
+        new EmojiPicker({
+            trigger: [               
+                {
+                    selector: '.emoji-btn',
+                    insertInto: '#chat_content'
+                }
+            ],
+            closeButton: true,
+            //specialButtons: green
+        });
 
-    var emojiKeyboard = new EmojiKeyboard;
+    </script>
 
-    /* you can edit a few attributes:
-        - callback: function called when a user clicks on an emoji, with the emoji and a boolean telling if the window got closed
-        - auto_reconstruction: boolean if we should recreate the keyboard when we cannot find it
-        - default_placeholder: placeholder text in the search bar
-        - resizable: boolean if the window can be resized (left side)
-    */
-    emojiKeyboard.callback = (emoji, closed) => {
-        console.info(emoji, closed)
-        zone.value += emoji.emoji;
-
-
-    };
-
-    emojiKeyboard.resizable = true;
-    emojiKeyboard.default_placeholder = "You are the best";
-    emojiKeyboard.instantiate(document.getElementById("emoji"));
-</script>
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-    Filevalidation();
-</script>
 @endsection
