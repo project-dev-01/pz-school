@@ -11,13 +11,6 @@
 
 @endsection
 @section('content')
-<style>
-    .btn-primary-bl {
-        width: 100px;
-        margin-bottom: 5px;
-        margin-right: 5px;
-    }
-</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -300,7 +293,7 @@
                             <input type="hidden" name="department" id="downExcelDepartment">
                             <input type="hidden" name="date" id="downExcelDate">
                             <div class="clearfix float-right">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                <button class="btn btn-primary-bl waves-effect waves-light" style="margin-right:5px;" type="submit">
                                 {{ __('messages.pdf') }}
                                 </button>
                             </div>

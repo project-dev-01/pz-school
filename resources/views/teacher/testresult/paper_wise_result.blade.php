@@ -7,12 +7,6 @@
 
 @endsection
 @section('content')
-<style>
-    .btn-primary-bl {
-        width: 100px;
-        margin-bottom: 5px;
-    }
-</style>
 <!-- Start Content-->
 <div class="container-fluid">
 

@@ -156,7 +156,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group text-right m-b-0">
-                                                <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
+                                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                                 {{ __('messages.filter') }}
                                                 </button>
                                             </div>
@@ -252,7 +252,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group text-right m-b-0">
-                                                <button class="btn btn-primary-bl waves-effect waves-light" style="width:80px" type="Save">
+                                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                                                 {{ __('messages.filter') }}
                                                 </button>
                                             </div>

@@ -12,8 +12,8 @@
 @endsection
 @section('content')
 <style>
-    .btn-primary-bl {
-        width: 100px;
+    .btn-primary-bl 
+    {
         margin-bottom: 5px;
         margin-right: 5px;
     }

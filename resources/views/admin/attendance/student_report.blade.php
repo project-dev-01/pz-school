@@ -29,7 +29,6 @@
     }
 
     .btn-primary-bl {
-        width: 100px;
         margin-bottom: 5px;
         margin-right: 5px;
     }
