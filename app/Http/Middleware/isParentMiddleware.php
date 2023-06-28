@@ -27,7 +27,7 @@ class isParentMiddleware
                 return $next($request);
             }
         } else {
-            return redirect()->route('admin.login');
+            return redirect()->route('parent.login');
         }
         abort(403);
     }

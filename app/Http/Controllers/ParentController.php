@@ -1056,4 +1056,61 @@ class ParentController extends Controller
         // dd($request);
         return Excel::download(new ParentAttendanceExport(1, $request->student, $request->subject, $request->date), 'Student_Attendance.xlsx');
     }
+
+    public function getProfileDetails(Request $request)
+    {
+        $data = [
+            'id' => session()->get('ref_user_id')
+        ];
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
+        $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+        // dd($response);
+        return view(
+            'parent.settings.profile-edit',
+            [
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'education' => isset($education['data']) ? $education['data'] : [],
+                'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
+                'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
+                'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
+            ]
+        );
+    }
+    public function updateProfile(Request $request)
+    {
+
+        $data = [
+
+            'id' => $request->id,
+            'email' => $request->email,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'passport' => $request->passport,
+            'race' => $request->race,
+            'religion' => $request->religion,
+            'nric' => $request->nric,
+            'blood_group' => $request->blood_group,
+            'occupation' => $request->occupation,
+            'income' => $request->income,
+            'education' => $request->education,
+            'country' => $request->country,
+            'post_code' => $request->post_code,
+            'city' => $request->city,
+            'state' => $request->state,
+            'mobile_no' => $request->mobile_no,
+            'address' => $request->address,
+            'address_2' => $request->address_2,
+            'facebook_url' => $request->facebook_url,
+            'linkedin_url' => $request->linkedin_url,
+            'twitter_url' => $request->twitter_url,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
+        return $response;
+    }
 }

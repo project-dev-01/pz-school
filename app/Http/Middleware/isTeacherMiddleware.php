@@ -27,7 +27,7 @@ class isTeacherMiddleware
                 return $next($request);
             }
         } else {
-            return redirect()->route('admin.login');
+            return redirect()->route('teacher.login');
         }
         abort(403);
     }

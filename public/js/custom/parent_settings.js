@@ -184,4 +184,38 @@ $(function () {
             }
         })
     });
+
+
+    
+    $("#profileEdit").validate({
+        rules: {
+            first_name: "required",
+            occupation: "required",
+        }
+    });
+
+    $('#profileEdit').on('submit', function (e) {
+        e.preventDefault();
+        console.log('123')
+        var parentcheck = $("#profileEdit").valid();
+        if (parentcheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                        window.location.href = indexParent;
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
 });
