@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Class Room Management')
+@section('title',' ' . __('messages.classroom_management') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -799,6 +799,12 @@
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
     // localStorage variables
     var teacher_classroom_details = localStorage.getItem('staff_classroom_details');
+    // Get PDF Footer Text
+    var header_txt = "{{ __('messages.classroom_management') }}";
+
+    var footer_txt = "{{ session()->get('footer_text') }}";
+
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/classroom.js') }}"></script>
 <script src="{{ asset('public/js/custom/short-test.js') }}"></script>

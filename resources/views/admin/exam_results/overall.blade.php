@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Overall')
+@section('title',' ' . __('messages.overall') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -186,6 +186,7 @@
     //
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var downloadFileName = "{{ __('messages.overall') }}";
 </script>
 <script src="{{ asset('public/js/custom/overall.js') }}"></script>
 @endsection

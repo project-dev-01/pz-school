@@ -154,6 +154,10 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.soap_sub_category') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 
 <script src="{{ asset('public/js/custom/staff_leave_assign.js') }}"></script>

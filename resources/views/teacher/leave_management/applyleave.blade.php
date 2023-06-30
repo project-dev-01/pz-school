@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Leave Management')
+@section('title',' ' .  __('messages.leave_management') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -18,66 +18,57 @@
 @section('content')
 <link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
-.ui-datepicker
- {
-width: 21.4em;
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
-{
-.ui-datepicker
- {
-width: 14.4em;
-}
-}
-@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
-{
-.ui-datepicker
- {
-width: 17.4em;
-}
-}
-@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
-{
-.ui-datepicker
- {
-width: 18.6em;
-}
-}
-@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
-{
-.ui-datepicker
- {
-width: 19.8em;
-}
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-.ui-datepicker
- {
-width: 21.5em;
-}
-}
-@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
-{
-.ui-datepicker
- {
-width: 31.3em;
-}
-}
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
-{
-.ui-datepicker
- {
-width: 13.2em;
-}
-}
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
-{
-.ui-datepicker
- {
-width: 14.3em;
-}
-}
+    .ui-datepicker {
+        width: 21.4em;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .ui-datepicker {
+            width: 14.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .ui-datepicker {
+            width: 17.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .ui-datepicker {
+            width: 18.6em;
+        }
+    }
+
+    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+        .ui-datepicker {
+            width: 19.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .ui-datepicker {
+            width: 21.5em;
+        }
+    }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+        .ui-datepicker {
+            width: 31.3em;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ui-datepicker {
+            width: 13.2em;
+        }
+    }
+
+    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+        .ui-datepicker {
+            width: 14.3em;
+        }
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -242,7 +233,7 @@ width: 14.3em;
                                 <br />
                                 <div class="form-group text-right m-b-0">
                                     <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                    {{ __('messages.apply') }}
+                                        {{ __('messages.apply') }}
                                     </button>
                                 </div>
                             </form>
@@ -325,6 +316,11 @@ width: 14.3em;
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
     var StaffDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
+    // Get PDF Footer Text
+
+    var header_txt = "{{ __('messages.all_leaves') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

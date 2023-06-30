@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.student_list') . '')
+@section('title',' ' .  __('messages.schedule_list') . '')
 @section('component_css')
 <link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -246,6 +246,7 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var downloadFileName = "{{ __('messages.timetable') }}";
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 

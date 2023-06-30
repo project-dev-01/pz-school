@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','By Class')
+@section('title',' ' . __('messages.by_class') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -197,6 +197,7 @@
     var teacher_id = "{{ Session::get('ref_user_id') }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var downloadFileName = "{{ __('messages.by_class') }}";
 </script>
 <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
 @endsection

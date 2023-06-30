@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Exam Paper Result')
+@section('title',' ' . __('messages.exam_paper_result') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -192,6 +192,7 @@
     var teacherID = null;
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var downloadFileName = "{{ __('messages.exam_paper_result') }}";
 </script>
 <script src="{{ asset('public/js/custom/paper_wise_result.js') }}"></script>
 @endsection

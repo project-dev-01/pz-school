@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Semester')
+@section('title',' ' . __('messages.semester') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -17,7 +17,8 @@
 <link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker {
-      z-index: 1600 !important; /* has to be larger than 1050 */
+        z-index: 1600 !important;
+        /* has to be larger than 1050 */
     }
 </style>
 <!-- Start Content-->
@@ -43,7 +44,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">{{ __('messages.semester') }}<h4>
+                        <h4 class="nav-link">{{ __('messages.semester') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -108,6 +110,12 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // Get PDF Footer Text
+    var header_txt = "{{ __('messages.semester') }}";
+
+    var footer_txt = "{{ session()->get('footer_text') }}";
+
+    // Get PDF Header & Footer Text End
 </script>
 
 <script src="{{ asset('public/js/custom/semester.js') }}"></script>

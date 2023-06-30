@@ -82,7 +82,7 @@ $(function () {
             $(table).table2excel({
                 // exclude: ".noExl",
                 name: "By Paper Results",
-                filename: "by_paper_result" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                filename: downloadFileName + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
                 fileext: ".xls",
                 exclude_img: true,
                 exclude_links: true,

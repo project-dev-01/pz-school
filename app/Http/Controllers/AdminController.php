@@ -15,6 +15,7 @@ use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
 use App\Exports\StudentAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
+
 class AdminController extends Controller
 {
     // forum screen pages start
@@ -5879,7 +5880,8 @@ class AdminController extends Controller
 
     public function staffAttendanceExcel(Request $request)
     {
-        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), 'Staff_Attendance.xlsx');
+        $employee_attendance_report = __('messages.employee_attendance_report');
+        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
     }
 
     // index absent Reason
@@ -6250,7 +6252,8 @@ class AdminController extends Controller
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), 'Student_Attendance.xlsx');
+        $attendance_report = __('messages.attendance_report');
+        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), $attendance_report . '.xlsx');
     }
     // copy academic
     public function acdemicCopyAssignTeacher(Request $request)
@@ -6817,6 +6820,7 @@ class AdminController extends Controller
     // index FeesType
     public function feesType()
     {
+        // dd(session()->get('footer_text'));
         return view('admin.fees_type.index');
     }
 
