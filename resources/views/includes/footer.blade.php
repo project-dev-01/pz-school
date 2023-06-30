@@ -207,6 +207,7 @@
     var class_end_lang = "{{ __('messages.class_end') }}";
     var assign_to_lang = "{{ __('messages.assign_to') }}";
     var action_lang = "{{ __('messages.action') }}";
+    var total_lang = "{{ __('messages.total') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

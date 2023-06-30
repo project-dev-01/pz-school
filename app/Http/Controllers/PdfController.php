@@ -462,8 +462,8 @@ class PdfController extends Controller
         $output .= "</head>";
         $output .= "<body><header> ".  __('messages.by_student') ."</header>
         <footer>".$footer_text."</footer>";
+        // $output = "";
         // dd($tot_grade_calcu_byclass);
-        $output = "";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
             $allbyStudent = $tot_grade_calcu_byclass['data']['allbyStudent'];
@@ -603,7 +603,6 @@ class PdfController extends Controller
         $output .= "</head>";
         $output .= "<body><header> ".  __('messages.overall') ."</header>
         <footer>".$footer_text."</footer>";
-        $output = "";
         if ($tot_grade_calcu_byclass['code'] == "200") {
             $headers = $tot_grade_calcu_byclass['data']['headers'];
             $allbysubject = $tot_grade_calcu_byclass['data']['allbysubject'];
@@ -1607,7 +1606,6 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.student_id') .'</th>
                  <th class="align-top" style="border: 1px solid; padding:12px;">'.  __('messages.name') .'</th>';
             foreach ($daterange as $date) {
                 $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
@@ -1620,7 +1618,6 @@ class PdfController extends Controller
             foreach ($student_details as $key => $res) {
                 $attendance_details = $res['attendance_details'];
                 $response .= '<tr>
-                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['student_id'] . '</td>
                  <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
                 foreach ($daterange as $dat) {
                     $checkMatch = 0;
@@ -1667,7 +1664,7 @@ class PdfController extends Controller
         // filename
         $now = now();
         $name = strtotime($now);
-        $fileName = "student_attendance" . $name . ".pdf";
+        $fileName = __('messages.student_attendance') . $name . ".pdf";
         return $pdf->download($fileName);
     }
 }

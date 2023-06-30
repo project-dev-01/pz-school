@@ -1350,4 +1350,8 @@ return [
     "apply_now" => "Apply Now",
     "language" => "Language",
     "profile_edit" => "Profile Edit", 
+    "total" => "Total",
+    "total_present" => "Total Present",
+    "total_absent" => "Total Absent",
+    "total_late" => "Total Late",
 ];
