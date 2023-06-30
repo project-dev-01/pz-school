@@ -1466,7 +1466,6 @@ class PdfController extends Controller
         <table width="100%" style="border-collapse: collapse; border: 0px;">
            <thead>
               <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.employee_id') . '</th>
                  <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.session') . '</th>
                  <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.employee_name') . '</th>';
             foreach ($daterange as $date) {
@@ -1478,8 +1477,7 @@ class PdfController extends Controller
             foreach ($staff_details as $key => $res) {
                 $attendance_details = $res['attendance_details'];
                 $response .= '<tr>
-                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['staff_id'] . '</td>
-                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['session_name'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . __('messages.' . strtolower($res['session_name'])) . '</td>
                  <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
                 foreach ($daterange as $dat) {
                     $checkMatch = 0;

@@ -208,7 +208,10 @@
     var assign_to_lang = "{{ __('messages.assign_to') }}";
     var action_lang = "{{ __('messages.action') }}";
     var total_lang = "{{ __('messages.total') }}";
-
+    var excused_lang = "{{ __('messages.excused') }}";
+    var session_lang = "{{ __('messages.session') }}";
+    var morning_lang = "{{ __('messages.morning') }}";
+    
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     var language_name = "{{ Session::get('language_name') }}";

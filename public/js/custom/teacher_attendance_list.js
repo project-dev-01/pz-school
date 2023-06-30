@@ -203,7 +203,7 @@ $(function () {
                                 '<table id="attnList" class="table table-bordered mb-0">' +
                                 '<thead>' +
                                 '<tr>' +
-                                '<th>Name</th>';
+                                '<th>'+ name_lang +'</th>';
                             // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
                             for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));
@@ -212,9 +212,9 @@ $(function () {
                                 attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                             }
 
-                            attendanceListShow += '<th>Total<br>Present</th>' +
-                                '<th>Total<br>Absent</th>' +
-                                '<th>Total<br>Late</th>' +
+                            attendanceListShow += '<th>'+total_lang+'<br>'+present_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+late_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>';
@@ -661,7 +661,7 @@ $(function () {
                                 '<table id="attnList" class="table table-bordered mb-0">' +
                                 '<thead>' +
                                 '<tr>' +
-                                '<th>Session Name</th><th>Name</th>';
+                                '<th>'+session_lang+'</th><th>'+name_lang+'</th>';
                             // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
                             for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));
@@ -670,17 +670,22 @@ $(function () {
                                 attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                             }
 
-                            attendanceListShow += '<th>Total<br>Present</th>' +
-                                '<th>Total<br>Absent</th>' +
-                                '<th>Total<br>Late</th>' +
-                                '<th>Total<br>Excused</th>' +
+                            attendanceListShow += '<th>'+total_lang+'<br>'+present_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+late_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+excused_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>';
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
+                                
+                                var cur_session = "";
+                                if (res.session_name == "Morning") {
+                                        var cur_session = morning_lang;
+                                }
                                 attendanceListShow += '<tr>' +
-                                    '<td>' + res.session_name + '</td>' +
+                                    '<td>' + cur_session + '</td>' +
                                     '<td class="text-left staffRow">' +
                                     '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light staffDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                     '<input type="hidden" value="' + res.staff_id + '">';
