@@ -90,7 +90,7 @@ $(function () {
                                 '<table id="attnList" class="table table-bordered mb-0">' +
                                 '<thead>' +
                                 '<tr>' +
-                                '<th>Name</th>';
+                                '<th>'+name_lang+'</th>';
                             // '<th>' + get_attendance_list[0].first_name + '' + get_attendance_list[0].last_name + '</th>';
                             for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));
@@ -99,9 +99,9 @@ $(function () {
                                 attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                             }
 
-                            attendanceListShow += '<th>Total<br>Present</th>' +
-                                '<th>Total<br>Absent</th>' +
-                                '<th>Total<br>Late</th>' +
+                            attendanceListShow += '<th>'+total_lang+'<br>'+present_lang+'</th>' +
+                                '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
+                                '<th>'+total_lang+'<br>'+late_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>' +

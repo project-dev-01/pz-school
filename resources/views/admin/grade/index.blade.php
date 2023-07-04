@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.grade') . '')
+@section('title',' ' .  __('messages.grade_range') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <div class="page-title-right">
+                <!-- <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
                     </ol>
-                </div>
+                </div> -->
                 <h4 class="page-title">{{ __('messages.grade_range') }}</h4>
             </div>
         </div>

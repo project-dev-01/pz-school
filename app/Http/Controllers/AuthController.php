@@ -967,7 +967,6 @@ class AuthController extends Controller
     // common logout
     public function logoutCommon($req)
     {
-        Helper::GetMethod(config('constants.api.logout'));
         session()->pull('role_id');
         session()->pull('token');
         session()->pull('picture');
@@ -989,6 +988,7 @@ class AuthController extends Controller
         // $req->session()->put('locale', $defalutLang);
         $hour = time() + 3600 * 24 * 30;
         Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
+        // Helper::GetMethod(config('constants.api.logout'));
     }
     public function rememberMe($req)
     {

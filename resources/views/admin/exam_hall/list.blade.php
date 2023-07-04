@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.exam_hall') . '')
+@section('title',' ' .  __('messages.location') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -103,7 +103,7 @@
     // lang change name end
     
     // Get PDF Footer Text
-    var header_txt="{{ __('messages.exam_hall') }}";
+    var header_txt="{{ __('messages.location') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
 </script>

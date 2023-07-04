@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','All Leaves')
+@section('title',' ' .  __('messages.all_leaves') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -167,6 +167,11 @@
     //     })
 
     // });
+    // Get PDF Footer Text
+
+    var header_txt="{{ __('messages.all_leaves') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/staff_all_leave.js') }}"></script>
 @endsection

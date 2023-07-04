@@ -1350,5 +1350,10 @@ return [
     "order_code" => "注文コード",
     "enter_order_code" => "注文コードを入力してください",
     "apply_now" => "入学申請はこちらへ",
-    "language" => "言語"
+    "language" => "言語",
+    "profile_edit" => "プロフィール編集", 
+    "total" => "合計",
+    "total_present" => "現在の合計",
+    "total_absent" => "合計欠席",
+    "total_late" => "合計遅延",
 ];

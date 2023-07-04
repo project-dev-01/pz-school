@@ -172,7 +172,7 @@
                                     <input type="hidden" name="session_id" id="downSessionID">
                                     <input type="hidden" name="academic_year" id="downAcademicYear">
                                     <div class="clearfix float-right">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF"  style="margin-right:5px;">{{ __('messages.pdf') }}</button>
                                         <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">{{ __('messages.download') }}</button>
                                     </div>
                                 </form>

@@ -27,7 +27,7 @@ class isStaffMiddleware
                 return $next($request);
             }
         } else {
-            return redirect()->route('admin.login');
+            return redirect()->route('staff.login');
         }
         abort(403);
     }

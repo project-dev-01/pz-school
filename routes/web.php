@@ -1178,6 +1178,8 @@ Route::group(['prefix' => 'parent'], function () {
 
         // Settings
         Route::get('settings', [ParentController::class, 'settings'])->name('parent.settings');
+        Route::get('profile-edit', [ParentController::class, 'getProfileDetails'])->name('parent.profile_edit');
+        Route::post('update-profile', [ParentController::class, 'updateProfile'])->name('parent.profile_update');
         Route::post('change-password', [ParentController::class, 'changeNewPassword'])->name('parent.settings.changeNewPassword');
         Route::post('update-profile-info', [ParentController::class, 'updateProfileInfo'])->name('parent.settings.updateProfileInfo');
         // faq        

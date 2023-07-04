@@ -611,7 +611,6 @@ class TeacherController extends Controller
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-        //dd($parent_list);
         return view('teacher.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],
@@ -1445,13 +1444,15 @@ class TeacherController extends Controller
     public function staffAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), 'Staff_Attendance.xlsx');
+        $employee_attendance_report = __('messages.employee_attendance_report');
+        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
     }
 
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
-        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), 'Student_Attendance.xlsx');
+        $attendance_report = __('messages.attendance_report');
+        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), $attendance_report . '.xlsx');
     }
 
     public function studentList(Request $request)

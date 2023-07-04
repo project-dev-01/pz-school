@@ -171,7 +171,7 @@
                         <input type="hidden" id="form_session_id" name="session_id">
                         <input type="hidden" id="form_semester_id" name="semester_id">
                         <!-- end row-->
-                        <div class="form-group text-right m-b-0">
+                        <div class="form-group text-right m-b-0" style="margin-top: 20px;">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                             {{ __('messages.save') }}
                             </button>

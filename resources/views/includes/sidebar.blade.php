@@ -1732,6 +1732,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('parent.profile_edit')}}" class="nav-link {{ (request()->is('parent/profile*')) ? 'active' : '' }}">
+                        <i data-feather="message-square"></i>
+                        <span>{{ __('messages.profile') }}</span>
+                    </a>
+                </li> 
+                <li>
                     <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_308_1884)">

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.student_list') . '')
+@section('title',' ' .  __('messages.schedule_list') . '')
 @section('component_css')
 <link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -172,7 +172,7 @@
                                     <input type="hidden" name="session_id" id="downSessionID">
                                     <input type="hidden" name="academic_year" id="downAcademicYear">
                                     <div class="clearfix float-right">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF" style="margin-right:5px;">{{ __('messages.pdf') }}</button>
                                         <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">{{ __('messages.download') }}</button>
 
                                     </div>
@@ -246,6 +246,7 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var downloadFileName = "{{ __('messages.timetable') }}";
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 

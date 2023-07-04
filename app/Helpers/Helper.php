@@ -93,8 +93,32 @@ class Helper
                 // ]);
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
+            // return $e->getMessage();
             // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+            // Handle HTTP client request exceptions
+            // if ($e->response) {
+            //     // The request was made and a non-2xx response was received
+            //     $statusCode = $e->response->status();
+            //     $responseBody = $e->response->body();
+            //     dd($statusCode);
+
+            //     // Handle the error based on the status code and response body
+            //     // ...
+            // } elseif ($e->hasResponse()) {
+            //     // The request was made, but no response was received
+            //     // Handle the error in an appropriate way
+            //     // ...
+            // } else {
+            //     // An error occurred while making the request
+            //     // Handle the error in an appropriate way
+            //     // ...
+            // }
+            if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
+                // return response()->view('errors.client_error', [], 500);
+                abort(500, view('errors.500'));
+            }
+
+            return null; // Continue normal execution if no client error occurred
         }
     }
     // get api call get method with data

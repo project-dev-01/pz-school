@@ -316,7 +316,7 @@
                                         <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
                                     </li>
-                                </ul><br>
+                                </ul>
                                 <div class="card-body">
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
                                     <div class="row" data-plugin="dragula" data-containers='["homework-list-show"]'>

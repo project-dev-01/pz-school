@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Attendance Report')
+@section('title',' ' .  __('messages.attendance_report') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -29,7 +29,6 @@
     }
 
     .btn-primary-bl {
-        width: 100px;
         margin-bottom: 5px;
         margin-right: 5px;
     }

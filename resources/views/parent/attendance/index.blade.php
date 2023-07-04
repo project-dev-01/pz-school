@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Children Attendance')
+@section('title',' ' .  __('messages.student_attendance') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -132,7 +132,7 @@
                             <input type="hidden" name="date" id="excelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.download') }}
+                                {{ __('messages.download') }} 11
                                 </button>
                             </div>
                         </form>
@@ -143,7 +143,7 @@
                             <input type="hidden" name="student_id" id="downExcelStudent">
                             <input type="hidden" name="year_month" id="downExcelDate">
                             <div class="clearfix float-right">
-                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit" style="margin-right:5px;">
                                 {{ __('messages.pdf') }}
                                 </button>
                             </div>

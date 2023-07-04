@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','By Class')
+@section('title',' ' . __('messages.by_class') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -9,12 +9,6 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
-<style>
-    .btn-primary-bl {
-        width: 100px;
-        margin-bottom: 5px;
-    }
-</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -154,7 +148,7 @@
                                         <input type="hidden" name="session_id" id="downSessionID">
                                         <input type="hidden" name="subject_id" id="downSubjectID">
                                         <input type="hidden" name="academic_year" id="downAcademicYear">
-                                        <div class="clearfix float-right">
+                                        <div class="clearfix float-right" style="margin-bottom:5px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
                                             <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
                                         </div>
@@ -205,6 +199,7 @@
     var teacher_id = null;
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var downloadFileName = "{{ __('messages.by_class') }}";
 </script>
 <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
 @endsection

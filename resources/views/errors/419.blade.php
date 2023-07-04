@@ -16,7 +16,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row justify-content-center">
-			<div class="col-lg-12" style="margin-top:30px; margin-bottom:30px;">
+			<div class="col-lg-12" style="margin-bottom:10px;">
 				<div class="text-center">
 					<h1 class="eoppps">Page is expired </h1>
 					<p class="etext">Sorry, Your page is expired.<br>please refresh and try again</p>
