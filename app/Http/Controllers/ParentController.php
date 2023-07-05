@@ -856,7 +856,7 @@ class ParentController extends Controller
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_parentgroup_list'), $data);
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-        // dd($teacher_list);
+       
         return view('parent.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],

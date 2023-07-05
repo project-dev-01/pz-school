@@ -100,7 +100,7 @@ use \App\Http\Controllers\AdminController;
                                     <th>{{ __('messages.payment_mode') }}</th>
                                     <th>{{ __('messages.due_date') }}</th>
                                     <th>{{ __('messages.paid_date') }}</th>
-                                    <th>{{ __('messages.short_test_name') }}</th>
+                                    <th>{{ __('messages.payment_status') }}</th>
                                     <th>{{ __('messages.amount') }}</th>
                                     <!-- <th>Discount</th> -->
                                     <!-- <th>Fine</th> -->

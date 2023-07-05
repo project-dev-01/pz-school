@@ -37,8 +37,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.login',
             [
@@ -73,8 +73,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.teacher_login',
             [
@@ -108,8 +108,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.staff_login',
             [
@@ -143,8 +143,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.parent_login',
             [
@@ -178,8 +178,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.student_login',
             [
@@ -220,8 +220,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         $email = $request->cookie('email');
         $password = $request->cookie('password');
 
@@ -819,8 +819,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         // dd($image_url);
         return view(
             'auth.forgot-password',
@@ -862,8 +862,8 @@ class AuthController extends Controller
                 $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
             }
             $setLang = isset($defalutLang) ? $defalutLang : 'en';
-            App::setLocale($setLang);
-            session()->put('locale', $setLang);
+            // App::setLocale($setLang);
+            // session()->put('locale', $setLang);
 
             // dd($image_url);
 
@@ -914,8 +914,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
         return view(
             'auth.password-reset',
             [
@@ -1245,8 +1245,8 @@ class AuthController extends Controller
             $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
         }
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
-        App::setLocale($setLang);
-        session()->put('locale', $setLang);
+        // App::setLocale($setLang);
+        // session()->put('locale', $setLang);
 
         // dd($homeDetails);
         return view(
