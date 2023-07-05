@@ -18,12 +18,7 @@ class isParentMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (session()->has('role_id')) {
-            $role_id = $request->session()->get('role_id');
-            // $school_name_url = $request->session()->get('school_name_url');
-            // URL::defaults([
-            //     'school_name_url' =>  $school_name_url
-            // ]);
-            if ($role_id == 5) {
+            if ($request->session()->get('role_id') == 5) {
                 return $next($request);
             }
         } else {

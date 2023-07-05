@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>503</title>
+    <title>424</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
     <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -22,17 +22,6 @@
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/error.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<style>
-    .error500 {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        background: url(../public/images/error500.jpg);
-        background-size: cover;
-        min-height: 100vh;
-    }
-</style>
 
 <body class="loading auth-fluid-pages pb-0">
 
@@ -42,8 +31,10 @@
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
                     <div class="text-left w-100 m-auto">
-                        <h1 class="eoppps">Service Unavailable</h1>
-                        <p class="etext">This page should clearly state that the service is temporarily unavailable and provide some explanation for the inconvenience<br> It's essential to maintain transparency and reassure users that the issue is temporary</p>
+                        <h1 class="eoppps">Oppps. Something went wrong</h1>
+                        <p class="etext">This page is currently not available. We are working<br> on the problem & appreciate your patience</p>
+                        <a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
+                        <br>
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>

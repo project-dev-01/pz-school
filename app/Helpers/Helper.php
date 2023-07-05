@@ -56,66 +56,39 @@ class Helper
             // //Check for any error 400 or 500 level status code
             if ($response->failed()) {
                 // process the failure
-                $datas = [
-                    'data' => [
-                        'message' => 'Failed'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.404')->with([
-                //     'message' => 'Failed.',
-                // ]);
+                abort(404, view('errors.404'));
             }
             // //Check if response has error with 500 level status code
             if ($response->serverError()) {
                 //process on server error
-                $datas = [
-                    'data' => [
-                        'message' => 'serverError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.500')->with([
-                //     'message' => 'serverError.',
-                // ]);
+                abort(500, view('errors.500'));
             }
             // //Check if response has error with 400 level status code
             if ($response->clientError()) {
                 //process on client error
-                $datas = [
-                    'data' => [
-                        'message' => 'clientError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.503')->with([
-                //     'message' => 'clientError.',
-                // ]);
+                abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
-            // return $e->getMessage();
-            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
             // Handle HTTP client request exceptions
-            // if ($e->response) {
-            //     // The request was made and a non-2xx response was received
-            //     $statusCode = $e->response->status();
-            //     $responseBody = $e->response->body();
-            //     dd($statusCode);
-
-            //     // Handle the error based on the status code and response body
-            //     // ...
-            // } elseif ($e->hasResponse()) {
-            //     // The request was made, but no response was received
-            //     // Handle the error in an appropriate way
-            //     // ...
-            // } else {
-            //     // An error occurred while making the request
-            //     // Handle the error in an appropriate way
-            //     // ...
-            // }
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
-                // return response()->view('errors.client_error', [], 500);
-                abort(500, view('errors.500'));
+                // 401,403,404,419,429,500,503,client_error
+                if ($e->response->status() == 503) {
+                    abort(503, view('errors.503'));
+                } else if ($e->response->status() == 500) {
+                    abort(500, view('errors.500'));
+                } else if ($e->response->status() == 429) {
+                    abort(429, view('errors.429'));
+                } else if ($e->response->status() == 419) {
+                    abort(419, view('errors.419'));
+                } else if ($e->response->status() == 404) {
+                    abort(404, view('errors.404'));
+                } else if ($e->response->status() == 403) {
+                    abort(403, view('errors.403'));
+                } else if ($e->response->status() == 401) {
+                    abort(401, view('errors.401'));
+                } else {
+                    abort(424, view('errors.424'));
+                }
             }
 
             return null; // Continue normal execution if no client error occurred
@@ -140,45 +113,42 @@ class Helper
             // //Check for any error 400 or 500 level status code
             if ($response->failed()) {
                 // process the failure
-                $datas = [
-                    'data' => [
-                        'message' => 'Failed'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.404')->with([
-                //     'message' => 'Failed.',
-                // ]);
+                abort(404, view('errors.404'));
             }
             // //Check if response has error with 500 level status code
             if ($response->serverError()) {
                 //process on server error
-                $datas = [
-                    'data' => [
-                        'message' => 'serverError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.500')->with([
-                //     'message' => 'serverError.',
-                // ]);
+                abort(500, view('errors.500'));
             }
             // //Check if response has error with 400 level status code
             if ($response->clientError()) {
                 //process on client error
-                $datas = [
-                    'data' => [
-                        'message' => 'clientError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.503')->with([
-                //     'message' => 'clientError.',
-                // ]);
+                abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
-            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+            // Handle HTTP client request exceptions
+            if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
+                // 401,403,404,419,429,500,503,client_error
+                if ($e->response->status() == 503) {
+                    abort(503, view('errors.503'));
+                } else if ($e->response->status() == 500) {
+                    abort(500, view('errors.500'));
+                } else if ($e->response->status() == 429) {
+                    abort(429, view('errors.429'));
+                } else if ($e->response->status() == 419) {
+                    abort(419, view('errors.419'));
+                } else if ($e->response->status() == 404) {
+                    abort(404, view('errors.404'));
+                } else if ($e->response->status() == 403) {
+                    abort(403, view('errors.403'));
+                } else if ($e->response->status() == 401) {
+                    abort(401, view('errors.401'));
+                } else {
+                    abort(424, view('errors.424'));
+                }
+            }
+
+            return null; // Continue normal execution if no client error occurred
         }
     }
     // post api call
@@ -200,45 +170,42 @@ class Helper
             // //Check for any error 400 or 500 level status code
             if ($response->failed()) {
                 // process the failure
-                $datas = [
-                    'data' => [
-                        'message' => 'Failed'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.404')->with([
-                //     'message' => 'Failed.',
-                // ]);
+                abort(404, view('errors.404'));
             }
             // //Check if response has error with 500 level status code
             if ($response->serverError()) {
                 //process on server error
-                $datas = [
-                    'data' => [
-                        'message' => 'serverError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.500')->with([
-                //     'message' => 'serverError.',
-                // ]);
+                abort(500, view('errors.500'));
             }
             // //Check if response has error with 400 level status code
             if ($response->clientError()) {
                 //process on client error
-                $datas = [
-                    'data' => [
-                        'message' => 'clientError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.503')->with([
-                //     'message' => 'clientError.',
-                // ]);
+                abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
-            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+            // Handle HTTP client request exceptions
+            if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
+                // 401,403,404,419,429,500,503,client_error
+                if ($e->response->status() == 503) {
+                    abort(503, view('errors.503'));
+                } else if ($e->response->status() == 500) {
+                    abort(500, view('errors.500'));
+                } else if ($e->response->status() == 429) {
+                    abort(429, view('errors.429'));
+                } else if ($e->response->status() == 419) {
+                    abort(419, view('errors.419'));
+                } else if ($e->response->status() == 404) {
+                    abort(404, view('errors.404'));
+                } else if ($e->response->status() == 403) {
+                    abort(403, view('errors.403'));
+                } else if ($e->response->status() == 401) {
+                    abort(401, view('errors.401'));
+                } else {
+                    abort(424, view('errors.424'));
+                }
+            }
+
+            return null; // Continue normal execution if no client error occurred
         }
     }
 
@@ -261,45 +228,42 @@ class Helper
             // //Check for any error 400 or 500 level status code
             if ($response->failed()) {
                 // process the failure
-                $datas = [
-                    'data' => [
-                        'message' => 'Failed'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.404')->with([
-                //     'message' => 'Failed.',
-                // ]);
+                abort(404, view('errors.404'));
             }
             // //Check if response has error with 500 level status code
             if ($response->serverError()) {
                 //process on server error
-                $datas = [
-                    'data' => [
-                        'message' => 'serverError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.500')->with([
-                //     'message' => 'serverError.',
-                // ]);
+                abort(500, view('errors.500'));
             }
             // //Check if response has error with 400 level status code
             if ($response->clientError()) {
                 //process on client error
-                $datas = [
-                    'data' => [
-                        'message' => 'clientError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.503')->with([
-                //     'message' => 'clientError.',
-                // ]);
+                abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
-            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+            // Handle HTTP client request exceptions
+            if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
+                // 401,403,404,419,429,500,503,client_error
+                if ($e->response->status() == 503) {
+                    abort(503, view('errors.503'));
+                } else if ($e->response->status() == 500) {
+                    abort(500, view('errors.500'));
+                } else if ($e->response->status() == 429) {
+                    abort(429, view('errors.429'));
+                } else if ($e->response->status() == 419) {
+                    abort(419, view('errors.419'));
+                } else if ($e->response->status() == 404) {
+                    abort(404, view('errors.404'));
+                } else if ($e->response->status() == 403) {
+                    abort(403, view('errors.403'));
+                } else if ($e->response->status() == 401) {
+                    abort(401, view('errors.401'));
+                } else {
+                    abort(424, view('errors.424'));
+                }
+            }
+
+            return null; // Continue normal execution if no client error occurred
         }
     }
     // decrypt string
@@ -362,45 +326,42 @@ class Helper
             // //Check for any error 400 or 500 level status code
             if ($response->failed()) {
                 // process the failure
-                $datas = [
-                    'data' => [
-                        'message' => 'Failed'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.404')->with([
-                //     'message' => 'Failed.',
-                // ]);
+                abort(404, view('errors.404'));
             }
             // //Check if response has error with 500 level status code
             if ($response->serverError()) {
                 //process on server error
-                $datas = [
-                    'data' => [
-                        'message' => 'serverError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.500')->with([
-                //     'message' => 'serverError.',
-                // ]);
+                abort(500, view('errors.500'));
             }
             // //Check if response has error with 400 level status code
             if ($response->clientError()) {
                 //process on client error
-                $datas = [
-                    'data' => [
-                        'message' => 'clientError'
-                    ]
-                ];
-                return $datas;
-                // return view('errors.503')->with([
-                //     'message' => 'clientError.',
-                // ]);
+                abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
-            // $e->getMessage() - will output "cURL error 6: Could not resolve host" in case of invalid domain
+            // Handle HTTP client request exceptions
+            if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
+                // 401,403,404,419,429,500,503,client_error
+                if ($e->response->status() == 503) {
+                    abort(503, view('errors.503'));
+                } else if ($e->response->status() == 500) {
+                    abort(500, view('errors.500'));
+                } else if ($e->response->status() == 429) {
+                    abort(429, view('errors.429'));
+                } else if ($e->response->status() == 419) {
+                    abort(419, view('errors.419'));
+                } else if ($e->response->status() == 404) {
+                    abort(404, view('errors.404'));
+                } else if ($e->response->status() == 403) {
+                    abort(403, view('errors.403'));
+                } else if ($e->response->status() == 401) {
+                    abort(401, view('errors.401'));
+                } else {
+                    abort(424, view('errors.424'));
+                }
+            }
+
+            return null; // Continue normal execution if no client error occurred
         }
     }
 }
