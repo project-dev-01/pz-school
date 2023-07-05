@@ -331,6 +331,7 @@ class AdminController extends Controller
         $count['student_count'] = isset($student_count['data']) ? $student_count['data'] : 0;
         $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
         $count['teacher_count'] = isset($teacher_count['data']) ? $teacher_count['data'] : 0;
+        // dd($get_to_do_list_dashboard);
         return view(
             'admin.dashboard.index',
             [
@@ -7001,11 +7002,11 @@ class AdminController extends Controller
                 'fees_type' => isset($fees_type['data']) ? $fees_type['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'month' => isset($month) ? $month : [],
-                'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
+                'Yearly' => isset($payment_mode['data'][0]['name']) ?  __('messages.' . strtolower($payment_mode['data'][0]['name']))  : '0',
                 'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
-                'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
+                'Semester' => isset($payment_mode['data'][1]['name']) ? __('messages.' . strtolower($payment_mode['data'][1]['name'])) : '1',
                 'Semester_ID' => isset($payment_mode['data'][1]['id']) ? $payment_mode['data'][1]['id'] : '1',
-                'Monthly' => isset($payment_mode['data'][2]['name']) ? $payment_mode['data'][2]['name'] : '2',
+                'Monthly' => isset($payment_mode['data'][2]['name']) ? __('messages.' . strtolower($payment_mode['data'][2]['name'])) : '2',
                 'Monthly_ID' => isset($payment_mode['data'][2]['id']) ? $payment_mode['data'][2]['id'] : '2',
             ]
         );
@@ -7053,11 +7054,11 @@ class AdminController extends Controller
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'payment_mode' => isset($payment_mode['data']) ? $payment_mode['data'] : [],
                 'month' => isset($month) ? $month : [],
-                'Yearly' => isset($payment_mode['data'][0]['name']) ? $payment_mode['data'][0]['name'] : '0',
+                'Yearly' => isset($payment_mode['data'][0]['name']) ? __('messages.' . strtolower($payment_mode['data'][0]['name'])) : '0',
                 'Yearly_ID' => isset($payment_mode['data'][0]['id']) ? $payment_mode['data'][0]['id'] : '0',
-                'Semester' => isset($payment_mode['data'][1]['name']) ? $payment_mode['data'][1]['name'] : '1',
+                'Semester' => isset($payment_mode['data'][1]['name']) ? __('messages.' . strtolower($payment_mode['data'][1]['name'])) : '1',
                 'Semester_ID' => isset($payment_mode['data'][1]['id']) ? $payment_mode['data'][1]['id'] : '1',
-                'Monthly' => isset($payment_mode['data'][2]['name']) ? $payment_mode['data'][2]['name'] : '2',
+                'Monthly' => isset($payment_mode['data'][2]['name']) ? __('messages.' . strtolower($payment_mode['data'][2]['name'])) : '2',
                 'Monthly_ID' => isset($payment_mode['data'][2]['id']) ? $payment_mode['data'][2]['id'] : '2',
                 'fees_type_fees_group_details' => isset($fees_group['data']['fees_group_details']) ? $fees_group['data']['fees_group_details'] : [],
                 'fees_group' => isset($fees_group['data']['fees_group']) ? $fees_group['data']['fees_group'] : []

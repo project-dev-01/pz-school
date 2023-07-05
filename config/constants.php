@@ -786,8 +786,11 @@ return [
         'chat_group_list'=> $url.'/chat/get_group_list',
         'chat_parentgroup_list'=> $url.'/chat/get_parentgroup_list',
         'tchat'=> $url.'/chat/storechat',
+        'pchat'=> $url.'/chat/storechat',
 		    'tdelchat'=> $url.'/chat/deletechat',
+        'pdelchat'=> $url.'/chat/deletechat',
         'chatlists'=> $url.'/chat/chatlist',		
+        'pchatlists'=> $url.'/chat/chatlist',	
         'groupchatlists'=> $url.'/chat/groupchatlists',
         
         'get_like_column_name'=> $url.'/get_like_column_name',

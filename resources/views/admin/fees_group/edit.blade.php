@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Edit Fees Group')
+@section('title',' ' .  __('messages.edit_fees_group') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -244,7 +244,7 @@
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][fees_group_details_id]" value="{{ $mon_det['fees_group_details_id'] }}" class="form-control">
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
-                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <input type="text" disabled class="form-control" value="{{ __('messages.' . strtolower($mon['name'])) }}" style="width: 70%;">
                                                                                                 <!-- hiddent feilds end-->
                                                                                             </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" value="{{ $mon_det['due_date'] }}" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>
@@ -262,7 +262,7 @@
                                                                                                 <!-- hiddent feilds start-->
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
-                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <input type="text" disabled class="form-control" value="{{ __('messages.' . strtolower($mon['name'])) }}" style="width: 70%;">
                                                                                                 <!-- hiddent feilds end-->
                                                                                             </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>
@@ -275,7 +275,7 @@
                                                                                                 <!-- hiddent feilds start-->
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
-                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <input type="text" disabled class="form-control" value="{{ __('messages.' . strtolower($mon['name'])) }}" style="width: 70%;">
                                                                                                 <!-- hiddent feilds end-->
                                                                                             </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>

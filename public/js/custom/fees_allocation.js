@@ -140,8 +140,18 @@ $(function () {
                             "value": d
                         });
                         $.each(paymentList, function (k, v) {
+                            var pay_name = "";
+                            if (v.id == "1") {
+                                pay_name = yearly_lang;
+                            }
+                            if (v.id == "2") {
+                                pay_name = semester_lang;
+                            }
+                            if (v.id == "3") {
+                                pay_name = monthly_lang;
+                            }
                             var $option = $("<option></option>", {
-                                "text": v.name,
+                                "text": pay_name,
                                 "value": v.id
                             });
                             if (r.payment_mode_id === v.id) {

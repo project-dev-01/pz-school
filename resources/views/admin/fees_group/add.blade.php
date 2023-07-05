@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Add Fees Group')
+@section('title',' ' .  __('messages.add_fees_group') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -181,7 +181,7 @@
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][payment_mode_id]" value="{{$Monthly_ID}}">
                                                                                                 <input type="hidden" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][monthly]" value="{{ $mon['id'] }}">
                                                                                                 <!-- hiddent feilds end-->
-                                                                                                <input type="text" disabled class="form-control" value="{{ $mon['name'] }}" style="width: 70%;">
+                                                                                                <input type="text" disabled class="form-control" value="{{ __('messages.' . strtolower($mon['name'])) }}" style="width: 70%;">
                                                                                             </td>
                                                                                             <td><input type="text" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][due_date]" class="form-control date-picker" data-provide="datepicker" placeholder="{{ __('messages.yyyy_mm_dd') }}" style="width: 70%;"></td>
                                                                                             <td> <input type="number" name="fees[{{$key}}][monthly_fees_details][{{$mkey}}][amount]" class="form-control"></td>

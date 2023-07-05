@@ -1106,6 +1106,7 @@ Route::group(['prefix' => 'teacher'], function () {
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Route::post('storetchat', [TeacherController::class, 'storetchat'])->name('teacher.storetchat');
+        Route::post('chatdata', [ParentController::class, 'chatdata'])->name('parent.chatform.add');
 
         Route::post('chat/chat_save', [TeacherController::class, 'savechat'])->name('teacher.chat.add');
         Route::post('chat/parentlist', [TeacherController::class, 'parentlist'])->name('teacher.chat.parentlist');

@@ -211,6 +211,9 @@
     var excused_lang = "{{ __('messages.excused') }}";
     var session_lang = "{{ __('messages.session') }}";
     var morning_lang = "{{ __('messages.morning') }}";
+    var yearly_lang = "{{ __('messages.yearly') }}";
+    var semester_lang = "{{ __('messages.semester') }}";
+    var monthly_lang = "{{ __('messages.monthly') }}";
     
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

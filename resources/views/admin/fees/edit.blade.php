@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Edit Fees')
+@section('title',' ' .  __('messages.edit_fees') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -34,7 +34,7 @@ use \App\Http\Controllers\AdminController;
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student & Parent Information
+                        <h4 class="navv">{{ __('messages.student_parent_information') }}
                             <h4>
                     </li>
                 </ul>
@@ -61,7 +61,7 @@ use \App\Http\Controllers\AdminController;
                                 <label class="mb-4">{{ __('messages.email') }} : <span class="text-muted mr-2">{{isset($student['email']) ? $student['email'] : ''}}</span></label>
                             </div>
                             <div class="col-md-3">
-                                <label class="mb-4">Parent Phone No : <span class="text-muted mr-2"></span></label>
+                                <label class="mb-4">{{ __('messages.parent_phone_no') }} : <span class="text-muted mr-2"></span></label>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ use \App\Http\Controllers\AdminController;
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Invoice History
+                        <h4 class="navv">{{ __('messages.invoice_history') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -99,13 +99,13 @@ use \App\Http\Controllers\AdminController;
                                     <th>{{ __('messages.fees_type') }}</th>
                                     <th>{{ __('messages.payment_mode') }}</th>
                                     <th>{{ __('messages.due_date') }}</th>
-                                    <th>Paid Date</th>
+                                    <th>{{ __('messages.paid_date') }}</th>
                                     <th>{{ __('messages.short_test_name') }}</th>
                                     <th>{{ __('messages.amount') }}</th>
                                     <!-- <th>Discount</th> -->
                                     <!-- <th>Fine</th> -->
-                                    <th>Paid</th>
-                                    <th>Balance</th>
+                                    <th>{{ __('messages.paid') }}</th>
+                                    <th>{{ __('messages.balance') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -150,7 +150,7 @@ use \App\Http\Controllers\AdminController;
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $row['fees_group_name'] }}</td>
                                     <td>{{ $row['name'] }}</td>
-                                    <td>{{ $row['payment_mode_name'] }}</td>
+                                    <td>{{ __('messages.' . strtolower($row['payment_mode_name'])) }}</td>
                                     <td>{{ $row['due_date'] }}</td>
                                     <td>{{ $row['paid_date'] }}</td>
                                     <td>
@@ -177,7 +177,7 @@ use \App\Http\Controllers\AdminController;
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <h4 class="navv">Student Fee Details<h4>
+            <h4 class="navv">{{ __('messages.student_fee_details') }}<h4>
         </li>
     </ul>
     <div class="card">
@@ -208,7 +208,7 @@ use \App\Http\Controllers\AdminController;
                                 <select id="payment_mode{{isset($fee['fees_type_id']) ? $fee['fees_type_id'] : ''}}" class="form-control payment_mode" name="payment_mode">
                                     <option value="">{{ __('messages.payment_status') }}</option>
                                     @forelse ($payment_mode as $mode)
-                                    <option value="{{ $mode['id'] }}">{{ $mode['name'] }}</option>
+                                    <option value="{{ $mode['id'] }}">{{ __('messages.' . strtolower($mode['name'])) }}</option>
                                     @empty
                                     @endforelse
                                 </select>
@@ -248,7 +248,7 @@ use \App\Http\Controllers\AdminController;
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="memo">{{ __('messages.memo') }}</label>
-                                                        <textarea class="form-control initialEmpty" id="yearMemo" name="fees[1][memo]" placeholder="Enter Memo"></textarea>
+                                                        <textarea class="form-control initialEmpty" id="yearMemo" name="fees[1][memo]" placeholder="{{ __('messages.enter_memo_here') }}"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,7 +311,7 @@ use \App\Http\Controllers\AdminController;
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <textarea class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterMemo{{$sem['id']}}" name="fees[2][{{$sem['id']}}][memo]" placeholder="Enter Memo"></textarea>
+                                                                    <textarea class="form-control checkbx_{{$sem['id']}} initialEmpty" disabled id="semesterMemo{{$sem['id']}}" name="fees[2][{{$sem['id']}}][memo]" placeholder="{{ __('messages.enter_memo_here') }}"></textarea>
                                                                 </td>
                                                             </tr>
                                                             @empty
@@ -368,7 +368,7 @@ use \App\Http\Controllers\AdminController;
                                                                 </td>
                                                                 <td><input type="text" disabled id="monthDate{{$mon['id']}}" class="form-control date-picker checkbx_{{$mon['id']}} initialEmpty" placeholder="{{ __('messages.yyyy_mm_dd') }}" name="fees[3][{{$mon['id']}}][date]">
                                                                 </td>
-                                                                <td>{{$mon['name']}}
+                                                                <td>{{ __('messages.' . strtolower($mon['name'])) }}
                                                                 </td>
                                                                 <td>
                                                                     <input type="hidden" value="" id="monthFeesGroupDetailsID{{$mon['id']}}" name="fees[3][{{$mon['id']}}][fees_group_details_id]">
@@ -383,7 +383,7 @@ use \App\Http\Controllers\AdminController;
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="Enter Memo" style="height:35px;"></textarea>
+                                                                    <textarea class="form-control checkbx_{{$mon['id']}} initialEmpty" disabled id="monthMemo{{$mon['id']}}" name="fees[3][{{$mon['id']}}][memo]" placeholder="{{ __('messages.enter_memo_here') }}" style="height:35px;"></textarea>
                                                                 </td>
                                                             </tr>
                                                             @empty

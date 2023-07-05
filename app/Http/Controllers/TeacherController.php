@@ -11,6 +11,7 @@ use Excel;
 use App\Exports\StaffAttendanceExport;
 use App\Exports\StudentAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Session\TokenMismatchException;
 
 class TeacherController extends Controller
 {
@@ -650,35 +651,40 @@ class TeacherController extends Controller
 
     public function savechat(Request $request)
     {
+        try {
 
-        $file = $request->file('file');
-        if ($file) {
-            $path = $file->path();
-            $data = file_get_contents($path);
-            $base64 = base64_encode($data);
-            $extension = $file->getClientOriginalExtension();
-        } else {
-            $base64 = null;
-            $extension = null;
+            $file = $request->file('file');
+            if ($file) {
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+            } else {
+                $base64 = null;
+                $extension = null;
+            }
+            $status = "Unread";
+            $data = [
+                'chat_fromid' => $request->chat_fromid,
+                'chat_fromname' => $request->chat_fromname,
+                'chat_fromuser' => $request->chat_fromuser,
+                'chat_toid' => $request->chat_toid,
+                'chat_toname' => $request->chat_toname,
+                'chat_touser' => $request->chat_touser,
+                'chat_content' => $request->chat_content,
+                'chat_status' => $status,
+                'chat_document' => $base64,
+                'chat_file_extension' => $extension
+            ];
+            // dd($data);       
+            $response = Helper::PostMethod(config('constants.api.tchat'), $data);
+            // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+            //dd($response);
+            return $response;
+        } catch (TokenMismatchException $e) {
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => 'CSRF token mismatch'], 419);
         }
-        $status = "Unread";
-        $data = [
-            'chat_fromid' => $request->chat_fromid,
-            'chat_fromname' => $request->chat_fromname,
-            'chat_fromuser' => $request->chat_fromuser,
-            'chat_toid' => $request->chat_toid,
-            'chat_toname' => $request->chat_toname,
-            'chat_touser' => $request->chat_touser,
-            'chat_content' => $request->chat_content,
-            'chat_status' => $status,
-            'chat_document' => $base64,
-            'chat_file_extension' => $extension
-        ];
-        // dd($data);       
-        $response = Helper::PostMethod(config('constants.api.tchat'), $data);
-        // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
-        //dd($response);
-        return $response;
     }
     // Save Chat
 
@@ -697,21 +703,25 @@ class TeacherController extends Controller
 
     public function chatshowlist(Request $request)
     {
+        try {
+            $data = [
+                'chat_fromid' => $request->chat_fromid,
+                'chat_fromname' => $request->chat_fromname,
+                'chat_fromuser' => $request->chat_fromuser,
+                'chat_toid' => $request->chat_toid,
+                'chat_toname' => $request->chat_toname,
+                'chat_touser' => $request->chat_touser
+            ];
+            //dd($data);       
 
-        $data = [
-            'chat_fromid' => $request->chat_fromid,
-            'chat_fromname' => $request->chat_fromname,
-            'chat_fromuser' => $request->chat_fromuser,
-            'chat_toid' => $request->chat_toid,
-            'chat_toname' => $request->chat_toname,
-            'chat_touser' => $request->chat_touser
-        ];
-        //dd($data);       
 
-
-        $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
-        //dd($response);
-        return $response;
+            $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
+            //dd($response);
+            return $response;
+        } catch (TokenMismatchException $e) {
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => 'CSRF token mismatch'], 419);
+        }
     }
     public function chatgroupshowlist(Request $request)
     {

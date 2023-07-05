@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
 @endsection
 @section('content')
-
 <!-- Start Content-->
 <div class="container-fluid">
 	<!-- start page title -->
@@ -30,9 +29,7 @@
 			<div class="card">
 				<div class="card-body">
 					@php $url=config('constants.image_url'); @endphp
-
 					<div class="media mb-3">
-
 						<img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42">
 						<div class="media-body">
 							<h5 class="mt-0 mb-0 font-15">
@@ -60,8 +57,9 @@
 
 					<h6 class="font-13 text-muted text-uppercase">{{ __('messages.group_chat') }}</h6>
 					<div class="p-2">
+
 						@foreach($group_list as $group)
-						<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers " onclick="my_function('{{$group['id']}}','{{$group['name']}}','','Group')">
+						<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','{{$group['name']}}','','Group')">
 							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
 							<span class="mb-0 mt-1">{{$group['name']}} Group</span>
 						</a>
@@ -107,10 +105,8 @@
 					<div class="row">
 						<div class="col">
 							<div data-simplebar style="max-height: 200px;">
-								
 								@foreach($teacher_list as $teacher)
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
-                                
                                     <div class="media p-2">
                                         <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
                                         <div class="media-body">
@@ -185,7 +181,7 @@
 								<input type="hidden" name="chat_toid" id="chat_toid" value="{{$parent['id']}}">
 								<input type="hidden" name="chat_toname" id="chat_toname" value="{{$parent['name']}}">
 								<input type="hidden" name="chat_touser" id="chat_touser" value="Parent">
-								<input type="hidden" name="branch_id" id="branch_id" value="1">
+								                             
 								<div class="row">
 									<div class="col mb-2 mb-sm-0">
 										<input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
@@ -199,7 +195,8 @@
 											<input type="file" id="homework_file" name="file" hidden onchange="Filevalidation()">
 											<a href="javascript: void(0);" class="emoji-btn btn btn-light">&#128512;</a>
 											<a href="javascript: void(0);" id='buttonid' class="btn btn-light"><i class="fe-paperclip" style="font-size:14px;color: #343a40;"></i></a>
-											<button type="button" id="chat_save" class="btn btn-success chat-send btn-block" ><i class='fe-send'></i></button>
+											<button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
+											<input type="hidden" name="csrftoken" id="csrftoken" value="{{ csrf_token() }}">  
 										</div>
 									</div> <!-- end col -->
 								</div> <!-- end row-->
@@ -210,7 +207,6 @@
 					<!-- end row -->
 				</div> <!-- end card-body -->
 			</div> <!-- end card -->
-			
 			@endif
 			@endforeach
 		</div>
@@ -221,7 +217,6 @@
 @endsection
 @section('scripts')
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('public/EmojiPicker/EmojiPicker.js') }}"></script>
@@ -248,7 +243,7 @@
 	window.addEventListener('focus', startTimer);
     // Get Chat List Start(Set Interval 5 Sec)
     function startTimer() {
-        var interval = 1000 * 5;
+        var interval = 1000 * 2;
         setInterval(getchatlist, interval);       
     }
 // Get Chat List End(Set Interval 5 Sec)
@@ -259,8 +254,6 @@
 	var tchatUrl = "{{ route('teacher.chat.add') }}";
 	$('#chat_save').on('click', function(e) {
 		e.preventDefault();
-
-
 		var form = this;
 		var chat_fromid = $("#chat_fromid").val();
 		var chat_fromname = $("#chat_fromname").val();
@@ -268,13 +261,11 @@
 		var chat_toid = $("#chat_toid").val();
 		var chat_toname = $("#chat_toname").val();
 		var chat_touser = $("#chat_touser").val();
-		var chat_content = $("#chat_content").val();
-		var branch_id = $("#branch_id").val();
+		var chat_content = $("#chat_content").val(); 
+        var csrftoken = $("#csrftoken").val();
 
-		var formData = new FormData();
-		
-        formData.append('token', token);        
-        formData.append('branch_id', branchID);
+        var formData = new FormData();
+        formData.append('_token', csrftoken);
 		formData.append('chat_fromid', chat_fromid);
 		formData.append('chat_fromname', chat_fromname);
 		formData.append('chat_fromuser', chat_fromuser);
@@ -293,7 +284,13 @@
 		//
 		if(chat_content!='')
         {
+            var token = "{{ Session::get('token') }}";
+			var csrfToken = $('meta[name="csrf-token"]').attr('content');
 		$.ajax({
+			headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Authorization': 'Bearer ' + token
+                },
 			url: tchatUrl,
 			method: 'post',
 			// data: new FormData(form),
@@ -301,6 +298,7 @@
 			processData: false,
 			dataType: 'json',
 			contentType: false,
+			Accept: 'application/json',
 			success: function(response) {
 				// alert(response.code);
 				if (response.code == 200) {
@@ -308,6 +306,16 @@
 					$("#chat_content").val("");
 					getchatlist();
 				} else {}
+			},
+			error: function(response) {
+				if (response.status === 419) {
+					// CSRF token mismatch, handle the error here
+					// You can refresh the page or show an error message
+					alert('419');
+				} else {
+					// Handle other errors
+					alert('in else');
+				}
 			}
 		});
 		}
@@ -322,37 +330,37 @@
 <script>
      // Delete Chat Start
 	var tchatdelUrl = "{{ route('teacher.chat.del') }}";
-
-	function deletechat(id) {
-		
-		var url = tchatdelUrl;
-		swal.fire({
-			title: 'Are you sure?',
-			html: 'You want to <b>delete</b> this Chat',
-			showCancelButton: true,
-			showCloseButton: true,
-			cancelButtonText: 'Cancel',
-			confirmButtonText: 'Yes, Delete',
-			cancelButtonColor: '#d33',
-			confirmButtonColor: '#556ee6',
-			width: 400,
-			allowOutsideClick: false
-		}).then(function(result) {
-			if (result.value) {
-				$.post(url, {
-					chat_id: id
-				}, function(data) {
-					if (data.code == 200) {
-						$("#chat_content").val("");
-						getchatlist();
-						toastr.success(data.message);
-					} else {
-						toastr.error(data.message);
-					}
-				}, 'json');
-			}
-		});
-	} // Delete Chat End
+    function deletechat(id)
+        {
+        var url = tchatdelUrl;
+        swal.fire({
+            title: 'Are you sure?',
+            html: 'You want to <b>delete</b> this Exam Term',
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    chat_id: id
+                }, function (data) {
+                    if (data.code == 200) {
+                        $("#chat_content").val("");
+                        getchatlist();
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    }
+	// Delete Chat End
 </script>
 
 <script>
@@ -360,11 +368,10 @@
     // Get Chat List function Start
 	
 	var chatlistUrl = "{{ route('teacher.chat.showlist') }}";
-	getchatlist();
+	
 
 	function getchatlist() {
-		// alert(1);
-
+		var csrftoken = $("#csrftoken").val();
 		var form = this;
 		var chat_fromid = $("#chat_fromid").val();
 		var chat_fromname = $("#chat_fromname").val();
@@ -373,11 +380,9 @@
 		var chat_toname = $("#chat_toname").val();
 		var chat_touser = $("#chat_touser").val();
 		var chat_content = $("#chat_content").val();
-		var branch_id = $("#branch_id").val();
 
-		var formData = new FormData();
-        formData.append('token', token);        
-        formData.append('branch_id', branchID);
+        var formData = new FormData();
+        formData.append('_token', csrftoken);
 		formData.append('chat_fromid', chat_fromid);
 		formData.append('chat_fromname', chat_fromname);
 		formData.append('chat_fromuser', chat_fromuser);
@@ -395,7 +400,13 @@
 		//
 		var searchbar = $("#searchbar").val();
 		if (searchbar == '') {
-			$.ajax({
+            var token = "{{ Session::get('token') }}";
+			var csrfToken = $('meta[name="csrf-token"]').attr('content');
+		$.ajax({
+			headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Authorization': 'Bearer ' + token
+                },
 				url: chatlistUrl,
 				method: 'post',
 				// data: new FormData(form),
@@ -403,9 +414,10 @@
 				processData: false,
 				dataType: 'json',
 				contentType: false,
+				Accept: 'application/json',
+				
 				success: function(response) {
-					console.log(response);
-
+					
 					if (response.code == 200) {
 
 						let chatfile = "";
@@ -445,7 +457,7 @@
 								chat_li += '</div>';
 								chat_li += '</div>';
 								chat_li += '<div class="conversation-actions dropdown">';
-								chat_li += '<button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="true"><i class="mdi mdi-dots-vertical font-16"></i></button>';
+								chat_li += '<button class="btn btn-sm btn-link" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical font-16"></i></button>';
 								chat_li += '<div class="dropdown-menu dropdown-menu-right">';
 								chat_li += '<a class="dropdown-item" href="#">Copy Message</a>';
 								chat_li += '<a class="dropdown-item" href="#">Edit</a>';
@@ -456,7 +468,8 @@
 							} else {
 								chat_li += '<li class="clearfix">';
 								chat_li += '<div class="chat-avatar">';
-								chat_li += '<i>' + tConvert(item.chattime) + '</i>';
+
+								chat_li += '<i>' + tConvert(item.chattime) + '<br> </i>';
 								chat_li += '</div>';
 								chat_li += '<div class="conversation-text">';
 								chat_li += '<div class="ctext-wrap">';
@@ -474,7 +487,6 @@
 								chat_li += '</div>';
 								chat_li += '</li>';
 							}
-
 						});
 						$('#showchat').html(chat_li);
 						//$('#showchat').append(chat_li);                              
@@ -485,6 +497,7 @@
 			});
 		}
 	}
+	 // Get Chat List function End
 	
 	function tConvert(time) {
 		// Check correct time format and split into components
@@ -506,7 +519,7 @@
 
 
      // Chat List Search Keywords Start
-	 function search_keyword() {
+	function search_keyword() {
         let input = document.getElementById('searchbar').value
         input = input.toLowerCase();
         let x = document.getElementsByClassName('clearfix');

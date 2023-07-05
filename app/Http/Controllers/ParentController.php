@@ -10,6 +10,7 @@ use App\Models\Task;
 use DataTables;
 use Excel;
 use App\Exports\ParentAttendanceExport;
+use Illuminate\Session\TokenMismatchException;
 
 class ParentController extends Controller
 {
@@ -606,14 +607,14 @@ class ParentController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-            
+
             $data = [
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
@@ -848,18 +849,18 @@ class ParentController extends Controller
     {
         $data = [
             'parent_id' => session()->get('ref_user_id'),
-			'to_id' => session()->get('ref_user_id'),
-			'role'=> "Parent"
+            'to_id' => session()->get('ref_user_id'),
+            'role' => "Parent"
         ];
-        
+
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_parentgroup_list'), $data);
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-        //dd($teacher_list);
+        // dd($teacher_list);
         return view('parent.chat.index', [
-            'teacher_list' => $teacher_list['data'],
-            'parent_list' => $parent_list['data'],
-            'group_list' => $group_list['data'],
+            'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
+            'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],
+            'group_list' => isset($group_list['data']) ? $group_list['data'] : [],
             'name' => session()->get('name'),
             'role' => "Parent",
             'tid' => session()->get('ref_user_id'),
@@ -867,81 +868,88 @@ class ParentController extends Controller
         return view('parent.chat.index');
     }
     //Get Teacher List
-   public function teacherlist()
-   {
-    $data = [
-        'parent_id' => session()->get('ref_user_id'),
-        'to_id' => session()->get('ref_user_id'),
-        'role'=> "Parent"
-    ];
-       $response = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
-       
-       return $response;
-   
-   }
-    public function savechat(Request $request)
+    public function teacherlist()
     {
-        
-        $file = $request->file('file');
-        if ($file) {
-            $path = $file->path();
-            $data = file_get_contents($path);
-            $base64 = base64_encode($data);
-            $extension = $file->getClientOriginalExtension();
-        } else {
-            $base64 = null;
-            $extension = null;
-        }
-        $status = "Unread";
         $data = [
-            'chat_fromid' => $request->chat_fromid,
-            'chat_fromname' => $request->chat_fromname,
-            'chat_fromuser' => $request->chat_fromuser,
-            'chat_toid' => $request->chat_toid,
-            'chat_toname' => $request->chat_toname,
-            'chat_touser' => $request->chat_touser,
-            'chat_content' => $request->chat_content,
-            'chat_status' => $status,
-            'chat_document' => $base64,
-            'chat_file_extension' => $extension
+            'parent_id' => session()->get('ref_user_id'),
+            'to_id' => session()->get('ref_user_id'),
+            'role' => "Parent"
         ];
-       // dd($data);       
-        $response = Helper::PostMethod(config('constants.api.tchat'), $data);
-       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
-        //dd($response);
+        $response = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
+
         return $response;
     }
-    // Save Chat
+    public function savechat(Request $request)
+    {
+        //dd ($request->all());
+        try {
+            // Your code here
+            $file = $request->file('file');
+            if ($file) {
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+            } else {
+                $base64 = null;
+                $extension = null;
+            }
+            $status = "Unread";
+            $data = [
+                'chat_fromid' => $request->chat_fromid,
+                'chat_fromname' => $request->chat_fromname,
+                'chat_fromuser' => $request->chat_fromuser,
+                'chat_toid' => $request->chat_toid,
+                'chat_toname' => $request->chat_toname,
+                'chat_touser' => $request->chat_touser,
+                'chat_content' => $request->chat_content,
+                'chat_status' => $status,
+                'chat_document' => $base64,
+                'chat_file_extension' => $extension
+            ];
+            $response = Helper::PostMethod(config('constants.api.pchat'), $data);
+            // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+            //dd($response);
+            return $response;
+        } catch (TokenMismatchException $e) {
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => 'CSRF token mismatch'], 419);
+        }
+    }
     public function deletechat(Request $request)
     {
         $data = [
             'chat_id' => $request->chat_id
-                ];
-       // dd($data);       
-        $response = Helper::PostMethod(config('constants.api.tdelchat'), $data);
-       // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
+        ];
+        // dd($data);       
+        $response = Helper::PostMethod(config('constants.api.pdelchat'), $data);
+        // $response = Helper::GetMethod(config('constants.api.chat_teacher_list'));
         //dd($response);
         return $response;
     }
     // Delete Chat
-    
+
     public function chatshowlist(Request $request)
     {
-        
-                $data = [
-            'chat_fromid' => $request->chat_fromid,
-            'chat_fromname' => $request->chat_fromname,
-            'chat_fromuser' => $request->chat_fromuser,
-            'chat_toid' => $request->chat_toid,
-            'chat_toname' => $request->chat_toname,
-            'chat_touser' => $request->chat_touser
-        ];
-        //dd($data);       
-       
-        
-         $response = Helper::PostMethod(config('constants.api.chatlists'), $data);
-        //dd($response);
-        return $response;
+        try {
+            $data = [
+                'chat_fromid' => $request->chat_fromid,
+                'chat_fromname' => $request->chat_fromname,
+                'chat_fromuser' => $request->chat_fromuser,
+                'chat_toid' => $request->chat_toid,
+                'chat_toname' => $request->chat_toname,
+                'chat_touser' => $request->chat_touser
+            ];
+            //dd($data);          
+
+
+            $response = Helper::PostMethod(config('constants.api.pchatlists'), $data);
+            //dd($response);
+            return $response;
+        } catch (TokenMismatchException $e) {
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => 'CSRF token mismatch'], 419);
+        }
     }
 
     public function analytic()
