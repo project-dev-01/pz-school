@@ -213,7 +213,7 @@
     window.addEventListener('focus', startTimer);
     // Get Chat List Start(Set Interval 5 Sec)
     function startTimer() {
-        var interval = 1000 * 2;
+        var interval = 5000;
         setInterval(getchatlist, interval);       
     }
 // Get Chat List End(Set Interval 5 Sec)

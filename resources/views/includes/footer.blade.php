@@ -214,7 +214,7 @@
     var yearly_lang = "{{ __('messages.yearly') }}";
     var semester_lang = "{{ __('messages.semester') }}";
     var monthly_lang = "{{ __('messages.monthly') }}";
-    
+
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     var language_name = "{{ Session::get('language_name') }}";
@@ -372,17 +372,14 @@
                 type: 'GET',
                 url: allLogout,
                 success: function(res) {
-                    if (res.code == 200) {
-                        toastr.error('Logout Successfully');
-                        setTimeout(function() {
-                            logoutFunc();
-                        }, 1000);
-                    }
-
+                    // console.log("Logout failed")
+                    // console.log(res)
                 },
                 error: function(err) {
-                    // console.log("eror")
-                    // console.log(err)
+                    toastr.error('Logout Successfully');
+                    setTimeout(function() {
+                        logoutFunc();
+                    }, 1000);
                 }
             });
         }, 8000);
@@ -460,6 +457,18 @@
             contentType: false,
             success: function(response) {
                 window.location.href = response.redirect_url;
+            },
+            error: function(err) {
+                console.log("'''logut error'''")
+                console.log(err);
+                // if (response.status === 419) {
+                //     // CSRF token mismatch, handle the error here
+                //     // You can refresh the page or show an error message
+                //     alert('419');
+                // } else {
+                //     // Handle other errors
+                //     alert('in else');
+                // }
             }
         });
     }
