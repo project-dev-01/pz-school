@@ -20,20 +20,8 @@
 	<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-	<link href="{{ asset('public/css/custom/error.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('public/css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<style>
-	.error419 {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		background: url(../public/images/error419.jpg);
-		background-size: cover;
-		min-height: 100vh;
-	}
-</style>
-
 <body class="loading auth-fluid-pages pb-0">
 
 	<div class="auth-fluid">
@@ -41,7 +29,7 @@
 		<div class="col-md-6" style="background: #F4F7FC;">
 			<div class="align-items-center d-flex h-100">
 				<div class="card-body">
-					<div class="text-left w-100 m-auto">
+					<div class="responsive">
 						<h1 class="eoppps">Page expired</h1>
 						<p class="etext">This mismatch error leads to expired session. <br>Kindly try again later on</p>
 						<a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
@@ -84,10 +72,8 @@
 
 		<!-- Auth fluid right content -->
 		<div class="col-md-6">
-			<div class="auth-fluid-right text-center error419">
-				<div class="">
-
-				</div>
+			<div class="container">
+			<img src="{{ asset('public/images/error419.jpg') }}" class="bg-image-content">
 			</div>
 		</div>
 		<!-- end Auth fluid right content -->

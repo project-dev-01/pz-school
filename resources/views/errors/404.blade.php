@@ -20,20 +20,8 @@
 	<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-	<link href="{{ asset('public/css/custom/error.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('public/css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<style>
-	.error404 {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		background: url(../public/images/error404.jpg);
-		background-size: cover;
-		min-height: 100vh;
-	}
-</style>
-
 <body class="loading auth-fluid-pages pb-0">
 
 	<div class="auth-fluid">
@@ -41,13 +29,13 @@
 		<div class="col-md-6" style="background: #F4F7FC;">
 			<div class="align-items-center d-flex h-100">
 				<div class="card-body">
-					<div class="text-left w-100 m-auto">
+					<div class="responsive">
 						<h1 class="eoppps">Page Not Found</h1>
 						<p class="etext">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
 						<a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
 						<br>
 						<a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-							<span>Go to Login</span>
+							<span class="res">Go to Login</span>
 						</a>
 						@if(Session::get('role_id') == '1')
 						<form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
@@ -84,11 +72,9 @@
 
 		<!-- Auth fluid right content -->
 		<div class="col-md-6">
-			<div class="auth-fluid-right text-center error404">
-				<div class="">
-
-				</div>
-			</div>
+			<div class="container">
+				<img src="{{ asset('public/images/error404.jpg') }}" class="bg-image-content">
+</div>
 		</div>
 		<!-- end Auth fluid right content -->
 	</div>
