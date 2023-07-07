@@ -14,7 +14,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">{{ __('messages.chat') }}</li>
+                        <li class="breadcrumb-item active">{{ __('messages.chat') }} </li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{ __('messages.chat') }}</h4>
@@ -194,6 +194,7 @@
     let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
     
     var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+    var scrollDownShow = 1;
     function my_function(toid, toname,toimage, touser) 
     {
         $('#toname').html(toname);
@@ -204,6 +205,7 @@
         $('#chat_touser').val(touser);
         toimg=(toimage && imgurl+toimage)?imgurl+toimage:defaultimg;
         $('#toimage').prop('src', toimg)
+		scrollDownShow = 1;
         getchatlist();
     }
     document.getElementById('buttonid').addEventListener('click', openDialog);
@@ -274,6 +276,7 @@
                     if (response.code == 200) {
                         toastr.success(response.message);
                         $("#chat_content").val("");
+		                scrollDownShow = 1;
                         getchatlist();
                     } else {}
                 },
@@ -320,6 +323,7 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                 }, function (data) {
                     if (data.code == 200) {
                         $("#chat_content").val("");
+		                scrollDownShow = 1;
                         getchatlist();
                         toastr.success(data.message);
                     } else {
@@ -455,12 +459,20 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                         });
                         //alert(chatdatearr);
                         $('#showchat').html(chat_li);
+                        
+						if(scrollDownShow==1){
+							scroll();             
+							scrollDownShow = 2;	
+						}                
                     } else {}
                 }
             });
         }
     }
      // Get Chat List function End
+	function scroll() {
+        document.getElementById("showchat").scrollIntoView({ block: "end" });
+    }
 
     function tConvert(time) {
         // Check correct time format and split into components

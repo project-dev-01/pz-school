@@ -224,6 +224,7 @@
 	let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
     
     var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+	var scrollDownShow = 1;
     function my_function(toid, toname,toimage, touser) 
     {
         $('#toname').html(toname);
@@ -234,6 +235,7 @@
         $('#chat_touser').val(touser);
         toimg=(toimage && imgurl+toimage)?imgurl+toimage:defaultimg;
         $('#toimage').prop('src', toimg)
+		scrollDownShow = 1;
         getchatlist();
     }
 	document.getElementById('buttonid').addEventListener('click', openDialog);
@@ -304,6 +306,7 @@
 				if (response.code == 200) {
 					toastr.success(response.message);
 					$("#chat_content").val("");
+					scrollDownShow = 1;
 					getchatlist();
 				} else {}
 			},
@@ -351,6 +354,7 @@
                 }, function (data) {
                     if (data.code == 200) {
                         $("#chat_content").val("");
+						scrollDownShow = 1;
                         getchatlist();
                         toastr.success(data.message);
                     } else {
@@ -489,7 +493,11 @@
 							}
 						});
 						$('#showchat').html(chat_li);
-						//$('#showchat').append(chat_li);                              
+						//$('#showchat').append(chat_li);
+						if(scrollDownShow==1){
+							scroll();             
+							scrollDownShow = 2;	
+						}
 					} else {
 
 					}
@@ -498,6 +506,9 @@
 		}
 	}
 	 // Get Chat List function End
+	function scroll() {
+        document.getElementById("showchat").scrollIntoView({ block: "end" });
+    }
 	
 	function tConvert(time) {
 		// Check correct time format and split into components
@@ -585,6 +596,5 @@
             closeButton: true,
             //specialButtons: green
         });
-
     </script>
 @endsection
