@@ -34,33 +34,37 @@
 						<p class="etext">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
 						<a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
 						<br>
-						<a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-							<span class="res">Go to Login</span>
-						</a>
-						@if(Session::get('role_id') == '1')
-						<form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
-						@elseif(Session::get('role_id') == '3')
-						<form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
-						@elseif(Session::get('role_id') == '4')
-						<form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
-						@elseif(Session::get('role_id') == '5')
-						<form id="logout-form" action="{{ route('parent.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
-						@elseif(Session::get('role_id') == '6')
-						<form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
+						@if(Session::get('role_id'))
+							<a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+								<span>Go to Login</span>
+							</a>
+							@if(Session::get('role_id') == '1')
+							<form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@elseif(Session::get('role_id') == '3')
+							<form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@elseif(Session::get('role_id') == '4')
+							<form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@elseif(Session::get('role_id') == '5')
+							<form id="logout-form" action="{{ route('parent.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@elseif(Session::get('role_id') == '6')
+							<form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@else
+							<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+								@csrf
+							</form>
+							@endif
 						@else
-						<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-							@csrf
-						</form>
+						<a class="link_404" href="{{ url()->previous() }}">Back</a>
 						@endif
 						<br>
 						<a href="{{url('/')}}" class="link_404">Go to Home</a>

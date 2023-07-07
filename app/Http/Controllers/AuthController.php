@@ -563,13 +563,11 @@ class AuthController extends Controller
     }
     public function authenticateParent(Request $request)
     {
-
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
         ]);
-        // dd($response);
         $userDetails = $response->json();
         $user_name = "";
         $request->session()->regenerate();

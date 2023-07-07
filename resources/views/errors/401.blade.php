@@ -34,6 +34,7 @@
                         <h1 class="eoppps">Unauthorized</h1>
                         <p class="etext">You are not authorized to access this page</p>
                         <!-- <a href="{{url('/')}}" class="link_404">Go to Login</a> -->
+                        @if(Session::get('role_id'))
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>
@@ -61,6 +62,9 @@
                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        @endif
+                        @else
+                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
                         @endif
                         <br>
                         <a href="{{url('/')}}" class="link_404">Go to Home</a>

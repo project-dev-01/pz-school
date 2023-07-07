@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title',' ' . __('messages.dashboard') . '')
 @section('calendar')
 <!-- full calendar css start-->
 <link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
@@ -770,7 +770,7 @@
                                     <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
                                     @empty
                                     @endforelse
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -781,7 +781,7 @@
                                     <option value="0">{{ __('messages.select_session') }}</option>
                                     @forelse($session as $ses)
                                     <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                    
+
                                     @empty
                                     @endforelse
                                 </select>
@@ -1052,6 +1052,10 @@
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
     // leave apply
     var StudentDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
+    // Get PDF Footer Text
+    var leave_status_txt = "{{ __('messages.leave_status') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>

@@ -22,6 +22,7 @@
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
 </head>
+
 <body class="loading auth-fluid-pages pb-0">
 
     <div class="auth-fluid">
@@ -32,6 +33,7 @@
                     <div class="responsive">
                         <h1 class="eopppss">Access Denied</h1>
                         <p class="etextt">Your request to access this page has been denied. <br>Seems like you entry is not being permitted.</p>
+                        @if(Session::get('role_id'))
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>
@@ -59,6 +61,9 @@
                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        @endif
+                        @else
+                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
                         @endif
                         <br>
                         <a href="{{url('/')}}" class="link_404">Go to Home</a>

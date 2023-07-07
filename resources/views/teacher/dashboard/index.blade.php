@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Dashboard')
+@section('title',' ' .  __('messages.dashboard') . '')
 @section('calendar')
 <!-- full calendar css start-->
 <link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
@@ -1106,6 +1106,10 @@
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
     var examByStudent = "{{ config('constants.api.exam_by_student') }}";
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
+    // Get PDF Footer Text
+    var header_txt = "{{ __('messages.assign') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('public/js/custom/teacher_calendor.js') }}"></script> -->

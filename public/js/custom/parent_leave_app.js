@@ -92,7 +92,7 @@ $(function () {
     });
     $('#leave_file').change(function () {
         var file = $('#leave_file')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#file_name').text("File greater than 2Mb");
             $("#file_name").addClass("error");
             $('#leave_file').val('');
@@ -105,12 +105,12 @@ $(function () {
     $(document).on('change', '.reissue_file', function () {
         console.log(12343333)
         var file = $(this)[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             toastr.error("File greater than 2Mb");
             $(this).val('');
         }
     });
-    
+
     // reverse dob
     function convertDigitIn(str) {
         return str.split('-').reverse().join('-');
@@ -129,11 +129,11 @@ $(function () {
             bDestroy: true,
             info: true,
             // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2'l><'col-sm-2'B><'col-sm-8'f>>" +
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -156,6 +156,65 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
+                },
+                {
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+                    title: function () {
+                        return leave_status_txt;
+                    },
+
+                    customize: function (doc) {
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        // Create a Header
+                        // doc['title']=(function(page, pages) {
+                        //     return {
+                        //         columns: [
+
+                        //             {
+                        //                 // This is the right column
+                        //                 bold: true,
+                        //                 fontSize: 20,
+                        //                 color: 'Blue',
+                        //                 fillColor: '#fff',
+                        //                 alignment: 'center',
+                        //                 text: leave_status_txt
+                        //             }
+                        //         ],
+                        //         margin:  [50, 15,0,0]
+                        //     }
+                        // });
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
+                    }
+
                 }
             ],
             ajax: stutdentleaveList,
@@ -275,7 +334,7 @@ $(function () {
                         if (row.document) {
                             return '-';
                         } else {
-                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">'+upload_lang+'</a></div>';
+                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">' + upload_lang + '</a></div>';
                         }
                     }
                 },

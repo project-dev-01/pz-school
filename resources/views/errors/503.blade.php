@@ -33,6 +33,7 @@
                     <div class="responsive">
                         <h1 class="eoppps">Service Unavailable</h1>
                         <p class="etext">This page should clearly state that the service is temporarily unavailable and provide some explanation for the inconvenience<br> It's essential to maintain transparency and reassure users that the issue is temporary</p>
+                        @if(Session::get('role_id'))
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>
@@ -60,6 +61,9 @@
                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        @endif
+                        @else
+                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
                         @endif
                         <br>
                         <a href="{{url('/')}}" class="link_404">Go to Home</a>

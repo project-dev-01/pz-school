@@ -33,6 +33,7 @@
                     <div class="responsive">
                         <h1 class="eoppps">Internal Server<br> Error</h1>
                         <p class="etext">We currently having an internal problem with our<br> server. This might take a while.</p>
+                        @if(Session::get('role_id'))
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>
@@ -60,6 +61,9 @@
                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
+                        @endif
+                        @else
+                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
                         @endif
                         <br>
                         <a href="{{url('/')}}" class="link_404">Go to Home</a>

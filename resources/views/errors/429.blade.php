@@ -36,6 +36,7 @@
                         <a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
                         <br>
                         <!-- <a href="{{url('/')}}" class="link_404">Go to Login</a> -->
+                        @if(Session::get('role_id'))
                         <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span>Go to Login</span>
                         </a>
@@ -64,8 +65,10 @@
                             @csrf
                         </form>
                         @endif
+                        @else
+                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
+                        @endif
                         <br>
-                        
                         <a href="{{url('/')}}" class="link_404">Go to Home</a>
                     </div>
                 </div> <!-- end .card-body -->

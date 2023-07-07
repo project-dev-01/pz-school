@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Leave Application')
+@section('title',' ' . __('messages.leave_application') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
@@ -260,6 +260,10 @@ width: 14.3em;
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";
     // leave apply
     var StudentDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
+    // Get PDF Footer Text
+    var leave_status_txt = "{{ __('messages.leave_status') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_leave_app.js') }}"></script>
