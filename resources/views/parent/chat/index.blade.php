@@ -14,7 +14,7 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">{{ __('messages.chat') }} </li>
+                        <li class="breadcrumb-item active">{{ __('messages.chat') }}</li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{ __('messages.chat') }}</h4>
@@ -90,6 +90,7 @@
                                         </div>
                                     </div>
                                 </a>
+								
                                 @endforeach
 
                             </div> <!-- end slimscroll-->
@@ -125,10 +126,6 @@
                                     <span class="mdi mdi-magnify"></span>
                                 </div>
                             </form>
-
-                            <!--<a href="javascript: void(0);" class="text-reset font-19 py-1 px-2 d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Chat">
-                                <i class="fe-trash-2"></i>
-                            </a>-->
                         </div>
                     </div>
                 </div>
@@ -168,9 +165,11 @@
                                             <button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
                                             <input type="hidden" name="csrftoken" id="csrftoken" value="{{ csrf_token() }}">
                                         </div>
-                                    </div> <!-- end col -->
+									</div>
+									<!-- end col -->
                                 </div> <!-- end row-->
-                            
+								<br />
+								<span id="fileloadstatus"></span> 
                             </div>
                         </div> <!-- end col-->
                     </div>
@@ -254,8 +253,6 @@
 		// }
 		// return false;
 		//
-		if(chat_content!='')
-        {
             var token = "{{ Session::get('token') }}";
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
 		$.ajax({
@@ -264,7 +261,7 @@
                 'Authorization': 'Bearer ' + token
                 },
                 url: tchatUrl,
-                method: 'POST',
+			    method: 'post',
                 // data: new FormData(form),
                 data: formData,
                 processData: false,
@@ -276,6 +273,8 @@
                     if (response.code == 200) {
                         toastr.success(response.message);
                         $("#chat_content").val("");
+					$("#homework_file").val("");
+					$("#fileloadstatus").html("");
 		                scrollDownShow = 1;
                         getchatlist();
                     } else {}
@@ -284,24 +283,21 @@
                     if (response.status === 419) {
                         // CSRF token mismatch, handle the error here
                         // You can refresh the page or show an error message
-                        alert('419');
+					//alert('419');
                     } else {
                         // Handle other errors
-                        alert('in else');
+					toastr.error("Please Enter the message");
                     }
                 }
-                
             });
-        }
-        else
-        {
-            toastr.error("Please Enter the message"); 
-        }
+
     });
      // Save Chat End
+</script>
 
-
-var tchatdelUrl = "{{ route('parent.chat.del') }}";
+<script>
+    // Delete Chat Start
+    var tchatdelUrl = "{{ route('parent.chat.del') }}";
     function deletechat(id)
         {
         var url = tchatdelUrl;
@@ -333,8 +329,10 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
             }
         });
     }
+	// Delete Chat End
+</script>
 
-
+<script>
     
     // Get Chat List function Start
     var chatlistUrl = "{{ route('parent.chat.showlist') }}";
@@ -391,7 +389,7 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
 
                         let chatfile = "";
                         let msgread = "";
-                        let chatdatearr = [];
+						let chatdate = [];
                         let chat_li = "";
                         let chatarray = response.data;
                         chatarray.reverse();
@@ -403,18 +401,20 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                             } else {
                                 msgread = '<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             }
-                            if (($.inArray(item.chatdate, chatdatearr)) < 0) {
+							if (($.inArray(item.chatdate, chatdate)) < 0) {
                                 chat_li += ' <li class="clearfix"> <center> ' + item.chatdate + '</center></li>';
-                                chatdatearr.push(item.chatdate);
+								chatdate.push(item.chatdate);
+							}
+							if (item.chat_content == null) {
+								item.chat_content = " ";
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><button type="button" onclick=showfile("' + item.chat_document + '") class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></button>';
+								chatfile = '<br><a href="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
                                 chat_li += '<div class="chat-avatar">';
-                                //chat_li +=' <img src="'+fromimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
                                 chat_li += '<i>' + tConvert(item.chattime) + '</i>';
                                 chat_li += msgread;
                                 chat_li += '<i class="fe-trash-2" onclick="deletechat(' + item.id + ')"></i>';
@@ -437,7 +437,7 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                             } else {
                                 chat_li += '<li class="clearfix">';
                                 chat_li += '<div class="chat-avatar">';
-                                // chat_li +=' <img src="'+imgurl+toimg+'" class="rounded" alt="'+item.chat_fromname+'" />';
+
                                 chat_li += '<i>' + tConvert(item.chattime) + '<br> </i>';
                                 chat_li += '</div>';
                                 chat_li += '<div class="conversation-text">';
@@ -457,14 +457,15 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                                 chat_li += '</li>';
                             }
                         });
-                        //alert(chatdatearr);
                         $('#showchat').html(chat_li);
-                        
+						//$('#showchat').append(chat_li);                              
 						if(scrollDownShow==1){
 							scroll();             
 							scrollDownShow = 2;	
 						}                
-                    } else {}
+					} else {
+
+					}
                 }
             });
         }
@@ -487,7 +488,7 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
     }
 
     function showfile(filename) {
-        var fileurl="{{ url($url.'/public/admin-documents/chats/') }}";
+        var fileurl="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}";
         window.open(fileurl+ filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
         return false;
     }  
@@ -543,6 +544,9 @@ var tchatdelUrl = "{{ route('parent.chat.del') }}";
                         text: 'Please select a file less than 10MB.!'
                     })
                 }
+				var  finame='File: '+fi.files.item(i).name;
+      			$('#fileloadstatus').html(finame);
+
             }
         }
     }

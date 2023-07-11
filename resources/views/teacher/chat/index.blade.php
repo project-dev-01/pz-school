@@ -106,6 +106,7 @@
 						<div class="col">
 							<div data-simplebar style="max-height: 200px;">
 								@foreach($teacher_list as $teacher)
+								@if($tid!=$teacher['staff_id'])
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
                                     <div class="media p-2">
                                         <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
@@ -123,6 +124,7 @@
                                         </div>
                                     </div>
                                 </a>
+								@endif
                                 @endforeach
 
 							</div> <!-- end slimscroll-->
@@ -198,9 +200,11 @@
 											<button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
 											<input type="hidden" name="csrftoken" id="csrftoken" value="{{ csrf_token() }}">  
 										</div>
-									</div> <!-- end col -->
+									</div>
+									<!-- end col -->
 								</div> <!-- end row-->
-							
+								<br />
+								<span id="fileloadstatus"></span> 
 							</div>
 						</div> <!-- end col-->
 					</div>
@@ -284,8 +288,6 @@
 		// }
 		// return false;
 		//
-		if(chat_content!='')
-        {
             var token = "{{ Session::get('token') }}";
 			var csrfToken = $('meta[name="csrf-token"]').attr('content');
 		$.ajax({
@@ -306,6 +308,8 @@
 				if (response.code == 200) {
 					toastr.success(response.message);
 					$("#chat_content").val("");
+					$("#homework_file").val("");
+					$("#fileloadstatus").html("");
 					scrollDownShow = 1;
 					getchatlist();
 				} else {}
@@ -314,18 +318,14 @@
 				if (response.status === 419) {
 					// CSRF token mismatch, handle the error here
 					// You can refresh the page or show an error message
-					alert('419');
+					//alert('419');
 				} else {
 					// Handle other errors
-					alert('in else');
+					toastr.error("Please Enter the message");
 				}
 			}
 		});
-		}
-        else
-        {
-            toastr.error("Please Enter the message"); 
-        }
+
 	});
  // Save Chat End
 </script>
@@ -443,9 +443,12 @@
 								chat_li += ' <li class="clearfix"> <center> ' + item.chatdate + '</center></li>';
 								chatdate.push(item.chatdate);
 							}
+							if (item.chat_content == null) {
+								item.chat_content = " ";
+							}
 
 							if (item.chat_document != null) {
-								chatfile = '<br><button type="button" onclick=showfile("' + item.chat_document + '") class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></button>';
+								chatfile = '<br><a href="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
 							}
 							if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
 								chat_li += '<li class="clearfix odd">';
@@ -493,7 +496,7 @@
 							}
 						});
 						$('#showchat').html(chat_li);
-						//$('#showchat').append(chat_li);
+						//$('#showchat').append(chat_li);                              
 						if(scrollDownShow==1){
 							scroll();             
 							scrollDownShow = 2;	
@@ -523,7 +526,7 @@
 	}
 
 	function showfile(filename) {
-        var fileurl="{{ url($url.'/public/admin-documents/chats/') }}";
+        var fileurl="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}";
         window.open(fileurl+ filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
         return false;
     }
@@ -579,6 +582,9 @@
 						text: 'Please select a file less than 10MB.!'
 					})
 				}
+				var  finame='File: '+fi.files.item(i).name;
+      			$('#fileloadstatus').html(finame);
+
 			}
 		}
 	}
@@ -596,5 +602,6 @@
             closeButton: true,
             //specialButtons: green
         });
+
     </script>
 @endsection
