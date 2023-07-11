@@ -609,9 +609,14 @@ class TeacherController extends Controller
             'role' => "Teacher"
         ];
 
+        $teacherData = [
+            'id' => session()->get('ref_user_id'),
+            'role' => "Teacher"
+        ];
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
-        $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $data);
-        $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $data);
+        $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $teacherData);
+        $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $teacherData);
+        // dd($parent_list);
         return view('teacher.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],

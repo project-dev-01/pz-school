@@ -71,7 +71,7 @@
 					<!-- users -->
 					<div class="row">
 						<div class="col">
-							<div data-simplebar style="max-height: 200px;">
+							<div data-simplebar style="max-height: 200px;" id="parent_list">
 								
 								@foreach($parent_list as $parent)								
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$parent['id']}}','{{$parent['name']}}','{{$parent['photo']}}','Parent')">
@@ -104,9 +104,8 @@
 					<!-- users -->
 					<div class="row">
 						<div class="col">
-							<div data-simplebar style="max-height: 200px;">
+							<div data-simplebar style="max-height: 200px;" id="teacher_list">
 								@foreach($teacher_list as $teacher)
-								@if($tid!=$teacher['staff_id'])
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
                                     <div class="media p-2">
                                         <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
@@ -124,7 +123,6 @@
                                         </div>
                                     </div>
                                 </a>
-								@endif
                                 @endforeach
 
 							</div> <!-- end slimscroll-->
@@ -204,7 +202,7 @@
 									<!-- end col -->
 								</div> <!-- end row-->
 								<br />
-								<span id="fileloadstatus"></span> 
+								<span id="fileloadstatus"></span>
 							</div>
 						</div> <!-- end col-->
 					</div>
@@ -227,7 +225,12 @@
 <script>
 	let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
     
+    var chatTeacherList = "{{ config('constants.api.chat_teacher_list') }}";
+    var chatParentList = "{{ config('constants.api.chat_parent_list') }}";
+
     var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+	
+    var intervalId;
 	var scrollDownShow = 1;
     function my_function(toid, toname,toimage, touser) 
     {
@@ -249,8 +252,12 @@
 	window.addEventListener('focus', startTimer);
     // Get Chat List Start(Set Interval 5 Sec)
     function startTimer() {
+		if (intervalId) {
+			clearInterval(intervalId)
+			intervalId = null
+		}
         var interval = 5000;
-        setInterval(getchatlist, interval);       
+        intervalId = setInterval(getchatlist, interval);
     }
 // Get Chat List End(Set Interval 5 Sec)
 </script>
@@ -431,8 +438,15 @@
 						let chatarray = response.data;
 						chatarray.reverse();
 
+						// var chatStatus = 0;
 						$.each(chatarray, function(i, item) {
 							chatfile = "";
+							// console.log('ch',chatStatus);
+							// console.log('item',item.chat_status);
+							// if (item.chat_status == 'Unread') {
+							// 	chatStatus++;
+							// }
+							// console.log('ch2',chatStatus);
 							// msgread= =(item.chat_status=='Unread')?'read.png':'unread.png';
 							if (item.chat_status == 'Unread') {
 								msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
@@ -496,11 +510,17 @@
 							}
 						});
 						$('#showchat').html(chat_li);
-						//$('#showchat').append(chat_li);                              
+						//$('#showchat').append(chat_li);
+						// console.log('chatStats',chatStatus)
 						if(scrollDownShow==1){
 							scroll();             
+							getChatNotifications();
 							scrollDownShow = 2;	
 						}
+						// if(chatStatus > 0) {
+							
+						// 	scroll();      
+						// }
 					} else {
 
 					}
@@ -602,6 +622,101 @@
             closeButton: true,
             //specialButtons: green
         });
-
     </script>
+	<script>
+		$(document).ready(function() {
+
+			var sTimeOut = setInterval(function() {
+				getChatNotifications();
+			}, 8000);
+		});
+
+		$('#test').click(function() {
+			
+            // getChatNotifications();
+        });
+        function getChatNotifications() {
+            var staff_id = "{{ Session::get('ref_user_id') }}";
+            $.ajax({
+                type: 'GET',
+                url: chatTeacherList,
+				data: {
+					id : staff_id,
+					role : "Teacher", 
+					token: token, 
+					branch_id: branchID
+				},
+                success: function(res) {
+					if (res.code == 200) {
+						console.log('res',res.data)
+						var teachers = "";
+						var photo = "";
+						$.each(res.data, function (key, val) {
+						teacherImg = (val.photo && imgurl+val.photo) ? imgurl+val.photo:defaultimg;
+
+						var teacher = 'Teacher';
+						var func = "my_function('"+val.staff_id+"','"+val.name+"','"+photo+"','"+teacher+"')";
+						if(val.photo){
+							photo = val.photo;
+						}
+							teachers += '<a href="javascript:void(0);" class="text-body chatusers" onclick="'+func+'"><div class="media p-2"><img src="'+teacherImg+'" class="mr-2 rounded-circle" height="42" alt="Maria C" /><div class="media-body"><h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12"></span>'+val.name+'</h5>';
+								if(val.msgcount>0) {
+									teachers += '<p class="mt-1 mb-0 text-muted font-14"><span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher'+val.staff_id+'">'+val.msgcount+'</span></span></p>';
+								}
+                            teachers += '</div></div></a>';			
+						});
+						
+						$('#teacher_list .simplebar-content').html("");
+						$('#teacher_list .simplebar-content').html(teachers);	
+					}
+
+					
+                },
+                error: function(err) {
+                    // console.log("eror")
+                    // console.log(err)
+                }
+            });
+			$.ajax({
+                type: 'GET',
+                url: chatParentList,
+				data: {
+					id : staff_id,
+					role : "Teacher", 
+					token: token, 
+					branch_id: branchID
+				},
+                success: function(res) {
+					if (res.code == 200) {
+						console.log('res',res.data)
+						var parents = "";
+						var photo = "";
+						$.each(res.data, function (key, val) {
+						parentImg = (val.photo && imgurl+val.photo) ? imgurl+val.photo:defaultimg;
+
+						var parent = 'Parent';
+						var func = "my_function('"+val.id+"','"+val.name+"','"+photo+"','"+parent+"')";
+						if(val.photo){
+							photo = val.photo;
+						}
+							parents += '<a href="javascript:void(0);" class="text-body chatusers" onclick="'+func+'"><div class="media p-2"><img src="'+parentImg+'" class="mr-2 rounded-circle" height="42" alt="Maria C" /><div class="media-body"><h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12"></span>'+val.name+'</h5>';
+								if(val.msgcount>0) {
+									parents += '<p class="mt-1 mb-0 text-muted font-14"><span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Parent'+val.staff_id+'">'+val.msgcount+'</span></span></p>';
+								}
+                            parents += '</div></div></a>';			
+						});
+						
+						$('#parent_list .simplebar-content').html("");
+						$('#parent_list .simplebar-content').html(parents);	
+					}
+
+					
+                },
+                error: function(err) {
+                    // console.log("eror")
+                    // console.log(err)
+                }
+            });
+        }
+	</script>
 @endsection

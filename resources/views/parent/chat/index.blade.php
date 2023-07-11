@@ -71,8 +71,8 @@
                     <!-- users -->
                     <div class="row">
                         <div class="col">
-                            <div data-simplebar style="max-height: 200px;">
-                            @foreach($teacher_list as $teacher)
+                            <div data-simplebar style="max-height: 200px;" id="teacher_list">
+                                @foreach($teacher_list as $teacher)
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
                                     <div class="media p-2">
                                         <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
@@ -81,16 +81,15 @@
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
                                                 {{$teacher['name']}}
                                             </h5>
-                                            @if($teacher['msgcount']>0) 
-                                                <p class="mt-1 mb-0 text-muted font-14">
-                                                    <span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span></span>
-                                                    <!--<span class="w-75">Thanks</span>-->
-                                                </p> 
+                                            @if($teacher['msgcount']>0)
+                                            <p class="mt-1 mb-0 text-muted font-14">
+                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span></span>
+                                                <!--<span class="w-75">Thanks</span>-->
+                                            </p>
                                             @endif
                                         </div>
                                     </div>
                                 </a>
-								
                                 @endforeach
 
                             </div> <!-- end slimscroll-->
@@ -141,14 +140,14 @@
                     <div class="row">
                         <div class="col">
                             <div class="mt-2 bg-light p-3 rounded">
-                            
+
                                 <input type="hidden" name="chat_fromid" id="chat_fromid" value="{{$tid}}">
                                 <input type="hidden" name="chat_fromname" id="chat_fromname" value="{{$name}}">
                                 <input type="hidden" name="chat_fromuser" id="chat_fromuser" value="{{$role}}">
                                 <input type="hidden" name="chat_toid" id="chat_toid" value="{{$teacher['staff_id']}}">
                                 <input type="hidden" name="chat_toname" id="chat_toname" value="{{$teacher['name']}}">
                                 <input type="hidden" name="chat_touser" id="chat_touser" value="Teacher">
-                                
+
                                 <div class="row">
                                     <div class="col mb-2 mb-sm-0">
                                         <input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
@@ -165,11 +164,11 @@
                                             <button type="button" id="chat_save" class="btn btn-success chat-send btn-block"><i class='fe-send'></i></button>
                                             <input type="hidden" name="csrftoken" id="csrftoken" value="{{ csrf_token() }}">
                                         </div>
-									</div>
-									<!-- end col -->
+                                    </div>
+                                    <!-- end col -->
                                 </div> <!-- end row-->
-								<br />
-								<span id="fileloadstatus"></span> 
+                                <br />
+                                <span id="fileloadstatus"></span>
                             </div>
                         </div> <!-- end col-->
                     </div>
@@ -191,115 +190,123 @@
 <script src="{{ asset('public/EmojiPicker/EmojiPicker.js') }}"></script>
 <script>
     let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
-    
-    var defaultimg= "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+
+    var chatTeacherList = "{{ config('constants.api.chat_teacher_list') }}";
+
+    var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+    var intervalId;
     var scrollDownShow = 1;
-    function my_function(toid, toname,toimage, touser) 
-    {
+
+    function my_function(toid, toname, toimage, touser) {
         $('#toname').html(toname);
         $('#usertype').html(touser);
 
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
-        toimg=(toimage && imgurl+toimage)?imgurl+toimage:defaultimg;
+        toimg = (toimage && imgurl + toimage) ? imgurl + toimage : defaultimg;
         $('#toimage').prop('src', toimg)
-		scrollDownShow = 1;
+        scrollDownShow = 1;
         getchatlist();
     }
     document.getElementById('buttonid').addEventListener('click', openDialog);
+
     function openDialog() {
         document.getElementById('homework_file').click();
     }
     window.addEventListener('focus', startTimer);
     // Get Chat List Start(Set Interval 5 Sec)
     function startTimer() {
+		if (intervalId) {
+			clearInterval(intervalId)
+			intervalId = null
+		}
         var interval = 5000;
-        setInterval(getchatlist, interval);       
+        intervalId = setInterval(getchatlist, interval);
     }
-// Get Chat List End(Set Interval 5 Sec)
+    // Get Chat List End(Set Interval 5 Sec)
 </script>
 
 <script>
     // Save Chat Start
     var tchatUrl = "{{ route('parent.chat.add') }}";
-	$('#chat_save').on('click', function(e) {
-		e.preventDefault();
-		var form = this;
-		var chat_fromid = $("#chat_fromid").val();
-		var chat_fromname = $("#chat_fromname").val();
-		var chat_fromuser = $("#chat_fromuser").val();
-		var chat_toid = $("#chat_toid").val();
-		var chat_toname = $("#chat_toname").val();
-		var chat_touser = $("#chat_touser").val();
-		var chat_content = $("#chat_content").val(); 
+    $('#chat_save').on('click', function(e) {
+        e.preventDefault();
+        var form = this;
+        var chat_fromid = $("#chat_fromid").val();
+        var chat_fromname = $("#chat_fromname").val();
+        var chat_fromuser = $("#chat_fromuser").val();
+        var chat_toid = $("#chat_toid").val();
+        var chat_toname = $("#chat_toname").val();
+        var chat_touser = $("#chat_touser").val();
+        var chat_content = $("#chat_content").val();
         var csrftoken = $("#csrftoken").val();
 
         var formData = new FormData();
         formData.append('_token', csrftoken);
-		formData.append('chat_fromid', chat_fromid);
-		formData.append('chat_fromname', chat_fromname);
-		formData.append('chat_fromuser', chat_fromuser);
-		formData.append('chat_toid', chat_toid);
-		formData.append('chat_toname', chat_toname);
-		formData.append('chat_touser', chat_touser);
-		formData.append('chat_content', chat_content);
+        formData.append('chat_fromid', chat_fromid);
+        formData.append('chat_fromname', chat_fromname);
+        formData.append('chat_fromuser', chat_fromuser);
+        formData.append('chat_toid', chat_toid);
+        formData.append('chat_toname', chat_toname);
+        formData.append('chat_touser', chat_touser);
+        formData.append('chat_content', chat_content);
 
-		// formData.append('file', file);
-		formData.append('file', $('input[type=file]')[0].files[0]);
-		// Display the key/value pairs
-		// for (var pair of formData.entries()) {
-		//     console.log(pair[0] + ', ' + pair[1]);
-		// }
-		// return false;
-		//
-            var token = "{{ Session::get('token') }}";
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-		$.ajax({
-                headers: {
+        // formData.append('file', file);
+        formData.append('file', $('input[type=file]')[0].files[0]);
+        // Display the key/value pairs
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+        // return false;
+        //
+        var token = "{{ Session::get('token') }}";
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            headers: {
                 'X-CSRF-TOKEN': csrfToken,
                 'Authorization': 'Bearer ' + token
-                },
-                url: tchatUrl,
-			    method: 'post',
-                // data: new FormData(form),
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-			    Accept: 'application/json',    
-			    success: function(response) {
-                    // alert(response.code);
-                    if (response.code == 200) {
-                        toastr.success(response.message);
-                        $("#chat_content").val("");
-					$("#homework_file").val("");
-					$("#fileloadstatus").html("");
-		                scrollDownShow = 1;
-                        getchatlist();
-                    } else {}
-                },
-                error: function(response) {
-                    if (response.status === 419) {
-                        // CSRF token mismatch, handle the error here
-                        // You can refresh the page or show an error message
-					//alert('419');
-                    } else {
-                        // Handle other errors
-					toastr.error("Please Enter the message");
-                    }
+            },
+            url: tchatUrl,
+            method: 'post',
+            // data: new FormData(form),
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            Accept: 'application/json',
+            success: function(response) {
+                // alert(response.code);
+                if (response.code == 200) {
+                    toastr.success(response.message);
+                    $("#chat_content").val("");
+                    $("#homework_file").val("");
+                    $("#fileloadstatus").html("");
+                    scrollDownShow = 1;
+                    getchatlist();
+                } else {}
+            },
+            error: function(response) {
+                if (response.status === 419) {
+                    // CSRF token mismatch, handle the error here
+                    // You can refresh the page or show an error message
+                    //alert('419');
+                } else {
+                    // Handle other errors
+                    toastr.error("Please Enter the message");
                 }
-            });
+            }
+        });
 
     });
-     // Save Chat End
+    // Save Chat End
 </script>
 
 <script>
     // Delete Chat Start
     var tchatdelUrl = "{{ route('parent.chat.del') }}";
-    function deletechat(id)
-        {
+
+    function deletechat(id) {
         var url = tchatdelUrl;
         swal.fire({
             title: 'Are you sure?',
@@ -312,14 +319,14 @@
             confirmButtonColor: '#556ee6',
             width: 400,
             allowOutsideClick: false
-        }).then(function (result) {
+        }).then(function(result) {
             if (result.value) {
                 $.post(url, {
                     chat_id: id
-                }, function (data) {
+                }, function(data) {
                     if (data.code == 200) {
                         $("#chat_content").val("");
-		                scrollDownShow = 1;
+                        scrollDownShow = 1;
                         getchatlist();
                         toastr.success(data.message);
                     } else {
@@ -329,25 +336,24 @@
             }
         });
     }
-	// Delete Chat End
+    // Delete Chat End
 </script>
 
 <script>
-    
     // Get Chat List function Start
     var chatlistUrl = "{{ route('parent.chat.showlist') }}";
 
     function getchatlist() {
-		var csrftoken = $("#csrftoken").val();
+        var csrftoken = $("#csrftoken").val();
         var form = this;
         var chat_fromid = $("#chat_fromid").val();
         var chat_fromname = $("#chat_fromname").val();
         var chat_fromuser = $("#chat_fromuser").val();
         var chat_toid = $("#chat_toid").val();
         var chat_toname = $("#chat_toname").val();
-        var chat_touser = $("#chat_touser").val();       
-		var chat_content = $("#chat_content").val();
-        
+        var chat_touser = $("#chat_touser").val();
+        var chat_content = $("#chat_content").val();
+
         var formData = new FormData();
         formData.append('_token', csrftoken);
         formData.append('chat_fromid', chat_fromid);
@@ -368,11 +374,11 @@
         var searchbar = $("#searchbar").val();
         if (searchbar == '') {
             var token = "{{ Session::get('token') }}";
-			var csrfToken = $('meta[name="csrf-token"]').attr('content');
-		$.ajax({
-			headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Authorization': 'Bearer ' + token
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Authorization': 'Bearer ' + token
                 },
                 url: chatlistUrl,
                 method: 'post',
@@ -381,15 +387,15 @@
                 processData: false,
                 dataType: 'json',
                 contentType: false,
-				Accept: 'application/json',
-				
-				success: function(response) {
-                    
+                Accept: 'application/json',
+
+                success: function(response) {
+
                     if (response.code == 200) {
 
                         let chatfile = "";
                         let msgread = "";
-						let chatdate = [];
+                        let chatdate = [];
                         let chat_li = "";
                         let chatarray = response.data;
                         chatarray.reverse();
@@ -401,16 +407,16 @@
                             } else {
                                 msgread = '<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             }
-							if (($.inArray(item.chatdate, chatdate)) < 0) {
+                            if (($.inArray(item.chatdate, chatdate)) < 0) {
                                 chat_li += ' <li class="clearfix"> <center> ' + item.chatdate + '</center></li>';
-								chatdate.push(item.chatdate);
-							}
-							if (item.chat_content == null) {
-								item.chat_content = " ";
+                                chatdate.push(item.chatdate);
+                            }
+                            if (item.chat_content == null) {
+                                item.chat_content = " ";
                             }
 
                             if (item.chat_document != null) {
-								chatfile = '<br><a href="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -458,21 +464,24 @@
                             }
                         });
                         $('#showchat').html(chat_li);
-						//$('#showchat').append(chat_li);                              
-						if(scrollDownShow==1){
-							scroll();             
-							scrollDownShow = 2;	
-						}                
-					} else {
+                        //$('#showchat').append(chat_li);                              
+                        if (scrollDownShow == 1) {
+                            scroll();
+                            getChatNotifications();
+                            scrollDownShow = 2;
+                        }
+                    } else {
 
-					}
+                    }
                 }
             });
         }
     }
-     // Get Chat List function End
-	function scroll() {
-        document.getElementById("showchat").scrollIntoView({ block: "end" });
+    // Get Chat List function End
+    function scroll() {
+        document.getElementById("showchat").scrollIntoView({
+            block: "end"
+        });
     }
 
     function tConvert(time) {
@@ -488,13 +497,13 @@
     }
 
     function showfile(filename) {
-        var fileurl="{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}";
-        window.open(fileurl+ filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
+        var fileurl = "{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}";
+        window.open(fileurl + filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
         return false;
-    }  
+    }
 
 
-     // Chat List Search Keywords Start
+    // Chat List Search Keywords Start
     function search_keyword() {
         let input = document.getElementById('searchbar').value
         input = input.toLowerCase();
@@ -508,8 +517,8 @@
             }
         }
     }
-// Chat List Search Keywords End
-// Chat Users Search Keywords Start
+    // Chat List Search Keywords End
+    // Chat Users Search Keywords Start
     function search_user() {
         let input = document.getElementById('searchuser').value
         input = input.toLowerCase();
@@ -523,11 +532,11 @@
             }
         }
     }
-// Chat Users Search Keywords End
+    // Chat Users Search Keywords End
 </script>
 
 <script>
-// Attach File Validation below 10 MB Start
+    // Attach File Validation below 10 MB Start
     Filevalidation = () => {
         const fi = document.getElementById('homework_file');
         // Check if any file is selected.
@@ -544,8 +553,8 @@
                         text: 'Please select a file less than 10MB.!'
                     })
                 }
-				var  finame='File: '+fi.files.item(i).name;
-      			$('#fileloadstatus').html(finame);
+                var finame = 'File: ' + fi.files.item(i).name;
+                $('#fileloadstatus').html(finame);
 
             }
         }
@@ -554,16 +563,66 @@
 </script>
 
 <script>
-        new EmojiPicker({
-            trigger: [               
-                {
-                    selector: '.emoji-btn',
-                    insertInto: '#chat_content'
-                }
-            ],
-            closeButton: true,
-            //specialButtons: green
-        });
+    new EmojiPicker({
+        trigger: [{
+            selector: '.emoji-btn',
+            insertInto: '#chat_content'
+        }],
+        closeButton: true,
+        //specialButtons: green
+    });
+</script>
 
-    </script>
+<script>
+    $(document).ready(function() {
+
+        var sTimeOut = setInterval(function() {
+            getChatNotifications();
+        }, 8000);
+    });
+
+    function getChatNotifications() {
+        var parent_id = "{{ Session::get('ref_user_id') }}";
+        $.ajax({
+            type: 'GET',
+            url: chatTeacherList,
+            data: {
+                id: parent_id,
+                role: "Parent",
+                token: token,
+                branch_id: branchID
+            },
+            success: function(res) {
+                if (res.code == 200) {
+                    console.log('res', res.data)
+                    var teachers = "";
+                    var photo = "";
+                    $.each(res.data, function(key, val) {
+                        teacherImg = (val.photo && imgurl + val.photo) ? imgurl + val.photo : defaultimg;
+
+                        var teacher = 'Teacher';
+                        var func = "my_function('" + val.staff_id + "','" + val.name + "','" + photo + "','" + teacher + "')";
+                        if (val.photo) {
+                            photo = val.photo;
+                        }
+                        teachers += '<a href="javascript:void(0);" class="text-body chatusers" onclick="' + func + '"><div class="media p-2"><img src="' + teacherImg + '" class="mr-2 rounded-circle" height="42" alt="Maria C" /><div class="media-body"><h5 class="mt-0 mb-0 font-14"><span class="float-right text-muted font-weight-normal font-12"></span>' + val.name + '</h5>';
+                        if (val.msgcount > 0) {
+                            teachers += '<p class="mt-1 mb-0 text-muted font-14"><span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher' + val.staff_id + '">' + val.msgcount + '</span></span></p>';
+                        }
+                        teachers += '</div></div></a>';
+                    });
+
+                    $('#teacher_list .simplebar-content').html("");
+                    $('#teacher_list .simplebar-content').html(teachers);
+                }
+
+
+            },
+            error: function(err) {
+                // console.log("eror")
+                // console.log(err)
+            }
+        });
+    }
+</script>
 @endsection
