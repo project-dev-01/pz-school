@@ -534,7 +534,7 @@
 						// console.log('chatStats',chatStatus)
 						if (scrollDownShow == 1) {
 							scroll();
-							getChatNotifications();
+							// getChatNotifications();
 							scrollDownShow = 2;
 						}
 						// if(chatStatus > 0) {
@@ -643,7 +643,7 @@
 		//specialButtons: green
 	});
 </script>
-<script>
+<!-- <script>
 	$(document).ready(function() {
 
 		var sTimeOut = setInterval(function() {
@@ -739,5 +739,5 @@
 			}
 		});
 	}
-</script>
+</script> -->
 @endsection

@@ -855,11 +855,15 @@ class ParentController extends Controller
 
         $parentData = [
             'id' => session()->get('ref_user_id'),
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id'),
             'role' => "Parent"
         ];
+        // dd($parentData);
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_parentgroup_list'), $data);
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $parentData);
-        $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $parentData);
+        $teacher_list = Helper::GETMethodWithData(config('constants.api.parent_chat_teacher_list'), $parentData);
+        // dd($teacher_list);
        
         return view('parent.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],

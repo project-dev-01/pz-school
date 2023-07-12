@@ -203,7 +203,7 @@
 <script>
     let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
 
-    var chatTeacherList = "{{ config('constants.api.chat_teacher_list') }}";
+    var chatTeacherList = "{{ config('constants.api.parent_chat_teacher_list') }}";
 
     var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
     var intervalId;
@@ -428,8 +428,7 @@
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('
-                                branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -480,7 +479,7 @@
                         //$('#showchat').append(chat_li);                              
                         if (scrollDownShow == 1) {
                             scroll();
-                            getChatNotifications();
+                            // getChatNotifications();
                             scrollDownShow = 2;
                         }
                     } else {
@@ -586,7 +585,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
 
         var sTimeOut = setInterval(function() {
@@ -596,12 +595,16 @@
 
     function getChatNotifications() {
         var parent_id = "{{ Session::get('ref_user_id') }}";
+        var student_id = "{{ Session::get('student_id') }}";
+        var academic_session_id = "{{ Session::get('academic_session_id') }}";
         $.ajax({
             type: 'GET',
             url: chatTeacherList,
             data: {
                 id: parent_id,
                 role: "Parent",
+                student_id: student_id,
+                academic_session_id: academic_session_id,
                 token: token,
                 branch_id: branchID
             },
@@ -637,5 +640,5 @@
             }
         });
     }
-</script>
+</script> -->
 @endsection
