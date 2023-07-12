@@ -75,9 +75,7 @@
 
         <!-- Auth fluid right content -->
         <div class="col-md-6">
-                <div class="container">
                 <img src="{{ asset('public/images/error500.jpg') }}" class="bg-image-content">
-                </div>
         </div>
         <!-- end Auth fluid right content -->
     </div>

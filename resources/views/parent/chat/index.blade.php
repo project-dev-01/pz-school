@@ -77,16 +77,15 @@
                                     <div class="media p-2">
                                         <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
                                         <div class="media-body">
-                                            <h5 class="mt-0 mb-0 font-14">
+                                            <h5 class="mt-0 mb-0 font-14" style="line-height: 44px;">
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
                                                 {{$teacher['name']}}
+                                                @if($teacher['msgcount']>0)
+                                                <span class="float-right text-muted font-weight-normal font-12" c>
+                                                    <span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span>
+                                                </span>
+                                                @endif
                                             </h5>
-                                            @if($teacher['msgcount']>0)
-                                            <p class="mt-1 mb-0 text-muted font-14">
-                                                <span class="w-25 float-right text-right"><span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span></span>
-                                                <!--<span class="w-75">Thanks</span>-->
-                                            </p>
-                                            @endif
                                         </div>
                                     </div>
                                 </a>
@@ -103,6 +102,19 @@
 
         <!-- chat area -->
         <div class="col-xl-9 col-lg-8">
+            <!-- <div class="card" style="background: #F4F7FC;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col" style="height: 300px; margin-top:70px;">
+                            <div id="center-text" style="text-align:center;">
+                                <img src="{{ asset('public/images/chat.png') }}" class="chatbox" style="height: 150px;border: 2px solid #EDEDED;border-radius: 1rem;">
+                                <h2>No messages</h2>
+                                <p>No messages yet, start the conversation!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
             @php $k=0; @endphp @foreach($teacher_list as $teacher)
             @php $k++; @endphp
             @if($k==1)
@@ -217,10 +229,10 @@
     window.addEventListener('focus', startTimer);
     // Get Chat List Start(Set Interval 5 Sec)
     function startTimer() {
-		if (intervalId) {
-			clearInterval(intervalId)
-			intervalId = null
-		}
+        if (intervalId) {
+            clearInterval(intervalId)
+            intervalId = null
+        }
         var interval = 5000;
         intervalId = setInterval(getchatlist, interval);
     }
@@ -416,7 +428,8 @@
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('
+                                branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
