@@ -126,8 +126,8 @@
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $teacher['name'] }}</span></a> (<span id="usertype">Teacher</span>)
                             </h5>
-                            <p class="mt-1 mb-0 text-muted font-12">
-                                <small class="mdi mdi-circle text-success"></small> Online
+                            <p class="mt-1 mb-0 text-muted font-12" id="onlinestatus">
+                                <small class="mdi mdi-circle text-fail"></small> Online
                             </p>
                         </div>
                         <div>
@@ -409,11 +409,22 @@
                         let msgread = "";
                         let chatdate = [];
                         let chat_li = "";
-                        let chatarray = response.data;
+                        let chatarray = response.data.list;
                         chatarray.reverse();
-
+                        if(response.data.logstatus=='Online')
+                        {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle text-success"></small>'+response.data.logstatus);
+                        }
+                        else
+                        {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle"></small> '+response.data.logstatus);
+                        }                      
                         $.each(chatarray, function(i, item) {
                             chatfile = "";
+                            if(chat_touser=='Group')
+							{
+								msgread = '';
+							}
                             if (item.chat_status == 'Unread') {
                                 msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             } else {

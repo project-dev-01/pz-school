@@ -167,7 +167,7 @@
 							<h5 class="mt-0 mb-0 font-15">
 								<a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $parent['name'] }}</span></a> (<span id="usertype">Parent</span>)
 							</h5>
-							<p class="mt-1 mb-0 text-muted font-12">
+							<p class="mt-1 mb-0 text-muted font-12" id="onlinestatus">
 								<small class="mdi mdi-circle text-success"></small> Online
 							</p>
 						</div>
@@ -454,19 +454,23 @@
 						let msgread = "";
 						let chatdate = [];
 						let chat_li = "";
-						let chatarray = response.data;
+						let chatarray = response.data.list;
 						chatarray.reverse();
 
-						// var chatStatus = 0;
+                        if(response.data.logstatus=='Online')
+                        {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle text-success"></small>'+response.data.logstatus);
+                        }
+                        else
+                        {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle"></small> '+response.data.logstatus);
+                        }                      
 						$.each(chatarray, function(i, item) {
 							chatfile = "";
-							// console.log('ch',chatStatus);
-							// console.log('item',item.chat_status);
-							// if (item.chat_status == 'Unread') {
-							// 	chatStatus++;
-							// }
-							// console.log('ch2',chatStatus);
-							// msgread= =(item.chat_status=='Unread')?'read.png':'unread.png';
+							if(chat_touser=='Group')
+							{
+								msgread = '';
+							}
 							if (item.chat_status == 'Unread') {
 								msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
 							} else {
