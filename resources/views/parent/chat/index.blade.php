@@ -207,6 +207,7 @@
 
     var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
     var intervalId;
+    var oldChatCount = 0;
     var scrollDownShow = 1;
 
     function my_function(toid, toname, toimage, touser) {
@@ -409,6 +410,7 @@
                         let msgread = "";
                         let chatdate = [];
                         let chat_li = "";
+						var chatCount = 0;
                         let chatarray = response.data.list;
                         chatarray.reverse();
                         if(response.data.logstatus=='Online')
@@ -421,6 +423,7 @@
                         }                      
                         $.each(chatarray, function(i, item) {
                             chatfile = "";
+								chatCount++;
                             if(chat_touser=='Group')
 							{
 								msgread = '';
@@ -491,8 +494,13 @@
                         if (scrollDownShow == 1) {
                             scroll();
                             // getChatNotifications();
+							oldChatCount = chatCount;
                             scrollDownShow = 2;
                         }
+						if(chatCount > oldChatCount) {
+							scroll();      
+							oldChatCount = chatCount;
+						}
                     } else {
 
                     }

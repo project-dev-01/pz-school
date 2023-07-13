@@ -250,8 +250,8 @@
 	var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
 
 	var intervalId;
+	var oldChatCount = 0;
 	var scrollDownShow = 1;
-
 	function my_function(toid, toname, toimage, touser) {
 		$('#toname').html(toname);
 		$('#usertype').html(touser);
@@ -467,6 +467,7 @@
                         }                      
 						$.each(chatarray, function(i, item) {
 							chatfile = "";
+								chatCount++;
 							if(chat_touser=='Group')
 							{
 								msgread = '';
@@ -485,8 +486,7 @@
 							}
 
 							if (item.chat_document != null) {
-								chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('
-								branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+								chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
 							}
 							if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
 								chat_li += '<li class="clearfix odd">';
@@ -534,17 +534,15 @@
 							}
 						});
 						$('#showchat').html(chat_li);
-						//$('#showchat').append(chat_li);
-						// console.log('chatStats',chatStatus)
 						if (scrollDownShow == 1) {
 							scroll();
-							// getChatNotifications();
+							oldChatCount = chatCount;
 							scrollDownShow = 2;
 						}
-						// if(chatStatus > 0) {
-
-						// 	scroll();      
-						// }
+						if(chatCount > oldChatCount) {
+							scroll();      
+							oldChatCount = chatCount;
+						}
 					} else {
 
 					}
