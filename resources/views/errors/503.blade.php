@@ -30,6 +30,17 @@
         <div class="col-md-6" style="background: #F4F7FC;">
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
+				<div class="auth-brand text-center text-lg-left">
+                            <div class="auth-logo">
+                                <div class="auth-logo">
+                                    <a href="" class="logo logo-dark">
+                                        <span class="logo-lg">
+                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     <div class="responsive">
                         <h1 class="eoppps">Service Unavailable</h1>
                         <p class="etext">This page should clearly state that the service is temporarily unavailable and provide some explanation for the inconvenience<br> It's essential to maintain transparency and reassure users that the issue is temporary</p>
@@ -73,9 +84,7 @@
 
         <!-- Auth fluid right content -->
         <div class="col-md-6">
-            <div class="container">
                 <img src="{{ asset('public/images/Illustrationerror.jpg') }}" class="bg-image-content">
-            </div>
         </div>
         <!-- end Auth fluid right content -->
     </div>

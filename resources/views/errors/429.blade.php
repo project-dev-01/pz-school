@@ -30,6 +30,17 @@
         <div class="col-md-6" style="background: #F4F7FC;">
             <div class="align-items-center d-flex h-100">
                 <div class="card-body">
+				<div class="auth-brand text-center text-lg-left">
+                            <div class="auth-logo">
+                                <div class="auth-logo">
+                                    <a href="" class="logo logo-dark">
+                                        <span class="logo-lg">
+                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     <div class="responsive">
                         <h1 class="eoppps">Too Many Requests</h1>
                         <p class="etext">We're sorry, but you have exceeded the rate limit for accessing this service<br> wait sometime and retry</p>
@@ -76,9 +87,7 @@
 
         <!-- Auth fluid right content -->
         <div class="col-md-6">
-            <div class="container">
                 <img src="{{ asset('public/images/Illustrationerror.jpg') }}" class="bg-image-content">
-            </div>
         </div>
         <!-- end Auth fluid right content -->
     </div>
