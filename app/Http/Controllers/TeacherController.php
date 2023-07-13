@@ -614,8 +614,14 @@ class TeacherController extends Controller
             'role' => "Teacher"
         ];
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
-        $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $teacherData);
+        // $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $teacherData);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $teacherData);
+        $subjectAssParent = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'role' => "Teacher"
+        ];
+        $parent_list = Helper::GETMethodWithData(config('constants.api.get_teacher_assign_parent_list'), $subjectAssParent);
+
         // dd($parent_list);
         return view('teacher.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
@@ -624,6 +630,7 @@ class TeacherController extends Controller
             'name' => session()->get('name'),
             'role' => "Teacher",
             'tid' => session()->get('ref_user_id'),
+            'user_id' => session()->get('user_id')
         ]);
         return view('teacher.chat.index');
     }
@@ -715,7 +722,8 @@ class TeacherController extends Controller
                 'chat_fromuser' => $request->chat_fromuser,
                 'chat_toid' => $request->chat_toid,
                 'chat_toname' => $request->chat_toname,
-                'chat_touser' => $request->chat_touser
+                'chat_touser' => $request->chat_touser,
+                'chat_user_id' => $request->chat_user_id
             ];
             //dd($data);       
 

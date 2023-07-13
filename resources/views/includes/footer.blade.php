@@ -372,14 +372,16 @@
                 type: 'GET',
                 url: allLogout,
                 success: function(res) {
-                    // console.log("Logout failed")
-                    // console.log(res)
+                    if (res.success) {
+                        // toastr.error('Logout Successfully');
+                        setTimeout(function() {
+                            logoutFunc();
+                        }, 1000);
+                    }
                 },
                 error: function(err) {
-                    toastr.error('Logout Successfully');
-                    setTimeout(function() {
-                        logoutFunc();
-                    }, 1000);
+                    // console.log("logout error");
+                    // console.log(err)
                 }
             });
         }, 8000);

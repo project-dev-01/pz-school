@@ -872,6 +872,7 @@ class ParentController extends Controller
             'name' => session()->get('name'),
             'role' => "Parent",
             'tid' => session()->get('ref_user_id'),
+            'user_id' => session()->get('user_id')
         ]);
         return view('parent.chat.index');
     }
@@ -946,7 +947,8 @@ class ParentController extends Controller
                 'chat_fromuser' => $request->chat_fromuser,
                 'chat_toid' => $request->chat_toid,
                 'chat_toname' => $request->chat_toname,
-                'chat_touser' => $request->chat_touser
+                'chat_touser' => $request->chat_touser,
+                'chat_user_id' => $request->chat_user_id
             ];
             //dd($data);          
 

@@ -6158,13 +6158,13 @@ class AdminController extends Controller
     public function globalSetting()
     {
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        $timezone_identifiers = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+        // $timezone_identifiers = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
         $get_languages = Helper::GetMethod(config('constants.api.get_languages'));
         return view(
             'admin.global_setting.index',
             [
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'timezone' => isset($timezone_identifiers) ? $timezone_identifiers : [],
+                // 'timezone' => isset($timezone_identifiers) ? $timezone_identifiers : [],
                 'get_languages' => isset($get_languages['data']) ? $get_languages['data'] : [],
             ]
         );

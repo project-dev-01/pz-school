@@ -108,10 +108,6 @@ $(function () {
                     name: 'footer_text'
                 },
                 {
-                    data: 'timezone',
-                    name: 'timezone'
-                },
-                {
                     data: 'facebook_url',
                     name: 'facebook_url'
                 },

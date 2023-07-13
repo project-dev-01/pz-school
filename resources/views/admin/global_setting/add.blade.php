@@ -28,17 +28,6 @@
                         <span class="text-danger error-text footer_text_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="timezone">{{ __('messages.timeZone') }}<span class="text-danger">*</span></label>
-                        <select id="timezone" class="form-control" name="timezone">
-                            <option value="">{{ __('messages.select_timeZone') }}</option>
-                            @forelse($timezone as $tz)
-                            <option >{{$tz}}</option>
-                            @empty
-                            @endforelse
-                        </select>
-                        <span class="text-danger error-text timezone_error"></span>
-                    </div>
-                    <div class="form-group">
                         <label for="facebook_url">{{ __('messages.facebook_url') }}<span class="text-danger">*</span></label>
                         <input type="text" id="facebook_url" name="facebook_url" class="form-control" placeholder="{{ __('messages.enter_facebook_url') }}">
                         <span class="text-danger error-text facebook_url_error"></span>

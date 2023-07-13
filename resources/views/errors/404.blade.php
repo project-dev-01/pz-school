@@ -22,6 +22,7 @@
 	<link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('public/css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
 </head>
+
 <body class="loading auth-fluid-pages pb-0">
 
 	<div class="auth-fluid">
@@ -35,34 +36,34 @@
 						<a href="javascript:void(0)" id="retryButton" class="link_404">Retry</a>
 						<br>
 						@if(Session::get('role_id'))
-							<a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-								<span>Go to Login</span>
-							</a>
-							@if(Session::get('role_id') == '1')
-							<form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@elseif(Session::get('role_id') == '3')
-							<form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@elseif(Session::get('role_id') == '4')
-							<form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@elseif(Session::get('role_id') == '5')
-							<form id="logout-form" action="{{ route('parent.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@elseif(Session::get('role_id') == '6')
-							<form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@else
-							<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-								@csrf
-							</form>
-							@endif
+						<a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+							<span>Go to Login</span>
+						</a>
+						@if(Session::get('role_id') == '1')
+						<form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@elseif(Session::get('role_id') == '3')
+						<form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@elseif(Session::get('role_id') == '4')
+						<form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@elseif(Session::get('role_id') == '5')
+						<form id="logout-form" action="{{ route('parent.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@elseif(Session::get('role_id') == '6')
+						<form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@else
+						<form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+						@endif
 						@else
 						<a class="link_404" href="{{ url()->previous() }}">Back</a>
 						@endif
@@ -76,7 +77,9 @@
 
 		<!-- Auth fluid right content -->
 		<div class="col-md-6">
+			<div class="container">
 				<img src="{{ asset('public/images/error404.jpg') }}" class="bg-image-content">
+			</div>
 		</div>
 		<!-- end Auth fluid right content -->
 	</div>

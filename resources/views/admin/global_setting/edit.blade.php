@@ -28,17 +28,6 @@
                         <span class="text-danger error-text footer_text_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="timezone">{{ __('messages.timeZone') }}<span class="text-danger">*</span></label>
-                        <select id="timezone" class="form-control" name="timezone">
-                            <option value="">{{ __('messages.select_timeZone') }}</option>
-                            @forelse($timezone as $tz)
-                            <option>{{$tz}}</option>
-                            @empty
-                            @endforelse
-                        </select>
-                        <span class="text-danger error-text timezone_error"></span>
-                    </div>
-                    <div class="form-group">
                         <label for="language_id">{{ __('messages.language') }}<span class="text-danger">*</span></label>
                         <select id="language_id" class="form-control" name="language_id">
                             @forelse($get_languages as $lg)

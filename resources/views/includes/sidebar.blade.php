@@ -1115,7 +1115,7 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.global_setting')}}" class="nav-link {{ (request()->is('admin/global_setting*')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.global_setting') }} </span>
+                                    <span> {{ __('messages.global_settings') }} </span>
                                 </a>
                             </li>
                             <li>

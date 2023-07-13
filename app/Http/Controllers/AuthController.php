@@ -462,7 +462,6 @@ class AuthController extends Controller
 
         $userDetails = $response->json();
         $user_name = "";
-        // dd($userDetails);
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
             if ($userDetails['data']['subsDetails']) {

@@ -57,7 +57,6 @@
                                     <th>#</th>
                                     <th>{{ __('messages.academic_year') }}</th>
                                     <th>{{ __('messages.footer_text') }}</th>
-                                    <th>{{ __('messages.timeZone') }}</th>
                                     <th>{{ __('messages.facebook_url') }}</th>
                                     <th>{{ __('messages.twitter_url') }}</th>
                                     <th>{{ __('messages.linkedIn_url') }}</th>

@@ -784,6 +784,7 @@ return [
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
+        'get_teacher_assign_parent_list'=> $url.'/chat/get_teacher_assign_parent_list',
         'chat_parentgroup_list'=> $url.'/chat/get_parentgroup_list',
         'parent_chat_teacher_list'=> $url.'/chat/parent_chat_teacher_list',
         'tchat'=> $url.'/chat/storechat',

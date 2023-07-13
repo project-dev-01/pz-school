@@ -75,7 +75,9 @@
 
         <!-- Auth fluid right content -->
         <div class="col-md-6">
-            <img src="{{ asset('public/images/error403.jpg') }}" class="bg-image-content">
+            <div class="container">
+                <img src="{{ asset('public/images/error403.jpg') }}" class="bg-image-content">
+            </div>
         </div>
         <!-- end Auth fluid right content -->
     </div>

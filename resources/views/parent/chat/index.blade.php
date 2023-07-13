@@ -143,7 +143,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <ul class="conversation-list" data-simplebar style="max-height:200px; overflow-x: hidden;">
+                            <ul class="conversation-list" data-simplebar style="height:250px; overflow-x: hidden;">
                                 <div id="showchat">
                                 </div>
                             </ul>
@@ -156,6 +156,7 @@
                                 <input type="hidden" name="chat_fromid" id="chat_fromid" value="{{$tid}}">
                                 <input type="hidden" name="chat_fromname" id="chat_fromname" value="{{$name}}">
                                 <input type="hidden" name="chat_fromuser" id="chat_fromuser" value="{{$role}}">
+                                <input type="hidden" name="chat_user_id" id="chat_user_id" value="{{$user_id}}">
                                 <input type="hidden" name="chat_toid" id="chat_toid" value="{{$teacher['staff_id']}}">
                                 <input type="hidden" name="chat_toname" id="chat_toname" value="{{$teacher['name']}}">
                                 <input type="hidden" name="chat_touser" id="chat_touser" value="Teacher">
@@ -366,6 +367,7 @@
         var chat_toname = $("#chat_toname").val();
         var chat_touser = $("#chat_touser").val();
         var chat_content = $("#chat_content").val();
+        var chat_user_id = $("#chat_user_id").val();
 
         var formData = new FormData();
         formData.append('_token', csrftoken);
@@ -375,6 +377,7 @@
         formData.append('chat_toid', chat_toid);
         formData.append('chat_toname', chat_toname);
         formData.append('chat_touser', chat_touser);
+        formData.append('chat_user_id', chat_user_id);
 
         // formData.append('file', file);
         ///formData.append('file', $('input[type=file]')[0].files[0]);
@@ -410,24 +413,20 @@
                         let msgread = "";
                         let chatdate = [];
                         let chat_li = "";
-						var chatCount = 0;
+                        var chatCount = 0;
                         let chatarray = response.data.list;
                         chatarray.reverse();
-                        if(response.data.logstatus=='Online')
-                        {
-                            $("#onlinestatus").html('<small class="mdi mdi-circle text-success"></small>'+response.data.logstatus);
+                        if (response.data.logstatus == 'Online') {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle text-success"></small>' + response.data.logstatus);
+                        } else {
+                            $("#onlinestatus").html('<small class="mdi mdi-circle"></small> ' + response.data.logstatus);
                         }
-                        else
-                        {
-                            $("#onlinestatus").html('<small class="mdi mdi-circle"></small> '+response.data.logstatus);
-                        }                      
                         $.each(chatarray, function(i, item) {
                             chatfile = "";
-								chatCount++;
-                            if(chat_touser=='Group')
-							{
-								msgread = '';
-							}
+                            chatCount++;
+                            if (chat_touser == 'Group') {
+                                msgread = '';
+                            }
                             if (item.chat_status == 'Unread') {
                                 msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             } else {
@@ -442,7 +441,8 @@
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('
+                                branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -494,13 +494,13 @@
                         if (scrollDownShow == 1) {
                             scroll();
                             // getChatNotifications();
-							oldChatCount = chatCount;
+                            oldChatCount = chatCount;
                             scrollDownShow = 2;
                         }
-						if(chatCount > oldChatCount) {
-							scroll();      
-							oldChatCount = chatCount;
-						}
+                        if (chatCount > oldChatCount) {
+                            scroll();
+                            oldChatCount = chatCount;
+                        }
                     } else {
 
                     }
