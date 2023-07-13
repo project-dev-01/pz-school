@@ -454,6 +454,7 @@
 						let msgread = "";
 						let chatdate = [];
 						let chat_li = "";
+						var chatCount = 0;
 						let chatarray = response.data.list;
 						chatarray.reverse();
 
