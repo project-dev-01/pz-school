@@ -1247,7 +1247,7 @@ class AuthController extends Controller
         $parent_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Parent.webp";
         $student_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Student.webp";
         $teacher_image =  config('constants.image_url') . "/public/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Teacher.webp";
-        $application =  config('constants.image_url') . "/public/common-asset/images/application.png";
+        $application =  config('constants.image_url') . "/public/common-asset/images/application.webp";
 
         // set default language
         if (Cookie::get('locale') !== null) {

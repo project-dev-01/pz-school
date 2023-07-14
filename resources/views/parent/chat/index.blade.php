@@ -81,7 +81,7 @@
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
                                                 {{$teacher['name']}}
                                                 @if($teacher['msgcount']>0)
-                                                <span class="float-right text-muted font-weight-normal font-12" c>
+                                                <span class="float-right text-muted font-weight-normal font-12" style="line-height:45px;">
                                                     <span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span>
                                                 </span>
                                                 @endif
