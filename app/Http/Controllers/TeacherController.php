@@ -622,7 +622,7 @@ class TeacherController extends Controller
         ];
         $parent_list = Helper::GETMethodWithData(config('constants.api.get_teacher_assign_parent_list'), $subjectAssParent);
 
-        // dd($parent_list);
+        // dd($teacher_list);
         return view('teacher.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],

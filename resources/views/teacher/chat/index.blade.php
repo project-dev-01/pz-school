@@ -134,8 +134,9 @@
 
 		<!-- chat area -->
 		<div class="col-xl-9 col-lg-8">
+
 			<!-- empty chat start -->
-			<!-- <div class="card" style="background: #F4F7FC;">
+			<div class="card" style="background: #F4F7FC;" id="emptyChat">
 				<div class="card-body">
 					<div class="row">
 						<div class="col" style="height: 300px; margin-top:70px;">
@@ -147,19 +148,16 @@
 						</div>
 					</div>
 				</div>
-			</div>  -->
+			</div>
 			<!-- empty chat ned -->
-			@php $k=0; @endphp @foreach($parent_list as $parent)
-			@php $k++; @endphp
-			@if($k==1)
-			<div class="card">
+			<div class="card" id="showIndivuChat" style="display:none;">
 				<div class="card-body py-2 px-3 border-bottom border-light">
 					<div class="media py-1">
-						<img src="{{ $parent['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : $url.'/public/common-asset/images/users/default.jpg' }}" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
+						<img src="" id="toimage" class="mr-2 rounded-circle" height="36" alt="Brandon Smith">
 
 						<div class="media-body">
 							<h5 class="mt-0 mb-0 font-15">
-								<a href="javascript: void(0);" class="text-reset"><span id="toname">{{ $parent['name'] }}</span></a> (<span id="usertype">Parent</span>)
+								<a href="javascript: void(0);" class="text-reset"><span id="toname"></span></a> (<span id="usertype">Parent</span>)
 							</h5>
 							<p class="mt-1 mb-0 text-muted font-12" id="onlinestatus">
 								<small class="mdi mdi-circle text-success"></small> Online
@@ -192,8 +190,8 @@
 								<input type="hidden" name="chat_fromname" id="chat_fromname" value="{{$name}}">
 								<input type="hidden" name="chat_fromuser" id="chat_fromuser" value="{{$role}}">
 								<input type="hidden" name="chat_user_id" id="chat_user_id" value="{{$user_id}}">
-								<input type="hidden" name="chat_toid" id="chat_toid" value="{{$parent['id']}}">
-								<input type="hidden" name="chat_toname" id="chat_toname" value="{{$parent['name']}}">
+								<input type="hidden" name="chat_toid" id="chat_toid" value="">
+								<input type="hidden" name="chat_toname" id="chat_toname" value="">
 								<input type="hidden" name="chat_touser" id="chat_touser" value="Parent">
 
 								<div class="row">
@@ -223,8 +221,7 @@
 					<!-- end row -->
 				</div> <!-- end card-body -->
 			</div> <!-- end card -->
-			@endif
-			@endforeach
+
 		</div>
 		<!-- end chat area-->
 
@@ -250,6 +247,9 @@
 	var scrollDownShow = 1;
 
 	function my_function(toid, toname, toimage, touser) {
+		$("#emptyChat").hide();
+		$("#showIndivuChat").show();
+
 		$('#toname').html(toname);
 		$('#usertype').html(touser);
 
