@@ -948,7 +948,8 @@ class ParentController extends Controller
                 'chat_toid' => $request->chat_toid,
                 'chat_toname' => $request->chat_toname,
                 'chat_touser' => $request->chat_touser,
-                'chat_user_id' => $request->chat_user_id
+                'chat_user_id' => $request->chat_user_id,
+                'limit' => $request->limit
             ];
             //dd($data);          
 

@@ -385,7 +385,26 @@
                 }
             });
         }, 8000);
-
+        var lastlogout = "{{ route('lastlogout') }}";
+        var sTimeOutq = setInterval(function() {
+          
+      
+            $.ajax({
+                type: 'GET',
+                url: lastlogout,
+               
+                success: function(res) {
+                    if (res.success) {
+                        // toastr.error('Logout Successfully');
+                        
+                    }
+                },
+                error: function(err) {
+                    // console.log("logout error");
+                    // console.log(err)
+                }
+            });
+        }, 2000);
         getNotifications();
 
         function getNotifications() {

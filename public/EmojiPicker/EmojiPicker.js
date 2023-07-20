@@ -7703,10 +7703,10 @@ const EmojiPicker = function(options) {
 
 
         rePositioning: (picker) => {
-            picker.getBoundingClientRect().right > window.screen.availWidth ? picker.style.left = window.screen.availWidth - picker.offsetWidth + 'px' : false;
+            picker.getBoundingClientRect().right > window.screen.availWidth ? picker.style.left = (window.screen.availWidth+(-40)) - picker.offsetWidth + 'px' : false;
             
             if (window.innerHeight > pickerHeight) {
-                picker.getBoundingClientRect().bottom > window.innerHeight ? picker.style.top = window.innerHeight - picker.offsetHeight + 'px' : false;
+                picker.getBoundingClientRect().bottom > window.innerHeight ? picker.style.top = (window.innerHeight+(-20)) - picker.offsetHeight + 'px' : false;
             }
         },
 

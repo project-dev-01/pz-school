@@ -39,11 +39,11 @@
                                 <small class="mdi mdi-circle text-success"></small> Online
                             </p>
                         </div>
-                        <div>
+                        <!--<div>
                             <a href="javascript: void(0);" class="text-reset font-20">
                                 <i class="mdi mdi-cog-outline"></i>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
 
                     <!-- start search box -->
@@ -64,6 +64,11 @@
                             <span class="mb-0 mt-1">{{$group['name']}} Group</span>
                         </a>
                         @endforeach
+                        @if(count($group_list)==0)
+                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+                            <span class="mb-0 mt-1">No Group Available</span>
+                        </a>
+                        @endif
                     </div>
 
                     <h6 class="font-13 text-muted text-uppercase mb-2">{{ __('messages.teacher_contacts') }}</h6>
@@ -81,7 +86,7 @@
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
                                                 {{$teacher['name']}}
                                                 @if($teacher['msgcount']>0)
-                                                <span class="float-right text-muted font-weight-normal font-12" style="line-height:45px;">
+                                                <span class="float-right text-muted font-weight-normal font-12" c>
                                                     <span class="badge badge-soft-success" id="Teacher{{$teacher['staff_id']}}">{{$teacher['msgcount']}}</span>
                                                 </span>
                                                 @endif
@@ -90,6 +95,11 @@
                                     </div>
                                 </a>
                                 @endforeach
+                                @if(count($teacher_list)==0)
+								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+									<span class="mb-0 mt-1">No Teacher Available</span>
+								</a>
+								@endif
 
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
@@ -125,9 +135,12 @@
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset"><span id="toname"></span></a> (<span id="usertype">Teacher</span>)
                             </h5>
-                            <p class="mt-1 mb-0 text-muted font-12" id="onlinestatus">
-                                <small class="mdi mdi-circle text-fail"></small> Online
-                            </p>
+                            <p class="mt-1 mb-0 text-muted font-12">
+								<span  id="onlinestatus">
+								<small class="mdi mdi-circle text-success"></small> Online  </span>
+								<a href="#"  data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0  Members</a>
+                        
+							</p>
                         </div>
                         <div>
                             <form class="search-bar mb-3">
@@ -143,7 +156,8 @@
                     <div class="row">
                         <div class="col">
                             <ul class="conversation-list" data-simplebar style="height:250px; overflow-x: hidden;">
-                                <div id="showchat">
+                            <div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> Read more... </button></div>
+							<div id="showchat">
                                 </div>
                             </ul>
                         </div>
@@ -159,6 +173,7 @@
                                 <input type="hidden" name="chat_toid" id="chat_toid" value="">
                                 <input type="hidden" name="chat_toname" id="chat_toname" value="">
                                 <input type="hidden" name="chat_touser" id="chat_touser" value="Teacher">
+                                <input type="hidden" name="limit" id="limit" value="10">
 
                                 <div class="row">
                                     <div class="col mb-2 mb-sm-0">
@@ -192,6 +207,25 @@
 
     </div> <!-- end row-->
 </div> <!-- container -->
+<!-- Grouplist Modal -->
+<div id="grouplist" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title"  id="showgrouptitle"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+        </div>
+        <div class="modal-body">
+        <ul id="showgrouplist"></ul>
+        </div>
+     
+    </div>
+
+  </div>
+</div>
 @endsection
 @section('scripts')
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
@@ -211,13 +245,17 @@
     function my_function(toid, toname, toimage, touser) {
         $("#emptyChat").hide();
 		$("#showIndivuChat").show();
-        
+        $('#groupcnt').hide();
         $('#toname').html(toname);
         $('#usertype').html(touser);
 
+        $('#limit').val(10);
+        $('#showlist').html('');
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
+		$('#Teacher'+toid).html('');
+        
         toimg = (toimage && imgurl + toimage) ? imgurl + toimage : defaultimg;
         $('#toimage').prop('src', toimg)
         scrollDownShow = 1;
@@ -368,6 +406,8 @@
         var chat_touser = $("#chat_touser").val();
         var chat_content = $("#chat_content").val();
         var chat_user_id = $("#chat_user_id").val();
+        var limit = $("#limit").val();
+
 
         var formData = new FormData();
         formData.append('_token', csrftoken);
@@ -378,6 +418,7 @@
         formData.append('chat_toname', chat_toname);
         formData.append('chat_touser', chat_touser);
         formData.append('chat_user_id', chat_user_id);
+        formData.append('limit', limit);
 
         // formData.append('file', file);
         ///formData.append('file', $('input[type=file]')[0].files[0]);
@@ -427,7 +468,7 @@
                             if (chat_touser == 'Group') {
                                 msgread = '';
                             }
-                            if (item.chat_status == 'Unread') {
+                            else if (item.chat_status == 'Unread') {
                                 msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             } else {
                                 msgread = '<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
@@ -437,12 +478,11 @@
                                 chatdate.push(item.chatdate);
                             }
                             if (item.chat_content == null) {
-                                item.chat_content = " ";
+                                item.chat_content = "";
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.' / public / '.Session::get('
-                                branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.'/public/'.config('constants.branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -454,7 +494,7 @@
                                 chat_li += '<div class="conversation-text">';
                                 chat_li += '<div class="ctext-wrap">';
                                 chat_li += '<i>' + item.chat_fromname + '</i>';
-                                chat_li += '<p>' + item.chat_content + ' ' + chatfile + '</p>';
+                                chat_li += '<p>' + item.chat_content + '' + chatfile + '</p>';
                                 chat_li += '</div>';
                                 chat_li += '</div>';
                                 chat_li += '<div class="conversation-actions dropdown">';
@@ -489,8 +529,30 @@
                                 chat_li += '</li>';
                             }
                         });
-                        $('#showchat').html(chat_li);
-                        //$('#showchat').append(chat_li);                              
+                       
+                        if(parseInt(limit)<=parseInt(chatCount))
+                        {
+                            
+							$('.chatreadmore').show(); 
+                        }
+                        else
+                        {
+                            
+							$('.chatreadmore').hide(); 
+                        }
+                        if(chat_touser=='Group')
+							{
+								var gplistarray=response.data.groupnamelist;
+								$('#groupcnt').show();
+								$('#groupcnt').html('('+response.data.groupcount+' Members )');
+								$('#showgrouptitle').html(chat_toname);
+								var gplist='';
+								$.each(gplistarray, function(i, item) {
+									gplist+='<li>'+item.username+' ( '+item.usertype+' )</li> ';
+								});
+							}
+						$('#showchat').html(chat_li);
+                        $('#showgrouplist').html(gplist);                            
                         if (scrollDownShow == 1) {
                             scroll();
                             // getChatNotifications();
@@ -514,7 +576,13 @@
             block: "end"
         });
     }
-
+    function addlimit()
+    {
+        
+        var newlimit = parseInt($("#limit").val())+parseInt('25');
+        $("#limit").val(newlimit);
+        getchatlist();
+    }
     function tConvert(time) {
         // Check correct time format and split into components
         time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

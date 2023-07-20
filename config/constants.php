@@ -792,7 +792,7 @@ return [
 		    'tdelchat'=> $url.'/chat/deletechat',
         'pdelchat'=> $url.'/chat/deletechat',
         'chatlists'=> $url.'/chat/chatlist',		
-        'pchatlists'=> $url.'/chat/chatlist',	
+        'pchatlists'=> $url.'/chat/pchatlist',	
         'groupchatlists'=> $url.'/chat/groupchatlists',
         
         'get_like_column_name'=> $url.'/get_like_column_name',
@@ -811,9 +811,10 @@ return [
         'student_application'=> $url.'/student_application',
         'application_relation_list'=> $url.'/application/relation/list',
         'application_academic_year_list'=> $url.'/application/academic_year/list',
-       
+
         'forum_image_store'=> $url.'/forum_image_store',
-        'get_languages'=> $url.'/get_languages'
+        'get_languages'=> $url.'/get_languages',
+        'lastlogout'=> $url.'/lastlogout'
         
       ]
 

@@ -149,6 +149,7 @@ Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
 // all logout
 Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
+Route::get('lastlogout', [AuthController::class, 'lastlogout'])->name('lastlogout');
 // update settings session
 Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 // password expired

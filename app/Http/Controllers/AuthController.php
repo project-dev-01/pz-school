@@ -1053,7 +1053,24 @@ class AuthController extends Controller
         $user_name = $userDetails['data']['user']['name'];
         return $user_name;
     }
+    public function lastlogout(Request $request)
+    {
+        try {
+            $session_id= session()->get('user_id');
+            $data = [
+            'userID' => $session_id
+        ];
+        // dd($data);       
+        $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+        
+        
+        return $response;
+        } catch (\Exception $e) {
 
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
     public function allLogout(Request $request)
     {
         try {

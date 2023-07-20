@@ -584,10 +584,7 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-
-        //$get_exams = Helper::GetMethod(config('constants.api.get_testresult_exams'));
-        // dd($response);     
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);   
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -614,7 +611,6 @@ class TeacherController extends Controller
             'role' => "Teacher"
         ];
         $group_list = Helper::GETMethodWithData(config('constants.api.chat_group_list'), $data);
-        // $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $teacherData);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.chat_teacher_list'), $teacherData);
         $subjectAssParent = [
             'teacher_id' => session()->get('ref_user_id'),
@@ -723,7 +719,8 @@ class TeacherController extends Controller
                 'chat_toid' => $request->chat_toid,
                 'chat_toname' => $request->chat_toname,
                 'chat_touser' => $request->chat_touser,
-                'chat_user_id' => $request->chat_user_id
+                'chat_user_id' => $request->chat_user_id,
+                'limit' => $request->limit
             ];
             //dd($data);       
 
