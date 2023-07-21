@@ -27,6 +27,7 @@ class CommonController extends Controller
             return false;
         }
     }
+
     public function updateSettingSessionLogo(Request $request)
     {
         // dd($request);
@@ -313,5 +314,24 @@ class CommonController extends Controller
         Cookie::queue(Cookie::make('teacher_analytic_semester', $request->semester_id, $minutes));
         Cookie::queue(Cookie::make('teacher_analytic_session', $request->session_id, $minutes));
         return true;
+    }
+    public function chatnotification(Request $request)
+    {
+        try {
+            $session_id= session()->get('ref_user_id');
+            $role_id= session()->get('role_id');
+            $data = [
+            'userID' => $session_id,
+            'role_id' => $role_id
+        ];
+        //dd($data);       
+        $response = Helper::PostMethod(config('constants.api.chatnotification'), $data);      
+        
+        return $response;
+        } catch (\Exception $e) {
+           // dd('123');
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

@@ -150,6 +150,7 @@ Route::get('unread_notifications', [CommonController::class, 'unreadNotification
 // all logout
 Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
 Route::get('lastlogout', [AuthController::class, 'lastlogout'])->name('lastlogout');
+Route::get('ChatNotification', [CommonController::class, 'chatnotification'])->name('ChatNotification');
 // update settings session
 Route::post('update-setting-session', [CommonController::class, 'updateSettingSession'])->name('settings.updateSettingSession');
 // password expired

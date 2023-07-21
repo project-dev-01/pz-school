@@ -1057,8 +1057,10 @@ class AuthController extends Controller
     {
         try {
             $session_id= session()->get('user_id');
+            $role_id= session()->get('role_id');
             $data = [
-            'userID' => $session_id
+            'userID' => $session_id,
+            'role_id' => $role_id
         ];
         // dd($data);       
         $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);

@@ -23,6 +23,7 @@
 <div class="navbar-custom" style="background-color:white;">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
+			
             <li class="dropdown notification-list topbar-dropdown responsivenotification">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
@@ -65,7 +66,16 @@
 
                     </div>
             </li>
-
+			@if(Session::get('role_id') == '4' || Session::get('role_id') == '5')
+			<li class="dropdown notification-list topbar-dropdown responsivenotification">
+			 @php $cpath=explode('/',\Request::path()); @endphp
+                <a class="nav-link dropdown-toggle waves-effect waves-light" href="{{ route($cpath[0].'.chat')}}" >
+                    <i class="far fa-comment-alt noti-icon"></i>
+                    <span class="badge badge-danger rounded-circle noti-icon-badge chat-count">0</span>
+                </a>  
+            </li>
+			@endif
+			
             <li class="dropdown notification-list topbar-dropdown">
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>

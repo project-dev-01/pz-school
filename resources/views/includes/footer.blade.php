@@ -386,6 +386,7 @@
             });
         }, 8000);
         var lastlogout = "{{ route('lastlogout') }}";
+		var chatnotification = "{{ route('ChatNotification') }}";
         var sTimeOutq = setInterval(function() {
           
       
@@ -395,8 +396,28 @@
                
                 success: function(res) {
                     if (res.success) {
-                        // toastr.error('Logout Successfully');
+                       // alert(res.data);// toastr.error('Logout Successfully');
                         
+                    }
+                },
+                error: function(err) {
+                    // console.log("logout error");
+                    // console.log(err)
+                }
+            });
+        }, 2000);
+		 var sTimeOutq = setInterval(function() {
+          
+     
+            $.ajax({
+                type: 'GET',
+                url: chatnotification,
+               
+                success: function(res) {
+                    if (res.success) {
+                      
+						//alert(res.data);
+                        $('.chat-count').html(res.data[0].count_row);
                     }
                 },
                 error: function(err) {

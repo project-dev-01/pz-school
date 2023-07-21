@@ -814,7 +814,8 @@ return [
 
         'forum_image_store'=> $url.'/forum_image_store',
         'get_languages'=> $url.'/get_languages',
-        'lastlogout'=> $url.'/lastlogout'
+        'lastlogout'=> $url.'/lastlogout',
+        'chatnotification'=> $url.'/chatnotification'     
         
       ]
 
