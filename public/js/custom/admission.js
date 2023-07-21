@@ -286,6 +286,10 @@ $(function () {
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
+        getSectionByClass(class_id)
+    });
+
+    function getSectionByClass(class_id) {
         $("#section_id").empty();
         $("#section_id").append('<option value="">' + select_class + '</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
@@ -295,7 +299,7 @@ $(function () {
                 });
             }
         }, 'json');
-    });
+    }
 
     $("#drp_transport_route").on('change', function (e) {
         e.preventDefault();
@@ -331,20 +335,6 @@ $(function () {
     if (student_id) {
         student(student_id);
     }
-    $('#student_name').keyup(function () {
-        var name = $(this).val();
-        if (name != '') {
-            $.ajax({
-                url: studentList,
-                method: "GET",
-                data: { token: token, branch_id: branchID, name: name },
-                success: function (data) {
-                    $('#student_list').fadeIn();
-                    $('#student_list').html(data);
-                }
-            });
-        }
-    });
 
     function student(id) {
 
@@ -370,8 +360,11 @@ $(function () {
                 $("#education").val(data.education);
                 $("#txt_mobile_no").val(data.mobile_no);
                 $("#address").val(data.address);
+                $("#btwyears").val(data.academic_year);
+                $("#class_id").val(data.academic_grade);
 
-
+                var class_id = data.academic_grade;
+                getSectionByClass(class_id);
 
                 if(data.father_first_name){
                     $("#father_form").show("slow");
@@ -415,20 +408,17 @@ $(function () {
         }, 'json');
     }
 
-    $('#student_list').on('click', 'li', function () {
+    
+    $("#application_id").on('change', function (e) {
+        e.preventDefault();
 
-        
         $('#addadmission')[0].reset();
-        $('#student_name').val($(this).text());
-        $('#student_list').fadeOut();
         $("#father_form").hide("slow");
         $("#mother_form").hide("slow");
         $("#guardian_form").hide("slow");
 
-        var value = $(this).text();
-        if (value == "No results Found" || value == "") {
-            $('#student_name').val("");
-        } else {
+        var id =  $(this).val();
+        if (id) {
             var id = $(this).val();
             student(id);
         }

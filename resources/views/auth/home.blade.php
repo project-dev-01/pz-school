@@ -75,7 +75,7 @@
                                 <h3 class="mb-2">{{ __('messages.contact_us') }}</h3>
                                 <div class="icon-item">
                                     <i class="fa fa-map-marker"></i>
-                                    <span style="margin-left: 12px;">Saujana Resort Seksyen U2, 40150 , Selangor Darul Ehsan, Malaysia</span>
+                                    <span style="margin-left: 12px;">{{ isset($home['address'])?$home['address']:''}}</span>
                                 </div>
                                 <div class="icon-item" style="margin-right: 25px;">
                                     <i class="fa fa-phone"></i>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="icon-item">
                                     <i class="fa fa-envelope"></i>
-                                    <span style="margin-left: 11px;"><a href="mailto:jskl2@jskl.edu.my">jskl2@jskl.edu.my</a></span>
+                                    <span style="margin-left: 11px;"><a href="mailto:{{ isset($home['email'])?$home['email']:''}}">{{ isset($home['email'])?$home['email']:''}}</a></span>
                                 </div>
                                 <h3 class="text-center mb-2">{{ __('messages.location') }}</h3>
                                 <div class="maps">

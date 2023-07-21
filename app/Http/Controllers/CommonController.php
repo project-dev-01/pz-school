@@ -27,7 +27,6 @@ class CommonController extends Controller
             return false;
         }
     }
-
     public function updateSettingSessionLogo(Request $request)
     {
         // dd($request);
@@ -57,6 +56,13 @@ class CommonController extends Controller
         $data = [
             'branch_id' => config('constants.branch_id')
         ];
+        
+        $contact = Http::post(config('constants.api.get_home_page_details'), $data);
+        $contactDetails = $contact->json();
+
+        $grade_response = Http::post(config('constants.api.application_grade_list'), $data);
+        $grade = $grade_response->json();
+        
         $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
         $relation = $relation_response->json();
 
@@ -66,7 +72,9 @@ class CommonController extends Controller
             'school-application-form',
             [
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'grade' => isset($grade['data']) ? $grade['data'] : [],
+                'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
             ]
         );
     }
@@ -86,6 +94,8 @@ class CommonController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'postal_code' => $request->postal_code,
+            'academic_grade' => $request->academic_grade,
+            'academic_year' => $request->academic_year,
             'grade' => $request->grade,
             'school_year' => $request->school_year,
             'school_last_attended' => $request->school_last_attended,
@@ -111,11 +121,13 @@ class CommonController extends Controller
             'guardian_occupation' => $request->guardian_occupation,
             'guardian_email' => $request->guardian_email,
             'guardian_relation' => $request->guardian_relation,
+            'branch_id' => config('constants.branch_id')
 
         ];
-
-        // dd($data);
-        $response = Helper::PostMethod(config('constants.api.application_add'), $data);
+        
+        $application = Http::post(config('constants.api.application_add'), $data);
+        $response = $application->json();
+        // dd($response);
         return $response;
     }
     function DBMigrationCall()

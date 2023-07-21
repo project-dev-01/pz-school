@@ -478,7 +478,6 @@ $(function () {
         var event_id = $(this).data('id');
         $('.viewEvent').find('span.error-text').text('');
         $.post(eventDetails, { id: event_id }, function (data) {
-            console.log('cc', data)
             $('.viewEvent').find('.title').text(data.data.title);
             $('.viewEvent').find('.type').text(data.data.type_name);
             $('.viewEvent').find('.start_date').text(data.data.start_date);

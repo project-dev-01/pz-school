@@ -1,16 +1,17 @@
 $(function () {
-
     $(document).on('change', '#terms_condition', function () {
+        
         if ($(this).prop('checked') == false) {
             $('#submit').prop('disabled', true);
             $('#submit').prop('disabled', true);
         } else {
+            $('#aggrement').modal({ backdrop: 'static', keyboard: false })
+            $('#aggrement').modal('show')
             $('#submit').prop('disabled', false);
             $('#submit').prop('disabled', false);
         }
 
     });
-    
     $(".number_validation").keypress(function () {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
@@ -42,6 +43,8 @@ $(function () {
             city: "required",
             state: "required",
             postal_code: "required",
+            academic_grade: "required",
+            academic_year: "required",
             grade: "required",
             school_year: "required",
             school_last_attended: "required",
@@ -99,6 +102,32 @@ $(function () {
                     }
                 }
             });
+        }
+    });
+
+    
+    // skip_mother_details
+    $("#skip_mother_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#mother_details").hide("slow");
+        } else {
+            $("#mother_details").show("slow");
+        }
+    });
+    // skip_father_details
+    $("#skip_father_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#father_details").hide("slow");
+        } else {
+            $("#father_details").show("slow");
+        }
+    });
+    // skip_guardian_details
+    $("#skip_guardian_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#guardian_details").hide("slow");
+        } else {
+            $("#guardian_details").show("slow");
         }
     });
 });

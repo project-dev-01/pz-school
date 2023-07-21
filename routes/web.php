@@ -175,6 +175,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+        
+        // application details
+        Route::get('application', [AdminController::class, 'applicationIndex'])->name('admin.application.index');
+        Route::get('application/list', [AdminController::class, 'applicationList'])->name('admin.application.list');
+        Route::get('application/application-details/{id}', [AdminController::class, 'getApplicationDetails'])->name('admin.application.details');
+        Route::post('application/update', [AdminController::class, 'updateApplication'])->name('admin.application.update');
+        Route::post('application/approve', [AdminController::class, 'approveApplication'])->name('admin.application.approve');
+        Route::post('application/delete', [AdminController::class, 'deleteApplication'])->name('admin.application.delete');
         // student details
         Route::get('student', [AdminController::class, 'studentIndex'])->name('admin.student.index');
         Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');

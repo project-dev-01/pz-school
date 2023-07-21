@@ -806,12 +806,17 @@ return [
         'get_home_page_details'=> $url.'/get_home_page_details',
 
         
-        'application_add'=> $url.'/application_add',
-        'student_application_list'=> $url.'/student_application_list',
-        'student_application'=> $url.'/student_application',
+        'application_add'=> $url.'/application/add',
+        'application_list'=> $url.'/application/list',
+        'application_details'=> $url.'/application/application-details',
+        'application_approve'=> $url.'/application/approve',
+        'application_update'=> $url.'/application/update',
+        'application_delete'=> $url.'/application/delete',
+
+        'application_grade_list'=> $url.'/application/grade/list',
         'application_relation_list'=> $url.'/application/relation/list',
         'application_academic_year_list'=> $url.'/application/academic_year/list',
-
+       
         'forum_image_store'=> $url.'/forum_image_store',
         'get_languages'=> $url.'/get_languages',
         'lastlogout'=> $url.'/lastlogout',

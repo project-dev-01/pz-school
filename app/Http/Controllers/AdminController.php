@@ -393,8 +393,8 @@ class AdminController extends Controller
             'password' => [
                 'required',
                 'min:8',
-                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
-                // 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+                // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
+                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);
@@ -1043,7 +1043,11 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($academic_year_list);
+        $data = [
+            'admission' => 1
+        ];
+        $application = Helper::GETMethodWithData(config('constants.api.application_list'),$data);
+        // dd($application);
         return view(
             'admin.admission.index',
             [
@@ -1056,6 +1060,7 @@ class AdminController extends Controller
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'application' => isset($application['data']) ? $application['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
             ]
         );
@@ -7385,5 +7390,155 @@ class AdminController extends Controller
             //     'data' => $data,
             // ]
         );
+    }
+    
+    public function applicationIndex()
+    {
+        
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($student);
+        return view(
+            'admin.application.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
+    
+    public function applicationList(Request $request)
+    {
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            "academic_year" => $request->academic_year,
+            "academic_grade" => $request->academic_grade,
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.application_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('approve', function ($row) {
+
+                $status = $row['status'];
+                if ($status == "Approved") {
+                    $result = "checked";
+                } else if ($status == "Enrolled") {
+                    $result = "checked disabled";
+                } else {
+                    $result = "";
+                }
+                return '<input type="checkbox" ' . $result . ' data-id="' . $row['id'] . '"  id="approveApplicationBtn">';
+            })
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.application.details', $row['id']);
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewApplicationBtn"><i class="fe-eye"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteApplicationBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions','approve'])
+            ->make(true);
+    }
+    
+    // DELETE Application Details
+    public function deleteApplication(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.application_delete'), $data);
+        return $response;
+    }
+
+    
+    // approve application
+    public function approveApplication(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'status' => $request->status
+        ];
+        $response = Helper::PostMethod(config('constants.api.application_approve'), $data);
+        return $response;
+    }
+
+    public function getApplicationDetails($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+
+        
+        $application = Helper::PostMethod(config('constants.api.application_details'), $data);
+        // dd($student);
+        return view(
+            'admin.application.edit',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'application' => isset($application['data']) ? $application['data'] : [],
+            ]
+        );
+    }
+
+    
+    public function updateApplication(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'address_1' => $request->address_1,
+            'address_2' => $request->address_2,
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'academic_grade' => $request->academic_grade,
+            'academic_year' => $request->academic_year,
+            'grade' => $request->grade,
+            'school_year' => $request->school_year,
+            'school_last_attended' => $request->school_last_attended,
+            'school_address_1' => $request->school_address_1,
+            'school_address_2' => $request->school_address_2,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            'father_first_name' => $request->father_first_name,
+            'father_last_name' => $request->father_last_name,
+            'father_phone_number' => $request->father_phone_number,
+            'father_occupation' => $request->father_occupation,
+            'father_email' => $request->father_email,
+            'mother_first_name' => $request->mother_first_name,
+            'mother_last_name' => $request->mother_last_name,
+            'mother_phone_number' => $request->mother_phone_number,
+            'mother_occupation' => $request->mother_occupation,
+            'mother_email' => $request->mother_email,
+            'guardian_first_name' => $request->guardian_first_name,
+            'guardian_last_name' => $request->guardian_last_name,
+            'guardian_phone_number' => $request->guardian_phone_number,
+            'guardian_occupation' => $request->guardian_occupation,
+            'guardian_email' => $request->guardian_email,
+            'guardian_relation' => $request->guardian_relation,
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.application_update'), $data);
+
+        return $response;
     }
 }

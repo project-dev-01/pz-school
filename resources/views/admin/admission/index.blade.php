@@ -295,7 +295,7 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12 addadmission">
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="page-title-box">
@@ -304,10 +304,14 @@
                 </div>
                 <div class="col-md-6 pt-2">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="student_name" placeholder="Search" aria-describedby="inputGroupPrepend">
                         <input type="hidden" name="student_id" id="student_id">
-                        <div id="student_list">
-                        </div>
+                        <select class="form-control select2" data-toggle="select2" id="application_id" name="application_id"  data-placeholder="{{ __('messages.application_list') }}">
+                            <option value="">{{ __('messages.application_list') }}</option>
+                            @forelse($application as $app)
+                            <option value="{{$app['id']}}">{{$app['first_name']}} {{$app['last_name']}}</option>
+                            @empty
+                            @endforelse
+                        </select>
                     </div>
                 </div>
             </div>
@@ -320,10 +324,12 @@
             <form id="addadmission" method="post" action="{{ route('admin.admission.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
- <input type="hidden" name="sudent_application_id" id="sudent_application_id">                <div class="card">
+                <input type="hidden" name="sudent_application_id" id="sudent_application_id">
+                <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.student_details') }}<h4>
+                            <h4 class="navv">{{ __('messages.student_details') }}
+                                <h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -569,7 +575,7 @@
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
                                         <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -582,7 +588,7 @@
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -1254,7 +1260,7 @@
                                         <option value="0">{{ __('messages.select_transport') }}</option>
                                         @forelse($transport as $trans)
                                         <option value="{{$trans['id']}}">{{$trans['name']}}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -1414,8 +1420,8 @@
     var parentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var parentName = "{{ config('constants.api.parent_name') }}";
-    var studentList = "{{ config('constants.api.student_application_list') }}";
-    var studentDetails = "{{ config('constants.api.student_application') }}";
+    var studentList = "{{ config('constants.api.application_list') }}";
+    var studentDetails = "{{ config('constants.api.application_details') }}";
     var parentDetails = "{{ config('constants.api.parent_details') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";

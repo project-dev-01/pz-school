@@ -205,6 +205,11 @@
                                                 <span>{{ __('messages.new_admission') }}</span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.application.index')}}" class="nav-link {{ (request()->is('admin/application/index')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.application_list') }}</span>
+                                            </a>
+                                        </li>
                                         <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
                                             <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.student_list') }}</span>
