@@ -570,7 +570,7 @@ $(function () {
                 }, function (data) {
                     if (data.code == 200) {
                         $("#student").show("slow");
-                        $('#student_table').DataTable().ajax.reload(null, false);
+                        $('#student-table').DataTable().ajax.reload(null, false);
                         toastr.success(data.message);
                     } else {
                         $("#student").hide("slow");

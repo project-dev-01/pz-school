@@ -392,7 +392,6 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
-        // dd($request);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -728,10 +727,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('admin.login');
+                return redirect()->route('admin.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('admin.login');
+            return redirect()->route('admin.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
     public function logoutTeacher(Request $request)
@@ -745,10 +750,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('teacher.login');
+                return redirect()->route('teacher.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('teacher.login');
+            return redirect()->route('teacher.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
     public function logoutStaff(Request $request)
@@ -762,10 +773,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('staff.login');
+                return redirect()->route('staff.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('staff.login');
+            return redirect()->route('staff.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
     public function logoutParent(Request $request)
@@ -779,10 +796,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('parent.login');
+                return redirect()->route('parent.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('parent.login');
+            return redirect()->route('parent.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
     public function logoutStudent(Request $request)
@@ -796,10 +819,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('student.login');
+                return redirect()->route('student.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('student.login');
+            return redirect()->route('student.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
     public function forgotPassword(Request $request)
@@ -1056,17 +1085,17 @@ class AuthController extends Controller
     public function lastlogout(Request $request)
     {
         try {
-            $session_id= session()->get('user_id');
-            $role_id= session()->get('role_id');
+            $session_id = session()->get('user_id');
+            $role_id = session()->get('role_id');
             $data = [
-            'userID' => $session_id,
-            'role_id' => $role_id
-        ];
-        // dd($data);       
-        $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
-        
-        
-        return $response;
+                'userID' => $session_id,
+                'role_id' => $role_id
+            ];
+            // dd($data);       
+            $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+
+
+            return $response;
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
@@ -1311,10 +1340,16 @@ class AuthController extends Controller
                 ];
                 return response()->json($response, 200);
             } else {
-                return redirect()->route('admin.login');
+                return redirect()->route('admin.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
             }
         } else {
-            return redirect()->route('admin.login');
+            return redirect()->route('admin.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
         }
     }
 }

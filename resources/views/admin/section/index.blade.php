@@ -27,7 +27,7 @@
     body {
         font-family: ipag !important;
     }
-</style>;
+</style>
 @endsection
 @section('content')
 <link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />

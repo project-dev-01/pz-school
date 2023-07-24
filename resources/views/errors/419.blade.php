@@ -30,17 +30,17 @@
 		<div class="col-md-6" style="background: #F4F7FC;">
 			<div class="align-items-center d-flex h-100">
 				<div class="card-body">
-				<div class="auth-brand text-center text-lg-left">
-                            <div class="auth-logo">
-                                <div class="auth-logo">
-                                    <a href="" class="logo logo-dark">
-                                        <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+					<div class="auth-brand text-center text-lg-left">
+						<div class="auth-logo">
+							<div class="auth-logo">
+								<a href="" class="logo logo-dark">
+									<span class="logo-lg">
+										<img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
 					<div class="responsive">
 						<h1 class="eoppps">Page expired</h1>
 						<p class="etext">This mismatch error leads to expired session. <br>Kindly try again later on</p>
@@ -86,7 +86,7 @@
 
 		<!-- Auth fluid right content -->
 		<div class="col-md-6">
-				<img src="{{ asset('public/images/error419.jpg') }}" class="bg-image-content">
+			<img src="{{ asset('public/images/error419.jpg') }}" class="bg-image-content">
 		</div>
 		<!-- end Auth fluid right content -->
 	</div>
@@ -100,11 +100,76 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
+		var backPrevious = "{{ url()->previous() }}";
 	</script>
-
+	@if(Session::get('role_id') == '1')
+	<script>
+		var logoutIdle = "{{ route('super_admin.logout') }}";
+	</script>
+	@elseif(Session::get('role_id') == '2')
+	<script>
+		var logoutIdle = "{{ route('admin.logout') }}";
+	</script>
+	@elseif(Session::get('role_id') == '3')
+	<script>
+		var logoutIdle = "{{ route('staff.logout') }}";
+	</script>
+	@elseif(Session::get('role_id') == '4')
+	<script>
+		var logoutIdle = "{{ route('teacher.logout') }}";
+	</script>
+	@elseif(Session::get('role_id') == '5')
+	<script>
+		var logoutIdle = "{{ route('parent.logout') }}";
+	</script>
+	@elseif(Session::get('role_id') == '6')
+	<script>
+		var logoutIdle = "{{ route('student.logout') }}";
+	</script>
+	@else
+	<script>
+		var logoutIdle = null;
+	</script>
+	@endif
 	<!-- App js -->
 	<script src="{{ asset('public/js/app.min.js') }}"></script>
 	<script>
+		$(document).ready(function() {
+			if (logoutIdle) {
+				logoutFunc();
+			} else {
+				window.location = backPrevious;
+			}
+		});
+
+		function logoutFunc() {
+			var formData = new FormData();
+			formData.append("idle_timeout", "idle_timeout");
+			$.ajax({
+				cache: false,
+				url: logoutIdle,
+				data: formData,
+				method: "post",
+				processData: false,
+				dataType: 'json',
+				contentType: false,
+				success: function(response) {
+					window.location.href = response.redirect_url;
+				},
+				error: function(err) {
+					console.log("'''logut error'''")
+					console.log(err);
+					// if (response.status === 419) {
+					//     // CSRF token mismatch, handle the error here
+					//     // You can refresh the page or show an error message
+					//     alert('419');
+					// } else {
+					//     // Handle other errors
+					//     alert('in else');
+					// }
+				}
+			});
+		}
 		document.getElementById('retryButton').addEventListener('click', function() {
 			location.reload(); // Reload the page when the button is clicked
 		});
