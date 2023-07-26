@@ -1,4 +1,31 @@
 $(function () {
+    // todoList set localStorage start
+    var old = localStorage.getItem("old");
+    var today = localStorage.getItem("today");
+    var upcoming = localStorage.getItem("upcoming");
+    // collapse a slide effect
+    if (old) {
+        $('.pastTasks').collapse('show');
+    }
+    if (today) {
+        $('.todayTasks').collapse('show');
+    }
+    if (upcoming) {
+        $('.upcomingTasks').collapse('show');
+    }
+    $("#toDoList a").on('click', function () {
+        var openCloseTab = $(this).data("id");
+        var toDoCount = $(this).data("count");
+        var isExpanded = $(this).attr('aria-expanded');
+        if ((isExpanded == "false") && (toDoCount > 0)) {
+            // To set an item from localStorage
+            localStorage.setItem(openCloseTab, openCloseTab);
+        } else {
+            // To remove an item from localStorage
+            localStorage.removeItem(openCloseTab, openCloseTab);
+        }
+    });
+    // todoList set localStorage end
     var getOldComCount = 0;
     // mark as read
     $(".admintaskListDashboard").on('click', function () {

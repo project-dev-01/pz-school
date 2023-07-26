@@ -4,9 +4,29 @@
 .fc-list-item-title {
     color: #852d2d;
 }
-.fc-time{
-    display: none;
+
+/* Customize the fc-today highlight color */
+/* .fc-today {
+    background-color: rgb(115, 96, 201);
+    font-weight: bold;
+    color: black;
+} */
+/* Customize the fc-today highlight background color */
+.fc-today {
+    background-color: #ADD8E6;
+    /* Use a light or mild background color */
 }
+
+/* Customize the fc-today highlight font color */
+.fc-today .fc-day-number {
+    color: #555;
+    /* Use a font color that complements the background */
+    font-weight: bold;
+}
+
+/* .fc-time{
+    display: none;
+} */
 .btn-primary {
     color: #fff;
     border-color: #0ABAB5;

@@ -133,16 +133,16 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+                            <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
-                                    <a class="text-dark" data-toggle="collapse" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
+                                    <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
                                         <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.today') }} <span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today']) ? count($get_to_do_list_dashboard['today']) : "0"}} )</span></h5>
                                     </a>
                                     <!-- Right modal -->
                                     <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                    @if(isset($get_to_do_list_dashboard['today']))
+                                    @if(!empty($get_to_do_list_dashboard['today']))
                                     @forelse ($get_to_do_list_dashboard['today'] as $today)
-                                    <div class="collapse show" id="todayTasks">
+                                    <div class="collapse todayTasks" id="todayTasks">
                                         <div class="card mb-0 shadow-none">
                                             <div class="card-body pb-0" id="task-list-one">
                                                 <!-- task -->
@@ -204,14 +204,14 @@
 
                                     <!-- upcoming tasks -->
                                     <div class="mt-4">
-                                        <a class="text-dark" data-toggle="collapse" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
+                                        <a class="text-dark" data-toggle="collapse" data-id="upcoming" data-count="{{ isset($get_to_do_list_dashboard['upcoming'])?count($get_to_do_list_dashboard['upcoming']):0 }}" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
                                             <h5 class="mb-0">
                                                 <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['upcoming']) ? count($get_to_do_list_dashboard['upcoming']) : "0"}})</span>
                                             </h5>
                                         </a>
-                                        @if(isset($get_to_do_list_dashboard['upcoming']))
+                                        @if(!empty($get_to_do_list_dashboard['upcoming']))
                                         @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
-                                        <div class="collapse" id="upcomingTasks">
+                                        <div class="collapse upcomingTasks" id="upcomingTasks">
                                             <div class="card mb-0 shadow-none">
                                                 <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
@@ -236,7 +236,7 @@
                                                                             {{$upcoming['total_comments']}}
                                                                         </li>
                                                                         <li class="list-inline-item pr-1">
-                                                                            <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
+                                                                            <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                             {{ date('j F y g a', strtotime($upcoming['due_date']));}}
 
                                                                         </li>
@@ -274,14 +274,14 @@
                                     <!-- end upcoming tasks -->
                                     <!-- old tasks -->
                                     <div class="mt-4">
-                                        <a class="text-dark" data-toggle="collapse" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
-                                            <h5 class="">
+                                        <a class="text-dark" data-toggle="collapse" data-id="old" data-count="{{ isset($get_to_do_list_dashboard['old'])?count($get_to_do_list_dashboard['old']):0 }}" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
+                                            <h5 class="mb-0">
                                                 <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.past') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['old']) ? count($get_to_do_list_dashboard['old']) : "0"}})</span>
                                             </h5>
                                         </a>
-                                        @if(isset($get_to_do_list_dashboard['old']))
+                                        @if(!empty($get_to_do_list_dashboard['old']))
                                         @forelse ($get_to_do_list_dashboard['old'] as $old)
-                                        <div class="collapse" id="pastTasks">
+                                        <div class="collapse pastTasks" id="pastTasks">
                                             <div class="card mb-0 shadow-none">
                                                 <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
@@ -307,6 +307,8 @@
                                                                         </li>
                                                                         <li class="list-inline-item pr-1">
                                                                             <i class='mdi mdi-calendar-month-outline font-16'></i>
+                                                                            <?php setlocale(LC_ALL, 'ja.UTF-8');
+                                                                            ?>
                                                                             {{ date('j F y g a', strtotime($old['due_date']));}}
 
                                                                         </li>
