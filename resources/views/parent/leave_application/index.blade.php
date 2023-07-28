@@ -265,7 +265,9 @@ width: 14.3em;
     var footer_txt = "{{ session()->get('footer_text') }}";
 
     // Get PDF Header & Footer Text End
-
+    var at="{{date('d-m-Y')}}";
+    $("#frm_ldate").val(at);    
+    $("#to_ldate").val(at);
     
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
 </script>
