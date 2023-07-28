@@ -84,6 +84,9 @@ $(function () {
     $('#studentHomeworkFilter').on('submit', function (e) {
         e.preventDefault();
         var form = this;
+        var formstatus=$('input[name="status"]:checked').val();
+        
+        var formsubject=$('#subject').val();
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -110,7 +113,39 @@ $(function () {
                 }
             }
         });
+        var classObj = {
+            formstatus: formstatus,
+            formsubject: formsubject,
+            academic_session_id: academic_session_id
+        };
+       // console.log(academic_session_id);
+        setLocalStorageForparenthomework(classObj);
     });
+
+    function setLocalStorageForparenthomework(classObj) {
+
+        var homeworkDetails = new Object();
+        homeworkDetails.status = classObj.formstatus;
+        homeworkDetails.subject = classObj.formsubject;
+        // here to attached to avoid localStorage other users to add
+        homeworkDetails.branch_id = branchID;
+        homeworkDetails.role_id = get_roll_id;
+        homeworkDetails.user_id = ref_user_id;
+        var homeworkClassArr = [];
+        homeworkClassArr.push(homeworkDetails);
+        if (get_roll_id == "5") {
+            // Parent
+            localStorage.removeItem("parent_homework_details");
+            localStorage.setItem('parent_homework_details', JSON.stringify(homeworkClassArr));
+        }
+        if (get_roll_id == "6") {
+            // Parent
+            localStorage.removeItem("student_homework_details");
+            localStorage.setItem('student_homework_details', JSON.stringify(homeworkClassArr));
+        }
+       
+        return true;
+    }
 
     
 
@@ -404,5 +439,49 @@ $(function () {
         homeworkevaluationchart.render();
         
     }
+    if (get_roll_id == "5") {
+    if ((parent_homework_storage)) {
+        if (parent_homework_storage) {
+            var parenthomeworkStorage = JSON.parse(parent_homework_storage);
+            if (parenthomeworkStorage.length == 1) {
+                var status, subject, userBranchID, userRoleID, userID;
+                parenthomeworkStorage.forEach(function (user) {
+                    status = user.status;
+                    subject = user.subject;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    $("input[name='status'][value=" + status + "]").prop('checked', true);
+                    $('select[name^="subject"] option[value=' + subject + ']').attr("selected","selected");
+                    
+                }
+            }
+        }
+    }
+    }
+    if (get_roll_id == "6") {
+        if ((student_homework_storage)) {
+            if (student_homework_storage) {
+                var studenthomeworkStorage = JSON.parse(student_homework_storage);
+                if (studenthomeworkStorage.length == 1) {
+                    var status, subject, userBranchID, userRoleID, userID;
+                    studenthomeworkStorage.forEach(function (user) {
+                        status = user.status;
+                        subject = user.subject;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $("input[name='status'][value=" + status + "]").prop('checked', true);
+                        $('select[name^="subject"] option[value=' + subject + ']').attr("selected","selected");
+                        
+                    }
+                }
+            }
+        }
+        }
 });
 

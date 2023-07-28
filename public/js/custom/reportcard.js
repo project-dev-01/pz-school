@@ -17,6 +17,11 @@ $(function () {
                 student_id = ref_user_id;
             }
             var exam_id = $("#examnames").val();
+            var classObj = {
+                exam_id: exam_id,
+                student_id: student_id,
+                academic_session_id: academic_session_id
+            };
             $.post(getbyreportcard, {
                 token: token,
                 branch_id: branchID,
@@ -38,8 +43,32 @@ $(function () {
                     toastr.error(data.message);
                 }
             });
+            setLocalStorageForparentreportcard(classObj);
         };
     });
+    function setLocalStorageForparentreportcard(classObj) {
+
+        var reportcardDetails = new Object();
+        reportcardDetails.exam_id = classObj.exam_id;
+        reportcardDetails.student_id = classObj.student_id;
+        // here to attached to avoid localStorage other users to add
+        reportcardDetails.branch_id = branchID;
+        reportcardDetails.role_id = get_roll_id;
+        reportcardDetails.user_id = ref_user_id;
+        var reportcardClassArr = [];
+        reportcardClassArr.push(reportcardDetails);
+        if (get_roll_id == "5") {
+            // Parent
+            localStorage.removeItem("parent_reportcard_details");
+            localStorage.setItem('parent_reportcard_details', JSON.stringify(reportcardClassArr));
+        }
+        if (get_roll_id == "6") {
+            // Parent
+            localStorage.removeItem("student_reportcard_details");
+            localStorage.setItem('student_reportcard_details', JSON.stringify(reportcardClassArr));
+        }
+        return true;
+    }
     // export excel
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
@@ -58,9 +87,7 @@ $(function () {
             });
         }
     });
-
-});
-
+    
 function bystudentdetails_class(datasetnew) {
     $('#byStudentTableAppend').empty();
     var sno = 0;
@@ -119,3 +146,50 @@ function bystudentdetails_class(datasetnew) {
         '</div>';
     $("#byStudentTableAppend").append(bysubjectAllTable);
 }
+if (get_roll_id == "5") {
+if ((parent_reportcard_storage)) {
+    if (parent_reportcard_storage) {
+        var parentreportcardStorage = JSON.parse(parent_reportcard_storage);
+        if (parentreportcardStorage.length == 1) {
+            var exam_id, student_id, userBranchID, userRoleID, userID;
+            parentreportcardStorage.forEach(function (user) {
+                exam_id = user.exam_id;
+                student_id = user.student_id;
+                userBranchID = user.branch_id;
+                userRoleID = user.role_id;
+                userID = user.user_id;
+            });
+            if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                
+                $('select[name^="exam_id"] option[value=' + exam_id + ']').attr("selected","selected");
+                
+            }
+        }
+    }
+}
+}
+
+if (get_roll_id == "6") {
+    if ((student_reportcard_storage)) {
+        if (student_reportcard_storage) {
+            var studentreportcardStorage = JSON.parse(student_reportcard_storage);
+            if (studentreportcardStorage.length == 1) {
+                var exam_id, student_id, userBranchID, userRoleID, userID;
+                studentreportcardStorage.forEach(function (user) {
+                    exam_id = user.exam_id;
+                    student_id = user.student_id;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    
+                    $('select[name^="exam_id"] option[value=' + exam_id + ']').attr("selected","selected");
+                    
+                }
+            }
+        }
+    }
+    }
+});
+

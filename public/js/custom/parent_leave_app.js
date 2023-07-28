@@ -69,7 +69,16 @@ $(function () {
             $("#listModestudentID").val(student_id);
             $("#listModereason").val(reason);
             $("#listModereasontext").val(reason_text);
-            //
+            var classObj = {
+                class_id:class_id,
+                section_id:section_id,
+                student_id: student_id,
+                frm_leavedate: frm_leavedate,
+                to_leavedate: to_leavedate,
+                reason: reason,
+                reason_text: reason_text,
+                academic_session_id: academic_session_id
+            };
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -88,8 +97,33 @@ $(function () {
                     }
                 }
             });
+            console.log(classObj);
+            setLocalStorageForparentleaveapply(classObj);
         };
     });
+    function setLocalStorageForparentleaveapply(classObj) {
+
+        var leaveapplyDetails  = new Object();
+        leaveapplyDetails.class_id = classObj.class_id;
+        leaveapplyDetails.section_id = classObj.section_id;
+        leaveapplyDetails.student_id = classObj.student_id;
+        leaveapplyDetails.frm_leavedate = classObj.frm_leavedate;
+        leaveapplyDetails.to_leavedate = classObj.to_leavedate;
+        leaveapplyDetails.reason = classObj.reason;
+        // here to attached to avoid localStorage other users to add
+        leaveapplyDetails.branch_id = branchID;
+        leaveapplyDetails.role_id = get_roll_id;
+        leaveapplyDetails.user_id = ref_user_id;
+        var leaveapplyClassArr = [];
+        leaveapplyClassArr.push(leaveapplyDetails);
+        if (get_roll_id == "5") {
+            // Parent
+            localStorage.removeItem("parent_leaveapply_details");
+            localStorage.setItem('parent_leaveapply_details', JSON.stringify(leaveapplyClassArr));
+        }
+        
+        return true;
+    }
     $('#leave_file').change(function () {
         var file = $('#leave_file')[0].files[0];
         if (file.size > 2097152) {
@@ -374,5 +408,42 @@ $(function () {
             }
         });
     });
-
+    if (get_roll_id == "5") {
+    if ((parent_leaveapply_storage)) {
+        if (parent_leaveapply_storage) {
+            var parentleaveapplyStorage = JSON.parse(parent_leaveapply_storage);
+            if (parentleaveapplyStorage.length == 1) {
+               
+                var class_id, section_id, student_id,frm_leavedate, to_leavedate, reason,reason_text,userBranchID, userRoleID, userID;
+                parentleaveapplyStorage.forEach(function (user) {
+                    class_id = user.class_id;
+                    section_id = user.section_id; 
+                    student_id = user.student_id;
+                    frm_leavedate = user.frm_leavedate;
+                    to_leavedate = user.to_leavedate; 
+                    reason = user.reason;
+                    reason_text = user.reason_text;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                  
+                    $('select[name^="changeStdName"] option[value=' + student_id + ']').attr("selected","selected");
+                    //$("#frm_ldate").val(frm_ldate);
+                    //$("#to_ldate").val(to_ldate);
+                    $("#frm_ldate").datepicker("setDate", frm_leavedate);
+                    $("#to_ldate").datepicker("setDate", to_leavedate);
+                    $('select[name^="changelevReasons"] option[value=' + reason + ']').attr("selected","selected");
+                  
+                    $("#listModeClassID").val(class_id);
+                    $("#listModeSectionID").val(section_id);
+                    $("#listModestudentID").val(student_id);
+                    $("#listModereason").val(reason);
+                    $("#listModereasontext").val(reason_text);
+                }
+            }
+        }
+    }
+}
 });

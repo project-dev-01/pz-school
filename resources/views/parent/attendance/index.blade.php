@@ -186,6 +186,8 @@
     var getAttendanceList = "{{ config('constants.api.get_attendance_list') }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    
+    var parent_attenance_storage = localStorage.getItem('parent_attentance_details');
 </script>
 <script src="{{ asset('public/js/custom/attendance_list.js') }}"></script>
 @endsection

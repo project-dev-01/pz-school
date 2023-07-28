@@ -308,6 +308,9 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var homeworkList = "{{ route('student.homework') }}";
+    
+    var parent_homework_storage = localStorage.getItem('parent_homework_details');
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
+
 @endsection

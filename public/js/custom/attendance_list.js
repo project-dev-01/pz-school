@@ -65,7 +65,13 @@ $(function () {
             formData.append('ref_user_id', ref_user_id);
             formData.append('student_id', student_id);
             formData.append('subject_id', subject_id);
-
+            var classObj = {
+                attendanceList: attendanceList,
+                subject_id: subject_id,
+                student_id: student_id,
+                academic_session_id: academic_session_id
+            };
+           
             $.ajax({
                 url: getAttendanceList,
                 method: 'post',
@@ -166,9 +172,31 @@ $(function () {
                     }
                 }
             });
+            console.log(classObj);
+            setLocalStorageForparentattendancelist(classObj);
         }
 
     });
+    function setLocalStorageForparentattendancelist(classObj) {
+
+        var attendaceDetails = new Object();
+        attendaceDetails.attendanceList = classObj.attendanceList;
+        attendaceDetails.subject_id = classObj.subject_id;
+        attendaceDetails.student_id = classObj.student_id;
+        // here to attached to avoid localStorage other users to add
+        attendaceDetails.branch_id = branchID;
+        attendaceDetails.role_id = get_roll_id;
+        attendaceDetails.user_id = ref_user_id;
+        var attendaceClassArr = [];
+        attendaceClassArr.push(attendaceDetails);
+        if (get_roll_id == "5") {
+            // Parent
+            localStorage.removeItem("parent_attentance_details");
+            localStorage.setItem('parent_attentance_details', JSON.stringify(attendaceClassArr));
+        }
+        
+        return true;
+    }
     // format date
     function formatDate(date) {
         var d = new Date(date),
@@ -462,5 +490,28 @@ $(function () {
         }
 
     });
+    if (get_roll_id == "5") {
+    if ((parent_attenance_storage)) {
+        if (parent_attenance_storage) {
+            var parentattendanceStorage = JSON.parse(parent_attenance_storage);
+            if (parentattendanceStorage.length == 1) {
+                var attendanceList, subject_id, student_id,userBranchID, userRoleID, userID;
+                parentattendanceStorage.forEach(function (user) {
+                    attendanceList = user.attendanceList;
+                    subject_id = user.subject_id; 
+                    student_id = user.student_id;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    $("#attendanceList").val(attendanceList);
+                    $('select[name^="subject_id"] option[value=' + subject_id + ']').attr("selected","selected");
+                    $("#student_id").val(student_id);
+                }
+            }
+        }
+    }
+    }
 
 });

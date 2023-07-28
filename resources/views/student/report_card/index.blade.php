@@ -142,6 +142,8 @@
 <script>
     var getbyreportcard = "{{ config('constants.api.get_by_reportcard') }}";
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    
+    var student_reportcard_storage = localStorage.getItem('student_reportcard_details');
 </script>
 <script src="{{ asset('public/js/custom/reportcard.js') }}"></script>
 @endsection

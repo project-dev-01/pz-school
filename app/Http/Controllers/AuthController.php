@@ -396,6 +396,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
         $school_name_url = "";
@@ -457,6 +460,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
         ]);
 
         $userDetails = $response->json();
@@ -511,6 +517,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
         ]);
 
         $userDetails = $response->json();
@@ -565,6 +574,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
         $user_name = "";
@@ -618,6 +630,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
         ]);
 
         $userDetails = $response->json();

@@ -230,7 +230,8 @@
     var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
     var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
 
-
+    
+    var student_analytic_storage = localStorage.getItem('student_analytic_details');
 
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";

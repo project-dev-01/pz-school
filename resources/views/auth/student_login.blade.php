@@ -86,6 +86,9 @@
                             <form id="LoginAuth" action="{{ route('student.authenticate') }}" method="post">
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
                                 <input type="hidden" name="branch_id" value="{{$branch_id}}">
+                                <input type="hidden" name="user_browser" id="user_browser"  value="">                                
+                                <input type="hidden" name="user_os" id="user_os" value="">                             
+                                <input type="hidden" name="user_device" id="user_device" value="">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -153,7 +156,9 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('public/js/vendor.min.js') }}"></script>  
+    
+    <script src="{{ asset('public/js/custom/user_config.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {

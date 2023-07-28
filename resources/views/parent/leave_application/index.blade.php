@@ -263,7 +263,12 @@ width: 14.3em;
     // Get PDF Footer Text
     var leave_status_txt = "{{ __('messages.leave_status') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
+
     // Get PDF Header & Footer Text End
+
+    
+    var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
+</script>
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_leave_app.js') }}"></script>
