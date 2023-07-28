@@ -63,6 +63,14 @@ $(function () {
             var total_leave = $("#total_leave").val();
             var remarks = $("#remarks").val();
 
+            var classObj = {
+                leave_type: leave_type,
+                reason: reason,
+                academic_session_id: academic_session_id,
+                userID: userID,
+            };
+            setLocalStorageForLeaveApply(classObj);
+
             var formData = new FormData();
             formData.append('staff_id', ref_user_id);
             formData.append('leave_type', leave_type);
@@ -104,6 +112,47 @@ $(function () {
             });
         };
     });
+
+    function setLocalStorageForLeaveApply(classObj) {
+
+        var leaveApplyDetails = new Object();
+        leaveApplyDetails.reason = classObj.reason;
+        leaveApplyDetails.leave_type = classObj.leave_type;
+        // here to attached to avoid localStorage other users to add
+        leaveApplyDetails.branch_id = branchID;
+        leaveApplyDetails.role_id = get_roll_id;
+        leaveApplyDetails.user_id = ref_user_id;
+        var leaveApplyClassArr = [];
+        leaveApplyClassArr.push(leaveApplyDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_leave_apply_details");
+            localStorage.setItem('teacher_leave_apply_details', JSON.stringify(leaveApplyClassArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof teacher_leave_apply_storage !== 'undefined') {
+        if ((teacher_leave_apply_storage)) {
+            if (teacher_leave_apply_storage) {
+                var teacherLeaveApplyStorage = JSON.parse(teacher_leave_apply_storage);
+                if (teacherLeaveApplyStorage.length == 1) {
+                    var leave_type, reason, userBranchID, userRoleID, userID;
+                    teacherLeaveApplyStorage.forEach(function (user) {
+                        leave_type = user.leave_type;
+                        reason = user.reason;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $("#leave_type").val(leave_type);
+                        $("#changelevReasons").val(reason);
+                    }
+                }
+            }
+        }
+    }
     // change leave reasons
     // $('#changelevReasons').on('change', function () {
     //     var Reasons = $("#changelevReasons").val();

@@ -55,34 +55,45 @@ $(function () {
 
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
-            $("#overlay").fadeIn(300);
+            // $("#overlay").fadeIn(300);
+            
+
+            var classObj = {
+                classID: class_id,
+                sectionID: section_id
+            };
+            setLocalStorageStudentLeaveTeacher(classObj);
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
             // // subject division
-            $.ajax({
-                url: allStutdentLeaveList,
-                method: "post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    if (response.code == 200) {
-                        var dataSet = response.data;
-                        allStudentLeave(dataSet);
-                        $(".studentLeaveShow").show("slow");
-                    } else {
-                        toastr.error(response.message);
-                    }
-                    $("#overlay").fadeOut(300);
-                }
-            });
+            studentLeaveList(formData);
 
         };
     });
+    function studentLeaveList(formData){
+        
+        $.ajax({
+            url: allStutdentLeaveList,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    var dataSet = response.data;
+                    allStudentLeave(dataSet);
+                    $(".studentLeaveShow").show("slow");
+                } else {
+                    toastr.error(response.message);
+                }
+                $("#overlay").fadeOut(300);
+            }
+        });
+    }
     // add remarks model
     $('#stuLeaveRemarksPopup').on('show.bs.modal', e => {
         $("#student_leave_remarks").focus();
@@ -273,6 +284,82 @@ $(function () {
             ]
         }).on('draw', function () {
         });
+    }
+
+
+    function setLocalStorageStudentLeaveTeacher(classObj) {
+
+        var studentLeaveDetails = new Object();
+        studentLeaveDetails.class_id = classObj.classID;
+        studentLeaveDetails.section_id = classObj.sectionID;
+        // here to attached to avoid localStorage other users to add
+        studentLeaveDetails.branch_id = branchID;
+        studentLeaveDetails.role_id = get_roll_id;
+        studentLeaveDetails.user_id = ref_user_id;
+        var studentLeaveClassArr = [];
+        studentLeaveClassArr.push(studentLeaveDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_student_leave_details");
+            localStorage.setItem('teacher_student_leave_details', JSON.stringify(studentLeaveClassArr));
+        }
+        return true;
+    }
+    
+    // if localStorage
+    if (typeof teacher_student_leave_storage !== 'undefined') {
+        if ((teacher_student_leave_storage)) {
+            if (teacher_student_leave_storage) {
+
+                console.log('test')
+                var teacherStudentLeaveStorage = JSON.parse(teacher_student_leave_storage);
+                if (teacherStudentLeaveStorage.length == 1) {
+                    var classID, sectionID, subjectID, studentID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    teacherStudentLeaveStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        
+                        $("#changeClassName").val(classID);
+                        var class_id = classID;
+                        var section_id = sectionID;
+                        if(classID){
+
+                            $("#studentLeaveList").find("#sectionID").empty();
+                            $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
+                    
+                            $.post(sectionByClassUrl, {
+                                token: token,
+                                branch_id: branchID,
+                                class_id: class_id,
+                                teacher_id: ref_user_id,
+                                academic_session_id:academic_session_id
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    console.log(res)
+                                    $.each(res.data, function (key, val) {
+                                        $("#studentLeaveList").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#studentLeaveList").find("#sectionID").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        $("#overlay").fadeIn(300);
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', class_id);
+                        formData.append('section_id', section_id);
+                        // // subject division
+                        studentLeaveList(formData);
+                    }
+                }
+            }
+        }
     }
 
 });

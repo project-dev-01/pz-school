@@ -102,6 +102,8 @@
     var token = "{{ Session::get('token') }}";
     var ref_user_id = "{{ Session::get('ref_user_id') }}";
     var branchID = "{{ Session::get('branch_id') }}";
+    var userID = "{{ Session::get('user_id') }}";
+    var studentID = "{{ Session::get('student_id') }}";
 
 
     var select_employee = "{{ __('messages.select_employee') }}";
@@ -131,8 +133,6 @@
     var calLang = "{{ __('messages.calendar_lang') }}";
     var downloadcsv = "{{ __('messages.download_csv') }}";
     var downloadpdf = "{{ __('messages.download_pdf') }}";
-    var userID = "{{ Session::get('user_id') }}";
-    var studentID = "{{ Session::get('student_id') }}";
     var select_class = "{{ __('messages.select_class') }}";
     var select_section = "{{ __('messages.select_section') }}";
     var select_subject = "{{ __('messages.select_subject') }}";

@@ -332,6 +332,8 @@
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var staffImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/staffs' }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+    // localStorage variables
+    var teacher_employee_attendance_report_storage = localStorage.getItem('teacher_employee_attendance_report_details');
 </script>
 
 <script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>

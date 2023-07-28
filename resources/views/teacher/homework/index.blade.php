@@ -267,6 +267,8 @@ width: 14.3em;
     var homeworkList = "{{ route('teacher.evaluation_report') }}";
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var subjectByClass = "{{ route('teacher.subject_by_class') }}";
+    // localStorage variables
+    var teacher_add_homework_storage = localStorage.getItem('teacher_add_homework_details');
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
 @endsection

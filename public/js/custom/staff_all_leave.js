@@ -360,6 +360,53 @@ $(function () {
     $('#allLeaveFilter').on('submit', function (e) {
         e.preventDefault();
         var leave_status = $("#changeLeaveSts").val();
+        var classObj = {
+            leave_status: leave_status,
+            academic_session_id: academic_session_id,
+            userID: userID,
+        };
+        setLocalStorageForAllLeave(classObj);
         AllLeaveListShow(leave_status);
     });
+    
+
+    function setLocalStorageForAllLeave(classObj) {
+
+        var allLeaveDetails = new Object();
+        allLeaveDetails.leave_status = classObj.leave_status;
+        // here to attached to avoid localStorage other users to add
+        allLeaveDetails.branch_id = branchID;
+        allLeaveDetails.role_id = get_roll_id;
+        allLeaveDetails.user_id = ref_user_id;
+        var allLeaveClassArr = [];
+        allLeaveClassArr.push(allLeaveDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_all_leave_details");
+            localStorage.setItem('teacher_all_leave_details', JSON.stringify(allLeaveClassArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof teacher_all_leave_storage !== 'undefined') {
+        if ((teacher_all_leave_storage)) {
+            if (teacher_all_leave_storage) {
+                var teacherAllLeaveStorage = JSON.parse(teacher_all_leave_storage);
+                if (teacherAllLeaveStorage.length == 1) {
+                    var leave_status, userBranchID, userRoleID, userID;
+                    teacherAllLeaveStorage.forEach(function (user) {
+                        leave_status = user.leave_status;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $("#changeLeaveSts").val(leave_status);
+                        AllLeaveListShow(leave_status);
+                    }
+                }
+            }
+        }
+    }
+
 });

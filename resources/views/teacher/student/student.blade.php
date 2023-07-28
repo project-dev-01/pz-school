@@ -181,6 +181,8 @@
     
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var studentList = "{{ route('teacher.student.list') }}";
+    // localStorage variables
+    var teacher_student_list_storage = localStorage.getItem('teacher_student_list_details');
 </script>
 <script src="{{ asset('public/js/custom/student.js') }}"></script>
 @endsection

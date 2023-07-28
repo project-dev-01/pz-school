@@ -310,168 +310,258 @@ $(function () {
         e.preventDefault();
         var StudentFilter = $("#StudentFilter").valid();
         if (StudentFilter === true) {
-            $("#student").show("slow");
-            $('#student-table').DataTable({
-                processing: true,
-                info: true,
-                bDestroy: true,
-                // dom: 'lBfrtip',
-                dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-                "language": {
-
-                    "emptyTable": no_data_available,
-                    "infoFiltered": filter_from_total_entries,
-                    "zeroRecords": no_matching_records_found,
-                    "infoEmpty": showing_zero_entries,
-                    "info": showing_entries,
-                    "lengthMenu": show_entries,
-                    "search": datatable_search,
-                    "paginate": {
-                        "next": next,
-                        "previous": previous
-                    },
-                },
-                buttons: [
-                    {
-                        extend: 'csv',
-                        text: downloadcsv,
-                        extension: '.csv',
-                        charset: 'utf-8',
-                        bom: true,
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: downloadpdf,
-                        extension: '.pdf',
-                        charset: 'utf-8',
-                        bom: true,
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        },
-        
-                    
-                        customize: function (doc) {
-                        doc.pageMargins = [50,50,50,50];
-                        doc.defaultStyle.fontSize = 10;
-                        doc.styles.tableHeader.fontSize = 12;
-                        doc.styles.title.fontSize = 14;
-                        // Remove spaces around page title
-                        doc.content[0].text = doc.content[0].text.trim();
-                        /*// Create a Header
-                        doc['header']=(function(page, pages) {
-                            return {
-                                columns: [
-                                    
-                                    {
-                                        // This is the right column
-                                        bold: true,
-                                        fontSize: 20,
-                                        color: 'Blue',
-                                        fillColor: '#fff',
-                                        alignment: 'center',
-                                        text: header_txt
-                                    }
-                                ],
-                                margin:  [50, 15,0,0]
-                            }
-                        });*/
-                        // Create a footer
-                        
-                        doc['footer']=(function(page, pages) {
-                            return {
-                                columns: [
-                                    { alignment: 'left', text: [ footer_txt ],width:400} ,
-                                    {
-                                        // This is the right column
-                                        alignment: 'right',
-                                        text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                        width:100
-        
-                                    }
-                                ],
-                                margin: [50, 0,0,0]
-                            }
-                        });
-                        
-                    }
-                }
-                ],
-                serverSide: true,
-                ajax: {
-                    url: studentList,
-                    data: function (d) {
-                        d.student_name = $('#student_name').val(),
-                            d.class_id = $('#class_id').val(),
-                            d.section_id = $('#section_id').val(),
-                            d.session_id = $('#session_id').val()
-                    }
-                },
-                "pageLength": 10,
-                "aLengthMenu": [
-                    [5, 10, 25, 50, -1],
-                    [5, 10, 25, 50, "All"]
-                ],
-                columns: [
-                    {
-                        searchable: false,
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    }
-                    ,
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'register_no',
-                        name: 'register_no'
-                    },
-                    {
-                        data: 'roll_no',
-                        name: 'roll_no'
-                    },
-                    {
-                        data: 'gender',
-                        name: 'gender'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                        orderable: false,
-                        searchable: false
-                    },
-                ],
-                columnDefs: [
-                    {
-                        "targets": 1,
-                        "className": "table-user",
-                        "render": function (data, type, row, meta) {
-                            var currentImg = studentImg + row.photo;
-                            // var existUrl = UrlExists(currentImg);
-                            // console.log(currentImg);
-                            var img = (row.photo != null) ? currentImg : defaultImg;
-                            var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                                '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                            return first_name;
-                        }
-                    },
-                ]
-            });
+            var student_name = $('#student_name').val();
+            var class_id = $('#class_id').val();
+            var section_id = $('#section_id').val();
+            var session_id = $('#session_id').val();
+            
+            var classObj = {
+                student_name: student_name,
+                classID: class_id,
+                sectionID: section_id,
+                sessionID: session_id,
+                userID: userID,
+            };
+            setLocalStorageForStudentList(classObj);
+            
+            var formData = {
+                student_name: student_name,
+                class_id: class_id,
+                section_id: section_id,
+                session_id: session_id,
+            };
+            getStudentList(formData);
         } else {
             $("#student").hide("slow");
         }
 
     });
+    function getStudentList(formData){
+        $("#student").show("slow");
+        
+        $('#student-table').DataTable({
+            processing: true,
+            info: true,
+            bDestroy: true,
+            // dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
 
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: downloadcsv,
+                    extension: '.csv',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+
+                
+                    customize: function (doc) {
+                    doc.pageMargins = [50,50,50,50];
+                    doc.defaultStyle.fontSize = 10;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.styles.title.fontSize = 14;
+                    // Remove spaces around page title
+                    doc.content[0].text = doc.content[0].text.trim();
+                    /*// Create a Header
+                    doc['header']=(function(page, pages) {
+                        return {
+                            columns: [
+                                
+                                {
+                                    // This is the right column
+                                    bold: true,
+                                    fontSize: 20,
+                                    color: 'Blue',
+                                    fillColor: '#fff',
+                                    alignment: 'center',
+                                    text: header_txt
+                                }
+                            ],
+                            margin:  [50, 15,0,0]
+                        }
+                    });*/
+                    // Create a footer
+                    
+                    doc['footer']=(function(page, pages) {
+                        return {
+                            columns: [
+                                { alignment: 'left', text: [ footer_txt ],width:400} ,
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
+                                    width:100
+
+                                }
+                            ],
+                            margin: [50, 0,0,0]
+                        }
+                    });
+                    
+                }
+            }
+            ],
+            serverSide: true,
+            ajax: {
+                url: studentList,
+                data: function (d) {
+                    d.student_name = formData.student_name,
+                        d.class_id = formData.class_id,
+                        d.section_id = formData.section_id,
+                        d.session_id = formData.session_id
+                }
+            },
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }
+                ,
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'register_no',
+                    name: 'register_no'
+                },
+                {
+                    data: 'roll_no',
+                    name: 'roll_no'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var currentImg = studentImg + row.photo;
+                        // var existUrl = UrlExists(currentImg);
+                        // console.log(currentImg);
+                        var img = (row.photo != null) ? currentImg : defaultImg;
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
+                },
+            ]
+        });
+    }
+
+    function setLocalStorageForStudentList(classObj) {
+
+        var studentListDetails = new Object();
+        studentListDetails.class_id = classObj.classID;
+        studentListDetails.section_id = classObj.sectionID;
+        studentListDetails.student_name = classObj.student_name;
+        studentListDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        studentListDetails.branch_id = branchID;
+        studentListDetails.role_id = get_roll_id;
+        studentListDetails.user_id = ref_user_id;
+        var studentListClassArr = [];
+        studentListClassArr.push(studentListDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_student_list_details");
+            localStorage.setItem('teacher_student_list_details', JSON.stringify(studentListClassArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof teacher_student_list_storage !== 'undefined') {
+        if ((teacher_student_list_storage)) {
+            if (teacher_student_list_storage) {
+                var teacherStudentListStorage = JSON.parse(teacher_student_list_storage);
+                if (teacherStudentListStorage.length == 1) {
+                    var classID, student_name,sectionID, sessionID, userBranchID, userRoleID, userID;
+                    teacherStudentListStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        student_name = user.student_name;
+                        sectionID = user.section_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $("#student_name").val(student_name);
+                        $('#session_id').val(sessionID);
+                        if (classID) {
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">' + select_class + '</option>');
+                            $.post(sectionByClass, { class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#section_id").val(classID);
+                                }
+                            }, 'json');
+                        }
+                        
+            
+                        var formData = {
+                            student_name: student_name,
+                            class_id: classID,
+                            section_id: sectionID,
+                            session_id: sessionID,
+                        };
+                        getStudentList(formData);
+                    }
+                }
+            }
+        }
+    }
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();

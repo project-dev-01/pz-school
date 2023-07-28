@@ -206,6 +206,8 @@
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var downloadFileName = "{{ __('messages.by_student') }}";
+    // localStorage variables
+    var teacher_exam_result_by_student_storage = localStorage.getItem('teacher_exam_result_by_student_details');
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
 @endsection

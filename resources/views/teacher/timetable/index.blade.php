@@ -198,6 +198,8 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
+    var timetableFilter = "{{ route('teacher.timetable.details') }}";
+    
     // localStorage variables
     var teacher_timetable_det = localStorage.getItem('teacher_timetable_details');
 </script>

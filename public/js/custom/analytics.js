@@ -333,7 +333,8 @@ $(function () {
                 studentID: studentID,
                 semesterID: semester_id,
                 sessionID: session_id,
-                academic_session_id: academic_session_id
+                academic_session_id: academic_session_id,
+                userID: userID,
             };
 
             var formData = new FormData();

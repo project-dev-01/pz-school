@@ -50,6 +50,7 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($academic_year_list);
         return view(
             'teacher.dashboard.index',
             [

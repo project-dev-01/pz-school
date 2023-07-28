@@ -104,6 +104,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="student_id">{{ __('messages.student') }}</label>
+                                    <select id="student_id" class="form-control" name="student_id">
+                                        <option value="">{{ __('messages.select_student') }}</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -197,6 +205,7 @@
     var teacher_id = null;
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.by_student') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details') }}";
 </script>
 <script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
 @endsection

@@ -210,6 +210,7 @@
     var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.subject_by_class') }}";
+    var getEvaluationReport = "{{ route('admin.homework.details') }}";
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
 @endsection

@@ -198,6 +198,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.by_class') }}";
+    // localStorage variables
+    var teacher_exam_result_by_class_storage = localStorage.getItem('teacher_exam_result_by_class_details');
 </script>
 <script src="{{ asset('public/js/custom/byclass.js') }}"></script>
 @endsection

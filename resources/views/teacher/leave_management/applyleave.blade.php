@@ -321,6 +321,8 @@
     var header_txt = "{{ __('messages.all_leaves') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    // localStorage variables
+    var teacher_leave_apply_storage = localStorage.getItem('teacher_leave_apply_details');
 </script>
 <script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
 @endsection

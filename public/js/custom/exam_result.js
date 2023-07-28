@@ -1,4 +1,5 @@
 $(function () {
+
     // change classroom
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
@@ -139,6 +140,26 @@ $(function () {
     });
 
 });
+
+
+function setLocalStorageEmployeeAttendanceTeacher(classObj) {
+
+    var employeeAttendanceDetails = new Object();
+    employeeAttendanceDetails.date = classObj.date;
+    employeeAttendanceDetails.session_id = classObj.sessionID;
+    // here to attached to avoid localStorage other users to add
+    employeeAttendanceDetails.branch_id = branchID;
+    employeeAttendanceDetails.role_id = get_roll_id;
+    employeeAttendanceDetails.user_id = ref_user_id;
+    var employeeAttendanceClassArr = [];
+    employeeAttendanceClassArr.push(employeeAttendanceDetails);
+    if (get_roll_id == "4") {
+        // teacher
+        localStorage.removeItem("teacher_employee_attendance_details");
+        localStorage.setItem('teacher_employee_attendance_details', JSON.stringify(employeeAttendanceClassArr));
+    }
+    return true;
+}
 function examresult_details(datasetnew) {
 
     $('#byStudentTableAppend').empty();

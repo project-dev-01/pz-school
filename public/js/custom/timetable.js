@@ -304,6 +304,42 @@ $(function () {
 
                             }
                         }, 'json');
+                        
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        $.ajax({
+                            url: timetableFilter,
+                            method: "post",
+                            data: formData,
+                            processData: false,
+                            dataType: 'json',
+                            contentType: false,
+                            success: function (data) {
+
+                                if (data.code == 200) {
+                                    $("#edit-modal").attr("data-class_id", data.class_id);
+                                    $("#edit-modal").attr("data-section_id", data.section_id);
+                                    $("#edit-modal").attr("data-semester_id", data.semester_id);
+                                    $("#edit-modal").attr("data-session_id", data.session_id);
+                                    $("#timetablerow").show("slow");
+                                    $("#timetable").html(data.timetable);
+                                    // download set start
+                                    $("#downClassID").val(data.class_id);
+                                    $("#downSectionID").val(data.section_id);
+                                    $("#downSemesterID").val(data.semester_id);
+                                    $("#downSessionID").val(data.session_id);
+                                    $("#downAcademicYear").val(academic_session_id);
+                                    // download set end
+                                } else {
+                                    $("#timetablerow").hide("slow");
+                                }
+                            }
+                        });
                     }
                 }
             }

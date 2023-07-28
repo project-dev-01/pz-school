@@ -407,6 +407,8 @@
     var teacherID = ref_user_id;
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    // localStorage variables
+    var teacher_exam_mark_storage = localStorage.getItem('teacher_exam_mark_details');
 </script>
 <script src="{{ asset('public/js/custom/testresult.js') }}"></script>
 @endsection

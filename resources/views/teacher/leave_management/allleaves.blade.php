@@ -158,6 +158,8 @@
     var leaveFilesUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var leaveApprovedUrl = "{{ config('constants.api.staff_leave_approved') }}";
     var staffLeaveDetailsShowUrl = "{{ config('constants.api.staff_leave_details') }}";
+    // localStorage variables
+    var teacher_all_leave_storage = localStorage.getItem('teacher_all_leave_details');
     // $(function() {
     //     $(".alloptions").maxlength({
     //         alwaysShow: !0,

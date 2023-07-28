@@ -150,6 +150,8 @@
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    // localStorage variables
+    var teacher_student_leave_storage = localStorage.getItem('teacher_student_leave_details');
 </script>
 <script src="{{ asset('public/js/custom/student_leave_list.js') }}"></script>
 @endsection

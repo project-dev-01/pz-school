@@ -248,6 +248,9 @@
     var homeworkList = "{{ route('teacher.evaluation_report') }}";
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var subjectByClass = "{{ route('teacher.subject_by_class') }}";
+    var getEvaluationReport = "{{ route('teacher.homework.details') }}";
+    // localStorage variables
+    var teacher_evaluation_report_storage = localStorage.getItem('teacher_evaluation_report_details');
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
 @endsection
