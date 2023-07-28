@@ -118,6 +118,15 @@ $(function () {
             };
             setLocalStorageForExamResultByStudent(classObj);
 
+            
+            // download set start
+            $("#downExamID").val(exam_id);
+            $("#downClassID").val(class_id);
+            $("#downSemesterID").val(semester_id);
+            $("#downSessionID").val(session_id);
+            $("#downSectionID").val(section_id);
+            $("#downAcademicYear").val(year);
+            // download set end
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -147,14 +156,6 @@ $(function () {
                         if (response.data.allbyStudent.length > 0) {
                             var datasetnew = response.data;
                             bystudentdetails_class(datasetnew);
-                            // download set start
-                            $("#downExamID").val(formData.exam_id);
-                            $("#downClassID").val(formData.class_id);
-                            $("#downSemesterID").val(formData.semester_id);
-                            $("#downSessionID").val(formData.session_id);
-                            $("#downSectionID").val(formData.section_id);
-                            $("#downAcademicYear").val(formData.academic_year);
-                            // download set end
                             $('#bystudent_bodycontent').show();
                             $("#overlay").fadeOut(300);
                         } else {
@@ -257,6 +258,15 @@ $(function () {
                             }, 'json');
                             getbyStudentDetails(year, classID, sectionID,studentID);
                         }
+            
+                        // download set start
+                        $("#downExamID").val(examID);
+                        $("#downClassID").val(classID);
+                        $("#downSemesterID").val(semesterID);
+                        $("#downSessionID").val(sessionID);
+                        $("#downSectionID").val(sectionID);
+                        $("#downAcademicYear").val(year);
+                        // download set end
                         var formData = new FormData();
                         formData.append('token', token);
                         formData.append('branch_id', branchID);

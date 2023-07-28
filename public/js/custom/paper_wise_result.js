@@ -125,6 +125,16 @@ $(function () {
             };
 
             setLocalStorageForExamPaperResult(classObj);
+            
+            // download set start
+            $("#downExamID").val(exam_id);
+            $("#downClassID").val(class_id);
+            $("#downSectionID").val(section_id);
+            $("#downSemesterID").val(semester_id);
+            $("#downSessionID").val(session_id);
+            $("#downSubjectID").val(subject_id);
+            $("#downAcademicYear").val(academic_session_id);
+            // download set end
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -155,15 +165,6 @@ $(function () {
                     if (response.data.get_subject_paper_marks.length > 0) {
                         var datasetnew = response.data;
                         paperwiseresult(datasetnew);
-                        // download set start
-                        $("#downExamID").val(formData.exam_id);
-                        $("#downClassID").val(formData.class_id);
-                        $("#downSectionID").val(formData.section_id);
-                        $("#downSemesterID").val(formData.semester_id);
-                        $("#downSessionID").val(formData.session_id);
-                        $("#downSubjectID").val(formData.subject_id);
-                        $("#downAcademicYear").val(formData.academic_session_id);
-                        // download set end
                         $("#body_content").show();
                         $("#overlay").fadeOut(300);
                     } else {
@@ -293,6 +294,15 @@ $(function () {
                             }, 'json');
                         }
 
+                        // download set start
+                        $("#downExamID").val(examID);
+                        $("#downClassID").val(classID);
+                        $("#downSectionID").val(sectionID);
+                        $("#downSemesterID").val(semesterID);
+                        $("#downSessionID").val(sessionID);
+                        $("#downSubjectID").val(subjectID);
+                        $("#downAcademicYear").val(academic_session_id);
+                        // download set end
                         var formData = new FormData();
                         formData.append('token', token);
                         formData.append('branch_id', branchID);
