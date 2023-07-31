@@ -108,7 +108,6 @@
 
     var select_employee = "{{ __('messages.select_employee') }}";
     var all_lang = "{{ __('messages.all') }}";
-    var all_lang = "{{ __('messages.all') }}";
     var remove = "{{ __('messages.remove') }}";
     var drag_and_drop_to_replace = "{{ __('messages.drag_and_drop_to_replace') }}";
     var drag_and_drop_to_check = "{{ __('messages.drag_and_drop_to_check') }}";

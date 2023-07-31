@@ -50,7 +50,6 @@ class TeacherController extends Controller
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($academic_year_list);
         return view(
             'teacher.dashboard.index',
             [
@@ -579,7 +578,7 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);   
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -937,7 +936,7 @@ class TeacherController extends Controller
     //add Homework
     public function addHomework(Request $request)
     {
-        $created_by = session()->get('user_id');
+        $created_by = session()->get('ref_user_id');
 
         $file = $request->file('file');
         $path = $file->path();
@@ -969,56 +968,104 @@ class TeacherController extends Controller
     }
 
     // get Homework
+    // public function getHomework(Request $request)
+    // {
+    //     $details_lang = __('messages.details');
+    //     $no_data_available_lang = __('messages.no_data_available');
+    //     $data = [
+    //         'class_id' => $request->class_id,
+    //         'section_id' => $request->section_id,
+    //         'subject_id' => $request->subject_id,
+    //         'semester_id' => $request->semester_id,
+    //         'session_id' => $request->session_id,
+    //         'academic_session_id' => session()->get('academic_session_id')
+    //     ];
+
+    //     $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
+
+    //     // dd($homework);
+    //     if ($homework['code'] == "200") {
+    //         $response = "";
+    //         $row = 1;
+    //         if ($homework['data']['homework']) {
+    //             foreach ($homework['data']['homework'] as $work) {
+    //                 $total_students = $homework['data']['total_students'];
+    //                 if ($work['students_completed'] == Null) {
+    //                     $completed = 0;
+    //                     $incompleted = $total_students;
+    //                 } else {
+    //                     $completed = $work['students_completed'];
+    //                     $incompleted = $total_students - $completed;
+    //                 }
+
+    //                 $response .= '<tr>
+    //                                 <td>' . $row . '</td>
+    //                                 <td>' . $work['title'] . '</td>
+    //                                 <td>' . $work['date_of_homework'] . '</td>
+    //                                 <td>' . $work['date_of_submission'] . '</td>
+    //                                 <td>' . $completed . '/' . $incompleted . '</td>
+    //                                 <td>' . $homework['data']['total_students'] . '</td>
+    //                                 <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">' . $details_lang . '</span></a></td>
+    //                             </tr>';
+    //                 $row++;
+    //             }
+    //         } else {
+    //             $response .= '<tr>
+    //                                 <td colspan="7"> ' . $no_data_available_lang . '</td>
+    //                             </tr>';
+    //         }
+
+    //         $homework['table'] = $response;
+    //     }
+    //     return $homework;
+    // }
     public function getHomework(Request $request)
     {
-        $details_lang = __('messages.details');
-        $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
-            'academic_session_id' => session()->get('academic_session_id')
+            'academic_session_id' => session()->get('academic_session_id'),
+            'teacher_id' => session()->get('ref_user_id')
         ];
+        // dd($data);
 
         $homework = Helper::PostMethod(config('constants.api.homework_list'), $data);
+        $datas = isset($homework['data']) ? $homework['data'] : [];
+        return DataTables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $details_lang = __('messages.details');
+                return '<div class="button-list">
+                <a href="javascript:void(0)" style="background-color: #6FC6CC;" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $row['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">' . $details_lang . '</span></a>
+                    </div>';
+            })
 
-        // dd($homework);
-        if ($homework['code'] == "200") {
-            $response = "";
-            $row = 1;
-            if ($homework['data']['homework']) {
-                foreach ($homework['data']['homework'] as $work) {
-                    $total_students = $homework['data']['total_students'];
-                    if ($work['students_completed'] == Null) {
-                        $completed = 0;
-                        $incompleted = $total_students;
-                    } else {
-                        $completed = $work['students_completed'];
-                        $incompleted = $total_students - $completed;
-                    }
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // get get Evaluation List
+    public function getEvaluationList(Request $request)
+    {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.homework_all_list'), $data);
+        $datas = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $details_lang = __('messages.details');
+                return '<div class="button-list">
+                <a href="javascript:void(0)" style="background-color: #6FC6CC;" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $row['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">' . $details_lang . '</span></a>
+                    </div>';
+            })
 
-                    $response .= '<tr>
-                                    <td>' . $row . '</td>
-                                    <td>' . $work['title'] . '</td>
-                                    <td>' . $work['date_of_homework'] . '</td>
-                                    <td>' . $work['date_of_submission'] . '</td>
-                                    <td>' . $completed . '/' . $incompleted . '</td>
-                                    <td>' . $homework['data']['total_students'] . '</td>
-                                    <td><a href="" class="btn btn-circle btn-default" data-toggle="modal" data-homework_id="' . $work['id'] . '" data-target=".firstModal"><i class="fas fa-bars"></i> <span style="color: white">' . $details_lang . '</span></a></td>
-                                </tr>';
-                    $row++;
-                }
-            } else {
-                $response .= '<tr>
-                                    <td colspan="7"> ' . $no_data_available_lang . '</td>
-                                </tr>';
-            }
-
-            $homework['table'] = $response;
-        }
-        return $homework;
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     // view Homework
     public function viewHomework(Request $request)
@@ -1032,9 +1079,9 @@ class TeacherController extends Controller
         $no_data_available_lang = __('messages.no_data_available');
         $data = [
             'homework_id' => $request->homework_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => session()->get('academic_session_id')
+            // 'semester_id' => $request->semester_id,
+            // 'session_id' => $request->session_id,
+            // 'academic_session_id' => session()->get('academic_session_id')
         ];
 
 
@@ -1047,10 +1094,13 @@ class TeacherController extends Controller
             $incomplete = 0;
             $checked = 0;
             $unchecked = 0;
+            $notsubchecked = 0;
+            $notsubunchecked = 0;
             if ($homework['data']) {
                 $row = 1;
                 foreach ($homework['data'] as $work) {
                     $check = "";
+                    $notsubcheck = "";
                     $disabled = "";
                     if ($work['score_name'] == "Marks") {
                         $score_name = '<select  class="form-control" required="" name="homework[' . $row . '][score_name]">
@@ -1088,7 +1138,12 @@ class TeacherController extends Controller
                     } else {
                         $unchecked++;
                     }
-
+                    if ($work['homework_status'] == "1") {
+                        $notsubcheck = "checked";
+                        $notsubchecked++;
+                    } else {
+                        $notsubunchecked++;
+                    }
                     if ($work['status'] == "1") {
                         $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">' . $completed_lang . '</button>';
                         $complete++;
@@ -1126,9 +1181,19 @@ class TeacherController extends Controller
 									</div>
                                     <td>
                                         <i data-feather="file-text" class="icon-dual"></i>
-                                        <span class="ml-2 font-weight-semibold"><a  href="' . asset('student/homework/') . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a></span>
+                                        <span class="ml-2 font-weight-semibold">
+                                        <a  href="' . config('constants.image_url') . '/' . 'public/' . config('constants.branch_id') . '/student/homework/' . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a>
+                                        </span>                                    
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
+                                    <td>
+                                        <div class="checkbox checkbox-primary mb-3">
+                                            <input  type="hidden" value="' . $work['homework_id'] . '" name="homework[' . $row . '][homework_id]">
+                                            <input  type="hidden" value="' . $work['student_id'] . '" name="homework[' . $row . '][student_id]">
+                                            <input  type="checkbox" ' . $notsubcheck . ' id="studentID' . $work['student_id'] . '" name="homework[' . $row . '][student_check]">
+                                            <label for="studentID' . $work['student_id'] . '"></label>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="checkbox checkbox-primary mb-3">
                                             <input  type="checkbox"  ' . $check . $disabled . ' id="' . $row . '" name="homework[' . $row . '][correction]">
@@ -1148,6 +1213,8 @@ class TeacherController extends Controller
             $homework['incomplete'] = $incomplete;
             $homework['checked'] = $checked;
             $homework['unchecked'] = $unchecked;
+            $homework['notsubchecked'] = $notsubchecked;
+            $homework['notsubunchecked'] = $notsubunchecked;
         }
 
         return $homework;

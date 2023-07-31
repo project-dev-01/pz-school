@@ -301,6 +301,7 @@ return [
          'homework_submit' => $url.'/homework/submit',
          'homework_view' => $url.'/homework/view',
          'homework_evaluate' => $url.'/homework/evaluate',
+         'homework_all_list' => $url.'/homework/all_list',
          // calendor timetable show
          'get_timetable_calendor' => $url.'/get_timetable_calendor',
          'get_event_calendor' => $url.'/get_event_calendor',

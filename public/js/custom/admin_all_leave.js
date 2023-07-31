@@ -18,7 +18,7 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -43,61 +43,61 @@ $(function () {
                     }
                 },
                 {
-                extend: 'pdf',
-                text: downloadpdf,
-                extension: '.pdf',
-                charset: 'utf-8',
-                bom: true,
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                },
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
 
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
+                    customize: function (doc) {
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
                             }
-                        ],
-                        margin: [50, 0,0,0]
+                        });*/
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
                     }
-                });
-                
-            }
-        }
+                }
             ],
             "ajax": {
                 url: AllLeaveList,
@@ -374,7 +374,7 @@ $(function () {
                     if (leave_type_details.length > 0) {
                         $.each(leave_type_details, function (key, val) {
                             var used_leave = 0;
-                            if(val.used_leave){
+                            if (val.used_leave) {
                                 used_leave = val.used_leave;
                             }
                             var bal = val.total_leave - val.used_leave;
@@ -382,12 +382,12 @@ $(function () {
                                 '<td>' + val.leave_name + '</td>' +
                                 '<td>' + val.total_leave + '</td>' +
                                 '<td>' + used_leave + '</td>' +
-                                '<td>' +  bal + '</td>' +
+                                '<td>' + bal + '</td>' +
                                 '</tr>';
 
                         });
                     } else {
-                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
+                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> ' + no_data_available + '</td></tr>';
 
                     }
                     $('#alreadyTakenLeave tbody').append(takenLeaveDetails);

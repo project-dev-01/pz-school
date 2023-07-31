@@ -13,7 +13,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <h4 class="navv">
-                                    {{ __('messages.view_homework_details') }}
+                                        {{ __('messages.view_homework_details') }}
                                         <h4>
                                 </li>
                             </ul><br>
@@ -62,7 +62,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <h4 class="navv">
-                                    {{ __('messages.homework_details') }}
+                                        {{ __('messages.homework_details') }}
                                         <h4>
                                 </li>
                             </ul><br>
@@ -83,7 +83,8 @@
                                                             <th>{{ __('messages.remarks') }}</th>
                                                             <th>{{ __('messages.submission') }}</th>
                                                             <th>{{ __('messages.student_remarks') }}</th>
-                                                            <th>{{ __('messages.correction') }}</th>
+                                                            <th>{{ __('messages.not_submitted') }}</th>
+                                                            <th>{{ __('messages.done') }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="homework_modal_table">
@@ -97,8 +98,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group text-right m-b-0">
-                                                <button class="btn btn-primary-b1 waves-effect waves-light" type="submit">
-                                                {{ __('messages.save') }}
+                                                <button class="btn btn-primary-b1 waves-effect waves-light" style="background-color: #6FC6CC;" type="submit">
+                                                    {{ __('messages.save') }}
                                                 </button>
                                             </div>
                                         </div>

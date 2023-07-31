@@ -198,7 +198,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('classes', [AdminController::class, 'classes'])->name('admin.classes');
         Route::get('classes/list', [AdminController::class, 'getClassList'])->name('admin.classes.list');
 
-
         // sections allocations routes
         Route::get('allocate_section/index', [AdminController::class, 'showSectionAllocation'])->name('admin.section_allocation');
         Route::get('allocate_section/list', [AdminController::class, 'getSectionAllocationList'])->name('admin.section_allocation.list');
@@ -384,12 +383,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // Homework routes
         Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');
         Route::post('homework/add', [AdminController::class, 'addHomework'])->name('admin.homework.add');
-        Route::post('homework/homework-details', [AdminController::class, 'getHomework'])->name('admin.homework.details');
+        // Route::post('homework/homework-details', [AdminController::class, 'getHomework'])->name('admin.homework.details');
+        Route::get('homework/homework-details', [AdminController::class, 'getHomework'])->name('admin.homework.details');
         Route::get('evaluation_report', [AdminController::class, 'evaluationReport'])->name('admin.evaluation_report');
         Route::post('homework/evaluation', [AdminController::class, 'evaluation'])->name('admin.homework.evaluation');
         Route::get('homework/edit', [AdminController::class, 'homeworkEdit'])->name('admin.homework_edit');
 
         Route::post('homework/view', [AdminController::class, 'viewHomework'])->name('admin.homework.view');
+        Route::get('homework/evaluation_report', [AdminController::class, 'getEvaluationList'])->name('admin.evaluation_report.list');
 
         // exam Term route
         Route::get('exam_term/index', [AdminController::class, 'examTerm'])->name('admin.exam_term');
@@ -1068,11 +1069,14 @@ Route::group(['prefix' => 'teacher'], function () {
         // Homework routes
         Route::get('homework/index', [TeacherController::class, 'homework'])->name('teacher.homework');
         Route::post('homework/add', [TeacherController::class, 'addHomework'])->name('teacher.homework.add');
-        Route::post('homework/homework-details', [TeacherController::class, 'getHomework'])->name('teacher.homework.details');
+        // Route::post('homework/homework-details', [TeacherController::class, 'getHomework'])->name('teacher.homework.details');
+        Route::get('homework/homework-details', [TeacherController::class, 'getHomework'])->name('teacher.homework.details');
         Route::get('evaluation_report', [TeacherController::class, 'evaluationReport'])->name('teacher.evaluation_report');
         Route::post('homework/evaluation', [TeacherController::class, 'evaluation'])->name('teacher.homework.evaluation');
         Route::get('homework/edit', [TeacherController::class, 'homeworkEdit'])->name('teacher.homework_edit');
         Route::post('homework/view', [TeacherController::class, 'viewHomework'])->name('teacher.homework.view');
+        Route::get('homework/evaluation_report', [TeacherController::class, 'getEvaluationList'])->name('teacher.evaluation_report.list');
+
         // Leave Apply
         Route::get('leave_management/applyleave', [TeacherController::class, 'applyleave'])->name('teacher.leave_management.applyleave');
         Route::post('leave_management/applyleave_save', [TeacherController::class, 'staffApplyLeave'])->name('teacher.leave_management.add');

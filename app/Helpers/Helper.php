@@ -69,6 +69,7 @@ class Helper
                 abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
+            // return $e->getMessage();
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
                 // 401,403,404,419,429,500,503,client_error
@@ -144,7 +145,8 @@ class Helper
                 } else if ($e->response->status() == 401) {
                     abort(401, view('errors.401'));
                 } else {
-                    abort(424, view('errors.424'));
+                    // abort(424, view('errors.424'));
+                    return $e->getMessage();
                 }
             }
 

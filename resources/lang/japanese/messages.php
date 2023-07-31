@@ -1395,4 +1395,7 @@ return [
     "skip_mother_details" => "Skip Mother Details",
     "skip_father_details" => "Skip Father Details",
     "skip_guardian_details" => "Skip Guardian Details",
+    "homework_history" => "宿題の歴史",
+    "click_here_homework_history" => "ここをクリック 宿題履歴",
+    "not_submitted" => "Not Submitted"
 ];

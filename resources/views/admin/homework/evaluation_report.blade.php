@@ -1,6 +1,11 @@
 @extends('layouts.admin-layout')
-@section('title','Evaluation Report')
+@section('title',' ' . __('messages.evaluation_report') . '')
 @section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
 <!-- date picker -->
 <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
@@ -12,10 +17,10 @@
 <!-- Start Content-->
 <div class="container-fluid">
     <style>
-        .btn {
+        /* .btn {
             background-color: #6FC6CC;
 
-        }
+        } */
     </style>
     <!-- start page title -->
     <div class="row">
@@ -40,16 +45,16 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="evaluationFilterForm" method="post" action="{{ route('admin.homework.details') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form id="evaluationFilterForm" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <label for="class_id">{{ __('messages.grade') }}</label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse($class as $cla)
@@ -61,7 +66,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <label for="section_id">{{ __('messages.class') }}</label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
@@ -69,9 +74,9 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
+                                    <label for="subject_id">{{ __('messages.subject') }}</label>
                                     <select id="subject_id" class="form-control" name="subject_id">
-                                        <option value="">{{ __('messages.select_subject') }}</option>
+                                        <option value="All">{{ __('messages.all') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -102,7 +107,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -117,65 +122,82 @@
 
     </div>
     <!-- end row -->
-
-
-    <div class="row" id="evaluation" style="display:none;">
-        <div class="col-xl-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="homewWorkHis">
+                        <h4 class="mb-0">
+                            <button class="btn btn-link collapsed" style="background-color: #6FC6CC;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                {{ __('messages.click_here_homework_history') }}
+                            </button>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="homewWorkHis" data-parent="#accordion">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <h4 class="navv">{{ __('messages.homework_history') }}
+                                        <h4>
+                                </li>
+                            </ul><br>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table dt-responsive nowrap w-100" id="evaluation-report-history">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ __('messages.title') }}</th>
+                                                <th>{{ __('messages.date_of_homework') }}</th>
+                                                <th>{{ __('messages.date_of_submission') }}</th>
+                                                <th>{{ __('messages.complete') }}/{{ __('messages.incomplete') }}</th>
+                                                <th>{{ __('messages.total_student') }}</th>
+                                                <th>{{ __('messages.action') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">
-                        {{ __('messages.homework_list') }}
+                        <h4 class="navv">{{ __('messages.homework_list') }}
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card-box">
-                                <div class="tab-content">
-                                    <div class="tab-pane show active" id="current-b1">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="row">
-                                                    <div class="col-md-8"></div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" placeholder="{{ __('messages.search') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table w-100 nowrap  text-center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>{{ __('messages.title') }}</th>
-                                                                <th>{{ __('messages.date_of_homework') }}</th>
-                                                                <th>{{ __('messages.date_of_submission') }}</th>
-                                                                <th>{{ __('messages.complete') }}/{{ __('messages.incomplete') }}</th>
-                                                                <th>{{ __('messages.total_student') }}</th>
-                                                                <th>{{ __('messages.action') }}</th>
+                    <div class="table-responsive">
+                        <table class="table dt-responsive nowrap w-100" id="homework-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ __('messages.title') }}</th>
+                                    <th>{{ __('messages.date_of_homework') }}</th>
+                                    <th>{{ __('messages.date_of_submission') }}</th>
+                                    <th>{{ __('messages.complete') }}/{{ __('messages.incomplete') }}</th>
+                                    <th>{{ __('messages.total_student') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="homework_table">
-                                                        </tbody>
-                                                    </table>
-                                                </div> <!-- end table-responsive-->
-
-                                            </div> <!-- end col-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- end card-box-->
-                        </div> <!-- end col -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- end row-->
-
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
+        <!--- end row -->
 
     </div>
     <!-- end row -->
@@ -186,31 +208,44 @@
 @endsection
 @section('scripts')
 <!-- plugin js -->
+<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
+<!-- button js added -->
+<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<!-- validation js -->
+<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+
 <script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
-<!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 <!-- Chart JS -->
 <script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
 <script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
 <script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
 
-<!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var homeworkView = "{{ route('admin.homework.view') }}";
     var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.subject_by_class') }}";
+    var evaluationReportList = "{{ route('admin.evaluation_report.list') }}";
+    var homeworkTableList = "{{ route('admin.homework.details') }}";
     var getEvaluationReport = "{{ route('admin.homework.details') }}";
+
+    // Get PDF Footer Text
+    var header_txt = "{{ __('messages.evaluation_report') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
+<script src="{{ asset('public/js/custom/evaluatuion_report.js') }}"></script>
 @endsection

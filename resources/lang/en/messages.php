@@ -1394,4 +1394,7 @@ return [
     "skip_mother_details" => "Skip Mother Details",
     "skip_father_details" => "Skip Father Details",
     "skip_guardian_details" => "Skip Guardian Details",
+    "homework_history" => "Homework History",
+    "click_here_homework_history" => "Click here homework history",
+    "not_submitted" => "Not Submitted"
 ];
