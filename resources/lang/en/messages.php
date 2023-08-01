@@ -1396,5 +1396,11 @@ return [
     "skip_guardian_details" => "Skip Guardian Details",
     "homework_history" => "Homework History",
     "click_here_homework_history" => "Click here homework history",
-    "not_submitted" => "Not Submitted"
+    "not_submitted" => "Not Submitted",
+    "check_in_out_time" => "Check In/Out Time",
+    "check_in_time" => "Check In Time",
+    "check_out_time" => "Check Out Time",
+    "edit_check_in_out_time" => "Edit Check In/Out Time",
+    "enter_check_in_time" => "Enter Check In Time",
+    "enter_check_out_time" => "Enter Check Out Time",
 ];

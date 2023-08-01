@@ -1124,6 +1124,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.check_in_out_time')}}" class="nav-link {{ (request()->is('admin/check_in_out_time*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.check_in_out_time') }} </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.settings.logo')}}" class="nav-link {{ (request()->is('admin/settings/logo')) ? 'active' : '' }}">
                                     <span> {{ __('messages.change_logo') }} </span>
                                 </a>

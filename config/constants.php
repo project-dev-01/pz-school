@@ -821,7 +821,12 @@ return [
         'forum_image_store'=> $url.'/forum_image_store',
         'get_languages'=> $url.'/get_languages',
         'lastlogout'=> $url.'/lastlogout',
-        'chatnotification'=> $url.'/chatnotification'     
+        'chatnotification'=> $url.'/chatnotification', 
+          
+         // check in out time url
+         'check_in_out_time_list' => $url.'/check_in_out_time/list',
+         'check_in_out_time_details' => $url.'/check_in_out_time/check_in_out_time-details',
+         'check_in_out_time_update' => $url.'/check_in_out_time/update',
         
       ]
 

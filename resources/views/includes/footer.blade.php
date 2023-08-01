@@ -218,6 +218,8 @@
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
     var language_name = "{{ Session::get('language_name') }}";
     var locale_lang = "{{ Cookie::get('locale') }}";
+    var employee_check_in_time = "{{ Session::get('check_in_time') }}";
+    var employee_check_out_time = "{{ Session::get('check_out_time') }}";
     // branch details
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";

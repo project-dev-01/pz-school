@@ -2343,7 +2343,6 @@ class AdminController extends Controller
     }
     public function employeeEntry()
     {
-
         $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -7603,4 +7602,54 @@ class AdminController extends Controller
 
         return $response;
     }
+    
+    // start Check In Out Time
+    public function checkInOutTime()
+    {
+        return view('admin.check_in_out_time.index');
+    }
+    public function getCheckInOutTimeList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.check_in_out_time_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editCheckInOutTimeBtn"><i class="fe-edit"></i></a>
+                        </div>';
+            })
+
+            // <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteCheckInOutTimeBtn"><i class="fe-trash-2"></i></a>
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getCheckInOutTimeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.check_in_out_time_details'), $data);
+        return $response;
+    }
+    public function updateCheckInOutTime(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'check_in' => $request->check_in,
+            'check_out' => $request->check_out,
+            'updated_by' => session()->get('ref_user_id'),
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.check_in_out_time_update'), $data);
+        if ($response['code'] == 200) {
+
+            $request->session()->pull('check_in_time');
+            $request->session()->pull('check_out_time');
+            $request->session()->put('check_in_time', $request->check_in);
+            $request->session()->put('check_out_time', $request->check_out);
+        }
+        return $response;
+    }
+    // end Check In Out Time
 }

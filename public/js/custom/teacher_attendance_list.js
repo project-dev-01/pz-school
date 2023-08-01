@@ -591,6 +591,17 @@ $(function () {
             $(this).closest('tr').find('.hours').prop('readonly', true);
 
         } else {
+            if (status == "present") {
+                $(this).closest('tr').find('.checkin').val(employee_check_in_time);
+                $(this).closest('tr').find('.checkout').val(employee_check_out_time);
+
+                var valuein = moment.duration(employee_check_in_time, 'HH:mm');
+                var valueout = moment.duration(employee_check_out_time, 'HH:mm');
+                var difference = valueout.subtract(valuein);
+                
+                var hours = ("0" + difference.hours()).slice(-2) + ":" + ("0" + difference.minutes()).slice(-2);
+                $(this).closest('tr').find('.hours').val(hours);
+            }
             $(this).closest('tr').find('.checkin').prop('readonly', false);
             $(this).closest('tr').find('.checkout').prop('readonly', false);
             $(this).closest('tr').find('.hours').prop('readonly', false);
@@ -1213,22 +1224,29 @@ $(function () {
 
     function callout(data) {
         $.each(data, function (key, val) {
+            console.log('val',val)
             var row = "";
             var disabled = "";
-            row += '<tr id="row' + count + '"> ';
+            var holiday = "";
+            var color = "";
+            if(val.holiday == 1){
+                var color = "#8e9597";
+                var holiday = "disabled";
+            }
+            row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
             if (val.details.id) {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '">';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '"'+ holiday +'>';
             } else {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="">';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="">'+ holiday +'';
             }
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '">';
+            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '"'+ holiday +'>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control status"  name="attendance[' + count + '][status]">';
+            row += '<select  class="form-control status"  name="attendance[' + count + '][status]"'+ holiday +'>';
             row += '<option value="">'+select_status+'</option>';
             if (val.leave) {
                 row += '<option value="present">'+present_lang+'</option>';
@@ -1247,26 +1265,26 @@ $(function () {
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '> ';
+            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '>';
+            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
             if (val.details.hours) {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' >';
+                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' '+ holiday +'>';
             } else {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + '>';
+                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + ''+ holiday +'>';
             }
             row += '</div>';
             row += '</td>';
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]">';
+            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]"'+ holiday +'>';
             row += '<option value="">'+select_reason+'s</option>';
             if (val.leave) {
                 var reason = val.leave.reason_id;
@@ -1290,12 +1308,12 @@ $(function () {
             row += '<td width="15%">';
 
             if (val.leave) {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '">';
+                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '"'+ holiday +'>';
             } else {
                 if (val.details.remarks) {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '">';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '"'+ holiday +'>';
                 } else {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="">';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value=""'+ holiday +'>';
                 }
             }
             row += '</td>';

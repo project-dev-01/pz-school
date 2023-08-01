@@ -815,6 +815,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('student/import/add', [AdminController::class, 'studentImportAdd'])->name('admin.student.import.add');
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'adminClassroomSetCookie'])->name('admin.classroom.setcookie');
+        // check in/out time setting routes
+        Route::get('check_in_out_time/index', [AdminController::class, 'checkInOutTime'])->name('admin.check_in_out_time');
+        Route::get('check_in_out_time/list', [AdminController::class, 'getCheckInOutTimeList'])->name('admin.check_in_out_time.list');
+        Route::post('check_in_out_time/check_in_out_time-details', [AdminController::class, 'getCheckInOutTimeDetails'])->name('admin.check_in_out_time.details');
+        Route::post('check_in_out_time/update', [AdminController::class, 'updateCheckInOutTime'])->name('admin.check_in_out_time.update');
     });
 });
 // admin routes end
