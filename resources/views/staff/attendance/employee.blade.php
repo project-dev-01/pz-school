@@ -170,6 +170,8 @@
 <script>
     var getEmployeAttendanceList = "{{ route('staff.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+    
+    var staff_emp_attenance_storage = localStorage.getItem('staff_emp_attentance_details');
 </script>
 <script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 

@@ -177,6 +177,23 @@ $(function () {
         }
 
     });
+
+    $( document ).ready(function() {
+        // Function to get a value from local storage if not present
+        function getValueFromLocalStorage(parent_attentance_details) {
+            // Check if the value exists in local storage
+            if (localStorage.getItem(parent_attentance_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                $("#attendanceList").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            } 
+        }
+
+        // Usage example:
+        const key = 'parent_attentance_details';
+        const value = getValueFromLocalStorage(key);
+    });
+
     function setLocalStorageForparentattendancelist(classObj) {
 
         var attendaceDetails = new Object();

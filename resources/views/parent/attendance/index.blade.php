@@ -188,8 +188,6 @@
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     
     var parent_attenance_storage = localStorage.getItem('parent_attentance_details');
-    var at="{{date('M Y')}}";
-    $("#attendanceList").val(at);
 </script>
 <script src="{{ asset('public/js/custom/attendance_list.js') }}"></script>
 @endsection

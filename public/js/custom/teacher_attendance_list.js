@@ -1149,8 +1149,60 @@ $(function () {
         }
         return true;
     }
+
     
-    // if localStorage
+    $( document ).ready(function() {
+        // Function to get a value from local storage if not present
+        function getValueFromLocalStorage(t_e_atten_details,s_e_atten_report_details,s_e_atten_details,t_s_atten_report_details,t_e_atten_report_details) {
+            // Check if the value exists in local storage
+            if (localStorage.getItem(t_e_atten_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                $("#employeeDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            } 
+            if (localStorage.getItem(s_e_atten_report_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                $("#employeeReportDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            }
+            if (localStorage.getItem(s_e_atten_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                //$("#employeeDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            }
+            if (localStorage.getItem(t_s_atten_report_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                $("#classDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            }
+            if (localStorage.getItem(t_e_atten_report_details) == null) {
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const d = new Date();
+                $("#employeeReportDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+            }
+        }
+
+        // Usage example:
+        const local_key1 = 'teacher_employee_attendance_details';
+        const local_key2 = 'staff_emp_attentancereport_details';
+        const local_key3 = 'staff_emp_attentance_details';
+        const local_key4 = 'teacher_student_attendance_report_details';
+        const local_key5 = 'teacher_employee_attendance_report_details';
+        const value = getValueFromLocalStorage(local_key1,local_key2,local_key3,local_key4,local_key5);
+    });
+
+    
+
+    /*$( document ).ready(function() {
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const d = new Date();
+        $("#classDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
+    });*/
+
+    
+        
+
+    // if localStorage 
     if (typeof teacher_employee_attendance_storage !== 'undefined') {
         if ((teacher_employee_attendance_storage)) {
             if (teacher_employee_attendance_storage) {

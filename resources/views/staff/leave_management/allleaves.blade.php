@@ -48,7 +48,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeLeaveSts">{{ __('messages.leave_status') }}</label>
-                                    <select id="changeLeaveSts" class="form-control" required="">
+                                    <select id="changeLeaveSts" name="leave_status" class="form-control" required="">
                                         <option value="All">{{ __('messages.all') }}</option>
                                         <option value="Approve">{{ __('messages.approved') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
@@ -172,6 +172,7 @@
     var header_txt="{{ __('messages.all_leaves') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    var staff_leaveapproval_storage = localStorage.getItem('staff_leaveapproval_details');
 </script>
 <script src="{{ asset('public/js/custom/staff_all_leave.js') }}"></script>
 @endsection
