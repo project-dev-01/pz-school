@@ -12,17 +12,34 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<style>
+    .accordion-head i {
+        font-size: 23px;
+        float: right;
+        margin-top: 5px;
+    }
+
+    .accordion-head>.collapsed>i:before {
+        content: "\f077";
+
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        background-color: transparent;
+    }
+
+    a:hover {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
-    <style>
-        /* .btn {
-            background-color: #6FC6CC;
-
-        } */
-    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -128,14 +145,18 @@
         <div class="col-lg-12">
             <div id="accordion">
                 <div class="card">
-                    <div class="card-header" id="homewWorkHis">
-                        <h4 class="mb-0">
-                            <button class="btn btn-link collapsed" style="background-color: #6FC6CC;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                {{ __('messages.click_here_homework_history') }}
-                            </button>
-                        </h4>
+                    <div class="card-header" role="tab" id="homewWorkHis" style="border-color: #0ABAB5;background-color: #cfe2ff;/*#6FC6CC;*/">
+                        <div class="mb-0 row">
+                            <div class="col-12 no-padding accordion-head">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#accordionBodyOne" aria-expanded="false" aria-controls="accordionBodyOne" class="collapsed ">
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    <h3>{{ __('messages.click_here_homework_history') }}</h3>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="homewWorkHis" data-parent="#accordion">
+
+                    <div id="accordionBodyOne" class="collapse" role="tabpanel" aria-labelledby="homewWorkHis" aria-expanded="false" data-parent="accordion">
                         <div class="card-body">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">

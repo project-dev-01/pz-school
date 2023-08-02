@@ -7652,4 +7652,66 @@ class AdminController extends Controller
         return $response;
     }
     // end Check In Out Time
+    // index holidays
+    public function holidays()
+    {
+        return view(
+            'admin.holidays.index'
+        );
+    }
+    public function getHolidaysList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.holidays_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editHolidaysBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteHolidaysBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function addHolidays(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'date' => $request->date,
+            'created_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.holidays_add'), $data);
+        return $response;
+    }
+    public function getHolidaysDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.holidays_details'), $data);
+        return $response;
+    }
+    public function updateHolidays(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'date' => $request->date,
+            'updated_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.holidays_update'), $data);
+        return $response;
+    }
+    public function deleteHolidays(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'deleted_by' => session()->get('ref_user_id')
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.holidays_delete'), $data);
+        return $response;
+    }
 }

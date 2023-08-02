@@ -4,9 +4,24 @@ $(function () {
     var subject_id = "All";
     var semester_id = null;
     var session_id = null;
-    HomeworkList(class_id, section_id, subject_id, semester_id, session_id);
+    HomeworkListShow(class_id, section_id, subject_id, semester_id, session_id);
     // get all leave list
-    function HomeworkList(class_id, section_id, subject_id, semester_id, session_id) {
+    function HomeworkListShow(class_id, section_id, subject_id, semester_id, session_id) {
+        console.log("HomeworkListShow");
+        // if (class_id != '') {
+        //     // It's not empty or undefined
+        //     console.log("not empty");
+        //   } else {
+        //     // It's empty or undefined
+        //     console.log(" empty");
+        //     class_id = null;
+
+        //   }
+        console.log(class_id);
+        console.log(section_id);
+        console.log(subject_id);
+        console.log(semester_id);
+        console.log(session_id);
         $('#homework-table').DataTable({
             processing: true,
             bDestroy: true,
@@ -124,6 +139,8 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
+                    console.log("json");
+                    console.log(json);
                     return json.data;
                 },
                 error: function (error) {
@@ -202,14 +219,272 @@ $(function () {
         var subject_id = $("#subject_id").val();;
         var semester_id = $("#semester_id").val();
         var session_id = $("#session_id").val();
-        console.log("---")
-        console.log(class_id)
-        console.log(section_id)
-        console.log(subject_id)
-        console.log(semester_id)
-        console.log(session_id)
-        HomeworkList(class_id, section_id, subject_id, semester_id, session_id);
+        console.log("-----");
+        console.log(class_id);
+        console.log(section_id);
+        console.log(subject_id);
+        console.log(semester_id);
+        console.log(session_id);
+        var classObj = {
+            classID: class_id,
+            sectionID: section_id,
+            subjectID: subject_id,
+            semesterID: semester_id,
+            sessionID: session_id,
+            academic_session_id: academic_session_id,
+            userID: userID,
+        };
+        HomeworkListShow(class_id, section_id, subject_id, semester_id, session_id);
+        setLocalStorageForEvaluationReport(classObj);
     });
+    function setLocalStorageForEvaluationReport(classObj) {
+
+        var evaluationReportDetails = new Object();
+        evaluationReportDetails.class_id = classObj.classID;
+        evaluationReportDetails.section_id = classObj.sectionID;
+        evaluationReportDetails.subject_id = classObj.subjectID;
+        evaluationReportDetails.semester_id = classObj.semesterID;
+        evaluationReportDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        evaluationReportDetails.branch_id = branchID;
+        evaluationReportDetails.role_id = get_roll_id;
+        evaluationReportDetails.user_id = ref_user_id;
+        var evaluationReportClassArr = [];
+        evaluationReportClassArr.push(evaluationReportDetails);
+        if (get_roll_id == "4") {
+            // teacher
+            localStorage.removeItem("teacher_evaluation_report_details");
+            localStorage.setItem('teacher_evaluation_report_details', JSON.stringify(evaluationReportClassArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof teacher_evaluation_report_storage !== 'undefined') {
+        if ((teacher_evaluation_report_storage)) {
+            if (teacher_evaluation_report_storage) {
+                var teacherEvaluationReportStorage = JSON.parse(teacher_evaluation_report_storage);
+                if (teacherEvaluationReportStorage.length == 1) {
+                    var classID, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    teacherEvaluationReportStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        subjectID = user.subject_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $('#semester_id').val(semesterID);
+                        $('#session_id').val(sessionID);
+                        if (classID) {
+
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">' + select_class + '</option>');
+                            $.post(sectionByClass, { class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $('#section_id').val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        if (sectionID) {
+                            $("#subject_id").empty();
+                            $("#subject_id").append('<option value="">' + select_subject + '</option>');
+                            $.post(subjectByClass, { class_id: classID, section_id: sectionID }, function (res) {
+                                console.log('data', res)
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#subject_id").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                    });
+                                    $('#subject_id').val(subjectID);
+                                }
+                            }, 'json');
+                        }
+                        // evealuation report
+                        HomeworkListShow(classID, sectionID, subjectID, semesterID, sessionID);
+                    }
+                }
+            }
+        }
+    }
+    // evaluate Homework
+    $('#evaluateHomework').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: $(form).attr('action'),
+            method: $(form).attr('method'),
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                console.log('data', data)
+                if (data.code == 200) {
+                    $('.firstModal').modal('hide');
+                    toastr.success(data.message);
+                    var class_id = $("#class_id").val();
+                    var section_id = $("#section_id").val();
+                    var subject_id = $("#subject_id").val();;
+                    var semester_id = $("#semester_id").val();
+                    var session_id = $("#session_id").val();
+                    console.log("*****");
+                    console.log(class_id);
+                    console.log(section_id);
+                    console.log(subject_id);
+                    console.log(semester_id);
+                    console.log(session_id);
+                    HomeworkListShow(class_id, section_id, subject_id, semester_id, session_id);
+                } else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    });
+
+    $('#evaluation_check').on('change', function (e) {
+        e.preventDefault();
+        var homework_id = $("#homework_id").val();
+        var evaluation = $("#evaluation_check").val();
+
+        var formData = new FormData();
+        formData.append('homework_id', homework_id);
+        formData.append('evaluation', evaluation);
+        $.ajax({
+            url: homeworkView,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                console.log('cs', res)
+                if (res.code == 200) {
+                    $("#homework_modal_table").html(res.table);
+                    var complete = res.complete;
+                    var incomplete = res.incomplete;
+                    var checked = res.checked;
+                    var unchecked = res.unchecked;
+
+                    callchart(complete, incomplete, checked, unchecked);
+                    homeworkchart.updateSeries([complete, incomplete]);
+                    homeworkevaluationchart.updateSeries([checked, unchecked]);
+
+                }
+            }
+        });
+    });
+
+    $('.firstModal').on('shown.bs.modal', e => {
+        var $button = $(e.relatedTarget);
+        var homework_id = $button.attr('data-homework_id');
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        $("#homework_id").val(homework_id);
+        $.post(homeworkView, { homework_id: homework_id, semester_id: semester_id, session_id: session_id }, function (res) {
+            if (res.code == 200) {
+                $("#homework_modal_table").html(res.table);
+                var complete = res.complete;
+                var incomplete = res.incomplete;
+                var checked = res.checked;
+                var unchecked = res.unchecked;
+
+                callchart(complete, incomplete, checked, unchecked);
+                homeworkchart.updateSeries([complete, incomplete]);
+                homeworkevaluationchart.updateSeries([checked, unchecked]);
+
+            }
+        }, 'json');
+    }).on('hidden.bs.modal', function (event) {
+
+    });
+
+
+    function callchart(complete, incomplete, checked, unchecked) {
+
+        colors = ["#00b19d", "#f1556c"];
+        (dataColors = $("#homework-status").data("colors")) && (colors = dataColors.split(","));
+        options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: [complete, incomplete],
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            labels: [complete_lang, incomplete_lang],
+            colors: colors,
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 240
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }],
+            fill: {
+                type: "gradient"
+            }
+        };
+
+        homeworkchart = new ApexCharts(document.querySelector("#homework-status"), options);
+        homeworkchart.render();
+
+        colors = ["#775DD0", "#FEB019"];
+        (dataColors = $("#homework-checked-status").data("colors")) && (colors = dataColors.split(","));
+        options = {
+            chart: {
+                height: 320,
+                type: "donut"
+            },
+            series: [checked, unchecked],
+            legend: {
+                show: !0,
+                position: "bottom",
+                horizontalAlign: "center",
+                verticalAlign: "middle",
+                floating: !1,
+                fontSize: "14px",
+                offsetX: 0,
+                offsetY: 7
+            },
+            labels: [checked_lang, unchecked_lang],
+            colors: colors,
+            responsive: [{
+                breakpoint: 600,
+                options: {
+                    chart: {
+                        height: 240
+                    },
+                    legend: {
+                        show: !1
+                    }
+                }
+            }],
+            fill: {
+                type: "gradient"
+            }
+        };
+        homeworkevaluationchart = new ApexCharts(document.querySelector("#homework-checked-status"), options);
+        homeworkevaluationchart.render();
+
+    }
     //GET ALL HISTORY
     $('#evaluation-report-history').DataTable({
         processing: true,
@@ -348,5 +623,5 @@ $(function () {
         ]
     }).on('draw', function () {
     });
-    
+
 });

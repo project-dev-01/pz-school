@@ -9,13 +9,13 @@ $(function () {
         yearRange: "-100:+50", // last hundred years
     });
 
+    
 
-
-    $('#homework_file').change(function () {
+    $('#homework_file').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#homework_file')[0].files[0];
         // var size = $('#homework_file')[0].files[0].size;
-        if (file.size > 2097152) {
+        if(file.size > 2097152) {
             $('#file_name').text("File greater than 2Mb");
             $("#file_name").addClass("error");
             $('#homework_file').val('');
@@ -38,48 +38,23 @@ $(function () {
     //         $(this).parent().text(file.name);
     //     }
     // });
-    $(document).on('submit', '.submitHomeworkForm', function (e) {
-        e.preventDefault();
-        var formid = $(this).attr("id")
-        formvalidate(formid)
-        var homeWork = $("#" + formid).valid();
-        if (homeWork === true) {
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    console.log('data', 200)
-                    if (data.code == 200) {
-                        toastr.success(data.message);
-                        window.location.href = homeworkList;
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
-        }
-    });
 
+    
     $(document).on('change', '.homework_file', function () {
         console.log(12343333)
         var file = $(this)[0].files[0];
-        if (file.size > 2097152) {
+        if(file.size > 2097152) {
             toastr.error("File greater than 2Mb");
             $(this).val('');
         }
     });
-
+    
     $('#studentHomeworkFilter').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        var formstatus = $('input[name="status"]:checked').val();
-
-        var formsubject = $('#subject').val();
+        var formstatus=$('input[name="status"]:checked').val();
+        
+        var formsubject=$('#subject').val();
         $.ajax({
             url: $(form).attr('action'),
             method: $(form).attr('method'),
@@ -88,14 +63,15 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (data) {
-                console.log('cs', data)
+                console.log('cs',data)
                 if (data.code == 200) {
                     $("#homeworks").show("slow");
-                    if (data.subject != "All") {
-                        var sub = homework_list_lang + ' (' + data.subject + ')';
-
-                    } else {
-                        var sub = homework_list_lang + ' (' + all_subject_lang + ')';
+                    if(data.subject!="All")
+                    {
+                        var sub = homework_list_lang+' ('+data.subject+')';
+                        
+                    }else{
+                        var sub = homework_list_lang+' ('+all_subject_lang+')';
                     }
                     $("#title").html(sub);
                     $("#homework_list").html(data.list);
@@ -110,7 +86,7 @@ $(function () {
             formsubject: formsubject,
             academic_session_id: academic_session_id
         };
-        // console.log(academic_session_id);
+       // console.log(academic_session_id);
         setLocalStorageForparenthomework(classObj);
     });
 
@@ -135,16 +111,14 @@ $(function () {
             localStorage.removeItem("student_homework_details");
             localStorage.setItem('student_homework_details', JSON.stringify(homeworkClassArr));
         }
-
+       
         return true;
     }
 
+ 
 
-
-
-
-    // rules validation
-    $("#addHomeworkForm").validate({
+     // rules validation
+     $("#addHomeworkForm").validate({
         rules: {
             title: "required",
             class_id: "required",
@@ -193,7 +167,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-                    // console.log('data',200)
+                        // console.log('data',200)
                     if (data.code == 200) {
                         $('.addHomeworkForm').find('form')[0].reset();
                         toastr.success(data.message);
@@ -205,7 +179,7 @@ $(function () {
             });
         }
     });
-
+    
     function setLocalStorageForAddHomework(classObj) {
 
         var addHomeworkDetails = new Object();
@@ -249,9 +223,9 @@ $(function () {
                         $('#semester_id').val(semesterID);
                         $('#session_id').val(sessionID);
                         if (classID) {
-
+                            
                             $("#section_id").empty();
-                            $("#section_id").append('<option value="">' + select_class + '</option>');
+                            $("#section_id").append('<option value="">'+select_class+'</option>');
                             $.post(sectionByClass, { class_id: classID }, function (res) {
                                 if (res.code == 200) {
                                     $.each(res.data, function (key, val) {
@@ -261,11 +235,11 @@ $(function () {
                                 }
                             }, 'json');
                         }
-                        if (sectionID) {
+                        if(sectionID){
                             $("#subject_id").empty();
-                            $("#subject_id").append('<option value="">' + select_subject + '</option>');
+                            $("#subject_id").append('<option value="">'+select_subject+'</option>');
                             $.post(subjectByClass, { class_id: classID, section_id: sectionID }, function (res) {
-                                console.log('data', res)
+                                console.log('data',res)
                                 if (res.code == 200) {
                                     $.each(res.data, function (key, val) {
                                         $("#subject_id").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
@@ -290,15 +264,15 @@ $(function () {
             $("#schedule").hide("slow");
         }
     });
-    function formvalidate(formid) {
-        $("#" + formid).validate({
+    function formvalidate(formid){
+        $("#"+formid).validate({
             rules: {
                 file: "required",
                 remarks: "required",
             }
         });
     }
-
+    
 
 
 
@@ -306,12 +280,12 @@ $(function () {
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
-
+        
         $("#section_id").empty();
-        $("#section_id").append('<option value="">' + select_class + '</option>');
-
+        $("#section_id").append('<option value="">'+select_class+'</option>');
+        
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="All">' + all_lang + '</option>');
+        $("#subject_id").append('<option value="">'+select_subject+'</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -325,11 +299,11 @@ $(function () {
         e.preventDefault();
         var section_id = $(this).val();
         var class_id = $("#class_id").val();
-
+        
         $("#subject_id").empty();
-        $("#subject_id").append('<option value="All">' + all_lang + '</option>');
+        $("#subject_id").append('<option value="">'+select_subject+'</option>');
         $.post(subjectByClass, { class_id: class_id, section_id: section_id }, function (res) {
-            console.log('data', res)
+            console.log('data',res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#subject_id").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
@@ -338,29 +312,29 @@ $(function () {
         }, 'json');
     });
 
-
+    
 
     if (get_roll_id == "5") {
-        if ((parent_homework_storage)) {
-            if (parent_homework_storage) {
-                var parenthomeworkStorage = JSON.parse(parent_homework_storage);
-                if (parenthomeworkStorage.length == 1) {
-                    var status, subject, userBranchID, userRoleID, userID;
-                    parenthomeworkStorage.forEach(function (user) {
-                        status = user.status;
-                        subject = user.subject;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $("input[name='status'][value=" + status + "]").prop('checked', true);
-                        $('select[name^="subject"] option[value=' + subject + ']').attr("selected", "selected");
-
-                    }
+    if ((parent_homework_storage)) {
+        if (parent_homework_storage) {
+            var parenthomeworkStorage = JSON.parse(parent_homework_storage);
+            if (parenthomeworkStorage.length == 1) {
+                var status, subject, userBranchID, userRoleID, userID;
+                parenthomeworkStorage.forEach(function (user) {
+                    status = user.status;
+                    subject = user.subject;
+                    userBranchID = user.branch_id;
+                    userRoleID = user.role_id;
+                    userID = user.user_id;
+                });
+                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                    $("input[name='status'][value=" + status + "]").prop('checked', true);
+                    $('select[name^="subject"] option[value=' + subject + ']').attr("selected","selected");
+                    
                 }
             }
         }
+    }
     }
     if (get_roll_id == "6") {
         if ((student_homework_storage)) {
@@ -377,12 +351,12 @@ $(function () {
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         $("input[name='status'][value=" + status + "]").prop('checked', true);
-                        $('select[name^="subject"] option[value=' + subject + ']').attr("selected", "selected");
-
+                        $('select[name^="subject"] option[value=' + subject + ']').attr("selected","selected");
+                        
                     }
                 }
             }
         }
-    }
+        }
 });
 

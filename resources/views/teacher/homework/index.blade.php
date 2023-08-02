@@ -270,5 +270,5 @@ width: 14.3em;
     // localStorage variables
     var teacher_add_homework_storage = localStorage.getItem('teacher_add_homework_details');
 </script>
-<script src="{{ asset('public/js/custom/homework.js') }}"></script>
+<script src="{{ asset('public/js/custom/add_homework.js') }}"></script>
 @endsection

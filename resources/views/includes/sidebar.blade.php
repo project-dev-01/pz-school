@@ -1065,6 +1065,11 @@
                                                 <span>{{ __('messages.location') }}</span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('admin.holidays')}}" class="nav-link {{ (request()->is('admin/holidays*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.holidays') }}</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

@@ -1404,4 +1404,7 @@ return [
     "edit_check_in_out_time" => "Edit Check In/Out Time",
     "enter_check_in_time" => "Enter Check In Time",
     "enter_check_out_time" => "Enter Check Out Time",
+    "holidays" => "Holidays",
+    "holiday_name" => "Holiday Name",
+    "delete_this_holidays" => "You want to delete this holidays",
 ];

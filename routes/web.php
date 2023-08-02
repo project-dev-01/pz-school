@@ -175,7 +175,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-        
+
         // application details
         Route::get('application', [AdminController::class, 'applicationIndex'])->name('admin.application.index');
         Route::get('application/list', [AdminController::class, 'applicationList'])->name('admin.application.list');
@@ -820,6 +820,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('check_in_out_time/list', [AdminController::class, 'getCheckInOutTimeList'])->name('admin.check_in_out_time.list');
         Route::post('check_in_out_time/check_in_out_time-details', [AdminController::class, 'getCheckInOutTimeDetails'])->name('admin.check_in_out_time.details');
         Route::post('check_in_out_time/update', [AdminController::class, 'updateCheckInOutTime'])->name('admin.check_in_out_time.update');
+        // Holidays routes
+        Route::get('holidays/index', [AdminController::class, 'holidays'])->name('admin.holidays');
+        Route::post('holidays/add', [AdminController::class, 'addHolidays'])->name('admin.holidays.add');
+        Route::get('holidays/list', [AdminController::class, 'getHolidaysList'])->name('admin.holidays.list');
+        Route::post('holidays/holidays-details', [AdminController::class, 'getHolidaysDetails'])->name('admin.holidays.details');
+        Route::post('holidays/update', [AdminController::class, 'updateHolidays'])->name('admin.holidays.update');
+        Route::post('holidays/delete', [AdminController::class, 'deleteHolidays'])->name('admin.holidays.delete');
     });
 });
 // admin routes end

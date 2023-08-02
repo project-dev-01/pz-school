@@ -827,6 +827,12 @@ return [
          'check_in_out_time_list' => $url.'/check_in_out_time/list',
          'check_in_out_time_details' => $url.'/check_in_out_time/check_in_out_time-details',
          'check_in_out_time_update' => $url.'/check_in_out_time/update',
+         // holidays url
+        'holidays_add' => $url.'/holidays/add',
+        'holidays_list' => $url.'/holidays/list',
+        'holidays_details' => $url.'/holidays/holidays-details',
+        'holidays_update' => $url.'/holidays/update',
+        'holidays_delete' => $url.'/holidays/delete'
         
       ]
 

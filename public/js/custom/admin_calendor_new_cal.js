@@ -90,7 +90,7 @@ $(document).ready(function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
-        slotDuration: "00:15:00",
+        slotDuration: "00:30:00",
         // minTime: "08:00:00",
         // maxTime: "24:00:00",
         themeSystem: "bootstrap",
@@ -103,6 +103,13 @@ $(document).ready(function () {
             list: list,
             prev: previous,
             next: next
+        },
+        // timeformat to show
+        eventTimeFormat: {
+            hour: 'numeric',
+            minute: 'numeric',
+            omitZeroMinute: true,
+            meridiem: 'short'
         },
         allDayText: allday_lang,
         noEventsMessage: no_events_to_display_lang,
@@ -361,9 +368,9 @@ $(document).ready(function () {
         eventClick: function (e) {
             //
             if (e.event.extendedProps.event_id) {
-                console.log('jd',e.event.start)
-                console.log('end',e.event)
-                console.log('ee',e.event.extendedProps)
+                console.log('jd', e.event.start)
+                console.log('end', e.event)
+                console.log('ee', e.event.extendedProps)
                 $('#admin-modal').modal('toggle');
                 var start = e.event.start_date;
                 var end = e.event.end_date;
@@ -371,7 +378,7 @@ $(document).ready(function () {
                 if (e.event.allDay == "1") {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-                }  else {
+                } else {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
                 }

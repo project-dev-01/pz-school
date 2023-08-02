@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
-        slotDuration: "00:15:00",
+        slotDuration: "00:30:00",
         // minTime: "08:00:00",
         // maxTime: "19:00:00",
         themeSystem: "bootstrap",
@@ -54,6 +54,13 @@ $(document).ready(function () {
             list: list,
             prev: previous,
             next: next
+        },
+        // timeformat to show
+        eventTimeFormat: {
+            hour: 'numeric',
+            minute: 'numeric',
+            omitZeroMinute: true,
+            meridiem: 'short'
         },
         allDayText: allday_lang,
         noEventsMessage: no_events_to_display_lang,

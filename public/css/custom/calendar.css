@@ -14,9 +14,10 @@
 /* Customize the fc-today highlight background color */
 .fc-today {
     background-color: #ADD8E6;
-    /* Use a light or mild background color */
+} 
+.fc-day-header.fc-today {
+    background-color: #E9D528;
 }
-
 /* Customize the fc-today highlight font color */
 .fc-today .fc-day-number {
     color: #555;
