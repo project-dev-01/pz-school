@@ -509,6 +509,11 @@ $(function () {
         studentListDetails.user_id = ref_user_id;
         var studentListClassArr = [];
         studentListClassArr.push(studentListDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_student_list_details");
+            localStorage.setItem('admin_student_list_details', JSON.stringify(studentListClassArr));
+        }
         if (get_roll_id == "4") {
             // teacher
             localStorage.removeItem("teacher_student_list_details");
@@ -517,13 +522,13 @@ $(function () {
         return true;
     }
     // if localStorage
-    if (typeof teacher_student_list_storage !== 'undefined') {
-        if ((teacher_student_list_storage)) {
-            if (teacher_student_list_storage) {
-                var teacherStudentListStorage = JSON.parse(teacher_student_list_storage);
-                if (teacherStudentListStorage.length == 1) {
+    if (typeof student_list_storage !== 'undefined') {
+        if ((student_list_storage)) {
+            if (student_list_storage) {
+                var studentListStorage = JSON.parse(student_list_storage);
+                if (studentListStorage.length == 1) {
                     var classID, student_name,sectionID, sessionID, userBranchID, userRoleID, userID;
-                    teacherStudentListStorage.forEach(function (user) {
+                    studentListStorage.forEach(function (user) {
                         classID = user.class_id;
                         student_name = user.student_name;
                         sectionID = user.section_id;

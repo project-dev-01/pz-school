@@ -192,6 +192,8 @@
     var header_txt="{{ __('messages.student_list') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    // localStorage variables
+    var student_list_storage = localStorage.getItem('admin_student_list_details');
 </script>
 <script src="{{ asset('public/js/custom/student.js') }}"></script>
 @endsection

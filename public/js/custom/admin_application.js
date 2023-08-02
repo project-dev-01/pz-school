@@ -189,7 +189,12 @@ $(function () {
     // get application list
     $('#applicationFilter').on('submit', function (e) {
         e.preventDefault();
-        application();
+        var formData = {
+            academic_year: $('#academic_year').val(),
+            academic_grade: $('#academic_grade').val(),
+        };
+        setLocalStorageForApplicationList(formData);
+        application(formData);
     });
 
     // Publish Event 
@@ -407,4 +412,52 @@ $(function () {
         });
         
         });
+        
+
+    function setLocalStorageForApplicationList(classObj) {
+
+        var applicationListDetails = new Object();
+        applicationListDetails.academic_year = classObj.academic_year;
+        applicationListDetails.academic_grade = classObj.academic_grade;
+        // here to attached to avoid localStorage other users to add
+        applicationListDetails.branch_id = branchID;
+        applicationListDetails.role_id = get_roll_id;
+        applicationListDetails.user_id = ref_user_id;
+        var applicationListArr = [];
+        applicationListArr.push(applicationListDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_application_list_details");
+            localStorage.setItem('admin_application_list_details', JSON.stringify(applicationListArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof admin_application_list_storage !== 'undefined') {
+        if ((admin_application_list_storage)) {
+            if (admin_application_list_storage) {
+                var adminApplicationListStorage = JSON.parse(admin_application_list_storage);
+                if (adminApplicationListStorage.length == 1) {
+                    var academicYear, academicGrade, userBranchID, userRoleID, userID;
+                    adminApplicationListStorage.forEach(function (user) {
+                        academicYear = user.academic_year;
+                        academicGrade = user.academic_grade;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        
+                        $("#academic_year").val(academicYear);
+                        $('#academic_grade').val(academicGrade);
+                        var formData = {
+                            academic_year: academicYear,
+                            academic_grade: academicGrade,
+                        };
+                        application(formData);
+                    }
+                }
+            }
+        }
+    }
 });

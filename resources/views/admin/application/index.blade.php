@@ -227,6 +227,8 @@ a:hover {
     var header_txt="{{ __('messages.application_list') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    // localStorage variables
+    var admin_application_list_storage = localStorage.getItem('admin_application_list_details');
 </script>
 <script src="{{ asset('public/js/custom/admin_application.js') }}"></script>
 @endsection
