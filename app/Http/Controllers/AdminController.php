@@ -4043,6 +4043,25 @@ class AdminController extends Controller
 
         return $response;
     }
+    public function byStudentRank()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        return view(
+            'admin.exam_results.bystudentrank',
+            [
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
     public function subjectdivisionAdd(Request $request)
     {
         //    dd($request);

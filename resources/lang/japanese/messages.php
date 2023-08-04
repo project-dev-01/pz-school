@@ -1407,4 +1407,5 @@ return [
     "holidays" => "Holidays",
     "holiday_name" => "Holiday Name",
     "delete_this_holidays" => "You want to delete this holidays",
+    "exam_student_rank" => "Student Rank"
 ];

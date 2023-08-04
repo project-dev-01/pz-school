@@ -732,6 +732,11 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.exam_results.bystudentrank')}}" class="nav-link {{ (request()->is('admin/exam_results/student_rank')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.exam_student_rank') }}</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1547,7 +1552,7 @@
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li>  
+                </li>
                 <li>
                     <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
 
@@ -1720,7 +1725,7 @@
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.chat') }}</span>
                     </a>
-                </li> 
+                </li>
                 <li>
                     <a href="{{ route('parent.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('parent/forum*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1751,7 +1756,7 @@
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.profile') }}</span>
                     </a>
-                </li> 
+                </li>
                 <li>
                     <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
