@@ -265,6 +265,7 @@
     var header_txt = "{{ __('messages.evaluation_report') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    var admin_evaluation_report_storage = localStorage.getItem('admin_evaluation_report_details');
 </script>
 <script src="{{ asset('public/js/custom/homework.js') }}"></script>
 <script src="{{ asset('public/js/custom/evaluatuion_report.js') }}"></script>

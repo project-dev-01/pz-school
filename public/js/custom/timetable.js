@@ -151,7 +151,14 @@ $(function () {
             var sessionID = $("#session_id").val();
             var Day = $("#day").val();
 
-
+            var classObj = {
+                class_id: classID,
+                section_id: sectionID,
+                semester_id: semesterID,
+                session_id: sessionID,
+                day: Day,
+                academic_session_id: academic_session_id
+            };
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -187,9 +194,34 @@ $(function () {
                     }
                 }
             });
+            
+            setLocalStorageForadminaddschedule(classObj);
         }
     });
 
+    function setLocalStorageForadminaddschedule(classObj) {
+
+        var addschedule = new Object();
+
+        addschedule.class_id = classObj.class_id;
+        addschedule.section_id = classObj.section_id;
+        addschedule.semester_id = classObj.semester_id;
+        addschedule.session_id = classObj.session_id;
+        addschedule.day = classObj.day;
+        // here to attached to avoid localStorage other users to add
+        addschedule.branch_id = branchID;
+        addschedule.role_id = get_roll_id;
+        addschedule.user_id = ref_user_id;
+        var addscheduleArr = [];
+        addscheduleArr.push(addschedule);
+        if (get_roll_id == "2") {
+            // Parent
+            localStorage.removeItem("admin_add_schedule_details");
+            localStorage.setItem('admin_add_schedule_details', JSON.stringify(addscheduleArr));
+        }
+        
+        return true;
+    }
     $("#indexFilter").validate({
         rules: {
             class_id: "required",
@@ -215,6 +247,17 @@ $(function () {
         var filterCheck = $("#indexFilter").valid();
         if (filterCheck === true) {
             var form = this;
+            var classID = $("#class_id").val();
+            var sectionID = $("#section_id").val();
+            var semesterID = $("#semester_id").val();
+            var sessionID = $("#session_id").val();
+            var classObj = {
+                classID: classID,
+                sectionID: sectionID,
+                semesterID: semesterID,
+                sessionID: sessionID
+            };
+            setLocalStorageTimetableTeacher(classObj);
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -225,13 +268,7 @@ $(function () {
                 success: function (data) {
 
                     if (data.code == 200) {
-                        var classObj = {
-                            classID: data.class_id,
-                            sectionID: data.section_id,
-                            semesterID: data.semester_id,
-                            sessionID: data.session_id
-                        };
-                        setLocalStorageTimetableTeacher(classObj);
+                       
                         $("#edit-modal").attr("data-class_id", data.class_id);
                         $("#edit-modal").attr("data-section_id", data.section_id);
                         $("#edit-modal").attr("data-semester_id", data.semester_id);
@@ -271,8 +308,14 @@ $(function () {
             localStorage.removeItem("teacher_timetable_details");
             localStorage.setItem('teacher_timetable_details', JSON.stringify(timeTableClassArr));
         }
+        if (get_roll_id == "2") {
+            // teacher
+            localStorage.removeItem("admin_schedule_list_details");
+            localStorage.setItem('admin_schedule_list_details', JSON.stringify(timeTableClassArr));
+        }
         return true;
     }
+    if (get_roll_id == "4") {
     // if localStorage
     if (typeof teacher_timetable_det !== 'undefined') {
         // variable is come
@@ -345,7 +388,83 @@ $(function () {
             }
         }
     }
+}
+if (get_roll_id == "2") {
+    // if localStorage
+    if (typeof admin_schedule_list_storage !== 'undefined') {
+        // variable is come
+        if ((admin_schedule_list_storage)) {
+            if (admin_schedule_list_storage) {
+                var adminschedulelistStorage = JSON.parse(admin_schedule_list_storage);
+                if (adminschedulelistStorage.length == 1) {
+                    var classID, sectionID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    adminschedulelistStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        console.log("f");
+                        $('select[name^="class_id"] option[value=' + classID + ']').attr("selected","selected");
+                        
+                        $("#section_id").empty();
+                        $("#section_id").append('<option value="">' + select_class + '</option>');
+                        $.post(sectionByClass, { class_id: classID }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    var selected=(sectionID==val.section_id)?'selected':'';
+                                    $("#section_id").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
+                                });
+                            }
+                        }, 'json');
+                        $('select[name^="semester_id"] option[value=' + semesterID + ']').attr("selected","selected");
+                        $('select[name^="session_id"] option[value=' + sessionID + ']').attr("selected","selected");
+                        
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        $.ajax({
+                            url: timetableFilter,
+                            method: "post",
+                            data: formData,
+                            processData: false,
+                            dataType: 'json',
+                            contentType: false,
+                            success: function (data) {
 
+                                if (data.code == 200) {
+                                    $("#edit-modal").attr("data-class_id", data.class_id);
+                                    $("#edit-modal").attr("data-section_id", data.section_id);
+                                    $("#edit-modal").attr("data-semester_id", data.semester_id);
+                                    $("#edit-modal").attr("data-session_id", data.session_id);
+                                    $("#timetablerow").show("slow");
+                                    $("#timetable").html(data.timetable);
+                                    // download set start
+                                    $("#downClassID").val(data.class_id);
+                                    $("#downSectionID").val(data.section_id);
+                                    $("#downSemesterID").val(data.semester_id);
+                                    $("#downSessionID").val(data.session_id);
+                                    $("#downAcademicYear").val(academic_session_id);
+                                    // download set end
+                                } else {
+                                    $("#timetablerow").hide("slow");
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+}
     // update timetable
     $('#editTimetableForm').on('submit', function (e) {
         e.preventDefault();
@@ -682,5 +801,43 @@ $(function () {
             });
         }
     });
-
+    if (get_roll_id == "2") {
+        if (typeof admin_add_schedule_storage !== 'undefined') {
+            if (admin_add_schedule_storage) {
+                var adminaddschedulestorage = JSON.parse(admin_add_schedule_storage);
+                if (adminaddschedulestorage.length == 1) {
+                    var class_id, section_id,day,semester_id,session_id, userBranchID, userRoleID, userID;
+                    adminaddschedulestorage.forEach(function (user) {
+                        class_id = user.class_id;
+                        section_id = user.section_id; 
+                        day = user.day;
+                        semester_id = user.semester_id;
+                        session_id = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        
+                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected","selected");
+                        
+                        $("#section_id").empty();
+                        $("#section_id").append('<option value="">' + select_class + '</option>');
+                        $.post(sectionByClass, { class_id: class_id }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    var selected=(section_id==val.section_id)?'selected':'';
+                                    $("#section_id").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
+                                });
+                            }
+                        }, 'json');
+                        $('select[name^="day"] option[value=' + day + ']').attr("selected","selected");
+                        $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected","selected");
+                        $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected","selected");
+                        
+                    }
+                }
+            }
+        }
+        }
 });

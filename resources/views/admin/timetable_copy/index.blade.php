@@ -226,6 +226,8 @@
 <script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    
+    var admin_schedule_list_storage = localStorage.getItem('admin_schedule_list_details');
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 

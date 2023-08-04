@@ -190,6 +190,8 @@
     var getEmployeAttendanceList = "{{ route('admin.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
     var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
+    
+    var admin_employee_attentance_storage = localStorage.getItem('admin_employee_attentance_details');
 </script>
 <script src="{{ asset('public/js/custom/attendance.js') }}"></script>
 

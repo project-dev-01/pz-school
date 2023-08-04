@@ -281,9 +281,73 @@ $(function () {
     });
     $('#staffLeaveAssignFilter').on('submit', function (e) {
         e.preventDefault();
+        var department = $("#department").val(); 
+        var employee = $("#employee").val();
+        var classObj = {
+            department: department,
+            employee:employee
+        };
+        setLocalStorageadminstaffLeaveAssign(classObj);
         var filterCheck = $("#staffLeaveAssignFilter").valid();
+
         if (filterCheck === true) {
             staffLeaveAssignTable();
         }
+
     });
+    
+    function setLocalStorageadminstaffLeaveAssign(classObj) {
+
+        var adminstaffLeaveAssignDetails = new Object();
+        adminstaffLeaveAssignDetails.department = classObj.department;
+        adminstaffLeaveAssignDetails.employee = classObj.employee;
+        // here to attached to avoid localStorage other users to add
+        adminstaffLeaveAssignDetails.branch_id = branchID;
+        adminstaffLeaveAssignDetails.role_id = get_roll_id;
+        adminstaffLeaveAssignDetails.user_id = ref_user_id;
+        var  adminstaffLeaveAssignClassArr = [];
+        adminstaffLeaveAssignClassArr.push(adminstaffLeaveAssignDetails);
+        if (get_roll_id == "2") {
+            // Admin
+            
+            localStorage.removeItem("admin_staffleaveassign_details");
+            localStorage.setItem('admin_staffleaveassign_details', JSON.stringify(adminstaffLeaveAssignClassArr));
+        }
+        return true;
+    }
+    if (get_roll_id == "2") {
+        if (typeof admin_staffleaveassign_storage !== 'undefined') {
+            if ((admin_staffleaveassign_storage)) {
+                if (admin_staffleaveassign_storage) {
+    
+                    console.log('test')
+                    var adminstaffleaveassignStorage = JSON.parse(admin_staffleaveassign_storage);
+                    if (adminstaffleaveassignStorage.length == 1) {
+                        var department, employee, userBranchID, userRoleID, userID;
+                        adminstaffleaveassignStorage.forEach(function (user) {
+                            department = user.department;
+                            employee = user.employee;
+                            userBranchID = user.branch_id;
+                            userRoleID = user.role_id;
+                            userID = user.user_id;
+                        });
+                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                            $("#department").val(department);
+                            $("#employee").empty();
+                            $("#employee").append('<option value="">'+select_employee+'</option>');
+                            $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        var selected=(employee==val.id)?'Selected':'';
+                                        $("#employee").append('<option value="' + val.id + '" '+ selected +'>' + val.first_name + ' ' + val.last_name + '</option>');
+                                    });
+                                }
+                            }, 'json');
+                            staffLeaveAssignTable();                            
+                        }
+                    }
+                }
+            }
+        }
+    }
 });

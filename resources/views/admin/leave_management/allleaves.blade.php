@@ -157,6 +157,8 @@
     var header_txt="{{ __('messages.all_leaves') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    
+    var admin_allleaves_storage = localStorage.getItem('admin_alltleaves_details');
 </script>
 <script src="{{ asset('public/js/custom/admin_all_leave.js') }}"></script>
 @endsection

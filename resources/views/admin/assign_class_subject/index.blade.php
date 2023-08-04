@@ -165,6 +165,8 @@
     var footer_txt="{{ session()->get('footer_text') }}";
 
     // Get PDF Header & Footer Text End
+    
+    var admin_assign_class_subject_storage = localStorage.getItem('admin_assign_class_subject_details');
 </script>
 <script src="{{ asset('public/js/custom/assign_class_subject.js') }}"></script>
 @endsection

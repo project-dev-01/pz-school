@@ -263,6 +263,8 @@
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var classRoomCheck = "{{ config('constants.api.class_room_check') }}";
+     
+    var admin_add_schedule_storage = localStorage.getItem('admin_add_schedule_details');
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 @endsection

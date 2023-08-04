@@ -182,7 +182,15 @@ $(function () {
             var employee = $("#employeeReportEmployee").val();
             var department = $("#employeeReportDepartment").val();
             var session = $("#employeeReportSession").val();
-
+            var classObj = {
+                reportDate: reportDate,
+                employee: employee,
+                department: department,
+                session: session,
+                academic_session_id: academic_session_id
+            };
+            setLocalStorageForadminemployeeattendancereportlist(classObj);
+           
             var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
 
@@ -320,7 +328,6 @@ $(function () {
                                 widgetlate += res.lateCount;
                                 widgetexcused += res.excusedCount;
                             });
-
                             // add functions tr end
                             attendanceListShow += '</tbody>' +
                                 '</table>' +
@@ -372,16 +379,33 @@ $(function () {
                     }
                 }
             });
+          
         }
 
     });
-
-    $( document ).ready(function() {
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const d = new Date();
-        $("#employeeReportDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
     
-    });
+    function setLocalStorageForadminemployeeattendancereportlist(classObj) {
+
+        var attendaceDetails = new Object(); 
+        attendaceDetails.employee = classObj.employee;
+        attendaceDetails.department = classObj.department;
+        attendaceDetails.session = classObj.session;
+        attendaceDetails.reportDate = classObj.reportDate;
+        // here to attached to avoid localStorage other users to add
+        attendaceDetails.branch_id = branchID;
+        attendaceDetails.role_id = get_roll_id;
+        attendaceDetails.user_id = ref_user_id;
+        var attendaceClassArr = [];
+        attendaceClassArr.push(attendaceDetails);
+        if (get_roll_id == "2") {
+            // Parent
+            localStorage.removeItem("admin_employeeattentanceReport_storage");
+            localStorage.setItem('admin_employeeattentanceReport_storage', JSON.stringify(attendaceClassArr));
+        }
+        
+        return true;
+    }
+  
 
     $("#employeeDate").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -408,7 +432,14 @@ $(function () {
             var department = $("#department").val();
             var session_id = $("#session_id").val();
 
-
+            var classObj = {
+                reportDate: reportDate,
+                employee: employee,
+                department: department,
+                session: session_id,
+                academic_session_id: academic_session_id
+            };
+            setLocalStorageForadminemployeeattendancelist(classObj);
             var date = new Date(reportDate);
 
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -443,9 +474,32 @@ $(function () {
                     }
                 }
             });
+            
         }
+       
     });
 
+    function setLocalStorageForadminemployeeattendancelist(classObj) {
+
+        var attendaceDetails = new Object(); 
+        attendaceDetails.employee = classObj.employee;
+        attendaceDetails.department = classObj.department;
+        attendaceDetails.session = classObj.session;
+        attendaceDetails.reportDate = classObj.reportDate;
+        // here to attached to avoid localStorage other users to add
+        attendaceDetails.branch_id = branchID;
+        attendaceDetails.role_id = get_roll_id;
+        attendaceDetails.user_id = ref_user_id;
+        var attendaceClassArr = [];
+        attendaceClassArr.push(attendaceDetails);
+        if (get_roll_id == "2") {
+            // Parent
+            localStorage.removeItem("admin_employee_attentance_details");
+            localStorage.setItem('admin_employee_attentance_details', JSON.stringify(attendaceClassArr));
+        }
+        
+        return true;
+    }
     // add Employee Attendance
     $('#addEmployeeAttendanceForm').on('submit', function (e) {
         e.preventDefault();
@@ -573,6 +627,86 @@ $(function () {
 
             $("#employee_attendance_body").append(row);
         });
+    }
+    if (get_roll_id == "2") {
+        if (typeof admin_employee_attentance_storage !== 'undefined') {
+            
+            if (admin_employee_attentance_storage) {
+                var adminemployeeattendanceStorage = JSON.parse(admin_employee_attentance_storage);
+                if (adminemployeeattendanceStorage.length == 1) {
+                    var employee, department, session,reportDate,userBranchID, userRoleID, userID;
+                    adminemployeeattendanceStorage.forEach(function (user) {
+                        employee = user.employee;
+                        department = user.department; 
+                        session = user.session; 
+                        reportDate = user.reportDate;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                      
+                        
+                        $('select[name^="department"] option[value=' + department + ']').attr("selected","selected");
+                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected","selected");
+                        $('#employeeDate').val(reportDate);
+                        $("#employee").empty();
+                        $("#employee").append('<option value="">'+select_employee+'</option>');
+                        $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    var selected=(employee==val.id)?'selected':'';
+                                    $("#employee").append('<option value="' + val.id + '" ' + selected + '>' + val.first_name + ' ' + val.last_name + '</option>');
+                                });
+                            }
+                        }, 'json');
+                    }
+                }
+            }
+        }
+    }
+    if (get_roll_id == "2") {
+        if (typeof admin_employeeattentanceReport_storage !== 'undefined') {
+            
+            if (admin_employeeattentanceReport_storage) {
+                var adminemployeeattendanceStorage = JSON.parse(admin_employeeattentanceReport_storage);
+                if (adminemployeeattendanceStorage.length == 1) {
+                    var employee, department, session,reportDate,userBranchID, userRoleID, userID;
+                    adminemployeeattendanceStorage.forEach(function (user) {
+                        employee = user.employee;
+                        department = user.department; 
+                        session = user.session; 
+                        reportDate = user.reportDate;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                                                
+                        $('select[name^="department"] option[value=' + department + ']').attr("selected","selected");
+                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected","selected");
+                        $("#employeeReportEmployee").empty();
+                        $("#employeeReportEmployee").append('<option value="">'+select_employee+'</option>');
+                        $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    var selected=(employee==val.id)?'selected':'';
+                                    $("#employeeReportEmployee").append('<option value="' + val.id + '" ' + selected + '>' + val.first_name + ' ' + val.last_name + '</option>');
+                                });
+                            }
+                        }, 'json');
+                        $('#employeeReportDate').val(reportDate);
+                    }
+                }
+            }
+        }
+        else
+        {
+            var  curdate="{{ date('F Y')}}";
+            $('#employeeReportDate').val(curdate);
+        }
     }
 
 });

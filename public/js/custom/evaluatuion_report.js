@@ -256,9 +256,16 @@ $(function () {
             localStorage.removeItem("teacher_evaluation_report_details");
             localStorage.setItem('teacher_evaluation_report_details', JSON.stringify(evaluationReportClassArr));
         }
+        if (get_roll_id == "2") {
+            // teacher
+            localStorage.removeItem("admin_evaluation_report_details");
+            localStorage.setItem('admin_evaluation_report_details', JSON.stringify(evaluationReportClassArr));
+        }
         return true;
     }
+    
     // if localStorage
+    if (get_roll_id == "4") {
     if (typeof teacher_evaluation_report_storage !== 'undefined') {
         if ((teacher_evaluation_report_storage)) {
             if (teacher_evaluation_report_storage) {
@@ -312,6 +319,63 @@ $(function () {
             }
         }
     }
+}
+     // if localStorage
+    if (get_roll_id == "2") {
+        if (typeof admin_evaluation_report_storage !== 'undefined') {
+        if ((admin_evaluation_report_storage)) {
+            if (admin_evaluation_report_storage) {
+                var adminevaluationreportstorage = JSON.parse(admin_evaluation_report_storage);
+                if (adminevaluationreportstorage.length == 1) {
+                    var classID, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    adminevaluationreportstorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        subjectID = user.subject_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $('#semester_id').val(semesterID);
+                        $('#session_id').val(sessionID);
+                        if (classID) {
+
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">' + select_class + '</option>');
+                            $.post(sectionByClass, { class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $('#section_id').val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        if (sectionID) {
+                            $("#subject_id").empty();
+                            $("#subject_id").append('<option value="">' + select_subject + '</option>');
+                            $.post(subjectByClass, { class_id: classID, section_id: sectionID }, function (res) {
+                                console.log('data', res)
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#subject_id").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                    });
+                                    $('#subject_id').val(subjectID);
+                                }
+                            }, 'json');
+                        }
+                        // evealuation report
+                        HomeworkListShow(classID, sectionID, subjectID, semesterID, sessionID);
+                    }
+                }
+            }
+        }
+    }
+}
     // evaluate Homework
     $('#evaluateHomework').on('submit', function (e) {
         e.preventDefault();

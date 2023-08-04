@@ -247,6 +247,8 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var downloadFileName = "{{ __('messages.timetable') }}";
+    
+    var admin_schedule_list_storage = localStorage.getItem('admin_schedule_list_details');
 </script>
 <script src="{{ asset('public/js/custom/timetable.js') }}"></script>
 

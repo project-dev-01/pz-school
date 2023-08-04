@@ -403,6 +403,56 @@ $(function () {
     $('#allLeaveFilter').on('submit', function (e) {
         e.preventDefault();
         var leave_status = $("#changeLeaveSts").val();
+        var classObj = {
+            leave_status: leave_status
+        };
+        setLocalStorageadminallleaves(classObj);
         AllLeaveListShow(leave_status);
     });
+    
+    function setLocalStorageadminallleaves(classObj) {
+
+        var adminallleavesDetails = new Object();
+        adminallleavesDetails.leave_status = classObj.leave_status;
+        // here to attached to avoid localStorage other users to add
+        adminallleavesDetails.branch_id = branchID;
+        adminallleavesDetails.role_id = get_roll_id;
+        adminallleavesDetails.user_id = ref_user_id;
+        var  adminallleavesClassArr = [];
+        adminallleavesClassArr.push(adminallleavesDetails);
+        if (get_roll_id == "2") {
+            // Admin
+            
+            localStorage.removeItem("admin_alltleaves_details");
+            localStorage.setItem('admin_alltleaves_details', JSON.stringify(adminallleavesClassArr));
+        }
+        return true;
+    }
+    if (get_roll_id == "2") {
+        if (typeof admin_allleaves_storage !== 'undefined') {
+            if ((admin_allleaves_storage)) {
+                if (admin_allleaves_storage) {
+    
+                    console.log('test')
+                    var adminallLeaveStorage = JSON.parse(admin_allleaves_storage);
+                    if (adminallLeaveStorage.length == 1) {
+                        var leave_status,  userBranchID, userRoleID, userID;
+                        adminallLeaveStorage.forEach(function (user) {
+                            leave_status = user.leave_status;
+                            userBranchID = user.branch_id;
+                            userRoleID = user.role_id;
+                            userID = user.user_id;
+                        });
+                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                            
+                            $("#changeLeaveSts").val(leave_status);
+                            AllLeaveListShow(leave_status);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
 });

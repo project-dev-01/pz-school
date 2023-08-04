@@ -271,8 +271,36 @@ $(function () {
         e.preventDefault();
         var class_id = $("#changeClassName").val();
         var section_id = $("#filtersectionID").val();
+        var classObj = {
+            class_id: class_id,
+            section_id: section_id,
+            academic_session_id: academic_session_id
+        };
+        //console.log(classObj);
+        setLocalStorageForadminassignclasssubject(classObj);
         AllLeaveListShow(class_id, section_id);
+
     });
+    
+    function setLocalStorageForadminassignclasssubject(classObj) {
+
+        var assignclasssubject = new Object();
+        assignclasssubject.class_id = classObj.class_id;
+        assignclasssubject.section_id = classObj.section_id;
+        // here to attached to avoid localStorage other users to add
+        assignclasssubject.branch_id = branchID;
+        assignclasssubject.role_id = get_roll_id;
+        assignclasssubject.user_id = ref_user_id;
+        var assignclasssubjectClassArr = [];
+        assignclasssubjectClassArr.push(assignclasssubject);
+        if (get_roll_id == "2") {
+            // Parent
+            localStorage.removeItem("admin_assign_class_subject_details");
+            localStorage.setItem('admin_assign_class_subject_details', JSON.stringify(assignclasssubjectClassArr));
+        }
+        
+        return true;
+    }
     AllLeaveListShow(class_id = null, section_id = null);
     // get all leave list
     function AllLeaveListShow(class_id, section_id) {
@@ -430,4 +458,40 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    if (get_roll_id == "2") {
+        if ((admin_assign_class_subject_storage)) {
+            if (admin_assign_class_subject_storage) {
+                var adminassignclasssubjectstorage = JSON.parse(admin_assign_class_subject_storage);
+                if (adminassignclasssubjectstorage.length == 1) {
+                    var class_id, section_id, userBranchID, userRoleID, userID;
+                    adminassignclasssubjectstorage.forEach(function (user) {
+                        class_id = user.class_id;
+                        section_id = user.section_id; 
+                        student_id = user.student_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        
+                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected","selected");
+                        
+                        $("#assignClassSubFilter").find("#filtersectionID").empty();
+                        $("#assignClassSubFilter").find("#filtersectionID").append('<option value="">'+select_class+'</option>');
+                        $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
+                            if (res.code == 200) {
+                                $.each(res.data, function (key, val) {
+                                    var selected=(section_id==val.section_id)?'selected':'';
+                                    $("#assignClassSubFilter").find("#filtersectionID").append('<option value="' + val.section_id + '" '+selected+'>' + val.section_name + '</option>');
+                                });
+                            }
+                        }, 'json');
+                       // alert(section_id);
+                        //$('select[name^="section_id"] option[value=' + section_id + ']').attr("selected","selected");
+                    
+                    }
+                }
+            }
+        }
+        }
 });

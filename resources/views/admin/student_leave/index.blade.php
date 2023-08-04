@@ -141,7 +141,7 @@
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
 <script>
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
@@ -150,6 +150,7 @@
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var admin_studentleave_storage = localStorage.getItem('admin_studentleave_details');
 </script>
 <script src="{{ asset('public/js/custom/student_leave_list.js') }}"></script>
 @endsection

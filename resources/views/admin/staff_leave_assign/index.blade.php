@@ -158,6 +158,8 @@
     var header_txt="{{ __('messages.soap_sub_category') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    
+    var admin_staffleaveassign_storage = localStorage.getItem('admin_staffleaveassign_details');
 </script>
 
 <script src="{{ asset('public/js/custom/staff_leave_assign.js') }}"></script>

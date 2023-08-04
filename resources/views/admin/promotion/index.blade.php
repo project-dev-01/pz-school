@@ -228,6 +228,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    
+    var admin_promotion_storage = localStorage.getItem('admin_promotion_details');
 </script>
 <script src="{{ asset('public/js/custom/promotion.js') }}"></script>
 @endsection

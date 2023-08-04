@@ -284,6 +284,7 @@
     // default image test
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var admin_studentattentanceReport_storage = localStorage.getItem('admin_studentattentanceReport_details');
 </script>
 <script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
 @endsection
