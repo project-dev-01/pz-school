@@ -1,6 +1,9 @@
 @extends('layouts.admin-layout')
 @section('title','Student Leave Details')
 @section('component_css')
+<link href="{{ asset('public/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('public/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('public/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css">
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
@@ -48,7 +51,13 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <label for="student_name">{{ __('messages.student_name') }}</label>
+                                    <input type="text" name="student_name" class="form-control" id="student_name">
+                                </div>
+                            </div>  
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="changeClassName">{{ __('messages.grade') }}</label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
@@ -60,10 +69,27 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <label for="sectionID">{{ __('messages.class') }}</label>
                                     <select id="sectionID" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="leave_status">{{ __('messages.status') }}</label>
+                                    <select id="leave_status" class="form-control" name="leave_status">
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>{{ __('messages.date_range') }}</label>
+                                    <input type="text" id="range-datepicker" name="date" class="form-control flatpickr-input active" placeholder="2018-10-03 to 2018-10-10" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -91,10 +117,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>{{ __('messages.standard') }}</th>
+                                    <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
-                                    <th>{{ __('messages.from_leave') }}</th>
-                                    <th>{{ __('messages.to_leave') }}</th>
+                                    <th>{{ __('messages.from') }}</th>
+                                    <th>{{ __('messages.to') }}</th>
+                                    <th>{{ __('messages.approval_status') }}</th>
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
                                     <th>{{ __('messages.document') }}</th>
@@ -131,6 +158,9 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="{{ asset('public/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- plugin js -->
 <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -140,6 +170,7 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('public/js/pages/form-pickers.init.js') }}"></script>
 <script>
      toastr.options.preventDuplicates = true;
 </script>

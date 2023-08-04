@@ -666,6 +666,7 @@ return [
          'student_count' => $url.'/student_count',
          'parent_count' => $url.'/parent_count',
          'teacher_count' => $url.'/teacher_count',
+         'student_leave_count' => $url.'/student_leave_count',
  
          //all logout
          'all_logout' => $url.'/all_logout',
@@ -832,7 +833,8 @@ return [
         'holidays_list' => $url.'/holidays/list',
         'holidays_details' => $url.'/holidays/holidays-details',
         'holidays_update' => $url.'/holidays/update',
-        'holidays_delete' => $url.'/holidays/delete'
+        'all_student_ranking' => $url.'/all_student/ranking'
+        
         
       ]
 

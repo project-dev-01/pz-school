@@ -190,6 +190,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
         Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
 
+        Route::get('all_student_rank/list', [AdminController::class, 'allStudentRankList'])->name('admin.all_student_rank.list');
         // section routes
         Route::get('section/index', [AdminController::class, 'section'])->name('admin.section');
         Route::get('section/list', [AdminController::class, 'getSectionList'])->name('admin.section.list');
@@ -1180,6 +1181,8 @@ Route::group(['prefix' => 'teacher'], function () {
         //Timetable
         Route::get('timetable/index', [TeacherController::class, 'timetable'])->name('teacher.timetable');
         Route::post('timetable/timetable-details', [TeacherController::class, 'getTimetable'])->name('teacher.timetable.details');
+        Route::get('exam_results/student_rank', [TeacherController::class, 'byStudentRank'])->name('teacher.exam_results.bystudentrank');
+        Route::get('all_student_rank/list', [TeacherController::class, 'allStudentRankList'])->name('teacher.all_student_rank.list');
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('teacher.exam_results.downbyclass');
         Route::post('exam_results/downbysubject', [PdfController::class, 'downbysubject'])->name('teacher.exam_results.downbysubject');

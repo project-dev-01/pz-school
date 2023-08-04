@@ -7733,4 +7733,31 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.holidays_delete'), $data);
         return $response;
     }
+    
+    public function allStudentRankList(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id,
+            "exam_id" => $request->exam_id,
+            "type" => $request->type,
+            "academic_session_id" => $request->academic_year
+        ];
+        $response = Helper::PostMethod(config('constants.api.all_student_ranking'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('pass_fail', function ($row) {
+                $pass_fail = 'Pass';
+                if($row['fail'] > 0){
+                    $pass_fail = 'Fail';
+                }
+                return $pass_fail;
+            })
+            ->make(true);
+    }
 }

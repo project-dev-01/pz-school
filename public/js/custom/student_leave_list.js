@@ -1,8 +1,10 @@
 $(function () {
-
+    var defaultList = new FormData();
+    defaultList.append('token', token);
+    defaultList.append('branch_id', branchID);
+    studentLeaveList(defaultList);
     // change class name
     $('#changeClassName').on('change', function () {
-        $(".studentLeaveShow").hide();
         var class_id = $(this).val();
         $("#studentLeaveList").find("#sectionID").empty();
         $("#studentLeaveList").find("#sectionID").append('<option value="">'+select_section+'</option>');
@@ -40,41 +42,40 @@ $(function () {
     // });
     // applyFilter
     // rules validation
-    $("#studentLeaveList").validate({
-        rules: {
-            class_id: "required",
-            section_id: "required"
-        }
-    });
     // data bind 
     $('#studentLeaveList').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        var classRoom = $("#studentLeaveList").valid();
-        if (classRoom === true) {
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var student_name = $("#student_name").val();
+        var status = $("#leave_status").val();
+        var date = $("#range-datepicker").val();
+        // $("#overlay").fadeIn(300);
+        
 
-            var class_id = $("#changeClassName").val();
-            var section_id = $("#sectionID").val();
-            // $("#overlay").fadeIn(300);
-            
-
-            var classObj = {
-                classID: class_id,
-                sectionID: section_id
-            };
-            setLocalStorageStudentLeaveTeacher(classObj);
-            var formData = new FormData();
-            formData.append('token', token);
-            formData.append('branch_id', branchID);
-            formData.append('class_id', class_id);
-            formData.append('section_id', section_id);
-            // // subject division
-            studentLeaveList(formData);
-
+        var classObj = {
+            classID: class_id,
+            sectionID: section_id,
+            studentName: student_name,
+            status: status,
+            date: date
         };
+        setLocalStorageStudentLeaveTeacher(classObj);
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('class_id', class_id);
+        formData.append('section_id', section_id);
+        formData.append('student_name', student_name);
+        formData.append('status', status);
+        formData.append('date', date);
+        // // subject division
+        studentLeaveList(formData);
     });
     function studentLeaveList(formData){
         
+        $(".studentLeaveShow").hide();
         $.ajax({
             url: allStutdentLeaveList,
             method: "post",
@@ -221,6 +222,9 @@ $(function () {
                     data: 'status'
                 },
                 {
+                    data: 'status'
+                },
+                {
                     data: 'reason'
                 },
                 {
@@ -254,7 +258,23 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 8,
+                    "targets": 7,
+                    "render": function (data, type, row, meta) {
+                        if(data=="Approve"){
+
+                            var status = '<span class="badge badge-success">'+data+'</span>';
+                        }else if(data=="Reject"){
+
+                            var status = '<span class="badge badge-danger">'+data+'</span>';
+                        }else if(data=="Pending"){
+
+                            var status = '<span class="badge badge-info">'+data+'</span>';
+                        }
+                        return status;
+                    }
+                },
+                {
+                    "targets": 9,
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (data) {
@@ -266,7 +286,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 9,
+                    "targets": 10,
                     "render": function (data, type, row, meta) {
 
                         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
@@ -275,7 +295,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 10,
+                    "targets": 11,
                     "render": function (data, type, row, meta) {
                         var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">'+update+'</button>';
                         return submitbtn;

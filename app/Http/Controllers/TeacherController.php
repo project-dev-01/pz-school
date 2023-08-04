@@ -44,6 +44,7 @@ class TeacherController extends Controller
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $greetings = Helper::greetingMessage();
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
+        $student_leave_count = Helper::GetMethod(config('constants.api.student_leave_count'));
         $count['teacher_count'] = isset($teacher_count['data']) ? $teacher_count['data'] : 0;
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -56,6 +57,11 @@ class TeacherController extends Controller
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'greetings' => isset($greetings) ? $greetings : [],
+                'count' => isset($count) ? $count : [],
+                'total_count' => isset($student_leave_count['data']['total']) ? $student_leave_count['data']['total'] : 0,
+                'approve_count' => isset($student_leave_count['data']['approve']) ? $student_leave_count['data']['approve'] : 0,
+                'pending_count' => isset($student_leave_count['data']['pending']) ? $student_leave_count['data']['pending'] : 0,
+                'reject_count' => isset($student_leave_count['data']['reject']) ? $student_leave_count['data']['reject'] : 0,
                 'count' => isset($count) ? $count : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -1716,5 +1722,55 @@ class TeacherController extends Controller
         $timetable['semester_id'] = $request->semester_id;
         $timetable['session_id'] = $request->session_id;
         return $timetable;
+    }
+    
+    public function byStudentRank()
+    {
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        return view(
+            'teacher.exam_results.bystudentrank',
+            [
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    
+    public function allStudentRankList(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "subject_id" => $request->subject_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id,
+            "exam_id" => $request->exam_id,
+            "type" => $request->type,
+            "academic_session_id" => $request->academic_year
+        ];
+        $response = Helper::PostMethod(config('constants.api.all_student_ranking'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('pass_fail', function ($row) {
+                $pass_fail = 'Pass';
+                if($row['fail'] > 0){
+                    $pass_fail = 'Fail';
+                }
+                return $pass_fail;
+            })
+            ->make(true);
     }
 }

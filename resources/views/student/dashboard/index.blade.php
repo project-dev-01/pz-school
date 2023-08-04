@@ -410,7 +410,7 @@
                                     <div class="col-12">
                                         <div class="row hover1">
                                             <div class="col-6">
-                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.standard') }} </div>
+                                                <div class="col-md-12 font-weight-bold homework-list">{{ __('messages.grade') }} </div>
                                             </div>
                                             <div class="col-6">
                                                 <input type="hidden" id="setCurDate" name="date">

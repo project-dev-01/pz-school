@@ -62,7 +62,7 @@
                                         <!-- <option value="All">All</option> -->
                                         @forelse ($classnames as $class)
 
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -229,14 +229,14 @@
     var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
     var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
     // var allStudentRank = "{{ config('constants.api.all_student_ranking') }}";
-    var allStudentRank = "{{ route('admin.all_student_rank.list') }}";
+    var allStudentRank = "{{ route('teacher.all_student_rank.list') }}";
     var teacher_id = null;
     // default image test
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.exam_student_rank') }}";
     // localStorage variables
-    var exam_result_by_student_rank_storage = localStorage.getItem('admin_exam_result_by_student_rank_details');
+    var exam_result_by_student_rank_storage = localStorage.getItem('teacher_exam_result_by_student_rank_details');
 </script>
 <script src="{{ asset('public/js/custom/bystudentrank.js') }}"></script>
 @endsection

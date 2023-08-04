@@ -1404,8 +1404,13 @@ return [
     "edit_check_in_out_time" => "Edit Check In/Out Time",
     "enter_check_in_time" => "Enter Check In Time",
     "enter_check_out_time" => "Enter Check Out Time",
+    "approval_status" => "Approval Status",
+    "date_range" => "Date Range",
     "holidays" => "Holidays",
     "holiday_name" => "Holiday Name",
     "delete_this_holidays" => "You want to delete this holidays",
-    "exam_student_rank" => "Student Rank"
+    "exam_student_rank" => "Student Rank",
+    "pass_fail" => "Pass/Fail",
+    "top" => "Top",
+    "bottom" => "Bottom",
 ];

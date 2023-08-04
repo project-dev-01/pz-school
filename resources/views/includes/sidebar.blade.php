@@ -1466,6 +1466,11 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="{{ route('teacher.exam_results.bystudentrank')}}" class="nav-link {{ (request()->is('admin/exam_results/student_rank')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.exam_student_rank') }}</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
