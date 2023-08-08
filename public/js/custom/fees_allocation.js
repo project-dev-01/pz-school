@@ -37,7 +37,23 @@ $(function () {
             formData.append('section_id', sectionID);
             formData.append('fees_group_id', groupID);
             formData.append('academic_session_id', academic_session_id);
-            $("#overlay").fadeIn(300);
+        
+            var classObj = {
+                year: academic_session_id,
+                classID: classID,
+                branchID: branchID,
+                sectionID: sectionID,
+                groupID: groupID,
+                userID: userID,
+            };
+            setLocalStorageForFeesAllocation(classObj);
+
+            feesAllocationList(formData);
+
+        }
+    });
+    function feesAllocationList(formData){
+        $("#overlay").fadeIn(300);
             $.ajax({
                 url: feesAllocatedStudentsList,
                 method: "post",
@@ -67,9 +83,74 @@ $(function () {
                     }
                 }
             });
+    }
 
+    function setLocalStorageForFeesAllocation(classObj) {
+
+        var feesAllocationDetails = new Object();
+        feesAllocationDetails.class_id = classObj.classID;
+        feesAllocationDetails.section_id = classObj.sectionID;
+        feesAllocationDetails.group_id = classObj.groupID;
+        feesAllocationDetails.year = classObj.year;
+        // here to attached to avoid localStorage other users to add
+        feesAllocationDetails.branch_id = branchID;
+        feesAllocationDetails.role_id = get_roll_id;
+        feesAllocationDetails.user_id = ref_user_id;
+        var feesAllocationArr = [];
+        feesAllocationArr.push(feesAllocationDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_fees_allocation_details");
+            localStorage.setItem('admin_fees_allocation_details', JSON.stringify(feesAllocationArr));
         }
-    });
+        return true;
+    }
+    // if localStorage
+    if (typeof fees_allocation_storage !== 'undefined') {
+        if ((fees_allocation_storage)) {
+            if (fees_allocation_storage) {
+                var feesAllocationStorage = JSON.parse(fees_allocation_storage);
+                if (feesAllocationStorage.length == 1) {
+                    var classID, year, sectionID, groupID, userBranchID, userRoleID, userID;
+                    feesAllocationStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        year = user.year;
+                        sectionID = user.section_id;
+                        groupID = user.group_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id; 
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $('#section_id').val(sectionID);
+                        $("#group_id").val(groupID);
+                        if (classID) {
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">'+select_class+'</option>');
+                            $.post(sectionByClass, { token: token, branch_id: branchID, class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#section_id").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('fees_group_id', groupID);
+                        formData.append('academic_session_id', year);
+
+                        feesAllocationList(formData);
+                    }
+                }
+            }
+        }
+    }
     // get payment mode list
     var paymentList = [];
     $.get(paymentModeList, {

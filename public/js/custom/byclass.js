@@ -54,8 +54,6 @@ $(function () {
 
         var byclass = $("#byclassfilter").valid();
         if (byclass === true) {
-
-            $("#overlay").fadeIn(300);
             var year = $("#btwyears").val();
             var class_id = $("#changeClassName").val();
             var subject_id = $("#subjectID").val();
@@ -97,7 +95,7 @@ $(function () {
         };
     });
     function examResultByClass(formData){
-
+        $("#overlay").fadeIn(300);
             // list mode
             $.ajax({
                 url: getbyClass,
@@ -141,6 +139,11 @@ $(function () {
         examResultByClassDetails.user_id = ref_user_id;
         var examResultByClassClassArr = [];
         examResultByClassClassArr.push(examResultByClassDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_result_by_class_details");
+            localStorage.setItem('admin_exam_result_by_class_details', JSON.stringify(examResultByClassClassArr));
+        }
         if (get_roll_id == "4") {
             // teacher
             localStorage.removeItem("teacher_exam_result_by_class_details");
@@ -149,13 +152,13 @@ $(function () {
         return true;
     }
     // if localStorage
-    if (typeof teacher_exam_result_by_class_storage !== 'undefined') {
-        if ((teacher_exam_result_by_class_storage)) {
-            if (teacher_exam_result_by_class_storage) {
-                var teacherExamResultByClassStorage = JSON.parse(teacher_exam_result_by_class_storage);
-                if (teacherExamResultByClassStorage.length == 1) {
+    if (typeof exam_result_by_class_storage !== 'undefined') {
+        if ((exam_result_by_class_storage)) {
+            if (exam_result_by_class_storage) {
+                var ExamResultByClassStorage = JSON.parse(exam_result_by_class_storage);
+                if (ExamResultByClassStorage.length == 1) {
                     var classID, year, subjectID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                    teacherExamResultByClassStorage.forEach(function (user) {
+                    ExamResultByClassStorage.forEach(function (user) {
                         classID = user.class_id;
                         year = user.year;
                         subjectID = user.subject_id;

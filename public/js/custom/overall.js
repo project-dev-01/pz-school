@@ -45,53 +45,133 @@ $(function () {
 
         var byclass = $("#byoverallfilter").valid();
         if (byclass === true) {
-
-            $("#overlay").fadeIn(300);
             var class_id = $("#changeClassName").val();
             var exam_id = $("#examnames").val();
             var year = $("#btwyears").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
             // get overall
-            $.post(getoverall, {
-                token: token,
-                branch_id: branchID,
-                exam_id: exam_id,
-                class_id: class_id,
-                semester_id: semester_id,
-                session_id: session_id,
-                academic_year: year
-            }, function (response) {
+            
+            var formData = {
+                year: year,
+                classID: class_id,
+                semesterID: semester_id,
+                sessionID: session_id,
+                examID: exam_id,
+                userID: userID,
+            };
+            setLocalStorageForExamResultOverall(formData);
+            // download set start
+            $("#downExamID").val(exam_id);
+            $("#downClassID").val(class_id);
+            $("#downSemesterID").val(semester_id);
+            $("#downSessionID").val(session_id);
+            $("#downAcademicYear").val(year);
+            // download set end
 
-                if (response.code == 200) {
-                    if (response.data.allbysubject.length > 0) {
-                        var datasetnew = response.data;
-                        overall_subject(datasetnew);
-                        // download set start
-                        $("#downExamID").val(exam_id);
-                        $("#downClassID").val(class_id);
-                        $("#downSemesterID").val(semester_id);
-                        $("#downSessionID").val(session_id);
-                        $("#downAcademicYear").val(year);
-                        // download set end
-                        $("#body_content").show();
-                        $("#overlay").fadeOut(300);
-                    } else {
-                        toastr.info('No records are available');
-                        $("#overlay").fadeOut(300);
-                    }
-                } else {
-                    toastr.error(data.message);
-                    $("#body_content").hide();
-                    $("#overlay").fadeOut(300);
-                }
-
-            });
-
-
+            overallList(formData);
         };
     });
+    function overallList(formData){
+
+        $("#overlay").fadeIn(300);
+        $.post(getoverall, {
+            token: token,
+            branch_id: branchID,
+            exam_id: formData.examID,
+            class_id: formData.classID,
+            semester_id: formData.semesterID,
+            session_id: formData.sessionID,
+            academic_year: formData.year
+        }, function (response) {
+
+            if (response.code == 200) {
+                if (response.data.allbysubject.length > 0) {
+                    var datasetnew = response.data;
+                    overall_subject(datasetnew);
+                    $("#body_content").show();
+                    $("#overlay").fadeOut(300);
+                } else {
+                    toastr.info('No records are available');
+                    $("#overlay").fadeOut(300);
+                }
+            } else {
+                toastr.error(data.message);
+                $("#body_content").hide();
+                $("#overlay").fadeOut(300);
+            }
+
+        });
+    }
     // by overall
+
+    function setLocalStorageForExamResultOverall(classObj) {
+
+        var examResultOverallDetails = new Object();
+        examResultOverallDetails.class_id = classObj.classID;
+        examResultOverallDetails.year = classObj.year;
+        examResultOverallDetails.exam_id = classObj.examID;
+        examResultOverallDetails.semester_id = classObj.semesterID;
+        examResultOverallDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        examResultOverallDetails.branch_id = branchID;
+        examResultOverallDetails.role_id = get_roll_id;
+        examResultOverallDetails.user_id = ref_user_id;
+        var examResultOverallArr = [];
+        examResultOverallArr.push(examResultOverallDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_result_overall_details");
+            localStorage.setItem('admin_exam_result_overall_details', JSON.stringify(examResultOverallArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof exam_result_overall_storage !== 'undefined') {
+        if ((exam_result_overall_storage)) {
+            if (exam_result_overall_storage) {
+                var examResultOverallStorage = JSON.parse(exam_result_overall_storage);
+                if (examResultOverallStorage.length == 1) {
+                    var classID, year, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    examResultOverallStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        year = user.year;
+                        sectionID = user.section_id;
+                        examID = user.exam_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#changeClassName').val(classID);
+                        $("#btwyears").val(year);
+                        $('#semester_id').val(semesterID);
+                        $('#session_id').val(sessionID);
+                        $('#examnames').val(examID);
+                        var formData = {
+                            year: year,
+                            classID: classID,
+                            semesterID: semesterID,
+                            sessionID: sessionID,
+                            examID: examID,
+                            userID: userID,
+                        };
+                        // download set start
+                        $("#downExamID").val(examID);
+                        $("#downClassID").val(classID);
+                        $("#downSemesterID").val(semesterID);
+                        $("#downSessionID").val(sessionID);
+                        $("#downAcademicYear").val(year);
+                        // download set end
+            
+                        overallList(formData);
+                    }
+                }
+            }
+        }
+    }
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
         var table = $('.table2excel');

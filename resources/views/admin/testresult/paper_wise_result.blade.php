@@ -193,6 +193,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.exam_paper_result') }}";
+    // localStorage variables
+    var exam_paper_result_storage = localStorage.getItem('admin_exam_paper_result_details');
 </script>
 <script src="{{ asset('public/js/custom/paper_wise_result.js') }}"></script>
 @endsection

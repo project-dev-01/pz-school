@@ -258,7 +258,6 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('academic_session_id', academic_session_id);
-            $("#overlay").fadeIn(300);
             
             // setLocalStorageForTestResult(classObj);
             examMarkList(formData);
@@ -272,6 +271,7 @@ $(function () {
     });
     function examMarkList(formData){
         
+        $("#overlay").fadeIn(300);
         $.ajax({
             url: getSubjectMarks,
             method: "post",
@@ -339,6 +339,11 @@ $(function () {
         examMarkDetails.user_id = ref_user_id;
         var examMarkClassArr = [];
         examMarkClassArr.push(examMarkDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_mark_details");
+            localStorage.setItem('admin_exam_mark_details', JSON.stringify(examMarkClassArr));
+        }
         if (get_roll_id == "4") {
             // teacher
             localStorage.removeItem("teacher_exam_mark_details");
@@ -347,13 +352,13 @@ $(function () {
         return true;
     }
     // if localStorage
-    if (typeof teacher_exam_mark_storage !== 'undefined') {
-        if ((teacher_exam_mark_storage)) {
-            if (teacher_exam_mark_storage) {
-                var teacherExamMarkStorage = JSON.parse(teacher_exam_mark_storage);
-                if (teacherExamMarkStorage.length == 1) {
+    if (typeof exam_mark_storage !== 'undefined') {
+        if ((exam_mark_storage)) {
+            if (exam_mark_storage) {
+                var examMarkStorage = JSON.parse(exam_mark_storage);
+                if (examMarkStorage.length == 1) {
                     var classID, year,sectionID, grade_category, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                    teacherExamMarkStorage.forEach(function (user) {
+                    examMarkStorage.forEach(function (user) {
                         grade_category = user.grade_category;
                         classID = user.class_id;
                         subjectID = user.subject_id;

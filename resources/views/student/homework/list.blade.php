@@ -180,7 +180,7 @@
                                     <p>
                                     <div>
                                         <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-{{$key}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            <i class="fas fa-caret-square-down"></i> {{$work['subject_name']}} - {{ date('j F Y', strtotime($work['date_of_homework'])) }} @if($work['status'] == 1) (Completed) @endif
+                                            <i class="fas fa-caret-square-down"></i> {{$work['subject_name']}} - {{ date('j F Y', strtotime($work['date_of_homework'])) }} @if($work['status'] == 1) (Completed) @endif @if($work['homework_status'] == 1) (Not Submitted) @else if($work['homework_status'] == 0) (Submitted)  @endif
                                         </a>
                                     </div>
                                     </p>

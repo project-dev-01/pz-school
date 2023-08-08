@@ -62,6 +62,18 @@ $(function () {
             var payment_status = $("#payment_status").val();
             var group_id = $("#group_id").val();
             
+            var classObj = {
+                year: year,
+                classID: classID,
+                branchID: branchID,
+                sectionID: sectionID,
+                studentID: student_id,
+                paymentStatus: payment_status,
+                groupID: group_id,
+                userID: userID,
+            };
+            setLocalStorageForFees(classObj);
+            
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -71,6 +83,7 @@ $(function () {
             formData.append('student_id', student_id);
             formData.append('payment_status', payment_status);
             formData.append('group_id', group_id);
+            
             loadTable(formData);
         }
     });
@@ -97,6 +110,94 @@ $(function () {
                 }
             }
         });
+    }
+
+    function setLocalStorageForFees(classObj) {
+
+        var feesDetails = new Object();
+        feesDetails.class_id = classObj.classID;
+        feesDetails.section_id = classObj.sectionID;
+        feesDetails.student_id = classObj.studentID;
+        feesDetails.group_id = classObj.groupID;
+        feesDetails.payment_status = classObj.paymentStatus;
+        feesDetails.year = classObj.year;
+        // here to attached to avoid localStorage other users to add
+        feesDetails.branch_id = branchID;
+        feesDetails.role_id = get_roll_id;
+        feesDetails.user_id = ref_user_id;
+        var feesArr = [];
+        feesArr.push(feesDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_fees_details");
+            localStorage.setItem('admin_fees_details', JSON.stringify(feesArr));
+        }
+        return true;
+    }
+    // if localStorage
+    if (typeof fees_storage !== 'undefined') {
+        if ((fees_storage)) {
+            if (fees_storage) {
+                var feesStorage = JSON.parse(fees_storage);
+                if (feesStorage.length == 1) {
+                    var classID, year, sectionID, studentID, paymentStatus, groupID, userBranchID, userRoleID, userID;
+                    feesStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        year = user.year;
+                        sectionID = user.section_id;
+                        studentID = user.student_id;
+                        paymentStatus = user.payment_status;
+                        groupID = user.group_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id; 
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $('#student_id').val(studentID);
+                        $('#btwyears').val(year);
+                        $("#payment_status").val(paymentStatus);
+                        $("#group_id").val(groupID);
+                        if (classID) {
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">'+select_class+'</option>');
+                            $.post(sectionByClass, { token: token, branch_id: branchID, class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#section_id").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        if(sectionID){
+                            $("#student_id").empty();
+                            $("#student_id").append('<option value="">'+select_student+'</option>');
+                            $.post(getStudentList, { token: token, branch_id: branchID, class_id: classID, academic_session_id: year, section_id: sectionID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#student_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    $("#student_id").val(studentID);
+                                }
+                            }, 'json');
+                        }
+                        
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('academic_session_id', year);
+                        formData.append('student_id', studentID);
+                        formData.append('payment_status', paymentStatus);
+                        formData.append('group_id', groupID);
+                        
+                        loadTable(formData);
+                    }
+                }
+            }
+        }
     }
     function getFess(dataSetNew) {
         $('#getFessStudents').DataTable().clear().destroy();

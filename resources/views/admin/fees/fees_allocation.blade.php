@@ -154,6 +154,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
+    // localStorage variables
+    var fees_allocation_storage = localStorage.getItem('admin_fees_allocation_details');
 </script>
 <script src="{{ asset('public/js/custom/fees_allocation.js') }}"></script>
 @endsection

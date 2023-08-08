@@ -54,7 +54,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="examTimetableFilter" method="post" action="{{ route('admin.exam_timetable') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form id="examTimetableFilter" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -188,6 +188,7 @@
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var viewExamTimetable = "{{ route('admin.exam_timetable.view') }}";
+    var listExamTimetable = "{{ route('admin.exam_timetable') }}";
     var examDelete = "{{ route('admin.exam_timetable.delete') }}";
     // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
@@ -195,6 +196,8 @@
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
     // lang change name end
+    // localStorage variables
+    var exam_timetable_list_storage = localStorage.getItem('admin_exam_timetable_list_details');
 </script>
 <script src="{{ asset('public/js/custom/exam_timetable.js') }}"></script>
 

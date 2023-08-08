@@ -182,6 +182,8 @@
     var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
     var editFeesPageUrl = '{{ route("admin.fees.edit", ":id") }}';
     var feesDelete = '{{ route("admin.fees.fees_delete") }}';
+    // localStorage variables
+    var fees_storage = localStorage.getItem('admin_fees_details');
 </script>
 
 <script src="{{ asset('public/js/custom/fees.js') }}"></script>

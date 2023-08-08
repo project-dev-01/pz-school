@@ -83,7 +83,6 @@ $(function () {
         e.preventDefault();
         var byclass = $("#bystudentrankfilter").valid();
         if (byclass === true) {
-            // $("#overlay").fadeIn(300);
             var year = $("#btwyears").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
@@ -134,6 +133,7 @@ $(function () {
     });
     function examResultByStudentRank(formData){
 
+        $("#overlay").fadeIn(300);
         $("#studentRank").show("slow");
         
         $('#student-rank-table').DataTable({
@@ -327,7 +327,7 @@ $(function () {
         var examResultByStudentRankClassArr = [];
         examResultByStudentRankClassArr.push(examResultByStudentRankDetails);
         if (get_roll_id == "2") {
-            // teacher
+            // admin
             localStorage.removeItem("admin_exam_result_by_student_rank_details");
             localStorage.setItem('admin_exam_result_by_student_rank_details', JSON.stringify(examResultByStudentRankClassArr));
         }
@@ -426,16 +426,16 @@ $(function () {
                         $("#downSectionID").val(sectionID);
                         $("#downAcademicYear").val(year);
                         // download set end
-                        var formData = new FormData();
-                        formData.append('token', token);
-                        formData.append('branch_id', branchID);
-                        formData.append('class_id', classID);
-                        formData.append('section_id', sectionID);
-                        formData.append('exam_id', examID);
-                        formData.append('semester_id', semesterID);
-                        formData.append('session_id', sessionID);
-                        formData.append('academic_year', year);
-                        formData.append('type', type);
+                        // var formData = new FormData();
+                        // formData.append('token', token);
+                        // formData.append('branch_id', branchID);
+                        // formData.append('class_id', classID);
+                        // formData.append('section_id', sectionID);
+                        // formData.append('exam_id', examID);
+                        // formData.append('semester_id', semesterID);
+                        // formData.append('session_id', sessionID);
+                        // formData.append('academic_year', year);
+                        // formData.append('type', type);
                         var classObj = {
                             year: year,
                             classID: classID,

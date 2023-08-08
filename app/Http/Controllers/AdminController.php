@@ -3371,7 +3371,6 @@ class AdminController extends Controller
             'session_id' => $request->session_id,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.exam_timetable_list'), $data);
         // dd($response);
 

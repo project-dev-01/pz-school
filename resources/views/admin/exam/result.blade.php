@@ -221,6 +221,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.individual_result') }}";
+    // localStorage variables
+    var exam_result_individual_storage = localStorage.getItem('admin_exam_result_individual_details');
 
 </script>
 <script src="{{ asset('public/js/custom/exam_result.js') }}"></script>

@@ -195,25 +195,45 @@ class StudentController extends Controller
                         $status = "InCompleted";
                         $top = "";
                     }
-
-
-                    if ($work['status'] == 1) {
-                        $file = '<div class="col-md-6">
-                            <div class="col-md-6 font-weight-bold">'.$attachment_file.': </div>
-                            <div class="col-md-6">
-                                <a href="' . asset('student/homework/') . '/' . $work['file'] . '" download>
-                                    <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
-                                </a>
+                    $homework_status = "";
+                    if ($work['homework_status'] == 1) {
+                        $homework_status = "( Not Submitted )";
+                    } else if ($work['homework_status'] == 0) {
+                        $homework_status = "( Submitted )";
+                    }
+                    if ($work['document']) {
+                        $document = '
+                        <div class="col-md-6">
+                            <div class="row">
+                                <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span><a href="' .config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/homework/'. $work['document'] . '" download>
+                                        <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
+                                    </a></p>
                             </div>
-                    </div>
-                    </div>';
+                        </div>';
+                    }else{
+                        $document = '<div class="col-md-6">
+                        <div class="row">
+                            <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span></p>
+                        </div>';
+
+                    }
+                    if ($work['file']) {
+                        $file = '<div class="col-md-6">
+                                    <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span>: </div>
+                                        <div class="col-md-6">
+                                            <a href="' .config('constants.image_url').'/public/'.config('constants.branch_id').'/student/homework/'.$work['file'] . '" download>
+                                                <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>';
                     } else {
                         $file = '<div class="col-md-6">
-                                <div class="col-md-6 font-weight-bold">'.$attachment_file.' : </div>
+                                <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span> : </div>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <div class="">
-                                            <input type="file" id="homework_file" class="custom-file-input " name="file">
+                                            <input type="file" id="homework_file" class="custom-file-input homework_file" name="file">
                                             <label class="custom-file-label" for="document">'.$choose_file_lang.'</label>
                                             <span id="file_name"></span>
                                         </div>
@@ -235,76 +255,60 @@ class StudentController extends Controller
                                 <p>
                                 <div>
                                     <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-' . $key . '" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . '
+                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top .' '. $homework_status. ' 
                                     </a>
                                 </div>
                                 </p>
                                 <div class="collapse" id="hw-' . $key . '">
                                     <div class="card card-body">
+                                    
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$title_lang.' :</div>
-                                                    <div class="col-md-3">' . $work['title'] . '</div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$title_lang.'</span>' . $work['title'] . '</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$status_lang.'  :</div>
-                                                    <div class="col-md-3">' . $status . '</div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$status_lang.'</span>' . $status . '</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$date_of_homework_lang.' :</div>
-                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_homework'])) . '</div>
-                                                </div>
-                                            </div>
-
-                                        </div><br />
+                                        </div>
                                         <div class="row">
-                                            
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$date_of_submission_lang.' :</div>
-                                                    <div class="col-md-3">' . date('F j , Y', strtotime($work['date_of_submission'])) . '</div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_homework_lang.'</span>' . date('F j , Y', strtotime($work['date_of_homework'])) . '</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$evalution_date_lang.' :</div>
-                                                    <div class="col-md-3">' . $evaluation_date . '</div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_submission_lang.'</span>' . date('F j , Y', strtotime($work['date_of_submission'])) . '</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$remarks_lang.' :</div>
-                                                    <div class="col-md-3">' . $work['description'] . '</div>
-                                                </div>
-                                            </div>
-                                        </div><br />
+                                        </div>
                                         <div class="row">
-                                            
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$rank_out_of_5_lang.' :</div>
-                                                    <div class="col-md-3">' . $work['rank'] . '</div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$evalution_date_lang.'</span>' . $evaluation_date . '</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="row">
-                                                    <div class="col-md-5 font-weight-bold">'.$document_lang.' :</div>
-                                                    <div class="col-md-3">
-                                                        <a href="' . asset('teacher/homework/') . '/' . $work['document'] . '" download>
-                                                            <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
-                                                        </a>
-                                                    </div>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$remarks_lang.'</span>' . $work['description'] . '</p>
                                                 </div>
                                             </div>
-                                        </div><br />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$rank_out_of_5_lang.' </span>' . $work['rank'] . '</p>
+                                                </div>
+                                            </div>
+                                            '.$document.'
+                                        </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold">'.$submission_process_here_lang.' :- </div>
+                                            <div class="col-md-12 font-weight-bold" >'.$submission_process_here_lang.' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">

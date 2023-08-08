@@ -120,7 +120,7 @@ $(function () {
                 examID: exam_id,
                 semesterID: semester_id,
                 sessionID: session_id,
-                academic_session_id: academic_session_id,
+                academicSessionID: academic_session_id,
                 userID: userID,
             };
 
@@ -145,7 +145,6 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('academic_session_id', academic_session_id);
-            $("#overlay").fadeIn(300);
             examPaperResult(formData);
         };
     });
@@ -153,6 +152,7 @@ $(function () {
 
     function examPaperResult(formData){
         
+        $("#overlay").fadeIn(300);
         $.ajax({
             url: getExamPaperResults,
             method: "post",
@@ -189,18 +189,25 @@ $(function () {
     function setLocalStorageForExamPaperResult(classObj) {
 
         var examPaperResultDetails = new Object();
+        
         examPaperResultDetails.class_id = classObj.classID;
         examPaperResultDetails.section_id = classObj.sectionID;
         examPaperResultDetails.subject_id = classObj.subjectID;
         examPaperResultDetails.exam_id = classObj.examID;
         examPaperResultDetails.semester_id = classObj.semesterID;
         examPaperResultDetails.session_id = classObj.sessionID;
+        examPaperResultDetails.academicSessionID = classObj.academicSessionID;
         // here to attached to avoid localStorage other users to add
         examPaperResultDetails.branch_id = branchID;
         examPaperResultDetails.role_id = get_roll_id;
         examPaperResultDetails.user_id = ref_user_id;
         var examPaperResultClassArr = [];
         examPaperResultClassArr.push(examPaperResultDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_paper_result_details");
+            localStorage.setItem('admin_exam_paper_result_details', JSON.stringify(examPaperResultClassArr));
+        }
         if (get_roll_id == "4") {
             // teacher
             localStorage.removeItem("teacher_exam_paper_result_details");
@@ -210,13 +217,13 @@ $(function () {
     }
     
     // if localStorage
-    if (typeof teacher_exam_paper_result_storage !== 'undefined') {
-        if ((teacher_exam_paper_result_storage)) {
-            if (teacher_exam_paper_result_storage) {
-                var teacherExamPaperResultStorage = JSON.parse(teacher_exam_paper_result_storage);
-                if (teacherExamPaperResultStorage.length == 1) {
-                    var classID, sectionID, subjectID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                    teacherExamPaperResultStorage.forEach(function (user) {
+    if (typeof exam_paper_result_storage !== 'undefined') {
+        if ((exam_paper_result_storage)) {
+            if (exam_paper_result_storage) {
+                var examPaperResultStorage = JSON.parse(exam_paper_result_storage);
+                if (examPaperResultStorage.length == 1) {
+                    var classID, sectionID, subjectID,academicSessionID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    examPaperResultStorage.forEach(function (user) {
                         classID = user.class_id;
                         sectionID = user.section_id;
                         subjectID = user.subject_id;
@@ -226,6 +233,7 @@ $(function () {
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
+                        academicSessionID = user.academicSessionID;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         $('#changeClassName').val(classID);
@@ -261,7 +269,7 @@ $(function () {
                                 branch_id: branchID,
                                 class_id: classID,
                                 section_id: sectionID,
-                                academic_session_id: academic_session_id,
+                                academic_session_id: academicSessionID,
                                 today: today
                             }, function (res) {
                                 if (res.code == 200) {
@@ -282,7 +290,7 @@ $(function () {
                                 class_id: classID,
                                 teacher_id: userID,
                                 section_id: sectionID,
-                                academic_session_id: academic_session_id,
+                                academic_session_id: academicSessionID,
                                 exam_id: examID
                             }, function (res) {
                                 if (res.code == 200) {
@@ -301,7 +309,7 @@ $(function () {
                         $("#downSemesterID").val(semesterID);
                         $("#downSessionID").val(sessionID);
                         $("#downSubjectID").val(subjectID);
-                        $("#downAcademicYear").val(academic_session_id);
+                        $("#downAcademicYear").val(academicSessionID);
                         // download set end
                         var formData = new FormData();
                         formData.append('token', token);
@@ -312,7 +320,7 @@ $(function () {
                         formData.append('exam_id', examID);
                         formData.append('semester_id', semesterID);
                         formData.append('session_id', sessionID);
-                        formData.append('academic_session_id', academic_session_id);
+                        formData.append('academic_session_id', academicSessionID);
                         $("#overlay").fadeIn(300);
                         examPaperResult(formData);
                     }

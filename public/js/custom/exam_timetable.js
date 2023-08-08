@@ -103,12 +103,42 @@ $(function () {
         e.preventDefault();
         var filterCheck = $("#examTimetableFilter").valid();
         if (filterCheck === true) {
-            $("#overlay").fadeIn(300);
-            var form = this;
+            
+            // var formData 
+            var semester_id = $("#semester_id").val();
+            var session_id = $("#session_id").val();
+            var class_id = $("#class_id").val();
+            var section_id = $("#section_id").val();
+            formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
+
+            var classObj = {
+                classID: class_id,
+                branchID: branchID,
+                sectionID: section_id,
+                semesterID: semester_id,
+                sessionID: session_id,
+                userID: userID,
+            };
+            setLocalStorageForExamTimeTableList(classObj);
+
+            examTimetableList(formData);
+
+            
+        }
+    });
+
+    function examTimetableList(formData){
+        $("#overlay").fadeIn(300);
             $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
+                url: listExamTimetable,
+                method: "Post",
+                data: formData,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
@@ -125,8 +155,75 @@ $(function () {
                     $("#overlay").fadeOut(300);
                 }
             });
+    }
+
+    function setLocalStorageForExamTimeTableList(classObj) {
+
+        var examTimetableListDetails = new Object();
+        examTimetableListDetails.class_id = classObj.classID;
+        examTimetableListDetails.section_id = classObj.sectionID;
+        examTimetableListDetails.semester_id = classObj.semesterID;
+        examTimetableListDetails.session_id = classObj.sessionID;
+        // here to attached to avoid localStorage other users to add
+        examTimetableListDetails.branch_id = branchID;
+        examTimetableListDetails.role_id = get_roll_id;
+        examTimetableListDetails.user_id = ref_user_id;
+        var examTimetableListArr = [];
+        examTimetableListArr.push(examTimetableListDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_timetable_list_details");
+            localStorage.setItem('admin_exam_timetable_list_details', JSON.stringify(examTimetableListArr));
         }
-    });
+        return true;
+    }
+    // if localStorage
+    if (typeof exam_timetable_list_storage !== 'undefined') {
+        if ((exam_timetable_list_storage)) {
+            if (exam_timetable_list_storage) {
+                var examTimetableListStorage = JSON.parse(exam_timetable_list_storage);
+                if (examTimetableListStorage.length == 1) {
+                    var classID, sectionID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    examTimetableListStorage.forEach(function (user) {
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;     
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#class_id').val(classID);
+                        $('#semester_id').val(semesterID);
+                        $('#session_id').val(sessionID);
+                        if (classID) {
+                            $("#section_id").empty();
+                            $("#section_id").append('<option value="">'+select_class+'</option>');
+                            $.post(sectionByClass, { token: token, branch_id: branchID, class_id: classID, teacher_id: userID }, function (res) {
+                                if (res.code == 200) {
+                                    $("#section_drp_div").show();
+                                    $.each(res.data, function (key, val) {
+                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#section_id").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        examTimetableList(formData);
+                    }
+                }
+            }
+        }
+    }
 
     $("#addScheduleFilter").validate({
         rules: {

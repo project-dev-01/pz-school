@@ -187,6 +187,8 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.overall') }}";
+    // localStorage variables
+    var exam_result_overall_storage = localStorage.getItem('admin_exam_result_overall_details');
 </script>
 <script src="{{ asset('public/js/custom/overall.js') }}"></script>
 @endsection

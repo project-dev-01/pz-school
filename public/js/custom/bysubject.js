@@ -59,7 +59,6 @@ $(function () {
         e.preventDefault();
         var byclass = $("#bysubjectfilter").valid();
         if (byclass === true) {
-            $("#overlay").fadeIn(300);
             var year = $("#btwyears").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
@@ -101,6 +100,7 @@ $(function () {
     });
     function examResultBySubject(formData){
 
+        $("#overlay").fadeIn(300);
             // list mode
             $.ajax({
                 url: getbySubject,
@@ -143,6 +143,11 @@ $(function () {
         examResultBySubjectDetails.user_id = ref_user_id;
         var examResultBySubjectClassArr = [];
         examResultBySubjectClassArr.push(examResultBySubjectDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_result_by_subject_details");
+            localStorage.setItem('admin_exam_result_by_subject_details', JSON.stringify(examResultBySubjectClassArr));
+        }
         if (get_roll_id == "4") {
             // teacher
             localStorage.removeItem("teacher_exam_result_by_subject_details");
@@ -151,13 +156,13 @@ $(function () {
         return true;
     }
     // if localStorage
-    if (typeof teacher_exam_result_by_subject_storage !== 'undefined') {
-        if ((teacher_exam_result_by_subject_storage)) {
-            if (teacher_exam_result_by_subject_storage) {
-                var teacherExamResultBySubjectStorage = JSON.parse(teacher_exam_result_by_subject_storage);
-                if (teacherExamResultBySubjectStorage.length == 1) {
+    if (typeof exam_result_by_subject_storage !== 'undefined') {
+        if ((exam_result_by_subject_storage)) {
+            if (exam_result_by_subject_storage) {
+                var examResultBySubjectStorage = JSON.parse(exam_result_by_subject_storage);
+                if (examResultBySubjectStorage.length == 1) {
                     var classID, year,sectionID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                    teacherExamResultBySubjectStorage.forEach(function (user) {
+                    examResultBySubjectStorage.forEach(function (user) {
                         classID = user.class_id;
                         year = user.year;
                         sectionID = user.section_id;
