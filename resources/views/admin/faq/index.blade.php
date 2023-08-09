@@ -159,8 +159,8 @@
 <script src="{{ asset('public/js/validation/validation.js') }}"></script>
 <script>
     var faqEmail = "{{ config('constants.api.faq_email') }}";
+    var schoolName = "{{ Session::get('school_name') }}";
 </script>
-
 <script src="{{ asset('public/js/custom/faq.js') }}"></script>
 
 @endsection

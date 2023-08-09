@@ -97,6 +97,7 @@
 
                     <div class="col-md-5">
                         <div class="row">
+                            @if(in_array(5, $branch_roles_permissions))
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('parent.login') }}">
@@ -106,7 +107,10 @@
                                         </div>
                                 </div>
                             </div>
+
+                            @endif
                             <div class="col-md-0"></div>
+                            @if(in_array(6, $branch_roles_permissions))
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('student.login') }}">
@@ -116,8 +120,8 @@
                                         </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                            @endif
+                            @if(in_array(4, $branch_roles_permissions))
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('teacher.login') }}">
@@ -127,7 +131,9 @@
                                         </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="col-md-0"></div>
+                            @if(in_array('apply_now', $branch_roles_permissions))
                             <div class="col-md-5">
                                 <div class="card">
                                     <a href="{{ route('schoolcrm.app.form') }}">
@@ -137,7 +143,7 @@
                                         </div>
                                 </div>
                             </div>
-
+                            @endif
                         </div>
                     </div>
                 </div>

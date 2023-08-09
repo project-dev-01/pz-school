@@ -28,6 +28,8 @@ $(function () {
             formData.append('email', email);
             formData.append('remarks', remarks);
             formData.append('subject', subject);
+            formData.append('school_name', schoolName);
+            
             var form = this;
             $.ajax({
                 url: faqEmail,
@@ -47,6 +49,7 @@ $(function () {
                     }
                 }, error: function (err) {
                     toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    $("#overlay").fadeOut(300);
                 }
             });
         }

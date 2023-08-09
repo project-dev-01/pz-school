@@ -1194,7 +1194,8 @@
 
     var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
 
-    var getTenStudent = "{{ config('constants.api.get_ten_student') }}";
+    // var getTenStudent = "{{ config('constants.api.get_ten_student') }}";
+    var getTenStudent = "{{ config('constants.api.all_student_ranking') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var all_exam_subject_scores = "{{ config('constants.api.all_exam_subject_scores') }}";
 

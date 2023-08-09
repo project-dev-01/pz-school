@@ -40,16 +40,25 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-        return view(
-            'auth.login',
-            [
-                'branch_id' => config('constants.branch_id'),
-                'school_name' => config('constants.school_name'),
-                'school_image' => config('constants.school_image'),
-                'language_name' => $setLang,
-                'image_url' => $image_url
-            ]
-        );
+        // roles to access
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
+        if (in_array(2, $roles_permissions_array)) {
+            // echo "access ok";
+            return view(
+                'auth.login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+        } else {
+            // echo "access denied";
+            return view('auth.access_denied');
+        }
     }
     public function teacherLoginForm(Request $request)
     {
@@ -76,16 +85,25 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-        return view(
-            'auth.teacher_login',
-            [
-                'branch_id' => config('constants.branch_id'),
-                'school_name' => config('constants.school_name'),
-                'school_image' => config('constants.school_image'),
-                'language_name' => $setLang,
-                'image_url' => $image_url
-            ]
-        );
+        // roles to access
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
+        if (in_array(4, $roles_permissions_array)) {
+            // echo "access ok";
+            return view(
+                'auth.teacher_login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+        } else {
+            // echo "access denied";
+            return view('auth.access_denied');
+        }
     }
     public function staffLoginForm(Request $request)
     {
@@ -111,16 +129,25 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-        return view(
-            'auth.staff_login',
-            [
-                'branch_id' => config('constants.branch_id'),
-                'school_name' => config('constants.school_name'),
-                'school_image' => config('constants.school_image'),
-                'language_name' => $setLang,
-                'image_url' => $image_url
-            ]
-        );
+        // roles to access
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
+        if (in_array(3, $roles_permissions_array)) {
+            // echo "access ok";
+            return view(
+                'auth.staff_login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+        } else {
+            // echo "access denied";
+            return view('auth.access_denied');
+        }
     }
     public function parentLoginForm(Request $request)
     {
@@ -146,16 +173,25 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-        return view(
-            'auth.parent_login',
-            [
-                'branch_id' => config('constants.branch_id'),
-                'school_name' => config('constants.school_name'),
-                'school_image' => config('constants.school_image'),
-                'language_name' => $setLang,
-                'image_url' => $image_url
-            ]
-        );
+        // roles to access
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
+        if (in_array(5, $roles_permissions_array)) {
+            // echo "access ok";
+            return view(
+                'auth.parent_login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+        } else {
+            // echo "access denied";
+            return view('auth.access_denied');
+        }
     }
     public function studentLoginForm(Request $request)
     {
@@ -181,16 +217,25 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-        return view(
-            'auth.student_login',
-            [
-                'branch_id' => config('constants.branch_id'),
-                'school_name' => config('constants.school_name'),
-                'school_image' => config('constants.school_image'),
-                'language_name' => $setLang,
-                'image_url' => $image_url
-            ]
-        );
+        // roles to access
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
+        if (in_array(6, $roles_permissions_array)) {
+            // echo "access ok";
+            return view(
+                'auth.student_login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+        } else {
+            // echo "access denied";
+            return view('auth.access_denied');
+        }
     }
     public function showLoadingForm(Request $request)
     {
@@ -1307,7 +1352,6 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-
         $home_response = Http::post(config('constants.api.get_home_page_details'), $data);
         $homeDetails = $home_response->json();
 
@@ -1325,8 +1369,8 @@ class AuthController extends Controller
         $setLang = isset($defalutLang) ? $defalutLang : 'en';
         App::setLocale($setLang);
         session()->put('locale', $setLang);
-
-        // dd($homeDetails);
+        $branch_roles_permissions = isset($schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids']) ? $schoolDetails['data']['branch_roles_permissions'][0]['access_role_ids'] : '';
+        $roles_permissions_array = explode(",", $branch_roles_permissions);
         return view(
             'auth.home',
             [
@@ -1339,6 +1383,7 @@ class AuthController extends Controller
                 'application' => $application,
                 'language_name' => $setLang,
                 'home' => $homeDetails['data'],
+                'branch_roles_permissions' => $roles_permissions_array,
             ]
         );
     }

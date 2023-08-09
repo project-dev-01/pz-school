@@ -1,34 +1,15 @@
 <!-- Topbar Start -->
-<style>
-    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
-        .responsive {
-            display: none !important;
-        }
-
-        .responsivenotification {
-            display: none !important;
-        }
-
-        .navbar-custom .button-menu-mobile {
-            width: 17px;
-        }
-
-        .logo-box {
-            width: 58px !important;
-            padding-right: 0 !important;
-        }
-    }
-</style>
-
+<link href="{{ asset('public/css/custom/navbar.css') }}" rel="stylesheet" type="text/css" />
 <div class="navbar-custom" style="background-color:white;">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
-			
-            <li class="dropdown notification-list topbar-dropdown responsivenotification">
+
+            <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge badge-count">0</span>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <!-- item-->
 
@@ -41,6 +22,8 @@
                             </span>{{ __('messages.notification') }}
                         </h5>
                     </div>
+
+
 
                     <div class="notification-list-show">
                         <!-- <div class="noti-scroll" data-simplebar> -->
@@ -66,16 +49,24 @@
 
                     </div>
             </li>
-			@if(Session::get('role_id') == '4' || Session::get('role_id') == '5')
-			<li class="dropdown notification-list topbar-dropdown responsivenotification">
-			 @php $cpath=explode('/',\Request::path()); @endphp
-                <a class="nav-link dropdown-toggle waves-effect waves-light" href="{{ route($cpath[0].'.chat')}}" >
+
+            @if(Session::get('role_id') == '4' || Session::get('role_id') == '5')
+            <li class="dropdown notification-list topbar-dropdown">
+                @php $cpath=explode('/',\Request::path()); @endphp
+                <a class="nav-link dropdown-toggle waves-effect waves-light" href="{{ route($cpath[0].'.chat')}}">
                     <i class="far fa-comment-alt noti-icon"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge chat-count">0</span>
-                </a>  
+                </a>
             </li>
-			@endif
-			
+            @endif
+
+            <!-- <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" href="">
+                    <i class="mdi mdi-calendar-clock font-22"></i>
+                    <span class="badge badge-danger rounded-circle noti-icon-badge chat-count">0</span>
+                </a>
+            </li> -->
+
             <li class="dropdown notification-list topbar-dropdown">
                 <div class="lang-select mt-1 ml-2">
                     <button class="btn-select" value=""></button>
@@ -104,7 +95,7 @@
                 </div>
             </li> -->
             @if(Session::get('role_id') != '1')
-            <li class="d-lg-inline-block" style="white-space: nowrap;width: 70px;overflow: hidden;text-overflow: ellipsis;">
+            <li class="d-lg-inline-block schl">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
@@ -226,7 +217,7 @@
         </ul>
 
         <!-- LOGO -->
-        <div class="logo-box">
+        <div class="logo-box teacher">
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">

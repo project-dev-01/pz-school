@@ -2,11 +2,11 @@ $(function () {
     $('#sr_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#sr_section_id").empty();
-        $("#sr_section_id").append('<option value="">'+select_class+'</option>');
+        $("#sr_section_id").append('<option value="">' + select_class + '</option>');
         $("#sr_examnames").empty();
-        $("#sr_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#sr_examnames").append('<option value="">' + select_exam + '</option>');
         $("#sr_student_id").empty();
-        $("#sr_student_id").append('<option value="">'+select_student+'</option>');
+        $("#sr_student_id").append('<option value="">' + select_student + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -28,9 +28,9 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#sr_examnames").empty();
-        $("#sr_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#sr_examnames").append('<option value="">' + select_exam + '</option>');
         $("#sr_student_id").empty();
-        $("#sr_student_id").append('<option value="">'+select_student+'</option>');
+        $("#sr_student_id").append('<option value="">' + select_student + '</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -99,7 +99,7 @@ $(function () {
                 bySubject += '</tr>';
             });
         } else {
-            bySubject += '<tr><td colspan="4">'+no_data_available+'</td></tr>';
+            bySubject += '<tr><td colspan="4">' + no_data_available + '</td></tr>';
         }
         $("#student_rank_body").append(bySubject);
     }
@@ -107,9 +107,9 @@ $(function () {
     $('#st_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#st_section_id").empty();
-        $("#st_section_id").append('<option value="">'+select_class+'</option>');
+        $("#st_section_id").append('<option value="">' + select_class + '</option>');
         $("#st_student_id").empty();
-        $("#st_student_id").append('<option value="">'+select_student+'</option>');
+        $("#st_student_id").append('<option value="">' + select_student + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -131,7 +131,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#st_student_id").empty();
-        $("#st_student_id").append('<option value="">'+select_student+'</option>');
+        $("#st_student_id").append('<option value="">' + select_student + '</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: academic_session_id, section_id: section_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -140,14 +140,14 @@ $(function () {
             }
         }, 'json');
     });
-    
+
     $('.studentSemester').on('change', function () {
         var student_id = $("#st_student_id").val();
         var academic_session_id = $("#st_btwyears").val();
         if (student_id) {
 
             $.post(all_exam_subject_scores, { token: token, branch_id: branchID, student_id: student_id, academic_session_id: academic_session_id }, function (res) {
-                
+
                 if (res.code == 200) {
                     var datasetnew = res.data;
                     bystudentSemester(datasetnew);
@@ -167,9 +167,9 @@ $(function () {
         var headone = "<tr>";
         $.each(datasetnew, function (key, val) {
             var count = val.exam_marks.length;
-            if(key==0){
+            if (key == 0) {
                 headone += '<th rowspan="2">#</th><th rowspan="2">Exam Name</th>';
-                headone += '<th colspan="'+ count +'">Subjects</th>';
+                headone += '<th colspan="' + count + '">Subjects</th>';
             }
         });
         headone += '</tr>';
@@ -177,7 +177,7 @@ $(function () {
         $.each(datasetnew, function (key1, val1) {
             var marks = val1.exam_marks;
             $.each(marks, function (key2, val2) {
-                if(key1==0){
+                if (key1 == 0) {
                     headone += ' <th>' + val2.subject_name + '</th>';
                 }
             });
@@ -187,9 +187,9 @@ $(function () {
         var body = "";
         $.each(datasetnew, function (key3, val3) {
             body += '<tr>';
-            var sl = key3+1;
-            body += '<td>'+sl+'</td>';
-            body += '<td>'+val3.exam_name+'</td>';
+            var sl = key3 + 1;
+            body += '<td>' + sl + '</td>';
+            body += '<td>' + val3.exam_name + '</td>';
             var marks1 = val3.exam_marks;
             $.each(marks1, function (key4, val4) {
                 body += ' <td>' + val4.mark + '</td>';
@@ -203,9 +203,9 @@ $(function () {
     $('#ems_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#ems_section_id").empty();
-        $("#ems_section_id").append('<option value="">'+select_class+'</option>');
+        $("#ems_section_id").append('<option value="">' + select_class + '</option>');
         $("#ems_student_id").empty();
-        $("#ems_student_id").append('<option value="">'+select_student+'</option>');
+        $("#ems_student_id").append('<option value="">' + select_student + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -227,7 +227,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#ems_student_id").empty();
-        $("#ems_student_id").append('<option value="">'+select_student+'</option>');
+        $("#ems_student_id").append('<option value="">' + select_student + '</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, academic_session_id: academic_session_id, section_id: section_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -240,9 +240,9 @@ $(function () {
     $('#st10_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#st10_section_id").empty();
-        $("#st10_section_id").append('<option value="">'+select_class+'</option>');
+        $("#st10_section_id").append('<option value="">' + select_class + '</option>');
         $("#st10_examnames").empty();
-        $("#st10_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#st10_examnames").append('<option value="">' + select_exam + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -264,7 +264,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#st10_examnames").empty();
-        $("#st10_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#st10_examnames").append('<option value="">' + select_exam + '</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -290,32 +290,39 @@ $(function () {
         var academic_session_id = $("#st10_btwyears").val();
         var exam_id = $("#st10_examnames").val();
         var type = "top";
-        console.log('academic_session_id',academic_session_id)
-        console.log('exam_id',exam_id)
-        console.log('semester_id',semester_id)
-        console.log('session_id',session_id)
+        var subject_id = "All";
         if (exam_id) {
 
-            $.post(getTenStudent, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id,session_id: session_id, semester_id: semester_id, exam_id: exam_id, type: type, academic_session_id: academic_session_id }, function (res) {
+            $.post(getTenStudent, {
+                branch_id: branchID,
+                class_id: class_id,
+                section_id: section_id,
+                session_id: session_id,
+                semester_id: semester_id,
+                exam_id: exam_id,
+                type: type,
+                subject_id: subject_id,
+                academic_session_id: academic_session_id
+            }, function (res) {
                 console.log('124', res)
                 if (res.code == 200) {
                     var datasetnew = res.data;
-                    topstudent(datasetnew,type);
+                    topstudent(datasetnew, type);
                 }
             }, 'json');
         } else {
-            $('#'+type+'_student_table').empty();
+            $('#' + type + '_student_table').empty();
         }
 
     });
 
-    
+
     $('#sb10_class_id').on('change', function () {
         var class_id = $(this).val();
         $("#sb10_section_id").empty();
-        $("#sb10_section_id").append('<option value="">'+select_class+'</option>');
+        $("#sb10_section_id").append('<option value="">' + select_class + '</option>');
         $("#sb10_examnames").empty();
-        $("#sb10_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#sb10_examnames").append('<option value="">' + select_exam + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -337,7 +344,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#sb10_examnames").empty();
-        $("#sb10_examnames").append('<option value="">'+select_exam+'</option>');
+        $("#sb10_examnames").append('<option value="">' + select_exam + '</option>');
 
         $.post(subjectByExamNames, {
             token: token,
@@ -363,66 +370,74 @@ $(function () {
         var academic_session_id = $("#sb10_btwyears").val();
         var exam_id = $("#sb10_examnames").val();
         var type = "bottom";
-        console.log('academic_session_id',academic_session_id)
-        console.log('exam_id',exam_id)
-        console.log('semester_id',semester_id)
-        console.log('session_id',session_id)
+        var subject_id = "All";
         if (exam_id) {
 
-            $.post(getTenStudent, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id,session_id: session_id, semester_id: semester_id, exam_id: exam_id, type: type, academic_session_id: academic_session_id }, function (res) {
+            $.post(getTenStudent, {
+                branch_id: branchID,
+                class_id: class_id,
+                section_id: section_id,
+                session_id: session_id,
+                semester_id: semester_id,
+                exam_id: exam_id,
+                type: type,
+                subject_id: subject_id,
+                academic_session_id: academic_session_id
+            }, function (res) {
                 console.log('124', res)
                 if (res.code == 200) {
                     var datasetnew = res.data;
-                    topstudent(datasetnew,type);
+                    topstudent(datasetnew, type);
                 }
             }, 'json');
         } else {
-            $('#'+type+'_student_table').empty();
+            $('#' + type + '_student_table').empty();
         }
 
     });
-    
-        function topstudent(datasetnew,type) {
-            $('#'+type+'_student_table').empty();
 
-            var sno = 0;
-            var byStudent = "";
-            var students = datasetnew.details;
-            if (students.length > 0) {
-                students.forEach(function (res) {
-                    sno++;
-                    if(sno<11){
-                        byStudent += '<tr><td>' + sno + '</td>';
-                        byStudent += '<td>' + res.student_name + '</td>';
-                        byStudent += '<td>' + res.total_mark + '</td>';
-                        byStudent += '<td>' + res.mark + '</td>';
-                        byStudent += '<td>' + res.rank + '</td>';
-                        byStudent += '</tr>';
-                    }
-                });
-            } else {
-                byStudent += '<tr><td colspan="5">'+no_data_available+'</td></tr>';
-            }
-            $('#'+type+'_student_table').append(byStudent);
+    function topstudent(datasetnew, type) {
+        $('#' + type + '_student_table').empty();
+
+        var sno = 0;
+        var byStudent = "";
+        // var students = datasetnew.details;
+        var students = datasetnew;
+        if (students.length > 0) {
+            students.forEach(function (res) {
+                sno++;
+                if (sno < 11) {
+                    byStudent += '<tr><td>' + sno + '</td>';
+                    byStudent += '<td>' + res.student_name + '</td>';
+                    byStudent += '<td>' + res.total_mark + '</td>';
+                    byStudent += '<td>' + res.mark + '</td>';
+                    byStudent += '<td>' + res.rank + '</td>';
+                    byStudent += '</tr>';
+                }
+            });
+        } else {
+            byStudent += '<tr><td colspan="5">' + no_data_available + '</td></tr>';
         }
-    
+        $('#' + type + '_student_table').append(byStudent);
+    }
 
-    
+
+
 
     var radar;
     var radarSubjectScore;
     var radarSubjectRank;
     var radarSubjectAvgHighLow;
-    
+
     $('.examMarkStatus').on('change', function () {
-            
+
         $("#scoreExamID").empty();
         var student_id = $("#ems_student_id").val();
         var academic_id = $("#ems_btwyears").val();
-        if(student_id) {
-            $.get(examByStudent, { token: token, branch_id: branchID, student_id: student_id, academic_session_id: academic_id}, function (res) {
+        if (student_id) {
+            $.get(examByStudent, { token: token, branch_id: branchID, student_id: student_id, academic_session_id: academic_id }, function (res) {
                 if (res.code == 200) {
-                    console.log('123',res)
+                    console.log('123', res)
                     $.each(res.data, function (key, val) {
                         $("#scoreExamID").append('<option value="' + val.id + '">' + val.name + '</option>');
                     });

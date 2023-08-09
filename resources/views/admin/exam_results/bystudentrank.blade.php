@@ -237,6 +237,10 @@
     var downloadFileName = "{{ __('messages.exam_student_rank') }}";
     // localStorage variables
     var exam_result_by_student_rank_storage = localStorage.getItem('admin_exam_result_by_student_rank_details');
+    // Get PDF Footer Text
+    var header_txt="{{ __('messages.exam_student_rank') }}";
+    var footer_txt="{{ session()->get('footer_text') }}";
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('public/js/custom/bystudentrank.js') }}"></script>
 @endsection
