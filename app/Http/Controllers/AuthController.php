@@ -423,7 +423,7 @@ class AuthController extends Controller
         if (session()->has('role_id')) {
             $role_id = session()->get('role_id');
             if ($role_id == 1) {
-                return redirect()->route('super_admin.dashboard');
+                return redirect()->route('branch.index');
             }
         }
         return view('super_admin.login.login');
@@ -749,7 +749,7 @@ class AuthController extends Controller
                 $request->session()->put('role_name', $userDetails['data']['role_name']);
             }
             if ($userDetails['data']['user']['role_id'] == 1) {
-                return redirect()->route('super_admin.dashboard');
+                return redirect()->route('branch.index');
             } else {
                 return redirect()->route('super_admin.login')->with('error', 'Invalid Credential');
             }

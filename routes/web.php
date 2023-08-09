@@ -56,14 +56,9 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
     Route::get('/login', [AuthController::class, 'showLoginFormSA'])->name('super_admin.login');
     Route::post('/authenticate', [AuthController::class, 'authenticateSA'])->name('super_admin.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutSA'])->name('super_admin.logout');
-    //school app form
-    Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('super_admin.schoolcrm.app.form');
     Route::post('/gretting', [CommonController::class, 'greettingSession'])->name('greetting.session');
 
     Route::group(['middleware' => ['isSuperAdmin', 'logroute']], function () {
-
-        // dashboard routes
-        Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
         // student details
         Route::get('/student', [SuperAdminController::class, 'studentIndex'])->name('student.index');
 

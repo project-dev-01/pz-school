@@ -50,34 +50,6 @@ class CommonController extends Controller
             return false;
         }
     }
-    public function showApplicationForm()
-    {
-
-        $data = [
-            'branch_id' => config('constants.branch_id')
-        ];
-        
-        $contact = Http::post(config('constants.api.get_home_page_details'), $data);
-        $contactDetails = $contact->json();
-
-        $grade_response = Http::post(config('constants.api.application_grade_list'), $data);
-        $grade = $grade_response->json();
-        
-        $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
-        $relation = $relation_response->json();
-
-        $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
-        $academic_year_list = $academic_year_list_response->json();
-        return view(
-            'school-application-form',
-            [
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'grade' => isset($grade['data']) ? $grade['data'] : [],
-                'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
-            ]
-        );
-    }
 
     public function addApplicationForm(Request $request)
     {

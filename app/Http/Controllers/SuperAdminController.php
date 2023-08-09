@@ -12,11 +12,7 @@ use App\Models\User;
 use App\Models\Task;
 class SuperAdminController extends Controller
 {
-    //
-    public function index()
-    {
-        return view('super_admin.dashboard.index');
-    }
+
     // get section
     public function section()
     {
