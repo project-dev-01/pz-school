@@ -1412,4 +1412,5 @@ return [
     "pass_fail" => "Pass/Fail",
     "top_ranking" => "Top Ranking",
     "bottom_ranking" => "Bottom Ranking",
+    "branch_url_permission" => "Branch Url Permission"
 ];

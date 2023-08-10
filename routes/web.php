@@ -111,13 +111,8 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         Route::post('form/postimage', [SuperAdminController::class, 'imagestore'])->name('super_admin.forum.image.store');
         // faq
         Route::get('faq/index', [SuperAdminController::class, 'faqIndex'])->name('super_admin.faq.index');
-
-        // exam Result Group 
-        Route::get('exam_results/byclass', [SuperAdminController::class, 'byclasss'])->name('super_admin.exam_results.byclass');
-        Route::get('exam_results/bysubject', [SuperAdminController::class, 'bysubject'])->name('super_admin.exam_results.bysubject');
-        Route::get('exam_results/overall', [SuperAdminController::class, 'overall'])->name('super_admin.exam_results.overall');
-        Route::get('exam_results/bystudent', [SuperAdminController::class, 'bystudent'])->name('super_admin.exam_results.bystudent');
-        Route::get('exam/result', [SuperAdminController::class, 'examResult'])->name('super_admin.exam.result');
+        // 
+        Route::get('branch_url_permission', [SuperAdminController::class, 'branchUrlPermission'])->name('super_admin.branch_url_permission');
     });
 });
 

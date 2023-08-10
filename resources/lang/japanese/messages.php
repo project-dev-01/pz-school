@@ -1411,6 +1411,8 @@ return [
     "delete_this_holidays" => "You want to delete this holidays",
     "exam_student_rank" => "Student Rank",
     "pass_fail" => "Pass/Fail",
-    "top" => "Top",
-    "bottom" => "Bottom",
+    "top_ranking" => "Top",
+    "bottom_ranking" => "Bottom",
+    "branch_url_permission" => "Branch Url Permission"
+
 ];

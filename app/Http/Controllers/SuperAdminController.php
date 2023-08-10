@@ -1704,66 +1704,21 @@ class SuperAdminController extends Controller
             ]
         );
     }
-    public function examResult()
+    public function branchUrlPermission()
     {
-        return view('super_admin.exam.result');
-    }
-    // LEAVE MANAGEMENT START
-    public function applyleave()
-    {
-        return view('super_admin.leave_management.applyleave');
-    }
-    public function approvalleave()
-    {
-        return view('super_admin.leave_management.approvalleave');
-    }
+        
+        $data = [
+            'email' => session()->get('email'),
+            'name' => session()->get('name'),
+            'role_name' => session()->get('role_name')
 
-    public function allleaves()
-    {
-        return view('super_admin.leave_management.allleaves');
-    }
-    // LEAVE MANAGEMENT END 
-    public function timeTableViewExam()
-    {
-        return view('super_admin.exam_timetable.schedule');
-    }
-    public function timeTableSetExamWise()
-    {
-        return view('super_admin.exam_timetable.add_schedule');
-    }
-    public function markEntry()
-    {
-        return view('super_admin.exam_marks.mark_entry');
-    }
-    public function byclasss()
-    {
-        return view('super_admin.exam_results.byclass');
-    }
-    public function bysubject()
-    {
-        return view('super_admin.exam_results.bysubject');
-    }
-    public function overall()
-    {
-        return view('super_admin.exam_results.overall');
-    }
-    public function bystudent()
-    {
-        return view('super_admin.exam_results.bystudent');
-    }
-
-    public function evaluationReport()
-    {
-        return view('super_admin.homework.evaluation_report');
-    }
-
-    public function homeworkEdit()
-    {
-        return view('super_admin.homework.edit');
-    }
-    public function gradeRange()
-    {
-        return view('super_admin.exam_marks.grades');
+        ];
+        return view(
+            'super_admin.branch_url_permission.index',
+            [
+                'data' => $data,
+            ]
+        );
     }
 
     // static page controller end
