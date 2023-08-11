@@ -6,6 +6,9 @@ $(function () {
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
+        onSelect: function() {
+            validateDates();
+        }
         
     });
     $("#to_ldate").datepicker({
@@ -15,8 +18,30 @@ $(function () {
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
+        onSelect: function() {
+            validateDates();
+        }
         
-    }); 
+    });
+    var fromDateInput = $("#frm_ldate");
+    var toDateInput = $("#to_ldate");
+    function validateDates() {
+        
+        var frm_ldate = fromDateInput.datepicker("getDate");
+        var to_ldate = toDateInput.datepicker("getDate");
+        
+        if (frm_ldate > to_ldate) {
+            var frm= $("#frm_ldate").val();
+            toastr.error("To date should be greater than from Date");
+            $("#to_ldate").val(frm);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     const date = new Date();
 
     let day = ("0" + date.getDate()).slice(-2);
@@ -26,18 +51,21 @@ $(function () {
     //console.log(today);
     $('#frm_ldate').val(today);
     $('#to_ldate').val(today);
-
+    
     var role_id = $('#role_id').val();
     var frm_ldate = $('#frm_ldate').val();
     var to_ldate = $('#to_ldate').val();
     loghistoryTable(role_id,frm_ldate,to_ldate);
+    
 }); 
 $('#LogHistoryFilter').on('submit', function (e) {
-    e.preventDefault();    
+    e.preventDefault();  
+    
     var role_id = $('#role_id').val();
     var frm_ldate = $('#frm_ldate').val();
     var to_ldate = $('#to_ldate').val();
     loghistoryTable(role_id,frm_ldate,to_ldate);
+    
 }); 
   // get all Login History table
 function loghistoryTable(role_id,frm_ldate,to_ldate) 
