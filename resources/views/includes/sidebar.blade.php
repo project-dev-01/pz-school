@@ -1117,6 +1117,38 @@
                         </ul>
                     </div>
                 </li>
+                <li class="{{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'menuitem-active' : '' }}">
+                    <a href="#sidebaractivity" data-toggle="collapse">
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1194)">
+                                <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect y="0.80957" width="11.2" height="24" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1194">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <span>{{ __('messages.activty_monitoring') }}</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse {{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'show' : '' }}" id="sidebaractivity">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.logactivity')}}" class="nav-link {{ (request()->is('admin/login_activity*')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.login_activity') }}</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="{{ route('admin.faq.index')}}" class="nav-link {{ (request()->is('admin/settings*')) ? 'active' : '' }}">
                         <!-- <i class="fas fa-question"></i> -->

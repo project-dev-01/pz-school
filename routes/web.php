@@ -819,6 +819,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('holidays/holidays-details', [AdminController::class, 'getHolidaysDetails'])->name('admin.holidays.details');
         Route::post('holidays/update', [AdminController::class, 'updateHolidays'])->name('admin.holidays.update');
         Route::post('holidays/delete', [AdminController::class, 'deleteHolidays'])->name('admin.holidays.delete');
+        //Activity Monitoring
+        Route::get('log_activity', [AdminController::class, 'logactivity'])->name('admin.logactivity');
+        Route::get('log_activity/list', [AdminController::class, 'login_activity'])->name('admin.login_activity.list');
+
     });
 });
 // admin routes end

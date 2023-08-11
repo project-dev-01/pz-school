@@ -949,6 +949,8 @@ return [
     "even_the_greatest" => "Even the greatest were beginners",
     "no_records_found" => "No Records Found",
     "super_admin" => "Super admin",
+    "super admin" => "Super admin",
+    
     "enter_branch_name" => "Enter Branch Name",
     "enter_school_code" => "Enter School Code",
     "enter_currency" => "Enter Currency",
@@ -1412,5 +1414,12 @@ return [
     "pass_fail" => "Pass/Fail",
     "top_ranking" => "Top Ranking",
     "bottom_ranking" => "Bottom Ranking",
-    "branch_url_permission" => "Branch Url Permission"
+    "branch_url_permission" => "Branch Url Permission",
+    "activty_monitoring" => "Activity Monitoring",
+    "login_activity" => "Login Activity",
+    "ip_address" => "IP Address",
+    "device" => "Device",
+    "os" => "OS",
+    "browser" => "Browser",
+    "spend" => "Spending TIme"
 ];

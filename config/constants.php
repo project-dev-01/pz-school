@@ -833,8 +833,11 @@ return [
         'holidays_list' => $url.'/holidays/list',
         'holidays_details' => $url.'/holidays/holidays-details',
         'holidays_update' => $url.'/holidays/update',
-        'all_student_ranking' => $url.'/all_student/ranking'
+        'all_student_ranking' => $url.'/all_student/ranking',
         
+         // Login Activity url
+
+        'login_activity_list' => $url.'/login_list'
         
       ]
 

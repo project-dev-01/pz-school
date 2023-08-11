@@ -1413,6 +1413,13 @@ return [
     "pass_fail" => "Pass/Fail",
     "top_ranking" => "Top",
     "bottom_ranking" => "Bottom",
-    "branch_url_permission" => "Branch Url Permission"
+    "branch_url_permission" => "Branch Url Permission",
+    "activty_monitoring" => "Activity Monitoring",
+    "login_activity" => "Login Activity",
+    "ip_address" => "IP Address",
+    "device" => "Device",
+    "os" => "OS",
+    "browser" => "Browser",
+    "spend" => "Spending TIme"
 
 ];

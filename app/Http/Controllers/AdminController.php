@@ -7620,7 +7620,39 @@ class AdminController extends Controller
 
         return $response;
     }
-    
+     // index FeesGroup
+    public function logactivity()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+
+        $data = [
+            'status' => "All"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        //dd($roles);
+        return view(
+            'admin.activity_monitoring.index',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [],                
+            ]
+        );
+    }
+    public function login_activity(Request $request)
+    {
+        $data = [
+            'branch_id' => session()->get('branch_id'),
+            'role_id' => $request->role_id,
+            'frm_ldate' => date('Y-m-d',strtotime($request->frm_ldate)),
+            'to_ldate' => date('Y-m-d',strtotime($request->to_ldate))
+        ];
+        $activity_list = Helper::GETMethodWithData(config('constants.api.login_activity_list'), $data);
+        //$data = isset($response['data']) ? $response['data'] : [];
+        return $activity_list;
+        /*return view('admin.activity_monitoring.index', [
+            'activity_list' => !empty($activity_list['data']) ? $activity_list['data'] : []
+        ]);*/
+        
+    }
     // start Check In Out Time
     public function checkInOutTime()
     {

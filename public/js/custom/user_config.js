@@ -5,7 +5,7 @@ var browserName  = navigator.appName;
 var fullVersion  = ''+parseFloat(navigator.appVersion); 
 var majorVersion = parseInt(navigator.appVersion,10);
 var nameOffset,verOffset,ix;
-var device = (window.orientation > 1)?'mobile':'System';
+var device = (window.orientation > 1)?'Mobile':'PC';
 
 // In Opera, the true version is after "OPR" or after "Version"
 if ((verOffset=nAgt.indexOf("OPR"))!=-1) {
