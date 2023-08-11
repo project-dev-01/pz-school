@@ -307,6 +307,8 @@ $(function () {
                 },
             ]
         });
+        
+        $("#overlay").fadeOut(300);
     }
 
     function setLocalStorageForExamResultByStudentRank(classObj) {
