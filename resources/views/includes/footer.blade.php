@@ -107,6 +107,7 @@
 
 
     var select_employee = "{{ __('messages.select_employee') }}";
+    var select_bank = "{{ __('messages.select_bank') }}";
     var all_lang = "{{ __('messages.all') }}";
     var remove = "{{ __('messages.remove') }}";
     var drag_and_drop_to_replace = "{{ __('messages.drag_and_drop_to_replace') }}";
@@ -406,7 +407,7 @@
                     // console.log(err)
                 }
             });
-        }, 2000);
+        }, 10000);
 		 var sTimeOutq = setInterval(function() {
           
      
@@ -426,7 +427,7 @@
                     // console.log(err)
                 }
             });
-        }, 2000);
+        }, 10000);
         getNotifications();
 
         function getNotifications() {

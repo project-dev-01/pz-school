@@ -77,6 +77,7 @@
                             </li>
                         </ul>
                         <div class="card-body">
+                            <a href="{{ route('teacher.student_leave.list')}}">
                             <div class="row">
                                 <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                     <div class="widget-rounded-circle card-box">
@@ -151,7 +152,7 @@
                                     </div> <!-- end widget-rounded-circle-->
                                 </div> <!-- end col-->
                             </div> <!-- end row -->
-
+                        </a>
 
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->

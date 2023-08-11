@@ -1421,5 +1421,22 @@ return [
     "device" => "Device",
     "os" => "OS",
     "browser" => "Browser",
-    "spend" => "Spending TIme"
+    "spend" => "Spending TIme",
+    "clear_local_storage" => "Clear Local Storage",
+    "clear" => "Clear",
+    "bank_account" => "Bank Account",
+    "add_bank_account" => "Add Bank Account",
+    "edit_bank_account" => "Edit Bank Account",
+    "delete_this_bank_account" => "You want to Delete this Bank Account",
+    "active_this_bank_account" => "You want to Active this Bank Account",
+    "inactive_this_bank_account" => "You want to Inactive this Bank Account",
+    "yes" => "Yes",
+    "routing_number" => "Routing Number",
+    "swift_code" => "Swift Code",
+    "bank" => "Bank",
+    "add_bank" => "Add Bank",
+    "edit_bank" => "Edit Bank",
+    "select_bank" => "Select Bank",
+    "delete_this_bank" => "You want to Delete this Bank",
+    
 ];

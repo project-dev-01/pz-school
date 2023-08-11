@@ -7791,4 +7791,203 @@ class AdminController extends Controller
             })
             ->make(true);
     }
+
+    // index BankAccount 
+    public function bankAccount()
+    {
+        return view('admin.bank_account.index');
+    }
+    // create Event 
+    public function createBankAccount()
+    {
+        $data = [
+            'country' => "Malaysia",
+        ];
+        
+        $bank = Helper::GETMethodWithData(config('constants.api.bank_list'), $data);
+        return view(
+            'admin.bank_account.add',
+            [
+                'bank' => isset($bank['data']) ? $bank['data'] : [],
+            ]
+        );
+    }
+    // edit Event 
+    public function editBankAccount($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $bank_account = Helper::PostMethod(config('constants.api.bank_account_details'), $data);
+        $country = [
+            'country' => isset($bank_account['data']['country']) ? $bank_account['data']['country'] : null
+        ];
+        $bank = Helper::GETMethodWithData(config('constants.api.bank_list'), $country);
+        return view(
+            'admin.bank_account.edit',
+            [
+                'bank' => isset($bank['data']) ? $bank['data'] : [],
+                'bank_account' => isset($bank_account['data']) ? $bank_account['data'] : [],
+            ]
+        );
+    }
+    public function addBankAccount(Request $request)
+    {
+        $data = [
+            'bank_name' => $request->bank_name,
+            'holder_name' => $request->holder_name,
+            'bank_branch' => $request->bank_branch,
+            'bank_address' => $request->bank_address,
+            'bank_address_2' => $request->bank_address_2,
+            'ifsc_code' => $request->ifsc_code,
+            'city' => $request->city,
+            'state' => $request->state,
+            'post_code' => $request->post_code,
+            'country' => $request->country,
+            'routing_number' => $request->routing_number,
+            'swift_code' => $request->swift_code,
+            'email' => $request->email,
+            'account_no' => $request->account_no,
+            'status' => $request->status,
+            'created_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_account_add'), $data);
+        // dd($response);
+        return $response;
+    }
+
+    public function getBankAccountList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.bank_account_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+                $status = "";
+                if($row['status'] == "1"){
+                    $status = "checked";
+                }
+                
+                // return '<input type="checkbox" ' . $status . ' data-id="' . $row['id'] . '"  id="bankAccountStatusBtn">';
+                return '<div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input bankAccountStatusBtn"  data-id="' . $row['id'] . '" id="bankAccountStatusBtn' . $row['id'] . '" '.$status.'>
+                            <label class="custom-control-label" for="bankAccountStatusBtn' . $row['id'] . '"></label>
+                        </div>';
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                            <a href="' . route('admin.bank_account.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBankAccountBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['status','actions'])
+            ->make(true);
+    }
+    // Update bank_account 
+    public function updateBankAccount(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'bank_name' => $request->bank_name,
+            'holder_name' => $request->holder_name,
+            'bank_branch' => $request->bank_branch,
+            'bank_address' => $request->bank_address,
+            'bank_address_2' => $request->bank_address_2,
+            'ifsc_code' => $request->ifsc_code,
+            'city' => $request->city,
+            'state' => $request->state,
+            'post_code' => $request->post_code,
+            'country' => $request->country,
+            'routing_number' => $request->routing_number,
+            'swift_code' => $request->swift_code,
+            'email' => $request->email,
+            'account_no' => $request->account_no,
+            'status' => $request->status,
+            'updated_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_account_update'), $data);
+        return $response;
+    }
+    // DELETE bank_account 
+    public function deleteBankAccount(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'deleted_by' => session()->get('ref_user_id')
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.bank_account_delete'), $data);
+        return $response;
+    }
+
+    // bank Account Status
+    public function bankAccountStatus(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'status' => $request->status
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_account_status'), $data);
+        return $response;
+    }
+    // index bank
+    public function bank()
+    {
+        return view('admin.bank.index');
+    }
+
+    public function addBank(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'country' => $request->country
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_add'), $data);
+        return $response;
+    }
+    public function getBankList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.bank_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editBankBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBankBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getBankDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_details'), $data);
+        return $response;
+    }
+    public function updateBank(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'country' => $request->country
+        ];
+        $response = Helper::PostMethod(config('constants.api.bank_update'), $data);
+        return $response;
+    }
+    // DELETE Bank Details
+    public function deleteBank(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.bank_delete'), $data);
+        return $response;
+    }
 }

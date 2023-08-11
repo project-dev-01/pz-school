@@ -822,7 +822,26 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         //Activity Monitoring
         Route::get('log_activity', [AdminController::class, 'logactivity'])->name('admin.logactivity');
         Route::get('log_activity/list', [AdminController::class, 'login_activity'])->name('admin.login_activity.list');
-
+        
+        Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('admin.clear_local_storage');
+        
+        // BankAccount routes
+        Route::get('bank_account/index', [AdminController::class, 'bankAccount'])->name('admin.bank_account');
+        Route::get('bank_account/create', [AdminController::class, 'createBankAccount'])->name('admin.bank_account.create');
+        Route::get('bank_account/edit/{id}', [AdminController::class, 'editBankAccount'])->name('admin.bank_account.edit');
+        Route::get('bank_account/list', [AdminController::class, 'getBankAccountList'])->name('admin.bank_account.list');
+        Route::post('bank_account/add', [AdminController::class, 'addBankAccount'])->name('admin.bank_account.add');
+        Route::post('bank_account/update', [AdminController::class, 'updateBankAccount'])->name('admin.bank_account.update');
+        Route::post('bank_account/delete', [AdminController::class, 'deleteBankAccount'])->name('admin.bank_account.delete');
+        Route::post('bank_account/status', [AdminController::class, 'bankAccountStatus'])->name('admin.bank_account.status');
+        
+        // Bank routes
+        Route::get('bank/index', [AdminController::class, 'bank'])->name('admin.bank');
+        Route::post('bank/add', [AdminController::class, 'addBank'])->name('admin.bank.add');
+        Route::get('bank/list', [AdminController::class, 'getBankList'])->name('admin.bank.list');
+        Route::post('bank/bank-details', [AdminController::class, 'getBankDetails'])->name('admin.bank.details');
+        Route::post('bank/update', [AdminController::class, 'updateBank'])->name('admin.bank.update');
+        Route::post('bank/delete', [AdminController::class, 'deleteBank'])->name('admin.bank.delete');
     });
 });
 // admin routes end
@@ -1042,6 +1061,8 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('staff.attendance.employee_pdf');
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'staffClassroomSetCookie'])->name('staff.classroom.setcookie');
+        
+        Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('staff.clear_local_storage');
     });
 });
 // TEACHER CONTROLLER START
@@ -1188,6 +1209,8 @@ Route::group(['prefix' => 'teacher'], function () {
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('teacher.classroom.setcookie');
         Route::get('analytic/setcookie', [CommonController::class, 'teacherAnalyticSetCookie'])->name('teacher.analytic.setcookie');
+        
+        Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('teacher.clear_local_storage');
     });
 });
 // TEACHER CONTROLLER END
@@ -1278,6 +1301,8 @@ Route::group(['prefix' => 'parent'], function () {
         //student report
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf_parent'])->name('parent.attendance.student_pdf');
         Route::post('attendance/student_excel', [ParentController::class, 'studentAttendanceExcel'])->name('parent.attendance.student_excel');
+        
+        Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('parent.clear_local_storage');
     });
 });
 
@@ -1339,5 +1364,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
 
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
+        
+        Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('student.clear_local_storage');
     });
 });

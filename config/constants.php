@@ -837,7 +837,22 @@ return [
         
          // Login Activity url
 
-        'login_activity_list' => $url.'/login_list'
+        'login_activity_list' => $url.'/login_list',
+        
+        // bank_account url
+        'bank_account_add' => $url.'/bank_account/add',
+        'bank_account_list' => $url.'/bank_account/list',
+        'bank_account_details' => $url.'/bank_account/bank_account-details',
+        'bank_account_update' => $url.'/bank_account/update',
+        'bank_account_delete' => $url.'/bank_account/delete',
+        'bank_account_status' => $url.'/bank_account/status',
+
+        // bank url
+        'bank_add' => $url.'/bank/add',
+        'bank_list' => $url.'/bank/list',
+        'bank_details' => $url.'/bank/bank-details',
+        'bank_update' => $url.'/bank/update',
+        'bank_delete' => $url.'/bank/delete',
         
       ]
 
