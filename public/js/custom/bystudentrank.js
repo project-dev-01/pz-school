@@ -133,6 +133,7 @@ $(function () {
     });
     function examResultByStudentRank(formData){
 
+        console.log('13')
         $("#overlay").fadeIn(300);
         $("#studentRank").show("slow");
         

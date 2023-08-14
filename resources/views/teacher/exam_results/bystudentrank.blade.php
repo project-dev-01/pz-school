@@ -142,7 +142,7 @@
     </div>
     <!-- end row -->
 
-    <div class="row" id="studentRank" >
+    <div class="row" id="studentRank" style="display:none">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >

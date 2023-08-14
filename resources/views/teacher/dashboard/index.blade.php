@@ -720,12 +720,13 @@
                                 <th>#</th>
                                 <th>{{ __('messages.subject') }}</th>
                                 <th>{{ __('messages.marks') }}</th>
-                                <th>{{ __('messages.marks') }}</th>
                                 <th>{{ __('messages.subject_position') }}</th>
                             </tr>
                         </thead>
                         <tbody id="student_rank_body">
-
+                            <tr>
+                                <td class="text-center" colspan="5">{{ __('messages.no_data_available') }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1026,7 +1027,9 @@
                             </tr>
                         </thead>
                         <tbody id="top_student_table">
-
+                            <tr>
+                                <td class="text-center" colspan="5">{{ __('messages.no_data_available') }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1122,7 +1125,9 @@
                             </tr>
                         </thead>
                         <tbody id="bottom_student_table">
-
+                            <tr>
+                                <td class="text-center" colspan="5">{{ __('messages.no_data_available') }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

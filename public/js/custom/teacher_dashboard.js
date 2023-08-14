@@ -74,6 +74,7 @@ $(function () {
             $('#class_rank').empty();
             $('#class_total').empty();
             $('#student_rank_body').empty();
+            $("#student_rank_body").append('<tr><td class="text-center" colspan="4">' + no_data_available + '</td></tr>');
         }
 
     });
@@ -304,14 +305,20 @@ $(function () {
                 subject_id: subject_id,
                 academic_session_id: academic_session_id
             }, function (res) {
-                console.log('124', res)
                 if (res.code == 200) {
+                    $('#' + type + '_student_table').empty();
                     var datasetnew = res.data;
-                    topstudent(datasetnew, type);
+                    if(datasetnew.length == 0){
+                        $('#' + type + '_student_table').append('<tr><td class="text-center" colspan="5">' + no_data_available + '</td></tr>');
+                    }else{
+                        topstudent(datasetnew, type);
+                    }
                 }
             }, 'json');
         } else {
             $('#' + type + '_student_table').empty();
+            $('#' + type + '_student_table').append('<tr><td  class="text-center" colspan="5">' + no_data_available + '</td></tr>');
+                    
         }
 
     });
@@ -383,29 +390,35 @@ $(function () {
                 type: type,
                 subject_id: subject_id,
                 academic_session_id: academic_session_id
-            }, function (res) {
-                console.log('124', res)
-                if (res.code == 200) {
-                    var datasetnew = res.data;
-                    topstudent(datasetnew, type);
+            }, function (response) {
+                
+                if (response.code == 200) {
+                    $('#' + type + '_student_table').empty();
+                    var datasetnew = response.data;
+                    if(datasetnew.length == 0){
+                        $('#' + type + '_student_table').append('<tr><td  class="text-center" colspan="5">' + no_data_available + '</td></tr>');
+                    }else{
+                        topstudent(datasetnew, type);
+                    }
                 }
+
             }, 'json');
         } else {
             $('#' + type + '_student_table').empty();
+            $('#' + type + '_student_table').append('<tr><td  class="text-center" colspan="5">' + no_data_available + '</td></tr>');
+                    
         }
 
     });
 
     function topstudent(datasetnew, type) {
-        $('#' + type + '_student_table').empty();
 
         var sno = 0;
         var byStudent = "";
         // var students = datasetnew.details;
         var students = datasetnew;
-        if (students.length > 0) {
-            students.forEach(function (res) {
-                sno++;
+        $.each(students, function (key, res) {
+            sno++;
                 if (sno < 11) {
                     byStudent += '<tr><td>' + sno + '</td>';
                     byStudent += '<td>' + res.student_name + '</td>';
@@ -414,15 +427,9 @@ $(function () {
                     byStudent += '<td>' + res.rank + '</td>';
                     byStudent += '</tr>';
                 }
-            });
-        } else {
-            byStudent += '<tr><td colspan="5">' + no_data_available + '</td></tr>';
-        }
+        });
         $('#' + type + '_student_table').append(byStudent);
     }
-
-
-
 
     var radar;
     var radarSubjectScore;
