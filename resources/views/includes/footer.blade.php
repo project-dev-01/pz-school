@@ -127,6 +127,7 @@
     var month = "{{ __('messages.month') }}";
     var today = "{{ __('messages.today') }}";
     var week = "{{ __('messages.week') }}";
+    var work_week = "{{ __('messages.work_week') }}";
     var day = "{{ __('messages.day') }}";
     var list = "{{ __('messages.list') }}";
     var locale = "{{ Session::get('locale') }}";

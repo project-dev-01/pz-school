@@ -78,81 +78,81 @@
                         </ul>
                         <div class="card-body">
                             <a href="{{ route('teacher.student_leave.list')}}">
-                            <div class="row">
-                                <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
-                                    <div class="widget-rounded-circle card-box">
-                                        <div class="row">
-                                            <p class="mb-1 text-truncate" style="width: 100%;">Total Leaves</p>
-                                            <div class="col-6">
-                                                <div class="avatar-lg rounded-circle bg-soft-info border-info border">
-                                                    <i class="mdi mdi-text-box-check-outline font-22 avatar-title text-info"></i>
+                                <div class="row">
+                                    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
+                                        <div class="widget-rounded-circle card-box">
+                                            <div class="row">
+                                                <p class="mb-1 text-truncate" style="width: 100%;">Total Leaves</p>
+                                                <div class="col-6">
+                                                    <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                                        <i class="mdi mdi-text-box-check-outline font-22 avatar-title text-info"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-right">
-                                                    <h3 class="mt-1"><span data-plugin="counterup">{{$total_count}}</span></h3>
+                                                <div class="col-6">
+                                                    <div class="text-right">
+                                                        <h3 class="mt-1"><span data-plugin="counterup">{{$total_count}}</span></h3>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end row-->
-                                    </div> <!-- end widget-rounded-circle-->
-                                </div> <!-- end col-->
-                                <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
-                                    <div class="widget-rounded-circle card-box">
-                                        <div class="row">
-                                            <p class="mb-1 text-truncate" style="width: 100%;">Leaves Approved</p>
-                                            <div class="col-6">
-                                                <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                                    <i class="mdi mdi-application-import font-22 avatar-title text-success"></i>
+                                            </div> <!-- end row-->
+                                        </div> <!-- end widget-rounded-circle-->
+                                    </div> <!-- end col-->
+                                    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
+                                        <div class="widget-rounded-circle card-box">
+                                            <div class="row">
+                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Approved</p>
+                                                <div class="col-6">
+                                                    <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                                                        <i class="mdi mdi-application-import font-22 avatar-title text-success"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-right">
-                                                    <h3 class="mt-1"><span data-plugin="counterup">{{$approve_count}}</span></h3>
+                                                <div class="col-6">
+                                                    <div class="text-right">
+                                                        <h3 class="mt-1"><span data-plugin="counterup">{{$approve_count}}</span></h3>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end row-->
-                                    </div> <!-- end widget-rounded-circle-->
-                                </div> <!-- end col-->
-                                <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
-                                    <div class="widget-rounded-circle card-box">
-                                        <div class="row">
-                                            <p class="mb-1 text-truncate" style="width: 100%;">Leaves Rejected</p>
-                                            <div class="col-6">
-                                                <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
-                                                    <i class="mdi mdi-account-cash-outline font-22 avatar-title text-pink"></i>
+                                            </div> <!-- end row-->
+                                        </div> <!-- end widget-rounded-circle-->
+                                    </div> <!-- end col-->
+                                    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
+                                        <div class="widget-rounded-circle card-box">
+                                            <div class="row">
+                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Rejected</p>
+                                                <div class="col-6">
+                                                    <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
+                                                        <i class="mdi mdi-account-cash-outline font-22 avatar-title text-pink"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-right">
-                                                    <h3 class="mt-1"><span data-plugin="counterup">{{$reject_count}}</span></h3>
+                                                <div class="col-6">
+                                                    <div class="text-right">
+                                                        <h3 class="mt-1"><span data-plugin="counterup">{{$reject_count}}</span></h3>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end row-->
-                                    </div> <!-- end widget-rounded-circle-->
-                                </div> <!-- end col-->
-                                <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
-                                    <div class="widget-rounded-circle card-box">
-                                        <div class="row">
-                                            <p class="mb-1 text-truncate" style="width: 100%;">Leaves Pending</p>
-                                            <div class="col-6">
-                                                <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
-                                                    <i class="mdi mdi-timetable font-22 avatar-title text-warning"></i>
+                                            </div> <!-- end row-->
+                                        </div> <!-- end widget-rounded-circle-->
+                                    </div> <!-- end col-->
+                                    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
+                                        <div class="widget-rounded-circle card-box">
+                                            <div class="row">
+                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Pending</p>
+                                                <div class="col-6">
+                                                    <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                                        <i class="mdi mdi-timetable font-22 avatar-title text-warning"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="text-right">
-                                                    <h3 class="mt-1"><span data-plugin="counterup">{{$pending_count}}</span></h3>
+                                                <div class="col-6">
+                                                    <div class="text-right">
+                                                        <h3 class="mt-1"><span data-plugin="counterup">{{$pending_count}}</span></h3>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div> <!-- end row-->
-                                    </div> <!-- end widget-rounded-circle-->
-                                </div> <!-- end col-->
-                            </div> <!-- end row -->
-                        </a>
+                                            </div> <!-- end row-->
+                                        </div> <!-- end widget-rounded-circle-->
+                                    </div> <!-- end col-->
+                                </div> <!-- end row -->
+                            </a>
 
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
@@ -1187,6 +1187,7 @@
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_teacher') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    var hiddenWks = "{{ $hiddenWeekends }}";
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
@@ -1217,6 +1218,8 @@
     var header_txt = "{{ __('messages.assign') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    // work week
+    var getWorkWeekUrl = "{{ config('constants.api.work_week') }}";
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('public/js/custom/teacher_calendor.js') }}"></script> -->

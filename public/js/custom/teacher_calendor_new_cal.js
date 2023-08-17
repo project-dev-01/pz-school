@@ -1,10 +1,13 @@
 $(document).ready(function () {
+    var dynamicEventSource = [];
     var date1 = $("#taskfromDate").flatpickr({
         dateFormat: "Y-m-d",
         onChange: function (selectedDates, dateStr, instance) {
             date2.set('minDate', dateStr)
         }
     });
+    var myString = hiddenWks;
+    var workWeekArray = myString.split(",").map(Number);
 
     var date2 = $("#taskToDate").flatpickr({
         dateFormat: "Y-m-d",
@@ -127,18 +130,19 @@ $(document).ready(function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
         slotDuration: "00:30:00",
-        minTime: "06:00:00",
-        maxTime: "24:00:00",
+        // minTime: "06:00:00",
+        // maxTime: "24:00:00",
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
         buttonText: {
-            today: today,
-            month: month,
-            week: week,
-            day: day,
-            list: list,
             prev: previous,
-            next: next
+            next: next,
+            today: today,
+            dayGridMonth: month,
+            timeGridWeek: week,
+            workWeek: work_week,
+            timeGridDay: day,
+            listMonth: list
         },
         // timeformat to show
         eventTimeFormat: {
@@ -151,6 +155,7 @@ $(document).ready(function () {
         noEventsMessage: no_events_to_display_lang,
         // defaultView: window.mobilecheck() ? "timeGridWeek" : "dayGridMonth",
         defaultView: "timeGridWeek",
+        nowIndicator: true, // This will display the current time indicator line
         // displayEventTime: false,
         displayEventTime: true,
         handleWindowResize: !0,
@@ -158,7 +163,23 @@ $(document).ready(function () {
         header: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+            right: "dayGridMonth,timeGridWeek,workWeek,timeGridDay,listMonth"
+        },
+        businessHours: {
+            daysOfWeek: [1, 2, 3, 4, 5], // Monday through Friday
+            startTime: employee_check_in_time, // Business hours start time (9:00 AM)
+            endTime: employee_check_out_time,   // Business hours end time (5:00 PM)
+        },
+        views: {
+            timeGridWeek: { // Basic week view (Sunday to Saturday)
+                type: 'timeGridWeek'
+            },
+            workWeek: { // Work week view (Monday to Friday)
+                type: 'timeGridWeek',
+                hiddenDays: workWeekArray // Hide Sat and Sun
+                // weekends: false, // Exclude weekends
+                // weekends: [1,2], // Exclude weekends
+            }
         },
         locale: calLang,
         // events: t,
@@ -168,6 +189,8 @@ $(document).ready(function () {
         eventLimit: 3,
         selectable: !0,
         eventSources: [
+            // added event source after fetch remove also
+            dynamicEventSource,
             // calendor events
             {
                 events: function (info, successCallback, failureCallback) {
@@ -417,7 +440,8 @@ $(document).ready(function () {
                                 className: newData.className,
                                 allDay: newData.allDay
                             };
-                            calendar.addEvent(eventObject);
+                            // calendar.addEvent(eventObject);
+                            addDynamicEvent(eventObject);
                         }
                     });
                     calendar.unselect();
@@ -436,7 +460,7 @@ $(document).ready(function () {
                 if (e.event.allDay == "1") {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-                }  else {
+                } else {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
                 }
@@ -470,13 +494,15 @@ $(document).ready(function () {
                 $("#bulk_name").html(e.event.extendedProps.name);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.time_table_id) {
+                var classStartTime = moment(e.event.start).format('hh:mm A');
+                var classEndTime = moment(e.event.end).format('hh:mm A');
                 $('#teacher-modal').modal('toggle');
                 var start = e.event.start;
                 var end = e.event.end;
                 var setCurDate = formatDate(end);
                 $("#event-title").html(e.event.title);
                 $("#subject-name").html(e.event.extendedProps.subject_name);
-                $("#timing-class").html(start.toLocaleTimeString() + ' - ' + end.toLocaleTimeString());
+                $("#timing-class").html(classStartTime + ' - ' + classEndTime);
                 // l("#timing-class").html(start + ' - ' + end),
                 $("#teacher-name").html(e.event.extendedProps.teacher_name);
                 $("#standard-name").html(e.event.extendedProps.class_name);
@@ -689,7 +715,8 @@ $(document).ready(function () {
                                 className: datas.className,
                                 allDay: datas.allDay
                             };
-                            calendar.addEvent(obj);
+                            // calendar.addEvent(obj);
+                            addDynamicEvent(obj);
                         }
                     });
                     calendar.unselect();
@@ -697,13 +724,43 @@ $(document).ready(function () {
             });
         }
     });
-
+    // Remove all events from the dynamic event source before rendering
+    calendar.on('datesRender', function (info) {
+        dynamicEventSource.events = []; // Clear the events array
+    });
+    // calendar.removeAllEvents();
     calendar.render();
+    // calendar.setOption('buttonText', {
+    //     dayGridMonth: month,
+    //     timeGridWeek: week,
+    //     workWeek: work_week,
+    //     timeGridDay: day,
+    //     listMonth: list,
+    // });
+    // An array to keep track of dynamically added events
+    // Add events dynamically
+    function addDynamicEvent(event) {
+        dynamicEventSource.events.push(event); // Push the new event into the array
+        calendar.refetchEvents(); // Redraw the events on the calendar
+    }
     // unbind model
     $("#addTasksModal").on("hidden.bs.modal", function () {
         $('#taskAdd').unbind();
     });
 
+    // // Get today's date
+    // var today = new Date();
+
+    // // Find today's events
+    // var todayEvents = calendar.getEvents().filter(event => {
+    //     return event.start.toDateString() === today.toDateString();
+    // });
+    
+    // // Display notifications
+    // if (todayEvents.length > 0) {
+    //     var eventTitles = todayEvents.map(event => event.title).join('\n');
+    //     alert('Today\'s Events:\n' + eventTitles);
+    // }
 
     function tConvert(time) {
         // Check correct time format and split into components

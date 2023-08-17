@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var myString = hiddenWks;
+    var workWeekArray = myString.split(",").map(Number);
     // check wether mobile or not
     window.mobilecheck = function () {
         var check = false;
@@ -21,7 +23,6 @@ $(document).ready(function () {
                     toastr.success(response.message);
                     calendar.refetchEvents();
                     $("#student-modal").modal("hide");
-
                 } else {
                     toastr.error(response.message);
                 }
@@ -47,13 +48,14 @@ $(document).ready(function () {
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
         buttonText: {
-            today: today,
-            month: month,
-            week: week,
-            day: day,
-            list: list,
             prev: previous,
-            next: next
+            next: next,
+            today: today,
+            dayGridMonth: month,
+            timeGridWeek: week,
+            workWeek: work_week,
+            timeGridDay: day,
+            listMonth: list
         },
         // timeformat to show
         eventTimeFormat: {
@@ -66,6 +68,7 @@ $(document).ready(function () {
         noEventsMessage: no_events_to_display_lang,
         // defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
         defaultView: "timeGridWeek",
+        nowIndicator: true, // This will display the current time indicator line
         // displayEventTime: false,
         displayEventTime: true,
         handleWindowResize: !0,
@@ -73,7 +76,23 @@ $(document).ready(function () {
         header: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+            right: "dayGridMonth,timeGridWeek,workWeek,timeGridDay,listMonth"
+        },
+        businessHours: {
+            daysOfWeek: [1, 2, 3, 4, 5], // Monday through Friday
+            startTime: employee_check_in_time, // Business hours start time (9:00 AM)
+            endTime: employee_check_out_time,   // Business hours end time (5:00 PM)
+        },
+        views: {
+            timeGridWeek: { // Basic week view (Sunday to Saturday)
+                type: 'timeGridWeek'
+            },
+            workWeek: { // Work week view (Monday to Friday)
+                type: 'timeGridWeek',
+                hiddenDays: workWeekArray // Hide Sat and Sun
+                // weekends: false, // Exclude weekends
+                // weekends: [1,2], // Exclude weekends
+            }
         },
         locale: calLang,
         // events: t,
@@ -216,7 +235,7 @@ $(document).ready(function () {
                 if (e.event.allDay == "1") {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-                }  else {
+                } else {
                     var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
                     var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
                 }
@@ -242,13 +261,15 @@ $(document).ready(function () {
                 $("#bulk_name").html(e.event.extendedProps.name);
                 $("#setCurDate").val(setCurDate);
             } else if (e.event.extendedProps.time_table_id) {
+                var classStartTime = moment(e.event.start).format('hh:mm A');
+                var classEndTime = moment(e.event.end).format('hh:mm A');
                 $('#student-modal').modal('toggle');
                 var start = e.event.start;
                 var end = e.event.end;
                 var setCurDate = formatDate(end);
                 $("#event-title").html(e.event.title);
                 $("#subject-name").html(e.event.extendedProps.subject_name);
-                $("#timing-class").html(start.toLocaleTimeString() + ' - ' + end.toLocaleTimeString());
+                $("#timing-class").html(classStartTime + ' - ' + classEndTime);
                 // l("#timing-class").html(start + ' - ' + end),
                 $("#teacher-name").html(e.event.extendedProps.teacher_name);
                 $("#standard-name").html(e.event.extendedProps.class_name);

@@ -853,7 +853,9 @@ return [
         'bank_details' => $url.'/bank/bank-details',
         'bank_update' => $url.'/bank/update',
         'bank_delete' => $url.'/bank/delete',
-        
+        'work_week' => $url.'/work/week',
+        'work_week_get' => $url.'/work/week/get',
+        'work_week_update' => $url.'/work/week/update'
       ]
 
 ];

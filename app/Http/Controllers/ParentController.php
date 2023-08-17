@@ -34,7 +34,9 @@ class ParentController extends Controller
         // session()->pull('password_changed_at');
         // $req->session()->flush();
         // $request->session()->put('children_id', "1");
-
+        $myArray = session()->get('hidden_week_ends');
+        $delimiter = ','; // Delimiter you want between array items
+        $hiddenWeekends = implode($delimiter, $myArray);
         $user_id = session()->get('user_id');
         $student_id = session()->get('student_id');
         $parent_id = session()->get('ref_user_id');
@@ -77,6 +79,7 @@ class ParentController extends Controller
                 'exams' => isset($exam_by_student['data']) ? $exam_by_student['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
+                'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
             ]
         );
     }

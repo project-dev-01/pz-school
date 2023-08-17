@@ -842,6 +842,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('bank/bank-details', [AdminController::class, 'getBankDetails'])->name('admin.bank.details');
         Route::post('bank/update', [AdminController::class, 'updateBank'])->name('admin.bank.update');
         Route::post('bank/delete', [AdminController::class, 'deleteBank'])->name('admin.bank.delete');
+        // 
+        Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
+        Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
     });
 });
 // admin routes end

@@ -547,12 +547,15 @@
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    var hiddenWks = "{{ $hiddenWeekends }}";
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";
     var calendorEditTaskCalendor = "{{ config('constants.api.calendor_edit_task_calendor') }}";
     var calendorUpdateTaskCalendor = "{{ config('constants.api.calendor_update_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
+    // work week
+    var getWorkWeekUrl = "{{ config('constants.api.work_week') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/admin_calendor_new_cal.js') }}"></script>

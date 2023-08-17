@@ -35,6 +35,9 @@ class TeacherController extends Controller
         // // session()->pull('password_changed_at');
         // session()->flush();
         // echo "ff";exit;
+        $myArray = session()->get('hidden_week_ends');
+        $delimiter = ','; // Delimiter you want between array items
+        $hiddenWeekends = implode($delimiter, $myArray);
         $user_id = session()->get('user_id');
         $teacher_id = session()->get('ref_user_id');
         $data = [
@@ -68,6 +71,7 @@ class TeacherController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
+                'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
             ]
         );
     }
@@ -1723,7 +1727,7 @@ class TeacherController extends Controller
         $timetable['session_id'] = $request->session_id;
         return $timetable;
     }
-    
+
     public function byStudentRank()
     {
         $data = [
@@ -1746,7 +1750,7 @@ class TeacherController extends Controller
             ]
         );
     }
-    
+
     public function allStudentRankList(Request $request)
     {
         $data = [
@@ -1766,7 +1770,7 @@ class TeacherController extends Controller
             ->addIndexColumn()
             ->addColumn('pass_fail', function ($row) {
                 $pass_fail = 'Pass';
-                if($row['fail'] > 0){
+                if ($row['fail'] > 0) {
                     $pass_fail = 'Fail';
                 }
                 return $pass_fail;

@@ -26,6 +26,9 @@ class StaffController extends Controller
     //
     public function index()
     {
+        $myArray = session()->get('hidden_week_ends');
+        $delimiter = ','; // Delimiter you want between array items
+        $hiddenWeekends = implode($delimiter, $myArray);
         $user_id = session()->get('user_id');
 
         $teacher_id = session()->get('ref_user_id');
@@ -50,7 +53,8 @@ class StaffController extends Controller
             [
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'greetings' => isset($greetings) ? $greetings : [],
-                'count' => $count
+                'count' => isset($count) ? $count : 0,
+                'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
             ]
         );
     }

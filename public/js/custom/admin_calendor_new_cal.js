@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var dynamicEventSource = [];
     // $("#taskdateSlot").flatpickr({
     //     // enableTime: !0,
     //     enableTime: true,
@@ -17,6 +18,8 @@ $(document).ready(function () {
             date2.set('minDate', dateStr)
         }
     });
+    var myString = hiddenWks;
+    var workWeekArray = myString.split(",").map(Number);
 
     var date2 = $("#taskToDate").flatpickr({
         dateFormat: "Y-m-d",
@@ -95,14 +98,24 @@ $(document).ready(function () {
         // maxTime: "24:00:00",
         themeSystem: "bootstrap",
         bootstrapFontAwesome: !1,
+        // buttonText: {
+        //     today: today,
+        //     month: month,
+        //     week: week,
+        //     day: day,
+        //     list: list,
+        //     prev: previous,
+        //     next: next
+        // },
         buttonText: {
-            today: today,
-            month: month,
-            week: week,
-            day: day,
-            list: list,
             prev: previous,
-            next: next
+            next: next,
+            today: today,
+            dayGridMonth: month,
+            timeGridWeek: week,
+            workWeek: work_week,
+            timeGridDay: day,
+            listMonth: list
         },
         // timeformat to show
         eventTimeFormat: {
@@ -114,13 +127,30 @@ $(document).ready(function () {
         allDayText: allday_lang,
         noEventsMessage: no_events_to_display_lang,
         defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
+        nowIndicator: true, // This will display the current time indicator line
         displayEventTime: true,
         handleWindowResize: !0,
         // height: (window).height() - 200,
         header: {
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+            right: "dayGridMonth,timeGridWeek,workWeek,timeGridDay,listMonth"
+        },
+        businessHours: {
+            daysOfWeek: [1, 2, 3, 4, 5], // Monday through Friday
+            startTime: employee_check_in_time, // Business hours start time (9:00 AM)
+            endTime: employee_check_out_time,   // Business hours end time (5:00 PM)
+        },
+        views: {
+            timeGridWeek: { // Basic week view (Sunday to Saturday)
+                type: 'timeGridWeek'
+            },
+            workWeek: { // Work week view (Monday to Friday)
+                type: 'timeGridWeek',
+                hiddenDays: workWeekArray // Hide Sat and Sun
+                // weekends: false, // Exclude weekends
+                // weekends: [1,2], // Exclude weekends
+            }
         },
         locale: calLang,
         // events: t,
@@ -131,6 +161,8 @@ $(document).ready(function () {
         eventLimit: 3, // set limit to show
         selectable: !0,
         eventSources: [
+            // added event source after fetch remove also
+            dynamicEventSource,
             // calendor events
             {
                 events: function (info, successCallback, failureCallback) {
@@ -356,7 +388,8 @@ $(document).ready(function () {
                                 className: newData.className,
                                 allDay: newData.allDay
                             };
-                            calendar.addEvent(eventObject);
+                            // calendar.addEvent(eventObject);
+                            addDynamicEvent(eventObject);
                         }
                     });
                     calendar.unselect();
@@ -610,7 +643,8 @@ $(document).ready(function () {
                                 className: datas.className,
                                 allDay: datas.allDay
                             };
-                            calendar.addEvent(obj);
+                            // calendar.addEvent(obj);
+                            addDynamicEvent(obj);
                         }
                     });
                     calendar.unselect();
@@ -618,8 +652,24 @@ $(document).ready(function () {
             });
         }
     });
-
+    // Remove all events from the dynamic event source before rendering
+    calendar.on('datesRender', function (info) {
+        dynamicEventSource.events = []; // Clear the events array
+    });
     calendar.render();
+    // calendar.setOption('buttonText', {
+    //     dayGridMonth: month,
+    //     timeGridWeek: week,
+    //     workWeek: work_week,
+    //     timeGridDay: day,
+    //     listMonth: list,
+    // });
+    // An array to keep track of dynamically added events
+    // Add events dynamically
+    function addDynamicEvent(event) {
+        dynamicEventSource.events.push(event); // Push the new event into the array
+        calendar.refetchEvents(); // Redraw the events on the calendar
+    }
     // unbind model
     $("#addTasksModal").on("hidden.bs.modal", function () {
         $('#taskAdd').unbind();

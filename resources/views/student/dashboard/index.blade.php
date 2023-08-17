@@ -852,6 +852,7 @@
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    var hiddenWks = "{{ $hiddenWeekends }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_student') }}";
     // all exam subject scores
     var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";

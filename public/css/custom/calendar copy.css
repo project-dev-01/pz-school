@@ -1,0 +1,110 @@
+/*start calender css*/
+
+.fc-list-item-time,
+.fc-list-item-title {
+    color: #852d2d;
+}
+
+/* Customize the fc-today highlight color */
+/* .fc-today {
+    background-color: rgb(115, 96, 201);
+    font-weight: bold;
+    color: black;
+} */
+/* Set the background color of the FullCalendar container */
+/* admin and staff cal css start*/
+#new_calendor .fc-day {
+    background-color: #f0f0f0;
+}
+
+/* Customize the fc-today highlight background color */
+#new_calendor .fc-today {
+    background-color: #fff;
+    border-color: #ADD8E6;
+    /* Change this to your preferred color */
+}
+
+#new_calendor .fc-day-header.fc-today {
+    background-color: #E9D528;
+}
+
+/* Customize the fc-today highlight font color */
+#new_calendor .fc-today {
+    font-weight: bold;
+}
+
+/* admin and staff cal css end*/
+/* teacher and staff cal css start*/
+#teacher_calendor .fc-day {
+    background-color: #f0f0f0;
+}
+
+/* Customize the fc-today highlight background color */
+#teacher_calendor .fc-today {
+    background-color: #fff;
+    border-color: #ADD8E6;
+    /* Change this to your preferred color */
+}
+
+#teacher_calendor .fc-day-header.fc-today {
+    background-color: #E9D528;
+}
+
+/* Customize the fc-today highlight font color */
+#teacher_calendor .fc-today {
+    font-weight: bold;
+}
+/* admin and staff cal css end*/
+/* parent,student and staff cal css start*/
+#student_calendor .fc-day {
+    background-color: #f0f0f0;
+}
+
+/* Customize the fc-today highlight background color */
+#student_calendor .fc-today {
+    background-color: #fff;
+    border-color: #ADD8E6;
+    /* Change this to your preferred color */
+}
+
+#student_calendor .fc-day-header.fc-today {
+    background-color: #E9D528;
+}
+
+/* Customize the fc-today highlight font color */
+#student_calendor .fc-today {
+    font-weight: bold;
+}
+
+/* parent,student and staff cal css end*/
+
+
+/* .fc-time{
+    display: none;
+} */
+.btn-primary {
+    color: #fff;
+    border-color: #0ABAB5;
+    background-color: #6FC6CC;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #108b92;
+    border-color: #6cc7d0;
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: black;
+    background-color: #95dfd0;
+    border-color: #6cc7d0;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #108b92;
+    border-color: #6cc7d0;
+}

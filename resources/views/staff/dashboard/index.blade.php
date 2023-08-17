@@ -605,6 +605,7 @@
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
     var UserName = "{{ Session::get('name') }}";
+    var hiddenWks = "{{ $hiddenWeekends }}";
     // task all url
     var calendorAddTaskCalendor = "{{ config('constants.api.calendor_add_task_calendor') }}";
     var calendorListTaskCalendor = "{{ config('constants.api.calendor_list_task_calendor') }}";

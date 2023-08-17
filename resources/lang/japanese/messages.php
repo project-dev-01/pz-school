@@ -1439,4 +1439,5 @@ return [
     "edit_bank" => "Edit Bank",
     "select_bank" => "Select Bank",
     "delete_this_bank" => "You want to Delete this Bank",
+    "work_week" => "稼働日:",
 ];

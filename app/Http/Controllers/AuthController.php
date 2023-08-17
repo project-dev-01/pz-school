@@ -1129,12 +1129,15 @@ class AuthController extends Controller
             $req->session()->put('footer_text', $userDetails['data']['academicSession']['footer_text']);
             $req->session()->put('check_in_time', $userDetails['data']['checkInOutTime']['check_in']);
             $req->session()->put('check_out_time', $userDetails['data']['checkInOutTime']['check_out']);
+            $req->session()->put('hidden_week_ends', $userDetails['data']['hiddenWeekends']);
+            
         } else {
             $req->session()->put('academic_session_id', 0);
             $req->session()->put('language_name', "en");
             $req->session()->put('footer_text', "");
             $req->session()->put('check_in_time', null);
             $req->session()->put('check_out_time', null);
+            $req->session()->put('hidden_week_ends', []);
         }
         if (isset($userDetails['data']['StudentID'])) {
             $req->session()->put('student_id', isset($userDetails['data']['StudentID'][0]['id']) ? $userDetails['data']['StudentID'][0]['id'] : 0);

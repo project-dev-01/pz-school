@@ -317,6 +317,9 @@ class AdminController extends Controller
         // $req->session()->flush();
         // echo "ff";exit;
         // dd(session('school_name_url'));
+        $myArray = session()->get('hidden_week_ends');
+        $delimiter = ','; // Delimiter you want between array items
+        $hiddenWeekends = implode($delimiter, $myArray);
         $user_id = session()->get('user_id');
         $data = [
             'user_id' => $user_id
@@ -337,7 +340,8 @@ class AdminController extends Controller
             [
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'greetings' => isset($greetings) ? $greetings : [],
-                'count' => isset($count) ? $count : ""
+                'count' => isset($count) ? $count : 0,
+                'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
             ]
         );
     }
@@ -7988,6 +7992,27 @@ class AdminController extends Controller
         ];
 
         $response = Helper::PostMethod(config('constants.api.bank_delete'), $data);
+        return $response;
+    }
+    // work week
+    public function workWeek()
+    {
+        $workWeek = Helper::GetMethod(config('constants.api.work_week_get'));
+        return view(
+            'admin.work_week.index',
+            [                
+                'workWeek' => isset($workWeek['data']) ? $workWeek['data'] : [],                
+            ]
+        );
+    }
+    public function workWeekUpdate(Request $request)
+    {
+        // dd($request);
+        $data = [
+            'work_weeks' => $request->work_weeks
+        ];
+        $response = Helper::PostMethod(config('constants.api.work_week_update'), $data);
+        // dd($response);
         return $response;
     }
 }
