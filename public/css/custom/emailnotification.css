@@ -1,0 +1,61 @@
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
+   {
+    font-family: Open sans-serif;
+    margin: revert;
+    font-weight: 800;
+   }
+  .btn-primary-bl
+   {
+    color: #fff;
+    border-color: #0ABAB5;
+    background-color: #6FC6CC;
+    text-align: center;
+    border-radius:10px;
+   }
+   
+   body
+   {
+    font-family: Open sans-serif;
+     width: 100% !important;
+      height: 100%; 
+      line-height: 1.6em;
+       background-color: #f6f6f6; 
+       margin: 0;
+}
+.gmail-table 
+   {
+    border: solid 1px #7E7E7E;
+    margin-bottom: 10px;
+    width: 100%;
+    
+   }
+  .gmail-table thead th
+   {
+    background: #2F2F8F;
+    padding: 10px;
+    text-align: left;
+    color: #FFFFFF;
+    
+    
+
+  }
+  .gmail-table tbody td {
+    background: #FFFFFF;
+
+    padding: 10px;
+  }
+  img.birthday {
+   max-height: 38vh;
+ }
+ 
+ .text {
+   padding: 1em;
+ }
+ 
+ .muted {
+   opacity: 0.8;
+ }
+ 
+ .space {
+   height: 100px;
+ }

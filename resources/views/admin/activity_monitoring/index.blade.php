@@ -94,9 +94,24 @@
                                     </button>-->
                         </div>
                     </form>
-                    <br><hr><br>
-                    <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="logactivity-table">
+                   
+                </div> <!-- end card-box -->
+            </div> <!-- end col -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <h4 class="navv">{{ __('messages.login_activity_details') }}
+                                    <h4>
+                            </li>
+                        </ul><br>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="">
+                                        <div class="table-responsive">
+                                        <table class="table dt-responsive nowrap w-100" id="logactivity-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -115,9 +130,17 @@
                             <tbody>
                             </tbody>
                         </table>
-                    </div>
-                </div> <!-- end card-box -->
-            </div> <!-- end col -->
+                                        </div> <!-- end table-responsive-->
+
+                                    </div> <!-- end card-box -->
+                                </div> <!-- end col-->
+                            </div>
+                            <!-- end row-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
         </div>
     </div>
     <!--- end row -->

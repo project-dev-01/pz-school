@@ -18,14 +18,13 @@
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" /> -->
-    <link href="{{ asset('public/css/custom-minified/login.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('public/css/custom/parent_login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+    <link href="{{ asset('public/css/custom-minified/parent_login.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-
 </head>
 <style>
-    .teacherlogin {
+    .parentlogin {
         position: relative;
         display: flex;
         min-height: 100vh;
@@ -38,12 +37,12 @@
 
 <body class="loading auth-fluid-pages pb-0">
     <div class="auth-fluid">
-        <div class="col-md-6 ">
-            <div class="auth-fluid-right text-center teacherlogin">
+        <div class="col-md-6">
+            <div class="auth-fluid-right text-center parentlogin">
                 <div class="">
                     <!--Auth fluid left content -->
                     <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}<br>{{ __('messages.act_of_optimism') }}</p>
+                        <p class="mb-3 text-white text">{{ __('messages.a_parent’s_love_is') }}</p>
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>
@@ -104,11 +103,11 @@
 
                         <!-- form -->
                         <div class="form">
-                            <form id="LoginAuth" action="{{ route('teacher.authenticate') }}" method="post">
+                            <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
-                                <input type="hidden" name="branch_id" value="{{$branch_id}}">                                
+                                <input type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <input type="hidden" name="user_browser" id="user_browser"  value="">                                
-                                <input type="hidden" name="user_os" id="user_os" value="">                         
+                                <input type="hidden" name="user_os" id="user_os" value="">                             
                                 <input type="hidden" name="user_device" id="user_device" value="">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
@@ -129,7 +128,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input class="form-control login-email" type="email" id="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
+                                    <input class="form-control login-email" type="email" value="{{ Cookie::get('email') ? Cookie::get('email'):'' }}" id="email" name="email" required="" placeholder="{{ __('messages.enter_your_email') }}">
                                 </div>
 
                                 <div class="form-group mb-3">
@@ -177,8 +176,7 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
-    
+    <script src="{{ asset('public/js/vendor.min.js') }}"></script>    
     <script src="{{ asset('public/js/custom/user_config.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -264,6 +262,7 @@
             }
         }
     </script>
+
 </body>
 
 </html>

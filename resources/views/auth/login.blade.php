@@ -55,7 +55,7 @@
             <div class="auth-fluid-form-box">
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
-                        <div class="form-group" style="text-align:right;">
+                      <!--  <div class="form-group" style="text-align:right;">
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
@@ -65,10 +65,10 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <!-- Logo -->
-                        <div class="auth-brand text-center text-lg-left">
+                        <!--<div class="auth-brand text-center text-lg-left">
                             <div class="auth-logo">
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
@@ -78,7 +78,30 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>-->
+                        <div class="form-group" style="text-align:right;">
+                            <div class="lang-select" style="float: right; margin-top:20px;">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;">
+                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                    <!-- Logo -->
+                    <div class="auth-logo">
+                        <div class="auth-logo">
+                            <div class="auth-logo">
+                                <a href="" class="logo logo-dark">
+                                    <span class="logo-lg">
+                                        <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
                         <!-- form -->
                         <div class="form">

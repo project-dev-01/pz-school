@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <title>Email Fees Template</title>
@@ -24,13 +25,13 @@
 
   <table class="body-wrap" style="width: 100%;">
     <tr>
-      <td class="container" style="display: block !important; max-width: 600px !important;">
+      <td class="container" width="700" style="display: block !important; max-width: 700px !important;" valign="top">
         <div class="content" style="padding:20px; margin-top: 20px;">
-          <table>
-            <tr> 
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;background: #F2F2F2;">
-              <table width="100%">
-                  <tr> 
+          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+            <tr>
+              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+                <table width="100%">
+                  <tr>
                     <td>
                       <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
                       <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
@@ -75,16 +76,6 @@
                 <p>Thank you for your continued support in investing in our institution and our students.</p>
                 <p><b>Best regards,</b></p>
                 <h6>{{$school_name}}</h6>
-                <hr>
-              </td>
-            </tr>
-            <tr>
-              <td>
-             
-                      <p>For help & support, kindly use contact information below.</p>
-                      <p>schoolhelp@gmail.com</p>
-                      <p>+60 1234-2345-122</p>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" style="float:right;" alt="">
               </td>
             </tr>
            </table>
@@ -96,4 +87,5 @@
     </tr>
   </table>
 </body>
+
 </html>

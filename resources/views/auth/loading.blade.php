@@ -15,15 +15,12 @@
     <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
     <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="{{ asset('public/css/custom/login_loading.css') }}" rel="stylesheet" type="text/css" />
-    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>-->
+   <!-- <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>-->
     <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/custom/login_loading.css') }}" rel="stylesheet" type="text/css" />
 </head>
-
 <body class="loading">
-
-
     <!-- Begin page -->
 
     <div class="container">
@@ -55,7 +52,7 @@
 
     </div>
 
-    <script>
+   <script>
         var redirectUrl = document.getElementById("redirect_route").value;
         /* 
          * (class)Progress<nowValue, minValue, maxValue>
