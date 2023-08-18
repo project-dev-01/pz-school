@@ -855,7 +855,8 @@ return [
         'bank_delete' => $url.'/bank/delete',
         'work_week' => $url.'/work/week',
         'work_week_get' => $url.'/work/week/get',
-        'work_week_update' => $url.'/work/week/update'
+        'work_week_update' => $url.'/work/week/update',
+        'get_public_holidays' => $url.'/get_public_holidays',
       ]
 
 ];

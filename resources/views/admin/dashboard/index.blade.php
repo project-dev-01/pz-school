@@ -556,6 +556,7 @@
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
     // work week
     var getWorkWeekUrl = "{{ config('constants.api.work_week') }}";
+    var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/admin_calendor_new_cal.js') }}"></script>

@@ -612,6 +612,7 @@
     var calendorEditTaskCalendor = "{{ config('constants.api.calendor_edit_task_calendor') }}";
     var calendorUpdateTaskCalendor = "{{ config('constants.api.calendor_update_task_calendor') }}";
     var calendorDeleteTaskCalendor = "{{ config('constants.api.calendor_delete_task_calendor') }}";
+    var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
 </script>
 <!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
 <script src="{{ asset('public/js/custom/admin_calendor_new_cal.js') }}"></script>

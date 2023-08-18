@@ -1214,6 +1214,7 @@
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
     var examByStudent = "{{ config('constants.api.exam_by_student') }}";
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";
+    var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
     // Get PDF Footer Text
     var header_txt = "{{ __('messages.assign') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";

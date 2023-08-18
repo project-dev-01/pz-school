@@ -858,7 +858,7 @@
     var allExamSubjectScores = "{{ config('constants.api.all_exam_subject_scores') }}";
     // all exam subject ranks
     var allExamSubjectRanks = "{{ config('constants.api.all_exam_subject_ranks') }}";
-
+    var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
     var getMarksByStudent = "{{ config('constants.api.get_marks_by_student') }}";
     // exam subject mark high low avg
     var examSubjectMarkHighLowAvg = "{{ config('constants.api.exam_subject_mark_high_low_avg') }}";

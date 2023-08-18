@@ -1059,6 +1059,7 @@
     var leave_status_txt = "{{ __('messages.leave_status') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('public/js/custom/parent_dashboard.js') }}"></script>

@@ -163,6 +163,33 @@ $(document).ready(function () {
         eventSources: [
             // added event source after fetch remove also
             dynamicEventSource,
+            // get Public Holidays
+            {
+                // backgroundColor:"red",
+                // borderColor:"blue",
+                events: function (info, successCallback, failureCallback) {
+                    $.ajax({
+                        url: getPublicHolidays + '?branch_id=' + branchID,
+                        dataType: 'json',
+                        type: 'get',
+                        data: {
+                            start: info.startStr,
+                            end: info.endStr
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            'Authorization': 'Bearer ' + token
+                        },
+                        success: function (response) {
+                            hs = response.data;
+                            successCallback(hs);
+                        },
+                        error: function (err) {
+                            failureCallback(err);
+                        },
+                    });
+                }
+            },
             // calendor events
             {
                 events: function (info, successCallback, failureCallback) {
