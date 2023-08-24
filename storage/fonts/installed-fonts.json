@@ -2,5 +2,42 @@
     "ipag": {
         "normal": "ipag_normal_6ab772bd09c9f51dce42bef9a45524e4",
         "bold": "ipag_bold_0d118b28ccc759dd953e48ebf245e7cb"
+    },
+    "footable": {
+        "normal": "footable_normal_cf7137b58030b48233d3063e587ed328"
+    },
+    "summernote": {
+        "normal": "summernote_normal_58c2e85fa86bc617f0ec8b2c777bec8a"
+    },
+    "dropify": {
+        "normal": "dropify_normal_351be698eaefa4cdc4d1da625ebdfa4b"
+    },
+    "dripicons-v2": {
+        "normal": "dripicons_v2_normal_b2e59df5383aca795ea709eca2b9c511"
+    },
+    "material design icons": {
+        "normal": "material_design_icons_normal_2ca65d55903f73a81f363ce8a2453885"
+    },
+    "feather": {
+        "normal": "feather_normal_c5520d8a0a0284016abf38e78f06ebc2"
+    },
+    "themify": {
+        "normal": "themify_normal_5341d8ecc2e0e86c9fb06cdc3a4463d0"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_40cccd562c50077353b18e321954f695"
+    },
+    "font awesome 5 free": {
+        "normal": "C:\\xampp\\htdocs\\school-management-system\\storage\\fonts\/font_awesome_5_free_normal_e67a3c18c61f73075d5bb107aac9f021",
+        "900": "font_awesome_5_free_900_a2b5c187f5ac7b2c8a5240fe1106328b"
+    },
+    "simple-line-icons": {
+        "normal": "simple_line_icons_normal_a37c5d2bddd91b3004f9cc5fe0bdc3fd"
+    },
+    "weathericons": {
+        "normal": "weathericons_normal_4dd75c183789b2e649b8b98a93cf0a0b"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_7ea195556637d817f455524c7885b526"
     }
 }

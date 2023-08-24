@@ -1730,6 +1730,27 @@
                         <span> {{ __('messages.report_card') }}</span>
                     </a>
                 </li>
+                <li  class="{{ (request()->is('parent/fees*')) ? 'menuitem-active' : '' }}">
+                    <a href="{{ route('parent.fees')}}" class="nav-link ">
+                        
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1194)">
+                                <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect y="0.80957" width="11.2" height="24" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1194">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <span> {{ __('messages.fees') }} </span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('parent.events')}}" class="nav-link {{ (request()->is('parent/events*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

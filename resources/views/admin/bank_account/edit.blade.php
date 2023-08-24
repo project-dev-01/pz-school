@@ -204,7 +204,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="swift_code">{{ __('messages.swift_code') }}</label>
-                                    <input type="text" class="form-control" name="swift_code" value="{{$bank_account['swift_code']}}" id="swift_code" placeholder="{{ __('messages.shift_code') }}">
+                                    <input type="text" class="form-control" name="swift_code" value="{{$bank_account['swift_code']}}" id="swift_code" placeholder="{{ __('messages.swift_code') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">

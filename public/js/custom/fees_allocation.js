@@ -30,6 +30,7 @@ $(function () {
             var sectionID = $("#section_id").val();
             var groupID = $("#group_id").val();
 
+            console.log('c',classID)
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -48,6 +49,10 @@ $(function () {
             };
             setLocalStorageForFeesAllocation(classObj);
 
+            // set group id
+            $("#feesAllocationStudGroupID").val(groupID);
+            $("#feesAllocationStudClassID").val(classID);
+            $("#feesAllocationStudSectionID").val(sectionID);
             feesAllocationList(formData);
 
         }
@@ -67,10 +72,6 @@ $(function () {
                         var dataSetNew = response.data;
                         if (dataSetNew.length > 0) {
                             $(".feesAllocationStudHideShow").show("slow");
-                            // set group id
-                            $("#feesAllocationStudGroupID").val(groupID);
-                            $("#feesAllocationStudClassID").val(classID);
-                            $("#feesAllocationStudSectionID").val(sectionID);
                             getFeesAllocation(dataSetNew);
                         } else {
                             $(".feesAllocationStudHideShow").hide();
@@ -137,6 +138,12 @@ $(function () {
                                 }
                             }, 'json');
                         }
+                        
+                        // set group id
+                        $("#feesAllocationStudGroupID").val(groupID);
+                        $("#feesAllocationStudClassID").val(classID);
+                        $("#feesAllocationStudSectionID").val(sectionID);
+                        
                         var formData = new FormData();
                         formData.append('token', token);
                         formData.append('branch_id', branchID);

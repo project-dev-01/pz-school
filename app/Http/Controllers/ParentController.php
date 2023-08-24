@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Task;
 use DataTables;
 use Excel;
+use PDF;
 use App\Exports\ParentAttendanceExport;
 use Illuminate\Session\TokenMismatchException;
 
@@ -1136,5 +1137,219 @@ class ParentController extends Controller
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
         return $response;
+    }
+
+    public function feesIndex()
+    {
+
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
+        $fees_group_list = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
+
+        return view(
+            'parent.fees.index',
+            [
+                'payment_status' => isset($payment_status['data']) ? $payment_status['data'] : [],
+                'fees_group_list' => isset($fees_group_list['data']) ? $fees_group_list['data'] : []
+            ]
+        );
+    }
+    public function feesView($id,$group_id)
+    {
+        $data = [
+            'student_id' => $id,
+            'group_id' => $group_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
+        $banks = Helper::GetMethod(config('constants.api.bank_account_list'));
+        return view(
+            'parent.fees.view',
+            [
+                'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+                'banks' => isset($banks['data']) ? $banks['data'] : [],
+            ]
+        );
+    }
+    
+    public function feesInvoice($id,$group_id)
+    {
+        $data = [
+            'student_id' => $id,
+            'group_id' => $group_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $parentData = [
+            'parent_id' => session()->get('ref_user_id')
+        ];
+        // dd($data);
+        $parent = Helper::PostMethod(config('constants.api.parent_profile_info'), $parentData);
+        $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
+        
+        $date = date('Y-m-d');
+        return view(
+            'parent.fees.invoice',
+            [
+                'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'date' => isset($date) ? $date : "",
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'student_id' => isset($id) ? $id : "",
+                'group_id' => isset($group_id) ? $group_id : "",
+            ]
+        );
+    }
+    
+    public static function paidStatusDetails($args)
+    {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.fees_status_check'), $data);
+        // current date
+        $now = date('Y-m-d');
+        $paid_date = isset($args['paid_date']) ? $args['paid_date'] : null;
+        $current_semester = isset($response['data']['current_semester']) ? $response['data']['current_semester'] : [];
+        $all_semester = isset($response['data']['all_semester']) ? $response['data']['all_semester'] : [];
+        $year_details = isset($response['data']['year_details']) ? $response['data']['year_details'] : [];
+        $paidSts = "";
+        $labelmode = "";
+        // amount paid
+        if ((isset($args['due_date'])) && (isset($paid_date))) {
+            // paid status id 1 mean paid
+            if ($args['payment_status_id'] == 1 && isset($args['paid_date'])) {
+                $type_amount = round($args['paid_amount']);
+            } else {
+                $type_amount = round(0);
+            }
+            $balance = ($args['amount'] - $type_amount);
+            $balance = number_format($balance, 2, '.', '');
+            if ($balance == 0) {
+                $paidSts = 'paid';
+                $labelmode = 'badge-success';
+            } else {
+                $paidSts = 'unpaid';
+                $labelmode = 'badge-danger';
+            }
+        }
+        // amount unpaid or delay
+        if ((isset($args['due_date'])) && ($paid_date === null || trim($paid_date) === '')) {
+            // yearly payment
+            if ($args['payment_mode_id'] == 1) {
+                $year_start_date = isset($year_details['0']['year_start_date']) ? $year_details['0']['year_start_date'] : null;
+                $start_date = date('Y-m-d', strtotime($year_start_date));
+                $year_end_date = isset($year_details['0']['year_end_date']) ? $year_details['0']['year_end_date'] : null;
+                $end_date = date('Y-m-d', strtotime($year_end_date));
+                if ($start_date <= $now && $now <= $end_date) {
+                    // match between semester date
+                    if ($args['due_date'] <= $now) {
+                        $paidSts = 'delay';
+                        $labelmode = 'badge-secondary';
+                    } else {
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
+                    }
+                } else {
+                    // not match between semester date
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+            // semester payment
+            if ($args['payment_mode_id'] == 2) {
+
+                $id = isset($current_semester['id']) ? $current_semester['id'] : 0;
+                $key = array_search($id, array_column($all_semester, 'id'));
+                if ((!empty($key)) || ($key === 0)) {
+                    // get which semester running now
+                    $get_semester = $all_semester[$key];
+                    $sem_start_date = isset($get_semester['start_date']) ? $get_semester['start_date'] : null;
+                    $start_date = date('Y-m-d', strtotime($sem_start_date));
+                    $sem_end_date = isset($get_semester['end_date']) ? $get_semester['end_date'] : null;
+                    $end_date = date('Y-m-d', strtotime($sem_end_date));
+                    if ($start_date <= $now && $now <= $end_date) {
+                        // match between semester date
+                        if ($args['due_date'] <= $now) {
+                            $paidSts = 'delay';
+                            $labelmode = 'badge-secondary';
+                        } else {
+                            $paidSts = 'unpaid';
+                            $labelmode = 'badge-danger';
+                        }
+                    } else {
+                        // not match between semester date
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
+                    }
+                } else {
+                    // if semester finish
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+            // monthly payment
+            if ($args['payment_mode_id'] == 3) {
+                $query_date = date('Y-m-d', strtotime($args['due_date']));
+                // First day of the month.
+                $start_date = date('Y-m-01', strtotime($query_date));
+                // Last day of the month.
+                $end_date = date('Y-m-t', strtotime($query_date));
+                if ($start_date <= $now && $now <= $end_date) {
+                    // match between semester date
+                    if ($args['due_date'] <= $now) {
+                        $paidSts = 'delay';
+                        $labelmode = 'badge-secondary';
+                    } else {
+                        $paidSts = 'unpaid';
+                        $labelmode = 'badge-danger';
+                    }
+                } else {
+                    // not match between semester date
+                    $paidSts = 'unpaid';
+                    $labelmode = 'badge-danger';
+                }
+            }
+        }
+        $ret_res = [
+            'paidSts' => $paidSts,
+            'labelmode' => $labelmode
+        ];
+        return $ret_res;
+    }
+    
+    public function feesDownload($id,$group_id,Request $request)
+    {
+
+        
+        $data = [
+            'student_id' => $id,
+            'group_id' => $group_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $parentData = [
+            'parent_id' => session()->get('ref_user_id')
+        ];
+        $date = date('Y-m-d');
+        // dd($data);
+        $parent = Helper::PostMethod(config('constants.api.parent_profile_info'), $parentData);
+        $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
+        
+            // $pdf = PDF::loadView('parent.fees.download',
+            return view('parent.fees.download',
+                [
+                    'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+                    'parent' => isset($parent['data']) ? $parent['data'] : [],
+                    'date' => isset($date) ? $date : "",
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                ]);
+            // ])->setPaper('a4', 'landscape');
+            // return $pdf->download('pdfview.pdf');
+
+        // return view('parent.fees.download');
     }
 }

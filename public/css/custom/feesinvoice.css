@@ -1,0 +1,91 @@
+.body-wrap {
+    width: 100%;
+}
+
+.container {
+    display: block !important;
+    max-width: 800px !important;
+    display: block !important;
+}
+
+.content {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.content-wrap {
+    text-align: justify;
+    line-height: 25px;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.invoice {
+
+    color: #000000;
+    font-weight: 800;
+    text-align: right;
+    margin-bottom: 55px;
+    margin-top: -42px;
+}
+.lang{
+    font-family: ipag;
+    font-style: normal;
+    font-weight: normal;
+    src: url("storage_path('fonts/ipag.ttf')");
+}
+.schoolname {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 800;
+    margin-top: -37px;
+    text-align: right;
+    margin-bottom: 37px;
+    font-family: ipag;
+    font-style: normal;
+    font-weight: normal;
+    src: url("storage_path('fonts/ipag.ttf')");
+}
+
+@media (min-width: 992px) {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm {
+        max-width: 800px;
+    }
+}
+
+.table td,
+.table th {
+    padding: 0.85rem;
+    vertical-align: top;
+    border-top: 1px solid #080b0c;
+
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: none;
+}
+
+.responsive {
+    border-bottom: 1px solid #080b0c;
+}
+
+hr {
+    border-bottom: 1px solid #080b0c;
+}
+
+@media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .responsive {
+        border-bottom: none;
+    }
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 670px) {
+    .responsive {
+        border-bottom: none;
+    }
+}

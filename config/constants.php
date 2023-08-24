@@ -857,6 +857,9 @@ return [
         'work_week_get' => $url.'/work/week/get',
         'work_week_update' => $url.'/work/week/update',
         'get_public_holidays' => $url.'/get_public_holidays',
+        
+        'get_parent_fees_list' => $url.'/fees/get_parent_fees_list',
+        'parent_fees_history' => $url.'/fees/parent_fees_history',
       ]
 
 ];

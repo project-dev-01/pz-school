@@ -1305,6 +1305,10 @@ Route::group(['prefix' => 'parent'], function () {
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf_parent'])->name('parent.attendance.student_pdf');
         Route::post('attendance/student_excel', [ParentController::class, 'studentAttendanceExcel'])->name('parent.attendance.student_excel');
         
+        Route::get('fees/index', [ParentController::class, 'feesIndex'])->name('parent.fees');
+        Route::get('fees/view/{id}/{group_id}', [ParentController::class, 'feesView'])->name('parent.fees.view');
+        Route::get('fees/invoice/{id}/{group_id}', [ParentController::class, 'feesInvoice'])->name('parent.fees.invoice');
+        Route::get('fees/invoice/download/{id}/{group_id}', [ParentController::class, 'feesDownload'])->name('parent.invoice.download');
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('parent.clear_local_storage');
     });
 });
