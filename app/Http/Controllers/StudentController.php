@@ -152,12 +152,12 @@ class StudentController extends Controller
             'homework_id' => $request->homework_id,
             'remarks' => $request->remarks,
             'student_id' => $student,
+            'student_name' => session()->get('name'),
             'file' => $base64,
             'file_extension' => $extension,
         ];
 
         $response = Helper::PostMethod(config('constants.api.homework_submit'), $data);
-
         return $response;
     }
 

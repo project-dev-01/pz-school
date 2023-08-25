@@ -238,6 +238,46 @@ class CommonController extends Controller
                         </p>
                     </a>';
                     }
+                    
+                    if ($notification['type'] == "App\Notifications\StudentHomeworkSubmit") {
+                        
+                        // dd($notification['data']['homework']['homework_name']);
+
+                        // dd($response['data']['class_name']);
+                        
+                        $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
+                        $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
+                        $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
+                        $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
+                        $date = isset($notification['data']['homework']['date']) ? $notification['data']['homework']['date'] : '';
+                        $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
+                        $notificationlist .= '<a href="'.route('teacher.evaluation_report') .'" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Homework (' . $date . ')</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small> '. $student_name .' ( '. $class_name . ' - ' . $section_name . ' ) has Submitted Homework '. $homework_name .' ( '. $subject_name . ' )</small>
+                        </p>
+                        </a>';
+                    }
+                    
+                    if ($notification['type'] == "App\Notifications\TeacherHomework") {
+                        
+                        // dd($notification['data']['homework']['homework_name']);
+
+                        // dd($response['data']['class_name']);
+                        
+                        $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
+                        $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
+                        $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
+                        $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
+                        $date = isset($notification['data']['homework']['due_date']) ? $notification['data']['homework']['due_date'] : '';
+                        $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
+                        $notificationlist .= '<a href="'.route('student.homework') .'" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Homework (' . $date . ')</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>'. $homework_name .' ( '. $subject_name .' ) has Assigned - Due Date ('. $date .' )</small>
+                        </p>
+                        </a>';
+                    }
                 }
                 $notificationlist .= '</div>';
             } else {

@@ -23,7 +23,7 @@
 .invoice {
 
     color: #000000;
-    font-weight: 800;
+    font-weight: normal;
     text-align: right;
     margin-bottom: 55px;
     margin-top: -42px;
@@ -37,14 +37,10 @@
 .schoolname {
     font-size: 15px;
     color: #000000;
-    font-weight: 800;
+    font-weight: normal;
     margin-top: -37px;
     text-align: right;
     margin-bottom: 37px;
-    font-family: ipag;
-    font-style: normal;
-    font-weight: normal;
-    src: url("storage_path('fonts/ipag.ttf')");
 }
 
 @media (min-width: 992px) {

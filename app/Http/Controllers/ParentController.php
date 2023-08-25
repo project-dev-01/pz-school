@@ -1333,23 +1333,47 @@ class ParentController extends Controller
         $parentData = [
             'parent_id' => session()->get('ref_user_id')
         ];
+        $tudentData  = [
+            'id' => $id
+        ];
         $date = date('Y-m-d');
         // dd($data);
+        
+        $student = Helper::PostMethod(config('constants.api.student_details'), $tudentData);
         $parent = Helper::PostMethod(config('constants.api.parent_profile_info'), $parentData);
         $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
-        
-            // $pdf = PDF::loadView('parent.fees.download',
-            return view('parent.fees.download',
+        $customPaper = array(0, 0, 800.00, 1200.00);
+            // return view('parent.fees.download',
+            //     [
+            //         'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+            //         'parent' => isset($parent['data']) ? $parent['data'] : [],
+            //         'date' => isset($date) ? $date : "",
+            //         'school_name' => config('constants.school_name'),
+            //         'school_image' => config('constants.school_image'),
+            //         'parent_name' => session()->get('name'),
+            //         'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
+            //     ]);
+                $pdf = PDF::loadView('parent.fees.download',
                 [
                     'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
                     'parent' => isset($parent['data']) ? $parent['data'] : [],
                     'date' => isset($date) ? $date : "",
                     'school_name' => config('constants.school_name'),
                     'school_image' => config('constants.school_image'),
-                ]);
-            // ])->setPaper('a4', 'landscape');
-            // return $pdf->download('pdfview.pdf');
+                    'parent_name' => session()->get('name'),
+                    'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
+                ])->setPaper($customPaper);
+                
+                // filename
+                $now = now();
+                $name = strtotime($now);
+                $fileName = __('messages.invoice') . $name . ".pdf";
+                return $pdf->download($fileName);
 
+            
+            // $customPaper = array(0, 0, 1000.00, 567.00);
+            // $pdf->set_paper($customPaper);
+            // $pdf->loadHTML($output);
         // return view('parent.fees.download');
     }
 }

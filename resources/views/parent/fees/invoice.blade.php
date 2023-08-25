@@ -76,8 +76,8 @@ use \App\Http\Controllers\ParentController;
                             </div>
                             <div class="float-right" style="font-weight: 800;font-size: 15px;">
                             
-                            <a href="{{ route('parent.invoice.download', [$student_id , $group_id]) }}">Download PDF</a>
-                                <h3>{{ __('messages.invoice') }}</a></h3>
+                            
+                                <h3>{{ __('messages.invoice') }}<a href="{{ route('parent.invoice.download', [$student_id , $group_id]) }}" target="_blank" style="padding-left:30px;"><i class="fa fa-print"></i></a></h3>
                                 <p>{{ $school_name }}</p>
                             </div>
                         </div>
@@ -98,7 +98,6 @@ use \App\Http\Controllers\ParentController;
                                 <h4>{{ __('messages.invoice_details') }}</h4>
                                 <div class="mt-3" style="line-height: 10px;">
                                     <p class="m-b-10"><strong>{{ __('messages.invoice_date') }} : </strong> <span class="float-right">{{$date}}</span></p>
-                                    <p class="m-b-10"><strong>{{ __('messages.due_date') }} : </strong> <span class="float-right"></span></p>
                                     <p class="m-b-10"><strong>{{ __('messages.invoice_no') }} : </strong> <span class="float-right"></span></p>
                                 </div>
                             </div><!-- end col -->
@@ -111,9 +110,10 @@ use \App\Http\Controllers\ParentController;
                                         <thead>
                                             <tr>
                                                 <th><b>{{ __('messages.fees_name') }}</b></th>
-                                                <th style="width: 20%"><b>{{ __('messages.price') }}</b></th>
-                                                <th style="width: 20%"><b>{{ __('messages.paid') }}</b></th>
-                                                <th style="width: 10%" class="text-right"><b>{{ __('messages.amount') }}</b></th>
+                                                <th style="width: 15%"><b>{{ __('messages.due_date') }}</b></th>
+                                                <th style="width: 15%"><b>{{ __('messages.price') }}</b></th>
+                                                <th style="width: 15%"><b>{{ __('messages.paid') }}</b></th>
+                                                <th style="width: 15%" class="text-right"><b>{{ __('messages.amount') }}</b></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -161,6 +161,9 @@ use \App\Http\Controllers\ParentController;
                                     <td>
                                         <b>{{ __('messages.' . strtolower($row['payment_mode_name'])) }}</b> <br />
                                         {{ $row['name'] }}
+                                    </td>
+                                    <td>
+                                        {{ $row['due_date'] }}
                                     </td>
                                     <td>${{ $fees_amount }}</td>
                                     <td>${{ $paid_amt }}</td>

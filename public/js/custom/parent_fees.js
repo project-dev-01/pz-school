@@ -141,6 +141,8 @@ $(function () {
                         loadTable(formData);
                     }
                 }
+            }else{
+                loadTable();
             }
         }
     }
