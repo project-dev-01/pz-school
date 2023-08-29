@@ -860,6 +860,7 @@ return [
         
         'get_parent_fees_list' => $url.'/fees/get_parent_fees_list',
         'parent_fees_history' => $url.'/fees/parent_fees_history',
+        'get_today_schedules_admin' => $url.'/get_today_schedules_admin',
       ]
 
 ];

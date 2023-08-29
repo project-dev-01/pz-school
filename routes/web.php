@@ -137,6 +137,7 @@ Route::post('/application-form/add', [CommonController::class, 'addApplicationFo
 Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 // notifications
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
+Route::get('remainder_notifications', [CommonController::class, 'remainderNotifications'])->name('remainder_notifications');
 // all logout
 Route::get('all_logout', [AuthController::class, 'allLogout'])->name('all_logout');
 Route::get('lastlogout', [AuthController::class, 'lastlogout'])->name('lastlogout');

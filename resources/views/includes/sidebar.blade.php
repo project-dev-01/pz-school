@@ -1132,7 +1132,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="{{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'menuitem-active' : '' }}">
+                <li class="{{  (request()->is('admin/logactivity*') || request()->is('admin/clear_local_storage')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebaractivity" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_354_1194)">
@@ -1153,7 +1153,7 @@
                         <span>{{ __('messages.activty_monitoring') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse {{  (request()->is('admin/fees_group*') || request()->is('admin/fees/edit*')) ? 'show' : '' }}" id="sidebaractivity">
+                    <div class="collapse {{  (request()->is('admin/logactivity*') || request()->is('admin/clear_local_storage')) ? 'show' : '' }}" id="sidebaractivity">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.logactivity')}}" class="nav-link {{ (request()->is('admin/login_activity*')) ? 'active' : '' }}">

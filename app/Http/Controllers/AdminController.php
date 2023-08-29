@@ -1979,7 +1979,7 @@ class AdminController extends Controller
                     $response .=  '<div class="form-group">';
                     $response .=  '<select class="form-control"  name="timetable[' . $row . '][class_room]" >';
                     $response .=  '<option value="">Select Hall</option>';
-                    foreach ($hall_list['data'] as $list) {
+                    foreach ($hall_list as $list) {
                         if ($list['id'] == $table['class_room']) {
                             $response .= '<option value="' . $list['id'] . '" selected>' . $list['hall_no'] . '</option>';
                         } else {

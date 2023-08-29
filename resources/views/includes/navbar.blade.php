@@ -9,10 +9,8 @@
                     <i class="fe-bell noti-icon"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge badge-count">0</span>
                 </a>
-
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <!-- item-->
-
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-right">
@@ -22,31 +20,9 @@
                             </span>{{ __('messages.notification') }}
                         </h5>
                     </div>
-
-
-
                     <div class="notification-list-show">
-                        <!-- <div class="noti-scroll" data-simplebar> -->
-
-                        <!-- item-->
-                        <!-- <div class="notification-list"></div> -->
-                        <!-- <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                            <div class="notify-icon">
-                                <img src="../assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" />
-                            </div>
-                            <p class="notify-details">Cristina Pride</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Hi, How are you? What about our next meeting</small>
-                            </p>
-                        </a> -->
-                        <!-- </div> -->
-
-                        <!-- All-->
                         <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                            <!-- View all
-                        <i class="fe-arrow-right"></i> -->
                         </a>
-
                     </div>
             </li>
 
@@ -59,7 +35,38 @@
                 </a>
             </li>
             @endif
-
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="mdi mdi-calendar-clock font-22"></i>
+                    <span class="badge badge-danger rounded-circle noti-icon-badge remainder-badge-count">0</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                    <div class="dropdown-item noti-title">
+                        <h5 class="m-0">Reminders
+                            <span class="float-right">
+                                <a href="javascript:void(0)" class="text-dark" id="mark-all-read">
+                                    <small>Reminders</small>
+                                </a>
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="remainder-list-show">
+                        <a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="">
+                            <p class="notify-details">Title</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>10:00 AM</small>
+                                <small>3 Min ago</small>
+                            </p>
+                        </a>
+                        <a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="">
+                            <p class="notify-details">Title</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>10:00 AM</small>
+                                <small>3 Min ago</small>
+                            </p>
+                        </a>
+                    </div>
+            </li>
             <!-- <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" href="">
                     <i class="mdi mdi-calendar-clock font-22"></i>
@@ -217,7 +224,7 @@
         </ul>
 
         <!-- LOGO -->
-        <div class="logo-box teacher">
+        <div class="logo-box">
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">

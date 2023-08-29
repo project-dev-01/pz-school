@@ -56,13 +56,13 @@ class CommonController extends Controller
         $data = [
             'branch_id' => config('constants.branch_id')
         ];
-        
+
         $contact = Http::post(config('constants.api.get_home_page_details'), $data);
         $contactDetails = $contact->json();
 
         $grade_response = Http::post(config('constants.api.application_grade_list'), $data);
         $grade = $grade_response->json();
-        
+
         $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
         $relation = $relation_response->json();
 
@@ -124,7 +124,7 @@ class CommonController extends Controller
             'branch_id' => config('constants.branch_id')
 
         ];
-        
+
         $application = Http::post(config('constants.api.application_add'), $data);
         $response = $application->json();
         // dd($response);
@@ -202,7 +202,7 @@ class CommonController extends Controller
         if ($unread_notifications['code'] == 200) {
             // dd($unread_notifications['data']['unread']);
             // dd($unread_notifications['data']['unread_count']);
-            $count = isset($unread_notifications['data']['unread_count']) ? $unread_notifications['data']['unread_count'] : 0;
+            $count = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
             // dd($count);
             if (!empty($unread_notifications['data']['unread'])) {
                 $notificationlist .= '<div class="noti-scroll" data-simplebar>';
@@ -238,43 +238,43 @@ class CommonController extends Controller
                         </p>
                     </a>';
                     }
-                    
+
                     if ($notification['type'] == "App\Notifications\StudentHomeworkSubmit") {
-                        
+
                         // dd($notification['data']['homework']['homework_name']);
 
                         // dd($response['data']['class_name']);
-                        
+
                         $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
                         $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
                         $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
                         $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
                         $date = isset($notification['data']['homework']['date']) ? $notification['data']['homework']['date'] : '';
                         $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
-                        $notificationlist .= '<a href="'.route('teacher.evaluation_report') .'" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        $notificationlist .= '<a href="' . route('teacher.evaluation_report') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">Homework (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> '. $student_name .' ( '. $class_name . ' - ' . $section_name . ' ) has Submitted Homework '. $homework_name .' ( '. $subject_name . ' )</small>
+                            <small> ' . $student_name . ' ( ' . $class_name . ' - ' . $section_name . ' ) has Submitted Homework ' . $homework_name . ' ( ' . $subject_name . ' )</small>
                         </p>
                         </a>';
                     }
-                    
+
                     if ($notification['type'] == "App\Notifications\TeacherHomework") {
-                        
+
                         // dd($notification['data']['homework']['homework_name']);
 
                         // dd($response['data']['class_name']);
-                        
+
                         $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
                         $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
                         $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
                         $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
                         $date = isset($notification['data']['homework']['due_date']) ? $notification['data']['homework']['due_date'] : '';
                         $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
-                        $notificationlist .= '<a href="'.route('student.homework') .'" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">Homework (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>'. $homework_name .' ( '. $subject_name .' ) has Assigned - Due Date ('. $date .' )</small>
+                            <small>' . $homework_name . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
                         </p>
                         </a>';
                     }
@@ -295,6 +295,76 @@ class CommonController extends Controller
             }
         }
         return array('count' => $count, 'notificationlist' => $notificationlist);
+    }
+    // remainder Notifications
+    public function remainderNotifications(Request $request)
+    {
+        // return "fdfsf";
+        // $unread_notifications = Helper::GetMethod(config('constants.api.get_today_schedules_admin'));
+        $data = [
+            'login_id' => session()->get('user_id')
+        ];
+        $unread_notifications = Helper::GETMethodWithData(config('constants.api.get_today_schedules_admin'), $data);
+        // return $unread_notifications;
+        $notificationlist = '';
+        $count = 0;
+        if ($unread_notifications['code'] == 200) {
+            $counting = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
+            $count = count($counting);
+            $notificationlist .= '<div class="noti-scroll" data-simplebar>';
+            if ($count > 0) {
+                foreach ($unread_notifications['data'] as $val) {
+                    $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="">
+                    <p class="notify-details">Title</p>
+                    <p class="text-muted mb-0 user-msg">
+                        <small>' . $val['title'] . '</small>
+                        <small>' . $this->timeago($val['start']) . '</small>
+                    </p>
+                </a>';
+                }
+            } else {
+                $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
+                <p class="notify-details"></p>
+                <p class="text-muted mb-0 user-msg">
+                    <small>There are no new notifications</small>
+                </p>
+            </a>';
+            }
+            $notificationlist .= '</div>';
+        }
+        return array('count' => $count, 'notificationlist' => $notificationlist);
+    }
+    public function timeago($start)
+    {
+        // $meetingDatetimeString = '2023-08-28 23:50:00'; // Replace with your datetime string
+        $meetingDatetimeString = $start; // Replace with your datetime string
+
+        // Create DateTime objects for the meeting datetime and current datetime
+        $meetingDatetime = new DateTime($meetingDatetimeString);
+        $currentDatetime = new DateTime();
+
+        // Calculate the time difference
+        $timeDifference = $meetingDatetime->getTimestamp() - $currentDatetime->getTimestamp();
+
+        // Calculate days, hours, minutes, and seconds remaining
+        $daysRemaining = floor($timeDifference / (60 * 60 * 24));
+        $hoursRemaining = floor(($timeDifference % (60 * 60 * 24)) / (60 * 60));
+        $minutesRemaining = floor(($timeDifference % (60 * 60)) / 60);
+        $secondsRemaining = $timeDifference % 60;
+
+        // Display the remaining time
+        if ($daysRemaining > 0) {
+            return "$daysRemaining days ";
+        } elseif ($hoursRemaining > 0) {
+            return "$hoursRemaining hours ";
+        } elseif ($minutesRemaining > 0) {
+            return "$minutesRemaining minutes ";
+        } elseif ($secondsRemaining > 0) {
+            return "$secondsRemaining seconds";
+        } else {
+            // it come only current day
+            return "All day";
+        }
     }
     // update child id
     public function greettingSession(Request $request)
@@ -370,23 +440,23 @@ class CommonController extends Controller
     public function chatnotification(Request $request)
     {
         try {
-            $session_id= session()->get('ref_user_id');
-            $role_id= session()->get('role_id');
+            $session_id = session()->get('ref_user_id');
+            $role_id = session()->get('role_id');
             $data = [
-            'userID' => $session_id,
-            'role_id' => $role_id
-        ];
-        //dd($data);       
-        $response = Helper::PostMethod(config('constants.api.chatnotification'), $data);      
-        
-        return $response;
+                'userID' => $session_id,
+                'role_id' => $role_id
+            ];
+            //dd($data);       
+            $response = Helper::PostMethod(config('constants.api.chatnotification'), $data);
+
+            return $response;
         } catch (\Exception $e) {
-           // dd('123');
+            // dd('123');
             // CSRF token mismatch occurred, handle the error
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
     public function clearLocalStorage(Request $request)
     {
         return view('clear-local-storage');

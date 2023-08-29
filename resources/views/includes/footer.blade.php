@@ -252,6 +252,7 @@
     // notifications
     var readNotifications = "{{ config('constants.api.mark_as_read') }}";
     var allNotifications = "{{ route('unread_notifications') }}";
+    var remainderallNotifications = "{{ route('remainder_notifications') }}";
     var allLogout = "{{ route('all_logout') }}";
 </script>
 
@@ -389,18 +390,18 @@
             });
         }, 8000);
         var lastlogout = "{{ route('lastlogout') }}";
-		var chatnotification = "{{ route('ChatNotification') }}";
+        var chatnotification = "{{ route('ChatNotification') }}";
         var sTimeOutq = setInterval(function() {
-          
-      
+
+
             $.ajax({
                 type: 'GET',
                 url: lastlogout,
-               
+
                 success: function(res) {
                     if (res.success) {
-                       // alert(res.data);// toastr.error('Logout Successfully');
-                        
+                        // alert(res.data);// toastr.error('Logout Successfully');
+
                     }
                 },
                 error: function(err) {
@@ -409,17 +410,17 @@
                 }
             });
         }, 10000);
-		 var sTimeOutq = setInterval(function() {
-          
-     
+        var sTimeOutq = setInterval(function() {
+
+
             $.ajax({
                 type: 'GET',
                 url: chatnotification,
-               
+
                 success: function(res) {
                     if (res.success) {
-                      
-						//alert(res.data);
+
+                        //alert(res.data);
                         $('.chat-count').html(res.data[0].count_row);
                     }
                 },
@@ -442,6 +443,23 @@
                 error: function(err) {
                     // console.log("eror")
                     // console.log(err)
+                }
+            });
+        }
+        remainderNotifications();
+        function remainderNotifications() {
+            $.ajax({
+                type: 'GET',
+                url: remainderallNotifications,
+                success: function(res) {
+                    console.log("res")
+                    console.log(res)
+                    $(".remainder-list-show").html(res.notificationlist);
+                    $(".remainder-badge-count").text(res.count);
+                },
+                error: function(err) {
+                    console.log("eror")
+                    console.log(err)
                 }
             });
         }

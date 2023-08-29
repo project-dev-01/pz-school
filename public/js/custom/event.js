@@ -119,7 +119,7 @@ $(function () {
         }
 
         if ($("#audience").val() == "3") {
-            var group = ($("#group_row").val()).length;
+            var group = ($("#group").val()).length;
             if (group == 0) {
                 $(form).find('span.group_error').text("This field is required.");
                 return false;
