@@ -72,7 +72,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">Leave Details
+                                <h4 class="navv">{{ __('messages.leave_details') }}
                                     <h4>
                             </li>
                         </ul>
@@ -82,7 +82,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">Total Leaves</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.total_leaves') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-info border-info border">
                                                         <i class="mdi mdi-text-box-check-outline font-22 avatar-title text-info"></i>
@@ -100,7 +100,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Approved</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leaves_approved') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-success border-success border">
                                                         <i class="mdi mdi-application-import font-22 avatar-title text-success"></i>
@@ -118,7 +118,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Rejected</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leave_rejected') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
                                                         <i class="mdi mdi-account-cash-outline font-22 avatar-title text-pink"></i>
@@ -136,7 +136,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">Leaves Pending</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leave_pending') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
                                                         <i class="mdi mdi-timetable font-22 avatar-title text-warning"></i>
