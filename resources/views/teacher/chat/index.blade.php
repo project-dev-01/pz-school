@@ -36,7 +36,7 @@
 								<a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
 							</h5>
 							<p class="mt-1 mb-0 text-muted font-14">
-								<small class="mdi mdi-circle text-success"></small> Online
+								<small class="mdi mdi-circle text-success"></small>{{ __('messages.online') }}
 							</p>
 						</div>
 						<!--<div>
@@ -61,17 +61,17 @@
 						@foreach($group_list as $group)
 						<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','{{$group['name']}}','','Group')">
 							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-							<span class="mb-0 mt-1">{{$group['name']}} Group</span>
+							<span class="mb-0 mt-1">{{$group['name']}} {{ __('messages.group') }}</span>
 						</a>
 						@endforeach
 						@if(count($group_list)==0)
-						<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-							<span class="mb-0 mt-1">No Group Available</span>
+						<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+							<span class="mb-0 mt-1">{{ __('messages.no_group_available') }}</span>
 						</a>
 						@endif
 					</div>
 
-					<h6 class="font-13 text-muted text-uppercase mb-2">Parent Contacts</h6>
+					<h6 class="font-13 text-muted text-uppercase mb-2">{{ __('messages.parent_contacts') }}</h6>
 
 					<!-- users -->
 					<div class="row">
@@ -98,8 +98,8 @@
 								</a>
 								@endforeach
 								@if(count($parent_list)==0)
-								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-									<span class="mb-0 mt-1">No Parents Available</span>
+								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+									<span class="mb-0 mt-1">{{ __('messages.no_parent_available') }}</span>
 								</a>
 								@endif
 							</div> <!-- end slimscroll-->
@@ -132,8 +132,8 @@
 								</a>
 								@endforeach
 								@if(count($teacher_list)==0)
-								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-									<span class="mb-0 mt-1">No Teacher Available</span>
+								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+									<span class="mb-0 mt-1">{{ __('messages.no_teacher_available') }}</span>
 								</a>
 								@endif
 							</div> <!-- end slimscroll-->
@@ -155,8 +155,8 @@
 						<div class="col" style="height: 300px; margin-top:70px;">
 							<div id="center-text" style="text-align:center;">
 								<img src="{{ asset('public/images/chat.png') }}" class="chatbox" style="height: 150px;border: 2px solid #EDEDED;border-radius: 1rem;">
-								<h2>No messages</h2>
-								<p>No messages yet, start the conversation!</p>
+								<h2>{{ __('messages.no_messages') }}</h2>
+								<p>{{ __('messages.no_messages_yet') }}</p>
 							</div>
 						</div>
 					</div>
@@ -170,19 +170,19 @@
 
 						<div class="media-body">
 							<h5 class="mt-0 mb-0 font-15">
-								<a href="javascript: void(0);" class="text-reset"><span id="toname"></span></a> (<span id="usertype">Parent</span>)
+								<a href="javascript: void(0);" class="text-reset"><span id="toname"></span></a> (<span id="usertype">{{ __('messages.parent') }}</span>)
 							</h5>
 							<p class="mt-1 mb-0 text-muted font-12">
-								<span  id="onlinestatus">
-								<small class="mdi mdi-circle text-success"></small> Online  </span>
-								<a href="#"  data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0  Members</a>
-                        
+								<span id="onlinestatus">
+									<small class="mdi mdi-circle text-success"></small> {{ __('messages.online') }}</span>
+								<a href="#" data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0 {{ __('messages.members') }}</a>
+
 							</p>
 						</div>
 						<div>
 							<form class="search-bar mb-3">
 								<div class="position-relative">
-									<input type="text" id="searchbar" onkeyup="search_keyword()" class="form-control form-control-light" style="padding-left: 40px;border-radius: 30px;" placeholder="Search keyword..">
+									<input type="text" id="searchbar" onkeyup="search_keyword()" class="form-control form-control-light" style="padding-left: 40px;border-radius: 30px;" placeholder="{{ __('messages.search_keywords') }}">
 									<span class="mdi mdi-magnify"></span>
 								</div>
 							</form>
@@ -193,9 +193,9 @@
 					<div class="row">
 						<div class="col">
 							<ul class="conversation-list" data-simplebar style="height:250px; overflow-x: hidden;">
-							<div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> Read more... </button></div>
-							
-							<div id="showchat">
+								<div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()">{{ __('messages.read_more') }}</button></div>
+
+								<div id="showchat">
 								</div>
 							</ul>
 						</div>
@@ -210,14 +210,14 @@
 								<input type="hidden" name="chat_user_id" id="chat_user_id" value="{{$user_id}}">
 								<input type="hidden" name="chat_toid" id="chat_toid" value="">
 								<input type="hidden" name="chat_toname" id="chat_toname" value="">
-								<input type="hidden" name="chat_touser" id="chat_touser" value="Parent">								
+								<input type="hidden" name="chat_touser" id="chat_touser" value="Parent">
 								<input type="hidden" name="limit" id="limit" value="10">
 
 								<div class="row">
 									<div class="col mb-2 mb-sm-0">
 										<input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
 										<div class="invalid-feedback">
-											Please enter your messsage
+											{{ __('messages.please_enter_your_message') }}
 										</div>
 										<span id="status"></span>
 									</div>
@@ -248,22 +248,22 @@
 </div> <!-- container -->
 <!-- Grouplist Modal -->
 <div id="grouplist" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+	<div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-      <h4 class="modal-title"  id="showgrouptitle"></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-       
-      </div>
-      <div class="modal-body">
-        <ul id="showgrouplist"></ul>
-      </div>
-     
-    </div>
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="showgrouptitle"></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 
-  </div>
+			</div>
+			<div class="modal-body">
+				<ul id="showgrouplist"></ul>
+			</div>
+
+		</div>
+
+	</div>
 </div>
 @endsection
 @section('scripts')
@@ -288,17 +288,17 @@
 		$("#emptyChat").hide();
 		$("#showIndivuChat").show();
 
-        $('#groupcnt').hide();
+		$('#groupcnt').hide();
 		$('#toname').html(toname);
 		$('#usertype').html(touser);
 
 		$('#chat_toid').val(toid);
 		$('#chat_toname').val(toname);
-		$('#chat_touser').val(touser);		
+		$('#chat_touser').val(touser);
 		$('#limit').val(10);
-        $('#showlist').html('');
-		$('#Parent'+toid).html('');
-		$('#Teacher'+toid).html('');
+		$('#showlist').html('');
+		$('#Parent' + toid).html('');
+		$('#Teacher' + toid).html('');
 		toimg = (toimage && imgurl + toimage) ? imgurl + toimage : defaultimg;
 		$('#toimage').prop('src', toimg)
 		scrollDownShow = 1;
@@ -451,7 +451,7 @@
 		var chat_touser = $("#chat_touser").val();
 		var chat_content = $("#chat_content").val();
 		var chat_user_id = $("#chat_user_id").val();
-		var limit =$('#limit').val();
+		var limit = $('#limit').val();
 		var formData = new FormData();
 		formData.append('_token', csrftoken);
 		formData.append('chat_fromid', chat_fromid);
@@ -460,7 +460,7 @@
 		formData.append('chat_toid', chat_toid);
 		formData.append('chat_toname', chat_toname);
 		formData.append('chat_touser', chat_touser);
-		formData.append('chat_user_id', chat_user_id);		
+		formData.append('chat_user_id', chat_user_id);
 		formData.append('limit', limit);
 		// formData.append('file', file);
 		///formData.append('file', $('input[type=file]')[0].files[0]);
@@ -510,8 +510,7 @@
 							chatCount++;
 							if (chat_touser == 'Group') {
 								msgread = '';
-							}
-							else if (item.chat_status == 'Unread') {
+							} else if (item.chat_status == 'Unread') {
 								msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
 							} else {
 								msgread = '<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
@@ -525,7 +524,8 @@
 							}
 
 							if (item.chat_document != null) {
-								chatfile = '<br><a href="{{ url($url.'/public/'.config('constants.branch_id').'/chats/') }}'+item.chat_document+'" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+								chatfile = '<br><a href="{{ url($url.' / public / '.config('
+								constants.branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
 							}
 							if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
 								chat_li += '<li class="clearfix odd">';
@@ -571,33 +571,29 @@
 								chat_li += '</div>';
 								chat_li += '</li>';
 							}
-							
-                    
-                        
+
+
+
 						});
-						if(parseInt(limit)<=parseInt(chatCount))
-                        {
-                            
-							$('.chatreadmore').show(); 
-                        }
-                        else
-                        {
-                            
-							$('.chatreadmore').hide(); 
-                        }
-						if(chat_touser=='Group')
-							{
-								var gplistarray=response.data.groupnamelist;
-								$('#groupcnt').show();
-								$('#groupcnt').html('('+response.data.groupcount+' Members )');
-								$('#showgrouptitle').html(chat_toname);
-								var gplist='';
-								$.each(gplistarray, function(i, item) {
-									gplist+='<li>'+item.username+' ( '+item.usertype+' )</li> ';
-								});
-							}
+						if (parseInt(limit) <= parseInt(chatCount)) {
+
+							$('.chatreadmore').show();
+						} else {
+
+							$('.chatreadmore').hide();
+						}
+						if (chat_touser == 'Group') {
+							var gplistarray = response.data.groupnamelist;
+							$('#groupcnt').show();
+							$('#groupcnt').html('(' + response.data.groupcount + ' Members )');
+							$('#showgrouptitle').html(chat_toname);
+							var gplist = '';
+							$.each(gplistarray, function(i, item) {
+								gplist += '<li>' + item.username + ' ( ' + item.usertype + ' )</li> ';
+							});
+						}
 						$('#showchat').html(chat_li);
-                        $('#showgrouplist').html(gplist);
+						$('#showgrouplist').html(gplist);
 						if (scrollDownShow == 1) {
 							scroll();
 							oldChatCount = chatCount;
@@ -620,13 +616,14 @@
 			block: "end"
 		});
 	}
-	function addlimit()
-    {
-        
-        var newlimit = parseInt($("#limit").val())+parseInt('25');
-        $("#limit").val(newlimit);
-        getchatlist();
-    }
+
+	function addlimit() {
+
+		var newlimit = parseInt($("#limit").val()) + parseInt('25');
+		$("#limit").val(newlimit);
+		getchatlist();
+	}
+
 	function tConvert(time) {
 		// Check correct time format and split into components
 		time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

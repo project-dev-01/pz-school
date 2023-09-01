@@ -12,7 +12,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-user mr-1"></i>
-                        <span>My Account</span>
+                        <span>{{ __('messages.my_account') }}</span>
                     </a>
 
                     <!-- item-->
@@ -24,18 +24,18 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-lock mr-1"></i>
-                        <span>Lock Screen</span>
+                        <span>{{ __('messages.lock_screen') }}</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-log-out mr-1"></i>
-                        <span>Logout</span>
+                        <span>{{ __('messages.logout') }}</span>
                     </a>
 
                 </div>
             </div>
-            <p class="text-muted">Admin Head</p>
+            <p class="text-muted">{{ __('messages.admin_head') }}</p>
         </div>
 
         <!--- Sidemenu -->
@@ -1730,9 +1730,9 @@
                         <span> {{ __('messages.report_card') }}</span>
                     </a>
                 </li>
-                <li  class="{{ (request()->is('parent/fees*')) ? 'menuitem-active' : '' }}">
+                <li class="{{ (request()->is('parent/fees*')) ? 'menuitem-active' : '' }}">
                     <a href="{{ route('parent.fees')}}" class="nav-link ">
-                        
+
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_354_1194)">
                                 <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />

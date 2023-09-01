@@ -118,7 +118,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leave_rejected') }}</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leaves_rejected') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
                                                         <i class="mdi mdi-account-cash-outline font-22 avatar-title text-pink"></i>
@@ -136,7 +136,7 @@
                                     <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
                                         <div class="widget-rounded-circle card-box">
                                             <div class="row">
-                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leave_pending') }}</p>
+                                                <p class="mb-1 text-truncate" style="width: 100%;">{{ __('messages.leaves_pending') }}</p>
                                                 <div class="col-6">
                                                     <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
                                                         <i class="mdi mdi-timetable font-22 avatar-title text-warning"></i>
