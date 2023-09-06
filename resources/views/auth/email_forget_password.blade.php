@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Email Forget Password Template</title>
+  <title>Email Feedback Request Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
   <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -21,50 +21,66 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="600" style="display: block !important; max-width: 600px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-        <table class="body-wrap" style="width: 100%;">
-    <tr>
-      <td class="container" width="800" style="display: block !important; max-width: 800px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
-                  <td>
-                                        <h4>Dear [user],</h4>
-                                        <span
-                                            style="display:inline-block; vertical-align:top; border-bottom:2px solid #cecece; width:100%;"></span>
-                                        <p style="font-size:14px;line-height:24px;text-align: justify;">
-                                        Forgot your password? No problem! 
-                                        </p>
-                                        <p style="font-size:14px;line-height:24px;text-align: justify;">
-                                        We've created a special link for you to reset it. 
-                                        </p>
-                                        <p style="font-size:14px;line-height:24px;text-align: justify;">
-                                        Just click the link and follow the instructions.
-                                        </p>
-                                        <a href="#" class="btn btn-primary-bl waves-effect waves-light">Reset Password</a>
-                                    </td>
-                 
+                  <tr>
+                    <td>
+                      <h4 class="head">Reset Password</h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><b>Dear [User Name],</b></p>
+                      <p>It seems like you forgot your password, & wish to reset it. Worry not, we will help you for this.</p>
+                    </td>
+                  </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Card-->
+                <div class="card forgetpassword">
+                  <p>Create the link below & follow the instruction afterwards</p>
+                  <a href="#" class="btn-primary-bl reset">Reset Password</a>
+                </div>
+                <!-- End card-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>
-        </div>
-      </td>
-    </tr>
-  </table>
         </div>
       </td>
     </tr>

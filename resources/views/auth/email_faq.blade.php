@@ -23,48 +23,62 @@
 </head>
 
 <body>
-  <table class="body-wrap" style="width: 100%;">
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="700" style="display: block !important; max-width: 700px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;
-    line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
-                    <tr>
-                        <td>
-                            <table width="100%" border="0" align="left">
-                                <tr>
-                                    <td>
-                                    <h4>Email Sent: FAQ Response</h4>
-                                    <p>Explore our FAQ section on the website for quick answers.</p>
-                                    <p>For any additional inquiries, please feel free to reach out to us at <b>suzen@kddi.com.my.</b></p> 
-                                    <p>We're here to help!</p>
-                                   <p><b>Best Regards,</b></p>
-                                   <h6>{{$school_name}}</h6>
-                                  </td>
-                                </tr>
-                                
-                            </table>
-                        </td>
-                   
-                  </tbody>
+                  <tr>
+                    <td>
+                      <h4 class="head">FAQ Emails</h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><b>Dear [User Name],</b></p>
+                      <p>Explore our FAQ section on the website for quick answers.</p>
+                      <p>For any additional inquiries, please feel free to reach out to us at <b>suzen@kddi.com.my.</b></p>
+                      <p>We're here to help!</p>
+                    </td>
+                  </tr>
                 </table>
-                
+                <!-- End Header-->
+                <table>
+                  <tr>
+                    <td>
+
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>
         </div>
       </td>
     </tr>
-    </tbody>
   </table>
 </body>
 

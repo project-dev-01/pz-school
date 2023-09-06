@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Email Student Homework Submission Template</title>
+  <title>Email ID Card Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
   <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -21,77 +21,93 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<style>
-    
-.fileUploadWrap {
-  padding-top: 10px;
-  position: relative;
-}
-.imgs {
-  position: absolute;
-  cursor: pointer;
-/*   below means you can click through the image onto the invisible input */
-  pointer-events: none;
-  width:40px;
-  top: 40%;
-  transform: translatey(-50%);
-}
-.fileName {
-  position: absolute;
-  left: 50px;
-  top: -8px;
-  pointer-events: none;
-}
-input[type=file] {
-  margin-left: -25px;
-  opacity: 0;
-}
 
-    </style>
 <body>
-
-  <table class="body-wrap" style="width: 100%;">
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="750" style="display: block !important; max-width: 750px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
-                   <tr>
-                      <td>
-                        <h4>Subject: Homework Submission - 佐藤 清</h4>
-                        <h4>Respected Sir/Mam,</h4>
-                        <p>I hope this message finds you well. I am writing to inform you that I have completed the homework assignment for [Subject/Assignment] and would like to submit it for your review.</p>
-                        <h5>Assignment Details:</h5>
-                        <p style="font-size:15px;line-height:30px;">
-                                    <b>Assignment Name:</b> [Assignment Name]<br>
-                                    <b>Due Date:</b>[Due Date]<br>
-                                   <b>Submission Date:</b> [Submission Date]<br>
-                                   <div class="fileUploadWrap" style="margin-top:-20px;">
-                                   <b>Attached File:</b>
-		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSZJ5Qtnz_eutCQeLs-5tnHPFubgFz2TjnpkkMwgIIqIG93t1z" alt="" class="imgs">
-
-		
-</div></p>
-                                  
-                        <p>I have attached the completed assignment to this email. Please review it at your earliest convenience. If there are any specific guidelines or requirements for submission, kindly let me know.</p>
-                        <p>Thank you for your time and consideration.</p>
-                      </td>
+                  <tr>
+                    <td>
+                      <h4 class="head">Homework Submission</h4>
+                    </td>
                   </tr>
-                   <tr>
-                      <td>
-                         <p><b>Your's Sincerely,</b></p>
-                         <h6>佐藤 清</h6>
-                      </td>
+                  <tr>
+                    <td>
+                      <p><b>Dear Sir/Madam,</b></p>
+                      <p> I have completed my assignment which is [subject/assignment]. You may review it through the attached file below.</p>
+                    </td>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Fees Table-->
+                <table class="idcard-table">
+                  <thead>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="assign">Student's Name</td>
+                      <td class="idcardleft" style="color: #000000;text-align: center;">Muhammad Zikry Bin Muhammad Adam</td>
+                    </tr>
+                    <tr>
+                      <td class="assign">Grade/Class</td>
+                      <td class="idcardleft" style="color: #000000;text-align: center;">Grade 1/Class 1</td>
+                    </tr>
+                    <tr>
+                      <td class="assign">Assignment Name</td>
+                      <td class="idcardleft" style="color: #000000;text-align: center;">Assignment Name</td>
+                    </tr>
+                    <tr>
+                      <td class="assign">Due Date</td>
+                      <td class="idcardleft" style="color: #000000;text-align: center;">31 March 2023</td>
+                    </tr>
+                    <tr>
+                      <td class="assign">Submission Date</td>
+                      <td class="idcardleft" style="color: #000000;text-align: center;">24 June 2023</td>
+                    </tr>
+                    <tr>
+                      <td class="assign">Attached File</td>
+                      <td class="idcardleft" style="color: #FF0E0E;text-align: center;">
+                        <img src="{{ asset('public/images/emailnotification/article.png') }}">
+                        <a href="">Assignment.pdf</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Fees Table-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>Please let me know if you have any specific requirements.</p>
+                      <p>Thanks,</p>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>

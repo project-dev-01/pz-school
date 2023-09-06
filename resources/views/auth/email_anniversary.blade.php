@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Anniversary Email</title>
+  <title>Email Anniversary Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
   <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -21,64 +21,83 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<style>
-p, address{
-  text-align: justify;
-}
 
-#date {
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  text-shadow: 0.3px 0.3px black
-}
-
-</style>
 <body>
-
-  <table class="body-wrap" style="width: 100%;">
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="800" style="display: block !important; max-width: 800px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="padding: 30px;border: 3px solid #4fc6e1;background-color: #eeebe5;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
                   <tr>
-                                    <td>
-                                    <h5> Subject: Join Us for {{$school_name}}'s Anniversary Celebration!</h5>
-                                   <h5>Hello [User],</h5>
-                                   <p>You're cordially invited to celebrate a momentous occasion: [Xth] Anniversary of {{$school_name}}! Your presence as a cherished member of our school community will truly make this event memorable.</p>
-                                   <p id="date">Tuesday 3<sup>rd</sup> August, 6-9pm</p>
-                                   <p style="text-align:center;">
-                                    @ {{$school_name}}<br>
-                                    Saujana Resort Seksyen U2, 40150 , <br>
-                                    Selangor Darul Ehsan, Malaysia<br>
-                                  </p>
-                                   <p>Over the past [Xth] years, {{$school_name}} has been a beacon of education, fostering a culture of growth and learning. Your support has played a vital role in our journey, and we eagerly anticipate creating lasting memories and envisioning a bright future together.</p> 
-                                   <p>Kindly RSVP by [RSVP Date] to assist us in planning for this significant celebration. For more information, please visit our website at [Your School Website] or contact our event organizing committee at [Contact Information].</p>
-                                   <p>Let's come together to celebrate {{$school_name}}'s achievements and the remarkable community that defines it. Your presence will add joy and significance to this momentous event.</p>
-                                   <p>We genuinely hope to see you there!</p>
-                                   <p><b>Best Regards,</b></p>
-                                   <h6>{{$school_name}}</h6>
-                                     </td>
-                                </tr>
-                 
-                  
-                 
+                    <td>
+                      <h4 class="headanniversary" style="font-size: 20px;">[{{$school_name}}] Anniversary Celebration</h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><b>Hello [Username],</b></p>
+                      <p>You're cordially invited to celebrate a momentous occasion: <b>[Xth] Anniversary</b> of <b>[{{$school_name}}]!</b>
+                      <p>
+                      <p>Your presence as a cherished member of our school community will truly make this event memorable.</p>
+
+                    </td>
+                  </tr>
+                </table>
+                <!-- End Header-->
+                <!-- Card-->
+                <div class="event">
+                  <img src="{{ asset('public/images/emailnotification/invited.png') }}" class="invited">
+                  <h4 class="eventdetails">[Event Name]</h4>
+                  <p class="details"><b>Date:</b> 12 January 2023</p>
+                  <p class="details"><b>Location:</b> School Hall</p>
+                  <p class="details"><b>RSVP Date:</b> 8-11 January 2023</p>
+                  <p class="details"><b> RSVP Contact:</b> Email or Phone number</p>
+
+                </div>
+                <!-- End card-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>Over the past <b>[Xth]</b> years, <b>[{{$school_name}}]</b> has been a beacon of education, fostering a culture of growth and learning. Your support has played a vital role in our journey, and we eagerly anticipate creating lasting memories and envisioning a bright future together.</p>
+                      <p>Kindly RSVP by <b>[RSVP Date]</b> to assist us in planning for this significant celebration.</p>
+                      <p>For more information, please visit our website at <b>[Your School Website]</b> or contact our event organizing committee at <b>[Contact Information]</b>.</p>
+                      <p>Let's come together to celebrate <b>[{{$school_name}}]'s</b> achievements and the remarkable community that defines it.</p>
+                      <p>Your presence will add joy and significance to this momentous event.</p>
+                      <p>We genuinely hope to see you there!</p>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>
         </div>
       </td>
     </tr>
-    </tbody>
   </table>
 </body>
+
 </html>

@@ -21,39 +21,85 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="750" style="display: block !important; max-width: 750px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
                   <tr>
-                      <td>
-                        <h4>Subject: Leave Application - [Your Name]</h4>
-                        <h4>Respected Sir/Mam,</h4>
-                        <p>I trust this message finds you well. I am writing to formally request a leave of absence from my teaching responsibilities at [School Name] from [Start Date] to [End Date]. The reason for my leave is [briefly explain the reason, such as personal reasons, medical reasons, professional development, etc.].</p>
-                        <p>I understand the importance of continuity in the classroom, and I will ensure that all necessary lesson plans and materials are prepared in advance for the substitute teacher. I am also available to provide any guidance or support that might be needed during my absence.</p>
-                        <p>I kindly request your approval for this leave and assure you of my commitment to minimizing any disruptions caused by my absence. If there are any specific procedures or tasks I need to address before my leave, please let me know.</p>
-                        <p>Thank you for your understanding and consideration.</p>
-                      </td>
+                    <td>
+                      <h4 class="head">Teacher Leave Application</h4>
+                    </td>
                   </tr>
-                   <tr>
-                      <td>
-                         <p><b>Your's Sincerely,</b></p>
-                         <h6>[Your Name]</h6>
-                      </td>
+                  <tr>
+                    <td>
+                      <p><b>Dear Sir/Madam,</b></p>
+                      <p>I humbly request a leave of absence from my teaching duties at <b>[{{$school_name}}]</b> starting from <b>[start date]</b> to <b>[end date]</b> </p>
+                    </td>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Fees Table-->
+                <table width="100%">
+                  <tr>
+                    <td class="texts">
+                      <p><b>My reason for this leave request:</b></p>
+                      <ol>
+                        <li>Point A</li>
+                        <li>Point B</li>
+                        <li>Point C</li>
+                      </ol>
+                    </td>
+                  </tr>
+                </table>
+                <!-- End Fees Table-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>I will diligently prepare all necessary materials for the substitute teacher and remain available for any guidance required during my absence.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>I kindly seek your approval for this leave, and if there are any specific tasks I need to address before departing, please do inform me.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>I deeply appreciate your understanding and consideration.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>
@@ -62,5 +108,4 @@
     </tr>
   </table>
 </body>
-
 </html>

@@ -21,64 +21,81 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="700" style="display: block !important; max-width: 700px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                    <hr>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4 class="head">Fee Notice</h4>
                     </td>
                   </tr>
                   <tr>
-                <td>
-                     <h4>Greetings from {{$school_name}}</h4>
-                </td>
-                </tr>
-                   <tr>
-                      <td>
-                        <p>This is a friendly reminder that your child's fee payment us due on the "due date". </p>
-                        <p>We kindly request you to take care of this matter as soon as possible. Your prompt attention is highly appreciated.</p>
-                      </td>
+                    <td>
+                      <p><b>Greetings from {{$school_name}}</b></p>
+                      <p>This is a friendly reminder that your child's fee payment us due on the <b>[due date]</b>. </p>
+                      <p>We kindly request you to take care of this matter as soon as possible. Your prompt attention is highly appreciated.</p>
+                    </td>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Fees Table-->
                 <table class="gmail-table">
-              <thead>
-                <tr>
-                  <th>Fees Reminder</th>
-                  <th>Due Date</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Additional School Fees</td>
-                  <td>August2023</td>
-                  <td>10,000</td>
-                </tr>
-                <tr>
-                  <td>School adminisitered Event Fees</td>
-                  <td>September2023</td>
-                  <td>10,000</td>
-                </tr>
-              </tbody>
-            </table>
-             <table>
-            <tr>
-              <td>
-                <p>Thank you for your continued support in investing in our institution and our students.</p>
-                <p><b>Best regards,</b></p>
-                <h6>{{$school_name}}</h6>
-              </td>
-            </tr>
-           </table>
+                  <thead>
+                    <tr>
+                      <th>Fees Reminder</th>
+                      <th>Due Date</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid #7E7E7E;">
+                      <td>Additional School Fees</td>
+                      <td>23 August 2023</td>
+                      <td>RM 350.00</td>
+                    </tr>
+                    <tr>
+                      <td>School adminisitered Event Fees</td>
+                      <td>12 Sept 2023</td>
+                      <td>RM 350.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+                 <!-- End Fees Table-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>Thank you for your continued support in investing in our institution and our students.</p>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                 <!--End Footer Table-->
               </td>
             </tr>
           </table>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Email Event Notification: Action Required Template</title>
+  <title>Email Notification Action Required Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
   <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -21,49 +21,69 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="750" style="display: block !important; max-width: 750px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
                   <tr>
-                      <td>
-                        <h4>Subject: Important Event Notification: Action Required</h4>
-                        <h4>Respected Sir/Mam,</h4>
-                        <p>I trust this email finds you well. We want to draw your attention to an upcoming event that requires your attention in our system.</p>
-                        <h4>Event Details:</h4>
-                        <p style="font-size:15px;line-height:30px;">
-                                    <b>Event:</b>Sports Day<br>
-                                    <b>Date:</b> 30-August-2023<br>
-                                   <b>Time:</b> 6PM - 9PM<br>
-                                    <b>Location:</b> Saujana Resort Seksyen U2, 40150 , Selangor Darul Ehsan, Malaysia<br>
-                                    </p>
-                                    <h4>Event Description:</h4>
-                        <p>[Provide a brief description of the event, its purpose, and any relevant details.]</p>
-                        <p>Please log in to our system at [System Link] to find more information about this event and any specific actions you need to take. It might include updating attendance, providing information, or any other necessary steps.</p>
-                        <p>If you encounter any technical difficulties or have questions about the event, please reach out to our technical support team at [Support Email/Phone Number].</p>
-                        <p>Your participation and cooperation are vital to the success of this event. We appreciate your dedication to our school community.</p>
-                        <p>Thank you for your prompt attention to this matter.</p>
-                      </td>
+                    <td>
+                      <h4 class="head">Your Respond Required!</h4>
+                    </td>
                   </tr>
-                   <tr>
-                      <td>
-                         <p><b>Best regards,,</b></p>
-                         <h6>[Your Name]</h6>
-                      </td>
+                  <tr>
+                    <td>
+                      <p><b>Dear [Recipient's Name],</b></p>
+                      <p>An important upcoming event in our system requires your immediate attention.</p>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Card-->
+                <div class="emailnotification">
+                  <img src="{{ asset('public/images/emailnotification/invited.png') }}" class="invited">
+                  <h4 class="eventdetails">[Event Name]</h4>
+                  <p class="invitationdetails"><b>Date:</b> 12 January 2023</p>
+                  <p class="invitationdetails"><b>Location:</b> School Hall</p>
+                  <p class="invitationdetails"><b>Theme:</b> School Hall</p>
+                  <p class="invitationdetails"><b>Time:</b> 9PM - 10PM</p>
+
+                </div>
+                <!-- End card-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>Please visit <b>[Link]</b> to access detailed information and any required actions, such as updating attendance or providing information for this event.</p>
+                      <p>For technical assistance or questions, contact our support team.</p>
+                      <p>Thank you for your prompt attention.</p>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>

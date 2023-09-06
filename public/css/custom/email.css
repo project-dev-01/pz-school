@@ -1,0 +1,147 @@
+.body-wrap 
+{
+  width: 100%;
+  background-color: #FFFFFF;
+}
+
+.container 
+{
+  display: block !important;
+  max-width: 600px !important;
+}
+
+.content 
+{
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.content-wrap 
+{
+  text-align: justify;
+  line-height: 20px;
+  padding: 30px;
+  background: #F2F2F2;
+  border-top: 6px solid #6FC6CC;
+}
+
+.login 
+{
+  width: 550px;
+  height: 240px;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px;
+  gap: 14px;
+  box-shadow: 0 0 0 1px #7E7E7E;
+  background-color: #FFFFFF;
+  font-size: 14px;
+}
+
+.footerlogo
+{
+  width: 165.85px;
+  height: 56px;
+}
+
+.schoolname 
+{
+  font-size: 15px;
+  color: #343556;
+  font-weight: 800;
+  margin-top: -37px;
+  text-align: right;
+}
+
+hr 
+{
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid #D9D9D9;
+}
+
+.head 
+{
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.heads 
+{
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+P 
+{
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18.4px;
+  letter-spacing: 0em;
+  text-align: justify;
+  color: #000000;
+}
+
+.footerfont 
+{
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #5A5A5A;
+}
+
+.btn-primary-bl 
+{
+  width: 192px;
+  height: 48px;
+  padding: 16px 20px 16px 20px;
+  border-radius: 8px;
+  gap: 8px;
+  background: #6FC6CC;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #083538;
+  margin-bottom: 10px;
+}
+
+.social 
+{
+  width: 196px;
+  height: 56px;
+  border-radius: 8px;
+  gap: 12px;
+}
+
+.confirmationemail 
+{
+  width: 550px;
+  height: 128px;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px;
+  gap: 14px;
+  box-shadow: 0 0 0 1px #7E7E7E;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

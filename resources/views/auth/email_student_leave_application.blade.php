@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Email Student Leave Application Template</title>
+  <title>Email Teacher Leave Application Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
   <meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
@@ -21,39 +21,80 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="750" style="display: block !important; max-width: 750px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action" itemscope itemtype="http://schema.org/ConfirmAction">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
-                   <tr>
-                      <td>
-                        <h4>Subject: Student Leave Application - 佐藤 清</h4>
-                        <h4>Respected Sir/Mam,</h4>
-                        <p>I hope this message finds you well. I am writing to formally request a leave of absence from [School Name] from [Start Date] to [End Date] due to [Reason for Leave]. I believe this time off is essential for [Explain the reason briefly].</p>
-                        <p>I am notifying you through my teacher, [Teacher's Name], as per the school's procedure. I kindly ask for your consideration and approval for this leave. I understand the importance of my studies and assure you that I will catch up on any missed work promptly upon my return.</p>
-                        <p>If there are any specific guidelines or requirements for me to follow during my leave, please let me know. I greatly appreciate your understanding and support.</p>
-                        <p>Thank you for your attention to this matter.</p>
-                      </td>
+                  <tr>
+                    <td>
+                      <h4 class="head">Student Leave Application</h4>
+                    </td>
                   </tr>
-                   <tr>
-                      <td>
-                         <p><b>Your's Sincerely,</b></p>
-                         <h6>佐藤 清</h6>
-                      </td>
+                  <tr>
+                    <td>
+                      <p><b>Dear Sir/Madam,</b></p>
+                      <p>I respectfully request a leave of absence from <b>[school name]</b> from <b>[start date]</b> to <b>[end date]</b> for <b>[briefly state reason]</b>. </p>
+                    </td>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Fees Table-->
+                <table width="100%">
+                  <tr>
+                    <td class="texts">
+                      <p><b>My reason for this leave request:</b></p>
+                      <ol>
+                        <li>Point A</li>
+                        <li>Point B</li>
+                        <li>Point C</li>
+                      </ol>
+                    </td>
+                  </tr>
+                </table>
+                <!-- End Fees Table-->
+                <!-- Footer Table-->
+                <table>
+                  <tr>
+                    <td>
+                      <p>My teacher, <b>[Teacher's name]</b>, is aware and I am committed to catching up on missed work promptly.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Your understanding and approval are greatly appreciated.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr style="width: 552px; height: 1px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>

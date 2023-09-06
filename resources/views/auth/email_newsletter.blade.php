@@ -21,59 +21,158 @@
   <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
-<body>
 
-  <table class="body-wrap" style="width: 100%;">
+<body>
+  <table class="body-wrap">
     <tr>
-      <td class="container" width="800" style="display: block !important; max-width: 800px !important;" valign="top">
-        <div class="content" style="padding:20px; margin-top: 20px;">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action">
+      <td class="container">
+        <div class="content">
+          <table>
             <tr>
-              <td class="content-wrap" style="text-align: justify;line-height: 25px;padding: 30px;border: 3px solid #4fc6e1;background-color: #fff;" valign="top">
+              <td class="content-wrap">
+                <!-- Start Header-->
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
-                      <p style="font-size: 15px; color: #343556; font-weight: 800; margin-top: -37px; text-align: right; margin-bottom: 37px;">{{$school_name}}</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <p class="schoolname">{{$school_name}}</p>
+                      <hr>
                     </td>
                   </tr>
-                   <tr>
-                      <td>
-                      <h5>Dear [user],</h5>
-                                  <p>We hope your month is off to a fantastic start! We are thrilled to share the latest updates from [School Name] with our beloved school community:</p>
-                                  <h5>Principal's Message:</h5>
-                                  <p>Welcome to a fantastic month ahead! Our principal, [principal name], extends heartfelt appreciation for the dedication and enthusiasm of our students and staff during [last month/term]. Exciting events and initiatives are on the horizon, enriching our school experience.</p>
-                                  <h5>Academic Excellence:</h5>
-                                  <p>Congratulations to our students on their academic achievements in [recent exams/competitions]. Your hard work inspires us all. Keep striving for excellence!</p>
-                                  <h5>Extracurricular Highlights:</h5>
-                                  <p>Our students continue to shine in sports, music, and various other activities. Please take a moment to explore their impressive achievements across these diverse fields.</p>
-                                  <h5>Upcoming Events:</h5>
-                                  <p>Exciting events this month! Stay tuned for schedules and info, including [event name] and community projects.</p>
-                                  <h5>Parent-Teacher Meetings:</h5>
-                                  <p>Connect with us at the upcoming parent-teacher meeting on [date] to discuss your child's development. Your presence matters!</p>
-                                  <h5>Staff Spotlight:</h5>
-                                  <p>Discover our dedicated faculty in this section. Know about their teaching philosophies and experiences as they share their insights.</p>
-                                  <h5>School Facilities Update:</h5>
-                                  <p>Exciting news! We've upgraded [specific school facilities] to create a better learning environment for our students.</p>
-                                  <h5>Parent Partnership:</h5>
-                                  <p>We appreciate parent-school collaboration. Share your ideas and feedback with us; your insights help us improve our school community.</p>
-                                  <h5>Reminders:</h5>
-                                 <ol>
-                                  <li>Follow us on social media for instant updates and a peek into school life.</li>
-                                  <li>Visit the school website for vital announcements and the latest news.</li>
-                                  <li>Keep your contact information up to date with the school office.</li>
-                                </ol>
-                                <p>Thank you for being a part of [ school name] family. We create an excellent education together. Wishing you a great month ahead!</p>
-
-                      </td>
+                  <tr>
+                    <td>
+                      <h4 class="head">Monthly Highlight - [Month/Year]</h4>
+                    </td>
                   </tr>
-                   <tr>
-                      <td>
-                         <p><b>Best regards,</b></p>
-                         <h6>{{$school_name}}</h6>
-                      </td>
+                  <tr>
+                    <td>
+                      <p><b>Dear [User Name],</b></p>
+                      <p>We hope your month is off to a fantastic start! We are thrilled to share the latest updates from <b>[School Name]</b> with our beloved school community:</p>
+                    </td>
                   </tr>
                 </table>
+                <!-- End Header-->
+                <!-- Card-->
+                <div class="card newsletter">
+                  <div class="one">
+                    <table>
+                      <tr>
+                        <td class="numbers"> 1</td>
+                        <td style="padding: 20px 0px 0px 0px;">
+                          <p><b>Principal's Message:</b><br>
+                            <b>[Principal Name]</b> welcomes you all to an amazing month ahead. We appreciate the dedication of our students and staff during [last month/term] and look forward to upcoming events and initiatives.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="two">
+                    <table>
+                      <tr>
+                        <td class="numbers">2</td>
+                        <td style="padding: 2px 0px 19px 0px">
+                          <p><b>Academic Excellence:</b><br>
+                            Congratulations to our students on their exceptional results in <b>[recent exams/competitions]</b>. Keep up the great work!</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="two">
+                    <table>
+                      <tr>
+                        <td class="numbers">3</td>
+                        <td style="padding: 2px 0px 19px 0px">
+                          <p><b>Extracurricular Highlights:</b><br>
+                            Our students continue to shine in sports, music, and more. Check out their achievements in various activities.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="two">
+                    <table>
+                      <tr>
+                        <td class="numbers">4</td>
+                        <td style="padding: 2px 0px 19px 0px">
+                          <p><b>Upcoming Events:</b><br>
+                            Stay tuned for exciting events, including <b>[event name]</b> and community service projects.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="two">
+                    <table>
+                      <tr>
+                        <td class="numbers">5</td>
+                        <td style="padding: 2px 0px 19px 0px">
+                          <p><b>Parent-Teacher Meetings:</b><br>
+                            Meet with teachers on <b>[date(s)]</b> to discuss your child's progress and strengths.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="three">
+                    <table>
+                      <tr>
+                        <td class="numbers">6</td>
+                        <td style="padding: 2px 0px 30px 0px">
+                          <p><b>Staff Spotlight:</b><br>
+                            Get to know our passionate teachers and their experiences.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="three">
+                    <table>
+                      <tr>
+                        <td class="numbers">7</td>
+                        <td style="padding: 2px 0px 19px 0px">
+                          <p><b>School Facilities Update:</b><br>
+                            We've upgraded <b>[specific school facilities]</b> to enhance the learning environment.</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="three">
+                    <table>
+                      <tr>
+                        <td class="numbers">8</td>
+                        <td style="padding: 2px 0px 30px 0px">
+                          <p><b>Parent Partnership:</b><br>
+                            Share your ideas and feedback with us. Your input matters!</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- End card-->
+                <!-- Footer Table-->
+                <table>
+
+                  <tr>
+                    <td>
+                      <p><b>Reminders:</b></p>
+                      <ol class="text">
+                        <li>Follow us on social media for real-time updates.</li>
+                        <li>Check the school website for announcements and news.</li>
+                        <li>Keep your contact information up-to-date with the school office.</li>
+                      </ol>
+                      <p>Thank you for being part of our family. Together, we create an outstanding educational experience.</p>
+                      <p>Wishing you a wonderful month ahead!</p>
+                      <h4 class="heads">Best regards,</h4>
+                      <h6>{{$school_name}}</h6>
+                      <hr>
+                    </td>
+                  </tr>
+                  <tr class="emailfooter">
+                    <td>
+                      <p class="footerfont">For help & support, kindly use contact information below.</p>
+                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <p class="footerfont">schoolhelp@gmail.com</p>
+                      <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
+                    </td>
+                  </tr>
+                </table>
+                <!--End Footer Table-->
               </td>
             </tr>
           </table>
@@ -82,5 +181,4 @@
     </tr>
   </table>
 </body>
-
 </html>
