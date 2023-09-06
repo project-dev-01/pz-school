@@ -89,7 +89,8 @@
                                     <div class="col-3 ml-auto show-mobile">
                                         <div class="tt-value">
                                             @php
-                                            echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                            $commonController = new \App\Http\Controllers\CommonController();
+                                            echo $commonController->get_timeago(strtotime($value['created_at']));
                                             @endphp
                                         </div>
                                     </div>
@@ -98,7 +99,8 @@
                             <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
                             <div class="tt-col-value hide-mobile">
                                 @php
-                                echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
                                 @endphp
                             </div>
                         </div>
@@ -137,12 +139,12 @@
                         @endphp
                         <div class="tt-item">
                             <div class="tt-col-avatar">
-                            <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                                 {{ $value['user_name'] }}
                             </div>
                             <div class="tt-col-description">
                                 <h6 class="tt-title">
-                                <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
+                                    <a href="{{route('admin.forum.page-single-topic-val',[$value['id'],$value['user_id']])}}">
                                         {{ $value['topic_title'] }}
                                     </a>
                                 </h6>
@@ -164,15 +166,16 @@
 
 
                             <div class="tt-col-value hide-mobile">
-                            @php
-                            echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
-                            @endphp
+                                @php
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
+                                @endphp
                             </div>
-                            <div class="tt-col-value hide-mobile">                            
-                            <a href="javescript:void(0)" class="tt-color15 tt-badge threadapproved" data-id="{{$value['id']}}">{{ __('messages.approve') }}</a>
-                            <a href="javescript:void(0)"  class="tt-color08 tt-badge threaddecline" data-id="{{$value['id']}}">{{ __('messages.decline') }}</a>
+                            <div class="tt-col-value hide-mobile">
+                                <a href="javescript:void(0)" class="tt-color15 tt-badge threadapproved" data-id="{{$value['id']}}">{{ __('messages.approve') }}</a>
+                                <a href="javescript:void(0)" class="tt-color08 tt-badge threaddecline" data-id="{{$value['id']}}">{{ __('messages.decline') }}</a>
 
-                            </div>                        
+                            </div>
                         </div>
                         @php
                         $randomcolor++;
@@ -189,7 +192,7 @@
                     </div>
                 </div>
                 <div class="tab-pane tt-indent-none" id="tt-tab-03" role="tabpanel">
-                    
+
                     <div class="tt-topic-list">
                         <div class="tt-list-header">
                             <div class="tt-col-topic">{{ __('messages.topic') }}</div>
@@ -215,11 +218,11 @@
                             </div>
                             <div class="tt-col-description">
                                 <h6 class="tt-title">
-                                <a href="{{route('admin.forum.page-single-topic-val',[$value['created_post_id'],$value['user_id']])}}">
+                                    <a href="{{route('admin.forum.page-single-topic-val',[$value['created_post_id'],$value['user_id']])}}">
                                         {{ $value['topic_title'] }}
                                     </a>
-                                 
-                                  </h6>
+
+                                </h6>
                                 <div class="row align-items-center no-gutters hide-desktope">
                                     <div class="col-9">
                                         <ul class="tt-list-badge">
@@ -231,14 +234,15 @@
                                     </div>
                                 </div>
                                 <div class="tt-content">
-                                   {!! $value['replies_com'] !!}
+                                    {!! $value['replies_com'] !!}
                                 </div>
                             </div>
                             <div class="tt-col-category"><a href="#"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names']}}</span></a></div>
                             <div class="tt-col-value-large hide-mobile">
-                            @php
-                            echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
-                            @endphp
+                                @php
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
+                                @endphp
                             </div>
                         </div>
                         @php

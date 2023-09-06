@@ -4,7 +4,7 @@
     <div class="container">
         <div class="tt-topic-list">
             <div class="tt-list-header">
-          <!--  <div class="ftt-col-topic">User</div> -->
+                <!--  <div class="ftt-col-topic">User</div> -->
                 <div class="tt-col-topic">{{ __('messages.topic') }}</div>
                 <div class="tt-col-category">{{ __('messages.category') }}</div>
                 <div class="tt-col-value hide-mobile">{{ __('messages.likes') }}</div>
@@ -65,17 +65,18 @@
                 </div>
                 <div class="tt-col-value hide-mobile">
                     @php
-                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                    $commonController = new \App\Http\Controllers\CommonController();
+                    echo $commonController->get_timeago(strtotime($value['created_at']));
                     @endphp
                 </div>
             </div>
             @php
             $randomcolor++;
             @endphp
-            @empty 
+            @empty
             @endforelse
             @else
-            <div class="text-justify">  {{ __('messages.no_records_found') }}</div>
+            <div class="text-justify"> {{ __('messages.no_records_found') }}</div>
             @endif
 
             <!-- <div class="tt-row-btn">

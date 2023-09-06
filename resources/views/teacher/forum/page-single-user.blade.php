@@ -89,7 +89,8 @@
                                     <div class="col-3 ml-auto show-mobile">
                                         <div class="tt-value">
                                             @php
-                                            echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                            $commonController = new \App\Http\Controllers\CommonController();
+                                            echo $commonController->get_timeago(strtotime($value['created_at']));
                                             @endphp
                                         </div>
                                     </div>
@@ -98,7 +99,8 @@
                             <div class="tt-col-category"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names'] }}</span></div>
                             <div class="tt-col-value hide-mobile">
                                 @php
-                                echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
                                 @endphp
                             </div>
                         </div>
@@ -165,7 +167,8 @@
 
                             <div class="tt-col-value hide-mobile">
                                 @php
-                                echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
                                 @endphp
                             </div>
                             <div class="tt-col-value hide-mobile">
@@ -243,7 +246,8 @@
                             <div class="tt-col-category"><a href="#"><span class="tt-color0{{$randomcolor}} tt-badge">{{$value['category_names']}}</span></a></div>
                             <div class="tt-col-value-large hide-mobile">
                                 @php
-                                echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                                $commonController = new \App\Http\Controllers\CommonController();
+                                echo $commonController->get_timeago(strtotime($value['created_at']));
                                 @endphp
                             </div>
                         </div>

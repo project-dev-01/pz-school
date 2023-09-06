@@ -35,7 +35,7 @@
                 </a>
             </li>
             @endif
-            <li class="dropdown notification-list topbar-dropdown">
+            <!-- <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="mdi mdi-calendar-clock font-22"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge remainder-badge-count">0</span>
@@ -66,7 +66,30 @@
                             </p>
                         </a>
                     </div>
+            </li> -->
+            @if(Session::get('role_id') == '2' || Session::get('role_id') == '4')
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="mdi mdi-calendar-clock font-22"></i>
+                    <span class="badge badge-danger rounded-circle noti-icon-badge remainder-badge-count">0</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                    <!-- item-->
+                    <div class="dropdown-item noti-title" style="border-bottom: 2px solid #e5e8eb;">
+                        <h5 class="m-0">
+                            <span class="float-right">
+                                <a href="javascrip:void(0)" class="text-dark">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#436ce5;">×</button>
+                                </a>
+                            </span>Reminders
+                        </h5>
+                    </div>
+                    <div class="noti-scroll remainder-list-show" data-simplebar>
+
+                    </div>
             </li>
+            @endif
             <!-- <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" href="">
                     <i class="mdi mdi-calendar-clock font-22"></i>
@@ -81,6 +104,7 @@
                         <ul id="a">
                             <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
                             <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                            <li><img src="{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
                         </ul>
                     </div>
                 </div>

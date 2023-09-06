@@ -1,21 +1,12 @@
 <?php
-// $url = "http://localhost/school-management-system/api";
 $url = "http://localhost/paxsuzen-api-dev/api";
 // $url = "https://api.suzen.school/api";
-
-
-// $url = "https://www.paxsuzen.com/smkkiaramas/api"; 
 return [
     'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     // 'image_url' => "https://api.suzen.school",
     'image_url' => "http://localhost/paxsuzen-api-dev",
-    
-    // 'branch_id'=>'1',
-    // 'school_name'=>'SMK Kiaramas',
-    // 'school_image'=>'school.jpg',
-    // 'image_url' => "http://localhost/paxsuzen-api-dev",
     'api' => [
         // login url
         'branch_id'=>'1',
@@ -861,6 +852,7 @@ return [
         'get_parent_fees_list' => $url.'/fees/get_parent_fees_list',
         'parent_fees_history' => $url.'/fees/parent_fees_history',
         'get_today_schedules_admin' => $url.'/get_today_schedules_admin',
+        'get_today_schedules_teacher' => $url.'/get_today_schedules_teacher'
       ]
 
 ];

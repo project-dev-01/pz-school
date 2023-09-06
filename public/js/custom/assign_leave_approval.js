@@ -55,21 +55,30 @@ $(function () {
     // assign_leave_approval
     $(document).on('click', '.assignLeaveApprove', function () {
         var staff_id = $(this).data('id');
-        var assigner_staff_id = $("#staffID_" + staff_id).val();
-        console.log(assigner_staff_id);
-        console.log(staff_id);
-        console.log("#staffID_" + staff_id);
-
+        // var assigner_staff_id = $("#staffID_" + staff_id).val();
+        var levelOneStaffApproval = $("#levelOneStaffApproval" + staff_id).val();
+        var levelTwoStaffApproval = $("#levelTwoStaffApproval" + staff_id).val();
+        var levelThreeStaffApproval = $("#levelThreeStaffApproval" + staff_id).val();
+        // console.log("-------");
+        // console.log(levelOneStaffApproval);
+        // console.log(levelTwoStaffApproval);
+        // console.log(levelThreeStaffApproval);
+        // console.log(staff_id);
+        // console.log("#staffID_" + staff_id);
+        // return false;
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
         formData.append('staff_id', staff_id);
-        formData.append('assigner_staff_id', assigner_staff_id);
+        formData.append('level_one_staff_id', levelOneStaffApproval);
+        formData.append('level_two_staff_id', levelTwoStaffApproval);
+        formData.append('level_three_staff_id', levelThreeStaffApproval);
+        // formData.append('assigner_staff_id', assigner_staff_id);
         formData.append('created_by', ref_user_id);
         // Display the key/value pairs
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
         $.ajax({
             url: assignLeaveApprovalUrl,
             method: "post",

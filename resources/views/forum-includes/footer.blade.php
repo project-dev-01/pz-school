@@ -476,20 +476,6 @@
                     <script src="{{ asset('public/js/custom/ja.js') }}"></script>
                     <script src="{{asset('public/js/custom/bootstrap-tokenfield.js')}}"></script>
 
-
-
-                    <script>
-                        toastr.options.preventDuplicates = true;
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-                    </script>
-                  
-                    
-                    <script src="{{ asset('public/js/validation/validation.js') }}"></script>
-
                     <script>
                         // forum count
 
@@ -516,3 +502,16 @@
                         var calLang = "{{ __('messages.calendar_lang') }}";
                         var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
                     </script>
+
+                    <script>
+                        toastr.options.preventDuplicates = true;
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            }
+                        });
+                    </script>
+
+
+                    <script src="{{ asset('public/js/validation/validation.js') }}"></script>

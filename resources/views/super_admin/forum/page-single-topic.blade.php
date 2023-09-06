@@ -309,7 +309,8 @@
                 </div>
                 <div class="tt-col-value hide-mobile flvalues">
                     @php
-                    echo App\Http\Controllers\CommonController::get_timeago(strtotime($value['created_at']));
+                    $commonController = new \App\Http\Controllers\CommonController();
+                    echo $commonController->get_timeago(strtotime($value['created_at']));
                     @endphp
                 </div>
 

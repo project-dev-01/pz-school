@@ -301,6 +301,13 @@
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
+        } else if (locale_lang == "malay") {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
         } else {
             var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
             var value = "en";
@@ -318,6 +325,13 @@
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
+        } else if (language_name == "malay") {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
         } else {
             var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
             var value = "en";
@@ -332,6 +346,13 @@
             var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else if (locale == "malay") {
+            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
@@ -437,6 +458,8 @@
                 type: 'GET',
                 url: allNotifications,
                 success: function(res) {
+                    console.log("res")
+                    console.log(res)
                     $(".notification-list-show").html(res.notificationlist);
                     $(".badge-count").text(res.count);
                 },
@@ -447,6 +470,7 @@
             });
         }
         remainderNotifications();
+
         function remainderNotifications() {
             $.ajax({
                 type: 'GET',

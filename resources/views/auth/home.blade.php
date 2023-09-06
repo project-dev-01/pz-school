@@ -39,6 +39,7 @@
                                 <ul id="a" style="margin-bottom:0px;">
                                     <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
                                     <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
 
                                 </ul>
                             </div>
@@ -202,6 +203,13 @@
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
+            } else if (locale_lang == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
             } else {
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
                 var value = "en";
@@ -219,6 +227,13 @@
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
+            } else if (language_name == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
             } else {
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
                 var value = "en";
@@ -233,6 +248,13 @@
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else if (locale == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);

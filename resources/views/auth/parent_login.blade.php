@@ -56,19 +56,19 @@
                 <div class="align-items-center d-flex h-100">
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
-                            <div class="lang-select" style="float: right; margin-top:-15px;">
+                            <div class="lang-select" style="float: right; margin-top:20px;">
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
                                     <ul id="a" style="margin-bottom:0px;">
                                         <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
                                         <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Logo -->
-                        <div class="auth-brand text-center text-lg-left">
+                        <div class="auth-logo">
                             <div class="auth-logo">
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
@@ -85,8 +85,8 @@
                             <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
                                 <input type="hidden" name="branch_id" value="{{$branch_id}}">
-                                <input type="hidden" name="user_browser" id="user_browser"  value="">                                
-                                <input type="hidden" name="user_os" id="user_os" value="">                             
+                                <input type="hidden" name="user_browser" id="user_browser" value="">
+                                <input type="hidden" name="user_os" id="user_os" value="">
                                 <input type="hidden" name="user_device" id="user_device" value="">
                                 <!-- <input type="hidden" name="branch_id" value="2"> -->
                                 @if ( Session::get('success'))
@@ -155,7 +155,7 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>    
+    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
     <script src="{{ asset('public/js/custom/user_config.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -197,6 +197,13 @@
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
+            } else if (locale_lang == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
             } else {
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
                 var value = "en";
@@ -214,6 +221,13 @@
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
+            } else if (language_name == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
             } else {
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
                 var value = "en";
@@ -228,6 +242,13 @@
                 var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else if (locale == "malay") {
+                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);

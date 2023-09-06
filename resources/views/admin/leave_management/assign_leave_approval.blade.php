@@ -51,13 +51,15 @@
                     </label>
 
                     <div class="table-responsive">
-                        <table id="demo-foo-pagination" class="table w-100 nowrap" data-page-size="5">
+                        <table id="demo-foo-pagination" class="table w-100 nowrap" data-page-size="10">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.employee_name') }}</th>
                                     <th>{{ __('messages.department_name') }}</th>
-                                    <th>{{ __('messages.approval_head') }}</th>
+                                    <th>{{ __('messages.level_one_staff_approval') }}</th>
+                                    <th>{{ __('messages.level_two_staff_approval') }}</th>
+                                    <th>{{ __('messages.level_three_staff_approval') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -71,10 +73,36 @@
                                     <td>{{$value['name']}}</td>
                                     <td>{{$value['department_name']}}</td>
                                     <td>
-                                        <select id="staffID_{{$value['id']}}" class="form-control">
+                                        <select id="levelOneStaffApproval{{$value['id']}}" class="form-control">
                                             <option value="">{{ __('messages.select_staff') }}</option>
                                             @forelse($get_all_staff_details as $val)
-                                            @if ($val['id'] == $value['assigner_staff_id'])
+                                            @if ($val['id'] == $value['level_one_staff_id'])
+                                            <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
+                                            @else
+                                            <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                            @endif
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="levelTwoStaffApproval{{$value['id']}}" class="form-control">
+                                            <option value="">{{ __('messages.select_staff') }}</option>
+                                            @forelse($get_all_staff_details as $val)
+                                            @if ($val['id'] == $value['level_two_staff_id'])
+                                            <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
+                                            @else
+                                            <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                            @endif
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="levelThreeStaffApproval{{$value['id']}}" class="form-control">
+                                            <option value="">{{ __('messages.select_staff') }}</option>
+                                            @forelse($get_all_staff_details as $val)
+                                            @if ($val['id'] == $value['level_three_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>

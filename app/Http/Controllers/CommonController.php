@@ -153,7 +153,7 @@ class CommonController extends Controller
         );
         echo "migration table executed success";
     }
-    function get_timeago($ptime)
+    public function get_timeago($ptime)
     {
         $estimate_time = time() - $ptime;
 
@@ -203,6 +203,7 @@ class CommonController extends Controller
             // dd($unread_notifications['data']['unread']);
             // dd($unread_notifications['data']['unread_count']);
             $count = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
+            $count = count($count);
             // dd($count);
             if (!empty($unread_notifications['data']['unread'])) {
                 $notificationlist .= '<div class="noti-scroll" data-simplebar>';
@@ -302,25 +303,44 @@ class CommonController extends Controller
         // return "fdfsf";
         // $unread_notifications = Helper::GetMethod(config('constants.api.get_today_schedules_admin'));
         $data = [
-            'login_id' => session()->get('user_id')
+            'login_id' => session()->get('user_id'),
+            'teacher_id' => session()->get('ref_user_id')
         ];
-        $unread_notifications = Helper::GETMethodWithData(config('constants.api.get_today_schedules_admin'), $data);
+        $role_id = session()->get('role_id');
+        if ($role_id == 2 || $role_id == '2') {
+            $url = config('constants.api.get_today_schedules_admin');
+        }
+        if ($role_id == 4 || $role_id == '2') {
+            $url = config('constants.api.get_today_schedules_teacher');
+        }
+        $unread_notifications = Helper::GETMethodWithData($url, $data);
         // return $unread_notifications;
         $notificationlist = '';
         $count = 0;
         if ($unread_notifications['code'] == 200) {
             $counting = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
-            $count = count($counting);
-            $notificationlist .= '<div class="noti-scroll" data-simplebar>';
-            if ($count > 0) {
+            $lengthArr = count($counting);
+            // $notificationlist .= '<div class="noti-scroll" data-simplebar>';
+            if ($lengthArr > 0) {
                 foreach ($unread_notifications['data'] as $val) {
-                    $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="">
-                    <p class="notify-details">Title</p>
-                    <p class="text-muted mb-0 user-msg">
-                        <small>' . $val['title'] . '</small>
-                        <small>' . $this->timeago($val['start']) . '</small>
-                    </p>
-                </a>';
+                    $allDay = isset($val['allDay']) ? $val['allDay'] : null;
+                    $timeDifference = $this->timeago($val['start'], $val['end'], $allDay);
+                    $startTime = $val['start']; // Replace with your datetime string
+                    $meetingtime = new DateTime($startTime);
+                    $formattedTime = $meetingtime->format('h:i A'); // Format as hours:minutes AM/PM
+                    if (isset($timeDifference)) {
+                        $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon">
+                            <i class="mdi mdi-calendar-clock font-22" style="color:#436ce5;"></i>
+                        </div>
+                        <p class="notify-details" style="color:#436ce5;">' . $val['title'] . '</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small>' . $formattedTime . '</small>
+                            <small class="float-right">' . $timeDifference . '</small>
+                        </p>
+                    </a>';
+                        $count++;
+                    }
                 }
             } else {
                 $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -330,42 +350,90 @@ class CommonController extends Controller
                 </p>
             </a>';
             }
-            $notificationlist .= '</div>';
+            if ($notificationlist == "") {
+                $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
+                <p class="notify-details"></p>
+                <p class="text-muted mb-0 user-msg">
+                    <small>There are no new notifications</small>
+                </p>
+            </a>';
+            }
+            // $notificationlist .= '</div>';
         }
         return array('count' => $count, 'notificationlist' => $notificationlist);
     }
-    public function timeago($start)
+    public function timeago($start, $end, $allDay)
     {
         // $meetingDatetimeString = '2023-08-28 23:50:00'; // Replace with your datetime string
         $meetingDatetimeString = $start; // Replace with your datetime string
-
+        $startDateString = $start; // Replace with your datetime string
+        $endDatetimeString = $end; // Replace with your datetime string
         // Create DateTime objects for the meeting datetime and current datetime
         $meetingDatetime = new DateTime($meetingDatetimeString);
         $currentDatetime = new DateTime();
+        $startDatetime = new DateTime($startDateString);
+        $endDatetime = new DateTime($endDatetimeString);
+        // if it is all day come over here
+        if (isset($allDay)) {
+            if ($allDay == 1) {
+                // Compare the current datetime with the start and end datetimes
+                if ($currentDatetime >= $startDatetime && $currentDatetime <= $endDatetime) {
+                    // The current datetime is within the specified range
+                    return "All Day";
+                } else {
+                    // The current datetime is outside the specified range
+                    return null;
+                }
+            }
+        }
+        if ($currentDatetime < $meetingDatetime) {
+            // Calculate the time difference
+            $timeDifference = $meetingDatetime->getTimestamp() - $currentDatetime->getTimestamp();
 
-        // Calculate the time difference
-        $timeDifference = $meetingDatetime->getTimestamp() - $currentDatetime->getTimestamp();
+            // Calculate days, hours, minutes, and seconds remaining
+            $daysRemaining = floor($timeDifference / (60 * 60 * 24));
+            $hoursRemaining = floor(($timeDifference % (60 * 60 * 24)) / (60 * 60));
+            $minutesRemaining = floor(($timeDifference % (60 * 60)) / 60);
+            $secondsRemaining = $timeDifference % 60;
 
-        // Calculate days, hours, minutes, and seconds remaining
-        $daysRemaining = floor($timeDifference / (60 * 60 * 24));
-        $hoursRemaining = floor(($timeDifference % (60 * 60 * 24)) / (60 * 60));
-        $minutesRemaining = floor(($timeDifference % (60 * 60)) / 60);
-        $secondsRemaining = $timeDifference % 60;
-
-        // Display the remaining time
-        if ($daysRemaining > 0) {
-            return "$daysRemaining days ";
-        } elseif ($hoursRemaining > 0) {
-            return "$hoursRemaining hours ";
-        } elseif ($minutesRemaining > 0) {
-            return "$minutesRemaining minutes ";
-        } elseif ($secondsRemaining > 0) {
-            return "$secondsRemaining seconds";
-        } else {
-            // it come only current day
-            return "All day";
+            // Display the remaining time
+            if ($daysRemaining > 0) {
+                return "$daysRemaining days ";
+            } elseif ($hoursRemaining > 0) {
+                return "$hoursRemaining hours ";
+            } elseif ($minutesRemaining > 0) {
+                return "$minutesRemaining minutes ";
+            } elseif ($secondsRemaining > 0) {
+                return "$secondsRemaining seconds";
+            } else {
+                // it come only current day
+                return null;
+                // return $meetingDatetime->format('Y-m-d H:i:s') . ' ' . $currentDatetime->format('Y-m-d H:i:s');
+            }
         }
     }
+    // public function timebetweenCheck()
+    // {
+    //     $currentDateTime = new DateTime();  // Current date and time
+    //     $startTime = new DateTime('2023-08-30 00:00:00'); // Replace with your start time
+    //     $endTime = new DateTime('2023-08-30 24:00:00');   // Replace with your end time
+    //     // print_r($currentDateTime);
+    //     // print_r($startTime);
+    //     // print_r($endTime);
+    //     // exit;
+    //     // Calculate the time remaining
+    //     if ($currentDateTime < $startTime) {
+    //         $remainingTime = $currentDateTime->diff($startTime);
+    //         $message = "The event starts in: " . $remainingTime->format('%H hours %i minutes');
+    //     } elseif ($currentDateTime < $endTime) {
+    //         $remainingTime = $currentDateTime->diff($endTime);
+    //         $message = "The event ends in: " . $remainingTime->format('%H hours %i minutes');
+    //     } else {
+    //         $message = "The event has already ended.";
+    //     }
+
+    //     echo $message;
+    // }
     // update child id
     public function greettingSession(Request $request)
     {

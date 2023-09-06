@@ -159,7 +159,10 @@ $(document).ready(function () {
         // displayEventTime: false,
         displayEventTime: true,
         handleWindowResize: !0,
+        scrollTime: '08:00:00',    // Set the initial scroll time
+
         // height: (window).height() - 200,
+        // Set the scrollTime to the start of your business hours
         header: {
             left: "prev,next today",
             center: "title",
@@ -182,6 +185,9 @@ $(document).ready(function () {
             }
         },
         locale: calLang,
+        // default: '15:00:00',
+        // default: false,
+        // scrollTime: '06:00:00', // Adjust this to match your business hours
         // events: t,
         editable: !0,
         droppable: !0,
@@ -757,6 +763,11 @@ $(document).ready(function () {
     });
     // calendar.removeAllEvents();
     calendar.render();
+    // Define the time you want to scroll to (e.g., 2:00 PM)
+    // let scrollTimeNew = '14:00:00'; // 24-hour format
+
+    // // Use scrollToTime to scroll to the specified time slot
+    // calendar.scrollToTime(scrollTimeNew);
     // calendar.setOption('buttonText', {
     //     dayGridMonth: month,
     //     timeGridWeek: week,

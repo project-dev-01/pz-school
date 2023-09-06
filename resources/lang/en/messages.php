@@ -1517,4 +1517,7 @@ return [
     "view_fees" => "View Fees",
     "terms_conditions" => "Terms and Conditions :",
     "offline" => "Offline",
+    "level_one_staff_approval" => "One Level Staff",
+    "level_two_staff_approval" => "Two Level Staff",
+    "level_three_staff_approval" => "Three Level Staff",
 ];
