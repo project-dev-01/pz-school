@@ -202,8 +202,8 @@ class CommonController extends Controller
         if ($unread_notifications['code'] == 200) {
             // dd($unread_notifications['data']['unread']);
             // dd($unread_notifications['data']['unread_count']);
-            $count = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
-            $count = count($count);
+            $count = isset($unread_notifications['data']['unread']) ? count($unread_notifications['data']['unread']) : 0;
+            // $count = count($count);
             // dd($count);
             if (!empty($unread_notifications['data']['unread'])) {
                 $notificationlist .= '<div class="noti-scroll" data-simplebar>';

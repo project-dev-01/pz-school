@@ -114,6 +114,9 @@ class TeacherController extends Controller
             'reason' => $request->reason,
             'remarks' => $request->remarks,
             'status' => $status,
+            'level_one_status' => $status,
+            'level_two_status' => $status,
+            'level_three_status' => $status,
             'document' => $base64,
             'file_extension' => $extension
         ];
@@ -167,7 +170,9 @@ class TeacherController extends Controller
     {
         $staff_data = [
             'staff_id' => $request->staff_id,
-            'leave_status' => $request->leave_status,
+            'level_one_status' => $request->level_one_status,
+            'level_two_status' => $request->level_two_status,
+            'level_three_status' => $request->level_three_status,
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
@@ -177,7 +182,7 @@ class TeacherController extends Controller
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['leave_id'] . '" data-assign_leave_approval_id="' . $row['id'] . '" data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
                             </div>';
             })
 

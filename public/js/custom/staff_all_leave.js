@@ -1,7 +1,7 @@
 $(function () {
-    AllLeaveListShow(leave_status = "All");
+    AllLeaveListShow(level_one_status = "All", level_two_status = "All", level_three_status = "All");
     // get all leave list
-    function AllLeaveListShow(leave_status) {
+    function AllLeaveListShow(level_one_status, level_two_status, level_three_status) {
         $('#all-leave-list').DataTable({
             processing: true,
             bDestroy: true,
@@ -18,7 +18,7 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -43,60 +43,60 @@ $(function () {
                     }
                 },
                 {
-                extend: 'pdf',
-                text: downloadpdf,
-                extension: '.pdf',
-                charset: 'utf-8',
-                bom: true,
-                exportOptions: {
-                    columns: 'th:not(:last-child)'
-                },
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
 
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
+                    customize: function (doc) {
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
                             }
-                        ],
-                        margin: [50, 0,0,0]
+                        });*/
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
                     }
-                });
-                
-            }
 
                 }
             ],
@@ -106,7 +106,13 @@ $(function () {
                 dataType: "json",
                 // data: { month:getSelectedMonth },
                 // data: formData,
-                data: { staff_id: ref_user_id, leave_status: leave_status },
+                data: {
+                    level_one_status: level_one_status,
+                    level_two_status: level_two_status,
+                    level_three_status: level_three_status,
+                    staff_id: ref_user_id,
+                    academic_session_id: academic_session_id
+                },
                 type: "GET",
                 // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                 // processData: true, // NEEDED, DON'T OMIT THIS
@@ -114,6 +120,8 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
+                    console.log("-----")
+                    console.log(json.data)
                     return json.data;
                 },
                 error: function (error) {
@@ -164,13 +172,17 @@ $(function () {
                     name: 'document'
                 },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'level_one_status',
+                    name: 'level_one_status',
                 },
-                // {
-                //     data: 'assiner_remarks',
-                //     name: 'assiner_remarks'
-                // },
+                {
+                    data: 'level_two_status',
+                    name: 'level_two_status',
+                },
+                {
+                    data: 'level_three_status',
+                    name: 'level_three_status',
+                },
                 {
                     data: 'created_at',
                     name: 'created_at',
@@ -183,28 +195,76 @@ $(function () {
                 },
             ],
             columnDefs: [
-                {
-                    "targets": 8,
-                    "render": function (data, type, row, meta) {
-                        var badgeColor = "";
-                        if (data == "Approve") {
-                            badgeColor = "badge-success";
-                        }
-                        if (data == "Reject") {
-                            badgeColor = "badge-danger";
-                        }
-                        if (data == "Pending") {
-                            badgeColor = "badge-warning";
-                        }
-                        var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
-                        return status;
-                    }
-                },
+
                 {
                     "targets": 7,
                     "render": function (data, type, row, meta) {
                         var document = '<a href="' + leaveFilesUrl + '/' + data + '" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                         return document;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "render": function (data, type, row, meta) {
+                        if (row.level_one_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
+                        }
+
+                    }
+                },
+                {
+                    "targets": 9,
+                    "render": function (data, type, row, meta) {
+                        if (row.level_two_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        if (row.level_three_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
+                        }
                     }
                 },
                 // {
@@ -241,6 +301,7 @@ $(function () {
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
         var leave_id = $(this).data('id');
+        var assign_leave_approval_id = $(this).data('assign_leave_approval_id');
         var staff_id = $(this).data('staff_id');
         // staffLeaveDetailsShowUrl
         var formData = new FormData();
@@ -248,6 +309,7 @@ $(function () {
         formData.append('branch_id', branchID);
         formData.append('leave_id', leave_id);
         formData.append('staff_id', staff_id);
+        formData.append('assign_leave_approval_id', assign_leave_approval_id);
         formData.append('academic_session_id', academic_session_id);
 
         $.ajax({
@@ -264,8 +326,32 @@ $(function () {
                     // DetailsModal
                     var leave_details = res.data.leave_details;
                     var leave_type_details = res.data.leave_type_details;
+                    var assign_leave_approval_details = res.data.assign_leave_approval_details;
+                    console.log("assign_leave_approval_details")
+                    console.log(res.data)
+                    console.log(assign_leave_approval_details)
+                    console.log(ref_user_id)
+                    let result = checkValue(assign_leave_approval_details, ref_user_id);
+                    var staffStatus = "";
+                    var staffRemarks = "";
+                    var approver_level = 0;
+                    // level 1 db column name
+                    if (result == 'level_one_staff_id') {
+                        staffStatus = leave_details.level_one_status;
+                        staffRemarks = leave_details.level_one_staff_remarks;
+                        approver_level = 1;
+                    } else if (result == 'level_two_staff_id') {
+                        staffStatus = leave_details.level_two_status;
+                        staffRemarks = leave_details.level_two_staff_remarks;
+                        approver_level = 2;
+                    } else if (result == 'level_three_staff_id') {
+                        staffStatus = leave_details.level_three_status;
+                        staffRemarks = leave_details.level_three_staff_remarks;
+                        approver_level = 3;
+                    }
                     $('#DetailsModal').modal('show');
                     $('#leave_id').val(leave_details.id);
+                    $('#approver_level').val(approver_level);
                     $('#staffName').html(leave_details.name);
                     $('#leaveDates').html(leave_details.from_leave + " / " + leave_details.to_leave);
                     $('#noOfDays').html(leave_details.date_diff + 1);
@@ -286,31 +372,34 @@ $(function () {
                     var status = '<span class="badge ' + badgeColor + ' badge-pill">' + leave_details.status + '</span>';
                     var document = '<a href="' + leaveFilesUrl + '/' + leave_details.document + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                     $('#documents').html(document);
-                    $('#remarks').html(leave_details.remarks);
                     $('#leave_status').html(status);
                     // set value
-                    $('#assiner_remarks').val(leave_details.assiner_remarks);
-                    $('#leave_status_name').val(leave_details.status);
+                    $('#1st_approver_remarks').html(leave_details.level_one_staff_remarks);
+                    $('#2nd_approver_remarks').html(leave_details.level_two_staff_remarks);
+                    $('#3rd_approver_remarks').html(leave_details.level_three_staff_remarks);
+
+                    $('#assiner_remarks').val(staffRemarks);
+                    $('#leave_status_name').val(staffStatus);
                     $('#alreadyTakenLeave tbody').empty();
                     // $('#myModal').modal('hide');
                     var takenLeaveDetails = "";
                     if (leave_type_details.length > 0) {
                         $.each(leave_type_details, function (key, val) {
                             var used_leave = 0;
-                            if(val.used_leave){
+                            if (val.used_leave) {
                                 used_leave = val.used_leave;
                             }
                             var bal = val.total_leave - val.used_leave;
                             takenLeaveDetails += '<tr>' +
-                            '<td>' + val.leave_name + '</td>' +
-                            '<td>' + val.total_leave + '</td>' +
-                            '<td>' + used_leave + '</td>' +
-                            '<td>' +  bal + '</td>' +
+                                '<td>' + val.leave_name + '</td>' +
+                                '<td>' + val.total_leave + '</td>' +
+                                '<td>' + used_leave + '</td>' +
+                                '<td>' + bal + '</td>' +
                                 '</tr>';
 
                         });
                     } else {
-                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> '+no_data_available+'</td></tr>';
+                        takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> ' + no_data_available + '</td></tr>';
 
                     }
                     $('#alreadyTakenLeave tbody').append(takenLeaveDetails);
@@ -328,7 +417,7 @@ $(function () {
         var status = $("#leave_status_name").val();
 
         var assiner_remarks = $("#assiner_remarks").val();
-
+        var approver_level = $("#approver_level").val();
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
@@ -336,6 +425,13 @@ $(function () {
         formData.append('status', status);
         formData.append('assiner_remarks', assiner_remarks);
         formData.append('staff_id', ref_user_id);
+        formData.append('approver_level', approver_level);
+        // Display the key/value pairs
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+
+        // return false;
         $.ajax({
             url: leaveApprovedUrl,
             method: "post",
@@ -359,21 +455,38 @@ $(function () {
     // all Leave Filter
     $('#allLeaveFilter').on('submit', function (e) {
         e.preventDefault();
-        var leave_status = $("#changeLeaveSts").val();
+        var level_one_status = $("#levelOneStatus").val();
+        var level_two_status = $("#levelTwoStatus").val();
+        var level_three_status = $("#levelThreeStatus").val();
         var classObj = {
-            leave_status: leave_status,
+            level_one_status: level_one_status,
+            level_two_status: level_two_status,
+            level_three_status: level_three_status,
             academic_session_id: academic_session_id,
             userID: userID,
         };
         setLocalStorageForAllLeave(classObj);
-        AllLeaveListShow(leave_status);
+        AllLeaveListShow(level_one_status, level_two_status, level_three_status);
     });
-    
+    function checkValue(obj, value) {
+        console.log("----");
+        console.log(obj);
+        console.log(value);
+        for (let key in obj) {
+            console.log(obj[key]);
+            if (obj[key] == value) {
+                return key;
+            }
+        }
+        return false;
+    }
 
     function setLocalStorageForAllLeave(classObj) {
 
         var allLeaveDetails = new Object();
-        allLeaveDetails.leave_status = classObj.leave_status;
+        allLeaveDetails.level_one_status = classObj.level_one_status;
+        allLeaveDetails.level_two_status = classObj.level_two_status;
+        allLeaveDetails.level_three_status = classObj.level_three_status;
         // here to attached to avoid localStorage other users to add
         allLeaveDetails.branch_id = branchID;
         allLeaveDetails.role_id = get_roll_id;
@@ -393,16 +506,20 @@ $(function () {
             if (teacher_all_leave_storage) {
                 var teacherAllLeaveStorage = JSON.parse(teacher_all_leave_storage);
                 if (teacherAllLeaveStorage.length == 1) {
-                    var leave_status, userBranchID, userRoleID, userID;
+                    var level_one_status,level_two_status,level_three_status, userBranchID, userRoleID, userID;
                     teacherAllLeaveStorage.forEach(function (user) {
-                        leave_status = user.leave_status;
+                        level_one_status = user.level_one_status;
+                        level_two_status = user.level_two_status;
+                        level_three_status = user.level_three_status;
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $("#changeLeaveSts").val(leave_status);
-                        AllLeaveListShow(leave_status);
+                        var level_one_status = $("#levelOneStatus").val();
+                        var level_two_status = $("#levelTwoStatus").val();
+                        var level_three_status = $("#levelThreeStatus").val();
+                        AllLeaveListShow(level_one_status, level_two_status, level_three_status);
                     }
                 }
             }

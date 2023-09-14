@@ -5093,6 +5093,9 @@ class AdminController extends Controller
             'reason' => $request->reason,
             'remarks' => $request->remarks,
             'status' => $status,
+            'level_one_status' => $status,
+            'level_two_status' => $status,
+            'level_three_status' => $status,
             'document' => $base64,
             'file_extension' => $extension
         ];

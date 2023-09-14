@@ -73,8 +73,8 @@
                                     <td>{{$value['name']}}</td>
                                     <td>{{$value['department_name']}}</td>
                                     <td>
-                                        <select id="levelOneStaffApproval{{$value['id']}}" class="form-control">
-                                            <option value="">{{ __('messages.select_staff') }}</option>
+                                        <select id="levelOneStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                            <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_one_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
@@ -86,8 +86,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="levelTwoStaffApproval{{$value['id']}}" class="form-control">
-                                            <option value="">{{ __('messages.select_staff') }}</option>
+                                        <select id="levelTwoStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                            <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_two_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
@@ -99,8 +99,8 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="levelThreeStaffApproval{{$value['id']}}" class="form-control">
-                                            <option value="">{{ __('messages.select_staff') }}</option>
+                                        <select id="levelThreeStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                            <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_three_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
