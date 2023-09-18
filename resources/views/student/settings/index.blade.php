@@ -2,11 +2,11 @@
 @section('title','Settings')
 @section('component_css')
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <style>
 
 .iti {
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
                 <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
                 <div class="text-left mt-3">
                     <form method="post" id="upload_form" enctype="multipart/form-data">
@@ -167,13 +167,13 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script>
     var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
@@ -195,7 +195,7 @@
     // settings url
     var profileUpdateStg = "{{ config('constants.api.change_student_profile_picture') }}";
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    var profilePath = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images' }}";
+    var profilePath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";
 </script>
-<script src="{{ asset('public/js/custom/student_settings.js') }}"></script>
+<script src="{{ asset('js/custom/student_settings.js') }}"></script>
 @endsection

@@ -12,14 +12,14 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- App favicon -->
-  <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+  <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
   <!-- App css -->
-  <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-  <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+  <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
   <!-- icons -->
-  <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('public/css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/custom/emailnotification.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -34,7 +34,7 @@
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
+                      <img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle header">
                       <p class="schoolname">{{$school_name}}</p>
                       <hr>
                     </td>
@@ -74,7 +74,7 @@
                   <tr>
                     <td>
                       <p class="footerfont">For help & support, kindly use contact information below.</p>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
+                      <img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle footerlogo">
                       <p class="footerfont">schoolhelp@gmail.com</p>
                       <p class="footerfont" style="line-height: 1px;">+60 1234-2345-122</p>
                     </td>

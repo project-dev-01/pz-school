@@ -1,9 +1,9 @@
 @extends('layouts.forum-layout')
 @section('content')
-<link href="{{ asset('public/css/custom/common.css') }}" rel="stylesheet" type="text/css" />
-<!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
-<link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .nav-tabs {
         background-color: white;

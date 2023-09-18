@@ -1,10 +1,10 @@
 @extends('layouts.admin-layout')
 @section('title','Schedule List')
 @section('component_css')
-<link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <style>
@@ -185,17 +185,17 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
      toastr.options.preventDuplicates = true;
 </script>
 <!-- validation -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var timetableFilter = "{{ route('teacher.timetable.details') }}";
@@ -203,5 +203,5 @@
     // localStorage variables
     var teacher_timetable_det = localStorage.getItem('teacher_timetable_details');
 </script>
-<script src="{{ asset('public/js/custom/timetable.js') }}"></script>
+<script src="{{ asset('js/custom/timetable.js') }}"></script>
 @endsection

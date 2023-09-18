@@ -13,18 +13,18 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="{{ asset('public/css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/home.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/libs/summernote/summernote-bs4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+    <link href="{{ asset('css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/home.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('libs/summernote/summernote-bs4.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="loading auth-fluid-pages pb-0">
@@ -37,9 +37,9 @@
                             <button class="btn-select" value=""></button>
                             <div class="b" style="text-align:justify;">
                                 <ul id="a" style="margin-bottom:0px;">
-                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
-                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
-                                    <li><img src="{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
+                                    <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                    <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                    <li><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
 
                                 </ul>
                             </div>
@@ -51,7 +51,7 @@
                             <div class="auth-logo">
                                 <a href="" class="logo logo-dark">
                                     <span class="logo-lg">
-                                        <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="45px" style="margin-bottom: 10px;">
+                                        <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="45px" style="margin-bottom: 10px;">
                                     </span>
                                 </a>
                             </div>
@@ -64,9 +64,9 @@
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('admin.authenticate') }}" method="post">
                                 <div class="form-group">
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 
                                 <h3 class="animated fadeInDown" style="font-size:22px;">{{ __('messages.welcome_to') }} {{$school_name}}</h3>
@@ -163,7 +163,7 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -173,7 +173,7 @@
     </script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
     <script type="text/javascript">
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
@@ -197,21 +197,21 @@
         if (locale_lang) {
             if (locale_lang == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (locale_lang == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -221,21 +221,21 @@
         } else if (language_name) {
             if (language_name == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (language_name == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -245,21 +245,21 @@
         } else {
             if (locale == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (locale == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -274,12 +274,12 @@
             $('.summernote').summernote();
         });
         //soapCategory routes
-        var imageUrl = "{{ config('constants.image_url').'/public/soap/images/' }}";
+        var imageUrl = "{{ config('constants.image_url').'/soap/images/' }}";
         var soapIndex = "{{ route('admin.soap') }}";
         var soapDelete = "{{ config('constants.api.soap_delete') }}";
     </script>
     <!-- Summernote js -->
-    <script src="{{ asset('public/libs/summernote/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('libs/summernote/summernote-bs4.min.js') }}"></script>
 
 </body>
 

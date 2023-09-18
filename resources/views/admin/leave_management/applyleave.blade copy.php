@@ -99,7 +99,8 @@ width: 14.3em;
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.already_taken_leave_details') }}
+                                <h4 class="navv">
+                                {{ __('messages.already_taken_leave_details') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -121,7 +122,7 @@ width: 14.3em;
                                             <td>{{ $val['total_leave'] }}</td>
                                             <td>{{ $val['used_leave'] ? $val['used_leave'] : 0 }}</td>
                                             <td>{{ $val['total_leave'] - $val['used_leave'] }}</td>
-                                        </tr>
+                                        </tr> 
                                         @empty
                                         <tr>
                                             <td colspan="4" style="text-align: center;">{{ __('messages.no_data_available') }}</td>
@@ -140,12 +141,13 @@ width: 14.3em;
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.leave_application') }}
+                                <h4 class="nav-link">
+                                {{ __('messages.leave_application') }}
                                     <h4>
                             </li>
                         </ul><br>
                         <div class="card-body">
-                            <form id="staffLeaveApply" method="post" action="{{ route('staff.leave_management.add') }}" autocomplete="off" novalidate>
+                            <form id="staffLeaveApply" method="post" action="{{ route('admin.leave_management.add') }}" autocomplete="off" novalidate>
                                 <!--1st row-->
                                 <div class="row">
                                     <div class="col-md-4">
@@ -201,6 +203,16 @@ width: 14.3em;
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="total_leave">{{ __('messages.total_leave_days') }}<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <input type="number" name="total_leave" class="form-control" id="total_leave">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-4" id="remarks_div" style="display:none;">
                                         <div class="form-group">
                                             <label for="heard">{{ __('messages.remarks') }}</label>
@@ -213,23 +225,13 @@ width: 14.3em;
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="total_leave">{{ __('messages.total_leave_days') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                </div>
-                                                <input type="text" name="total_leave" class="form-control number_validation" id="total_leave">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
                                             <label for="document">{{ __('messages.attachment_file') }}</label>
 
                                             <div class="input-group">
                                                 <div class="">
                                                     <input type="file" id="leave_file" class="custom-file-input" name="file">
                                                     <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
-                                                        <span id="file_name"></span>
+                                                    <span id="file_name"></span>
                                                 </div>
                                             </div>
 
@@ -238,10 +240,8 @@ width: 14.3em;
                                 </div>
                                 <!--3rd row-->
                                 <br />
-                                <div class="form-group text-right m-b-0">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                    {{ __('messages.apply') }}
-                                    </button>
+                                <div class="clearfix mt-4">
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="float:right;">{{ __('messages.apply') }}</button>
                                 </div>
                             </form>
 
@@ -251,20 +251,20 @@ width: 14.3em;
             </div>
             <!--Last Leave Taken -->
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-md-12">
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.leave_history') }}
+                                <h4 class="navv">{{ __('messages.leave_history') }}
                                     <h4>
                             </li>
                         </ul><br>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-md-12">
                                     <div class="">
                                         <div class="table-responsive">
-                                            <table id="staff-leave-list" class="table table-bordered mb-0">
+                                            <table id="staff-leave-list" class="table w-100 nowrap">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -319,10 +319,9 @@ width: 14.3em;
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     var StaffDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
-    var StaffLeaveList = "{{ route('staff.leave_management.list') }}";
-    var reuploadFileUrl = "{{ route('staff.reupload_file.add') }}";
+    var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
+    var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
     // Get PDF Footer Text
-
     var header_txt="{{ __('messages.leave_management') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End

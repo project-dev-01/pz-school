@@ -2,14 +2,14 @@
 @section('title','Homework')
 @section('component_css')
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
-<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
 .ui-datepicker
  {
@@ -251,15 +251,15 @@ width: 14.3em;
 
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
@@ -270,5 +270,5 @@ width: 14.3em;
     // localStorage variables
     var teacher_add_homework_storage = localStorage.getItem('teacher_add_homework_details');
 </script>
-<script src="{{ asset('public/js/custom/add_homework.js') }}"></script>
+<script src="{{ asset('js/custom/add_homework.js') }}"></script>
 @endsection

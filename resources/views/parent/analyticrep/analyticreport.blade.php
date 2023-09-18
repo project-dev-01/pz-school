@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 @section('title','Analytic Report')
 @section('component_css')
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
@@ -205,19 +205,19 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <!-- Chart JS -->
-<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
-<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 <!-- hightcharts js -->
-<script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
@@ -236,8 +236,8 @@
 
 
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
-    var studentImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
 </script>
-<script src="{{ asset('public/js/custom/analytics_parent_student.js') }}"></script>
+<script src="{{ asset('js/custom/analytics_parent_student.js') }}"></script>
 @endsection

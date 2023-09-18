@@ -34,6 +34,6 @@
     var faqEmail = "{{ config('constants.api.faq_email') }}";
 </script>
 
-<script src="{{ asset('public/js/custom/faq.js') }}"></script>
+<script src="{{ asset('js/custom/faq.js') }}"></script>
 
 @endsection

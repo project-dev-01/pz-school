@@ -209,7 +209,7 @@ class StudentController extends Controller
                         $document = '
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span><a href="' .config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/homework/'. $work['document'] . '" download>
+                                <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span><a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/teacher/homework/'. $work['document'] . '" download>
                                         <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                     </a></p>
                             </div>
@@ -225,7 +225,7 @@ class StudentController extends Controller
                         $file = '<div class="col-md-6">
                                     <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span>: </div>
                                         <div class="col-md-6">
-                                            <a href="' .config('constants.image_url').'/public/'.config('constants.branch_id').'/student/homework/'.$work['file'] . '" download>
+                                            <a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/student/homework/'.$work['file'] . '" download>
                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                             </a>
                                         </div>

@@ -121,5 +121,30 @@ $(function () {
         }
 
     });
+    $(document).on('change', '.enableNextDropdown', function () {
+        var enable_id = $(this).data('enablekey');
+        var level = $(this).data('level');
 
+        var levelOneStaffApproval = $(".firstDropDown" + enable_id).val();
+        var levelTwoStaffApproval = $(".secondDropDown" + enable_id).val();
+        if (level == '1') {
+            if (levelOneStaffApproval == "") {
+                $(".secondDropDown" + enable_id).val('');
+                $(".thirdDropDown" + enable_id).val('');
+                $(".secondDropDown" + enable_id).prop('disabled', true);
+                $(".thirdDropDown" + enable_id).prop('disabled', true);
+                return false;
+            }
+            $(".secondDropDown" + enable_id).prop('disabled', false);
+            $(".thirdDropDown" + enable_id).prop('disabled', true);
+        }
+        if (level == '2') {
+            if (levelTwoStaffApproval == "") {
+                $(".thirdDropDown" + enable_id).val('');
+                $(".thirdDropDown" + enable_id).prop('disabled', true);
+                return false;
+            }
+            $(".thirdDropDown" + enable_id).prop('disabled', false);
+        }
+    });
 });

@@ -2,24 +2,24 @@
 @section('title','Dashboard')
 @section('calendar')
 <!-- full calendar css start-->
-<link href="{{ asset('public/libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/@fullcalendar/daygrid/main.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/@fullcalendar/timegrid/main.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/@fullcalendar/core/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/@fullcalendar/daygrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/@fullcalendar/bootstrap/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/@fullcalendar/timegrid/main.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/@fullcalendar/list/main.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- full calendar css end-->
 @endsection
 @section('component_css')
 <!-- date picker -->
-<link href="{{ asset('public/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
-<link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- <style>
     svg {
         height: 48px;
@@ -185,7 +185,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
-                                                                <img src="{{ config('constants.image_url').'/public/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
                                                                 <ul class="list-inline font-13 text-sm-center">
@@ -253,7 +253,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
 
                                                                 <div class="mt-3 mt-sm-0">
@@ -324,7 +324,7 @@
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
                                                                 <div>
-                                                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
+                                                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
@@ -513,28 +513,28 @@
 @endsection
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<!-- <script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script> -->
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<!-- <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script> -->
 
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <script>
     toastr.options.preventDuplicates = true;
 </script>
 
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 
 <!-- full calendar js start -->
-<script src="{{ asset('public/libs/@fullcalendar/core/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/daygrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/timegrid/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/list/main.min.js') }}"></script>
-<script src="{{ asset('public/libs/@fullcalendar/interaction/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/core/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/bootstrap/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/daygrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/timegrid/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
+<script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 <!-- full calendar js end -->
-<script src="{{ asset('public/libs/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
@@ -542,7 +542,7 @@
     var getBulkCalendor = "{{ config('constants.api.get_bulk_calendor_admin') }}";
     var readUpdateTodoUrl = "{{ config('constants.api.read_update_todo') }}";
     var getAssignClassUrl = "{{ config('constants.api.get_assign_class') }}";
-    var pathDownloadFileUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/todolist/' }}";
+    var pathDownloadFileUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details') }}";
 
@@ -558,8 +558,8 @@
     var getWorkWeekUrl = "{{ config('constants.api.work_week') }}";
     var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
 </script>
-<!-- <script src="{{ asset('public/js/custom/admin_calendor.js') }}"></script> -->
-<script src="{{ asset('public/js/custom/admin_calendor_new_cal.js') }}"></script>
-<script src="{{ asset('public/js/custom/admin/dashboard.js') }}"></script>
-<script src="{{ asset('public/js/custom/greeting.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
+<script src="{{ asset('js/custom/admin_calendor_new_cal.js') }}"></script>
+<script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
+<script src="{{ asset('js/custom/greeting.js') }}"></script>
 @endsection

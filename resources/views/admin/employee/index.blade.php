@@ -1,22 +1,22 @@
 @extends('layouts.admin-layout')
 @section('title','Add Employee')
 @section('component_css')
-<link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
-<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
-<link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 <style>
     .switch {
         height: 24px;
@@ -321,7 +321,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/public/common-asset/images/700x500.png' }}" data-remove="Rewm" />
+                                        <input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/common-asset/images/700x500.png' }}" data-remove="Rewm" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>
@@ -869,27 +869,27 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ asset('public/libs/autonumeric/autoNumeric-min.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('libs/autonumeric/autoNumeric-min.js') }}"></script>
 
 <!-- Init js-->
-<script src="{{ asset('public/js/pages/form-masks.init.js') }}"></script>
-<script src="{{ asset('public/libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
-<script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
-<script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
+<script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
 
 <script>
     var input = document.querySelector("#mobile_no");
@@ -915,16 +915,16 @@
     });
 </script>
 
-<!-- <script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script> -->
-<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
+<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;
 </script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('public/js/custom/employee.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/employee.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
         messages: {

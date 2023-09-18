@@ -6,12 +6,12 @@
     <title>Forum </title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ asset('public/forum/build/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">    
-    <link href="{{ asset('public/css/custom/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('forum/build/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">    
+    <link href="{{ asset('css/custom/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
     <style>
         .error {

@@ -12,14 +12,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/email.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/email.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -73,13 +73,13 @@
                                     <tr>
                                         <td>
 
-                                            <img src="{{ asset('public/images/emailnotification/Suzen-app-logo.png') }}" class="mr-2 footerlogo">
+                                            <img src="{{ asset('images/emailnotification/Suzen-app-logo.png') }}" class="mr-2 footerlogo">
                                             <p class="footerfont" style="margin-top: 15px;">Suzen is an educational management platform that brings School Administration, Teachers, Parents & Children together, blurring the boundary from orthodox educational system.</p>
                                             <div class="social">
-                                                <img src="{{ asset('public/images/emailnotification/vector.png') }}">
-                                                <img src="{{ asset('public/images/emailnotification/Facebook.png') }}">
-                                                <img src="{{ asset('public/images/emailnotification/TwitterX.png') }}">
-                                                <img src="{{ asset('public/images/emailnotification/TikTok.png') }}">
+                                                <img src="{{ asset('images/emailnotification/vector.png') }}">
+                                                <img src="{{ asset('images/emailnotification/Facebook.png') }}">
+                                                <img src="{{ asset('images/emailnotification/TwitterX.png') }}">
+                                                <img src="{{ asset('images/emailnotification/TikTok.png') }}">
                                             </div>
                                             <p class="footerfont" style="line-height: 9px;">Suzen HQ Address</p>
                                             <p class="footerfont" style="line-height: 9px;">Suzen Service Email</p>

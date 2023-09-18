@@ -62,6 +62,6 @@
 <script>
     var getAllStaffUrl = "{{ route('admin.leave_management.get_all_staff_details') }}";
 </script>
-<script src="{{ asset('public/js/custom/assign_leave_approval.js') }}"></script>
+<script src="{{ asset('js/custom/assign_leave_approval.js') }}"></script>
 
 @endsection

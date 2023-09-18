@@ -21,7 +21,7 @@
 <!-- END wrapper -->
 
 <!-- Vendor js -->
-<script src="{{ asset('public/js/vendor.min.js') }}"></script>
+<script src="{{ asset('js/vendor.min.js') }}"></script>
 @if(Session::get('role_id') == '1')
 <script>
     var backToLogin = "{{ route('super_admin.login') }}";
@@ -77,11 +77,11 @@
 @endif
 @endif
 
-<script src="{{ asset('public/js/app.min.js') }}"></script>
-<script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('public/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/app.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script> -->
+<!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <script>
     var token = "{{ Session::get('token') }}";
     // toastr.options.preventDuplicates = true;
@@ -238,7 +238,7 @@
     // settings url
     // var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
     // var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    // var profilePath = "{{ asset('public/users/images') }}";
+    // var profilePath = "{{ asset('users/images') }}";
     // greeding
     var updateGreddingSession = "{{ route('greetting.session') }}";
 
@@ -295,21 +295,21 @@
     if (locale_lang) {
         if (locale_lang == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else if (locale_lang == "malay") {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
             var value = "malay";
             var text = "Malay";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -319,21 +319,21 @@
     } else if (language_name) {
         if (language_name == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else if (language_name == "malay") {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
             var value = "malay";
             var text = "Malay";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -343,21 +343,21 @@
     } else {
         if (locale == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else if (locale == "malay") {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
             var value = "malay";
             var text = "Malay";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

@@ -1,24 +1,24 @@
 @extends('layouts.admin-layout')
 @section('title',' ' .  __('messages.employee_list') . '')
 @section('component_css')
-<link href="{{ asset('public/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- datatable -->
-<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- button link  -->
-<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
 @endsection
 @section('content')
-<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <style>
     /* table css*/
@@ -91,40 +91,40 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('public/libs/mohithg-switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('public/libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('public/libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
 <!-- button js added -->
-<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Italic.ttf"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-Medium.ttf"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/fonts/Roboto/Roboto-MediumItalic.ttf"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/encoding-japanese/2.0.0/encoding.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script> -->
-<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     // employee
     var employeeList = "{{ route('admin.employee.list') }}";
     var employeeDelete = "{{ route('admin.employee.delete') }}";
-    var employeeImg = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/' }}";
+    var employeeImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
     var deleteHtml = "{{ __('messages.delete_this_employee') }}";
@@ -138,5 +138,5 @@
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
 </script>
-<script src="{{ asset('public/js/custom/employee.js') }}"></script>
+<script src="{{ asset('js/custom/employee.js') }}"></script>
 @endsection

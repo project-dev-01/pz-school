@@ -2,8 +2,8 @@
 @section('title','Exam Paper Result')
 @section('component_css')
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
 @endsection
 @section('content')
@@ -157,14 +157,14 @@
 @endsection
 @section('scripts')
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
      toastr.options.preventDuplicates = true;
 </script>
 
-<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
@@ -173,10 +173,10 @@
 
     var teacherID = ref_user_id;
     // default image test
-    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.exam_paper_result') }}";
     // localStorage variables
     var teacher_exam_paper_result_storage = localStorage.getItem('teacher_exam_paper_result_details');
 </script>
-<script src="{{ asset('public/js/custom/paper_wise_result.js') }}"></script>
+<script src="{{ asset('js/custom/paper_wise_result.js') }}"></script>
 @endsection

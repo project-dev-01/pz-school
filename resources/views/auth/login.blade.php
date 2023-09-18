@@ -12,16 +12,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="{{ asset('public/css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+    <link href="{{ asset('css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <style>
     .teacherlogin {
@@ -60,8 +60,8 @@
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
                                     <ul id="a" style="margin-bottom:0px;">
-                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
-                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -84,9 +84,9 @@
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
                                     <ul id="a" style="margin-bottom:0px;">
-                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
-                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
-                                        <li><img src="{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -125,9 +125,9 @@
                                 @endif
                                 @csrf
                                 <div class="form-group">
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.png') }}" class="mr-2 rounded-circle" alt="">SMK BERJAYA</span> -->
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
 
                                 <div class="form-group">
@@ -179,9 +179,9 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
 
-    <script src="{{ asset('public/js/custom/user_config.js') }}"></script>
+    <script src="{{ asset('js/custom/user_config.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -191,7 +191,7 @@
     </script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
 
     <script type="text/javascript">
         var locale = "{{ Session::get('locale') }}";
@@ -216,21 +216,21 @@
         if (locale_lang) {
             if (locale_lang == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (locale_lang == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -240,21 +240,21 @@
         } else if (language_name) {
             if (language_name == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (language_name == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
@@ -264,21 +264,21 @@
         } else {
             if (locale == "japanese") {
                 //find an item with value of sessionLang\
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
                 var value = "japanese";
                 var text = "日本語";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else if (locale == "malay") {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/MAL.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
                 var value = "malay";
                 var text = "Malay";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
                 $('.btn-select').html(item);
                 $('.btn-select').attr('value', value);
             } else {
-                var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
                 var value = "en";
                 var text = "English";
                 var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

@@ -125,14 +125,14 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('public/js/dist/jquery.table2excel.js') }}"></script>
+<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
     // default image test
     var teacher_id = null;
-    var defaultImg = "{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}";
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 </script>
-<script src="{{ asset('public/js/custom/bystudent.js') }}"></script>
+<script src="{{ asset('js/custom/bystudent.js') }}"></script>
 @endsection

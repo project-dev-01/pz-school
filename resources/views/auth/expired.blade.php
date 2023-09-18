@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
 
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
 
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
 
-    <link href="{{ asset('public/css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="body bg">
@@ -35,7 +35,7 @@
                                 <div class="auth-logo">
                                     <a href="index.html" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="40px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="40px">
                                         </span>
                                     </a>
                                 </div><br>
@@ -44,8 +44,8 @@
                             </div>
                             <form id="LoginAuth" action="{{ route('reset_password') }}" method="post">
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/school.jpg' }}" class="mr-2 rounded-circle" alt="">SMK Kiaramas</span>
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.jpg') }}" class="mr-2 rounded-circle" alt="">Maahad Tahfiz Al-Quran Darul Saadah Lilbanat</span> -->
                                 </div>
                                 @if ( Session::get('success'))
                                 <div class="alert alert-success">
@@ -95,16 +95,16 @@
 
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
 
-    <script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 
-    <script src="{{ asset('public/bootstrap/js/twitter-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/twitter-bootstrap.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
 
 </body>
 

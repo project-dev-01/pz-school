@@ -9,16 +9,16 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
 
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/loginstyle.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -36,7 +36,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="40px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="40px">
                                         </span>
                                     </a>
                                 </div><br>
@@ -46,7 +46,7 @@
 
                             <!-- <form action="#"> -->
                             <div class="form-group">
-                                <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                             </div>
 
                             <br>
@@ -99,17 +99,17 @@
     <!-- end page -->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
+    <script src="{{ asset('js/app.min.js') }}"></script>
 
     <!-- Peity chart-->
-    <script src="{{ asset('public/libs/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('libs/peity/jquery.peity.min.js') }}"></script>
 
     <!-- Init js-->
-    <script src="{{ asset('public/js/pages/peity.init.js') }}"></script>
-    <script src="{{ asset('public/js/custom/loading.js') }}"></script>
+    <script src="{{ asset('js/pages/peity.init.js') }}"></script>
+    <script src="{{ asset('js/custom/loading.js') }}"></script>
 
 </body>
 

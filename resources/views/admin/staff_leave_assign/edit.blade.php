@@ -91,7 +91,7 @@
     var staffLeaveAssignIndex = "{{ route('admin.staff_leave_assign') }}";
     
 </script>
-<script src="{{ asset('public/js/custom/staff_leave_assign.js') }}"></script>
+<script src="{{ asset('js/custom/staff_leave_assign.js') }}"></script>
 
 @endsection
 

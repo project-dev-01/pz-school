@@ -2,13 +2,13 @@
 @section('title','Assign Leave approval')
 @section('component_css')
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <!-- Bootstrap Tables css -->
-<link href="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/bootstrap-table/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -67,16 +67,21 @@
                                 @php
                                 $i =1;
                                 @endphp
-                                @forelse($get_all_staff_details as $value)
+                                @forelse($get_all_staff_details as $key => $value)
+                                <?php
+                                $secondDisable = "disabled";
+                                $thirdDisable = "disabled";
+                                ?>
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$value['name']}}</td>
                                     <td>{{$value['department_name']}}</td>
                                     <td>
-                                        <select id="levelOneStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                        <select id="levelOneStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="1" data-id="{{$value['id']}}" class="form-control enableNextDropdown level1 firstDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_one_staff_id'])
+                                            <?php $secondDisable = ""; ?>
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>
@@ -86,10 +91,11 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="levelTwoStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                        <select id="levelTwoStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="2" {{$secondDisable}} data-id="{{$value['id']}}" class="form-control enableNextDropdown level2 secondDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_two_staff_id'])
+                                            <?php $thirdDisable = ""; ?>
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>
@@ -99,7 +105,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="levelThreeStaffApproval{{$value['id']}}" data-id="{{$value['id']}}" class="form-control staff-dropdown{{$value['id']}}">
+                                        <select id="levelThreeStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="3" {{$thirdDisable}} data-id="{{$value['id']}}" class="form-control level3 thirdDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
                                             @if ($val['id'] == $value['level_three_staff_id'])
@@ -142,22 +148,22 @@
 @endsection
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 <!-- Bootstrap Tables js -->
-<script src="{{ asset('public/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<script src="{{ asset('public/libs/footable/footable.all.min.js') }}"></script>
-<script src="{{ asset('public/js/pages/foo-tables.init.js') }}"></script>
+<script src="{{ asset('libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('libs/footable/footable.all.min.js') }}"></script>
+<script src="{{ asset('js/pages/foo-tables.init.js') }}"></script>
 
 <script>
     var assignLeaveApprovalUrl = "{{ config('constants.api.assign_leave_approval') }}";
 </script>
-<!-- <script src="{{ asset('public/js/custom/sections.js') }}"></script> -->
-<script src="{{ asset('public/js/custom/assign_leave_approval.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/sections.js') }}"></script> -->
+<script src="{{ asset('js/custom/assign_leave_approval.js') }}"></script>
 
 @endsection

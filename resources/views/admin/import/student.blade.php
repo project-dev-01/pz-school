@@ -2,8 +2,8 @@
 @section('title','Student Import')
 @section('component_css')
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <!-- Page Content -->
@@ -33,7 +33,7 @@
                     <div class="col-12">
                         <div class="col-sm-12 col-md-12">
                             <div class="dt-buttons" style="float:right;"> 
-                                <a href="{{ config('constants.image_url').'/public/common-asset/uploads/Sample Student.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
+                                <a href="{{ config('constants.image_url').'/common-asset/uploads/Sample Student.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
                             </div>
                         </div>
                     </div>
@@ -77,10 +77,10 @@
 <!-- /Page Content -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 @endsection

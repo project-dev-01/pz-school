@@ -1528,4 +1528,5 @@ return [
     "1st_approver_remarks" => "1st approver remarks",
     "2nd_approver_remarks" => "2nd approver remarks",
     "3rd_approver_remarks" => "3rd approver remarks",
+    "applied_leave" => "Applied Leave",
 ];

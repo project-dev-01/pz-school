@@ -2,8 +2,8 @@
 @section('title','Chat')
 @section('component_css')
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     @php $url=config('constants.image_url'); @endphp
                     <div class="media mb-3">
-                        <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42">
+                        <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42">
                         <div class="media-body">
                             <h5 class="mt-0 mb-0 font-15">
                                 <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
@@ -80,7 +80,7 @@
                                 @foreach($teacher_list as $teacher)
                                 <a href="javascript:void(0);" class="text-body chatusers" onclick="my_function('{{$teacher['staff_id']}}','{{$teacher['name']}}','{{$teacher['photo']}}','Teacher')">
                                     <div class="media p-2">
-                                        <img src="{{ ($teacher['photo'] && $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/public/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
+                                        <img src="{{ ($teacher['photo'] && $url.'/'.config('constants.branch_id').'/users/images/'.$teacher['photo']) ? $url.'/'.config('constants.branch_id').'/users/images/'.$teacher['photo'] :  $url.'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="42" alt="Maria C" />
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-0 font-14" style="line-height: 44px;">
                                                 <span class="float-right text-muted font-weight-normal font-12"></span>
@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="col" style="height: 300px; margin-top:70px;">
                             <div id="center-text" style="text-align:center;">
-                                <img src="{{ asset('public/images/chat.png') }}" class="chatbox" style="height: 150px;border: 2px solid #EDEDED;border-radius: 1rem;">
+                                <img src="{{ asset('images/chat.png') }}" class="chatbox" style="height: 150px;border: 2px solid #EDEDED;border-radius: 1rem;">
                                 <h2>No messages</h2>
                                 <p>No messages yet, start the conversation!</p>
                             </div>
@@ -228,16 +228,16 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/EmojiPicker/EmojiPicker.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('EmojiPicker/EmojiPicker.js') }}"></script>
 <script>
-    let imgurl = "{{ url($url.'/public/'.config('constants.branch_id').'/users/images/')}}";
+    let imgurl = "{{ url($url.'/'.config('constants.branch_id').'/users/images/')}}";
 
     var chatTeacherList = "{{ config('constants.api.parent_chat_teacher_list') }}";
 
-    var defaultimg = "{{ url($url.'/public/common-asset/images/users/default.jpg') }}";
+    var defaultimg = "{{ url($url.'/common-asset/images/users/default.jpg') }}";
     var intervalId;
     var oldChatCount = 0;
     var scrollDownShow = 1;
@@ -482,7 +482,7 @@
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.'/public/'.config('constants.branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.'/'.config('constants.branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -596,7 +596,7 @@
     }
 
     function showfile(filename) {
-        var fileurl = "{{ url($url.'/public/'.Session::get('branch_id').'/chats/') }}";
+        var fileurl = "{{ url($url.'/'.Session::get('branch_id').'/chats/') }}";
         window.open(fileurl + filename, 'popup', 'width=600,height=600,scrollbars=no,resizable=no');
         return false;
     }

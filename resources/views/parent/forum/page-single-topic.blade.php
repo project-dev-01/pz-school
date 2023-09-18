@@ -13,7 +13,7 @@
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
                                 <i class="tt-icon">
-                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
 
                                 </i>
                             </div>
@@ -125,7 +125,7 @@
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
                                 <i class="tt-icon">
-                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                                 </i>
                             </div>
                             <div class="tt-avatar-title">
@@ -269,7 +269,7 @@
                     <!-- <svg class="tt-icon">
                         <use xlink:href="#icon-ava-n"></use>
                     </svg>-->
-                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                    <img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                     {{ $value['user_name'] }}
                 </div>
                 <div class="tt-col-description flvalues">
@@ -458,5 +458,5 @@
 
     });
 </script>
-<script src="{{ asset('public/js/custom/forum-post-countsothers.js') }}"></script>
+<script src="{{ asset('js/custom/forum-post-countsothers.js') }}"></script>
 @endsection

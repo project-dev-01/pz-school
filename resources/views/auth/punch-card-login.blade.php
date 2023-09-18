@@ -12,16 +12,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- <link href="{{ asset('public/css/custom/login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" /> -->
-    <link href="{{ asset('public/css/custom-minified/login.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('css/custom/login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" /> -->
+    <link href="{{ asset('css/custom-minified/login.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 <style>
@@ -59,8 +59,8 @@
                     <div class="card-body">
                         <div class="form-group" style="text-align:right;">
                              <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">ENG</option>
-                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">JPN</option>
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/common-asset/images/USA.png' }}">ENG</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}">JPN</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -76,7 +76,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -99,8 +99,8 @@
                                 @csrf
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
                                 <div class="form-group">
-                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('public/images/school.png') }}" class="mr-2 rounded-circle" alt="">BERJAYA</span> -->
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
+                                    <!-- <span class="badge badge-secondary smk"><img src="{{ asset('images/school.png') }}" class="mr-2 rounded-circle" alt="">BERJAYA</span> -->
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">{{$school_name}}</span>
                                 </div>
                                 <input class="form-control" type="hidden" name="session" value="{{$session}}">
                                 <input class="form-control" type="hidden" name="branch_id" value="{{$branch_id}}">
@@ -138,7 +138,7 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -148,8 +148,8 @@
     </script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
-    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
+    <script src="{{ asset('js/app.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/custom/login.js') }}"></script> -->
 
     <script type="text/javascript">
         var locale = "{{ Session::get('locale') }}";
@@ -195,14 +195,14 @@
         // console.log('en',sessionLang)
         if (locale == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "JPN";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "ENG";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

@@ -1,9 +1,9 @@
 @extends('layouts.forum-layout')
 @section('content')
-<link href="{{ asset('public/css/custom/common.css') }}" rel="stylesheet" type="text/css" />
-<!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
-<link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .nav-tabs {
@@ -343,8 +343,8 @@ border-bottom: 1px solid #E9D528;
 <script>
     var indexPost = "{{ route('teacher.forum.page-create-topic') }}";
 </script>
-<script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script>
     function SimpleUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {

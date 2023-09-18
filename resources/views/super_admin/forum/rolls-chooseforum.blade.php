@@ -73,5 +73,5 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/js/custom/getbranchidsession.js') }}"></script>
+<script src="{{ asset('js/custom/getbranchidsession.js') }}"></script>
 @endsection

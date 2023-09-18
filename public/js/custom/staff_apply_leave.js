@@ -321,6 +321,10 @@ $(function () {
                 name: 'document'
             },
             {
+                data: 'level_one_staff_remarks',
+                name: 'level_one_staff_remarks'
+            },
+            {
                 data: 'status',
                 name: 'status',
             },

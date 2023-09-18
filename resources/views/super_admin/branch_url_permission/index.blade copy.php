@@ -2,21 +2,21 @@
 @section('title',' ' . __('messages.leave_management') . '')
 @section('component_css')
 <!-- datatable -->
-<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/datatable/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- button link  -->
-<link rel="stylesheet" href="{{ asset('public/datatable/css/buttons.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
 @endsection
 @section('content')
-<link href="{{ asset('public/css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .ui-datepicker {
         width: 21.4em;
@@ -177,28 +177,28 @@
 @endsection
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('public/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
 <!-- button js added -->
-<script src="{{ asset('public/buttons-datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('public/buttons-datatables/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
-    var StaffDocUrl = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
+    var StaffDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
     var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
     // Get PDF Footer Text
 
@@ -208,5 +208,5 @@
     // localStorage variables
     var teacher_leave_apply_storage = localStorage.getItem('teacher_leave_apply_details');
 </script>
-<script src="{{ asset('public/js/custom/staff_apply_leave.js') }}"></script>
+<script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>
 @endsection

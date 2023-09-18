@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title','Settings')
 @section('css')
-<link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <style>
 
 .iti {
@@ -33,10 +33,10 @@
     <div class="row">
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
-                <img src="{{ Session::get('picture') && config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-                <!-- <img src="{{ Session::get('picture') && Storage::disk('public')->exists('users/images/'.Session::get('picture')) ? asset('public/users/images/'.Session::get('picture')) : asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
+                <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
+                <!-- <img src="{{ Session::get('picture') && Storage::disk('public')->exists('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
 
-                <!-- <img src="{{ asset('public/images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
+                <!-- <img src="{{ asset('images/users/default.jpg') }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image"> -->
                 <h4 class="mb-0 user_name">{{ Session::get('role_name') }}</h4>
 
                 <div class="text-left mt-3">
@@ -176,5 +176,5 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/js/custom/settings.js') }}"></script>
+<script src="{{ asset('js/custom/settings.js') }}"></script>
 @endsection

@@ -12,14 +12,14 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <!-- App favicon -->
-  <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+  <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
   <!-- App css -->
-  <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-  <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+  <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
   <!-- icons -->
-  <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ asset('public/css/custom/feesinvoice.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/custom/feesinvoice.css') }}" rel="stylesheet" type="text/css" />
 
   <style>
     @font-face {
@@ -82,7 +82,7 @@
                 <table width="100%">
                   <tr>
                     <td>
-                      <img src="{{ config('constants.image_url').'/public/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
+                      <img src="{{ config('constants.image_url').'/common-asset/images/'.$school_image }}" class="mr-2 rounded-circle" alt="">
                       <p class="invoice" style="font-size: 20px;"><strong>{{ __('messages.invoice') }}{{ $school_name }}</strong></p>
                       <p class="schoolname"><strong>{{ $school_name }}</strong></p>
                     </td>

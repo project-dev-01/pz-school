@@ -394,6 +394,7 @@ $(function () {
                                 '<td>' + val.leave_name + '</td>' +
                                 '<td>' + val.total_leave + '</td>' +
                                 '<td>' + used_leave + '</td>' +
+                                '<td>' + val.applied_leave + '</td>' +
                                 '<td>' + bal + '</td>' +
                                 '</tr>';
 

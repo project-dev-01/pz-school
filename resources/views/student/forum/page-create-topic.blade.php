@@ -1,10 +1,10 @@
 @extends('layouts.forum-layout')
 @section('content')
-<link href="{{ asset('public/css/custom/common.css') }}" rel="stylesheet" type="text/css" />
-<!-- <link href="{{ asset('public/css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
-<link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/common.css') }}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('css/custom/Responsive.css') }}" rel="stylesheet" type="text/css" /> -->
+<link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .nav-tabs {
@@ -375,7 +375,7 @@
                                     <!-- <svg class="tt-icon">
                             <use xlink:href="#icon-ava-n"></use>
                         </svg>-->
-                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
+                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="mr-2 rounded-circle" height="40" />
                                     {{ $value['user_name'] }}
                                 </div>
                                 <div class="tt-col-description">
@@ -457,8 +457,8 @@
     var indexPost = "{{ route('student.forum.page-create-topic') }}";
     var deletePost = "{{ config('constants.api.forum_delete') }}";
 </script>
-<script src="{{ asset('public/js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('public/js/custom/forum-createpost.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
 <script>
     function SimpleUploadAdapterPlugin(editor) {
         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {

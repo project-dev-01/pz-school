@@ -287,9 +287,9 @@ class AdminController extends Controller
 
         //     echo json_encode([
 
-        //         'default' => asset('storage/app/public/forumupload/' . $filenametostore),
+        //         'default' => asset('storage/app/forumupload/' . $filenametostore),
 
-        //         '500' =>  asset('storage/app/public/forumupload/' . $filenametostore)
+        //         '500' =>  asset('storage/app/forumupload/' . $filenametostore)
 
         //     ]);
         // }

@@ -4,7 +4,7 @@
 
         <!-- User box -->
         <div class="user-box text-center">
-            <img src="{{ config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+            <img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
             <div class="dropdown">
                 <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown">Geneva Kennedy</a>
                 <div class="dropdown-menu user-pro-dropdown">
@@ -43,7 +43,7 @@
             <!-- <ul class="list-unstyled topnav-menu mb-0">
                 <li>
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('public/images/favicon.ico') }}" alt="user-image" height="50px" width="50px" class="rounded-circle admin_picture">
+                        <img src="{{ asset('images/favicon.ico') }}" alt="user-image" height="50px" width="50px" class="rounded-circle admin_picture">
                         <span style="color:#0ABAB5"><b> {{ Session::get('school_name') }}</b> </span>
                     </a>
                 </li>

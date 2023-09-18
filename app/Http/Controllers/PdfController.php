@@ -1058,7 +1058,7 @@ class PdfController extends Controller
             'saturday',
             'sunday',
         );
-        // $fonturl = asset('public/public/fonts/japanese/ipag.ttf');
+        // $fonturl = asset('public/fonts/japanese/ipag.ttf');
         // $fonturl = asset('public/fonts/japanese/ipag.ttf');
         $fonturl = storage_path('fonts/ipag.ttf');
         // dd($fonturl);

@@ -13,17 +13,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico' }}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!--<link href="{{ asset('public/css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
-    <link href="{{ asset('public/css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/superadminlogin.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!--<link href="{{ asset('css/custom/admin_login.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />-->
+    <link href="{{ asset('css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/superadminlogin.css') }}" rel="stylesheet" type="text/css" />
 </head>
 <style>
     .superlogin {
@@ -32,7 +32,7 @@
         min-height: 100vh;
         flex-direction: row;
         align-items: stretch;
-        background: url(../public/images/login-images/bg-auth-admin.jpg);
+        background: url(../images/login-images/bg-auth-admin.jpg);
         background-size: cover;
     }
 </style>
@@ -65,8 +65,8 @@
                                 <option value="japanese" {{ session()->get('locale') == 'japanese' ? 'selected' : '' }}>Japanese</option>
                             </select> -->
                             <select class="vodiapicker">
-                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}">English</option>
-                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}">日本語</option>
+                                <option value="en" data-thumbnail="{{ config('constants.image_url').'/common-asset/images/USA.png' }}">English</option>
+                                <option value="japanese" data-thumbnail="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}">日本語</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -75,8 +75,8 @@
                                 </div>
                             </div>
                             <!-- <select class="vodiapicker">
-                                <option value="en"  data-thumbnail="{{ asset('public/images/USA.png') }}">EN</option>
-                                <option value="japanese"  data-thumbnail="{{ asset('public/images/JPN.png') }}">Jap</option>
+                                <option value="en"  data-thumbnail="{{ asset('images/USA.png') }}">EN</option>
+                                <option value="japanese"  data-thumbnail="{{ asset('images/JPN.png') }}">Jap</option>
                             </select>
                             <div class="lang-select" style="float: right; margin-top:-15px;">
                                 <button class="btn-select" value=""></button>
@@ -87,14 +87,14 @@
                                 </div>
                             </div> -->
                             <!-- <div class="col col-2 lang-select mt-1 ml-2 " style="float: right;">
-                                <button class="btn-select" value="en"><li><img src="http://localhost/school_new/public/images/USA.png" alt=""><span>EN</span></li></button>
+                                <button class="btn-select" value="en"><li><img src="http://localhost/school_new/images/USA.png" alt=""><span>EN</span></li></button>
                                 <div class="b">
                                     <ul id="a">
                                         <li>
-                                            <img src="http://localhost/school_new/public/images/USA.png" alt="" value="en"><span>EN</span>
+                                            <img src="http://localhost/school_new/images/USA.png" alt="" value="en"><span>EN</span>
                                         </li>
                                         <li>
-                                            <img src="http://localhost/school_new/public/images/JPN.png" alt="" value="japanese"><span>JAP</span>
+                                            <img src="http://localhost/school_new/images/JPN.png" alt="" value="japanese"><span>JAP</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -106,7 +106,7 @@
                         <div class="auth-logo">
                             <a href="" class="logo logo-dark">
                                 <span class="logo-lg">
-                                    <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                    <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                 </span>
                             </a>
                         </div>
@@ -117,7 +117,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
@@ -141,7 +141,7 @@
                                 @csrf
                                 <h1 class="welcomeback">{{ __('messages.welcome_back') }},</h1>
                                 <div class="form-group">
-                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/public/common-asset/images/logo-pz-01.png' }}" class="mr-2 rounded-circle" alt="">Paxsuzen</span>
+                                    <span class="badge badge-secondary smk"><img src="{{ config('constants.image_url').'/common-asset/images/logo-pz-01.png' }}" class="mr-2 rounded-circle" alt="">Paxsuzen</span>
                                 </div>
 
                                 <div class="form-group">
@@ -195,7 +195,7 @@
     <!-- end auth-fluid-->
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -205,8 +205,8 @@
     </script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js') }}"></script>
-    <!-- <script src="{{ asset('public/js/custom/login.js') }}"></script> -->
+    <script src="{{ asset('js/app.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/custom/login.js') }}"></script> -->
     <!-- <script type="text/javascript">
         var url = "{{ route('changeLang') }}";
 
@@ -256,14 +256,14 @@
         // console.log('en',sessionLang)
         if (locale == "japanese") {
             //find an item with value of sessionLang\
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/JPN.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
             var value = "japanese";
             var text = "日本語";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
             $('.btn-select').html(item);
             $('.btn-select').attr('value', value);
         } else {
-            var img = "{{ config('constants.image_url').'/public/common-asset/images/USA.png' }}";
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
             var value = "en";
             var text = "English";
             var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';

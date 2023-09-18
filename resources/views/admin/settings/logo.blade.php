@@ -2,13 +2,13 @@
 @section('title','Settings')
 @section('component_css')
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{ asset('public/libs/dropzone/min/dropzone.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/libs/dropify/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 <style>
     .dropify-clear {
         display: none !important;
@@ -46,7 +46,7 @@
                             <div class="mt-3">
                                 <form method="post" id="upload_form" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <input type="file" class="dropify-im" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && config('constants.image_url').'/public/'.config('constants.branch_id').'/images/sub-logo/'.Session::get('school_logo') ? config('constants.image_url').'/public/'.config('constants.branch_id').'/images/sub-logo/'.Session::get('school_logo') : config('constants.image_url').'/public/common-asset/images/users/default.jpg' }}" />
+                                    <input type="file" class="dropify-im" name="change_logo" id="change_logo" data-plugins="dropify" data-default-file="{{ Session::get('school_logo') && config('constants.image_url').'/'.config('constants.branch_id').'/images/sub-logo/'.Session::get('school_logo') ? config('constants.image_url').'/'.config('constants.branch_id').'/images/sub-logo/'.Session::get('school_logo') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" />
                                     <p class="text-muted text-center mt-2 mb-0">{{ Session::get('school_name') }}</p>
                                 </form>
 
@@ -62,22 +62,22 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('public/libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('public/js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 
 <script>
-    var subLogoPath = "{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/images/sub-logo' }}";
+    var subLogoPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/images/sub-logo' }}";
     var changeLogoUrl = "{{ config('constants.api.change_logo') }}";
     var updateLogoSession = "{{ route('settings.update.logo') }}";
 </script>
-<script src="{{ asset('public/js/custom/settings.js') }}"></script>
+<script src="{{ asset('js/custom/settings.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
         messages: {

@@ -2,11 +2,11 @@
 @section('title','Employee Attendance')
 @section('component_css')
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -149,24 +149,24 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('public/libs/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <!-- Chart JS -->
-<script src="{{ asset('public/libs/chart.js/Chart.bundle.min.js') }}"></script>
-<script src="{{ asset('public/libs/morris.js06/morris.min.js') }}"></script>
-<script src="{{ asset('public/libs/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('libs/morris.js06/morris.min.js') }}"></script>
+<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <!-- hightcharts js -->
-<script src="{{ asset('public/js/highcharts/highcharts.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/highcharts/highcharts.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
      toastr.options.preventDuplicates = true;
 </script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     var getEmployeAttendanceList = "{{ route('teacher.attendance.employee_list') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
@@ -175,6 +175,6 @@
     // localStorage variables
     var teacher_employee_attendance_storage = localStorage.getItem('teacher_employee_attendance_details');
 </script>
-<script src="{{ asset('public/js/custom/teacher_attendance_list.js') }}"></script>
+<script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
 
 @endsection

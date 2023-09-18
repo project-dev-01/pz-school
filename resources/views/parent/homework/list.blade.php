@@ -2,11 +2,11 @@
 @section('title','Homework')
 @section('component_css')
 <!-- date picker -->
-<link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
-<link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-<link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
 <style>
@@ -234,7 +234,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="row">
-                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/teacher/homework/'}}{{$work['document']}}" download>
+                                                        <p class="col-md-12"><span class="font-weight-semibold homework-list">{{ __('messages.document') }}</span><a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/homework/'}}{{$work['document']}}" download>
                                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                             </a></p>
                                                     </div>
@@ -261,7 +261,7 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-6 font-weight-bold">{{ __('messages.attachment_file') }} :</div>
                                                     <div class="col-md-6">
-                                                        <a href="{{ config('constants.image_url').'/public/'.config('constants.branch_id').'/student/homework/'}}{{$work['file'] }}" download>
+                                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/student/homework/'}}{{$work['file'] }}" download>
                                                             <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                                         </a>
                                                     </div>
@@ -297,20 +297,20 @@
 
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
 <!-- validation js -->
-<script src="{{ asset('public/js/validation/validation.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     var homeworkList = "{{ route('student.homework') }}";
     
     var parent_homework_storage = localStorage.getItem('parent_homework_details');
 </script>
-<script src="{{ asset('public/js/custom/homework.js') }}"></script>
+<script src="{{ asset('js/custom/homework.js') }}"></script>
 
 @endsection
