@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.all_leaves') . '')
+@section('title',' ' . __('messages.all_leaves') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -16,6 +16,48 @@
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
+<!-- Start Content-->
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 6px 20px;
+    }
+
+    tr th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 6px 20px;
+
+    }
+
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc_disabled:before {
+        right: 1em;
+        content: "\2191";
+        top: 22px;
+    }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        right: 0.5em;
+        content: "\2193";
+        top: 22px;
+    }
+</style>
+
 <div class="container-fluid">
 
     <!-- start page title -->
@@ -37,18 +79,40 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
 
                 <div class="card-body">
                     <form id="allLeaveFilter" data-parsley-validate="">
-                        <div class="row">
+                    <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="changeLeaveSts">{{ __('messages.leave_status') }}</label>
-                                    <select id="changeLeaveSts" name="leave_status" class="form-control" required="">
+                                    <label for="levelOneStatus">{{ __('messages.level_one_staff_approval') }}</label>
+                                    <select id="levelOneStatus" class="form-control" required="">
+                                        <option value="All">{{ __('messages.all') }}</option>
+                                        <option value="Approve">{{ __('messages.approved') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="levelTwoStatus">{{ __('messages.level_two_staff_approval') }}</label>
+                                    <select id="levelTwoStatus" class="form-control" required="">
+                                        <option value="All">{{ __('messages.all') }}</option>
+                                        <option value="Approve">{{ __('messages.approved') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="levelThreeStatus">{{ __('messages.level_three_staff_approval') }}</label>
+                                    <select id="levelThreeStatus" class="form-control" required="">
                                         <option value="All">{{ __('messages.all') }}</option>
                                         <option value="Approve">{{ __('messages.approved') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
@@ -59,7 +123,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -74,7 +138,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.leave_list') }}
+                            {{ __('messages.leave_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -82,9 +146,53 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="table-responsive">
-                            <table id="all-leave-list" class="table w-100 nowrap">
+                        <table id="all-leave-list" class="" style="border-collapse: collapse;width:100%">
                                 <thead>
                                     <tr>
+                                        <th rowspan="2">#</th>
+                                        <th rowspan="2">{{ __('messages.employee_name') }}</th>
+                                        <th rowspan="2">{{ __('messages.leave_type') }}</th>
+                                        <th rowspan="2">{{ __('messages.no._of._days') }}</th>
+                                        <th rowspan="2">{{ __('messages.from_leave') }}</th>
+                                        <th rowspan="2">{{ __('messages.to_leave') }}</th>
+                                        <th rowspan="2">{{ __('messages.reason') }}</th>
+                                        <th rowspan="2">{{ __('messages.document') }}</th>
+                                        <th colspan="3">{{ __('messages.approval_status') }}</th>
+                                        <!-- <th>{{ __('messages.2nd') }}</th>
+                                        <th>{{ __('messages.3rd') }}</th> -->
+                                        <th rowspan="2">{{ __('messages.applied_date') }}</th>
+                                        <th rowspan="2">{{ __('messages.action') }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>{{ __('messages.1st') }}</th>
+                                        <th>{{ __('messages.2nd') }}</th>
+                                        <th>{{ __('messages.3rd') }}</th>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th class="align-top" rowspan="2">#</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.employee_name') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.leave_type') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.no._of._days') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.from_leave') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.to_leave') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.reason') }}</th>
+                                        <th class="align-top" rowspan="2">{{ __('messages.document') }}</th>
+                                        <th class="text-center" rowspan="2">{{ __('messages.approval_status') }}</th>
+                                        <th class="align-middle" rowspan="2">{{ __('messages.applied_date') }}</th>
+                                        <th class="align-middle" rowspan="2">{{ __('messages.action') }}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">%</td>
+                                        <td class="text-center">%</td>
+                                        <td class="text-center">%</td>
+                                    </tr> -->
+                                </thead>
+                                <!-- <tr>
+                                        <th rowspan="6"></th>
+                                        <th rowspan="3">{{ __('messages.approval_status') }}</th>
+                                        <th rowspan="2"></th>
+                                    </tr> -->
+                                <!-- <tr>
                                         <th>#</th>
                                         <th>{{ __('messages.employee_name') }}</th>
                                         <th>{{ __('messages.leave_type') }}</th>
@@ -93,12 +201,15 @@
                                         <th>{{ __('messages.to_leave') }}</th>
                                         <th>{{ __('messages.reason') }}</th>
                                         <th>{{ __('messages.document') }}</th>
-                                        <th>{{ __('messages.status') }}</th>
-                                        <!-- <th>Remarks</th> -->
+                                        <th>{{ __('messages.approval_status') }}</th>
                                         <th>{{ __('messages.applied_date') }}</th>
                                         <th>{{ __('messages.action') }}</th>
-                                    </tr>
-                                </thead>
+                                    </tr> -->
+                                <!-- <tr>
+                                        <td class="text-center">1st</td>
+                                        <td class="text-center">2nd</td>
+                                        <td class="text-center">3rd</td>
+                                    </tr> -->
                                 <tbody>
                                 </tbody>
                             </table>
@@ -169,8 +280,8 @@
     // });
     // Get PDF Footer Text
 
-    var header_txt="{{ __('messages.all_leaves') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var header_txt = "{{ __('messages.all_leaves') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
     var staff_leaveapproval_storage = localStorage.getItem('staff_leaveapproval_details');
 </script>

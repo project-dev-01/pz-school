@@ -2792,7 +2792,7 @@ class AdminController extends Controller
                     } else {
                         $notsubunchecked++;
                     }
-                    
+
                     if ($work['status'] == "1") {
                         $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">' . $completed_lang . '</button>';
                         $complete++;
@@ -4982,18 +4982,24 @@ class AdminController extends Controller
     public function getAllLeaveList(Request $request)
     {
         $staff_data = [
-            'leave_status' => $request->leave_status,
+            'staff_id' => $request->staff_id,
+            'level_one_status' => $request->level_one_status,
+            'level_two_status' => $request->level_two_status,
+            'level_three_status' => $request->level_three_status,
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_data);
+        // dd($staff_data);
+        // $response = Helper::PostMethod(config('constants.api.staff_leave_history'), $staff_data);
+        $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
+        // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
-                            </div>';
+                <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['leave_id'] . '" data-assign_leave_approval_id="' . $row['id'] . '" data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
+                </div>';
             })
 
             ->rawColumns(['actions'])
@@ -5106,15 +5112,22 @@ class AdminController extends Controller
     public function assignLeaveApprover()
     {
         $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+        $all_staff_details = isset($get_all_staff_details['data']['staff_details']) ? $get_all_staff_details['data']['staff_details'] : [];
+        $widget_details = isset($get_all_staff_details['data']['widget_details']) ? $get_all_staff_details['data']['widget_details'] : [];
         return view('admin.leave_management.assign_leave_approval', [
-            'get_all_staff_details' => isset($get_all_staff_details['data']) ? $get_all_staff_details['data'] : []
+            'get_all_staff_details' => $all_staff_details,
+            'total_staff' => isset($widget_details[0]['total_staff']) ? $widget_details[0]['total_staff'] : 0,
+            'level_one_count' => isset($widget_details[0]['level_one_count']) ? $widget_details[0]['level_one_count'] : 0,
+            'level_two_count' => isset($widget_details[0]['level_two_count']) ? $widget_details[0]['level_two_count'] : 0,
+            'level_three_count' => isset($widget_details[0]['level_three_count']) ? $widget_details[0]['level_three_count'] : 0
         ]);
     }
     public function reliefAssignment()
     {
         $get_all_staff_details = Helper::GetMethod(config('constants.api.get_all_staff_details'));
+        $all_staff_details = isset($get_all_staff_details['data']['staff_details']) ? $get_all_staff_details['data']['staff_details'] : [];
         return view('admin.leave_management.relief_assignment', [
-            'get_all_staff_details' => isset($get_all_staff_details['data']) ? $get_all_staff_details['data'] : []
+            'get_all_staff_details' => $all_staff_details
         ]);
     }
     // public function getAllStaffDetails(Request $request)
@@ -7627,7 +7640,7 @@ class AdminController extends Controller
 
         return $response;
     }
-     // index FeesGroup
+    // index FeesGroup
     public function logactivity()
     {
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
@@ -7639,8 +7652,8 @@ class AdminController extends Controller
         //dd($roles);
         return view(
             'admin.activity_monitoring.index',
-            [                
-                'roles' => isset($roles['data']) ? $roles['data'] : [],                
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
             ]
         );
     }
@@ -7649,8 +7662,8 @@ class AdminController extends Controller
         $data = [
             'branch_id' => session()->get('branch_id'),
             'role_id' => $request->role_id,
-            'frm_ldate' => date('Y-m-d',strtotime($request->frm_ldate)),
-            'to_ldate' => date('Y-m-d',strtotime($request->to_ldate))
+            'frm_ldate' => date('Y-m-d', strtotime($request->frm_ldate)),
+            'to_ldate' => date('Y-m-d', strtotime($request->to_ldate))
         ];
         $activity_list = Helper::GETMethodWithData(config('constants.api.login_activity_list'), $data);
         //$data = isset($response['data']) ? $response['data'] : [];
@@ -7658,7 +7671,6 @@ class AdminController extends Controller
         /*return view('admin.activity_monitoring.index', [
             'activity_list' => !empty($activity_list['data']) ? $activity_list['data'] : []
         ]);*/
-        
     }
     // start Check In Out Time
     public function checkInOutTime()
@@ -7771,7 +7783,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.holidays_delete'), $data);
         return $response;
     }
-    
+
     public function allStudentRankList(Request $request)
     {
         $data = [
@@ -7791,7 +7803,7 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('pass_fail', function ($row) {
                 $pass_fail = 'Pass';
-                if($row['fail'] > 0){
+                if ($row['fail'] > 0) {
                     $pass_fail = 'Fail';
                 }
                 return $pass_fail;
@@ -7810,7 +7822,7 @@ class AdminController extends Controller
         $data = [
             'country' => "Malaysia",
         ];
-        
+
         $bank = Helper::GETMethodWithData(config('constants.api.bank_list'), $data);
         return view(
             'admin.bank_account.add',
@@ -7872,13 +7884,13 @@ class AdminController extends Controller
             ->addIndexColumn()
             ->addColumn('status', function ($row) {
                 $status = "";
-                if($row['status'] == "1"){
+                if ($row['status'] == "1") {
                     $status = "checked";
                 }
-                
+
                 // return '<input type="checkbox" ' . $status . ' data-id="' . $row['id'] . '"  id="bankAccountStatusBtn">';
                 return '<div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input bankAccountStatusBtn"  data-id="' . $row['id'] . '" id="bankAccountStatusBtn' . $row['id'] . '" '.$status.'>
+                            <input type="checkbox" class="custom-control-input bankAccountStatusBtn"  data-id="' . $row['id'] . '" id="bankAccountStatusBtn' . $row['id'] . '" ' . $status . '>
                             <label class="custom-control-label" for="bankAccountStatusBtn' . $row['id'] . '"></label>
                         </div>';
             })
@@ -7888,7 +7900,7 @@ class AdminController extends Controller
                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBankAccountBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-            ->rawColumns(['status','actions'])
+            ->rawColumns(['status', 'actions'])
             ->make(true);
     }
     // Update bank_account 
@@ -8003,8 +8015,8 @@ class AdminController extends Controller
         $workWeek = Helper::GetMethod(config('constants.api.work_week_get'));
         return view(
             'admin.work_week.index',
-            [                
-                'workWeek' => isset($workWeek['data']) ? $workWeek['data'] : [],                
+            [
+                'workWeek' => isset($workWeek['data']) ? $workWeek['data'] : [],
             ]
         );
     }

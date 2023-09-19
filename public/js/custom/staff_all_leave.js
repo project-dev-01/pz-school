@@ -97,7 +97,6 @@ $(function () {
                         });
 
                     }
-
                 }
             ],
             "ajax": {
@@ -120,8 +119,6 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
-                    console.log("-----")
-                    console.log(json.data)
                     return json.data;
                 },
                 error: function (error) {
@@ -195,7 +192,6 @@ $(function () {
                 },
             ],
             columnDefs: [
-
                 {
                     "targets": 7,
                     "render": function (data, type, row, meta) {
@@ -327,10 +323,6 @@ $(function () {
                     var leave_details = res.data.leave_details;
                     var leave_type_details = res.data.leave_type_details;
                     var assign_leave_approval_details = res.data.assign_leave_approval_details;
-                    console.log("assign_leave_approval_details")
-                    console.log(res.data)
-                    console.log(assign_leave_approval_details)
-                    console.log(ref_user_id)
                     let result = checkValue(assign_leave_approval_details, ref_user_id);
                     var staffStatus = "";
                     var staffRemarks = "";
@@ -390,11 +382,13 @@ $(function () {
                                 used_leave = val.used_leave;
                             }
                             var bal = val.total_leave - val.used_leave;
+                            var applied_leave = val.applied_leave !== null ? val.applied_leave : 0;
+
                             takenLeaveDetails += '<tr>' +
                                 '<td>' + val.leave_name + '</td>' +
                                 '<td>' + val.total_leave + '</td>' +
                                 '<td>' + used_leave + '</td>' +
-                                '<td>' + val.applied_leave + '</td>' +
+                                '<td>' + applied_leave + '</td>' +
                                 '<td>' + bal + '</td>' +
                                 '</tr>';
 
@@ -422,6 +416,7 @@ $(function () {
         var formData = new FormData();
         formData.append('token', token);
         formData.append('branch_id', branchID);
+        formData.append('academic_session_id', academic_session_id);
         formData.append('leave_id', leave_id);
         formData.append('status', status);
         formData.append('assiner_remarks', assiner_remarks);
@@ -470,11 +465,7 @@ $(function () {
         AllLeaveListShow(level_one_status, level_two_status, level_three_status);
     });
     function checkValue(obj, value) {
-        console.log("----");
-        console.log(obj);
-        console.log(value);
         for (let key in obj) {
-            console.log(obj[key]);
             if (obj[key] == value) {
                 return key;
             }
@@ -507,7 +498,7 @@ $(function () {
             if (teacher_all_leave_storage) {
                 var teacherAllLeaveStorage = JSON.parse(teacher_all_leave_storage);
                 if (teacherAllLeaveStorage.length == 1) {
-                    var level_one_status,level_two_status,level_three_status, userBranchID, userRoleID, userID;
+                    var level_one_status, level_two_status, level_three_status, userBranchID, userRoleID, userID;
                     teacherAllLeaveStorage.forEach(function (user) {
                         level_one_status = user.level_one_status;
                         level_two_status = user.level_two_status;

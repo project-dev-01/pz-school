@@ -210,10 +210,21 @@ class CommonController extends Controller
                 foreach ($unread_notifications['data']['unread'] as $notification) {
                     // dd($notification['type']);
                     if ($notification['type'] == "App\Notifications\LeaveApply") {
+                        $redirectRoute = "javascript:void(0)";
+                        if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
+                            $redirectRoute = route('admin.leave_management.allleaves');
+                        }
+                        if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
+                            $redirectRoute = route('staff.leave_management.allleaves');
+                        }
+                        if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
+                            $redirectRoute = route('teacher.leave_management.allleaves');
+                        }
+
                         $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
                         $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
                         $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
-                        $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . ucfirst($name) . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>

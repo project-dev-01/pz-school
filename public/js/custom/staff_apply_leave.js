@@ -43,6 +43,7 @@ $(function () {
 
     $('#staffLeaveApply').on('submit', function (e) {
         e.preventDefault();
+
         var start = convertDigitIn($("#frm_ldate").val());
         var end = convertDigitIn($("#to_ldate").val());
         let startDate = new Date(start);
@@ -55,6 +56,9 @@ $(function () {
         var std_details = $("#staffLeaveApply").valid();
 
         if (std_details === true) {
+            // Disable submit button and change text to "Please wait..."
+            $('#submitButton').prop('disabled', true).text('Please wait...');
+
             var form = this;
             var leave_type = $("#leave_type").val();
             var frm_leavedate = $("#frm_ldate").val();
@@ -104,10 +108,14 @@ $(function () {
                         // $("#remarks_div").hide();
                         // $('#file_name').text("");
                         $("#file_name").html("");
+                        location.reload();
                     } else {
                         toastr.error(response.message);
                         // $("#remarks_div").hide();
                     }
+                    // Enable submit button and restore original text
+                    $('#submitButton').prop('disabled', false).text('Submit');
+
                 }
             });
         };
@@ -226,7 +234,7 @@ $(function () {
                 }
             },
             {
-            extend: 'pdf',
+                extend: 'pdf',
                 text: downloadpdf,
                 extension: '.pdf',
                 charset: 'utf-8',
@@ -235,51 +243,51 @@ $(function () {
                     columns: 'th:not(:last-child)'
                 },
 
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
-                            }
-                        ],
-                        margin: [50, 0,0,0]
-                    }
-                });
-                
-            }
+                customize: function (doc) {
+                    doc.pageMargins = [50, 50, 50, 50];
+                    doc.defaultStyle.fontSize = 10;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.styles.title.fontSize = 14;
+                    // Remove spaces around page title
+                    doc.content[0].text = doc.content[0].text.trim();
+                    /*// Create a Header
+                    doc['header']=(function(page, pages) {
+                        return {
+                            columns: [
+                                
+                                {
+                                    // This is the right column
+                                    bold: true,
+                                    fontSize: 20,
+                                    color: 'Blue',
+                                    fillColor: '#fff',
+                                    alignment: 'center',
+                                    text: header_txt
+                                }
+                            ],
+                            margin:  [50, 15,0,0]
+                        }
+                    });*/
+                    // Create a footer
+
+                    doc['footer'] = (function (page, pages) {
+                        return {
+                            columns: [
+                                { alignment: 'left', text: [footer_txt], width: 400 },
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                    width: 100
+
+                                }
+                            ],
+                            margin: [50, 0, 0, 0]
+                        }
+                    });
+
+                }
 
             }
         ],
@@ -355,8 +363,10 @@ $(function () {
                 }
             },
             {
-                "targets": 7,
+                "targets": 8,
                 "render": function (data, type, row, meta) {
+                    console.log("data");
+                    console.log(data);
                     var badgeColor = "";
                     if (data == "Approve") {
                         badgeColor = "badge-success";

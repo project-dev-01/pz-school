@@ -234,7 +234,7 @@
                                 <!--3rd row-->
                                 <br />
                                 <div class="form-group text-right m-b-0">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light" id="submitButton">
                                         {{ __('messages.apply') }}
                                     </button>
                                 </div>

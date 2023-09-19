@@ -14,6 +14,7 @@
 <!-- Start Content-->
 <div class="container-fluid">
 
+
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -26,6 +27,61 @@
                 <h4 class="page-title">{{ __('messages.assign_leave_approval') }}</h4>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4">
+            <div class="widget-rounded-circle card-box">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
+                            <i class="mdi mdi-account font-22 avatar-title text-pink"></i>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <h3 class="mt-1"><span>{{$total_staff}}/{{$level_one_count}}</span></h3>
+                            <p class="text-muted mb-1 text-truncate">{{ __('messages.level_one_staff_approval') }}</p>
+                        </div>
+                    </div>
+                </div> <!-- end row-->
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+        <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4">
+            <div class="widget-rounded-circle card-box">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                            <i class="mdi mdi-account-check font-22 avatar-title text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+                        <div class="text-right">
+                            <h3 class="mt-1"><span>{{$total_staff}}/{{$level_two_count}}</span></h3>
+                            <p class="text-muted mb-1 text-truncate">{{ __('messages.level_two_staff_approval') }}</p>
+                        </div>
+                    </div>
+                </div> <!-- end row-->
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4">
+            <div class="widget-rounded-circle card-box">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                            <i class="mdi mdi-account-key font-22 avatar-title text-info"></i>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <h3 class="mt-1"><span>{{$total_staff}}/{{$level_three_count}}</span></h3>
+                            <p class="text-muted mb-1 text-truncate">{{ __('messages.level_three_staff_approval') }}</p>
+                        </div>
+                    </div>
+                </div> <!-- end row-->
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
     </div>
     <!-- end page title -->
     <div class="row">
@@ -80,11 +136,13 @@
                                         <select id="levelOneStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="1" data-id="{{$value['id']}}" class="form-control enableNextDropdown level1 firstDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
+                                            @if($value['id'] != $val['id'])
                                             @if ($val['id'] == $value['level_one_staff_id'])
                                             <?php $secondDisable = ""; ?>
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                            @endif
                                             @endif
                                             @empty
                                             @endforelse
@@ -94,11 +152,13 @@
                                         <select id="levelTwoStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="2" {{$secondDisable}} data-id="{{$value['id']}}" class="form-control enableNextDropdown level2 secondDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
+                                            @if($value['id'] != $val['id'])
                                             @if ($val['id'] == $value['level_two_staff_id'])
                                             <?php $thirdDisable = ""; ?>
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                            @endif
                                             @endif
                                             @empty
                                             @endforelse
@@ -108,10 +168,12 @@
                                         <select id="levelThreeStaffApproval{{$value['id']}}" data-enablekey="{{$key}}" data-level="3" {{$thirdDisable}} data-id="{{$value['id']}}" class="form-control level3 thirdDropDown{{$key}} staff-dropdown{{$value['id']}}">
                                             <option value="">{{ __('messages.none') }}</option>
                                             @forelse($get_all_staff_details as $val)
+                                            @if($value['id'] != $val['id'])
                                             @if ($val['id'] == $value['level_three_staff_id'])
                                             <option value="{{$val['id']}}" selected>{{$val['name']}}</option>
                                             @else
                                             <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                            @endif
                                             @endif
                                             @empty
                                             @endforelse

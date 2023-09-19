@@ -542,18 +542,18 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.leave_management.assign_leave_approver')}}" class="nav-link {{ (request()->is('admin/leave_management/assign_leave_approver')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.assign_leave_approval') }} </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.leave_management.allleaves')}}" class="nav-link {{ (request()->is('admin/leave_management/allleaves')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.all_leave') }}</span>
+                                    <span> {{ __('messages.leave_approval') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.leave_management.applyleave')}}" class="nav-link {{ (request()->is('admin/leave_management/applyleave')) ? 'active' : '' }}">
                                     <span> {{ __('messages.leave_apply') }} </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.leave_management.assign_leave_approver')}}" class="nav-link {{ (request()->is('admin/leave_management/assign_leave_approver')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.assign_leave_approval') }} </span>
                                 </a>
                             </li>
                             <li>

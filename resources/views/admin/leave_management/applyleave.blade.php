@@ -92,7 +92,8 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.already_taken_leave_details') }}
+                                <h4 class="navv">
+                                    {{ __('messages.already_taken_leave_details') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -135,12 +136,13 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.leave_application') }}
+                                <h4 class="nav-link">
+                                    {{ __('messages.leave_application') }}
                                     <h4>
                             </li>
                         </ul><br>
                         <div class="card-body">
-                            <form id="staffLeaveApply" method="post" action="{{ route('teacher.leave_management.add') }}" autocomplete="off" novalidate>
+                            <form id="staffLeaveApply" method="post" action="{{ route('admin.leave_management.add') }}" autocomplete="off" novalidate>
                                 <!--1st row-->
                                 <div class="row">
                                     <div class="col-md-4">
@@ -164,7 +166,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
+                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="frm_ldate">
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +179,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
+                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="to_ldate">
                                             </div>
                                         </div>
                                     </div>
@@ -212,7 +214,7 @@
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" name="total_leave" class="form-control number_validation" id="total_leave">
+                                                <input type="number" name="total_leave" class="form-control number_validation" id="total_leave">
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +252,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.leave_history') }}
+                                <h4 class="navv">{{ __('messages.leave_history') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -314,18 +316,14 @@
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-
 <script>
-    var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
+    var StaffLeaveList = "{{ route('admin.leave_management.apply_list') }}";
     var StaffDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/leaves/' }}";
-    var reuploadFileUrl = "{{ route('teacher.reupload_file.add') }}";
+    var reuploadFileUrl = "{{ route('admin.reupload_file.add') }}";
     // Get PDF Footer Text
-
-    var header_txt = "{{ __('messages.all_leaves') }}";
+    var header_txt = "{{ __('messages.leave_management') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
-    // localStorage variables
-    var teacher_leave_apply_storage = localStorage.getItem('teacher_leave_apply_details');
 </script>
 <script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>
 @endsection

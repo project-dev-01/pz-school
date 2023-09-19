@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.leave_management') . '')
+@section('title',' ' . __('messages.leave_management') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -16,66 +16,57 @@
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
-.ui-datepicker
- {
-width: 21.4em;
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
-{
-.ui-datepicker
- {
-width: 14.4em;
-}
-}
-@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
-{
-.ui-datepicker
- {
-width: 17.4em;
-}
-}
-@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
-{
-.ui-datepicker
- {
-width: 18.6em;
-}
-}
-@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
-{
-.ui-datepicker
- {
-width: 19.8em;
-}
-}
-@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
-{
-.ui-datepicker
- {
-width: 21.5em;
-}
-}
-@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
-{
-.ui-datepicker
- {
-width: 31.3em;
-}
-}
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
-{
-.ui-datepicker
- {
-width: 13.2em;
-}
-}
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
-{
-.ui-datepicker
- {
-width: 14.3em;
-}
-}
+    .ui-datepicker {
+        width: 21.4em;
+    }
+
+    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+        .ui-datepicker {
+            width: 14.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+        .ui-datepicker {
+            width: 17.4em;
+        }
+    }
+
+    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .ui-datepicker {
+            width: 18.6em;
+        }
+    }
+
+    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+        .ui-datepicker {
+            width: 19.8em;
+        }
+    }
+
+    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+        .ui-datepicker {
+            width: 21.5em;
+        }
+    }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+        .ui-datepicker {
+            width: 31.3em;
+        }
+    }
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .ui-datepicker {
+            width: 13.2em;
+        }
+    }
+
+    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+        .ui-datepicker {
+            width: 14.3em;
+        }
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -111,6 +102,7 @@ width: 14.3em;
                                             <th>{{ __('messages.leave_type') }}</th>
                                             <th>{{ __('messages.total_leave') }}</th>
                                             <th>{{ __('messages.used_leave') }}</th>
+                                            <th>{{ __('messages.applied_leave') }}</th>
                                             <th>{{ __('messages.remaining_leave') }}</th>
                                         </tr>
                                     </thead>
@@ -120,6 +112,7 @@ width: 14.3em;
                                             <td>{{ $val['leave_name'] }}</td>
                                             <td>{{ $val['total_leave'] }}</td>
                                             <td>{{ $val['used_leave'] ? $val['used_leave'] : 0 }}</td>
+                                            <td>{{ $val['applied_leave'] ? $val['applied_leave'] : 0 }}</td>
                                             <td>{{ $val['total_leave'] - $val['used_leave'] }}</td>
                                         </tr>
                                         @empty
@@ -229,7 +222,7 @@ width: 14.3em;
                                                 <div class="">
                                                     <input type="file" id="leave_file" class="custom-file-input" name="file">
                                                     <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
-                                                        <span id="file_name"></span>
+                                                    <span id="file_name"></span>
                                                 </div>
                                             </div>
 
@@ -240,7 +233,7 @@ width: 14.3em;
                                 <br />
                                 <div class="form-group text-right m-b-0">
                                     <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                    {{ __('messages.apply') }}
+                                        {{ __('messages.apply') }}
                                     </button>
                                 </div>
                             </form>
@@ -274,6 +267,7 @@ width: 14.3em;
                                                         <th>{{ __('messages.to_from') }}</th>
                                                         <th>{{ __('messages.reason') }}</th>
                                                         <th>{{ __('messages.document') }}</th>
+                                                        <th>{{ __('messages.remarks') }}</th>
                                                         <th>{{ __('messages.status') }}</th>
                                                         <th>{{ __('messages.apply_date') }}</th>
                                                         <th>{{ __('messages.action') }}</th>
@@ -323,8 +317,8 @@ width: 14.3em;
     var reuploadFileUrl = "{{ route('staff.reupload_file.add') }}";
     // Get PDF Footer Text
 
-    var header_txt="{{ __('messages.leave_management') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var header_txt = "{{ __('messages.leave_management') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('js/custom/staff_apply_leave.js') }}"></script>

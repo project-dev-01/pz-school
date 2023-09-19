@@ -128,6 +128,7 @@
                                 <th>{{ __('messages.leave_type') }}</th>
                                 <th>{{ __('messages.total_leave') }}</th>
                                 <th>{{ __('messages.used_leave') }}</th>
+                                <th>{{ __('messages.applied_leave') }}</th>
                                 <th>{{ __('messages.remaining_leave') }}</th>
                             </tr>
                         </thead>
@@ -176,15 +177,25 @@
                                 <td id="documents"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.staff_remarks') }}</td>
+                                <td>{{ __('messages.1st_approver_remarks') }}</td>
                                 <td>:</td>
-                                <td id="remarks"></td>
+                                <td id="1st_approver_remarks"></td>
                             </tr>
                             <tr>
+                                <td>{{ __('messages.2nd_approver_remarks') }}</td>
+                                <td>:</td>
+                                <td id="2nd_approver_remarks"></td>
+                            </tr>
+                            <tr>
+                                <td>{{ __('messages.3rd_approver_remarks') }}</td>
+                                <td>:</td>
+                                <td id="3rd_approver_remarks"></td>
+                            </tr>
+                            <!-- <tr>
                                 <td>{{ __('messages.status') }}</td>
                                 <td>:</td>
                                 <td id="leave_status"></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td>{{ __('messages.your_remarks') }}</td>
                                 <td>:</td>
@@ -197,6 +208,7 @@
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="leave_id" id="leave_id">
+                                    <input type="hidden" name="approver_level" id="approver_level">
                                     <select id="leave_status_name" name="leave_status_name" class="form-control">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         <option value="Approve">{{ __('messages.approve') }}</option>

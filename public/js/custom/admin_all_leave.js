@@ -1,7 +1,7 @@
 $(function () {
-    AllLeaveListShow(leave_status = "All");
+    AllLeaveListShow(level_one_status = "All", level_two_status = "All", level_three_status = "All");
     // get all leave list
-    function AllLeaveListShow(leave_status) {
+    function AllLeaveListShow(level_one_status, level_two_status, level_three_status) {
         $('#all-leave-list').DataTable({
             processing: true,
             bDestroy: true,
@@ -105,7 +105,13 @@ $(function () {
                 dataType: "json",
                 // data: { month:getSelectedMonth },
                 // data: formData,
-                data: { staff_id: ref_user_id, leave_status: leave_status },
+                data: {
+                    level_one_status: level_one_status,
+                    level_two_status: level_two_status,
+                    level_three_status: level_three_status,
+                    staff_id: ref_user_id,
+                    academic_session_id: academic_session_id
+                },
                 type: "GET",
                 // contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
                 // processData: true, // NEEDED, DON'T OMIT THIS
@@ -122,7 +128,7 @@ $(function () {
                 }
             },
 
-            "pageLength": 5,
+            "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
@@ -163,13 +169,17 @@ $(function () {
                     name: 'document'
                 },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'level_one_status',
+                    name: 'level_one_status',
                 },
-                // {
-                //     data: 'assiner_remarks',
-                //     name: 'assiner_remarks'
-                // },
+                {
+                    data: 'level_two_status',
+                    name: 'level_two_status',
+                },
+                {
+                    data: 'level_three_status',
+                    name: 'level_three_status',
+                },
                 {
                     data: 'created_at',
                     name: 'created_at',
@@ -183,33 +193,74 @@ $(function () {
             ],
             columnDefs: [
                 {
-                    "targets": 3,
+                    "targets": 7,
                     "render": function (data, type, row, meta) {
-                        return data;
+                        var document = '<a href="' + leaveFilesUrl + '/' + data + '" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        return document;
                     }
                 },
                 {
                     "targets": 8,
                     "render": function (data, type, row, meta) {
-                        var badgeColor = "";
-                        if (data == "Approve") {
-                            badgeColor = "badge-success";
+                        if (row.level_one_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
                         }
-                        if (data == "Reject") {
-                            badgeColor = "badge-danger";
-                        }
-                        if (data == "Pending") {
-                            badgeColor = "badge-warning";
-                        }
-                        var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
-                        return status;
+
                     }
                 },
                 {
-                    "targets": 7,
+                    "targets": 9,
                     "render": function (data, type, row, meta) {
-                        var document = '<a href="' + leaveFilesUrl + '/' + data + '" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
-                        return document;
+                        if (row.level_two_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        if (row.level_three_staff_id) {
+                            var badgeColor = "";
+                            if (data == "Approve") {
+                                badgeColor = "badge-success";
+                            }
+                            if (data == "Reject") {
+                                badgeColor = "badge-danger";
+                            }
+                            if (data == "Pending") {
+                                badgeColor = "badge-warning";
+                            }
+                            var status = '<span class="badge ' + badgeColor + ' badge-pill">' + data + '</span>';
+                            return status;
+                        } else {
+                            return '-';
+                        }
                     }
                 },
                 // {
@@ -243,81 +294,10 @@ $(function () {
         $('#addRemarksAdmin' + studenetlevtblID).val(compain_remarks_tblID);
         $('#LeaveRemarksPopup').modal('hide');
     });
-    // approved leave
-    // $(document).on('click', '#approvedLeave', function () {
-    //     var leave_id = $(this).data('id');
-    //     var status = $("#leavestatus" + leave_id).val();
-
-    //     var assiner_remarks = $("#addRemarksAdmin" + leave_id).val();
-
-    //     var formData = new FormData();
-    //     formData.append('token', token);
-    //     formData.append('branch_id', branchID);
-    //     formData.append('leave_id', leave_id);
-    //     formData.append('status', status);
-    //     formData.append('assiner_remarks', assiner_remarks);
-    //     formData.append('staff_id', ref_user_id);
-    //     // for(var pair of formData.entries()){
-    //     //     console.log(pair[0]+ ', ' + pair[1]); 
-    //     // }
-    //     // return false;
-    //     $.ajax({
-    //         url: leaveApprovedUrl,
-    //         method: "post",
-    //         data: formData,
-    //         processData: false,
-    //         dataType: 'json',
-    //         contentType: false,
-    //         success: function (res) {
-    //             if (res.code == 200) {
-    //                 $('#all-leave-list').DataTable().ajax.reload(null, false);
-    //                 toastr.success(res.message);
-    //             }
-    //             else {
-    //                 toastr.error(res.message);
-
-    //             }
-    //         }
-    //     });
-
-    // });
-    $(document).on('click', '#approvedLeave', function () {
-        var leave_id = $("#leave_id").val();
-        var status = $("#leave_status_name").val();
-
-        var assiner_remarks = $("#assiner_remarks").val();
-
-        var formData = new FormData();
-        formData.append('token', token);
-        formData.append('branch_id', branchID);
-        formData.append('academic_session_id', academic_session_id);
-        formData.append('leave_id', leave_id);
-        formData.append('status', status);
-        formData.append('assiner_remarks', assiner_remarks);
-        formData.append('staff_id', ref_user_id);
-        $.ajax({
-            url: leaveApprovedUrl,
-            method: "post",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (res) {
-                if (res.code == 200) {
-                    toastr.success(res.message);
-                    $('#all-leave-list').DataTable().ajax.reload(null, false);
-                    $('#DetailsModal').modal('hide');
-                }
-                else {
-                    toastr.error(res.message);
-                }
-            }
-        });
-
-    });
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
         var leave_id = $(this).data('id');
+        var assign_leave_approval_id = $(this).data('assign_leave_approval_id');
         var staff_id = $(this).data('staff_id');
         // staffLeaveDetailsShowUrl
         var formData = new FormData();
@@ -325,6 +305,7 @@ $(function () {
         formData.append('branch_id', branchID);
         formData.append('leave_id', leave_id);
         formData.append('staff_id', staff_id);
+        formData.append('assign_leave_approval_id', assign_leave_approval_id);
         formData.append('academic_session_id', academic_session_id);
 
         $.ajax({
@@ -341,8 +322,28 @@ $(function () {
                     // DetailsModal
                     var leave_details = res.data.leave_details;
                     var leave_type_details = res.data.leave_type_details;
+                    var assign_leave_approval_details = res.data.assign_leave_approval_details;
+                    let result = checkValue(assign_leave_approval_details, ref_user_id);
+                    var staffStatus = "";
+                    var staffRemarks = "";
+                    var approver_level = 0;
+                    // level 1 db column name
+                    if (result == 'level_one_staff_id') {
+                        staffStatus = leave_details.level_one_status;
+                        staffRemarks = leave_details.level_one_staff_remarks;
+                        approver_level = 1;
+                    } else if (result == 'level_two_staff_id') {
+                        staffStatus = leave_details.level_two_status;
+                        staffRemarks = leave_details.level_two_staff_remarks;
+                        approver_level = 2;
+                    } else if (result == 'level_three_staff_id') {
+                        staffStatus = leave_details.level_three_status;
+                        staffRemarks = leave_details.level_three_staff_remarks;
+                        approver_level = 3;
+                    }
                     $('#DetailsModal').modal('show');
                     $('#leave_id').val(leave_details.id);
+                    $('#approver_level').val(approver_level);
                     $('#staffName').html(leave_details.name);
                     $('#leaveDates').html(leave_details.from_leave + " / " + leave_details.to_leave);
                     $('#noOfDays').html(leave_details.date_diff + 1);
@@ -363,11 +364,14 @@ $(function () {
                     var status = '<span class="badge ' + badgeColor + ' badge-pill">' + leave_details.status + '</span>';
                     var document = '<a href="' + leaveFilesUrl + '/' + leave_details.document + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                     $('#documents').html(document);
-                    $('#remarks').html(leave_details.remarks);
                     $('#leave_status').html(status);
                     // set value
-                    $('#assiner_remarks').val(leave_details.assiner_remarks);
-                    $('#leave_status_name').val(leave_details.status);
+                    $('#1st_approver_remarks').html(leave_details.level_one_staff_remarks);
+                    $('#2nd_approver_remarks').html(leave_details.level_two_staff_remarks);
+                    $('#3rd_approver_remarks').html(leave_details.level_three_staff_remarks);
+
+                    $('#assiner_remarks').val(staffRemarks);
+                    $('#leave_status_name').val(staffStatus);
                     $('#alreadyTakenLeave tbody').empty();
                     // $('#myModal').modal('hide');
                     var takenLeaveDetails = "";
@@ -378,10 +382,12 @@ $(function () {
                                 used_leave = val.used_leave;
                             }
                             var bal = val.total_leave - val.used_leave;
+                            var applied_leave = val.applied_leave !== null ? val.applied_leave : 0;
                             takenLeaveDetails += '<tr>' +
                                 '<td>' + val.leave_name + '</td>' +
                                 '<td>' + val.total_leave + '</td>' +
                                 '<td>' + used_leave + '</td>' +
+                                '<td>' + applied_leave + '</td>' +
                                 '<td>' + bal + '</td>' +
                                 '</tr>';
 
@@ -399,30 +405,88 @@ $(function () {
             }
         });
     });
+    // approved leave
+    $(document).on('click', '#approvedLeave', function () {
+        var leave_id = $("#leave_id").val();
+        var status = $("#leave_status_name").val();
+
+        var assiner_remarks = $("#assiner_remarks").val();
+        var approver_level = $("#approver_level").val();
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('academic_session_id', academic_session_id);
+        formData.append('leave_id', leave_id);
+        formData.append('status', status);
+        formData.append('assiner_remarks', assiner_remarks);
+        formData.append('staff_id', ref_user_id);
+        formData.append('approver_level', approver_level);
+        // Display the key/value pairs
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+
+        // return false;
+        $.ajax({
+            url: leaveApprovedUrl,
+            method: "post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (res) {
+                if (res.code == 200) {
+                    toastr.success(res.message);
+                    $('#all-leave-list').DataTable().ajax.reload(null, false);
+                    $('#DetailsModal').modal('hide');
+                }
+                else {
+                    toastr.error(res.message);
+                }
+            }
+        });
+
+    });
     // all Leave Filter
     $('#allLeaveFilter').on('submit', function (e) {
         e.preventDefault();
-        var leave_status = $("#changeLeaveSts").val();
+        var level_one_status = $("#levelOneStatus").val();
+        var level_two_status = $("#levelTwoStatus").val();
+        var level_three_status = $("#levelThreeStatus").val();
         var classObj = {
-            leave_status: leave_status
+            level_one_status: level_one_status,
+            level_two_status: level_two_status,
+            level_three_status: level_three_status,
+            academic_session_id: academic_session_id,
+            userID: userID,
         };
-        setLocalStorageadminallleaves(classObj);
-        AllLeaveListShow(leave_status);
+        setLocalStorageForAllLeave(classObj);
+        AllLeaveListShow(level_one_status, level_two_status, level_three_status);
     });
-    
-    function setLocalStorageadminallleaves(classObj) {
+    function checkValue(obj, value) {
+        for (let key in obj) {
+            if (obj[key] == value) {
+                return key;
+            }
+        }
+        return false;
+    }
+
+    function setLocalStorageForAllLeave(classObj) {
 
         var adminallleavesDetails = new Object();
-        adminallleavesDetails.leave_status = classObj.leave_status;
+        adminallleavesDetails.level_one_status = classObj.level_one_status;
+        adminallleavesDetails.level_two_status = classObj.level_two_status;
+        adminallleavesDetails.level_three_status = classObj.level_three_status;
         // here to attached to avoid localStorage other users to add
         adminallleavesDetails.branch_id = branchID;
         adminallleavesDetails.role_id = get_roll_id;
         adminallleavesDetails.user_id = ref_user_id;
-        var  adminallleavesClassArr = [];
+        var adminallleavesClassArr = [];
         adminallleavesClassArr.push(adminallleavesDetails);
         if (get_roll_id == "2") {
             // Admin
-            
+
             localStorage.removeItem("admin_alltleaves_details");
             localStorage.setItem('admin_alltleaves_details', JSON.stringify(adminallleavesClassArr));
         }
@@ -432,27 +496,30 @@ $(function () {
         if (typeof admin_allleaves_storage !== 'undefined') {
             if ((admin_allleaves_storage)) {
                 if (admin_allleaves_storage) {
-    
-                    console.log('test')
+
                     var adminallLeaveStorage = JSON.parse(admin_allleaves_storage);
                     if (adminallLeaveStorage.length == 1) {
-                        var leave_status,  userBranchID, userRoleID, userID;
+                        var level_one_status, level_two_status, level_three_status, userBranchID, userRoleID, userID;
                         adminallLeaveStorage.forEach(function (user) {
-                            leave_status = user.leave_status;
+                            level_one_status = user.level_one_status;
+                            level_two_status = user.level_two_status;
+                            level_three_status = user.level_three_status;
                             userBranchID = user.branch_id;
                             userRoleID = user.role_id;
                             userID = user.user_id;
                         });
                         if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                            
-                            $("#changeLeaveSts").val(leave_status);
-                            AllLeaveListShow(leave_status);
+
+                            var level_one_status = $("#levelOneStatus").val();
+                            var level_two_status = $("#levelTwoStatus").val();
+                            var level_three_status = $("#levelThreeStatus").val();
+                            AllLeaveListShow(level_one_status, level_two_status, level_three_status);
                         }
                     }
                 }
             }
         }
     }
-    
-    
+
+
 });
