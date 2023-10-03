@@ -1723,4 +1723,206 @@ class SuperAdminController extends Controller
 
     // static page controller end
 
+    // Menu coding Start
+    public function addmenu(Request $request)
+    {
+        $current_user = session()->get('role_id');
+        $adminid = 2;
+        $tags_add_also_currentroll =  $current_user . ',' . $adminid;         
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'role_id' => $request->role_id,
+            'menu_name' => $request->menu_name,
+            'menu_type' => $request->menu_type,
+            'menu_icon' => $request->menu_icon,
+            'menu_refid' => $request->menu_refid,
+            'menu_url' => $request->menu_url,            
+            'menu_routename' => $request->menu_routename,
+            'menu_status' => $request->menu_status,
+            'menu_dropdown' => $request->menu_dropdown,
+            'tags' => $tags_add_also_currentroll
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.addmenu'), $data);
+        //dd($response);
+        return redirect('syscont/super_admin/menucreation');
+        
+    }
+    public function createmenu()
+    {
+        $data = [
+            'status' => "All"
+        ];
+        $mainmenudata = [
+            'type' => "Mainmenu"
+        ];
+        $submenudata = [
+            'type' => "Submenu"
+        ];
+        $childmenudata = [
+            'type' => "Childmenu"
+        ];
+        
+        $mainmenu = Helper::PostMethod(config('constants.api.menus_list'),$mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.menus_list'),$submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.menus_list'),$childmenudata);
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        return view(
+            'super_admin.menus.index',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [], 
+                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [],
+                'submenu' => isset($submenu['data']) ?$submenu['data'] : [],
+                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : []                    
+            ]
+        );
+    }
+
+    public function menuaccess()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [
+            'status' => "All"
+        ];
+        
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        
+        
+        return view(
+            'super_admin.menus.menuaccess',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [],  
+                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [],
+                'mainmenu' =>  [] ,
+                'submenu' => [] ,
+                'childmenu' =>  []      
+            ]
+        );
+    }
+    public function getmenus(Request $request)
+    {
+        $role_id = $request->role_id;
+        $branch_id =$request->branch_id;
+        //dd($branch_id);
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [            
+            'status' => "All"
+        ];
+        $mainmenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'type' => 'Mainmenu'
+        ];
+        $submenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'type' => "Submenu"
+        ];
+        $childmenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'type' => "Childmenu"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        
+        $mainmenu = Helper::PostMethod(config('constants.api.menuaccess_list'),$mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.menuaccess_list'),$submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.menuaccess_list'),$childmenudata);
+       // dd($mainmenu);
+        return view(
+            'super_admin.menus.menuaccess',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [],  
+                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [] ,
+                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [] ,
+                'submenu' => isset($submenu['data']) ?$submenu['data'] : [] ,
+                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : [],
+                'role_id' => $role_id, 
+                'branch_id' => $branch_id                  
+            ]
+        );
+    }
+    public function setpermission(Request $request)
+    {
+        
+        $data = [
+            'role_id' => $request->role_id,
+            'br_id' => $request->branch_id,
+            'menu_id' => $request->menu_id,
+            'menuaccess_id' => $request->menuaccess_id,
+            'act' => $request->act,
+            'accessdenied' => $request->accessdenied
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.setpermission'), $data);
+        //dd($response);
+        return redirect('syscont/super_admin/menuaccess');
+        
+    }
+    public function getmenuEditDetails(Request $request, $id)
+    {
+        
+        $res = [
+            'id' => $id,
+        ];
+        $MenuDetails = Helper::PostMethod(config('constants.api.menu_details'), $res);
+        $data = [
+            'status' => "All"
+        ];
+        $mainmenudata = [
+            'type' => "Mainmenu"
+        ];
+        $submenudata = [
+            'type' => "Submenu"
+        ];
+        $childmenudata = [
+            'type' => "Childmenu"
+        ];
+        //dd($MenuDetails);
+        $mainmenu = Helper::PostMethod(config('constants.api.menus_list'),$mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.menus_list'),$submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.menus_list'),$childmenudata);
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        return view(
+            'super_admin.menus.edit',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [], 
+                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [],
+                'submenu' => isset($submenu['data']) ?$submenu['data'] : [],
+                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : [],
+                'MenuDetails' => isset($MenuDetails['data']) ?$MenuDetails['data'] : []                     
+            ]
+        );
+    }
+    public function updatemenuDetails(Request $request)
+    {
+        $current_user = session()->get('role_id');
+        $adminid = 2;
+        $tags_add_also_currentroll =  $current_user . ',' . $adminid;         
+        $data = [
+            'user_id' => session()->get('user_id'),
+            'user_name' => session()->get('name'),
+            'menu_id' => $request->menu_id,
+            'role_id' => $request->role_id,
+            'menu_name' => $request->menu_name,
+            'menu_type' => $request->menu_type,
+            'menu_icon' => $request->menu_icon,
+            'menu_refid' => $request->menu_refid,
+            'menu_url' => $request->menu_url,
+            'menu_routename' => $request->menu_routename,
+            'menu_status' => $request->menu_status,
+            'menu_dropdown' => $request->menu_dropdown,
+            'tags' => $tags_add_also_currentroll
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.menu_update'), $data);
+        //dd($response);
+        return redirect('syscont/super_admin/menucreation');
+        
+    }
+    // Menu Coding End
+
 }

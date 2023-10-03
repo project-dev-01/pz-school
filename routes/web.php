@@ -62,6 +62,17 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         // student details
         Route::get('/student', [SuperAdminController::class, 'studentIndex'])->name('student.index');
 
+        //Menu Routes 
+        Route::get('super_admin/menucreation', [SuperAdminController::class, 'createmenu'])->name('super_admin.createmenu');
+        Route::post('super_admin/addmenu', [SuperAdminController::class, 'addmenu'])->name('super_admin.addmenu');
+        
+        Route::get('menu/edit/{id}', [SuperAdminController::class, 'getmenuEditDetails'])->name('menu.edit');
+        
+        Route::post('menu/update', [SuperAdminController::class, 'updatemenuDetails'])->name('menu.update');
+        Route::get('super_admin/menuaccess', [SuperAdminController::class, 'menuaccess'])->name('super_admin.menuaccess');        
+        Route::post('super_admin/getmenus', [SuperAdminController::class, 'getmenus'])->name('super_admin.getmenus');
+        Route::post('super_admin/setpermission', [SuperAdminController::class, 'setpermission'])->name('super_admin.setpermission');
+
 
         // branch routes
         Route::get('branch/index', [SuperAdminController::class, 'branchIndex'])->name('branch.index');
@@ -132,6 +143,7 @@ Route::get('/password/reset/{token}', [AuthController::class, 'passwordRest'])->
 Route::post('/reset-password-validation', [AuthController::class, 'resetPasswordValidation'])->name('reset_password_validation');
 
 //school app form
+Route::get('/application/email/{token}', [CommonController::class, 'emailApplicationForm'])->name('application.email');
 Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
 Route::post('/application-form/add', [CommonController::class, 'addApplicationForm'])->name('application.add');
 Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
@@ -846,6 +858,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // 
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
+        Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
     });
 });
 // admin routes end

@@ -6,6 +6,19 @@
 @endsection
 @section('content')
 <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
+<style>
+    @media only screen and (min-device-width: 320px) and (max-device-width: 844px) {
+        .homework {
+            height: 95%;
+        }
+    }
+
+    @media only screen and (min-device-width: 390px) and (max-device-width: 896px) {
+        .homeworkstatus {
+            margin-top: 25px;
+        }
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -71,7 +84,7 @@
     <div class="row">
         <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
-            <div class="card">
+            <div class="card homework">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
@@ -89,7 +102,7 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
         <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
-            <div class="card">
+            <div class="card homework">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
@@ -98,7 +111,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="col-md-12">
+                    <div class="col-md-12 homeworkstatus">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
                             <div id="homework-status" class="apex-charts" data-colors="#1FAB44,#f1556c,#4FC6E1"></div>
                         </div> <!-- collapsed end -->

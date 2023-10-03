@@ -15,11 +15,24 @@
  {
 width: 21.4em;
 }
+@media screen and (min-device-width: 280px) and (max-device-width: 653px) 
+{
+.ui-datepicker
+ {
+width: 14.4em;
+}
+.checkbox label {
+    margin-top: 15px;
+}
+}
 @media screen and (min-device-width: 320px) and (max-device-width: 660px) 
 {
 .ui-datepicker
  {
 width: 14.4em;
+}
+.checkbox label {
+    margin-top: 15px;
 }
 }
 @media screen and (min-device-width: 360px) and (max-device-width: 740px) 

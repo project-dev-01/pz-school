@@ -76,7 +76,7 @@
 
                         <div class="form-group">
                             <label for="dueDate">{{ __('messages.due_date') }} & {{ __('messages.time') }}<span class="text-danger">*</span></label>
-                            <input type="text" id="dueDate" name="due_date" class="form-control" placeholder="{{ __('messages.enter_date _time') }}">
+                            <input type="text" id="dueDate" name="due_date" class="form-control" placeholder="{{ __('messages.enter_date_time') }}">
                         </div>
                         <div class="form-group">
                             <label for="assign_to">{{ __('messages.assigned_to') }}<span class="text-danger">*</span></label>

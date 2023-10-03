@@ -242,7 +242,7 @@ $(function () {
                         // add functions tr start
                         get_attendance_list.forEach(function (res) {
                             attendanceListShow += '<tr>' +
-                                '<td class="text-left studentRow" style="display:grid;">' +
+                                '<td class="text-center studentRow" style="display:block;">' +
                                 // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                 '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
                                 '<input type="hidden" value="' + res.student_id + '">';

@@ -6,6 +6,19 @@
 @endsection
 @section('content')
 <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
+<style>
+    @media only screen and (min-device-width: 320px) and (max-device-width: 844px) {
+        .homework {
+            height: 95%;
+        }
+    }
+
+    @media only screen and (min-device-width: 390px) and (max-device-width: 896px) {
+        .homeworkstatus {
+            margin-top: 25px;
+        }
+    }
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -28,7 +41,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -57,7 +70,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -69,11 +82,11 @@
     <div class="row">
         <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
-            <div class="card">
+            <div class="card homework">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attendance_report') }}
+                            {{ __('messages.attendance_report') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -87,16 +100,16 @@
             </div> <!-- end card-->
         </div> <!-- end col-->
         <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
-            <div class="card">
+            <div class="card homework">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.homeWork_report') }}
+                            {{ __('messages.homeWork_report') }}
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <div class="col-md-12">
+                    <div class="col-md-12 homeworkstatus">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
                             <div id="homework-status" class="apex-charts" data-colors="#1FAB44,#f1556c,#4FC6E1"></div>
                         </div> <!-- collapsed end -->
@@ -111,7 +124,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.attitude') }}
+                            {{ __('messages.attitude') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -134,7 +147,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.short_test') }}
+                            {{ __('messages.short_test') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -155,7 +168,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.exam_result') }}
+                            {{ __('messages.exam_result') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -217,7 +230,7 @@
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
 <script>
     var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
@@ -230,7 +243,7 @@
     var getSubjectAbgGraphByStudent = "{{ config('constants.api.get_subject_average_by_student') }}";
     var getExamMarksGraphByStudent = "{{ config('constants.api.get_exam_marks_by_student') }}";
 
-    
+
     var student_analytic_storage = localStorage.getItem('student_analytic_details');
 
     // default image test

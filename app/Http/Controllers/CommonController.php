@@ -535,6 +535,42 @@ class CommonController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
+    public function emailApplicationForm(Request $request, $token)
+
+    {
+
+        // dd($verify_email);
+
+        $data = [
+
+            'branch_id' => config('constants.branch_id'),
+
+            'token' => $token,
+
+        ];
+
+        // dd($data);
+
+        //$application = Http::post(config('constants.api.application_email'), $data);
+
+        //$response = $application->json();
+
+       
+
+        return view(
+
+            'school-application-email',
+
+            [
+
+                'application' => isset($application['message']) ? $application['message'] : [],
+
+            ]
+
+        );
+
+    }
 
     public function clearLocalStorage(Request $request)
     {

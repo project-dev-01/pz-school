@@ -17,6 +17,10 @@
             padding: 0px 5px;
             border-radius: 0.15rem;
         }
+        .btn-primary-bl {
+            width: 100px;
+            font-size: 12px;
+        }
 
     }
 
@@ -25,9 +29,12 @@
             padding: 0px 0px;
             border-radius: 0.15rem;
         }
+        .btn-primary-bl {
+            width: 90px;
+            font-size: 12px;
+        }
 
     }
-
 </style>
 <!-- Start Content-->
 <div class="container-fluid">

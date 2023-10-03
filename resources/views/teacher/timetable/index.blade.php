@@ -35,7 +35,23 @@
         .dt-responsive {
             width: max-content;
         }
+        .btn-primary-bl {
+            width: 90px;
+            font-size: 12px;
+        }
 
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 1200px) {
+        .dt-responsive {
+            width: max-content;
+        }
+
+        .btn-primary-bl {
+            width: 100px;
+            font-size: 12px;
+        }
+        
     }
 </style>
 <!-- Start Content-->

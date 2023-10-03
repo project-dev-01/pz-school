@@ -100,20 +100,22 @@ $(function () {
 
                 }
             ],
-            ajax: eventList,
+            ajax: eventList,           
             "pageLength": 10,
+            "responsive" : true,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
             columns: [
+                
                 //  {data:'id', name:'id'},
                 // {
                 //     data: 'checkbox',
                 //     name: 'checkbox',
                 //     orderable: false,
                 //     searchable: false
-                // },
+                // },                
                 {
                     searchable: false,
                     data: 'DT_RowIndex',
