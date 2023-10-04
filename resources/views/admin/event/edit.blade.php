@@ -134,12 +134,12 @@
                             </div>
                             @php $cla = 'style=display:none'; $gro = 'style=display:none'; @endphp
                             @if(isset($event['audience']))
-                                @if($event['audience']==2)
-                                @php $cla = ''; @endphp
-                                @endif
-                                @if($event['audience']==3)
-                                @php $gro = ''; @endphp
-                                @endif
+                            @if($event['audience']==2)
+                            @php $cla = ''; @endphp
+                            @endif
+                            @if($event['audience']==3)
+                            @php $gro = ''; @endphp
+                            @endif
                             @endif
 
                             <div class="col-md-4" id="edit_class" {{$cla}}>
@@ -222,6 +222,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" {{ isset($event['holiday']) ?  $event['holiday'] == "0" ? 'checked':'' : "" }}>
+                                        <label class="custom-control-label" for="holiday">{{ __('messages.holiday') }}</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-3 time" {{ isset($event['all_day']) ? $event['all_day'] == "on" ? 'style=display:none':'' : "" }}>
                                 <div class="form-group">
                                     <label>{{ __('messages.start_time') }}</label>
@@ -236,12 +244,25 @@
                                     <span class="text-danger error-text end_time_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 parent_staff_holiday" {{ isset($event['holiday']) ? $event['holiday'] == "1" ? 'style=display:none':'' : "" }}>
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
-                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" {{ isset($event['holiday']) ?  $event['holiday'] == "0" ? 'checked':'' : "" }}>
-                                        <label class="custom-control-label" for="holiday">{{ __('messages.holiday') }}</label>
+                                        <input type="checkbox" class="custom-control-input" name="student_holiday" id="student_holiday" {{ isset($event['student_holiday']) ?  $event['student_holiday'] == "1" ? 'checked':'' : "" }}>
+                                        <label class="custom-control-label" for="student_holiday">{{ __('messages.student_holiday') }}</label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 parent_staff_holiday" {{ isset($event['holiday']) ? $event['holiday'] == "1" ? 'style=display:none':'' : "" }}>
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="staff_holiday" id="staff_holiday" {{ isset($event['staff_holiday']) ?  $event['staff_holiday'] == "1" ? 'checked':'' : "" }}>
+                                        <label class="custom-control-label" for="staff_holiday">{{ __('messages.staff_holiday') }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 parent_staff_holiday">
+                                <div class="form-group mt-3">
+                                    <span class="note">Note: If both are not checked mean events attendance</span>
                                 </div>
                             </div>
                             <div class="col-md-4">

@@ -125,6 +125,7 @@ $(document).ready(function () {
         });
 
     });
+
     var calendarEl = document.getElementById('teacher_calendor');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {

@@ -21,6 +21,13 @@
 @endsection
 @section('content')
 <style>
+    .note {
+        /* font-size: 12px;
+        color: #777;
+        margin-left: 10px; */
+        word-wrap: break-word;
+    }
+
     .ui-datepicker {
         width: 21.4em;
     }
@@ -194,7 +201,7 @@
                             <div class="col-md-2">
                                 <div class="form-group mt-3">
                                     <div class="custom-control custom-checkbox form-check">
-                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday" checked>
+                                        <input type="checkbox" class="custom-control-input" name="holiday" id="holiday">
                                         <label class="custom-control-label" for="holiday">{{ __('messages.holiday') }}</label>
                                     </div>
                                 </div>
@@ -211,6 +218,27 @@
                                     <label>{{ __('messages.end_time') }}</label>
                                     <input type="text" class="form-control timepicker" name="end_time" id="add_end_time">
                                     <span class="text-danger error-text end_time_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 parent_staff_holiday" style="display:none">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="student_holiday" id="student_holiday" checked>
+                                        <label class="custom-control-label" for="student_holiday">{{ __('messages.student_holiday') }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 parent_staff_holiday" style="display:none">
+                                <div class="form-group mt-3">
+                                    <div class="custom-control custom-checkbox form-check">
+                                        <input type="checkbox" class="custom-control-input" name="staff_holiday" id="staff_holiday" checked>
+                                        <label class="custom-control-label" for="staff_holiday">{{ __('messages.staff_holiday') }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 parent_staff_holiday" style="display:none">
+                                <div class="form-group mt-3">
+                                    <span class="note">Note: If both are not checked mean events attendance</span>
                                 </div>
                             </div>
                             <div class="col-md-4">

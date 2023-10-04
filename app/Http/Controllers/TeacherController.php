@@ -587,6 +587,24 @@ class TeacherController extends Controller
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
+    public function classroomManagementNoSub()
+    {
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($sem);
+        return view('teacher.classroom.attendance', [
+            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
     // faq screen pages end
     public function testResult()
     {
@@ -1306,6 +1324,23 @@ class TeacherController extends Controller
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
+        return $response;
+    }
+    function attendancePost(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
+
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.add_student_attendance_no_subject'), $data);
         return $response;
     }
     function getShortTest(Request $request)

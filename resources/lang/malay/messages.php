@@ -1561,4 +1561,7 @@ return [
     "task" => "Tugasan",
     "theory" => "Teori",
     "practical" => "Praktikal",
+    "student_holiday" => "Student Holiday",
+    "staff_holiday" => "Staff Holiday",
+    "classroom_attendance" => "Classroom Attendance"
 ];

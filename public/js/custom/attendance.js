@@ -533,7 +533,7 @@ $(function () {
             var color = "";
             if(val.holiday == 1){
                 var color = "#8e9597";
-                var holiday = "disabled";
+                var holiday = "";
             }
             row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
             if (val.details.id) {

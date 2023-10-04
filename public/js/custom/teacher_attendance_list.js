@@ -135,14 +135,14 @@ $(function () {
         var check = $("#attendanceFilter").valid();
         if (check === true) {
 
-            var attendanceList = $("#classDate").val();
+            var reportDate = $("#classDate").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var subject_id = $("#subjectID").val();
             var semester_id = $("#semesterID").val();
             var session_id = $("#sessionID").val();
 
-            var date = new Date(attendanceList)
+            var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
 
             // var date = new Date();
@@ -180,19 +180,18 @@ $(function () {
                 subjectID: subject_id,
                 semesterID: semester_id,
                 sessionID: session_id,
-                date: attendanceList,
+                date: reportDate,
                 academic_session_id: academic_session_id,
                 userID: userID,
             };
 
             setLocalStorageForStudentAttendance(classObj);
 
-            studentAttendanceList(formData,attendanceList)
+            studentAttendanceList(formData,reportDate)
         }
 
     });
     function studentAttendanceList(formData,reportDate){
-
         var date = new Date(reportDate)
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -435,14 +434,14 @@ $(function () {
                             }, 'json');
                         }
 
-                        var attendanceList = date;
+                        var reportDate = date;
                         var class_id = classID;
                         var section_id = sectionID
                         var subject_id = subjectID
                         var semester_id = semesterID
                         var session_id = sessionID
 
-                        var date = new Date(attendanceList)
+                        var date = new Date(reportDate)
                         var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
                         //excel download
 
@@ -471,7 +470,7 @@ $(function () {
                         formData.append('year_month', year_month);
                         formData.append('academic_session_id', academic_session_id);
 
-                        studentAttendanceList(formData,attendanceList);
+                        studentAttendanceList(formData,reportDate);
                     }
                 }
             }
@@ -535,14 +534,14 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                         }, 'json');
                     }
 
-                    var attendanceList = date;
+                    var reportDate = date;
                     var class_id = classID;
                     var section_id = sectionID
                     var subject_id = subjectID
                     var semester_id = semesterID
                     var session_id = sessionID
 
-                    var date = new Date(attendanceList)
+                    var date = new Date(reportDate)
                     var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
                     //excel download
 
@@ -571,7 +570,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                     formData.append('year_month', year_month);
                     formData.append('academic_session_id', academic_session_id);
 
-                    studentAttendanceList(formData,attendanceList);
+                    studentAttendanceList(formData,reportDate);
                 }
             }
         }
@@ -1391,7 +1390,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             var color = "";
             if(val.holiday == 1){
                 var color = "#8e9597";
-                var holiday = "disabled";
+                var holiday = "";
             }
             row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
             if (val.details.id) {

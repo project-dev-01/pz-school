@@ -317,7 +317,7 @@ $(document).ready(function () {
                 var classStartTime = moment(e.event.start).format('hh:mm A');
                 var classEndTime = moment(e.event.end).format('hh:mm A');
                 $('#student-modal').modal('toggle');
-                
+
                 var start = e.event.start;
                 var end = e.event.end;
                 var setCurDate = formatDate(end);

@@ -876,7 +876,6 @@ class AdminController extends Controller
             'id' => $id,
         ];
         $event = Helper::PostMethod(config('constants.api.event_details'), $data);
-
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
         $getgroup = Helper::GetMethod(config('constants.api.group_list'));
@@ -895,7 +894,6 @@ class AdminController extends Controller
 
     public function addEvent(Request $request)
     {
-
         if ($request->class) {
             $class = implode(",", $request->class);
         } else {
@@ -923,8 +921,12 @@ class AdminController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'holiday' => $request->holiday,
+            'student_holiday' => $request->student_holiday,
+            'staff_holiday' => $request->staff_holiday,
             'created_by' => session()->get('ref_user_id')
         ];
+        // dd($data);
+
         $response = Helper::PostMethod(config('constants.api.event_add'), $data);
         // dd($response);
         return $response;
@@ -1004,6 +1006,8 @@ class AdminController extends Controller
             'section' => $request->section,
             'all_day' => $request->all_day,
             'holiday' => $request->holiday,
+            'student_holiday' => $request->student_holiday,
+            'staff_holiday' => $request->staff_holiday,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'description' => $request->description,
@@ -1570,7 +1574,7 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
-        // dd($staff['data']['user']);
+        // dd($res);
         return view(
             'admin.employee.edit',
             [

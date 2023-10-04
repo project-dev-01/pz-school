@@ -46,6 +46,15 @@ $(function () {
             // $(".time").show("slow");
         }
     });
+    // holiday checkbox
+    $("#holiday").on("change", function () {
+        if ($(this).is(":checked")) {
+            $('.parent_staff_holiday').css("display", "block");
+        } else {
+            $('.parent_staff_holiday').css("display", "none");
+        }
+        // $('#student_holiday, #staff_holiday').prop('checked', false);
+    });
 
     $("#event_start_date").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -281,7 +290,7 @@ $(function () {
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             //dom: 'lBfrtip',
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -315,7 +324,7 @@ $(function () {
                         columns: 'th:not(:last-child)'
                     },
                     customize: function (doc) {
-                        doc.pageMargins = [50,50,50,50];
+                        doc.pageMargins = [50, 50, 50, 50];
                         doc.defaultStyle.fontSize = 10;
                         doc.styles.tableHeader.fontSize = 12;
                         doc.styles.title.fontSize = 14;
@@ -340,23 +349,23 @@ $(function () {
                             }
                         });*/
                         // Create a footer
-                        
-                        doc['footer']=(function(page, pages) {
+
+                        doc['footer'] = (function (page, pages) {
                             return {
                                 columns: [
-                                    { alignment: 'left', text: [ footer_txt ],width:400} ,
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
                                     {
                                         // This is the right column
                                         alignment: 'right',
-                                        text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                        width:100
-    
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
                                     }
                                 ],
-                                margin: [50, 0,0,0]
+                                margin: [50, 0, 0, 0]
                             }
                         });
-                        
+
                     }
 
                 }
@@ -484,9 +493,9 @@ $(function () {
             $('.viewEvent').find('.end_date').text(data.data.end_date);
             if (data.data.audience == 1) {
                 $('.viewEvent').find('.audience').text("Everyone");
-            }else if (data.data.audience == 2) {
+            } else if (data.data.audience == 2) {
                 $('.viewEvent').find('.audience').text("Grade :" + data.data.class_name);
-            }else if (data.data.audience == 3) {
+            } else if (data.data.audience == 3) {
                 $('.viewEvent').find('.audience').text("Group : " + data.data.group_name);
             }
 
@@ -574,11 +583,11 @@ $(function () {
     function branchEvent(branch_id, Selector) {
 
         $(Selector).find("#type").empty();
-        $(Selector).find("#type").append('<option value="">'+select_type+'</option>');
+        $(Selector).find("#type").append('<option value="">' + select_type + '</option>');
         $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">'+select_class+'</option>');
+        $(Selector).find("#class_name").append('<option value="">' + select_class + '</option>');
         $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">'+select_section+'</option>');
+        $(Selector).find("#section_name").append('<option value="">' + select_section + '</option>');
         $.post(branchByEvent, { branch_id: branch_id, token: token }, function (res) {
             if (res.code == 200) {
                 $.each(res.data.eventType, function (key, val) {

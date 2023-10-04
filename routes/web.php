@@ -1163,6 +1163,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('faq/index', [TeacherController::class, 'faqIndex'])->name('teacher.faq.Index');
         // class room management    
         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
+        Route::get('classroom/attendance', [TeacherController::class, 'classroomManagementNoSub'])->name('teacher.classroom.attendance');
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Route::post('storetchat', [TeacherController::class, 'storetchat'])->name('teacher.storetchat');
@@ -1200,6 +1201,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('add_daily_report', [TeacherController::class, 'addDailyReport'])->name('teacher.classroom.add_daily_report');
         Route::post('add_daily_report_remarks', [TeacherController::class, 'addDailyReportRemarks'])->name('teacher.classroom.add_daily_report_remarks');
         Route::post('studentleave/update', [TeacherController::class, 'getstudentleave_update'])->name('teacher.studentleave.update');
+        Route::post('attendanceAdd', [TeacherController::class, 'attendancePost'])->name('teacher.attendance.add');
         // Subject By Class Route
         Route::post('subject-by-class', [TeacherController::class, 'subjectByClass'])->name('teacher.subject_by_class');
 

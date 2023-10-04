@@ -266,9 +266,9 @@
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <!-- Chart JS -->
-<!-- <script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('libs/chart.js/Chart.bundle.min.js') }}"></script>
 <script src="{{ asset('libs/morris.js06/morris.min.js') }}"></script>
-<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script> -->
+<script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>

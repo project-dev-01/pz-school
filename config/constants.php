@@ -9,7 +9,6 @@ return [
     'image_url' => "http://localhost/paxsuzen-api-dev/public",
     'api' => [
         // login url
-        // 'branch_id'=>'2',
         'login' => $url.'/login',
         'loginSA' => $url.'/loginSA',
         'login_branch' => $url.'/login_branch',
@@ -270,7 +269,8 @@ return [
         'get_testresult_exams' => $url.'/get_testresult_exams',
         'get_testresult_marks_subject_vs' => $url.'/get_testresult_marks_subject_vs',
         'add_daily_report_by_student' => $url.'/add_daily_report_by_student',
-        
+        'get_student_attendance_no_subject' => $url.'/get_student_attendance_no_subject',
+        'add_student_attendance_no_subject' => $url.'/add_student_attendance_no_subject',
         // get attendance list
         'get_attendance_list' => $url.'/get_attendance_list',
         'get_child_subjects' => $url.'/get_child_subjects',
@@ -824,6 +824,7 @@ return [
         'holidays_list' => $url.'/holidays/list',
         'holidays_details' => $url.'/holidays/holidays-details',
         'holidays_update' => $url.'/holidays/update',
+        'holidays_delete' => $url.'/holidays/delete',
         'all_student_ranking' => $url.'/all_student/ranking',
         
          // Login Activity url

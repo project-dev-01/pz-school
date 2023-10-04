@@ -58,6 +58,17 @@
 #student_calendor .fc-day-header.fc-today {
     background-color: #E9D528;
 }
+.background-event-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+  }  
 
 /* Adjust the height of hour slots */
 /* #teacher_calendor .fc-time-grid td {
