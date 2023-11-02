@@ -20,7 +20,7 @@ $(function () {
                 var valuein = moment.duration(employee_check_in_time, 'HH:mm');
                 var valueout = moment.duration(employee_check_out_time, 'HH:mm');
                 var difference = valueout.subtract(valuein);
-                
+
                 var hours = ("0" + difference.hours()).slice(-2) + ":" + ("0" + difference.minutes()).slice(-2);
                 $(this).closest('tr').find('.hours').val(hours);
             }
@@ -28,10 +28,10 @@ $(function () {
             $(this).closest('tr').find('.checkout').prop('readonly', false);
             $(this).closest('tr').find('.hours').prop('readonly', false);
         }
-        
+
         var reason = $(this).closest('tr').find('.reason');
         reason.empty();
-        reason.append('<option value="">'+select_reason+'</option>');
+        reason.append('<option value="">' + select_reason + '</option>');
         $.post(getTeacherAbsentExcuse, {
             token: token,
             branch_id: branchID,
@@ -93,7 +93,7 @@ $(function () {
         e.preventDefault();
         var department = $(this).val();
         $("#employee").empty();
-        $("#employee").append('<option value="">'+select_employee+'</option>');
+        $("#employee").append('<option value="">' + select_employee + '</option>');
         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -107,8 +107,8 @@ $(function () {
         e.preventDefault();
         var department = $(this).val();
         $("#employeeReportEmployee").empty();
-        $("#employeeReportEmployee").append('<option value="">'+select_employee+'</option>');
-        $("#employeeReportEmployee").append('<option value="All">'+all_lang+'</option>');
+        $("#employeeReportEmployee").append('<option value="">' + select_employee + '</option>');
+        $("#employeeReportEmployee").append('<option value="All">' + all_lang + '</option>');
         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -190,7 +190,7 @@ $(function () {
                 academic_session_id: academic_session_id
             };
             setLocalStorageForadminemployeeattendancereportlist(classObj);
-           
+
             var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
 
@@ -379,14 +379,14 @@ $(function () {
                     }
                 }
             });
-          
+
         }
 
     });
-    
+
     function setLocalStorageForadminemployeeattendancereportlist(classObj) {
 
-        var attendaceDetails = new Object(); 
+        var attendaceDetails = new Object();
         attendaceDetails.employee = classObj.employee;
         attendaceDetails.department = classObj.department;
         attendaceDetails.session = classObj.session;
@@ -402,10 +402,10 @@ $(function () {
             localStorage.removeItem("admin_employeeattentanceReport_storage");
             localStorage.setItem('admin_employeeattentanceReport_storage', JSON.stringify(attendaceClassArr));
         }
-        
+
         return true;
     }
-  
+
 
     $("#employeeDate").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -474,14 +474,14 @@ $(function () {
                     }
                 }
             });
-            
+
         }
-       
+
     });
 
     function setLocalStorageForadminemployeeattendancelist(classObj) {
 
-        var attendaceDetails = new Object(); 
+        var attendaceDetails = new Object();
         attendaceDetails.employee = classObj.employee;
         attendaceDetails.department = classObj.department;
         attendaceDetails.session = classObj.session;
@@ -497,7 +497,7 @@ $(function () {
             localStorage.removeItem("admin_employee_attentance_details");
             localStorage.setItem('admin_employee_attentance_details', JSON.stringify(attendaceClassArr));
         }
-        
+
         return true;
     }
     // add Employee Attendance
@@ -531,63 +531,65 @@ $(function () {
             var disabled = "";
             var holiday = "";
             var color = "";
-            if(val.holiday == 1){
-                var color = "#8e9597";
+            var fontColor = "";
+            if (val.holiday == 1) {
+                var color = "#D3D3D3";
                 var holiday = "";
+                fontColor = "color: red";
             }
-            row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
+            row += '<tr id="row' + count + '" style="background-color:' + color + '"> ';
             if (val.details.id) {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '"'+ holiday +'>';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '"' + holiday + '>';
             } else {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value=""'+ holiday +'>';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value=""' + holiday + '>';
             }
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '"'+ holiday +'>';
+            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '"' + holiday + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control status"  name="attendance[' + count + '][status]"'+ holiday +'>';
-            row += '<option value="">'+select_status+'</option>';
+            row += '<select  class="form-control status"  name="attendance[' + count + '][status]"' + holiday + '>';
+            row += '<option value="">' + select_status + '</option>';
             if (val.leave) {
-                row += '<option value="present">'+present_lang+'</option>';
-                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
-                row += '<option value="late">'+late_lang+'</option>';
-                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
+                row += '<option value="present">' + present_lang + '</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>' + absent_lang + '</option>';
+                row += '<option value="late">' + late_lang + '</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>' + excused_lang + '</option>';
                 disabled = "readonly";
             } else {
-                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>'+present_lang+'</option>';
-                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
-                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>'+late_lang+'</option>';
-                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>' + present_lang + '</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>' + absent_lang + '</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>' + late_lang + '</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>' + excused_lang + '</option>';
             }
             row += '</select>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'> ';
+            row += '<input class="form-control checkin" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '' + holiday + '> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'>';
+            row += '<input class="form-control checkout" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '' + holiday + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
             if (val.details.hours) {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' '+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' ' + holiday + '>';
             } else {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + ''+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + '' + holiday + '>';
             }
             row += '</div>';
             row += '</td>';
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]"'+ holiday +'>';
-            row += '<option value="">'+select_reason+'s</option>';
+            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]"' + holiday + '>';
+            row += '<option value="">' + select_reason + 's</option>';
             if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";
@@ -612,12 +614,12 @@ $(function () {
             row += '<td width="15%">';
 
             if (val.leave) {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '"'+ holiday +'>';
+                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '"' + holiday + '>';
             } else {
                 if (val.details.remarks) {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '"'+ holiday +'>';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '"' + holiday + '>';
                 } else {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value=""'+ holiday +'>';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value=""' + holiday + '>';
                 }
             }
             row += '</td>';
@@ -630,33 +632,33 @@ $(function () {
     }
     if (get_roll_id == "2") {
         if (typeof admin_employee_attentance_storage !== 'undefined') {
-            
+
             if (admin_employee_attentance_storage) {
                 var adminemployeeattendanceStorage = JSON.parse(admin_employee_attentance_storage);
                 if (adminemployeeattendanceStorage.length == 1) {
-                    var employee, department, session,reportDate,userBranchID, userRoleID, userID;
+                    var employee, department, session, reportDate, userBranchID, userRoleID, userID;
                     adminemployeeattendanceStorage.forEach(function (user) {
                         employee = user.employee;
-                        department = user.department; 
-                        session = user.session; 
+                        department = user.department;
+                        session = user.session;
                         reportDate = user.reportDate;
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
                     });
-                    
+
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                      
-                        
-                        $('select[name^="department"] option[value=' + department + ']').attr("selected","selected");
-                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected","selected");
+
+
+                        $('select[name^="department"] option[value=' + department + ']').attr("selected", "selected");
+                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected", "selected");
                         $('#employeeDate').val(reportDate);
                         $("#employee").empty();
-                        $("#employee").append('<option value="">'+select_employee+'</option>');
+                        $("#employee").append('<option value="">' + select_employee + '</option>');
                         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
                             if (res.code == 200) {
                                 $.each(res.data, function (key, val) {
-                                    var selected=(employee==val.id)?'selected':'';
+                                    var selected = (employee == val.id) ? 'selected' : '';
                                     $("#employee").append('<option value="' + val.id + '" ' + selected + '>' + val.first_name + ' ' + val.last_name + '</option>');
                                 });
                             }
@@ -668,31 +670,31 @@ $(function () {
     }
     if (get_roll_id == "2") {
         if (typeof admin_employeeattentanceReport_storage !== 'undefined') {
-            
+
             if (admin_employeeattentanceReport_storage) {
                 var adminemployeeattendanceStorage = JSON.parse(admin_employeeattentanceReport_storage);
                 if (adminemployeeattendanceStorage.length == 1) {
-                    var employee, department, session,reportDate,userBranchID, userRoleID, userID;
+                    var employee, department, session, reportDate, userBranchID, userRoleID, userID;
                     adminemployeeattendanceStorage.forEach(function (user) {
                         employee = user.employee;
-                        department = user.department; 
-                        session = user.session; 
+                        department = user.department;
+                        session = user.session;
                         reportDate = user.reportDate;
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
                     });
-                    
+
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                                                
-                        $('select[name^="department"] option[value=' + department + ']').attr("selected","selected");
-                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected","selected");
+
+                        $('select[name^="department"] option[value=' + department + ']').attr("selected", "selected");
+                        $('select[name^="session_id"] option[value=' + session + ']').attr("selected", "selected");
                         $("#employeeReportEmployee").empty();
-                        $("#employeeReportEmployee").append('<option value="">'+select_employee+'</option>');
+                        $("#employeeReportEmployee").append('<option value="">' + select_employee + '</option>');
                         $.post(employeeByDepartment, { token: token, branch_id: branchID, department_id: department }, function (res) {
                             if (res.code == 200) {
                                 $.each(res.data, function (key, val) {
-                                    var selected=(employee==val.id)?'selected':'';
+                                    var selected = (employee == val.id) ? 'selected' : '';
                                     $("#employeeReportEmployee").append('<option value="' + val.id + '" ' + selected + '>' + val.first_name + ' ' + val.last_name + '</option>');
                                 });
                             }
@@ -702,9 +704,8 @@ $(function () {
                 }
             }
         }
-        else
-        {
-            var  curdate="{{ date('F Y')}}";
+        else {
+            var curdate = "{{ date('F Y')}}";
             $('#employeeReportDate').val(curdate);
         }
     }

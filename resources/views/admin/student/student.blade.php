@@ -170,6 +170,8 @@
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.3/js/buttons.colVis.min.js"></script>
+
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 

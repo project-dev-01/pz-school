@@ -314,7 +314,7 @@ $(function () {
             var class_id = $('#class_id').val();
             var section_id = $('#section_id').val();
             var session_id = $('#session_id').val();
-            
+
             var classObj = {
                 student_name: student_name,
                 classID: class_id,
@@ -323,7 +323,7 @@ $(function () {
                 userID: userID,
             };
             setLocalStorageForStudentList(classObj);
-            
+
             var formData = {
                 student_name: student_name,
                 class_id: class_id,
@@ -336,17 +336,20 @@ $(function () {
         }
 
     });
-    function getStudentList(formData){
+    function getStudentList(formData) {
         $("#student").show("slow");
-        
-        $('#student-table').DataTable({
+
+        var table = $('#student-table').DataTable({
             processing: true,
             info: true,
             bDestroy: true,
             // dom: 'lBfrtip',
-            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+            // dom: 'Blfrtip',
+
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            // dom: 'C&gt;"clear"&lt;lfrtip',
             "language": {
 
                 "emptyTable": no_data_available,
@@ -362,6 +365,17 @@ $(function () {
                 },
             },
             buttons: [
+                // 'colvis',
+                {
+                    extend: 'colvis',
+                    text: 'Column Visibility',
+                    charset: 'utf-8',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+                    columns: ":not(':last')",
+                    exclude: [0] // Exclude the first column (optional)
+                },
                 {
                     extend: 'csv',
                     text: downloadcsv,
@@ -369,7 +383,8 @@ $(function () {
                     charset: 'utf-8',
                     bom: true,
                     exportOptions: {
-                        columns: 'th:not(:last-child)'
+                        columns: 'th:not(:last-child)',
+                        columns: ':visible',
                     }
                 },
                 {
@@ -379,56 +394,58 @@ $(function () {
                     charset: 'utf-8',
                     bom: true,
                     exportOptions: {
-                        columns: 'th:not(:last-child)'
+                        columns: 'th:not(:last-child)',
+                        columns: ':visible',
                     },
 
-                
-                    customize: function (doc) {
-                    doc.pageMargins = [50,50,50,50];
-                    doc.defaultStyle.fontSize = 10;
-                    doc.styles.tableHeader.fontSize = 12;
-                    doc.styles.title.fontSize = 14;
-                    // Remove spaces around page title
-                    doc.content[0].text = doc.content[0].text.trim();
-                    /*// Create a Header
-                    doc['header']=(function(page, pages) {
-                        return {
-                            columns: [
-                                
-                                {
-                                    // This is the right column
-                                    bold: true,
-                                    fontSize: 20,
-                                    color: 'Blue',
-                                    fillColor: '#fff',
-                                    alignment: 'center',
-                                    text: header_txt
-                                }
-                            ],
-                            margin:  [50, 15,0,0]
-                        }
-                    });*/
-                    // Create a footer
-                    
-                    doc['footer']=(function(page, pages) {
-                        return {
-                            columns: [
-                                { alignment: 'left', text: [ footer_txt ],width:400} ,
-                                {
-                                    // This is the right column
-                                    alignment: 'right',
-                                    text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                    width:100
 
-                                }
-                            ],
-                            margin: [50, 0,0,0]
-                        }
-                    });
-                    
+                    customize: function (doc) {
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
+                            }
+                        });*/
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
+                    }
                 }
-            }
             ],
+            // exportOptions: { rows: ':visible' },
             serverSide: true,
             ajax: {
                 url: studentList,
@@ -527,7 +544,7 @@ $(function () {
             if (student_list_storage) {
                 var studentListStorage = JSON.parse(student_list_storage);
                 if (studentListStorage.length == 1) {
-                    var classID, student_name,sectionID, sessionID, userBranchID, userRoleID, userID;
+                    var classID, student_name, sectionID, sessionID, userBranchID, userRoleID, userID;
                     studentListStorage.forEach(function (user) {
                         classID = user.class_id;
                         student_name = user.student_name;
@@ -553,8 +570,8 @@ $(function () {
                                 }
                             }, 'json');
                         }
-                        
-            
+
+
                         var formData = {
                             student_name: student_name,
                             class_id: classID,

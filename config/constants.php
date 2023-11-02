@@ -2,6 +2,9 @@
 $url = "http://localhost/paxsuzen-api-dev/public/api";
 // $url = "https://api.suzen.school/api";
 return [
+    // 'branch_id'=>'1',
+    // 'school_name'=>'SMK Kiaramas',
+    // 'school_image'=>'school.jpg',
     'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 
 <!-- date picker -->
+<link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
@@ -314,7 +315,7 @@
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-
+<script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     var StaffLeaveList = "{{ route('teacher.leave_management.list') }}";
     var StaffDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/leaves/' }}";

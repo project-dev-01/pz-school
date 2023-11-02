@@ -1388,9 +1388,11 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             var disabled = "";
             var holiday = "";
             var color = "";
+            var fontColor = "";
             if(val.holiday == 1){
-                var color = "#8e9597";
+                var color = "#D3D3D3";
                 var holiday = "";
+                fontColor = "color: red";
             }
             row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
             if (val.details.id) {
@@ -1424,20 +1426,20 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'> ';
+            row += '<input class="form-control checkin" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'>';
+            row += '<input class="form-control checkout" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
             if (val.details.hours) {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' '+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' '+ holiday +'>';
             } else {
-                row += '<input type="text" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + ''+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + ''+ holiday +'>';
             }
             row += '</div>';
             row += '</td>';

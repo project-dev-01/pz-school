@@ -54,6 +54,17 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="gender">Department<span class="text-danger">*</span></label>
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="">Select Department</option>
+                                        <option value="Primary">Primary</option>
+                                        <option value="Secondary">Secondary</option>
+                                        <option value="Kindergarden">Kindergarden</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
@@ -254,7 +265,7 @@
     var subjectByClass = "{{ route('admin.timetable.bulk.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
-    
+
     var admin_add_bulkschedule_storage = localStorage.getItem('admin_add_bulkschedule_details');
 </script>
 <script src="{{ asset('js/custom/timetable_bulk.js') }}"></script>

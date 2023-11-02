@@ -76,7 +76,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('super_admin.branch_url_permission')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+                    <a href="{{ route('super_admin.branch_url_permission')}}"  class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="12.7998" y="10.4095" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
@@ -407,11 +407,32 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li>
+                            <li class="{{  (request()->is('admin.promotion.index')) ? 'menuitem-active' : '' }}">
+                                <a href="#sideBarPromotion" data-toggle="collapse">
+                                    <!-- <i class="far fa-calendar-alt"></i>-->
+                                    <span>{{ __('messages.promotion') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse {{  (request()->is('admin.promotion.index')) ? 'show' : '' }}" id="sideBarPromotion">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.promotion.index')}}" class="nav-link {{ (request()->is('admin/promotion/index')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.promotion') }}</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.promotion.bulk')}}" class="nav-link {{ (request()->is('admin/promotion/bulk')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.bulk_promotion') }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- <li>
                                 <a href="{{ route('admin.promotion.index')}}" class="nav-link {{ (request()->is('admin/promotion*')) ? 'active' : '' }}">
                                     <span>{{ __('messages.promotion') }}</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -566,7 +587,9 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.student_leave.list')}}" class="nav-link {{ (request()->is('admin/student_leave*')) ? 'active' : '' }}">
-                        <i class="far fa-user"></i>
+                        <svg class="svg-icon" style="width: 20; height: 20;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M860 860.5H512c-28.3 0-51.2-22.9-51.2-51.2v-71.7h450.4v71.7c0 28.3-22.9 51.2-51.2 51.2zM630.6 519.7c-40-20.3-67.4-61.6-67.4-109.5 0-67.8 55-122.8 122.8-122.8s122.8 55 122.8 122.8c0 47.9-27.5 89.2-67.4 109.5 97.5 24.7 169.8 112.8 169.8 218H460.8c0-105.2 72.3-193.3 169.8-218zM491.5 410.1c0 31.4 7.6 60.9 20.8 87.2-74.5 53.9-123.2 141.4-123.2 240.4 0 13.4 1.2 26.6 2.9 39.5-156.6-14.1-279.3-145.4-279.3-305.7 0-169.6 137.5-307.1 307.1-307.1 72 0 138.1 25 190.4 66.5-69.7 29.6-118.7 98.7-118.7 179.2zM430.1 318c0-17-13.7-30.7-30.7-30.7S368.7 301 368.7 318v138.8l-94.8 94.8c-12 12-12 31.4 0 43.4s31.4 12 43.4 0l101.3-101.3c5.6-5.6 8.5-12.8 8.8-20.1 1.7-3.8 2.6-8 2.6-12.4V318z" fill="#C4C7D2" />
+                        </svg>
                         <span> {{ __('messages.student_leaves') }} </span>
                     </a>
                 </li>
@@ -967,6 +990,11 @@
                                     <span>{{ __('messages.fees') }}</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.fees.import')}}" class="nav-link {{ (request()->is('fees/import/expense')) ? 'active' : '' }}">
+                                    <span>Import Expense</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1355,12 +1383,12 @@
                         <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('teacher.classroom.attendance')}}" class="nav-link {{ (request()->is('teacher/classroom/attendance')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span> {{ __('messages.attendance') }} </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1409,7 +1437,9 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.student_leave.list')}}" class="nav-link {{ (request()->is('teacher/student_leave*')) ? 'active' : '' }}">
-                        <i class="far fa-user"></i>
+                        <svg class="svg-icon" style="width: 20; height: 20;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M860 860.5H512c-28.3 0-51.2-22.9-51.2-51.2v-71.7h450.4v71.7c0 28.3-22.9 51.2-51.2 51.2zM630.6 519.7c-40-20.3-67.4-61.6-67.4-109.5 0-67.8 55-122.8 122.8-122.8s122.8 55 122.8 122.8c0 47.9-27.5 89.2-67.4 109.5 97.5 24.7 169.8 112.8 169.8 218H460.8c0-105.2 72.3-193.3 169.8-218zM491.5 410.1c0 31.4 7.6 60.9 20.8 87.2-74.5 53.9-123.2 141.4-123.2 240.4 0 13.4 1.2 26.6 2.9 39.5-156.6-14.1-279.3-145.4-279.3-305.7 0-169.6 137.5-307.1 307.1-307.1 72 0 138.1 25 190.4 66.5-69.7 29.6-118.7 98.7-118.7 179.2zM430.1 318c0-17-13.7-30.7-30.7-30.7S368.7 301 368.7 318v138.8l-94.8 94.8c-12 12-12 31.4 0 43.4s31.4 12 43.4 0l101.3-101.3c5.6-5.6 8.5-12.8 8.8-20.1 1.7-3.8 2.6-8 2.6-12.4V318z" fill="#C4C7D2" />
+                        </svg>
                         <span> {{ __('messages.student_leaves') }} </span>
                     </a>
                 </li>
@@ -1683,7 +1713,11 @@
                 </li>
                 <li>
                     <a href="{{ route('parent.student_leaves')}}" class="nav-link {{ (request()->is('parent/student_leaves*')) ? 'active' : '' }}">
-                        <i class="far fa-user"></i>
+                        <svg class="svg-icon" style="width: 15; height: 15;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M802.133333 567.466667c-123.733333 0-221.866667 98.133333-221.866666 221.866666s98.133333 221.866667 221.866666 221.866667 221.866667-98.133333 221.866667-221.866667-98.133333-221.866667-221.866667-221.866666z m0 388.266666c-89.6 0-162.133333-72.533333-162.133333-162.133333s72.533333-162.133333 162.133333-162.133333 162.133333 72.533333 162.133334 162.133333-72.533333 162.133333-162.133334 162.133333z" fill="#f2f5f7" />
+                            <path d="M832 780.8v-102.4c0-17.066667-12.8-29.866667-29.866667-29.866667-17.066667 0-29.866667 12.8-29.866666 29.866667v115.2c0 8.533333 4.266667 12.8 8.533333 21.333333l59.733333 59.733334c4.266667 4.266667 12.8 8.533333 21.333334 8.533333s12.8-4.266667 21.333333-8.533333c12.8-12.8 12.8-29.866667 0-42.666667l-51.2-51.2z" fill="#f2f5f7" />
+                            <path d="M524.8 789.333333c0-72.533333 25.6-136.533333 72.533333-183.466666v-166.4h170.666667v81.066666c12.8 0 21.333333-4.266667 34.133333-4.266666 17.066667 0 34.133333 0 51.2 4.266666V226.133333c0-72.533333-55.466667-128-128-128h-85.333333v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666666 42.666667v42.666666H298.666667v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666667 42.666667v42.666666H128c-72.533333 0-128 55.466667-128 128v597.333334c0 72.533333 55.466667 128 128 128h448c-29.866667-46.933333-51.2-102.4-51.2-162.133334zM85.333333 226.133333c0-25.6 17.066667-42.666667 42.666667-42.666666h85.333333v42.666666c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h256v42.666666c0 25.6 17.066667 42.666667 42.666666 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h85.333333c25.6 0 42.666667 17.066667 42.666667 42.666666v128H85.333333v-128z m170.666667 640H128c-25.6 0-42.666667-17.066667-42.666667-42.666666v-132.266667h170.666667v174.933333z m0-260.266666H85.333333v-166.4h170.666667v166.4z m256 260.266666H341.333333v-174.933333h170.666667v174.933333z m0-260.266666H341.333333v-166.4h170.666667v166.4z" fill="#f2f5f7" />
+                        </svg>
                         <span> {{ __('messages.leave_application') }} </span>
                     </a>
                 </li>

@@ -604,7 +604,88 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
+                                    <div class="button-list">
 
+                                        <button type="button" class="btn btn-primary width-xs waves-effect waves-light">Add +</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Description">Description</label>
+                                    <select class="form-control" name="Description">
+                                        <option value="">1st Grade English Teacher</option>
+                                        <option value="">2nd Grade English Teacher</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="birthday">Start</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="birthday">End</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" name="Description">
+                                        <option value="">1st Grade English Teacher</option>
+                                        <option value="">2nd Grade English Teacher</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

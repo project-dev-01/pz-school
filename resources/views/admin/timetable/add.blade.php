@@ -45,13 +45,24 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <form id="addFilter" method="post" action="{{ route('admin.timetable.subject') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="gender">Department<span class="text-danger">*</span></label>
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="">Select Department</option>
+                                        <option value="Primary">Primary</option>
+                                        <option value="Secondary">Secondary</option>
+                                        <option value="Kindergarden">Kindergarden</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
@@ -95,7 +106,7 @@
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}" {{$current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        
+
                                         @empty
                                         @endforelse
                                     </select>
@@ -117,7 +128,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -138,7 +149,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.add_schedule') }}
+                            {{ __('messages.add_schedule') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -224,7 +235,7 @@
                         <input type="hidden" id="form_day" name="day">
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.save') }}
+                                {{ __('messages.save') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                             Cancel
@@ -263,7 +274,7 @@
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var classRoomCheck = "{{ config('constants.api.class_room_check') }}";
-     
+
     var admin_add_schedule_storage = localStorage.getItem('admin_add_schedule_details');
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>

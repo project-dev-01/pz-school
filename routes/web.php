@@ -339,6 +339,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // promotion
         Route::get('promotion/index', [AdminController::class, 'Promotion'])->name('admin.promotion.index');
         Route::post('promotion/add', [AdminController::class, 'PromotionAdd'])->name('admin.promotion.add');
+        Route::get('promotion/bulk', [AdminController::class, 'PromotionBulk'])->name('admin.promotion.bulk');
 
         // Time Table Bulk
         Route::post('timetable/bulk/add', [AdminController::class, 'addBulkTimetable'])->name('admin.timetable.bulk.add');
@@ -790,6 +791,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('fees_type/delete', [AdminController::class, 'deleteFeesType'])->name('admin.fees_type.delete');
 
         // Fees routes
+        Route::get('fees/import/expense', [AdminController::class, 'feesImportExpense'])->name('admin.fees.import');
         Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
         Route::get('fees/edit/{id}', [AdminController::class, 'editFees'])->name('admin.fees.edit');
         Route::post('fees/update', [AdminController::class, 'updateFees'])->name('admin.fees.update');

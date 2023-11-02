@@ -395,6 +395,9 @@ $(document).ready(function () {
                 }
             }
         ],
+        // dayRender: function (info) {
+        //     info.el.style.backgroundColor = 'lightgray';
+        // },
         // selectable: true,
         selectHelper: true,
         select: function (e) {

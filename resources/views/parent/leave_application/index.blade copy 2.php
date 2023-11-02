@@ -16,57 +16,66 @@
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
-    .ui-datepicker {
-        width: 21.4em;
-    }
-
-    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
-        .ui-datepicker {
-            width: 14.4em;
-        }
-    }
-
-    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
-        .ui-datepicker {
-            width: 17.4em;
-        }
-    }
-
-    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
-        .ui-datepicker {
-            width: 18.6em;
-        }
-    }
-
-    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
-        .ui-datepicker {
-            width: 19.8em;
-        }
-    }
-
-    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
-        .ui-datepicker {
-            width: 21.5em;
-        }
-    }
-
-    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
-        .ui-datepicker {
-            width: 31.3em;
-        }
-    }
-
-    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .ui-datepicker {
-            width: 13.2em;
-        }
-    }
-
-    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
-        .ui-datepicker {
-            width: 14.3em;
-        }
-    }
+.ui-datepicker
+ {
+width: 21.4em;
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 660px) 
+{
+.ui-datepicker
+ {
+width: 14.4em;
+}
+}
+@media screen and (min-device-width: 360px) and (max-device-width: 740px) 
+{
+.ui-datepicker
+ {
+width: 17.4em;
+}
+}
+@media screen and (min-device-width: 375px) and (max-device-width: 667px) 
+{
+.ui-datepicker
+ {
+width: 18.6em;
+}
+}
+@media screen and (min-device-width: 390px) and (max-device-width: 844px) 
+{
+.ui-datepicker
+ {
+width: 19.8em;
+}
+}
+@media screen and (min-device-width: 412px) and (max-device-width: 915px) 
+{
+.ui-datepicker
+ {
+width: 21.5em;
+}
+}
+@media screen and (min-device-width: 540px) and (max-device-width: 720px) 
+{
+.ui-datepicker
+ {
+width: 31.3em;
+}
+}
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) 
+{
+.ui-datepicker
+ {
+width: 13.2em;
+}
+}
+@media screen and (min-device-width: 820px) and (max-device-width: 1180px) 
+{
+.ui-datepicker
+ {
+width: 14.3em;
+}
+}
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -146,22 +155,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Number Of Days Leave<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter the number of days leave">
-                                    <span class="text-danger error-text name_error"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changelev">Leave Type<span class="text-danger">*</span></label>
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                        <option value="">Select Leave Type</option>
-                                        <option value="">Sick Leave</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
                                         <option value="">{{ __('messages.select_reason') }}</option>
@@ -172,10 +165,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                        </div>
-                        <!--3st row-->
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document">{{ __('messages.attachment_file') }}</label>
@@ -187,19 +176,13 @@
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changelev">Remarks<span class="text-danger">*</span></label>
-                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the remarks" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                    </textarea>
+
                                 </div>
                             </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.apply') }}
+                            {{ __('messages.apply') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel
@@ -282,10 +265,10 @@
     var footer_txt = "{{ session()->get('footer_text') }}";
 
     // Get PDF Header & Footer Text End
-    var at = "{{date('d-m-Y')}}";
-    $("#frm_ldate").val(at);
+    var at="{{date('d-m-Y')}}";
+    $("#frm_ldate").val(at);    
     $("#to_ldate").val(at);
-
+    
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
 </script>
 </script>

@@ -2066,6 +2066,10 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.promotion_add'), $data);
         return $response;
     }
+    public function PromotionBulk(Request $request)
+    {
+        return view('admin.promotion.student');
+    }
     // add Timetable
     public function addTimetable(Request $request)
     {
@@ -7011,6 +7015,10 @@ class AdminController extends Controller
                 'fees_group_list' => isset($fees_group_list['data']) ? $fees_group_list['data'] : []
             ]
         );
+    }
+    public function feesImportExpense()
+    {
+        return view('admin.fees.expense');
     }
 
     public function editFees($id)

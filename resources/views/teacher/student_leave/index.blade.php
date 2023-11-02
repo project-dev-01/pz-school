@@ -38,6 +38,175 @@
 
     <div class="row">
         <div class="col-12">
+            <!-- student leave start -->
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}(Nursing teacher)
+                            <h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table dt-responsive nowrap w-100" id="student-leave-table-sample">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ __('messages.student_name') }}</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.class') }}</th>
+                                    <th>{{ __('messages.from') }}</th>
+                                    <th>{{ __('messages.to') }}</th>
+                                    <th>{{ __('messages.status') }}</th>
+                                    <th>{{ __('messages.reason') }}</th>
+                                    <th>Homeroom teacher reason</th>
+                                    <th>{{ __('messages.document') }}</th>
+                                    <th>Remarks</th>
+                                    <th>{{ __('messages.action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> Student Leave Authorization
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
+                        @csrf
+                        <!--1st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <select id="changeClassName" class="form-control" name="class_id">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse ($classes as $class)
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">{{ __('messages.select_class') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
+                                    <select id="changeStdName" class="form-control" name="changeStdName">
+                                        <option value="">{{ __('messages.select_student') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--2st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changelev">Number Of Days Leave<span class="text-danger">*</span></label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter the number of days leave">
+                                    <span class="text-danger error-text name_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--3st row-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
+                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                        <option value="">{{ __('messages.select_reason') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="document">{{ __('messages.attachment_file') }}</label>
+
+                                    <div class="input-group">
+                                        <div class="">
+                                            <input type="file" id="leave_file" class="custom-file-input" name="file">
+                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                            <span id="file_name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="leave_status">{{ __('messages.status') }}</label>
+                                    <select id="leave_status" class="form-control" name="leave_status">
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changelev">Remarks<span class="text-danger">*</span></label>
+                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the remarks" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.apply') }}
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>-->
+                        </div>
+
+                    </form>
+
+                </div> <!-- end card-body -->
+            </div>
+            <!-- student leave end -->
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -54,7 +223,7 @@
                                     <label for="student_name">{{ __('messages.student_name') }}</label>
                                     <input type="text" name="student_name" class="form-control" id="student_name">
                                 </div>
-                            </div>  
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}</label>
@@ -95,7 +264,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -156,6 +325,8 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div> <!-- container -->
+@include('teacher.student_leave.homeroom')
+@include('teacher.student_leave.nursing')
 @endsection
 @section('scripts')
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
@@ -172,7 +343,7 @@
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
 <script>
-     toastr.options.preventDuplicates = true;
+    toastr.options.preventDuplicates = true;
 </script>
 <script>
     var sectionByClassUrl = "{{ config('constants.api.class_teacher_sections') }}";

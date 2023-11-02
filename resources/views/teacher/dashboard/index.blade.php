@@ -1135,6 +1135,43 @@
         </div>
     </div> <!-- end card-->
 </div> <!-- end col -->
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv"> Staff Leave Information</h4>
+                </li>
+            </ul><br>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100 nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Staff Name</th>
+                                <th>Department</th>
+                                <th>Leave Days</th>
+                                <th>Leave Start</th>
+                                <th>Leave End</th>
+                            </tr>
+                        </thead>
+                        <tbody id="">
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-center">xxxx</td>
+                                <td class="text-center">yyyy</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">24-10-2023</td>
+                                <td class="text-center">24-10-2023</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end card-->
+</div> <!-- end col -->
 </div> <!-- end row -->
 </div> <!-- end row -->
 @include('teacher.dashboard.check_list')

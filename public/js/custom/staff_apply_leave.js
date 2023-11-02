@@ -8,6 +8,44 @@ $(function () {
     //         return false;
     //     }
     // });
+    $("#start_time, #end_time").flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K", // 12-hour format with AM/PM
+    });
+
+    // check min data validation
+    var check_in_date = flatpickr("#start_time", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i",
+        onChange: function (selectedDates, dateStr, instance) {
+            check_out_date.set('minTime', selectedDates[0]);
+            $("#end_time").val("");
+        }
+    });
+
+    var check_out_date = flatpickr("#end_time", {
+        enableTime: !0, noCalendar: !0, dateFormat: "H:i"
+    });
+    $('#leave_request').on('change', function (e) {
+        var daysOrHour = $('#leave_request').val();
+        if (daysOrHour == "Hours") {
+            // let fromDateval = $(".taskfromDate").val();
+            // $(".taskToDate").val(fromDateval);
+            $(".dateSlotShow").hide();
+            $(".timeSlotShow").show();
+        } else {
+            $(".dateSlotShow").show();
+            $(".timeSlotShow").hide();
+        }
+    });
+    $("#leave_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        minDate: 0
+    });
     $("#frm_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,

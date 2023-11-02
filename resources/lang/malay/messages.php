@@ -1563,5 +1563,9 @@ return [
     "practical" => "Praktikal",
     "student_holiday" => "Student Holiday",
     "staff_holiday" => "Staff Holiday",
-    "classroom_attendance" => "Classroom Attendance"
+    "classroom_attendance" => "Classroom Attendance",
+    "days" => "Days",
+    "hours" => "Hours",
+    "bulk_promotion" => "Bulk Promotion",
+    "promotion_import" => "Promotion Import"
 ];

@@ -283,26 +283,26 @@ $(function () {
                 if (response.code == 200) {
                     var dataSetNew = response.data.get_subject_marks;
                     if (dataSetNew.length > 0) {
-                        $("#grade_category").val(formData.grade_category);
+                        $("#grade_category").val(formData.get('grade_category'));
                         $("#mark_by_subject_card").show();
                         bindmarks(dataSetNew);
-                        $("#listModeClassID").val(formData.class_id);
-                        $("#listModeSectionID").val(formData.section_id);
-                        $("#listModeSubjectID").val(formData.subject_id);
-                        $("#listModeexamID").val(formData.exam_id);
-                        $("#listModePaperID").val(formData.paper_id);
-                        $("#listModeSemesterID").val(formData.semester_id);
-                        $("#listModeSessionID").val(formData.session_id);
+                        $("#listModeClassID").val(formData.get('class_id'));
+                        $("#listModeSectionID").val(formData.get('section_id'));
+                        $("#listModeSubjectID").val(formData.get('subject_id'));
+                        $("#listModeexamID").val(formData.get('exam_id'));
+                        $("#listModePaperID").val(formData.get('paper_id'));
+                        $("#listModeSemesterID").val(formData.get('semester_id'));
+                        $("#listModeSessionID").val(formData.get('session_id'));
                         // download start
-                        $("#downClassID").val(formData.class_id);
-                        $("#downSectionID").val(formData.section_id);
-                        $("#downSubjectID").val(formData.subject_id);
-                        $("#downExamID").val(formData.exam_id);
-                        $("#downPaperID").val(formData.paper_id);
-                        $("#downSemesterID").val(formData.semester_id);
-                        $("#downSessionID").val(formData.session_id);
-                        $("#downGradeCategory").val(formData.grade_category);
-                        $("#downAcademicSessionID").val(formData.academic_session_id);
+                        $("#downClassID").val(formData.get('class_id'));
+                        $("#downSectionID").val(formData.get('section_id'));
+                        $("#downSubjectID").val(formData.get('subject_id'));
+                        $("#downExamID").val(formData.get('exam_id'));
+                        $("#downPaperID").val(formData.get('paper_id'));
+                        $("#downSemesterID").val(formData.get('semester_id'));
+                        $("#downSessionID").val(formData.get('session_id'));
+                        $("#downGradeCategory").val(formData.get('grade_category'));
+                        $("#downAcademicSessionID").val(formData.get('academic_session_id'));
                         // download end
                     } else {
                         toastr.error("No data available");

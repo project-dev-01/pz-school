@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.activty_monitoring') . '')
+@section('title',' ' . __('messages.activty_monitoring') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -38,13 +38,14 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">{{ __('messages.menu_creation') }}<h4>
+                        <h4 class="nav-link">{{ __('messages.menu_creation') }}
+                            <h4>
                     </li>
                 </ul><br>
-               
+
                 <div class="card-body">
                     <form id="LogHistoryFilter" autocomplete="off" novalidate="novalidate">
-                                    
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -56,10 +57,10 @@
                                 <div class="form-group">
                                     <label>{{ __('messages.menu_type') }}</label>
                                     <select id="" name="" class="form-control">
-                                    <option value="">{{ __('messages.select_menu_type') }}</option>
-                                    <option value="">{{ __('messages.select_mainmenu') }}</option>
-                                    <option value="">{{ __('messages.select_submenu') }}</option>
-                                    <option value="">{{ __('messages.select_childmenu') }}</option>
+                                        <option value="">{{ __('messages.select_menu_type') }}</option>
+                                        <option value="">{{ __('messages.select_mainmenu') }}</option>
+                                        <option value="">{{ __('messages.select_submenu') }}</option>
+                                        <option value="">{{ __('messages.select_childmenu') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -67,12 +68,12 @@
                                 <div class="form-group">
                                     <label>{{ __('messages.menu') }}</label>
                                     <select id="" name="" class="form-control">
-                                    <option value="">{{ __('messages.select_menu') }}</option>
+                                        <option value="">{{ __('messages.select_menu') }}</option>
                                     </select>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="row">   
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description">{{ __('messages.menu_icon') }}<span class="text-danger">*</span></label>
@@ -90,16 +91,16 @@
                                 <div class="form-group">
                                     <label>{{ __('messages.menu_status') }}</label>
                                     <select id="" name="" class="form-control">
-                                    <option value="">{{ __('messages.select_menu_status') }}</option>
-                                    <option value="">{{ __('messages.active') }}</option>
-                                    <option value="">{{ __('messages.de-active') }}</option>
+                                        <option value="">{{ __('messages.select_menu_status') }}</option>
+                                        <option value="">{{ __('messages.active') }}</option>
+                                        <option value="">{{ __('messages.de-active') }}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            Save
+                                Save
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
@@ -122,21 +123,21 @@
                                 <div class="col-md-12">
                                     <div class="">
                                         <div class="table-responsive">
-                                        <table class="table dt-responsive nowrap w-100" id="">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-									<th>{{ __('messages.menu_name') }}</th>
-									<th>{{ __('messages.menu_type') }}</th>
-                                    <th>{{ __('messages.menu_icon') }}</th>
-                                    <th>{{ __('messages.menu') }}</th>									
-                                    <th>{{ __('messages.menu_url') }}</th>
-                                    <th>{{ __('messages.menu_status') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                                            <table class="table dt-responsive nowrap w-100" id="">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>{{ __('messages.menu_name') }}</th>
+                                                        <th>{{ __('messages.menu_type') }}</th>
+                                                        <th>{{ __('messages.menu_icon') }}</th>
+                                                        <th>{{ __('messages.menu') }}</th>
+                                                        <th>{{ __('messages.menu_url') }}</th>
+                                                        <th>{{ __('messages.menu_status') }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
                                         </div> <!-- end table-responsive-->
 
                                     </div> <!-- end card-box -->
@@ -178,11 +179,11 @@
     var login_activityList = "{{ route('admin.login_activity.list') }}";
 
     // Get PDF Footer Text
-    var header_txt="{{ __('messages.fees_group') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var header_txt = "{{ __('messages.fees_group') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
 </script>
 
-<script src="{{ asset('js/custom/login_activity.js') }}"></script>
+<!-- <script src="{{ asset('js/custom/login_activity.js') }}"></script> -->
 
 @endsection

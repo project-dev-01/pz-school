@@ -13,7 +13,7 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#promotionFilter").find("#sectionID").empty();
-        $("#promotionFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#promotionFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -26,7 +26,7 @@ $(function () {
     $('#promoteClassID').on('change', function () {
         var class_id = $(this).val();
         $("#promoteStudentForm").find(".promoteSectionID").empty();
-        $("#promoteStudentForm").find(".promoteSectionID").append('<option value="">'+select_class+'</option>');
+        $("#promoteStudentForm").find(".promoteSectionID").append('<option value="">' + select_class + '</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -81,7 +81,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log('ch',response);
+                    console.log('ch', response);
                     if (response.code == 200) {
                         var dataSetNew = response.data;
                         if (dataSetNew.length > 0) {
@@ -126,7 +126,7 @@ $(function () {
             localStorage.removeItem("admin_promotion_details");
             localStorage.setItem('admin_promotion_details', JSON.stringify(addpromotionArr));
         }
-        
+
         return true;
     }
     // rules validation
@@ -146,7 +146,7 @@ $(function () {
                 $(c).rules("add", {
                     required: true
                 })
-            }else if ($(this).is(':unchecked')) {
+            } else if ($(this).is(':unchecked')) {
                 var c = $(this).parent().parent().parent().find('.promoteSectionID');
                 $(this).parent().parent().parent().find('.promoteSectionID').removeClass('error');
                 $(c).rules("add", {
@@ -184,18 +184,18 @@ $(function () {
 function bindStudents(dataSetNew) {
     // reset form
     $('#promoteStudentForm')[0].reset();
-    
+
     listTable = $('#showStudentDetails').DataTable({
         processing: true,
         bDestroy: true,
         info: true,
         dom: 'lrt',
         "language": {
-            
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,
@@ -210,6 +210,10 @@ function bindStudents(dataSetNew) {
         columns: [
             {
                 searchable: false,
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+            },
+            {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
             },
@@ -259,9 +263,20 @@ function bindStudents(dataSetNew) {
                 }
             },
             {
+                "targets": 3,
+                "render": function (data, type, row, meta) {
+                    var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    var randomNumbers = Math.floor(Math.random() * 90000) + 10000;
+                    var studentID = '9' + 'JSKL' + randomNumbers;
+                    return studentID;
+                    // var reg_no = "9ABCD12345";
+                    // return reg_no;
+                }
+            },
+            {
                 "targets": 4,
                 "render": function (data, type, row, meta) {
-                    var drop = '<div class="form-group"><select class="form-control promoteSectionID" name="promotion[' + meta.row + '][promote_section_id]"><option value="">'+select_class+'</option></select></div>';
+                    var drop = '<div class="form-group"><select class="form-control promoteSectionID" name="promotion[' + meta.row + '][promote_section_id]"><option value="">' + select_class + '</option></select></div>';
                     return drop;
                 }
             }
@@ -277,7 +292,7 @@ if (get_roll_id == "2") {
             if (admin_promotion_storage) {
                 var adminpromotionstorage = JSON.parse(admin_promotion_storage);
                 if (adminpromotionstorage.length == 1) {
-                    var class_id, section_id, semester_id, session_id,year, userBranchID, userRoleID, userID;
+                    var class_id, section_id, semester_id, session_id, year, userBranchID, userRoleID, userID;
                     adminpromotionstorage.forEach(function (user) {
                         class_id = user.class_id;
                         section_id = user.section_id;
@@ -290,27 +305,27 @@ if (get_roll_id == "2") {
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         console.log("f");
-                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected","selected");
-                        
+                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected", "selected");
+
                         $("#section_id").empty();
                         $("#section_id").append('<option value="">' + select_class + '</option>');
-                        
+
                         $("#sectionID").empty();
-                        $("#sectionID").append('<option value="">'+select_class+'</option>');
+                        $("#sectionID").append('<option value="">' + select_class + '</option>');
                         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
                             if (res.code == 200) {
-                                
+
                                 $.each(res.data, function (key, val) {
-                                    var selected=(section_id==val.section_id)?'selected':'';
+                                    var selected = (section_id == val.section_id) ? 'selected' : '';
                                     $("#sectionID").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
                                 });
                             }
                         }, 'json');
-                        $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected","selected");
-                        $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected","selected");
-                        $('select[name^="year"] option[value=' + year + ']').attr("selected","selected");
-                        
-                        
+                        $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected", "selected");
+                        $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected", "selected");
+                        $('select[name^="year"] option[value=' + year + ']').attr("selected", "selected");
+
+
                     }
                 }
             }
