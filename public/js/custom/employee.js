@@ -1,6 +1,6 @@
 $(function () {
 
-    $(".number_validation").keypress(function(){
+    $(".number_validation").keypress(function () {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
@@ -118,9 +118,9 @@ $(function () {
 
         var Selector = '#addEmployeeForm';
         $(Selector).find("#empDesignation").empty();
-        $(Selector).find("#empDesignation").append('<option value="">'+select_designation+'</option>');
+        $(Selector).find("#empDesignation").append('<option value="">' + select_designation + '</option>');
         $(Selector).find("#empDepartment").empty();
-        $(Selector).find("#empDepartment").append('<option value="">'+select_department+'</option>');
+        $(Selector).find("#empDepartment").append('<option value="">' + select_department + '</option>');
         $.post(empDesignation, { branch_id: branchId, token: token }, function (res) {
             console.log('res', res)
             if (res.code == 200) {
@@ -247,6 +247,29 @@ $(function () {
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
             formData.append('status', status);
+            // 
+            var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();
+            var department_start = $("input[name='department_start[]']").map(function () { return $(this).val(); }).get();
+            var department_end = $("input[name='department_end[]']").map(function () { return $(this).val(); }).get();
+            // 
+            var designation_lt = $("select[name='designation[]']").map(function () { return $(this).val(); }).get();
+            var designation_start = $("input[name='designation_start[]']").map(function () { return $(this).val(); }).get();
+            var designation_end = $("input[name='designation_end[]']").map(function () { return $(this).val(); }).get();
+            // 
+            var employee_type_lt = $("select[name='employee_type[]']").map(function () { return $(this).val(); }).get();
+            var employee_type_start = $("input[name='employee_type_start[]']").map(function () { return $(this).val(); }).get();
+            var employee_type_end = $("input[name='employee_type_end[]']").map(function () { return $(this).val(); }).get();
+
+            formData.append('department_ids', department_lt);
+            formData.append('department_start', department_start);
+            formData.append('department_end', department_end);
+            formData.append('designation_ids', designation_lt);
+            formData.append('designation_start', designation_start);
+            formData.append('designation_end', designation_end);
+            formData.append('employee_type_ids', employee_type_lt);
+            formData.append('employee_type_start', employee_type_start);
+            formData.append('employee_type_end', employee_type_end);
+            formData.append('job_title', $('#job_title').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -395,6 +418,29 @@ $(function () {
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
             formData.append('status', status);
+            // 
+            var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();
+            var department_start = $("input[name='department_start[]']").map(function () { return $(this).val(); }).get();
+            var department_end = $("input[name='department_end[]']").map(function () { return $(this).val(); }).get();
+            // 
+            var designation_lt = $("select[name='designation[]']").map(function () { return $(this).val(); }).get();
+            var designation_start = $("input[name='designation_start[]']").map(function () { return $(this).val(); }).get();
+            var designation_end = $("input[name='designation_end[]']").map(function () { return $(this).val(); }).get();
+            // 
+            var employee_type_lt = $("select[name='employee_type[]']").map(function () { return $(this).val(); }).get();
+            var employee_type_start = $("input[name='employee_type_start[]']").map(function () { return $(this).val(); }).get();
+            var employee_type_end = $("input[name='employee_type_end[]']").map(function () { return $(this).val(); }).get();
+
+            formData.append('department_ids', department_lt);
+            formData.append('department_start', department_start);
+            formData.append('department_end', department_end);
+            formData.append('designation_ids', designation_lt);
+            formData.append('designation_start', designation_start);
+            formData.append('designation_end', designation_end);
+            formData.append('employee_type_ids', employee_type_lt);
+            formData.append('employee_type_start', employee_type_start);
+            formData.append('employee_type_end', employee_type_end);
+            formData.append('job_title', $('#job_title').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
 
@@ -440,7 +486,7 @@ $(function () {
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -473,53 +519,53 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-    
-                
+
+
                     customize: function (doc) {
-                    doc.pageMargins = [50,50,50,50];
-                    doc.defaultStyle.fontSize = 10;
-                    doc.styles.tableHeader.fontSize = 12;
-                    doc.styles.title.fontSize = 14;
-                    // Remove spaces around page title
-                    doc.content[0].text = doc.content[0].text.trim();
-                    /*// Create a Header
-                    doc['header']=(function(page, pages) {
-                        return {
-                            columns: [
-                                
-                                {
-                                    // This is the right column
-                                    bold: true,
-                                    fontSize: 20,
-                                    color: 'Blue',
-                                    fillColor: '#fff',
-                                    alignment: 'center',
-                                    text: header_txt
-                                }
-                            ],
-                            margin:  [50, 15,0,0]
-                        }
-                    });*/
-                    // Create a footer
-                    
-                    doc['footer']=(function(page, pages) {
-                        return {
-                            columns: [
-                                { alignment: 'left', text: [ footer_txt ],width:400} ,
-                                {
-                                    // This is the right column
-                                    alignment: 'right',
-                                    text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                    width:100
-    
-                                }
-                            ],
-                            margin: [50, 0,0,0]
-                        }
-                    });
-                    
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
+                            }
+                        });*/
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
+                    }
                 }
-            }
             ],
             ajax: employeeList,
             // "paging": false,

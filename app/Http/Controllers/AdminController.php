@@ -1525,7 +1525,17 @@ class AdminController extends Controller
             'state' => $request->state,
             'country' => $request->country,
             'post_code' => $request->post_code,
-            'google2fa_secret_enable' => $request->google2fa_secret_enable
+            'google2fa_secret_enable' => $request->google2fa_secret_enable,
+            'department_ids' => $request->department_ids,
+            'department_start' => $request->department_start,
+            'department_end' => $request->department_end,
+            'designation_ids' => $request->designation_ids,
+            'designation_start' => $request->designation_start,
+            'designation_end' => $request->designation_end,
+            'employee_type_ids' => $request->employee_type_ids,
+            'employee_type_start' => $request->employee_type_start,
+            'employee_type_end' => $request->employee_type_end,
+            'job_title' => $request->job_title
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
@@ -1574,6 +1584,8 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
+        $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
         // dd($res);
         return view(
             'admin.employee.edit',
@@ -1591,6 +1603,9 @@ class AdminController extends Controller
                 'stream_types' => isset($stream_types['data']) ? $stream_types['data'] : [],
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
+                'job_title_list' => isset($job_title_list['data']) ? $job_title_list['data'] : [],
+                'employee_type_list' => isset($employee_type_list['data']) ? $employee_type_list['data'] : [],
+
             ]
         );
     }
@@ -1612,6 +1627,9 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
+        $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
+
         return view(
             'admin.employee.index',
             [
@@ -1625,6 +1643,8 @@ class AdminController extends Controller
                 'stream_types' => isset($stream_types['data']) ? $stream_types['data'] : [],
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
+                'job_title_list' => isset($job_title_list['data']) ? $job_title_list['data'] : [],
+                'employee_type_list' => isset($employee_type_list['data']) ? $employee_type_list['data'] : [],
             ]
         );
     }
@@ -1698,7 +1718,17 @@ class AdminController extends Controller
             'state' => $request->state,
             'country' => $request->country,
             'post_code' => $request->post_code,
-            'google2fa_secret_enable' => $request->google2fa_secret_enable
+            'google2fa_secret_enable' => $request->google2fa_secret_enable,
+            'department_ids' => $request->department_ids,
+            'department_start' => $request->department_start,
+            'department_end' => $request->department_end,
+            'designation_ids' => $request->designation_ids,
+            'designation_start' => $request->designation_start,
+            'designation_end' => $request->designation_end,
+            'employee_type_ids' => $request->employee_type_ids,
+            'employee_type_start' => $request->employee_type_start,
+            'employee_type_end' => $request->employee_type_end,
+            'job_title' => $request->job_title
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_update'), $data);

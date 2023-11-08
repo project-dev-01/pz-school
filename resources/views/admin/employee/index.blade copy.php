@@ -522,6 +522,33 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
+                                        @forelse($emp_designation as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
+                                        <option value="">{{ __('messages.choose_department') }}</option>
+                                        @forelse($emp_department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="staff_position">{{ __('messages.staff_position') }}</label>
                                     <select class="form-control" id="staffPosition" name="staff_position">
                                         <option value="">{{ __('messages.select_staff_position') }}</option>
@@ -532,14 +559,15 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
                                     <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_category">{{ __('messages.staff_category') }}</label>
@@ -564,8 +592,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="stream_type">{{ __('messages.stream_type') }}</label>
@@ -578,174 +604,88 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="job_title">{{ __('messages.job_title') }}</label>
-                                    <select class="form-control" name="job_title" id="job_title">
-                                        <option value="">{{ __('messages.select_job_title') }}</option>
-                                        @forelse($job_title_list as $r)
-                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @empty
-                                        @endforelse <!--  -->
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
+                                    <div class="button-list">
+
+                                        <button type="button" class="btn btn-primary width-xs waves-effect waves-light">Add +</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Description">Description</label>
+                                    <select class="form-control" name="Description">
+                                        <option value="">1st Grade English Teacher</option>
+                                        <option value="">2nd Grade English Teacher</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="birthday">Start</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="birthday">End</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department">{{ __('messages.department') }}</label>
+                                    <select class="form-control" name="Description">
+                                        <option value="">1st Grade English Teacher</option>
+                                        <option value="">2nd Grade English Teacher</option>
+                                    </select>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <td>{{ __('messages.department') }}</td>
-                                        <td>{{ __('messages.start') }}</td>
-                                        <td>{{ __('messages.end') }}</td>
-                                    </tr>
-                                </thead>
-                                <tbody id="dynamic_field_one">
-                                    <tr>
-                                        <td>
-                                            <select class="form-control" name="department[]">
-                                                <option value="">{{ __('messages.select_department') }}</option>
-                                                @forelse($emp_department as $r)
-                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="department_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="department_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">Add +</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="designation">{{ __('messages.designation') }}</label>
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <td>{{ __('messages.designation') }}</td>
-                                        <td>{{ __('messages.start') }}</td>
-                                        <td>{{ __('messages.end') }}</td>
-                                    </tr>
-                                </thead>
-                                <tbody id="dynamic_field_two">
-                                    <tr>
-                                        <td>
-                                            <select class="form-control" name="designation[]">
-                                                <option value="">{{ __('messages.select_designation') }}</option>
-                                                @forelse($emp_designation as $r)
-                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="designation_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="designation_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">Add +</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="employee_type">{{ __('messages.employee_type') }}</label>
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="birthday" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="empDOB">
+                                    </div>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <td>{{ __('messages.employee_type') }}</td>
-                                        <td>{{ __('messages.start') }}</td>
-                                        <td>{{ __('messages.end') }}</td>
-                                    </tr>
-                                </thead>
-                                <tbody id="dynamic_field_three">
-                                    <tr>
-                                        <td>
-                                            <select class="form-control" name="employee_type[]">
-                                                <option value="">{{ __('messages.select_employee_type') }}</option>
-                                                @forelse($employee_type_list as $r)
-                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="employee_type_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-calendar"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control designationDatepicker" name="employee_type_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">Add +</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -890,39 +830,47 @@
                         </li>
                     </ul>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="height">{{ __('messages.height') }}</label>
-                                    <input type="text" id="height" class="form-control" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
-                                </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
+                                <label class="custom-control-label" for="skip_medical_history">{{ __('messages.skipped_medical_history') }}</label>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="weight">{{ __('messages.weight') }}</label>
-                                    <input type="text" id="weight" class="form-control" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
+                        </div>
+                        <div id="medical_history_form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="height">{{ __('messages.height') }}</label>
+                                        <input type="text" id="height" class="form-control" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="allergy">{{ __('messages.allergy') }}</label>
-                                    <input type="text" id="allergy" class="form-control" name="allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="weight">{{ __('messages.weight') }}</label>
+                                        <input type="text" id="weight" class="form-control" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="blood_group">{{ __('messages.blood_group') }}</label>
-                                    <select class="form-control" name="blood_group" id="blood_group">
-                                        <option value="">{{ __('messages.select_blood_group') }}</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="allergy">{{ __('messages.allergy') }}</label>
+                                        <input type="text" id="allergy" class="form-control" name="allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="blood_group">{{ __('messages.blood_group') }}</label>
+                                        <select class="form-control" name="blood_group" id="blood_group">
+                                            <option value="">{{ __('messages.select_blood_group') }}</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1055,14 +1003,9 @@
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;
-    var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
-    var emp_department_list = @json($emp_department);
-    var emp_designation_list = @json($emp_designation);
-    var employee_type_list = @json($employee_type_list);
 </script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
-<script src="{{ asset('js/custom/employee_add_more.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
         messages: {

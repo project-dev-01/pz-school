@@ -856,7 +856,9 @@ return [
         'get_parent_fees_list' => $url.'/fees/get_parent_fees_list',
         'parent_fees_history' => $url.'/fees/parent_fees_history',
         'get_today_schedules_admin' => $url.'/get_today_schedules_admin',
-        'get_today_schedules_teacher' => $url.'/get_today_schedules_teacher'
+        'get_today_schedules_teacher' => $url.'/get_today_schedules_teacher',
+        'job_title_list' => $url.'/job_title/list',
+        'employee_type_list' => $url.'/employee_type/list',
       ]
 
 ];

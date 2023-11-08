@@ -1570,5 +1570,12 @@ return [
     "days" => "Days",
     "hours" => "Hours",
     "bulk_promotion" => "Bulk Promotion",
-    "promotion_import" => "Promotion Import"
+    "promotion_import" => "Promotion Import",
+    "job_title" => "Job Title",
+    "select_job_title" => "Select Job",
+    "start" => "Start",
+    "end" => "End",
+    "employee_type" => "Employee Type",
+    "select_employee_type" => "Select Employee Type",
+    "select_designation" => "Select Designation",
 ];

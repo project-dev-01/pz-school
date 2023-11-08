@@ -150,6 +150,7 @@
     var select_hall = "{{ __('messages.select_hall') }}";
     var select_department = "{{ __('messages.select_department') }}";
     var select_designation = "{{ __('messages.select_designation') }}";
+    var select_employee_type = "{{ __('messages.select_employee_type') }}";
     var select = "{{ __('messages.select') }}";
     var choose = "{{ __('messages.choose') }}";
     var add_remarks = "{{ __('messages.add_remarks') }}";

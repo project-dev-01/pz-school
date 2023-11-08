@@ -537,53 +537,6 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="designation_id">{{ __('messages.designation') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
-                                        <option value="">{{ __('messages.choose_designation') }}</option>
-                                        @forelse($designation as $des)
-                                        @php
-                                        $selected = "";
-                                        @endphp
-                                        @foreach(explode(',', $employee['designation_id']) as $info)
-                                        @if($des['id'] == $info)
-                                        @php
-                                        $selected = "Selected";
-                                        @endphp
-                                        @endif
-                                        @endforeach
-                                        <option value="{{$des['id']}}" {{ $selected }}>{{$des['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="department_id">{{ __('messages.department') }}</label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
-                                        <option value="">{{ __('messages.choose_department') }}</option>
-                                        @forelse($department as $dep)
-                                        @php
-                                        $selected = "";
-                                        @endphp
-                                        @foreach(explode(',', $employee['department_id']) as $info)
-                                        @if($dep['id'] == $info)
-                                        @php
-                                        $selected = "Selected";
-                                        @endphp
-                                        @endif
-                                        @endforeach
-                                        <option value="{{$dep['id']}}" {{ $selected }}>{{$dep['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label for="staff_position">{{ __('messages.staff_position') }}</label>
                                     <select class="form-control" id="staffPosition" name="staff_position">
                                         <option value="">{{ __('messages.select_staff_position') }}</option>
@@ -594,15 +547,14 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
                                     <input type="number" value="{{ isset($employee['salary_grade']) ? $employee['salary_grade'] : ''}}" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_category">{{ __('messages.staff_category') }}</label>
@@ -637,6 +589,8 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="stream_type">{{ __('messages.stream_type') }}</label>
@@ -649,7 +603,231 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="job_title">{{ __('messages.job_title') }}</label>
+                                    <select class="form-control" name="job_title" id="job_title">
+                                        <option value="">{{ __('messages.select_job_title') }}</option>
+                                        @forelse($job_title_list as $r)
+                                        <option value="{{$r['id']}}" {{ isset($employee['job_title_id']) ? $employee['job_title_id'] == $r['id'] ? 'Selected' : '' : '' }}>{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse <!--  -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department">{{ __('messages.department') }}</label>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>{{ __('messages.department') }}</td>
+                                        <td>{{ __('messages.start') }}</td>
+                                        <td>{{ __('messages.end') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="dynamic_field_one">
+                                    @php
+                                    $departmentIds = isset($employee['department_id']) ? $employee['department_id'] :"";
+                                    $departmentLists = explode(',', $departmentIds);
+                                    $department_start_date = isset($employee['department_start_date']) ? $employee['department_start_date'] :"";
+                                    $departmentStartList = explode(',', $department_start_date);
+                                    $department_end_date = isset($employee['department_end_date']) ? $employee['department_end_date'] :"";
+                                    $departmentEndList = explode(',', $department_end_date);
+                                    @endphp
+                                    @foreach($departmentLists as $key => $step)
+                                    @php
+                                    $addRemovedep = $key+1;
+                                    @endphp
+                                    <tr id="row_department{{$addRemovedep}}">
+                                        <td>
+                                            <select class="form-control" name="department[]">
+                                                <option value="">{{ __('messages.select_department') }}</option>
+                                                @forelse($department as $r)
+                                                <option value="{{$r['id']}}" {{ isset($step) ? $step == $r['id'] ? 'Selected' : '' : '' }}>{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($departmentStartList[$key]) ? $departmentStartList[$key] : ''}}" class="form-control designationDatepicker" name="department_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($departmentEndList[$key]) ? $departmentEndList[$key] : ''}}" class="form-control designationDatepicker" name="department_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if($addRemovedep > 1)
+                                            <button type="button" name="remove_designation" data-designationremoveid="{{$addRemovedep}}" id="{{$addRemovedep}}" class="btn btn-danger btn_remove_department">X</button>
+                                            @else
+                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">Add +</button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- last feild value -->
+                                    <input type="hidden" value="{{ $addRemovedep }}" id="addRemovedepartment">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="designation">{{ __('messages.designation') }}</label>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>{{ __('messages.designation') }}</td>
+                                        <td>{{ __('messages.start') }}</td>
+                                        <td>{{ __('messages.end') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="dynamic_field_two">
+                                    @php
+                                    $designationIds = isset($employee['designation_id']) ? $employee['designation_id'] :"";
+                                    $designationLists = explode(',', $designationIds);
+                                    $designation_start_date = isset($employee['designation_start_date']) ? $employee['designation_start_date'] :"";
+                                    $designationStartList = explode(',', $designation_start_date);
+                                    $designation_end_date = isset($employee['designation_end_date']) ? $employee['designation_end_date'] :"";
+                                    $designationEndList = explode(',', $designation_end_date);
+                                    @endphp
+                                    @foreach($designationLists as $dkey => $dstep)
+                                    @php
+                                    $addRemovedes = $dkey+1;
+                                    @endphp
+                                    <tr id="row_designation{{$addRemovedes}}">
+                                        <td>
+                                            <select class="form-control" name="designation[]">
+                                                <option value="">{{ __('messages.select_designation') }}</option>
+                                                @forelse($designation as $r)
+                                                <option value="{{$r['id']}}" {{ isset($dstep) ? $dstep == $r['id'] ? 'Selected' : '' : '' }}>{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($designationStartList[$dkey]) ? $designationStartList[$dkey] : ''}}" class="form-control designationDatepicker" name="designation_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($designationEndList[$dkey]) ? $designationEndList[$dkey] : ''}}" class="form-control designationDatepicker" name="designation_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if($addRemovedes > 1)
+                                            <button type="button" name="remove_designation" data-designationremoveid="{{$addRemovedes}}" id="{{$addRemovedes}}" class="btn btn-danger btn_remove_designation">X</button>
+                                            @else
+                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">Add +</button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- last feild value -->
+                                    <input type="hidden" value="{{ $addRemovedes }}" id="addRemoveDesignation">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="employee_type">{{ __('messages.employee_type') }}</label>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>{{ __('messages.employee_type') }}</td>
+                                        <td>{{ __('messages.start') }}</td>
+                                        <td>{{ __('messages.end') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="dynamic_field_three">
+                                    @php
+                                    $employeeTypeIds = isset($employee['employee_type_id']) ? $employee['employee_type_id'] :"";
+                                    $employeeTypeLists = explode(',', $employeeTypeIds);
+                                    $employee_type_start_date = isset($employee['employee_type_start_date']) ? $employee['employee_type_start_date'] :"";
+                                    $employeeTypeStartList = explode(',', $employee_type_start_date);
+                                    $employee_type_end_date = isset($employee['employee_type_end_date']) ? $employee['employee_type_end_date'] :"";
+                                    $employeeTypeEndList = explode(',', $employee_type_end_date);
+                                    @endphp
+                                    @foreach($employeeTypeLists as $etkey => $etstep)
+                                    @php
+                                    $addRemove = $etkey+1;
+                                    @endphp
+                                    <tr id="row_emp_type{{$addRemove}}">
+                                        <td>
+                                            <select class="form-control" name="employee_type[]">
+                                                <option value="">{{ __('messages.select_employee_type') }}</option>
+                                                @forelse($employee_type_list as $r)
+                                                <option value="{{$r['id']}}" {{ isset($etstep) ? $etstep == $r['id'] ? 'Selected' : '' : '' }}>{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($employeeTypeStartList[$etkey]) ? $employeeTypeStartList[$etkey] : ''}}" class="form-control designationDatepicker" name="employee_type_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" value="{{ isset($employeeTypeEndList[$etkey]) ? $employeeTypeEndList[$etkey] : ''}}" class="form-control designationDatepicker" name="employee_type_end[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if($addRemove > 1)
+                                            <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button>
+                                            @else
+                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">Add +</button>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- last feild value -->
+                                    <input type="hidden" value="{{ $addRemove }}" id="addRemoveLastEmpType">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -795,47 +973,39 @@
                         </li>
                     </ul>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
-                                <label class="custom-control-label" for="skip_medical_history">{{ __('messages.skipped_medical_history') }}</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="height">{{ __('messages.height') }}</label>
+                                    <input type="text" id="height" class="form-control" value="{{ isset($employee['height']) ? $employee['height'] : ''}}" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
+                                </div>
                             </div>
-                        </div>
-                        <div id="medical_history_form">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="height">{{ __('messages.height') }}</label>
-                                        <input type="text" id="height" class="form-control" value="{{ isset($employee['height']) ? $employee['height'] : ''}}" name="height" placeholder="{{ __('messages.enter_height') }}" data-parsley-trigger="change">
-                                    </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="weight">{{ __('messages.weight') }}</label>
+                                    <input type="text" id="weight" class="form-control" value="{{ isset($employee['weight']) ? $employee['weight'] : ''}}" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="weight">{{ __('messages.weight') }}</label>
-                                        <input type="text" id="weight" class="form-control" value="{{ isset($employee['weight']) ? $employee['weight'] : ''}}" name="weight" placeholder="{{ __('messages.enter_weight') }}" data-parsley-trigger="change">
-                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="allergy">{{ __('messages.allergy') }}</label>
+                                    <input type="text" id="allergy" class="form-control" value="{{ isset($employee['allergy']) ? $employee['allergy'] : ''}}" name="Allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="allergy">{{ __('messages.allergy') }}</label>
-                                        <input type="text" id="allergy" class="form-control" value="{{ isset($employee['allergy']) ? $employee['allergy'] : ''}}" name="Allergy" placeholder="{{ __('messages.enter_allergy') }}" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="blood_group">{{ __('messages.blood_group') }}</label>
-                                        <select class="form-control" name="blood_group" id="blood_group">
-                                            <option value="">{{ __('messages.select_blood_group') }}</option>
-                                            <option value="A+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A+" ? 'selected' : '' : '' }}>A+</option>
-                                            <option value="A-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A-" ? 'selected' : '' : '' }}>A-</option>
-                                            <option value="AB+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB+" ? 'selected' : '' : '' }}>AB+</option>
-                                            <option value="AB-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB-" ? 'selected' : '' : '' }}>AB-</option>
-                                            <option value="B+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B+" ? 'selected' : '' : '' }}>B+</option>
-                                            <option value="B-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B-" ? 'selected' : '' : '' }}>B-</option>
-                                            <option value="O+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O+" ? 'selected' : '' : '' }}>O+</option>
-                                            <option value="O-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O-" ? 'selected' : '' : '' }}>O-</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="blood_group">{{ __('messages.blood_group') }}</label>
+                                    <select class="form-control" name="blood_group" id="blood_group">
+                                        <option value="">{{ __('messages.select_blood_group') }}</option>
+                                        <option value="A+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A+" ? 'selected' : '' : '' }}>A+</option>
+                                        <option value="A-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "A-" ? 'selected' : '' : '' }}>A-</option>
+                                        <option value="AB+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB+" ? 'selected' : '' : '' }}>AB+</option>
+                                        <option value="AB-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "AB-" ? 'selected' : '' : '' }}>AB-</option>
+                                        <option value="B+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B+" ? 'selected' : '' : '' }}>B+</option>
+                                        <option value="B-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "B-" ? 'selected' : '' : '' }}>B-</option>
+                                        <option value="O+" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O+" ? 'selected' : '' : '' }}>O+</option>
+                                        <option value="O-" {{ isset($employee['blood_group']) ? $employee['blood_group'] == "O-" ? 'selected' : '' : '' }}>O-</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -964,8 +1134,13 @@
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;
+    var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
+    var emp_department_list = @json($department);
+    var emp_designation_list = @json($designation);
+    var employee_type_list = @json($employee_type_list);
 </script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
+<script src="{{ asset('js/custom/edit_employee_add_more.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
         messages: {
