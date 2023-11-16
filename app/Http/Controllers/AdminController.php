@@ -8107,4 +8107,254 @@ class AdminController extends Controller
         // dd($response);
         return $response;
     }
+    public function buletin_board()
+    {
+        $user_id = session()->get('role_id');
+        $data = [
+            'user_id' => $user_id,
+        ];
+        $usernames = Helper::GETMethodWithData(config('constants.api.buletin_board_usernames'), $data);
+        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        return view(
+            'admin.buletin_board.index',
+            [
+                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                'emp_department' => isset($emp_department['data']) ? $emp_department['data'] : [],
+                'usernames' => isset($usernames['data']) ? $usernames['data'] : []
+            ]
+        );
+    }
+    public function getBuletinBoardList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.buletin_board_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('target_user', function ($row) {
+                $targetUser = 'Target Users: ' . $row['name'];
+
+                if (!empty($row['grade_name'])) {
+                    $targetUser .= '<br>Grade: ' . $row['grade_name'];
+                }
+
+                if (!empty($row['section_name'])) {
+                    $targetUser .= '<br>Class: ' . $row['section_name'];
+                }
+
+                // Check if "admin" and "student" are in the target user names
+                if (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Student') !== false) {
+                    $targetUser .= '<br>Student: ' . $row['student_name'];
+                } elseif (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Teacher') !== false) {
+                    $targetUser .= '<br>Department: ' . $row['department_name'];
+                } else {
+                    if (!empty($row['parent_name'])) {
+                        $targetUser .= '<br>Parent: ' . $row['parent_name'];
+                    }
+                }
+
+                return $targetUser;
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewBuletinBtn"><i class="fe-eye"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light"  data-id="' . $row['id'] . '" id="editBuletinBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteBuletin_boardBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['target_user', 'actions'])
+            ->make(true);
+    }
+    public function addBuletinBoard(Request $request)
+    {
+
+
+        // Retrieve the selected values as an array
+        $targetUsers = $request->input('target_user', []);
+
+        // Ensure $targetUsers is an array
+        if (!is_array($targetUsers)) {
+            $targetUsers = [$targetUsers];
+        }
+
+        // Implode the array with commas
+        $targetUserString = implode(',', $targetUsers);
+
+        // Assuming the admin ID is 2 (replace with the actual admin ID)
+        $adminId = 2;
+
+        // Concatenate the admin ID with the target users
+        $rollid_target_user = $adminId . ',' . $targetUserString;
+        $file = $request->file('file');
+        $path = $file->path();
+        $data = file_get_contents($path);
+        $base64 = base64_encode($data);
+        $extension = $file->getClientOriginalExtension();
+        $data = [
+            'title' => $request->title,
+            'description' => $request->discription,
+            'file' => $base64,
+            'file_extension' => $extension,
+            'target_user' => $rollid_target_user,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' =>  $request->student_id,
+            'parent_id' =>  $request->parent_id,
+            'department_id' => $request->empDepartment,
+            'publish' => $request->publish,
+            'add_to_dash' => $request->add_to_dash,
+            'publish_date' => $request->date,
+            'publish_end_date' => $request->endDate,
+            'created_by' => session()->get('ref_user_id')
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.buletin_board_add'), $data);
+        // dd($response);
+        return $response;
+    }
+    public function deleteBuletinBoard(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'deleted_by' => session()->get('ref_user_id')
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.buletin_board_delete'), $data);
+        return $response;
+    }
+    public function getBuletinBoardDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.buletin_board_details'), $data);
+        return $response;
+    }
+    public function editBuletinBoard($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.buletin_board_details'), $data);
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettype = Helper::GetMethod(config('constants.api.event_type_list'));
+        $getgroup = Helper::GetMethod(config('constants.api.group_list'));
+
+        return view(
+            'admin.buletin_board.edit',
+            [
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'type' => isset($gettype['data']) ? $gettype['data'] : [],
+                'group' => isset($getgroup['data']) ? $getgroup['data'] : [],
+                'event' => isset($response['data']) ? $response['data'] : [],
+            ]
+        );
+    }
+    public function updateBuletinBoard(Request $request)
+    {
+
+        // Retrieve the selected values as an array
+        $targetUsers = $request->input('target_user', []);
+
+        // Ensure $targetUsers is an array
+        if (!is_array($targetUsers)) {
+            $targetUsers = [$targetUsers];
+        }
+
+        // Implode the array with commas
+        $targetUserString = implode(',', $targetUsers);
+
+        // Assuming the admin ID is 2 (replace with the actual admin ID)
+        $adminId = 2;
+
+        // Concatenate the admin ID with the target users
+        $rollid_target_user = $adminId . ',' . $targetUserString;
+        $file = $request->file('file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'id' => $request->id,
+            'title' => $request->title,
+            'description' => $request->discription,
+            'file' => $base64,
+            'file_extension' => $extension,
+            'oldfile' => $request->oldfile,
+            'target_user' => $rollid_target_user,
+            'publish' => $request->publish,
+            'publish_date' => $request->date,
+            'publish_end_dates' => $request->publish_end_dates,
+            'updated_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.buletin_board_update'), $data);
+        return $response;
+    }
+    public function retired_person()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($session);
+        return view(
+            'admin.retired_person.retired_person',
+            [
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    public function retiredPersonList(Request $request)
+    {
+        $data = [
+            "working_status" => $request->employee_type
+        ];
+        $response = Helper::PostMethod(config('constants.api.retired_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('designation_name', function ($row) {
+                return  $row['designation_name'];
+            })
+            ->addColumn('tenure', function ($row) {
+                $joiningDate =  $row['joining_date'];
+                $relieveDate = $row['releive_date'];
+                $relieveDate = empty($relieveDate) ? date('Y-m-d') : $relieveDate;
+                // Create DateTime objects for joining and relieve dates
+                $joiningDateTime = new DateTime($joiningDate);
+                $relieveDateTime = new DateTime($relieveDate);
+
+                // Calculate the difference between the dates
+                $interval = $joiningDateTime->diff($relieveDateTime);
+
+                if ($interval->y > 0) {
+                    return $tenure = $interval->y . ' year' . ($interval->y !== 1 ? 's' : '');
+                } else if ($interval->m > 0) {
+                    return  $tenure = $interval->m . ' month' . ($interval->m !== 1 ? 's' : '');
+                } else {
+                    return $tenure = $interval->d . ' day' . ($interval->d !== 1 ? 's' : '');
+                }
+            })
+
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.student.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-edit"></i></a>
+                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['tenure', 'designation_name', 'actions'])
+            ->make(true);
+    }
 }

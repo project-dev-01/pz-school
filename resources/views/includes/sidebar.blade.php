@@ -76,7 +76,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('super_admin.branch_url_permission')}}"  class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
+                    <a href="{{ route('super_admin.branch_url_permission')}}" class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="12.7998" y="10.4095" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
@@ -900,6 +900,21 @@
                         <span>{{ __('messages.forum') }}</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.buletin_board')}}" class="nav-link {{ (request()->is('admin/buletin_board*')) ? 'active' : '' }}">
+                        <!--<i class="far fa-comments"></i>--->
+                        <svg class="svg-icon" style="width: 1.1em; height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="#C4C7D2" />
+                        </svg>
+                        <span> {{ __('messages.buletin') }} </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.retired_person')}}" class="nav-link {{ (request()->is('admin/retired_person*')) ? 'active' : '' }}">
+                        <i class="fas fa-users"></i>
+                        <span> {{ __('messages.retired_persons') }} </span>
+                    </a>
+                </li>
                 <li class="{{  (request()->is('admin/soap_subject/create')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarSoap" data-toggle="collapse">
                         <!--<i class="fas fa-map"></i>-->
@@ -1627,6 +1642,15 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('teacher.buletin_board')}}" class="nav-link {{ (request()->is('teacher/buletin_board*')) ? 'active' : '' }}">
+                        <!--<i class="far fa-comments"></i>--->
+                        <svg class="svg-icon" style="width: 1.1em; height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="#C4C7D2" />
+                        </svg>
+                        <span> {{ __('messages.buletin') }} </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('teacher.forum.index')}}" target=”_blank” class="nav-link {{ (request()->is('teacher/forum*')) ? 'active' : '' }}">
 
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1808,6 +1832,15 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('parent.buletin_board')}}" class="nav-link {{ (request()->is('parent/buletin_board*')) ? 'active' : '' }}">
+                        <!--<i class="far fa-comments"></i>--->
+                        <svg class="svg-icon" style="width: 1.1em; height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="#C4C7D2" />
+                        </svg>
+                        <span> {{ __('messages.buletin') }} </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('schoolcrm.app.form')}}" target=”_blank” class="nav-link {{ (request()->is('application-form')) ? 'active' : '' }}">
 
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1945,6 +1978,15 @@
                     <a href="{{ route('student.report_card')}}" class="nav-link {{ (request()->is('student/report_card*')) ? 'active' : '' }}">
                         <i class="far fa-id-card"></i>
                         <span>{{ __('messages.report_card') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('student.buletin_board')}}" class="nav-link {{ (request()->is('student/buletin_board*')) ? 'active' : '' }}">
+                        <!--<i class="far fa-comments"></i>--->
+                        <svg class="svg-icon" style="width: 1.1em; height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="#C4C7D2" />
+                        </svg>
+                        <span> {{ __('messages.buletin') }} </span>
                     </a>
                 </li>
                 <li>

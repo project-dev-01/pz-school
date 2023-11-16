@@ -65,11 +65,11 @@ Route::group(['prefix' => 'syscont', 'namespace' => 'Super Admin'], function () 
         //Menu Routes 
         Route::get('super_admin/menucreation', [SuperAdminController::class, 'createmenu'])->name('super_admin.createmenu');
         Route::post('super_admin/addmenu', [SuperAdminController::class, 'addmenu'])->name('super_admin.addmenu');
-        
+
         Route::get('menu/edit/{id}', [SuperAdminController::class, 'getmenuEditDetails'])->name('menu.edit');
-        
+
         Route::post('menu/update', [SuperAdminController::class, 'updatemenuDetails'])->name('menu.update');
-        Route::get('super_admin/menuaccess', [SuperAdminController::class, 'menuaccess'])->name('super_admin.menuaccess');        
+        Route::get('super_admin/menuaccess', [SuperAdminController::class, 'menuaccess'])->name('super_admin.menuaccess');
         Route::post('super_admin/getmenus', [SuperAdminController::class, 'getmenus'])->name('super_admin.getmenus');
         Route::post('super_admin/setpermission', [SuperAdminController::class, 'setpermission'])->name('super_admin.setpermission');
 
@@ -837,9 +837,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         //Activity Monitoring
         Route::get('log_activity', [AdminController::class, 'logactivity'])->name('admin.logactivity');
         Route::get('log_activity/list', [AdminController::class, 'login_activity'])->name('admin.login_activity.list');
-        
+
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('admin.clear_local_storage');
-        
+
         // BankAccount routes
         Route::get('bank_account/index', [AdminController::class, 'bankAccount'])->name('admin.bank_account');
         Route::get('bank_account/create', [AdminController::class, 'createBankAccount'])->name('admin.bank_account.create');
@@ -849,7 +849,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('bank_account/update', [AdminController::class, 'updateBankAccount'])->name('admin.bank_account.update');
         Route::post('bank_account/delete', [AdminController::class, 'deleteBankAccount'])->name('admin.bank_account.delete');
         Route::post('bank_account/status', [AdminController::class, 'bankAccountStatus'])->name('admin.bank_account.status');
-        
+
         // Bank routes
         Route::get('bank/index', [AdminController::class, 'bank'])->name('admin.bank');
         Route::post('bank/add', [AdminController::class, 'addBank'])->name('admin.bank.add');
@@ -861,6 +861,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
         Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
+        // buletin_board routes
+        Route::get('buletin_board/index', [AdminController::class, 'buletin_board'])->name('admin.buletin_board');
+        Route::get('buletin_board/list', [AdminController::class, 'getBuletinBoardList'])->name('admin.buletin_board.list');
+        Route::post('buletin_board/add', [AdminController::class, 'addBuletinBoard'])->name('admin.buletin_board.addBuletinBoard');
+        Route::post('buletin_board/delete', [AdminController::class, 'deleteBuletinBoard'])->name('admin.buletin_board.delete');
+        Route::post('buletin_board/buletin_board-details', [AdminController::class, 'getBuletinBoardDetails'])->name('admin.buletin_board.details');
+        Route::get('buletin_board/edit/{id}', [AdminController::class, 'editBuletinBoard'])->name('admin.buletin_board.edit');
+        Route::post('buletin_board/update', [AdminController::class, 'updateBuletinBoard'])->name('admin.buletin_board.update');
+
+        // retired_person routes
+        Route::get('retired_person/index', [AdminController::class, 'retired_person'])->name('admin.retired_person');
+        Route::get('retired_person/list', [AdminController::class, 'retiredPersonList'])->name('admin.retired_person.list');
     });
 });
 // admin routes end
@@ -1080,7 +1092,7 @@ Route::group(['prefix' => 'staff'], function () {
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('staff.attendance.employee_pdf');
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'staffClassroomSetCookie'])->name('staff.classroom.setcookie');
-        
+
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('staff.clear_local_storage');
     });
 });
@@ -1135,7 +1147,11 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('leave_management/reupload_file', [TeacherController::class, 'reUploadLeaveFile'])->name('teacher.reupload_file.add');
         // admin student_leave list
         Route::get('student-leave/list', [TeacherController::class, 'studentLeaveShow'])->name('teacher.student_leave.list');
-
+        //Bulletin Board
+        Route::get('buletin_board', [TeacherController::class, 'buletin_board'])->name('teacher.buletin_board');
+        Route::get('buletin_board/list', [TeacherController::class, 'getBuletinBoardTeacherList'])->name('teacher.buletin_board.list');
+        Route::get('buletin_board/imp_list', [TeacherController::class, 'getBuletinBoardImpTeacherList'])->name('teacher.buletin_board.imp_list');
+        Route::post('buletin_board/star', [TeacherController::class, 'bulletinStarTeacher'])->name('teacher.buletin_board.star');
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');
@@ -1230,7 +1246,7 @@ Route::group(['prefix' => 'teacher'], function () {
         // set cookie
         Route::get('classroom/setcookie', [CommonController::class, 'teacherClassroomSetCookie'])->name('teacher.classroom.setcookie');
         Route::get('analytic/setcookie', [CommonController::class, 'teacherAnalyticSetCookie'])->name('teacher.analytic.setcookie');
-        
+
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('teacher.clear_local_storage');
     });
 });
@@ -1264,6 +1280,11 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('events', [ParentController::class, 'events'])->name('parent.events');
         Route::get('event/list', [ParentController::class, 'getEventList'])->name('parent.event.list');
         Route::post('event/event-details', [ParentController::class, 'getEventDetails'])->name('parent.event.details');
+        //Bulletin Board
+        Route::get('buletin_board', [ParentController::class, 'buletin_board'])->name('parent.buletin_board');
+        Route::get('buletin_board/list', [ParentController::class, 'getBuletinBoardParentList'])->name('parent.buletin_board.list');
+        Route::get('buletin_board/imp_list', [ParentController::class, 'getBuletinBoardImpParentList'])->name('parent.buletin_board.imp_list');
+        Route::post('buletin_board/star', [ParentController::class, 'bulletinStar'])->name('parent.buletin_board.star');
         //Library routes
         Route::get('library/books', [ParentController::class, 'bookList'])->name('parent.library.books');
         Route::get('library/book_issued', [ParentController::class, 'bookIssued'])->name('parent.library.book_issued');
@@ -1322,7 +1343,7 @@ Route::group(['prefix' => 'parent'], function () {
         //student report
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf_parent'])->name('parent.attendance.student_pdf');
         Route::post('attendance/student_excel', [ParentController::class, 'studentAttendanceExcel'])->name('parent.attendance.student_excel');
-        
+
         Route::get('fees/index', [ParentController::class, 'feesIndex'])->name('parent.fees');
         Route::get('fees/view/{id}/{group_id}', [ParentController::class, 'feesView'])->name('parent.fees.view');
         Route::get('fees/invoice/{id}/{group_id}', [ParentController::class, 'feesInvoice'])->name('parent.fees.invoice');
@@ -1363,6 +1384,11 @@ Route::group(['prefix' => 'student'], function () {
         Route::get('events', [StudentController::class, 'events'])->name('student.events');
         Route::get('event/list', [StudentController::class, 'getEventList'])->name('student.event.list');
         Route::post('event/event-details', [StudentController::class, 'getEventDetails'])->name('student.event.details');
+        //Bulletin Board
+        Route::get('buletin_board', [StudentController::class, 'buletin_board'])->name('student.buletin_board');
+        Route::get('buletin_board/list', [StudentController::class, 'getBuletinBoardStudentList'])->name('student.buletin_board.list');
+        Route::get('buletin_board/imp_list', [StudentController::class, 'getBuletinBoardImpStudentList'])->name('student.buletin_board.imp_list');
+        Route::post('buletin_board/star', [StudentController::class, 'bulletinStar'])->name('student.buletin_board.star');
         // Library 
         Route::get('library/books', [StudentController::class, 'bookList'])->name('student.library.books');
         Route::get('library/book_issued', [StudentController::class, 'bookIssued'])->name('student.library.book_issued');
@@ -1389,7 +1415,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
 
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
-        
+
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('student.clear_local_storage');
     });
 });

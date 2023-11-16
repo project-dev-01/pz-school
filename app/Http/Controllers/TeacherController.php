@@ -1817,4 +1817,67 @@ class TeacherController extends Controller
             })
             ->make(true);
     }
+    public function buletin_board()
+    {
+        return view('teacher.bulletin_board.index');
+    }
+    public function getBuletinBoardTeacherList(Request $request)
+    {
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'role_id' => session()->get('role_id'),
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_teacher'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
+    }
+    public function bulletinStarTeacher(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'parentImp' => $request->parentImp,
+            'role_id' => session()->get('role_id'),
+            'user_id' => session()->get('ref_user_id'),
+            'updated_by' => session()->get('ref_user_id'),
+            'created_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.bulletin_star_teacher'), $data);
+        return $response;
+    }
+    public function getBuletinBoardImpTeacherList(Request $request)
+    {
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            'role_id' => session()->get('role_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_imp_teacher'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
+    }
 }

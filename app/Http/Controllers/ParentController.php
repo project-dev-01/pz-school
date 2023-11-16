@@ -719,22 +719,21 @@ class ParentController extends Controller
                         $top = "";
                     }
 
-                    
+
                     if ($work['document']) {
                         $document = '
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span><a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/teacher/homework/'. $work['document'] . '" download>
+                                <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $document_lang . '</span><a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/teacher/homework/' . $work['document'] . '" download>
                                         <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                     </a></p>
                             </div>
                         </div>';
-                    }else{
+                    } else {
                         $document = '<div class="col-md-6">
                         <div class="row">
-                            <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span></p>
+                            <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $document_lang . '</span></p>
                         </div>';
-
                     }
                     $homework_status = "";
                     if ($work['homework_status'] == 1) {
@@ -745,9 +744,9 @@ class ParentController extends Controller
 
                     if ($work['file']) {
                         $file = '<div class="col-md-6">
-                                    <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span>: </div>
+                                    <div class="col-md-6 font-weight-bold">' . $attachment_file . '<span class="text-danger">*</span>: </div>
                                         <div class="col-md-6">
-                                            <a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/student/homework/'.$work['file'] . '" download>
+                                            <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/student/homework/' . $work['file'] . '" download>
                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                             </a>
                                         </div>
@@ -764,7 +763,7 @@ class ParentController extends Controller
                                 <p>
                                 <div>
                                     <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-' . $key . '" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top .' '. $homework_status. ' 
+                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . ' ' . $homework_status . ' 
                                     </a>
                                 </div>
                                 </p>
@@ -774,56 +773,56 @@ class ParentController extends Controller
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$title_lang.'</span>' . $work['title'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $title_lang . '</span>' . $work['title'] . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$status_lang.'</span>' . $status . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $status_lang . '</span>' . $status . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_homework_lang.'</span>' . date('F j , Y', strtotime($work['date_of_homework'])) . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $date_of_homework_lang . '</span>' . date('F j , Y', strtotime($work['date_of_homework'])) . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_submission_lang.'</span>' . date('F j , Y', strtotime($work['date_of_submission'])) . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $date_of_submission_lang . '</span>' . date('F j , Y', strtotime($work['date_of_submission'])) . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$evalution_date_lang.'</span>' . $evaluation_date . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $evalution_date_lang . '</span>' . $evaluation_date . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$remarks_lang.'</span>' . $work['description'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $remarks_lang . '</span>' . $work['description'] . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$rank_out_of_5_lang.' </span>' . $work['rank'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $rank_out_of_5_lang . ' </span>' . $work['rank'] . '</p>
                                                 </div>
                                             </div>
-                                            '.$document.'
+                                            ' . $document . '
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold" >'.$submission_process_here_lang.' :- </div>
+                                            <div class="col-md-12 font-weight-bold" >' . $submission_process_here_lang . ' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p class="col-md-12"><span class="font-weight-semibold">'.$note_lang.' <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                <p class="col-md-12"><span class="font-weight-semibold">' . $note_lang . ' <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                                 ' . $work['remarks'] . '</textarea></p>
 
                                             </div>
@@ -870,7 +869,7 @@ class ParentController extends Controller
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $parentData);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.parent_chat_teacher_list'), $parentData);
         // dd($teacher_list);
-       
+
         return view('parent.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],
@@ -1156,7 +1155,7 @@ class ParentController extends Controller
             ]
         );
     }
-    public function feesView($id,$group_id)
+    public function feesView($id, $group_id)
     {
         $data = [
             'student_id' => $id,
@@ -1174,8 +1173,8 @@ class ParentController extends Controller
             ]
         );
     }
-    
-    public function feesInvoice($id,$group_id)
+
+    public function feesInvoice($id, $group_id)
     {
         $data = [
             'student_id' => $id,
@@ -1188,7 +1187,7 @@ class ParentController extends Controller
         // dd($data);
         $parent = Helper::PostMethod(config('constants.api.parent_profile_info'), $parentData);
         $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
-        
+
         $date = date('Y-m-d');
         return view(
             'parent.fees.invoice',
@@ -1203,7 +1202,7 @@ class ParentController extends Controller
             ]
         );
     }
-    
+
     public static function paidStatusDetails($args)
     {
         $data = [
@@ -1320,11 +1319,11 @@ class ParentController extends Controller
         ];
         return $ret_res;
     }
-    
-    public function feesDownload($id,$group_id,Request $request)
+
+    public function feesDownload($id, $group_id, Request $request)
     {
 
-        
+
         $data = [
             'student_id' => $id,
             'group_id' => $group_id,
@@ -1338,42 +1337,110 @@ class ParentController extends Controller
         ];
         $date = date('Y-m-d');
         // dd($data);
-        
+
         $student = Helper::PostMethod(config('constants.api.student_details'), $tudentData);
         $parent = Helper::PostMethod(config('constants.api.parent_profile_info'), $parentData);
         $student_fees_history = Helper::PostMethod(config('constants.api.parent_fees_history'), $data);
         $customPaper = array(0, 0, 800.00, 1200.00);
-            // return view('parent.fees.download',
-            //     [
-            //         'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
-            //         'parent' => isset($parent['data']) ? $parent['data'] : [],
-            //         'date' => isset($date) ? $date : "",
-            //         'school_name' => config('constants.school_name'),
-            //         'school_image' => config('constants.school_image'),
-            //         'parent_name' => session()->get('name'),
-            //         'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
-            //     ]);
-                $pdf = PDF::loadView('parent.fees.download',
-                [
-                    'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
-                    'parent' => isset($parent['data']) ? $parent['data'] : [],
-                    'date' => isset($date) ? $date : "",
-                    'school_name' => config('constants.school_name'),
-                    'school_image' => config('constants.school_image'),
-                    'parent_name' => session()->get('name'),
-                    'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
-                ])->setPaper($customPaper);
-                
-                // filename
-                $now = now();
-                $name = strtotime($now);
-                $fileName = __('messages.invoice') . $name . ".pdf";
-                return $pdf->download($fileName);
+        // return view('parent.fees.download',
+        //     [
+        //         'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+        //         'parent' => isset($parent['data']) ? $parent['data'] : [],
+        //         'date' => isset($date) ? $date : "",
+        //         'school_name' => config('constants.school_name'),
+        //         'school_image' => config('constants.school_image'),
+        //         'parent_name' => session()->get('name'),
+        //         'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
+        //     ]);
+        $pdf = PDF::loadView(
+            'parent.fees.download',
+            [
+                'student_fees_history' => isset($student_fees_history['data']) ? $student_fees_history['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'date' => isset($date) ? $date : "",
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'parent_name' => session()->get('name'),
+                'student_name' =>  isset($student['data']) ? $student['data']['student']['name'] : "",
+            ]
+        )->setPaper($customPaper);
 
-            
-            // $customPaper = array(0, 0, 1000.00, 567.00);
-            // $pdf->set_paper($customPaper);
-            // $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.invoice') . $name . ".pdf";
+        return $pdf->download($fileName);
+
+
+        // $customPaper = array(0, 0, 1000.00, 567.00);
+        // $pdf->set_paper($customPaper);
+        // $pdf->loadHTML($output);
         // return view('parent.fees.download');
+    }
+    public function buletin_board()
+    {
+        return view('parent.bulletin_board.index');
+    }
+    public function getBuletinBoardParentList(Request $request)
+    {
+        $data = [
+            'parent_id' => session()->get('ref_user_id'),
+            'role_id' => session()->get('role_id'),
+            'student_id' => session()->get('student_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_parent'), $data);
+        // dd($response);
+
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
+    }
+    public function bulletinStar(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'parentImp' => $request->parentImp,
+            'role_id' => session()->get('role_id'),
+            'user_id' => session()->get('ref_user_id'),
+            'updated_by' => session()->get('ref_user_id'),
+            'created_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.bulletin_star'), $data);
+        return $response;
+    }
+    public function getBuletinBoardImpParentList(Request $request)
+    {
+        $data = [
+            'parent_id' => session()->get('ref_user_id'),
+            'role_id' => session()->get('role_id'),
+            'student_id' => session()->get('student_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_imp_parent'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
     }
 }

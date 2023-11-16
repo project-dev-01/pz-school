@@ -860,6 +860,31 @@ return [
         'job_title_list' => $url.'/job_title/list',
         'employee_type_list' => $url.'/employee_type/list',
         'grade_list_by_departmentId' => $url.'/grade_list_by_department',
+        //buletin board
+        'buletin_board_list' => $url.'/buletin_board/list',
+        'buletin_board_add' => $url.'/buletin_board/add',
+        'buletin_board_usernames'=>$url.'/buletin_board/usernames',
+        'buletin_board_delete' => $url.'/buletin_board/delete',
+        'buletin_board_details' => $url.'/buletin_board/buletin_board-details',
+        'buletin_board_update' => $url.'/buletin_board/update',
+        'get_student_details_buletin_board' => $url.'/get_student_details_buletin_board',
+        'get_parent_details_buletin_board'  => $url.'/get_parent_details_buletin_board',
+
+
+        'get_bulletin_parent' => $url.'/buletin_board/list/parent',
+        'get_bulletin_imp_parent' => $url.'/buletin_board/imp_list/parent',
+        'bulletin_star' => $url.'/bulletin_board/bulletin_star',
+
+        'get_bulletin_teacher' => $url.'/buletin_board/list/teacher',
+        'get_bulletin_imp_teacher' => $url.'/buletin_board/imp_list/teacher',
+        'bulletin_star_teacher' => $url.'/bulletin_board/bulletin_star_teacher',
+
+        'get_bulletin_student' => $url.'/buletin_board/list/student',
+        'get_bulletin_imp_student' => $url.'/buletin_board/imp_list/student',
+        'bulletin_star_student' => $url.'/bulletin_board/bulletin_star_student',
+
+        //retired person
+        'retired_list' => $url.'/retired/list',
         
       ]
 

@@ -48,8 +48,8 @@ class StudentController extends Controller
         // dd($get_homework_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
-        
-        
+
+
         // $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         return view(
             'student.dashboard.index',
@@ -85,7 +85,7 @@ class StudentController extends Controller
     }
     public function settings()
     {
-        
+
         $data = [
             'student_id' => session()->get('ref_user_id')
         ];
@@ -101,7 +101,7 @@ class StudentController extends Controller
 
     public function faqIndex()
     {
-        
+
         $data = [
             'email' => session()->get('email'),
             'name' => session()->get('name'),
@@ -164,7 +164,7 @@ class StudentController extends Controller
     //Filter  Homework
     public function filterHomework(Request $request)
     {
-         $title_lang = __('messages.title');
+        $title_lang = __('messages.title');
         $status_lang = __('messages.status');
         $date_of_homework_lang = __('messages.date_of_homework');
         $date_of_submission_lang = __('messages.date_of_submission');
@@ -209,23 +209,22 @@ class StudentController extends Controller
                         $document = '
                         <div class="col-md-6">
                             <div class="row">
-                                <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span><a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/teacher/homework/'. $work['document'] . '" download>
+                                <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $document_lang . '</span><a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/teacher/homework/' . $work['document'] . '" download>
                                         <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                     </a></p>
                             </div>
                         </div>';
-                    }else{
+                    } else {
                         $document = '<div class="col-md-6">
                         <div class="row">
-                            <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$document_lang.'</span></p>
+                            <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $document_lang . '</span></p>
                         </div>';
-
                     }
                     if ($work['file']) {
                         $file = '<div class="col-md-6">
-                                    <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span>: </div>
+                                    <div class="col-md-6 font-weight-bold">' . $attachment_file . '<span class="text-danger">*</span>: </div>
                                         <div class="col-md-6">
-                                            <a href="' .config('constants.image_url').'/'.config('constants.branch_id').'/student/homework/'.$work['file'] . '" download>
+                                            <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/student/homework/' . $work['file'] . '" download>
                                                 <i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i>
                                             </a>
                                         </div>
@@ -233,12 +232,12 @@ class StudentController extends Controller
                                 </div>';
                     } else {
                         $file = '<div class="col-md-6">
-                                <div class="col-md-6 font-weight-bold">'.$attachment_file.'<span class="text-danger">*</span> : </div>
+                                <div class="col-md-6 font-weight-bold">' . $attachment_file . '<span class="text-danger">*</span> : </div>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <div class="">
                                             <input type="file" id="homework_file" class="custom-file-input homework_file" name="file">
-                                            <label class="custom-file-label" for="document">'.$choose_file_lang.'</label>
+                                            <label class="custom-file-label" for="document">' . $choose_file_lang . '</label>
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
@@ -247,7 +246,7 @@ class StudentController extends Controller
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                                '.$submit_lang.'
+                                ' . $submit_lang . '
                             </button>
                         </div>';
                     }
@@ -259,7 +258,7 @@ class StudentController extends Controller
                                 <p>
                                 <div>
                                     <a class="list-group-item list-group-item-info btn-block btn-lg" data-toggle="collapse" href="#hw-' . $key . '" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top .' '. $homework_status. ' 
+                                        <i class="fas fa-caret-square-down"></i>' . $work['subject_name'] . ' - ' . date('j F Y', strtotime($work['date_of_homework'])) . ' ' . $top . ' ' . $homework_status . ' 
                                     </a>
                                 </div>
                                 </p>
@@ -269,56 +268,56 @@ class StudentController extends Controller
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$title_lang.'</span>' . $work['title'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $title_lang . '</span>' . $work['title'] . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$status_lang.'</span>' . $status . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $status_lang . '</span>' . $status . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_homework_lang.'</span>' . date('F j , Y', strtotime($work['date_of_homework'])) . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $date_of_homework_lang . '</span>' . date('F j , Y', strtotime($work['date_of_homework'])) . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$date_of_submission_lang.'</span>' . date('F j , Y', strtotime($work['date_of_submission'])) . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $date_of_submission_lang . '</span>' . date('F j , Y', strtotime($work['date_of_submission'])) . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$evalution_date_lang.'</span>' . $evaluation_date . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $evalution_date_lang . '</span>' . $evaluation_date . '</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$remarks_lang.'</span>' . $work['description'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $remarks_lang . '</span>' . $work['description'] . '</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">'.$rank_out_of_5_lang.' </span>' . $work['rank'] . '</p>
+                                                    <p class="col-md-12"><span class="font-weight-semibold homework-list">' . $rank_out_of_5_lang . ' </span>' . $work['rank'] . '</p>
                                                 </div>
                                             </div>
-                                            '.$document.'
+                                            ' . $document . '
                                         </div>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-12 font-weight-bold" >'.$submission_process_here_lang.' :- </div>
+                                            <div class="col-md-12 font-weight-bold" >' . $submission_process_here_lang . ' :- </div>
 
                                         </div><br>
                                         <input type="hidden" name="homework_id" value="' . $work['id'] . '">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p class="col-md-12"><span class="font-weight-semibold">'.$note_lang.' <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                                <p class="col-md-12"><span class="font-weight-semibold">' . $note_lang . ' <span class="text-danger">*</span></span><textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="255" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                                 ' . $work['remarks'] . '</textarea></p>
 
                                             </div>
@@ -393,7 +392,7 @@ class StudentController extends Controller
                 }
             } else {
                 $output .= '<tr>
-                                <td colspan="7" class="text-center"> '.$no_data_available_lang.'</td>
+                                <td colspan="7" class="text-center"> ' . $no_data_available_lang . '</td>
                             </tr>';
             }
 
@@ -483,7 +482,7 @@ class StudentController extends Controller
         $user_id = session()->get('role_id');
         $data = [
             'user_id' => $user_id,
-            'id'=>$id
+            'id' => $id
         ];
         $category = Helper::GetMethod(config('constants.api.category'));
         $usernames = Helper::GETMethodWithData(config('constants.api.usernames_autocomplete'), $data);
@@ -598,7 +597,7 @@ class StudentController extends Controller
         $adminid = 2;
         $tags_add_also_currentroll = $rollid_tags . ',' . $current_user . ',' . $adminid;
         $data = [
-            'id'=> $request->id,
+            'id' => $request->id,
             'user_id' => session()->get('user_id'),
             'user_name' => session()->get('name'),
             'topic_title' => $request->inputTopicTitle,
@@ -657,14 +656,14 @@ class StudentController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-            
+
             $data = [
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
@@ -766,61 +765,124 @@ class StudentController extends Controller
         $response = Helper::PostMethod(config('constants.api.event_details'), $data);
         return $response;
     }
-     // change password
-     public function changeNewPassword(Request $request)
-     {
-         //Validate form
-         $validator = \Validator::make($request->all(), [
-             'id' => "required",
-             'old' => "required",
-             'password' => [
-                 'required',
-                 'min:8',
-                 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
-             ],
-             'confirmed' => 'required|same:password|min:8'
-         ]);
- 
-         if (!$validator->passes()) {
-             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-         } else {
-             $data = [
-                 'id' => $request->id,
-                 'old' => $request->old,
-                 'password' => $request->password,
-                 'confirmed' => $request->confirmed
-             ];
-             $response = Helper::PostMethod(config('constants.api.change_password'), $data);
-             return $response;
-         }
-     }
-     // update te profile
-     public function updateProfileInfo(Request $request)
-     {
-         //Validate form
-         $validator = \Validator::make($request->all(), [
-             'id' => "required",
-             'student_id' => "required",
-             'first_name' => "required",
-             'email' => "required",
-             'mobile_no' => "required",
-             'address' => "required",
-         ]);
- 
-         if (!$validator->passes()) {
-             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-         } else {
-             $data = [
-                 'id' => $request->id,
-                 'student_id' => $request->student_id,
-                 'first_name' => $request->first_name,
-                 'last_name' => $request->last_name,
-                 'email' => $request->email,
-                 'mobile_no' => $request->mobile_no,
-                 'address' => $request->address
-             ];
-             $response = Helper::PostMethod(config('constants.api.update_student_profile_info'), $data);
-             return $response;
-         }
-     }
+    // change password
+    public function changeNewPassword(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'old' => "required",
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+            ],
+            'confirmed' => 'required|same:password|min:8'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'old' => $request->old,
+                'password' => $request->password,
+                'confirmed' => $request->confirmed
+            ];
+            $response = Helper::PostMethod(config('constants.api.change_password'), $data);
+            return $response;
+        }
+    }
+    // update te profile
+    public function updateProfileInfo(Request $request)
+    {
+        //Validate form
+        $validator = \Validator::make($request->all(), [
+            'id' => "required",
+            'student_id' => "required",
+            'first_name' => "required",
+            'email' => "required",
+            'mobile_no' => "required",
+            'address' => "required",
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $data = [
+                'id' => $request->id,
+                'student_id' => $request->student_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'mobile_no' => $request->mobile_no,
+                'address' => $request->address
+            ];
+            $response = Helper::PostMethod(config('constants.api.update_student_profile_info'), $data);
+            return $response;
+        }
+    }
+    public function buletin_board()
+    {
+        return view('student.bulletin_board.index');
+    }
+    public function getBuletinBoardStudentList(Request $request)
+    {
+        $data = [
+            'role_id' => session()->get('role_id'),
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_student'), $data);
+        //dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
+    }
+    public function bulletinStar(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'parentImp' => $request->parentImp,
+            'role_id' => session()->get('role_id'),
+            'user_id' =>  session()->get('ref_user_id'),
+            'updated_by' => session()->get('ref_user_id'),
+            'created_by' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.bulletin_star_student'), $data);
+        return $response;
+    }
+    public function getBuletinBoardImpStudentList(Request $request)
+    {
+        $data = [
+            'role_id' => session()->get('role_id'),
+            'student_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.get_bulletin_imp_student'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+            </a>
+                        </div>';
+            })
+            ->rawColumns(['publish', 'actions'])
+            ->make(true);
+    }
 }
