@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.assign_grade_subjects') . '')
+@section('title',' ' . __('messages.assign_grade_subjects') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -38,7 +38,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.assign_grade_subjects') }}<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -46,13 +47,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="filter_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="filter_department_id" name="filter_department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($classDetails as $cla)
-                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -78,7 +87,7 @@
                         <div>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                {{ __('messages.filter') }}
+                                    {{ __('messages.filter') }}
                                 </button>
                             </div>
                         </div>
@@ -89,7 +98,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.assign_grade_subjects_list') }}<h4>
+                        <h4 class="navv">{{ __('messages.assign_grade_subjects_list') }}
+                            <h4>
                     </li>
                 </ul><br>
 
@@ -104,6 +114,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{ __('messages.department_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.subject') }}</th>
@@ -160,12 +171,12 @@
     // lang change name end
     // Get PDF Footer Text
 
-    var header_txt="{{ __('messages.assign_grade_subjects') }}";
+    var header_txt = "{{ __('messages.assign_grade_subjects') }}";
 
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 
     // Get PDF Header & Footer Text End
-    
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var admin_assign_class_subject_storage = localStorage.getItem('admin_assign_class_subject_details');
 </script>
 <script src="{{ asset('js/custom/assign_class_subject.js') }}"></script>

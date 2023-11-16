@@ -54,12 +54,13 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="gender">Department<span class="text-danger">*</span></label>
-                                    <select id="gender" name="gender" class="form-control">
-                                        <option value="">Select Department</option>
-                                        <option value="Primary">Primary</option>
-                                        <option value="Secondary">Secondary</option>
-                                        <option value="Kindergarden">Kindergarden</option>
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -69,10 +70,6 @@
                                     <select class="form-control" name="class_id" id="bulk_class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -267,6 +264,7 @@
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
 
     var admin_add_bulkschedule_storage = localStorage.getItem('admin_add_bulkschedule_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/timetable_bulk.js') }}"></script>
 @endsection

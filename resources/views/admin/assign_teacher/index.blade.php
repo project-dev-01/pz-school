@@ -52,6 +52,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{ __('messages.department_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.classes') }}</th>
                                     <th>{{ __('messages.teacher') }}</th>
@@ -113,7 +114,7 @@
 
     var footer_txt="{{ session()->get('footer_text') }}";
 
-    // Get PDF Header & Footer Text End
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/teacher-allocation.js') }}"></script>
 @endsection

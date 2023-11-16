@@ -859,6 +859,8 @@ return [
         'get_today_schedules_teacher' => $url.'/get_today_schedules_teacher',
         'job_title_list' => $url.'/job_title/list',
         'employee_type_list' => $url.'/employee_type/list',
+        'grade_list_by_departmentId' => $url.'/grade_list_by_department',
+        
       ]
 
 ];

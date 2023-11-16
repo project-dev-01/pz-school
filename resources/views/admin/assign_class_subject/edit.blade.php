@@ -11,14 +11,19 @@
                     @csrf
                     <input type="hidden" id="assign_class_sub_id" name="assign_class_sub_id">
                     <div class="form-group">
+                        <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                        <select id="edit_department_id" name="edit_department_id" class="form-control">
+                            <option value="">{{ __('messages.select_department') }}</option>
+                            @forelse($department as $r)
+                            <option value="{{$r['id']}}">{{$r['name']}}</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="editchangeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="editchangeClassName" name="class_name">
                             <option value="">{{ __('messages.choose_grade') }}</option>
-                            @forelse($classDetails as $class)
-                            <option value="{{$class['id']}}">{{$class['name']}}</option>
-                            @empty
-                            @endforelse
-
                         </select>
                     </div>
                     <div class="form-group">

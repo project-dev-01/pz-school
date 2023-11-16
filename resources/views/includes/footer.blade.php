@@ -163,6 +163,7 @@
     var sl_no_lang = "{{ __('messages.s.no') }}";
     var mark_lang = "{{ __('messages.mark') }}";
     var grade_lang = "{{ __('messages.grade') }}";
+    var select_grade = "{{ __('messages.select_grade') }}";
     var class_lang = "{{ __('messages.class') }}";
     var student_name_lang = "{{ __('messages.student_name') }}";
     var subject_name_lang = "{{ __('messages.subject_name') }}";

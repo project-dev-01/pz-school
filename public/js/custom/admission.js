@@ -8,7 +8,35 @@ $(function () {
     // $('#txt_nric').rules("add", {
     //     required: true
     // });
-
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#addadmission';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="class_id"]').empty();
+        $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="section_id"]').empty();
+        $(Selector).find('select[name="section_id"]').append('<option value="">' + select_class + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
     $('#txt_nric').mask("000000-00-0000", { reverse: true });
     // nric validation end
     $(".number_validation").keypress(function (event) {
@@ -50,6 +78,7 @@ $(function () {
             txt_roll_no: "required",
             admission_date: "required",
             classnames: "required",
+            department_id: "required",
             class_id: "required",
             section_id: "required",
             // categy: "required",
@@ -366,7 +395,7 @@ $(function () {
                 var class_id = data.academic_grade;
                 getSectionByClass(class_id);
 
-                if(data.father_first_name){
+                if (data.father_first_name) {
                     $("#father_form").show("slow");
                     $("#father_info").show();
                     $("#father_photo").show();
@@ -378,7 +407,7 @@ $(function () {
                     $("#father_occupation").val(data.father_occupation);
                     $("#father_email").val(data.father_email);
                 }
-                if(data.father_first_name){
+                if (data.father_first_name) {
                     $("#mother_form").show("slow");
                     $("#mother_info").show();
                     $("#mother_photo").show();
@@ -391,7 +420,7 @@ $(function () {
                     $("#mother_email").val(data.mother_email);
                 }
 
-                if(data.guardian_relation){
+                if (data.guardian_relation) {
                     $("#guardian_form").show("slow");
                     $("#guardian_info").show();
                     $("#guardian_photo").show();
@@ -408,7 +437,7 @@ $(function () {
         }, 'json');
     }
 
-    
+
     $("#application_id").on('change', function (e) {
         e.preventDefault();
 
@@ -417,7 +446,7 @@ $(function () {
         $("#mother_form").hide("slow");
         $("#guardian_form").hide("slow");
 
-        var id =  $(this).val();
+        var id = $(this).val();
         if (id) {
             var id = $(this).val();
             student(id);

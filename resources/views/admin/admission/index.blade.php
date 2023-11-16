@@ -305,7 +305,7 @@
                 <div class="col-md-6 pt-2">
                     <div class="form-group">
                         <input type="hidden" name="student_id" id="student_id">
-                        <select class="form-control select2" data-toggle="select2" id="application_id" name="application_id"  data-placeholder="{{ __('messages.application_list') }}">
+                        <select class="form-control select2" data-toggle="select2" id="application_id" name="application_id" data-placeholder="{{ __('messages.application_list') }}">
                             <option value="">{{ __('messages.application_list') }}</option>
                             @forelse($application as $app)
                             <option value="{{$app['id']}}">{{$app['first_name']}} {{$app['last_name']}}</option>
@@ -532,18 +532,16 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="text">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -551,10 +549,6 @@
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -568,6 +562,19 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="text">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
@@ -1429,6 +1436,7 @@
     var indexAdmission = "{{ route('admin.student.index') }}";
     var select_vehicle_number = "{{ __('messages.select_vehicle_number') }}";
     var select_room_name = "{{ __('messages.select_room_name') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

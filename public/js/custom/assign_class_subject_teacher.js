@@ -1,5 +1,45 @@
 $(function () {
 
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '.addAssignClassSubjectModal';
+        var department_id = $(this).val();
+        var classID = "";
+        if (department_id) {
+            classAllocation(department_id, Selector, classID);
+        }
+    });
+    $("#edit_department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '.editAssClassSubjectModel';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="class_name"]').empty();
+        $(Selector).find('select[name="class_name"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="section_name"]').empty();
+        $(Selector).find('select[name="section_name"]').append('<option value="">' + select_class + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_name"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_name"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         var IDnames = "#addAssignClassSubject";
@@ -15,9 +55,9 @@ $(function () {
     function getSections(class_id, IDnames, section_id) {
 
         $(IDnames).find("#assignSubjects").empty();
-        $(IDnames).find("#assignSubjects").append('<option value="">'+select_subject+'</option>');
+        $(IDnames).find("#assignSubjects").append('<option value="">' + select_subject + '</option>');
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $(IDnames).find("#sectionID").append('<option value="">' + select_class + '</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -47,7 +87,7 @@ $(function () {
     });
     function getSectionsBySub(class_id, IDnames, section_id, subject_id) {
         $(IDnames).find("#assignSubjects").empty();
-        $(IDnames).find("#assignSubjects").append('<option value="">'+select_subject+'</option>');
+        $(IDnames).find("#assignSubjects").append('<option value="">' + select_subject + '</option>');
 
         $.post(getAssignClassSubjUrl, {
             token: token,
@@ -81,6 +121,7 @@ $(function () {
         e.preventDefault();
         var classValid = $("#addAssignClassSubject").valid();
         if (classValid === true) {
+            var department_id = $("#department_id").val();
             var changeClassName = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
             var assignSubjects = $("#assignSubjects").val();
@@ -88,7 +129,7 @@ $(function () {
             var subjectType = $("#subjectType").val();
 
             var formData = new FormData();
-            formData.append('token', token);
+            formData.append('department_id', department_id);
             formData.append('branch_id', branchID);
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
@@ -137,10 +178,16 @@ $(function () {
             var class_id = data.data.class_id;
             var section_id = data.data.section_id;
             var subject_id = data.data.subject_id;
-
+            if (data.data.department_id != "") {
+                var department_id = data.data.department_id;
+                var Selector = '.editAssClassSubjectModel';
+                var classID = data.data.class_id;
+                classAllocation(department_id, Selector, classID);
+            }
             var IDnames = "#updateAssignClassSubject";
             getSections(class_id, IDnames, section_id);
             getSectionsBySub(class_id, IDnames, section_id, subject_id);
+            $('.editAssClassSubjectModel').find('select[name="edit_department_id"]').val(data.data.department_id);
             $('.editAssClassSubjectModel').find('input[name="assign_class_sub_id"]').val(data.data.id);
             $('.editAssClassSubjectModel').find('select[name="class_name"]').val(data.data.class_id);
             $('.editAssClassSubjectModel').find('select[name="subject_id"]').val(data.data.subject_id);
@@ -167,6 +214,7 @@ $(function () {
         if (sectionValid === true) {
 
             var assign_class_sub_id = $("#updateAssignClassSubject").find("input[name=assign_class_sub_id]").val();
+            var edit_department_id = $("#updateAssignClassSubject").find("select[name=edit_department_id]").val();
             var changeClassName = $("#updateAssignClassSubject").find("select[name=class_name]").val();
             var sectionID = $("#updateAssignClassSubject").find("select[name=section_name]").val();
             var assignSubjects = $("#updateAssignClassSubject").find("select[name=subject_id]").val();
@@ -174,7 +222,7 @@ $(function () {
             var type = $("#updateAssignClassSubject").find("select[name=type]").val();
 
             var formData = new FormData();
-            formData.append('token', token);
+            formData.append('department_id', edit_department_id);
             formData.append('branch_id', branchID);
             formData.append('id', assign_class_sub_id);
             formData.append('class_id', changeClassName);
@@ -183,7 +231,6 @@ $(function () {
             formData.append('teacher_id', classTeacher);
             formData.append('type', type);
             formData.append('academic_session_id', academic_session_id);
-
             $.ajax({
                 url: classAssignTeacherUpdateUrl,
                 method: "post",
@@ -251,13 +298,13 @@ $(function () {
         dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            
+
         "language": {
-            
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,
@@ -287,52 +334,52 @@ $(function () {
                     columns: 'th:not(:last-child)'
                 },
 
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
-                            }
-                        ],
-                        margin: [50, 0,0,0]
-                    }
-                });
-                
+                customize: function (doc) {
+                    doc.pageMargins = [50, 50, 50, 50];
+                    doc.defaultStyle.fontSize = 10;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.styles.title.fontSize = 14;
+                    // Remove spaces around page title
+                    doc.content[0].text = doc.content[0].text.trim();
+                    /*// Create a Header
+                    doc['header']=(function(page, pages) {
+                        return {
+                            columns: [
+                                
+                                {
+                                    // This is the right column
+                                    bold: true,
+                                    fontSize: 20,
+                                    color: 'Blue',
+                                    fillColor: '#fff',
+                                    alignment: 'center',
+                                    text: header_txt
+                                }
+                            ],
+                            margin:  [50, 15,0,0]
+                        }
+                    });*/
+                    // Create a footer
+
+                    doc['footer'] = (function (page, pages) {
+                        return {
+                            columns: [
+                                { alignment: 'left', text: [footer_txt], width: 400 },
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                    width: 100
+
+                                }
+                            ],
+                            margin: [50, 0, 0, 0]
+                        }
+                    });
+
+                }
             }
-        }
         ],
         ajax: classAssignTeacherSubList,
         "pageLength": 10,
@@ -345,6 +392,10 @@ $(function () {
                 searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
+            },
+            {
+                data: 'department_name',
+                name: 'department_name'
             },
             {
                 data: 'class_name',
@@ -375,7 +426,7 @@ $(function () {
         ],
         columnDefs: [
             {
-                "targets": 5,
+                "targets": 6,
                 "className": "text-center",
                 "render": function (data, type, row, meta) {
                     var passTag = "";

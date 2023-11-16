@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.schedule_list') . '')
+@section('title','Schedule List')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -51,13 +51,8 @@
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
                 </div>
-                <h4 class="page-title"> {{ __('messages.schedule_list') }}</h4>
+                <h4 class="page-title">{{ __('messages.schedule_list') }}</h4>
             </div>
         </div>
     </div>
@@ -69,7 +64,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            {{ __('messages.select_ground') }}
+                        {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -78,11 +73,11 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="index_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
-                                    <select id="index_department_id" name="index_department_id" class="form-control">
-                                        <option value="">{{ __('messages.select_department') }}</option>
-                                        @forelse($department as $r)
-                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                    <label for="class_id"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <select id="class_id" class="form-control" name="class_id">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse($class as $cla)
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -90,15 +85,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">{{ __('messages.select_grade') }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <label for="section_id"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
@@ -107,7 +94,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semester_id">{{ __('messages.semester') }}</label>
+                                    <label for="semester_id"> {{ __('messages.semester') }}</label>
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
@@ -119,7 +106,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="session_id">{{ __('messages.session') }}</label>
+                                    <label for="session_id"> {{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
@@ -132,11 +119,8 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
+                            {{ __('messages.filter') }}
                             </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                                Cancel
-                            </button>-->
                         </div>
                     </form>
                 </div> <!-- end card-body -->
@@ -156,7 +140,7 @@
                             </a>
                         </div>
                         <h4 class="nav-link">
-                            {{ __('messages.schedule_list') }}
+                        {{ __('messages.schedule_list') }}
                         </h4>
                     </li>
                 </ul><br>
@@ -169,24 +153,12 @@
                                     </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->
-                        </div>
-                        <div class="col-md-12">
-                            <div class="clearfix mt-4">
-                                <form method="post" action="{{ route('admin.timetable.pdf') }}">
-                                    @csrf
-                                    <input type="hidden" name="class_id" id="downClassID">
-                                    <input type="hidden" name="section_id" id="downSectionID">
-                                    <input type="hidden" name="semester_id" id="downSemesterID">
-                                    <input type="hidden" name="session_id" id="downSessionID">
-                                    <input type="hidden" name="academic_year" id="downAcademicYear">
-                                    <div class="clearfix float-right">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF" style="margin-right:5px;">{{ __('messages.pdf') }}</button>
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;">{{ __('messages.download') }}</button>
-
-                                    </div>
-                                </form>
+                            <div class="col-md-12">
+                                <div class="clearfix mt-4">
+                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel" style="float:right;"> {{ __('messages.download') }}</button>
+                                </div>
                             </div>
-                        </div><!-- end col-->
+                        </div> <!-- end col-->
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -202,11 +174,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myeditTimetableModalLabel">{{ __('messages.schedule_edit') }}</h4>
+                <h4 class="modal-title" id="myeditTimetableModalLabel"> {{ __('messages.schedule_edit') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form id="edit-timetable-form" method="post" action="{{ route('admin.timetable.edit') }}" autocomplete="off">
+                <form id="edit-timetable-form" method="post" action="{{ route('admin.timetable.edit.copy') }}" autocomplete="off">
                     @csrf
                     <input type="hidden" name="class_id" id="edit_class_id">
                     <input type="hidden" name="section_id" id="edit_section_id">
@@ -226,8 +198,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.done') }}</button>
-                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light"> {{ __('messages.done') }}</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal"> {{ __('messages.close') }}</button>
                     </div>
 
                 </form>
@@ -254,11 +226,8 @@
 <script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var downloadFileName = "{{ __('messages.timetable') }}";
-
+    
     var admin_schedule_list_storage = localStorage.getItem('admin_schedule_list_details');
-    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
-
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>
 

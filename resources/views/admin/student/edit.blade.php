@@ -472,8 +472,8 @@
                                                 <label for="gender">{{ __('messages.gender') }}</label>
                                                 <select id="gender" name="gender" class="form-control">
                                                     <option value="">{{ __('messages.select_gender') }}</option>
-                                                    <option value="Male" {{ isset($student['gender']) ?  $student['gender'] == "Male" ? 'Selected' : '' : "" }} >{{ __('messages.male') }}</option>
-                                                    <option value="Female" {{ isset($student['gender']) ?  $student['gender'] == "Female" ? 'Selected' : '' : "" }} >{{ __('messages.female') }}</option>
+                                                    <option value="Male" {{ isset($student['gender']) ?  $student['gender'] == "Male" ? 'Selected' : '' : "" }}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{ isset($student['gender']) ?  $student['gender'] == "Female" ? 'Selected' : '' : "" }}>{{ __('messages.female') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -632,6 +632,46 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                                <select id="department_id" name="department_id" class="form-control">
+                                                    <option value="">{{ __('messages.select_department') }}</option>
+                                                    @forelse($department as $r)
+                                                    <option value="{{$r['id']}}" {{ isset($student['department_id']) ?  $student['department_id'] == $r['id'] ? 'Selected' : '' : "" }}>{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                                <select id="class_id" class="form-control" name="class_id">
+                                                    <option value="">{{ __('messages.select_grade') }}</option>
+                                                    @forelse($grade_list_by_department as $rd)
+                                                    <option value="{{$rd['id']}}" {{ isset($student['class_id']) ?  $student['class_id'] == $rd['id'] ? 'Selected' : '' : "" }}>{{$rd['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                                <select id="section_id" class="form-control" name="section_id">
+                                                    <option value="">{{ __('messages.select_class') }}</option>
+                                                    @forelse($section as $sec)
+                                                    <option value="{{$sec['section_id']}}" {{ isset($student['section_id']) ?  $student['section_id'] == $sec['section_id'] ? 'Selected' : '' : "" }}>{{$sec['section_name']}}</option>
+
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <div class="form-group mb-3">
                                                 <label for="">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
@@ -646,42 +686,12 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                                <select id="class_id" class="form-control" name="class_id">
-                                                    <option value="">{{ __('messages.select_grade') }}</option>
-                                                    @forelse($class as $cla)
-                                                    <option value="{{$cla['id']}}" {{ isset($student['class_id']) ?  $student['class_id'] == $cla['id'] ? 'Selected' : '' : "" }}>{{$cla['name']}}</option>
-                                                    
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-                                                <select id="section_id" class="form-control" name="section_id">
-                                                    <option value="">{{ __('messages.select_class') }}</option>
-                                                    @forelse($section as $sec)
-                                                    <option value="{{$sec['section_id']}}" {{ isset($student['section_id']) ?  $student['section_id'] == $sec['section_id'] ? 'Selected' : '' : "" }}>{{$sec['section_name']}}</option>
-                                                    
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
                                                 <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                                 <select id="session_id" class="form-control" name="session_id">
                                                     <option value="">{{ __('messages.select_session') }}</option>
                                                     @forelse($session as $ses)
                                                     <option value="{{$ses['id']}}" {{ isset($student['session_id']) ?  $student['session_id'] == $ses['id'] ? 'Selected' : '' : "" }}>{{$ses['name']}}</option>
-                                                    
+
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -694,7 +704,7 @@
                                                     <option value="0">{{ __('messages.select_semester') }}</option>
                                                     @forelse($semester as $sem)
                                                     <option value="{{$sem['id']}}" {{ isset($student['semester_id']) ? isset($student['semester_id']) == $sem['id'] ? 'Selected' : '' : "" }}>{{$sem['name']}}</option>
-                                                    
+
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1333,7 +1343,7 @@
                                                     <option value="">{{ __('messages.select_transport') }}</option>
                                                     @forelse($transport as $trans)
                                                     <option value="{{$trans['id']}}" {{ isset($student['route_id']) ?  $student['route_id'] == $trans['id'] ? "Selected" : "" : "" }}>{{$trans['name']}}</option>
-                                                    
+
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1347,7 +1357,7 @@
 
                                                     @forelse($vehicle as $veh)
                                                     <option value="{{$veh['vehicle_id']}}" {{ isset($student['vehicle_id']) ?  $student['vehicle_id'] == $veh['vehicle_id'] ? "Selected" : "" : "" }}>{{$veh['vehicle_no']}}</option>
-                                                    
+
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1371,7 +1381,7 @@
                                                     <option value="">{{ __('messages.select_hostel_name') }}</option>
                                                     @forelse($hostel as $hos)
                                                     <option value="{{$hos['id']}}" {{ isset($student['hostel_id']) ?  $student['hostel_id'] == $hos['id'] ? "Selected" : "" : "" }}>{{$hos['name']}}</option>
-                                                    
+
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1740,6 +1750,7 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexStudent = "{{ route('admin.student.index') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

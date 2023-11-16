@@ -424,7 +424,10 @@ class AdminController extends Controller
 
     public function classes()
     {
-        return view('admin.classes.index');
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view('admin.classes.index', [
+            'department' => isset($department['data']) ? $department['data'] : []
+        ]);
     }
     // update profile picture
     public function updatePicture(Request $request)
@@ -626,13 +629,15 @@ class AdminController extends Controller
     // section allocations
     public function showSectionAllocation()
     {
-        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        // $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getSections = Helper::GetMethod(config('constants.api.section_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.section_allocation.allocation',
             [
-                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                // 'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
                 'sectionDetails' => isset($getSections['data']) ? $getSections['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : []
             ]
         );
     }
@@ -659,12 +664,14 @@ class AdminController extends Controller
     // get TeacherAllocation
     public function showTeacherAllocation()
     {
-        $getClasses = Helper::GetMethod(config('constants.api.class_list'));
+        // $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.assign_teacher.index',
             [
-                'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                // 'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'getAllTeacherList' => isset($getAllTeacherList['data']) ? $getAllTeacherList['data'] : []
             ]
         );
@@ -722,9 +729,11 @@ class AdminController extends Controller
     {
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getSubjectList = Helper::GetMethod(config('constants.api.subject_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.assign_class_subject.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
                 'getSubjectList' => isset($getSubjectList['data']) ? $getSubjectList['data'] : []
             ]
@@ -755,9 +764,11 @@ class AdminController extends Controller
     // get showClassAssignSubTeacherIndex
     public function showClassAssignSubTeacherIndex()
     {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $getAllTeacherList = Helper::GetMethod(config('constants.api.get_all_teacher_list'));
         return view('admin.assign_class_subject_teacher.index', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
             'getAllTeacherList' => isset($getAllTeacherList['data']) ? $getAllTeacherList['data'] : [],
         ]);
@@ -1054,6 +1065,7 @@ class AdminController extends Controller
             'admission' => 1
         ];
         $application = Helper::GETMethodWithData(config('constants.api.application_list'), $data);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         // dd($application);
         return view(
             'admin.admission.index',
@@ -1068,7 +1080,8 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'application' => isset($application['data']) ? $application['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : []
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : []
             ]
         );
         // return view('admin.admission.index');
@@ -1575,7 +1588,8 @@ class AdminController extends Controller
         $res = [
             'id' => $id,
         ];
-        $department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        // $department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         $staff = Helper::PostMethod(config('constants.api.employee_details'), $res);
         $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
@@ -1619,7 +1633,8 @@ class AdminController extends Controller
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        // $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        $emp_department = Helper::GetMethod(config('constants.api.department_list'));
         $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
         $staff_categories = Helper::GetMethod(config('constants.api.staff_categories'));
@@ -2048,10 +2063,12 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $hall_list = Helper::GetMethod(config('constants.api.exam_hall_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         // dd($semester);
         return view(
             'admin.timetable.add',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -2069,10 +2086,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        // dd($semester);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.promotion.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -2123,6 +2141,7 @@ class AdminController extends Controller
     // create bulk Timetable
     public function createBulkTimetable(Request $request)
     {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -2132,6 +2151,7 @@ class AdminController extends Controller
         return view(
             'admin.timetable.bulk_add',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -2162,6 +2182,7 @@ class AdminController extends Controller
     // index Timetable
     public function timetable(Request $request)
     {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -2169,6 +2190,7 @@ class AdminController extends Controller
         return view(
             'admin.timetable.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -2184,9 +2206,11 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.timetable_copy.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -2403,6 +2427,7 @@ class AdminController extends Controller
     }
     public function studentIndex()
     {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -2411,6 +2436,7 @@ class AdminController extends Controller
         return view(
             'admin.student.student',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -3910,6 +3936,7 @@ class AdminController extends Controller
             'school_name' => $request->txt_prev_schname,
             'qualification' => $request->txt_prev_qualify,
             'remarks' => $request->txtarea_prev_remarks,
+            'department_id' => $request->department_id,
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'session_id' => $request->session_id,
@@ -4200,15 +4227,21 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $data = [
+            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+        ];
+        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 
         $prev = json_decode($student['data']['student']['previous_details']);
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        // dd($student);
         return view(
             'admin.student.edit',
             [
+                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'parent' => isset($parent['data']) ? $parent['data'] : [],
                 'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
@@ -4291,6 +4324,7 @@ class AdminController extends Controller
             'school_name' => $request->txt_prev_schname,
             'qualification' => $request->txt_prev_qualify,
             'remarks' => $request->txtarea_prev_remarks,
+            'department_id' => $request->department_id,
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'session_id' => $request->session_id,
@@ -7538,10 +7572,11 @@ class AdminController extends Controller
 
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($student);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.application.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'grade' => isset($getclass['data']) ? $getclass['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]

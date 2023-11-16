@@ -1,5 +1,47 @@
 $(function () {
 
+    // change department filter
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '.addAssignTeachernModal';
+        var department_id = $(this).val();
+        var classID = "";
+        if (department_id) {
+            classAllocation(department_id, Selector, classID);
+        }
+    });
+    $("#edit_department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '.editAssignTeacherModal';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+
+    function classAllocation(department_id, Selector, classID) {
+
+        $(Selector).find('select[name="class_name"]').empty();
+        $(Selector).find('select[name="class_name"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="section_name"]').empty();
+        $(Selector).find('select[name="section_name"]').append('<option value="">' + select_class + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_name"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_name"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         var IDnames = "#addAssignTeacherForm";
@@ -14,7 +56,7 @@ $(function () {
     });
     function getSections(class_id, IDnames, section_id) {
         $(IDnames).find("#sectionID").empty();
-        $(IDnames).find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $(IDnames).find("#sectionID").append('<option value="">' + select_class + '</option>');
 
         $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -45,9 +87,9 @@ $(function () {
             var sectionID = $("#sectionID").val();
             var assignClassTeacher = $("#assignClassTeacher").val();
             var subjectType = $("#subjectType").val();
-
+            var department_id = $("#department_id").val();
             var formData = new FormData();
-            formData.append('token', token);
+            formData.append('department_id', department_id);
             formData.append('branch_id', branchID);
             formData.append('class_id', changeClassName);
             formData.append('section_id', sectionID);
@@ -92,7 +134,14 @@ $(function () {
             var class_id = data.data.class_id;
             var section_id = data.data.section_id;
             var IDnames = "#editAssignTeacherForm";
+            if (data.data.department_id != "") {
+                var department_id = data.data.department_id;
+                var Selector = '.editAssignTeacherModal';
+                var classID = data.data.class_id;
+                classAllocation(department_id, Selector, classID);
+            }
             getSections(class_id, IDnames, section_id);
+            $('.editAssignTeacherModal').find('select[name="edit_department_id"]').val(data.data.department_id);
             $('.editAssignTeacherModal').find('input[name="assign_teacher_id"]').val(data.data.id);
             $('.editAssignTeacherModal').find('select[name="class_name"]').val(data.data.class_id);
             $('.editAssignTeacherModal').find('select[name="class_teacher"]').val(data.data.teacher_id);
@@ -201,11 +250,11 @@ $(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
         "language": {
-            
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,
@@ -235,52 +284,52 @@ $(function () {
                     columns: 'th:not(:last-child)'
                 },
 
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
-                            }
-                        ],
-                        margin: [50, 0,0,0]
-                    }
-                });
-                
+                customize: function (doc) {
+                    doc.pageMargins = [50, 50, 50, 50];
+                    doc.defaultStyle.fontSize = 10;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.styles.title.fontSize = 14;
+                    // Remove spaces around page title
+                    doc.content[0].text = doc.content[0].text.trim();
+                    /*// Create a Header
+                    doc['header']=(function(page, pages) {
+                        return {
+                            columns: [
+                                
+                                {
+                                    // This is the right column
+                                    bold: true,
+                                    fontSize: 20,
+                                    color: 'Blue',
+                                    fillColor: '#fff',
+                                    alignment: 'center',
+                                    text: header_txt
+                                }
+                            ],
+                            margin:  [50, 15,0,0]
+                        }
+                    });*/
+                    // Create a footer
+
+                    doc['footer'] = (function (page, pages) {
+                        return {
+                            columns: [
+                                { alignment: 'left', text: [footer_txt], width: 400 },
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                    width: 100
+
+                                }
+                            ],
+                            margin: [50, 0, 0, 0]
+                        }
+                    });
+
+                }
             }
-        }
         ],
         ajax: assignTeacherList,
         "pageLength": 10,
@@ -293,6 +342,10 @@ $(function () {
                 searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
+            },
+            {
+                data: 'department_name',
+                name: 'department_name'
             },
             {
                 data: 'class_name',
@@ -316,10 +369,11 @@ $(function () {
                 orderable: false,
                 searchable: false
             },
-        ], columnDefs: [
+        ]
+        , columnDefs: [
 
             {
-                "targets": 4,
+                "targets": 5,
                 "className": "text-center",
                 "render": function (data, type, row, meta) {
                     var passTag = "";

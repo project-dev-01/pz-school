@@ -34,7 +34,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_promotion') }}<h4>
+                        <h4 class="navv">{{ __('messages.student_promotion') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -54,13 +55,21 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($classes as $class)
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -99,7 +108,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -113,7 +122,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.the_next_session_was_transferred') }}<h4>
+                        <h4 class="navv">{{ __('messages.the_next_session_was_transferred') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -134,13 +144,21 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="promote_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="promote_department_id" name="promote_department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="promoteClassID">{{ __('messages.promote_to_standard') }}<span class="text-danger">*</span></label>
                                     <select id="promoteClassID" class="form-control" name="promote_class_id">
                                         <option value="">{{ __('messages.select_standard') }}</option>
-                                        @forelse ($classes as $class)
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -188,7 +206,7 @@
                             <br>
                             <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.promotion') }}
+                                    {{ __('messages.promotion') }}
                                 </button>
                             </div>
                         </div> <!-- end table-responsive-->
@@ -229,8 +247,9 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
-    
+
     var admin_promotion_storage = localStorage.getItem('admin_promotion_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/promotion.js') }}"></script>
 @endsection

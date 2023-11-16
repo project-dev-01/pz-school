@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.grade') . '')
+@section('title',' ' . __('messages.grade') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -39,7 +39,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.grade') }}<h4>
+                        <h4 class="navv">{{ __('messages.grade') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -53,18 +54,13 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{ __('messages.department_name') }}</th>
                                     <th>{{ __('messages.grade_name') }}</th>
                                     <th>{{ __('messages.grade_numeric') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                    <td>#</td>
-                                    <td>{{ __('messages.grade_name') }}</td>
-                                    <td>{{ __('messages.grade_numeric') }}</td>
-                                    <td>{{ __('messages.action') }}</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -112,12 +108,12 @@
     // lang change name end
     // Get PDF Footer Text
 
-    var header_txt="{{ __('messages.grade') }}";
-    
+    var header_txt = "{{ __('messages.grade') }}";
 
-    var footer_txt="{{ session()->get('footer_text') }}";
 
-// Get PDF Header & Footer Text End
+    var footer_txt = "{{ session()->get('footer_text') }}";
+
+    // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('js/custom/classes.js') }}"></script>
 @endsection

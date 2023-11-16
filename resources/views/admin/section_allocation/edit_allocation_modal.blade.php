@@ -11,13 +11,19 @@
                     @csrf
                     <input type="hidden" id="sectionAlloID" name="said">
                     <div class="form-group">
-                        <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                        <select class="form-control" id="editClassID" name="class_id">
-                            <option value="">{{ __('messages.choose_grade') }}</option>
-                            @forelse($classDetails as $class)
-                            <option value="{{$class['id']}}">{{$class['name']}}</option>
+                        <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                        <select id="edit_department_id" name="edit_department_id" class="form-control">
+                            <option value="">{{ __('messages.select_department') }}</option>
+                            @forelse($department as $r)
+                            <option value="{{$r['id']}}">{{$r['name']}}</option>
                             @empty
                             @endforelse
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                        <select class="form-control" id="classID" name="class_id">
+                            <option value="">{{ __('messages.choose_grade') }}</option>
                         </select>
                     </div>
                     <div class="form-group">

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Schedule List')
+@section('title',' ' . __('messages.schedule_list') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -64,7 +64,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                            {{ __('messages.select_ground') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -73,13 +73,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="index_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="index_department_id" name="index_department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="class_id"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -119,7 +127,7 @@
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                         </div>
                     </form>
@@ -140,7 +148,7 @@
                             </a>
                         </div>
                         <h4 class="nav-link">
-                        {{ __('messages.schedule_list') }}
+                            {{ __('messages.schedule_list') }}
                         </h4>
                     </li>
                 </ul><br>
@@ -226,7 +234,7 @@
 <script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
-    
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var admin_schedule_list_storage = localStorage.getItem('admin_schedule_list_details');
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>

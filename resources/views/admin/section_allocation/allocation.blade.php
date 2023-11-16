@@ -52,6 +52,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{ __('messages.department_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.capacity') }}</th>
@@ -107,7 +108,8 @@
       // Get PDF Footer Text
     var header_txt="{{ __('messages.class_allocation') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
-    // Get PDF Header & Footer Text End
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+
 </script>
 <script src="{{ asset('js/custom/section_allocation.js') }}"></script>
 @endsection

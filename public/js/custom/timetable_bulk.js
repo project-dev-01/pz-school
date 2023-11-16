@@ -10,6 +10,36 @@ $(function () {
     //         width: '100%'
     //     });
     // }
+    // change department filter
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#addFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        if (department_id) {
+            classAllocation(department_id, Selector, classID);
+        }
+    });
+
+    function classAllocation(department_id, Selector, classID) {
+
+        $(Selector).find("#bulk_class_id").empty();
+        $(Selector).find("#bulk_class_id").append('<option value="">' + select_grade + '</option>');
+        $(Selector).find("#bulk_class_id").append('<option value="All">' + all_lang + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find("#bulk_class_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                    }
+                }, 'json');
+        }
+    }
     // $('.select2-multiple').select2();
     $('.select2-multiple-plus').select2();
     // add timetable
@@ -43,7 +73,7 @@ $(function () {
         var class_id = $(this).val();
 
         $("#section_id").empty();
-        $("#section_id").append('<option value="">'+select_class+'</option>');
+        $("#section_id").append('<option value="">' + select_class + '</option>');
         $.post(sectionByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -55,6 +85,7 @@ $(function () {
 
     $("#addFilter").validate({
         rules: {
+            department_id: "required",
             class_id: "required",
             section_id: "required",
             day: "required",
@@ -69,9 +100,9 @@ $(function () {
 
             $("#timetable").hide("slow");
             $(".teacher").empty();
-            $(".teacher").append('<option value="">'+select_teacher+'</option>');
+            $(".teacher").append('<option value="">' + select_teacher + '</option>');
             $(".subject").empty();
-            $(".subject").append('<option value="">'+select_subject+'</option>');
+            $(".subject").append('<option value="">' + select_subject + '</option>');
 
             // var table = document.getElementById("timetable_table");
             // var length = table.tBodies[0].rows.length
@@ -80,12 +111,14 @@ $(function () {
             // {
             $("#timetable_body").empty();
             // }
+            var department_id = $("#department_id").val();
             var classID = $("#bulk_class_id").val();
             var semesterID = $("#semester_id").val();
             var sessionID = $("#session_id").val();
             var Day = $("#day").val();
             var classObj = {
-                class_id: classID,              
+                department_id: department_id,
+                class_id: classID,
                 semester_id: semesterID,
                 session_id: sessionID,
                 day: Day,
@@ -108,11 +141,11 @@ $(function () {
                         $("#form_day").val(Day);
                         $("#timetable").show("slow");
                         var teacher = data.data.teacher;
-                        console.log('teacher',teacher)
+                        console.log('teacher', teacher)
                         var exam_hall = data.data.exam_hall;
 
                         if (data.data.timetable == "") {
-                            callout( teacher, exam_hall);
+                            callout(teacher, exam_hall);
                         } else {
                             var cd = data.data.length;
                             count = cd;
@@ -131,6 +164,7 @@ $(function () {
 
         var addschedule = new Object();
 
+        addschedule.department_id = classObj.department_id;
         addschedule.class_id = classObj.class_id;
         addschedule.semester_id = classObj.semester_id;
         addschedule.session_id = classObj.session_id;
@@ -146,7 +180,7 @@ $(function () {
             localStorage.removeItem("admin_add_bulkschedule_details");
             localStorage.setItem('admin_add_bulkschedule_details', JSON.stringify(addscheduleArr));
         }
-        
+
         return true;
     }
     $("#indexFilter").validate({
@@ -240,7 +274,7 @@ $(function () {
     $(document).on('click', "#addMore", function () {
 
         var class_id = $("#form_class_id").val();
-        $.post(subjectByClass, { class_id: class_id}, function (res) {
+        $.post(subjectByClass, { class_id: class_id }, function (res) {
             if (res.code == 200) {
                 var teacher = res.data.teacher;
                 var exam_hall = res.data.exam_hall;
@@ -272,7 +306,7 @@ $(function () {
     });
 
 
-    function callout( teacher, exam_hall) {
+    function callout(teacher, exam_hall) {
         var row = "";
         row += '<tr class="iadd">';
         row += '<td ><div class="checkbox-replace"> ';
@@ -283,8 +317,8 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group main">';
         row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
-        row += '<option value="">'+select_teacher+'</option>';
-        row += '<option value="0">'+all_lang+'</option>';
+        row += '<option value="">' + select_teacher + '</option>';
+        row += '<option value="0">' + all_lang + '</option>';
         $.each(teacher, function (key, val) {
             row += '<option value="' + val.id + '">' + val.name + '</option>';
         });
@@ -298,7 +332,7 @@ $(function () {
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group">';
         row += '<select  class="form-control class_room"  name="timetable[' + count + '][class_room]" class="form-control">';
-        row += '<option value="">'+select_hall+'</option>';
+        row += '<option value="">' + select_hall + '</option>';
         $.each(exam_hall, function (key, val) {
             row += '<option value="' + val.id + '">' + val.hall_no + '</option>';
         });
@@ -322,10 +356,11 @@ $(function () {
             if (admin_add_bulkschedule_storage) {
                 var adminaddschedulestorage = JSON.parse(admin_add_bulkschedule_storage);
                 if (adminaddschedulestorage.length == 1) {
-                    var class_id, section_id,day,semester_id,session_id, userBranchID, userRoleID, userID;
+                    var department_id, class_id, section_id, day, semester_id, session_id, userBranchID, userRoleID, userID;
                     adminaddschedulestorage.forEach(function (user) {
+                        department_id = user.department_id;
                         class_id = user.class_id;
-                        section_id = user.section_id; 
+                        section_id = user.section_id;
                         day = user.day;
                         semester_id = user.semester_id;
                         session_id = user.session_id;
@@ -334,15 +369,33 @@ $(function () {
                         userID = user.user_id;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        
-                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected","selected");
-                        $('select[name^="day"] option[value=' + day + ']').attr("selected","selected");
-                        $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected","selected");
-                        $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected","selected");
-                        
+                        var Selector = '#addFilter';
+                        $(Selector).find('select[name="department_id"]').val(department_id);
+                        if (department_id) {
+                            $(Selector).find('select[name="class_id"]').empty();
+                            $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+                            $(Selector).find('select[name="class_id"]').append('<option value="All">' + all_lang + '</option>');
+                            $.post(getGradeByDepartmentUrl, {
+                                branch_id: branchID,
+                                department_id: department_id
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    if (class_id != '') {
+                                        $(Selector).find('select[name="class_id"]').val(class_id);
+                                    }
+                                }
+                            }, 'json');
+                        }
+                        $(Selector).find('select[name="day"]').val(day);
+                        $(Selector).find('select[name="semester_id"]').val(semester_id);
+                        $(Selector).find('select[name="session_id"]').val(session_id);
+
                     }
                 }
             }
         }
-        }
+    }
 });

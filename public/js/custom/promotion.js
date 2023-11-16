@@ -1,4 +1,60 @@
 $(function () {
+
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#promotionFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    $("#promote_department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#promoteStudentForm';
+        var department_id = $(this).val();
+        var classID = "";
+        $(Selector).find('select[name="promote_class_id"]').empty();
+        $(Selector).find('select[name="promote_class_id"]').append('<option value="">' + select_grade + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="promote_class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="promote_class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    });
+
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="class_id"]').empty();
+        $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="section_id"]').empty();
+        $(Selector).find('select[name="section_id"]').append('<option value="">' + select_class + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     $('#selectAllchkbox').prop('checked', false); // Unchecks it
     // script for all checkbox checked / unchecked
     $("#selectAllchkbox").on("change", function (ev) {
@@ -39,6 +95,7 @@ $(function () {
     $("#promotionFilter").validate({
         rules: {
             year: "required",
+            department_id: "required",
             class_id: "required",
             section_id: "required",
             session_id: "required",
@@ -51,6 +108,7 @@ $(function () {
         var promValid = $("#promotionFilter").valid();
         if (promValid === true) {
 
+            var department_id = $("#department_id").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var semester_id = $("#semester_id").val();
@@ -65,6 +123,7 @@ $(function () {
             formData.append('session_id', session_id);
             formData.append('academic_session_id', btwyears);
             var classObj = {
+                department_id: department_id,
                 class_id: class_id,
                 section_id: section_id,
                 semester_id: semester_id,
@@ -110,6 +169,7 @@ $(function () {
 
         var addpromotion = new Object();
 
+        addpromotion.department_id = classObj.department_id;
         addpromotion.class_id = classObj.class_id;
         addpromotion.section_id = classObj.section_id;
         addpromotion.semester_id = classObj.semester_id;
@@ -292,8 +352,9 @@ if (get_roll_id == "2") {
             if (admin_promotion_storage) {
                 var adminpromotionstorage = JSON.parse(admin_promotion_storage);
                 if (adminpromotionstorage.length == 1) {
-                    var class_id, section_id, semester_id, session_id, year, userBranchID, userRoleID, userID;
+                    var department_id, class_id, section_id, semester_id, session_id, year, userBranchID, userRoleID, userID;
                     adminpromotionstorage.forEach(function (user) {
+                        department_id = user.department_id;
                         class_id = user.class_id;
                         section_id = user.section_id;
                         semester_id = user.semester_id;
@@ -305,25 +366,71 @@ if (get_roll_id == "2") {
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         console.log("f");
-                        $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected", "selected");
+                        console.log("f");
+                        console.log(section_id);
+                        console.log(year);
+                        console.log("f");
+                        var Selector = '#promotionFilter';
+                        $(Selector).find('select[name="department_id"]').val(department_id);
+                        if (department_id) {
+                            $(Selector).find('select[name="class_id"]').empty();
+                            $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+                            $(Selector).find('select[name="section_id"]').empty();
+                            $(Selector).find('select[name="section_id"]').append('<option value="">' + select_class + '</option>');
+                            $.post(getGradeByDepartmentUrl, {
+                                branch_id: branchID,
+                                department_id: department_id
+                            }, function (responses) {
+                                console.log("sdasdsad");
+                                console.log(responses)
+                                if (responses.code == 200) {
+                                    $.each(responses.data, function (key, val) {
+                                        $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    if (class_id != '') {
+                                        $(Selector).find('select[name="class_id"]').val(class_id);
+                                    }
+                                    // after success
+                                    $.post(teacherSectionUrl, {
+                                        token: token,
+                                        branch_id: branchID,
+                                        teacher_id: ref_user_id,
+                                        class_id: class_id
+                                    }, function (res) {
+                                        console.log("tecj dsfj");
+                                        console.log(res)
+                                        if (res.code == 200) {
+                                            $.each(res.data, function (key, val) {
+                                                var selected = (section_id == val.section_id) ? 'selected' : '';
+                                                $("#sectionID").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
+                                            });
+                                        }
+                                    }, 'json');
+                                }
+                            }, 'json');
+                        }
+                        $(Selector).find('select[name="semester_id"]').val(semester_id);
+                        $(Selector).find('select[name="session_id"]').val(session_id);
+                        $(Selector).find('select[name="year"]').val(year);
+                        // $('select[name^="class_id"] option[value=' + class_id + ']').attr("selected", "selected");
 
-                        $("#section_id").empty();
-                        $("#section_id").append('<option value="">' + select_class + '</option>');
+                        // $("#section_id").empty();
+                        // $("#section_id").append('<option value="">' + select_class + '</option>');
 
-                        $("#sectionID").empty();
-                        $("#sectionID").append('<option value="">' + select_class + '</option>');
-                        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
-                            if (res.code == 200) {
+                        // $("#sectionID").empty();
+                        // $("#sectionID").append('<option value="">' + select_class + '</option>');
+                        // $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
+                        //     if (res.code == 200) {
 
-                                $.each(res.data, function (key, val) {
-                                    var selected = (section_id == val.section_id) ? 'selected' : '';
-                                    $("#sectionID").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
-                                });
-                            }
-                        }, 'json');
-                        $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected", "selected");
-                        $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected", "selected");
-                        $('select[name^="year"] option[value=' + year + ']').attr("selected", "selected");
+                        //         $.each(res.data, function (key, val) {
+                        //             var selected = (section_id == val.section_id) ? 'selected' : '';
+                        //             $("#sectionID").append('<option value="' + val.section_id + '" ' + selected + '>' + val.section_name + '</option>');
+                        //         });
+                        //     }
+                        // }, 'json');
+                        // $('select[name^="semester_id"] option[value=' + semester_id + ']').attr("selected", "selected");
+                        // $('select[name^="session_id"] option[value=' + session_id + ']').attr("selected", "selected");
+                        // $('select[name^="year"] option[value=' + year + ']').attr("selected", "selected");
 
 
                     }

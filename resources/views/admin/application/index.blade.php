@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.application_list') . '')
+@section('title',' ' . __('messages.application_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -17,43 +17,43 @@
 @endsection
 @section('content')
 <style>
-
-fieldset {
-    display: none;
-}
-
-fieldset.show {
-    display: block;
-}
-
-
-.tabs {
-    margin: 2px 5px 0px 5px;
-    padding-bottom: 10px;
-    cursor: pointer;
-}
-
-.tabs:hover, .tabs.active {
-    border-bottom: 1px solid #2196F3;
-}
-
-a:hover {
-    text-decoration: none;
-    color: #1565C0;
-}
-
-.line {
-    background-color: #CFD8DC;
-    height: 1px;
-    width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-    .tabs h6 {
-        font-size: 12px;
+    fieldset {
+        display: none;
     }
-}
-    </style>
+
+    fieldset.show {
+        display: block;
+    }
+
+
+    .tabs {
+        margin: 2px 5px 0px 5px;
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .tabs:hover,
+    .tabs.active {
+        border-bottom: 1px solid #2196F3;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: #1565C0;
+    }
+
+    .line {
+        background-color: #CFD8DC;
+        height: 1px;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        .tabs h6 {
+            font-size: 12px;
+        }
+    }
+</style>
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
@@ -78,7 +78,7 @@ a:hover {
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">{{ __('messages.select_ground') }}
                             <h4>
@@ -99,15 +99,21 @@ a:hover {
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="department_id">{{ __('messages.department') }}</label>
+                                <select id="department_id" name="department_id" class="form-control">
+                                    <option value="">{{ __('messages.select_department') }}</option>
+                                    @forelse($department as $r)
+                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="academic_grade">{{ __('messages.grade') }}</label>
                                     <select id="academic_grade" name="academic_grade" class="form-control">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($grade as $g)
-                                        <option value="{{$g['id']}}">{{$g['name']}}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -117,7 +123,7 @@ a:hover {
                                 Filter
                             </button> -->
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                            {{ __('messages.filter') }}
+                                {{ __('messages.filter') }}
                             </button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
@@ -136,10 +142,10 @@ a:hover {
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs" >
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.application_list') }}
+                            {{ __('messages.application_list') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -161,8 +167,8 @@ a:hover {
                                             <th> {{ __('messages.actions') }}</th>
                                         </tr>
                                     </thead>
-                                    <tbody >
-                                        
+                                    <tbody>
+
                                     </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->
@@ -201,16 +207,15 @@ a:hover {
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 
 <script>
-    
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
-    
+
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var applicationDelete = "{{ route('admin.application.delete') }}";
     var applicationList = "{{ route('admin.application.list') }}";
     var applicationApprove = "{{ route('admin.application.approve') }}";
     var applicationDetails = "{{ config('constants.api.application_details') }}";
-    
+
 
     // lang change name start
     var approveApplication = "{{ __('messages.approve_this_application') }}";
@@ -224,11 +229,12 @@ a:hover {
     // lang change name end// Get PDF Footer Text
 
     // Get PDF Footer Text
-    var header_txt="{{ __('messages.application_list') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var header_txt = "{{ __('messages.application_list') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
     // localStorage variables
     var admin_application_list_storage = localStorage.getItem('admin_application_list_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/admin_application.js') }}"></script>
 @endsection

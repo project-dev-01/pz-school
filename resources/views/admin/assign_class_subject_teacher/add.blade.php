@@ -10,23 +10,19 @@
                 <form id="addAssignClassSubject" autocomplete="off">
                     @csrf
                     <div class="form-group">
-                        <label for="gender">Department<span class="text-danger">*</span></label>
-                        <select id="gender" name="gender" class="form-control">
-                            <option value="">Select Department</option>
-                            <option value="Primary">Primary</option>
-                            <option value="Secondary">Secondary</option>
-                            <option value="Kindergarden">Kindergarden</option>
+                        <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                        <select id="department_id" name="department_id" class="form-control">
+                            <option value="">{{ __('messages.select_department') }}</option>
+                            @forelse($department as $r)
+                            <option value="{{$r['id']}}">{{$r['name']}}</option>
+                            @empty
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="changeClassName" name="class_name">
                             <option value="">{{ __('messages.choose_grade') }}</option>
-                            @forelse($classDetails as $class)
-                            <option value="{{$class['id']}}">{{$class['name']}}</option>
-                            @empty
-                            @endforelse
-
                         </select>
                     </div>
                     <div class="form-group">

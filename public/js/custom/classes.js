@@ -3,6 +3,7 @@ $(function () {
     // rules validation
     $("#classSubmit").validate({
         rules: {
+            department_id: "required",
             name: "required",
             short_name: "required"
         }
@@ -15,12 +16,14 @@ $(function () {
             var className = $("#className").val();
             var nameNumeric = $("#nameNumeric").val();
             var short_name = $("#short_name").val();
+            var department_id = $("#department_id").val();
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('name', className);
             formData.append('short_name', short_name);
             formData.append('name_numeric', nameNumeric);
+            formData.append('department_id', department_id);
             $.ajax({
                 url: classesAddUrl,
                 method: "post",
@@ -57,6 +60,7 @@ $(function () {
             branch_id: branchID
         }, function (data) {
             $('.editClassModal').find('input[name="class_id"]').val(data.data.id);
+            $('.editClassModal').find('select[name="edit_department_id"]').val(data.data.department_id);
             $('.editClassModal').find('input[name="name"]').val(data.data.name);
             $('.editClassModal').find('input[name="short_name"]').val(data.data.short_name);
             $('.editClassModal').find('input[name="name_numeric"]').val(data.data.name_numeric);
@@ -67,6 +71,7 @@ $(function () {
     // update class
     $("#classesUpdateForm").validate({
         rules: {
+            edit_department_id: "required",
             name: "required",
             short_name: "required"
         }
@@ -77,6 +82,7 @@ $(function () {
         var sectionValid = $("#classesUpdateForm").valid();
         if (sectionValid === true) {
             var classID = $("#classID").val();
+            var edit_department_id = $("#edit_department_id").val();
             var editclassName = $("#editclassName").val();
             var editnameNumeric = $("#editnameNumeric").val();
             var edit_short_name = $("#edit_short_name").val();
@@ -87,7 +93,7 @@ $(function () {
             formData.append('name', editclassName);
             formData.append('short_name', edit_short_name);
             formData.append('name_numeric', editnameNumeric);
-
+            formData.append('department_id', edit_department_id);
             $.ajax({
                 url: classesUpdateUrl,
                 method: "post",
@@ -250,6 +256,10 @@ $(function () {
                 searchable: false,
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
+            },
+            {
+                data: 'department_name',
+                name: 'department_name'
             },
             {
                 data: 'name',

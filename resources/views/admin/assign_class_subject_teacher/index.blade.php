@@ -52,6 +52,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{ __('messages.department_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.class') }}</th>
                                     <th>{{ __('messages.subject') }}</th>
@@ -114,7 +115,7 @@
     var header_txt="{{ __('messages.assign_subjects_teacher') }}";
 
     var footer_txt="{{ session()->get('footer_text') }}";
-
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     // Get PDF Header & Footer Text End
 </script>
 

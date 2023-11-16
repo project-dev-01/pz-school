@@ -1,5 +1,33 @@
 $(function () {
 
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#applicationFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="academic_grade"]').empty();
+        $(Selector).find('select[name="academic_grade"]').append('<option value="">' + select_grade + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="academic_grade"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="academic_grade"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     application();
     function application() {
         $('#application-table').DataTable({
