@@ -10,13 +10,19 @@
                 <form id="exam-paper-form" autocomplete="off">
                     @csrf
                     <div class="form-group">
+                        <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                        <select id="department_id" name="department_id" class="form-control">
+                            <option value="">{{ __('messages.select_department') }}</option>
+                                @forelse($department as $r)
+                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                @empty
+                                @endforelse
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                         <select class="form-control add_class_name" id="changeClassName" name="class_id">
                             <option value="">{{ __('messages.choose_grade') }}</option>
-                            @forelse($classDetails as $class)
-                            <option value="{{$class['id']}}">{{$class['name']}}</option>
-                            @empty
-                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">

@@ -121,20 +121,29 @@
                                     </ul><br>
                                     <div class="card-body">
                                         <form id="oldStudentFilter" autocomplete="off" enctype="multipart/form-data">
-                                            <div class="row">                          
-                                                <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                                    <select id="department_id" name="department_id" class="form-control">
+                                                        <option value="">{{ __('messages.select_department') }}</option>
+                                                            @forelse($department as $r)
+                                                            <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                            @empty
+                                                            @endforelse
+                                                    </select>
+                                                    </div>
+                                                </div>                          
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="old_class_id">{{ __('messages.grade') }}</label>
                                                         <select id="old_class_id" class="form-control" name="class_id">
                                                             <option value="">{{ __('messages.select_grade') }}</option>
-                                                            @forelse ($class as $clas)
-                                                                <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
-                                                            @empty
-                                                            @endforelse
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="old_section_id">{{ __('messages.class') }}</label>
                                                         <select id="old_section_id" class="form-control" name="section_id">
@@ -142,7 +151,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="old_session_id">{{ __('messages.session') }}</label>
                                                         <select id="old_session_id" class="form-control"  name="session_id">                              
@@ -218,19 +227,27 @@
                                     <div class="card-body">
                                         <form id="newStudentFilter" autocomplete="off" enctype="multipart/form-data">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                            <div class="col-md-3">
+                                                    <div class="form-group">
+                                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                                    <select id="newdepartment_id" name="department_id" class="form-control">
+                                                        <option value="">{{ __('messages.select_department') }}</option>
+                                                            @forelse($department as $r)
+                                                            <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                            @empty
+                                                            @endforelse
+                                                    </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="class_id">{{ __('messages.grade') }}</label>
                                                         <select id="class_id" class="form-control" name="class_id">
                                                             <option value="">{{ __('messages.select_grade') }}</option>
-                                                            @forelse ($class as $clas)
-                                                                <option value="{{ $clas['id'] }}">{{ $clas['name'] }}</option>
-                                                            @empty
-                                                            @endforelse
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="section_id">{{ __('messages.class') }}</label>
                                                         <select id="section_id" class="form-control" name="section_id">
@@ -238,7 +255,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label for="session_id">{{ __('messages.session') }}</label>
                                                         <select id="session_id" class="form-control"  name="session_id">                              
@@ -845,6 +862,7 @@
     var soapLogList = "{{ route('admin.soap_log.list') }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var soapStudentIDUrl = "{{ route('admin.settings.soap_student_id') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     
 </script>
 

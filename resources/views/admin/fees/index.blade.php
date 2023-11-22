@@ -50,16 +50,23 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
+                                        <div class="form-group">
+                                        <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                        <select id="department_id" name="department_id" class="form-control">
+                                            <option value="">{{ __('messages.select_department') }}</option>
+                                                @forelse($department as $r)
+                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                        </select>
+                                        </div>
+                                    </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        <!-- <option value="All">All</option> -->
-                                        @forelse ($classnames as $class)
-
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -177,6 +184,7 @@
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var getFeesAllocatedStudents = "{{ config('constants.api.get_fees_allocated_students') }}";
     var feesTypeGroupUrl = "{{ config('constants.api.fees_type_group') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";

@@ -51,13 +51,21 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                         @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                         @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($classnames as $class)
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -189,6 +197,7 @@
     var downloadFileName = "{{ __('messages.overall') }}";
     // localStorage variables
     var exam_result_overall_storage = localStorage.getItem('admin_exam_result_overall_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/overall.js') }}"></script>
 @endsection

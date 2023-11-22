@@ -1,5 +1,41 @@
 $(function () {
 
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#addExamPaperModal';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    $("#editdepartment_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#editExamPaperModal';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        //console.log(department_id);
+        $(Selector).find('select[name="class_id"]').empty();
+        $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         var IDnames = "#addExamPaperModal";
@@ -31,6 +67,7 @@ $(function () {
     // rules validation
     $("#exam-paper-form").validate({
         rules: {
+            department_id: "required",
             class_id: "required",
             subject_id: "required",
             paper_name: "required",
@@ -44,7 +81,7 @@ $(function () {
         e.preventDefault();
         var Check = $("#exam-paper-form").valid();
         if (Check === true) {
-
+            var department_id = $('.addExamPaper').find('select[name="department_id"]').val();
             var class_id = $('.addExamPaper').find('select[name="class_id"]').val();
             var subject_id = $('.addExamPaper').find('select[name="subject_id"]').val();
             var paper_name = $('.addExamPaper').find('input[name="paper_name"]').val();
@@ -56,6 +93,7 @@ $(function () {
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
+            formData.append('department_id', department_id);
             formData.append('class_id', class_id);
             formData.append('subject_id', subject_id);
             formData.append('paper_name', paper_name);
@@ -235,11 +273,13 @@ $(function () {
         }, function (data) {
 
             var class_id = data.data.class_id;
+            var department_id = data.data.department_id;
             var subject_id = data.data.subject_id;
             var IDnames = "#editExamPaperModal";
             getSubjects(class_id, IDnames, subject_id);
-
+            classAllocation(department_id, IDnames, class_id);
             $('.editExamPaper').find('input[name="id"]').val(data.data.id);
+            $('.editExamPaper').find('select[name="department_id"]').val(data.data.department_id);
             $('.editExamPaper').find('select[name="class_id"]').val(data.data.class_id);
             $('.editExamPaper').find('input[name="paper_name"]').val(data.data.paper_name);
             $('.editExamPaper').find('select[name="paper_type"]').val(data.data.paper_type);
@@ -253,6 +293,7 @@ $(function () {
     // rules validation
     $("#edit-exam-paper-form").validate({
         rules: {
+            department_id : "required",
             class_id: "required",
             subject_id: "required",
             paper_name: "required",
@@ -268,6 +309,7 @@ $(function () {
         if (Check === true) {
 
             var id = $('.editExamPaper').find('input[name="id"]').val();
+            var department_id = $('.editExamPaper').find('select[name="department_id"]').val();
             var class_id = $('.editExamPaper').find('select[name="class_id"]').val();
             var subject_id = $('.editExamPaper').find('select[name="subject_id"]').val();
             var paper_name = $('.editExamPaper').find('input[name="paper_name"]').val();
@@ -280,6 +322,7 @@ $(function () {
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('id', id);
+            formData.append('department_id', department_id);
             formData.append('class_id', class_id);
             formData.append('subject_id', subject_id);
             formData.append('paper_name', paper_name);

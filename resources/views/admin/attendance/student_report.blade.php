@@ -69,13 +69,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($class as $cla)
-                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -280,6 +288,7 @@
     var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 
     // default image test
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";

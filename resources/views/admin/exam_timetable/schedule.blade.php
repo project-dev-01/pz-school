@@ -58,13 +58,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                <select id="department_id" name="department_id" class="form-control">
+                                    <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -198,6 +206,7 @@
     // lang change name end
     // localStorage variables
     var exam_timetable_list_storage = localStorage.getItem('admin_exam_timetable_list_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/exam_timetable.js') }}"></script>
 

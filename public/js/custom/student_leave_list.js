@@ -5,6 +5,35 @@ $(function () {
     studentLeaveList(defaultList);
     // $('#homeRoomPopup').modal('show');
     // $('#nursingPopup').modal('show');
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#studentLeaveList';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="class_id"]').empty();
+        $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="section_id"]').empty();
+        $(Selector).find('select[name="section_id"]').append('<option value="">' + select_class + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
     // change class name
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();

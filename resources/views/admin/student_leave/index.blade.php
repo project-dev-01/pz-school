@@ -54,16 +54,24 @@
                                     <label for="student_name">{{ __('messages.student_name') }}</label>
                                     <input type="text" name="student_name" class="form-control" id="student_name">
                                 </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
                             </div>           
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}</label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($classes as $class)
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -182,6 +190,7 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var admin_studentleave_storage = localStorage.getItem('admin_studentleave_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
 @endsection

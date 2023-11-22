@@ -1,5 +1,40 @@
 $(function () {
 
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#examTimetableFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    $("#add_department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#addScheduleFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="class_id"]').empty();
+        $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="class_id"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
+
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
@@ -93,7 +128,8 @@ $(function () {
 
     $("#examTimetableFilter").validate({
         rules: {
-            class_id: "required",
+            department_id:  "required",
+            class_id: "required", 
             section_id: "required",
         }
     });
@@ -227,6 +263,7 @@ $(function () {
 
     $("#addScheduleFilter").validate({
         rules: {
+            department_id : "required",
             class_id: "required",
             section_id: "required",
             exam_id: "required",

@@ -71,13 +71,22 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}</label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
-                                        @empty
-                                        @endforelse
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -260,6 +269,7 @@
     var subjectByClass = "{{ route('admin.subject_by_class') }}";
     var evaluationReportList = "{{ route('admin.evaluation_report.list') }}";
     var homeworkTableList = "{{ route('admin.homework.details') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 
     // Get PDF Footer Text
     var header_txt = "{{ __('messages.evaluation_report') }}";

@@ -1108,9 +1108,11 @@ class AdminController extends Controller
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.homework.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -2486,7 +2488,9 @@ class AdminController extends Controller
     public function studentLeaveShow()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.student_leave.index', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : []
         ]);
     }
@@ -2634,9 +2638,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.homework.evaluation_report',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -3393,9 +3399,11 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_timetable.schedule',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -3415,10 +3423,11 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_timetable.add_schedule',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'exam' => isset($getexam['data']) ? $getexam['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -3961,9 +3970,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_results.byclass',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -3981,9 +3992,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_results.bysubject',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -4000,9 +4013,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_results.bystudent',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -4023,9 +4038,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_results.overall',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'allexams' => isset($allexams['data']) ? $allexams['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -4045,9 +4062,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam.result',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -4066,8 +4085,10 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         // dd($sem);
         return view('admin.testresult.index', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
@@ -4082,7 +4103,9 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.testresult.paper_wise_result', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
@@ -4118,9 +4141,11 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.exam_results.bystudentrank',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -5325,7 +5350,9 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.classroom.management', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'class' => isset($class['data']) ? $class['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
@@ -5897,8 +5924,9 @@ class AdminController extends Controller
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $grade_category = Helper::GetMethod(config('constants.api.grade_category'));
         $get_paper_type = Helper::GetMethod(config('constants.api.get_paper_type'));
-
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.exam_paper.list', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
             'grade_category' => isset($grade_category['data']) ? $grade_category['data'] : [],
             'get_paper_type' => isset($get_paper_type['data']) ? $get_paper_type['data'] : []
@@ -6417,7 +6445,9 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.attendance.student_report', [
+            'department' => isset($department['data']) ? $department['data'] : [],
             'class' => isset($getclass['data']) ? $getclass['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
@@ -6505,9 +6535,11 @@ class AdminController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.soap.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'soap_category_list' => isset($soap_category_list['data']) ? $soap_category_list['data'] : [],
@@ -7067,9 +7099,11 @@ class AdminController extends Controller
         $fees_type = Helper::GetMethod(config('constants.api.fees_type_list'));
         $payment_status = Helper::GetMethod(config('constants.api.payment_status_list'));
         $fees_group_list = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'admin.fees.index',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -7143,11 +7177,13 @@ class AdminController extends Controller
         $fees_group_list = Helper::GETMethodWithData(config('constants.api.fees_group_list'), $data);
 
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         // $fees_group_list = Helper::GetMethod(config('constants.api.fees_group_list'));
         // dd($fees_group_list);
         return view(
             'admin.fees.fees_allocation',
             [
+                'department' => isset($department['data']) ? $department['data'] : [],
                 'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
                 'fees_group_list' => isset($fees_group_list['data']) ? $fees_group_list['data'] : []
             ]

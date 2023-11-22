@@ -106,11 +106,11 @@ width: 14.3em;
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                    <select id="class_id" class="form-control" name="class_id">
-                                        <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($class as $cla)
-                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -118,14 +118,23 @@ width: 14.3em;
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <select id="class_id" class="form-control" name="class_id">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                        <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
@@ -265,6 +274,7 @@ width: 14.3em;
     var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var subjectByClass = "{{ route('admin.subject_by_class') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
 <script src="{{ asset('js/custom/add_homework.js') }}"></script>
 @endsection

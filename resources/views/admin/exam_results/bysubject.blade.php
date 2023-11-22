@@ -50,16 +50,22 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
+                                        <div class="form-group">
+                                        <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                        <select id="department_id" name="department_id" class="form-control">
+                                            <option value="">{{ __('messages.select_department') }}</option>
+                                                @forelse($department as $r)
+                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                        </select>
+                                        </div>
+                                    </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        <!-- <option value="All">All</option> -->
-                                        @forelse ($classnames as $class)
-
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -199,6 +205,7 @@
     var Allexams = "{{ config('constants.api.all_exams_list') }}";
     var getbySubjectAllstd = "{{ config('constants.api.all_bysubject_list') }}";
     var getgradeBysubject = "{{ config('constants.api.get_grade_bysubject') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var teacher_id = null;
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";

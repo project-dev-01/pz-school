@@ -42,13 +42,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($class as $cla)
-                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -68,14 +76,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            
+                        </div>
+                        <div class="row">
+                        <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="semester_id">{{ __('messages.semester') }}</label>
@@ -786,6 +795,7 @@
 <script>
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 
     // var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
     // var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
