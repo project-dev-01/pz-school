@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- button link  -->
-<!-- <link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -149,17 +149,6 @@
                                 </table>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
-                        <div class="col-md-12">
-                            <div class="clearfix mt-4">
-                                <form method="post" action="">
-                                    @csrf
-                                    <div class="clearfix float-right" style="margin-bottom:5px;">
-                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
-                                        <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -172,7 +161,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            Setting Student Information
+                            Download Student List
                             <h4>
                     </li>
                 </ul><br>
@@ -215,6 +204,143 @@
                                         </div>
                                         <ul>
                                             <li class="list-unstyled">
+                                                <div class="col-xl-12 mt-3 mt-xl-0">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-6">
+                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                <input id="checkbox2" type="checkbox" checked>
+                                                                <label for="checkbox2">
+                                                                    Grade & Classes
+                                                                </label>
+                                                            </div>
+                                                        </dt>
+                                                        <dt class="col-sm-5">
+                                                            <div class="mb-2">
+                                                                <select id="inputState" class="form-control">
+                                                                    <option>FY23</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </dt>
+                                                        <dd class="col-sm-1">
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </li>
+                                            <li class="list-unstyled">
+                                                <div class="col-xl-12 mt-3 mt-xl-0">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-6">
+                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                <input id="checkbox2" type="checkbox" checked>
+                                                                <label for="checkbox2">
+                                                                    Activity
+                                                                </label>
+                                                            </div>
+                                                        </dt>
+                                                        <dt class="col-sm-5">
+                                                            <div class="mb-2">
+                                                                <select id="inputState" class="form-control">
+                                                                    <option>FY23</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </dt>
+                                                        <dd class="col-sm-1">
+                                                        </dd>
+                                                    </dl>
+                                                </div> <!-- end col -->
+                                            </li>
+                                            <li class="list-unstyled">
+                                                <div class="col-xl-12 mt-3 mt-xl-0">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-6">
+                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                <input id="checkbox2" type="checkbox" checked>
+                                                                <label for="checkbox2">
+                                                                    Attenadance
+                                                                </label>
+                                                            </div>
+                                                        </dt>
+                                                        <dt class="col-sm-5">
+                                                            <div class="mb-2">
+                                                                <select id="inputState" class="form-control">
+                                                                    <option>FY23</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </dt>
+                                                        <dd class="col-sm-1">
+                                                        </dd>
+                                                    </dl>
+                                                </div> <!-- end col -->
+                                            </li>
+                                            <li class="list-unstyled">
+                                                <div class="col-xl-12 mt-3 mt-xl-0">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-6">
+                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                <input id="checkbox2" type="checkbox" checked>
+                                                                <label for="checkbox2">
+                                                                    Test Results
+
+                                                                </label>
+                                                            </div>
+                                                        </dt>
+                                                        <dt class="col-sm-5">
+                                                            <div class="mb-2">
+                                                                <select id="inputState" class="form-control">
+                                                                    <option>FY23</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </dt>
+                                                        <dd class="col-sm-1">
+                                                        </dd>
+                                                    </dl>
+                                                </div> <!-- end col -->
+                                            </li>
+                                            <li class="list-unstyled">
+                                                <div class="col-xl-12 mt-3 mt-xl-0">
+                                                    <dl class="row">
+                                                        <dt class="col-sm-6">
+                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                <input id="checkbox2" type="checkbox" checked>
+                                                                <label for="checkbox2">
+                                                                    Interview
+
+                                                                </label>
+                                                            </div>
+                                                        </dt>
+                                                        <dt class="col-sm-5">
+                                                            <div class="mb-2">
+                                                                <select id="inputState" class="form-control">
+                                                                    <option>FY23</option>
+                                                                    <option>Option 1</option>
+                                                                    <option>Option 2</option>
+                                                                    <option>Option 3</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </dt>
+                                                        <dd class="col-sm-1">
+                                                        </dd>
+                                                    </dl>
+                                                </div> <!-- end col -->
+                                            </li>
+                                            <!-- <li class="list-unstyled">
                                                 <ul class="list-inline m-b-0">
                                                     <li class="list-inline-item">
                                                         <div class="checkbox checkbox-primary mb-2">
@@ -313,7 +439,7 @@
                                                         </select>
                                                     </li>
                                                 </ul>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </li>
                                 </ul>
@@ -321,7 +447,10 @@
                             <br>
                             <div class="form-group text-left m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
-                                    Save
+                                    CSV
+                                </button>
+                                <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
+                                    PDF
                                 </button>
                             </div>
                         </div>
@@ -350,12 +479,12 @@
     toastr.options.preventDuplicates = true;
 </script>
 <!-- button js added -->
-<!-- <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.3/js/buttons.colVis.min.js"></script> -->
+<script src="https://cdn.datatables.net/buttons/1.5.3/js/buttons.colVis.min.js"></script>
 
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>

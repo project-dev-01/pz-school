@@ -4,7 +4,7 @@ $(function () {
     defaultList.append('branch_id', branchID);
     studentLeaveList(defaultList);
     // $('#homeRoomPopup').modal('show');
-    // $('#nursingPopup').modal('show');
+    $('#nursingPopup').modal('show');
     // change class name
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
@@ -284,34 +284,20 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (data) {
-                            var document = '<i class="fas fa-cloud-download-alt text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+                            var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                         } else {
-                            document = '<i class="fas fa-cloud-download-alt text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+                            document = "-";
                         }
                         return document;
                     }
                 },
-                // {
-                //     "targets": 10,
-                //     "render": function (data, type, row, meta) {
-
-                //         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
-                //             '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">' + add_remarks + '</button>';
-                //         return addremarks;
-                //     }
-                // },
                 {
                     "targets": 10,
                     "render": function (data, type, row, meta) {
 
-                        // var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
-                        //     '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">' + add_remarks + '</button>';
-                        // return addremarks;
-                        var document = "";
-                        var document = '<i class="fas fa-check-square text-center" data-toggle="tooltip" title="Click to download..!"></i>' +
-                            '<i class="fas fa-ban text-center" data-toggle="tooltip" title="Click to download..!"></i>';
-
-                        return document;
+                        var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
+                            '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">' + add_remarks + '</button>';
+                        return addremarks;
                     }
                 },
                 {
@@ -547,17 +533,11 @@ $(function () {
                 {
                     data: 'reason'
                 },
-                // {
-                //     data: 'teacher_remarks'
-                // },
                 {
                     data: 'document'
                 },
                 {
-                    data: 'id'
-                },
-                {
-                    data: 'id'
+                    data: 'teacher_remarks'
                 }
             ],
             columnDefs: [
@@ -591,43 +571,19 @@ $(function () {
                     "targets": 8,
                     "render": function (data, type, row, meta) {
                         var document = "";
-                        // console.log("data");
-                        // console.log(data);
-                        // console.log(row);
-                        // if (data) {
-                        //     var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
-                        // } else {
-                        //     document = "-";
-                        // }
-                        // return document;
-                        var document = "";
-                        // if (row.id == 1) {
-                        //     var document = '<i class="fas fa-cloud-download-alt text-center" data-toggle="tooltip" title="Click to download..!"></i>';
-                        // } else {
-                        //     document = '<i class="fas fa-times-circle text-center" data-toggle="tooltip" title="Click to download..!"></i>';
-                        // }
-                        if (row.id == 1) {
-                            var document = '<button type="button" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></button>';
+                        if (data) {
+                            var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                         } else {
-                            document = '<button type="button" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></button>';
+                            document = "-";
                         }
                         return document;
-                        // var document = "";
-                        // var document = '<i class="fas fa-check-square text-center" data-toggle="tooltip" title="Click to download..!"></i>'+
-                        // '<i class="fas fa-ban text-center" data-toggle="tooltip" title="Click to download..!"></i>';
-
-                        // return document;
                     }
                 },
                 {
                     "targets": 9,
                     "render": function (data, type, row, meta) {
 
-                        // var addremarks = '<button class="icon-button"><i class="fas fa-check-circle fa-sm"></i></button><button class="icon-button"><i class="fas fa-times-circle fa-sm"></i></button>';
-                        // var addremarks = '<button type="button" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-heart-half-full"></i></button>' +
-                        //     '&nbsp;<button type="button" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button>';
-                        var addremarks = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
-                            '&nbsp;<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
+                        var addremarks = '-';
                         return addremarks;
                     }
                 },

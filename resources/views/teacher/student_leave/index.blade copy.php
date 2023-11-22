@@ -42,7 +42,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}(Homeroom teacher)
+                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}(Nursing teacher)
                             <h4>
                     </li>
                 </ul>
@@ -59,9 +59,9 @@
                                     <th>{{ __('messages.to') }}</th>
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <!-- <th>Homeroom teacher reason</th> -->
+                                    <th>Homeroom teacher reason</th>
                                     <th>{{ __('messages.document') }}</th>
-                                    <th>Status</th>
+                                    <th>Remarks</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -294,7 +294,7 @@
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
                                     <th>{{ __('messages.document') }}</th>
-                                    <th>Remarks</th>
+                                    <th>{{ __('messages.teacher_remarks') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

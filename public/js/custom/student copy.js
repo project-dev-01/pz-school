@@ -380,26 +380,107 @@ $(function () {
             info: true,
             bDestroy: true,
             // dom: 'lBfrtip',
-            dom: 'Blfrtip',
+            // dom: 'Blfrtip',
 
-            // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             // dom: 'C&gt;"clear"&lt;lfrtip',
-            // "language": {
+            "language": {
 
-            //     "emptyTable": no_data_available,
-            //     "infoFiltered": filter_from_total_entries,
-            //     "zeroRecords": no_matching_records_found,
-            //     "infoEmpty": showing_zero_entries,
-            //     "info": showing_entries,
-            //     "lengthMenu": show_entries,
-            //     "search": datatable_search,
-            //     "paginate": {
-            //         "next": next,
-            //         "previous": previous
-            //     },
-            // },
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
+            buttons: [
+                // 'colvis',
+                {
+                    extend: 'colvis',
+                    text: 'Column Visibility',
+                    charset: 'utf-8',
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+                    columns: ":not(':last')",
+                    exclude: [0] // Exclude the first column (optional)
+                },
+                {
+                    extend: 'csv',
+                    text: downloadcsv,
+                    extension: '.csv',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)',
+                        columns: ':visible',
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)',
+                        columns: ':visible',
+                    },
+
+
+                    customize: function (doc) {
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
+                            }
+                        });*/
+                        // Create a footer
+
+                        doc['footer'] = (function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        width: 100
+
+                                    }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            }
+                        });
+
+                    }
+                }
+            ],
             // exportOptions: { rows: ':visible' },
             serverSide: true,
             ajax: {
