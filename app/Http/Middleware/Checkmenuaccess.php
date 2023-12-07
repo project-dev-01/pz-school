@@ -24,7 +24,35 @@ class Checkmenuaccess
         //$url = $_SERVER['REQUEST_URI'];
         //LIVE URL end
         $role_id = Session::get('role_id');
+$school_roleid = Session::get('school_roleid');
         $branch_id =config('constants.branch_id');
+if(!empty(Session::get('school_roleid')))
+        {
+            $pagedata = [
+                //'menu_id' => "27",
+                'menu_id' => $url, 
+                'role_id' => $role_id,  
+                'school_roleid' => $school_roleid,             
+                'br_id' => $branch_id
+            ];    
+           // dd($pagedata);
+            $permission = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
+           // dd($permission);
+            if($permission['data']==null)
+            {
+                return $next($request);
+            }
+            elseif($permission['data']['read']=='Access')
+            {
+                return $next($request);
+            }
+            else
+            {
+                abort(403);
+            }       
+        }
+        else
+        { 
         $data = [
 			'role_id' => $role_id,
             //'role_id' => "2",
@@ -46,4 +74,5 @@ class Checkmenuaccess
             abort(403);
         }       
     }
+}
 }

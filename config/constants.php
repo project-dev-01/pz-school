@@ -353,7 +353,8 @@ return [
         'get_student_grade' => $url.'/get_student_grade',
         'get_subject_division_mark' => $url.'/get_subject_division_mark',
         'get_subject_mark_status' => $url.'/get_subject_mark_status',
-        
+        'get_pointsresult' => $url.'/get_pointsresult',
+                
         // hostel url
         'hostel_add' => $url.'/hostel/add',
         'hostel_list' => $url.'/hostel/list',
@@ -886,6 +887,27 @@ return [
         //retired person
         'retired_list' => $url.'/retired/list',
         
+        // Menu List
+        'menus_list' => $url.'/menus/list',      
+        'menuaccess_list' => $url.'/menus/accesslist',                     
+        'addmenu' => $url.'/menus/add',                     
+        'setpermission' => $url.'/menus/setpermission',        
+        'menu_details' => $url.'/menus/menu_details',
+        'menu_update' => $url.'/menus/update',        
+        'menuaccess_permission' => $url.'/menus/getpermission',  
+
+        // event type url
+        'school_role_add' => $url.'/school_role/add',
+        'school_role_list' => $url.'/school_role/list',
+        'school_role_details' => $url.'/school_role/school_role-details',
+        'school_role_update' => $url.'/school_role/update',
+        'school_role_delete' => $url.'/school_role/delete',
+
+        //School Role Permissions
+        'schoolmenuaccess_list' => $url.'/menus/schoolaccesslist',       
+        'setschoolpermission' => $url.'/menus/setschoolpermission',
+        'getschoolroleaccess' => $url.'/menus/getschoolroleaccess',  
+      
       ]
 
 ];

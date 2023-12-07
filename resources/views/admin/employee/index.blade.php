@@ -499,9 +499,18 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
+                                     <!--<select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
                                         @forelse($roles as $r)
                                         <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['role_name'])) }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>-->
+                                    <select class="form-control "  id="role_id" name="role_id" data-placeholder="{{ __('messages.choose_role') }}">
+                                        <option value="">{{ __('messages.select_role') }}</option>
+                                        @forelse($school_roles as $r)
+                                        @if($r['portal_roleid']==3)
+                                        <option value="{{$r['id']}}">{{ $r['fullname'] }}</option>
+                                        @endif
                                         @empty
                                         @endforelse
                                     </select>
@@ -518,6 +527,33 @@
                                         </div>
                                         <input type="text" class="form-control" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
+                                        @forelse($emp_designation as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
+                                        <option value="">{{ __('messages.choose_department') }}</option>
+                                        @forelse($emp_department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -540,6 +576,7 @@
                                     <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
+                      
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_category">{{ __('messages.staff_category') }}</label>
@@ -890,6 +927,13 @@
                         </li>
                     </ul>
                     <div class="card-body">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
+                            <label class="custom-control-label" for="skip_medical_history">{{ __('messages.skipped_medical_history') }}</label>
+                        </div>
+                    </div>
+                    <div id="medical_history_form">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">

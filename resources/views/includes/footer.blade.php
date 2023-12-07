@@ -433,6 +433,8 @@
                 }
             });
         }, 10000);
+        if(get_roll_id=='4' || get_roll_id=='5')
+		{
         var sTimeOutq = setInterval(function() {
 
 
@@ -453,6 +455,7 @@
                 }
             });
         }, 10000);
+    }
         getNotifications();
 
         function getNotifications() {

@@ -744,6 +744,7 @@ class AuthController extends Controller
                 $request->session()->put('user_id', $userDetails['data']['user']['id']);
                 $request->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
                 $request->session()->put('role_id', $userDetails['data']['user']['role_id']);
+                $request->session()->put('school_roleid', $userDetails['data']['user']['school_roleid']);
                 $request->session()->put('picture', $userDetails['data']['user']['picture']);
                 $request->session()->put('token', $userDetails['data']['token']);
                 $request->session()->put('name', $userDetails['data']['user']['name']);
@@ -1107,6 +1108,7 @@ class AuthController extends Controller
     {
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
+        $req->session()->put('school_roleid', $userDetails['data']['user']['school_roleid']);
         $req->session()->put('role_id', $roleID);
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);

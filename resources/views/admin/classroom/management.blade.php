@@ -825,4 +825,10 @@
 </script>
 <script src="{{ asset('js/custom/classroom.js') }}"></script>
 <script src="{{ asset('js/custom/short-test.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

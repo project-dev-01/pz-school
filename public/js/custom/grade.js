@@ -192,6 +192,7 @@ $(function () {
             $('.editGrade').find('input[name="max_mark"]').val(data.data.max_mark);
             $('.editGrade').find('select[name="status"]').val(data.data.status);
             $('.editGrade').find('select[name="grade_category"]').val(data.data.grade_category);
+            $('.editGrade').find('select[name="score_type"]').val(data.data.score_type);
             $('.editGrade').find('input[name="notes"]').val(data.data.notes);
             $('.editGrade').modal('show');
         }, 'json');

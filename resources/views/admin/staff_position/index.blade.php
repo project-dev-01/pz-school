@@ -109,5 +109,10 @@
 </script>
 
 <script src="{{ asset('js/custom/staff_position.js') }}"></script>
-
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

@@ -26,7 +26,7 @@
                 <p class="sub-header">
                 <div class="form-group pull-right">
                     <div class="col-xs-2 col-sm-2">
-                        <button type="button" class="btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addCategoryModal">{{ __('messages.add_category') }}</button>
+                        <button type="button" class="btn add-btn btn-primary-bl btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addCategoryModal">{{ __('messages.add_category') }}</button>
                     </div>
                 </div>
                 </p>

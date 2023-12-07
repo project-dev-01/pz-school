@@ -296,4 +296,10 @@
     var admin_studentattentanceReport_storage = localStorage.getItem('admin_studentattentanceReport_details');
 </script>
 <script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

@@ -1066,6 +1066,7 @@ class AdminController extends Controller
         ];
         $application = Helper::GETMethodWithData(config('constants.api.application_list'), $data);
         $department = Helper::GetMethod(config('constants.api.department_list'));
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         // dd($application);
         return view(
             'admin.admission.index',
@@ -1080,6 +1081,7 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'application' => isset($application['data']) ? $application['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'department' => isset($department['data']) ? $department['data'] : []
             ]
@@ -1600,6 +1602,7 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
         $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
         // dd($res);
@@ -1608,6 +1611,7 @@ class AdminController extends Controller
             [
                 'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
                 'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
                 'employee' => isset($staff['data']['staff']) ? $staff['data']['staff'] : [],
                 'bank' => isset($staff['data']['bank']) ? $staff['data']['bank'] : [],
                 'department' => isset($department['data']) ? $department['data'] : [],
@@ -1635,7 +1639,7 @@ class AdminController extends Controller
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        // $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $emp_department = Helper::GetMethod(config('constants.api.department_list'));
         $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
@@ -1652,6 +1656,7 @@ class AdminController extends Controller
             [
                 'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
                 'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
                 'emp_department' => isset($emp_department['data']) ? $emp_department['data'] : [],
                 'emp_designation' => isset($emp_designation['data']) ? $emp_designation['data'] : [],
                 'qualifications' => isset($qualifications['data']) ? $qualifications['data'] : [],
@@ -3788,7 +3793,8 @@ class AdminController extends Controller
             'max_mark' => $request->max_mark,
             'grade' => $request->grade,
             'grade_point' => $request->grade_point,
-            'grade_category' => $request->grade_category,
+            'grade_category' => $request->grade_category,            
+            'score_type' => $request->score_type,
             'notes' => $request->notes,
             'status' => $request->status
         ];
@@ -3838,6 +3844,7 @@ class AdminController extends Controller
             'grade' => $request->grade,
             'grade_point' => $request->grade_point,
             'grade_category' => $request->grade_category,
+            'score_type' => $request->score_type,
             'notes' => $request->notes,
             'status' => $request->status
         ];
@@ -3954,7 +3961,7 @@ class AdminController extends Controller
             'password' => $request->txt_pwd,
             'confirm_password' => $request->txt_retype_pwd,
             'sudent_application_id' => $request->sudent_application_id,
-
+            'school_roleid' => $request->school_roleid,
 
         ];
 
@@ -4262,7 +4269,8 @@ class AdminController extends Controller
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        return view(
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+         return view(
             'admin.student.edit',
             [
                 'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
@@ -4281,8 +4289,8 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
-
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
         );
     }
@@ -4358,6 +4366,7 @@ class AdminController extends Controller
             'parent_id' => $request->txt_name,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
+            'school_roleid' => $request->school_roleid,
 
         ];
 
@@ -4418,13 +4427,14 @@ class AdminController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
-
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         return view(
             'admin.parent.add',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
         );
     }
@@ -4477,6 +4487,7 @@ class AdminController extends Controller
             'facebook_url' => $request->facebook_url,
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
+            'school_roleid' => $request->school_roleid,
         ];
         //  dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
@@ -4510,6 +4521,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         // dd($response);
         return view(
             'admin.parent.edit',
@@ -4520,6 +4532,7 @@ class AdminController extends Controller
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
             ]
         );
     }
@@ -4575,6 +4588,7 @@ class AdminController extends Controller
             'facebook_url' => $request->facebook_url,
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
+            'school_roleid' => $request->school_roleid,
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
@@ -7785,6 +7799,38 @@ class AdminController extends Controller
             'activity_list' => !empty($activity_list['data']) ? $activity_list['data'] : []
         ]);*/
     }
+    public function menuaccess()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [
+            'status' => "All"
+        ];
+        $mainmenudata = [
+            'type' => "Mainmenu"
+        ];
+        $submenudata = [
+            'type' => "Submenu"
+        ];
+        $childmenudata = [
+            'type' => "Childmenu"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        $mainmenu = Helper::PostMethod(config('constants.api.menus_list'),$mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.menus_list'),$submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.menus_list'),$childmenudata);
+        
+        return view(
+            'admin.activity_monitoring.menuaccess',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [],  
+                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [] ,
+                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [] ,
+                'submenu' => isset($submenu['data']) ?$submenu['data'] : [] ,
+                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : []                    
+            ]
+        );     
+    }
     // start Check In Out Time
     public function checkInOutTime()
     {
@@ -8122,6 +8168,192 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.bank_delete'), $data);
         return $response;
     }
+   // index School Roles
+    public function school_role()
+    {       
+        $data = [
+            'status' => "0"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        return view(
+            'admin.school_roles.index',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : []
+            ]); 
+    }
+    public function addschool_role(Request $request)
+    {
+        $data = [
+            'portal_roleid' => $request->portal_roleid,
+            'fullname' => $request->fullname,
+            'shortname' => $request->shortname,
+        ];
+        $response = Helper::PostMethod(config('constants.api.school_role_add'), $data);
+        return $response;
+    }
+    
+    public function getschool_roleList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.school_role_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        $a=1;
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('color', function ($row) {
+                return '<span style="color:' . $row['shortname'] . '" >' . $row['shortname'] . '</span>';
+            })
+            ->addColumn('actions', function  ($row) use($a) {
+                
+                return '<div class="button-list">
+                                
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSchoolRoleBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteSchoolRoleBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['shortname', 'actions'])
+            ->make(true);
+    }
+    public function getschool_roleDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
+        return $response;
+    }
+    public function updateschool_role(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'portal_roleid' => $request->portal_roleid,
+            'fullname' => $request->fullname,
+            'shortname' => $request->shortname,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.school_role_update'), $data);
+        return $response;
+    }
+    public function deleteschool_role(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.school_role_delete'), $data);
+        return $response;
+    }
+    
+    public function rollmenuaccess(Request $request)
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [
+            'status' => "All"
+        ];
+        
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);        
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));  
+        
+        return view(
+            'admin.school_roles.menuaccess',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [], 
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
+                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [],
+                'mainmenu' =>  [] ,
+                'submenu' => [] ,
+                'childmenu' =>  []      
+            ]
+        );
+    }
+    public function getmenus(Request $request)
+    {
+        $role_id = $request->role_id;
+        $branch_id =config('constants.branch_id');
+        
+        $school_roleid =$request->school_roleid;
+        //dd($branch_id);
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [            
+            'status' => "All"
+        ];
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+        $mainmenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'scrole_id' => $school_roleid,
+            'type' => 'Mainmenu'
+        ];
+        $submenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'scrole_id' => $school_roleid,
+            'type' => "Submenu"
+        ];
+        $childmenudata = [
+            'role_id' => $role_id,
+            'br_id' => $branch_id,
+            'scrole_id' => $school_roleid,
+            'type' => "Childmenu"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        
+        $mainmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$childmenudata);
+        // dd($mainmenu);
+        return view(
+            'admin.school_roles.menuaccess',
+            [                
+                'roles' => isset($roles['data']) ? $roles['data'] : [],  
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
+                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [] ,
+                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [] ,
+                'submenu' => isset($submenu['data']) ?$submenu['data'] : [] ,
+                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : [],
+                'role_id' => $role_id, 
+                'branch_id' => $branch_id ,
+                'school_roleid' => $school_roleid
+            ]
+        );
+    }
+    public function setpermission(Request $request)
+    {
+        
+        $data = [
+            'role_id' => $request->role_id,
+            'br_id' => $request->branch_id,
+            'school_roleid' => $request->school_roleid,
+            'menu_id' => $request->menu_id,
+            'menuaccess_id' => $request->menuaccess_id,
+            'act' => $request->act,
+            'read' => $request->read,
+            'add' => $request->add,
+            'updates' => $request->updates,
+            'deletes' => $request->deletes,
+            'export' => $request->export
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
+        //dd($response);
+        return redirect('admin/school_role/menuaccess');
+        
+    }
+    public function checkpermissions(Request $request)
+    {
+        $pagedata = [
+            //'menu_id' => "27",
+            'menu_id' => $request->menu_id,
+            'role_id'=> session()->get('role_id'),
+            'school_roleid'=> session()->get('school_roleid'),
+            'branch_id'=> config('constants.branch_id')
+        ];    
+        // dd($pagedata);
+        $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
+        return $page;
+    }
     // work week
     public function workWeek()
     {
@@ -8385,9 +8617,9 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                 $edit = route('admin.student.details', $row['id']);
                 return '<div class="button-list">
-                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-edit"></i></a>
-                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-                         </div>';
+                                <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
             })
 
             ->rawColumns(['tenure', 'designation_name', 'actions'])

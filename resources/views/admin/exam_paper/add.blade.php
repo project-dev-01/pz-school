@@ -56,6 +56,16 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="status">{{ __('messages.score_type') }}<span class="text-danger">*</span></label>
+                        <select class="form-control" name="score_type">
+                            <option value="">{{ __('messages.select') }}</option>
+                            <option value="Grade">{{ __('messages.grade') }}</option>
+                            <option value="Mark">{{ __('messages.mark') }}</option>
+                            <option value="Points">{{ __('messages.points') }}</option>
+                            <option value="Freetext">{{ __('messages.freetext') }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
                         <input type="number" name="subject_weightage" class="form-control" placeholder="{{ __('messages.enter_subject_weightage') }}">
                     </div>

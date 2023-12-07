@@ -124,5 +124,10 @@
 <script src="{{ asset('js/custom/hostel.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

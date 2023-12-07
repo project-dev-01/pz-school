@@ -108,4 +108,10 @@
     // Get PDF Header & Footer Text End
 </script>
 <script src="{{ asset('js/custom/exam_hall.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

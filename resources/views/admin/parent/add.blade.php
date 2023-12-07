@@ -514,6 +514,21 @@
                                     <input type="text" class="form-control number_validation" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="mobile_no">{{ __('messages.role') }}<span class="text-danger">*</span></label>
+                                    
+                                    <select class="form-control "  id="school_roleid" name="school_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+                                        <option value="">{{ __('messages.select_role') }}</option>
+                                        @forelse($school_roles as $r)
+                                        @if($r['portal_roleid']==5)
+                                        <option value="{{$r['id']}}">{{ $r['fullname'] }}</option>
+                                        @endif
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

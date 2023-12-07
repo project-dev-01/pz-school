@@ -120,4 +120,10 @@
 </script>
 
 <script src="{{ asset('js/custom/assign_class_subject_teacher.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

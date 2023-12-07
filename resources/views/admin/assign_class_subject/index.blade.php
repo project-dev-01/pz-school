@@ -180,4 +180,10 @@
     var admin_assign_class_subject_storage = localStorage.getItem('admin_assign_class_subject_details');
 </script>
 <script src="{{ asset('js/custom/assign_class_subject.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

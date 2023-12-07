@@ -501,24 +501,17 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_id">{{ __('messages.role') }}<span class="text-danger">*</span></label>
-                                    <!-- <select class="form-control" name="role_id" id="role_id"> -->
-                                    <select class="form-control select2-multiple" data-toggle="select2" id="role_id" name="role_id" multiple="multiple" data-placeholder="{{ __('messages.choose_role') }}">
-                                        <option value="">{{ __('messages.select_role') }}</option>
-                                        @forelse($roles as $r)
-                                        @php
-                                        $selected = "";
-                                        @endphp
-                                        @foreach(explode(',', $role['role_id']) as $info)
-                                        @if($r['id'] == $info)
-                                        @php
-                                        $selected = "Selected";
-                                        @endphp
+                                        
+                                    <select class="form-control "  id="role_id" name="role_id" data-placeholder="{{ __('messages.choose_role') }}">
+                                    <option value="">{{ __('messages.select_role') }}</option>
+                                        @forelse($school_roles as $r)
+                                        @if($r['portal_roleid']==3)
+                                        
+                                        <option value="{{$r['id']}}"  {{ (isset($role['school_roleid']) && $role['school_roleid'] ==$r['id']) ? 'selected' : ''  }}>{{ $r['fullname'] }}</option>
                                         @endif
-                                        @endforeach
-                                        <option value="{{$r['id']}}" {{ $selected }}>{{ __('messages.' . strtolower($r['role_name'])) }}</option>
                                         @empty
+                                        
                                         @endforelse
-
                                     </select>
                                 </div>
                             </div>
@@ -533,6 +526,53 @@
                                         </div>
                                         <input type="text" class="form-control" value="{{ isset($employee['joining_date']) ? $employee['joining_date'] : ''}}" name="joining_date" id="joiningDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="designation_id">{{ __('messages.designation') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id[]" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
+                                        <option value="">{{ __('messages.choose_designation') }}</option>
+                                        @forelse($designation as $des)
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $employee['designation_id']) as $info)
+                                        @if($des['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        <option value="{{$des['id']}}" {{ $selected }}>{{$des['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
+                                        <option value="">{{ __('messages.choose_department') }}</option>
+                                        @forelse($department as $dep)
+                                        @php
+                                        $selected = "";
+                                        @endphp
+                                        @foreach(explode(',', $employee['department_id']) as $info)
+                                        @if($dep['id'] == $info)
+                                        @php
+                                        $selected = "Selected";
+                                        @endphp
+                                        @endif
+                                        @endforeach
+                                        <option value="{{$dep['id']}}" {{ $selected }}>{{$dep['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -973,6 +1013,13 @@
                         </li>
                     </ul>
                     <div class="card-body">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="skip_medical_history" name="skip_medical_history">
+                            <label class="custom-control-label" for="skip_medical_history">{{ __('messages.skipped_medical_history') }}</label>
+                        </div>
+                    </div>
+                    <div id="medical_history_form">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">

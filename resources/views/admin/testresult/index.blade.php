@@ -206,7 +206,36 @@
                                                 <th class="text-center" width="15%">{{ __('messages.status') }}</th>
                                                 <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
                                             </tr>
+                                            </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <table id="stdmark_points" class="table w-100 nowrap" style="display:none;">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">#</th>
+                                                <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
+                                                <th class="text-center" width="20%">{{ __('messages.points') }}</th>
+                                                <th class="text-center" width="15%">{{ __('messages.pass') }}/{{ __('messages.fail') }}</th>
+                                                <th class="text-center" width="15%">{{ __('messages.status') }}</th>
+                                                <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
+                                            </tr>
 
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <table id="stdmark_freetext" class="table w-100 nowrap" style="display:none;">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">#</th>
+                                                <th class="text-center" width="10%">{{ __('messages.student_name') }}</th>
+                                                <th class="text-center" width="20%">{{ __('messages.text') }}</th>
+                                                <th class="text-center" width="15%">{{ __('messages.pass') }}/{{ __('messages.fail') }}</th>
+                                                <th class="text-center" width="15%">{{ __('messages.status') }}</th>
+                                                <th class="text-center" width="30%">{{ __('messages.memo') }}</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>
@@ -445,6 +474,8 @@
     // var getSubjectDivisionMark = "{{ config('constants.api.get_subject_division_mark') }}";
     var getSubjectMarkStatus = "{{ config('constants.api.get_subject_mark_status') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var getpointresultpage = "{{ config('constants.api.get_pointsresult') }}";
+    
     var teacherID = null;
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
