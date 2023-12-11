@@ -886,7 +886,8 @@ return [
 
         //retired person
         'retired_list' => $url.'/retired/list',
-        
+        //add promotion bulk
+        'promotion_data_bulk' => $url.'/get_student_list/promotion_data_bulk',
         // Menu List
         'menus_list' => $url.'/menus/list',      
         'menuaccess_list' => $url.'/menus/accesslist',                     

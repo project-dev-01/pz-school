@@ -340,6 +340,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('promotion/index', [AdminController::class, 'Promotion'])->name('admin.promotion.index');
         Route::post('promotion/add', [AdminController::class, 'PromotionAdd'])->name('admin.promotion.add');
         Route::get('promotion/bulk', [AdminController::class, 'PromotionBulk'])->name('admin.promotion.bulk');
+        Route::post('promotion/import_excel', [AdminController::class, 'PromotionBulkImport'])->name('admin.promotion.import.add');
 
         // Time Table Bulk
         Route::post('timetable/bulk/add', [AdminController::class, 'addBulkTimetable'])->name('admin.timetable.bulk.add');

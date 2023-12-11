@@ -57,7 +57,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <form method="post" enctype="multipart/form-data" action="{{ route('admin.student.import.add') }}">
+                <form method="post" enctype="multipart/form-data" action="{{ route('admin.promotion.import.add') }}">
                     {{ csrf_field() }}
                     <div class="form-group" style="text-align: center;">
                         <div class="card-body" style="margin-left: 17px;">
@@ -105,10 +105,12 @@
                                     <th># Attendance No</th>
                                     <th>Student Name</th>
                                     <th>Student Number</th>
+                                    <th>Current Dept</th>
                                     <th>Current Grade</th>
                                     <th>Current Class</th>
                                     <th>Current Semester</th>
                                     <th>Current Session</th>
+                                    <th style="background-color: orange;">Promoted Dept</th>
                                     <th style="background-color: orange;">Promoted Grade</th>
                                     <th style="background-color: orange;">Promoted Class</th>
                                     <th style="background-color: orange;">Promoted Semester</th>
@@ -116,53 +118,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" id="selectAllchkbox"></td>
-                                    <td>1
-                                        <a href="#" data-toggle="modal" data-target="#centermodal"><i class="fa fa-caret-down" style="color:solid blue;font-size: 18px;padding: 0px 0px 0px 12px;"></i></a>
-                                    </td>
-                                    <td>XXXX</td>
-                                    <td>9ABCD2322</td>
-                                    <td>Grade 1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Morning</td>
-                                    <td>Grade 2</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>Morning</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="selectAllchkbox"></td>
-                                    <td>2
-                                        <a href="#" data-toggle="modal" data-target="#centermodal"><i class="fa fa-caret-down" style="color:solid blue;font-size: 18px;padding: 0px 0px 0px 12px;"></i></a>
-                                    </td>
-                                    <td>YYYY</td>
-                                    <td>9ABCD2323</td>
-                                    <td>Grade 1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Morning</td>
-                                    <td>Grade 2</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>Morning</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" id="selectAllchkbox"></td>
-                                    <td>3
-                                        <a href="#" data-toggle="modal" data-target="#centermodal"><i class="fa fa-caret-down" style="color:solid blue;font-size: 18px;padding: 0px 0px 0px 12px;"></i></a>
-                                    </td>
-                                    <td>ZZZZ</td>
-                                    <td>9ABCD2324</td>
-                                    <td>Grade 1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Morning</td>
-                                    <td>Grade 2</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>Morning</td>
+                            <tr>
+                            @if(session::get('data'))
+                            @foreach(session::get('data') as $index => $outerArray)
+                                @foreach($outerArray as $innerArray)
+                                    <tr> <!-- Assuming you are in a table row -->
+                                        <td><input type="checkbox" id="selectAllchkbox"></td>
+                                        @foreach($innerArray[0] as $key => $value)
+                                            <td>
+                                                @if(isset($value))
+                                                    {{ $value }}
+                                                    @if($key === 'attendance_no')
+                                                        <a href="#" data-toggle="modal" data-target="#centermodal"><i class="fa fa-caret-down" style="color:solid blue;font-size: 18px;padding: 0px 0px 0px 12px;"></i></a>
+                                                    @endif
+                                                @else
+                                                    Debug: {{ print_r($innerArray, true) }}
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+                            @endforeach      
+                            @endif
                                 </tr>
                             </tbody>
                         </table>
@@ -236,4 +213,14 @@
         });
     });
 </script>
-@endsection
+<script>
+    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
+    var getStudentListByClassSectionUrl = "{{ config('constants.api.get_student_by_class_section_sem_ses') }}";
+    // default image test
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
+    var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
+
+    var admin_promotion_storage = localStorage.getItem('admin_promotion_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+</script>
+<script src="{{ asset('js/custom/promotion.js') }}"></script>@endsection

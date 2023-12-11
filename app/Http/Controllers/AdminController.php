@@ -2125,6 +2125,44 @@ class AdminController extends Controller
     {
         return view('admin.promotion.student');
     }
+    public function PromotionBulkImport(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        } else {
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $base64 = base64_encode(file_get_contents($request->file('file')));
+
+            $data = [
+                'file' => $base64,
+                'fileName' => $filename,
+                'extension' => $extension,
+                'tempPath' => $tempPath,
+                'fileSize' => $fileSize,
+                'mimeType' => $mimeType,
+            ];
+            $response = Helper::PostMethod(config('constants.api.promotion_data_bulk'), $data);
+           // return $response;
+           if (isset($response['code']) && $response['code'] == 200) {
+
+                return redirect()->route('admin.promotion.bulk')->with([
+                    'success' => 'Imported Successfully',
+                    'data' => $response['data'], // Add your additional data here
+                ]);
+            } else {
+                return redirect()->route('admin.promotion.bulk')->with('errors', $response['data']);
+            }
+        }
+    }
     // add Timetable
     public function addTimetable(Request $request)
     {

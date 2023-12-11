@@ -21,7 +21,7 @@
                         <span class="text-danger error-text discription_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="name">{{ __('messages.file') }}<span class="text-danger">*</span></label>
+                        <label for="name">{{ __('messages.file') }}<span class="text-danger">*</span> (PDF file Only)</label>
                         <input type="file" id="file" name="file" class="form-control" placeholder="{{ __('messages.enter_file') }}">
                         <span class="text-danger error-text file_error"></span>
                     </div>
@@ -63,7 +63,7 @@
                             </select>
                         </div>
                     </div>
-                    <div id="parent" data-value="parent">
+                    <div id="parentss" data-value="parent">
                         <div class="form-group">
                             <label for="parent_id">{{ __('messages.parent') }}</label>
                             <select id="parent_id" class="form-control" name="parent_id">

@@ -112,9 +112,13 @@
                                             <!-- <th> {{ __('messages.actions') }}</th> -->
                                         </tr>
                                     </thead>
-                                    <tbody >
-                                        
-                                    </tbody>
+                                    <tbody>
+                                    <!-- Placeholder row for "No data available" message -->
+                                    <tr id="no-data-row">
+                                        <td colspan="10" class="text-center">No data available.</td>
+                                    </tr>
+                                    <!-- Actual data rows will be inserted here dynamically -->
+                                </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->

@@ -118,6 +118,7 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     //event routes
+    var bulletin = "{{ route('admin.buletin_board') }}";
     var buletinBoardList = "{{ route('admin.buletin_board.list') }}";
     var buletinBoardDetails = "{{ route('admin.buletin_board.details') }}";
     var buletinBoardDelete = "{{ route('admin.buletin_board.delete') }}";

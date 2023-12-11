@@ -40,11 +40,19 @@ $(function () {
             title: "required",
             discription: "required",
             target_user: "required",
+            file: "required",
         }
     });
     $('#buletinForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
+        var fileName = $("#file").val();
+        var ext = fileName.split('.').pop().toLowerCase();
+
+        if ($.inArray(ext, ['pdf']) === -1) {
+            $(form).find('span.file_error').text('Please select a PDF file.');
+            
+        }
         if ($('#publish').is(":checked")) {
             var date = $("#date").val().trim(); // Trim to remove leading/trailing spaces
             if (date.length === 0) {
@@ -113,10 +121,11 @@ $(function () {
                     $(form).find('span.error-text').text('');
                 },
                 success: function (data) {
+                    console.log(data)
                     if (data.code == 200) {
-                        $('#buletin-table').DataTable().ajax.reload(null, false);
-                        $('.addBuletin').modal('hide');
+                        //$('#buletin-table').DataTable().ajax.reload(null, false);
                         $('.addBuletin').find('form')[0].reset();
+                        window.location.href = bulletin;
                     } else {
                         toastr.error(data.message);
                     }
@@ -211,11 +220,11 @@ $(function () {
         var eventCheck = $("#buletinEditForm").valid();
         if (eventCheck === true) {
             var id =  $('#id').val();
-            console.log(id);
+           // console.log(id);
             var title = $("#titles").val();
             var discription = $("#descriptions").val();
             var file = $('#files')[0].files[0];
-            console.log(file);
+            //console.log(file);
             var publish = $("#publishs").val();
             var date = $("#publish_dates").val();
             var publish_end_dates = $("#publish_end_dates").val();
@@ -225,7 +234,8 @@ $(function () {
                     target_user.push(this.value);
                 }
             });
-            console.log(target_user);
+           // console.log(target_user);
+            console.log($('#oldfile').text());
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -236,7 +246,7 @@ $(function () {
             formData.append('publish', publish);
             formData.append('date', date);
             formData.append('publish_end_dates',publish_end_dates);
-            formData.append('oldfile', $('#oldfile').val());
+            formData.append('oldfile', $('#oldfile').text());
             formData.append('file', file);
             var form = this;
             $.ajax({
@@ -250,6 +260,7 @@ $(function () {
                     $(form).find('span.error-text').text('');
                 },
                 success: function (data) {
+                    console.log(data);
                     if (data.code == 0) {
                         $.each(data.error, function (prefix, val) {
                             $(form).find('span.' + prefix + '_error').text(val[0]);
@@ -257,7 +268,7 @@ $(function () {
                     } else {
                         if (data.code == 200) {
                             $('#buletin-table').DataTable().ajax.reload(null, false);
-                            window.location.href = buletinBoardList;
+                            window.location.href = bulletin;
                             toastr.success(data.message);
                         } else {
                             toastr.error(data.message);
@@ -500,7 +511,7 @@ $(function () {
     $('#class').hide();  // Initially disable the multi-select
     $('#department').hide();
     $('#student').hide();
-    $('#parent').hide();
+    $('#parentss').hide();
     $('#target_user').change(function () {
         var selectedOptions = $(this).val();
 
@@ -510,35 +521,35 @@ $(function () {
             $('#class').show();
             $('#department').show();
             $('#student').show();
-            $('#parent').show();
+            $('#parentss').show();
         }else if (selectedOptions && selectedOptions.includes('4') && selectedOptions.includes('5')){
             $('#class').show();
             $('#department').show();
-            $('#parent').show();
+            $('#parentss').show();
             $('#student').hide();
         }else if (selectedOptions && selectedOptions.includes('5') && selectedOptions.includes('6')){
             $('#class').show();
             $('#student').show();
-            $('#parent').show();
+            $('#parentss').show();
             $('#department').hide();
         }else if (selectedOptions && selectedOptions.includes('4')) {
             // Hide the other dropdown and show class dropdown
             $('#department').show();
             $('#class').hide();
             $('#student').hide();
-            $('#parent').hide();
+            $('#parentss').hide();
         }else if (selectedOptions && selectedOptions.includes('5')) {
             // Hide the other dropdown and show class dropdown
             $('#department').hide();
             $('#class').show();
             $('#student').hide();
-             $('#parent').show();
+             $('#parentss').show();
         }else if (selectedOptions && selectedOptions.includes('6')) {
             // Hide the other dropdown and show class dropdown
             $('#department').hide();
             $('#class').show();
             $('#student').show();
-            $('#parent').hide();
+            $('#parentss').hide();
         }else {
             // Show class dropdown and hide the other dropdown
             $('#class').hide();
@@ -546,15 +557,15 @@ $(function () {
         }
     });
   
-    $("#filtersectionID").on('change', function (e) {
+    $("#target_user").on('change', function (e) {
         e.preventDefault();
         var target_user = $("#target_user").val();
         var class_id = $("#changeClassName").val();
-        var section_id = $(this).val();
+        var section_id = $("#filtersectionID").val();
        
       // console.log('Active div data-value:', activeDivDataValue);  // Use the stored data-value
-   
-       if(target_user.includes('6'))
+        console.log(target_user);
+       if(target_user.includes('6') && target_user.includes('5'))
        {
             $("#student_id").empty();
             $("#student_id").append('<option value="">'+select_student+'</option>');
@@ -566,7 +577,6 @@ $(function () {
                     });
                 }
             }, 'json');
-       }else{
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
@@ -577,6 +587,30 @@ $(function () {
                     });
                 }
             }, 'json');
+       }else if(target_user.includes('5'))
+       {
+            $("#parent_id").empty();
+            $("#parent_id").append('<option value="">Select Parent</option>');
+            $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $("#parent_id").append('<option value="' + val.id + '">' + val.parent_name + '</option>');
+                    });
+                }
+            }, 'json');
+       }else {
+
+        $("#student_id").empty();
+        $("#student_id").append('<option value="">'+select_student+'</option>');
+        $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+            console.log(res);
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#student_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
        }
        
     });
