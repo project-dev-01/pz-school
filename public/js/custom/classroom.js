@@ -153,6 +153,27 @@ $(function () {
     // onload show start
     $(".classRoomHideSHow").hide();
 
+    // console.log('test',$.datepicker.noWeekends)
+    // var dates = ["10-10-2023", "11-10-2023"];
+    // function DisableDates(date) {
+
+    //     var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+    //     var day = date.getDay();
+    //     return [( day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
+    // }
+    // $(function() {
+    //     $("#classDate").datepicker({
+    //         dateFormat: 'dd-mm-yy',
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         autoclose: true,
+    //         yearRange: "-100:+50",
+    //         maxDate: 0,
+    //         beforeShowDay: DisableDates,
+    //         // beforeShowDay: $.datepicker.noWeekends,
+    //         daysOfWeekDisabled: [0,6]
+    //     });
+    // });
     $("#classDate").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,

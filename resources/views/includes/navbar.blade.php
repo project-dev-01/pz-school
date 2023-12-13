@@ -238,6 +238,10 @@
                     <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
+                    @elseif(Session::get('role_id') == '7')
+                    <form id="logout-form" action="{{ route('guest.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                     @else
                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                         @csrf

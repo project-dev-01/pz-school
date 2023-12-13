@@ -217,6 +217,27 @@
     var yearly_lang = "{{ __('messages.yearly') }}";
     var semester_lang = "{{ __('messages.semester') }}";
     var monthly_lang = "{{ __('messages.monthly') }}";
+    var education_lang = "{{ __('messages.education') }}";
+    var nationality_lang = "{{ __('messages.nationality') }}";
+    var occupation_lang = "{{ __('messages.occupation') }}";
+    var income_lang = "{{ __('messages.income') }}";
+    var address_1_lang = "{{ __('messages.address_1') }}";
+    var address_2_lang = "{{ __('messages.address_2') }}";
+    var city_lang = "{{ __('messages.city') }}";
+    var post_code_lang = "{{ __('messages.post_code') }}";
+    var state_lang = "{{ __('messages.state') }}";
+    var country_lang = "{{ __('messages.country') }}";
+    var mobile_no_lang = "{{ __('messages.mobile_no') }}";
+    var race_lang = "{{ __('messages.race') }}";
+    var religion_lang = "{{ __('messages.religion') }}";
+    var blood_group_lang = "{{ __('messages.blood_group') }}";
+    var nric_lang = "{{ __('messages.nric') }}";
+    var passport_lang = "{{ __('messages.passport_number') }}";
+    var passport_expiry_date_lang = "{{ __('messages.passport_expiry_date') }}";
+    var passport_photo_lang = "{{ __('messages.passport_photo') }}";
+    var visa_number_lang = "{{ __('messages.visa_number') }}";
+    var visa_expiry_date_lang = "{{ __('messages.visa_expiry_date') }}";
+    var visa_photo_lang = "{{ __('messages.visa_photo') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

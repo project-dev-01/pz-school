@@ -56,6 +56,48 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
+
+    $("#passport_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#visa_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+    
+    $('#passport_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#passport_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#passport_photo_name').text("File greater than 2Mb");
+            $("#passport_photo_name").addClass("error");
+            $('#passport_photo').val('');
+        } else {
+            $("#passport_photo_name").removeClass("error");
+            $('#passport_photo_name').text(file.name);
+        }
+    });
+    
+    $('#visa_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#visa_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#visa_photo_name').text("File greater than 2Mb");
+            $("#visa_photo_name").addClass("error");
+            $('#visa_photo').val('');
+        } else {
+            $("#visa_photo_name").removeClass("error");
+            $('#visa_photo_name').text(file.name);
+        }
+    });
     $("#dob").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -395,19 +437,24 @@ $(function () {
                 var class_id = data.academic_grade;
                 getSectionByClass(class_id);
 
-                if (data.father_first_name) {
-                    $("#father_form").show("slow");
-                    $("#father_info").show();
-                    $("#father_photo").show();
-                    var father_name = data.father_first_name + " " + data.father_last_name;
-                    $('#father_name').val(father_name);
-                    $("#father_first_name").val(data.father_first_name);
-                    $("#father_last_name").val(data.father_last_name);
-                    $("#father_mobile_no").val(data.father_phone_number);
-                    $("#father_occupation").val(data.father_occupation);
-                    $("#father_email").val(data.father_email);
+                console.log('data',data)
+                if(data.father_first_name != null){
+
+                    if(data.father_first_name.length > 0){
+                        $("#father_form").show("slow");
+                        $("#father_info").show();
+                        $("#father_photo").show();
+                        var father_name = data.father_first_name + " " + data.father_last_name;
+                        $('#father_name').val(father_name);
+                        $("#father_first_name").val(data.father_first_name);
+                        $("#father_last_name").val(data.father_last_name);
+                        $("#father_mobile_no").val(data.father_phone_number);
+                        $("#father_occupation").val(data.father_occupation);
+                        $("#father_email").val(data.father_email);
+                    }
                 }
-                if (data.father_first_name) {
+                if(data.mother_first_name != null){
+                if(data.mother_first_name.length > 0){
                     $("#mother_form").show("slow");
                     $("#mother_info").show();
                     $("#mother_photo").show();
@@ -419,8 +466,10 @@ $(function () {
                     $("#mother_occupation").val(data.mother_occupation);
                     $("#mother_email").val(data.mother_email);
                 }
+            }
 
-                if (data.guardian_relation) {
+                if(data.guardian_first_name != null){
+                if(data.guardian_first_name.length > 0){
                     $("#guardian_form").show("slow");
                     $("#guardian_info").show();
                     $("#guardian_photo").show();
@@ -434,9 +483,9 @@ $(function () {
                     $("#guardian_email").val(data.guardian_email);
                 }
             }
+            }
         }, 'json');
     }
-
 
     $("#application_id").on('change', function (e) {
         e.preventDefault();

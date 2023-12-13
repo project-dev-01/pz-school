@@ -69,6 +69,64 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
+    
+    var dates = ["10-10-2023", "11-10-2023"];
+    function DisableDates(date) {
+
+        var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+        var day = date.getDay();
+        return [( day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
+    }
+    
+    $("#termDay").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50",
+        maxDate: 0,
+        beforeShowDay: DisableDates,
+    });
+    $('#termYear').datepicker({
+        changeMonth: false,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        // autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+    $("#termYear").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+
+    $('#termMonth').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        // autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+    $("#termMonth").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+
 
     $("#classDate").focus(function () {
         $(".ui-datepicker-calendar").hide();
@@ -290,6 +348,8 @@ $(function () {
                                 var currentDate = formatDate(new Date(s));
 
                                 var i = 0;
+                                var bg = "";
+                                var title="";
                                 attendance_details.forEach(function (res) {
 
                                     if (currentDate == res.date) {
@@ -303,9 +363,13 @@ $(function () {
                                         if (res.status == "late") {
                                             color = "btn-warning";
                                         }
-                                        attendanceListShow += '<td>' +
+                                        if(res.student_id==2){
+                                            bg = "#5c595b";
+                                        }
+                                        title  = "Homeroom Teacher : Check \n Nursing Teacher :Test";
+                                        attendanceListShow += '<td style="background-color:'+bg+'">' +
                                             '<input type="hidden" value="' + res.status + '" ></input>' +
-                                            '<button type="button" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
+                                            '<button type="button"  data-toggle="tooltip"  href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" title="'+title+'" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
                                             '</td>';
                                         i = 1;
                                     }

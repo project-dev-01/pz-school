@@ -79,6 +79,7 @@ class Kernel extends HttpKernel
         'isTeacher' => \App\Http\Middleware\isTeacherMiddleware::class,
         'isParent' => \App\Http\Middleware\isParentMiddleware::class,
         'isStudent' => \App\Http\Middleware\isStudentMiddleware::class,
+        'isGuest' => \App\Http\Middleware\isGuestMiddleware::class,
         'isTenantConnection' => \App\Http\Middleware\ConfigureTenantConnection::class,
         'guardswitcher' => GuardSwitcher::class,
         'Checkmenuaccess' => \App\Http\Middleware\Checkmenuaccess::class

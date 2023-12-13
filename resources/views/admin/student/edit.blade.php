@@ -467,17 +467,67 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    @if($form_field['name_english'] == 0)
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="gender">{{ __('messages.gender') }}</label>
-                                                <select id="gender" name="gender" class="form-control">
-                                                    <option value="">{{ __('messages.select_gender') }}</option>
-                                                    <option value="Male" {{ isset($student['gender']) ?  $student['gender'] == "Male" ? 'Selected' : '' : "" }}>{{ __('messages.male') }}</option>
-                                                    <option value="Female" {{ isset($student['gender']) ?  $student['gender'] == "Female" ? 'Selected' : '' : "" }}>{{ __('messages.female') }}</option>
-                                                </select>
+                                                <label for="">{{ __('messages.first_name') }}({{ __('messages.english') }})<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($student['first_name_english']) ? $student['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name') }}({{ __('messages.english') }})</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($student['last_name_english']) ? $student['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
+                                    @if($form_field['name_furigana'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.first_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="first_name_furigana" class="form-control alloptions" maxlength="50" id="first_name_furigana" value="{{ isset($student['first_name_furigana']) ? $student['first_name_furigana'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($student['last_name_furigana']) ? $student['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
@@ -494,60 +544,21 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                                <input type="text" maxlength="20" id="txt_nric" class="form-control alloptions" value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999" name="txt_nric" data-parsley-trigger="change">
+                                                <label for="gender">{{ __('messages.gender') }}</label>
+                                                <select id="gender" name="gender" class="form-control">
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
+                                                    <option value="Male" {{ isset($student['gender']) ?  $student['gender'] == "Male" ? 'Selected' : '' : "" }}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{ isset($student['gender']) ?  $student['gender'] == "Female" ? 'Selected' : '' : "" }}>{{ __('messages.female') }}</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                                <input type="text" maxlength="20" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($student['passport']) ? $student['passport'] : ''}}">
+                                                <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="txt_caste">{{ __('messages.race') }}</label>
-                                                <select class="form-control" name="txt_race" id="addRace">
-                                                    <option value="">{{ __('messages.select_race') }}</option>
-                                                    @forelse($races as $r)
-                                                    <option value="{{$r['id']}}" {{ isset($student['race']) ?  $student['race'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['races_name']}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="txt_religion">{{ __('messages.religion') }}</label>
-                                                <select class="form-control" name="txt_religion" id="religion">
-                                                    <option value="">{{ __('messages.select_religion') }}</option>
-                                                    @forelse($religion as $r)
-                                                    <option value="{{$r['id']}}" {{ isset($student['religion']) ?  $student['religion'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['religions_name']}}</option>
-                                                    @empty
-                                                    @endforelse
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
-                                                <select id="blooddgrp" name="blooddgrp" class="form-control">
-                                                    <option value="">{{ __('messages.select_blood_group') }}</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "O+" ? 'Selected' : '' : "" }}>O+</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "A+" ? 'Selected' : '' : "" }}>A+</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "B+" ? 'Selected' : '' : "" }}>B+</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "AB+" ? 'Selected' : '' : "" }}>AB+</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "O-" ? 'Selected' : '' : "" }}>O-</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "A-" ? 'Selected' : '' : "" }}>A-</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "B-" ? 'Selected' : '' : "" }}>B-</option>
-                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "AB-" ? 'Selected' : '' : "" }}>AB-</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -585,15 +596,151 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="drp_country">{{ __('messages.country') }}</label>
-                                                <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
+                                                <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        @if($form_field['race'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_caste">{{ __('messages.race') }}</label>
+                                                <select class="form-control" name="txt_race" id="addRace">
+                                                    <option value="">{{ __('messages.select_race') }}</option>
+                                                    @forelse($races as $r)
+                                                    <option value="{{$r['id']}}" {{ isset($student['race']) ?  $student['race'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['races_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($form_field['religion'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_religion">{{ __('messages.religion') }}</label>
+                                                <select class="form-control" name="txt_religion" id="religion">
+                                                    <option value="">{{ __('messages.select_religion') }}</option>
+                                                    @forelse($religion as $r)
+                                                    <option value="{{$r['id']}}" {{ isset($student['religion']) ?  $student['religion'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['religions_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($form_field['blood_group'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
+                                                <select id="blooddgrp" name="blooddgrp" class="form-control">
+                                                    <option value="">{{ __('messages.select_blood_group') }}</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "O+" ? 'Selected' : '' : "" }}>O+</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "A+" ? 'Selected' : '' : "" }}>A+</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "B+" ? 'Selected' : '' : "" }}>B+</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "AB+" ? 'Selected' : '' : "" }}>AB+</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "O-" ? 'Selected' : '' : "" }}>O-</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "A-" ? 'Selected' : '' : "" }}>A-</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "B-" ? 'Selected' : '' : "" }}>B-</option>
+                                                    <option {{ isset($student['blood_group']) ?  $student['blood_group'] == "AB-" ? 'Selected' : '' : "" }}>AB-</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                        @if($form_field['nationality'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nationality">{{ __('messages.nationality') }}</label>
+                                                <input type="text" maxlength="50" id="nationality" class="form-control country" placeholder="{{ __('messages.nationality') }}" name="nationality" value="{{ isset($student['nationality']) ? $student['nationality'] : ''}}" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($form_field['nric'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_nric">{{ __('messages.nric_number') }}</label>
+                                                <input type="text" maxlength="20" id="txt_nric" class="form-control alloptions" value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999" name="txt_nric" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($form_field['passport'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="Passport">{{ __('messages.passport_number') }}</label>
+                                                <input type="text" maxlength="20" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($student['passport']) ? $student['passport'] : ''}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}" data-parsley-trigger="change">
+                                            <div class="form-group mb-3">
+                                                <label for="text">{{ __('messages.passport_expiry_date') }}<span class="text-danger"></span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['passport_expiry_date']) ? $student['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                </div>
                                             </div>
                                         </div>
+                                        
+                                        <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="passport_photo">{{ __('messages.passport_photo') }}</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg" >
+                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
+                                        </div>
+                                    </div>
+                                    @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
+                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
+                                    @endif
+                                    <span id="passport_photo_name"></span>
+                                </div>
+                            </div>
+                                        @endif
+                                        @if($form_field['visa'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="visa_number">{{ __('messages.visa_number') }}</label>
+                                                <input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" name="visa_number" value="{{ isset($student['visa_number']) ? $student['visa_number'] : ''}}" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="text">{{ __('messages.visa_expiry_date') }}<span class="text-danger"></span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($student['visa_photo']) ? $student['visa_photo'] : ''}}" />
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="visa_photo">{{ __('messages.visa_photo') }}</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg" >
+                                            <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
+                                        </div>
+                                    </div>
+                                    @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
+                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
+                                    @endif
+                                    <span id="visa_photo_name"></span>
+                                </div>
+                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1736,8 +1883,9 @@
         // utilsScript: "js/utils.js"
     });
 
-    $("#drp_country").countrySelect({
-        responsiveDropdown: true
+    $(".country").countrySelect({
+        responsiveDropdown: true,
+        preferredCountries: ['my', 'jp'],
     });
 </script>
 <script>

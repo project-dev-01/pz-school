@@ -760,6 +760,63 @@ class AuthController extends Controller
             return redirect()->route('super_admin.login')->with('error', 'Email and password are wrong');
         }
     }
+    public function authenticateGuest(Request $request)
+    {
+        $response = Http::post(config('constants.api.login'), [
+            'email' => $request->email,
+            'branch_id' => $request->branch_id,
+            'password' => $request->password,
+            'user_browser' => $request->user_browser,
+            'user_os' => $request->user_os,
+            'user_device' => $request->user_device
+        ]);
+        $userDetails = $response->json();
+        // dd($userDetails);
+        $user_name = "";
+        $request->session()->regenerate();
+        if ($userDetails['code'] == 200) {
+            if ($userDetails['data']['subsDetails']) {
+                // check 2 FA Enable
+                $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
+                // add remember me
+                $this->rememberMe($request);
+                if ($twoFaEnable == 1) {
+                    $google2fa_secret = isset($userDetails['data']['user']['google2fa_secret']) ? $userDetails['data']['user']['google2fa_secret'] : null;
+                    $routePrefix = trim($request->route()->getPrefix(), '/');
+                    // set session for 2fa
+                    $request->session()->put('two_fa_email', $request->email);
+                    $request->session()->put('two_fa_pass', $request->password);
+                    $request->session()->put('two_branch_id', $request->branch_id);
+                    $request->session()->put('google2fa_secret', $google2fa_secret);
+                    $request->session()->put('routePrefix', $routePrefix);
+                    if (is_null($google2fa_secret)) {
+                        return redirect()->route('2fa.register');
+                    } else {
+                        return redirect()->route('2fa.view');
+                    }
+                } else {
+                    // multiple roles same account
+                    $role_ids = explode(",", $userDetails['data']['user']['role_id']);
+                    $matchRoleIndex = array_search('7', $role_ids, true);
+                    $roleID = $role_ids[$matchRoleIndex];
+                    if ($roleID == 7) {
+                        $user_name = $this->sessionCommon($request, $userDetails, $roleID);
+                    }
+                    if ($roleID == 7) {
+                        $redirect_route = route('guest.dashboard');
+                        return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
+                    } else {
+                        return redirect()->route('guest.login')->with('error', 'Invalid Credential');
+                    }
+                }
+            } else {
+                return redirect()->route('guest.login')->with('error', 'Access denied please contact admin');
+            }
+        } else {
+            return redirect()->route('parent.login')->with('error', $userDetails['message']);
+        }
+    }
+
 
     public function logoutSA(Request $request)
     {
@@ -889,6 +946,29 @@ class AuthController extends Controller
             }
         } else {
             return redirect()->route('student.login')->withHeaders([
+                'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                'Pragma' => 'no-cache'
+            ]);
+        }
+    }
+    public function logoutGuest(Request $request)
+    {
+        if (session()->has('role_id')) {
+            $this->logoutCommon($request);
+            if (isset($request->idle_timeout)) {
+                $response = [
+                    'code' => 200,
+                    'redirect_url' => route('guest.login')
+                ];
+                return response()->json($response, 200);
+            } else {
+                return redirect()->route('guest.login')->withHeaders([
+                    'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+                    'Pragma' => 'no-cache'
+                ]);
+            }
+        } else {
+            return redirect()->route('guest.login')->withHeaders([
                 'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
                 'Pragma' => 'no-cache'
             ]);
@@ -1106,6 +1186,8 @@ class AuthController extends Controller
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
+        // return $req;
+        // dd($userDetails);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('school_roleid', $userDetails['data']['user']['school_roleid']);
@@ -1422,5 +1504,30 @@ class AuthController extends Controller
                 'Pragma' => 'no-cache'
             ]);
         }
+    }
+    
+    public function guestLogin(Request $request)
+    {
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+        $image_url =  config('constants.image_url') . "/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Student.webp";
+        
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
+        
+            return view(
+                'auth.guest_login',
+                [
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
     }
 }

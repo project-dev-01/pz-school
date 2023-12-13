@@ -1387,6 +1387,443 @@ class PdfController extends Controller
         $fileName =  __('messages.attendance_report') . $name . ".pdf";
         return $pdf->download($fileName);
     }
+    public function attendance_student_pdf_day_test(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'year_month' => $request->year_month,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $footer_text = session()->get('footer_text');
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> " .  __('messages.attendance_report') . "</header>
+        <footer>" . $footer_text . "</footer>";
+
+        $response .= '<div class="table-responsive">
+            <table class="">
+            <tr>
+                <th class="align-center">Total Students: <br>28</th>
+                <th class="align-center">Present Students:  <br>24</th>
+                <th class="align-center">Absent Students: <br> 4</th>
+            </tr>
+        </table>
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+              <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Name (English)</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Grade</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Class</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">Status</th>
+            <th class="align-top" style="border: 1px solid; padding:12px;">Remarks</th>';
+
+        $response .= '</tr></thead><tbody>';
+        $response .= '
+                <tr>
+                    <td class="text-center" style="border: 1px solid; padding:12px;">1</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 佐藤 直美</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Naomi Sato</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Present</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;">Good</td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="border: 1px solid; padding:12px;">2</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 生田 宏枝</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Hiroe Ikuta</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Absent</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Sick Leave </td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="border: 1px solid; padding:12px;">3</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 平良 孝浩</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Takahiro Taira</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Present</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Execellent </td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="border: 1px solid; padding:12px;">4</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 水田 崇</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Takashi Mizuta</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> Present</td>
+                    <td class="text-center" style="border: 1px solid; padding:12px;"> </td>
+                </tr>';
+        
+        $response .= '</tbody></table></div>';
+        $response .= "</body></html>";
+
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName =  __('messages.attendance_report') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+    public function attendance_student_pdf_term_test(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'year_month' => $request->year_month,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $footer_text = session()->get('footer_text');
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> Attendance Report - Term</header>
+        <footer>" . $footer_text . "</footer>";
+
+        $response .= '<div class="table-responsive">
+            
+            <table class="">
+            <tr>
+                <th style="text-align:center">Total Students : <br>28</th>
+                <th style="text-align:center">Total School Days : <br>24</th>
+                <th style="text-align:center">Total Holidays : <br>4</th>
+            </tr>
+        </table><table width="100%" style="border-collapse: collapse; border: 0px;">
+        <thead>
+           <tr>
+           <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Name (English)</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Grade</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Class</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Term</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">No of Present</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">No of Absent</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">No of Late</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">Remarks</th>';
+
+     $response .= '</tr></thead><tbody>';
+     $response .= '
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 佐藤 直美</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Naomi Sato</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> First Term</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 18</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">Good</td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 生田 宏枝</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Hiroe Ikuta</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> First Term</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 16</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Sick Leave </td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">3</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 平良 孝浩</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Takahiro Taira</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> First Term</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 20</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 0</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Execellent </td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 水田 崇</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Takashi Mizuta</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Second Term</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 17</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 3</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> </td>
+             </tr>';
+        $response .= '</tbody></table></div>';
+        $response .= "</body></html>";
+
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName =  __('messages.attendance_report') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+    public function attendance_student_pdf_year_test(Request $request)
+    {
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'subject_id' => $request->subject_id,
+            'semester_id' => $request->semester_id,
+            'session_id' => $request->session_id,
+            'year_month' => $request->year_month,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $footer_text = session()->get('footer_text');
+        $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> Attendance Report - Year</header>
+        <footer>" . $footer_text . "</footer>";
+
+        $response .= '<div class="table-responsive">
+            
+            <table class="">
+            <tr>
+                <th style="text-align:center">Total Students : <br>28</th>
+                <th style="text-align:center">Total School Days : <br>24</th>
+                <th style="text-align:center">Total Holidays : <br>4</th>
+            </tr>
+        </table><table width="100%" style="border-collapse: collapse; border: 0px;">
+        <thead>
+           <tr>
+           <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Name (English)</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Grade</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">Class</th>
+              <th class="align-top" style="border: 1px solid; padding:12px;">No of Present</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">No of Absent</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">No of Late</th>
+         <th class="align-top" style="border: 1px solid; padding:12px;">Remarks</th>';
+
+     $response .= '</tr></thead><tbody>';
+     $response .= '
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 佐藤 直美</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Naomi Sato</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 18</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">Good</td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 生田 宏枝</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Hiroe Ikuta</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 16</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Sick Leave </td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">3</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 平良 孝浩</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Takahiro Taira</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 20</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 0</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 2</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Execellent </td>
+             </tr>
+             <tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 水田 崇</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> Takashi Mizuta</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1年</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 1組</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 17</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 3</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> 4</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;"> </td>
+             </tr>';
+        $response .= '</tbody></table></div>';
+        $response .= "</body></html>";
+
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName =  __('messages.attendance_report_year') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
     public function attendance_employee_pdf(Request $request)
     {
         $data = [

@@ -1061,6 +1061,8 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // dd($form_field['data'][0]);
         $data = [
             'admission' => 1
         ];
@@ -1081,6 +1083,7 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'application' => isset($application['data']) ? $application['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'department' => isset($department['data']) ? $department['data'] : []
@@ -1097,6 +1100,22 @@ class AdminController extends Controller
     public function parent()
     {
         return view('admin.parent.index');
+    }
+
+    public function parentUpdateInfo(Request $request)
+    {
+        // if($request->ajax()){
+
+        // }
+        return view('admin.parent.update_list');
+    }
+
+    public function studentUpdateInfo(Request $request)
+    {
+        // if($request->ajax()){
+
+        // }
+        return view('admin.student.update_list');
     }
 
     public function employee()
@@ -1492,6 +1511,26 @@ class AdminController extends Controller
             $base64 = null;
             $extension = null;
         }
+        
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
 
         $data = [
             'role_id' => $request->role_id,
@@ -1552,7 +1591,19 @@ class AdminController extends Controller
             'employee_type_ids' => $request->employee_type_ids,
             'employee_type_start' => $request->employee_type_start,
             'employee_type_end' => $request->employee_type_end,
-            'job_title' => $request->job_title
+            'job_title' => $request->job_title,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_add'), $data);
@@ -1602,6 +1653,7 @@ class AdminController extends Controller
         $stream_types = Helper::GetMethod(config('constants.api.stream_types'));
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
         $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
@@ -1625,7 +1677,7 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'job_title_list' => isset($job_title_list['data']) ? $job_title_list['data'] : [],
                 'employee_type_list' => isset($employee_type_list['data']) ? $employee_type_list['data'] : [],
-
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
             ]
         );
     }
@@ -1649,6 +1701,7 @@ class AdminController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
 
         return view(
@@ -1665,6 +1718,7 @@ class AdminController extends Controller
                 'stream_types' => isset($stream_types['data']) ? $stream_types['data'] : [],
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'job_title_list' => isset($job_title_list['data']) ? $job_title_list['data'] : [],
                 'employee_type_list' => isset($employee_type_list['data']) ? $employee_type_list['data'] : [],
             ]
@@ -1688,6 +1742,26 @@ class AdminController extends Controller
         } else {
             $base64 = null;
             $extension = null;
+        }
+        
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
         }
         $data = [
             'id' => $request->id,
@@ -1750,7 +1824,21 @@ class AdminController extends Controller
             'employee_type_ids' => $request->employee_type_ids,
             'employee_type_start' => $request->employee_type_start,
             'employee_type_end' => $request->employee_type_end,
-            'job_title' => $request->job_title
+            'job_title' => $request->job_title,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'visa_old_photo' => $request->visa_old_photo,
+            'passport_old_photo' => $request->passport_old_photo,
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.employee_update'), $data);
@@ -2905,7 +2993,6 @@ class AdminController extends Controller
                     } else {
                         $notsubunchecked++;
                     }
-
                     if ($work['status'] == "1") {
                         $status = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" style="border:none;">' . $completed_lang . '</button>';
                         $complete++;
@@ -2944,7 +3031,7 @@ class AdminController extends Controller
 									<td>
                                         <i data-feather="file-text" class="icon-dual"></i>
                                         <span class="ml-2 font-weight-semibold">
-                                        <a  href="' . config('constants.image_url') . '/' . 'public/' . config('constants.branch_id') . '/student/homework/' . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a>
+                                        <a  href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/student/homework/' . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a>
                                         </span>
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
@@ -3953,6 +4040,27 @@ class AdminController extends Controller
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
         }
+
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
+
         $data = [
             'year' => $request->year,
             'register_no' => $request->txt_regiter_no,
@@ -4000,7 +4108,18 @@ class AdminController extends Controller
             'confirm_password' => $request->txt_retype_pwd,
             'sudent_application_id' => $request->sudent_application_id,
             'school_roleid' => $request->school_roleid,
-
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
         ];
 
         // dd($data);
@@ -4297,6 +4416,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
         $data = [
             'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
@@ -4327,6 +4447,7 @@ class AdminController extends Controller
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
@@ -4353,6 +4474,26 @@ class AdminController extends Controller
             $extension = $file->getClientOriginalExtension();
         }
 
+
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
 
         $data = [
             'year' => $request->year,
@@ -4405,9 +4546,21 @@ class AdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'school_roleid' => $request->school_roleid,
-
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'visa_old_photo' => $request->visa_old_photo,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'passport_old_photo' => $request->passport_old_photo,
         ];
-
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }
@@ -4465,6 +4618,7 @@ class AdminController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         return view(
             'admin.parent.add',
@@ -4472,6 +4626,7 @@ class AdminController extends Controller
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
         );
@@ -4493,6 +4648,26 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
+        }
+
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
         }
 
         $data = [
@@ -4526,6 +4701,17 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
             'school_roleid' => $request->school_roleid,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
         ];
         //  dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_add'), $data);
@@ -4543,12 +4729,109 @@ class AdminController extends Controller
                 $edit = route('admin.parent.details', $row['id']);
                 return '<div class="button-list">
                 
-                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" ="editParentBtn"><i class="fe-edit"></i></a>
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editParentBtn"><i class="fe-edit"></i></a>
                             <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteParentBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    
+    public function getParentUpdateInfoList(Request $request)
+    {
+        
+        $data = [
+            "status" => "Admin"
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.parent_update_info_list'),$data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+                return '<div class="button-list">
+                
+                <span class="badge badge-soft-warning p-1">Pending</span>
+            </div>';
+            })
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.parent.update_info_view', $row['id']);
+                return '<div class="button-list">
+                
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="ViewParentUpdateBtn"><i class="fe-edit"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions','status'])
+            ->make(true);
+    }
+    public function viewParentUpdateInfo($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
+        $response = Helper::PostMethod(config('constants.api.parent_update_info_view'), $data);
+        // dd($response);
+        return view(
+            'admin.parent.update_view',
+            [
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'education' => isset($education['data']) ? $education['data'] : [],
+                'parent' => isset($response['data']['profile']) ? $response['data']['profile'] : [],
+                'changes' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
+            ]
+        );
+    }
+
+    
+    
+    public function getStudentUpdateInfoList(Request $request)
+    {
+        $data['status'] = "Admin";
+        $response = Helper::GETMethodWithData(config('constants.api.student_update_info_list'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+                return '<div class="button-list">
+                
+                <span class="badge badge-soft-warning p-1">Pending</span>
+            </div>';
+            })
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.student.update_info_view', $row['id']);
+                return '<div class="button-list">
+                
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="ViewStudentUpdateBtn"><i class="fe-edit"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions','status'])
+            ->make(true);
+    }
+    public function viewStudentUpdateInfo($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
+        $response = Helper::PostMethod(config('constants.api.student_update_info_view'), $data);
+        // dd($response);
+        return view(
+            'admin.student.update_view',
+            [
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'education' => isset($education['data']) ? $education['data'] : [],
+                'student' => isset($response['data']['profile']) ? $response['data']['profile'] : [],
+                'changes' => isset($response['data']['student']) ? $response['data']['student'] : [],
+            ]
+        );
     }
     public function getParentDetails($id)
     {
@@ -4559,6 +4842,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         // dd($response);
         return view(
@@ -4570,6 +4854,7 @@ class AdminController extends Controller
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
             ]
         );
@@ -4593,6 +4878,25 @@ class AdminController extends Controller
             $extension = $file->getClientOriginalExtension();
         }
 
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
         $data = [
 
             'id' => $request->id,
@@ -4627,9 +4931,36 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
             'school_roleid' => $request->school_roleid,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'visa_old_photo' => $request->visa_old_photo,
+            'passport_old_photo' => $request->passport_old_photo,
+            'role_id' => session()->get('role_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
+        return $response;
+    }
+    
+    public function updateParentInfo(Request $request)
+    {
+        // dd($request);
+        $response = Helper::PostMethod(config('constants.api.parent_update_info_update'), $request);
+        // dd($response);
+        return $response;
+    }
+    public function updateStudentInfo(Request $request)
+    {
+        $response = Helper::PostMethod(config('constants.api.student_update_info_update'), $request);
         return $response;
     }
     // DELETE Parent Details
@@ -7683,28 +8014,83 @@ class AdminController extends Controller
         return DataTables::of($data)
 
             ->addIndexColumn()
-            ->addColumn('approve', function ($row) {
+            ->addColumn('status', function ($row) {
 
                 $status = $row['status'];
                 if ($status == "Approved") {
-                    $result = "checked";
-                } else if ($status == "Enrolled") {
-                    $result = "checked disabled";
-                } else {
+                    $result = "success";
+                } else if ($status == "Send Back") {
+                    $result = "warning";
+                } else if ($status == "Applied") {
+                    $result = "info";
+                } else if ($status == "Reject") {
+                    $result = "danger";
+                }    else {
                     $result = "";
                 }
-                return '<input type="checkbox" ' . $result . ' data-id="' . $row['id'] . '"  id="approveApplicationBtn">';
+                
+                return '<span class="badge badge-soft-'.$result.' p-1">'.$status.'</span>';
+            })
+            ->addColumn('phase_2_status', function ($row) {
+
+                $status = $row['phase_2_status'];
+                if ($status == "Approved") {
+                    $result = "success";
+                } else if ($status == "Send Back") {
+                    $result = "warning";
+                } else if ($status == "Process") {
+                    $result = "info";
+                } else if ($status == "Reject") {
+                    $result = "danger";
+                }  else {
+                    $result = "";
+                }
+                
+                return '<span class="badge badge-soft-'.$result.' p-1">'.$status.'</span>';
             })
             ->addColumn('actions', function ($row) {
-                $edit = route('admin.application.details', $row['id']);
+                $edit = route('admin.application.edit', $row['id']);
+                // <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewApplicationBtn"><i class="fe-eye"></i></a>
+                                
                 return '<div class="button-list">
-                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewApplicationBtn"><i class="fe-eye"></i></a>
+                <a href="'.$edit.'" class="btn btn-warning waves-effect waves-light" ><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteApplicationBtn"><i class="fe-trash-2"></i></a>
                          </div>';
             })
 
-            ->rawColumns(['actions', 'approve'])
+            ->rawColumns(['actions', 'status', 'phase_2_status'])
             ->make(true);
+    }
+
+    public function applicationEdit($id)
+    {
+
+        
+        $data = [
+            'id' => $id,
+        ];
+        // dd($data);
+        $application = Helper::PostMethod(config('constants.api.application_details'), $data);
+        $grade = Helper::GetMethod(config('constants.api.class_list'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // dd($application);
+        return view(
+            'admin.application.edit',
+            [
+                'application' => isset($application['data']) ? $application['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'grade' => isset($grade['data']) ? $grade['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+            ]
+        );
     }
 
     // DELETE Application Details
@@ -7758,6 +8144,30 @@ class AdminController extends Controller
 
     public function updateApplication(Request $request)
     {
+        $trail_date = "";
+        if($request->enrollment=="Trail Enrollment"){
+            $trail_date = $request->trail_date;
+        }
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+        
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
+
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,
@@ -7799,7 +8209,31 @@ class AdminController extends Controller
             'guardian_occupation' => $request->guardian_occupation,
             'guardian_email' => $request->guardian_email,
             'guardian_relation' => $request->guardian_relation,
-
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'race' => $request->race,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+            'nationality' => $request->nationality,
+            'status' => $request->status,
+            'enrollment' => $request->enrollment,
+            'trail_date' => $trail_date,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'phase_2_status' => $request->phase_2_status,
+            'phase_1_reason' => $request->phase_1_reason,
+            'phase_2_reason' => $request->phase_2_reason,
+            'role_id' => session()->get('role_id'),
         ];
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);
 
@@ -8019,7 +8453,7 @@ class AdminController extends Controller
         $data = [
             'country' => "Malaysia",
         ];
-
+       
         $bank = Helper::GETMethodWithData(config('constants.api.bank_list'), $data);
         return view(
             'admin.bank_account.add',
@@ -8662,5 +9096,385 @@ class AdminController extends Controller
 
             ->rawColumns(['tenure', 'designation_name', 'actions'])
             ->make(true);
+    }
+    // index Email Type
+    public function emailType()
+    {
+        return view('admin.email_type.index');
+    }
+
+    public function addEmailType(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+        ];
+        $response = Helper::PostMethod(config('constants.api.email_type_add'), $data);
+        return $response;
+    }
+    public function getEmailTypeList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.email_type_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEmailTypeBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmailTypeBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['color', 'actions'])
+            ->make(true);
+    }
+    public function getEmailTypeDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.email_type_details'), $data);
+        return $response;
+    }
+    public function updateEmailType(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.email_type_update'), $data);
+        return $response;
+    }
+    // DELETE email type Details
+    public function deleteEmailType(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.email_type_delete'), $data);
+        return $response;
+    }
+
+     
+    // index Email Template
+    public function emailTemplate()
+    {
+        $email_type = Helper::GETMethod(config('constants.api.email_type_list'));
+        
+        // dd($email_type);
+        return view(
+            'admin.email_template.index',
+        );
+    }
+
+    public function createEmailTemplate()
+    {
+        $email_type = Helper::GETMethod(config('constants.api.email_type_list'));
+        return view(
+            'admin.email_template.add',
+            [
+                'email_type' => isset($email_type['data']) ? $email_type['data'] : [],
+            ]
+        );
+    }
+
+    public function addEmailTemplate(Request $request)
+    {
+        $data = [
+            'type_id' => $request->type_id,
+            'subject' => $request->subject,
+            'template_body' => $request->template_body,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.email_template_add'), $data);
+        return $response;
+    }
+    public function getEmailTemplateList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.email_template_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editEmailTemplateBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmailTemplateBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['color', 'actions'])
+            ->make(true);
+    }
+    public function getEmailTemplateDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.email_template_details'), $data);
+        return $response;
+    }
+    public function updateEmailTemplate(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'type_id' => $request->type_id, 
+            'subject' => $request->subject,
+            'template_body' => $request->template_body,
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.email_template_update'), $data);
+        return $response;
+    }
+    // DELETE email template Details
+    public function deleteEmailTemplate(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.email_template_delete'), $data);
+        return $response;
+    }
+
+    public function emailTemplateImage(Request $request)
+    {
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('upload');
+        if ($request->hasFile('upload')) {
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+            
+            $data = [
+                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'photo' => $base64,
+                'file_extension' => $extension,
+            ];
+            // dd($data);
+            
+            $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
+            // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
+            echo json_encode([
+
+                'default' => config('constants.image_url') . $response['path'] . $response['file_name'],
+
+                '500' =>  config('constants.image_url') . $response['path'] . $response['file_name'],
+
+            ]);
+        }
+    }
+
+    
+    public function emailEvent(Request $request)
+    {
+        return view(
+            'auth.email_event',[
+                'school_name' => "クアラルンプール日本人学校",
+                'school_image' => "logo_jskl.jpeg",
+            ]
+        );
+    }
+
+     // start Form Field
+     public function formField()
+     {
+         return view('admin.form_field.index');
+     }
+ 
+     public function getFormFieldList(Request $request)
+     {
+         $response = Helper::GetMethod(config('constants.api.form_field_list'));
+         $data = isset($response['data']) ? $response['data'] : [];
+         return DataTables::of($data)
+             ->addIndexColumn()
+             ->addColumn('name_english', function ($row) {
+ 
+                 $name_english = $row['name_english'];
+                 if ($name_english == 0) {
+                     $result_name_english = "checked";
+                 } else {
+                     $result_name_english = "";
+                 }
+                 return '<input type="checkbox" ' . $result_name_english .'>';
+             })->addColumn('visa', function ($row) {
+ 
+                $visa = $row['visa'];
+                if ($visa == 0) {
+                    $result_visa = "checked";
+                } else {
+                    $result_visa = "";
+                }
+                return '<input type="checkbox" ' . $result_visa .'>';
+            })->addColumn('nationality', function ($row) {
+ 
+                $nationality = $row['nationality'];
+                if ($nationality == 0) {
+                    $result_nationality = "checked";
+                } else {
+                    $result_nationality = "";
+                }
+                return '<input type="checkbox" ' . $result_nationality .'>';
+            })->addColumn('passport', function ($row) {
+ 
+                $passport = $row['passport'];
+                if ($passport == 0) {
+                    $result_passport = "checked";
+                } else {
+                    $result_passport = "";
+                }
+                return '<input type="checkbox" ' . $result_passport .'>';
+            })->addColumn('nric', function ($row) {
+ 
+                $nric = $row['nric'];
+                if ($nric == 0) {
+                    $result_nric = "checked";
+                } else {
+                    $result_nric = "";
+                }
+                return '<input type="checkbox" ' . $result_nric .'>';
+            })
+             ->addColumn('actions', function ($row) {
+                 return '<div class="button-list">
+                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editFormFieldBtn"><i class="fe-edit"></i></a>
+                         </div>';
+             })// <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFormFieldBtn"><i class="fe-trash-2"></i></a>
+             ->rawColumns(['name_english','visa','nationality','passport','nric','actions'])
+             ->make(true);
+     }
+     public function getFormFieldDetails(Request $request)
+     {
+         $data = [
+             'id' => $request->id,
+         ];
+         $response = Helper::PostMethod(config('constants.api.form_field_details'), $data);
+         return $response;
+     }
+     public function updateFormField(Request $request)
+     {
+         $data = [
+             'id' => $request->id,
+             'name_english' => $request->name_english,
+             'name_furigana' => $request->name_furigana,
+             'visa' => $request->visa,
+             'nationality' => $request->nationality,
+             'passport' => $request->passport,
+             'nric' => $request->nric,
+             'race' => $request->race,
+             'religion' => $request->religion,
+             'blood_group' => $request->blood_group,
+         ];
+ 
+         $response = Helper::PostMethod(config('constants.api.form_field_update'), $data);
+         return $response;
+     }
+
+     
+    public function terminationIndex()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($student);
+        return view(
+            'admin.termination.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
+
+    // edit Termination 
+    public function editTermination(Request $request, $id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $termination = Helper::PostMethod(config('constants.api.termination_details'), $data);
+
+        // dd($termination);
+        return view(
+            'parent.termination.edit',
+            [
+                'termination' => isset($termination['data']) ? $termination['data'] : [],
+            ]
+        );
+    }
+    public function getTerminationList(Request $request)
+    {
+        
+        $response = Helper::GETMethod(config('constants.api.termination_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('termination_status', function ($row) {
+                $color = "";
+                if($row['termination_status']=="Approved"){
+                    $color = "success";
+                }else if($row['termination_status']=="Rejected"){
+                    $color = "danger";
+                }else if($row['termination_status']=="Pending"){
+                    $color = "warning";
+
+                }else if($row['termination_status']=="Send Back"){
+                    $color = "info";
+
+                }
+                return '<div class="button-list">
+                
+                <span class="badge badge-soft-'. $color.' p-1">'.$row['termination_status'].'</span>
+            </div>';
+            })
+            // <a href="' . route('parent.termination.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                    <a data-toggle="modal" data-target="#terminationModal" data-id="'.$row['id'].'"  id="editTerminationBtn" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions','termination_status'])
+            ->make(true);
+    }
+    public function getTerminationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.termination_details'), $data);
+        return $response;
+    }
+    // Update group 
+    public function updateTermination(Request $request)
+    {
+        // dd($request);
+        $termination_notification = "No";
+        $date_of_termination = null;
+        if($request->termination_status=="Approved"){
+            $date_of_termination = $request->date_of_termination;
+            $termination_notification = "Yes";
+        }
+        $delete_google_address = "No";
+        if($request->delete_google_address=="on"){
+            $delete_google_address = "Yes";
+        }
+        $data = [
+            'id' => $request->id,
+            'school_fees_payment_status' => $request->school_fees_payment_status,
+            'termination_status' => $request->termination_status,
+            'delete_google_address' => $delete_google_address,
+            'remarks' => $request->remarks,
+            'student_status' => $request->student_status,
+            'date_of_termination' => $date_of_termination,
+            'termination_notification' => $termination_notification,
+
+        ];
+        // dd($request);
+        $response = Helper::PostMethod(config('constants.api.termination_update_admin'), $data);
+        return $response;
     }
 }

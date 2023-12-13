@@ -161,7 +161,7 @@
                         <span>{{ __('messages.admission') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse {{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarAdmission">
+                    <div class="collapse {{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/update_info*') || request()->is('admin/student/update_info*') || request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarAdmission">
                         <ul class="nav-second-level" style="padding-left: 30px;">
                             <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarStudentDetails" data-toggle="collapse">
@@ -169,11 +169,16 @@
                                     <span>{{ __('messages.student_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse {{  (request()->is('admin/student/student-details*')) ? 'show' : '' }}" id="sidebarStudentDetails">
+                                <div class="collapse {{  (request()->is('admin/student/student-details*') || request()->is('admin/student/update_info*')) ? 'show' : '' }}" id="sidebarStudentDetails">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.admission')}}" class="nav-link {{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.new_admission') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -181,9 +186,14 @@
                                                 <span>{{ __('messages.application_list') }}</span>
                                             </a>
                                         </li>
-                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
-                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
-                                                <span>{{ __('messages.student_list') }}</span>
+                                        <li>
+                                            <a href="{{ route('admin.termination.index')}}" class="nav-link {{ (request()->is('admin/termination/index')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.termination_list') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class=" {{ (request()->is('admin/student/update_info*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.student.update_info')}}" class="nav-link {{ (request()->is('admin/student/update_info*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.student_update_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -194,13 +204,13 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
+                            <li class="{{  (request()->is('admin/parent/parent-details*') || request()->is('admin/parent/update_info*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarParent" data-toggle="collapse">
                                     <!--<i class="fe-user-plus"></i>-->
                                     <span>{{ __('messages.parent_guardian_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse {{  (request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarParent">
+                                <div class="collapse {{  (request()->is('admin/parent/parent-details*') || request()->is('admin/parent/update_info*')) ? 'show' : '' }}" id="sidebarParent">
                                     <ul class="nav-second-level">
                                         <li>
                                             <a href="{{ route('admin.parent.create')}}" class="nav-link {{ (request()->is('admin/parent/create')) ? 'active' : '' }}">
@@ -210,6 +220,11 @@
                                         <li class="{{  (request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                                             <a href="{{ route('admin.parent')}}" class="nav-link {{ (request()->is('admin/parent') || request()->is('admin/parent/parent-details*')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.parent_guardian_list') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ (request()->is('admin/parent/update_info*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.parent.update_info')}}" class="nav-link {{ (request()->is('admin/parent/update_info*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.parent_update_list') }}</span>
                                             </a>
                                         </li>
                                         <li>
@@ -1013,6 +1028,43 @@
                         </ul>
                     </div>
                 </li>
+
+                <!-- <li class="{{  (request()->is('admin/email*')) ? 'menuitem-active' : '' }}">
+                    <a href="#sidebarEmail" data-toggle="collapse">
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1194)">
+                                <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect y="0.80957" width="11.2" height="24" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                                <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1194">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <span>{{ __('messages.email') }}</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse {{  (request()->is('admin/email*')) ? 'show' : '' }}" id="sidebarEmail">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.email_type')}}" class="nav-link {{ (request()->is('admin/email_type/*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.email_type') }} </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.email_template')}}" class="nav-link {{ (request()->is('admin/email_template/*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.email_template') }} </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> -->
                 <li class="{{  (request()->is('admin/group*') || request()->is('admin/hostel_group*') || request()->is('admin/bank_account*')) ? 'menuitem-active' : '' }}">
                     <a href="#sideBarSettings" data-toggle="collapse">
                         <!-- <i data-feather="settings" class="icon-dual"></i> -->
@@ -1145,6 +1197,11 @@
                             <li>
                                 <a href="{{ route('admin.global_setting')}}" class="nav-link {{ (request()->is('admin/global_setting*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.global_settings') }} </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.form_field')}}" class="nav-link {{ (request()->is('admin/form_field*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.form_field') }} </span>
                                 </a>
                             </li>
                             <li>
@@ -1907,6 +1964,115 @@
                         <span>{{ __('messages.profile') }}</span>
                     </a>
                 </li>
+                
+                <li>
+                    <a href="#sidebarParentProfileUpdate" data-toggle="collapse">
+                        <!--<i class="fas fa-map"></i>-->
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1182)">
+                                <path d="M11.985 18.6498C10.3017 18.6498 8.61853 18.6498 6.93364 18.6498C6.75689 18.6497 6.58206 18.6119 6.41998 18.5387C6.29248 18.4786 6.1851 18.3804 6.11151 18.2568C6.03792 18.1332 6.00143 17.9897 6.0067 17.8445C5.99331 17.2943 6.0067 16.7424 6.0067 16.1922C6.0067 15.2966 5.9816 14.3993 6.0067 13.5054C6.05522 12.2488 6.68769 11.3828 7.78027 10.869C8.08063 10.7293 8.40647 10.6583 8.73564 10.6608C10.9359 10.6608 13.1361 10.6451 15.3363 10.6608C15.9275 10.6752 16.4977 10.8913 16.9586 11.2756C17.4195 11.6599 17.7455 12.1911 17.8862 12.7869C17.952 13.0635 17.9862 13.3472 17.9883 13.6321C17.9983 14.9876 17.9883 16.3449 17.9883 17.7004C17.9883 18.0736 17.8779 18.3947 17.5349 18.5491C17.3794 18.6152 17.2125 18.6471 17.0446 18.6429C15.3631 18.6533 13.6732 18.6498 11.985 18.6498Z" fill="#C4C7D2" />
+                                <path d="M11.8929 8.95096C11.0146 8.95626 10.1629 8.63855 9.489 8.05421C8.81511 7.46988 8.36263 6.65674 8.21191 5.75915C8.04063 4.90628 8.14182 4.01875 8.50017 3.23084C8.85851 2.44294 9.4545 1.79756 10.198 1.39234C10.6761 1.13912 11.2011 0.995308 11.7374 0.970622C12.2737 0.945936 12.8089 1.04095 13.3068 1.24925C13.8047 1.45755 14.2537 1.77427 14.6234 2.17803C14.9932 2.58178 15.2751 3.06316 15.4501 3.58963C15.7771 4.53071 15.7563 5.56415 15.3917 6.49025C15.027 7.41635 14.3444 8.16938 13.4757 8.60383C12.9801 8.84201 12.439 8.96069 11.8929 8.95096Z" fill="#C4C7D2" />
+                                <path d="M4.72339 11.0059C3.97111 10.9863 3.2516 10.6825 2.7 10.1515C2.14839 9.62052 1.80264 8.89892 1.72766 8.1222C1.65268 7.34548 1.85363 6.56709 2.29278 5.9332C2.73194 5.29931 3.37908 4.85353 4.11267 4.67958C4.585 4.55942 5.07963 4.57163 5.54591 4.71497C6.01219 4.8583 6.43338 5.12761 6.76634 5.49532C7.69829 6.46726 7.97269 7.64054 7.49584 8.92837C7.31137 9.47074 6.98615 9.94977 6.556 10.3127C6.12586 10.6756 5.6075 10.9082 5.05802 10.9851C4.94696 10.9987 4.83523 11.0057 4.72339 11.0059Z" fill="#C4C7D2" />
+                                <path d="M19.198 11.0198C18.6257 11.0012 18.0695 10.8187 17.591 10.4924C17.1125 10.1662 16.7304 9.70891 16.487 9.17127C16.2437 8.63364 16.1485 8.03661 16.212 7.44632C16.2756 6.85603 16.4954 6.2955 16.8472 5.82682C17.0904 5.4815 17.4022 5.19434 17.7616 4.98475C18.1209 4.77515 18.5195 4.648 18.9303 4.61188C20.5081 4.45394 21.9002 5.67755 22.1528 7.26564C22.2695 8.07462 22.0895 8.89959 21.6484 9.57761C21.2073 10.2556 20.5371 10.7374 19.7702 10.9278C19.5828 10.9816 19.3887 10.9937 19.198 11.0198Z" fill="#C4C7D2" />
+                                <path d="M19.5711 18.5593C19.6163 18.2798 19.6698 18.0108 19.6983 17.7401C19.7131 17.5409 19.717 17.3409 19.71 17.1413C19.71 16.0288 19.7251 14.918 19.71 13.8072C19.7016 13.316 19.623 12.8248 19.5745 12.3336C19.5745 12.2833 19.5594 12.2347 19.5494 12.1601H21.599C21.9147 12.1542 22.2283 12.2143 22.5212 12.3366C22.8141 12.459 23.0803 12.6412 23.304 12.8724C23.5277 13.1036 23.7042 13.3791 23.8232 13.6825C23.9422 13.9859 24.0012 14.311 23.9967 14.6385C23.9967 15.6139 23.9967 16.5911 23.9967 17.5665C23.9954 17.8299 23.8943 18.0821 23.7152 18.2689C23.5362 18.4556 23.2935 18.5618 23.0396 18.5645C21.9253 18.5437 20.8109 18.5645 19.6933 18.5645L19.5711 18.5593Z" fill="#C4C7D2" />
+                                <path d="M4.45232 12.1723C4.42889 12.2434 4.41049 12.3042 4.39041 12.3632C4.26044 12.7424 4.22419 13.1494 4.285 13.5469C4.28893 13.6046 4.28893 13.6626 4.285 13.7204C4.285 15.1228 4.285 16.524 4.285 17.9241C4.285 18.1289 4.31009 18.332 4.32515 18.5489C4.29336 18.5489 4.24819 18.5489 4.20301 18.5489C3.11211 18.5489 2.02789 18.5333 0.931963 18.5489C0.684189 18.5398 0.448972 18.4335 0.273815 18.2515C0.0986583 18.0695 -0.00338759 17.8253 -0.011709 17.5683C0.0133886 16.5686 -0.011709 15.5671 -0.011709 14.5657C-0.0235154 14.0125 0.151986 13.4725 0.484279 13.0396C0.816572 12.6068 1.28463 12.3085 1.80703 12.1966C1.92864 12.1657 2.05327 12.1494 2.17847 12.1479C2.89291 12.1479 3.60737 12.1479 4.32014 12.1479C4.37201 12.1618 4.39877 12.167 4.45232 12.1723Z" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1182">
+                                    <rect width="24" height="17.6842" fill="white" transform="translate(0 0.967285)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                        <span> {{ __('messages.profile') }} </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarParentProfileUpdate">
+                        <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ route('parent.update_info')}}" class="nav-link {{ (request()->is('parent/update_info/list*')) ? 'active' : '' }}">
+                                
+                                <span>{{ __('messages.list') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('parent.profile_edit')}}" class="nav-link {{ (request()->is('parent/profile*')) ? 'active' : '' }}">
+                                
+                                <span>{{ __('messages.parent_profile') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('parent.student.profile')}}" class="nav-link {{ (request()->is('parent/stduent/profile*')) ? 'active' : '' }}">
+                                
+                                <span>{{ __('messages.student_profile') }}</span>
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarParentApplication" data-toggle="collapse">
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_122_3580)">
+                                <path d="M0.0202342 7.91378C0.0202342 7.25256 -0.00771459 6.59133 0.0202342 5.93395C0.0563401 5.55371 0.223237 5.19596 0.494462 4.91741C0.765688 4.63885 1.12572 4.45543 1.51749 4.39623C1.64961 4.37648 1.78306 4.36621 1.91676 4.36548H4.60383V1.75135C4.5853 1.51634 4.66449 1.28386 4.82398 1.10507C4.98347 0.926273 5.21019 0.815805 5.45427 0.797962C5.69835 0.78012 5.9398 0.856361 6.1255 1.00992C6.31119 1.16348 6.42593 1.38179 6.44446 1.6168C6.44854 1.69236 6.44854 1.76806 6.44446 1.84361V4.35395H17.5082V4.18095C17.5082 3.37749 17.5082 2.57787 17.5082 1.77826C17.5023 1.54171 17.5944 1.31264 17.764 1.14141C17.9336 0.970189 18.1668 0.870841 18.4125 0.865233C18.6582 0.859625 18.8961 0.948214 19.0739 1.11151C19.2518 1.2748 19.355 1.49943 19.3608 1.73597C19.3608 2.54712 19.3608 3.35827 19.3608 4.16941V4.36548H22.0678C22.3208 4.35688 22.573 4.39854 22.8086 4.48784C23.0442 4.57715 23.2582 4.71219 23.4372 4.88457C23.6162 5.05695 23.7565 5.26297 23.8492 5.4898C23.942 5.71664 23.9852 5.95943 23.9763 6.20306C23.9763 6.76817 23.9763 7.33328 23.9763 7.90993L0.0202342 7.91378Z" fill="#C4C7D2" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.000144945 9.70129H6V10.8095H8V9.70129H24.0001V22.9526C24.0182 23.3692 23.8838 23.7786 23.6204 24.1095C23.3569 24.4404 22.9812 24.6718 22.5588 24.7633C22.4014 24.7959 22.2407 24.8114 22.0797 24.8094H1.92461C1.49174 24.8272 1.06621 24.6974 0.722953 24.4429C0.379694 24.1883 0.140706 23.8253 0.0480552 23.4178C0.0143581 23.2714 -0.00171658 23.1218 0.000144945 22.9718V9.70129ZM8 11.8095H6V13.8095H8V11.8095Z" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_122_3580">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.809509)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <span> {{ __('messages.application') }} </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarParentApplication">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('parent.application.index')}}" class="nav-link {{ (request()->is('parent/application') || request()->is('parent/application/edit')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.list') }} </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('parent.application.create')}}" class="nav-link {{ (request()->is('parent/application/create')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.add') }} </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarParentTermination" data-toggle="collapse">
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_59_2184)">
+                                <path d="M11.2567 4.31207V2.11065H10.0526V0.666656H13.9496V2.09817H12.7435V4.30748C16.6027 4.65141 19.7033 6.333 21.911 9.50321C23.5559 11.8661 24.2232 14.5165 23.9352 17.3795C23.6385 20.3463 22.2288 23.0944 19.9854 25.0794C17.742 27.0645 14.8285 28.1417 11.8221 28.0976C8.8156 28.0536 5.93546 26.8916 3.75212 24.8418C1.56878 22.792 0.241509 20.0039 0.0332032 17.0297C-0.197159 13.7531 0.794459 10.8382 2.98091 8.36115C5.16736 5.88405 7.95289 4.58643 11.2567 4.31207ZM19.5915 16.286C19.5663 12.0387 16.1705 8.68014 11.9908 8.69195C7.79534 8.70377 4.37831 12.0952 4.40611 16.225C4.43391 20.3548 7.76356 23.7324 11.9041 23.7363C13.9919 23.7363 15.8401 23.0209 17.3322 21.5428C18.8163 20.0771 19.5537 18.2853 19.5915 16.286Z" fill="#C4C7D2" />
+                                <path d="M11.9987 22.2641C8.63131 22.2641 5.8855 19.5475 5.87491 16.2007C5.86432 12.8644 8.64256 10.1005 12.0027 10.1274C15.4197 10.1543 18.1033 12.8369 18.1165 16.2C18.1304 19.5455 15.3694 22.2628 11.9987 22.2641ZM7.52914 16.4843L10.4087 19.3388L16.5066 14.0531L15.5322 12.9557L10.4689 17.3533L8.54922 15.4735L7.52914 16.4843Z" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_59_2184">
+                                    <rect width="24" height="27.4286" fill="white" transform="translate(0 0.666656)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <span> {{ __('messages.termination') }}</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarParentTermination">
+                        <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ route('parent.termination.index')}}" class="nav-link {{ (request()->is('parent/termination/index*')) ? 'active' : '' }}">
+                                <!-- <i data-feather="x-circle"></i> -->
+                                <span>{{ __('messages.list') }}</span>
+                            </a>
+                        </li>
+                            <li>
+                                <a href="{{ route('parent.termination.create')}}" class="nav-link {{ (request()->is('parent/termination/create')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.add') }} </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="{{ route('parent.faq.Index')}}" class="nav-link {{ (request()->is('parent/faq*')) ? 'active' : '' }}">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2030,8 +2196,49 @@
                         <span> {{ __('messages.faqs') }} </span>
                     </a>
                 </li>
+                @elseif(Session::get('role_id') == '7')
+                
+                <li>
+                    <a href="{{ route('guest.dashboard')}}" class="nav-link {{ (request()->is('guest/dashboard*')) ? 'active' : '' }}">
+                        <!--<i data-feather="airplay" class="icon-dual"></i>-->
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" fill="#C4C7D2" />
+                        </svg>
+                        <span> {{ __('messages.dashboards') }} </span>
+                    </a>
+                </li>
+                <li class="{{  (request()->is('guest/application/edit*')) ? 'menuitem-active' : '' }}">
+                    <a href="#sidebarGuestApplication" data-toggle="collapse">
+                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_122_3580)">
+                                <path d="M0.0202342 7.91378C0.0202342 7.25256 -0.00771459 6.59133 0.0202342 5.93395C0.0563401 5.55371 0.223237 5.19596 0.494462 4.91741C0.765688 4.63885 1.12572 4.45543 1.51749 4.39623C1.64961 4.37648 1.78306 4.36621 1.91676 4.36548H4.60383V1.75135C4.5853 1.51634 4.66449 1.28386 4.82398 1.10507C4.98347 0.926273 5.21019 0.815805 5.45427 0.797962C5.69835 0.78012 5.9398 0.856361 6.1255 1.00992C6.31119 1.16348 6.42593 1.38179 6.44446 1.6168C6.44854 1.69236 6.44854 1.76806 6.44446 1.84361V4.35395H17.5082V4.18095C17.5082 3.37749 17.5082 2.57787 17.5082 1.77826C17.5023 1.54171 17.5944 1.31264 17.764 1.14141C17.9336 0.970189 18.1668 0.870841 18.4125 0.865233C18.6582 0.859625 18.8961 0.948214 19.0739 1.11151C19.2518 1.2748 19.355 1.49943 19.3608 1.73597C19.3608 2.54712 19.3608 3.35827 19.3608 4.16941V4.36548H22.0678C22.3208 4.35688 22.573 4.39854 22.8086 4.48784C23.0442 4.57715 23.2582 4.71219 23.4372 4.88457C23.6162 5.05695 23.7565 5.26297 23.8492 5.4898C23.942 5.71664 23.9852 5.95943 23.9763 6.20306C23.9763 6.76817 23.9763 7.33328 23.9763 7.90993L0.0202342 7.91378Z" fill="#C4C7D2" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.000144945 9.70129H6V10.8095H8V9.70129H24.0001V22.9526C24.0182 23.3692 23.8838 23.7786 23.6204 24.1095C23.3569 24.4404 22.9812 24.6718 22.5588 24.7633C22.4014 24.7959 22.2407 24.8114 22.0797 24.8094H1.92461C1.49174 24.8272 1.06621 24.6974 0.722953 24.4429C0.379694 24.1883 0.140706 23.8253 0.0480552 23.4178C0.0143581 23.2714 -0.00171658 23.1218 0.000144945 22.9718V9.70129ZM8 11.8095H6V13.8095H8V11.8095Z" fill="#C4C7D2" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_122_3580">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.809509)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <span> {{ __('messages.application') }} </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse {{  (request()->is('guest/application/edit*')) ? 'show' : '' }}" id="sidebarGuestApplication">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('guest.application.index')}}" class="nav-link {{ (request()->is('guest/application') || request()->is('guest/application/edit*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.list') }} </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('guest.application.create')}}" class="nav-link {{ (request()->is('guest/application/create')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.add') }} </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 @endif
-
                 @endif
 
             </ul>

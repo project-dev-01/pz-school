@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Helpers\Helper;
 use App\Models\User;
 use App\Models\Task;
@@ -179,6 +180,55 @@ class ParentController extends Controller
             'parent.settings.index',
             [
                 'user_details' => isset($staff_profile_info['data']) ? $staff_profile_info['data'] : []
+            ]
+        );
+    }
+
+    public function studentProfile()
+    {
+
+        $student_id = session()->get('student_id');
+        $data = [
+            'id' => isset($student_id) ? $student_id : 0,
+        ];
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+
+        $prev = json_decode($student['data']['student']['previous_details']);
+        $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        // dd($student);
+        return view(
+            'parent.student.profile',
+            [
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
+
             ]
         );
     }
@@ -719,7 +769,6 @@ class ParentController extends Controller
                         $top = "";
                     }
 
-
                     if ($work['document']) {
                         $document = '
                         <div class="col-md-6">
@@ -869,7 +918,6 @@ class ParentController extends Controller
         $parent_list = Helper::GETMethodWithData(config('constants.api.chat_parent_list'), $parentData);
         $teacher_list = Helper::GETMethodWithData(config('constants.api.parent_chat_teacher_list'), $parentData);
         // dd($teacher_list);
-
         return view('parent.chat.index', [
             'teacher_list' => isset($teacher_list['data']) ? $teacher_list['data'] : [],
             'parent_list' => isset($parent_list['data']) ? $parent_list['data'] : [],
@@ -1090,6 +1138,7 @@ class ParentController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $data);
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($response);
         return view(
             'parent.settings.profile-edit',
@@ -1100,20 +1149,36 @@ class ParentController extends Controller
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
             ]
         );
     }
     public function updateProfile(Request $request)
     {
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
 
         $data = [
 
             'id' => $request->id,
             'email' => $request->email,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
             'race' => $request->race,
             'religion' => $request->religion,
@@ -1132,6 +1197,15 @@ class ParentController extends Controller
             'facebook_url' => $request->facebook_url,
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'role_id' => session()->get('role_id')
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
@@ -1442,5 +1516,634 @@ class ParentController extends Controller
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
+    }
+
+    // Update Student 
+    public function updateStudent(Request $request)
+    {
+
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
+        $data = [
+            'passport' => $request->txt_passport,
+            'nric' => $request->txt_nric,
+            'blood_group' => $request->blooddgrp,
+            'religion' => $request->txt_religion,
+            'race' => $request->txt_race,
+            'country' => $request->drp_country,
+            'post_code' => $request->drp_post_code,
+            'mobile_no' => $request->txt_mobile_no,
+            'city' => $request->drp_city,
+            'state' => $request->drp_state,
+            'current_address' => $request->txtarea_paddress,
+            'permanent_address' => $request->txtarea_permanent_address,
+            'student_id' => $request->student_id,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'parent_id' => session()->get('ref_user_id'),
+
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.parent_student_update'), $data);
+        // dd($response);
+        return $response;
+    }
+    public function applicationIndex()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($student);
+        return view(
+            'parent.application.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
+    public function applicationList(Request $request)
+    {
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            "academic_year" => $request->academic_year,
+            "academic_grade" => $request->academic_grade,
+            "created_by" => session()->get('ref_user_id'),
+            "role" => session()->get('role_id'),
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.application_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+
+                $status = $row['status'];
+                if ($status == "Approved") {
+                    $result = "success";
+                } else if ($status == "Send Back") {
+                    $result = "warning";
+                } else if ($status == "Applied") {
+                    $result = "info";
+                } else if ($status == "Reject") {
+                    $result = "danger";
+                } else {
+                    $result = "";
+                }
+
+                return '<span class="badge badge-soft-' . $result . ' p-1">' . $status . '</span>';
+            })
+            ->addColumn('phase_2_status', function ($row) {
+
+                $status = $row['phase_2_status'];
+                if ($status == "Approved") {
+                    $result = "success";
+                } else if ($status == "Send Back") {
+                    $result = "warning";
+                } else if ($status == "Process") {
+                    $result = "info";
+                } else if ($status == "Reject") {
+                    $result = "danger";
+                } else {
+                    $result = "";
+                }
+
+                return '<span class="badge badge-soft-' . $result . ' p-1">' . $status . '</span>';
+            })
+            ->addColumn('actions', function ($row) {
+                $edit = route('parent.application.edit', $row['id']);
+                return '<div class="button-list">
+                <a href="' . $edit . '" class="btn btn-warning waves-effect waves-light" ><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewApplicationBtn"><i class="fe-eye"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteApplicationBtn"><i class="fe-trash-2"></i></a>
+                         </div>';
+            })
+
+            ->rawColumns(['actions', 'status', 'phase_2_status'])
+            ->make(true);
+    }
+
+    public function applicationCreate()
+    {
+
+
+        $data = [
+            'branch_id' => config('constants.branch_id')
+        ];
+
+        $contact = Http::post(config('constants.api.get_home_page_details'), $data);
+        $contactDetails = $contact->json();
+
+        $grade_response = Http::post(config('constants.api.application_grade_list'), $data);
+        $grade = $grade_response->json();
+
+        $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
+        $relation = $relation_response->json();
+
+        $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
+        $academic_year_list = $academic_year_list_response->json();
+
+        $form_field_list_response = Http::post(config('constants.api.form_field_list'), $data);
+        $form_field_list = $form_field_list_response->json();
+        // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        return view(
+            'parent.application.add',
+            [
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'grade' => isset($grade['data']) ? $grade['data'] : [],
+                'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+            ]
+        );
+    }
+    public function applicationAdd(Request $request)
+    {
+
+        $type = "Admission";
+        if ($request->last_date_of_withdrawal) {
+            $type = "Re-Admission";
+        }
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'race' => $request->race,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+            'nationality' => $request->nationality,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'address_1' => $request->address_1,
+            'address_2' => $request->address_2,
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'academic_grade' => $request->academic_grade,
+            'academic_year' => $request->academic_year,
+            'grade' => $request->grade,
+            'school_year' => $request->school_year,
+            'school_last_attended' => $request->school_last_attended,
+            'school_address_1' => $request->school_address_1,
+            'school_address_2' => $request->school_address_2,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            'father_first_name' => $request->father_first_name,
+            'father_last_name' => $request->father_last_name,
+            'father_phone_number' => $request->father_phone_number,
+            'father_occupation' => $request->father_occupation,
+            'father_email' => $request->father_email,
+            'mother_first_name' => $request->mother_first_name,
+            'mother_last_name' => $request->mother_last_name,
+            'mother_phone_number' => $request->mother_phone_number,
+            'mother_occupation' => $request->mother_occupation,
+            'mother_email' => $request->mother_email,
+            'guardian_first_name' => $request->guardian_first_name,
+            'guardian_last_name' => $request->guardian_last_name,
+            'guardian_phone_number' => $request->guardian_phone_number,
+            'guardian_occupation' => $request->guardian_occupation,
+            'guardian_email' => $request->guardian_email,
+            'guardian_relation' => $request->guardian_relation,
+            're_admission' => $request->re_admission,
+            'last_date_of_withdrawal' => $request->last_date_of_withdrawal,
+            'created_by' => session()->get('ref_user_id'),
+            'created_by_role' => session()->get('role_id'),
+            "type" => $type
+
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.application_add'), $data);
+
+        return $response;
+    }
+
+
+    public function applicationEdit($id)
+    {
+
+
+        $data = [
+            'id' => $id,
+        ];
+        // dd($data);
+        $application = Helper::PostMethod(config('constants.api.application_details'), $data);
+        $grade = Helper::GetMethod(config('constants.api.class_list'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // dd($application['data']['guardian_first_name']);
+        return view(
+            'parent.application.edit',
+            [
+                'application' => isset($application['data']) ? $application['data'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'grade' => isset($grade['data']) ? $grade['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+            ]
+        );
+    }
+    public function applicationUpdate(Request $request)
+    {
+        // dd(1);
+        $trail_date = "";
+        if ($request->enrollment == "Trail Enrollment") {
+            $trail_date = $request->trail_date;
+        }
+        $status = $request->status;
+        if ($request->status == "") {
+            $status = $request->phase_1_status;
+        }
+        $visa_base64 = "";
+        $visa_extension = "";
+        $visa_file = $request->file('visa_photo');
+        if ($visa_file) {
+            $visa_path = $visa_file->path();
+            $visa_data = file_get_contents($visa_path);
+            $visa_base64 = base64_encode($visa_data);
+            $visa_extension = $visa_file->getClientOriginalExtension();
+        }
+
+        $passport_base64 = "";
+        $passport_extension = "";
+        $passport_file = $request->file('passport_photo');
+        if ($passport_file) {
+            $passport_path = $passport_file->path();
+            $passport_data = file_get_contents($passport_path);
+            $passport_base64 = base64_encode($passport_data);
+            $passport_extension = $passport_file->getClientOriginalExtension();
+        }
+        $data = [
+            'id' => $request->id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'race' => $request->race,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+            'nationality' => $request->nationality,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'address_1' => $request->address_1,
+            'address_2' => $request->address_2,
+            'country' => $request->country,
+            'city' => $request->city,
+            'state' => $request->state,
+            'postal_code' => $request->postal_code,
+            'academic_grade' => $request->academic_grade,
+            'academic_year' => $request->academic_year,
+            'grade' => $request->grade,
+            'school_year' => $request->school_year,
+            'school_last_attended' => $request->school_last_attended,
+            'school_address_1' => $request->school_address_1,
+            'school_address_2' => $request->school_address_2,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            'father_first_name' => $request->father_first_name,
+            'father_last_name' => $request->father_last_name,
+            'father_phone_number' => $request->father_phone_number,
+            'father_occupation' => $request->father_occupation,
+            'father_email' => $request->father_email,
+            'mother_first_name' => $request->mother_first_name,
+            'mother_last_name' => $request->mother_last_name,
+            'mother_phone_number' => $request->mother_phone_number,
+            'mother_occupation' => $request->mother_occupation,
+            'mother_email' => $request->mother_email,
+            'guardian_first_name' => $request->guardian_first_name,
+            'guardian_last_name' => $request->guardian_last_name,
+            'guardian_phone_number' => $request->guardian_phone_number,
+            'guardian_occupation' => $request->guardian_occupation,
+            'guardian_email' => $request->guardian_email,
+            'guardian_relation' => $request->guardian_relation,
+            'status' => $status,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
+            'passport_expiry_date' => $request->passport_expiry_date,
+            'visa_number' => $request->visa_number,
+            'visa_expiry_date' => $request->visa_expiry_date,
+            'nationality' => $request->nationality,
+            'visa_photo' => $visa_base64,
+            'visa_file_extension' => $visa_extension,
+            'passport_photo' => $passport_base64,
+            'passport_file_extension' => $passport_extension,
+            'phase_2_status' => $request->phase_2_status,
+            'enrollment' => $request->enrollment,
+            'trail_date' => $trail_date,
+            'phase_1_reason' => $request->phase_1_reason,
+            'phase_2_reason' => $request->phase_2_reason,
+            'role_id' => session()->get('role_id'),
+        ];
+        // }
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.application_update'), $data);
+
+        return $response;
+    }
+    public function updateInfo(Request $request)
+    {
+        // if($request->ajax()){
+
+        // }
+        return view('parent.settings.update_list');
+    }
+
+
+    public function getParentUpdateInfoList(Request $request)
+    {
+
+        $data = [
+            "status" => "Parent"
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.parent_student_update_info_list'), $data);
+        // dd($response);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('status', function ($row) {
+                $color = "";
+                if ($row['status_parent'] == "Accept") {
+                    $color = "success";
+                } else if ($row['status_parent'] == "Reject") {
+                    $color = "danger";
+                } else if ($row['status_parent'] == "Remand") {
+                    $color = "info";
+                }
+                return '<div class="button-list">
+                
+                <span class="badge badge-soft-' . $color . ' p-1">' . $row['status_parent'] . '</span>
+            </div>';
+            })
+            ->addColumn('actions', function ($row) {
+                $type = "";
+                if (isset($row['student_id'])) {
+                    $type = "Student";
+                } else if (isset($row['parent_id'])) {
+                    $type = "Parent";
+                }
+                return '<div class="button-list">
+                    <a data-toggle="modal" data-target="#updateViewModal" data-id="' . $row['id'] . '" data-type="' . $type . '" id="updateViewModalDetails" class="btn btn-info waves-effect waves-light"><i class="fe-eye"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions', 'status'])
+            ->make(true);
+    }
+    public function viewParentUpdateInfo($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $education = Helper::GetMethod(config('constants.api.education_list'));
+        $response = Helper::PostMethod(config('constants.api.parent_update_info_view'), $data);
+        // dd($response);
+        return $response;
+        // return view(
+        //     'parent.update_view',
+        //     [
+        //         'religion' => isset($religion['data']) ? $religion['data'] : [],
+        //         'races' => isset($races['data']) ? $races['data'] : [],
+        //         'education' => isset($education['data']) ? $education['data'] : [],
+        //         'parent' => isset($response['data']['profile']) ? $response['data']['profile'] : [],
+        //         'changes' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
+        //     ]
+        // );
+    }
+
+    // index Termination 
+    public function termination()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($student);
+        return view(
+            'parent.termination.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
+    // create Termination 
+    public function createTermination()
+    {
+        return view('parent.termination.add');
+    }
+    // edit Termination 
+    public function editTermination(Request $request, $id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+        $termination = Helper::PostMethod(config('constants.api.termination_details'), $data);
+
+        // dd($termination);
+        return view(
+            'parent.termination.edit',
+            [
+                'termination' => isset($termination['data']) ? $termination['data'] : [],
+            ]
+        );
+    }
+    public function addTermination(Request $request)
+    {
+        $data = [
+            'student_id' => $request->student_id,
+            'date' => $request->date,
+            'schedule_date_of_termination' => $request->schedule_date_of_termination,
+            'reason_for_transfer' => $request->reason_for_transfer,
+            'transfer_destination_school_name' => $request->transfer_destination_school_name,
+            'transfer_destination_tel' => $request->transfer_destination_tel,
+            'parent_phone_number_after_transfer' => $request->parent_phone_number_after_transfer,
+            'parent_email_address_after_transfer' => $request->parent_email_address_after_transfer,
+            'parent_address_after_transfer' => $request->parent_address_after_transfer,
+            "termination_status" => "Pending",
+            "created_by" => session()->get('ref_user_id'),
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.termination_add'), $data);
+        // dd($response);
+        return $response;
+    }
+
+    public function getTerminationList(Request $request)
+    {
+
+        $data = [
+            "parent_id" => session()->get('ref_user_id')
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.termination_list'), $data);
+        // dd($data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('termination_status', function ($row) {
+                $color = "";
+                if ($row['termination_status'] == "Approved") {
+                    $color = "success";
+                } else if ($row['termination_status'] == "Rejected") {
+                    $color = "danger";
+                } else if ($row['termination_status'] == "Pending") {
+                    $color = "warning";
+                } else if ($row['termination_status'] == "Send Back") {
+                    $color = "info";
+                }
+                return '<div class="button-list">
+                
+                <span class="badge badge-soft-' . $color . ' p-1">' . $row['termination_status'] . '</span>
+            </div>';
+            })
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="' . route('parent.termination.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions', 'termination_status'])
+            ->make(true);
+    }
+    public function getTerminationDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.termination_details'), $data);
+        return $response;
+    }
+    // Update Termination 
+    public function updateTermination(Request $request)
+    {
+
+
+        $termination_notification = "No";
+        $delete_google_address = "No";
+        if ($request->delete_google_address == "on") {
+            $delete_google_address = "Yes";
+        }
+        // dd($request);
+        $termination_status = $request->termination_status;
+        if ($request->termination_status == "Approved") {
+            if ($request->old_date_of_termination != $request->date_of_termination) {
+                $termination_status = "Pending";
+                $termination_notification = "Yes";
+            }
+        } else {
+            $data = [
+                'id' => $request->id,
+            ];
+            $new = [];
+            $new['schedule_date_of_termination'] = $request->schedule_date_of_termination;
+            $new['reason_for_transfer'] = $request->reason_for_transfer;
+            $new['transfer_destination_school_name'] = $request->transfer_destination_school_name;
+            $new['transfer_destination_tel'] = $request->transfer_destination_tel;
+            $new['parent_phone_number_after_transfer'] = $request->parent_phone_number_after_transfer;
+            $new['parent_email_address_after_transfer'] = $request->parent_email_address_after_transfer;
+            $new['parent_address_after_transfer'] = $request->parent_address_after_transfer;
+            $new['school_fees_payment_status'] = $request->school_fees_payment_status;
+            $new['termination_status'] = $request->termination_status;
+            $new['delete_google_address'] = $delete_google_address;
+            $new['remarks'] = $request->remarks;
+            // dd($new);
+            $termination = Helper::PostMethod(config('constants.api.termination_details'), $data);
+
+            // dd($termination['data']['id']);
+            $old = [];
+            $old['schedule_date_of_termination'] = $termination['data']['schedule_date_of_termination'];
+            $old['reason_for_transfer'] = $termination['data']['reason_for_transfer'];
+            $old['transfer_destination_school_name'] = $termination['data']['transfer_destination_school_name'];
+            $old['transfer_destination_tel'] = $termination['data']['transfer_destination_tel'];
+            $old['parent_phone_number_after_transfer'] = $termination['data']['parent_phone_number_after_transfer'];
+            $old['parent_email_address_after_transfer'] = $termination['data']['parent_email_address_after_transfer'];
+            $old['parent_address_after_transfer'] = $termination['data']['parent_address_after_transfer'];
+            $old['school_fees_payment_status'] = $termination['data']['school_fees_payment_status'];
+            $old['termination_status'] = $termination['data']['termination_status'];
+            $old['delete_google_address'] = $termination['data']['delete_google_address'];
+            $old['remarks'] = $termination['data']['remarks'];
+            $output  = array_diff($new, $old);
+            if (count($output) > 0) {
+                $termination_status = "Pending";
+            }
+        }
+        $data = [
+            'id' => $request->id,
+            'student_id' => $request->student_id,
+            'control_number' => $request->control_number,
+            'date' => $request->date,
+            'schedule_date_of_termination' => $request->schedule_date_of_termination,
+            'reason_for_transfer' => $request->reason_for_transfer,
+            'transfer_destination_school_name' => $request->transfer_destination_school_name,
+            'transfer_destination_tel' => $request->transfer_destination_tel,
+            'parent_phone_number_after_transfer' => $request->parent_phone_number_after_transfer,
+            'parent_email_address_after_transfer' => $request->parent_email_address_after_transfer,
+            'parent_address_after_transfer' => $request->parent_address_after_transfer,
+            'school_fees_payment_status' => $request->school_fees_payment_status,
+            'termination_status' => $termination_status,
+            'delete_google_address' => $delete_google_address,
+            'remarks' => $request->remarks,
+            'date_of_termination' => $request->date_of_termination,
+            'termination_notification' => $termination_notification,
+            "created_by" => session()->get('ref_user_id'),
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.termination_update'), $data);
+        // dd($response);
+        return $response;
+    }
+    // DELETE Termination 
+    public function deleteTermination(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.termination_delete'), $data);
+        return $response;
     }
 }

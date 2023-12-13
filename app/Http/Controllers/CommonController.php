@@ -81,6 +81,9 @@ class CommonController extends Controller
 
     public function addApplicationForm(Request $request)
     {
+        $verify_email = $request->verify_email . '_email';
+        // dd($verify_email);
+        $created_by = session()->get('ref_user_id');
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -121,11 +124,48 @@ class CommonController extends Controller
             'guardian_occupation' => $request->guardian_occupation,
             'guardian_email' => $request->guardian_email,
             'guardian_relation' => $request->guardian_relation,
-            'branch_id' => config('constants.branch_id')
+            'branch_id' => config('constants.branch_id'),
+            'created_by' => isset($created_by) ? $created_by : "Public",
+            'created_by_role' => session()->get('role_id'),
+            'verify_email' => $request->$verify_email,
+            'url' => env('APP_URL'),
 
         ];
-
         $application = Http::post(config('constants.api.application_add'), $data);
+        $response = $application->json();
+        return $response;
+    }
+
+    public function emailApplicationForm(Request $request, $branch_id, $token)
+    {
+        // dd($verify_email);
+        $data = [
+            'branch_id' => $branch_id,
+            'url' => env('APP_URL'),
+            'token' => $token,
+        ];
+        // dd($data);
+
+        $application = Http::post(config('constants.api.application_email'), $data);
+        $response = $application->json();
+        // dd($response);
+        return view(
+            'school-application-email',
+            [
+                'application' => isset($response['message']) ? $response['message'] : [],
+            ]
+        );
+    }
+    public function verifyApplicationForm(Request $request)
+    {
+        // dd($verify_email);
+        $data = [
+            'branch_id' => config('constants.branch_id'),
+            'url' => env('APP_URL'),
+            'email' => $request->email
+        ];
+
+        $application = Http::post(config('constants.api.application_verify'), $data);
         $response = $application->json();
         // dd($response);
         return $response;
@@ -209,6 +249,52 @@ class CommonController extends Controller
                 $notificationlist .= '<div class="noti-scroll" data-simplebar>';
                 foreach ($unread_notifications['data']['unread'] as $notification) {
                     // dd($notification['type']);
+                    
+                    if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
+                        $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
+                        $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
+                        
+                        $notificationlist .= '<a href="' . route('admin.student.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Information Update</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small> ' . $parent_name . ' Parent Updated Their Student '. $student_name .' Information </small>
+                        </p>
+                        </a>';
+                    }
+                    if ($notification['type'] == "App\Notifications\ParentInfoUpdate") {
+                        $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
+                        
+                        $notificationlist .= '<a href="' . route('admin.parent.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Information Update</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small> ' . $parent_name . ' Parent Updated Their Information </small>
+                        </p>
+                        </a>';
+                    }
+                    if ($notification['type'] == "App\Notifications\ParentTermination") {
+                        $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
+                        $parent_name = isset($notification['data']['termination']['parent_name']) ? $notification['data']['termination']['parent_name'] : '-';
+                        $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
+
+                        $notificationlist .= '<a href="' . route('admin.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Termination</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small> ' . $student_name . ' Termination  has Been ' . $status . ' By ' . $parent_name . ' </small>
+                        </p>
+                        </a>';
+                    }
+                    if ($notification['type'] == "App\Notifications\AdminTermination") {
+                        $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
+                        $date = isset($notification['data']['termination']['date']) ? $notification['data']['termination']['date'] : '-';
+                        $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
+
+                        $notificationlist .= '<a href="' . route('parent.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">Termination</p>
+                        <p class="text-muted mb-0 user-msg">
+                            <small> ' . $student_name . ' Termination  has Been ' . $status . ' By  Admin Termination Date ( ' . $date . ' )</small>
+                        </p>
+                        </a>';
+                    }
                     if ($notification['type'] == "App\Notifications\LeaveApply") {
                         $redirectRoute = "javascript:void(0)";
                         if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
@@ -313,6 +399,7 @@ class CommonController extends Controller
     {
         // return "fdfsf";
         // $unread_notifications = Helper::GetMethod(config('constants.api.get_today_schedules_admin'));
+        $url = "";
         $data = [
             'login_id' => session()->get('user_id'),
             'teacher_id' => session()->get('ref_user_id')
@@ -536,41 +623,6 @@ class CommonController extends Controller
         }
     }
     
-    public function emailApplicationForm(Request $request, $token)
-
-    {
-
-        // dd($verify_email);
-
-        $data = [
-
-            'branch_id' => config('constants.branch_id'),
-
-            'token' => $token,
-
-        ];
-
-        // dd($data);
-
-        //$application = Http::post(config('constants.api.application_email'), $data);
-
-        //$response = $application->json();
-
-       
-
-        return view(
-
-            'school-application-email',
-
-            [
-
-                'application' => isset($application['message']) ? $application['message'] : [],
-
-            ]
-
-        );
-
-    }
 
     public function clearLocalStorage(Request $request)
     {

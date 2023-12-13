@@ -42,7 +42,7 @@ $(function () {
                     $('#check_out').html(data.data.check_out);
                     
                     $('#check_in').prop('disabled', data.data.check_in_status);
-                    $('#check_out').prop('disabled', data.data.check_out_status);
+                    $('#check_out').disabled', data.data.check_out_status);
                     
                     $('.check_in_time').html(data.data.check_in_time);
                     $('.check_out_time').html(data.data.check_out_time);

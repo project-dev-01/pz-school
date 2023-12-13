@@ -70,6 +70,32 @@ $(function () {
         $("#shortName").val(shortname.toUpperCase());
     });
     // change file
+    
+    $('#passport_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#passport_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#passport_photo_name').text("File greater than 2Mb");
+            $("#passport_photo_name").addClass("error");
+            $('#passport_photo').val('');
+        } else {
+            $("#passport_photo_name").removeClass("error");
+            $('#passport_photo_name').text(file.name);
+        }
+    });
+    
+    $('#visa_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#visa_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#visa_photo_name').text("File greater than 2Mb");
+            $("#visa_photo_name").addClass("error");
+            $('#visa_photo').val('');
+        } else {
+            $("#visa_photo_name").removeClass("error");
+            $('#visa_photo_name').text(file.name);
+        }
+    });
     // $("#photo").on("change", function () {
     //     var file = $("input[type=file]").get(0).files[0];
     //     if (file) {

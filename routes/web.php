@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\LangController;
@@ -143,9 +144,10 @@ Route::get('/password/reset/{token}', [AuthController::class, 'passwordRest'])->
 Route::post('/reset-password-validation', [AuthController::class, 'resetPasswordValidation'])->name('reset_password_validation');
 
 //school app form
-Route::get('/application/email/{token}', [CommonController::class, 'emailApplicationForm'])->name('application.email');
 Route::get('/application-form', [CommonController::class, 'showApplicationForm'])->name('schoolcrm.app.form');
 Route::post('/application-form/add', [CommonController::class, 'addApplicationForm'])->name('application.add');
+Route::post('/application-form/verify', [CommonController::class, 'verifyApplicationForm'])->name('application.verify');
+Route::get('/application/email/{branch_id}/{token}', [CommonController::class, 'emailApplicationForm'])->name('application.email');
 Route::get('/DBMigrationCall', [CommonController::class, 'DBMigrationCall']);
 // notifications
 Route::get('unread_notifications', [CommonController::class, 'unreadNotifications'])->name('unread_notifications');
@@ -167,6 +169,21 @@ Route::get('/2fa/checktwofa', [AuthController::class, 'twoFACheckView'])->name('
 Route::get('/2fa/checktwofaregister', [AuthController::class, 'twoFACheckRegister'])->name('2fa.register');
 Route::post('2fa/register', [AuthController::class, 'twoFACheckOTPRegister'])->name('complete.registration');
 
+Route::group(['prefix' => 'guest'], function () {
+    Route::get('/login', [AuthController::class, 'guestLogin'])->name('guest.login');
+    Route::any('/authenticate', [AuthController::class, 'authenticateGuest'])->name('guest.authenticate');
+    Route::post('/logout', [AuthController::class, 'logoutGuest'])->name('guest.logout');
+    Route::group(['middleware' => ['isGuest', 'logroute']], function () {
+        Route::get('/dashboard', [GuestController::class, 'index'])->name('guest.dashboard');
+    Route::get('/application', [GuestController::class, 'applicationIndex'])->name('guest.application.index');
+    Route::get('application/list', [GuestController::class, 'applicationList'])->name('guest.application.list');
+    Route::get('/application/create', [GuestController::class, 'applicationCreate'])->name('guest.application.create');
+    Route::post('/application/add', [GuestController::class, 'applicationAdd'])->name('guest.application.add');
+    Route::get('/application/edit/{id}', [GuestController::class, 'applicationEdit'])->name('guest.application.edit');
+    Route::post('/application/update', [GuestController::class, 'applicationUpdate'])->name('guest.application.update');
+    });
+});
+
 // admin routes start
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
@@ -182,6 +199,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // application details
         Route::get('application', [AdminController::class, 'applicationIndex'])->name('admin.application.index');
         Route::get('application/list', [AdminController::class, 'applicationList'])->name('admin.application.list');
+        Route::get('/application/edit/{id}', [AdminController::class, 'applicationEdit'])->name('admin.application.edit');
         Route::get('application/application-details/{id}', [AdminController::class, 'getApplicationDetails'])->name('admin.application.details');
         Route::post('application/update', [AdminController::class, 'updateApplication'])->name('admin.application.update');
         Route::post('application/approve', [AdminController::class, 'approveApplication'])->name('admin.application.approve');
@@ -379,11 +397,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Parent routes
         Route::get('parent/index', [AdminController::class, 'parent'])->name('admin.parent');
+        Route::get('parent/update_info', [AdminController::class, 'parentUpdateInfo'])->name('admin.parent.update_info');
+        Route::get('student/update_info', [AdminController::class, 'studentUpdateInfo'])->name('admin.student.update_info');
         Route::get('parent/create', [AdminController::class, 'createParent'])->name('admin.parent.create');
         Route::post('parent/add', [AdminController::class, 'addParent'])->name('admin.parent.add');
+        Route::get('parent/update_info/list', [AdminController::class, 'getParentUpdateInfoList'])->name('admin.parent.update_info_list');
+        Route::get('student/update_info/list', [AdminController::class, 'getstudentUpdateInfoList'])->name('admin.student.update_info_list');
         Route::get('parent/list', [AdminController::class, 'getParentList'])->name('admin.parent.list');
         Route::get('parent/parent-details/{id}', [AdminController::class, 'getParentDetails'])->name('admin.parent.details');
+        Route::get('parent/update_info/view/{id}', [AdminController::class, 'viewParentUpdateInfo'])->name('admin.parent.update_info_view');
+        Route::get('student/update_info/view/{id}', [AdminController::class, 'viewStudentUpdateInfo'])->name('admin.student.update_info_view');
         Route::post('parent/update', [AdminController::class, 'updateParent'])->name('admin.parent.update');
+        Route::post('parent/update_info/update', [AdminController::class, 'updateParentInfo'])->name('admin.parent.update_info_update');
+        Route::post('student/update_info/update', [AdminController::class, 'updateStudentInfo'])->name('admin.student.update_info_update');
         Route::post('parent/delete', [AdminController::class, 'deleteParent'])->name('admin.parent.delete');
 
         // Homework routes
@@ -520,6 +546,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Attendance routes
         Route::get('attendance/student_report', [AdminController::class, 'studentAttendanceReport'])->name('admin.attendance.student_report');
+        Route::get('attendance/student_report_test', [AdminController::class, 'studentAttendanceReportTest'])->name('admin.attendance.student_report_test');
+        Route::get('attendance/pdf_download', [AdminController::class, 'studentAttendancePdfDownload'])->name('admin.attendance.pdf_download');
         Route::post('attendance/student_excel', [AdminController::class, 'studentAttendanceExcel'])->name('admin.attendance.student_excel');
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');
         Route::get('attendance/employee_entry', [AdminController::class, 'employeeEntry'])->name('admin.attendance.employee_entry');
@@ -587,6 +615,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbytest_paper', [PdfController::class, 'downbytest_paper'])->name('admin.exam_results.downbytest_paper');
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf'])->name('admin.attendance.student_pdf');
+        Route::post('attendance/student_pdf_day_test', [PdfController::class, 'attendance_student_pdf_day_test'])->name('admin.attendance.student_pdf_day_test');
+        Route::post('attendance/student_pdf_term_test', [PdfController::class, 'attendance_student_pdf_term_test'])->name('admin.attendance.student_pdf_term_test');
+        Route::post('attendance/student_pdf_year_test', [PdfController::class, 'attendance_student_pdf_year_test'])->name('admin.attendance.student_pdf_year_test');
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('admin.attendance.employee_pdf');
         // Test Result Route
         Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
@@ -861,7 +892,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // 
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
-        Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
         // buletin_board routes
         Route::get('buletin_board/index', [AdminController::class, 'buletin_board'])->name('admin.buletin_board');
         Route::get('buletin_board/list', [AdminController::class, 'getBuletinBoardList'])->name('admin.buletin_board.list');
@@ -874,6 +904,43 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // retired_person routes
         Route::get('retired_person/index', [AdminController::class, 'retired_person'])->name('admin.retired_person');
         Route::get('retired_person/list', [AdminController::class, 'retiredPersonList'])->name('admin.retired_person.list');
+    
+        
+        // Email Type routes
+        Route::get('email_type/index', [AdminController::class, 'emailType'])->name('admin.email_type');
+        Route::get('email_type/list', [AdminController::class, 'getEmailTypeList'])->name('admin.email_type.list');
+        Route::post('email_type/add', [AdminController::class, 'addEmailType'])->name('admin.email_type.add');
+        Route::post('email_type/email_type-details', [AdminController::class, 'getEmailTypeDetails'])->name('admin.email_type.details');
+        Route::post('email_type/update', [AdminController::class, 'updateEmailType'])->name('admin.email_type.update');
+        Route::post('email_type/delete', [AdminController::class, 'deleteEmailType'])->name('admin.email_type.delete');
+
+        
+        // Email Template routes
+        Route::get('email_template/index', [AdminController::class, 'emailTemplate'])->name('admin.email_template');
+        Route::get('email_template/list', [AdminController::class, 'getEmailTemplateList'])->name('admin.email_template.list');
+        Route::get('email_template/create', [AdminController::class, 'createEmailTemplate'])->name('admin.email_template.create');
+        Route::post('email_template/add', [AdminController::class, 'addEmailTemplate'])->name('admin.email_template.add');
+        Route::post('email_template/email_template-details', [AdminController::class, 'getEmailTemplateDetails'])->name('admin.email_template.details');
+        Route::post('email_template/update', [AdminController::class, 'updateEmailTemplate'])->name('admin.email_template.update');
+        Route::post('email_template/delete', [AdminController::class, 'deleteEmailTemplate'])->name('admin.email_template.delete');
+        
+        Route::post('email_template/image', [AdminController::class, 'emailTemplateImage'])->name('admin.email_template.image.store');
+        Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
+
+        
+        // Form Field routes
+        Route::get('form_field/index', [AdminController::class, 'formField'])->name('admin.form_field');
+        Route::get('form_field/list', [AdminController::class, 'getFormFieldList'])->name('admin.form_field.list');
+        Route::post('form_field/form_field-details', [AdminController::class, 'getFormFieldDetails'])->name('admin.form_field.details');
+        Route::post('form_field/update', [AdminController::class, 'updateFormField'])->name('admin.form_field.update');
+
+        
+        Route::get('/termination', [AdminController::class, 'terminationIndex'])->name('admin.termination.index');
+        Route::get('/termination/edit/{id}', [AdminController::class, 'editTermination'])->name('admin.termination.edit');
+        Route::get('termination/list', [AdminController::class, 'getTerminationList'])->name('admin.termination.list');
+        // Route::post('termination/termination-details', [AdminController::class, 'getTerminationDetails'])->name('admin.termination.details');
+        Route::post('termination/update', [AdminController::class, 'updateTermination'])->name('admin.termination.update');
+    
     });
 });
 // admin routes end
@@ -1261,9 +1328,24 @@ Route::group(['prefix' => 'parent'], function () {
     Route::post('/logout', [AuthController::class, 'logoutParent'])->name('parent.logout');
     Route::group(['middleware' => ['isParent', 'logroute']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+        // Termination routes
+        Route::get('termination/index', [ParentController::class, 'termination'])->name('parent.termination.index');
+        Route::get('termination/create', [ParentController::class, 'createTermination'])->name('parent.termination.create');
+        Route::get('termination/edit/{id}', [ParentController::class, 'editTermination'])->name('parent.termination.edit');
+        Route::get('termination/list', [ParentController::class, 'getTerminationList'])->name('parent.termination.list');
+        Route::post('termination/add', [ParentController::class, 'addTermination'])->name('parent.termination.add');
+        Route::post('termination/termination-details', [ParentController::class, 'getTerminationDetails'])->name('parent.termination.details');
+        Route::post('termination/update', [ParentController::class, 'updateTermination'])->name('parent.termination.update');
+        Route::post('termination/delete', [ParentController::class, 'deleteTermination'])->name('parent.termination.delete');
 
+        // Route::get('/termination', [ParentController::class, 'terminationIndex'])->name('parent.termination.index');
+        // Route::get('/termination/add', [ParentController::class, 'terminationAdd'])->name('parent.termination.add');
+        // Route::get('/termination/edit', [ParentController::class, 'terminationEdit'])->name('parent.termination.edit');
         // Settings
         Route::get('settings', [ParentController::class, 'settings'])->name('parent.settings');
+        Route::get('student-profile', [ParentController::class, 'studentProfile'])->name('parent.student.profile');
+        Route::post('student/update', [ParentController::class, 'updateStudent'])->name('parent.student.update');
+        
         Route::get('profile-edit', [ParentController::class, 'getProfileDetails'])->name('parent.profile_edit');
         Route::post('update-profile', [ParentController::class, 'updateProfile'])->name('parent.profile_update');
         Route::post('change-password', [ParentController::class, 'changeNewPassword'])->name('parent.settings.changeNewPassword');
@@ -1350,6 +1432,20 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('fees/invoice/{id}/{group_id}', [ParentController::class, 'feesInvoice'])->name('parent.fees.invoice');
         Route::get('fees/invoice/download/{id}/{group_id}', [ParentController::class, 'feesDownload'])->name('parent.invoice.download');
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('parent.clear_local_storage');
+
+        
+        Route::get('/application', [ParentController::class, 'applicationIndex'])->name('parent.application.index');
+        Route::get('application/list', [ParentController::class, 'applicationList'])->name('parent.application.list');
+        Route::get('/application/create', [ParentController::class, 'applicationCreate'])->name('parent.application.create');
+        Route::post('/application/add', [ParentController::class, 'applicationAdd'])->name('parent.application.add');
+        Route::get('/application/edit/{id}', [ParentController::class, 'applicationEdit'])->name('parent.application.edit');
+        Route::post('/application/update', [ParentController::class, 'applicationUpdate'])->name('parent.application.update');
+
+        
+
+        Route::get('/update_info', [ParentController::class, 'updateInfo'])->name('parent.update_info');
+        Route::get('/update_info/list', [ParentController::class, 'getParentUpdateInfoList'])->name('parent.update_info_list');
+        Route::get('/update_info/view/{id}', [ParentController::class, 'viewParentUpdateInfo'])->name('parent.update_info_view');
     });
 });
 

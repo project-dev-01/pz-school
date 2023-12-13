@@ -9,30 +9,30 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ config('constants.image_url').'/public/common-asset/images/favicon.ico'}}">
+    <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico'}}">
 
     <!-- App css -->
-    <link href="{{ asset('public/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-    <link href="{{ asset('public/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+    <link href="{{ asset('css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
 
-    <link href="{{ asset('public/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-    <link href="{{ asset('public/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+    <link href="{{ asset('css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+    <link href="{{ asset('css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
 
     <!-- icons -->
-    <link href="{{ asset('public/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- <link href="{{ asset('public/css/common.css')}}" rel="stylesheet" type="text/css" /> -->
-    <link href="{{ asset('public/css/custom/style.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ asset('css/common.css')}}" rel="stylesheet" type="text/css" /> -->
+    <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 
 
     <!-- date picker -->
-    <link href="{{ asset('public/date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/date-picker/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- toaster alert -->
-    <link rel="stylesheet" href="{{ asset('public/sweetalert2/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/mobile-country/css/intlTelInput.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/country/css/countrySelect.css') }}">
+    <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+    <link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 
     <style>
         .error {
@@ -67,7 +67,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark text-center">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/public/common-asset/images/logo-dark.png'}}" alt="" height="50">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/logo-dark.png'}}" alt="" height="50">
                                         </span>
                                     </a>
                                 </div>
@@ -83,10 +83,12 @@
                                     </div>
                                 </div>
 
-                                @if($application == "Verified")
+                                @if($application == "Email Verified Successfully")
                                 <h4 class="text-center" style="color: #000000;">Email Verified Successfully</h4>
-                                @else
+                                @elseif($application == "Email Already Verified")
                                 <h4 class="text-center" style="color: #000000;">Your Email Already Verified</h4>
+                                @elseif($application == "Link Has been Expired")
+                                <h4 class="text-center" style="color: #000000;">Your Link Has been Expired</h4>
                                 @endif
                             </div>
                             <div class="form-group" style="text-align: center;">
@@ -115,27 +117,27 @@
     <div class="rightbar-overlay"></div>
 
     <!-- Vendor js -->
-    <script src="{{ asset('public/js/vendor.min.js')}}"></script>
+    <script src="{{ asset('js/vendor.min.js')}}"></script>
 
     <!-- Plugins js-->
-    <script src="{{ asset('public/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
+    <script src="{{ asset('libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
     <!-- Init js-->
-    <script src="{{ asset('public/js/pages/form-wizard.init.js')}}"></script>
+    <script src="{{ asset('js/pages/form-wizard.init.js')}}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('public/js/app.min.js')}}"></script>
+    <script src="{{ asset('js/app.min.js')}}"></script>
 
-    <script src="{{ asset('public/libs/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 
-    <script src="{{ asset('public/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('public/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('public/date-picker/jquery-ui.js') }}"></script>
-    <script src="{{ asset('public/js/validation/validation.js') }}"></script>
-    <script src="{{ asset('public/js/custom/student_application.js') }}"></script>
+    <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/validation/validation.js') }}"></script>
+    <script src="{{ asset('js/custom/student_application.js') }}"></script>
     <!-- Init js-->
-    <script src="{{ asset('public/mobile-country/js/intlTelInput.js') }}"></script>
-    <script src="{{ asset('public/country/js/countrySelect.js') }}"></script>
+    <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+    <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";

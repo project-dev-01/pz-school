@@ -418,9 +418,19 @@ return [
         //Parent Url
         'parent_add' => $url.'/parent/add',
         'parent_list' => $url.'/parent/list',
+        'parent_update_info_list' => $url.'/parent/update_info/list',
+        'parent_update_info_view' => $url.'/parent/update_info/view',
+        'parent_student_update' => $url.'/parent/student/update',
+        'parent_update_view' => $url.'/parent/update/view',
+        'parent_student_update_info_list' => $url.'/parent/student/update_info/list',
+        
+        'student_update_info_list' => $url.'/student/update_info/list',
+        'student_update_info_view' => $url.'/student/update_info/view',
         'parent_name' => $url.'/parent/name',
         'parent_details' => $url.'/parent/parent-details',
         'parent_update' => $url.'/parent/update',
+        'parent_update_info_update' => $url.'/parent/update_info/update',
+        'student_update_info_update' => $url.'/student/update_info/update',
         'parent_delete' => $url.'/parent/delete',
         // get_all_teacher_list
         'get_all_teacher_list' => $url.'/get_all_teacher_list',
@@ -804,11 +814,13 @@ return [
 
         
         'application_add'=> $url.'/application/add',
+        'application_verify'=> $url.'/application/verify',
         'application_list'=> $url.'/application/list',
         'application_details'=> $url.'/application/application-details',
         'application_approve'=> $url.'/application/approve',
         'application_update'=> $url.'/application/update',
         'application_delete'=> $url.'/application/delete',
+        'application_email'=> $url.'/application/email',
 
         'application_grade_list'=> $url.'/application/grade/list',
         'application_relation_list'=> $url.'/application/relation/list',
@@ -907,8 +919,40 @@ return [
         //School Role Permissions
         'schoolmenuaccess_list' => $url.'/menus/schoolaccesslist',       
         'setschoolpermission' => $url.'/menus/setschoolpermission',
-        'getschoolroleaccess' => $url.'/menus/getschoolroleaccess',  
-      
+        'getschoolroleaccess' => $url.'/menus/getschoolroleaccess', 
+        
+        
+        // email type url
+        'email_type_add' => $url.'/email_type/add',
+        'email_type_list' => $url.'/email_type/list',
+        'email_type_details' => $url.'/email_type/email_type-details',
+        'email_type_update' => $url.'/email_type/update',
+        'email_type_delete' => $url.'/email_type/delete',
+        
+        // email template url
+        'email_template_add' => $url.'/email_template/add',
+        'email_template_list' => $url.'/email_template/list',
+        'email_template_details' => $url.'/email_template/email_template-details',
+        'email_template_update' => $url.'/email_template/update',
+        'email_template_delete' => $url.'/email_template/delete',
+
+        
+        // form field url
+        'form_field'=> $url.'/form_field',
+        'form_field_add' => $url.'/form_field/add',
+        'form_field_list' => $url.'/form_field/list',
+        'form_field_details' => $url.'/form_field/form_field-details',
+        'form_field_update' => $url.'/form_field/update',
+        'form_field_delete' => $url.'/form_field/delete',
+
+        
+        // termination url
+        'termination_add' => $url.'/termination/add',
+        'termination_list' => $url.'/termination/list',
+        'termination_details' => $url.'/termination/termination-details',
+        'termination_update' => $url.'/termination/update',
+        'termination_update_admin' => $url.'/termination/update/admin',
+        'termination_delete' => $url.'/termination/delete',
       ]
 
 ];

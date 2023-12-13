@@ -1,4 +1,42 @@
 $(function () {
+    
+
+    $("#verifyApplication").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+        }
+    });
+
+
+    $('#verifyApplication').on('submit', function (e) {
+        e.preventDefault();
+        
+        var admissionCheck = $("#verifyApplication").valid();
+        if (admissionCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    
+                    // toastr.success("Email Verification Sended Successfully");
+                    if (data.code == 200) {
+                        $('#verify_email').val("");
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
     $(document).on('change', '#terms_condition', function () {
         
         if ($(this).prop('checked') == false) {
@@ -75,7 +113,7 @@ $(function () {
                 required: true,
                 email: true
             },
-
+            verify_email:"required",
         }
     });
 
@@ -106,6 +144,21 @@ $(function () {
     });
 
     
+    // verify email required 
+    $(".verify_email").on("click", function () {
+        var details = $(this).val()+"_details";
+        console.log('this',details)
+        $("#"+details).show("slow");
+        $(".skip").prop( "disabled", false )
+        // $(".skip").prop( "checked", true )
+        $("#skip_"+details).prop( "disabled", true )
+        $("#skip_"+details).prop( "checked", false )
+        // if ($(this).is(":checked")) {
+        //     $("#mother_details").hide("slow");
+        // } else {
+        //     $("#mother_details").show("slow");
+        // }
+    });
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
         if ($(this).is(":checked")) {
@@ -130,4 +183,6 @@ $(function () {
             $("#guardian_details").show("slow");
         }
     });
+
+    
 });

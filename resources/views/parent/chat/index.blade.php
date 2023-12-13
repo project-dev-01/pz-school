@@ -469,9 +469,9 @@
                                 msgread = '';
                             }
                             else if (item.chat_status == 'Unread') {
-                                msgread = '<img src={{ asset("public/images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
+                                msgread = '<img src={{ asset("images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             } else {
-                                msgread = '<img src={{ asset("public/images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
+                                msgread = '<img src={{ asset("images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             }
                             if (($.inArray(item.chatdate, chatdate)) < 0) {
                                 chat_li += ' <li class="clearfix"> <center> ' + item.chatdate + '</center></li>';

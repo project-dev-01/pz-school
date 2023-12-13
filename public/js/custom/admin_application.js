@@ -1,4 +1,178 @@
 $(function () {
+    
+    $('#phase_1_status').on('change', function () {
+        var status = $(this).val();
+        if(status=="Reject" || status=="Send Back"){
+
+            $("#reason_1").show();
+        }else{
+            $("#reason_1").hide();
+        }
+    });
+    $('#phase_2_status').on('change', function () {
+        var status = $(this).val();
+        console.log('sty',status)
+        if(status=="Reject" || status=="Send Back"){
+
+            $("#reason_2").show();
+        }else{
+            $("#reason_2").hide();
+        }
+    });
+
+    $('#passport_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#passport_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#passport_photo_name').text("File greater than 2Mb");
+            $("#passport_photo_name").addClass("error");
+            $('#passport_photo').val('');
+        } else {
+            $("#passport_photo_name").removeClass("error");
+            $('#passport_photo_name').text(file.name);
+        }
+    });
+    
+    $('#visa_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#visa_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#visa_photo_name').text("File greater than 2Mb");
+            $("#visa_photo_name").addClass("error");
+            $('#visa_photo').val('');
+        } else {
+            $("#visa_photo_name").removeClass("error");
+            $('#visa_photo_name').text(file.name);
+        }
+    });
+    $("#date_of_birth").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        maxDate: 0
+    });
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#passport_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#visa_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+    $("#editApplication").validate({
+        rules: {
+            first_name: "required",
+            mobile_no: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            address_1: "required",
+            country: "required",
+            city: "required",
+            state: "required",
+            postal_code: "required",
+            academic_grade: "required",
+            academic_year: "required",
+            grade: "required",
+            school_year: "required",
+            school_last_attended: "required",
+            school_address_1: "required",
+            school_country: "required",
+            school_city: "required",
+            school_state: "required",
+            school_postal_code: "required",
+            father_first_name: "required",
+            father_phone_number: "required",
+            father_occupation: "required",
+            father_email: {
+                required: true,
+                email: true
+            },
+            mother_first_name: "required",
+            mother_phone_number: "required",
+            mother_occupation: "required",
+            mother_email: {
+                required: true,
+                email: true
+            },
+            guardian_first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: "required",
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
+            status:"required",
+            enrollment:"required",
+            trail_date:"required",
+
+        }
+    });
+
+    $('#editApplication').on('submit', function (e) {
+        e.preventDefault();
+        console.log('123')
+        var admissionCheck = $("#editApplication").valid();
+        if (admissionCheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                        window.location.href = application;
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    });
+
+    // change 
+    // $('#phase_1_status').on('change', function () {
+    //     var status = $(this).val();
+    //     if(status=="Approved"){
+
+    //         $("#enrollment_show").show();
+    //     }else{
+    //         $("#trail_date_show").hide();
+    //         $("#enrollment_show").hide();
+    //     }
+    // });
+    $('#enrollment').on('change', function () {
+        var status = $(this).val();
+        if(status=="Trail Enrollment"){
+
+            $("#trail_date_show").show();
+        }else{
+            $("#trail_date_show").hide();
+        }
+    });
 
     $("#department_id").on('change', function (e) {
         e.preventDefault();
@@ -142,8 +316,20 @@ $(function () {
                 }
                 ,
                 {
+                    data: 'register_number',
+                    name: 'register_number'
+                },
+                {
                     data: 'name',
                     name: 'name'
+                },
+                {
+                    data: 'name_english',
+                    name: 'name_english'
+                },
+                {
+                    data: 'type',
+                    name: 'type'
                 },
                 {
                     data: 'gender',
@@ -166,10 +352,8 @@ $(function () {
                     name: 'status'
                 },
                 {
-                    data: 'approve',
-                    name: 'approve',
-                    orderable: false,
-                    searchable: false
+                    data: 'phase_2_status',
+                    name: 'phase_2_status'
                 },
                 {
                     data: 'actions',
@@ -271,90 +455,6 @@ $(function () {
             return false;
         }
     });
-    $("#date_of_birth").datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        maxDate: 0
-    });
-
-    $("#editApplication").validate({
-        rules: {
-            first_name: "required",
-            mobile_no: "required",
-            email: {
-                required: true,
-                email: true
-            },
-            address_1: "required",
-            country: "required",
-            city: "required",
-            state: "required",
-            postal_code: "required",
-            academic_grade: "required",
-            academic_year: "required",
-            grade: "required",
-            school_year: "required",
-            school_last_attended: "required",
-            school_address_1: "required",
-            school_country: "required",
-            school_city: "required",
-            school_state: "required",
-            school_postal_code: "required",
-            father_first_name: "required",
-            father_phone_number: "required",
-            father_occupation: "required",
-            father_email: {
-                required: true,
-                email: true
-            },
-            mother_first_name: "required",
-            mother_phone_number: "required",
-            mother_occupation: "required",
-            mother_email: {
-                required: true,
-                email: true
-            },
-            guardian_first_name: "required",
-            guardian_relation: "required",
-            guardian_phone_number: "required",
-            guardian_occupation: "required",
-            guardian_email: {
-                required: true,
-                email: true
-            },
-
-        }
-    });
-
-    $('#editApplication').on('submit', function (e) {
-        e.preventDefault();
-        console.log('123')
-        var admissionCheck = $("#editApplication").valid();
-        if (admissionCheck === true) {
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    if (data.code == 200) {
-                        toastr.success(data.message);
-                        window.location.href = application;
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
-        }
-    });
-
-    
     $(document).on('click', '#viewApplicationBtn', function () {
         var id = $(this).data('id');
         $('.viewApplication').find('span.error-text').text('');

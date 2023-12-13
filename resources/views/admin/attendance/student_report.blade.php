@@ -172,6 +172,7 @@
                                         <div class="form-group">
                                             <table class="">
                                                 <tr>
+                                                    <th><button type="button" style="background-color: #5c595b;" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-ufo"></i>Reason</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
                                                     <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> {{ __('messages.holiday') }}</button></th>

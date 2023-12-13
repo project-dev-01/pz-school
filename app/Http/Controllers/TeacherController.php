@@ -1215,7 +1215,7 @@ class TeacherController extends Controller
                                     <td>
                                         <i data-feather="file-text" class="icon-dual"></i>
                                         <span class="ml-2 font-weight-semibold">
-                                        <a  href="' . config('constants.image_url') . '/' . 'public/' . config('constants.branch_id') . '/student/homework/' . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a>
+                                        <a  href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/student/homework/' . '/' . $work['file'] . '" download class="text-reset">' . $work['file'] . '</a>
                                         </span>                                    
                                     </td>
                                     <td>' . $work['remarks'] . '</td>
