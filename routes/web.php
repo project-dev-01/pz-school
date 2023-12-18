@@ -519,7 +519,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('hostel_floor/update', [AdminController::class, 'updateHostelFloor'])->name('admin.hostel_floor.update');
         Route::post('hostel_floor/delete', [AdminController::class, 'deleteHostelFloor'])->name('admin.hostel_floor.delete');
 
+// School Role routes
+Route::get('school_role/index', [AdminController::class, 'school_role'])->name('admin.school_role.index');
+Route::get('school_role/list', [AdminController::class, 'getschool_roleList'])->name('admin.school_role.list');
+Route::post('school_role/add', [AdminController::class, 'addschool_role'])->name('admin.school_role.add');
+Route::post('school_role/role-details', [AdminController::class, 'getschool_roleDetails'])->name('admin.school_role.details');
+Route::post('school_role/update', [AdminController::class, 'updateschool_role'])->name('admin.school_role.update');
+Route::post('school_role/delete', [AdminController::class, 'deleteschool_role'])->name('admin.school_role.delete');
+Route::get('school_role/menuaccess', [AdminController::class, 'rollmenuaccess'])->name('admin.school_role.menuaccess');   
 
+// School Role Permission routes
+Route::post('school_role/getmenus', [AdminController::class, 'getmenus'])->name('admin.school_role.getmenus');     
+Route::post('school_role/setpermission', [AdminController::class, 'setpermission'])->name('admin.school_role.setpermission');
+Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermissions'])->name('admin.school_role.checkpermissions');     
         // Library routes
         Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
         Route::get('library/book/category', [AdminController::class, 'bookCategory'])->name('admin.library.bookcategory');
@@ -609,6 +621,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
         Route::post('exam_results/downbysubject', [PdfController::class, 'downbysubject'])->name('admin.exam_results.downbysubject');
         Route::post('exam_results/downbystudent', [PdfController::class, 'downbystudent'])->name('admin.exam_results.downbystudent');
+        Route::post('exam_results/downbystaffleave', [PdfController::class, 'downbystaffleave'])->name('admin.exam_results.downbystaffleave');
         Route::post('exam_results/downbyoverall', [PdfController::class, 'downbyoverall'])->name('admin.exam_results.downbyoverall');
         Route::post('exam_results/downbystudentroll', [PdfController::class, 'downbystudentroll'])->name('admin.exam_results.downbystudentroll');
         Route::post('exam_results/downbypaperwise', [PdfController::class, 'downbypaperwise'])->name('admin.exam_results.downbypaperwise');
@@ -691,6 +704,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('leave_management/reupload_file', [AdminController::class, 'reUploadLeaveFile'])->name('admin.reupload_file.add');
         //
         Route::get('get_all_leave_relief_assignment', [AdminController::class, 'getAllLeaveReliefAssignment'])->name('admin.relief_assignment.list');
+        Route::get('leave_management/leave_history_by_staff', [AdminController::class, 'leaveHistoryByStaff'])->name('admin.leave_management.leave_history_by_staff');
+        Route::post('leave_management/employee_leave_list', [AdminController::class, 'leaveHistoryByStaffList'])->name('admin.leave_management.employee_leave_list');
 
         // Education routes
         Route::get('education/index', [AdminController::class, 'education'])->name('admin.education');
@@ -892,6 +907,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // 
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
+        Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
         // buletin_board routes
         Route::get('buletin_board/index', [AdminController::class, 'buletin_board'])->name('admin.buletin_board');
         Route::get('buletin_board/list', [AdminController::class, 'getBuletinBoardList'])->name('admin.buletin_board.list');

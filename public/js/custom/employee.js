@@ -272,6 +272,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
+            formData.append('teacher_type', $('#teacher_type').val());
             formData.append('status', status);
             // 
             var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();
@@ -443,6 +444,7 @@ $(function () {
             formData.append('state', $('#State').val());
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
+            formData.append('teacher_type', $('#teacher_type').val());
             formData.append('status', status);
             // 
             var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();

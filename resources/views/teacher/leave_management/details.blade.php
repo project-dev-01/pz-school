@@ -111,7 +111,7 @@
 
 <!-- Long Content Scroll Modal -->
 <div class="modal fade DetailsModal" id="DetailsModal" tabindex="-1" role="dialog" aria-labelledby="DetailsModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-full-width modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="DetailsModalTitle">{{ __('messages.staff_leave_details') }}</h5>
@@ -152,7 +152,12 @@
                                 <td id="leaveDates"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.no._of._days') }}</td>
+                                <td>{{ __('messages.leave_request_for') }}</td>
+                                <td>:</td>
+                                <td id="leaveRequestFor"></td>
+                            </tr>
+                            <tr>
+                                <td>{{ __('messages.no._of._days') }} / {{ __('messages.hours') }}</td>
                                 <td>:</td>
                                 <td id="noOfDays"></td>
                             </tr>

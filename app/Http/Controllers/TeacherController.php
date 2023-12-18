@@ -104,15 +104,28 @@ class TeacherController extends Controller
             $extension = null;
         }
         $status = "Pending";
+        if ($request->leave_request == "Days") {
+            $from_leave = $request->from_leave;
+            $to_leave = $request->to_leave;
+            $total_leave_days = $request->total_leave;
+        } else {
+            $from_leave = $request->leave_date;
+            $to_leave = $request->leave_date;
+            $total_leave_days = 1;
+        }
         $data = [
             'staff_id' => session()->get('ref_user_id'),
             'leave_type' => $request->leave_type,
-            'from_leave' => $request->from_leave,
-            'to_leave' => $request->to_leave,
-            'total_leave' => $request->total_leave,
+            'from_leave' => $from_leave,
+            'to_leave' => $to_leave,
+            'total_leave' => $total_leave_days,
             'academic_session_id' => $request->academic_session_id,
             'reason' => $request->reason,
             'remarks' => $request->remarks,
+            'leave_request' => $request->leave_request,
+            'leave_date' => $request->leave_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'status' => $status,
             'level_one_status' => $status,
             'level_two_status' => $status,

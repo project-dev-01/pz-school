@@ -153,7 +153,8 @@
                                         <th rowspan="2">#</th>
                                         <th rowspan="2">{{ __('messages.employee_name') }}</th>
                                         <th rowspan="2">{{ __('messages.leave_type') }}</th>
-                                        <th rowspan="2">{{ __('messages.no._of._days') }}</th>
+                                        <th rowspan="2">{{ __('messages.leave_request_for') }}</th>
+                                        <th rowspan="2">{{ __('messages.no._of._days') }} / {{ __('messages.hours') }}</th>
                                         <th rowspan="2">{{ __('messages.from_leave') }}</th>
                                         <th rowspan="2">{{ __('messages.to_leave') }}</th>
                                         <th rowspan="2">{{ __('messages.reason') }}</th>

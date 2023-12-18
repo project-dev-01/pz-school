@@ -75,7 +75,11 @@ $(function () {
             to_ldate: "required",
             frm_ldate: "required",
             changelevReasons: "required",
-            total_leave: "required"
+            total_leave: "required",
+            leave_date: "required",
+            start_time: "required",
+            end_time: "required",
+            
         }
     });
 
@@ -92,7 +96,9 @@ $(function () {
             return false;
         }
         var std_details = $("#staffLeaveApply").valid();
-
+        // console.log("std_details")
+        // console.log(std_details)
+        // return false;
         if (std_details === true) {
             // Disable submit button and change text to "Please wait..."
             $('#submitButton').prop('disabled', true).text('Please wait...');
@@ -104,14 +110,18 @@ $(function () {
             var reason = $("#changelevReasons").val();
             var total_leave = $("#total_leave").val();
             var remarks = $("#remarks").val();
+            var leave_request = $("#leave_request").val();
+            var leave_date = $("#leave_date").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
 
-            var classObj = {
-                leave_type: leave_type,
-                reason: reason,
-                academic_session_id: academic_session_id,
-                userID: userID,
-            };
-            setLocalStorageForLeaveApply(classObj);
+            // var classObj = {
+            //     leave_type: leave_type,
+            //     reason: reason,
+            //     academic_session_id: academic_session_id,
+            //     userID: userID,
+            // };
+            // setLocalStorageForLeaveApply(classObj);
 
             var formData = new FormData();
             formData.append('staff_id', ref_user_id);
@@ -121,6 +131,10 @@ $(function () {
             formData.append('reason', reason);
             formData.append('remarks', remarks);
             formData.append('total_leave', total_leave);
+            formData.append('leave_request', leave_request);
+            formData.append('leave_date', leave_date);
+            formData.append('start_time', start_time);
+            formData.append('end_time', end_time);
             formData.append('academic_session_id', academic_session_id);
             // formData.append('file', file);
             formData.append('file', $('input[type=file]')[0].files[0]);
@@ -159,46 +173,46 @@ $(function () {
         };
     });
 
-    function setLocalStorageForLeaveApply(classObj) {
+    // function setLocalStorageForLeaveApply(classObj) {
 
-        var leaveApplyDetails = new Object();
-        leaveApplyDetails.reason = classObj.reason;
-        leaveApplyDetails.leave_type = classObj.leave_type;
-        // here to attached to avoid localStorage other users to add
-        leaveApplyDetails.branch_id = branchID;
-        leaveApplyDetails.role_id = get_roll_id;
-        leaveApplyDetails.user_id = ref_user_id;
-        var leaveApplyClassArr = [];
-        leaveApplyClassArr.push(leaveApplyDetails);
-        if (get_roll_id == "4") {
-            // teacher
-            localStorage.removeItem("teacher_leave_apply_details");
-            localStorage.setItem('teacher_leave_apply_details', JSON.stringify(leaveApplyClassArr));
-        }
-        return true;
-    }
+    //     var leaveApplyDetails = new Object();
+    //     leaveApplyDetails.reason = classObj.reason;
+    //     leaveApplyDetails.leave_type = classObj.leave_type;
+    //     // here to attached to avoid localStorage other users to add
+    //     leaveApplyDetails.branch_id = branchID;
+    //     leaveApplyDetails.role_id = get_roll_id;
+    //     leaveApplyDetails.user_id = ref_user_id;
+    //     var leaveApplyClassArr = [];
+    //     leaveApplyClassArr.push(leaveApplyDetails);
+    //     if (get_roll_id == "4") {
+    //         // teacher
+    //         localStorage.removeItem("teacher_leave_apply_details");
+    //         localStorage.setItem('teacher_leave_apply_details', JSON.stringify(leaveApplyClassArr));
+    //     }
+    //     return true;
+    // }
     // if localStorage
-    if (typeof teacher_leave_apply_storage !== 'undefined') {
-        if ((teacher_leave_apply_storage)) {
-            if (teacher_leave_apply_storage) {
-                var teacherLeaveApplyStorage = JSON.parse(teacher_leave_apply_storage);
-                if (teacherLeaveApplyStorage.length == 1) {
-                    var leave_type, reason, userBranchID, userRoleID, userID;
-                    teacherLeaveApplyStorage.forEach(function (user) {
-                        leave_type = user.leave_type;
-                        reason = user.reason;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $("#leave_type").val(leave_type);
-                        $("#changelevReasons").val(reason);
-                    }
-                }
-            }
-        }
-    }
+    // if (typeof teacher_leave_apply_storage !== 'undefined') {
+    //     if ((teacher_leave_apply_storage)) {
+    //         if (teacher_leave_apply_storage) {
+    //             var teacherLeaveApplyStorage = JSON.parse(teacher_leave_apply_storage);
+    //             if (teacherLeaveApplyStorage.length == 1) {
+    //                 var leave_type, reason, userBranchID, userRoleID, userID;
+    //                 teacherLeaveApplyStorage.forEach(function (user) {
+    //                     leave_type = user.leave_type;
+    //                     reason = user.reason;
+    //                     userBranchID = user.branch_id;
+    //                     userRoleID = user.role_id;
+    //                     userID = user.user_id;
+    //                 });
+    //                 if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+    //                     $("#leave_type").val(leave_type);
+    //                     $("#changelevReasons").val(reason);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     // change leave reasons
     // $('#changelevReasons').on('change', function () {
     //     var Reasons = $("#changelevReasons").val();
@@ -371,6 +385,10 @@ $(function () {
                 name: 'level_one_staff_remarks'
             },
             {
+                data: 'remarks',
+                name: 'remarks'
+            },
+            {
                 data: 'status',
                 name: 'status',
             },
@@ -401,7 +419,7 @@ $(function () {
                 }
             },
             {
-                "targets": 8,
+                "targets": 9,
                 "render": function (data, type, row, meta) {
                     console.log("data");
                     console.log(data);

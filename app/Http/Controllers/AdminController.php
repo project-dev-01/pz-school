@@ -1537,7 +1537,7 @@ class AdminController extends Controller
             'joining_date' => $request->joining_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
-            // 'name' => $request->name,
+            'teacher_type' => $request->teacher_type,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'short_name' => $request->short_name,
@@ -1769,6 +1769,7 @@ class AdminController extends Controller
             'joining_date' => $request->joining_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
+            'teacher_type' => $request->teacher_type,
             // 'name' => $request->name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -2620,7 +2621,9 @@ class AdminController extends Controller
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
+        $get_student_leave_types = Helper::GetMethod(config('constants.api.get_student_leave_types'));
         return view('admin.student_leave.index', [
+            'get_student_leave_types' => isset($get_student_leave_types['data']) ? $get_student_leave_types['data'] : [],
             'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : []
         ]);
@@ -5234,7 +5237,7 @@ class AdminController extends Controller
                 return '<div class="button-list">
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveTypeBtn"><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveTypeBtn"><i class="fe-trash-2"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" data-leave_days="' . $row['leave_days'] . '"data-short_name="' . $row['short_name'] . '"data-name="' . $row['name'] . '"data-gender="' . $row['gender'] . '" id="restoreLeaveTypeBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" data-leave_days="' . $row['leave_days'] . '"data-short_name="' . $row['short_name'] . '"data-name="' . $row['name'] . '"data-gender="' . $row['gender'] . '" id="restoreLeaveTypeBtn"><i class="fe-rotate-cw"></i></a>
                         </div>';
             })
 
@@ -5450,6 +5453,30 @@ class AdminController extends Controller
             'leave_taken_history' => isset($leave_taken_history['data']) ? $leave_taken_history['data'] : [],
         ]);
     }
+    public function leaveHistoryByStaffList(Request $request)
+    {
+        $data = [
+            'department_id' => $request->department_id,
+            'staff_id' => $request->staff_id,
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $attendance = Helper::PostMethod(config('constants.api.leave_taken_history_by_staff'), $data);
+        return $attendance;
+    }
+    public function leaveHistoryByStaff()
+    {
+        $getdepartment = Helper::GetMethod(config('constants.api.department_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        return view(
+            'admin.leave_management.emp_leave_list',
+            [
+                'department' => isset($getdepartment['data']) ? $getdepartment['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
     public function approvalleave()
     {
         return view('admin.leave_management.approvalleave');
@@ -5569,15 +5596,28 @@ class AdminController extends Controller
             $extension = null;
         }
         $status = "Pending";
+        if ($request->leave_request == "Days") {
+            $from_leave = $request->from_leave;
+            $to_leave = $request->to_leave;
+            $total_leave_days = $request->total_leave;
+        } else {
+            $from_leave = $request->leave_date;
+            $to_leave = $request->leave_date;
+            $total_leave_days = 1;
+        }
         $data = [
             'staff_id' => session()->get('ref_user_id'),
             'leave_type' => $request->leave_type,
-            'from_leave' => $request->from_leave,
-            'to_leave' => $request->to_leave,
-            'total_leave' => $request->total_leave,
+            'from_leave' => $from_leave,
+            'to_leave' => $to_leave,
+            'total_leave' => $total_leave_days,
             'academic_session_id' => $request->academic_session_id,
             'reason' => $request->reason,
             'remarks' => $request->remarks,
+            'leave_request' => $request->leave_request,
+            'leave_date' => $request->leave_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'status' => $status,
             'level_one_status' => $status,
             'level_two_status' => $status,

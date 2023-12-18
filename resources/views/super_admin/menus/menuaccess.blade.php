@@ -199,7 +199,7 @@
       </div>-->
       <div class="modal-footer">
       <button type="button" class="btn btn-light" data-dismiss="modal" name="set" value="update">Close</button>
-      <button type="submit" class="btn btn-success waves-effect waves-light" data-dismiss="modal">Update</button>
+      <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
       </div>
     </div>
 

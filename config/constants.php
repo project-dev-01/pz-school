@@ -442,6 +442,8 @@ return [
         'get_students_parentdashboard' => $url.'/get_students_parentdashboard',
         //student leave apply 
         'std_leave_apply'=> $url.'/std_leave_apply',
+        'get_student_leave_types'=> $url.'/student_leave/get_student_leave_types',
+        'get_reasons_by_leave_type'=> $url.'/student_leave/get_reasons_by_leave_type',
         // get student leaves
         'get_student_leaves'=> $url.'/get_student_leaves',
         // get leave reasons
@@ -898,6 +900,8 @@ return [
 
         //retired person
         'retired_list' => $url.'/retired/list',
+        'leave_taken_history_by_staff' => $url.'/employee-leave/leave_taken_history_by_staff',
+        'view_student_leave_details_row' => $url.'/view_student_leave_details_row',
         //add promotion bulk
         'promotion_data_bulk' => $url.'/get_student_list/promotion_data_bulk',
         // Menu List

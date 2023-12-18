@@ -134,8 +134,6 @@
                                     <th> {{ __('messages.reason') }}</th>
                                     <th> {{ __('messages.document') }}</th>
                                     <th> {{ __('messages.teacher_remarks') }}</th>
-                                    <th> {{ __('messages.nursing_teacher_remarks') }}</th>
-                                    <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
@@ -149,7 +147,6 @@
         </div><!-- end col-->
     </div>
     <!-- end row-->
-    @include('admin.student_leave.nursing')
     <!-- student leave remarks popup -->
     <div class="modal fade" id="stuLeaveRemarksPopup" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -194,15 +191,6 @@
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var admin_studentleave_storage = localStorage.getItem('admin_studentleave_details');
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
-    var viewStudentLeaveDetailsRow = "{{ config('constants.api.view_student_leave_details_row') }}";
-    var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
 </script>
-<script src="{{ asset('js/custom/student_leave_list_byadmin.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/student_leave_list.js') }}"></script> -->
-@if(!empty(Session::get('school_roleid')))
-<script>
-var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
-</script>
-<script src="{{ asset('js/custom/permissions.js') }}"></script>
-@endif
+<script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
 @endsection

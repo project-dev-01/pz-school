@@ -796,6 +796,15 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="teacher_type">{{ __('messages.teacher_type') }}</label>
+                                    <select class="form-control" name="teacher_type" id="teacher_type">
+                                        <option value="">{{ __('messages.select_teacher_type') }}</option>
+                                        <option value="nursing_teacher" {{ isset($employee['teacher_type']) ? $employee['teacher_type'] == "nursing_teacher" ? 'Selected' : '' : '' }}>Nursing Teacher</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">

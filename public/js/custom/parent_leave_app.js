@@ -15,16 +15,57 @@ $(function () {
         yearRange: "-100:+50", // last hundred years
         minDate: 0
     });
+    $("#to_ldate").on('change', function () {
+        let frm_ldate = $("#frm_ldate").val();
+        let to_ldate = $("#to_ldate").val();
+        const businessDays = getBusinessDays(convertDigitIn(frm_ldate), convertDigitIn(to_ldate));
+        $("#total_leave").val(businessDays);
+    });
+    $("#changeLevType").on('change', function (e) {
+        e.preventDefault();
+        var student_leave_type_id = $(this).val();
+        $("#changelevReasons").empty();
+        $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
+        $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+    });
     StudentLeave_tabel();
+    const getBusinessDays = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const current = new Date(startDate);
+        const dates = [];
+
+        while (current <= end) {
+            if (current.getDay() !== 6 && current.getDay() !== 0) {
+                dates.push(new Date(current));
+            }
+
+            current.setDate(current.getDate() + 1);
+        }
+
+        return dates.length;
+    }
+    // reverse dob
+    function convertDigitIn(str) {
+        return str.split('-').reverse().join('-');
+    }
     $("#stdGeneralDetails").validate({
         rules: {
             changeStdName: "required",
             to_ldate: "required",
             frm_ldate: "required",
-            changelevReasons: "required"
+            total_leave: "required",
+            changeLevType: "required",
+            changelevReasons: "required",
+            txtarea_prev_remarks: "required"
         }
     });
-
     $('#stdGeneralDetails').on('submit', function (e) {
         e.preventDefault();
         var start = convertDigitIn($("#frm_ldate").val());
@@ -45,9 +86,13 @@ $(function () {
             var student_id = $("#changeStdName").val();
             var frm_leavedate = $("#frm_ldate").val();
             var to_leavedate = $("#to_ldate").val();
+            var total_leave = $("#total_leave").val();
+            var changeLevType = $("#changeLevType").val();
             var reason = $("#changelevReasons").val();
             var reason_text = $('option:selected', '#changelevReasons').text();
-            var remarks = $("#remarks").val();
+            // var remarks = $("#remarks").val();
+            var remarks = $("#txtarea_prev_remarks").val();
+
             // var file = $("#file").val();
 
             var formData = new FormData();
@@ -61,24 +106,30 @@ $(function () {
             formData.append('reason', reason);
             formData.append('reason_text', reason_text);
             formData.append('remarks', remarks);
+            formData.append('total_leave', total_leave);
+            formData.append('change_lev_type', changeLevType);
             // formData.append('file', file);
             formData.append('file', $('input[type=file]')[0].files[0]);
-
-            $("#listModeClassID").val(class_id);
-            $("#listModeSectionID").val(section_id);
-            $("#listModestudentID").val(student_id);
-            $("#listModereason").val(reason);
-            $("#listModereasontext").val(reason_text);
-            var classObj = {
-                class_id:class_id,
-                section_id:section_id,
-                student_id: student_id,
-                frm_leavedate: frm_leavedate,
-                to_leavedate: to_leavedate,
-                reason: reason,
-                reason_text: reason_text,
-                academic_session_id: academic_session_id
-            };
+            // Display the key/value pairs
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
+            // return false;
+            // $("#listModeClassID").val(class_id);
+            // $("#listModeSectionID").val(section_id);
+            // $("#listModestudentID").val(student_id);
+            // $("#listModereason").val(reason);
+            // $("#listModereasontext").val(reason_text);
+            // var classObj = {
+            //     class_id: class_id,
+            //     section_id: section_id,
+            //     student_id: student_id,
+            //     frm_leavedate: frm_leavedate,
+            //     to_leavedate: to_leavedate,
+            //     reason: reason,
+            //     reason_text: reason_text,
+            //     academic_session_id: academic_session_id
+            // };
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -97,33 +148,33 @@ $(function () {
                     }
                 }
             });
-            console.log(classObj);
-            setLocalStorageForparentleaveapply(classObj);
+            // console.log(classObj);
+            // setLocalStorageForparentleaveapply(classObj);
         };
     });
-    function setLocalStorageForparentleaveapply(classObj) {
+    // function setLocalStorageForparentleaveapply(classObj) {
 
-        var leaveapplyDetails  = new Object();
-        leaveapplyDetails.class_id = classObj.class_id;
-        leaveapplyDetails.section_id = classObj.section_id;
-        leaveapplyDetails.student_id = classObj.student_id;
-        leaveapplyDetails.frm_leavedate = classObj.frm_leavedate;
-        leaveapplyDetails.to_leavedate = classObj.to_leavedate;
-        leaveapplyDetails.reason = classObj.reason;
-        // here to attached to avoid localStorage other users to add
-        leaveapplyDetails.branch_id = branchID;
-        leaveapplyDetails.role_id = get_roll_id;
-        leaveapplyDetails.user_id = ref_user_id;
-        var leaveapplyClassArr = [];
-        leaveapplyClassArr.push(leaveapplyDetails);
-        if (get_roll_id == "5") {
-            // Parent
-            localStorage.removeItem("parent_leaveapply_details");
-            localStorage.setItem('parent_leaveapply_details', JSON.stringify(leaveapplyClassArr));
-        }
-        
-        return true;
-    }
+    //     var leaveapplyDetails = new Object();
+    //     leaveapplyDetails.class_id = classObj.class_id;
+    //     leaveapplyDetails.section_id = classObj.section_id;
+    //     leaveapplyDetails.student_id = classObj.student_id;
+    //     leaveapplyDetails.frm_leavedate = classObj.frm_leavedate;
+    //     leaveapplyDetails.to_leavedate = classObj.to_leavedate;
+    //     leaveapplyDetails.reason = classObj.reason;
+    //     // here to attached to avoid localStorage other users to add
+    //     leaveapplyDetails.branch_id = branchID;
+    //     leaveapplyDetails.role_id = get_roll_id;
+    //     leaveapplyDetails.user_id = ref_user_id;
+    //     var leaveapplyClassArr = [];
+    //     leaveapplyClassArr.push(leaveapplyDetails);
+    //     if (get_roll_id == "5") {
+    //         // Parent
+    //         localStorage.removeItem("parent_leaveapply_details");
+    //         localStorage.setItem('parent_leaveapply_details', JSON.stringify(leaveapplyClassArr));
+    //     }
+
+    //     return true;
+    // }
     $('#leave_file').change(function () {
         var file = $('#leave_file')[0].files[0];
         if (file.size > 2097152) {
@@ -408,42 +459,42 @@ $(function () {
             }
         });
     });
-    if (get_roll_id == "5") {
-    if ((parent_leaveapply_storage)) {
-        if (parent_leaveapply_storage) {
-            var parentleaveapplyStorage = JSON.parse(parent_leaveapply_storage);
-            if (parentleaveapplyStorage.length == 1) {
-               
-                var class_id, section_id, student_id,frm_leavedate, to_leavedate, reason,reason_text,userBranchID, userRoleID, userID;
-                parentleaveapplyStorage.forEach(function (user) {
-                    class_id = user.class_id;
-                    section_id = user.section_id; 
-                    student_id = user.student_id;
-                    frm_leavedate = user.frm_leavedate;
-                    to_leavedate = user.to_leavedate; 
-                    reason = user.reason;
-                    reason_text = user.reason_text;
-                    userBranchID = user.branch_id;
-                    userRoleID = user.role_id;
-                    userID = user.user_id;
-                });
-                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                  
-                    $('select[name^="changeStdName"] option[value=' + student_id + ']').attr("selected","selected");
-                    //$("#frm_ldate").val(frm_ldate);
-                    //$("#to_ldate").val(to_ldate);
-                    $("#frm_ldate").datepicker("setDate", frm_leavedate);
-                    $("#to_ldate").datepicker("setDate", to_leavedate);
-                    $('select[name^="changelevReasons"] option[value=' + reason + ']').attr("selected","selected");
-                  
-                    $("#listModeClassID").val(class_id);
-                    $("#listModeSectionID").val(section_id);
-                    $("#listModestudentID").val(student_id);
-                    $("#listModereason").val(reason);
-                    $("#listModereasontext").val(reason_text);
-                }
-            }
-        }
-    }
-}
+    // if (get_roll_id == "5") {
+    //     if ((parent_leaveapply_storage)) {
+    //         if (parent_leaveapply_storage) {
+    //             var parentleaveapplyStorage = JSON.parse(parent_leaveapply_storage);
+    //             if (parentleaveapplyStorage.length == 1) {
+
+    //                 var class_id, section_id, student_id, frm_leavedate, to_leavedate, reason, reason_text, userBranchID, userRoleID, userID;
+    //                 parentleaveapplyStorage.forEach(function (user) {
+    //                     class_id = user.class_id;
+    //                     section_id = user.section_id;
+    //                     student_id = user.student_id;
+    //                     frm_leavedate = user.frm_leavedate;
+    //                     to_leavedate = user.to_leavedate;
+    //                     reason = user.reason;
+    //                     reason_text = user.reason_text;
+    //                     userBranchID = user.branch_id;
+    //                     userRoleID = user.role_id;
+    //                     userID = user.user_id;
+    //                 });
+    //                 if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+
+    //                     $('select[name^="changeStdName"] option[value=' + student_id + ']').attr("selected", "selected");
+    //                     //$("#frm_ldate").val(frm_ldate);
+    //                     //$("#to_ldate").val(to_ldate);
+    //                     $("#frm_ldate").datepicker("setDate", frm_leavedate);
+    //                     $("#to_ldate").datepicker("setDate", to_leavedate);
+    //                     $('select[name^="changelevReasons"] option[value=' + reason + ']').attr("selected", "selected");
+
+    //                     $("#listModeClassID").val(class_id);
+    //                     $("#listModeSectionID").val(section_id);
+    //                     $("#listModestudentID").val(student_id);
+    //                     $("#listModereason").val(reason);
+    //                     $("#listModereasontext").val(reason_text);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 });

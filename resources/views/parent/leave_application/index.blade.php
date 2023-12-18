@@ -96,11 +96,11 @@
                 <div class="card-body">
                     <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
                         @csrf
-                        <input type="hidden" name="class_id" id="listModeClassID">
-                        <input type="hidden" name="section_id" id="listModeSectionID" />
-                        <input type="hidden" name="student_id" id="listModestudentID" />
-                        <input type="hidden" name="reasons" id="listModereason" />
-                        <input type="hidden" name="reasonstxt" id="listModereasontext" />
+                        <!-- <input type="text" name="class_id" id="listModeClassID">
+                        <input type="text" name="section_id" id="listModeSectionID" />
+                        <input type="text" name="student_id" id="listModestudentID" />
+                        <input type="text" name="reasons" id="listModereason" />
+                        <input type="text" name="reasonstxt" id="listModereasontext" /> -->
                         <!--1st row-->
                         <div class="row">
                             <div class="col-md-4">
@@ -146,17 +146,20 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Number Of Days Leave<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter the number of days leave">
+                                    <label for="total_leave">Number Of Days Leave<span class="text-danger">*</span></label>
+                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the number of days leave">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Leave Type<span class="text-danger">*</span></label>
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                    <label for="changeLevType">Leave Type<span class="text-danger">*</span></label>
+                                    <select id="changeLevType" class="form-control" name="changeLevType">
                                         <option value="">Select Leave Type</option>
-                                        <option value="">Sick Leave</option>
+                                        @forelse ($get_student_leave_types as $ress)
+                                        <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -165,10 +168,6 @@
                                     <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
                                         <option value="">{{ __('messages.select_reason') }}</option>
-                                        @forelse ($get_leave_reasons_dashboard as $res)
-                                        <option value="{{ $res['id'] }}">{{ $res['name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -343,11 +342,11 @@
     // Get PDF Footer Text
     var leave_status_txt = "{{ __('messages.leave_status') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
-
+    var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
     // Get PDF Header & Footer Text End
     var at = "{{date('d-m-Y')}}";
     $("#frm_ldate").val(at);
-    $("#to_ldate").val(at);
+    // $("#to_ldate").val(at);
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
 </script>

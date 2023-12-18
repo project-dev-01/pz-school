@@ -1639,16 +1639,32 @@ class StaffController extends Controller
             $extension = null;
         }
         $status = "Pending";
+        if ($request->leave_request == "Days") {
+            $from_leave = $request->from_leave;
+            $to_leave = $request->to_leave;
+            $total_leave_days = $request->total_leave;
+        } else {
+            $from_leave = $request->leave_date;
+            $to_leave = $request->leave_date;
+            $total_leave_days = 1;
+        }
         $data = [
             'staff_id' => session()->get('ref_user_id'),
             'leave_type' => $request->leave_type,
-            'from_leave' => $request->from_leave,
-            'to_leave' => $request->to_leave,
-            'total_leave' => $request->total_leave,
+            'from_leave' => $from_leave,
+            'to_leave' => $to_leave,
+            'total_leave' => $total_leave_days,
             'academic_session_id' => $request->academic_session_id,
             'reason' => $request->reason,
             'remarks' => $request->remarks,
+            'leave_request' => $request->leave_request,
+            'leave_date' => $request->leave_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
             'status' => $status,
+            'level_one_status' => $status,
+            'level_two_status' => $status,
+            'level_three_status' => $status,
             'document' => $base64,
             'file_extension' => $extension
         ];
@@ -1713,8 +1729,10 @@ class StaffController extends Controller
     {
         $staff_data = [
             'staff_id' => $request->staff_id,
-            'leave_status' => $request->leave_status,
-            "academic_session_id" => session()->get('academic_session_id')
+            'level_one_status' => $request->level_one_status,
+            'level_two_status' => $request->level_two_status,
+            'level_three_status' => $request->level_three_status,
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.leave_approval_history_by_staff'), $staff_data);
         $data = isset($response['data']) ? $response['data'] : [];
@@ -1723,7 +1741,7 @@ class StaffController extends Controller
             ->addColumn('actions', function ($row) {
                 $details_lang = __('messages.details');
                 return '<div class="button-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['leave_id'] . '" data-assign_leave_approval_id="' . $row['id'] . '" data-staff_id="' . $row['staff_id'] . '" id="viewDetails">' . $details_lang . '</a>
                             </div>';
             })
 

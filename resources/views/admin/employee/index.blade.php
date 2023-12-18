@@ -754,7 +754,16 @@
                                         @forelse($job_title_list as $r)
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
-                                        @endforelse <!--  -->
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="teacher_type">{{ __('messages.teacher_type') }}</label>
+                                    <select class="form-control" name="teacher_type" id="teacher_type">
+                                        <option value="">{{ __('messages.select_teacher_type') }}</option>
+                                        <option value="nursing_teacher">Nursing Teacher</option>
                                     </select>
                                 </div>
                             </div>

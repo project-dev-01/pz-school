@@ -118,6 +118,7 @@ $(function () {
                 if (response.code == 200) {
                     var dataSet = response.data;
                     allStudentLeave(dataSet);
+                    allStudentLeaveSample(dataSet);
                     $(".studentLeaveShow").show("slow");
                 } else {
                     toastr.error(response.message);
@@ -325,6 +326,29 @@ $(function () {
                         return document;
                     }
                 },
+                // {
+                //     "targets": 10,
+                //     "render": function (data, type, row, meta) {
+
+                //         var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
+                //             '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">' + add_remarks + '</button>';
+                //         return addremarks;
+                //     }
+                // },
+                // {
+                //     "targets": 10,
+                //     "render": function (data, type, row, meta) {
+
+                //         // var addremarks = '<textarea style="display:none;" class="addRemarksStudent" data-id="' + row.id + '" id="addRemarksStudent' + row.id + '" >' + (row.teacher_remarks !== "null" ? row.teacher_remarks : "") + '</textarea>' +
+                //         //     '<button type="button" data-id="' + row.id + '" class="btn btn-outline-info waves-effect waves-light" data-toggle="modal" data-target="#stuLeaveRemarksPopup" id="editLeaveRemarksStudent">' + add_remarks + '</button>';
+                //         // return addremarks;
+                //         var document = "";
+                //         var document = '<i class="fas fa-check-square text-center" data-toggle="tooltip" title="Click to download..!"></i>' +
+                //             '<i class="fas fa-ban text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+
+                //         return document;
+                //     }
+                // },
                 {
                     "targets": 12,
                     "render": function (data, type, row, meta) {
@@ -347,120 +371,7 @@ $(function () {
         });
     }
 
-    //viewDetails
-    $(document).on('click', '#viewDetails', function () {
-        var student_leave_id = $(this).data('id');
-        var student_id = $(this).data('student_id');
-        // staffLeaveDetailsShowUrl
-        var formData = new FormData();
-        formData.append('branch_id', branchID);
-        formData.append('student_leave_id', student_leave_id);
-        formData.append('student_id', student_id);
-        // Display the key/value pairs
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-        // formData.append('assign_leave_approval_id', assign_leave_approval_id);
-        // formData.append('academic_session_id', academic_session_id);
-        // $.ajax({
-        //     url: staffLeaveDetailsShowUrl,
-        //     method: "post",
-        //     data: formData,
-        //     processData: false,
-        //     dataType: 'json',
-        //     contentType: false,
-        //     success: function (res) {
-        //         // if (res.code == 200) {
-        //         //     // $('#all-leave-list').DataTable().ajax.reload(null, false);
-        //         //     // toastr.success(res.message);
-        //         //     // DetailsModal
-        //         //     var leave_details = res.data.leave_details;
-        //         //     var leave_type_details = res.data.leave_type_details;
-        //         //     var assign_leave_approval_details = res.data.assign_leave_approval_details;
-        //         //     let result = checkValue(assign_leave_approval_details, ref_user_id);
-        //         //     var staffStatus = "";
-        //         //     var staffRemarks = "";
-        //         //     var approver_level = 0;
-        //         //     // level 1 db column name
-        //         //     if (result == 'level_one_staff_id') {
-        //         //         staffStatus = leave_details.level_one_status;
-        //         //         staffRemarks = leave_details.level_one_staff_remarks;
-        //         //         approver_level = 1;
-        //         //     } else if (result == 'level_two_staff_id') {
-        //         //         staffStatus = leave_details.level_two_status;
-        //         //         staffRemarks = leave_details.level_two_staff_remarks;
-        //         //         approver_level = 2;
-        //         //     } else if (result == 'level_three_staff_id') {
-        //         //         staffStatus = leave_details.level_three_status;
-        //         //         staffRemarks = leave_details.level_three_staff_remarks;
-        //         //         approver_level = 3;
-        //         //     }
-        //         //     $('#DetailsModal').modal('show');
-        //         //     $('#leave_id').val(leave_details.id);
-        //         //     $('#approver_level').val(approver_level);
-        //         //     $('#staffName').html(leave_details.name);
-        //         //     $('#leaveDates').html(leave_details.from_leave + " / " + leave_details.to_leave);
 
-        //         //     var durationInHours = 0;
-        //         //     if (leave_details.end_time && leave_details.start_time) {
-        //         //         durationInHours = showHoursMin(leave_details.start_time, leave_details.end_time);
-        //         //     }
-        //         //     var leave_req = (leave_details.date_diff + 1) + '/ ' + durationInHours;
-
-        //         //     $('#noOfDays').html(leave_req);
-        //         //     $('#applyDate').html(leave_details.created_at);
-        //         //     $('#leaveType').html(leave_details.leave_type_name);
-        //         //     $('#reason').html(leave_details.reason_name);
-        //         //     $('#leaveRequestFor').html(leave_details.leave_request);
-        //         //     // document
-        //         //     var badgeColor = "";
-        //         //     if (leave_details.status == "Approve") {
-        //         //         badgeColor = "badge-success";
-        //         //     }
-        //         //     if (leave_details.status == "Reject") {
-        //         //         badgeColor = "badge-danger";
-        //         //     }
-        //         //     if (leave_details.status == "Pending") {
-        //         //         badgeColor = "badge-warning";
-        //         //     }
-        //         //     var status = '<span class="badge ' + badgeColor + ' badge-pill">' + leave_details.status + '</span>';
-        //         //     var document = '<a href="' + leaveFilesUrl + '/' + leave_details.document + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
-        //         //     $('#documents').html(document);
-        //         //     $('#leave_status').html(status);
-        //         //     // set value
-        //         //     $('#1st_approver_remarks').html(leave_details.level_one_staff_remarks);
-        //         //     $('#2nd_approver_remarks').html(leave_details.level_two_staff_remarks);
-        //         //     $('#3rd_approver_remarks').html(leave_details.level_three_staff_remarks);
-
-        //         //     $('#assiner_remarks').val(staffRemarks);
-        //         //     $('#leave_status_name').val(staffStatus);
-        //         //     $('#alreadyTakenLeave tbody').empty();
-        //         //     // $('#myModal').modal('hide');
-        //         //     var takenLeaveDetails = "";
-        //         //     if (leave_type_details.length > 0) {
-        //         //         $.each(leave_type_details, function (key, val) {
-        //         //             takenLeaveDetails += '<tr>' +
-        //         //                 '<td>' + val.leave_type_name + '</td>' +
-        //         //                 '<td>' + val.overall_days + ' Days (' + val.overall_days_by_hours + ' hours )' + '</td>' +
-        //         //                 '<td>' + val.used_leave_days + ' Days (' + val.used_leave_days_by_hours + ' hours )' + '</td>' +
-        //         //                 '<td>' + val.applied_leave_days + ' Days (' + val.applied_leave_days_by_hours + ' hours )' + '</td>' +
-        //         //                 '<td>' + val.balance_days + ' Days (' + val.balance_days_by_hours + ' hours )' + '</td>' +
-        //         //                 '</tr>';
-
-        //         //         });
-        //         //     } else {
-        //         //         takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> ' + no_data_available + '</td></tr>';
-
-        //         //     }
-        //         //     $('#alreadyTakenLeave tbody').append(takenLeaveDetails);
-        //         // }
-        //         // else {
-        //         //     // toastr.error(res.message);
-
-        //         // }
-        //     }
-        // });
-    });
     // function setLocalStorageStudentLeaveTeacher(classObj) {
 
     //     var studentLeaveDetails = new Object();
@@ -600,4 +511,179 @@ $(function () {
     //     }
     // }
     // start
+    function allStudentLeaveSample(dataSetNew) {
+
+        $('#student-leave-table-sample').DataTable({
+            processing: true,
+            bDestroy: true,
+            info: true,
+            // dom: 'lBfrtip',
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: downloadcsv,
+                    extension: '.csv',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    }
+
+                }
+            ],
+            data: dataSetNew,
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                },
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'class_name'
+                },
+                {
+                    data: 'section_name'
+                },
+                {
+                    data: 'from_leave'
+                },
+                {
+                    data: 'to_leave'
+                },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'reason'
+                },
+                // {
+                //     data: 'teacher_remarks'
+                // },
+                {
+                    data: 'document'
+                },
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'id'
+                }
+            ],
+            columnDefs: [
+                {
+
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "render": function (data, type, row, meta) {
+                        if (data == "Approve") {
+
+                            var status = '<span class="badge badge-success">' + data + '</span>';
+                        } else if (data == "Reject") {
+
+                            var status = '<span class="badge badge-danger">' + data + '</span>';
+                        } else if (data == "Pending") {
+
+                            var status = '<span class="badge badge-info">' + data + '</span>';
+                        }
+                        return status;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "render": function (data, type, row, meta) {
+                        // console.log("data");
+                        // console.log(data);
+                        // console.log(row);
+                        // if (data) {
+                        //     var document = '<a href="' + studentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                        // } else {
+                        //     document = "-";
+                        // }
+                        // return document;
+                        var document = "";
+                        // if (row.id == 1) {
+                        //     var document = '<i class="fas fa-cloud-download-alt text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+                        // } else {
+                        //     document = '<i class="fas fa-times-circle text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+                        // }
+                        if (row.id == 1) {
+                            var document = '<button type="button" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></button>';
+                        } else {
+                            document = '<button type="button" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></button>';
+                        }
+                        return document;
+                        // var document = "";
+                        // var document = '<i class="fas fa-check-square text-center" data-toggle="tooltip" title="Click to download..!"></i>'+
+                        // '<i class="fas fa-ban text-center" data-toggle="tooltip" title="Click to download..!"></i>';
+
+                        // return document;
+                    }
+                },
+                {
+                    "targets": 9,
+                    "render": function (data, type, row, meta) {
+
+                        // var addremarks = '<button class="icon-button"><i class="fas fa-check-circle fa-sm"></i></button><button class="icon-button"><i class="fas fa-times-circle fa-sm"></i></button>';
+                        // var addremarks = '<button type="button" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-heart-half-full"></i></button>' +
+                        //     '&nbsp;<button type="button" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i></button>';
+                        var addremarks = '<button type="button" class="btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
+                            '&nbsp;<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
+                        return addremarks;
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '">Details</button>';
+                        return submitbtn;
+                    }
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
 });

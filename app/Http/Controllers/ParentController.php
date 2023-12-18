@@ -108,7 +108,9 @@ class ParentController extends Controller
             'parent_id' => $parent_id,
             'frm_leavedate' => $request->frm_leavedate,
             'to_leavedate' => $request->to_leavedate,
-            'reasons' => $request->reason,
+            'total_leave' => $request->total_leave,
+            'change_lev_type' => $request->change_lev_type,
+            'reason_id' => $request->reason,
             'reason_text' => $request->reason_text,
             'remarks' => $request->remarks,
             'status' => $status,
@@ -1094,24 +1096,24 @@ class ParentController extends Controller
         $get_to_do_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_to_do_teacher'), $data);
         $get_homework_list_dashboard = Helper::GETMethodWithData(config('constants.api.get_homework_list_dashboard'), $data);
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
-        $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
+        // $get_leave_reasons_dashboard = Helper::GetMethod(config('constants.api.absent_reason_list'));
         $greetings = Helper::greetingMessage();
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         // dd($get_homework_list_dashboard);
         $exam_by_student = Helper::GETMethodWithData(config('constants.api.exam_by_student'), $data);
         $all_exam_subject_scores = Helper::PostMethod(config('constants.api.all_exam_subject_scores'), $data);
-
-
+        $get_student_leave_types = Helper::GetMethod(config('constants.api.get_student_leave_types'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         // dd($all_exam_subject_scores['data']);
         return view(
             'parent.leave_application.index',
             [
+                'get_student_leave_types' => isset($get_student_leave_types['data']) ? $get_student_leave_types['data'] : [],
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'get_homework_list_dashboard' => isset($get_homework_list_dashboard['data']) ? $get_homework_list_dashboard['data'] : [],
                 'get_std_names_dashboard' => isset($get_std_names_dashboard['data']) ? $get_std_names_dashboard['data'] : [],
-                'get_leave_reasons_dashboard' => isset($get_leave_reasons_dashboard['data']) ? $get_leave_reasons_dashboard['data'] : [],
+                // 'get_leave_reasons_dashboard' => isset($get_leave_reasons_dashboard['data']) ? $get_leave_reasons_dashboard['data'] : [],
                 'all_exam_subject_scores' => isset($all_exam_subject_scores['data']) ? $all_exam_subject_scores['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
@@ -1179,6 +1181,10 @@ class ParentController extends Controller
 
             'id' => $request->id,
             'email' => $request->email,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $request->date_of_birth,
             'passport' => $request->passport,
             'race' => $request->race,
             'religion' => $request->religion,

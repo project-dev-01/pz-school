@@ -531,6 +531,137 @@ class PdfController extends Controller
             // return $pdf->stream();
         }
     }
+    public function downbystaffleave(Request $request)
+    {
+        $data = [
+            'department_id' => $request->department_id,
+            'staff_id' => $request->staff_id,
+            'academic_session_id' => $request->academic_session_id
+        ];
+        $leave_taken_history_by_staff = Helper::PostMethod(config('constants.api.leave_taken_history_by_staff'), $data);
+        $footer_text = session()->get('footer_text');
+
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body><header> " .  __('messages.leave_history_by_staff') . "</header>
+        <footer>" . $footer_text . "</footer>";
+        // $output = "";
+        // dd($tot_grade_calcu_byclass);
+        if ($leave_taken_history_by_staff['code'] == "200") {
+            $headers = $leave_taken_history_by_staff['data']['headers'];
+            $staff_leave_history = $leave_taken_history_by_staff['data']['staff_leave_history'];
+            $headercount = count($headers);
+            $headercount = $headercount * 3;
+            // dd($headercount);
+            $output .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+              <th style="border: 1px solid; padding:12px;border-bottom-style: hidden"></th>
+              <th style="border: 1px solid; padding:12px;border-bottom-style: hidden"></th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;" colspan="' . $headercount . '">Leave Type</th>
+             </tr><tr>';
+            $output .=  '<th class="text-center" style="border-bottom-style: hidden;border-left: 1px solid; padding:12px;">Dep Name</th>';
+            $output .=  '<th class="text-center" style="border-bottom-style: hidden;border-left: 1px solid; padding:12px;">Employee Name</th>';
+            foreach ($headers as $val) {
+                $output .=  '<th colspan="3" class="text-center" style="border: 1px solid; padding:12px;">' . $val['name'] . '</th>';
+            }
+            $output .= '</tr><tr>';
+            $output .= '<th style="border: 1px solid; padding:12px;"></th>';
+            $output .= '<th style="border: 1px solid; padding:12px;"></th>';
+            foreach ($headers as $val) {
+                $output .=  '<th class="text-center" style="border: 1px solid; padding:12px;">Entitlement</th>
+                    <th class="text-center" style="border: 1px solid; padding:12px;">Taken</th>
+                    <th class="text-center" style="border: 1px solid; padding:12px;">Balance</th>';
+            }
+            $output .= '</tr>
+           </thead>
+           <tbody>';
+            foreach ($staff_leave_history as $key => $res) {
+                $key++;
+                $output .= '<tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['department_name'] . '</td>
+                 <td class="text-left" style="border: 1px solid; padding:12px;">' . $res['name'] . '</td>';
+                foreach ($headers as $resp) {
+                    // header subject id
+                    $id = $resp['id'];
+                    //subject array
+                    $marksArr = $res['leave_history'];
+                    // echo "<pre>";
+                    // print_r($subject_id);
+                    // print_r($marksArr);
+                    $retVal = $this->search($marksArr, 'leave_type', $id);
+                    // if (array_search($subject_id, $marksArr)) {
+                    if (isset($retVal)) {
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">' . $retVal[0]['overall_days_by_hours'] . '</td>';
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">' . $retVal[0]['used_leave_days_by_hours'] . '</td>';
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">' . $retVal[0]['balance_days_by_hours'] . '</td>';
+                    } else {
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">-</td>';
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">-</td>';
+                        $output .=  '<td class="text-center" style="border: 1px solid; padding:12px;">-</td>';
+                    }
+                    // exit;
+                }
+                $output .= '</tr>';
+            }
+            $output .= '</tbody></table><br></div>';
+        }
+        // dd($output);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        // $customPaper = array(0, 0, 1600.00, 567.00);
+        $customPaper = array(0, 0, 2880.00, 1620.00);
+        $pdf->set_paper($customPaper);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName =  __('messages.leave_history_by_staff') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
     // return match key
     public function search($array, $key, $value)
     {

@@ -149,6 +149,10 @@ $(function () {
                     name: 'leave_type_name'
                 },
                 {
+                    data: 'leave_request',
+                    name: 'leave_request'
+                },
+                {
                     data: 'total_leave',
                     name: 'total_leave'
                 },
@@ -193,14 +197,25 @@ $(function () {
             ],
             columnDefs: [
                 {
-                    "targets": 7,
+                    "targets": 4,
+                    "render": function (data, type, row, meta) {
+                        var leave_req = row.total_leave;
+                        var durationInHours = 0;
+                        if (row.end_time && row.start_time) {
+                            durationInHours = showHoursMin(row.start_time, row.end_time);
+                        }
+                        return leave_req + '/ ' + durationInHours;
+                    }
+                },
+                {
+                    "targets": 8,
                     "render": function (data, type, row, meta) {
                         var document = '<a href="' + leaveFilesUrl + '/' + data + '" download name="student_leave_upd[' + meta.row + ']"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
                         return document;
                     }
                 },
                 {
-                    "targets": 8,
+                    "targets": 9,
                     "render": function (data, type, row, meta) {
                         if (row.level_one_staff_id) {
                             var badgeColor = "";
@@ -222,7 +237,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 9,
+                    "targets": 10,
                     "render": function (data, type, row, meta) {
                         if (row.level_two_staff_id) {
                             var badgeColor = "";
@@ -243,7 +258,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 10,
+                    "targets": 11,
                     "render": function (data, type, row, meta) {
                         if (row.level_three_staff_id) {
                             var badgeColor = "";
@@ -276,6 +291,25 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    function showHoursMin(startTime, endTime) {
+        // Parsing the time strings
+        const [startHour, startMinute] = startTime.split(":").map(Number);
+        const [endHour, endMinute] = endTime.split(":").map(Number);
+
+        // Calculating the time difference
+        let hourDiff = endHour - startHour;
+        let minuteDiff = endMinute - startMinute;
+        // Handling negative minutes and hours if needed
+        if (minuteDiff < 0) {
+            minuteDiff += 60;
+            hourDiff--; // Decrement hours if borrowing from hours
+        }
+        if (hourDiff < 0) {
+            hourDiff += 24; // In case end time is before start time, add a day (24 hours)
+        }
+
+        return `${hourDiff} hours ${minuteDiff} minutes`;
+    }
     // add remarks model
     $('#LeaveRemarksPopup').on('show.bs.modal', e => {
         $("#leave_remarks").focus();
@@ -296,6 +330,7 @@ $(function () {
     });
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
+        console.log("-viewDetails--");
         var leave_id = $(this).data('id');
         var assign_leave_approval_id = $(this).data('assign_leave_approval_id');
         var staff_id = $(this).data('staff_id');
@@ -316,6 +351,8 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (res) {
+                console.log("---");
+                console.log(res);
                 if (res.code == 200) {
                     // $('#all-leave-list').DataTable().ajax.reload(null, false);
                     // toastr.success(res.message);
@@ -342,14 +379,24 @@ $(function () {
                         approver_level = 3;
                     }
                     $('#DetailsModal').modal('show');
+                    console.log(leave_details);
+
                     $('#leave_id').val(leave_details.id);
                     $('#approver_level').val(approver_level);
                     $('#staffName').html(leave_details.name);
                     $('#leaveDates').html(leave_details.from_leave + " / " + leave_details.to_leave);
-                    $('#noOfDays').html(leave_details.date_diff + 1);
+
+                    var durationInHours = 0;
+                    if (leave_details.end_time && leave_details.start_time) {
+                        durationInHours = showHoursMin(leave_details.start_time, leave_details.end_time);
+                    }
+                    var leave_req = (leave_details.date_diff + 1) + '/ ' + durationInHours;
+
+                    $('#noOfDays').html(leave_req);
                     $('#applyDate').html(leave_details.created_at);
                     $('#leaveType').html(leave_details.leave_type_name);
                     $('#reason').html(leave_details.reason_name);
+                    $('#leaveRequestFor').html(leave_details.leave_request);
                     // document
                     var badgeColor = "";
                     if (leave_details.status == "Approve") {
@@ -377,20 +424,16 @@ $(function () {
                     var takenLeaveDetails = "";
                     if (leave_type_details.length > 0) {
                         $.each(leave_type_details, function (key, val) {
-                            var used_leave = 0;
-                            if (val.used_leave) {
-                                used_leave = val.used_leave;
-                            }
-                            var bal = val.total_leave - val.used_leave;
-                            var applied_leave = val.applied_leave !== null ? val.applied_leave : 0;
                             takenLeaveDetails += '<tr>' +
-                                '<td>' + val.leave_name + '</td>' +
-                                '<td>' + val.total_leave + '</td>' +
-                                '<td>' + used_leave + '</td>' +
-                                '<td>' + applied_leave + '</td>' +
-                                '<td>' + bal + '</td>' +
+                                '<td>' + val.leave_type_name + '</td>' +
+                                '<td>' + val.overall_days + ' Days (' + val.overall_days_by_hours + ' hours )' + '</td>' +
+                                '<td>' + val.used_leave_days + ' Days (' + val.used_leave_days_by_hours + ' hours )' + '</td>' +
+                                '<td>' + val.applied_leave_days + ' Days (' + val.applied_leave_days_by_hours + ' hours )' + '</td>' +
+                                '<td>' + val.balance_days + ' Days (' + val.balance_days_by_hours + ' hours )' + '</td>' +
+                                // '<td>' + used_leave + '</td>' +
+                                // '<td>' + applied_leave + '</td>' +
+                                // '<td>' + bal + '</td>' +
                                 '</tr>';
-
                         });
                     } else {
                         takenLeaveDetails += '<tr><td colspan="4" style="text-align: center;"> ' + no_data_available + '</td></tr>';

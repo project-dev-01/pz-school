@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.leave_management') . '')
+@section('title',' ' . __('messages.leave_management') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -112,11 +112,11 @@
                                     <tbody>
                                         @forelse($leave_taken_history as $val)
                                         <tr>
-                                            <td>{{ $val['leave_name'] }}</td>
-                                            <td>{{ $val['total_leave'] }}</td>
-                                            <td>{{ $val['used_leave'] ? $val['used_leave'] : 0 }}</td>
-                                            <td>{{ $val['applied_leave'] ? $val['applied_leave'] : 0 }}</td>
-                                            <td>{{ $val['total_leave'] - $val['used_leave'] }}</td>
+                                            <td>{{ $val['leave_type_name'] }}</td>
+                                            <td>{{ $val['overall_days'] }} Days ({{ $val['overall_days_by_hours'] }} hours)</td>
+                                            <td>{{ $val['used_leave_days'] }} Days ({{ $val['used_leave_days_by_hours'] }} hours)</td>
+                                            <td>{{ $val['applied_leave_days'] }} Days ({{ $val['applied_leave_days_by_hours'] }} hours)</td>
+                                            <td>{{ $val['balance_days'] }} Days ({{ $val['balance_days_by_hours'] }} hours)</td>
                                         </tr>
                                         @empty
                                         <tr>
@@ -136,7 +136,8 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.leave_application') }}
+                                <h4 class="navv">
+                                    {{ __('messages.leave_application') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -158,33 +159,13 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="far fa-calendar-alt"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" id="frm_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
-                                            </div>
+                                            <label for="leave_request">{{ __('messages.leave_request_for') }}<span class="text-danger">*</span></label>
+                                            <select id="leave_request" name="leave_request" class="form-control">
+                                                <option value="Days">{{ __('messages.days') }}</option>
+                                                <option value="Hours">{{ __('messages.hours') }}</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="far fa-calendar-alt"></span>
-                                                    </div>
-                                                </div>
-                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" id="to_ldate" placeholder="{{ __('messages.dd_mm_yyyy') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--2st row-->
-                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
@@ -197,26 +178,74 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" id="remarks_div" style="display:none;">
+                                </div>
+                                <!--2st row-->
+                                <div class="row">
+                                    <div class="col-md-4 dateSlotShow">
                                         <div class="form-group">
-                                            <label for="heard">{{ __('messages.remarks') }}</label>
+                                            <label for="frm_ldate">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </div>
                                                 </div>
-                                                <input type="text" name="remarks" class="form-control" id="remarks">
+                                                <input type="text" autocomplete="off" name="frm_ldate" class="form-control" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="frm_ldate">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 dateSlotShow">
+                                        <div class="form-group">
+                                            <label for="to_ldate">{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" autocomplete="off" name="to_ldate" class="form-control" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="to_ldate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 timeSlotShow" style="display:none">
+                                        <div class="form-group">
+                                            <label for="leave_date">{{ __('messages.leave_date') }}<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" autocomplete="off" name="leave_date" class="form-control" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="leave_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 timeSlotShow" style="display:none">
+                                        <div class="form-group">
+                                            <label>{{ __('messages.start_time') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control timepicker" name="start_time" id="start_time">
+                                            <span class="text-danger error-text start_time_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 timeSlotShow" style="display:none">
+                                        <div class="form-group">
+                                            <label>{{ __('messages.end_time') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control timepicker" name="end_time" id="end_time">
+                                            <span class="text-danger error-text end_time_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 dateSlotShow">
                                         <div class="form-group">
                                             <label for="total_leave">{{ __('messages.total_leave_days') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                 </div>
-                                                <input type="text" name="total_leave" class="form-control number_validation" id="total_leave">
+                                                <input type="number" name="total_leave" class="form-control number_validation" step=".5" id="total_leave">
                                             </div>
                                         </div>
                                     </div>
+                                <!-- </div>
+                                <div class="row"> -->
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="document">{{ __('messages.attachment_file') }}</label>
@@ -231,11 +260,21 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-md-4" id="remarks_div">
+                                        <div class="form-group">
+                                            <label for="heard">{{ __('messages.remarks') }}</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                </div>
+                                                <textarea type="textarea" name="remarks" rows="3" class="form-control" id="remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--3rd row-->
                                 <br />
                                 <div class="form-group text-right m-b-0">
-                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light" id="submitButton">
+                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
                                         {{ __('messages.apply') }}
                                     </button>
                                 </div>
@@ -270,6 +309,7 @@
                                                         <th>{{ __('messages.to_from') }}</th>
                                                         <th>{{ __('messages.reason') }}</th>
                                                         <th>{{ __('messages.document') }}</th>
+                                                        <th>{{ __('messages.teachers_remarks') }}</th>
                                                         <th>{{ __('messages.remarks') }}</th>
                                                         <th>{{ __('messages.status') }}</th>
                                                         <th>{{ __('messages.apply_date') }}</th>
