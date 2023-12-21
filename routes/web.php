@@ -842,7 +842,14 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::get('fees/index', [AdminController::class, 'fees'])->name('admin.fees');
         Route::get('fees/edit/{id}', [AdminController::class, 'editFees'])->name('admin.fees.edit');
         Route::post('fees/update', [AdminController::class, 'updateFees'])->name('admin.fees.update');
-
+        //Expense
+        
+        
+        Route::post('fees/expense/pdf', [PdfController::class, 'feesExpensePdf'])->name('admin.fees.expense.pdf');
+        Route::post('/fees/expense/excel', [AdminController::class, 'feesExpenseExcel'])->name('admin.fees.expense.excel');
+        Route::get('fees/expense/index', [AdminController::class, 'feesExpenseIndex'])->name('admin.fees.expense.index');
+        Route::post('fees/expense/update', [AdminController::class, 'feesExpenseUpdate'])->name('admin.fees.expense.update');
+        Route::post('fees/import/expense/add', [AdminController::class, 'feesImportExpenseAdd'])->name('admin.fees.import.expense.add');
         // FeesGroup routes
         Route::get('fees_group/index', [AdminController::class, 'feesGroup'])->name('admin.fees_group');
         Route::get('fees_group/create', [AdminController::class, 'createFeesGroup'])->name('admin.fees_group.create');

@@ -34,7 +34,7 @@
                     <div class="col-12">
                         <div class="col-sm-12 col-md-12">
                             <div class="dt-buttons" style="float:right;">
-                                <a href="{{ config('constants.image_url').'/common-asset/uploads/promotion_sample.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
+                                <a href="{{ config('constants.image_url').'/common-asset/uploads/Expense Sample.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
                 @endif
-                <form method="post" enctype="multipart/form-data" action="{{ route('admin.student.import.add') }}">
+                <form method="post" enctype="multipart/form-data" action="{{ route('admin.fees.import.expense.add') }}">
                     {{ csrf_field() }}
                     <div class="form-group" style="text-align: center;">
                         <div class="card-body" style="margin-left: 17px;">

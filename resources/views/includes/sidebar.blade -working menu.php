@@ -75,7 +75,7 @@
                         </ul>
                     </div>
                 </li>
-				 <li>
+                <li>
                             <a href="#sidebarmenu" data-toggle="collapse">
                                 <i class="fe-git-branch"></i>
                                 <span>{{ __('messages.menus') }}</span>
@@ -1047,6 +1047,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.fees.expense.index')}}" class="nav-link {{ (request()->is('fees/import/expense/index')) ? 'active' : '' }}">
+                                    <span> Expense List</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.fees.import')}}" class="nav-link {{ (request()->is('fees/import/expense')) ? 'active' : '' }}">
                                     <span>Import Expense</span>
                                 </a>
@@ -1984,12 +1989,12 @@
                         <span> {{ __('messages.clear_local_storage') }} </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('parent.profile_edit')}}" class="nav-link {{ (request()->is('parent/profile*')) ? 'active' : '' }}">
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.profile') }}</span>
                     </a>
-                </li>
+                </li> -->
                 
                 <li>
                     <a href="#sidebarParentProfileUpdate" data-toggle="collapse">

@@ -957,6 +957,13 @@ return [
         'termination_update' => $url.'/termination/update',
         'termination_update_admin' => $url.'/termination/update/admin',
         'termination_delete' => $url.'/termination/delete',
+
+        //expense
+        
+        'fees_expense_export' => $url.'/fees/expense/export',
+        'fees_expense_update' => $url.'/fees/expense/update',
+        'get_fees_expense_students' => $url.'/fees/get_fees_expense_students',
+        'import_expense'=> $url.'/importcsv/expense',
       ]
 
 ];

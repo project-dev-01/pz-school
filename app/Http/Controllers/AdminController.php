@@ -13,6 +13,7 @@ use Excel;
 use DateTime;
 use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
+use App\Exports\FeesExpenseExport;
 use App\Exports\StudentAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
 
@@ -6508,8 +6509,17 @@ class AdminController extends Controller
 
     public function staffAttendanceExcel(Request $request)
     {
+        
+        $branch_id = session()->get('branch_id');
         $employee_attendance_report = __('messages.employee_attendance_report');
-        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
+        return Excel::download(new StaffAttendanceExport($branch_id, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
+    }
+    public function feesExpenseExcel(Request $request)
+    {
+        // dd($request);
+        $branch_id = session()->get('branch_id');
+        $expense_report = __('messages.fees_expense_report');
+        return Excel::download(new FeesExpenseExport($branch_id, $request->department_id, $request->class_id, $request->section_id, $request->academic_session_id), $expense_report . '.xlsx');
     }
 
     // index absent Reason
@@ -7539,7 +7549,84 @@ class AdminController extends Controller
     }
     public function feesImportExpense()
     {
-        return view('admin.fees.expense');
+        return view('admin.fees.expense_import');
+    }
+    public function feesExpenseIndex()
+    {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.fees.expense_list',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
+
+    public function feesExpenseUpdate(Request $request)
+    {
+        // dd($request);
+        $value = "";
+        if($request->semester_1){
+            $name= "semester_1";
+            $value = $request->semester_1;
+        }else if($request->semester_2){
+            $name= "semester_2";
+            $value = $request->semester_2;
+        }else if($request->semester_3){
+            $name= "semester_3";
+            $value = $request->semester_3;
+        }
+        $data = [
+            'id' => $request->id,
+            $name => $value,
+            'student_id' => $request->student_id,
+            'academic_year' => $request->academic_year
+        ];
+
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.fees_expense_update'), $data);
+        return $response;
+    }
+    public function feesImportExpenseAdd(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        } else {
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $base64 = base64_encode(file_get_contents($request->file('file')));
+
+            $data = [
+                'file' => $base64,
+                'fileName' => $filename,
+                'extension' => $extension,
+                'tempPath' => $tempPath,
+                'fileSize' => $fileSize,
+                'mimeType' => $mimeType,
+            ];
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.import_expense'), $data);
+            if ($response['code'] == 200) {
+
+                return redirect()->route('admin.fees.import')->with('success', 'Expense Imported Successfully');
+            } else {
+                return redirect()->route('admin.fees.import')->with('errors', $response['data']);
+            }
+        }
     }
 
     public function editFees($id)

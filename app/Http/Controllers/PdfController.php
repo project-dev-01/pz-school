@@ -2234,4 +2234,104 @@ class PdfController extends Controller
         $fileName = __('messages.student_attendance') . $name . ".pdf";
         return $pdf->download($fileName);
     }
+
+    public function feesExpensePdf(Request $request)
+    {
+        $data = [
+            'section_id' => $request->section_id,
+            'department_id' => $request->department_id,
+            'class_id' => $request->class_id,
+            'academic_session_id' => $request->academic_session_id
+        ];
+        $footer_text = session()->get('footer_text');
+        $fees_expense = Helper::PostMethod(config('constants.api.fees_expense_export'), $data);
+        // dd($get_attendance_list_teacher);
+
+        // dd($expense);
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body><header> " .  __('messages.fees_expense_report') . "</header>
+        <footer>" . $footer_text . "</footer>";
+        // dd($employee_attendance);
+        if ($fees_expense['code'] == "200") {
+            $expense = $fees_expense['data']['expense'];
+            $response .= '<div class="table-responsive">
+        <table width="100%" style="border-collapse: collapse; border: 0px;">
+           <thead>
+              <tr>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.student_name') . '</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.roll_no') . '</th>
+                 <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.semester_1') . '</th>
+            <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.semester_2') . '</th>>
+            <th class="align-top" style="border: 1px solid; padding:12px;">' .  __('messages.semester_3') . '</th>>';
+            foreach ($expense as $key => $res) {
+                $response .= '<tr>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['roll_no'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['semester_1'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['semester_2'] . '</td>
+                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['semester_3'] . '</td>';
+                $response .= '</tr>';
+            }
+            $response .= '</tbody></table></div>';
+        }
+
+        $response .= "</body></html>";
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.fees_expense_report') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
 }

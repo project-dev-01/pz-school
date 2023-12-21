@@ -1678,5 +1678,8 @@ return [
     "form_field" => "Form Field",
     "leave_request_for"   => "Leave Request For",
     "leave_history_by_staff" => "Leave History By Staff",
-    "nursing_teacher_remarks" => "Nursing Teacher Remarks"
+    "nursing_teacher_remarks" => "Nursing Teacher Remarks",
+    "expense" => "Expense",
+    "expense_details" => "Expense Details",
+    "fees_expense_report" => "Fees Expense Report",
 ];

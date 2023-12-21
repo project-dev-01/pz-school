@@ -311,6 +311,7 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ isset($parent['id']) ? $parent['id'] : ''}}">
                 <input type="hidden" name="email" value="{{ isset($parent['email']) ? $parent['email'] : ''}}">
+                <input type="hidden" name="first_name" value="{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}">
                 <div class="card">
                     <ul class="nav nav-tabs" style="display: block;">
                         <li class="nav-item">
