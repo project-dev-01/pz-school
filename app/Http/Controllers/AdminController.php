@@ -4174,6 +4174,27 @@ class AdminController extends Controller
             ]
         );
     }
+    public function byreport()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.exam_results.byreport',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
     public function bystudent()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
@@ -9621,4 +9642,75 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.termination_update_admin'), $data);
         return $response;
     }
+    public function ExamImport()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view('admin.import.exam', [
+            'department' => isset($department['data']) ? $department['data'] : [],
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+    public function ExamImportAdd(Request $request)
+    {
+
+        $validator = \Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+        $department_id=$request->department_id;
+        $class_id=$request->class_id;
+        $section_id=$request->section_id;
+        $exam_id=$request->exam_id;
+        $subject_id=$request->subject_id;
+        $semester_id=$request->semester_id;
+        $session_id=$request->session_id;
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        } else {
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+            $mimeType = $file->getMimeType();
+            $base64 = base64_encode(file_get_contents($request->file('file')));
+
+            $data = [
+                
+                'academic_session_id'=> session()->get('academic_session_id'),
+                'department_id' => $department_id,
+                'class_id' => $class_id,
+                'section_id' => $section_id,
+                'exam_id' => $exam_id,
+                'subject_id' => $subject_id,
+                'semester_id' => $semester_id,
+                'session_id' => $session_id,
+                'file' => $base64,
+                'fileName' => $filename,
+                'extension' => $extension,
+                'tempPath' => $tempPath,
+                'fileSize' => $fileSize,
+                'mimeType' => $mimeType,
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.import_exam'), $data);
+            //dd($response);
+            //dd($data);
+            if ($response['code'] == 200) 
+            {
+                return redirect()->route('admin.exam.import')->with('success', ' Exam Mark  Imported Successfully');
+            } else {
+                return redirect()->route('admin.exam.import')->with('errors', $response['data']);
+            }
+        }
+    }
+    
 }

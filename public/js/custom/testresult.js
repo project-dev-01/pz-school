@@ -307,6 +307,7 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
+                console.log(response);
                 if (response.code == 200) {
                     var dataSetNew = response.data.get_subject_marks;
                     var exampaper = response.data.exampaper;
@@ -1274,8 +1275,8 @@ $(document).on("change", ".basepoints", function (e) {
                         }
                             var pass_fail = '<select class="form-control lbl_pass_fail" id="' + row.student_id + '" data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][pass_fail]">' +
                             '<option value="">'+choose+'</option>' +
-                            '<option value="present" ' + (row.status == "present" ? "selected" : "selected") + '>Pass</option>' +
-                            '<option value="absent" ' + (row.status == "absent" ? "selected" : "") + '>Fail</option>' +
+                            '<option value="Pass" ' + (row.status == "Pass" ? "selected" : "selected") + '>Pass</option>' +
+                            '<option value="Fail" ' + (row.status == "Fail" ? "selected" : "") + '>Fail</option>' +
                             '</select>';
                     
                         return pass_fail;

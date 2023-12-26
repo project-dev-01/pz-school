@@ -964,6 +964,16 @@ return [
         'fees_expense_update' => $url.'/fees/expense/update',
         'get_fees_expense_students' => $url.'/fees/get_fees_expense_students',
         'import_expense'=> $url.'/importcsv/expense',
+        //  Exam Report
+        'exam_studentslist' => $url.'/exam_result/students',
+        'exam_papermarks' => $url.'/exam_result/papermark',  
+        'import_exam'=> $url.'/importcsv/exam',
+        'stuexam_marklist' => $url.'/exam_result/stuexam_marklist',
+        'stuexam_spmarklist' => $url.'/exam_result/stuexam_spmarklist',
+        'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
+        'studentmonthly_attendance' => $url.'/exam_result/studentmonthly_attendance',        
+        'getmonthlyholidays' => $url.'/getmonthlyholidays',
+      
       ]
 
 ];

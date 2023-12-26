@@ -18,8 +18,7 @@
                             @empty
                             @endforelse
                         </select>-->
-                        <select class="form-control" id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
-                           
+                        <select class="form-control" id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">                           
                             <option value="3">{{ __('messages.' . strtolower('staff')) }}</option>
                             <option value="5">{{ __('messages.' . strtolower('student')) }}</option> 
                             <option value="6">{{ __('messages.' . strtolower('parent')) }}</option>

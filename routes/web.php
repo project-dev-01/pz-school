@@ -616,6 +616,17 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::get('exam_results/bystudent', [AdminController::class, 'bystudent'])->name('admin.exam_results.bystudent');
         Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
         Route::get('exam_results/student_rank', [AdminController::class, 'byStudentRank'])->name('admin.exam_results.bystudentrank');
+        Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
+        Route::post('exam_results/downbyecreport', [PdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
+        Route::post('exam_results/downby12reportcard', [PdfController::class, 'downby12reportcard'])->name('admin.exam_results.downby12reportcard');
+        Route::post('exam_results/downby34reportcard', [PdfController::class, 'downby34reportcard'])->name('admin.exam_results.downby34reportcard');
+        Route::post('exam_results/downby56reportcard', [PdfController::class, 'downby56reportcard'])->name('admin.exam_results.downby56reportcard');
+        Route::post('exam_results/downbysecreportcard', [PdfController::class, 'downbysecreportcard'])->name('admin.exam_results.downbysecreportcard');
+        Route::post('exam_results/downbypersoanalreport', [PdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
+        
+        Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
+        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
+      
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
