@@ -228,6 +228,7 @@ $(function () {
             var subject_id = $("#subjectID").val();
             var semester_id = $("#semesterID").val();
             var session_id = $("#sessionID").val();
+            var pattern = $("#pattern").val();
 
             var date = new Date(reportDate)
             var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
@@ -258,6 +259,7 @@ $(function () {
             formData.append('semester_id', semester_id);
             formData.append('session_id', session_id);
             formData.append('year_month', year_month);
+            formData.append('pattern', pattern);
             formData.append('academic_session_id', academic_session_id);
 
 

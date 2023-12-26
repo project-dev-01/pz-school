@@ -105,35 +105,50 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="semesterID">{{ __('messages.semester') }}</label>
-                                    <select id="semesterID" class="form-control" name="semester_id">
-                                        <option value="0">{{ __('messages.select_semester') }}</option>
-                                        @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>                                        
-                                        @empty
-                                        @endforelse
+                                    <label for="pattern">Pattern<span class="text-danger">*</span></label>
+                                    <select id="pattern" class="form-control" name="pattern">
+                                        <option value="">Select Pattern</option>
+                                        <option>Day</option>
+                                        <option>Month</option>
+                                        <option>Term</option>
+                                        <option>Year</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" class="dates" id="term" style="display:none">
                                 <div class="form-group">
-                                    <label for="sessionID">{{ __('messages.session') }}</label>
-                                    <select id="sessionID" class="form-control" name="session_id">
-                                        <option value="0">{{ __('messages.select_session') }}</option>
-                                        @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        
-                                        @empty
-                                        @endforelse
+                                    <label for="class_date">{{ __('messages.term') }}</label>
+                                    <select class="form-control" name="class_date">
+                                        <option value="">{{ __('messages.select_term') }}</option>
+                                        <option>First Term</option>
+                                        <option>Second Term</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" class="dates" id="day" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="termDay" placeholder="{{ __('messages.mm_yyyy') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="year" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="termYear" placeholder="{{ __('messages.mm_yyyy') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="month" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="termMonth" placeholder="{{ __('messages.mm_yyyy') }}">
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="class_date" id="classDate" placeholder="{{ __('messages.mm_yyyy') }}">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div>
                             <div class="form-group text-right m-b-0">
@@ -285,6 +300,37 @@
      toastr.options.preventDuplicates = true;
 </script>
 <script>
+    $("#pattern").on("change", function() {
+        var pattern = $(this).val();
+        console.log('ch', pattern)
+        $(".dates").hide();
+        $(".tables").hide();
+        if (pattern == "Term") {
+            $("#term").show();
+            $("#month").hide();
+            $("#day").hide();
+            $("#year").hide();
+            $("#term_table").show();
+        } else if (pattern == "Month") {
+            $("#month").show();
+            $("#term").hide();
+            $("#day").hide();
+            $("#year").hide();
+            $("#month_table").show();
+        } else if (pattern == "Day") {
+            $("#day").show();
+            $("#month").hide();
+            $("#term").hide();
+            $("#year").hide();
+            $("#day_table").show();
+        } else if (pattern == "Year") {
+            $("#year").show();
+            $("#month").hide();
+            $("#term").hide();
+            $("#day").hide();
+            $("#year_table").show();
+        }
+    });
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";

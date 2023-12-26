@@ -128,7 +128,7 @@ class CommonController extends Controller
             'created_by' => isset($created_by) ? $created_by : "Public",
             'created_by_role' => session()->get('role_id'),
             'verify_email' => $request->$verify_email,
-            'url' => env('APP_URL'),
+            'url' => url('/'),
 
         ];
         $application = Http::post(config('constants.api.application_add'), $data);
@@ -141,7 +141,7 @@ class CommonController extends Controller
         // dd($verify_email);
         $data = [
             'branch_id' => $branch_id,
-            'url' => env('APP_URL'),
+            'url' => url('/'),
             'token' => $token,
         ];
         // dd($data);
@@ -161,10 +161,9 @@ class CommonController extends Controller
         // dd($verify_email);
         $data = [
             'branch_id' => config('constants.branch_id'),
-            'url' => env('APP_URL'),
+            'url' => url('/'),
             'email' => $request->email
         ];
-
         $application = Http::post(config('constants.api.application_verify'), $data);
         $response = $application->json();
         // dd($response);

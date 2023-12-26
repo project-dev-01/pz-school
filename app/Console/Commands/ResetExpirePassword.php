@@ -39,7 +39,7 @@ class ResetExpirePassword extends Command
     public function handle()
     {
         $data = [
-            'url' => env('APP_URL'),
+            'url' => url('/'),
             'branch_id' => session()->get('branch_id')
         ];
         $url = config('constants.api.reset_password_expired_link');
