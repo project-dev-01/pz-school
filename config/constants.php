@@ -908,6 +908,16 @@ return [
         'view_student_leave_details_row' => $url.'/view_student_leave_details_row',
         //add promotion bulk
         'promotion_data_bulk' => $url.'/get_student_list/promotion_data_bulk',
+        'promotion_bulk_import_save' => $url.'/get_student_list/promotion_bulk_import_save',
+        'promotion_bulk_student_list' => $url.'/get_student_list/promotion_bulk_student_list',
+        'promotion_unassigned_student_list' => $url.'/get_student_list/promotion_unassigned_student_list',
+        'promotion_termination_student_list' => $url.'/get_student_list/promotion_termination_student_list',
+        'promotion_prepared_Data_add' => $url.'/get_student_list/promotion_prepared_Data_add',
+        'promotion_get_data_freezed' =>  $url.'/get_student_list/promotion_get_data_freezed',
+        'get_studentList_Unassigned_Freezed' => $url.'/get_student_list/get_studentList_Unassigned_Freezed',
+        'promotion_Status_Data_add'=> $url.'/get_student_list/promotion_Status_Data_add',
+        'promotion_Final_Data_add'=> $url.'/get_student_list/promotion_Final_Data_add',
+        'promotion_download_csv'=> $url.'/get_student_list/promotion_download_csv',
         // Menu List
         'menus_list' => $url.'/menus/list',      
         'menuaccess_list' => $url.'/menus/accesslist',                     

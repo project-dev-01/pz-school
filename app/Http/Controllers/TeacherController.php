@@ -1944,4 +1944,163 @@ class TeacherController extends Controller
             ->rawColumns(['publish', 'actions'])
             ->make(true);
     }
+     //promotion
+     public function PromotionBulkImport(Request $request)
+     {
+         $validator = \Validator::make($request->all(), [
+             'file' => 'required'
+         ]);
+ 
+         if (!$validator->passes()) {
+             return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+         } else {
+             $file = $request->file('file');
+             $filename = $file->getClientOriginalName();
+             $extension = $file->getClientOriginalExtension();
+             $tempPath = $file->getRealPath();
+             $fileSize = $file->getSize();
+             $mimeType = $file->getMimeType();
+             $base64 = base64_encode(file_get_contents($request->file('file')));
+ 
+             $data = [
+                 'file' => $base64,
+                 'fileName' => $filename,
+                 'extension' => $extension,
+                 'tempPath' => $tempPath,
+                 'fileSize' => $fileSize,
+                 'mimeType' => $mimeType,
+             ];
+             $response = Helper::PostMethod(config('constants.api.promotion_data_bulk'), $data);
+             if ($response['code'] == 200) {
+ 
+                 return redirect()->route('teacher.promotion.studentlist')->with('success', ' Employee Imported Successfully');
+             } else {
+                 return redirect()->route('teacher.promotion.studentlist')->with('errors', $response['data']);
+             }
+         }
+     }
+     public function downloadPromotionCsv(Request $request)
+     {
+           // Fetch data based on the selected department, class, and section
+         $data = [
+            'department_id' => $request->input('download_department_id'),
+            'class_id' => $request->input('download_class_id'),
+            'section_id' => $request->input('download_section_id')
+         ];
+            
+         $response = Helper::PostMethod(config('constants.api.promotion_download_csv'), $data);
+         if (!$response || isset($response['error'])) {
+             return response()->json(['error' => 'Error fetching data from the API. Please try again.'], 500);
+         }
+         $csvFileName = 'promotion_data.csv';
+         // Check if it's an Ajax request
+             if ($request->ajax()) {
+                 return response($response, 200)
+                     ->header('Content-Type', 'text/csv')
+                     ->header('Content-Disposition', 'attachment; filename=' . $csvFileName);
+             }
+ 
+     }
+     public function promotionBulkImportSave(Request $request)
+     {
+         $data = [
+            'updatedData' => $request->input('updatedData')
+         ];
+         $response = Helper::PostMethod(config('constants.api.promotion_bulk_import_save'), $data);
+         // dd($response);
+         return $response;
+     }
+     public function promotionBulkStudentList(Request $request)
+     {
+         $getclass = Helper::GetMethod(config('constants.api.class_list'));
+         $department = Helper::GetMethod(config('constants.api.department_list'));
+         return view(
+             'teacher.promotion.studentList',
+             [
+                 'department' => isset($department['data']) ? $department['data'] : [],
+                 'classes' => isset($getclass['data']) ? $getclass['data'] : []
+             ]
+         );
+     }
+     public function promotionBulkDataStudentList(Request $request){
+         $data = [
+             'department_id' =>$request->department,
+             'grade_id' =>$request->grade,
+             'section_id' =>$request->section,
+             'sort_id' =>$request->sort,
+             'teacher_id' =>session()->get('ref_user_id')
+         ];
+         $response = Helper::PostMethod(config('constants.api.promotion_bulk_student_list'), $data);
+        return $response;
+         
+     }
+     public function promotionUnassignedStudentList(Request $request)
+     {
+         $data = [
+             'department_id' =>$request->department,
+             'grade_id' =>$request->grade,
+             'section_id' =>$request->section
+         ];
+         $response = Helper::PostMethod(config('constants.api.promotion_unassigned_student_list'), $data);
+         return $response;
+     }
+     public function promotionTerminationStudentList(Request $request){
+         $data = [
+             'department_id' =>$request->department,
+             'grade_id' =>$request->grade,
+             'section_id' =>$request->section
+         ];
+         $response = Helper::PostMethod(config('constants.api.promotion_termination_student_list'), $data);
+         return $response;
+     }
+     public function promotionPreparedDataAdd(Request $request){
+         
+         $data = [
+             'updatedData' => $request->input('updatedData')
+          ];
+          $response = Helper::PostMethod(config('constants.api.promotion_prepared_Data_add'), $data);
+          // dd($response);
+          return $response;
+     }
+     public function promotionDataFreezed(Request $request)
+     {
+         return view('teacher.promotion.freezedStudentList');
+     }
+     public function promotionGetDataFreezed(Request $request)
+     {
+         $data= [
+            'status'=> $request->status
+         ];
+         $response = Helper::PostMethod(config('constants.api.promotion_get_data_freezed'), $data);
+         $data = isset($response['data']) ? $response['data'] : [];
+         return DataTables::of($data)
+             ->addIndexColumn()
+             ->addColumn('actions', function ($row) {
+                 return '<div class="form-group">
+                 <select class="form-control"><option value="0">None</option><option value="3">Data Freezed</option>
+                 <option value="4">Temporary Unlock</option></select>
+                 </div>';
+             })
+ 
+             ->rawColumns(['actions'])
+             ->make(true);
+     }
+     public function promotionSaveStatusFreezed(Request $request){
+           
+         $data = [
+             'statusData' => $request->input('statusData')
+          ];
+          $response = Helper::PostMethod(config('constants.api.promotion_Status_Data_add'), $data);
+          // dd($response);
+          return  $response;
+     }
+     public function promotionFinalData(Request $request){
+         $data = [
+             'promotionFinalData' => $request->input('promotionData')
+          ];
+          $response = Helper::PostMethod(config('constants.api.promotion_Final_Data_add'), $data);
+          // dd($response);
+          return  $response;
+     }
+ 
 }

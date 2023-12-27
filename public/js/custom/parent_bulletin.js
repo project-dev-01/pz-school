@@ -141,7 +141,7 @@ $(function () {
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
-                                    <a href="#" onclick="openFilePopup('${fileUrl}', '${fileName}', '${fileDescription}')">${data}</a>
+                                    ${data}
                                 </span>
                             </div>`;
                     }
@@ -286,7 +286,7 @@ $(function () {
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
-                                    <a href="#" onclick="openFilePopup('${fileUrl}', '${fileName}', '${fileDescription}')">${data}</a>
+                                    ${data}
                                 </span>
                             </div>`;
                     }

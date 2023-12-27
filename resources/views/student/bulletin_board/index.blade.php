@@ -148,7 +148,7 @@
                                         
                             </div>
                             </div>
-                                <table class="table w-100 nowrap" id="teacher-bulletin-table">
+                                <table class="table w-100 nowrap" id="student-bulletin-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -186,7 +186,7 @@
                             
                             </div>
                             </div>
-                                <table class="table w-100 nowrap" id="teacher-bulletin-imp-table">
+                                <table class="table w-100 nowrap" id="student-bulletin-imp-table">
                             <thead>
                                 <tr>
                                     <th>#</th>

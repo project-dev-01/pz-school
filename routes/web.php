@@ -359,7 +359,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('promotion/add', [AdminController::class, 'PromotionAdd'])->name('admin.promotion.add');
         Route::get('promotion/bulk', [AdminController::class, 'PromotionBulk'])->name('admin.promotion.bulk');
         Route::post('promotion/import_excel', [AdminController::class, 'PromotionBulkImport'])->name('admin.promotion.import.add');
-
+        Route::post('promotion/import_excel_save', [AdminController::class, 'promotionBulkImportSave'])->name('admin.promotion.import.save');
+        Route::get('promotion/student_list', [AdminController::class, 'promotionBulkStudentList'])->name('admin.promotion.studentlist');
+        Route::get('promotion/student_list_data', [AdminController::class, 'promotionBulkDataStudentList'])->name('admin.promotion.bulk_student_list');
+        Route::get('promotion/unassigned_student_list', [AdminController::class, 'promotionUnassignedStudentList'])->name('admin.promotion.unassigned_student_list');
+        Route::get('promotion/termination_student_list', [AdminController::class, 'promotionTerminationStudentList'])->name('admin.promotion.termination_student_list');
+        Route::post('promotion/prepared_data_save', [AdminController::class, 'promotionPreparedDataAdd'])->name('admin.promotion.save_prepared_data');
+        Route::get('promotion/freezed_data', [AdminController::class, 'promotionDataFreezed'])->name('admin.promotion.freezed_student_list');
+        Route::get('promotion/get_freezed_data', [AdminController::class, 'promotionGetDataFreezed'])->name('admin.promotion.get_freezed_student_list');
+        Route::post('promotion/save_status_freezed_data', [AdminController::class, 'promotionSaveStatusFreezed'])->name('admin.promotion.save_status_freezed_data');
+        Route::post('promotion/promotion_final_data', [AdminController::class, 'promotionFinalData'])->name('admin.promotion.promotion_final_data');
+        Route::post('promotion/csv', [AdminController::class, 'downloadPromotionCsv'])->name('admin.promotion.downloadCSV');
         // Time Table Bulk
         Route::post('timetable/bulk/add', [AdminController::class, 'addBulkTimetable'])->name('admin.timetable.bulk.add');
         Route::get('timetable/bulk/create', [AdminController::class, 'createBulkTimetable'])->name('admin.timetable.bulk.create');
@@ -1352,7 +1362,18 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('analytic/setcookie', [CommonController::class, 'teacherAnalyticSetCookie'])->name('teacher.analytic.setcookie');
 
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('teacher.clear_local_storage');
-    });
+        Route::post('promotion/import_excel', [TeacherController::class, 'PromotionBulkImport'])->name('teacher.promotion.import.add');
+        Route::get('promotion/student_list', [TeacherController::class, 'promotionBulkStudentList'])->name('teacher.promotion.studentlist');
+        Route::get('promotion/student_list_data', [TeacherController::class, 'promotionBulkDataStudentList'])->name('teacher.promotion.bulk_student_list');
+        Route::get('promotion/unassigned_student_list', [TeacherController::class, 'promotionUnassignedStudentList'])->name('teacher.promotion.unassigned_student_list');
+        Route::get('promotion/termination_student_list', [TeacherController::class, 'promotionTerminationStudentList'])->name('teacher.promotion.termination_student_list');
+        Route::post('promotion/prepared_data_save', [TeacherController::class, 'promotionPreparedDataAdd'])->name('teacher.promotion.save_prepared_data');
+        Route::get('promotion/freezed_data', [TeacherController::class, 'promotionDataFreezed'])->name('teacher.promotion.freezed_student_list');
+        Route::get('promotion/get_freezed_data', [TeacherController::class, 'promotionGetDataFreezed'])->name('teacher.promotion.get_freezed_student_list');
+        Route::post('promotion/save_status_freezed_data', [TeacherController::class, 'promotionSaveStatusFreezed'])->name('teacher.promotion.save_status_freezed_data');
+        Route::post('promotion/promotion_final_data', [TeacherController::class, 'promotionFinalData'])->name('teacher.promotion.promotion_final_data');
+        Route::post('promotion/csv', [TeacherController::class, 'downloadPromotionCsv'])->name('teacher.promotion.downloadCSV');  
+      });
 });
 // TEACHER CONTROLLER END
 

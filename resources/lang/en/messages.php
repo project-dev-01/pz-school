@@ -1786,4 +1786,10 @@ return [
     "english"=>"English",
     "total5"=>"Total of 5 Subjects",
     "total9"=>"Total of 9 Subjects",
+    "promotion_student_list" => "Promotion Student List",
+    "data_prepared_done"  => "Data Prepared Done",
+    "promotion_sort"  => "Sort",
+    "select_sort"  => "Select Sort",
+    "promotion_freezed" => "Promotion Process"
+
 ];
