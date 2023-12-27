@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- button link  -->
 <link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
+<!-- date picker -->
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
@@ -38,53 +41,24 @@
 
     <div class="row">
         <div class="col-12">
-            <!-- student leave start -->
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}(Homeroom teacher)
+                        <h4 class="navv">
+                            {{ __('messages.student_leave_details_list') }}
                             <h4>
                     </li>
                 </ul>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="student-leave-table-sample">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('messages.student_name') }}</th>
-                                    <th>{{ __('messages.grade') }}</th>
-                                    <th>{{ __('messages.class') }}</th>
-                                    <th>{{ __('messages.from') }}</th>
-                                    <th>{{ __('messages.to') }}</th>
-                                    <th>{{ __('messages.status') }}</th>
-                                    <th>{{ __('messages.reason') }}</th>
-                                    <!-- <th>Homeroom teacher reason</th> -->
-                                    <th>{{ __('messages.document') }}</th>
-                                    <th>Status</th>
-                                    <th>{{ __('messages.action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div> <!-- end table-responsive-->
-
-                </div> <!-- end card body-->
-            </div> <!-- end card -->
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv"> Student Leave Authorization
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
-                        @csrf
-                        <!--1st row-->
+                    <form id="studentLeaveList" data-parsley-validate="" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="student_name">{{ __('messages.student_name') }}</label>
+                                    <input type="text" name="student_name" class="form-control" id="student_name">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
@@ -96,10 +70,112 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sectionID"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <select id="sectionID" class="form-control" name="section_id">
+                                        <option value="">{{ __('messages.select_class') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="leave_status">{{ __('messages.status') }}</label>
+                                    <select id="leave_status" class="form-control" name="leave_status">
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>{{ __('messages.date_range') }}</label>
+                                    <input type="text" id="range-datepicker" name="date" class="form-control flatpickr-input active" placeholder="{{ __('messages.yyyy_mm_dd') }} {{ __('messages.to') }} {{ __('messages.yyyy_mm_dd') }}" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.filter') }}
+                            </button>
+                        </div>
+                    </form>
+
+
+                </div> <!-- end card-body -->
+            </div>
+            <div class="card studentLeaveShow" style="display:none;">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> {{ __('messages.student_leave_details_list') }}
+                            @if($teacher_type == "nursing_teacher")
+                            ( Nursing Teacher )
+                            @else
+                            ( Homeroom Teacher )
+                            @endif
+                            <h4>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table dt-responsive nowrap w-100" id="student-leave-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th> {{ __('messages.student_name') }}</th>
+                                    <th> {{ __('messages.grade') }}</th>
+                                    <th> {{ __('messages.class') }}</th>
+                                    <th> {{ __('messages.from') }}</th>
+                                    <th> {{ __('messages.to') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.homeroom_status') }}</th>
+                                    <th> {{ __('messages.nursing_status') }}</th>
+                                    <th> {{ __('messages.reason') }}</th>
+                                    <th> {{ __('messages.document') }}</th>
+                                    <th> {{ __('messages.teacher_remarks') }}</th>
+                                    <th> {{ __('messages.nursing_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div> <!-- end table-responsive-->
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+            @if($teacher_type == "nursing_teacher")
+            <div class="card studentLeaveShow" style="display:none;">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv"> Student Leave Authorization
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <form id="stdGeneralDetails" method="post" action="{{ route('teacher.studentleave.add') }}">
+                        @csrf
+                        <!--1st row-->
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-                                    <select id="sectionID" class="form-control" name="section_id">
+                                    <label for="directClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                    <select id="directClassName" class="form-control" name="class_id">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse ($classes as $class)
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="directsectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                    <select id="directsectionID" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
                                 </div>
@@ -113,7 +189,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--2st row-->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -143,14 +218,26 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Number Of Days Leave<span class="text-danger">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter the number of days leave">
+                                    <label for="total_leave">Number Of Days Leave<span class="text-danger">*</span></label>
+                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the number of days leave">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                         </div>
-                        <!--3st row-->
+                        <!--2st row-->
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="directchangeLevType">Leave Type<span class="text-danger">*</span></label>
+                                    <select id="directchangeLevType" class="form-control" name="directchangeLevType">
+                                        <option value="">Select Leave Type</option>
+                                        @forelse ($get_student_leave_types as $ress)
+                                        <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
@@ -161,35 +248,42 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">{{ __('messages.attachment_file') }}</label>
+                                    <label for="leave_file">{{ __('messages.attachment_file') }}</label>
 
                                     <div class="input-group">
                                         <div class="">
                                             <input type="file" id="leave_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                            <label class="custom-file-label" for="leave_file">{{ __('messages.choose_file') }}</label>
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="leave_status">{{ __('messages.status') }}</label>
-                                    <select id="leave_status" class="form-control" name="leave_status">
-                                        <option value="">{{ __('messages.select_status') }}</option>
-                                        <option value="Approve">{{ __('messages.approve') }}</option>
-                                        <option value="Reject">{{ __('messages.reject') }}</option>
-                                        <option value="Pending">{{ __('messages.pending') }}</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
+                        <!--3st row-->
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="changelev">Remarks<span class="text-danger">*</span></label>
                                     <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the remarks" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal" id="studentAllReasons"> Click Here For Reason Details</button>
+                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="stud_leave_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
+                                    <select id="stud_leave_status" class="form-control" name="stud_leave_status">
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="Approve">{{ __('messages.approve') }}</option>
+                                        <option value="Reject">{{ __('messages.reject') }}</option>
+                                        <option value="Pending">{{ __('messages.pending') }}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -204,107 +298,9 @@
 
                     </form>
 
-                </div> <!-- end card-body -->
+                </div>
             </div>
-            <!-- student leave end -->
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.student_leave_details_list') }}
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <form id="studentLeaveList" data-parsley-validate="" autocomplete="off">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="student_name">{{ __('messages.student_name') }}</label>
-                                    <input type="text" name="student_name" class="form-control" id="student_name">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="changeClassName">{{ __('messages.grade') }}</label>
-                                    <select id="changeClassName" class="form-control" name="class_id">
-                                        <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($classes as $class)
-                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="sectionID">{{ __('messages.class') }}</label>
-                                    <select id="sectionID" class="form-control" name="section_id">
-                                        <option value="">{{ __('messages.select_class') }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="leave_status">{{ __('messages.status') }}</label>
-                                    <select id="leave_status" class="form-control" name="leave_status">
-                                        <option value="">{{ __('messages.select_status') }}</option>
-                                        <option value="Approve">{{ __('messages.approve') }}</option>
-                                        <option value="Reject">{{ __('messages.reject') }}</option>
-                                        <option value="Pending">{{ __('messages.pending') }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>{{ __('messages.date_range') }}</label>
-                                    <input type="text" id="range-datepicker" name="date" class="form-control flatpickr-input active" placeholder="2018-10-03 to 2018-10-10" readonly="readonly">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                {{ __('messages.filter') }}
-                            </button>
-                        </div>
-                    </form>
-
-
-                </div> <!-- end card-body -->
-            </div>
-            <div class="card studentLeaveShow" style="display: none;">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_leave_details_list') }}
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="student-leave-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('messages.student_name') }}</th>
-                                    <th>{{ __('messages.grade') }}</th>
-                                    <th>{{ __('messages.class') }}</th>
-                                    <th>{{ __('messages.from') }}</th>
-                                    <th>{{ __('messages.to') }}</th>
-                                    <th>{{ __('messages.approval_status') }}</th>
-                                    <th>{{ __('messages.status') }}</th>
-                                    <th>{{ __('messages.reason') }}</th>
-                                    <th>{{ __('messages.document') }}</th>
-                                    <th>Remarks</th>
-                                    <th>{{ __('messages.action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div> <!-- end table-responsive-->
-
-                </div> <!-- end card body-->
-            </div> <!-- end card -->
+            @endif
         </div><!-- end col-->
     </div>
     <!-- end row-->
@@ -324,9 +320,15 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    @include('teacher.student_leave.reason')
+
 </div> <!-- container -->
-@include('teacher.student_leave.homeroom')
+@if($teacher_type == "nursing_teacher")
 @include('teacher.student_leave.nursing')
+@else
+@include('teacher.student_leave.homeroom')
+@endif
+
 @endsection
 @section('scripts')
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
@@ -336,6 +338,7 @@
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
@@ -346,7 +349,12 @@
     toastr.options.preventDuplicates = true;
 </script>
 <script>
-    var sectionByClassUrl = "{{ config('constants.api.class_teacher_sections') }}";
+    var teacher_type = "{{ $teacher_type }}";
+    if (teacher_type == "nursing_teacher") {
+        var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
+    } else {
+        var sectionByClassUrl = "{{ config('constants.api.class_teacher_sections') }}";
+    }
     var allStutdentLeaveList = "{{ config('constants.api.get_all_student_leaves') }}";
     var studentDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
@@ -354,6 +362,18 @@
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     // localStorage variables
     var teacher_student_leave_storage = localStorage.getItem('teacher_student_leave_details');
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var viewStudentLeaveDetailsRow = "{{ config('constants.api.view_student_leave_details_row') }}";
+    var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details') }}";
+    var leaveTypeWiseGetAllReason = "{{ config('constants.api.leave_type_wise_get_all_reason') }}";
 </script>
 <script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
+<script src="{{ asset('js/custom/student_leave_direct_approve.js') }}"></script>
+@if(!empty(Session::get('school_roleid')))
+<script>
+    var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 @endsection

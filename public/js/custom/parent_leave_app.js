@@ -188,7 +188,6 @@ $(function () {
     });
 
     $(document).on('change', '.reissue_file', function () {
-        console.log(12343333)
         var file = $(this)[0].files[0];
         if (file.size > 2097152) {
             toastr.error("File greater than 2Mb");
@@ -428,6 +427,75 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    // studentAllReasons
+    $(document).on('click', '#studentAllReasons', function () {
+        // staffLeaveDetailsShowUrl
+        $.get(leaveTypeWiseGetAllReason,
+            {
+                branch_id: branchID
+            }, function (res) {
+                $('#knowtheReasons').modal('show');
+                if (res.code == 200) {
+                    const jsonObject = JSON.parse(res.data);
+                    var appendData = displayLeaveTypesAndReasonsTable(jsonObject);
+                    $("#showAllReasons").append(appendData);
+                }
+            }, 'json');
+    });
+    // Function to parse reasons JSON string
+    function parseReasons(reasonsString) {
+        return JSON.parse(reasonsString);
+    }
+    // Function to display leave types and corresponding reasons in a table format
+    function displayLeaveTypesAndReasonsTable(data) {
+        const table = document.createElement('table');
+        table.classList.add('table', 'table-responsive');
+
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        const headerRow = thead.insertRow();
+        const leaveTypesSet = new Set();
+
+        // Extract unique leave types
+        Object.values(data).forEach(entry => {
+            leaveTypesSet.add(entry.leave_type);
+        });
+
+        const uniqueLeaveTypes = Array.from(leaveTypesSet);
+
+        // Create table headers with leave types
+        uniqueLeaveTypes.forEach(leaveType => {
+            const header = document.createElement('th');
+            header.textContent = leaveType;
+            headerRow.appendChild(header);
+        });
+
+        // Find reasons for each leave type and populate the table
+        const maxReasonsCount = Math.max(...Object.values(data).map(entry => parseReasons(entry.reasons).length));
+
+        for (let i = 0; i < maxReasonsCount; i++) {
+            const row = tbody.insertRow();
+
+            uniqueLeaveTypes.forEach(leaveType => {
+                const cell = row.insertCell();
+                const reasons = Object.values(data)
+                    .filter(entry => entry.leave_type === leaveType)
+                    .map(entry => parseReasons(entry.reasons))
+                    .flat();
+
+                if (reasons[i]) {
+                    cell.textContent = reasons[i].reason;
+                }
+            });
+        }
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        return table;
+        // document.body.appendChild(table); // Append the table to the body or your desired element
+    }
+
     // updateIssueFile
     $(document).on('click', '#updateIssueFile', function () {
         var id = $(this).data('id');

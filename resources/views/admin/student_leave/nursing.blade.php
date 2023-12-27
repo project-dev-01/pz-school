@@ -37,7 +37,7 @@
                                 <td id="documentDetails"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.leave_type') }}</td>
+                                <td>{{ __('messages.leave_type') }} (From Parent)</td>
                                 <td>:</td>
                                 <td id="showleaveType"></td>
                             </tr>
@@ -47,12 +47,17 @@
                                 <td id="absentReasonFromParent"></td>
                             </tr>
                             <tr>
+                                <td>{{ __('messages.leave_type') }} (Class Incharge)</td>
+                                <td>:</td>
+                                <td id="showleaveTypeTeacher"></td>
+                            </tr>
+                            <tr>
                                 <td>Absense Reason(Class Incharge)</td>
                                 <td>:</td>
                                 <td id="absentReasonForTeacher"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.leave_type') }}</td>
+                                <td>{{ __('messages.leave_type') }} (Nursing)</td>
                                 <td>:</td>
                                 <td id="dropLeaveType">
                                     <select id="changeLevType" class="form-control" name="changeLevType">
@@ -65,7 +70,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Absense Reason</td>
+                                <td>Absense Reason (Nursing)</td>
                                 <td>:</td>
                                 <td id="absentReason">
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">

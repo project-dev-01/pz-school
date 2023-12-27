@@ -649,6 +649,7 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
 
         Route::post('subjectmarksAdd', [AdminController::class, 'subjectmarks'])->name('admin.subjectmarks.add');
         Route::post('subjectdivisionAdd', [AdminController::class, 'subjectdivisionAdd'])->name('admin.subjectdivision.add');
+        Route::post('std_leave_apply/add', [AdminController::class, 'studentApplyLeavebyStaff'])->name('admin.studentleave.add');
 
         // Leave Type routes
         Route::get('leave_type/index', [AdminController::class, 'leaveType'])->name('admin.leave_type');
@@ -1249,6 +1250,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('leave_management/reupload_file', [TeacherController::class, 'reUploadLeaveFile'])->name('teacher.reupload_file.add');
         // admin student_leave list
         Route::get('student-leave/list', [TeacherController::class, 'studentLeaveShow'])->name('teacher.student_leave.list');
+        Route::post('std_leave_apply/add', [TeacherController::class, 'studentApplyLeavebyStaff'])->name('teacher.studentleave.add');
         //Bulletin Board
         Route::get('buletin_board', [TeacherController::class, 'buletin_board'])->name('teacher.buletin_board');
         Route::get('buletin_board/list', [TeacherController::class, 'getBuletinBoardTeacherList'])->name('teacher.buletin_board.list');

@@ -315,17 +315,17 @@ class CommonController extends Controller
                     if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
                         $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
                         $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
-                        
+
                         $notificationlist .= '<a href="' . route('admin.student.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">Information Update</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $parent_name . ' Parent Updated Their Student '. $student_name .' Information </small>
+                            <small> ' . $parent_name . ' Parent Updated Their Student ' . $student_name . ' Information </small>
                         </p>
                         </a>';
                     }
                     if ($notification['type'] == "App\Notifications\ParentInfoUpdate") {
                         $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
-                        
+
                         $notificationlist .= '<a href="' . route('admin.parent.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">Information Update</p>
                         <p class="text-muted mb-0 user-msg">
@@ -357,7 +357,7 @@ class CommonController extends Controller
                         </p>
                         </a>';
                     }
-                    
+
                     if ($notification['type'] == "App\Notifications\LeaveApply") {
                         $redirectRoute = "javascript:void(0)";
                         if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
@@ -436,6 +436,39 @@ class CommonController extends Controller
                         <p class="notify-details">Homework (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>' . $homework_name . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
+                        </p>
+                        </a>';
+                    }
+                    if ($notification['type'] == "App\Notifications\LeaveReasonNotification") {
+
+                        // dd($notification['data']['homework']['homework_name']);
+
+                        // dd($response['data']['class_name']);
+                        $status = isset($notification['data']['leave_approve_details']['status']) ? $notification['data']['leave_approve_details']['status'] : '';
+                        // $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        // <p class="notify-details">Homework (' . $date . ')</p>
+                        // <p class="text-muted mb-0 user-msg">
+                        //     <small>' . $status . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
+                        // </p>
+                        // </a>';
+
+                        $redirectRoute = "javascript:void(0)";
+                        // if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
+                        //     $redirectRoute = route('admin.leave_management.applyleave');
+                        // }
+                        // if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
+                        //     $redirectRoute = route('staff.leave_management.applyleave');
+                        // }
+                        // if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
+                        //     $redirectRoute = route('teacher.leave_management.applyleave');
+                        // }
+
+                        $from_leave = isset($notification['data']['leave_approve_details']['from_leave']) ? $notification['data']['leave_approve_details']['from_leave'] : '-';
+                        $to_leave = isset($notification['data']['leave_approve_details']['to_leave']) ? $notification['data']['leave_approve_details']['to_leave'] : '-';
+                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="text-muted mb-0 user-msg">
+                            <small>Your leave application for ' . $from_leave . ' to ' . $to_leave . ' was ' . $status . '</small>
+
                         </p>
                         </a>';
                     }
@@ -685,7 +718,7 @@ class CommonController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
 
     public function clearLocalStorage(Request $request)
     {

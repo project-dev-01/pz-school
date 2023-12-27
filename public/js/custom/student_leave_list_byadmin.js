@@ -12,6 +12,13 @@ $(function () {
         var classID = "";
         classAllocation(department_id, Selector, classID);
     });
+    $("#direct_department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#stdGeneralDetails';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
     $("#changeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
@@ -157,7 +164,6 @@ $(function () {
         $('#addRemarksStudent' + studenetlevtblID).val(compain_remarks_tblID);
         $('#stuLeaveRemarksPopup').modal('hide');
     });
-
     $(document).on('click', '.approveRejectLeave', function () {
         var student_leave_tbl_id = $(this).data('id');
         var status = $(this).data('status');
@@ -307,9 +313,9 @@ $(function () {
                 {
                     data: 'to_leave'
                 },
-                {
-                    data: 'status'
-                },
+                // {
+                //     data: 'status'
+                // },
                 {
                     data: 'status'
                 },
@@ -343,20 +349,20 @@ $(function () {
                         return first_name;
                     }
                 },
+                // {
+                //     "targets": 6,
+                //     "render": function (data, type, row, meta) {
+                //         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
+                //             '<option value="">' + choose + '</option>' +
+                //             '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>' + approve_lang + '</option>' +
+                //             '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>' + reject_lang + '</option>' +
+                //             '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>' + pending_lang + '</option>'
+                //         '</select>';
+                //         return status;
+                //     }
+                // }
                 {
                     "targets": 6,
-                    "render": function (data, type, row, meta) {
-                        var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
-                            '<option value="">' + choose + '</option>' +
-                            '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>' + approve_lang + '</option>' +
-                            '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>' + reject_lang + '</option>' +
-                            '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>' + pending_lang + '</option>'
-                        '</select>';
-                        return status;
-                    }
-                },
-                {
-                    "targets": 7,
                     "render": function (data, type, row, meta) {
                         if (data == "Approve") {
 
@@ -372,7 +378,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 9,
+                    "targets": 8,
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (row.document) {
@@ -384,7 +390,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 12,
+                    "targets": 11,
                     "render": function (data, type, row, meta) {
                         var addremarks = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
                             '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
@@ -392,7 +398,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 13,
+                    "targets": 12,
                     "render": function (data, type, row, meta) {
                         // var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">' + update + '</button>';
                         // return submitbtn;
@@ -471,9 +477,9 @@ $(function () {
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
 
                     var student_leave_type_id = leave_details.nursing_leave_type;
+                    $("#changelevReasons").empty();
+                    $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
                     if (student_leave_type_id) {
-                        $("#changelevReasons").empty();
-                        $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
                         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
                             if (res.code == 200) {
                                 $.each(res.data, function (key, val) {

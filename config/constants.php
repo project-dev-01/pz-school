@@ -79,6 +79,7 @@ return [
         'class_details' => $url.'/classes/class-details',
         'class_update' => $url.'/classes/update',
         'class_delete' => $url.'/classes/delete',
+        'classes_list_by_department' => $url.'/classes/list_by_department',
         // subjects url
         'subject_add' => $url.'/subjects/add',
         'subject_list' => $url.'/subjects/list',
@@ -442,8 +443,10 @@ return [
         'get_students_parentdashboard' => $url.'/get_students_parentdashboard',
         //student leave apply 
         'std_leave_apply'=> $url.'/std_leave_apply',
+        'call_via_leave_approve'=> $url.'/call_via_leave_approve',
         'get_student_leave_types'=> $url.'/student_leave/get_student_leave_types',
         'get_reasons_by_leave_type'=> $url.'/student_leave/get_reasons_by_leave_type',
+        'nursing_or_homeroom'=> $url.'/nursing_or_homeroom',
         // get student leaves
         'get_student_leaves'=> $url.'/get_student_leaves',
         // get leave reasons
@@ -451,6 +454,7 @@ return [
         // get student leave list particular
         'studentleave_list'=>$url.'/studentleave_list',
         'get_all_student_leaves'=>$url.'/get_all_student_leaves',
+        'leave_type_wise_get_all_reason'=>$url.'/leave_type_wise_get_all_reason',
         // teacher leave approve
         'teacher_leave_approve'=>$url.'/teacher_leave_approve',
         'leave_reupload_file'=>$url.'/std_leave_apply/reupload_file',

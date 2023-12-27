@@ -1682,6 +1682,8 @@ return [
     "leave_request_for"   => "Leave Request For",
     "leave_history_by_staff" => "Leave History By Staff",
     "nursing_teacher_remarks" => "Nursing Teacher Remarks",
+    "homeroom_status" => "Homeroom status",
+    "nursing_status" => "Nursing status",
     "expense" => "Expense",
     "expense_details" => "Expense Details",
     "fees_expense_report" => "Fees Expense Report",

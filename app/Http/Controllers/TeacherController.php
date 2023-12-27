@@ -163,6 +163,40 @@ class TeacherController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+    public function studentApplyLeavebyStaff(Request $request)
+    {
+        // dd($request);
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' => $request->student_id,
+            'frm_leavedate' => $request->frm_leavedate,
+            'to_leavedate' => $request->to_leavedate,
+            'total_leave' => $request->total_leave,
+            'change_lev_type' => $request->change_lev_type,
+            'reason_id' => $request->reason,
+            'remarks' => $request->remarks,
+            'status' => $request->leave_status,
+            'direct_approval_status' => "1",
+            'direct_approval_by' => session()->get('ref_user_id'),
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.call_via_leave_approve'), $data);
+        return $response;
+    }
     public function studentLeaveShow()
     {
 
@@ -170,8 +204,25 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
-        $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
+        $nursing_or_homeroom = Helper::PostMethod(config('constants.api.nursing_or_homeroom'), $staff_data);
+        $teacher_type = isset($nursing_or_homeroom['data']['teacher_type']) ? $nursing_or_homeroom['data']['teacher_type'] : null;
+        if ($teacher_type == "nursing_teacher") {
+            $getclass = Helper::PostMethod(config('constants.api.classes_list_by_department'), $staff_data);
+        } else {
+            $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
+        }
+        // dd($nursing_or_homeroom);
+
+        // $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
+
+        // dd($getclass);
+        // nursing_teacher
+        // $department = Helper::GetMethod(config('constants.api.department_list'));
+        $get_student_leave_types = Helper::GetMethod(config('constants.api.get_student_leave_types'));
         return view('teacher.student_leave.index', [
+            'get_student_leave_types' => isset($get_student_leave_types['data']) ? $get_student_leave_types['data'] : [],
+            'teacher_type' => $teacher_type,
+            // 'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : []
         ]);
     }

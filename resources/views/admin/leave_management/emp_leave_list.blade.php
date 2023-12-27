@@ -106,9 +106,9 @@
                                 <div class="clearfix mt-4">
                                     <form method="post" action="{{ route('admin.exam_results.downbystaffleave') }}">
                                         @csrf
-                                    <input type="text" name="department_id" id="downDepartmentID">
-                                    <input type="text" name="staff_id" id="downStaffID">
-                                    <input type="text" name="academic_session_id" id="downAcademicSessionID">
+                                    <input type="hidden" name="department_id" id="downDepartmentID">
+                                    <input type="hidden" name="staff_id" id="downStaffID">
+                                    <input type="hidden" name="academic_session_id" id="downAcademicSessionID">
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
                                             <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>

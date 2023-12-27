@@ -1512,7 +1512,7 @@ class AdminController extends Controller
             $base64 = null;
             $extension = null;
         }
-        
+
         $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
@@ -1522,7 +1522,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -1744,7 +1744,7 @@ class AdminController extends Controller
             $base64 = null;
             $extension = null;
         }
-        
+
         $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
@@ -1754,7 +1754,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -2241,8 +2241,8 @@ class AdminController extends Controller
                 'mimeType' => $mimeType,
             ];
             $response = Helper::PostMethod(config('constants.api.promotion_data_bulk'), $data);
-           // return $response;
-           if (isset($response['code']) && $response['code'] == 200) {
+            // return $response;
+            if (isset($response['code']) && $response['code'] == 200) {
 
                 return redirect()->route('admin.promotion.bulk')->with([
                     'success' => 'Imported Successfully',
@@ -3922,7 +3922,7 @@ class AdminController extends Controller
             'max_mark' => $request->max_mark,
             'grade' => $request->grade,
             'grade_point' => $request->grade_point,
-            'grade_category' => $request->grade_category,            
+            'grade_category' => $request->grade_category,
             'score_type' => $request->score_type,
             'notes' => $request->notes,
             'status' => $request->status
@@ -4054,7 +4054,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -4453,7 +4453,7 @@ class AdminController extends Controller
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
-         return view(
+        return view(
             'admin.student.edit',
             [
                 'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
@@ -4509,7 +4509,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -4684,7 +4684,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -4761,14 +4761,14 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    
+
     public function getParentUpdateInfoList(Request $request)
     {
-        
+
         $data = [
             "status" => "Admin"
         ];
-        $response = Helper::GETMethodWithData(config('constants.api.parent_update_info_list'),$data);
+        $response = Helper::GETMethodWithData(config('constants.api.parent_update_info_list'), $data);
         // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
@@ -4786,7 +4786,7 @@ class AdminController extends Controller
                             <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="ViewParentUpdateBtn"><i class="fe-edit"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions','status'])
+            ->rawColumns(['actions', 'status'])
             ->make(true);
     }
     public function viewParentUpdateInfo($id)
@@ -4811,8 +4811,8 @@ class AdminController extends Controller
         );
     }
 
-    
-    
+
+
     public function getStudentUpdateInfoList(Request $request)
     {
         $data['status'] = "Admin";
@@ -4834,7 +4834,7 @@ class AdminController extends Controller
                             <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="ViewStudentUpdateBtn"><i class="fe-edit"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions','status'])
+            ->rawColumns(['actions', 'status'])
             ->make(true);
     }
     public function viewStudentUpdateInfo($id)
@@ -4880,7 +4880,7 @@ class AdminController extends Controller
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
         );
     }
@@ -4912,7 +4912,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -4975,7 +4975,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
         return $response;
     }
-    
+
     public function updateParentInfo(Request $request)
     {
         // dd($request);
@@ -6530,7 +6530,7 @@ class AdminController extends Controller
 
     public function staffAttendanceExcel(Request $request)
     {
-        
+
         $branch_id = session()->get('branch_id');
         $employee_attendance_report = __('messages.employee_attendance_report');
         return Excel::download(new StaffAttendanceExport($branch_id, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
@@ -6905,7 +6905,7 @@ class AdminController extends Controller
             'class' => isset($getclass['data']) ? $getclass['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'session' => isset($session['data']) ? $session['data'] : [],
-            'current_semester' => isset(    $sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
@@ -7557,6 +7557,41 @@ class AdminController extends Controller
         return $response;
     }
 
+    // student leave 
+    public function studentApplyLeavebyStaff(Request $request)
+    {
+        // dd($request);
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $data = [
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' => $request->student_id,
+            'frm_leavedate' => $request->frm_leavedate,
+            'to_leavedate' => $request->to_leavedate,
+            'total_leave' => $request->total_leave,
+            'change_lev_type' => $request->change_lev_type,
+            'reason_id' => $request->reason,
+            'remarks' => $request->remarks,
+            'status' => $request->leave_status,
+            'direct_approval_status' => "1",
+            'direct_approval_by' => session()->get('ref_user_id'),
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.call_via_leave_approve'), $data);
+        return $response;
+    }
     // index Fees
     public function fees()
     {
@@ -7609,14 +7644,14 @@ class AdminController extends Controller
     {
         // dd($request);
         $value = "";
-        if($request->semester_1){
-            $name= "semester_1";
+        if ($request->semester_1) {
+            $name = "semester_1";
             $value = $request->semester_1;
-        }else if($request->semester_2){
-            $name= "semester_2";
+        } else if ($request->semester_2) {
+            $name = "semester_2";
             $value = $request->semester_2;
-        }else if($request->semester_3){
-            $name= "semester_3";
+        } else if ($request->semester_3) {
+            $name = "semester_3";
             $value = $request->semester_3;
         }
         $data = [
@@ -8190,11 +8225,11 @@ class AdminController extends Controller
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
-                }    else {
+                } else {
                     $result = "";
                 }
-                
-                return '<span class="badge badge-soft-'.$result.' p-1">'.$status.'</span>';
+
+                return '<span class="badge badge-soft-' . $result . ' p-1">' . $status . '</span>';
             })
             ->addColumn('phase_2_status', function ($row) {
 
@@ -8207,18 +8242,18 @@ class AdminController extends Controller
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
-                }  else {
+                } else {
                     $result = "";
                 }
-                
-                return '<span class="badge badge-soft-'.$result.' p-1">'.$status.'</span>';
+
+                return '<span class="badge badge-soft-' . $result . ' p-1">' . $status . '</span>';
             })
             ->addColumn('actions', function ($row) {
                 $edit = route('admin.application.edit', $row['id']);
                 // <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewApplicationBtn"><i class="fe-eye"></i></a>
-                                
+
                 return '<div class="button-list">
-                <a href="'.$edit.'" class="btn btn-warning waves-effect waves-light" ><i class="fe-edit"></i></a>
+                <a href="' . $edit . '" class="btn btn-warning waves-effect waves-light" ><i class="fe-edit"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteApplicationBtn"><i class="fe-trash-2"></i></a>
                          </div>';
             })
@@ -8230,7 +8265,7 @@ class AdminController extends Controller
     public function applicationEdit($id)
     {
 
-        
+
         $data = [
             'id' => $id,
         ];
@@ -8310,7 +8345,7 @@ class AdminController extends Controller
     public function updateApplication(Request $request)
     {
         $trail_date = "";
-        if($request->enrollment=="Trail Enrollment"){
+        if ($request->enrollment == "Trail Enrollment") {
             $trail_date = $request->trail_date;
         }
         $visa_base64 = "";
@@ -8322,7 +8357,7 @@ class AdminController extends Controller
             $visa_base64 = base64_encode($visa_data);
             $visa_extension = $visa_file->getClientOriginalExtension();
         }
-        
+
         $passport_base64 = "";
         $passport_extension = "";
         $passport_file = $request->file('passport_photo');
@@ -8453,20 +8488,20 @@ class AdminController extends Controller
             'type' => "Childmenu"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        $mainmenu = Helper::PostMethod(config('constants.api.menus_list'),$mainmenudata);
-        $submenu = Helper::PostMethod(config('constants.api.menus_list'),$submenudata);
-        $childmenu = Helper::PostMethod(config('constants.api.menus_list'),$childmenudata);
-        
+        $mainmenu = Helper::PostMethod(config('constants.api.menus_list'), $mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.menus_list'), $submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.menus_list'), $childmenudata);
+
         return view(
             'admin.activity_monitoring.menuaccess',
-            [                
-                'roles' => isset($roles['data']) ? $roles['data'] : [],  
-                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [] ,
-                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [] ,
-                'submenu' => isset($submenu['data']) ?$submenu['data'] : [] ,
-                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : []                    
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
+                'mainmenu' => isset($mainmenu['data']) ? $mainmenu['data'] : [],
+                'submenu' => isset($submenu['data']) ? $submenu['data'] : [],
+                'childmenu' => isset($childmenu['data']) ? $childmenu['data'] : []
             ]
-        );     
+        );
     }
     // start Check In Out Time
     public function checkInOutTime()
@@ -8618,7 +8653,7 @@ class AdminController extends Controller
         $data = [
             'country' => "Malaysia",
         ];
-       
+
         $bank = Helper::GETMethodWithData(config('constants.api.bank_list'), $data);
         return view(
             'admin.bank_account.add',
@@ -8805,18 +8840,19 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.bank_delete'), $data);
         return $response;
     }
-   // index School Roles
+    // index School Roles
     public function school_role()
-    {       
+    {
         $data = [
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
         return view(
             'admin.school_roles.index',
-            [                
+            [
                 'roles' => isset($roles['data']) ? $roles['data'] : []
-            ]); 
+            ]
+        );
     }
     public function addschool_role(Request $request)
     {
@@ -8828,19 +8864,19 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.school_role_add'), $data);
         return $response;
     }
-    
+
     public function getschool_roleList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.school_role_list'));
         $data = isset($response['data']) ? $response['data'] : [];
-        $a=1;
+        $a = 1;
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('color', function ($row) {
                 return '<span style="color:' . $row['shortname'] . '" >' . $row['shortname'] . '</span>';
             })
-            ->addColumn('actions', function  ($row) use($a) {
-                
+            ->addColumn('actions', function ($row) use ($a) {
+
                 return '<div class="button-list">
                                 
                                 <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editSchoolRoleBtn"><i class="fe-edit"></i></a>
@@ -8880,7 +8916,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.school_role_delete'), $data);
         return $response;
     }
-    
+
     public function rollmenuaccess(Request $request)
     {
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
@@ -8888,32 +8924,32 @@ class AdminController extends Controller
         $data = [
             'status' => "All"
         ];
-        
-        $roles = Helper::PostMethod(config('constants.api.roles'), $data);        
-        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));  
-        
+
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+
         return view(
             'admin.school_roles.menuaccess',
-            [                
-                'roles' => isset($roles['data']) ? $roles['data'] : [], 
-                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
-                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [],
-                'mainmenu' =>  [] ,
-                'submenu' => [] ,
-                'childmenu' =>  []      
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
+                'mainmenu' =>  [],
+                'submenu' => [],
+                'childmenu' =>  []
             ]
         );
     }
     public function getmenus(Request $request)
     {
         $role_id = $request->role_id;
-        $branch_id =config('constants.branch_id');
-        
-        $school_roleid =$request->school_roleid;
+        $branch_id = config('constants.branch_id');
+
+        $school_roleid = $request->school_roleid;
         //dd($branch_id);
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
         //$menus = Helper::GetMethod(config('constants.api.menus'));
-        $data = [            
+        $data = [
             'status' => "All"
         ];
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
@@ -8936,29 +8972,29 @@ class AdminController extends Controller
             'type' => "Childmenu"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
-        
-        $mainmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$mainmenudata);
-        $submenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$submenudata);
-        $childmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$childmenudata);
+
+        $mainmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'), $mainmenudata);
+        $submenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'), $submenudata);
+        $childmenu = Helper::PostMethod(config('constants.api.schoolmenuaccess_list'), $childmenudata);
         // dd($mainmenu);
         return view(
             'admin.school_roles.menuaccess',
-            [                
-                'roles' => isset($roles['data']) ? $roles['data'] : [],  
-                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [], 
-                'branches' => isset($getBranches['data']) ?$getBranches['data'] : [] ,
-                'mainmenu' => isset($mainmenu['data']) ?$mainmenu['data'] : [] ,
-                'submenu' => isset($submenu['data']) ?$submenu['data'] : [] ,
-                'childmenu' => isset($childmenu['data']) ?$childmenu['data'] : [],
-                'role_id' => $role_id, 
-                'branch_id' => $branch_id ,
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
+                'mainmenu' => isset($mainmenu['data']) ? $mainmenu['data'] : [],
+                'submenu' => isset($submenu['data']) ? $submenu['data'] : [],
+                'childmenu' => isset($childmenu['data']) ? $childmenu['data'] : [],
+                'role_id' => $role_id,
+                'branch_id' => $branch_id,
                 'school_roleid' => $school_roleid
             ]
         );
     }
     public function setpermission(Request $request)
     {
-        
+
         $data = [
             'role_id' => $request->role_id,
             'br_id' => $request->branch_id,
@@ -8976,17 +9012,16 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
         //dd($response);
         return redirect('admin/school_role/menuaccess');
-        
     }
     public function checkpermissions(Request $request)
     {
         $pagedata = [
             //'menu_id' => "27",
             'menu_id' => $request->menu_id,
-            'role_id'=> session()->get('role_id'),
-            'school_roleid'=> session()->get('school_roleid'),
-            'branch_id'=> config('constants.branch_id')
-        ];    
+            'role_id' => session()->get('role_id'),
+            'school_roleid' => session()->get('school_roleid'),
+            'branch_id' => config('constants.branch_id')
+        ];
         // dd($pagedata);
         $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
         return $page;
@@ -9321,12 +9356,12 @@ class AdminController extends Controller
         return $response;
     }
 
-     
+
     // index Email Template
     public function emailTemplate()
     {
         $email_type = Helper::GETMethod(config('constants.api.email_type_list'));
-        
+
         // dd($email_type);
         return view(
             'admin.email_template.index',
@@ -9383,7 +9418,7 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $request->id,
-            'type_id' => $request->type_id, 
+            'type_id' => $request->type_id,
             'subject' => $request->subject,
             'template_body' => $request->template_body,
         ];
@@ -9413,14 +9448,14 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
-            
+
             $data = [
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
             ];
             // dd($data);
-            
+
             $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             // $response = Helper::PostMethod(config('constants.api.forum_image_store'), $data);
             echo json_encode([
@@ -9433,111 +9468,112 @@ class AdminController extends Controller
         }
     }
 
-    
+
     public function emailEvent(Request $request)
     {
         return view(
-            'auth.email_event',[
+            'auth.email_event',
+            [
                 'school_name' => "クアラルンプール日本人学校",
                 'school_image' => "logo_jskl.jpeg",
             ]
         );
     }
 
-     // start Form Field
-     public function formField()
-     {
-         return view('admin.form_field.index');
-     }
- 
-     public function getFormFieldList(Request $request)
-     {
-         $response = Helper::GetMethod(config('constants.api.form_field_list'));
-         $data = isset($response['data']) ? $response['data'] : [];
-         return DataTables::of($data)
-             ->addIndexColumn()
-             ->addColumn('name_english', function ($row) {
- 
-                 $name_english = $row['name_english'];
-                 if ($name_english == 0) {
-                     $result_name_english = "checked";
-                 } else {
-                     $result_name_english = "";
-                 }
-                 return '<input type="checkbox" ' . $result_name_english .'>';
-             })->addColumn('visa', function ($row) {
- 
+    // start Form Field
+    public function formField()
+    {
+        return view('admin.form_field.index');
+    }
+
+    public function getFormFieldList(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.form_field_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('name_english', function ($row) {
+
+                $name_english = $row['name_english'];
+                if ($name_english == 0) {
+                    $result_name_english = "checked";
+                } else {
+                    $result_name_english = "";
+                }
+                return '<input type="checkbox" ' . $result_name_english . '>';
+            })->addColumn('visa', function ($row) {
+
                 $visa = $row['visa'];
                 if ($visa == 0) {
                     $result_visa = "checked";
                 } else {
                     $result_visa = "";
                 }
-                return '<input type="checkbox" ' . $result_visa .'>';
+                return '<input type="checkbox" ' . $result_visa . '>';
             })->addColumn('nationality', function ($row) {
- 
+
                 $nationality = $row['nationality'];
                 if ($nationality == 0) {
                     $result_nationality = "checked";
                 } else {
                     $result_nationality = "";
                 }
-                return '<input type="checkbox" ' . $result_nationality .'>';
+                return '<input type="checkbox" ' . $result_nationality . '>';
             })->addColumn('passport', function ($row) {
- 
+
                 $passport = $row['passport'];
                 if ($passport == 0) {
                     $result_passport = "checked";
                 } else {
                     $result_passport = "";
                 }
-                return '<input type="checkbox" ' . $result_passport .'>';
+                return '<input type="checkbox" ' . $result_passport . '>';
             })->addColumn('nric', function ($row) {
- 
+
                 $nric = $row['nric'];
                 if ($nric == 0) {
                     $result_nric = "checked";
                 } else {
                     $result_nric = "";
                 }
-                return '<input type="checkbox" ' . $result_nric .'>';
+                return '<input type="checkbox" ' . $result_nric . '>';
             })
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editFormFieldBtn"><i class="fe-edit"></i></a>
                          </div>';
-             })// <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFormFieldBtn"><i class="fe-trash-2"></i></a>
-             ->rawColumns(['name_english','visa','nationality','passport','nric','actions'])
-             ->make(true);
-     }
-     public function getFormFieldDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.form_field_details'), $data);
-         return $response;
-     }
-     public function updateFormField(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-             'name_english' => $request->name_english,
-             'name_furigana' => $request->name_furigana,
-             'visa' => $request->visa,
-             'nationality' => $request->nationality,
-             'passport' => $request->passport,
-             'nric' => $request->nric,
-             'race' => $request->race,
-             'religion' => $request->religion,
-             'blood_group' => $request->blood_group,
-         ];
- 
-         $response = Helper::PostMethod(config('constants.api.form_field_update'), $data);
-         return $response;
-     }
+            }) // <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFormFieldBtn"><i class="fe-trash-2"></i></a>
+            ->rawColumns(['name_english', 'visa', 'nationality', 'passport', 'nric', 'actions'])
+            ->make(true);
+    }
+    public function getFormFieldDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.form_field_details'), $data);
+        return $response;
+    }
+    public function updateFormField(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name_english' => $request->name_english,
+            'name_furigana' => $request->name_furigana,
+            'visa' => $request->visa,
+            'nationality' => $request->nationality,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
+            'race' => $request->race,
+            'religion' => $request->religion,
+            'blood_group' => $request->blood_group,
+        ];
 
-     
+        $response = Helper::PostMethod(config('constants.api.form_field_update'), $data);
+        return $response;
+    }
+
+
     public function terminationIndex()
     {
 
@@ -9572,37 +9608,35 @@ class AdminController extends Controller
     }
     public function getTerminationList(Request $request)
     {
-        
+
         $response = Helper::GETMethod(config('constants.api.termination_list'));
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('termination_status', function ($row) {
                 $color = "";
-                if($row['termination_status']=="Approved"){
+                if ($row['termination_status'] == "Approved") {
                     $color = "success";
-                }else if($row['termination_status']=="Rejected"){
+                } else if ($row['termination_status'] == "Rejected") {
                     $color = "danger";
-                }else if($row['termination_status']=="Pending"){
+                } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
-
-                }else if($row['termination_status']=="Send Back"){
+                } else if ($row['termination_status'] == "Send Back") {
                     $color = "info";
-
                 }
                 return '<div class="button-list">
                 
-                <span class="badge badge-soft-'. $color.' p-1">'.$row['termination_status'].'</span>
+                <span class="badge badge-soft-' . $color . ' p-1">' . $row['termination_status'] . '</span>
             </div>';
             })
             // <a href="' . route('parent.termination.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
             ->addColumn('actions', function ($row) {
                 return '<div class="button-list">
-                    <a data-toggle="modal" data-target="#terminationModal" data-id="'.$row['id'].'"  id="editTerminationBtn" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+                    <a data-toggle="modal" data-target="#terminationModal" data-id="' . $row['id'] . '"  id="editTerminationBtn" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions','termination_status'])
+            ->rawColumns(['actions', 'termination_status'])
             ->make(true);
     }
     public function getTerminationDetails(Request $request)
@@ -9619,12 +9653,12 @@ class AdminController extends Controller
         // dd($request);
         $termination_notification = "No";
         $date_of_termination = null;
-        if($request->termination_status=="Approved"){
+        if ($request->termination_status == "Approved") {
             $date_of_termination = $request->date_of_termination;
             $termination_notification = "Yes";
         }
         $delete_google_address = "No";
-        if($request->delete_google_address=="on"){
+        if ($request->delete_google_address == "on") {
             $delete_google_address = "Yes";
         }
         $data = [
@@ -9665,13 +9699,13 @@ class AdminController extends Controller
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
-        $department_id=$request->department_id;
-        $class_id=$request->class_id;
-        $section_id=$request->section_id;
-        $exam_id=$request->exam_id;
-        $subject_id=$request->subject_id;
-        $semester_id=$request->semester_id;
-        $session_id=$request->session_id;
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        $semester_id = $request->semester_id;
+        $session_id = $request->session_id;
         if (!$validator->passes()) {
             return back()->with(['errors' => $validator->errors()->toArray()['file']]);
         } else {
@@ -9684,8 +9718,8 @@ class AdminController extends Controller
             $base64 = base64_encode(file_get_contents($request->file('file')));
 
             $data = [
-                
-                'academic_session_id'=> session()->get('academic_session_id'),
+
+                'academic_session_id' => session()->get('academic_session_id'),
                 'department_id' => $department_id,
                 'class_id' => $class_id,
                 'section_id' => $section_id,
@@ -9700,17 +9734,15 @@ class AdminController extends Controller
                 'fileSize' => $fileSize,
                 'mimeType' => $mimeType,
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.import_exam'), $data);
             //dd($response);
             //dd($data);
-            if ($response['code'] == 200) 
-            {
+            if ($response['code'] == 200) {
                 return redirect()->route('admin.exam.import')->with('success', ' Exam Mark  Imported Successfully');
             } else {
                 return redirect()->route('admin.exam.import')->with('errors', $response['data']);
             }
         }
     }
-    
 }

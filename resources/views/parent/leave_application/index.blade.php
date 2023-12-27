@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal" data-target="#knowtheReasons"> Click Here For Reason Details</button>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal"  id="studentAllReasons"> Click Here For Reason Details</button>
                                     <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
@@ -251,65 +251,9 @@
             </div>
         </div> <!-- end card-->
     </div> <!-- end col -->
-    <!-- Full width modal content -->
-    <div id="knowtheReasons" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-full-width">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="fullWidthModalLabel">Reason Details</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-box">
-                                <h4 class="header-title">Reason</h4>
-
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Leave Types</th>
-                                                <th>Absense</th>
-                                                <th>Suspension of attendance</th>
-                                                <th>bereavement</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row" rowspan="3">Reasons</th>
-                                                <td>cold</td>
-                                                <td>House circumstances</td>
-                                                <td>COVID-19 infection</td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <th scope="row">Reasons</th> -->
-                                                <td>unwell</td>
-                                                <td>Temporary return</td>
-                                                <td>influenza</td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <th scope="row">Reasons</th> -->
-                                                <td>fever</td>
-                                                <td>Transfer preparation/examination</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- end card-box -->
-                        </div> <!-- end col -->
-                    </div>
-                    <!--- end row -->
-
-
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    
     <!-- Center modal content -->
-    @include('parent.dashboard.check_list')
-    @include('parent.dashboard.exam-schedule')
+    @include('parent.leave_application.reason')
 
 </div> <!-- container -->
 @endsection
@@ -343,6 +287,7 @@
     var leave_status_txt = "{{ __('messages.leave_status') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
+    var leaveTypeWiseGetAllReason = "{{ config('constants.api.leave_type_wise_get_all_reason') }}";
     // Get PDF Header & Footer Text End
     var at = "{{date('d-m-Y')}}";
     $("#frm_ldate").val(at);
