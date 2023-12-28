@@ -804,6 +804,7 @@
     var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
     var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
+    var holidayList = "{{ config('constants.api.holidays_list') }}"
     // student leave apply
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
     var imgurl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/student-leaves/' }}";

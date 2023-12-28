@@ -854,17 +854,15 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
-
+        // $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        
+        $department = Helper::GetMethod(config('constants.api.department_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         return view('teacher.attendance.index', [
-            'teacher_class' => isset($response['data']) ? $response['data'] : [],
+            'department' => isset($department['data']) ? $department['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
-            'session' => isset($session['data']) ? $session['data'] : [],
-            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
         ]);
     }
     // by classes
@@ -1640,15 +1638,17 @@ class TeacherController extends Controller
     public function staffAttendanceExcel(Request $request)
     {
         // dd($request);
+        $branch_id = session()->get('branch_id');
         $employee_attendance_report = __('messages.employee_attendance_report');
-        return Excel::download(new StaffAttendanceExport(1, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
+        return Excel::download(new StaffAttendanceExport($branch_id, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
     }
 
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
+        $branch_id = session()->get('branch_id');
         $attendance_report = __('messages.attendance_report');
-        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), $attendance_report . '.xlsx');
+        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date), $attendance_report . '.xlsx');
     }
 
     public function studentList(Request $request)

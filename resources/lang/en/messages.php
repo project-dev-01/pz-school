@@ -1790,6 +1790,13 @@ return [
     "data_prepared_done"  => "Data Prepared Done",
     "promotion_sort"  => "Sort",
     "select_sort"  => "Select Sort",
-    "promotion_freezed" => "Promotion Process"
-
+    "promotion_freezed" => "Promotion Process",
+    "total_students" => "Totals Students",
+    "present_students" => "Present Students",
+    "absent_students" => "Absent Students",
+    "total_school_days"=>"Total School Days",
+    "total_holidays"=>"Total Holidays",
+    "no_of_late" => "No of Late",
+    "no_of_present" => "No of Present",
+    "no_of_absent" => "No of Absent",
 ];

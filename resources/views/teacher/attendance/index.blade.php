@@ -72,13 +72,21 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse ($teacher_class as $class)
-                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
-                                        @empty
-                                        @endforelse
                                     </select>
                                 </div>
                             </div>
@@ -92,40 +100,62 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="pattern">Pattern<span class="text-danger">*</span></label>
+                                    <select id="pattern" class="form-control" name="pattern">
+                                        <option value="">Select Pattern</option>
+                                        <option>Day</option>
+                                        <option>Month</option>
+                                        <option>Term</option>
+                                        <option>Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="term" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
+                                    <select id="patternTerm" class="form-control" name="class_date">
+                                        <option value="0">{{ __('messages.select_semester') }}</option>
+                                        @forelse($semester as $sem)
+                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="day" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="patternDay" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="month" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="patternMonth" placeholder="{{ __('messages.mm_yyyy') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3" class="dates" id="year" style="display:none">
+                                <div class="form-group">
+                                    <label for="class_date">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
+                                    <select id="patternYear" name="class_date" class="form-control">
+                                        <option value="">{{ __('messages.select_academic_year') }}</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="class_date">{{ __('messages.year') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="class_date" id="patternYear" placeholder="{{ __('messages.yyyy') }}">
+                                </div> -->
+                            </div>
+                            <div class="col-md-3" id="subject" style="display:none">
+                                <div class="form-group">
                                     <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
                                         <option value="">{{ __('messages.select_subject') }}</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="semesterID">{{ __('messages.semester') }}</label>
-                                    <select id="semesterID" class="form-control" name="semester_id">
-                                        <option value="0">{{ __('messages.select_semester') }}</option>
-                                        @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="sessionID">{{ __('messages.session') }}</label>
-                                    <select id="sessionID" class="form-control" name="session_id">
-                                        <option value="0">{{ __('messages.select_session') }}</option>
-                                        @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="classDate" placeholder="{{ __('messages.mm_yyyy') }}">
                                 </div>
                             </div>
                         </div>
@@ -164,15 +194,8 @@
                                     <div class="col-md-8"></div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <table class="">
-                                                <tr>
-                                                    <th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i> {{ __('messages.present') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i> {{ __('messages.absent') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> {{ __('messages.holiday') }}</button></th>
-                                                    <th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> {{ __('messages.late') }}</button></th>
-
-                                                </tr>
-                                            </table>
+                                            <div id="count-show">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -190,8 +213,7 @@
                             <input type="hidden" name="subject" id="excelSubject">
                             <input type="hidden" name="class" id="excelClass">
                             <input type="hidden" name="section" id="excelSection">
-                            <input type="hidden" name="semester" id="excelSemester">
-                            <input type="hidden" name="session" id="excelSession">
+                            <input type="hidden" name="pattern" id="excelPattern">
                             <input type="hidden" name="date" id="excelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -204,8 +226,7 @@
                             <input type="hidden" name="subject_id" id="downExcelSubject">
                             <input type="hidden" name="class_id" id="downExcelClass">
                             <input type="hidden" name="section_id" id="downExcelSection">
-                            <input type="hidden" name="semester_id" id="downExcelSemester">
-                            <input type="hidden" name="session_id" id="downExcelSession">
+                            <input type="hidden" name="pattern" id="downExcelPattern">
                             <input type="hidden" name="year_month" id="downExcelDate">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" style="margin-right:5px;" type="submit">
@@ -223,7 +244,7 @@
     <!-- end row -->
     <!-- end page title -->
 
-    <div class="row attendanceReport">
+    <div class="row "  id="daily-present-late-chart" style="display:none">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
@@ -283,6 +304,8 @@
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.teacher_class') }}";
+    var holidayList = "{{ config('constants.api.holidays_list') }}"
 
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";

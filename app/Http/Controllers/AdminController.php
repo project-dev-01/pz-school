@@ -7014,18 +7014,18 @@ class AdminController extends Controller
     // end Global Setting
     public function studentAttendanceReport()
     {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
         $department = Helper::GetMethod(config('constants.api.department_list'));
         return view('admin.attendance.student_report', [
             'department' => isset($department['data']) ? $department['data'] : [],
-            'class' => isset($getclass['data']) ? $getclass['data'] : [],
+            'term' => isset($term['data']) ? $term['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
-            'session' => isset($session['data']) ? $session['data'] : [],
-            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
         ]);
     }
 
@@ -7049,8 +7049,9 @@ class AdminController extends Controller
     public function studentAttendanceExcel(Request $request)
     {
         // dd($request);
+        $branch_id = session()->get('branch_id');
         $attendance_report = __('messages.attendance_report');
-        return Excel::download(new StudentAttendanceExport(1, $request->class, $request->section, $request->subject, $request->semester, $request->session, $request->date), $attendance_report . '.xlsx');
+        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date), $attendance_report . '.xlsx');
     }
     // copy academic
     public function acdemicCopyAssignTeacher(Request $request)

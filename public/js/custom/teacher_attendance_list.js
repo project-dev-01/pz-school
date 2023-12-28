@@ -1,5 +1,38 @@
 $(function () {
 
+    
+    $("#pattern").on("change", function() {
+        var pattern = $(this).val();
+        console.log('ch', pattern)
+        $(".dates").hide();
+        $(".tables").hide();
+        if (pattern == "Term") {
+            $("#term").show();
+            $("#month").hide();
+            $("#day").hide();
+            $("#year").hide();
+            $("#subject").hide();
+        } else if (pattern == "Month") {
+            $("#subject").show();
+            $("#month").show();
+            $("#term").hide();
+            $("#day").hide();
+            $("#year").hide();
+        } else if (pattern == "Day") {
+            $("#day").show();
+            $("#month").hide();
+            $("#term").hide();
+            $("#year").hide();
+            $("#subject").hide();
+        } else if (pattern == "Year") {
+            $("#year").show();
+            $("#month").hide();
+            $("#term").hide();
+            $("#day").hide();
+            $("#subject").hide();
+        }
+    });
+
     $(".attendanceReport").hide();
     var reasonChart;
     // monthly present,late,absent start
@@ -69,17 +102,28 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    
-    var dates = ["10-10-2023", "11-10-2023"];
+
+    var dates = [];
+    getHolidays();
+    function getHolidays(){
+        $.get(holidayList, { token: token, branch_id: branchID}, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    dates.push(val.date);
+                });
+            }
+        }, 'json');
+    }
+
     function DisableDates(date) {
 
-        var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
         var day = date.getDay();
-        return [( day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
+        return [(day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
     }
-    
-    $("#termDay").datepicker({
-        dateFormat: 'dd-mm-yy',
+
+    $("#patternDay").datepicker({
+        dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
@@ -87,18 +131,18 @@ $(function () {
         maxDate: 0,
         beforeShowDay: DisableDates,
     });
-    $('#termYear').datepicker({
+    $('#patternYear').datepicker({
         changeMonth: false,
         changeYear: true,
         showButtonPanel: true,
-        dateFormat: 'MM yy',
+        dateFormat: 'yy',
         // autoclose: true,
         yearRange: "-100:+50", // last hundred years
         onClose: function (dateText, inst) {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    $("#termYear").focus(function () {
+    $("#patternYear").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
             my: "center top",
@@ -107,7 +151,7 @@ $(function () {
         });
     });
 
-    $('#termMonth').datepicker({
+    $('#patternMonth').datepicker({
         changeMonth: true,
         changeYear: true,
         showButtonPanel: true,
@@ -118,7 +162,7 @@ $(function () {
             $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
         }
     });
-    $("#termMonth").focus(function () {
+    $("#patternMonth").focus(function () {
         $(".ui-datepicker-calendar").hide();
         $("#ui-datepicker-div").position({
             my: "center top",
@@ -152,7 +196,8 @@ $(function () {
             $.post(getGradeByDepartmentUrl,
                 {
                     branch_id: branchID,
-                    department_id: department_id
+                    department_id: department_id,
+                    teacher_id: ref_user_id
                 }, function (res) {
                     if (res.code == 200) {
                         $.each(res.data, function (key, val) {
@@ -170,9 +215,9 @@ $(function () {
         $(".attendanceReport").hide();
         var class_id = $(this).val();
         $("#attendanceFilter").find("#sectionID").empty();
-        $("#attendanceFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
 
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
@@ -187,7 +232,7 @@ $(function () {
         var section_id = $(this).val();
         var class_id = $("#changeClassName").val();
         $("#attendanceFilter").find("#subjectID").empty();
-        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
         $.post(teacherSubjectUrl, {
             token: token,
             branch_id: branchID,
@@ -211,9 +256,8 @@ $(function () {
             class_id: "required",
             section_id: "required",
             subject_id: "required",
+            pattern: "required",
             class_date: "required",
-            session_id: "required",
-            semester_id: "required"
         }
     });
 
@@ -222,33 +266,41 @@ $(function () {
         var check = $("#attendanceFilter").valid();
         if (check === true) {
 
-            var reportDate = $("#classDate").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var subject_id = $("#subjectID").val();
-            var semester_id = $("#semesterID").val();
-            var session_id = $("#sessionID").val();
             var pattern = $("#pattern").val();
 
-            var date = new Date(reportDate)
-            var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+            if (pattern == "Day") {
+                var year_month = $("#patternDay").val();
+            } else if (pattern == "Month") {
+                var reportDate = $("#patternMonth").val();
+                var date = new Date(reportDate)
+                var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+
+            } else if (pattern == "Term") {
+
+                var year_month = $("#patternTerm").val();
+            } else if (pattern == "Year") {
+
+                var year_month = $("#patternYear").val();
+            }
 
             // var date = new Date();
             //excel download
 
+                
             $("#excelSubject").val(subject_id);
             $("#excelClass").val(class_id);
             $("#excelSection").val(section_id);
-            $("#excelSemester").val(semester_id);
-            $("#excelSession").val(session_id);
             $("#excelDate").val(year_month);
-            // pdf download
+            $("#excelPattern").val(pattern);
+            // pdf doMonthwnload
             $("#downExcelSubject").val(subject_id);
             $("#downExcelClass").val(class_id);
             $("#downExcelSection").val(section_id);
-            $("#downExcelSemester").val(semester_id);
-            $("#downExcelSession").val(session_id);
             $("#downExcelDate").val(year_month);
+            $("#downExcelPattern").val(pattern);
 
             var formData = new FormData();
             formData.append('token', token);
@@ -256,8 +308,8 @@ $(function () {
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
             formData.append('subject_id', subject_id);
-            formData.append('semester_id', semester_id);
-            formData.append('session_id', session_id);
+            // formData.append('semester_id', semester_id);
+            // formData.append('session_id', session_id);
             formData.append('year_month', year_month);
             formData.append('pattern', pattern);
             formData.append('academic_session_id', academic_session_id);
@@ -267,20 +319,22 @@ $(function () {
                 classID: class_id,
                 sectionID: section_id,
                 subjectID: subject_id,
-                semesterID: semester_id,
-                sessionID: session_id,
-                date: reportDate,
+                // semesterID: semester_id,
+                // sessionID: session_id,
+                date: year_month,
+                pattern: pattern,
                 academic_session_id: academic_session_id,
                 userID: userID,
             };
 
             setLocalStorageForStudentAttendance(classObj);
 
-            studentAttendanceList(formData,reportDate)
+            studentAttendanceList(formData, reportDate, pattern)
         }
 
     });
-    function studentAttendanceList(formData,reportDate){
+    function studentAttendanceList(formData, reportDate, pattern) {
+
         var date = new Date(reportDate)
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -301,39 +355,97 @@ $(function () {
                     $(".attendanceReport").show();
 
                     var get_attendance_list = response.data.student_details;
-                    var late_present_graph = response.data.late_present_graph;
-
-
-                    $("#attendanceListShow").empty(attendanceListShow);
+                    $("#attendanceListShow").empty();
+                    $("#count-show").empty();
+                    $("#daily-present-late-chart").hide();
                     var attendanceListShow = "";
+                    var countShow = "";
                     var i = 1;
-                    if (get_attendance_list.length > 0) {
+                    if (pattern == "Day") {
+
+                        var count = response.data.count;
                         attendanceListShow += '<div class="table-responsive">' +
-                            '<table id="attnList" class="table table-bordered mb-0">' +
+                            '<table class="table w-100 table-bordered mb-0">' +
                             '<thead>' +
                             '<tr>' +
-                            '<th>'+ name_lang +'</th>';
-                        // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
-                        for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
-                            // daysOfYear.push(new Date(d));
-                            var ds = new Date(d);
-                            var dayName = days[ds.getDay()];
-                            attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
-                        }
-
-                        attendanceListShow += '<th>'+total_lang+'<br>'+present_lang+'</th>' +
-                        '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
-                        '<th>'+total_lang+'<br>'+late_lang+'</th>' +
+                            '<th>#</th>' +
+                            '<th>' + name_lang + '</th>' +
+                            '<th>' + name_english_lang + '</th>' +
+                            '<th>' + grade_lang + '</th>' +
+                            '<th>' + class_lang + '</th>' +
+                            '<th>' + status_lang + '</th>' +
+                            '<th>' + remarks_lang + '</th>' +
                             '</tr>' +
                             '</thead>' +
                             '<tbody>';
-                        // add functions tr start
-                        get_attendance_list.forEach(function (res) {
-                            attendanceListShow += '<tr>' +
-                                '<td class="text-center studentRow" style="display:block;">' +
-                                // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                '<input type="hidden" value="' + res.student_id + '">';
+                        if (get_attendance_list.length > 0) {
+                            // add functions tr start
+                            get_attendance_list.forEach(function (res) {
+                                console.log('fn',res.name_english)
+                                var name_english = "";
+                                if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
+                                    name_english = res.name_english;
+                                }
+                                var remarks = "";
+                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                    remarks = res.remarks;
+                                }
+                                var status = "";
+                                if(res.status=="absent"){
+                                    status = "Absent";
+                                }else if(res.status=="present"){
+                                    status = "Present";
+                                }
+                                attendanceListShow += '<tr>' +
+                                    '<td>'+i+'</td >'+
+                                    '<td>'+res.first_name + ' ' + res.last_name +'</td>'+
+                                    '<td>' + name_english + '</td>' +
+                                    '<td>' + res.class_name + '</td>' +
+                                    '<td>' + res.section_name + '</td>' +
+                                    '<td>' + status + '</td>' +
+                                    '<td>' + remarks + '</td>' +
+                                    '</tr>';
+                                    i++;
+                            });
+                        } else {
+                            attendanceListShow += '<tr> <td colspan="7" class="text-center">'+no_data_available +'</td></tr>';
+                        }
+                        attendanceListShow += '</tbody>' +
+                            '</table>' +
+                            '</div>';
+                        countShow += '<table><tr><th style="text-align:center"> '+ total_students_lang +' : '+ count.totalCount +' </th><th style="text-align:center"> '+ present_students_lang +' : '+ count.presentCount +' </th><th style="text-align:center"> '+ absent_students_lang + ': '+ count.absentCount +' </th><table/>';
+                    
+                    } else if (pattern == "Month") {
+
+                        $("#daily-present-late-chart").show();
+                        var late_present_graph = response.data.late_present_graph;
+                        if (get_attendance_list.length > 0) {
+                            attendanceListShow += '<div class="table-responsive">' +
+                                '<table id="attnList" class="table table-bordered mb-0">' +
+                                '<thead>' +
+                                '<tr>' +
+                                '<th>' + name_lang + '</th>';
+                            // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
+                            for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
+                                // daysOfYear.push(new Date(d));
+                                var ds = new Date(d);
+                                var dayName = days[ds.getDay()];
+                                attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
+                            }
+
+                            attendanceListShow += '<th>' + total_lang + '<br>' + present_lang + '</th>' +
+                                '<th>' + total_lang + '<br>' + absent_lang + '</th>' +
+                                '<th>' + total_lang + '<br>' + late_lang + '</th>' +
+                                '</tr>' +
+                                '</thead>' +
+                                '<tbody>';
+                            // add functions tr start
+                            get_attendance_list.forEach(function (res) {
+                                attendanceListShow += '<tr>' +
+                                    '<td class="text-center studentRow" style="display:block;">' +
+                                    // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                    '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                    '<input type="hidden" value="' + res.student_id + '">';
                                 // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
                                 if (res.photo) {
                                     attendanceListShow += '<img src="' + studentImg + '/' + res.photo + '" alt="user-image" class="rounded-circle">';
@@ -341,98 +453,215 @@ $(function () {
                                     attendanceListShow += '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">';
                                 }
                                 attendanceListShow += '</a>' + res.first_name + ' ' + res.last_name +
-                                '</td>';
+                                    '</td>';
 
-                            var attendance_details = res.attendance_details;
+                                var attendance_details = res.attendance_details;
 
-                            for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
-                                // daysOfYear.push(new Date(d));
-                                var currentDate = formatDate(new Date(s));
+                                
+                                for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
+                                    // daysOfYear.push(new Date(d));
+                                    var currentDate = formatDate(new Date(s));
 
-                                var i = 0;
-                                var bg = "";
-                                var title="";
-                                attendance_details.forEach(function (res) {
+                                    var i = 0;
+                                    var bg = "";
+                                    var title = "";
+                                    attendance_details.forEach(function (res) {
 
-                                    if (currentDate == res.date) {
-                                        var color = "";
-                                        if (res.status == "present") {
-                                            color = "btn-success";
+                                        if (currentDate == res.date) {
+                                            var color = "";
+                                            if (res.status == "present") {
+                                                color = "btn-success";
+                                            }
+                                            if (res.status == "absent") {
+                                                color = "btn-danger";
+                                            }
+                                            if (res.status == "late") {
+                                                color = "btn-warning";
+                                            }
+                                            if(res.remarks != null && res.homeroom_teacher_remarks != null){
+
+                                                if(res.remarks != res.homeroom_teacher_remarks){
+
+                                                    title = "Homeroom Teacher : "+res.homeroom_teacher_remarks+" \n Nursing Teacher :"+res.remarks;
+                                                   
+                                                    bg = "#5c595b";
+                                                    console.log('title',title)
+                                                }
+                                            }
+                                            attendanceListShow += '<td style="background-color:' + bg + '">' +
+                                                '<input type="hidden" value="' + res.status + '" ></input>' +
+                                                '<button type="button"  data-toggle="tooltip"  href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" title="' + title + '" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
+                                                '</td>';
+                                            i = 1;
                                         }
-                                        if (res.status == "absent") {
-                                            color = "btn-danger";
-                                        }
-                                        if (res.status == "late") {
-                                            color = "btn-warning";
-                                        }
-                                        if(res.student_id==2){
-                                            bg = "#5c595b";
-                                        }
-                                        title  = "Homeroom Teacher : Check \n Nursing Teacher :Test";
-                                        attendanceListShow += '<td style="background-color:'+bg+'">' +
-                                            '<input type="hidden" value="' + res.status + '" ></input>' +
-                                            '<button type="button"  data-toggle="tooltip"  href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false" title="'+title+'" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
-                                            '</td>';
+
+                                    });
+                                    if (i == 0) {
+                                        attendanceListShow += '<td style="background-color: #ddd; cursor: not-allowed;"></td>';
                                         i = 1;
                                     }
-
-                                });
-                                if (i == 0) {
-                                    attendanceListShow += '<td style="background-color: #ddd; cursor: not-allowed;"></td>';
-                                    i = 1;
                                 }
-                            }
-                            firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
+                                firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
 
-                            attendanceListShow += '<td>' + res.presentCount + '</td>' +
-                                '<td>' + res.absentCount + '</td>' +
-                                '<td>' + res.lateCount + '</td>' +
-                                '</tr>';
-                        });
+                                attendanceListShow += '<td>' + res.presentCount + '</td>' +
+                                    '<td>' + res.absentCount + '</td>' +
+                                    '<td>' + res.lateCount + '</td>' +
+                                    '</tr>';
+                            });
 
 
-                        // add functions tr end
+                            // add functions tr end
+                            attendanceListShow += '</tbody>' +
+                                '</table>' +
+                                '</div>';
+                        } else {
+                            attendanceListShow += '<div class="row">' +
+                                '<div class="col-md-12 text-center">' +
+                                no_data_available +
+                                '</div>'
+                            '</div>';
+                        }
+
+                        countShow += '<table ><tr><th><button type="button" style="background-color: #5c595b;" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-ufo"></i>'+reason_lang+'</button></th><th><button type="button" class="btn btn-xs btn-success waves-effect waves-light"><i class="mdi mdi-check"></i>'+present_lang+'</button></th><th><button type="button" class="btn btn-xs btn-danger waves-effect waves-light"><i class="mdi mdi-close"></i>'+absent_lang+'</button></th><th><button type="button" class="btn btn-xs btn-info waves-effect waves-light"><i class="mdi mdi-ufo"></i> '+holiday_lang+'</button></th><th><button type="button" class="btn btn-xs btn-warning waves-effect waves-light"><i class="mdi mdi-clock-outline"></i> '+late_lang+'</button></th></tr></table>';
+                        
+                        var newLabels = [];
+                        var absentData = [];
+                        var lateData = [];
+                        var presentData = [];
+                        if (late_present_graph.length > 0) {
+                            // graph data
+                            late_present_graph.forEach(function (res) {
+                                newLabels.push(res.date);
+                                absentData.push(res.absentCount);
+                                lateData.push(res.lateCount);
+                                presentData.push(res.presentCount);
+                            });
+                        }
+                        chart.updateSeries([{
+                            name: present_lang,
+                            type: "line",
+                            data: presentData
+                        }, {
+                            name: late_lang,
+                            type: "line",
+                            data: lateData
+                        }, {
+                            name: absent_lang,
+                            type: "line",
+                            data: absentData
+                        }]);
+                        chart.updateOptions({
+                            labels: newLabels
+                        })
+                    } else if(pattern == "Term"){
+
+                        var count = response.data.count;
+                        attendanceListShow += '<div class="table-responsive">' +
+                            '<table class="table w-100 table-bordered mb-0">' +
+                            '<thead>' +
+                            '<tr>' +
+                            '<th>#</th>' +
+                            '<th>' + name_lang + '</th>' +
+                            '<th>' + name_english_lang + '</th>' +
+                            '<th>' + grade_lang + '</th>' +
+                            '<th>' + class_lang + '</th>' +
+                            '<th>' + semester_lang + '</th>' +
+                            '<th>' + no_of_present_lang + '</th>' +
+                            '<th>' + no_of_absent_lang + '</th>' +
+                            '<th>' + no_of_late_lang + '</th>' +
+                            '<th>' + remarks_lang + '</th>' +
+                            '</tr>' +
+                            '</thead>' +
+                            '<tbody>';
+                        if (get_attendance_list.length > 0) {
+                            // add functions tr start
+                            get_attendance_list.forEach(function (res) {
+                                console.log('fn',res.name_english)
+                                var name_english = "";
+                                if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
+                                    name_english = res.name_english;
+                                }
+                                var remarks = "";
+                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                    remarks = res.remarks;
+                                }
+                                attendanceListShow += '<tr>' +
+                                    '<td>'+i+'</td >'+
+                                    '<td>'+res.first_name + ' ' + res.last_name +'</td>'+
+                                    '<td>' + name_english + '</td>' +
+                                    '<td>' + res.class_name + '</td>' +
+                                    '<td>' + res.section_name + '</td>' +
+                                    '<td>' + res.semester_name + '</td>' +
+                                    '<td>' + res.presentCount + '</td>' +
+                                    '<td>' + res.absentCount + '</td>' +
+                                    '<td>' + res.lateCount + '</td>' +
+                                    '<td>' + remarks + '</td>' +
+                                    '</tr>';
+                                    i++;
+                            });
+                        } else {
+                            attendanceListShow += '<tr> <td colspan="10" class="text-center">'+no_data_available +'</td></tr>';
+                        }
                         attendanceListShow += '</tbody>' +
                             '</table>' +
                             '</div>';
-                    } else {
-                        attendanceListShow += '<div class="row">' +
-                            '<div class="col-md-12 text-center">' +
-                            no_data_available +
-                            '</div>'
-                        '</div>';
-                    }
+                        countShow += '<table><tr><th style="text-align:center"> '+ total_students_lang +' : '+ count.total_students +' </th><th style="text-align:center"> '+ total_school_days_lang +' : '+ count.total_school_days +' </th><th style="text-align:center"> '+ total_holidays_lang + ': '+ count.total_holidays +' </th><table/>';
+                    
+                    } else if(pattern == "Year"){
 
-                    $("#attendanceListShow").append(attendanceListShow);
-                    var newLabels = [];
-                    var absentData = [];
-                    var lateData = [];
-                    var presentData = [];
-                    if (late_present_graph.length > 0) {
-                        // graph data
-                        late_present_graph.forEach(function (res) {
-                            newLabels.push(res.date);
-                            absentData.push(res.absentCount);
-                            lateData.push(res.lateCount);
-                            presentData.push(res.presentCount);
-                        });
+                        var count = response.data.count;
+                        attendanceListShow += '<div class="table-responsive">' +
+                            '<table class="table w-100 table-bordered mb-0">' +
+                            '<thead>' +
+                            '<tr>' +
+                            '<th>#</th>' +
+                            '<th>' + name_lang + '</th>' +
+                            '<th>' + name_english_lang + '</th>' +
+                            '<th>' + grade_lang + '</th>' +
+                            '<th>' + class_lang + '</th>' +
+                            '<th>' + no_of_present_lang + '</th>' +
+                            '<th>' + no_of_absent_lang + '</th>' +
+                            '<th>' + no_of_late_lang + '</th>' +
+                            '<th>' + remarks_lang + '</th>' +
+                            '</tr>' +
+                            '</thead>' +
+                            '<tbody>';
+                        if (get_attendance_list.length > 0) {
+                            // add functions tr start
+                            get_attendance_list.forEach(function (res) {
+                                console.log('fn',res.name_english)
+                                var name_english = "";
+                                if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
+                                    name_english = res.name_english;
+                                }
+                                var remarks = "";
+                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                    remarks = res.remarks;
+                                }
+                                attendanceListShow += '<tr>' +
+                                    '<td>'+i+'</td >'+
+                                    '<td>'+res.first_name + ' ' + res.last_name +'</td>'+
+                                    '<td>' + name_english + '</td>' +
+                                    '<td>' + res.class_name + '</td>' +
+                                    '<td>' + res.section_name + '</td>' +
+                                    '<td>' + res.presentCount + '</td>' +
+                                    '<td>' + res.absentCount + '</td>' +
+                                    '<td>' + res.lateCount + '</td>' +
+                                    '<td>' + remarks + '</td>' +
+                                    '</tr>';
+                                    i++;
+                            });
+                        } else {
+                            attendanceListShow += '<tr> <td colspan="9" class="text-center">'+no_data_available +'</td></tr>';
+                        }
+                        attendanceListShow += '</tbody>' +
+                            '</table>' +
+                            '</div>';
+                        countShow += '<table><tr><th style="text-align:center"> '+ total_students_lang +' : '+ count.total_students +' </th><th style="text-align:center"> '+ total_school_days_lang +' : '+ count.total_school_days +' </th><th style="text-align:center"> '+ total_holidays_lang + ': '+ count.total_holidays +' </th><table/>';
+                    
                     }
-                    chart.updateSeries([{
-                        name: present_lang,
-                        type: "line",
-                        data: presentData
-                    }, {
-                        name: late_lang,
-                        type: "line",
-                        data: lateData
-                    }, {
-                        name: absent_lang,
-                        type: "line",
-                        data: absentData
-                    }]);
-                    chart.updateOptions({
-                        labels: newLabels
-                    })
+                    $("#attendanceListShow").append(attendanceListShow);
+                    $("#count-show").append(countShow);
 
                 } else {
                     toastr.error(data.message);
@@ -441,7 +670,7 @@ $(function () {
         });
     }
 
-    
+
     function setLocalStorageForStudentAttendance(classObj) {
 
         var studentAttendanceReportDetails = new Object();
@@ -470,208 +699,208 @@ $(function () {
         return true;
     }
 
-    
+
     // if localStorage
     if (get_roll_id == "4") {
         // teacher
-    if (typeof teacher_student_attendance_report_storage !== 'undefined') {
-        if ((teacher_student_attendance_report_storage)) {
-            if (teacher_student_attendance_report_storage) {
-                var teacherStudentAttendanceReportStorage = JSON.parse(teacher_student_attendance_report_storage);
-                if (teacherStudentAttendanceReportStorage.length == 1) {
-                    var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                    teacherStudentAttendanceReportStorage.forEach(function (user) {
-                        classID = user.class_id;
-                        sectionID = user.section_id;
-                        subjectID = user.subject_id;
-                        semesterID = user.semester_id;
-                        sessionID = user.session_id;
-                        date = user.date;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $('#changeClassName').val(classID);
-                        $('#classDate').val(date);
-                        $('#semesterID').val(semesterID);
-                        $('#sessionID').val(sessionID);
-                        if (classID) {
-                            
-                            $("#attendanceFilter").find("#sectionID").empty();
-                            $("#attendanceFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
-                            $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
-                                if (res.code == 200) {
-                                    $.each(res.data, function (key, val) {
-                                        $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                    });
-                                    $("#attendanceFilter").find("#sectionID").val(sectionID)
-                                }
-                            }, 'json');
+        if (typeof teacher_student_attendance_report_storage !== 'undefined') {
+            if ((teacher_student_attendance_report_storage)) {
+                if (teacher_student_attendance_report_storage) {
+                    var teacherStudentAttendanceReportStorage = JSON.parse(teacher_student_attendance_report_storage);
+                    if (teacherStudentAttendanceReportStorage.length == 1) {
+                        var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                        teacherStudentAttendanceReportStorage.forEach(function (user) {
+                            classID = user.class_id;
+                            sectionID = user.section_id;
+                            subjectID = user.subject_id;
+                            semesterID = user.semester_id;
+                            sessionID = user.session_id;
+                            date = user.date;
+                            userBranchID = user.branch_id;
+                            userRoleID = user.role_id;
+                            userID = user.user_id;
+                        });
+                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                            $('#changeClassName').val(classID);
+                            $('#classDate').val(date);
+                            $('#semesterID').val(semesterID);
+                            $('#sessionID').val(sessionID);
+                            if (classID) {
+
+                                $("#attendanceFilter").find("#sectionID").empty();
+                                $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
+                                $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
+                                    if (res.code == 200) {
+                                        $.each(res.data, function (key, val) {
+                                            $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                        });
+                                        $("#attendanceFilter").find("#sectionID").val(sectionID)
+                                    }
+                                }, 'json');
+                            }
+                            if (sectionID) {
+                                $("#attendanceFilter").find("#subjectID").empty();
+                                $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
+                                $.post(teacherSubjectUrl, {
+                                    token: token,
+                                    branch_id: branchID,
+                                    teacher_id: userID,
+                                    class_id: classID,
+                                    section_id: sectionID,
+                                    academic_session_id: academic_session_id,
+                                }, function (res) {
+                                    if (res.code == 200) {
+                                        $.each(res.data, function (key, val) {
+                                            $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                        });
+                                        $("#attendanceFilter").find("#subjectID").val(subjectID)
+                                    }
+                                }, 'json');
+                            }
+
+                            var reportDate = date;
+                            var class_id = classID;
+                            var section_id = sectionID
+                            var subject_id = subjectID
+                            var semester_id = semesterID
+                            var session_id = sessionID
+
+                            var date = new Date(reportDate)
+                            var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+                            //excel download
+
+                            $("#excelSubject").val(subject_id);
+                            $("#excelClass").val(class_id);
+                            $("#excelSection").val(section_id);
+                            $("#excelSemester").val(semester_id);
+                            $("#excelSession").val(session_id);
+                            $("#excelDate").val(year_month);
+                            // pdf download
+                            $("#downExcelSubject").val(subject_id);
+                            $("#downExcelClass").val(class_id);
+                            $("#downExcelSection").val(section_id);
+                            $("#downExcelSemester").val(semester_id);
+                            $("#downExcelSession").val(session_id);
+                            $("#downExcelDate").val(year_month);
+
+                            var formData = new FormData();
+                            formData.append('token', token);
+                            formData.append('branch_id', branchID);
+                            formData.append('class_id', class_id);
+                            formData.append('section_id', section_id);
+                            formData.append('subject_id', subject_id);
+                            formData.append('semester_id', semester_id);
+                            formData.append('session_id', session_id);
+                            formData.append('year_month', year_month);
+                            formData.append('academic_session_id', academic_session_id);
+
+                            studentAttendanceList(formData, reportDate);
                         }
-                        if(sectionID){
-                            $("#attendanceFilter").find("#subjectID").empty();
-                            $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
-                            $.post(teacherSubjectUrl, {
-                                token: token,
-                                branch_id: branchID,
-                                teacher_id: userID,
-                                class_id: classID,
-                                section_id: sectionID,
-                                academic_session_id: academic_session_id,
-                            }, function (res) {
-                                if (res.code == 200) {
-                                    $.each(res.data, function (key, val) {
-                                        $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                                    });
-                                    $("#attendanceFilter").find("#subjectID").val(subjectID)
-                                }
-                            }, 'json');
-                        }
-
-                        var reportDate = date;
-                        var class_id = classID;
-                        var section_id = sectionID
-                        var subject_id = subjectID
-                        var semester_id = semesterID
-                        var session_id = sessionID
-
-                        var date = new Date(reportDate)
-                        var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-                        //excel download
-
-                        $("#excelSubject").val(subject_id);
-                        $("#excelClass").val(class_id);
-                        $("#excelSection").val(section_id);
-                        $("#excelSemester").val(semester_id);
-                        $("#excelSession").val(session_id);
-                        $("#excelDate").val(year_month);
-                        // pdf download
-                        $("#downExcelSubject").val(subject_id);
-                        $("#downExcelClass").val(class_id);
-                        $("#downExcelSection").val(section_id);
-                        $("#downExcelSemester").val(semester_id);
-                        $("#downExcelSession").val(session_id);
-                        $("#downExcelDate").val(year_month);
-
-                        var formData = new FormData();
-                        formData.append('token', token);
-                        formData.append('branch_id', branchID);
-                        formData.append('class_id', class_id);
-                        formData.append('section_id', section_id);
-                        formData.append('subject_id', subject_id);
-                        formData.append('semester_id', semester_id);
-                        formData.append('session_id', session_id);
-                        formData.append('year_month', year_month);
-                        formData.append('academic_session_id', academic_session_id);
-
-                        studentAttendanceList(formData,reportDate);
                     }
                 }
             }
         }
     }
-}
-if (get_roll_id == "2") {
-    // teacher
-if (typeof admin_studentattentanceReport_storage !== 'undefined') {
-    if ((admin_studentattentanceReport_storage)) {
-        if (admin_studentattentanceReport_storage) {
-            var adminStudentAttendanceReportStorage = JSON.parse(admin_studentattentanceReport_storage);
-            if (adminStudentAttendanceReportStorage.length == 1) {
-                var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                adminStudentAttendanceReportStorage.forEach(function (user) {
-                    classID = user.class_id;
-                    sectionID = user.section_id;
-                    subjectID = user.subject_id;
-                    semesterID = user.semester_id;
-                    sessionID = user.session_id;
-                    date = user.date;
-                    userBranchID = user.branch_id;
-                    userRoleID = user.role_id;
-                    userID = user.user_id;
-                });
-                if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                    $('#changeClassName').val(classID);
-                    $('#classDate').val(date);
-                    $('#semesterID').val(semesterID);
-                    $('#sessionID').val(sessionID);
-                    if (classID) {
-                        
-                        $("#attendanceFilter").find("#sectionID").empty();
-                        $("#attendanceFilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
-                        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
-                            if (res.code == 200) {
-                                $.each(res.data, function (key, val) {
-                                    $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                });
-                                $("#attendanceFilter").find("#sectionID").val(sectionID)
+    if (get_roll_id == "2") {
+        // teacher
+        if (typeof admin_studentattentanceReport_storage !== 'undefined') {
+            if ((admin_studentattentanceReport_storage)) {
+                if (admin_studentattentanceReport_storage) {
+                    var adminStudentAttendanceReportStorage = JSON.parse(admin_studentattentanceReport_storage);
+                    if (adminStudentAttendanceReportStorage.length == 1) {
+                        var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                        adminStudentAttendanceReportStorage.forEach(function (user) {
+                            classID = user.class_id;
+                            sectionID = user.section_id;
+                            subjectID = user.subject_id;
+                            semesterID = user.semester_id;
+                            sessionID = user.session_id;
+                            date = user.date;
+                            userBranchID = user.branch_id;
+                            userRoleID = user.role_id;
+                            userID = user.user_id;
+                        });
+                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                            $('#changeClassName').val(classID);
+                            $('#classDate').val(date);
+                            $('#semesterID').val(semesterID);
+                            $('#sessionID').val(sessionID);
+                            if (classID) {
+
+                                $("#attendanceFilter").find("#sectionID").empty();
+                                $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
+                                $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
+                                    if (res.code == 200) {
+                                        $.each(res.data, function (key, val) {
+                                            $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                        });
+                                        $("#attendanceFilter").find("#sectionID").val(sectionID)
+                                    }
+                                }, 'json');
                             }
-                        }, 'json');
-                    }
-                    if(sectionID){
-                        $("#attendanceFilter").find("#subjectID").empty();
-                        $("#attendanceFilter").find("#subjectID").append('<option value="">'+select_subject+'</option>');
-                        $.post(teacherSubjectUrl, {
-                            token: token,
-                            branch_id: branchID,
-                            teacher_id: userID,
-                            class_id: classID,
-                            section_id: sectionID,
-                            academic_session_id: academic_session_id,
-                        }, function (res) {
-                            if (res.code == 200) {
-                                $.each(res.data, function (key, val) {
-                                    $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                                });
-                                $("#attendanceFilter").find("#subjectID").val(subjectID)
+                            if (sectionID) {
+                                $("#attendanceFilter").find("#subjectID").empty();
+                                $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
+                                $.post(teacherSubjectUrl, {
+                                    token: token,
+                                    branch_id: branchID,
+                                    teacher_id: userID,
+                                    class_id: classID,
+                                    section_id: sectionID,
+                                    academic_session_id: academic_session_id,
+                                }, function (res) {
+                                    if (res.code == 200) {
+                                        $.each(res.data, function (key, val) {
+                                            $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                        });
+                                        $("#attendanceFilter").find("#subjectID").val(subjectID)
+                                    }
+                                }, 'json');
                             }
-                        }, 'json');
+
+                            var reportDate = date;
+                            var class_id = classID;
+                            var section_id = sectionID
+                            var subject_id = subjectID
+                            var semester_id = semesterID
+                            var session_id = sessionID
+
+                            var date = new Date(reportDate)
+                            var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+                            //excel download
+
+                            $("#excelSubject").val(subject_id);
+                            $("#excelClass").val(class_id);
+                            $("#excelSection").val(section_id);
+                            $("#excelSemester").val(semester_id);
+                            $("#excelSession").val(session_id);
+                            $("#excelDate").val(year_month);
+                            // pdf download
+                            $("#downExcelSubject").val(subject_id);
+                            $("#downExcelClass").val(class_id);
+                            $("#downExcelSection").val(section_id);
+                            $("#downExcelSemester").val(semester_id);
+                            $("#downExcelSession").val(session_id);
+                            $("#downExcelDate").val(year_month);
+
+                            var formData = new FormData();
+                            formData.append('token', token);
+                            formData.append('branch_id', branchID);
+                            formData.append('class_id', class_id);
+                            formData.append('section_id', section_id);
+                            formData.append('subject_id', subject_id);
+                            formData.append('semester_id', semester_id);
+                            formData.append('session_id', session_id);
+                            formData.append('year_month', year_month);
+                            formData.append('academic_session_id', academic_session_id);
+
+                            studentAttendanceList(formData, reportDate);
+                        }
                     }
-
-                    var reportDate = date;
-                    var class_id = classID;
-                    var section_id = sectionID
-                    var subject_id = subjectID
-                    var semester_id = semesterID
-                    var session_id = sessionID
-
-                    var date = new Date(reportDate)
-                    var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-                    //excel download
-
-                    $("#excelSubject").val(subject_id);
-                    $("#excelClass").val(class_id);
-                    $("#excelSection").val(section_id);
-                    $("#excelSemester").val(semester_id);
-                    $("#excelSession").val(session_id);
-                    $("#excelDate").val(year_month);
-                    // pdf download
-                    $("#downExcelSubject").val(subject_id);
-                    $("#downExcelClass").val(class_id);
-                    $("#downExcelSection").val(section_id);
-                    $("#downExcelSemester").val(semester_id);
-                    $("#downExcelSession").val(session_id);
-                    $("#downExcelDate").val(year_month);
-
-                    var formData = new FormData();
-                    formData.append('token', token);
-                    formData.append('branch_id', branchID);
-                    formData.append('class_id', class_id);
-                    formData.append('section_id', section_id);
-                    formData.append('subject_id', subject_id);
-                    formData.append('semester_id', semester_id);
-                    formData.append('session_id', session_id);
-                    formData.append('year_month', year_month);
-                    formData.append('academic_session_id', academic_session_id);
-
-                    studentAttendanceList(formData,reportDate);
                 }
             }
         }
     }
-}
-}
     // studentDetails
     $(document).on('click', '.studentDetails', function () {
         var studentID = $(this).find('input').val();
@@ -800,7 +1029,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                 var valuein = moment.duration(employee_check_in_time, 'HH:mm');
                 var valueout = moment.duration(employee_check_out_time, 'HH:mm');
                 var difference = valueout.subtract(valuein);
-                
+
                 var hours = ("0" + difference.hours()).slice(-2) + ":" + ("0" + difference.minutes()).slice(-2);
                 $(this).closest('tr').find('.hours').val(hours);
             }
@@ -811,7 +1040,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
 
         var reason = $(this).closest('tr').find('.reason');
         reason.empty();
-        reason.append('<option value="">'+select_reason+'</option>');
+        reason.append('<option value="">' + select_reason + '</option>');
         $.post(getTeacherAbsentExcuse, {
             token: token,
             branch_id: branchID,
@@ -969,7 +1198,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             $("#excelSession").val(session);
             $("#excelDate").val(year_month);
 
-            
+
 
             var classObj = {
                 employee: employee,
@@ -988,12 +1217,12 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             // formData.append('department', department);
             formData.append('date', year_month);
 
-            employeeAttendanceReportList(formData,reportDate);
+            employeeAttendanceReportList(formData, reportDate);
         }
 
     });
-    function employeeAttendanceReportList(formData,reportDate){
-        console.log('form',formData.date)
+    function employeeAttendanceReportList(formData, reportDate) {
+        console.log('form', formData.date)
         var date = new Date(reportDate)
         // var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -1033,7 +1262,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                             '<table id="attnList" class="table table-bordered mb-0">' +
                             '<thead>' +
                             '<tr>' +
-                            '<th>'+session_lang+'</th><th>'+name_lang+'</th>';
+                            '<th>' + session_lang + '</th><th>' + name_lang + '</th>';
                         // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
                         for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                             // daysOfYear.push(new Date(d));
@@ -1042,19 +1271,19 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                             attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                         }
 
-                        attendanceListShow += '<th>'+total_lang+'<br>'+present_lang+'</th>' +
-                        '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
-                        '<th>'+total_lang+'<br>'+late_lang+'</th>' +
-                        '<th>'+total_lang+'<br>'+excused_lang+'</th>' +
+                        attendanceListShow += '<th>' + total_lang + '<br>' + present_lang + '</th>' +
+                            '<th>' + total_lang + '<br>' + absent_lang + '</th>' +
+                            '<th>' + total_lang + '<br>' + late_lang + '</th>' +
+                            '<th>' + total_lang + '<br>' + excused_lang + '</th>' +
                             '</tr>' +
                             '</thead>' +
                             '<tbody>';
                         // add functions tr start
                         get_attendance_list.forEach(function (res) {
-                            
+
                             var cur_session = "";
                             if (res.session_name == "Morning") {
-                                    var cur_session = morning_lang;
+                                var cur_session = morning_lang;
                             }
                             attendanceListShow += '<tr>' +
                                 '<td>' + cur_session + '</td>' +
@@ -1172,7 +1401,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
         });
 
     }
-    
+
     function setLocalStorageForEmployeeAttendanceReport(classObj) {
 
         var employeeAttendanceDetails = new Object();
@@ -1213,7 +1442,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
 
                         var reportDate = date;
                         var employee = employee;
-                        var session =   sessionID;
+                        var session = sessionID;
                         // var department = $("#employeeReportDepartment").val();
 
                         var date = new Date(reportDate)
@@ -1232,7 +1461,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
                         // formData.append('department', department);
                         formData.append('date', year_month);
 
-                        employeeAttendanceReportList(formData,reportDate);
+                        employeeAttendanceReportList(formData, reportDate);
 
                     }
                 }
@@ -1314,7 +1543,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             getEmployeeAttendanceList(formData)
         }
     });
-    
+
     function getEmployeeAttendanceList(formData) {
         $.ajax({
             url: getEmployeAttendanceList,
@@ -1331,7 +1560,7 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             }
         });
     }
-    
+
 
     function setLocalStorageEmployeeAttendanceTeacher(classObj) {
 
@@ -1352,16 +1581,16 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
         return true;
     }
 
-    
-    $( document ).ready(function() {
+
+    $(document).ready(function () {
         // Function to get a value from local storage if not present
-        function getValueFromLocalStorage(t_e_atten_details,s_e_atten_report_details,s_e_atten_details,t_s_atten_report_details,t_e_atten_report_details) {
+        function getValueFromLocalStorage(t_e_atten_details, s_e_atten_report_details, s_e_atten_details, t_s_atten_report_details, t_e_atten_report_details) {
             // Check if the value exists in local storage
             if (localStorage.getItem(t_e_atten_details) == null) {
                 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 const d = new Date();
                 $("#employeeDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
-            } 
+            }
             if (localStorage.getItem(s_e_atten_report_details) == null) {
                 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 const d = new Date();
@@ -1390,10 +1619,10 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
         const local_key3 = 'staff_emp_attentance_details';
         const local_key4 = 'teacher_student_attendance_report_details';
         const local_key5 = 'teacher_employee_attendance_report_details';
-        const value = getValueFromLocalStorage(local_key1,local_key2,local_key3,local_key4,local_key5);
+        const value = getValueFromLocalStorage(local_key1, local_key2, local_key3, local_key4, local_key5);
     });
 
-    
+
 
     /*$( document ).ready(function() {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -1401,8 +1630,8 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
         $("#classDate").val(monthNames[d.getMonth()] + " " + d.getFullYear());
     });*/
 
-    
-        
+
+
 
     // if localStorage 
     if (typeof teacher_employee_attendance_storage !== 'undefined') {
@@ -1478,70 +1707,70 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
 
     function callout(data) {
         $.each(data, function (key, val) {
-            console.log('val',val)
+            console.log('val', val)
             var row = "";
             var disabled = "";
             var holiday = "";
             var color = "";
             var fontColor = "";
-            if(val.holiday == 1){
+            if (val.holiday == 1) {
                 var color = "#D3D3D3";
                 var holiday = "";
                 fontColor = "color: red";
             }
-            row += '<tr id="row' + count + '" style="background-color:'+color+'"> ';
+            row += '<tr id="row' + count + '" style="background-color:' + color + '"> ';
             if (val.details.id) {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '"'+ holiday +'>';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="' + val.details.id + '"' + holiday + '>';
             } else {
-                row += '<input type="hidden" name="attendance[' + count + '][id]" value="">'+ holiday +'';
+                row += '<input type="hidden" name="attendance[' + count + '][id]" value="">' + holiday + '';
             }
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '"'+ holiday +'>';
+            row += '<input type="text" name="attendance[' + count + '][date]" class="form-control" value="' + val.date + '"' + holiday + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control status"  name="attendance[' + count + '][status]"'+ holiday +'>';
-            row += '<option value="">'+select_status+'</option>';
+            row += '<select  class="form-control status"  name="attendance[' + count + '][status]"' + holiday + '>';
+            row += '<option value="">' + select_status + '</option>';
             if (val.leave) {
-                row += '<option value="present">'+present_lang+'</option>';
-                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
-                row += '<option value="late">'+late_lang+'</option>';
-                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
+                row += '<option value="present">' + present_lang + '</option>';
+                row += '<option value="absent" ' + (val.leave.leave_type == "absent" ? "selected" : "") + '>' + absent_lang + '</option>';
+                row += '<option value="late">' + late_lang + '</option>';
+                row += '<option value="excused" ' + (val.leave.leave_type == "excused" ? "selected" : "") + '>' + excused_lang + '</option>';
                 disabled = "readonly";
             } else {
-                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>'+present_lang+'</option>';
-                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>'+absent_lang+'</option>';
-                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>'+late_lang+'</option>';
-                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>'+excused_lang+'</option>';
+                row += '<option value="present" ' + (val.details.status == "present" ? "selected" : "") + '>' + present_lang + '</option>';
+                row += '<option value="absent"' + (val.details.status == "absent" ? "selected" : "") + '>' + absent_lang + '</option>';
+                row += '<option value="late"' + (val.details.status == "late" ? "selected" : "") + '>' + late_lang + '</option>';
+                row += '<option value="excused"' + (val.details.status == "excused" ? "selected" : "") + '>' + excused_lang + '</option>';
             }
             row += '</select>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkin" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'> ';
+            row += '<input class="form-control checkin" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_in]"  value="' + moment(val.details.check_in, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '' + holiday + '> ';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
-            row += '<input class="form-control checkout" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + ''+ holiday +'>';
+            row += '<input class="form-control checkout" style="' + fontColor + '" type="time" name="attendance[' + count + '][check_out]" value="' + moment(val.details.check_out, 'HH:mm:ss').format('HH:mm') + '" ' + disabled + '' + holiday + '>';
             row += '</div>';
             row += '</td>';
             row += '<td width="10%">';
             row += '<div class="form-group">';
             if (val.details.hours) {
-                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' '+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="' + val.details.hours + '" ' + disabled + ' ' + holiday + '>';
             } else {
-                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + ''+ holiday +'>';
+                row += '<input type="text" style="' + fontColor + '" name="attendance[' + count + '][hours]" class="form-control hours" value="" ' + disabled + '' + holiday + '>';
             }
             row += '</div>';
             row += '</td>';
             row += '<td width="15%">';
             row += '<div class="form-group">';
-            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]"'+ holiday +'>';
-            row += '<option value="">'+select_reason+'s</option>';
+            row += '<select  class="form-control reason"  name="attendance[' + count + '][reason_id]"' + holiday + '>';
+            row += '<option value="">' + select_reason + 's</option>';
             if (val.leave) {
                 var reason = val.leave.reason_id;
                 var status = "absent";
@@ -1564,12 +1793,12 @@ if (typeof admin_studentattentanceReport_storage !== 'undefined') {
             row += '<td width="15%">';
 
             if (val.leave) {
-                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '"'+ holiday +'>';
+                row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.leave.remarks + '"' + holiday + '>';
             } else {
                 if (val.details.remarks) {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '"'+ holiday +'>';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value="' + val.details.remarks + '"' + holiday + '>';
                 } else {
-                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value=""'+ holiday +'>';
+                    row += '<input type="remarks" name="attendance[' + count + '][remarks]" class="form-control" value=""' + holiday + '>';
                 }
             }
             row += '</td>';

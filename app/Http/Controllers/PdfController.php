@@ -4452,11 +4452,11 @@ class PdfController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'subject_id' => $request->subject_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
+            'pattern' => $request->pattern,
             'year_month' => $request->year_month,
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        // dd($data);
         $footer_text = session()->get('footer_text');
         $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
         // dd($get_attendance_list_teacher);
@@ -4510,70 +4510,180 @@ class PdfController extends Controller
         <footer>" . $footer_text . "</footer>";
         if ($get_attendance_list_teacher['code'] == "200") {
             $student_details = $get_attendance_list_teacher['data']['student_details'];
-            $year_month = "01-" . $request->year_month;
-            // First day of the month.
-            $startDate = date('Y-m-01', strtotime($year_month));
-            // Last day of the month.
-            $endDate = date('Y-m-t', strtotime($year_month));
-            $begin = new DateTime($startDate);
-            $end = new DateTime($endDate);
-
-            $end = $end->modify('+1 day');
-
-            $interval = new DateInterval('P1D');
-            $daterange = new DatePeriod($begin, $interval, $end);
-
-            $response .= '<div class="table-responsive">
-        <table width="100%" style="border-collapse: collapse; border: 0px;">
-           <thead>
-              <tr>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Student Id</th>
-                 <th class="align-top" style="border: 1px solid; padding:12px;">Name</th>';
-            foreach ($daterange as $date) {
-                $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
-            }
-            $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">Total Present</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Absent</th>>
-            <th class="align-top" style="border: 1px solid; padding:12px;">Total Late</th>>';
-
-            $response .= '</tr></thead><tbody>';
-            foreach ($student_details as $key => $res) {
-                $attendance_details = $res['attendance_details'];
-                $response .= '<tr>
-                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['student_id'] . '</td>
-                 <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
-                foreach ($daterange as $dat) {
-                    $checkMatch = 0;
-                    foreach ($attendance_details as $att) {
-                        $loopDate = $dat->format("Y-m-d");
-                        $attDate = $att['date'];
-                        if ($loopDate == $attDate) {
-                            // dd($attDate);
-                            $status = "";
-                            if ($att['status'] == "present") {
-                                $status = "P";
+            $i = 0;
+            if($request->pattern == "Day"){
+    
+                $response .= '<div class="table-responsive">
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+               <thead>
+                  <tr>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.status') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
+    
+                $response .= '</tr></thead><tbody>';
+                foreach ($student_details as $key => $res) {
+                    $i++;
+                    $status = "";
+                    if($res['status']=="absent"){
+                        $status = "Absent";
+                    }else if($res['status']=="present"){
+                        $status = "Present";
+                    }
+                    $response .= '<tr>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
+                    
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $status . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['remarks'] . '</td>';
+                    $response .= '</tr>';
+                }
+                $response .= '</tbody></table></div>';
+    
+            }else if($request->pattern == "Month"){
+                $year_month = "01-" . $request->year_month;
+                // First day of the month.
+                $startDate = date('Y-m-01', strtotime($year_month));
+                // Last day of the month.
+                $endDate = date('Y-m-t', strtotime($year_month));
+                $begin = new DateTime($startDate);
+                $end = new DateTime($endDate);
+    
+                $end = $end->modify('+1 day');
+    
+                $interval = new DateInterval('P1D');
+                $daterange = new DatePeriod($begin, $interval, $end);
+    
+                $response .= '<div class="table-responsive">
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+               <thead>
+                  <tr>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>';
+                foreach ($daterange as $date) {
+                    $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
+                }
+                $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_present') .'</th>>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_absent') .'</th>>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_late') .'</th>>';
+    
+                $response .= '</tr></thead><tbody>';
+                foreach ($student_details as $key => $res) {
+                    $attendance_details = $res['attendance_details'];
+                    $response .= '<tr>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i. '</td>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
+                    foreach ($daterange as $dat) {
+                        $checkMatch = 0;
+                        foreach ($attendance_details as $att) {
+                            $loopDate = $dat->format("Y-m-d");
+                            $attDate = $att['date'];
+                            if ($loopDate == $attDate) {
+                                // dd($attDate);
+                                $status = "";
+                                if ($att['status'] == "present") {
+                                    $status = "P";
+                                }
+                                if ($att['status'] == "absent") {
+                                    $status = "A";
+                                }
+                                if ($att['status'] == "late") {
+                                    $status = "L";
+                                }
+                                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $status . '</td>';
+                                $checkMatch = 1;
                             }
-                            if ($att['status'] == "absent") {
-                                $status = "A";
-                            }
-                            if ($att['status'] == "late") {
-                                $status = "L";
-                            }
-                            $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $status . '</td>';
+                        }
+                        if ($checkMatch == 0) {
+                            $response .= '<td class="text-center" style="border: 1px solid; padding:12px;"></td>';
                             $checkMatch = 1;
                         }
                     }
-                    if ($checkMatch == 0) {
-                        $response .= '<td class="text-center" style="border: 1px solid; padding:12px;"></td>';
-                        $checkMatch = 1;
-                    }
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['presentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['absentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['lateCount'] . '</td>';
+                    $response .= '</tr>';
                 }
-                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['presentCount'] . '</td>';
-                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['absentCount'] . '</td>';
-                $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['lateCount'] . '</td>';
-                $response .= '</tr>';
+                $response .= '</tbody></table></div>';
+    
+            }else if($request->pattern == "Term"){
+    
+                $response .= '<div class="table-responsive">
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+               <thead>
+                  <tr>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.semester') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_present') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_absent') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_late') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
+    
+                $response .= '</tr></thead><tbody>';
+                foreach ($student_details as $key => $res) {
+                    $i++;
+                    $response .= '<tr>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
+                    
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['semester_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['presentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['absentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['lateCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['remarks'] . '</td>';
+                    $response .= '</tr>';
+                }
+                $response .= '</tbody></table></div>';
+    
+            }else if($request->pattern == "Year"){
+    
+                $response .= '<div class="table-responsive">
+            <table width="100%" style="border-collapse: collapse; border: 0px;">
+               <thead>
+                  <tr>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_present') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_absent') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_late') .'</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
+    
+                $response .= '</tr></thead><tbody>';
+                foreach ($student_details as $key => $res) {
+                    $i++;
+                    $response .= '<tr>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
+                    
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['presentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['absentCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['lateCount'] . '</td>';
+                    $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['remarks'] . '</td>';
+                    $response .= '</tr>';
+                }
+                $response .= '</tbody></table></div>';
+    
             }
-            $response .= '</tbody></table></div>';
         }
 
         $response .= "</body></html>";
@@ -4712,7 +4822,7 @@ class PdfController extends Controller
                     <td class="text-center" style="border: 1px solid; padding:12px;"> Present</td>
                     <td class="text-center" style="border: 1px solid; padding:12px;"> </td>
                 </tr>';
-        
+
         $response .= '</tbody></table></div>';
         $response .= "</body></html>";
 

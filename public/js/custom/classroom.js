@@ -154,34 +154,47 @@ $(function () {
     $(".classRoomHideSHow").hide();
 
     // console.log('test',$.datepicker.noWeekends)
-    // var dates = ["10-10-2023", "11-10-2023"];
-    // function DisableDates(date) {
+    var dates = [];
+    getHolidays();
+    function getHolidays(){
 
-    //     var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
-    //     var day = date.getDay();
-    //     return [( day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
-    // }
-    // $(function() {
-    //     $("#classDate").datepicker({
-    //         dateFormat: 'dd-mm-yy',
-    //         changeMonth: true,
-    //         changeYear: true,
-    //         autoclose: true,
-    //         yearRange: "-100:+50",
-    //         maxDate: 0,
-    //         beforeShowDay: DisableDates,
-    //         // beforeShowDay: $.datepicker.noWeekends,
-    //         daysOfWeekDisabled: [0,6]
-    //     });
-    // });
-    $("#classDate").datepicker({
-        dateFormat: 'dd-mm-yy',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        maxDate: 0
+        $.get(holidayList, { token: token, branch_id: branchID}, function (res) {
+            // console.log('test',res)
+
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    dates.push(val.date);
+                });
+            }
+        }, 'json');
+    }
+    function DisableDates(date) {
+
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+        var day = date.getDay();
+        return [( day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
+    }
+    $(function() {
+        $("#classDate").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50",
+            maxDate: 0,
+            beforeShowDay: DisableDates,
+        });
     });
+    
+    // $("#classDate").datepicker({
+    //     dateFormat: 'dd-mm-yy',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    //     yearRange: "-100:+50", // last hundred years
+    //     maxDate: 0
+    // });
+    
     // reverse dob
     function convertDigitIn(str) {
         return str.split('-').reverse().join('-');

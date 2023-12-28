@@ -26,16 +26,14 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
     protected $section;
     protected $subject;
     protected $date;
-    protected $semester;
-    protected $session;
+    protected $pattern;
 
-    function __construct($branch,$class,$section,$subject,$semester,$session,$date) {
+    function __construct($branch,$class,$section,$subject,$pattern,$date) {
         $this->branch = $branch;
         $this->class = $class;
         $this->section = $section;
         $this->subject = $subject;
-        $this->semester = $semester;
-        $this->session = $session;
+        $this->pattern = $pattern;
         $this->date = $date;
     }
     public function collection()
@@ -47,12 +45,12 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
             "class_id" => $this->class,
             "section_id" => $this->section,
             "subject_id" => $this->subject,
-            "semester_id" => $this->semester,
-            "session_id" => $this->session,
+            "pattern" => $this->pattern,
             "date" => $this->date,
         ];
         // dd(config('constants.api.staff_attendance_export'));   
         $response = Helper::PostMethod(config('constants.api.student_attendance_export'), $data);
+        // dd($response);
         $excel = $response['data']['attendance'];
         
         return collect($excel);
@@ -61,32 +59,44 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
     
     public function headings(): array
     {
-        $date = $this->date;
-        $month_year = explode("-", $date);
-        $m = $month_year[0];
-        $y = $month_year[1];
-
-        $final = ['Student Id','Student Name'];
-
-        
-        
-        $start = $y.'-'.$m.'-01';
-        $end = date('Y-m-t', strtotime($start));
-        //
-        $startDate = new DateTime($start);
-        $endDate = new DateTime($end);
-
-        while ($startDate <= $endDate) {
+        if($this->pattern == "Day"){
+            $final = ['#',__('messages.name'),__('messages.name_english'),__('messages.grade'),__('messages.class'),__('messages.status'),__('messages.remarks')];
+    
+        }else if($this->pattern == "Month"){
+            $date = $this->date;
+            $month_year = explode("-", $date);
+            $m = $month_year[0];
+            $y = $month_year[1];
+    
+            $final = ['#',__('messages.name')];
+    
             
-            $dat = $startDate->format('Y-m-d');
-            array_push($final,$dat);
-            $startDate->modify('+1 day');
+            
+            $start = $y.'-'.$m.'-01';
+            $end = date('Y-m-t', strtotime($start));
+            //
+            $startDate = new DateTime($start);
+            $endDate = new DateTime($end);
+    
+            while ($startDate <= $endDate) {
+                
+                $dat = $startDate->format('Y-m-d');
+                array_push($final,$dat);
+                $startDate->modify('+1 day');
+            }
+    
+            
+            array_push($final,'Total Present'); 
+            array_push($final,'Total Absent'); 
+            array_push($final,'Total Late'); 
+        }else if($this->pattern == "Term"){
+            $final = ['#',__('messages.name'),__('messages.name_english'),__('messages.grade'),__('messages.class'),__('messages.semester'),__('messages.no_of_present'),__('messages.no_of_absent'),__('messages.no_of_late'),__('messages.remarks')];
+    
+        }else if($this->pattern == "Year"){
+            $final = ['#',__('messages.name'),__('messages.name_english'),__('messages.grade'),__('messages.class'),__('messages.no_of_present'),__('messages.no_of_absent'),__('messages.no_of_late'),__('messages.remarks')];
+    
         }
-
         
-        array_push($final,'Total Present'); 
-        array_push($final,'Total Absent'); 
-        array_push($final,'Total Late'); 
 
         return $final;
     }
@@ -98,13 +108,16 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
         $result = [
             AfterSheet::class => function(AfterSheet $event) {
                 // dd($event);
-                $date = $this->date;
-                $month_date = explode("-", $date);
-                $month = $month_date[0];
-                $year = $month_date[1];
+                if($this->pattern == "Month"){
 
-                
-                $tot = date('t', strtotime($year.'-'.$month.'-01'));
+                    $date = $this->date;
+                    $month_date = explode("-", $date);
+                    $month = $month_date[0];
+                    $year = $month_date[1];
+    
+                    
+                    $tot = date('t', strtotime($year.'-'.$month.'-01'));
+                }
                 // dd($tot);
                 $num = $event->sheet->getHighestRow();
                 $cellRange = 'A1:AJ1'; // All headers

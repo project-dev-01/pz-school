@@ -1784,4 +1784,12 @@ return [
     "english"=>"English",
     "total5"=>"Total of 5 Subjects",
     "total9"=>"Total of 9 Subjects",
+    "total_students" => "Totals Students",
+    "present_students" => "Present Students",
+    "absent_students" => "Absent Students",
+    "total_school_days"=>"Total School Days",
+    "total_holidays"=>"Total Holidays",
+    "no_of_late" => "No of Late",
+    "no_of_present" => "No of Present",
+    "no_of_absent" => "No of Absent",
 ];

@@ -168,6 +168,16 @@
     var student_name_lang = "{{ __('messages.student_name') }}";
     var subject_name_lang = "{{ __('messages.subject_name') }}";
     var total_student_lang = "{{ __('messages.total_student') }}";
+    var total_students_lang = "{{ __('messages.total_students') }}";
+    var present_students_lang = "{{ __('messages.present_students') }}";
+    var absent_students_lang = "{{ __('messages.absent_students') }}";
+    var status_lang = "{{ __('messages.status') }}";
+    var remarks_lang = "{{ __('messages.remarks') }}";
+    var no_of_present_lang = "{{ __('messages.no_of_present') }}";
+    var no_of_absent_lang = "{{ __('messages.no_of_absent') }}";
+    var no_of_late_lang = "{{ __('messages.no_of_late') }}";
+    var total_school_days_lang = "{{ __('messages.total_school_days') }}";
+    var total_holidays_lang = "{{ __('messages.total_holidays') }}";
     var class_teacher_name_lang = "{{ __('messages.class_teacher_name') }}";
     var subject_teacher_name_lang = "{{ __('messages.subject_teacher_name') }}";
     var pass_lang = "{{ __('messages.pass') }}";
@@ -178,6 +188,9 @@
     var dob_lang = "{{ __('messages.DOB') }}";
     var present_lang = "{{ __('messages.present') }}";
     var absent_lang = "{{ __('messages.absent') }}";
+    var name_english_lang = "{{ __('messages.name_english') }}";
+    var reason_lang = "{{ __('messages.reason') }}";
+    var holiday_lang = "{{ __('messages.holiday') }}";
     var late_lang = "{{ __('messages.late') }}";
     var excused_lang = "{{ __('messages.excused') }}";
     var current_month_lang = "{{ __('messages.current_month') }}";
