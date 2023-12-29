@@ -22,7 +22,7 @@
 
     <!-- start page title -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
                     <!--<ol class="breadcrumb m-0">
@@ -39,7 +39,7 @@
 
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -48,7 +48,7 @@
                     </li>
                 </ul>
                 <div class="card-body">
-                    <div class="col-md-12">
+                    <div class="col-xl-6">
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link active">
@@ -64,7 +64,7 @@
                         <div class="tab-content">
                             <div class="tab-pane show active" id="home1">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-xl-12">
                                         <div class="card">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                                 <div class="row" id="student">
-                                    <div class="col-md-12">
+                                    <div class="col-xl-12">
                                         <div class="card">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
@@ -144,7 +144,7 @@
                                             </ul><br>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-12">
+                                                    <div class="col-sm-12">
                                                         <div class="table-responsive">
                                                             <table class="table w-100 nowrap " id="student-table">
                                                                 <thead>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="tab-pane" id="profile1">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-xl-12">
                                         <div class="card">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
@@ -194,11 +194,11 @@
                                             </ul><br>
                                             <!-- <div class="card-body"> -->
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-12">
                                                     <div class="card-body">
                                                        <form id="StudentSettingFilter" autocomplete="off">
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-6">
                                                                 <ul class="list-unstyled">
                                                                     <li>
                                                                         <div class="checkbox checkbox-primary mb-2">
@@ -340,7 +340,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-3">
                                                             </div>
                                                         </div>
                                                         <br>

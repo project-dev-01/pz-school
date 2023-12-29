@@ -2686,6 +2686,8 @@ class AdminController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+
         // dd($session);
         return view(
             'admin.student.student',
@@ -2694,10 +2696,30 @@ class AdminController extends Controller
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
             ]
         );
     }
+    public function studentSettings(Request $request){
+        $data = [
+            'studentDetails' => $request->studentDetails,
+            'parentDetails' => $request->parentDetails,
+            'schoolDetails' => $request->schoolDetails,
+            'academicDetails' => $request->academicDetails,
+            'gradeAndClasses' => $request->gradeAndClasses,
+            'gardeClassAcademic' => $request->gardeClassAcademic,
+            'attendance' => $request->attendance,
+            'attendanceAcademic' => $request->attendanceAcademic,
+            'testResult' => $request->testResult,
+            'testResultAcademic' => $request->testResultAcademic,
+            'staff_id' => session()->get('ref_user_id')
+
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.student_settings'), $data);
+        return $response;
+    }    
     public function faqIndex()
     {
         $data = [

@@ -58,25 +58,24 @@
                                     </select>
                                 </div>
                             </div>
-														<div class="col-md-3">
-                            </div>
-                            <div class="col-md-2">
-                            </div>
-                              
-                            <div class="col-md-2">
-                            <div class="form-group text-right m-b-0" style="margin-top:32px;">
+                            <div class="col-md-3">
+                            <div class="form-group text-right m-b-0">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                     {{ __('messages.filter') }}
                                 </button>
                                 </div>
+                            </div> 
+                            <div class="col-md-3">
+                            </div> 
+                            <div class="col-md-3">
                             </div>
-                            <div class="col-md-2">
-                            <div class="form-group text-right m-b-0" style="margin-top:32px;">
+                        </div>
+                        </form>
+                        <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" id="saveFinalPromotionDataBtn" type="button">
                                     {{ __('messages.promotion') }}
                                 </button>
                         </div>
-                            </div> 
                     </div>
                 
             </div>

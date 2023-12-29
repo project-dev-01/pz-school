@@ -1487,6 +1487,27 @@
                         <span> {{ __('messages.attendance') }} </span>
                     </a>
                 </li> -->
+                <li class="{{  (request()->is('teacher.promotion.studentlist')) ? 'menuitem-active' : '' }}">
+                    <a href="#sideBarPromotion" data-toggle="collapse">
+                    <i class="fa fa-arrow-up"></i>
+                        <span>{{ __('messages.promotion') }}</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse {{  (request()->is('teacher.promotion.studentlist')) ? 'show' : '' }}" id="sideBarPromotion">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('teacher.promotion.studentlist')}}" class="nav-link {{ (request()->is('teacher/promotion/studentList')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.promotion_student_list') }}</span>
+                                 </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('teacher.promotion.freezed_student_list')}}" class="nav-link {{ (request()->is('teacher/promotion/freezedStudentList')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.promotion_freezed') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                 </li> 
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

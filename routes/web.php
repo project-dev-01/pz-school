@@ -210,6 +210,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
         Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
+        Route::post('student/student_setting', [AdminController::class, 'studentSettings'])->name('admin.student.student_setting');
 
         Route::get('all_student_rank/list', [AdminController::class, 'allStudentRankList'])->name('admin.all_student_rank.list');
         // section routes

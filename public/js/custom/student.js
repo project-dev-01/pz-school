@@ -414,6 +414,41 @@ $(function () {
         }
 
     });
+    $('#StudentSettingFilter').on('submit', function (e) {
+        var formData = {
+            studentDetails: document.getElementById('checkboxStudentDetails').checked,
+            parentDetails: document.getElementById('checkboxParentDetails').checked,
+            schoolDetails: document.getElementById('checkboxSchoolDetails').checked,
+            academicDetails: document.getElementById('checkboxAcademic').checked,
+            gradeAndClasses: document.getElementById('checkboxGrade').checked,
+            gardeClassAcademic: $('#gardeClassAcademic').val(),
+            attendance: document.getElementById('checkboxAttendance').checked,
+            attendanceAcademic: $('#attendanceAcademic').val(),
+            testResult: document.getElementById('checkboxTestResult').checked,
+            testResultAcademic: $('#testResultAcademic').val()
+            // Add similar lines for other checkboxes as needed
+            // Add data for dropdowns if needed
+        };
+        console.log(formData);
+            // Send the data to the server using AJAX
+        $.ajax({
+            type: 'POST',
+            url: studentSettings, // Replace with your Laravel route
+            data: formData,
+            success: function (response) {
+                // Handle success, if needed
+                console.log('Data saved successfully:', response);
+                swal.fire("Success", "Your data has been saved.", "success");
+            },
+            error: function (error) {
+                // Handle errors, if needed
+                console.error('Error saving data:', error);
+                swal.fire("Error", "There was an error saving your data.", "error");
+            }
+        });
+
+    });
+
     function getStudentList(formData) {
         $("#student").show("slow");
 
