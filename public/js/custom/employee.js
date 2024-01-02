@@ -273,6 +273,18 @@ $(function () {
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
             formData.append('teacher_type', $('#teacher_type').val());
+            formData.append('first_name_english', $('#first_name_english').val());
+            formData.append('last_name_english', $('#last_name_english').val());
+            formData.append('first_name_furigana', $('#first_name_furigana').val());
+            formData.append('last_name_furigana', $('#last_name_furigana').val());
+            formData.append('nationality', $('#nationality').val());
+            formData.append('passport_expiry_date', $('#passport_expiry_date').val());
+            formData.append('passport_photo', $('#passport_photo')[0].files[0]);
+            formData.append('passport_old_photo', $('#passport_old_photo').val());
+            formData.append('visa_number', $('#visa_number').val());
+            formData.append('visa_expiry_date', $('#visa_expiry_date').val());
+            formData.append('visa_old_photo', $('#visa_old_photo').val());
+            formData.append('visa_photo', $('#visa_photo')[0].files[0]);
             formData.append('status', status);
             // 
             var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();
@@ -445,6 +457,18 @@ $(function () {
             formData.append('country', $('#Country').val());
             formData.append('post_code', $('#postCode').val());
             formData.append('teacher_type', $('#teacher_type').val());
+            formData.append('first_name_english', $('#first_name_english').val());
+            formData.append('last_name_english', $('#last_name_english').val());
+            formData.append('first_name_furigana', $('#first_name_furigana').val());
+            formData.append('last_name_furigana', $('#last_name_furigana').val());
+            formData.append('nationality', $('#nationality').val());
+            formData.append('passport_expiry_date', $('#passport_expiry_date').val());
+            formData.append('passport_photo', $('#passport_photo')[0].files[0]);
+            formData.append('passport_old_photo', $('#passport_old_photo').val());
+            formData.append('visa_number', $('#visa_number').val());
+            formData.append('visa_expiry_date', $('#visa_expiry_date').val());
+            formData.append('visa_old_photo', $('#visa_old_photo').val());
+            formData.append('visa_photo', $('#visa_photo')[0].files[0]);
             formData.append('status', status);
             // 
             var department_lt = $("select[name='department[]']").map(function () { return $(this).val(); }).get();

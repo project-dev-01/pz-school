@@ -81,6 +81,7 @@ class CommonController extends Controller
 
     public function addApplicationForm(Request $request)
     {
+        
         $verify_email = $request->verify_email . '_email';
         // dd($verify_email);
         $created_by = session()->get('ref_user_id');
@@ -158,15 +159,14 @@ class CommonController extends Controller
     }
     public function verifyApplicationForm(Request $request)
     {
-        // dd($verify_email);
         $data = [
             'branch_id' => config('constants.branch_id'),
             'url' => url('/'),
             'email' => $request->email
         ];
+        // dd($data);
         $application = Http::post(config('constants.api.application_verify'), $data);
         $response = $application->json();
-        // dd($response);
         return $response;
     }
     function DBMigrationCall()

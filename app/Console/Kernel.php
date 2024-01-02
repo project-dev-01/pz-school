@@ -15,12 +15,15 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ResetExpirePassword::class,
+        Commands\TerminationCron::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('reset_expire_password:cron')
-                 ->everyMinute();
+                ->everyMinute();
+        $schedule->command('termination:cron')
+                ->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 

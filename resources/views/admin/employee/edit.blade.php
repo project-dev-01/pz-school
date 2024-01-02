@@ -1030,7 +1030,7 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" value="{{ isset($role['id']) ? $role['id'] : ''}}" class="form-control" name="role_user_id" id="role_user_id">
+                            <input type="hidden" value="{{ isset($role['id']) ? $role['id'] : '0'}}" class="form-control" name="role_user_id" id="role_user_id">
                             <div class="col-md-5">
                                 <div class="form-group mb-3">
                                     <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
@@ -1040,7 +1040,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" value="{{ isset($role['email']) ? $role['email'] : ''}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
+                                        <input type="email" value="{{ isset($employee['email']) ? $employee['email'] : ''}}" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
                                     </div>
                                 </div>
                             </div>

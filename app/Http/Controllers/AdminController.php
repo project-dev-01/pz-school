@@ -1658,7 +1658,7 @@ class AdminController extends Controller
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
         $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
-        // dd($res);
+        
         return view(
             'admin.employee.edit',
             [
