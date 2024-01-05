@@ -13,6 +13,7 @@ use Excel;
 use DateTime;
 use DateTimeZone;
 use App\Exports\StaffAttendanceExport;
+use App\Exports\StudentListExport;
 use App\Exports\FeesExpenseExport;
 use App\Exports\StudentAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
@@ -1536,8 +1537,8 @@ class AdminController extends Controller
         $data = [
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
-            'designation_id' => $request->designation_id,
-            'department_id' => $request->department_id,
+            // 'designation_id' => $request->designation_id,
+            // 'department_id' => $request->department_id,
             'teacher_type' => $request->teacher_type,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1658,7 +1659,6 @@ class AdminController extends Controller
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $job_title_list = Helper::GetMethod(config('constants.api.job_title_list'));
         $employee_type_list = Helper::GetMethod(config('constants.api.employee_type_list'));
-        
         return view(
             'admin.employee.edit',
             [
@@ -2252,30 +2252,29 @@ class AdminController extends Controller
     }
     public function downloadPromotionCsv(Request $request)
     {
-          // Fetch data based on the selected department, class, and section
+        // Fetch data based on the selected department, class, and section
         $data = [
-           'department_id' => $request->input('download_department_id'),
-           'class_id' => $request->input('download_class_id'),
-           'section_id' => $request->input('download_section_id')
+            'department_id' => $request->input('download_department_id'),
+            'class_id' => $request->input('download_class_id'),
+            'section_id' => $request->input('download_section_id')
         ];
-           
+
         $response = Helper::PostMethod(config('constants.api.promotion_download_csv'), $data);
         if (!$response || isset($response['error'])) {
             return response()->json(['error' => 'Error fetching data from the API. Please try again.'], 500);
         }
         $csvFileName = 'promotion_data.csv';
         // Check if it's an Ajax request
-            if ($request->ajax()) {
-                return response($response, 200)
-                    ->header('Content-Type', 'text/csv')
-                    ->header('Content-Disposition', 'attachment; filename=' . $csvFileName);
-            }
-
+        if ($request->ajax()) {
+            return response($response, 200)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', 'attachment; filename=' . $csvFileName);
+        }
     }
     public function promotionBulkImportSave(Request $request)
     {
         $data = [
-           'updatedData' => $request->input('updatedData')
+            'updatedData' => $request->input('updatedData')
         ];
         $response = Helper::PostMethod(config('constants.api.promotion_bulk_import_save'), $data);
         // dd($response);
@@ -2293,44 +2292,46 @@ class AdminController extends Controller
             ]
         );
     }
-    public function promotionBulkDataStudentList(Request $request){
+    public function promotionBulkDataStudentList(Request $request)
+    {
         $data = [
-            'department_id' =>$request->department,
-            'grade_id' =>$request->grade,
-            'section_id' =>$request->section,
-            'sort_id' =>$request->sort
+            'department_id' => $request->department,
+            'grade_id' => $request->grade,
+            'section_id' => $request->section,
+            'sort_id' => $request->sort
         ];
         $response = Helper::PostMethod(config('constants.api.promotion_bulk_student_list'), $data);
-       return $response;
-        
+        return $response;
     }
     public function promotionUnassignedStudentList(Request $request)
     {
         $data = [
-            'department_id' =>$request->department,
-            'grade_id' =>$request->grade,
-            'section_id' =>$request->section
+            'department_id' => $request->department,
+            'grade_id' => $request->grade,
+            'section_id' => $request->section
         ];
         $response = Helper::PostMethod(config('constants.api.promotion_unassigned_student_list'), $data);
         return $response;
     }
-    public function promotionTerminationStudentList(Request $request){
+    public function promotionTerminationStudentList(Request $request)
+    {
         $data = [
-            'department_id' =>$request->department,
-            'grade_id' =>$request->grade,
-            'section_id' =>$request->section
+            'department_id' => $request->department,
+            'grade_id' => $request->grade,
+            'section_id' => $request->section
         ];
         $response = Helper::PostMethod(config('constants.api.promotion_termination_student_list'), $data);
         return $response;
     }
-    public function promotionPreparedDataAdd(Request $request){
-        
+    public function promotionPreparedDataAdd(Request $request)
+    {
+
         $data = [
             'updatedData' => $request->input('updatedData')
-         ];
-         $response = Helper::PostMethod(config('constants.api.promotion_prepared_Data_add'), $data);
-         // dd($response);
-         return $response;
+        ];
+        $response = Helper::PostMethod(config('constants.api.promotion_prepared_Data_add'), $data);
+        // dd($response);
+        return $response;
     }
     public function promotionDataFreezed(Request $request)
     {
@@ -2338,8 +2339,8 @@ class AdminController extends Controller
     }
     public function promotionGetDataFreezed(Request $request)
     {
-        $data= [
-           'status'=> $request->status
+        $data = [
+            'status' => $request->status
         ];
         $response = Helper::PostMethod(config('constants.api.promotion_get_data_freezed'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
@@ -2355,22 +2356,24 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    public function promotionSaveStatusFreezed(Request $request){
-          
+    public function promotionSaveStatusFreezed(Request $request)
+    {
+
         $data = [
             'statusData' => $request->input('statusData')
-         ];
-         $response = Helper::PostMethod(config('constants.api.promotion_Status_Data_add'), $data);
-         // dd($response);
-         return  $response;
+        ];
+        $response = Helper::PostMethod(config('constants.api.promotion_Status_Data_add'), $data);
+        // dd($response);
+        return  $response;
     }
-    public function promotionFinalData(Request $request){
+    public function promotionFinalData(Request $request)
+    {
         $data = [
             'promotionFinalData' => $request->input('promotionData')
-         ];
-         $response = Helper::PostMethod(config('constants.api.promotion_Final_Data_add'), $data);
-         // dd($response);
-         return  $response;
+        ];
+        $response = Helper::PostMethod(config('constants.api.promotion_Final_Data_add'), $data);
+        // dd($response);
+        return  $response;
     }
     // add Timetable
     public function addTimetable(Request $request)
@@ -2682,12 +2685,15 @@ class AdminController extends Controller
     public function healthLogbooksIndex()
     {
         $department = Helper::GetMethod(config('constants.api.department_list'));
-        return view('admin.health_logbooks.employee',
-        [
-            'department' => isset($department['data']) ? $department['data'] : []
-        ]);
+        return view(
+            'admin.health_logbooks.employee',
+            [
+                'department' => isset($department['data']) ? $department['data'] : []
+            ]
+        );
     }
-    public function getHealthLogbooksData(Request $request){
+    public function getHealthLogbooksData(Request $request)
+    {
         $data = [
             'date' => $request->date_of_homework
         ];
@@ -2695,7 +2701,8 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.health_logbooks'), $data);
         return $response;
     }
-    public function addHealthLogbooksData(Request $request){
+    public function addHealthLogbooksData(Request $request)
+    {
         $data = [
             'temp' =>  $request->temp,
             'date' => $request->date,
@@ -2724,11 +2731,15 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-
+        $data = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $get_student_download_settings = Helper::PostMethod(config('constants.api.get_student_download_settings'), $data);
         // dd($session);
         return view(
             'admin.student.student',
             [
+                'get_student_download_settings' => isset($get_student_download_settings['data']) ? $get_student_download_settings['data'] : [],
                 'department' => isset($department['data']) ? $department['data'] : [],
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -2738,11 +2749,12 @@ class AdminController extends Controller
             ]
         );
     }
-    public function studentSettings(Request $request){
+    public function studentSettings(Request $request)
+    {
         $data = [
             'studentDetails' => $request->studentDetails,
             'parentDetails' => $request->parentDetails,
-            'schoolDetails' => $request->schoolDetails,
+            // 'schoolDetails' => $request->schoolDetails,
             'academicDetails' => $request->academicDetails,
             'gradeAndClasses' => $request->gradeAndClasses,
             'gardeClassAcademic' => $request->gardeClassAcademic,
@@ -2756,7 +2768,7 @@ class AdminController extends Controller
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.student_settings'), $data);
         return $response;
-    }    
+    }
     public function faqIndex()
     {
         $data = [
@@ -5983,8 +5995,23 @@ class AdminController extends Controller
             'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
         ]);
     }
-
-    function classroomPost(Request $request)
+    public function studDailyAttendance()
+    {
+        $class = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view('admin.classroom.daily_attendance', [
+            'department' => isset($department['data']) ? $department['data'] : [],
+            'class' => isset($class['data']) ? $class['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+    public function classroomPost(Request $request)
     {
         // echo "<pre>";
         // print_r($request);
@@ -6000,6 +6027,19 @@ class AdminController extends Controller
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
+        return $response;
+    }
+    public function studDailyAttendanceAdd(Request $request)
+    {
+        $data = [
+            "attendance" => $request->attendance,
+            "date" => $request->date,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "semester_id" => $request->semester_id,
+            "session_id" => $request->session_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.add_student_attendance_by_day'), $data);
         return $response;
     }
     function getShortTest(Request $request)
@@ -6712,6 +6752,16 @@ class AdminController extends Controller
         $branch_id = session()->get('branch_id');
         $employee_attendance_report = __('messages.employee_attendance_report');
         return Excel::download(new StaffAttendanceExport($branch_id, $request->employee, $request->session, $request->date, $request->department), $employee_attendance_report . '.xlsx');
+    }
+    public function StudentListExcel(Request $request)
+    {
+
+        $branch_id = session()->get('branch_id');
+        $staff_id = session()->get('ref_user_id');
+        // $employee_attendance_report = __('messages.employee_attendance_report');
+        $student_list_report = "Student List";
+        // dd($request);
+        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session), $student_list_report . '.xlsx');
     }
     public function feesExpenseExcel(Request $request)
     {

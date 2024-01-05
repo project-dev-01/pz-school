@@ -14,9 +14,6 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
-@endsection
-@section('css')
 <link href="{{ asset('css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -791,12 +788,14 @@
     var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
     var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
     var getShortTest = "{{ config('constants.api.get_short_test') }}";
+    var holidayList = "{{ config('constants.api.holidays_list') }}"
     // student leave apply
     var getStudentLeave = "{{ config('constants.api.get_student_leaves') }}";
     var imgurl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
     var teacher_leave_remarks_updated = "{{ config('constants.api.teacher_leave_approve') }}";
     var getAbsentLateExcuse = "{{ config('constants.api.get_absent_late_excuse') }}";
 
+    var studentDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
@@ -811,5 +810,6 @@
 </script>
 <script src="{{ asset('js/custom/classroom.js') }}"></script>
 <script src="{{ asset('js/custom/short-test.js') }}"></script>
+
 <!-- <script src="https://use.fontawesome.com/fe459689b4.js"></script> -->
 @endsection

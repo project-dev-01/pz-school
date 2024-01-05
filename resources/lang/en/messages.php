@@ -1814,4 +1814,8 @@ return [
     "event_notes_type_here" => "Event Notes Type Here",
     "enter_time" => "Enter Time",
     "report_list" => "Report List",
+    "teacher_type" => "Teacher Type",
+    "select_teacher_type" => "Select Teacher Type",
+    "promotion_freezed" => "Promotion Process",
+    "class_student_attendance" => "Class Student Attendance",
 ];

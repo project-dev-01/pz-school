@@ -1795,4 +1795,12 @@ return [
     "no_of_late" => "No of Late",
     "no_of_present" => "No of Present",
     "no_of_absent" => "No of Absent",
+    "teacher_type" => "Teacher Type",
+    "select_teacher_type" => "Select Teacher Type",
+    "promotion_student_list" => "Promotion Student List",
+    "data_prepared_done"  => "Data Prepared Done",
+    "promotion_sort"  => "Sort",
+    "select_sort"  => "Select Sort",
+    "promotion_freezed" => "Promotion Process",
+    "class_student_attendance" => "Class Student Attendance",
 ];

@@ -485,6 +485,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.student.daily_attendance')}}" class="nav-link {{ (request()->is('admin/student/daily_attendance')) ? 'active' : '' }}">
+                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
+                        </svg>
+                        <span>{{ __('messages.class_student_attendance') }} </span>
+                    </a>
+                </li>
+                <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <!--<i class="fe-book-open"></i>-->
                         <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1487,6 +1495,14 @@
                         <span> {{ __('messages.classroom_management') }} </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('teacher.student.daily_attendance')}}" class="nav-link {{ (request()->is('teacher/student/daily_attendance')) ? 'active' : '' }}">
+                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
+                        </svg>
+                        <span>{{ __('messages.class_student_attendance') }} </span>
+                    </a>
+                </li>
                 <!-- <li>
                     <a href="{{ route('teacher.classroom.attendance')}}" class="nav-link {{ (request()->is('teacher/classroom/attendance')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
@@ -1495,7 +1511,7 @@
                 </li> -->
                 <li class="{{  (request()->is('teacher.promotion.studentlist')) ? 'menuitem-active' : '' }}">
                     <a href="#sideBarPromotion" data-toggle="collapse">
-                    <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-up"></i>
                         <span>{{ __('messages.promotion') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -1504,7 +1520,7 @@
                             <li>
                                 <a href="{{ route('teacher.promotion.studentlist')}}" class="nav-link {{ (request()->is('teacher/promotion/studentList')) ? 'active' : '' }}">
                                     <span>{{ __('messages.promotion_student_list') }}</span>
-                                 </a>
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('teacher.promotion.freezed_student_list')}}" class="nav-link {{ (request()->is('teacher/promotion/freezedStudentList')) ? 'active' : '' }}">
@@ -1513,7 +1529,7 @@
                             </li>
                         </ul>
                     </div>
-                 </li> 
+                </li>
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

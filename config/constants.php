@@ -415,6 +415,7 @@ return [
         'student_update' => $url.'/student/update',
         'student_delete' => $url.'/student/delete',
         'student_settings' => $url.'/student/student_settings',
+        'get_student_download_settings' => $url.'/get_student_download_settings',
         
         'relation_list' => $url.'/relation/list',
         //Parent Url
@@ -989,6 +990,9 @@ return [
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
         'studentmonthly_attendance' => $url.'/exam_result/studentmonthly_attendance',        
         'getmonthlyholidays' => $url.'/getmonthlyholidays',
+        'download_student_list_information' => $url.'/download_student_list_information',
+        'get_student_attendance_by_day' => $url.'/get_student_attendance_by_day',
+        'add_student_attendance_by_day' => $url.'/add_student_attendance_by_day',
         //health logBooks
         'health_logbooks' => $url.'/getHealthLogbooks',
         'health_logbooks_add' => $url.'/health_logbooks_add',

@@ -83,7 +83,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="department_id_filter">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                                                <label for="department_id_filter">{{ __('messages.department') }}</label>
                                                                 <select id="department_id_filter" name="department_id_filter" class="form-control">
                                                                     <option value="">{{ __('messages.select_department') }}</option>
                                                                     @forelse($department as $r)
@@ -111,7 +111,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
+                                                                <label for="session_id">{{ __('messages.session') }}</label>
                                                                 <select id="session_id" class="form-control" name="session_id">
                                                                     <option value="">{{ __('messages.select_session') }}</option>
                                                                     @forelse($session as $ses)
@@ -165,12 +165,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <div class="clearfix mt-4">
-                                                            <form method="post" action="">
+                                                        <div class="form-group text-right m-b-0">
+                                                            <form method="post" action="{{ route('admin.student_list.excel')}}">
                                                                 @csrf
-                                                                <div class="clearfix float-right" style="margin-bottom:5px;">
-                                                                    <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.pdf') }}</button>
-                                                                    <button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>
+                                                                <input type="hidden" name="student_name" id="excelStudentName">
+                                                                <input type="hidden" name="department_id" id="excelDepartment">
+                                                                <input type="hidden" name="class_id" id="excelClassID">
+                                                                <input type="hidden" name="section_id" id="excelSectionID">
+                                                                <input type="hidden" name="session" id="excelSession">
+                                                                <div class="clearfix float-right">
+                                                                    <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                                                        {{ __('messages.download') }}
+                                                                    </button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -196,65 +202,65 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="card-body">
-                                                       <form id="StudentSettingFilter" autocomplete="off">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <ul class="list-unstyled">
-                                                                    <li>
-                                                                        <div class="checkbox checkbox-primary mb-2">
-                                                                            <input id="checkboxStudentDetails" name ="checkboxStudentDetails" type="checkbox" checked>
-                                                                            <label for="checkboxStudentDetails">
-                                                                                Student Details
-                                                                            </label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="checkbox checkbox-primary mb-2">
-                                                                            <input id="checkboxParentDetails" name="checkboxParentDetails" type="checkbox" checked>
-                                                                            <label for="checkboxParentDetails">
-                                                                                Parent Details
-                                                                            </label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="checkbox checkbox-primary mb-2">
-                                                                            <input id="checkboxSchoolDetails" name="checkboxSchoolDetails" type="checkbox" checked>
-                                                                            <label for="checkboxSchoolDetails">
-                                                                                School Details
-                                                                            </label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="checkbox checkbox-primary mb-2">
-                                                                            <input id="checkboxAcademic" name="checkboxAcademic" type="checkbox" checked onchange="updateCheckboxes(this)">
-                                                                            <label for="checkboxAcademic">
-                                                                                Academic Details
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="card" style="background-color:#8adfee14;">
-                                                                            <div class="card-body">
-                                                                                <ul>
-                                                                                    <li class="list-unstyled">
-                                                                                        <ul class="list-inline m-b-0">
-                                                                                            <li class="list-inline-item">
-                                                                                                <div class="checkbox checkbox-primary mb-2">
-                                                                                                    <input id="checkboxGrade" name="checkboxGrade" type="checkbox" checked>
-                                                                                                    <label for="checkboxGrade">
-                                                                                                        Grade & Classes
-                                                                                                    </label>
-                                                                                                </div>
-                                                                                            </li>
-                                                                                            <li class="list-inline-item">
-                                                                                                <select id="gardeClassAcademic" name="gardeClassAcademic" class="form-control" style="width: 200px;background-color: white;">
-                                                                                                @forelse($academic_year_list as $r)
-                                                                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                                                                    @empty
-                                                                                                    @endforelse
-                                                                                                </select>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                    <!-- <li class="list-unstyled">
+                                                        <form id="StudentSettingFilter" autocomplete="off">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <ul class="list-unstyled">
+                                                                        <li>
+                                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                                <input id="checkboxStudentDetails" name="checkboxStudentDetails" type="checkbox" {{ isset($get_student_download_settings['student_info']) ? $get_student_download_settings['student_info'] == "1" ? "checked" : "" : "" }}>
+                                                                                <label for="checkboxStudentDetails">
+                                                                                    Student Details
+                                                                                </label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                                <input id="checkboxParentDetails" name="checkboxParentDetails" type="checkbox" {{ isset($get_student_download_settings['parent_info']) ? $get_student_download_settings['parent_info'] == "1" ? "checked" : "" : "" }}>
+                                                                                <label for="checkboxParentDetails">
+                                                                                    Parent Details
+                                                                                </label>
+                                                                            </div>
+                                                                        </li>
+                                                                        <!-- <li>
+                                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                                <input id="checkboxSchoolDetails" name="checkboxSchoolDetails" type="checkbox" checked>
+                                                                                <label for="checkboxSchoolDetails">
+                                                                                    School Details
+                                                                                </label>
+                                                                            </div>
+                                                                        </li> -->
+                                                                        <li>
+                                                                            <div class="checkbox checkbox-primary mb-2">
+                                                                                <input id="checkboxAcademic" name="checkboxAcademic" type="checkbox" {{ isset($get_student_download_settings['grade_class_info']) ? $get_student_download_settings['grade_class_info'] == "1" ? "checked" : "" : "" }} onchange="updateCheckboxes(this)">
+                                                                                <label for="checkboxAcademic">
+                                                                                    Academic Details
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="card" style="background-color:#8adfee14;">
+                                                                                <div class="card-body">
+                                                                                    <ul>
+                                                                                        <li class="list-unstyled">
+                                                                                            <ul class="list-inline m-b-0">
+                                                                                                <li class="list-inline-item">
+                                                                                                    <div class="checkbox checkbox-primary mb-2">
+                                                                                                        <input id="checkboxGrade" name="checkboxGrade" type="checkbox" {{ isset($get_student_download_settings['academic_info']) ? $get_student_download_settings['academic_info'] == "1" ? "checked" : "" : "" }}>
+                                                                                                        <label for="checkboxGrade">
+                                                                                                            Grade & Classes
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                                <li class="list-inline-item">
+                                                                                                    <select id="gardeClassAcademic" name="gardeClassAcademic" class="form-control" style="width: 200px;background-color: white;">
+                                                                                                        @forelse($academic_year_list as $r)
+                                                                                                        <option value="{{$r['id']}}" {{ isset($get_student_download_settings['grade_class_academic_year']) ?  $get_student_download_settings['grade_class_academic_year'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['name']}}</option>
+                                                                                                        @empty
+                                                                                                        @endforelse
+                                                                                                    </select>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <!-- <li class="list-unstyled">
                                                                                         <ul class="list-inline m-b-0">
                                                                                             <li class="list-inline-item">
                                                                                                 <div class="checkbox checkbox-primary mb-2">
@@ -274,47 +280,47 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </li> -->
-                                                                                    <li class="list-unstyled">
-                                                                                        <ul class="list-inline m-b-0">
-                                                                                            <li class="list-inline-item">
-                                                                                                <div class="checkbox checkbox-primary mb-2">
-                                                                                                    <input id="checkboxAttendance" name="checkboxAttendance" type="checkbox" checked>
-                                                                                                    <label for="checkboxAttendance">
-                                                                                                        Attendance
-                                                                                                    </label>
-                                                                                                </div>
-                                                                                            </li>
-                                                                                            <li class="list-inline-item" style="margin-left: 20px;">
-                                                                                                <select id="attendanceAcademic" name="attendanceAcademic" class="form-control" style="width: 200px;background-color: white;">
-                                                                                                   @forelse($academic_year_list as $r)
-                                                                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                                                                    @empty
-                                                                                                    @endforelse
-                                                                                                </select>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                    <li class="list-unstyled">
-                                                                                        <ul class="list-inline m-b-0">
-                                                                                            <li class="list-inline-item">
-                                                                                                <div class="checkbox checkbox-primary mb-2">
-                                                                                                    <input id="checkboxTestResult" name="checkboxTestResult" type="checkbox" checked>
-                                                                                                    <label for="checkboxTestResult">
-                                                                                                        Test Results
-                                                                                                    </label>
-                                                                                                </div>
-                                                                                            </li>
-                                                                                            <li class="list-inline-item" style="margin-left: 24px;">
-                                                                                                <select id="testResultAcademic" name="testResultAcademic" class="form-control" style="width: 200px;background-color: white;">
-                                                                                                   @forelse($academic_year_list as $r)
-                                                                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                                                                    @empty
-                                                                                                    @endforelse
-                                                                                                </select>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                    <!-- <li class="list-unstyled">
+                                                                                        <li class="list-unstyled">
+                                                                                            <ul class="list-inline m-b-0">
+                                                                                                <li class="list-inline-item">
+                                                                                                    <div class="checkbox checkbox-primary mb-2">
+                                                                                                        <input id="checkboxAttendance" name="checkboxAttendance" type="checkbox" {{ isset($get_student_download_settings['attendance_info']) ? $get_student_download_settings['attendance_info'] == "1" ? "checked" : "" : "" }}>
+                                                                                                        <label for="checkboxAttendance">
+                                                                                                            Attendance
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                                <li class="list-inline-item" style="margin-left: 20px;">
+                                                                                                    <select id="attendanceAcademic" name="attendanceAcademic" class="form-control" style="width: 200px;background-color: white;">
+                                                                                                        @forelse($academic_year_list as $r)
+                                                                                                        <option value="{{$r['id']}}" {{ isset($get_student_download_settings['attendance_academic_year']) ?  $get_student_download_settings['attendance_academic_year'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['name']}}</option>
+                                                                                                        @empty
+                                                                                                        @endforelse
+                                                                                                    </select>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li class="list-unstyled">
+                                                                                            <ul class="list-inline m-b-0">
+                                                                                                <li class="list-inline-item">
+                                                                                                    <div class="checkbox checkbox-primary mb-2">
+                                                                                                        <input id="checkboxTestResult" name="checkboxTestResult" type="checkbox" {{ isset($get_student_download_settings['test_result_info']) ? $get_student_download_settings['test_result_info'] == "1" ? "checked" : "" : "" }}>
+                                                                                                        <label for="checkboxTestResult">
+                                                                                                            Test Results
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                                <li class="list-inline-item" style="margin-left: 24px;">
+                                                                                                    <select id="testResultAcademic" name="testResultAcademic" class="form-control" style="width: 200px;background-color: white;">
+                                                                                                        @forelse($academic_year_list as $r)
+                                                                                                        <option value="{{$r['id']}}" {{ isset($get_student_download_settings['test_result_academic_year']) ?  $get_student_download_settings['test_result_academic_year'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['name']}}</option>
+                                                                                                        @empty
+                                                                                                        @endforelse
+                                                                                                    </select>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <!-- <li class="list-unstyled">
                                                                                         <ul class="list-inline m-b-0">
                                                                                             <li class="list-inline-item">
                                                                                                 <div class="checkbox checkbox-primary mb-2">
@@ -334,22 +340,22 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </li> -->
-                                                                                </ul>
+                                                                                    </ul>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <br>
+                                                            <div class="form-group text-left m-b-0">
+                                                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                                                    Save
+                                                                </button>
                                                             </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="form-group text-left m-b-0">
-                                                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                                Save
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -416,10 +422,9 @@
             // Add similar lines for other checkboxes as needed
         }
     }
-    </script>
+</script>
 
 <script>
-
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 

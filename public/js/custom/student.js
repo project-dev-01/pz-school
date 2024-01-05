@@ -1,5 +1,14 @@
 $(function () {
 
+    var formData = {
+        student_name: null,
+        department_id: null,
+        class_id: null,
+        section_id: null,
+        session_id: null
+    };
+    getStudentList(formData);
+
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#editadmission';
@@ -44,7 +53,7 @@ $(function () {
             return false;
         }
     });
-    $("#student").hide();
+    // $("#student").hide();
     var father_id = $("#father_id").val();
     if (father_id) {
         father(father_id);
@@ -67,7 +76,7 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
-    
+
     $("#passport_expiry_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -83,11 +92,11 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
-    
-    $('#passport_photo').change(function() {
+
+    $('#passport_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#passport_photo_name').text("File greater than 2Mb");
             $("#passport_photo_name").addClass("error");
             $('#passport_photo').val('');
@@ -96,11 +105,11 @@ $(function () {
             $('#passport_photo_name').text(file.name);
         }
     });
-    
-    $('#visa_photo').change(function() {
+
+    $('#visa_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#visa_photo')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#visa_photo_name').text("File greater than 2Mb");
             $("#visa_photo_name").addClass("error");
             $('#visa_photo').val('');
@@ -377,48 +386,47 @@ $(function () {
         }, 'json');
     }
     // rules validation
-    $("#StudentFilter").validate({
-        rules: {
-            session_id: "required"
-        }
-    });
 
     // get student list
     $('#StudentFilter').on('submit', function (e) {
         e.preventDefault();
-        var StudentFilter = $("#StudentFilter").valid();
-        if (StudentFilter === true) {
-            var student_name = $('#student_name').val();
-            var class_id = $('#class_id').val();
-            var section_id = $('#section_id').val();
-            var session_id = $('#session_id').val();
+        // var StudentFilter = $("#StudentFilter").valid();
+        // if (StudentFilter === true) {
+        var student_name = $('#student_name').val();
+        var department_id_filter = $('#department_id_filter').val();
+        var class_id = $('#class_id').val();
+        var section_id = $('#section_id').val();
+        var session_id = $('#session_id').val();
 
-            var classObj = {
-                student_name: student_name,
-                classID: class_id,
-                sectionID: section_id,
-                sessionID: session_id,
-                userID: userID,
-            };
-            setLocalStorageForStudentList(classObj);
+        var classObj = {
+            student_name: student_name,
+            department_id: department_id_filter,
+            classID: class_id,
+            sectionID: section_id,
+            sessionID: session_id,
+            userID: userID,
+        };
+        // setLocalStorageForStudentList(classObj);
 
-            var formData = {
-                student_name: student_name,
-                class_id: class_id,
-                section_id: section_id,
-                session_id: session_id,
-            };
-            getStudentList(formData);
-        } else {
-            $("#student").hide("slow");
-        }
+        var formData = {
+            student_name: student_name,
+            department_id: department_id_filter,
+            class_id: class_id,
+            section_id: section_id,
+            session_id: session_id,
+        };
+        getStudentList(formData);
+        // } else {
+        //     $("#student").hide("slow");
+        // }
 
     });
     $('#StudentSettingFilter').on('submit', function (e) {
+        e.preventDefault();
         var formData = {
             studentDetails: document.getElementById('checkboxStudentDetails').checked,
             parentDetails: document.getElementById('checkboxParentDetails').checked,
-            schoolDetails: document.getElementById('checkboxSchoolDetails').checked,
+            // schoolDetails: document.getElementById('checkboxSchoolDetails').checked,
             academicDetails: document.getElementById('checkboxAcademic').checked,
             gradeAndClasses: document.getElementById('checkboxGrade').checked,
             gardeClassAcademic: $('#gardeClassAcademic').val(),
@@ -430,20 +438,27 @@ $(function () {
             // Add data for dropdowns if needed
         };
         console.log(formData);
-            // Send the data to the server using AJAX
+        // Send the data to the server using AJAX
         $.ajax({
             type: 'POST',
             url: studentSettings, // Replace with your Laravel route
             data: formData,
             success: function (response) {
                 // Handle success, if needed
-                console.log('Data saved successfully:', response);
-                swal.fire("Success", "Your data has been saved.", "success");
+                // console.log('Data saved successfully:', response);
+                // swal.fire("Success", "Your data has been saved.", "success");
+                if (response.code == 200) {
+                    toastr.success(response.message);
+                    // window.location.href = indexStudent;
+                } else {
+                    toastr.error(response.message);
+                }
             },
             error: function (error) {
                 // Handle errors, if needed
-                console.error('Error saving data:', error);
-                swal.fire("Error", "There was an error saving your data.", "error");
+                // console.error('Error saving data:', error);
+                // swal.fire("Error", "There was an error saving your data.", "error");
+                toastr.error(error.message);
             }
         });
 
@@ -451,7 +466,12 @@ $(function () {
 
     function getStudentList(formData) {
         $("#student").show("slow");
-
+        // set download filter value
+        $('#excelStudentName').val(formData.student_name);
+        $('#excelDepartment').val(formData.department_id);
+        $('#excelClassID').val(formData.class_id);
+        $('#excelSectionID').val(formData.section_id);
+        $('#excelSession').val(formData.session_id);
         var table = $('#student-table').DataTable({
             processing: true,
             info: true,
@@ -545,77 +565,83 @@ $(function () {
         });
     }
 
-    function setLocalStorageForStudentList(classObj) {
+    // function setLocalStorageForStudentList(classObj) {
 
-        var studentListDetails = new Object();
-        studentListDetails.class_id = classObj.classID;
-        studentListDetails.section_id = classObj.sectionID;
-        studentListDetails.student_name = classObj.student_name;
-        studentListDetails.session_id = classObj.sessionID;
-        // here to attached to avoid localStorage other users to add
-        studentListDetails.branch_id = branchID;
-        studentListDetails.role_id = get_roll_id;
-        studentListDetails.user_id = ref_user_id;
-        var studentListClassArr = [];
-        studentListClassArr.push(studentListDetails);
-        if (get_roll_id == "2") {
-            // admin
-            localStorage.removeItem("admin_student_list_details");
-            localStorage.setItem('admin_student_list_details', JSON.stringify(studentListClassArr));
-        }
-        if (get_roll_id == "4") {
-            // teacher
-            localStorage.removeItem("teacher_student_list_details");
-            localStorage.setItem('teacher_student_list_details', JSON.stringify(studentListClassArr));
-        }
-        return true;
-    }
-    // if localStorage
-    if (typeof student_list_storage !== 'undefined') {
-        if ((student_list_storage)) {
-            if (student_list_storage) {
-                var studentListStorage = JSON.parse(student_list_storage);
-                if (studentListStorage.length == 1) {
-                    var classID, student_name, sectionID, sessionID, userBranchID, userRoleID, userID;
-                    studentListStorage.forEach(function (user) {
-                        classID = user.class_id;
-                        student_name = user.student_name;
-                        sectionID = user.section_id;
-                        sessionID = user.session_id;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $('#class_id').val(classID);
-                        $("#student_name").val(student_name);
-                        $('#session_id').val(sessionID);
-                        if (classID) {
-                            $("#section_id").empty();
-                            $("#section_id").append('<option value="">' + select_class + '</option>');
-                            $.post(sectionByClass, { class_id: classID }, function (res) {
-                                if (res.code == 200) {
-                                    $.each(res.data, function (key, val) {
-                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                    });
-                                    $("#section_id").val(classID);
-                                }
-                            }, 'json');
-                        }
+    //     var studentListDetails = new Object();
+    //     studentListDetails.class_id = classObj.classID;
+    //     studentListDetails.section_id = classObj.sectionID;
+    //     studentListDetails.student_name = classObj.student_name;
+    //     studentListDetails.session_id = classObj.sessionID;
+    //     // here to attached to avoid localStorage other users to add
+    //     studentListDetails.branch_id = branchID;
+    //     studentListDetails.role_id = get_roll_id;
+    //     studentListDetails.user_id = ref_user_id;
+    //     var studentListClassArr = [];
+    //     studentListClassArr.push(studentListDetails);
+    //     if (get_roll_id == "2") {
+    //         // admin
+    //         localStorage.removeItem("admin_student_list_details");
+    //         localStorage.setItem('admin_student_list_details', JSON.stringify(studentListClassArr));
+    //     }
+    //     if (get_roll_id == "4") {
+    //         // teacher
+    //         localStorage.removeItem("teacher_student_list_details");
+    //         localStorage.setItem('teacher_student_list_details', JSON.stringify(studentListClassArr));
+    //     }
+    //     return true;
+    // }
+    // // if localStorage
+    // if (typeof student_list_storage !== 'undefined') {
+    //     if ((student_list_storage)) {
+    //         if (student_list_storage) {
+    //             var studentListStorage = JSON.parse(student_list_storage);
+    //             if (studentListStorage.length == 1) {
+    //                 var classID, student_name, sectionID, sessionID, userBranchID, userRoleID, userID;
+    //                 studentListStorage.forEach(function (user) {
+    //                     classID = user.class_id;
+    //                     student_name = user.student_name;
+    //                     sectionID = user.section_id;
+    //                     sessionID = user.session_id;
+    //                     userBranchID = user.branch_id;
+    //                     userRoleID = user.role_id;
+    //                     userID = user.user_id;
+    //                 });
+    //                 if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+    //                     $('#class_id').val(classID);
+    //                     $("#student_name").val(student_name);
+    //                     $('#session_id').val(sessionID);
+    //                     if (classID) {
+    //                         $("#section_id").empty();
+    //                         $("#section_id").append('<option value="">' + select_class + '</option>');
+    //                         $.post(sectionByClass, { class_id: classID }, function (res) {
+    //                             if (res.code == 200) {
+    //                                 $.each(res.data, function (key, val) {
+    //                                     $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+    //                                 });
+    //                                 $("#section_id").val(classID);
+    //                             }
+    //                         }, 'json');
+    //                     }
 
 
-                        var formData = {
-                            student_name: student_name,
-                            class_id: classID,
-                            section_id: sectionID,
-                            session_id: sessionID,
-                        };
-                        getStudentList(formData);
-                    }
-                }
-            }
-        }
-    }
+    //                     var formData = {
+    //                         student_name: student_name,
+    //                         class_id: classID,
+    //                         section_id: sectionID,
+    //                         session_id: sessionID,
+    //                     };
+    //                     getStudentList(formData);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // var student_name = $('#student_name').val();
+    //     var department_id_filter = $('#department_id_filter').val();
+    //     var class_id = $('#class_id').val();
+    //     var section_id = $('#section_id').val();
+    //     var session_id = $('#session_id').val();
+
     $("#class_id").on('change', function (e) {
         e.preventDefault();
         var class_id = $(this).val();
@@ -756,10 +782,10 @@ $(function () {
         }, 'json');
     });
 
-    
+
     // function getStudentList(formData){
     //     $("#student").show("slow");
-        
+
     //     $('#student-table').DataTable({
     //         processing: true,
     //         info: true,
@@ -803,7 +829,7 @@ $(function () {
     //                     columns: 'th:not(:last-child)'
     //                 },
 
-                
+
     //                 customize: function (doc) {
     //                 doc.pageMargins = [50,50,50,50];
     //                 doc.defaultStyle.fontSize = 10;
@@ -815,7 +841,7 @@ $(function () {
     //                 doc['header']=(function(page, pages) {
     //                     return {
     //                         columns: [
-                                
+
     //                             {
     //                                 // This is the right column
     //                                 bold: true,
@@ -830,7 +856,7 @@ $(function () {
     //                     }
     //                 });*/
     //                 // Create a footer
-                    
+
     //                 doc['footer']=(function(page, pages) {
     //                     return {
     //                         columns: [
@@ -846,7 +872,7 @@ $(function () {
     //                         margin: [50, 0,0,0]
     //                     }
     //                 });
-                    
+
     //             }
     //         }
     //         ],

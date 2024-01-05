@@ -175,12 +175,12 @@ Route::group(['prefix' => 'guest'], function () {
     Route::post('/logout', [AuthController::class, 'logoutGuest'])->name('guest.logout');
     Route::group(['middleware' => ['isGuest', 'logroute']], function () {
         Route::get('/dashboard', [GuestController::class, 'index'])->name('guest.dashboard');
-    Route::get('/application', [GuestController::class, 'applicationIndex'])->name('guest.application.index');
-    Route::get('application/list', [GuestController::class, 'applicationList'])->name('guest.application.list');
-    Route::get('/application/create', [GuestController::class, 'applicationCreate'])->name('guest.application.create');
-    Route::post('/application/add', [GuestController::class, 'applicationAdd'])->name('guest.application.add');
-    Route::get('/application/edit/{id}', [GuestController::class, 'applicationEdit'])->name('guest.application.edit');
-    Route::post('/application/update', [GuestController::class, 'applicationUpdate'])->name('guest.application.update');
+        Route::get('/application', [GuestController::class, 'applicationIndex'])->name('guest.application.index');
+        Route::get('application/list', [GuestController::class, 'applicationList'])->name('guest.application.list');
+        Route::get('/application/create', [GuestController::class, 'applicationCreate'])->name('guest.application.create');
+        Route::post('/application/add', [GuestController::class, 'applicationAdd'])->name('guest.application.add');
+        Route::get('/application/edit/{id}', [GuestController::class, 'applicationEdit'])->name('guest.application.edit');
+        Route::post('/application/update', [GuestController::class, 'applicationUpdate'])->name('guest.application.update');
     });
 });
 
@@ -194,6 +194,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
+        Route::post('/student_list/excel', [AdminController::class, 'StudentListExcel'])->name('admin.student_list.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
         // application details
@@ -530,19 +531,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('hostel_floor/update', [AdminController::class, 'updateHostelFloor'])->name('admin.hostel_floor.update');
         Route::post('hostel_floor/delete', [AdminController::class, 'deleteHostelFloor'])->name('admin.hostel_floor.delete');
 
-// School Role routes
-Route::get('school_role/index', [AdminController::class, 'school_role'])->name('admin.school_role.index');
-Route::get('school_role/list', [AdminController::class, 'getschool_roleList'])->name('admin.school_role.list');
-Route::post('school_role/add', [AdminController::class, 'addschool_role'])->name('admin.school_role.add');
-Route::post('school_role/role-details', [AdminController::class, 'getschool_roleDetails'])->name('admin.school_role.details');
-Route::post('school_role/update', [AdminController::class, 'updateschool_role'])->name('admin.school_role.update');
-Route::post('school_role/delete', [AdminController::class, 'deleteschool_role'])->name('admin.school_role.delete');
-Route::get('school_role/menuaccess', [AdminController::class, 'rollmenuaccess'])->name('admin.school_role.menuaccess');   
+        // School Role routes
+        Route::get('school_role/index', [AdminController::class, 'school_role'])->name('admin.school_role.index');
+        Route::get('school_role/list', [AdminController::class, 'getschool_roleList'])->name('admin.school_role.list');
+        Route::post('school_role/add', [AdminController::class, 'addschool_role'])->name('admin.school_role.add');
+        Route::post('school_role/role-details', [AdminController::class, 'getschool_roleDetails'])->name('admin.school_role.details');
+        Route::post('school_role/update', [AdminController::class, 'updateschool_role'])->name('admin.school_role.update');
+        Route::post('school_role/delete', [AdminController::class, 'deleteschool_role'])->name('admin.school_role.delete');
+        Route::get('school_role/menuaccess', [AdminController::class, 'rollmenuaccess'])->name('admin.school_role.menuaccess');
 
-// School Role Permission routes
-Route::post('school_role/getmenus', [AdminController::class, 'getmenus'])->name('admin.school_role.getmenus');     
-Route::post('school_role/setpermission', [AdminController::class, 'setpermission'])->name('admin.school_role.setpermission');
-Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermissions'])->name('admin.school_role.checkpermissions');     
+        // School Role Permission routes
+        Route::post('school_role/getmenus', [AdminController::class, 'getmenus'])->name('admin.school_role.getmenus');
+        Route::post('school_role/setpermission', [AdminController::class, 'setpermission'])->name('admin.school_role.setpermission');
+        Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermissions'])->name('admin.school_role.checkpermissions');
         // Library routes
         Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
         Route::get('library/book/category', [AdminController::class, 'bookCategory'])->name('admin.library.bookcategory');
@@ -589,6 +590,8 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::post('add_short_test', [AdminController::class, 'addShortTest'])->name('admin.classroom.add_short_test');
         Route::post('add_daily_report', [AdminController::class, 'addDailyReport'])->name('admin.classroom.add_daily_report');
         Route::post('add_daily_report_remarks', [AdminController::class, 'addDailyReportRemarks'])->name('admin.classroom.add_daily_report_remarks');
+        Route::get('student/daily_attendance', [AdminController::class, 'studDailyAttendance'])->name('admin.student.daily_attendance');
+        Route::post('student/daily_attendance_add', [AdminController::class, 'studDailyAttendanceAdd'])->name('admin.daily_attendance.add');
         //faq route
 
         // faq        
@@ -634,10 +637,10 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::post('exam_results/downby56reportcard', [PdfController::class, 'downby56reportcard'])->name('admin.exam_results.downby56reportcard');
         Route::post('exam_results/downbysecreportcard', [PdfController::class, 'downbysecreportcard'])->name('admin.exam_results.downbysecreportcard');
         Route::post('exam_results/downbypersoanalreport', [PdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
-        
+
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
-      
+
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
@@ -866,8 +869,8 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::get('fees/edit/{id}', [AdminController::class, 'editFees'])->name('admin.fees.edit');
         Route::post('fees/update', [AdminController::class, 'updateFees'])->name('admin.fees.update');
         //Expense
-        
-        
+
+
         Route::post('fees/expense/pdf', [PdfController::class, 'feesExpensePdf'])->name('admin.fees.expense.pdf');
         Route::post('/fees/expense/excel', [AdminController::class, 'feesExpenseExcel'])->name('admin.fees.expense.excel');
         Route::get('fees/expense/index', [AdminController::class, 'feesExpenseIndex'])->name('admin.fees.expense.index');
@@ -950,8 +953,8 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         // retired_person routes
         Route::get('retired_person/index', [AdminController::class, 'retired_person'])->name('admin.retired_person');
         Route::get('retired_person/list', [AdminController::class, 'retiredPersonList'])->name('admin.retired_person.list');
-    
-        
+
+
         // Email Type routes
         Route::get('email_type/index', [AdminController::class, 'emailType'])->name('admin.email_type');
         Route::get('email_type/list', [AdminController::class, 'getEmailTypeList'])->name('admin.email_type.list');
@@ -960,7 +963,7 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::post('email_type/update', [AdminController::class, 'updateEmailType'])->name('admin.email_type.update');
         Route::post('email_type/delete', [AdminController::class, 'deleteEmailType'])->name('admin.email_type.delete');
 
-        
+
         // Email Template routes
         Route::get('email_template/index', [AdminController::class, 'emailTemplate'])->name('admin.email_template');
         Route::get('email_template/list', [AdminController::class, 'getEmailTemplateList'])->name('admin.email_template.list');
@@ -969,18 +972,18 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::post('email_template/email_template-details', [AdminController::class, 'getEmailTemplateDetails'])->name('admin.email_template.details');
         Route::post('email_template/update', [AdminController::class, 'updateEmailTemplate'])->name('admin.email_template.update');
         Route::post('email_template/delete', [AdminController::class, 'deleteEmailTemplate'])->name('admin.email_template.delete');
-        
+
         Route::post('email_template/image', [AdminController::class, 'emailTemplateImage'])->name('admin.email_template.image.store');
         Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
 
-        
+
         // Form Field routes
         Route::get('form_field/index', [AdminController::class, 'formField'])->name('admin.form_field');
         Route::get('form_field/list', [AdminController::class, 'getFormFieldList'])->name('admin.form_field.list');
         Route::post('form_field/form_field-details', [AdminController::class, 'getFormFieldDetails'])->name('admin.form_field.details');
         Route::post('form_field/update', [AdminController::class, 'updateFormField'])->name('admin.form_field.update');
 
-        
+
         Route::get('/termination', [AdminController::class, 'terminationIndex'])->name('admin.termination.index');
         Route::get('/termination/edit/{id}', [AdminController::class, 'editTermination'])->name('admin.termination.edit');
         Route::get('termination/list', [AdminController::class, 'getTerminationList'])->name('admin.termination.list');
@@ -1300,6 +1303,8 @@ Route::group(['prefix' => 'teacher'], function () {
         // class room management    
         Route::get('classroom/classroom-management', [TeacherController::class, 'classroomManagement'])->name('teacher.classroom.management');
         Route::get('classroom/attendance', [TeacherController::class, 'classroomManagementNoSub'])->name('teacher.classroom.attendance');
+        Route::get('student/daily_attendance', [TeacherController::class, 'studDailyAttendance'])->name('teacher.student.daily_attendance');
+        Route::post('student/daily_attendance_add', [TeacherController::class, 'studDailyAttendanceAdd'])->name('teacher.daily_attendance.add');
         // chat app    
         Route::get('chat', [TeacherController::class, 'chatShow'])->name('teacher.chat');
         //Route::post('storetchat', [TeacherController::class, 'storetchat'])->name('teacher.storetchat');
@@ -1376,8 +1381,8 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('promotion/get_freezed_data', [TeacherController::class, 'promotionGetDataFreezed'])->name('teacher.promotion.get_freezed_student_list');
         Route::post('promotion/save_status_freezed_data', [TeacherController::class, 'promotionSaveStatusFreezed'])->name('teacher.promotion.save_status_freezed_data');
         Route::post('promotion/promotion_final_data', [TeacherController::class, 'promotionFinalData'])->name('teacher.promotion.promotion_final_data');
-        Route::post('promotion/csv', [TeacherController::class, 'downloadPromotionCsv'])->name('teacher.promotion.downloadCSV');  
-      });
+        Route::post('promotion/csv', [TeacherController::class, 'downloadPromotionCsv'])->name('teacher.promotion.downloadCSV');
+    });
 });
 // TEACHER CONTROLLER END
 
@@ -1406,7 +1411,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('settings', [ParentController::class, 'settings'])->name('parent.settings');
         Route::get('student-profile', [ParentController::class, 'studentProfile'])->name('parent.student.profile');
         Route::post('student/update', [ParentController::class, 'updateStudent'])->name('parent.student.update');
-        
+
         Route::get('profile-edit', [ParentController::class, 'getProfileDetails'])->name('parent.profile_edit');
         Route::post('update-profile', [ParentController::class, 'updateProfile'])->name('parent.profile_update');
         Route::post('change-password', [ParentController::class, 'changeNewPassword'])->name('parent.settings.changeNewPassword');
@@ -1494,7 +1499,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('fees/invoice/download/{id}/{group_id}', [ParentController::class, 'feesDownload'])->name('parent.invoice.download');
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('parent.clear_local_storage');
 
-        
+
         Route::get('/application', [ParentController::class, 'applicationIndex'])->name('parent.application.index');
         Route::get('application/list', [ParentController::class, 'applicationList'])->name('parent.application.list');
         Route::get('/application/create', [ParentController::class, 'applicationCreate'])->name('parent.application.create');
@@ -1502,7 +1507,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/application/edit/{id}', [ParentController::class, 'applicationEdit'])->name('parent.application.edit');
         Route::post('/application/update', [ParentController::class, 'applicationUpdate'])->name('parent.application.update');
 
-        
+
 
         Route::get('/update_info', [ParentController::class, 'updateInfo'])->name('parent.update_info');
         Route::get('/update_info/list', [ParentController::class, 'getParentUpdateInfoList'])->name('parent.update_info_list');
