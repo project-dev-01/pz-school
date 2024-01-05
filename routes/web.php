@@ -986,7 +986,10 @@ Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermi
         Route::get('termination/list', [AdminController::class, 'getTerminationList'])->name('admin.termination.list');
         // Route::post('termination/termination-details', [AdminController::class, 'getTerminationDetails'])->name('admin.termination.details');
         Route::post('termination/update', [AdminController::class, 'updateTermination'])->name('admin.termination.update');
-    
+        //health logbooks
+        Route::get('/health_logbooks', [AdminController::class, 'healthLogbooksIndex'])->name('admin.health_logbooks.health');
+        Route::post('/health_logbooks/list', [AdminController::class, 'getHealthLogbooksData'])->name('admin.health_logbooks.list');
+        Route::post('/health_logbooks/add', [AdminController::class, 'addHealthLogbooksData'])->name('admin.health_logbooks.add');
     });
 });
 // admin routes end

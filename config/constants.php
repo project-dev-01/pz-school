@@ -989,6 +989,9 @@ return [
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
         'studentmonthly_attendance' => $url.'/exam_result/studentmonthly_attendance',        
         'getmonthlyholidays' => $url.'/getmonthlyholidays',
+        //health logBooks
+        'health_logbooks' => $url.'/getHealthLogbooks',
+        'health_logbooks_add' => $url.'/health_logbooks_add',
       
       ]
 

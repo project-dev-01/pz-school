@@ -2679,6 +2679,43 @@ class AdminController extends Controller
     {
         return view('admin.attendance.exam');
     }
+    public function healthLogbooksIndex()
+    {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view('admin.health_logbooks.employee',
+        [
+            'department' => isset($department['data']) ? $department['data'] : []
+        ]);
+    }
+    public function getHealthLogbooksData(Request $request){
+        $data = [
+            'date' => $request->date_of_homework
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.health_logbooks'), $data);
+        return $response;
+    }
+    public function addHealthLogbooksData(Request $request){
+        $data = [
+            'temp' =>  $request->temp,
+            'date' => $request->date,
+            'weather' => $request->weather,
+            'humidity' => $request->humidity,
+            'event_notes_a' => $request->event_notes_a,
+            'event_notes_b' => $request->event_notes_b,
+            'department_id' => $request->department_id,
+            'grade_id' => $request->changeClassName,
+            'section_id' => $request->sectionID,
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'time' => $request->time,
+            'event_notes_c' => $request->event_notes_c,
+            'date' => $request->date
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.health_logbooks_add'), $data);
+        return $response;
+    }
     public function studentIndex()
     {
         $department = Helper::GetMethod(config('constants.api.department_list'));

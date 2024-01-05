@@ -473,6 +473,12 @@
                     </div>
                 </li>
                 <li>
+                    <a href="{{ route('admin.health_logbooks.health')}}" class="nav-link {{ (request()->is('admin/health*')) ? 'active' : '' }}">
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span>{{ __('messages.health_logbooks') }} </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.classroom.management')}}" class="nav-link {{ (request()->is('admin/classroom*')) ? 'active' : '' }}">
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span>{{ __('messages.classroom_management') }} </span>
