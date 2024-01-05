@@ -9974,4 +9974,170 @@ class AdminController extends Controller
             }
         }
     }
+    public function graduatesIndex()
+    {
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($session);
+        return view(
+            'admin.graduates.student',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    public function graduatesList(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.graduates.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                                 
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+       
+    }
+    public function getGraduateDetails($id)
+    {
+
+        $data = [
+            'id' => $id,
+        ];
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $data = [
+            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+        ];
+        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+
+        $prev = json_decode($student['data']['student']['previous_details']);
+        $school_name=$prev->school_name;
+        $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+        //dd($student);
+        return view(
+            'admin.graduates.edit',
+            [
+                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],                
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+            ]
+        );
+    }
+    public function student_picture(Request $request)
+    {
+        return view('admin.student.picture');
+    } 
+    public function student_pictureview (Request $request)
+    {
+        return view('admin.student.viewpicture');
+    } 
+    public function report_history (Request $request)
+    {
+        return view('admin.report.report_history');
+    } 
+    public function addstupicture(Request $request)
+    {
+        //$roll_no  = $request->roll_no;
+        $base64 = "";
+        $extension = "";
+        $file = $request->file('upload');        
+        if($request->hasFile('upload')) {
+
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+            $data = [
+                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'photo' => $base64,
+                'file_extension' => $extension,
+                'roll_no' => $request->roll_no,
+                'branch_id'=> config('constants.branch_id')
+            ];
+            //dd($data);
+
+            $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
+            if ($response['code'] == 200) 
+            {
+                return redirect()->route('admin.student.picture')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            }
+        }
+    }
+    public function addmultistupicture(Request $request)
+    {
+        //$roll_no  = $request->roll_no;
+        $base64 = "";
+        $extension = "";
+       
+        $n= count($request->file('uploads'));   
+        $response ='';    
+        for($i=0;$i<$n;$i++)
+        {
+        if ($request->hasFile('uploads')) {
+            $file = $request->file('uploads')[$i];
+            $filenamewithextension = $request->file('uploads')[$i]->getClientOriginalName();
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+            $data = [
+                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'photo' => $base64,
+                'file_extension' => $extension,
+                'roll_no' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                'branch_id'=> config('constants.branch_id')
+            ];
+            //dd($data);
+            $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
+         }
+        }
+        
+          if($response['code'] == 200) 
+            {
+                return redirect()->route('admin.student.picture')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            }
+        
+    }
 }

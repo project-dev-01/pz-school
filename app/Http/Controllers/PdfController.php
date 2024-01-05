@@ -3282,7 +3282,2294 @@ class PdfController extends Controller
             // return $pdf->stream();
         
     }
-    public function downbysubject(Request $request)
+    public function downprimaryform1($id)
+		{
+			
+			//dd($student_id);
+			$footer_text = session()->get('footer_text');
+			$sdata = [
+            'id' => $id,
+            
+			];       
+			$getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+			$student=$getstudent['data']['student'];
+			$data = [
+            'id' => $id,
+            'department_id'=> $student['department_id'],
+			]; 
+			$prev = json_decode($getstudent['data']['student']['previous_details']);
+			$school_name=$prev->school_name;
+			$pdata = [
+            'id' => $student['father_id'],
+			];
+			$getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
+			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+			$parent=$getparent['data']['parent'];
+			
+			$fonturl = storage_path('fonts/ipag.ttf');
+			$output = "<!DOCTYPE html>";
+			$output .= "<html><head>";
+			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+			$output .= '<style>
+			.table td,
+			.table th {
+            padding: 2px;
+            text-align: center;
+			}
+			
+			.table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+			}
+			
+			
+			table td {
+            overflow: hidden;
+            border: 1px solid #000;
+            text-align: center;
+			}
+			
+			.line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+			}
+			
+			.diagonal {
+            width: 150px;
+            height: 40px;
+			}
+			
+			.diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+			}
+			
+			.diagonal span.rt {
+            top: 2px;
+            right: 2px;
+			}
+			.diagonalCross2 {
+			background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+			}
+			</style>';
+			$output .= "</head>";
+			$output .= "<body>";
+			$output .='<main><h4 style=" text-align:center">'.__('messages.download_form1title').'</h4>
+			<h4 class="float-left">'.__('messages.download_form1title2').'</h4>
+			<table class="main" width="100%">
+			<tr>
+			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;align=center">
+			
+			
+			<table class="table table-bordered">
+			<thead>
+			<tr>
+			<td>'.$student['first_name'].' '.$student['last_name'].'</td>
+			</tr>
+			<tr>
+			<td>'.$student['roll_no'].'</td>
+			</tr>
+			</thead>
+			</table>
+			</td>
+			<td>
+			<table class="table table-bordered" style="margin-bottom: 15px;">
+			<thead>
+			<tr>
+			<th  colspan="2" style="text-align:center;width:50px;border: 1px solid black;">'.__('messages.division').'</th>
+			<th colspan="1" class="diagonalCross2" style="width:50px;border: 1px solid black;border-right:hidden; border-left:hidden;"></th>
+			<th  colspan="1" style="text-align:center;border: 1px solid black;">'.__('messages.grade').'</th>
+			';
+			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+			//dd('$getgrade');
+			foreach($getgrade['data'] as $grade)
+			{
+				
+				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+			}
+			
+			$output.='</tr>
+			
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="4">'.__('messages.class').'</td>';
+			foreach($getclasssec['data'] as $sec)
+			{
+				
+				$output.='<td> '.$sec['section'].'</td>';
+			}
+			$output.='</tr>
+			<tr>
+			<td colspan="4">'.__('messages.attendance_no').'</td>
+			';
+			foreach($getclasssec['data'] as $sec)
+			{
+				
+				$output.='<td> '.$sec['studentPlace'].'</td>';
+			}
+			$output.='
+			</tr>
+			</tbody>
+			</table>
+			</td>
+			</tr>
+			<tr>
+			<td colspan="2">
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<th colspan="15" style="text-align:center; border: 1px solid black;">'.__('messages.records_academic').'</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td rowspan="2">'.__('messages.student').'</td>
+			<td>'.__('messages.phonetic_name').'</td>
+			<td colspan="3">'.$student['first_name'].' '.$student['last_name'].'<br>
+			
+			'.$student['birthday'].'<br></td>
+			<td colspan="">'.__('messages.gender').'</td>
+			<td colspan="">'.$student['gender'].'</td>
+			<td colspan="3">'.__('messages.previous_school').'</td>
+			<td colspan="5">'.$school_name.'</td>
+			</tr>
+			<tr>
+			<td>'.__('messages.current_address').'</td>
+			<td colspan="5">'.$student['current_address'].'</td>
+			<td colspan="3">'.__('messages.admissions_transfers_etc').'</td>
+			<td colspan="5"></td>
+			</tr>
+			<tr>
+			<td rowspan="3">'.__('messages.parent').'</td>
+			<td>'.__('messages.phonetic_name').'</td>
+			<td colspan="5">'.$parent['first_name'].' '.$parent['last_name'].'</td>
+			<td colspan="3">'.__('messages.dropout').'</td>
+			<td colspan="5"></td>
+			</tr>
+			
+			<tr style="height:70px">
+			<td rowspan="2">'.__('messages.current_address').'</td>
+			<td rowspan="2" colspan="5">'.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
+			<td colspan="3">'.__('messages.graduation').'</td>
+			<td colspan="5"></td>
+			</tr>
+			<tr>
+			<td colspan="3" style="height:70px">'.__('messages.next_school').'</td>
+			<td colspan="5"></td>
+			</tr>
+			</tbody>
+			</table>
+			<table class="table table-bordered">
+			<tr>
+			<td colspan="4" style="width:90px">'.__('messages.school_name_and_location').'</td>';
+			
+			$bdata = [
+			'id' => session()->get('branch_id'),
+			];
+			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+			//dd($getbranch);
+			$output.='<td colspan="7">
+			'.$getbranch['data']['school_name'].'<br>
+			'.$getbranch['data']['address'].'<br>
+			Tel: '.$getbranch['data']['mobile_no'].' Mail : '.$getbranch['data']['email'].'<br>
+			</td>
+			</tr>
+			</table>
+			<table class="table table-bordered">
+			<tr>
+			<td class="diagonal" style="width:122px;border-bottom:hidden">
+			<span class="lb">'.__('messages.fiscal_year').'</span>
+			<span class="rt"></span>
+			<div class="line"></div>
+			</td>';
+			foreach($getclasssec['data'] as $ac)
+			{
+				
+				$output.=' <th style=" border: 1px solid black;">'.$ac['academic_year'].'</th>';
+			}
+			
+			$output.='
+			
+			</tr>
+			<tr>
+			<td>'.__('messages.division_grade').'</td>';
+			foreach($getgrade['data'] as $grade)
+			{
+				
+				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+			}
+			
+			$output.='
+			</tr>
+			<tr style="height:80px">
+			<td>'.__('messages.principals_name_seal').'</td>';
+			foreach($getclasssec['data'] as $princ)
+			{
+				$output.=' <th style=" border: 1px solid black;">'.$princ['principal'].'</th>';
+			}
+			
+			$output.='
+			
+			</tr>
+			<tr style="height:80px">
+			<td>'.__('messages.class_teacher_name_stamp').'</td>';
+			foreach($getclasssec['data'] as $teach)
+			{
+				$output.=' <th style=" border: 1px solid black;">'.$teach['teacher'].'</th>';
+			}
+			
+			$output.='
+			</tr>
+			
+			</table>
+			</td>
+			</tr>
+			
+			</table></main>';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form1') .'-'. $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();        
+			
+		}
+		
+		public function downprimaryform2a($id)
+		{
+			$student_id=$id;
+			$footer_text = session()->get('footer_text');
+			$sdata = [
+            'id' => $id,
+			]; 
+			$getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+			$student=$getstudent['data']['student'];
+			$data = [
+            'id' => $id,
+            'department_id' => $student['department_id'],
+			];       
+			
+			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+			$paper1=__('messages.paper1');
+			$paper2=__('messages.paper2');        
+			$paper3=__('messages.paper3');
+			$paper4=__('messages.paper4');
+			$paper6=__('messages.learning_and_activities');        
+			$paper7=__('messages.perspectives');
+			$paper_list=[$paper1,$paper2,$paper3,$paper4];
+			
+			$paper_list1=[$paper6,$paper7,$paper4]; 
+			
+			$language=__('messages.language');
+			$language1=__('messages.language1');
+			$society=__('messages.society');
+			$math=__('messages.math');
+			$music=__('messages.music');
+			$life=__('messages.life');
+			$art=__('messages.art');
+			$sports=__('messages.sports');
+			$science=__('messages.science');
+			$home_economic=__('messages.home_economic');
+			$tech_home_economic=__('messages.tech_home_economic');
+			$english=__('messages.english');
+			$foreign_language=__('messages.foreign_language');
+			
+			$special_subjects2=__('messages.special_subjects2');
+			$special_subjects5=__('messages.special_subjects5');
+			$special_subjects6=__('messages.special_subjects6');
+			$special_subjects7=__('messages.special_subjects7');
+			
+			
+			$special_paper1=__('messages.classroom_activities');
+			$special_paper2=__('messages.children_association_activities');
+			$special_paper3=__('messages.club_activities');
+			$special_paper4=__('messages.school_events');
+			
+			$special_paper11=__('messages.special_paper11'); 
+			$subjectlist=[$language1,$society,$math, $science,$life,$music,$art,$home_economic, $sports,$english];
+			
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $output = "<!DOCTYPE html>";
+            $output .= "<html><head>";
+            $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $output .= '<style>
+			.table td,
+			.table th {
+            padding: 2px;
+            text-align: center;
+			}
+			
+			.table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+			}
+			
+			
+			table td {
+            overflow: hidden;
+            border: 1px solid #000;
+            text-align: center;
+			}
+			
+			.line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+			}
+			
+			.diagonal {
+            width: 150px;
+            height: 40px;
+			}
+			
+			.diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+			}
+			
+			.diagonal span.rt {
+            top: 2px;
+            right: 2px;
+			}
+			.diagonalCross2 {
+			background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+			}
+			</style>';
+			$output .= "</head>";
+			$output .= "<body>";
+			$output .='<h4 class=" float-left">'.__('messages.download_form2Atitle').'</h4>
+			<table class="main" width="100%">
+            <tr>
+			<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+			align=" center">
+			
+			
+			<table class="table table-bordered" style="margin-bottom: 15px;">
+			<thead>
+			<tr>
+			<th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
+			<th style=" border: 1px solid black;">'.__('messages.school_name').'</th>
+			<th style=" border: 1px solid black;">'.__('messages.division_grade').'</th>';
+			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+			//dd($getgrade);
+			$totgrade=0;
+			foreach($getgrade['data'] as $grade)
+			{
+				$totgrade++;
+				//dd($grade);
+				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+			}
+			
+			$output.='
+			</tr>
+			
+			</thead>
+			<tbody>
+			<tr>
+			<td rowspan="6">'.$student['first_name'].' '.$student['last_name'].'</td>';
+			$bdata = [
+			'id' => session()->get('branch_id'),
+			];
+			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+			//dd($getbranch);
+			$output.='
+			<td rowspan="6">'.$getbranch['data']['school_name'].'<br>
+			'.$getbranch['data']['address'].'</td>
+			<td>'.__('messages.class').'</td>';
+			foreach($getclasssec['data'] as $sec)
+			{
+				
+				$output.='<td> '.$sec['section'].'</td>';
+			}
+			$output.='</tr>
+			
+			<tr>
+			<td>'.__('messages.attendance_no').'</td>';
+			foreach($getclasssec['data'] as $sec)
+			{
+				
+				$output.='<td> '.$sec['studentPlace'].'</td>';
+			}
+			$output.='
+			</tr>
+			</tbody>
+			</table>
+			</td>
+			</tr>
+			
+			<tr>
+			<td style="width:50%">
+			
+			
+			
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<td colspan="'.($totgrade+4).'" style="text-align:center; border: 1px solid black;">
+			'.__('messages.transcripts_of_each_subject').'</td>
+			
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="1">'.__('messages.subject').'</td>
+			<td colspan="1">'.__('messages.perspectives').'</td>
+			<td colspan="1" class="diagonalCross2"></td>
+			<td colspan="1">'.__('messages.grade').'</td>';
+			foreach($getgrade['data'] as $grade)
+			{
+				//dd($grade);
+				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+			}
+			
+			$output.='
+			</tr>';
+			foreach($subjectlist as $sub)
+			{ $i=0;
+				foreach($paper_list as $papers)
+				{
+					$i++;
+					$studata = [
+					'branch_id' => session()->get('branch_id'),
+					'student_id' => $student['id'],
+					'department_id'=> $student['department_id'],
+					'subject' => $sub,
+					'paper' => $papers
+					
+					];
+					$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+					
+					
+					$output.=' <tr>';
+					if($i==1)
+					{
+						$output.='<td rowspan="4" style="width: 0px;">'.$sub.'</td>';
+					}
+					$output.='<td colspan="3"  style="text-align:left;" >'.$papers.'</td>';
+					
+					foreach($getmarks['data'] as $mark)
+					{
+						$output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+					}
+					$output.='</tr>';
+					
+				}
+			} 
+			
+			
+			$output.='</table>
+			</td>
+			<td style="width:50%">
+			<table class="table table-bordered specialtable">
+			<thead class="colspanHead">
+			<tr>
+			
+			<td colspan="10" style="text-align:center; border: 1px solid black;">
+			'.__('messages.special_subject_morality').'
+			</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="1">'.__('messages.grade').'</td>
+			<td colspan="9">'.__('messages.progress_in_learning_and_morality').'</td>
+			</tr>';
+			
+			$studata = [
+			'branch_id' => session()->get('branch_id'),
+			'student_id' => $student['id'],
+			'department_id'=> $student['department_id'],
+			'subject' => $special_subjects2,
+			'paper' => $special_paper11];
+			$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+			//dd($getmarks) ;      
+			foreach($getmarks['data'] as $spmark){
+				$output.='<tr >
+				<td style="height:40px;">'.$spmark['class'].'</td>
+				<td  colspan="9" style="height:40px;">'.$spmark['printmark'].'</td>
+				</tr>';
+				
+			}
+			$output.='
+			</tbody>
+			</table>
+			<table class="table table-bordered specialtable">
+			<tr>
+			<td colspan="10">'.__('messages.records_of_foreign_language_sctivities').'</td>
+			</tr>
+			<tr>
+			
+			<td colspan="1" style="font-size: 8px;">'.__('messages.grade').'</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.paper1').'</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.paper2').'
+			</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.paper3').'</td>
+			</tr>
+			<tr>
+			<td style="height:40px;">3</td>
+			';
+			$i=0;
+			foreach($paper_list as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $foreign_language,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='3')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='							
+			</tr>
+			<tr>
+			<td style="height:40px;">4</td>
+			';
+			$i=0;
+			foreach($paper_list as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $foreign_language,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='4')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='
+			</tr>
+			</table>
+			<table class="table table-bordered specialtable">
+			<tr>
+			<td colspan="10">'.__('messages.comprehensive_study_time_notes').'</td>
+			</tr>
+			<tr>
+			<td colspan="1" style="font-size: 8px;">'.__('messages.grade').'</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.learning_and_activities').'</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.perspectives').'</td>
+			<td colspan="3" style="font-size: 8px;">'.__('messages.paper4').'</td>
+			</tr>
+			<tr>
+			<td style="height:40px;">3</td>
+			';
+			$i=0;
+			foreach($paper_list1 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subjects6,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='3')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='
+			</tr>
+			<tr>
+			<td style="height:40px;">4</td>
+			';
+			$i=0;
+			foreach($paper_list1 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subjects6,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='4')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='
+			</tr>
+			<tr>
+			<td style="height:40px;">5</td>
+			';
+			$i=0;
+			foreach($paper_list1 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subjects6,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='5')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='
+			</tr>
+			<tr>
+			<td style="height:40px;">6</td>
+			';
+			$i=0;
+			foreach($paper_list1 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subjects6,
+				'paper' => $papers                                
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				//dd($getmarks);
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					if($i!=4 && $mark['class']=='6')
+					{
+						$output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+					}
+				}
+			}                            
+			$output.='
+			</tr>
+			</table>
+			<table class="table table-bordered specialtable">
+			<tr>
+			
+			<td colspan="'.($totgrade+4).'">'.__('messages.records_of_special_activities').'</td>
+			</tr>
+			<tr>
+			<td colspan="1"  >'.__('messages.contents').'</td>
+			<td colspan="1"  >'.__('messages.perspectives').'</td>
+			<td colspan="1" class="diagonalCross2"></td>
+			<td colspan="1" >'.__('messages.grade').'</td>';
+			foreach($getgrade['data'] as $grade)
+			{
+				//dd($grade);
+				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+			}
+			
+			$output.='
+			</tr>
+			<tr>
+			<td colspan="1" style="width:0px;">'.__('messages.classroom_activities').'</td>
+			<td colspan="1" rowspan="6" colspan="3"></td>';                           
+			$studata = [
+			'branch_id' => session()->get('branch_id'),
+			'student_id' => $student['id'],
+			'department_id'=> $student['department_id'],
+			'subject' => $special_subjects7,
+			'paper' => $special_paper1];
+			
+			$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+			//dd($getmarks) ;      
+			foreach($getmarks['data'] as $spmark){
+				$output.='<td colspan="1" >'.$spmark['printmark'].'</td>';
+			}
+			$output.='
+			
+			</tr>
+			<tr><td colspan="1" style="border-bottom-style: hidden;" >'.__('messages.children_association_activities').'</td>
+			';                           
+			$studata = [
+			'branch_id' => session()->get('branch_id'),
+			'student_id' => $student['id'],
+			'department_id'=> $student['department_id'],
+			'subject' => $special_subjects7,
+			'paper' => $special_paper1];
+			
+			$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+			//dd($getmarks) ;      
+			foreach($getmarks['data'] as $spmark){
+				$output.='<td colspan="1" >'.$spmark['printmark'].'</td>';
+			}
+			$output.='
+			</tr>
+			<tr><td colspan="1" >'.__('messages.club_activities').'								
+			</td>
+			';
+			
+			$studata = [
+			'branch_id' => session()->get('branch_id'),
+			'student_id' => $student['id'],
+			'department_id'=> $student['department_id'],
+			'subject' => $special_subjects7,
+			'paper' => $special_paper3];
+			
+			$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+			//dd($getmarks) ;      
+			foreach($getmarks['data'] as $spmark){
+				$output.='<td colspan="1" >'.$spmark['printmark'].'</td>';
+			}
+			$output.='
+			</tr>
+			<tr><td colspan="1" >'.__('messages.school_events').'							
+			</td>
+			';
+			
+			$studata = [
+			'branch_id' => session()->get('branch_id'),
+			'student_id' => $student['id'],
+			'department_id'=> $student['department_id'],
+			'subject' => $special_subjects7,
+			'paper' => $special_paper4];
+			
+			$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+			//dd($getmarks) ;      
+			foreach($getmarks['data'] as $spmark){
+				$output.='<td colspan="1" >'.$spmark['printmark'].'</td>';
+			}
+			$output.='
+			</tr>
+			
+			</table>
+			</td>
+			</tr>
+			
+			</table>
+			';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form2a') . $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();
+			
+			
+		}
+		
+		public function downprimaryform2b($id)
+		{
+			$student_id=$id;
+			$footer_text = session()->get('footer_text');
+			$sdata = [
+            'id' => $id,
+			]; 
+			$getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+			$student=$getstudent['data']['student'];
+			$data = [
+            'id' => $id,
+            'department_id' => $student['department_id'],
+			];       
+			
+			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+            //dd($getclasssec)
+			$fonturl = storage_path('fonts/ipag.ttf');
+			$output = "<!DOCTYPE html>";
+			$output .= "<html><head>";
+			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+			$output .= '<style>
+			.table td,
+			.table th {
+            padding: 2px;
+            text-align: center;
+			}
+			
+			.table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+			}
+			
+			
+			table td {
+            overflow: hidden;
+            border: 1px solid #000;
+            text-align: center;
+			}
+			
+			.line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+			}
+			
+			.diagonal {
+            width: 150px;
+            height: 40px;
+			}
+			
+			.diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+			}
+			
+			.diagonal span.rt {
+            top: 2px;
+            right: 2px;
+			}
+			.diagonalCross2 {
+			background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+			}
+			</style>';
+			$output .= "</head>";
+			$output .= '<body><table class="main" width="100%">
+            <tr> 
+			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+			text-align:center">
+			
+			
+			<table class="table table-bordered" style="margin-bottom: 15px;">
+			<thead>
+			<tr>
+			<th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
+			</tr>
+			
+			</thead>
+			<tbody>
+			<tr>
+			<td>'.$student['first_name'].' '.$student['last_name'].'</td>
+			</tr>
+			
+			</tbody>
+			</table>
+			
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<td colspan="2" style="text-align:center; border: 1px solid black;">
+			'.__('messages.record_of_action').'</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td>
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<td colspan="1" style="text-align:center;width:50px;">Item</td>
+			<td colspan="1" class="diagonalCross2" style="width:50px;"></td>
+			<td colspan="1" style="text-align:center;">Grade</td>';
+			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+			
+			foreach($getgrade['data'] as $grade)
+			{
+				$output.=' <td>'.$grade['name'].'</td>';
+			}                                
+			$output.='
+			
+			</tr>
+			
+			</thead>
+			<tbody>';
+			$special_subject1=__('messages.record_of_action');
+			$special_paper1=__('messages.basic_lifestyle_habits');
+			$special_paper2=__('messages.improvement_of_health_and_physical_fitness');
+			$special_paper3=__('messages.self_discipline');
+			$special_paper4=__('messages.Responsibility');
+			$special_paper5=__('messages.creativity');
+			$subjectlist1=[$special_paper1,$special_paper2,$special_paper3, $special_paper4,$special_paper5];
+			$special_paper6=__('messages.compassion_and_cooperation');
+			$special_paper7=__('messages.respect_for_life_and_love_for_nature');
+			$special_paper8=__('messages.labor_service');
+			$special_paper9=__('messages.fairness');
+			
+			$special_paper10=__('messages.public_virtue');
+			
+			$subjectlist2=[$special_paper6,$special_paper7,$special_paper8, $special_paper9,$special_paper10];
+			$i=0;
+			foreach($subjectlist1 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subject1,
+				'paper' => $papers
+				
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				
+				
+				$output.=' <tr>';
+				
+					$output.='<td  colspan="3" style="width: 0px;">'.$papers.'</td>';
+				
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					$output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+				}
+				$output.='</tr>';
+			} 
+			$output.='
+			</tbody>
+			</table>
+			</td>
+			<td>
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<td colspan="1" style="text-align:center;width:50px;">'.__('messages.item').'</td>
+			<td colspan="1" class="diagonalCross2" style="width:50px;"></td>
+			<td colspan="1" style="text-align:center;">'.__('messages.grade').'</td>';
+			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+			
+			foreach($getgrade['data'] as $grade)
+			{
+				$output.=' <td>'.$grade['name'].'</td>';
+			}                                
+			$output.='
+			
+			</tr>
+			
+			</thead>
+			<tbody>';
+			$i=0;
+			foreach($subjectlist2 as $papers)
+			{
+				$i++;
+				$studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subject1,
+				'paper' => $papers
+				
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				
+				
+				$output.=' <tr>';
+				
+					$output.='<td  colspan="3" style="width: 0px;">'.$papers.'</td>';
+				
+				
+				foreach($getmarks['data'] as $mark)
+				{
+					$output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+				}
+				$output.='</tr>';
+			}
+			$output.='  </tbody>
+			</table>
+			</td>
+			</tr>
+			</tbody>
+			</table>
+			<table class="table table-bordered">
+			<tbody>
+			<tr>
+			<td colspan="18" style="text-align:center;">'.__('messages.comprehensive_findings_and_various_matters').'</td>
+			</tr>
+			</tbody>
+			
+			<tbody>';
+            
+            $special_subjects=__('messages.comprehensive_findings_and_various_matters');
+            $description=__('messages.description');
+            $studata = [
+				'branch_id' => session()->get('branch_id'),
+				'student_id' => $student['id'],
+				'department_id'=> $student['department_id'],
+				'subject' => $special_subjects,
+				'paper' => $description
+				
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+				
+            
+
+			$output.='<tr>';
+            $k=0;
+
+            foreach($getmarks['data'] as $mark)
+				{
+					$k++;
+                    
+                    $output.='<td  style="height: 200px;width: 0px; padding-top: 45px;">Y<br>e<br>a<br>r<br>'.$k.'</td>
+                    <td  colspan="8">'.$mark['printmark'].'</td>';
+                    if($k%2==0)
+                    {
+                        $output.='</tr><tr>';  
+                    }   
+				}
+			
+			
+			$output.='</tr>
+			</tbody>
+			
+			
+			
+			</table>
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<td colspan="18" style="text-align:center; border: 1px solid black;">
+			'.__('messages.Attendance_records').'</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+            <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.grade_division').'</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_classes').'</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_suspension').'</td>
+			<td colspan="1" style="width: 85px;font-size: 10px;">'.__('messages.number_of_days_have_to_attend').'</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_absent').'</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_attendance').'</td>
+			
+			<td colspan="12" style="width: 0px;font-size: 10px;">'.__('messages.remarks').'</td>
+			
+			</tr>';
+            
+            foreach($getclasssec['data'] as $sec)
+            {
+                $totaldays=''; $suspension=''; $totalcomimg=''; $totpres='';$totabs='';
+                if($sec['academic_year']!='')
+                {
+                $acy=explode('-',$sec['academic_year']);
+                $fromyear= $acy[0]; $toyear= $acy[1];
+                $attdata= [
+                    'branch_id' => session()->get('branch_id'),                               
+                    'student_id' => $student['id'],
+                    'start' => $fromyear.'-04-01',
+                    'end' => $toyear.'-03-31',
+                    
+                ];
+                $getholidays = Helper::PostMethod(config('constants.api.getacyearholidays'), $attdata);
+               
+                $getattendance = Helper::PostMethod(config('constants.api.studentacyear_attendance'), $attdata);
+                //dd($getattendance['data']);
+                $start=strtotime($fromyear.'-04-01');
+                $end=strtotime($toyear.'-03-31');
+                $iter = 24*60*60; // whole day in seconds
+                $count = 0; // keep a count of Sats & Suns                    
+                for($i = $start; $i <= $end; $i=$i+$iter)
+                {
+                    if(Date('D',$i) == 'Sat' || Date('D',$i) == 'Sun')
+                    {
+                        $count++;
+                    }
+                }
+                $suspension=0;
+                $totalweekends= $count;
+                
+                $totaldays=365-$getholidays['data']-$totalweekends;
+                
+                $totalcomimg= $totaldays-$suspension;
+                $totpres=$getattendance['data'][0]['presentCount'];
+                $totabs=$getattendance['data'][0]['absentCount'];
+                }   
+            $output.=' <tr>
+            <td colspan="1" style="width: 0px;">'.$sec['class'].'</td>
+            <td colspan="1" style="width: 0px;">'.$totaldays.'</td>
+            <td colspan="1" style="width: 0px;">'.$suspension.'</td>
+            <td colspan="1" style="width: 0px;">'.$totalcomimg.'</td>
+            <td colspan="1" style="width: 0px;">'.$totabs.'</td>
+            <td colspan="1" style="width: 0px;">'.$totpres.'</td>
+            <td colspan="12" style="width: 0px;;"></td>            
+            </tr>';
+            }
+			
+			$output.='</tbody>
+			</table>
+			
+			</td>
+			</tr>
+			</table>';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form2b') . $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();
+			
+			
+		}
+		public function downsecondaryform1($id)
+		{
+			$student_id=$id;
+			$sdata = [
+            'id' => $id,
+			];
+			
+			$getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+			$student=$getstudent['data']['student'];
+			$prev = json_decode($getstudent['data']['student']['previous_details']);
+            $data = [
+                'id' => $id,
+                'department_id'=> $student['department_id'],
+            ]; 
+			$school_name=$prev->school_name;
+			$pdata = [
+            'id' => $student['father_id'],
+			];
+			$getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
+			$parent=$getparent['data']['parent'];
+			//dd($student);
+			$footer_text = session()->get('footer_text');
+			
+			$fonturl = storage_path('fonts/ipag.ttf');
+			$output = "<!DOCTYPE html>";
+			$output .= "<html><head>";
+			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+			$output .= '<style>
+			.table td,
+			.table th {
+            padding: 2px;
+            text-align: center;
+			}
+			
+			.table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+			}
+			
+			
+			table td {
+            overflow: hidden;
+            border: 1px solid #000;
+            text-align: center;
+			}
+			
+			.line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+			}
+			
+			.diagonal {
+            width: 150px;
+            height: 40px;
+			}
+			
+			.diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+			}
+			
+			.diagonal span.rt {
+            top: 2px;
+            right: 2px;
+			}
+			.diagonalCross2 {
+			background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+			}
+			</style>';
+			$output .= "</head>";
+			$output .= '<body><h4 style="text-align:center;">'.__('messages.download_secondary_form1_title').'</h4>
+			<h4 class="float-left">'.__('messages.download_secondary_form1_title2').'</h4>
+			<table class="main" width="100%">
+            <tr>
+			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+			text-align:center">
+			
+			
+			<table class="table table-bordered" style="margin-bottom: 15px;">
+			<thead>
+			<tr>
+			<tr>
+			<td class="cell-left">'.__('messages.category').'</td>
+			<td class="diagonalCross2" style="border-right:hidden; border-left:hidden;"></td>
+			<td class="cell-right">'.__('messages.grade').'</td>';
+            $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+            $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+            //dd('$getgrade');
+            foreach($getgrade['data'] as $grade)
+            {
+                
+            $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+            }
+            
+            $output.='
+			</tr>
+			
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="3">Class</td>'; foreach($getclasssec['data'] as $sec)
+            {
+            
+            $output.='<td> '.$sec['section'].'</td>';
+            }
+            $output.='
+			</tr>
+			<tr>
+			<td colspan="3">Attendance No</td>'; foreach($getclasssec['data'] as $sec)
+            {
+            
+            $output.='<td> '.$sec['studentPlace'].'</td>';
+            }
+            $output.='
+			</tr>
+			</tbody>
+			</table>
+			
+			<table class="table table-bordered">
+			<thead class="colspanHead">
+			<tr>
+			<th colspan="17" style="text-align:center; border: 1px solid black;">'.__('messages.records_of_academic_records').'</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td rowspan="4" colspan="1" style="width:10px">'.__('messages.student').'</td>
+			<td colspan="2">'.__('messages.pronouncation').'</td>
+			<td colspan="6"></td>
+			<td style="width:10px">'.__('messages.gender').'</td>
+			<td style="width:10px"> '.$student['gender'].'</td>
+			<td colspan="2" style="border-bottom:hidden" >'.__('messages.admission_transfer').'</td>
+			<td colspan="4" style="border-bottom:hidden">'.__('messages.admission_transfer_previous').'</td>
+			</tr>
+			<tr>
+			<td colspan="2">'.__('messages.name').'</td>                                           
+			<td colspan="8"> '.$student['first_name'].' '.$student['last_name'].'</td>
+			<td colspan="2" ></td>
+			<td colspan="4" > '.$school_name.' </td>
+			</tr>
+			<tr>
+			<td colspan="2">'.__('messages.date_of_birth').'</td>                                           
+			<td colspan="8"> '.$student['birthday'].'</td>
+			<td colspan="2" style="border-bottom:hidden" >'.__('messages.transfer_student').'</td>
+			<td colspan="4" style="border-bottom:hidden" ></td>
+			</tr>
+			<tr>
+			<td colspan="2">'.__('messages.current_address').'</td>                                           
+			<td colspan="8">'.$student['current_address'].'</td>
+			<td colspan="2" ></td>
+			<td colspan="4" ></td>
+			</tr>
+			
+			
+			<tr>
+			<td rowspan="6" colspan="1" style="width:10px">'.__('messages.parent').'</td>
+			<td colspan="2" rowspan="2" >'.__('messages.pronouncation').'</td>
+			<td colspan="8" rowspan="2" ></td>
+			<td colspan="2" >'.__('messages.the_day_left_school_to_transfer').'</td>
+			<td colspan="4"></td>
+			</tr>
+			<tr>
+			
+			<td colspan="2">'.__('messages.date_of_withdrawal').'</td>
+			<td colspan="4" ></td>
+			
+			</tr>
+			<tr>
+			<td colspan="2" rowspan="2" >'.__('messages.name').'</td>
+			<td colspan="8" rowspan="2" >'.$parent['first_name'].' '.$parent['last_name'].'</td>
+			<td colspan="2" >'.__('messages.next_transfer_school_name').'</td>
+			<td colspan="4" ></td>
+			</tr>
+			
+			<tr>
+			
+			
+			<td colspan="2" >'.__('messages.year_of_transfer').'</td>
+			<td colspan="4" ></td>
+			
+			</tr>
+			<tr>
+			
+			<td colspan="2" style="border-bottom:hidden">'.__('messages.current_address').'</td>
+			<td colspan="8" style="border-bottom:hidden"> '.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
+			<td colspan="2" >'.__('messages.location_as_above').'</td>
+			<td colspan="4" ></td>
+			
+			</tr>
+			<tr>
+			<td colspan="2" ></td>
+			<td colspan="8"></td>
+			<td colspan="2" ></td>
+			<td colspan="4" ></td>
+			
+			</tr>
+			<tr>
+			<td style="border-bottom:hidden">'.__('messages.experiences_before_admission').'
+			</td>
+			<td colspan="2" style="border-bottom:hidden;border-right:hidden;"></td>
+			<td colspan="8" style="border-bottom:hidden;"></td>
+			<td colspan="2" >'.__('messages.graduation').'</td>
+			<td colspan="4"></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			<td colspan="2" style="border-right:hidden;" ></td>
+			<td colspan="8"></td>
+			<td colspan="2" >'.__('messages.next_high_school_name').'</td>
+			<td colspan="4"></td>
+			
+			</tr>
+			</table>
+			
+			
+			<table class="table table-bordered">
+            <tr>
+                <td colspan="4" style="width:90px">'.__('messages.school_name_and_location').'</td>';
+                
+                $bdata = [
+                    'id' => session()->get('branch_id'),
+                ];
+                $getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+                //dd($getbranch);
+                $output.='<td colspan="7">
+                    '.$getbranch['data']['school_name'].'<br>
+                    '.$getbranch['data']['address'].'<br>
+                    Tel: '.$getbranch['data']['mobile_no'].' Mail : '.$getbranch['data']['email'].'<br>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td class="diagonal" style="width:122px;border-bottom:hidden">
+                    <span class="lb">'.__('messages.fiscal_year').'</span>
+                    <span class="rt"></span>
+                    <div class="line"></div>
+                </td>';
+                foreach($getclasssec['data'] as $ac)
+                    {
+                        
+                    $output.=' <th style=" border: 1px solid black;">'.$ac['academic_year'].'</th>';
+                    }
+                    
+                    $output.='
+            
+            </tr>
+            <tr>
+                <td style="height:60px;">'.__('messages.division_grade').'</td>';
+                foreach($getgrade['data'] as $grade)
+                    {
+                        
+                    $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+                    }
+                    
+                    $output.='
+            </tr>
+            <tr style="height:80px">
+                <td style="height:60px;">'.__('messages.principal_sign').'</td>';
+                foreach($getclasssec['data'] as $princ)
+                    {
+                        $output.=' <th style=" border: 1px solid black;">'.$princ['principal'].'</th>';
+                    }
+                    
+                    $output.='
+                
+            </tr>
+            <tr style="height:80px">
+                <td style="height:60px;">'.__('messages.grade_teacher_sign').'</td>';
+                foreach($getclasssec['data'] as $teach)
+                {
+                    $output.=' <th style=" border: 1px solid black;">'.$teach['teacher'].'</th>';
+                }
+                
+                $output.='
+            </tr>
+            
+        </table>
+			
+			</tbody>
+			</table>
+			
+			</td>
+			</tr>
+			</table>';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form1') . $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();
+			
+			
+		}
+		
+		public function downsecondaryform2a($id)
+		{
+			$student_id=$id;
+			$footer_text = session()->get('footer_text');
+			
+			$sdata = [
+                'id' => $id,
+            ]; 
+            $getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+            $student=$getstudent['data']['student'];
+            $data = [
+                'id' => $id,
+                'department_id' => $student['department_id'],
+            ];       
+          
+            $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+            $paper1=__('messages.paper1');
+            $paper2=__('messages.paper2');        
+            $paper3=__('messages.paper3');
+            $paper4=__('messages.paper4');
+            $paper6=__('messages.learning_and_activities');        
+            $paper7=__('messages.perspectives');
+            $paper_list=[$paper1,$paper2,$paper3,$paper4];
+            
+            $paper_list1=[$paper6,$paper7,$paper4]; 
+            
+            $language=__('messages.language');
+            $language1=__('messages.language1');
+            $society=__('messages.society');
+            $math=__('messages.math');
+            $music=__('messages.music');
+            $life=__('messages.life');
+            $art=__('messages.art');
+            $sports=__('messages.sports');
+            $science=__('messages.science');
+            $home_economic=__('messages.home_economic');
+            $tech_home_economic=__('messages.tech_home_economic');
+            $english=__('messages.english');
+            $foreign_language=__('messages.foreign_language');
+            
+            $special_subjects2=__('messages.special_subjects2');
+            $special_subjects5=__('messages.special_subjects5');
+            $special_subjects6=__('messages.special_subjects6');
+            $special_subjects7=__('messages.special_subjects7');
+    
+            
+            $special_paper1=__('messages.classroom_activities');
+            $special_paper2=__('messages.student_council_activities');
+            $special_paper3=__('messages.school_events');
+            
+            $special_paper11=__('messages.special_paper11'); 
+            $subjectlist=[$language1,$society,$math, $science,$life,$music,$art,$home_economic, $sports,$english];
+            
+                $fonturl = storage_path('fonts/ipag.ttf');
+                $output = "<!DOCTYPE html>";
+                $output .= "<html><head>";
+                $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+                $output .= '<style>
+                .table td,
+                .table th {
+                padding: 2px;
+                text-align: center;
+                }
+                
+                .table {
+                width: 100%;
+                margin-bottom: 1px;
+                color: black;
+                text-align: center;
+                }
+                
+                .table-bordered td,
+                .table-bordered th {
+                border: 1px solid black;
+                text-align: center;
+                }
+                
+                
+                table td {
+                overflow: hidden;
+                border: 1px solid #000;
+                text-align: center;
+                }
+                
+                .line {
+                height: 10px;
+                right: 10px;
+                margin: auto;
+                left: -5px;
+                width: 100%;
+                border-top: 1px solid #000;
+                -webkit-transform: rotate(14deg);
+                -ms-transform: rotate(14deg);
+                transform: rotate(14deg);
+                }
+                
+                .diagonal {
+                width: 150px;
+                height: 40px;
+                }
+                
+                .diagonal span.lb {
+                bottom: 2px;
+                left: 2px;
+                }
+                
+                .diagonal span.rt {
+                top: 2px;
+                right: 2px;
+                }
+                .diagonalCross2 {
+                background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+                }
+            </style>';
+    $output .= "</head>";
+    $output .= "<body>";
+    $output .='<h4 class=" float-left">'.__('messages.download_form2Atitle').'</h4>
+            <table class="main" width="100%">
+                <tr>
+                    <td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+                    align=" center">
+                        
+                        
+                        <table class="table table-bordered" style="margin-bottom: 15px;">
+                            <thead>
+                                <tr>
+                                    <th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
+                                    <th style=" border: 1px solid black;">'.__('messages.school_name').'</th>
+                                    <th style=" border: 1px solid black;">'.__('messages.division_grade').'</th>';
+                                    $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                                    //dd($getgrade);
+                                    $totgrade=0;
+                                    foreach($getgrade['data'] as $grade)
+                                    {
+                                        $totgrade++;
+                                        //dd($grade);
+                                   $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+                                    }
+                                    
+                                    $output.='
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="6">'.$student['first_name'].' '.$student['last_name'].'</td>';
+                                    $bdata = [
+                                        'id' => session()->get('branch_id'),
+                                    ];
+                                    $getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+                                    //dd($getbranch);
+                                    $output.='
+                                    <td rowspan="6">'.$getbranch['data']['school_name'].'<br>
+                                    '.$getbranch['data']['address'].'</td>
+                                    <td>'.__('messages.class').'</td>';
+                                    foreach($getclasssec['data'] as $sec)
+                                    {
+                                    
+                                    $output.='<td> '.$sec['section'].'</td>';
+                                    }
+                                    $output.='</tr>
+                                
+                                <tr>
+                                    <td>'.__('messages.attendance_no').'</td>';
+                                    foreach($getclasssec['data'] as $sec)
+                                    {
+                                    
+                                    $output.='<td> '.$sec['studentPlace'].'</td>';
+                                    }
+                                    $output.='
+                                </tr>
+                            </tbody>
+                        </table>
+                        </td>
+                </tr>
+                
+                <tr>
+                    <td style="width:50%">
+                        
+                        
+                                
+                        <table class="table table-bordered">
+                            <thead class="colspanHead">
+                                <tr>
+                                    <td colspan="'.($totgrade+4).'" style="text-align:center; border: 1px solid black;">
+                                    '.__('messages.transcripts_of_each_subject').'</td>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="1">'.__('messages.subject').'</td>
+                                    <td colspan="1">'.__('messages.perspectives').'</td>
+                                    <td colspan="1" class="diagonalCross2"></td>
+                                    <td colspan="1">'.__('messages.grade').'</td>';
+                                    foreach($getgrade['data'] as $grade)
+                                    {
+                                        //dd($grade);
+                                   $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+                                    }
+                                    
+                                    $output.='
+                                </tr>';
+                                foreach($subjectlist as $sub)
+                                    { $i=0;
+                                        foreach($paper_list as $papers)
+                                        {
+                                            $i++;
+                                            $studata = [
+                                            'branch_id' => session()->get('branch_id'),
+                                            'student_id' => $student['id'],
+                                            'department_id'=> $student['department_id'],
+                                            'subject' => $sub,
+                                            'paper' => $papers
+                                            
+                                        ];
+                                        $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                                        
+                                        
+                                        $output.=' <tr>';
+                                        if($i==1)
+                                        {
+                                            $output.='<td rowspan="4" style="width: 0px;">'.$sub.'</td>';
+                                        }
+                                        $output.='<td colspan="3"  style="text-align:left;" >'.$papers.'</td>';
+    
+                                        foreach($getmarks['data'] as $mark)
+                                        {
+                                            $output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+                                        }
+                                        $output.='</tr>';
+                                        
+                                    }
+                                } 
+                            
+                            
+                                $output.='</table>
+                    </td>
+                    <td style="width:50%">
+                        <table class="table table-bordered specialtable">
+                            <thead class="colspanHead">
+                                <tr>
+                                    
+                                    <td colspan="10" style="text-align:center; border: 1px solid black;height:60px;">
+                                    '.__('messages.special_subject_morality').'
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="1" style="height:60px;">'.__('messages.grade').'</td>
+                                    <td colspan="9">'.__('messages.progress_in_learning_and_morality').'</td>
+                                </tr>';
+                               
+                                $studata = [
+                                    'branch_id' => session()->get('branch_id'),
+                                    'student_id' => $student['id'],
+                                    'department_id'=> $student['department_id'],
+                                    'subject' => $special_subjects2,
+                                    'paper' => $special_paper11];
+                                $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                                //dd($getmarks) ;      
+                                foreach($getmarks['data'] as $spmark){
+                                    $output.='<tr >
+                                    <td style="height:60px;">'.$spmark['class'].'</td>
+                                    <td  colspan="9" style="height:40px;">'.$spmark['printmark'].'</td>
+                                </tr>';
+    
+                                }
+                                $output.='
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered specialtable">
+                            <tr>
+                                <td colspan="10" style="height:60px;">'.__('messages.comprehensive_study_time_notes').'</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" style="height:60px;">'.__('messages.grade').'</td>
+                                <td colspan="3" style="height:60px;">'.__('messages.learning_and_activities').'</td>
+                                <td colspan="3" style="height:60px;">'.__('messages.perspectives').'</td>
+                                <td colspan="3" style="height:60px;">'.__('messages.paper4').'</td>
+                            </tr>';
+                            foreach($getclasssec['data'] as $cls)
+                            {
+                                $output.=' <tr>
+                                <td style="height:60px;">'.$cls['class'].'</td>
+                                ';
+                                $i=0;
+                                foreach($paper_list1 as $papers)
+                                {
+                                    $i++;
+                                    $studata = [
+                                    'branch_id' => session()->get('branch_id'),
+                                    'student_id' => $student['id'],
+                                    'department_id'=> $student['department_id'],
+                                    'subject' => $special_subjects6,
+                                    'paper' => $papers                                
+                                    ];
+                                    $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                                    //dd($getmarks);
+                                    
+                                    foreach($getmarks['data'] as $mark)
+                                        {
+                                        if($i!=4 && $mark['class']==$cls['class'])
+                                        {
+                                        $output.='<td  colspan="3" style="height:40px;">'.$mark['printmark'].'</td>';
+                                        }
+                                     }
+                                }                            
+                                $output.='
+                            </tr>';
+                            }
+                            $output.=' </table>
+                        <table class="table table-bordered specialtable">
+                            <tr>
+                                
+                                <td colspan="'.($totgrade+4).'">'.__('messages.records_of_special_activities').'</td>
+                            </tr>
+                            <tr>
+                                <td colspan="1"  style="height:60px;">'.__('messages.contents').'</td>
+                                <td colspan="1"  >'.__('messages.perspectives').'</td>
+                                <td colspan="1" class="diagonalCross2"></td>
+                                <td colspan="1" >'.__('messages.grade').'</td>';
+                                foreach($getgrade['data'] as $grade)
+                                {
+                                    //dd($grade);
+                                    $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+                                }
+                                
+                                $output.='
+                            </tr>
+                            <tr>
+                                <td colspan="1" style="height:60px;">'.$special_paper1.'</td>
+                                <td colspan="1" rowspan="'.($totgrade+1).'" colspan="3"></td>';                           
+                                $studata = [
+                                    'branch_id' => session()->get('branch_id'),
+                                    'student_id' => $student['id'],
+                                    'department_id'=> $student['department_id'],
+                                    'subject' => $special_subjects7,
+                                    'paper' => $special_paper1];
+    
+                                $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                                //dd($getmarks) ;      
+                                foreach($getmarks['data'] as $spmark){
+                                    $output.='<td colspan="1" style="height:60px;">'.$spmark['printmark'].'</td>';
+                                }
+                                $output.='
+                                
+                            </tr>
+                            <tr><td colspan="1" style="border-bottom-style: hidden;height:60px;" >'.$special_paper2.'</td>
+                            ';                           
+                            $studata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'student_id' => $student['id'],
+                                'department_id'=> $student['department_id'],
+                                'subject' => $special_subjects7,
+                                'paper' => $special_paper2];
+    
+                            $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                            //dd($getmarks) ;      
+                            foreach($getmarks['data'] as $spmark){
+                                $output.='<td colspan="1" style="height:60px;">'.$spmark['printmark'].'</td>';
+                            }
+                            $output.='
+                            </tr>
+                            <tr><td colspan="1" style="height:60px;">'.$special_paper3.'								
+                            </td>
+                            ';
+                               
+                            $studata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'student_id' => $student['id'],
+                                'department_id'=> $student['department_id'],
+                                'subject' => $special_subjects7,
+                                'paper' => $special_paper3];
+    
+                            $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                            //dd($getmarks) ;      
+                            foreach($getmarks['data'] as $spmark){
+                                $output.='<td colspan="1" style="height:60px;" >'.$spmark['printmark'].'</td>';
+                            }
+                            $output.='
+                            </tr>
+                           
+                            
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+                    ';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form2a') . $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();
+			
+			
+		}
+		
+		public function downsecondaryform2b($id)
+		{
+			$student_id=$id;
+			$footer_text = session()->get('footer_text');
+			
+			$sdata = [
+                'id' => $id,
+                ]; 
+                $getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+                $student=$getstudent['data']['student'];
+                $data = [
+                'id' => $id,
+                'department_id' => $student['department_id'],
+                ];       
+                
+                $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+                //dd($getclasssec)
+                $fonturl = storage_path('fonts/ipag.ttf');
+                $output = "<!DOCTYPE html>";
+                $output .= "<html><head>";
+                $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+                $output .= '<style>
+                .table td,
+                .table th {
+                padding: 2px;
+                text-align: center;
+                }
+                
+                .table {
+                width: 100%;
+                margin-bottom: 1px;
+                color: black;
+                text-align: center;
+                }
+                
+                .table-bordered td,
+                .table-bordered th {
+                border: 1px solid black;
+                text-align: center;
+                }
+                
+                
+                table td {
+                overflow: hidden;
+                border: 1px solid #000;
+                text-align: center;
+                }
+                
+                .line {
+                height: 10px;
+                right: 10px;
+                margin: auto;
+                left: -5px;
+                width: 100%;
+                border-top: 1px solid #000;
+                -webkit-transform: rotate(14deg);
+                -ms-transform: rotate(14deg);
+                transform: rotate(14deg);
+                }
+                
+                .diagonal {
+                width: 150px;
+                height: 40px;
+                }
+                
+                .diagonal span.lb {
+                bottom: 2px;
+                left: 2px;
+                }
+                
+                .diagonal span.rt {
+                top: 2px;
+                right: 2px;
+                }
+                .diagonalCross2 {
+                background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+                }
+                </style>';
+                $output .= "</head>";
+                $output .= '<body><table class="main" width="100%">
+                <tr> 
+                <td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+                text-align:center">
+                
+                
+                <table class="table table-bordered" style="margin-bottom: 15px;">
+                <thead>
+                <tr>
+                <th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
+                </tr>
+                
+                </thead>
+                <tbody>
+                <tr>
+                <td>'.$student['first_name'].' '.$student['last_name'].'</td>
+                </tr>
+                
+                </tbody>
+                </table>
+                
+                <table class="table table-bordered">
+                <thead class="colspanHead">
+                <tr>
+                <td colspan="2" style="text-align:center; border: 1px solid black;">
+                '.__('messages.record_of_action').'</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>
+                <table class="table table-bordered">
+                <thead class="colspanHead">
+                <tr>
+                <td colspan="1" style="text-align:center;width:50px;">Item</td>
+                <td colspan="1" class="diagonalCross2" style="width:50px;"></td>
+                <td colspan="1" style="text-align:center;">Grade</td>';
+                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                
+                foreach($getgrade['data'] as $grade)
+                {
+                    $output.=' <td>'.$grade['name'].'</td>';
+                }                                
+                $output.='
+                
+                </tr>
+                
+                </thead>
+                <tbody>';
+                $special_subject1=__('messages.record_of_action');
+                $special_paper1=__('messages.basic_lifestyle_habits');
+                $special_paper2=__('messages.improvement_of_health_and_physical_fitness');
+                $special_paper3=__('messages.self_discipline');
+                $special_paper4=__('messages.Responsibility');
+                $special_paper5=__('messages.creativity');
+                $subjectlist1=[$special_paper1,$special_paper2,$special_paper3, $special_paper4,$special_paper5];
+                $special_paper6=__('messages.compassion_and_cooperation');
+                $special_paper7=__('messages.respect_for_life_and_love_for_nature');
+                $special_paper8=__('messages.labor_service');
+                $special_paper9=__('messages.fairness');
+                
+                $special_paper10=__('messages.public_virtue');
+                
+                $subjectlist2=[$special_paper6,$special_paper7,$special_paper8, $special_paper9,$special_paper10];
+                $i=0;
+                foreach($subjectlist1 as $papers)
+                {
+                    $i++;
+                    $studata = [
+                    'branch_id' => session()->get('branch_id'),
+                    'student_id' => $student['id'],
+                    'department_id'=> $student['department_id'],
+                    'subject' => $special_subject1,
+                    'paper' => $papers
+                    
+                    ];
+                    $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                    
+                    
+                    $output.=' <tr>';
+                    
+                        $output.='<td  colspan="3" style="width: 0px;text-align:left;">'.$papers.'</td>';
+                    
+                    
+                    foreach($getmarks['data'] as $mark)
+                    {
+                        $output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+                    }
+                    $output.='</tr>';
+                } 
+                $output.='
+                </tbody>
+                </table>
+                </td>
+                <td>
+                <table class="table table-bordered">
+                <thead class="colspanHead">
+                <tr>
+                <td colspan="1" style="text-align:center;width:50px;">'.__('messages.item').'</td>
+                <td colspan="1" class="diagonalCross2" style="width:50px;"></td>
+                <td colspan="1" style="text-align:center;">'.__('messages.grade').'</td>';
+                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                
+                foreach($getgrade['data'] as $grade)
+                {
+                    $output.=' <td>'.$grade['name'].'</td>';
+                }                                
+                $output.='
+                
+                </tr>
+                
+                </thead>
+                <tbody>';
+                $i=0;
+                foreach($subjectlist2 as $papers)
+                {
+                    $i++;
+                    $studata = [
+                    'branch_id' => session()->get('branch_id'),
+                    'student_id' => $student['id'],
+                    'department_id'=> $student['department_id'],
+                    'subject' => $special_subject1,
+                    'paper' => $papers
+                    
+                    ];
+                    $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                    
+                    
+                    $output.=' <tr>';
+                    
+                        $output.='<td  colspan="3" style="width: 0px;text-align:left;">'.$papers.'</td>';
+                    
+                    
+                    foreach($getmarks['data'] as $mark)
+                    {
+                        $output.='<td colspan="1">'.$mark['printmark'].'</td>';   
+                    }
+                    $output.='</tr>';
+                }
+                $output.='  </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table class="table table-bordered">
+                <tbody>
+                <tr>
+                <td colspan="9" style="text-align:center;">'.__('messages.comprehensive_findings_and_various_matters').'</td>
+                </tr>
+                </tbody>
+                
+                <tbody>';
+                
+                $special_subjects=__('messages.comprehensive_findings_and_various_matters');
+                $description=__('messages.description');
+                $studata = [
+                    'branch_id' => session()->get('branch_id'),
+                    'student_id' => $student['id'],
+                    'department_id'=> $student['department_id'],
+                    'subject' => $special_subjects,
+                    'paper' => $description
+                    
+                    ];
+                    $getmarks = Helper::PostMethod(config('constants.api.stuoverall_marklist'), $studata);
+                    
+                
+    
+               
+                $k=0;
+    
+                foreach($getmarks['data'] as $mark)
+                    {
+                        $k++;
+                        $output.='<tr><td  style="height: 200px;width: 0px; padding-top: 45px;">G<br>R<br>A<br>D<br>E<br>'.$k.'</td>
+                        <td  colspan="8">'.$mark['printmark'].'</td></tr>';  
+                        
+                    }
+                
+                
+                $output.='
+                </tbody>
+                
+                
+                
+                </table>
+                <table class="table table-bordered">
+                <thead class="colspanHead">
+                <tr>
+                <td colspan="18" style="text-align:center; border: 1px solid black;">
+                '.__('messages.Attendance_records').'</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.grade_division').'</td>
+                <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_classes').'</td>
+                <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_suspension').'</td>
+                <td colspan="1" style="width: 85px;font-size: 10px;">'.__('messages.number_of_days_have_to_attend').'</td>
+                <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_absent').'</td>
+                <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_attendance').'</td>
+                
+                <td colspan="12" style="width: 0px;font-size: 10px;">'.__('messages.remarks').'</td>
+                
+                </tr>';
+                
+                foreach($getclasssec['data'] as $sec)
+                {
+                    $totaldays=''; $suspension=''; $totalcomimg=''; $totpres='';$totabs='';
+                    if($sec['academic_year']!='')
+                    {
+                    $acy=explode('-',$sec['academic_year']);
+                    $fromyear= $acy[0]; $toyear= $acy[1];
+                    $attdata= [
+                        'branch_id' => session()->get('branch_id'),                               
+                        'student_id' => $student['id'],
+                        'start' => $fromyear.'-04-01',
+                        'end' => $toyear.'-03-31',
+                        
+                    ];
+                    $getholidays = Helper::PostMethod(config('constants.api.getacyearholidays'), $attdata);
+                   
+                    $getattendance = Helper::PostMethod(config('constants.api.studentacyear_attendance'), $attdata);
+                    //dd($getattendance['data']);
+                    $start=strtotime($fromyear.'-04-01');
+                    $end=strtotime($toyear.'-03-31');
+                    $iter = 24*60*60; // whole day in seconds
+                    $count = 0; // keep a count of Sats & Suns                    
+                    for($i = $start; $i <= $end; $i=$i+$iter)
+                    {
+                        if(Date('D',$i) == 'Sat' || Date('D',$i) == 'Sun')
+                        {
+                            $count++;
+                        }
+                    }
+                    $suspension=0;
+                    $totalweekends= $count;
+                    
+                    $totaldays=365-$getholidays['data']-$totalweekends;
+                    
+                    $totalcomimg= $totaldays-$suspension;
+                    $totpres=$getattendance['data'][0]['presentCount'];
+                    $totabs=$getattendance['data'][0]['absentCount'];
+                    }   
+                $output.=' <tr>
+                <td colspan="1" style="width: 0px;">'.$sec['class'].'</td>
+                <td colspan="1" style="width: 0px;">'.$totaldays.'</td>
+                <td colspan="1" style="width: 0px;">'.$suspension.'</td>
+                <td colspan="1" style="width: 0px;">'.$totalcomimg.'</td>
+                <td colspan="1" style="width: 0px;">'.$totabs.'</td>
+                <td colspan="1" style="width: 0px;">'.$totpres.'</td>
+                <td colspan="12" style="width: 0px;;"></td>            
+                </tr>';
+                }
+                
+                $output.='</tbody>
+                </table>
+                
+                </td>
+                </tr>
+                </table>';
+			
+			$output .= '</body></html>';
+			$pdf = \App::make('dompdf.wrapper');
+			// set size
+			$customPaper = array(0, 0, 792.00, 1224.00);
+			$pdf->set_paper($customPaper);
+			$pdf->loadHTML($output);
+			// filename
+			$now = now();
+			$name = strtotime($now);
+			$fileName = __('messages.download_form2b') . $name . ".pdf";
+			return $pdf->download($fileName);
+			// return $pdf->stream();
+			
+			
+	}
+	public function downbysubject(Request $request)
     {
         $data = [
             'exam_id' => $request->exam_id,

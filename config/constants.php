@@ -990,6 +990,16 @@ return [
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
         'studentmonthly_attendance' => $url.'/exam_result/studentmonthly_attendance',        
         'getmonthlyholidays' => $url.'/getmonthlyholidays',
+        'studentclasssection' => $url.'/studentclasssection',        
+        'stuoverall_marklist' => $url.'/exam_result/stuoverall_marklist',        
+        'stuoverall_spmarklist' => $url.'/exam_result/stuoverall_spmarklist',
+        
+        'studentacyear_attendance' => $url.'/exam_result/studentacyear_attendance',        
+        'getacyearholidays' => $url.'/getacyearholidays',  
+        
+        // Student Image Upload
+        
+        'addstupicture'=> $url.'/student/addstupicture',
         'download_student_list_information' => $url.'/download_student_list_information',
         'get_student_attendance_by_day' => $url.'/get_student_attendance_by_day',
         'add_student_attendance_by_day' => $url.'/add_student_attendance_by_day',

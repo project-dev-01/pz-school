@@ -211,6 +211,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
         Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
+          // Graduvates details
+        Route::get('graduates/student', [AdminController::class, 'graduatesIndex'])->name('admin.graduates.index');
+        Route::get('graduates/list', [AdminController::class, 'graduatesList'])->name('admin.graduates.list');        
+        Route::get('graduates/student-details/{id}', [AdminController::class, 'getGraduateDetails'])->name('admin.graduates.details');
         Route::post('student/student_setting', [AdminController::class, 'studentSettings'])->name('admin.student.student_setting');
 
         Route::get('all_student_rank/list', [AdminController::class, 'allStudentRankList'])->name('admin.all_student_rank.list');
@@ -640,7 +644,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
-
+        
+        //Graduates Yoroku primary /Secondary Report
+        
+        Route::get('primary/downloadform1/{id}', [PdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
+        Route::get('primary/downloadform2a/{id}', [PdfController::class, 'downprimaryform2a'])->name('admin.primary.downloadform2a');
+        Route::get('primary/downloadform2b/{id}', [PdfController::class, 'downprimaryform2b'])->name('admin.primary.downloadform2b');
+        
+        Route::get('secondary/downloadform1/{id}', [PdfController::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
+        Route::get('secondary/downloadform2a/{id}', [PdfController::class, 'downsecondaryform2a'])->name('admin.secondary.downloadform2a');
+        Route::get('secondary/downloadform2b/{id}', [PdfController::class, 'downsecondaryform2b'])->name('admin.secondary.downloadform2b');
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
@@ -989,6 +1002,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('termination/list', [AdminController::class, 'getTerminationList'])->name('admin.termination.list');
         // Route::post('termination/termination-details', [AdminController::class, 'getTerminationDetails'])->name('admin.termination.details');
         Route::post('termination/update', [AdminController::class, 'updateTermination'])->name('admin.termination.update');
+        // Student Image
+        Route::get('student/picture', [AdminController::class, 'student_picture'])->name('admin.student.picture');
+        Route::get('student/viewpicture', [AdminController::class, 'student_pictureview'])->name('admin.student.viewpicture');
+        Route::get('report/history', [AdminController::class, 'report_history'])->name('admin.student.report_history');
+        
+        Route::post('student/addpicture', [AdminController::class, 'addstupicture'])->name('admin.student.addpicture');
+        Route::post('student/addmultipicture', [AdminController::class, 'addmultistupicture'])->name('admin.student.addmultipicture');
+
         //health logbooks
         Route::get('/health_logbooks', [AdminController::class, 'healthLogbooksIndex'])->name('admin.health_logbooks.health');
         Route::post('/health_logbooks/list', [AdminController::class, 'getHealthLogbooksData'])->name('admin.health_logbooks.list');
