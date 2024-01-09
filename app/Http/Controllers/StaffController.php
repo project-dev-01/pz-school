@@ -43,6 +43,10 @@ class StaffController extends Controller
         $student_count = Helper::GetMethod(config('constants.api.student_count'));
         $parent_count = Helper::GetMethod(config('constants.api.parent_count'));
         $teacher_count = Helper::GetMethod(config('constants.api.teacher_count'));
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $count['employee_count'] = isset($employee_count['data']) ? $employee_count['data'] : 0;
         $count['student_count'] = isset($student_count['data']) ? $student_count['data'] : 0;
         $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
@@ -55,6 +59,7 @@ class StaffController extends Controller
                 'greetings' => isset($greetings) ? $greetings : [],
                 'count' => isset($count) ? $count : 0,
                 'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
+                'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
             ]
         );
     }
@@ -1864,4 +1869,67 @@ class StaffController extends Controller
         $response = Helper::PostMethod(config('constants.api.update_student_leave'), $data);
         return $response;
     }
+    // index shortcutLinks 
+    public function shortcutLinks()
+    {
+        return view('staff.shortcut_links.index');
+    }
+    public function addShortcutLinks(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'link' => $request->link,
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_add'), $data);
+        return $response;
+    }
+    public function getShortcutLinksList(Request $request)
+    {
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editShortCutBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteShortCutBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getShortcutLinksDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_details'), $data);
+        return $response;
+    }
+    public function updateShortcutLinks(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'link' => $request->link
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_update'), $data);
+        return $response;
+    }
+    // DELETE shortcutLink Details
+    public function deleteShortcutLinks(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
+        return $response;
+    }
+
 }

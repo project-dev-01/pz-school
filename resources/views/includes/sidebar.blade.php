@@ -1269,6 +1269,11 @@
                                     <span> {{ __('messages.change_logo') }} </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.settings.shortcut_links')}}" class="nav-link {{ (request()->is('admin/settings/shortcut_links')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.shortcut_links') }} </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -1448,6 +1453,12 @@
                             </defs>
                         </svg>
                         <span>{{ __('messages.settings') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('staff.settings.shortcut_links')}}" class="nav-link {{ (request()->is('staff/settings/shortcut_links')) ? 'active' : '' }}">
+                        <i class="fa fa-desktop" aria-hidden="true"></i>         
+                        <span> {{ __('messages.shortcut_links') }} </span>
                     </a>
                 </li>
                 <li>
@@ -1800,6 +1811,12 @@
                             </defs>
                         </svg>
                         <span>{{ __('messages.settings') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('teacher.settings.shortcut_links')}}" class="nav-link {{ (request()->is('teacher/settings/shortcut_links')) ? 'active' : '' }}">
+                        <i class="fa fa-desktop" aria-hidden="true"></i>  
+                        <span> {{ __('messages.shortcut_links') }} </span>
                     </a>
                 </li>
                 <li>

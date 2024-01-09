@@ -1905,5 +1905,12 @@ return [
         "principal_sign"=>"Principal sign",
         "grade_teacher_sign"=>"Grade teacher sign",
         "student_council_activities"=>"Student Council Activities",
-        "Attendance_records"=>"Attendance Records"
+        "Attendance_records"=>"Attendance Records",
+        "shortcut_links" => "Dashboard Shortcut links",
+        "sidebar_name"  => "Sibebar Name",
+        "link"  => "Url",
+        "edit_shortcut" =>"Edit Shortcut Link",
+        "delete_this_shortcut" => "You want to Delete this Shortcut Link",
+
+
 ];

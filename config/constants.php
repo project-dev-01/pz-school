@@ -1006,6 +1006,13 @@ return [
         //health logBooks
         'health_logbooks' => $url.'/getHealthLogbooks',
         'health_logbooks_add' => $url.'/health_logbooks_add',
+        //shortcut links
+        'shortcutLink_add' => $url.'/shortcutLink/add',
+        'shortcutLink_list' => $url.'/shortcutLink/list',
+        'shortcutLink_details' => $url.'/shortcutLink/shortcutLink-details',
+        'shortcutLink_update' => $url.'/shortcutLink/update',
+        'shortcutLink_delete' => $url.'/shortcutLink/delete',
+        'bulletinBoard_Dashboard' =>  $url.'/bulletinBoard_Dashboard',
       
       ]
 
