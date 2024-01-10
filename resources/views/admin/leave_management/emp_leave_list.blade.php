@@ -95,7 +95,7 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="navv">
-                                    Staff Leave History
+                                {{ __('messages.staff_leave_history') }} 
                                     <h4>
                             </li>
                         </ul><br>

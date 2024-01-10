@@ -158,7 +158,7 @@
 			<!-- content start  -->
 			<div class="row d-none">
 				<div class="col-md-12" >
-					<button class="btn btn-success" style="float:right;"> New Record  </button><button class="btn btn-warning" style="float:right;"> Existing Record  </button><button class="btn btn-danger" style="float:right;"> Modify Data  </button> <br> <br>
+					<button class="btn btn-success" style="float:right;">{{ __('messages.new_record') }} </button><button class="btn btn-warning" style="float:right;">{{ __('messages.existing_record') }}</button><button class="btn btn-danger" style="float:right;">{{ __('messages.modify_data') }}</button> <br> <br>
 				</div>
 				<div class="col-md-12">
 					<div class="card mb-0">
@@ -171,13 +171,13 @@
 									<div class="row">   <div class="col-12">
 										<table class="table">
 											<tr>
-												<th> sno </th>
-												<th> Student ID</th>
-												<th> Student Name</th>
-												<th> Year</th>
-												<th> Department</th>
-												<th> Grade</th>
-												<th> Class</th>
+												<th>{{ __('messages.sno') }} sno </th>
+												<th>{{ __('messages.student_id') }}</th>
+												<th>{{ __('messages.student_name') }}</th>
+												<th>{{ __('messages.year') }}</th>
+												<th>{{ __('messages.department') }}</th>
+												<th>{{ __('messages.grade') }}</th>
+												<th>{{ __('messages.class') }}</th>
 											</tr>
 											<tr>
 												<th> 1 </th>
@@ -225,20 +225,19 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									
-									<h4 class="modal-title">Info</h4> 
+									<h4 class="modal-title">{{ __('messages.info') }}</h4> 
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
 								<div class="modal-body">
-									<p>This Information Already Exist.
+									<p>{{ __('messages.this_information_already_exist') }}
 										
 										
 										<br>
-									Are Your Confirm to Overwrite Informations</p>
+										{{ __('messages.are_your_confirm_to_overwrite_informations') }}</p>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-								</div>
+									<button type="button" class="btn btn-default" data-dismiss="modal">{{ __('messages.close') }}</button>
+						 		</div>
 							</div>
 							
 						</div>

@@ -108,8 +108,8 @@
     <div class="card-box">
                     <div class="row">
                         <div class="col-lg-3">
-                        <label for="employee_type">Search</label>
-                            <input type="text" class="form-control" id="pdfSearchInput" placeholder="Search PDF files">
+                        <label for="employee_type">{{ __('messages.search') }}</label>
+                            <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
                         </div>
                     </div>
                 </div>
@@ -121,12 +121,12 @@
                                     <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs">
                                         <li class="nav-item">
                                             <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                            Bulletin Board
+                                            {{ __('messages.buletin') }}
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                            Important
+                                            {{ __('messages.important') }}
                                             </a>
                                         </li>
                                     </ul>
@@ -216,7 +216,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="fileModalLabel">File Details</h5>
+                <h5 class="modal-title" id="fileModalLabel">{{ __('messages.file_details') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -235,11 +235,11 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.download') }}</td>
-                                        <td class="publish_date"><a id="downloadLink" href="#" download>Download</a></td>
+                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.preview') }}</td>
-                                        <td class="target_user"><a href="#" id="previewLink" target="_blank">Preview</a></td>
+                                        <td class="target_user"><a href="#" id="previewLink" target="_blank">{{ __('messages.preview') }}</a></td>
                                     </tr>
                                 </table>
                             </div>

@@ -53,9 +53,9 @@
                                 <div class="form-group">
                                     <label for="employee_type">{{ __('messages.employee_type') }}</label>
                                     <select name="employee_type" class="form-control" id="employee_type">
-                                        <option value=''>Select the employee type</option>
-                                        <option value='0'>All</option>
-                                         <option value='1'>Retired Employee</option>
+                                        <option value=''>{{ __('messages.select_the_employee_type') }}</option>
+                                        <option value='0'>{{ __('messages.all') }}</option>
+                                         <option value='1'>{{ __('messages.retired_employee') }}</option>
                                    </select>
                                 </div>
                             </div>                       
@@ -115,7 +115,7 @@
                                     <tbody>
                                     <!-- Placeholder row for "No data available" message -->
                                     <tr id="no-data-row">
-                                        <td colspan="10" class="text-center">No data available.</td>
+                                        <td colspan="10" class="text-center">{{ __('messages.no_data_avaliable') }}</td>
                                     </tr>
                                     <!-- Actual data rows will be inserted here dynamically -->
                                 </tbody>

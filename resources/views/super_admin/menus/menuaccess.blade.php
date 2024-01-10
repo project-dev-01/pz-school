@@ -79,7 +79,7 @@
 
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit" name="getmenus" value="get">
-                            GET MENUS
+                            {{ __('messages.get_menus') }}
                             </button>
                         </div>
                         
@@ -93,8 +93,8 @@
                                 <tr>
                                     <th>#</th>
 									<th>{{ __('messages.name') }}</th>
-									<th>Access</th>
-                                    <th>Denied</th>
+									<th>{{ __('messages.access') }}</th>
+                                    <th>{{ __('messages.denied') }}</th>
                                     
                                 </tr>
                             </thead>
@@ -114,8 +114,8 @@
                                         <input type="hidden" name="menuaccess_id[{{$menu['menu_id']}}]" value="{{ $menu['menuaccess_id'] }}" >                                            
                                         <input type="hidden" name="act[{{$menu['menu_id']}}]" value="{{ $act }}" >
                                     </th>
-									<th><input type="radio"  name="accessdenied[{{$menu['menu_id']}}]" class="mainmenu{{ $i }}" onclick="mainmenu({{ $i }},'A')" value="Access" {{ $acbtn }}> Access</th>
-                                    <th><input type="radio"  name="accessdenied[{{$menu['menu_id']}}]" class="mainmenu{{ $i }}"onclick="mainmenu({{ $i }},'D')" value="Denied" {{ $debtn }}> Denied</th>
+									<th><input type="radio"  name="accessdenied[{{$menu['menu_id']}}]" class="mainmenu{{ $i }}" onclick="mainmenu({{ $i }},'A')" value="Access" {{ $acbtn }}> {{ __('messages.access') }}</th>
+                                    <th><input type="radio"  name="accessdenied[{{$menu['menu_id']}}]" class="mainmenu{{ $i }}"onclick="mainmenu({{ $i }},'D')" value="Denied" {{ $debtn }}> {{ __('messages.denied') }}</th>
                                     
                                 </tr>
                                     @php $k=0;@endphp
@@ -134,8 +134,8 @@
                                             <input type="hidden" name="menuaccess_id[{{$menu1['menu_id']}}]" value="{{ $menu1['menuaccess_id'] }}" >                                            
                                             <input type="hidden" name="act[{{$menu1['menu_id']}}]" value="  {{ $act}}" >
                                         </th>
-                                        <th><input type="radio"  name="accessdenied[{{$menu1['menu_id']}}]"  onclick="submenu({{ $i }}{{ $k }},'A')" value="Access"  {{ $acbtn }}> Access</th>
-                                        <th><input type="radio"  name="accessdenied[{{$menu1['menu_id']}}]"  onclick="submenu({{ $i }}{{ $k }},'D')" value="Denied" {{ $debtn }}> Denied</th>
+                                        <th><input type="radio"  name="accessdenied[{{$menu1['menu_id']}}]"  onclick="submenu({{ $i }}{{ $k }},'A')" value="Access"  {{ $acbtn }}>{{ __('messages.access') }}</th>
+                                        <th><input type="radio"  name="accessdenied[{{$menu1['menu_id']}}]"  onclick="submenu({{ $i }}{{ $k }},'D')" value="Denied" {{ $debtn }}>{{ __('messages.denied') }}</th>
                                         
                                     </tr>
                                     
@@ -156,8 +156,8 @@
                                                     <input type="hidden" name="act[{{$menu2['menu_id']}}]" value="{{$act}}" >
                                                 </th>                                                
                                                 <th>{{ __("messages.".$menu2['menu_name']) }}</th>
-                                                <th><input type="radio"  name="accessdenied[{{$menu2['menu_id']}}]"  onclick="childmenu({{ $i }}{{ $k }}{{ $j }},'A')" value="Access"  {{ $acbtn }}> Access</th>
-                                                <th><input type="radio"  name="accessdenied[{{$menu2['menu_id']}}]"  onclick="childmenu({{ $i }}{{ $k }}{{ $j }},'D')" value="Denied" {{ $debtn }}> Denied</th>
+                                                <th><input type="radio"  name="accessdenied[{{$menu2['menu_id']}}]"  onclick="childmenu({{ $i }}{{ $k }}{{ $j }},'A')" value="Access"  {{ $acbtn }}>{{ __('messages.access') }}</th>
+                                                <th><input type="radio"  name="accessdenied[{{$menu2['menu_id']}}]"  onclick="childmenu({{ $i }}{{ $k }}{{ $j }},'D')" value="Denied" {{ $debtn }}>{{ __('messages.denied') }}</th>
                                                 
                                             </tr>
                                             @endif
@@ -174,7 +174,7 @@
                         <input type="hidden" name="branch_id" value="{{ @$branch_id}}">
                         @if(isset($branch_id))
                         <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" type="button" data-toggle="modal" data-target="#confirm">Set Permission</button>
+                        <button class="btn btn-primary-bl waves-effect waves-light" type="button" data-toggle="modal" data-target="#confirm">{{ __('messages.set_permission') }}</button>
                         </div>
                         @endif
                         <!-- Trigger the modal with a button -->
@@ -186,20 +186,20 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-      <h4 class="modal-title">Menu Access Permission</h4>
+      <h4 class="modal-title">{{ __('messages.menu_access_permission') }}</h4>
       <button type="button" class="close" data-dismiss="modal">&times;</button>
         
       </div>
       <div class="modal-body">
-        <h4>Are You Confirm To Set Access Permission</h4>
+        <h4>{{ __('messages.are_ypu_confirm') }}</h4>
       </div>
       <!--<div class="modal-footer">
       <button name="submit" name="set" value="update" class="btn btn-success btn-lg"> Update </button>
       <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>                 
       </div>-->
       <div class="modal-footer">
-      <button type="button" class="btn btn-light" data-dismiss="modal" name="set" value="update">Close</button>
-      <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+      <button type="button" class="btn btn-light" data-dismiss="modal" name="set" value="update">{{ __('messages.close') }}Close</button>
+      <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}Update</button>
       </div>
     </div>
 

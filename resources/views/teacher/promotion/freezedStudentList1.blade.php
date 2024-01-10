@@ -105,7 +105,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Promoted Student List<h4>
+                        <h4 class="navv">{{ __('messages.promoted_student_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -116,10 +116,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th >Id</th>
-                                        <th>Department</th>
-                                        <th>Grade</th>
-                                        <th>Data Status</th>
+                                        <th>{{ __('messages.id') }}</th>
+                                        <th>{{ __('messages.department') }}</th>
+                                        <th>{{ __('messages.grade') }}</th>
+                                        <th>{{ __('messages.data_status') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
@@ -143,7 +143,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Unassigned Student List<h4>
+                        <h4 class="navv">{{ __('messages.unassigned_student_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -151,14 +151,14 @@
                         <table class="table table-bordered w-100" id="unassignedPromotionStudentList">
                             <thead>
                                 <tr>
-                                    <th>Attendance No</th>
-                                    <th>Student Name</th>
-                                    <th>Student Number</th>
-                                    <th>Dept</th>
-                                    <th>Grade</th>
-                                    <th>Class</th>
-                                    <th>Admission Date</th>
-                                    <th>Status</th>
+                                    <th>{{ __('messages.attendance_no') }}</th>
+                                    <th>{{ __('messages.student_name') }}</th>
+                                    <th>{{ __('messages.student_number') }}</th>
+                                    <th>{{ __('messages.dept') }}</th>
+                                    <th>{{ __('messages.grade') }}</th>
+                                    <th>{{ __('messages.class') }}</th>
+                                    <th>{{ __('messages.admission_date') }}</th>
+                                    <th>{{ __('messages.status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

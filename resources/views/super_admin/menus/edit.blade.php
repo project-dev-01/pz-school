@@ -169,7 +169,7 @@
                         <div class="form-group text-right m-b-0">
                             <input type="hidden" autocomplete="off" name="menu_id" class="form-control " placeholder="{{ __('messages.enter_menu_url') }}" id="menu_id" value="{{@$MenuDetails['menu_id']}}" required>
                                    
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit"> Update </button>
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">{{ __('messages.update') }}</button>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
                                     </button>-->

@@ -222,7 +222,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Promoted Student List<h4>
+                        <h4 class="navv">{{ __('messages.promoted_student_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -233,18 +233,18 @@
                             <table class="table table-bordered w-100" id="promotionDataStudentList">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th >Id</th>
-                                        <th>Attendance No</th>
-                                        <th>Student Name</th>
-                                        <th>Student Number</th>
-                                        <th>Current Dept</th>
-                                        <th>Current Grade</th>
-                                        <th>Current Class</th>
-                                        <th style="background-color: orange;">Promoted Dept</th>
-                                        <th style="background-color: orange;">Promoted Grade</th>
-                                        <th style="background-color: orange;">Promoted Class</th>
-                                        <th>status</th>
+                                            <th>#</th>
+											<th>{{ __('messages.id') }}</th>
+											<th>{{ __('messages.attendance_no') }}</th>
+											<th>{{ __('messages.student_name') }}</th>
+											<th>{{ __('messages.student_number') }}</th>
+											<th>{{ __('messages.current_dept') }}</th>
+											<th>{{ __('messages.current_grade') }}</th>
+											<th>{{ __('messages.current_class') }}</th>
+											<th style="background-color: orange;">{{ __('messages.promoted_dept') }}</th>
+											<th style="background-color: orange;">{{ __('messages.promoted_grade') }}</th>
+											<th style="background-color: orange;">{{ __('messages.promoted_class') }}</th>
+											<th>{{ __('messages.status') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -267,7 +267,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Unassigned Student List<h4>
+                        <h4 class="navv">{{ __('messages.unassigned_student_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -275,15 +275,15 @@
                         <table class="table table-bordered w-100" id="unassignedStudentList">
                             <thead>
                                 <tr>
-                                   <th>#</th>
-                                    <th>Attendance No</th>
-                                    <th>Student Name</th>
-                                    <th>Student Number</th>
-                                    <th>Dept</th>
-                                    <th>Grade</th>
-                                    <th>Class</th>
-                                    <th>Admission Date</th>
-                                    <th>Status</th>
+                                        <th>#</th>
+										<th>{{ __('messages.attendance_no') }}</th>
+										<th>{{ __('messages.student_name') }}</th>
+										<th>{{ __('messages.student_number') }}</th>
+										<th>{{ __('messages.dept') }}</th>
+										<th>{{ __('messages.grade') }}</th>
+										<th>{{ __('messages.class') }}</th>
+										<th>{{ __('messages.admission_date') }}</th>
+										<th>{{ __('messages.status') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -302,7 +302,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Termination Student List<h4>
+                        <h4 class="navv">{{ __('messages.termination_student_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -310,14 +310,15 @@
                         <table class="table w-100 nowrap" id="terminationStudentList">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Attendance No</th>
-                                    <th>Student Name</th>
-                                    <th>Student Number</th>
-                                    <th>Dept</th>
-                                    <th>Grade</th>
-                                    <th>Class</th>
-                                    <th>Termination Date</th>
+                                        <th>#</th>
+										<th>{{ __('messages.attendance_no') }}</th>
+										<th>{{ __('messages.student_name') }}</th>
+										<th>{{ __('messages.student_number') }}</th>
+										<th>{{ __('messages.dept') }}</th>
+										<th>{{ __('messages.grade') }}</th>
+										<th>{{ __('messages.class') }}</th>
+										<th>{{ __('messages.admission_date') }}</th>
+										<th>{{ __('messages.termination_date') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

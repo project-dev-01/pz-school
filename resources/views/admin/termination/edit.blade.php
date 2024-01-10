@@ -302,7 +302,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">Edit Termination</h4>
+                <h4 class="page-title">{{ __('messages.edit_termination') }}</h4>
             </div>
         </div>
     </div>
@@ -319,7 +319,7 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="navv">
-                                    Termination {{ __('messages.details') }}
+                                    {{ __('messages.termination_details') }}
                                     <h4>
                             </li>
                         </ul><br>
@@ -338,8 +338,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Control Number<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" value="230089" disabled name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.control_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" value="230089" disabled name="school_last_attended" placeholder="{{ __('messages.enter_control_number') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -357,7 +357,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="date_of_birth">Scheduled date of Termination</label>
+                                        <label for="date_of_birth">{{ __('messages.scheduled_date_of_termination') }}</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" class="form-control" disabled id="date_of_birth" disabled name="date_of_birth" value="2023-12-02"  placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">
@@ -370,53 +370,53 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Resaon for Transfer<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" disabled value="Job Transfer"  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.reason_for_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" disabled value="Job Transfer"  name="school_last_attended" placeholder="{{ __('messages.enter_reason_for_transfer') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Transfer Destination School Name<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" disabled value="KMHHS"  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.transfer_destination_school_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" disabled value="KMHHS"  name="school_last_attended" placeholder="{{ __('messages.enter_transfer_destination_school_name') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Transfer Destination TEL<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" disabled value="+91-6716767210"  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" disabled value="+91-6716767210"  name="school_last_attended" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Parent/Guardian Phone Number after Transfer<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" disabled value="+91-8987819812"  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" disabled value="+91-8987819812"  name="school_last_attended" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Parent Email Address after Transfer<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="school_last_attended" disabled value="michael@gamil.com"  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="school_last_attended">{{ __('messages.parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="school_last_attended" disabled value="michael@gamil.com"  name="school_last_attended" placeholder="{{ __('messages.enter_parent_email_address_after_transfer') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Parent Address after Transfer<span class="text-danger">*</span></label>
-                                        <textarea type="textarea" class="form-control" id="school_last_attended" disabled  name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">32 NT St, Johor, Malaysia</textarea>
+                                        <label for="school_last_attended">{{ __('messages.parent_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <textarea type="textarea" class="form-control" id="school_last_attended" disabled  name="school_last_attended" placeholder="{{ __('messages.enter_parent_address_after_transfer') }}" aria-describedby="inputGroupPrepend">32 NT St, Johor, Malaysia</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="school_last_attended">Status<span class="text-danger">*</span></label>
+                                        <label for="school_last_attended">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                         <select id="changeStdName" disabled class="form-control" name="changeStdName">
-                                        <option value="">Select Status</option>
-                                        <option selected value="">Approved</option>
-                                        <option value="">Pending</option>
-                                        <option value="">Rejected</option>
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option selected value="">{{ __('messages.approved') }}</option>
+                                        <option value="">{{ __('messages.pending') }}</option>
+                                        <option value="">{{ __('messages.rejected') }}</option>
                                     </select></div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="date_of_birth">Date of Termination</label>
+                                        <label for="date_of_birth">{{ __('messages.date_of_termination') }}</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" class="form-control"  id="date_of_birth" name="date_of_birth" value="2023-12-22"  placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">

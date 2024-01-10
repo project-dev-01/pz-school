@@ -43,7 +43,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Students List
+                    <h4 class="navv">{{ __('messages.students_list') }}
                             <h4>
                     </li>
                 </ul>
@@ -52,12 +52,12 @@
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                    Students List
+                                {{ __('messages.students_list') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#profile1" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                    Setting Student Information
+                                {{ __('messages.setting_student_information') }}
                                 </a>
                             </li>
                         </ul>
@@ -194,7 +194,7 @@
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
                                                     <h4 class="nav-link">
-                                                        Setting Student Information
+                                                    {{ __('messages.setting_student_information') }}
                                                         <h4>
                                                 </li>
                                             </ul><br>
@@ -210,7 +210,7 @@
                                                                             <div class="checkbox checkbox-primary mb-2">
                                                                                 <input id="checkboxStudentDetails" name="checkboxStudentDetails" type="checkbox" {{ isset($get_student_download_settings['student_info']) ? $get_student_download_settings['student_info'] == "1" ? "checked" : "" : "" }}>
                                                                                 <label for="checkboxStudentDetails">
-                                                                                    Student Details
+                                                                                {{ __('messages.student_details') }}
                                                                                 </label>
                                                                             </div>
                                                                         </li>
@@ -218,7 +218,7 @@
                                                                             <div class="checkbox checkbox-primary mb-2">
                                                                                 <input id="checkboxParentDetails" name="checkboxParentDetails" type="checkbox" {{ isset($get_student_download_settings['parent_info']) ? $get_student_download_settings['parent_info'] == "1" ? "checked" : "" : "" }}>
                                                                                 <label for="checkboxParentDetails">
-                                                                                    Parent Details
+                                                                                {{ __('messages.parent_details') }}
                                                                                 </label>
                                                                             </div>
                                                                         </li>
@@ -234,7 +234,7 @@
                                                                             <div class="checkbox checkbox-primary mb-2">
                                                                                 <input id="checkboxAcademic" name="checkboxAcademic" type="checkbox" {{ isset($get_student_download_settings['grade_class_info']) ? $get_student_download_settings['grade_class_info'] == "1" ? "checked" : "" : "" }} onchange="updateCheckboxes(this)">
                                                                                 <label for="checkboxAcademic">
-                                                                                    Academic Details
+                                                                                {{ __('messages.academic_details') }}
                                                                                 </label>
                                                                             </div>
                                                                             <div class="card" style="background-color:#8adfee14;">
@@ -246,7 +246,7 @@
                                                                                                     <div class="checkbox checkbox-primary mb-2">
                                                                                                         <input id="checkboxGrade" name="checkboxGrade" type="checkbox" {{ isset($get_student_download_settings['academic_info']) ? $get_student_download_settings['academic_info'] == "1" ? "checked" : "" : "" }}>
                                                                                                         <label for="checkboxGrade">
-                                                                                                            Grade & Classes
+                                                                                                        {{ __('messages.grade') }}&{{ __('messages.classes') }}
                                                                                                         </label>
                                                                                                     </div>
                                                                                                 </li>
@@ -286,11 +286,11 @@
                                                                                                     <div class="checkbox checkbox-primary mb-2">
                                                                                                         <input id="checkboxAttendance" name="checkboxAttendance" type="checkbox" {{ isset($get_student_download_settings['attendance_info']) ? $get_student_download_settings['attendance_info'] == "1" ? "checked" : "" : "" }}>
                                                                                                         <label for="checkboxAttendance">
-                                                                                                            Attendance
+                                                                                                        {{ __('messages.attendance') }}
                                                                                                         </label>
                                                                                                     </div>
                                                                                                 </li>
-                                                                                                <li class="list-inline-item" style="margin-left: 20px;">
+                                                                                                <li class="list-inline-item" style="margin-left: 22px;">
                                                                                                     <select id="attendanceAcademic" name="attendanceAcademic" class="form-control" style="width: 200px;background-color: white;">
                                                                                                         @forelse($academic_year_list as $r)
                                                                                                         <option value="{{$r['id']}}" {{ isset($get_student_download_settings['attendance_academic_year']) ?  $get_student_download_settings['attendance_academic_year'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['name']}}</option>
@@ -306,11 +306,11 @@
                                                                                                     <div class="checkbox checkbox-primary mb-2">
                                                                                                         <input id="checkboxTestResult" name="checkboxTestResult" type="checkbox" {{ isset($get_student_download_settings['test_result_info']) ? $get_student_download_settings['test_result_info'] == "1" ? "checked" : "" : "" }}>
                                                                                                         <label for="checkboxTestResult">
-                                                                                                            Test Results
+                                                                                                        {{ __('messages.test_results') }}
                                                                                                         </label>
                                                                                                     </div>
                                                                                                 </li>
-                                                                                                <li class="list-inline-item" style="margin-left: 24px;">
+                                                                                                <li class="list-inline-item" style="margin-left: 18px;">
                                                                                                     <select id="testResultAcademic" name="testResultAcademic" class="form-control" style="width: 200px;background-color: white;">
                                                                                                         @forelse($academic_year_list as $r)
                                                                                                         <option value="{{$r['id']}}" {{ isset($get_student_download_settings['test_result_academic_year']) ?  $get_student_download_settings['test_result_academic_year'] == $r['id'] ? 'selected' : '' : "" }}>{{$r['name']}}</option>
@@ -352,7 +352,7 @@
                                                             <br>
                                                             <div class="form-group text-left m-b-0">
                                                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                                    Save
+                                                                {{ __('messages.save') }}
                                                                 </button>
                                                             </div>
                                                         </form>

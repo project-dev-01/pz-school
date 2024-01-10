@@ -10,7 +10,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Employee Master Import</h4>
+                <h4 class="page-title">{{ __('messages.employee_master_import') }}</h4>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <div class="card mb-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Employee Master Import<h4>
+                        <h4 class="nav-link">{{ __('messages.employee_master_import') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">

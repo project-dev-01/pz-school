@@ -16,7 +16,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Expense Import</h4>
+                <h4 class="page-title">{{ __('messages.expense_import') }}</h4>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
             <div class="card mb-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Expense Import
+                        <h4 class="nav-link">{{ __('messages.expense_import') }}
                             <h4>
                     </li>
                 </ul><br>

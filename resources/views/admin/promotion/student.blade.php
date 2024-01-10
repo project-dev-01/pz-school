@@ -98,7 +98,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">Student Promoted List<h4>
+                        <h4 class="navv">{{ __('messages.student_promoted_list') }}<h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -108,19 +108,19 @@
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
-                                        <th># Attendance No</th>
-                                        <th>Student Name</th>
-                                        <th>Student Number</th>
-                                        <th>Current Dept</th>
-                                        <th>Current Grade</th>
-                                        <th>Current Class</th>
-                                        <th>Current Semester</th>
-                                        <th>Current Session</th>
-                                        <th style="background-color: orange;">Promoted Dept</th>
-                                        <th style="background-color: orange;">Promoted Grade</th>
-                                        <th style="background-color: orange;">Promoted Class</th>
-                                        <th style="background-color: orange;">Promoted Semester</th>
-                                        <th style="background-color: orange;">Promoted Session</th>
+                                        <th># {{ __('messages.attendance_no') }}</th>
+                                        <th>{{ __('messages.student_name') }}</th>
+                                        <th>{{ __('messages.student_number') }}</th>
+                                        <th>{{ __('messages.current_dept') }}</th>
+                                        <th>{{ __('messages.current_grade') }}</th>
+                                        <th>{{ __('messages.current_class') }}</th>
+                                        <th>{{ __('messages.current_semester') }}</th>
+                                        <th>{{ __('messages.current_session') }}</th>
+                                        <th style="background-color: orange;">{{ __('messages.promoted_dept') }}</th>
+                                        <th style="background-color: orange;">{{ __('messages.promoted_grade') }}</th>
+                                        <th style="background-color: orange;">{{ __('messages.promoted_class') }}</th>
+                                        <th style="background-color: orange;">{{ __('messages.promoted_semester') }}</th>
+                                        <th style="background-color: orange;">{{ __('messages.promoted_session') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,7 +148,7 @@
                                     @endforeach
                                 @endforeach 
                                 @else
-                                <td colspan="14" class="text-center">No data available.</td>   
+                                <td colspan="14" class="text-center">{{ __('messages.no_data_available') }}</td>   
                                 @endif
                                     </tr>
                                 </tbody>
@@ -172,19 +172,19 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #10a084;">
-                <h4 class="modal-title" id="myCenterModalLabel">Are you sure?</h4>
+                <h4 class="modal-title" id="myCenterModalLabel">{{ __('messages.are_you_sure?') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="card-body">
                 <form id="attendanceForm">
                 <div class="form-group">
-                    <label for="attendanceNumber">Attendance Number<span class="text-danger">*</span></label>
-                    <input type="text" id="attendanceNumber" name="attendanceNumber" class="form-control" placeholder="Enter Attendance Number">
+                    <label for="attendanceNumber">{{ __('messages.attendance_number') }}<span class="text-danger">*</span></label>
+                    <input type="text" id="attendanceNumber" name="attendanceNumber" class="form-control" placeholder="{{ __('messages.enter_attendance_number') }}Enter Attendance Number">
                     <span class="text-danger error-text name_error"></span>
                 </div>
                 <div class="form-group text-right m-b-0">
-                    <button type="button" class="btn btn-success waves-effect waves-light" id="saveAttendanceBtn">Save</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success waves-effect waves-light" id="saveAttendanceBtn">{{ __('messages.save') }}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('messages.close') }}</button>
                 </div>
                 </form>
             </div>

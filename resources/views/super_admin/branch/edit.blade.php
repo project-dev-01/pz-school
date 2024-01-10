@@ -224,7 +224,7 @@
                     <ol class="breadcrumb m-0">
                     </ol>
                 </div>
-                <h4 class="page-title">Edit Branch</h4>
+                <h4 class="page-title">{{ __('messages.edit_branch') }}</h4>
             </div>
         </div>
     </div>
@@ -238,7 +238,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">Edit Branch <h4>
+                            <h4 class="navv">{{ __('messages.edit_branch') }}<h4>
                         </li>
                     </ul>
                     <div class="card-body">
@@ -295,7 +295,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="school_code">School Code</label>
+                                    <label for="school_code">{{ __('messages.school_code') }}</label>
                                     <input type="text" maxlength="50" name="school_code" value="{{$branch['school_code']}}" class="form-control" placeholder="{{ __('messages.enter_school_code') }}">
                                 </div>
                             </div>
@@ -315,7 +315,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                                    <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" value="{{$branch['mobile_no']}}" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
                                 </div>
                             </div>
@@ -329,7 +329,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="symbol">Currency Symbol<span class="text-danger">*</span></label>
+                                    <label for="symbol">{{ __('messages.currency_symbol') }}<span class="text-danger">*</span></label>
                                     <input type="text" maxlength="50" value="{{$branch['symbol']}}" name="symbol" class="form-control" placeholder="{{ __('messages.enter_currency_symbol') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
@@ -337,7 +337,7 @@
                                 <div class="form-group">
                                     <label for="country">{{ __('messages.country') }}</label>
                                     <select id="editGetCountry" class="form-control" name="country">
-                                        <option value="">Select Country</option>
+                                        <option value="">{{ __('messages.select_country') }}</option>
                                         @foreach($countries as $c)
                                         @if($branch['country_id'] == $c['id'])
                                         <option value="{{$c['id']}}" selected>{{$c['name']}}</option>
@@ -385,7 +385,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                                    <input type="text" class="form-control" value="{{$branch['post_code']}}" name="post_code" id="postCode" placeholder="000000">
+                                    <input type="text" class="form-control" value="{{$branch['post_code']}}" name="post_code" id="postCode" placeholder="{{ __('messages.zip_postal_code') }}">
                                 </div>
                             </div>
                         </div>
@@ -405,7 +405,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">{{ __('messages.address_line_1') }}<span class="text-danger">*</span></label>
-                                    <input class="form-control" name="address" value="{{$branch['address']}}" id="address" placeholder="johor">
+                                    <input class="form-control" name="address" value="{{$branch['address']}}" id="address" placeholder=">{{ __('messages.enter_address_line_1') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -419,10 +419,10 @@
                 </div>
                 <div class="form-group text-right m-b-0">
                     <button type="submit" class="btn btn-primary-bl waves-effect waves-light">
-                        Update
+                    {{ __('messages.update') }}
                     </button>
                     <a href="{{ route('branch.index') }}" class="btn btn-primary-bl waves-effect waves-light">
-                        Back
+                    {{ __('messages.back') }}
                     </a>
                 </div>
             </form>

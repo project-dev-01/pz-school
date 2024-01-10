@@ -193,10 +193,10 @@
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" id="selectAllchkbox"></th>
-                                        <th>#AttendanceNo</th>
+                                        <th>#{{ __('messages.attendance_no') }}</th>
                                         <th>{{ __('messages.student_name') }}</th>
                                         <!-- <th>{{ __('messages.register_no') }}</th> -->
-                                        <th>Student Number</th>
+                                        <th>{{ __('messages.student_number') }}</th>
                                         <th>{{ __('messages.promote_to_class') }}</th>
                                     </tr>
                                 </thead>

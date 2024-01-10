@@ -23,11 +23,11 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>{{ __('messages.from') }}<span class="text-danger">*</span></label>
-                                <input id="edittaskfromDate" name="edittaskfromDate" class="form-control taskfromDate" placeholder="YYYY-MM-DD">
+                                <input id="edittaskfromDate" name="edittaskfromDate" class="form-control taskfromDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                             </div>
                             <div class="col-sm-6">
                                 <label>{{ __('messages.to') }}<span class="text-danger">*</span></label>
-                                <input id="edittaskToDate" name="edittaskfromDate" class="form-control taskToDate" placeholder="YYYY-MM-DD">
+                                <input id="edittaskToDate" name="edittaskfromDate" class="form-control taskToDate" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                             </div>
                         </div>
                     </div>
@@ -35,18 +35,18 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>{{ __('messages.start_time') }}</label>
-                                <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="HH:MM">
+                                <input id="editTasktimeSlotStart" name="editTasktimeSlotStart" class="form-control" placeholder="{{ __('messages.hh_mm') }}">
                             </div>
                             <div class="col-sm-6">
                                 <label>{{ __('messages.end_time') }}</label>
-                                <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="HH:MM">
+                                <input id="editTasktimeSlotEnd" name="editTasktimeSlotEnd" class="form-control" placeholder="{{ __('messages.hh_mm') }}">
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-3">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input allDayCheck" id="editAllDayCheck">
-                            <label class="custom-control-label" for="editAllDayCheck">All day</label>
+                            <label class="custom-control-label" for="editAllDayCheck">{{ __('messages.all_day') }}</label>
                         </div>
                     </div>
                     <!-- <div class="form-group">

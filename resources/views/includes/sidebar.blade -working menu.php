@@ -1048,12 +1048,12 @@
                             </li>
                             <li>
                                 <a href="{{ route('admin.fees.expense.index')}}" class="nav-link {{ (request()->is('fees/import/expense/index')) ? 'active' : '' }}">
-                                    <span> Expense List</span>
+                                    <span>{{ __('messages.expense_list') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.fees.import')}}" class="nav-link {{ (request()->is('fees/import/expense')) ? 'active' : '' }}">
-                                    <span>Import Expense</span>
+                                    <span>{{ __('messages.import_expense') }}</span>
                                 </a>
                             </li>
                         </ul>

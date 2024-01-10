@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="school_code">School Code</label>
+                        <label for="school_code">{{ __('messages.school_code') }}</label>
                         <input type="text" maxlength="50" name="school_code" class="form-control" placeholder="{{ __('messages.enter_school_code') }}">
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="mobile_no">Mobile No<span class="text-danger">*</span></label>
+                        <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
                         <input type="number" class="form-control" name="mobile_no" id="mobile_no" data-parsley-trigger="change">
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="symbol">Currency Symbol<span class="text-danger">*</span></label>
+                        <label for="symbol">{{ __('messages.currency_symbol') }}<span class="text-danger">*</span></label>
                         <input type="text" maxlength="50" name="symbol" class="form-control" placeholder="{{ __('messages.enter_currency_symbol') }}" data-parsley-trigger="change">
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label for="country">{{ __('messages.country') }}</label>
                         <select id="getCountry" class="form-control" name="country">
-                            <option value="">Select Country</option>
+                            <option value="">{{ __('messages.select_country') }}</option>
                             @foreach($countries as $c)
                             <option value="{{$c['id']}}">{{$c['name']}}</option>
                             @endforeach
@@ -131,7 +131,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                        <input type="text" class="form-control" name="post_code" id="postCode" placeholder="000000">
+                        <input type="text" class="form-control" name="post_code" id="postCode" placeholder="{{ __('messages.zip_postal_code') }}">
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="address">{{ __('messages.address_line_1') }}<span class="text-danger">*</span></label>
-                        <input class="form-control" name="address" id="address" placeholder="johor">
+                        <input class="form-control" name="address" id="address" placeholder="{{ __('messages.enter_address_line_1') }}">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -180,7 +180,7 @@
                                     <span class="far fa-envelope-open"></span>
                                 </div>
                             </div>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="aa@gmail.com">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="{{ __('messages.enter_your_email') }}">
                         </div>
                     </div>
                 </div>
