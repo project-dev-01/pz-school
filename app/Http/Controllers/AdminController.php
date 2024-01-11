@@ -1773,6 +1773,8 @@ class AdminController extends Controller
             $passport_extension = $passport_file->getClientOriginalExtension();
         }
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             'id' => $request->id,
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
@@ -4504,7 +4506,8 @@ class AdminController extends Controller
     public function subjectmarks(Request $request)
     {
         $data = [
-
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             "subjectmarks" => $request->subjectmarks,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
@@ -4719,6 +4722,8 @@ class AdminController extends Controller
         }
 
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             'year' => $request->year,
             'parent_id' => $request->parent_id,
             'student_id' => $request->student_id,
@@ -5904,6 +5909,8 @@ class AdminController extends Controller
     public function addEmployeeAttendance(Request $request)
     {
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             'employee' => $request->employee,
             'session_id' => $request->session_id,
             'attendance' => $request->attendance,
@@ -6025,6 +6032,8 @@ class AdminController extends Controller
         // print_r($request);
 
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             "attendance" => $request->attendance,
             "date" => $request->date,
             "class_id" => $request->class_id,
@@ -8730,6 +8739,39 @@ class AdminController extends Controller
         /*return view('admin.activity_monitoring.index', [
             'activity_list' => !empty($activity_list['data']) ? $activity_list['data'] : []
         ]);*/
+    }
+    public function logmodifydatas()
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        $modifyusers = Helper::GetMethod(config('constants.api.getlogmodifyusers'));
+        $modifytables = Helper::GetMethod(config('constants.api.getlogmodifytables'));
+        $data = [
+            'status' => "All"
+        ];
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        //dd($modifytables);
+        return view(
+            'admin.activity_monitoring.logmodifydatas',
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'modifyusers' => isset($modifyusers['data']) ? $modifyusers['data'] : [],
+                'modifytables' => isset($modifytables['data']) ? $modifytables['data'] : [],
+            ]
+        );
+    }
+    public function log_modifylist(Request $request)
+    {
+        $data = [
+            'branch_id' => session()->get('branch_id'),
+            'user_id' => $request->user_id,            
+            'tablename' => $request->tablename,
+            'frm_ldate' => date('Y-m-d', strtotime($request->frm_ldate)),
+            'to_ldate' => date('Y-m-d', strtotime($request->to_ldate))
+        ];
+        $activity_list = Helper::GETMethodWithData(config('constants.api.log_modifylist'), $data);
+       
+        return $activity_list;
+       
     }
     public function menuaccess()
     {

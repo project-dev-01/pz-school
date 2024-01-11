@@ -3310,12 +3310,14 @@ class PdfController extends Controller
 			$output = "<!DOCTYPE html>";
 			$output .= "<html><head>";
 			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>
-			.table td,
-			.table th {
-            padding: 2px;
-            text-align: center;
-			}
+			$output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+         } 
 			
 			.table {
             width: 100%;
@@ -3615,13 +3617,14 @@ class PdfController extends Controller
             $output = "<!DOCTYPE html>";
             $output .= "<html><head>";
             $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-            $output .= '<style>
-			.table td,
-			.table th {
-            padding: 2px;
-            text-align: center;
-			}
-			
+            $output .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $output .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+            } 			
 			.table {
             width: 100%;
             margin-bottom: 1px;
@@ -4148,12 +4151,15 @@ class PdfController extends Controller
 			$output = "<!DOCTYPE html>";
 			$output .= "<html><head>";
 			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>
-			.table td,
-			.table th {
-            padding: 2px;
-            text-align: center;
-			}
+			$output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+       
 			
 			.table {
             width: 100%;
@@ -4514,12 +4520,15 @@ class PdfController extends Controller
 			$output = "<!DOCTYPE html>";
 			$output .= "<html><head>";
 			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>
-			.table td,
-			.table th {
-            padding: 2px;
-            text-align: center;
-			}
+			$output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+       
 			
 			.table {
             width: 100%;
@@ -4862,13 +4871,14 @@ class PdfController extends Controller
                 $output = "<!DOCTYPE html>";
                 $output .= "<html><head>";
                 $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-                $output .= '<style>
-                .table td,
-                .table th {
-                padding: 2px;
-                text-align: center;
-                }
-                
+                $output .= '<style>';
+                // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+                $output .= '@font-face {
+                    font-family: ipag;
+                    font-style: normal;
+                    font-weight: normal;
+                    src: url("' . $fonturl . '");
+                } 
                 .table {
                 width: 100%;
                 margin-bottom: 1px;
@@ -5234,12 +5244,15 @@ class PdfController extends Controller
                 $output = "<!DOCTYPE html>";
                 $output .= "<html><head>";
                 $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-                $output .= '<style>
-                .table td,
-                .table th {
-                padding: 2px;
-                text-align: center;
-                }
+                $output .= '<style>';
+                // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+                $output .= '@font-face {
+                    font-family: ipag;
+                    font-style: normal;
+                    font-weight: normal;
+                    src: url("' . $fonturl . '");
+                } 
+               
                 
                 .table {
                 width: 100%;

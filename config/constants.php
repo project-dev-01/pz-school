@@ -1015,7 +1015,10 @@ return [
         'bulletinBoard_Dashboard' =>  $url.'/bulletinBoard_Dashboard',
         'settings_attendance_report' => $url.'/settings_attendance_report',
         'get_settings_attendance_report' => $url.'/get_settings_attendance_report',
-
+        'getlogmodifyusers' => $url.'/getlogmodifyusers',
+        'getlogmodifytables' => $url.'/getlogmodifytables',
+        'log_modifylist'=> $url.'/log_modifylist',
+        
       ]
 
 ];

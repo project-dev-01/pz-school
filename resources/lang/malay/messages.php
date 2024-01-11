@@ -1905,5 +1905,7 @@ return [
     "grade_teacher_sign" => "Grade teacher sign",
     "student_council_activities" => "Student Council Activities",
     "Attendance_records" => "Attendance Records",
-    "student_attendance_report_settings" => "Attendance Report Settings"
+    "student_attendance_report_settings" => "Attendance Report Settings",
+    "studentstaff"=>" Student / Staff",
+     "modify_table"=>" Modify Table",
 ];

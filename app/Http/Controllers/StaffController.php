@@ -1591,6 +1591,8 @@ class StaffController extends Controller
     public function addEmployeeAttendance(Request $request)
     {
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             'employee' => $request->employee,
             'session_id' => $request->session_id,
             'attendance' => $request->attendance,

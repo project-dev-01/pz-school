@@ -931,6 +931,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         //Activity Monitoring
         Route::get('log_activity', [AdminController::class, 'logactivity'])->name('admin.logactivity');
         Route::get('log_activity/list', [AdminController::class, 'login_activity'])->name('admin.login_activity.list');
+        //Log Datas Monitoring
+        Route::get('log_modifydatas', [AdminController::class, 'logmodifydatas'])->name('admin.logmodifydatas');
+        Route::get('log_modify/list', [AdminController::class, 'log_modifylist'])->name('admin.log_modify.list');
 
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('admin.clear_local_storage');
 

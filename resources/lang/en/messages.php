@@ -1731,7 +1731,7 @@ return [
     "new_content" => "After Mofidication",
     "modify_date" => "Modify Date",
     "modifiedby" => "Modified By",
-
+    "modify_datas"=>"Data Modification",
     "created_date" => "Created Date",
 
     "exam_report" => "Exam Report",
@@ -1911,6 +1911,7 @@ return [
     "link"  => "Url",
     "edit_shortcut" => "Edit Shortcut Link",
     "delete_this_shortcut" => "You want to Delete this Shortcut Link",
-    "student_attendance_report_settings" => "Attendance Report Settings"
-
+    "student_attendance_report_settings" => "Attendance Report Settings",
+    "studentstaff"=>" Student / Staff",
+    "modify_table"=>" Modify Table",
 ];

@@ -1330,6 +1330,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.logmodifydatas')}}" class="nav-link {{ (request()->is('admin/logmodifydatas*')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.user_modify_report') }}</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.clear_local_storage')}}" class="nav-link {{ (request()->is('admin/clear_local_storage')) ? 'active' : '' }}">
                                     <span> {{ __('messages.clear_local_storage') }} </span>
                                 </a>
