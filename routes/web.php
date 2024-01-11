@@ -804,6 +804,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
         Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
+        Route::get('student_attendance_report_settings', [AdminController::class, 'studentAttendanceReportStg'])->name('admin.student_attendance_report');
 
         // Soap routes
         Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');

@@ -77,7 +77,9 @@
                 </li>
                 <li>
                     <a href="#sidebarmenu" data-toggle="collapse">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="#C4C7D2"  viewBox="0 0 50 50" width="50px" height="50px"><path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#C4C7D2" viewBox="0 0 50 50" width="50px" height="50px">
+                            <path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z" />
+                        </svg>
                         <span>{{ __('messages.menus') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
@@ -220,6 +222,16 @@
                                         <li>
                                             <a href="{{ route('admin.student.import')}}" class="nav-link {{ (request()->is('admin/student/import')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.student_bulk_upload') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.graduates.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.graduates_list') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
+                                            <a href="{{ route('admin.student.picture')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.student_picture_upload') }}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -743,6 +755,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.exam.import')}}" class="nav-link {{ (request()->is('admin/test_result*')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.exam_import') }}</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.paper_wise_result')}}" class="nav-link {{ (request()->is('admin/exam_results/paper_wise_result')) ? 'active' : '' }}">
                                     <span> {{ __('messages.exam_paper_result') }} </span>
                                 </a>
@@ -753,6 +770,11 @@
                                 </a>
                                 <div class="collapse" id="sidebarResult">
                                     <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('admin.exam_results.byreport')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
+                                                <span>{{ __('messages.export_examresult') }}</span>
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="{{ route('admin.exam_results.byclass')}}" class="nav-link {{ (request()->is('admin/exam_results')) ? 'active' : '' }}">
                                                 <span>{{ __('messages.by_class') }}</span>
@@ -966,9 +988,10 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.retired_person')}}" class="nav-link {{ (request()->is('admin/retired_person*')) ? 'active' : '' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 446 511.89">
-                        <path fill="#C4C7D2" d="M35.61 13.26a32.08 32.08 0 00-5.74 23.93l42.95 266.86a32.09 32.09 0 0010.87 19.4c5.69 4.86 13.07 7.72 20.88 7.71h2.85v.1h42.86l-39.66 110.78c-18.8-8.04-36.06-18.34-50.93-30.87-6.17-5.19-12.01-10.9-17.45-17.09-8.76-10.02-24-11.03-34.01-2.27-10.02 8.77-11.03 24-2.27 34.01 6.88 7.84 14.51 15.25 22.74 22.19 51.08 43.04 123.58 64.33 195.41 63.87 71.99-.47 144.12-22.72 194.27-66.75 7.77-6.83 15.13-14.31 21.97-22.43 8.56-10.17 7.24-25.36-2.93-33.91-10.17-8.56-25.35-7.24-33.91 2.93-5.04 5.98-10.7 11.71-16.88 17.13-7.62 6.7-15.9 12.77-24.72 18.24l-31.11-95.83h32.23c8.91 0 16.98-3.61 22.81-9.44 5.82-5.83 9.43-13.9 9.43-22.81 0-8.91-3.61-16.98-9.44-22.81-5.83-5.82-13.89-9.43-22.8-9.43H221.51l28.77-63.82h88.3c5.28 0 10.05-2.14 13.5-5.58 3.45-3.45 5.59-8.23 5.59-13.5 0-5.28-2.14-10.06-5.59-13.51a19.062 19.062 0 00-13.5-5.58H115.52L93.36 27.11c-1.38-8.75-6.21-16.14-12.86-20.97A32.124 32.124 0 0056.57.4c-8.75 1.38-16.13 6.21-20.96 12.86zm158.75 35.91l-18.51-4.96-29.14 108.26h19.39l28.26-103.3zm52.89 93.87c11.28 3.03 22.91-3.67 25.93-14.96 3.03-11.29-3.68-22.92-14.97-25.93-11.3-3.02-22.92 3.68-25.94 14.97-3.02 11.29 3.7 22.9 14.98 25.92zm67.96 9.43l22.6-84.61-131.14-35.14-32.21 119.75h19.31l20.97-77.86c9.33 2.5 18.98-3.09 21.48-12.42l61.8 16.55c-2.5 9.35 3.06 19 12.4 21.5l-13.94 52.23h18.73zM148.04 454.65l44.21-123.39h97.05l37.13 113.5c-31.5 12.4-66.92 18.72-102.51 18.95-25.79.16-51.56-2.86-75.88-9.06zm-23.05-251.7h83.48l-28.76 63.82h-47.77l-10.27-63.82h3.32z"/></svg>
-                        
+                        <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 446 511.89">
+                            <path fill="#C4C7D2" d="M35.61 13.26a32.08 32.08 0 00-5.74 23.93l42.95 266.86a32.09 32.09 0 0010.87 19.4c5.69 4.86 13.07 7.72 20.88 7.71h2.85v.1h42.86l-39.66 110.78c-18.8-8.04-36.06-18.34-50.93-30.87-6.17-5.19-12.01-10.9-17.45-17.09-8.76-10.02-24-11.03-34.01-2.27-10.02 8.77-11.03 24-2.27 34.01 6.88 7.84 14.51 15.25 22.74 22.19 51.08 43.04 123.58 64.33 195.41 63.87 71.99-.47 144.12-22.72 194.27-66.75 7.77-6.83 15.13-14.31 21.97-22.43 8.56-10.17 7.24-25.36-2.93-33.91-10.17-8.56-25.35-7.24-33.91 2.93-5.04 5.98-10.7 11.71-16.88 17.13-7.62 6.7-15.9 12.77-24.72 18.24l-31.11-95.83h32.23c8.91 0 16.98-3.61 22.81-9.44 5.82-5.83 9.43-13.9 9.43-22.81 0-8.91-3.61-16.98-9.44-22.81-5.83-5.82-13.89-9.43-22.8-9.43H221.51l28.77-63.82h88.3c5.28 0 10.05-2.14 13.5-5.58 3.45-3.45 5.59-8.23 5.59-13.5 0-5.28-2.14-10.06-5.59-13.51a19.062 19.062 0 00-13.5-5.58H115.52L93.36 27.11c-1.38-8.75-6.21-16.14-12.86-20.97A32.124 32.124 0 0056.57.4c-8.75 1.38-16.13 6.21-20.96 12.86zm158.75 35.91l-18.51-4.96-29.14 108.26h19.39l28.26-103.3zm52.89 93.87c11.28 3.03 22.91-3.67 25.93-14.96 3.03-11.29-3.68-22.92-14.97-25.93-11.3-3.02-22.92 3.68-25.94 14.97-3.02 11.29 3.7 22.9 14.98 25.92zm67.96 9.43l22.6-84.61-131.14-35.14-32.21 119.75h19.31l20.97-77.86c9.33 2.5 18.98-3.09 21.48-12.42l61.8 16.55c-2.5 9.35 3.06 19 12.4 21.5l-13.94 52.23h18.73zM148.04 454.65l44.21-123.39h97.05l37.13 113.5c-31.5 12.4-66.92 18.72-102.51 18.95-25.79.16-51.56-2.86-75.88-9.06zm-23.05-251.7h83.48l-28.76 63.82h-47.77l-10.27-63.82h3.32z" />
+                        </svg>
+
                         <span> {{ __('messages.retired_persons') }} </span>
                     </a>
                 </li>
@@ -1242,6 +1265,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.student_attendance_report')}}" class="nav-link {{ (request()->is('admin/student_attendance_report_settings')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.student_attendance_report_settings') }} </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.form_field')}}" class="nav-link {{ (request()->is('admin/form_field*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.form_field') }} </span>
                                 </a>
@@ -1281,10 +1309,14 @@
                 </li>
                 <li class="{{  (request()->is('admin/logactivity*') || request()->is('admin/clear_local_storage')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebaractivity" data-toggle="collapse">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve" style="width: 15px;">
-                            <g><g><g>
-                            <path fill="#C4C7D2" d="M20.1,10.7c-4.6,1.6-7.9,5-9.4,9.6C10,22.4,9.9,32.4,10,129l0.1,106.4l1.2,2.3c1.4,3,4.2,5.7,7.2,7.2l2.3,1.2h107.3h107.3l2.3-1.2c3-1.4,5.7-4.2,7.2-7.2l1.2-2.3V128.1V20.8l-1.2-2.3c-1.4-3-4.2-5.7-7.2-7.2l-2.3-1.2l-106.6-0.1C32.7,10,22,10,20.1,10.7z M216.7,76.4v36.9H198h-18.7l-10.7,16.2c-5.9,8.9-10.8,16.1-11,16.1c-0.1,0-12.7-18.7-27.9-41.5c-15.2-22.9-28.2-42-28.8-42.5c-1.6-1.2-3.5-1.1-5.1,0.4c-0.8,0.7-8.9,12.6-18,26.3l-16.6,25.1H50.3H39.5V76.4V39.5h88.6h88.6V76.4z M126.5,152.1c15.2,22.9,28.2,42,28.8,42.5c1.3,1.1,3.2,1.1,4.6,0.1c0.6-0.4,8.7-12.2,18.1-26.3l17-25.6h10.8h10.8v36.9v36.9h-88.6H39.5v-36.9v-36.9h18.7h18.7l10.7-16.2c5.9-8.9,10.8-16.1,11-16.1C98.7,110.6,111.2,129.3,126.5,152.1z"/>
-                            </g></g></g>
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve" style="width: 15px;">
+                            <g>
+                                <g>
+                                    <g>
+                                        <path fill="#C4C7D2" d="M20.1,10.7c-4.6,1.6-7.9,5-9.4,9.6C10,22.4,9.9,32.4,10,129l0.1,106.4l1.2,2.3c1.4,3,4.2,5.7,7.2,7.2l2.3,1.2h107.3h107.3l2.3-1.2c3-1.4,5.7-4.2,7.2-7.2l1.2-2.3V128.1V20.8l-1.2-2.3c-1.4-3-4.2-5.7-7.2-7.2l-2.3-1.2l-106.6-0.1C32.7,10,22,10,20.1,10.7z M216.7,76.4v36.9H198h-18.7l-10.7,16.2c-5.9,8.9-10.8,16.1-11,16.1c-0.1,0-12.7-18.7-27.9-41.5c-15.2-22.9-28.2-42-28.8-42.5c-1.6-1.2-3.5-1.1-5.1,0.4c-0.8,0.7-8.9,12.6-18,26.3l-16.6,25.1H50.3H39.5V76.4V39.5h88.6h88.6V76.4z M126.5,152.1c15.2,22.9,28.2,42,28.8,42.5c1.3,1.1,3.2,1.1,4.6,0.1c0.6-0.4,8.7-12.2,18.1-26.3l17-25.6h10.8h10.8v36.9v36.9h-88.6H39.5v-36.9v-36.9h18.7h18.7l10.7-16.2c5.9-8.9,10.8-16.1,11-16.1C98.7,110.6,111.2,129.3,126.5,152.1z" />
+                                    </g>
+                                </g>
+                            </g>
                         </svg>
 
                         <span>{{ __('messages.activty_monitoring') }}</span>
@@ -1449,7 +1481,7 @@
                 </li>
                 <li>
                     <a href="{{ route('staff.settings.shortcut_links')}}" class="nav-link {{ (request()->is('staff/settings/shortcut_links')) ? 'active' : '' }}">
-                        <i class="fa fa-desktop" aria-hidden="true"></i>         
+                        <i class="fa fa-desktop" aria-hidden="true"></i>
                         <span> {{ __('messages.shortcut_links') }} </span>
                     </a>
                 </li>
@@ -1514,16 +1546,16 @@
                 </li> -->
                 <li class="{{  (request()->is('teacher.promotion.studentlist')) ? 'menuitem-active' : '' }}">
                     <a href="#sideBarPromotion" data-toggle="collapse">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
-                    <defs>
-                    </defs>
-                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                        <path d="M 77.025 48.783 L 63.347 35.105 c 3.137 -3.239 2.843 -8.674 -0.688 -12.206 s -8.967 -3.825 -12.206 -0.688 L 36.971 8.729 c -1.015 -1.016 -2.512 -0.926 -3.462 -0.108 c -0.181 0.155 -0.337 0.336 -0.47 0.543 c -0.177 0.276 -0.323 0.58 -0.386 0.938 c -0.198 1.133 -0.412 2.248 -0.638 3.353 c -0.056 0.274 -0.117 0.544 -0.174 0.816 c -0.182 0.859 -0.369 1.711 -0.568 2.553 c -0.059 0.252 -0.121 0.502 -0.182 0.753 c -0.219 0.899 -0.446 1.789 -0.684 2.668 c -0.044 0.163 -0.088 0.327 -0.132 0.489 c -0.288 1.044 -0.587 2.077 -0.902 3.095 c -2.506 8.092 -5.882 15.313 -10.128 21.665 c -0.521 0.779 -1.054 1.545 -1.599 2.299 c -0.025 0.034 -0.048 0.069 -0.073 0.103 c -0.558 0.769 -1.13 1.525 -1.717 2.266 c -0.003 0.003 -0.005 0.006 -0.007 0.01 l -7.514 7.514 c -3.064 3.064 -4.405 7.199 -4.022 11.201 c 0.17 1.778 0.681 3.53 1.532 5.15 c 0.213 0.405 0.447 0.802 0.702 1.188 c 0.511 0.773 1.107 1.507 1.787 2.188 c 0.34 0.34 0.694 0.66 1.059 0.958 c 0.365 0.298 0.742 0.575 1.129 0.83 c 1.16 0.766 2.41 1.341 3.704 1.724 c 1.294 0.383 2.633 0.575 3.972 0.575 c 0.892 0 1.785 -0.085 2.664 -0.255 c 2.638 -0.511 5.157 -1.787 7.199 -3.83 l 1.121 -1.121 l 12.364 12.364 c 1.793 1.793 4.726 1.793 6.519 0 c 1.793 -1.793 1.793 -4.727 0 -6.519 L 35.725 69.794 c -0.045 0.035 -0.092 0.069 -0.137 0.104 c 0 0 0 0 0 0 c 0.741 -0.588 1.498 -1.16 2.268 -1.718 c 0.034 -0.025 0.07 -0.049 0.104 -0.074 c 0.754 -0.545 1.52 -1.079 2.299 -1.599 l 0 0 c 6.353 -4.246 13.576 -7.623 21.67 -10.129 c 1.014 -0.314 2.045 -0.612 3.086 -0.899 c 0.164 -0.045 0.329 -0.089 0.494 -0.134 c 0.878 -0.238 1.767 -0.464 2.664 -0.682 c 0.252 -0.061 0.503 -0.123 0.756 -0.183 c 0.839 -0.198 1.689 -0.385 2.544 -0.566 c 0.275 -0.058 0.547 -0.12 0.824 -0.176 c 1.103 -0.225 2.216 -0.439 3.347 -0.636 c 0.001 0 0.003 -0.001 0.004 -0.001 c 1.274 -0.223 2.065 -1.282 2.121 -2.402 C 77.804 50.026 77.574 49.331 77.025 48.783 z M 35.581 69.903 L 35.581 69.903 L 35.581 69.903 L 35.581 69.903 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        <path d="M 68.382 18.381 c 0.259 0 0.517 -0.099 0.715 -0.296 l 8.793 -8.793 c 0.395 -0.395 0.395 -1.035 0 -1.43 s -1.035 -0.395 -1.43 0 l -8.793 8.793 c -0.395 0.395 -0.395 1.035 0 1.43 C 67.864 18.282 68.123 18.381 68.382 18.381 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        <path d="M 58.368 13.07 c 0.06 0.011 0.12 0.016 0.18 0.016 c 0.481 0 0.907 -0.343 0.994 -0.833 l 1.985 -11.063 c 0.099 -0.55 -0.268 -1.075 -0.817 -1.174 c -0.55 -0.1 -1.075 0.267 -1.174 0.817 l -1.985 11.063 C 57.453 12.446 57.819 12.971 58.368 13.07 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        <path d="M 84.56 24.224 l -11.062 1.985 c -0.549 0.099 -0.915 0.624 -0.817 1.174 c 0.088 0.489 0.514 0.832 0.994 0.832 c 0.059 0 0.12 -0.005 0.18 -0.016 l 11.062 -1.985 c 0.549 -0.099 0.915 -0.624 0.817 -1.174 C 85.636 24.491 85.111 24.128 84.56 24.224 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                    </g>
-                    </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+                            <defs>
+                            </defs>
+                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                <path d="M 77.025 48.783 L 63.347 35.105 c 3.137 -3.239 2.843 -8.674 -0.688 -12.206 s -8.967 -3.825 -12.206 -0.688 L 36.971 8.729 c -1.015 -1.016 -2.512 -0.926 -3.462 -0.108 c -0.181 0.155 -0.337 0.336 -0.47 0.543 c -0.177 0.276 -0.323 0.58 -0.386 0.938 c -0.198 1.133 -0.412 2.248 -0.638 3.353 c -0.056 0.274 -0.117 0.544 -0.174 0.816 c -0.182 0.859 -0.369 1.711 -0.568 2.553 c -0.059 0.252 -0.121 0.502 -0.182 0.753 c -0.219 0.899 -0.446 1.789 -0.684 2.668 c -0.044 0.163 -0.088 0.327 -0.132 0.489 c -0.288 1.044 -0.587 2.077 -0.902 3.095 c -2.506 8.092 -5.882 15.313 -10.128 21.665 c -0.521 0.779 -1.054 1.545 -1.599 2.299 c -0.025 0.034 -0.048 0.069 -0.073 0.103 c -0.558 0.769 -1.13 1.525 -1.717 2.266 c -0.003 0.003 -0.005 0.006 -0.007 0.01 l -7.514 7.514 c -3.064 3.064 -4.405 7.199 -4.022 11.201 c 0.17 1.778 0.681 3.53 1.532 5.15 c 0.213 0.405 0.447 0.802 0.702 1.188 c 0.511 0.773 1.107 1.507 1.787 2.188 c 0.34 0.34 0.694 0.66 1.059 0.958 c 0.365 0.298 0.742 0.575 1.129 0.83 c 1.16 0.766 2.41 1.341 3.704 1.724 c 1.294 0.383 2.633 0.575 3.972 0.575 c 0.892 0 1.785 -0.085 2.664 -0.255 c 2.638 -0.511 5.157 -1.787 7.199 -3.83 l 1.121 -1.121 l 12.364 12.364 c 1.793 1.793 4.726 1.793 6.519 0 c 1.793 -1.793 1.793 -4.727 0 -6.519 L 35.725 69.794 c -0.045 0.035 -0.092 0.069 -0.137 0.104 c 0 0 0 0 0 0 c 0.741 -0.588 1.498 -1.16 2.268 -1.718 c 0.034 -0.025 0.07 -0.049 0.104 -0.074 c 0.754 -0.545 1.52 -1.079 2.299 -1.599 l 0 0 c 6.353 -4.246 13.576 -7.623 21.67 -10.129 c 1.014 -0.314 2.045 -0.612 3.086 -0.899 c 0.164 -0.045 0.329 -0.089 0.494 -0.134 c 0.878 -0.238 1.767 -0.464 2.664 -0.682 c 0.252 -0.061 0.503 -0.123 0.756 -0.183 c 0.839 -0.198 1.689 -0.385 2.544 -0.566 c 0.275 -0.058 0.547 -0.12 0.824 -0.176 c 1.103 -0.225 2.216 -0.439 3.347 -0.636 c 0.001 0 0.003 -0.001 0.004 -0.001 c 1.274 -0.223 2.065 -1.282 2.121 -2.402 C 77.804 50.026 77.574 49.331 77.025 48.783 z M 35.581 69.903 L 35.581 69.903 L 35.581 69.903 L 35.581 69.903 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 68.382 18.381 c 0.259 0 0.517 -0.099 0.715 -0.296 l 8.793 -8.793 c 0.395 -0.395 0.395 -1.035 0 -1.43 s -1.035 -0.395 -1.43 0 l -8.793 8.793 c -0.395 0.395 -0.395 1.035 0 1.43 C 67.864 18.282 68.123 18.381 68.382 18.381 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 58.368 13.07 c 0.06 0.011 0.12 0.016 0.18 0.016 c 0.481 0 0.907 -0.343 0.994 -0.833 l 1.985 -11.063 c 0.099 -0.55 -0.268 -1.075 -0.817 -1.174 c -0.55 -0.1 -1.075 0.267 -1.174 0.817 l -1.985 11.063 C 57.453 12.446 57.819 12.971 58.368 13.07 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 84.56 24.224 l -11.062 1.985 c -0.549 0.099 -0.915 0.624 -0.817 1.174 c 0.088 0.489 0.514 0.832 0.994 0.832 c 0.059 0 0.12 -0.005 0.18 -0.016 l 11.062 -1.985 c 0.549 -0.099 0.915 -0.624 0.817 -1.174 C 85.636 24.491 85.111 24.128 84.56 24.224 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #C4C7D2; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            </g>
+                        </svg>
 
                         <span>{{ __('messages.promotion') }}</span>
                         <span class="menu-arrow"></span>
@@ -1817,7 +1849,7 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.settings.shortcut_links')}}" class="nav-link {{ (request()->is('teacher/settings/shortcut_links')) ? 'active' : '' }}">
-                        <i class="fa fa-desktop" aria-hidden="true"></i>  
+                        <i class="fa fa-desktop" aria-hidden="true"></i>
                         <span> {{ __('messages.shortcut_links') }} </span>
                     </a>
                 </li>
@@ -2055,31 +2087,30 @@
 
                 <li>
                     <a href="#sidebarParentProfileUpdate" data-toggle="collapse">
-                    <svg fill="#C4C7D2" width="20" height="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	                    viewBox="0 0 402.161 402.161" xml:space="preserve">
-                        <g>
+                        <svg fill="#C4C7D2" width="20" height="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 402.161 402.161" xml:space="preserve">
                             <g>
                                 <g>
-                                    <path d="M201.08,49.778c-38.794,0-70.355,31.561-70.355,70.355c0,18.828,7.425,40.193,19.862,57.151
+                                    <g>
+                                        <path d="M201.08,49.778c-38.794,0-70.355,31.561-70.355,70.355c0,18.828,7.425,40.193,19.862,57.151
                                         c14.067,19.181,32,29.745,50.493,29.745c18.494,0,36.426-10.563,50.494-29.745c12.437-16.958,19.862-38.323,19.862-57.151
                                         C271.436,81.339,239.874,49.778,201.08,49.778z M201.08,192.029c-13.396,0-27.391-8.607-38.397-23.616
                                         c-10.46-14.262-16.958-32.762-16.958-48.28c0-30.523,24.832-55.355,55.355-55.355s55.355,24.832,55.355,55.355
-                                        C256.436,151.824,230.372,192.029,201.08,192.029z"/>
-                                    <path d="M201.08,0C109.387,0,34.788,74.598,34.788,166.292c0,91.693,74.598,166.292,166.292,166.292
+                                        C256.436,151.824,230.372,192.029,201.08,192.029z" />
+                                        <path d="M201.08,0C109.387,0,34.788,74.598,34.788,166.292c0,91.693,74.598,166.292,166.292,166.292
                                         s166.292-74.598,166.292-166.292C367.372,74.598,292.773,0,201.08,0z M201.08,317.584c-30.099-0.001-58.171-8.839-81.763-24.052
                                         c0.82-22.969,11.218-44.503,28.824-59.454c6.996-5.941,17.212-6.59,25.422-1.615c8.868,5.374,18.127,8.099,27.52,8.099
                                         c9.391,0,18.647-2.724,27.511-8.095c8.201-4.97,18.39-4.345,25.353,1.555c17.619,14.93,28.076,36.526,28.895,59.512
                                         C259.25,308.746,231.178,317.584,201.08,317.584z M296.981,283.218c-3.239-23.483-15.011-45.111-33.337-60.64
                                         c-11.89-10.074-29.1-11.256-42.824-2.939c-12.974,7.861-26.506,7.86-39.483-0.004c-13.74-8.327-30.981-7.116-42.906,3.01
                                         c-18.31,15.549-30.035,37.115-33.265,60.563c-33.789-27.77-55.378-69.868-55.378-116.915C49.788,82.869,117.658,15,201.08,15
-                                        c83.423,0,151.292,67.869,151.292,151.292C352.372,213.345,330.778,255.448,296.981,283.218z"/>
-                                    <path d="M302.806,352.372H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
-                                        C310.307,355.73,306.948,352.372,302.806,352.372z"/>
-                                    <path d="M302.806,387.161H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
-                                        C310.307,390.519,306.948,387.161,302.806,387.161z"/>
+                                        c83.423,0,151.292,67.869,151.292,151.292C352.372,213.345,330.778,255.448,296.981,283.218z" />
+                                        <path d="M302.806,352.372H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                                        C310.307,355.73,306.948,352.372,302.806,352.372z" />
+                                        <path d="M302.806,387.161H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                                        C310.307,390.519,306.948,387.161,302.806,387.161z" />
+                                    </g>
                                 </g>
                             </g>
-                        </g>
                         </svg>
 
 
@@ -2142,15 +2173,15 @@
                 </li>
                 <li>
                     <a href="#sidebarParentTermination" data-toggle="collapse">
-                    <svg width="800px" height="800px" viewBox="0 0 48 48" fill="#C4C7D2" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40 16.3977V6C40 4.89543 39.1046 4 38 4H10C8.89543 4 8 4.89543 8 6V42C8 43.1046 8.89543 44 10 44H20" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 14H29" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M16 21H21" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M34 44C28.4772 44 24 39.5228 24 34C24 28.4772 28.4772 24 34 24C39.5228 24 44 28.4772 44 34C44 39.5228 39.5228 44 34 44Z" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M27 27L41 41" stroke="white" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M24 34C24 28.4772 28.4772 24 34 24" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M34 44C39.5228 44 44 39.5228 44 34" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                        <svg width="800px" height="800px" viewBox="0 0 48 48" fill="#C4C7D2" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M40 16.3977V6C40 4.89543 39.1046 4 38 4H10C8.89543 4 8 4.89543 8 6V42C8 43.1046 8.89543 44 10 44H20" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16 14H29" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" />
+                            <path d="M16 21H21" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" />
+                            <path d="M34 44C28.4772 44 24 39.5228 24 34C24 28.4772 28.4772 24 34 24C39.5228 24 44 28.4772 44 34C44 39.5228 39.5228 44 34 44Z" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M27 27L41 41" stroke="white" stroke-width="4" stroke-linecap="round" />
+                            <path d="M24 34C24 28.4772 28.4772 24 34 24" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M34 44C39.5228 44 44 39.5228 44 34" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                         <span> {{ __('messages.termination') }}</span>
                         <span class="menu-arrow"></span>
                     </a>

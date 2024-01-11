@@ -1013,7 +1013,9 @@ return [
         'shortcutLink_update' => $url.'/shortcutLink/update',
         'shortcutLink_delete' => $url.'/shortcutLink/delete',
         'bulletinBoard_Dashboard' =>  $url.'/bulletinBoard_Dashboard',
-      
+        'settings_attendance_report' => $url.'/settings_attendance_report',
+        'get_settings_attendance_report' => $url.'/get_settings_attendance_report',
+
       ]
 
 ];

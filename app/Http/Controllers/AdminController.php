@@ -337,7 +337,7 @@ class AdminController extends Controller
         ];
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $bulletinBorad_data = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
-        
+
         $count['employee_count'] = isset($employee_count['data']) ? $employee_count['data'] : 0;
         $count['student_count'] = isset($student_count['data']) ? $student_count['data'] : 0;
         $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
@@ -7047,7 +7047,30 @@ class AdminController extends Controller
             ->make(true);
     }
     // academic year end
-
+    // studentAttendanceReport
+    public function studentAttendanceReportStg()
+    {
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $userid = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_settings_attendance_report'), $userid);
+        // dd($response);
+        return view('admin.student_att_report_settings.index', [
+            'get_settings_row' => isset($response['data']) ? $response['data'] : [],
+            'department' => isset($department['data']) ? $department['data'] : [],
+            'term' => isset($term['data']) ? $term['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+        ]);
+        // admin.attendance.student_report
+    }
     // start Global Setting
     public function globalSetting()
     {
@@ -10025,7 +10048,6 @@ class AdminController extends Controller
 
             ->rawColumns(['actions'])
             ->make(true);
-       
     }
     public function getGraduateDetails($id)
     {
@@ -10046,7 +10068,7 @@ class AdminController extends Controller
         $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 
         $prev = json_decode($student['data']['student']['previous_details']);
-        $school_name=$prev->school_name;
+        $school_name = $prev->school_name;
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
@@ -10057,7 +10079,7 @@ class AdminController extends Controller
             [
                 'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
                 'department' => isset($department['data']) ? $department['data'] : [],
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],                
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'session' => isset($session['data']) ? $session['data'] : [],
                 'semester' => isset($semester['data']) ? $semester['data'] : [],
                 'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
@@ -10071,22 +10093,22 @@ class AdminController extends Controller
     public function student_picture(Request $request)
     {
         return view('admin.student.picture');
-    } 
-    public function student_pictureview (Request $request)
+    }
+    public function student_pictureview(Request $request)
     {
         return view('admin.student.viewpicture');
-    } 
-    public function report_history (Request $request)
+    }
+    public function report_history(Request $request)
     {
         return view('admin.report.report_history');
-    } 
+    }
     public function addstupicture(Request $request)
     {
         //$roll_no  = $request->roll_no;
         $base64 = "";
         $extension = "";
-        $file = $request->file('upload');        
-        if($request->hasFile('upload')) {
+        $file = $request->file('upload');
+        if ($request->hasFile('upload')) {
 
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
             $path = $file->path();
@@ -10098,13 +10120,12 @@ class AdminController extends Controller
                 'photo' => $base64,
                 'file_extension' => $extension,
                 'roll_no' => $request->roll_no,
-                'branch_id'=> config('constants.branch_id')
+                'branch_id' => config('constants.branch_id')
             ];
             //dd($data);
 
             $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
-            if ($response['code'] == 200) 
-            {
+            if ($response['code'] == 200) {
                 return redirect()->route('admin.student.picture')->with('success', $response['message']);
             } else {
                 return redirect()->route('admin.student.picture')->with('errors', $response['message']);
@@ -10116,98 +10137,95 @@ class AdminController extends Controller
         //$roll_no  = $request->roll_no;
         $base64 = "";
         $extension = "";
-       
-        $n= count($request->file('uploads'));   
-        $response ='';    
-        for($i=0;$i<$n;$i++)
-        {
-        if ($request->hasFile('uploads')) {
-            $file = $request->file('uploads')[$i];
-            $filenamewithextension = $request->file('uploads')[$i]->getClientOriginalName();
-            $path = $file->path();
-            $data = file_get_contents($path);
-            $base64 = base64_encode($data);
-            $extension = $file->getClientOriginalExtension();
-            $data = [
-                'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
-                'photo' => $base64,
-                'file_extension' => $extension,
-                'roll_no' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
-                'branch_id'=> config('constants.branch_id')
-            ];
-            //dd($data);
-            $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
-         }
-        }
-        
-          if($response['code'] == 200) 
-            {
-                return redirect()->route('admin.student.picture')->with('success', $response['message']);
-            } else {
-                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+
+        $n = count($request->file('uploads'));
+        $response = '';
+        for ($i = 0; $i < $n; $i++) {
+            if ($request->hasFile('uploads')) {
+                $file = $request->file('uploads')[$i];
+                $filenamewithextension = $request->file('uploads')[$i]->getClientOriginalName();
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+                $data = [
+                    'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                    'photo' => $base64,
+                    'file_extension' => $extension,
+                    'roll_no' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                    'branch_id' => config('constants.branch_id')
+                ];
+                //dd($data);
+                $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
             }
-        
+        }
+
+        if ($response['code'] == 200) {
+            return redirect()->route('admin.student.picture')->with('success', $response['message']);
+        } else {
+            return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+        }
     }
-     // index shortcutLinks 
-     public function shortcutLinks()
-     {
-         return view('admin.shortcut_links.index');
-     }
-     public function addShortcutLinks(Request $request)
-     {
-         $data = [
-             'name' => $request->name,
-             'link' => $request->link,
-             'staff_id' => session()->get('ref_user_id')
-         ];
-         $response = Helper::PostMethod(config('constants.api.shortcutLink_add'), $data);
-         return $response;
-     }
-     public function getShortcutLinksList(Request $request)
-     {
+    // index shortcutLinks 
+    public function shortcutLinks()
+    {
+        return view('admin.shortcut_links.index');
+    }
+    public function addShortcutLinks(Request $request)
+    {
+        $data = [
+            'name' => $request->name,
+            'link' => $request->link,
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_add'), $data);
+        return $response;
+    }
+    public function getShortcutLinksList(Request $request)
+    {
         $staff_id = [
             'staff_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
-         $data = isset($response['data']) ? $response['data'] : [];
-         return DataTables::of($data)
-             ->addIndexColumn()
-             ->addColumn('actions', function ($row) {
-                 return '<div class="button-list">
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editShortCutBtn"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteShortCutBtn"><i class="fe-trash-2"></i></a>
                          </div>';
-             })
- 
-             ->rawColumns(['actions'])
-             ->make(true);
-     }
-     public function getShortcutLinksDetails(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-         ];
-         $response = Helper::PostMethod(config('constants.api.shortcutLink_details'), $data);
-         return $response;
-     }
-     public function updateShortcutLinks(Request $request)
-     {
-         $data = [
-             'id' => $request->id,
-             'name' => $request->name,
-             'link' => $request->link
-         ];
-         $response = Helper::PostMethod(config('constants.api.shortcutLink_update'), $data);
-         return $response;
-     }
-     // DELETE shortcutLink Details
-     public function deleteShortcutLinks(Request $request)
-     {
-         $data = [
-             'id' => $request->id
-         ];
- 
-         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
-         return $response;
-     }
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getShortcutLinksDetails(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_details'), $data);
+        return $response;
+    }
+    public function updateShortcutLinks(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'link' => $request->link
+        ];
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_update'), $data);
+        return $response;
+    }
+    // DELETE shortcutLink Details
+    public function deleteShortcutLinks(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
+        return $response;
+    }
 }
