@@ -40,6 +40,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="subjectType">{{ __('messages.pdf_report') }}</label>
+                        <select class="form-control" id="editpdf_report" name="pdf_report">
+                            <option value="0">{{ __('messages.select') }}</option>
+                            @forelse($pdf_report as $r)
+                            <option value="{{$r['id']}}">{{$r['pdf_name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="edit_times_per_week">{{ __('messages.minimum_times_per_week') }}</label>
                         <input type="number" id="edit_times_per_week" name="times_per_week" class="form-control times_per_week">
                     </div>

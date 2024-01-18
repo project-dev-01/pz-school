@@ -88,6 +88,7 @@ $(function () {
         var byclass = $("#bysubjectfilter").valid();
         if (byclass === true) {
             var year = $("#btwyears").val();
+            var department_id = $("#department_id").val();
             var semester_id = $("#semester_id").val();
             var session_id = $("#session_id").val();
             var class_id = $("#changeClassName").val();
@@ -97,6 +98,7 @@ $(function () {
 
             var classObj = {
                 year: year,
+                department_id: department_id,
                 classID: class_id,
                 sectionID: section_id,
                 semesterID: semester_id,
@@ -108,6 +110,7 @@ $(function () {
 
             // download set start
             $(".downExamID").val(exam_id);
+            $(".downDepartmentID").val(department_id);			
             $(".downClassID").val(class_id);
             $(".downSemesterID").val(semester_id);
             $(".downSessionID").val(session_id);
@@ -117,9 +120,10 @@ $(function () {
             $(".downReport_type").val(report_type);
             // download set end
 
-            var formData = new FormData();
+            var formData = new FormData();			
             formData.append('token', token);
             formData.append('branch_id', branchID);
+            formData.append('department_id', department_id);
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
             formData.append('exam_id', exam_id);
@@ -128,7 +132,22 @@ $(function () {
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
             examResultBySubject(formData);
-        };
+			var formData1 = {
+                student_name: "",
+				department_id:department_id,
+                class_id: class_id,
+                section_id: section_id,
+				exam_id:exam_id,
+				semester_id:semester_id,
+                session_id: session_id,
+				academic_year:year,
+				report_type:report_type,
+            };
+			//getStudentList(formData1);
+        }
+		else {
+            $("#student").hide("slow");
+        }
     });
     function examResultBySubject(formData){
 
@@ -137,7 +156,7 @@ $(function () {
             var report_type= $("#report_type").val();
             var department_id= $("#department_id").val();
             var class_id=$("#changeClassName option:selected" ).text();
-            alert(class_id);
+            //alert(class_id);
             $.ajax({
                 url: getbySubject,
                 method: "Post",
@@ -149,69 +168,27 @@ $(function () {
                     if (response.code == 200) {
                         if (response.data.grade_list_master.length > 0) {
                             var datasetnew = response.data;
-                            bysubjectdetails_class(datasetnew);
+                            //bysubjectdetails_class(datasetnew);
                             $("#overlay").fadeOut(300);
                             if(report_type=='english_communication')
                             {
                                 $("#byec_body").show("slow");
-                                $("#by12report_body").hide("slow");
-                                $("#by34report_body").hide("slow");
-                                $("#by56report_body").hide("slow");
-                                $("#bysecreport_body").hide("slow");                                       
+                                $("#byreport_body").hide("slow");                                       
                                 $("#bypersonal_body").hide("slow");
                             }
                             else if(report_type=='report_card')
                             {
-                                if(department_id=='1')
-                                {
-                                    if(class_id=='1' || class_id=='1')
-                                    {
-                                        $("#byec_body").hide("slow");
-                                        $("#by12report_body").show("slow");
-                                        $("#by34report_body").hide("slow");
-                                        $("#by56report_body").hide("slow");
-                                        $("#bysecreport_body").hide("slow");                                        
-                                        $("#bypersonal_body").hide("slow");
-                                    }
-                                    else if(class_id=='3' || class_id=='4')
-                                    {
-                                        $("#byec_body").hide("slow");
-                                        $("#by12report_body").hide("slow");
-                                        $("#by34report_body").show("slow");
-                                        $("#by56report_body").hide("slow");
-                                        $("#bysecreport_body").hide("slow");                                                                               
-                                        $("#bypersonal_body").hide("slow");
-                                    }
-                                    else if(class_id=='5' || class_id=='6')
-                                    {
-                                        $("#byec_body").hide("slow");
-                                        $("#by12report_body").hide("slow");
-                                        $("#by34report_body").hide("slow");
-                                        $("#by56report_body").show("slow");
-                                        $("#bysecreport_body").hide("slow");                                                                               
-                                        $("#bypersonal_body").hide("slow");
-                                    }
-                                }
-                                if(department_id=='2')
-                                {
-                                        $("#byec_body").hide("slow");
-                                        $("#by12report_body").hide("slow");
-                                        $("#by34report_body").hide("slow");
-                                        $("#by56report_body").hide("slow");
-                                        $("#bysecreport_body").show("slow");                                       
-                                        $("#bypersonal_body").hide("slow");
-                                }
+                                $("#byec_body").hide("slow");
+                                $("#byreport_body").show("slow");                                       
+                                $("#bypersonal_body").hide("slow");
                                     
                                 
                                 
                             }
                             else
                             {
-                                $("#byec_body").hide("slow");
-                                $("#by12report_body").hide("slow");
-                                $("#by34report_body").hide("slow");
-                                $("#by56report_body").hide("slow");
-                                $("#bysecreport_body").hide("slow");                                       
+                                $("#byec_body").hide("slow"); 
+                                $("#byreport_body").hide("slow");                                      
                                 $("#bypersonal_body").show("slow");
                                 if(department_id=='2')
                                 {
@@ -233,7 +210,8 @@ $(function () {
                     } else {
                         toastr.error(data.message);
                         $('#byec_body').hide();
-                        $('#byreport_body').hide();
+                        $('#byreport_body').hide();					                                     
+                        $("#bypersonal_body").hide("slow");
                     }
                 }
             });
@@ -261,119 +239,6 @@ $(function () {
 
 });
 
-function bysubjectdetails_class(datasetnew) {
-    $('#bysubjectTableAppend').empty();
-    var sno = 0;
-    var bysubjectAllTable = "";
-    var headers = datasetnew.headers;
-    var grade_list_master = datasetnew.grade_list_master;
-    bysubjectAllTable += '<div class="table-responsive">' +
-        '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
-        '<thead>' +
-        '<tr>' +
-        '<th class="align-top" rowspan="2">'+sl_no_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+grade_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+class_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+subject_name_lang+'</th>' +
-        '<th class="align-top th-sm - 6 rem" rowspan="2">'+total_student_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+absent_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+present_lang+'</th>' +
-        '<th class="align-top" rowspan="2">'+subject_teacher_name_lang+'</th>';
-    headers.forEach(function (resp) {
-        bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
-    });
-    bysubjectAllTable += '<th class="align-middle" rowspan="2">'+pass_lang+'</th>' +
-        '<th class="align-middle" rowspan="2">'+g_lang+'</th>' +
-        '<th class="align-middle" rowspan="2">'+gpa_lang+'</th>' +
-        '<th class="align-middle" rowspan="2">%</th>' +
-        '</tr>';
-    bysubjectAllTable += '<tr>';
-    headers.forEach(function (resp) {
-        bysubjectAllTable += '<td class="text-center">%</td>';
-    });
-    bysubjectAllTable += '</tr></thead><tbody>';
-    grade_list_master.forEach(function (res) {
-        sno++;
-        bysubjectAllTable += '<tr>' +
-            '<td class="text-center" rowspan="2">';
-        bysubjectAllTable += sno +
-            '</td>';
-        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-            '<label for="clsname">' + res.class_name + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-            '<label for="stdcount"> ' + res.section_name + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-            '<label for="clsname">' + res.subject_name + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-            '<label for="clsname">' + res.totalstudentcount + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-left">' +
-            '<label for="clsname">' + res.absent_count + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-center">' +
-            '<label for="stdcount">' + res.present_count + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-            '<label for="clsname">' + res.teacher_name + '</label>' +
-            '</td>';
-        headers.forEach(function (resp) {
-            var obj = res.gradecnt;
-            var exists = isKey(resp.grade, obj); // true
-            if (exists) {
-                Object.keys(obj).forEach(key => {
-                    if (resp.grade == key) {
-                        // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
-                        bysubjectAllTable += '<td class="text-center">' + obj[key] + '</td>';
-                    }
-                });
-            } else {
-                bysubjectAllTable += '<td class="text-center">0</td>';
-            }
-        });
-        bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
-            '<td class="text-center">' + res.fail_count + '</td>' +
-            '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
-            '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
-        bysubjectAllTable += '</tr>';
-        // show another row percentage
-        bysubjectAllTable += '<tr>';
-        var absentPer = (res.absent_count / res.totalstudentcount) * 100;
-        absentPer = parseFloat(absentPer, 10).toFixed(2);
-        var presentPer = (res.present_count / res.totalstudentcount) * 100;
-        presentPer = parseFloat(presentPer, 10).toFixed(2);
-        bysubjectAllTable += '<td class="text-left">' +
-            '<label for="clsname">' + absentPer + '</label>' +
-            '</td>';
-        bysubjectAllTable += '<td class="text-center">' +
-            '<label for="stdcount">' + presentPer + '</label>' +
-            '</td>';
-        headers.forEach(function (resp) {
-            var obj = res.gradecnt;
-            var exists = isKey(resp.grade, obj); // true
-            if (exists) {
-                Object.keys(obj).forEach(key => {
-                    if (resp.grade == key) {
-                        // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
-                        var gradepercentage = (obj[key] / res.totalstudentcount) * 100;
-                        gradepercentage = parseFloat(gradepercentage, 10).toFixed(2);
-                        bysubjectAllTable += '<td class="text-center">' + gradepercentage + '</td>';
-                    }
-                });
-            } else {
-                bysubjectAllTable += '<td class="text-center">0</td>';
-            }
-        });
-        bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
-            '<td class="text-center">' + res.fail_percentage + '</td>';
-        bysubjectAllTable += '</tr>';
-    });
-    bysubjectAllTable += '</tbody></table>' +
-        '</div>';
-    $("#bysubjectTableAppend").append(bysubjectAllTable);
-}
 // find matched
 function isKey(key, obj) {
     var keys = Object.keys(obj).map(function (x) {
@@ -381,3 +246,107 @@ function isKey(key, obj) {
     });
     return keys.indexOf(key) !== -1;
 }
+function getStudentList(formData) {
+        //$("#student").show("slow");
+		///alert(2);
+        setTimeout(function () {
+            $('.btn-danger').removeClass('d-none');
+            }, 5000);   
+        var table = $('#student-table').DataTable({
+            processing: true,
+            info: true,
+            bDestroy: true,
+            // dom: 'lBfrtip',
+            dom: 'Blfrtip',
+
+            // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
+            //     "<'row'<'col-sm-12'tr>>" +
+            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            // dom: 'C&gt;"clear"&lt;lfrtip',
+            // "language": {
+
+            //     "emptyTable": no_data_available,
+            //     "infoFiltered": filter_from_total_entries,
+            //     "zeroRecords": no_matching_records_found,
+            //     "infoEmpty": showing_zero_entries,
+            //     "info": showing_entries,
+            //     "lengthMenu": show_entries,
+            //     "search": datatable_search,
+            //     "paginate": {
+            //         "next": next,
+            //         "previous": previous
+            //     },
+            // },
+            // exportOptions: { rows: ':visible' },
+            serverSide: true,
+            ajax: {
+                url: studentList,
+                data: function (d) {
+                    d.student_name = "",
+                        d.class_id = formData.class_id,
+                        d.section_id = formData.section_id,
+                        d.session_id = formData.session_id,
+                        d.semester_id = formData.semester_id,
+                        d.department_id = formData.department_id,
+                        d.exam_id = formData.exam_id,
+                        d.academic_year = formData.academic_year,
+                        d.report_type = formData.report_type
+                }
+            },
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }
+                ,
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'register_no',
+                    name: 'register_no'
+                },
+                {
+                    data: 'roll_no',
+                    name: 'roll_no'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "table-user",
+                    "render": function (data, type, row, meta) {
+                        var currentImg = studentImg + row.photo;
+                        // var existUrl = UrlExists(currentImg);
+                        // console.log(currentImg);
+                        var img = (row.photo != null) ? currentImg : defaultImg;
+                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
+                    }
+                },
+            ]
+        });
+        
+    }

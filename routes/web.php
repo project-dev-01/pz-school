@@ -12,6 +12,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\ExamPdfController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -627,7 +628,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // room By hostel Route
         Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
 
-        // exam Result Group 
+        // exam Result Group        
+        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');      
         Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
         Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
         Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');
@@ -635,12 +637,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
         Route::get('exam_results/student_rank', [AdminController::class, 'byStudentRank'])->name('admin.exam_results.bystudentrank');
         Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
-        Route::post('exam_results/downbyecreport', [PdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
-        Route::post('exam_results/downby12reportcard', [PdfController::class, 'downby12reportcard'])->name('admin.exam_results.downby12reportcard');
-        Route::post('exam_results/downby34reportcard', [PdfController::class, 'downby34reportcard'])->name('admin.exam_results.downby34reportcard');
-        Route::post('exam_results/downby56reportcard', [PdfController::class, 'downby56reportcard'])->name('admin.exam_results.downby56reportcard');
-        Route::post('exam_results/downbysecreportcard', [PdfController::class, 'downbysecreportcard'])->name('admin.exam_results.downbysecreportcard');
-        Route::post('exam_results/downbypersoanalreport', [PdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
+        Route::post('exam_results/downbyecreport', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
+        Route::post('exam_results/downbyreportcard', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
+        Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
 
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');

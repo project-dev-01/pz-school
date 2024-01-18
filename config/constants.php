@@ -983,6 +983,11 @@ return [
         'import_expense'=> $url.'/importcsv/expense',
         //  Exam Report
         'exam_studentslist' => $url.'/exam_result/students',
+        'get_subjectlist' => $url.'/exam_result/get_subjectlist',        
+        'get_mainsubjectlist' => $url.'/exam_result/get_mainsubjectlist',
+        'getsubjecpapertlist' => $url.'/exam_result/getsubjecpapertlist',
+        'getsem_studentattendance' => $url.'/getsem_studentattendance',
+        
         'exam_papermarks' => $url.'/exam_result/papermark',  
         'import_exam'=> $url.'/importcsv/exam',
         'stuexam_marklist' => $url.'/exam_result/stuexam_marklist',
@@ -1018,6 +1023,8 @@ return [
         'getlogmodifyusers' => $url.'/getlogmodifyusers',
         'getlogmodifytables' => $url.'/getlogmodifytables',
         'log_modifylist'=> $url.'/log_modifylist',
+        'getpdf_report'=>$url.'/getpdf_report',
+        'getacyeardates'=>$url.'/getacyeardates',
         
       ]
 

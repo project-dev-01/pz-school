@@ -66,6 +66,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="subjectType">{{ __('messages.pdf_report') }}</label>
+                        <select class="form-control" id="pdf_report" name="pdf_report">
+                            <option value="0">{{ __('messages.select') }}</option>
+                            @forelse($pdf_report as $r)
+                            <option value="{{$r['id']}}">{{$r['pdf_name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
                         <input type="number" name="subject_weightage" class="form-control" placeholder="{{ __('messages.enter_subject_weightage') }}">
                     </div>

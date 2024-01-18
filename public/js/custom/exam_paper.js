@@ -87,7 +87,8 @@ $(function () {
             var paper_name = $('.addExamPaper').find('input[name="paper_name"]').val();
             var paper_type = $('.addExamPaper').find('select[name="paper_type"]').val();
             var grade_category = $('.addExamPaper').find('select[name="grade_category"]').val();
-            var score_type = $('.addExamPaper').find('select[name="score_type"]').val();
+            var score_type = $('.addExamPaper').find('select[name="score_type"]').val();			
+            var pdf_report = $('.addExamPaper').find('select[name="pdf_report"]').val();
             var subject_weightage = $('.addExamPaper').find('input[name="subject_weightage"]').val();
             var notes = $('.addExamPaper').find('textarea[name="notes"]').val();
 
@@ -101,6 +102,7 @@ $(function () {
             formData.append('paper_type', paper_type);
             formData.append('grade_category', grade_category);
             formData.append('score_type', score_type);
+            formData.append('pdf_report', pdf_report);
             formData.append('subject_weightage', subject_weightage);
             formData.append('notes', notes);
             formData.append('academic_session_id', academic_session_id);
@@ -286,7 +288,8 @@ $(function () {
             $('.editExamPaper').find('input[name="paper_name"]').val(data.data.paper_name);
             $('.editExamPaper').find('select[name="paper_type"]').val(data.data.paper_type);
             $('.editExamPaper').find('select[name="grade_category"]').val(data.data.grade_category);            
-            $('.editExamPaper').find('select[name="score_type"]').val(data.data.score_type);
+            $('.editExamPaper').find('select[name="score_type"]').val(data.data.score_type);           
+            $('.editExamPaper').find('select[name="pdf_report"]').val(data.data.pdf_report);
             $('.editExamPaper').find('input[name="subject_weightage"]').val(data.data.subject_weightage);
             $('.editExamPaper').find('textarea[name="notes"]').val(data.data.notes);
             $('.editExamPaper').modal('show');
@@ -318,7 +321,8 @@ $(function () {
             var paper_name = $('.editExamPaper').find('input[name="paper_name"]').val();
             var paper_type = $('.editExamPaper').find('select[name="paper_type"]').val();
             var grade_category = $('.editExamPaper').find('select[name="grade_category"]').val();
-            var score_type = $('.editExamPaper').find('select[name="score_type"]').val();
+            var score_type = $('.editExamPaper').find('select[name="score_type"]').val();			
+            var pdf_report = $('.editExamPaper').find('select[name="pdf_report"]').val();
             var subject_weightage = $('.editExamPaper').find('input[name="subject_weightage"]').val();
             var notes = $('.editExamPaper').find('textarea[name="notes"]').val();
 
@@ -333,6 +337,7 @@ $(function () {
             formData.append('paper_type', paper_type);
             formData.append('grade_category', grade_category);
             formData.append('score_type', score_type);
+            formData.append('pdf_report', pdf_report);
             formData.append('subject_weightage', subject_weightage);
             formData.append('notes', notes);
             formData.append('academic_session_id', academic_session_id);

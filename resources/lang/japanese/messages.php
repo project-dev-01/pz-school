@@ -1732,7 +1732,7 @@ return [
     "new_content" => "After Mofidication",
     "modify_date" => "Modify Date",
     "modifiedby" => "Modified By",
-
+    "modify_datas"=>"Data Modification",
     "created_date" => "Created Date",
 
     "exam_report" => "Exam Report",
@@ -1907,5 +1907,13 @@ return [
     "grade_teacher_sign" => "Grade teacher sign",
     "student_council_activities" => "Student Council Activities",
     "Attendance_records" => "Attendance Records",
-    "student_attendance_report_settings" => "Attendance Report Settings"
+    "shortcut_links" => "Dashboard Shortcut links",
+    "sidebar_name"  => "Sibebar Name",
+    "link"  => "Url",
+    "edit_shortcut" => "Edit Shortcut Link",
+    "delete_this_shortcut" => "You want to Delete this Shortcut Link",
+    "student_attendance_report_settings" => "Attendance Report Settings",
+    "studentstaff"=>" Student / Staff",
+    "modify_table"=>" Modify Table",
+    "pdf_report"=>" Pdf Report",
 ];

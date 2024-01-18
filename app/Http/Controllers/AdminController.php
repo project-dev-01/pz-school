@@ -713,7 +713,16 @@ class AdminController extends Controller
     // get showSubjectsIndex
     public function showSubjectsIndex()
     {
-        return view('admin.subjects.index');
+        //return view('admin.subjects.index');
+        $pdf_report = Helper::GetMethod(config('constants.api.getpdf_report'));
+        return view(
+            'admin.subjects.index',
+            [
+                
+                'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : []
+                
+            ]
+        );
     }
 
     // get subjects
@@ -6049,6 +6058,8 @@ class AdminController extends Controller
     public function studDailyAttendanceAdd(Request $request)
     {
         $data = [
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
             "attendance" => $request->attendance,
             "date" => $request->date,
             "class_id" => $request->class_id,
@@ -6605,11 +6616,13 @@ class AdminController extends Controller
         $grade_category = Helper::GetMethod(config('constants.api.grade_category'));
         $get_paper_type = Helper::GetMethod(config('constants.api.get_paper_type'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
+        $pdf_report = Helper::GetMethod(config('constants.api.getpdf_report'));
         return view('admin.exam_paper.list', [
             'department' => isset($department['data']) ? $department['data'] : [],
             'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
             'grade_category' => isset($grade_category['data']) ? $grade_category['data'] : [],
-            'get_paper_type' => isset($get_paper_type['data']) ? $get_paper_type['data'] : []
+            'get_paper_type' => isset($get_paper_type['data']) ? $get_paper_type['data'] : [],
+            'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : []
         ]);
     }
     // get Exam paper list
@@ -9313,7 +9326,12 @@ class AdminController extends Controller
         //dd($data);
         $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
         //dd($response);
-        return redirect('admin/school_role/menuaccess');
+        //return redirect('admin/school_role/menuaccess');
+        if ($response['code'] == 200) {
+            return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+        } else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+        }
     }
     public function checkpermissions(Request $request)
     {
@@ -10207,8 +10225,34 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.student.picture')->with('errors', $response['message']);
         }
+    } 
+    public function examsutdentlist(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => $request->academic_year
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        //dd($data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.graduates.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                                 
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
     }
-    // index shortcutLinks 
+        // index shortcutLinks 
     public function shortcutLinks()
     {
         return view('admin.shortcut_links.index');

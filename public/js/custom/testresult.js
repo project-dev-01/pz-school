@@ -1251,7 +1251,7 @@ $(document).on("change", ".basepoints", function (e) {
                         if (row.status == "absent") {
                             attribue = "disabled";
                         }
-                        var freetext = '<textarea class="form-control" name="subjectmarks[' + meta.row + '][freetext]"></textarea>';
+                        var freetext = '<textarea class="form-control" name="subjectmarks[' + meta.row + '][freetext]" style="width:250px"></textarea>';
                         return freetext;
                         
                     }

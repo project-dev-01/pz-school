@@ -41,7 +41,18 @@
                         <h4 class="nav-link">{{ __('messages.menu_access') }}<h4>
 						</li>
 						</ul><br>
-						
+						@if($message = Session::get('success'))
+							<div class="alert alert-success alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
+							@if($message = Session::get('errors'))
+							<div class="alert alert-danger alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>{{ $message }}</strong>
+							</div>
+						@endif
 						<div class="card-body">
 							<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off" novalidate="novalidate">                    
 								@csrf     

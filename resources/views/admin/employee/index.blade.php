@@ -660,7 +660,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                           <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="designation_id">{{ __('messages.designation') }}</label>
                                     <select class="form-control select2-multiple" data-toggle="select2" id="empDesignation" name="designation_id" multiple="multiple" data-placeholder="{{ __('messages.choose_designation') }}">
@@ -686,7 +686,7 @@
                                         @endforelse
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="staff_position">{{ __('messages.staff_position') }}</label>

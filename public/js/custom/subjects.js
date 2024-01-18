@@ -20,6 +20,7 @@ $(function () {
             var subjectType = $("#subjectType").val();
             var subjectColor = $("#subjectColor").val();
             var subjectTypeTwo = $("#subjectTypeTwo").val();
+            var pdf_report = $("#pdf_report").val();
             var times_per_week = $("#times_per_week").val();
             var order_code = $("#order_code").val();
             var exam_exclude = 0;
@@ -35,6 +36,7 @@ $(function () {
             formData.append('subject_code', subjectCode);
             formData.append('subject_type', subjectType);
             formData.append('subject_type_2', subjectTypeTwo);
+            formData.append('pdf_report', pdf_report);
             formData.append('times_per_week', times_per_week);
             formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', subjectColor);
@@ -81,9 +83,10 @@ $(function () {
             $('.editSubjectModel').find('input[name="subject_code"]').val(data.data.subject_code);
             $('.editSubjectModel').find('select[name="subject_type"]').val(data.data.subject_type);
             $('.editSubjectModel').find('select[name="subject_type_2"]').val(data.data.subject_type_2);
+            $('.editSubjectModel').find('select[name="pdf_report"]').val(data.data.pdf_report);
             $('.editSubjectModel').find('input[name="times_per_week"]').val(data.data.times_per_week);
             $('.editSubjectModel').find('input[name="subject_color_calendor"]').val(data.data.subject_color_calendor);
-            $('.editSubjectModel').find('input[name="order_code"]').val(data.data.oder_code);
+            $('.editSubjectModel').find('input[name="order_code"]').val(data.data.order_code);
             if (data.data.exam_exclude == "1") {
                 $('.editSubjectModel').find('input[name="exam_exclude"]').prop('checked', true);
             } else {
@@ -113,6 +116,7 @@ $(function () {
             var editsubjectType = $("#editsubjectType").val();
             var editsubjectColor = $("#editsubjectColor").val();
             var editsubjectTypeTwo = $("#editsubjectTypeTwo").val();
+            var editpdf_report = $("#editpdf_report").val();
             var edit_times_per_week = $("#edit_times_per_week").val();
             var edit_order_code = $("#edit_order_code").val();
             var exam_exclude = 0;
@@ -129,6 +133,7 @@ $(function () {
             formData.append('subject_code', editsubjectCode);
             formData.append('subject_type', editsubjectType);
             formData.append('subject_type_2', editsubjectTypeTwo);
+            formData.append('pdf_report', editpdf_report);
             formData.append('times_per_week', edit_times_per_week);
             formData.append('exam_exclude', exam_exclude);
             formData.append('subject_color', editsubjectColor);

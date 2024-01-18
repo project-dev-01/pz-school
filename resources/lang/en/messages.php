@@ -1914,4 +1914,5 @@ return [
     "student_attendance_report_settings" => "Attendance Report Settings",
     "studentstaff"=>" Student / Staff",
     "modify_table"=>" Modify Table",
+    "pdf_report"=>" Pdf Report",
 ];

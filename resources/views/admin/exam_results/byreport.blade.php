@@ -1,6 +1,9 @@
 @extends('layouts.admin-layout')
 @section('title',' ' . __('messages.export_examresult') . '')
 @section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
@@ -159,6 +162,8 @@
                                 <div class="clearfix mt-4">
                                     <form method="post" action="{{ route('admin.exam_results.downbyecreport') }}">
                                         @csrf
+                                        
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
                                         <input type="hidden" name="exam_id" class="downExamID">
                                         <input type="hidden" name="class_id" class="downClassID">
                                         <input type="hidden" name="semester_id" class="downSemesterID">
@@ -166,6 +171,7 @@
                                         <input type="hidden" name="section_id" class="downSectionID">
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
+                                        
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
                                             <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
@@ -183,13 +189,13 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row" style="display: none;" id="by12report_body">
+    <div class="row" style="display: none;" id="byreport_body">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        Grade 1,2 {{ __('messages.report_card') }}
+                        {{ __('messages.report_card') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -199,11 +205,11 @@
                             
                             <!-- <div id="btnAppend">
                             </div> -->
-
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downby12reportcard') }}">
-                                        @csrf
+                                    <form method="post" action="{{ route('admin.exam_results.downbyreportcard') }}">
+                                        @csrf                                        
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
                                         <input type="hidden" name="exam_id" class="downExamID">
                                         <input type="hidden" name="class_id" class="downClassID">
                                         <input type="hidden" name="semester_id" class="downSemesterID">
@@ -223,141 +229,29 @@
                         <!-- end row-->
 
                     </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-    </div>
-    <div class="row" style="display: none;" id="by34report_body">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        Grade 3,4 {{ __('messages.report_card') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
+                    <div class="row d-none">
                         <div class="col-sm-12">
-                            
-                            <!-- <div id="btnAppend">
-                            </div> -->
+                            <div class="table-responsive">
+                                <table class="table w-100 nowrap " id="student-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th> {{ __('messages.name') }}</th>
+                                            <th> {{ __('messages.register_no') }}</th>
+                                            <th> {{ __('messages.roll_no') }}</th>
+                                            <th> {{ __('messages.gender') }}</th>
+                                            <th> {{ __('messages.email') }}</th>
+                                            <th> {{ __('messages.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            <div class="col-md-12">
-                                <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downby34reportcard') }}">
-                                        @csrf
-                                        <input type="hidden" name="exam_id" class="downExamID">
-                                        <input type="hidden" name="class_id" class="downClassID">
-                                        <input type="hidden" name="semester_id" class="downSemesterID">
-                                        <input type="hidden" name="session_id" class="downSessionID">
-                                        <input type="hidden" name="section_id" class="downSectionID">
-                                        <input type="hidden" name="academic_year" class="downAcademicYear">
-                                        <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end row-->
-
-                    </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-    </div>
-    <div class="row" style="display: none;" id="by56report_body">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        Grade 5,6 {{ __('messages.report_card') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            
-                            <!-- <div id="btnAppend">
-                            </div> -->
-
-                            <div class="col-md-12">
-                                <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downby56reportcard') }}">
-                                        @csrf
-                                        <input type="hidden" name="exam_id" class="downExamID">
-                                        <input type="hidden" name="class_id" class="downClassID">
-                                        <input type="hidden" name="semester_id" class="downSemesterID">
-                                        <input type="hidden" name="session_id" class="downSessionID">
-                                        <input type="hidden" name="section_id" class="downSectionID">
-                                        <input type="hidden" name="academic_year" class="downAcademicYear">
-                                        <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end row-->
-
-                    </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-    </div>
-    <div class="row" style="display: none;" id="bysecreport_body">
-        <div class="col-xl-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        Secondary  {{ __('messages.report_card') }} 
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            
-                            <!-- <div id="btnAppend">
-                            </div> -->
-
-                            <div class="col-md-12">
-                                <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbysecreportcard') }}">
-                                        @csrf
-                                        <input type="hidden" name="exam_id" class="downExamID">
-                                        <input type="hidden" name="class_id" class="downClassID">
-                                        <input type="hidden" name="semester_id" class="downSemesterID">
-                                        <input type="hidden" name="session_id" class="downSessionID">
-                                        <input type="hidden" name="section_id" class="downSectionID">
-                                        <input type="hidden" name="academic_year" class="downAcademicYear">
-                                        <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end row-->
-
-                    </div> <!-- end card-body -->
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end col-->
+                        
+                    </div>
                 </div> <!-- end card-->
             </div> <!-- end card-->
         </div> <!-- end col -->
@@ -385,6 +279,7 @@
                                 <div class="clearfix mt-4">
                                     <form method="post" action="{{ route('admin.exam_results.downbypersoanalreport') }}">
                                         @csrf
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
                                         <input type="hidden" name="exam_id" class="downExamID">
                                         <input type="hidden" name="class_id" class="downClassID">
                                         <input type="hidden" name="semester_id" class="downSemesterID">
@@ -393,8 +288,8 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
+                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
+                                        <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
                                         </div>
                                     </form>
                                 </div>
@@ -426,6 +321,10 @@
 
 @endsection
 @section('scripts')
+
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
@@ -436,6 +335,8 @@
 <script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 
 <script>
+    
+    var studentList = "{{ route('admin.exam_result.sutdentlist') }}";
     var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
