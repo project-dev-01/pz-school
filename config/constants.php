@@ -1030,6 +1030,7 @@ return [
         'log_modifylist'=> $url.'/log_modifylist',
         'getpdf_report'=>$url.'/getpdf_report',
         'getacyeardates'=>$url.'/getacyeardates',
+        //add
         
       ]
 

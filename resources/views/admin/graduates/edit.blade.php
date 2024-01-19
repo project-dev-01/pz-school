@@ -516,7 +516,7 @@
         $('#txt_nric').mask("000000-00-0000", {
             reverse: true
 		});
-        // nric validation end
+        // nric validation ends
 	});
 </script>
 @endsection
