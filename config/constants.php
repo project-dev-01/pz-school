@@ -990,6 +990,11 @@ return [
         
         'exam_papermarks' => $url.'/exam_result/papermark',  
         'import_exam'=> $url.'/importcsv/exam',
+        'get_overallsubjectlist' => $url.'/exam_result/get_overallsubjectlist',
+        'get_overallpaperlist' => $url.'/exam_result/get_overallpaperlist',
+        'getpaperoverallmarklist' => $url.'/exam_result/getpaperoverallmarklist',
+        
+        
         'stuexam_marklist' => $url.'/exam_result/stuexam_marklist',
         'stuexam_spmarklist' => $url.'/exam_result/stuexam_spmarklist',
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',

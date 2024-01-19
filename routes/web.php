@@ -646,13 +646,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         
         //Graduates Yoroku primary /Secondary Report
         
-        Route::get('primary/downloadform1/{id}', [PdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
-        Route::get('primary/downloadform2a/{id}', [PdfController::class, 'downprimaryform2a'])->name('admin.primary.downloadform2a');
-        Route::get('primary/downloadform2b/{id}', [PdfController::class, 'downprimaryform2b'])->name('admin.primary.downloadform2b');
-        
-        Route::get('secondary/downloadform1/{id}', [PdfController::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
-        Route::get('secondary/downloadform2a/{id}', [PdfController::class, 'downsecondaryform2a'])->name('admin.secondary.downloadform2a');
-        Route::get('secondary/downloadform2b/{id}', [PdfController::class, 'downsecondaryform2b'])->name('admin.secondary.downloadform2b');
+        Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
+        Route::get('yoroku/downloadform2a/{id}', [ExamPdfController::class, 'downloadYorokuform2a'])->name('admin.yoroku.downloadform2a');
+        Route::get('yoroku/downloadform2b/{id}', [ExamPdfController::class, 'downloadYorokuform2b'])->name('admin.yoroku.downloadform2b');
+        Route::get('secondary/downloadform1/{id}', [ExamPdfController::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
