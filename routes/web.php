@@ -610,6 +610,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('task/update', [AdminController::class, 'updateToDoList'])->name('admin.task.update');
         Route::get('task/get', [AdminController::class, 'getToDoList'])->name('admin.task.get');
         Route::get('task/edit/{id}', [AdminController::class, 'editToDoList'])->name('admin.task.edit');
+        Route::post('widget/add', [AdminController::class, 'widgetAddUpdate'])->name('admin.widget.add');
 
         // static page routes end
         // Settings
@@ -800,7 +801,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam_master/copy/exam_setup', [AdminController::class, 'examMasterCopyExamSetup'])->name('admin.exam_master.copy.exam_setup');
         Route::get('exam_master/copy/exam_paper', [AdminController::class, 'examMasterCopyExamPaper'])->name('admin.exam_master.copy.exam_paper');
         Route::post('timetable/pdf', [PdfController::class, 'timetable_pdf'])->name('admin.timetable.pdf');
-        Route::get('student_attendance_report_settings', [AdminController::class, 'studentAttendanceReportStg'])->name('admin.student_attendance_report');
+        // Route::get('student_attendance_report_settings', [AdminController::class, 'studentAttendanceReportStg'])->name('admin.student_attendance_report');
 
         // Soap routes
         Route::get('soap/index', [AdminController::class, 'soap'])->name('admin.soap');
@@ -951,6 +952,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('bank/update', [AdminController::class, 'updateBank'])->name('admin.bank.update');
         Route::post('bank/delete', [AdminController::class, 'deleteBank'])->name('admin.bank.delete');
         // 
+        Route::get('admin/dashboard/widget', [AdminController::class, 'dashboardWidget'])->name('admin.dashboard.widget');
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
         Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');
@@ -1021,6 +1023,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
      Route::post('shortcut_link/shortcut_link-details', [AdminController::class, 'getShortcutLinksDetails'])->name('admin.shortcut_link.details');
      Route::post('shortcut_link/update', [AdminController::class, 'updateShortcutLinks'])->name('admin.shortcut_link.update');
      Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
+     Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
     });
 });
 // admin routes end
@@ -1620,7 +1623,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
 
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
-        //
+        
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('student.clear_local_storage');
     });
 });

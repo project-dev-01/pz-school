@@ -343,15 +343,22 @@ class AdminController extends Controller
         $count['parent_count'] = isset($parent_count['data']) ? $parent_count['data'] : 0;
         $count['teacher_count'] = isset($teacher_count['data']) ? $teacher_count['data'] : 0;
         // dd($get_to_do_list_dashboard);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $response = Helper::PostMethod(config('constants.api.get_settings_attendance_report'), $staff_id);
+        $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
+        // dd($get_data_hide_unhide_dashboard);
         return view(
             'admin.dashboard.index',
             [
+                'get_data_hide_unhide_dashboard' => isset($get_data_hide_unhide_dashboard['data']) ? $get_data_hide_unhide_dashboard['data'] : [],
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'greetings' => isset($greetings) ? $greetings : [],
                 'count' => isset($count) ? $count : 0,
                 'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
                 'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
                 'bulletinBorad_data' => isset($bulletinBorad_data['data']) ? $bulletinBorad_data['data'] : [],
+                'get_settings_row' => isset($response['data']) ? $response['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
             ]
         );
     }
@@ -1643,6 +1650,33 @@ class AdminController extends Controller
                 <a href="' . route('admin.employee.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
                                  <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteEmployeeBtn"><i class="fe-trash-2"></i></a>
                          </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    // present student termination_list 
+    public function presentStudentTerminationList(Request $request)
+    {
+        // $response = Helper::GetMethod(config('constants.api.present_student_termination_list'));
+        // $data = isset($response['data']) ? $response['data'] : [];
+        // // return DataTables::of($data)->make(true);
+        // return DataTables::of($data)
+
+        //     ->addIndexColumn()
+        //     ->make(true);
+        // return config('constants.api.present_student_termination_list');
+        $response = Helper::GetMethod(config('constants.api.present_student_termination_list'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        // return $data;
+        // dd(config('constants.api.present_student_termination_list'));
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="button-list">
+                                <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editClassBtn"><i class="fe-edit"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteClassBtn"><i class="fe-trash-2"></i></a>
+                        </div>';
             })
 
             ->rawColumns(['actions'])
@@ -6055,6 +6089,19 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.add_student_attendance'), $data);
         return $response;
     }
+    public function widgetAddUpdate(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
+
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            "unhide_data" => $request->unhide_data,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.hide_unhide_dashboard'), $data);
+        return $response;
+    }
     public function studDailyAttendanceAdd(Request $request)
     {
         $data = [
@@ -8784,7 +8831,6 @@ class AdminController extends Controller
         $activity_list = Helper::GETMethodWithData(config('constants.api.log_modifylist'), $data);
        
         return $activity_list;
-       
     }
     public function menuaccess()
     {
@@ -9345,6 +9391,40 @@ class AdminController extends Controller
         // dd($pagedata);
         $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
         return $page;
+    }
+    // dashboard widget
+    public function dashboardWidget()
+    {
+        // $data = [
+        //     'academic_session_id' => session()->get('academic_session_id')
+        // ];
+        // $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // $semester = Helper::GetMethod(config('constants.api.semester'));
+        // $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $userid = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_settings_attendance_report'), $userid);
+        $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $userid);
+
+        return view('admin.settings.dashboard_widget', [
+
+            'get_data_hide_unhide_dashboard' => isset($get_data_hide_unhide_dashboard['data']) ? $get_data_hide_unhide_dashboard['data'] : [],
+            'get_settings_row' => isset($response['data']) ? $response['data'] : [],
+            'department' => isset($department['data']) ? $department['data'] : [],
+            // 'term' => isset($term['data']) ? $term['data'] : [],
+            // 'semester' => isset($semester['data']) ? $semester['data'] : [],
+            // 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+        ]);
+        // return view('admin.settings.dashboard_widget');
+        // $workWeek = Helper::GetMethod(config('constants.api.work_week_get'));
+        // return view(
+        //     'admin.work_week.index',
+        //     [
+        //         'workWeek' => isset($workWeek['data']) ? $workWeek['data'] : [],
+        //     ]
+        // );
     }
     // work week
     public function workWeek()

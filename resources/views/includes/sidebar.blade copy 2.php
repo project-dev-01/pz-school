@@ -162,39 +162,6 @@
                         <span> {{ __('messages.dashboards') }} </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#sidebarrolemanagement" data-toggle="collapse">
-                        <!--<i class="fe-book-open"></i>
-                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
-                        </svg>-->
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                <path d="M0,172v-172h172v172z" fill="none"></path>
-                                <g fill="#c4c7d2">
-                                    <path d="M21.5,21.5v129h64.5v-32.25v-64.5v-32.25zM86,53.75c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25c-17.7805,0 -32.25,14.4695 -32.25,32.25zM118.25,86c-17.7805,0 -32.25,14.4695 -32.25,32.25c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25z"></path>
-                                </g>
-                            </g>
-                        </svg>
-
-                        <span> {{ __('messages.school_roles') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarrolemanagement">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.school_role.index')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
-                                    <span>{{ __('messages.school_roles') }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.school_role.menuaccess')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
-                                    <span>{{ __('messages.school_rolepermissions') }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="{{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/parent-details*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarAdmission" data-toggle="collapse">
                         <!--<i class="fe-edit"></i>-->
@@ -379,34 +346,6 @@
                             <li>
                                 <a href="{{ route('admin.employee.import')}}" class="nav-link {{ (request()->is('admin/employee/import')) ? 'active' : '' }}">
                                     <span>{{ __('messages.employee_bulk_upload') }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#sidebarrolemanagement" data-toggle="collapse">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                <path d="M0,172v-172h172v172z" fill="none"></path>
-                                <g fill="#c4c7d2">
-                                    <path d="M21.5,21.5v129h64.5v-32.25v-64.5v-32.25zM86,53.75c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25c-17.7805,0 -32.25,14.4695 -32.25,32.25zM118.25,86c-17.7805,0 -32.25,14.4695 -32.25,32.25c0,17.7805 14.4695,32.25 32.25,32.25c17.7805,0 32.25,-14.4695 32.25,-32.25c0,-17.7805 -14.4695,-32.25 -32.25,-32.25z"></path>
-                                </g>
-                            </g>
-                        </svg>
-                        <span> {{ __('messages.school_roles') }} </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarrolemanagement">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.school_role.index')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
-                                    <span>{{ __('messages.school_roles') }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.school_role.menuaccess')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
-                                    <span>{{ __('messages.school_rolepermissions') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -1326,6 +1265,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.student_attendance_report')}}" class="nav-link {{ (request()->is('admin/student_attendance_report_settings')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.student_attendance_report_settings') }} </span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.form_field')}}" class="nav-link {{ (request()->is('admin/form_field*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.form_field') }} </span>
                                 </a>
@@ -1338,11 +1282,6 @@
                             <li>
                                 <a href="{{ route('admin.work_week')}}" class="nav-link {{ (request()->is('admin/work/week*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.work_week') }} </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.dashboard.widget')}}" class="nav-link {{ (request()->is('admin/dashboard/widget*')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.dashboard_hideunhide') }} </span>
                                 </a>
                             </li>
                             <li>

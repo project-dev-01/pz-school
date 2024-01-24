@@ -10,6 +10,11 @@
 <!-- full calendar css end-->
 @endsection
 @section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 <!-- date picker -->
 <link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -145,455 +150,133 @@
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
     </div>
-    <!-- end row-->
+    @php
+    $taskBladeFileName = 'task'; // Your dynamic file name variable
+    $calendarBladeFileName = 'calendar'; // Your dynamic file name variable
+    $attendanceBladeFileName = 'attendance'; // Your dynamic file name variable
+    $studentPlanLeaveBladeFileName = 'student_plan_leave'; // Your dynamic file name variable
+    $studentTransferListBladeFileName = 'student_transfer_list'; // Your dynamic file name variable
+    $studentNewJoiningBladeFileName = 'studentnewjoining'; // Your dynamic file name variable
+    $shortcutBladeFileName = 'shortcut'; // Your dynamic file name variable
+    $bulletinBladeFileName = 'bulletin'; // Your dynamic file name variable
+    $bladeKeyAndDashboardHideUnhideVal = [
+    'attendance' => 'AttendanceReport',
+    'calendar' => 'Calendar',
+    'task' => 'Task',
+    'student_transfer_list' => 'StudentTransferredList',
+    'shortcut' => 'ShortcutLinks',
+    'bulletin' => 'BulletinBoard',
+    'student_plan_leave' => 'StudentPlanToLeave',
+    'studentnewjoining' => 'StudentNewJoining',
+    ];
+    @endphp
 
-    <!-- end row-->
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}
-                                    <h4>
-                            </li>
-                        </ul>
-                        <div class="card-body">
-                            <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
-                                <div class="col">
-                                    <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
-                                        <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.today') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }} )</span></h5>
-                                    </a>
-                                    <!-- Right modal -->
-                                    <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#right-modal">Rightbar Modal</button> -->
-                                    @if(!empty($get_to_do_list_dashboard['today']))
-                                    @forelse ($get_to_do_list_dashboard['today'] as $today)
-                                    <div class="collapse todayTasks" id="todayTasks">
-                                        <div class="card mb-0 shadow-none">
-                                            <div class="card-body pb-0" id="task-list-one">
-                                                <!-- task -->
-                                                <div class="row justify-content-sm-between task-item">
-                                                    <div class="col-lg-6 mb-2">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" data-id="{{ $today['id'] }}" class="custom-control-input admintaskListDashboard" id="today{{ $today['id'] }}" {{ ($today['user_id']) ? "checked" : "" }}>
-                                                            <label class="custom-control-label" for="today{{ $today['id'] }}">
-                                                                {{$today['title']}}
-                                                            </label>
-                                                        </div> <!-- end checkbox -->
-                                                    </div> <!-- end col -->
-                                                    <div class="col-lg-6">
-                                                        <div class="d-sm-flex justify-content-between">
-                                                            <div>
-                                                                <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
-                                                            </div>
-                                                            <div class="mt-3 mt-sm-0">
-                                                                <ul class="list-inline font-13 text-sm-center">
-                                                                    <li class="list-inline-item" id="comments{{ $today['id'] }}">
-                                                                        <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
-                                                                        {{$today['total_comments']}}
-                                                                    </li>
-                                                                    <li class="list-inline-item pr-1">
-                                                                        <i class='mdi mdi-calendar-month-outline font-16 mr-1'></i>
-                                                                        <!-- Today 10am -->
-                                                                        {{ date('j F y g a', strtotime($today['due_date']));}}
-                                                                    </li>
-                                                                    <!-- <li class="list-inline-item pr-1">
-                                                                                <i class='mdi mdi-tune font-16 mr-1'></i>
-                                                                                3/7
-                                                                            </li> -->
+    @forelse($get_data_hide_unhide_dashboard as $r)
 
-                                                                    <li class="list-inline-item mt-3 mt-sm-0">
-                                                                        @if($today['priority'] == "Low")
-                                                                        <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
-                                                                        @endif
-                                                                        @if($today['priority'] == "Medium")
-                                                                        <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
-                                                                        @endif
-                                                                        @if($today['priority'] == "High")
-                                                                        <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
-                                                                        @endif
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div> <!-- end .d-flex-->
-                                                    </div> <!-- end col -->
-                                                </div>
-                                                <hr class="my-2" style="margin-bottom: 1px!important;;margin-top: 1px!important;" />
-                                                <!-- end task -->
-                                            </div> <!-- end card-body-->
-                                        </div> <!-- end card -->
-                                    </div> <!-- end .collapse-->
-                                    @empty
-                                    <p></p>
-                                    @endforelse
-                                    @endif
-                                    <!-- upcoming tasks -->
-                                    <div class="mt-4">
-                                        <a class="text-dark" data-toggle="collapse" data-id="upcoming" data-count="{{ isset($get_to_do_list_dashboard['upcoming'])?count($get_to_do_list_dashboard['upcoming']):0 }}" href="#upcomingTasks" aria-expanded="false" aria-controls="upcomingTasks">
-                                            <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i>{{ __('messages.upcoming') }}<span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['upcoming'])?count($get_to_do_list_dashboard['upcoming']):0 }} )</span>
-                                            </h5>
-                                        </a>
-                                        @if(!empty($get_to_do_list_dashboard['upcoming']))
-                                        @forelse ($get_to_do_list_dashboard['upcoming'] as $upcoming)
-                                        <div class="collapse upcomingTasks" id="upcomingTasks">
-                                            <div class="card mb-0 shadow-none">
-                                                <div class="card-body pb-0" id="task-list-two">
-                                                    <!-- task -->
-                                                    <div class="row justify-content-sm-between task-item">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" data-id="{{ $upcoming['id'] }}" class="custom-control-input admintaskListDashboard" id="upcoming{{ $upcoming['id'] }}" {{ ($upcoming['user_id']) ? "checked" : "" }}>
-                                                                <label class="custom-control-label" for="upcoming{{ $upcoming['id'] }}">
-                                                                    {{$upcoming['title']}}
-                                                                </label>
-                                                            </div> <!-- end checkbox -->
-                                                        </div> <!-- end col -->
-                                                        <div class="col-lg-6">
-                                                            <div class="d-sm-flex justify-content-between">
-                                                                <div>
-                                                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
-                                                                </div>
+    @php
+    $foundKey = array_search($r['widget_value'], $bladeKeyAndDashboardHideUnhideVal);
+    @endphp
 
-                                                                <div class="mt-3 mt-sm-0">
-                                                                    <ul class="list-inline font-13 text-sm-center">
-                                                                        <li class="list-inline-item" id="comments{{ $upcoming['id'] }}">
-                                                                            <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
-                                                                            {{$upcoming['total_comments']}}
-                                                                        </li>
-                                                                        <li class="list-inline-item pr-1">
-                                                                            <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                            {{ date('j F y g a', strtotime($upcoming['due_date']));}}
+    @if ($foundKey !== false)
+    @if ($r['visibility'] == '0')
+    @include('admin.dashboard.order_base_show_div.' . $foundKey, ['row_details' => $r])
 
-                                                                        </li>
-                                                                        <!-- <li class="list-inline-item pr-1">
-                                                                                    <i class='mdi mdi-tune font-16 mr-1'></i>
-                                                                                    1/12
-                                                                                </li> -->
+    @endif
+    @endif
 
-                                                                        <li class="list-inline-item mt-3 mt-sm-0">
-                                                                            @if($upcoming['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
-                                                                            @endif
-                                                                            @if($upcoming['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
-                                                                            @endif
-                                                                            @if($upcoming['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
-                                                                            @endif
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div> <!-- end .d-flex-->
-                                                        </div> <!-- end col -->
-                                                    </div>
-                                                    <hr class="my-2" style="margin-bottom: 1px!important;;margin-top: 1px!important;" />
-                                                    <!-- end task -->
-                                                </div> <!-- end card-body-->
-                                            </div> <!-- end card -->
-                                        </div> <!-- end collapse-->
-                                        @empty
-                                        <p></p>
-                                        @endforelse
-                                        @endif
-                                    </div>
-                                    <!-- end upcoming tasks -->
-                                    <!-- old tasks -->
-                                    <div class="mt-4">
-                                        <a class="text-dark" data-toggle="collapse" data-id="old" data-count="{{ isset($get_to_do_list_dashboard['old'])?count($get_to_do_list_dashboard['old']):0 }}" href="#pastTasks" aria-expanded="false" aria-controls="pastTasks">
-                                            <h5 class="mb-0">
-                                                <i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.past') }} <span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['old'])?count($get_to_do_list_dashboard['old']):0 }} )</span>
-                                            </h5>
-                                        </a>
-                                        @if(!empty($get_to_do_list_dashboard['old']))
-                                        @forelse ($get_to_do_list_dashboard['old'] as $old)
-                                        <div class="collapse pastTasks" id="pastTasks">
-                                            <div class="card mb-0 shadow-none">
-                                                <div class="card-body pb-0" id="task-list-two">
-                                                    <!-- task -->
-                                                    <div class="row justify-content-sm-between task-item">
-                                                        <div class="col-lg-6 mb-2">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
-                                                                <label class="custom-control-label" for="old{{ $old['id'] }}">
-                                                                    {{$old['title']}}
-                                                                </label>
-                                                            </div> <!-- end checkbox -->
-                                                        </div> <!-- end col -->
-                                                        <div class="col-lg-6">
-                                                            <div class="d-sm-flex justify-content-between">
-                                                                <div>
-                                                                    <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
-                                                                </div>
-                                                                <div class="mt-3 mt-sm-0">
-                                                                    <ul class="list-inline font-13 text-sm-center">
-                                                                        <li class="list-inline-item" id="comments{{ $old['id'] }}">
-                                                                            <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
-                                                                            {{$old['total_comments']}}
-                                                                        </li>
-                                                                        <li class="list-inline-item pr-1">
-                                                                            <i class='mdi mdi-calendar-month-outline font-16'></i>
-                                                                            <?php setlocale(LC_ALL, 'ja.UTF-8');
-                                                                            ?>
-                                                                            {{ date('j F y g a', strtotime($old['due_date']));}}
-
-                                                                        </li>
-                                                                        <!-- <li class="list-inline-item pr-1">
-                                                                                    <i class='mdi mdi-tune font-16 mr-1'></i>
-                                                                                    1/12
-                                                                                </li> -->
-
-                                                                        <li class="list-inline-item mt-3 mt-sm-0">
-                                                                            @if($old['priority'] == "Low")
-                                                                            <span class="badge badge-soft-success p-1">{{ __('messages.low') }}</span>
-                                                                            @endif
-                                                                            @if($old['priority'] == "Medium")
-                                                                            <span class="badge badge-soft-info p-1">{{ __('messages.medium') }}</span>
-                                                                            @endif
-                                                                            @if($old['priority'] == "High")
-                                                                            <span class="badge badge-soft-danger p-1">{{ __('messages.high') }}</span>
-                                                                            @endif
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div> <!-- end .d-flex-->
-                                                        </div> <!-- end col -->
-                                                    </div>
-                                                    <!-- end task -->
-                                                    <hr class="my-2" style="margin-bottom: 1px!important;;margin-top: 1px!important;" />
-                                                </div> <!-- end card-body-->
-                                            </div> <!-- end card -->
-                                        </div> <!-- end collapse-->
-                                        @empty
-                                        <p></p>
-                                        @endforelse
-                                        @endif
-                                    </div>
-                                    <!-- end old tasks -->
-                                </div> <!-- end col -->
-                            </div> <!-- end row -->
-
-
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card -->
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div> <!-- end col -->
-
-        <!-- task details -->
-        <!-- task panel end -->
-    </div> <!-- end card-box -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div id="" class="m-t-20">
-                                <br>
-                            </div>
-
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-12">
-                            <!-- <div id="admin_calendor"></div> -->
-                            <div id="new_calendor"></div>
-                        </div> <!-- end col -->
-
-                    </div> <!-- end row -->
-                </div> <!-- end card body-->
-            </div> <!-- end card -->
-
-            <!-- Add New Event MODAL -->
-            <div class="modal fade viewEvent" id="admin-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box eventpopup" style="background-color: #8adfee14;">
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <style>
-                                                    .table td {
-                                                        border-top: none;
-                                                        text-align: justify;
-                                                    }
-                                                </style>
-                                                <tr>
-                                                    <td>{{ __('messages.title') }}</td>
-                                                    <td id="title"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ __('messages.type') }}</td>
-                                                    <td id="type"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ __('messages.start_date') }}</td>
-                                                    <td id="start_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ __('messages.end_date') }}</td>
-                                                    <td id="end_date"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ __('messages.audience') }}</td>
-                                                    <td id="audience"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ __('messages.description') }}</td>
-                                                    <td id="description"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.details') }}</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <p class="text-center"> {{ __('messages.name') }} :<span id="bulk_name"></span></p><br>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.birthday') }}</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-box">
-                                        <div class="table-responsive">
-                                            <p class="text-center"> {{ __('messages.happy_birthday') }} <span id="name"></span></p>
-                                        </div>
-                                    </div> <!-- end card-box -->
-                                </div> <!-- end col -->
-                            </div>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <!-- end col-12 -->
-    </div> <!-- end row -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Shortcut Links
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
-                <div class="col-12">
-                        <div class="row">
-                        <?php 
-                         if (!empty($shortcut_links)) {
-                            // Iterate through shortcut data and generate links
-                            foreach ($shortcut_links as $shortcut) {
-                                ?>
-                                <div class="col-3">
-                                    <a href="<?= $shortcut['links'] ?>" data-toggle="collapse">
-                                        <i class="fa fa-share" aria-hidden="true" style="color: blue;"></i>
-                                        <span><?= $shortcut['sidebar_name'] ?></span>
-                                    </a>
-                                </div>
-                                <?php
-                            }
-                        }else{
-                                // Display a message or take alternative action when no shortcuts are available
-                                echo '<div class="col-12  text-center">No shortcuts available.</div>';
-                        }
-                        ?>
-
-                        </div>
-                    </div>
-                    </div>
-                    
-            </div>
-        </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        Bulletin Board
-                            <h4>
-                    </li>
-                </ul>
-
-                <div class="card-body">
-                <div class="row">
-                    <?php 
-                    if (!empty($bulletinBorad_data)) {
-                        foreach ($bulletinBorad_data as $file) {
-                            $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'. $file['file'];
-                            ?>
-                            <div class="col-xl-4">
-                                <div class="card mb-1 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-sm">
-                                                    <span class="avatar-title bg-danger text-primary rounded">
-                                                        <i class="fe-file" style="color: #fff;"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col pl-0">
-                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['file']; ?></a>
-                                                <p class="mb-0">Preview</p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!-- Button -->
-                                                <a  href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="btn btn-link btn-lg text-muted" style="color: black;" download>
-                                                    <i class="dripicons-download" style="color: black;"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                            <?php
-                        }
-                    } else {
-                        // If no files are available
-                        echo '<div class="col-12 text-center">No files available.</div>';
-                    }
-                    ?>
+    @empty
+    @endforelse
+    <!-- Add New Event MODAL -->
+    <div class="modal fade viewEvent" id="admin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle"></i>{{ __('messages.event_details') }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-box eventpopup" style="background-color: #8adfee14;">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <style>
+                                            .table td {
+                                                border-top: none;
+                                                text-align: justify;
+                                            }
+                                        </style>
+                                        <tr>
+                                            <td>{{ __('messages.title') }}</td>
+                                            <td id="title"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.type') }}</td>
+                                            <td id="type"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.start_date') }}</td>
+                                            <td id="start_date"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.end_date') }}</td>
+                                            <td id="end_date"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.audience') }}</td>
+                                            <td id="audience"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.description') }}</td>
+                                            <td id="description"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade " id="bulk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myviewBulkModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.details') }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <p class="text-center"> {{ __('messages.name') }} :<span id="bulk_name"></span></p><br>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade " id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myviewBirthdayModalLabel"> <i class="fas fa-info-circle"></i>{{ __('messages.birthday') }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-box">
+                                <div class="table-responsive">
+                                    <p class="text-center"> {{ __('messages.happy_birthday') }} <span id="name"></span></p>
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div> <!-- end col -->
+                    </div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -609,8 +292,8 @@
 @section('scripts')
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
-<!-- <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script> -->
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
@@ -630,6 +313,13 @@
 <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 <!-- full calendar js end -->
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
+<!-- button js added -->
+<script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
+
 <script>
     var getBirthdayCalendorAdmin = "{{ config('constants.api.get_birthday_calendor_admin') }}";
     var getEventCalendorAdmin = "{{ config('constants.api.get_event_calendor_admin') }}";
@@ -652,9 +342,25 @@
     // work week
     var getWorkWeekUrl = "{{ config('constants.api.work_week') }}";
     var getPublicHolidays = "{{ config('constants.api.get_public_holidays') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var absent_attendance_reportUrl = "{{ config('constants.api.absent_attendance_report') }}";
+    var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
+    // var presentStudentTerminationListUrl = "{{ route('admin.student_termination.list') }}";
+
+    var studentPlanToLeaveListUrl = "{{ config('constants.api.student_plan_to_leave') }}";
+    var studentTransferListUrl = "{{ config('constants.api.student_transfer_list') }}";
+    var studentNewJoiningListUrl = "{{ config('constants.api.student_new_joining_list') }}";
+
+    var header_txt = "{{ __('messages.student_plan_to_leave') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
+    var deptIDs = "{{ (isset($get_settings_row['department_id']) ? $get_settings_row['department_id'] : null) }}";
+    var classIDS = "{{ (isset($get_settings_row['class_id']) ? $get_settings_row['class_id'] : null) }}";
+    var secIDs = "{{ (isset($get_settings_row['section_id']) ? $get_settings_row['section_id'] : null) }}";
+    var patternNames = "{{ (isset($get_settings_row['pattern']) ? $get_settings_row['pattern'] : null) }}";
 </script>
 <!-- <script src="{{ asset('js/custom/admin_calendor.js') }}"></script> -->
 <script src="{{ asset('js/custom/admin_calendor_new_cal.js') }}"></script>
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/greeting.js') }}"></script>
+<script src="{{ asset('js/custom/dashboard_attendance_report_stg.js') }}"></script>
 @endsection

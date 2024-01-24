@@ -170,10 +170,11 @@ $(function () {
             var sectionName = $("#editAssignTeacherForm").find("select[name=section_name]").val();
             var classTeacher = $("#editAssignTeacherForm").find("select[name=class_teacher]").val();
             var type = $("#editAssignTeacherForm").find("select[name=type]").val();
-
+            var department_id = $("#editAssignTeacherForm").find("select[name=edit_department_id]").val();
             var formData = new FormData();
             formData.append('id', id);
             formData.append('token', token);
+            formData.append('department_id', department_id);
             formData.append('branch_id', branchID);
             formData.append('class_id', className);
             formData.append('section_id', sectionName);

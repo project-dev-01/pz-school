@@ -1031,6 +1031,12 @@ return [
         'getpdf_report'=>$url.'/getpdf_report',
         'getacyeardates'=>$url.'/getacyeardates',
         //add
+        'absent_attendance_report'=> $url.'/absent_attendance_report',
+        'student_plan_to_leave'=> $url.'/student_plan_to_leave',
+        'student_transfer_list'=> $url.'/student_transfer_list',
+        'student_new_joining_list'=> $url.'/student_new_joining_list',
+        'hide_unhide_dashboard'=> $url.'/hide_unhide_dashboard',
+        'get_data_hide_unhide_dashboard'=> $url.'/get_data_hide_unhide_dashboard',
         
       ]
 

@@ -251,6 +251,7 @@
     var visa_number_lang = "{{ __('messages.visa_number') }}";
     var visa_expiry_date_lang = "{{ __('messages.visa_expiry_date') }}";
     var visa_photo_lang = "{{ __('messages.visa_photo') }}";
+    var AttendanceReportLabel = "{{ __('messages.AttendanceReport') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

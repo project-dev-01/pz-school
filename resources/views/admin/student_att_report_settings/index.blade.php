@@ -126,9 +126,9 @@
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var holidayList = "{{ config('constants.api.holidays_list') }}";
-    var deptIDs = "{{ $get_settings_row['department_id'] }}";
-    var classIDS = "{{ $get_settings_row['class_id'] }}";
-    var secIDs = "{{ $get_settings_row['section_id'] }}";
+    var deptIDs = "{{ (isset($get_settings_row['department_id']) ? $get_settings_row['department_id'] : null) }}";
+    var classIDS = "{{ (isset($get_settings_row['class_id']) ? $get_settings_row['class_id'] : null) }}";
+    var secIDs = "{{ (isset($get_settings_row['section_id']) ? $get_settings_row['section_id'] : null) }}";
 
     // default image test
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";
