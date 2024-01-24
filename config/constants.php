@@ -1037,7 +1037,7 @@ return [
         'student_new_joining_list'=> $url.'/student_new_joining_list',
         'hide_unhide_dashboard'=> $url.'/hide_unhide_dashboard',
         'get_data_hide_unhide_dashboard'=> $url.'/get_data_hide_unhide_dashboard',
-        
+        'staff_leave_history_dashboard'=> $url.'/staff_leave_history_dashboard'
       ]
 
 ];

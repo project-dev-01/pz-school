@@ -10,6 +10,12 @@
 <!-- full calendar css end-->
 @endsection
 @section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
+
 <!-- date picker -->
 <link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -1140,31 +1146,24 @@
         <div class="card">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <h4 class="navv"> Staff Leave Information</h4>
+                    <h4 class="navv">{{ __('messages.staff_leave_details') }}</h4>
                 </li>
             </ul><br>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered w-100 nowrap">
+                    <table class="table table-bordered w-100 nowrap" id="staff-leave-list">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Staff Name</th>
-                                <th>Department</th>
-                                <th>Leave Days</th>
-                                <th>Leave Start</th>
-                                <th>Leave End</th>
+                                <th>{{ __('messages.name') }}</th>
+                                <th>{{ __('messages.leave_type') }}</th>
+                                <th>{{ __('messages.leave_from') }}</th>
+                                <th>{{ __('messages.to_from') }}</th>
+                                <th>{{ __('messages.reason') }}</th>
+                                <th>{{ __('messages.status') }}</th>
                             </tr>
                         </thead>
-                        <tbody id="">
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center">xxxx</td>
-                                <td class="text-center">yyyy</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">24-10-2023</td>
-                                <td class="text-center">24-10-2023</td>
-                            </tr>
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -1173,44 +1172,44 @@
     </div> <!-- end card-->
 </div> <!-- end col -->
 <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            Shortcut Links
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
+    <div class="col-12">
+        <div class="card">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <h4 class="navv">
+                        Shortcut Links
+                        <h4>
+                </li>
+            </ul>
+            <div class="card-body">
                 <div class="col-12">
-                        <div class="row">
-                        <?php 
-                         if (!empty($shortcut_links)) {
+                    <div class="row">
+                        <?php
+                        if (!empty($shortcut_links)) {
                             // Iterate through shortcut data and generate links
                             foreach ($shortcut_links as $shortcut) {
-                                ?>
+                        ?>
                                 <div class="col-3">
                                     <a href="<?= $shortcut['links'] ?>" data-toggle="collapse">
                                         <i class="fa fa-share" aria-hidden="true" style="color: blue;"></i>
                                         <span><?= $shortcut['sidebar_name'] ?></span>
                                     </a>
                                 </div>
-                                <?php
+                        <?php
                             }
-                        }else{
-                                // Display a message or take alternative action when no shortcuts are available
-                                echo '<div class="col-12  text-center">No shortcuts available.</div>';
+                        } else {
+                            // Display a message or take alternative action when no shortcuts are available
+                            echo '<div class="col-12  text-center">No shortcuts available.</div>';
                         }
                         ?>
 
-                        </div>
                     </div>
-                    </div>
-                    
+                </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 </div> <!-- end row -->
 </div> <!-- end row -->
 @include('teacher.dashboard.check_list')
@@ -1224,6 +1223,8 @@
 @section('scripts')
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 <!-- full calendar js end -->
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
@@ -1245,6 +1246,13 @@
 <script src="{{ asset('libs/@fullcalendar/list/main.min.js') }}"></script>
 <script src="{{ asset('libs/@fullcalendar/interaction/main.min.js') }}"></script>
 <!-- full calendar js end -->
+<!-- button js added -->
+<script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
+
 <script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     // calendor js
@@ -1281,6 +1289,7 @@
     var getTenStudent = "{{ config('constants.api.all_student_ranking') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var all_exam_subject_scores = "{{ config('constants.api.all_exam_subject_scores') }}";
+    var staffLeaveHistoryDashboardUrl = "{{ config('constants.api.staff_leave_history_dashboard') }}";
 
 
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
