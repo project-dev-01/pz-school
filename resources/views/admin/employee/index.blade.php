@@ -744,7 +744,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="department">{{ __('messages.department') }}</label>
+                                    <label for="department">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                 </div>
                             </div>
                             <table class="table table-bordered table-hover">

@@ -1,10 +1,4 @@
 $(document).ready(function () {
-    console.log("emp_department_list");
-    console.log(emp_department_list);
-    console.log("emp_designation_list");
-    console.log(emp_designation_list);
-    console.log("employee_type_list");
-    console.log(employee_type_list);
     // designation
     $(".designationDatepicker").datepicker({
         dateFormat: 'dd-mm-yy',

@@ -70,11 +70,11 @@ $(function () {
         $("#shortName").val(shortname.toUpperCase());
     });
     // change file
-    
-    $('#passport_photo').change(function() {
+
+    $('#passport_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#passport_photo_name').text("File greater than 2Mb");
             $("#passport_photo_name").addClass("error");
             $('#passport_photo').val('');
@@ -83,11 +83,11 @@ $(function () {
             $('#passport_photo_name').text(file.name);
         }
     });
-    
-    $('#visa_photo').change(function() {
+
+    $('#visa_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#visa_photo')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#visa_photo_name').text("File greater than 2Mb");
             $("#visa_photo_name").addClass("error");
             $('#visa_photo').val('');
@@ -173,6 +173,17 @@ $(function () {
             email: {
                 required: true,
                 email: true
+            },
+
+            // department: "required",
+            // Custom validation rule for at least one department
+            'department[]': {
+                required: function (element) {
+                    // Check if at least one department is selected
+                    return $("select[name='department[]']").filter(function () {
+                        return $(this).val() !== '';
+                    }).length === 0;
+                }
             },
             // designation_id: "required",
             // department_id: "required",

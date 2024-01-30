@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Log;
 
 class Helper
 {
@@ -70,6 +71,11 @@ class Helper
                 abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
+            Log::error("HTTP request failed to $url", [
+                'url' => $url,
+                'body' => $data,
+                'error' => $e->getMessage(),
+            ]);
             // return $e->getMessage();
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
@@ -89,7 +95,8 @@ class Helper
                 } else if ($e->response->status() == 401) {
                     abort(401, view('errors.401'));
                 } else {
-                    abort(424, view('errors.424'));
+                    // abort(424, view('errors.424'));
+                    return $e->getMessage();
                 }
             }
 
@@ -128,6 +135,11 @@ class Helper
                 abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
+            Log::error("HTTP request failed to $url", [
+                'url' => $url,
+                'body' => $data,
+                'error' => $e->getMessage(),
+            ]);
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
                 // 401,403,404,419,429,500,503,client_error
@@ -182,6 +194,11 @@ class Helper
             }
             return $response->json();
         } catch (\Exception $e) {
+            Log::error("HTTP request failed to $url", [
+                'url' => $url,
+                'body' => $data,
+                'error' => $e->getMessage(),
+            ]);
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
                 // return $e->getMessage();
@@ -240,6 +257,11 @@ class Helper
                 abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
+            Log::error("HTTP request failed to $url", [
+                'url' => $url,
+                'body' => $data,
+                'error' => $e->getMessage(),
+            ]);
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
                 // 401,403,404,419,429,500,503,client_error
@@ -271,6 +293,10 @@ class Helper
         try {
             $data = Crypt::decryptString($string);
         } catch (DecryptException $e) {
+            Log::error("HTTP request failed", [
+                'string' => $string,
+                'error' => $e->getMessage(),
+            ]);
             $data = "";
         }
         return $data;
@@ -338,6 +364,7 @@ class Helper
                 abort(503, view('errors.503'));
             }
         } catch (\Exception $e) {
+            Log::error("Error in HTTP request: " . $e->getMessage());
             // Handle HTTP client request exceptions
             if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response && $e->response->status() >= 400) {
                 // 401,403,404,419,429,500,503,client_error

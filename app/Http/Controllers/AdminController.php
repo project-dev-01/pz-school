@@ -1737,8 +1737,9 @@ class AdminController extends Controller
     // show employee
     public function showEmployee()
     {
+        // echo "jka";
+        // exit;
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-
         $data = [
             'status' => "0"
         ];
@@ -9307,7 +9308,7 @@ class AdminController extends Controller
         $branch_id = config('constants.branch_id');
 
         $school_roleid = $request->school_roleid;
-        //dd($branch_id);
+        // dd($school_roleid);
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
         //$menus = Helper::GetMethod(config('constants.api.menus'));
         $data = [
@@ -9320,6 +9321,7 @@ class AdminController extends Controller
             'scrole_id' => $school_roleid,
             'type' => 'Mainmenu'
         ];
+        // dd($mainmenudata);
         $submenudata = [
             'role_id' => $role_id,
             'br_id' => $branch_id,
@@ -9369,9 +9371,9 @@ class AdminController extends Controller
             'deletes' => $request->deletes,
             'export' => $request->export
         ];
-        //dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
-        //dd($response);
+        // dd($response);
         //return redirect('admin/school_role/menuaccess');
         if ($response['code'] == 200) {
             return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
