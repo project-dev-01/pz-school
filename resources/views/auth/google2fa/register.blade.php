@@ -87,17 +87,18 @@
                               <div id="" class="news-app-promo">
                               <div class="news-app-promo__section">
                                   <div class="news-app-promo-subsection">
+                                  
                                   <a class="" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_parent">
-                                  <img class="authenticator_logo" src="..\public\images\authenticator.png"> 
+                                  <img class="authenticator_logo" src="{{ asset('images/twofa/authenticator.png') }}"> 
                                   </a>
                                   </div>
                                   <div class="news-app-promo-subsection">
                                       <a class="news-app-promo-subsection--link news-app-promo-subsection--playstore" href="https://play.google.com/store/search?q=google+authenticator&c=apps" target="_parent">
-                                        <img class="news-app-promo__play-store" src="..\public\images\Googleplay.png" style="height: 90px;margin-left: -15px; width: 130px;">
+                                        <img class="news-app-promo__play-store" src="{{ asset('images/twofa/Googleplay.png') }}" style="height: 90px;margin-left: -15px; width: 130px;">
                                         
                                       </a>
                                       <a class="news-app-promo-subsection--link news-app-promo-subsection--appstore" href="https://apps.apple.com/us/app/google-authenticator/id388497605" target="_parent">
-                                          <img class="news-app-promo__app-store" src="..\public\images\appstore.png" style="margin-bottom: 30px;margin-top: -15px;">
+                                          <img class="news-app-promo__app-store" src="{{ asset('images/twofa/appstore.png') }}" style="margin-bottom: 30px;margin-top: -15px;">
                                       </a>
                                   </div>
                               </div>

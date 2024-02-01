@@ -736,7 +736,7 @@
                                     <label for="teacher_type">{{ __('messages.teacher_type') }}</label>
                                     <select class="form-control" name="teacher_type" id="teacher_type">
                                         <option value="">{{ __('messages.select_teacher_type') }}</option>
-                                        <option value="nursing_teacher">Nursing Teacher</option>
+                                        <option value="nursing_teacher">{{ __('messages.nursing_teacher') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -787,7 +787,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -839,7 +839,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -891,7 +891,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -917,7 +917,7 @@
                                                 <span class="far fa-envelope-open"></span>
                                             </div>
                                         </div>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="xxxxx@gmail.com" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -930,7 +930,7 @@
                                                 <span class="fas fa-unlock"></span>
                                             </div>
                                         </div>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="*********">
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="*********" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -1245,6 +1245,15 @@
             reverse: true
         });
         // nric validation end
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            // Clear the values of email and password fields
+            $("#email").val("");
+            $("#password").val("");
+        }, 2000);
     });
 </script>
 @endsection

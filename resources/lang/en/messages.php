@@ -1927,5 +1927,11 @@ return [
     "StudentTransferredList" => "Student Transferred List",
     "ShortcutLinks" => "Shortcut Links",
     "BulletinBoard" => "Bulletin Board",
-
+    "add_hideunhide" => "Add Hide/Unhide",
+    "dashboard_details" => "Dashboard Details",
+    "add_attendance_report" => "Add Attendance Report",
+    "pattern" => "Pattern",
+    "wick" => "Wick",
+    "nursing_teacher" => "Nursing Teacher",
+    
 ];

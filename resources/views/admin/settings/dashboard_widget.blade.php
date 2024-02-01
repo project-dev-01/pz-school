@@ -109,14 +109,9 @@
                                             <div class="form-group">
                                                 <form id="addDynamicFilter" action="{{ route('admin.widget.add') }}" method="post">
                                                     <table class="table table-borderless" id="dynamic_field">
-                                                        <!-- <tr>
-                                                            <td class="col-md-10">
-                                                                <button type="button" name="name[]" class="form-control name_list" class="btn btn-default" data-toggle="modal" data-target="#standard-modal">+</button>
-                                                            </td>
-                                                        </tr> -->
                                                         @forelse($get_data_hide_unhide_dashboard as $r)
                                                         <tr class="widget" id="{{ $r['order_no'] }}" data-id="{{ $r['order_no'] }}" data-order="{{ $r['order_no'] }}">
-                                                            <td class="col-md-10">
+                                                            <td class="col-md-9">
                                                                 <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][order_no]" id="orderNo{{ $r['order_no'] }}" value="{{ $r['order_no'] }}">
                                                                 <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][widget_name]" id="widgetName{{ $r['order_no'] }}" value="{{ $r['widget_name'] }}">
                                                                 <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][widget_value]" id="widgetValue{{ $r['order_no'] }}" value="{{ $r['widget_value'] }}">
@@ -128,16 +123,17 @@
                                                                 <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][pattern]" id="patternName{{ $r['order_no'] }}" value="{{ $r['pattern'] }}">
                                                                 <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">{{ $r['widget_name'] }}</button>
                                                             </td>
-                                                            <td class="col-md-2" style="padding:15px;">
+                                                            <td class="col-md-3" style="padding:15px;">
                                                                 <button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-up"></i></button>
                                                                 <button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-down"></i></button>
+                                                                <button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                         @empty
                                                         @endforelse
                                                     </table>
                                                     <div class="form-group text-right m-b-0">
-                                                        <button type="submit" class="btn btn-success waves-effect waves-light">save</button>
+                                                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -167,7 +163,7 @@
                                 <table class="table table-bordered mb-0">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('messages.sl_no') }}</th>
+                                            <th>{{ __('messages.s.no') }}</th>
                                             <th>{{ __('messages.dashboard_details') }}</th>
                                             <th>{{ __('messages.action') }}</th>
                                         </tr>

@@ -952,7 +952,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('bank/update', [AdminController::class, 'updateBank'])->name('admin.bank.update');
         Route::post('bank/delete', [AdminController::class, 'deleteBank'])->name('admin.bank.delete');
         // 
-        Route::get('admin/dashboard/widget', [AdminController::class, 'dashboardWidget'])->name('admin.dashboard.widget');
+        Route::get('dashboard/widget', [AdminController::class, 'dashboardWidget'])->name('admin.dashboard.widget');
         Route::get('work/week', [AdminController::class, 'workWeek'])->name('admin.work_week');
         Route::post('work_week/update', [AdminController::class, 'workWeekUpdate'])->name('admin.work_week.update');
         Route::get('email_event', [AdminController::class, 'emailEvent'])->name('admin.email_event');

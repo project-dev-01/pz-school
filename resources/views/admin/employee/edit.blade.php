@@ -754,7 +754,7 @@
                                     <label for="teacher_type">{{ __('messages.teacher_type') }}</label>
                                     <select class="form-control" name="teacher_type" id="teacher_type">
                                         <option value="">{{ __('messages.select_teacher_type') }}</option>
-                                        <option value="nursing_teacher" {{ isset($employee['teacher_type']) ? $employee['teacher_type'] == "nursing_teacher" ? 'Selected' : '' : '' }}>Nursing Teacher</option>
+                                        <option value="nursing_teacher" {{ isset($employee['teacher_type']) ? $employee['teacher_type'] == "nursing_teacher" ? 'Selected' : '' : '' }}>{{ __('messages.nursing_teacher') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -820,7 +820,7 @@
                                             @if($addRemovedep > 1)
                                             <button type="button" name="remove_designation" data-designationremoveid="{{$addRemovedep}}" id="{{$addRemovedep}}" class="btn btn-danger btn_remove_department">X</button>
                                             @else
-                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                             @endif
                                         </td>
                                     </tr>
@@ -891,7 +891,7 @@
                                             @if($addRemovedes > 1)
                                             <button type="button" name="remove_designation" data-designationremoveid="{{$addRemovedes}}" id="{{$addRemovedes}}" class="btn btn-danger btn_remove_designation">X</button>
                                             @else
-                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_designation" id="add_designation" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                             @endif
                                         </td>
                                     </tr>
@@ -962,7 +962,7 @@
                                             @if($addRemove > 1)
                                             <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button>
                                             @else
-                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">Add +</button>
+                                            <button type="button" name="add_employee_type" id="add_employee_type" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                             @endif
                                         </td>
                                     </tr>

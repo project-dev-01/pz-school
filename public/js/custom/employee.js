@@ -168,6 +168,8 @@ $(function () {
     $("#addEmployeeForm").validate({
         rules: {
             first_name: "required",
+            first_name_english: "required",
+            first_name_furigana: "required",
             role_id: "required",
             // joining_date: "required",
             email: {
@@ -177,13 +179,17 @@ $(function () {
 
             // department: "required",
             // Custom validation rule for at least one department
-            'department[]': {
-                required: function (element) {
-                    // Check if at least one department is selected
-                    return $("select[name='department[]']").filter(function () {
-                        return $(this).val() !== '';
-                    }).length === 0;
-                }
+            // 'department[]': {
+            //     required: function (element) {
+            //         // Check if at least one department is selected
+            //         return $("select[name='department[]']").filter(function () {
+            //             return $(this).val() !== '';
+            //         }).length === 0;
+            //     }
+            // },
+            // Rules for dynamically added department fields
+            "department[]": {
+                required: true
             },
             // designation_id: "required",
             // department_id: "required",
@@ -359,11 +365,18 @@ $(function () {
     // rules validation
     $("#editEmployeeForm").validate({
         rules: {
+            first_name: "required",
+            first_name_english: "required",
+            first_name_furigana: "required",
+
             role_id: "required",
             // joining_date: "required",
             email: {
                 required: true,
                 email: true
+            },
+            "department[]": {
+                required: true
             },
             // designation_id: "required",
             // department_id: "required",
