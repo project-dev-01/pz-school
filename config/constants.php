@@ -1016,6 +1016,15 @@ return [
         //health logBooks
         'health_logbooks' => $url.'/getHealthLogbooks',
         'health_logbooks_add' => $url.'/health_logbooks_add',
+        'health_logbooks_partc_add' => $url.'/health_logbooks_partc_add',
+        'health_logbook_delete' => $url.'/health_logbook_delete',
+        'health_logbook_edit'  => $url.'/health_logbook_edit',
+        'health_logbook_update' => $url.'/health_logbook_update',
+        'health_logbook_export' => $url.'/health_logbook_export',
+        'health_logbook_leave_summary' => $url.'/health_logbook_leave_summary',
+        'injury_list' => $url.'/injury_list',
+        'illness_list' => $url.'/illness_list',
+        'healthConsult_list' => $url.'/healthConsult_list',
         //shortcut links
         'shortcutLink_add' => $url.'/shortcutLink/add',
         'shortcutLink_list' => $url.'/shortcutLink/list',

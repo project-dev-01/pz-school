@@ -1,7 +1,9 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.employee_attendance_report') . '')
+@section('title',' ' .  __('messages.health_logbooks') . '')
 @section('component_css')
 <!-- date picker -->
+<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 
@@ -73,7 +75,7 @@
 
     </div>
     <!-- end row -->
-    <form id="healthLogBookForm" action="" method="post">
+    <form id="healthLogBookForm" class="healthLogBookClass" action="" method="post">
         <div class="card classRoomHideSHow" style="display: none;">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
@@ -86,27 +88,28 @@
                                     <div class="form-group">
                                         <label for="temp">{{ __('messages.temperature') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="temp" name="temp" placeholder="{{ __('messages.enter_temperature') }}" aria-describedby="inputGroupPrepend">
-                                        
+                                        <span id="temp_error" class="error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="weather">{{ __('messages.weather') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="weather" name="weather" placeholder="{{ __('messages.enter_weather') }}" aria-describedby="inputGroupPrepend">
-                                        
+                                        <span id="weather_error" class="error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="humidity">{{ __('messages.humidity') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="humidity" name="humidity" placeholder="{{ __('messages.enter_humidity') }}" aria-describedby="inputGroupPrepend">
-                                        
+                                        <span id="humidity_error" class="error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="description">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
                                         <textarea class="form-control" name="description" id="description" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                        <span id="description_error" class="error"></span>
                                     </div>
                                 </div>
                                 
@@ -128,6 +131,7 @@
                                         <label for="message">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
                                         <div class="summernote">
                                             <textarea class="form-control" id="remarks" name="remarks" rows="5" placeholder="{{ __('messages.event_notes_type_here') }}" name="remarks"></textarea>
+                                            <span id="remarks_error" class="error"></span>
                                         </div>
                                     </div>
                                 </div>    
@@ -176,18 +180,10 @@
                             <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.enter_name') }}" aria-describedby="inputGroupPrepend">
+                                        <select id="student_id" class="form-control" name="student_id">
+                                            <option value="">{{ __('messages.select_student') }}</option>
+                                        </select>
                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="section_id">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
-                                        <select id="gender" name="gender" class="form-control">
-                                        <option value="">{{ __('messages.select_gender') }}</option>
-                                        <option value="Male">{{ __('messages.male') }}</option>
-                                        <option value="Female">{{ __('messages.female') }}</option>
-                                    </select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -205,58 +201,75 @@
                                         <textarea class="form-control" name="descriptions" id="descriptions" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
                                     </div>
                                 </div>
-                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="descriptions">{{ __('messages.main_reason') }}<span class="text-danger">*</span></label><br>
+                                        <button type="button" id="mainReasonBtn" class="btn btn-primary-bl waves-effect waves-light" style="width: 346px">
+                                        {{ __('messages.main_reason') }}
+                                        </button>
+                                    </div>
+                                    </div>
+                                <div class="col-md-4">
+                                    <div class="float-right" >
+                                    <input type="hidden" name="healthlogID" id="healthlogID">
+                                        <button type="submit"  id="addButton" class="btn btn-primary-bl waves-effect waves-light">
+                                            {{ __('messages.add') }}
+                                        </button>
+                                    </div> 
+                                </div>    
+                            </div>
+                            
             <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.report_list') }}
-                                <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table dt-responsive nowrap w-100" id="healthLogbooksTable">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{ __('messages.grade') }}</th>
-                                        <th>{{ __('messages.class') }}</th>
-                                        <th>{{ __('messages.name') }}</th>
-                                        <th>{{ __('messages.gender') }}</th>
-                                        <th>{{ __('messages.time') }}</th>
-                                        <th>{{ __('messages.event_notes') }}</th>
+                <div class="col-md-12">
+                    <div class="card">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <h4 class="navv">{{ __('messages.report_list') }}
+                                    <h4>
+                            </li>
+                        </ul><br>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table dt-responsive nowrap w-100" id="healthLogbooksTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th >Id</th>
+                                            <th>{{ __('messages.department') }}</th>
+                                            <th>{{ __('messages.grade') }}</th>
+                                            <th>{{ __('messages.class') }}</th>
+                                            <th>{{ __('messages.name') }}</th>
+                                            <th>{{ __('messages.gender') }}</th>
+                                            <th>{{ __('messages.time') }}</th>
+                                            <th>{{ __('messages.tab') }}</th>
+                                            <th>{{ __('messages.details') }}</th>
+                                            <th>{{ __('messages.event_notes') }}</th>
+                                            <th>{{ __('messages.action') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> <!-- end card-box -->
-                </div> <!-- end col -->
-            </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->
+                </div>
             <!--- end row -->
             </form>
         </div>
     
 <div class="form-group text-right m-b-0">
-
-<!-- <form method="post" action="{{ route('admin.attendance.student_excel')}}">
-    <input type="hidden" name="subject" id="excelSubject">
-    <input type="hidden" name="class" id="excelClass">
-    <input type="hidden" name="section" id="excelSection">
-    <input type="hidden" name="semester" id="excelSemester">
-    <input type="hidden" name="session" id="excelSession">
-    <input type="hidden" name="date" id="excelDate"> -->
-    <div class="clearfix float-right">
-        <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-        {{ __('messages.download') }}
-        </button>
-    </div>
-<!-- </form> -->
+        <!-- Your hidden input fields for Excel download go here -->
+        <form method="post" action="{{ route('admin.health_logbooks.downloadpdf') }}">
+        @csrf
+            <input type="hidden" name="date" id="downDateID">
+            <div class="clearfix float-right">
+                <button class="btn btn-primary-bl waves-effect waves-light" id="downloadPdf" type="submit">
+                    {{ __('messages.download') }}
+                </button>
+            </div>
+        </form>
    
     <div class="clearfix float-right" style="margin-right: 5px;">
     <button type="submit"  id="saveButton" class="btn btn-primary-bl waves-effect waves-light">
@@ -267,11 +280,17 @@
 </div>
     </div>
     <!-- end row -->
-
+    @include('admin.health_logbooks.edit')
+    @include('admin.health_logbooks.main_reason')
 </div> <!-- container -->
 
 @endsection
 @section('scripts')
+<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
+
+
 <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
@@ -293,7 +312,12 @@
 <script>
     var getHealthLogBooksList = "{{ route('admin.health_logbooks.list') }}";
     var saveHealthLogBooksList = "{{ route('admin.health_logbooks.add') }}";
+    var deletePartCList = "{{ route('admin.health_logbooks_partc.delete') }}";
+    var addHealthLogBooksListPartC = "{{ route('admin.health_logbooks_partc.add') }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+    var downloadHealthLogBooksList ="{{ route('admin.health_logbooks.downloadpdf') }}";
+    var editHealthLogBooksListPartC ="{{ route('admin.health_logbooks_partc.edit') }}";
+    var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
     var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
     
     var admin_employee_attentance_storage = localStorage.getItem('admin_employee_attentance_details');
@@ -334,7 +358,17 @@
     var admin_evaluation_report_storage = localStorage.getItem('admin_evaluation_report_details');
 </script>
 <script src="{{ asset('js/custom/health_log_books.js') }}"></script>
+<script>
+   // Initialize Select2 with multiple selections
+$('#injury_name, #place, #injury_treatment, #part, #illness_name, #illness_treatment, #target, #health_treatment').select2({
+    multiple: true
+});
+$('#edit_injury_name, #edit_place, #edit_injury_treatment, #edit_part, #edit_illness_name, #edit_illness_treatment, #edit_target, #edit_health_treatment').select2({
+    multiple: true
+});
 
+
+</script>
 @endsection
 
 

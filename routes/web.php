@@ -212,9 +212,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('student/student-details/{id}', [AdminController::class, 'getStudentDetails'])->name('admin.student.details');
         Route::post('student/update', [AdminController::class, 'updateStudent'])->name('admin.student.update');
         Route::post('student/delete', [AdminController::class, 'deleteStudent'])->name('admin.student.delete');
-          // Graduvates details
+        // Graduvates details
         Route::get('graduates/student', [AdminController::class, 'graduatesIndex'])->name('admin.graduates.index');
-        Route::get('graduates/list', [AdminController::class, 'graduatesList'])->name('admin.graduates.list');        
+        Route::get('graduates/list', [AdminController::class, 'graduatesList'])->name('admin.graduates.list');
         Route::get('graduates/student-details/{id}', [AdminController::class, 'getGraduateDetails'])->name('admin.graduates.details');
         Route::post('student/student_setting', [AdminController::class, 'studentSettings'])->name('admin.student.student_setting');
 
@@ -630,7 +630,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
 
         // exam Result Group        
-        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');      
+        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');
         Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
         Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
         Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');
@@ -644,9 +644,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
-        
+
         //Graduates Yoroku primary /Secondary Report
-        
+
         Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
         Route::get('yoroku/downloadform2a/{id}', [ExamPdfController::class, 'downloadYorokuform2a'])->name('admin.yoroku.downloadform2a');
         Route::get('yoroku/downloadform2b/{id}', [ExamPdfController::class, 'downloadYorokuform2b'])->name('admin.yoroku.downloadform2b');
@@ -1008,22 +1008,27 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('student/picture', [AdminController::class, 'student_picture'])->name('admin.student.picture');
         Route::get('student/viewpicture', [AdminController::class, 'student_pictureview'])->name('admin.student.viewpicture');
         Route::get('report/history', [AdminController::class, 'report_history'])->name('admin.student.report_history');
-        
+
         Route::post('student/addpicture', [AdminController::class, 'addstupicture'])->name('admin.student.addpicture');
         Route::post('student/addmultipicture', [AdminController::class, 'addmultistupicture'])->name('admin.student.addmultipicture');
 
         //health logbooks
-        Route::get('/health_logbooks', [AdminController::class, 'healthLogbooksIndex'])->name('admin.health_logbooks.health');
-        Route::post('/health_logbooks/list', [AdminController::class, 'getHealthLogbooksData'])->name('admin.health_logbooks.list');
-        Route::post('/health_logbooks/add', [AdminController::class, 'addHealthLogbooksData'])->name('admin.health_logbooks.add');
-     // shortcut links routes
-     Route::get('shortcut_link/index', [AdminController::class, 'shortcutLinks'])->name('admin.settings.shortcut_links');
-     Route::post('shortcut_link/add', [AdminController::class, 'addShortcutLinks'])->name('admin.shortcut_link.add');
-     Route::get('shortcut_link/list', [AdminController::class, 'getShortcutLinksList'])->name('admin.shortcut_link.list');
-     Route::post('shortcut_link/shortcut_link-details', [AdminController::class, 'getShortcutLinksDetails'])->name('admin.shortcut_link.details');
-     Route::post('shortcut_link/update', [AdminController::class, 'updateShortcutLinks'])->name('admin.shortcut_link.update');
-     Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
-     Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
+        Route::get('health_logbooks', [AdminController::class, 'healthLogbooksIndex'])->name('admin.health_logbooks.health');
+        Route::post('health_logbooks/list', [AdminController::class, 'getHealthLogbooksData'])->name('admin.health_logbooks.list');
+        Route::post('health_logbooks/add', [AdminController::class, 'addHealthLogbooksData'])->name('admin.health_logbooks.add');
+        Route::post('health_logbooks/add_partc', [AdminController::class, 'addHealthLogbooksDataPartC'])->name('admin.health_logbooks_partc.add');
+        Route::post('health_logbooks/edit_partc', [AdminController::class, 'editHealthLogbooksDataPartC'])->name('admin.health_logbooks_partc.edit');
+        Route::post('health_logbooks/update_partc', [AdminController::class, 'updateHealthLogbooksDataPartC'])->name('admin.health_logbooks_partc.update');
+        Route::post('health_logbooks/delete_partc', [AdminController::class, 'deleteHealthLogbooksDataPartC'])->name('admin.health_logbooks_partc.delete');
+        Route::post('health_logbooks/downloadpdf', [PdfController::class, 'downloadPDF'])->name('admin.health_logbooks.downloadpdf');
+        // shortcut links routes
+        Route::get('shortcut_link/index', [AdminController::class, 'shortcutLinks'])->name('admin.settings.shortcut_links');
+        Route::post('shortcut_link/add', [AdminController::class, 'addShortcutLinks'])->name('admin.shortcut_link.add');
+        Route::get('shortcut_link/list', [AdminController::class, 'getShortcutLinksList'])->name('admin.shortcut_link.list');
+        Route::post('shortcut_link/shortcut_link-details', [AdminController::class, 'getShortcutLinksDetails'])->name('admin.shortcut_link.details');
+        Route::post('shortcut_link/update', [AdminController::class, 'updateShortcutLinks'])->name('admin.shortcut_link.update');
+        Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
+        Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
     });
 });
 // admin routes end
@@ -1245,13 +1250,13 @@ Route::group(['prefix' => 'staff'], function () {
         Route::get('classroom/setcookie', [CommonController::class, 'staffClassroomSetCookie'])->name('staff.classroom.setcookie');
 
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('staff.clear_local_storage');
-         // shortcut links routes
-         Route::get('shortcut_link/index', [StaffController::class, 'shortcutLinks'])->name('staff.settings.shortcut_links');
-         Route::post('shortcut_link/add', [StaffController::class, 'addShortcutLinks'])->name('staff.shortcut_link.add');
-         Route::get('shortcut_link/list', [StaffController::class, 'getShortcutLinksList'])->name('staff.shortcut_link.list');
-         Route::post('shortcut_link/shortcut_link-details', [StaffController::class, 'getShortcutLinksDetails'])->name('staff.shortcut_link.details');
-         Route::post('shortcut_link/update', [StaffController::class, 'updateShortcutLinks'])->name('staff.shortcut_link.update');
-         Route::post('shortcut_link/delete', [StaffController::class, 'deleteShortcutLinks'])->name('staff.shortcut_link.delete');
+        // shortcut links routes
+        Route::get('shortcut_link/index', [StaffController::class, 'shortcutLinks'])->name('staff.settings.shortcut_links');
+        Route::post('shortcut_link/add', [StaffController::class, 'addShortcutLinks'])->name('staff.shortcut_link.add');
+        Route::get('shortcut_link/list', [StaffController::class, 'getShortcutLinksList'])->name('staff.shortcut_link.list');
+        Route::post('shortcut_link/shortcut_link-details', [StaffController::class, 'getShortcutLinksDetails'])->name('staff.shortcut_link.details');
+        Route::post('shortcut_link/update', [StaffController::class, 'updateShortcutLinks'])->name('staff.shortcut_link.update');
+        Route::post('shortcut_link/delete', [StaffController::class, 'deleteShortcutLinks'])->name('staff.shortcut_link.delete');
     });
 });
 // TEACHER CONTROLLER START
@@ -1420,13 +1425,13 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('promotion/save_status_freezed_data', [TeacherController::class, 'promotionSaveStatusFreezed'])->name('teacher.promotion.save_status_freezed_data');
         Route::post('promotion/promotion_final_data', [TeacherController::class, 'promotionFinalData'])->name('teacher.promotion.promotion_final_data');
         Route::post('promotion/csv', [TeacherController::class, 'downloadPromotionCsv'])->name('teacher.promotion.downloadCSV');
-         // shortcut links routes
-       Route::get('shortcut_link/index', [TeacherController::class, 'shortcutLinks'])->name('teacher.settings.shortcut_links');
-       Route::post('shortcut_link/add', [TeacherController::class, 'addShortcutLinks'])->name('teacher.shortcut_link.add');
-       Route::get('shortcut_link/list', [TeacherController::class, 'getShortcutLinksList'])->name('teacher.shortcut_link.list');
-       Route::post('shortcut_link/shortcut_link-details', [TeacherController::class, 'getShortcutLinksDetails'])->name('teacher.shortcut_link.details');
-       Route::post('shortcut_link/update', [TeacherController::class, 'updateShortcutLinks'])->name('teacher.shortcut_link.update');
-       Route::post('shortcut_link/delete', [TeacherController::class, 'deleteShortcutLinks'])->name('teacher.shortcut_link.delete');
+        // shortcut links routes
+        Route::get('shortcut_link/index', [TeacherController::class, 'shortcutLinks'])->name('teacher.settings.shortcut_links');
+        Route::post('shortcut_link/add', [TeacherController::class, 'addShortcutLinks'])->name('teacher.shortcut_link.add');
+        Route::get('shortcut_link/list', [TeacherController::class, 'getShortcutLinksList'])->name('teacher.shortcut_link.list');
+        Route::post('shortcut_link/shortcut_link-details', [TeacherController::class, 'getShortcutLinksDetails'])->name('teacher.shortcut_link.details');
+        Route::post('shortcut_link/update', [TeacherController::class, 'updateShortcutLinks'])->name('teacher.shortcut_link.update');
+        Route::post('shortcut_link/delete', [TeacherController::class, 'deleteShortcutLinks'])->name('teacher.shortcut_link.delete');
     });
 });
 // TEACHER CONTROLLER END
@@ -1623,7 +1628,7 @@ Route::group(['prefix' => 'student'], function () {
         Route::post('form/postimage', [StudentController::class, 'imagestore'])->name('student.forum.image.store');
 
         Route::get('/analyticrep', [StudentController::class, 'analytic'])->name('student.analyticrep.analyticreport');
-        
+
         Route::get('clear_local_storage', [CommonController::class, 'clearLocalStorage'])->name('student.clear_local_storage');
     });
 });

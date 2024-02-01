@@ -725,9 +725,9 @@ class AdminController extends Controller
         return view(
             'admin.subjects.index',
             [
-                
+
                 'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : []
-                
+
             ]
         );
     }
@@ -2739,11 +2739,18 @@ class AdminController extends Controller
     public function healthLogbooksIndex()
     {
         $department = Helper::GetMethod(config('constants.api.department_list'));
+        $injury = Helper::GetMethod(config('constants.api.injury_list'));
+        $illness = Helper::GetMethod(config('constants.api.illness_list'));
+        $healthConsult = Helper::GetMethod(config('constants.api.healthConsult_list'));
         return view(
             'admin.health_logbooks.employee',
             [
-                'department' => isset($department['data']) ? $department['data'] : []
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'injury' => isset($injury['data']) ? $injury['data'] : [],
+                'illness' => isset($illness['data']) ? $illness['data'] : [],
+                'healthConsult' => isset($healthConsult['data']) ? $healthConsult['data'] : []
             ]
+
         );
     }
     public function getHealthLogbooksData(Request $request)
@@ -2763,18 +2770,87 @@ class AdminController extends Controller
             'weather' => $request->weather,
             'humidity' => $request->humidity,
             'event_notes_a' => $request->event_notes_a,
-            'event_notes_b' => $request->event_notes_b,
-            'department_id' => $request->department_id,
-            'grade_id' => $request->changeClassName,
-            'section_id' => $request->sectionID,
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'time' => $request->time,
-            'event_notes_c' => $request->event_notes_c,
-            'date' => $request->date
+            'event_notes_b' => $request->event_notes_b
+
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.health_logbooks_add'), $data);
+        return $response;
+    }
+    public function addHealthLogbooksDataPartC(Request $request)
+    {
+        $data = [
+            'healthlogID' =>  $request->healthlogID,
+            'department_id' => $request->department_id,
+            'grade_id' => $request->changeClassName,
+            'section_id' => $request->sectionID,
+            'student_id' => $request->student_id,
+            'time' => $request->time,
+            'tab'  => $request->tab,
+            'tab_details' => $request->tab_details,
+            'event_notes_c' => $request->event_notes_c,
+            'selectedInjuryName' => $request->selectedInjuryName,
+            'selectedPlace' => $request->selectedPlace,
+            'selectedInjuryTreatment' => $request->selectedInjuryTreatment,
+            'selectedPart' => $request->selectedPart,
+            'selectedIllness' => $request->selectedIllness,
+            'selectedIllnessTreatment' => $request->selectedIllnessTreatment,
+            'selectedReasonTemp' => $request->selectedReasonTemp,
+            'selectedMeal' => $request->selectedMeal,
+            'selectedDefecation' => $request->selectedDefecation,
+            'selectedTarget' => $request->selectedTarget,
+            'selectedSlept_time' => $request->selectedSlept_time,
+            'selectedHealth_treatment' => $request->selectedHealth_treatment,
+            'date' => $request->date
+        ];
+        $response = Helper::PostMethod(config('constants.api.health_logbooks_partc_add'), $data);
+        return $response;
+    }
+    public function deleteHealthLogbooksDataPartC(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.health_logbook_delete'), $data);
+        return $response;
+    }
+    public function  editHealthLogbooksDataPartC(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.health_logbook_edit'), $data);
+        return $response;
+    }
+    public function updateHealthLogbooksDataPartC(Request $request)
+    {
+        $data = [
+            'healthlogID' =>  $request->healthlogID,
+            'department_id' => $request->department_id,
+            'grade_id' => $request->changeClassName,
+            'section_id' => $request->sectionID,
+            'student_id' => $request->student_id,
+            'time' => $request->time,
+            'event_notes_c' => $request->event_notes_c,
+            'tab'  => $request->tab,
+            'tab_details' => $request->tab_details,
+            'selectedInjuryName' => $request->selectedInjuryName,
+            'selectedPlace' => $request->selectedPlace,
+            'selectedInjuryTreatment' => $request->selectedInjuryTreatment,
+            'selectedPart' => $request->selectedPart,
+            'selectedIllness' => $request->selectedIllness,
+            'selectedIllnessTreatment' => $request->selectedIllnessTreatment,
+            'selectedReasonTemp' => $request->selectedReasonTemp,
+            'selectedMeal' => $request->selectedMeal,
+            'selectedDefecation' => $request->selectedDefecation,
+            'selectedTarget' => $request->selectedTarget,
+            'selectedSlept_time' => $request->selectedSlept_time,
+            'selectedHealth_treatment' => $request->selectedHealth_treatment,
+            'date' => $request->date
+        ];
+        $response = Helper::PostMethod(config('constants.api.health_logbook_update'), $data);
         return $response;
     }
     public function studentIndex()
@@ -8824,13 +8900,13 @@ class AdminController extends Controller
     {
         $data = [
             'branch_id' => session()->get('branch_id'),
-            'user_id' => $request->user_id,            
+            'user_id' => $request->user_id,
             'tablename' => $request->tablename,
             'frm_ldate' => date('Y-m-d', strtotime($request->frm_ldate)),
             'to_ldate' => date('Y-m-d', strtotime($request->to_ldate))
         ];
         $activity_list = Helper::GETMethodWithData(config('constants.api.log_modifylist'), $data);
-       
+
         return $activity_list;
     }
     public function menuaccess()
@@ -10307,7 +10383,7 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.student.picture')->with('errors', $response['message']);
         }
-    } 
+    }
     public function examsutdentlist(Request $request)
     {
         $data = [
@@ -10334,7 +10410,7 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-        // index shortcutLinks 
+    // index shortcutLinks 
     public function shortcutLinks()
     {
         return view('admin.shortcut_links.index');

@@ -2445,4 +2445,338 @@ class PdfController extends Controller
         return $pdf->download($fileName);
     }
     //
+    public function downloadPDF(Request $request)
+    {
+        $data = [
+            'date' => $request->date
+        ];
+        $footer_text = session()->get('footer_text');
+      
+        $health_log_books_leave_summary = Helper::PostMethod(config('constants.api.health_logbook_leave_summary'), $data);
+        
+            $headers[]  = $health_log_books_leave_summary['data']['headers'];
+            $reasonCount[] = $health_log_books_leave_summary['data']['reason_count'];
+
+        $health_log_books = Helper::PostMethod(config('constants.api.health_logbook_export'), $data);
+        //dd($health_log_books);
+        foreach( $health_log_books['data']['partab'] as $data){
+           $temp =  $data['temp'];
+           $weather =  $data['weather'];
+           $humidity =  $data['humidity'];
+           $event_notes_a =  $data['event_notes_a'];
+           $event_notes_b =  $data['event_notes_b'];
+           $date =  $data['date'];
+           $dates =  strtotime($date);
+           $day = getDate($dates);
+        }
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }
+        .table td, 
+        .table th {
+            padding: 2px;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+        }
+
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+			font-size:11px;
+        }
+
+
+        table td {
+            overflow: hidden;
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        .line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+        }
+
+        .diagonal {
+            width: 150px;
+            height: 40px;
+        }
+
+        .diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+        }
+
+        .diagonal span.rt {
+            top: 2px;
+            right: 2px;
+        }
+		.diagonalCross2 {
+         background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+        }
+		@media screen and (min-device-width: 280px) and (max-device-width: 900px) 
+        {
+            .responsive
+            {
+            margin-top:10px;
+            }
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body>";
+        $response .= ' <div class="content" style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff;">
+            <table class="main" width="100%">
+                <tr>
+                    <td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
+                        align="center">
+    
+                        
+                            <div class="row">
+                                <div class="col-md-12">';
+                                
+                                    $response .= '<table class="table table-bordered" style="margin-bottom: 15px;">
+                                        <thead>
+                                            
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" rowspan="4" style="text-align:center;border: 1px solid black;">'.$date.'
+                                                <br>'.$day['weekday'].'</td>
+                                                <td colspan="2"  style="text-align:center;border: 1px solid black;width: 50px;height: 20px;"></td>
+                                                <td rowspan="4" style="border: 1px solid black;width: 20px;"></td>
+                                                <td colspan="4" rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
+                                                <td rowspan="4" style=" border: 1px solid black;width: 20px;"></td>
+                                                <td colspan="4" rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
+                                                <td rowspan="4" style="border: 1px solid black;width: 20px;"></td>
+                                                <td colspan="4" rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
+                                                <td rowspan="4" style="border: 1px solid black;width: 20px;"></td>
+                                                <td colspan="' . (count($headers[0]) + 4) . '"  rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" rowspan="1" style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$weather.'</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="1" colspan="1" style="text-align:center;border: 1px solid black;width: 50px;height: 20px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td  style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$temp.'</td>
+                                                <td style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$humidity.'</td>
+                                            </tr>
+                                        </tbody>
+                                        
+                                        <tbody style="border: 1px solid black;">
+                                            <tr>
+                                                <td colspan="4" rowspan="' . (count($reasonCount[0]) + 2) . '"  style="text-align:left;border: 1px solid black;height: 20px;">'.$event_notes_a.'</td>
+                                                <td colspan="' . (count($headers[0]) + 6) . '"   style="text-align:center;border: 1px solid black;height: 20px;">' .  __('messages.absense_checking') . '</td>
+                                            </tr>
+                                            <tr>
+                                                <td  colspan="2" style="text-align:center;border: 1px solid black;height: 15px;">' .  __('messages.category') . '</td>
+                                                <td colspan="2" class="diagonalCross2" style="width:0px;border: 1px solid black;border-right:hidden; border-left:hidden;"></td>
+                                                <td  colspan="2" style="text-align:center;border: 1px solid black;">' .  __('messages.grade') . '</td>';
+                                                // Display class names
+                                                foreach ($headers as $classes) {
+                                                    // Check if 'name' key exists in the current class array
+                                                    foreach ($classes as $class ) {
+                                                        $response .= '<td style=" border: 1px solid black;">' . $class['name'] . '</td>';
+                                                    }
+                                                }
+                                                $response .= ' </tr>';
+                                                $staticColumnDisplayed = false;
+                                                    // Display rows based on actual data
+                                                    foreach ($reasonCount[0] as $index => $reasonData) {
+                                                        $response .= '<tr>';
+                                                        if (!$staticColumnDisplayed) {
+                                                            $response .= '<td colspan="3" rowspan="' . (count($reasonCount[0])) . '" style="text-align:center;border: 1px solid black;height: 15px;">' .  __('messages.absense') . '</td>'; // Static column
+                                                            $staticColumnDisplayed = true; // Set the flag to true after displaying the static column
+                                                        } 
+                                                        $response .= '<td colspan="3" style="text-align:center;border: 1px solid black;height: 15px;">' . $reasonData['reason_name'] . '</td>';
+
+                                                        foreach ($headers as $classes) {
+                                                            foreach ($classes as $class) {
+                                                                $classId = array_key_exists('id', $class) ? $class['id'] : null;
+
+                                                                // Find the corresponding 'reasons_count' for the current class and reason_name
+                                                                $matchingGradeCnt = collect($reasonData['gradecnt'])->firstWhere('class_id', $classId);
+
+                                                                if ($matchingGradeCnt) {
+                                                                    $response .= '<td style="border: 1px solid black;">' . $matchingGradeCnt['reasons_count'] . '</td>';
+                                                                } else {
+                                                                    $response .= '<td style="border: 1px solid black;">0</td>';
+                                                                }
+                                                            }
+                                                        }
+
+                                                        $response .= '</tr>';
+                                                    }
+                                            $response .= ' </tbody>
+                                        
+                                        <tbody style="border: 1px solid black;">
+                                            <tr>
+                                                <td style="text-align:center;border: 1px solid black;height: 200px;width: 50px;"></td>
+                                                <td  style="text-align:left;border: 1px solid black;height: 20px;border-right:hidden;">'.$event_notes_b.'</td>
+                                            </tr>
+                                        </tbody>
+                                        
+                                        <tbody style="border: 1px solid black;">
+                                            <tr>
+                                                <td rowspan="21" style="height: 700px;"></td>
+                                                <td style="height: 30px;">' .  __('messages.grade') . '</td>
+                                                <td>' .  __('messages.class') . '</td>
+                                                <td colspan="3">' .  __('messages.name') . '</td>
+                                                <td colspan="3">' .  __('messages.gender') . '</td>
+                                                <td colspan="2">' .  __('messages.time') . '</td>
+                                                <td colspan="2">' .  __('messages.tab') . '</td>
+                                                <td colspan="4">' .  __('messages.details') . '</td>
+                                                <td colspan="7">' .  __('messages.notes') . '</td>
+                                            </tr>';
+                                            if ($health_log_books['code'] == "200") {
+                                                $log = $health_log_books['data']['partc'];
+                                                 foreach ($log as  $res) {
+                                        $response .= '<tr>
+                                                <td style="height: 30px;">'.$res['class_name'].'</td>
+                                                <td>'.$res['section_name'].'</td>
+                                                <td colspan="3">'.$res['name'].'</td>
+                                                <td colspan="3">'.$res['gender'].'</td>
+                                                <td colspan="2">'.$res['time'].'</td>
+                                                <td colspan="2">'.$res['tab'].'</td>
+                                                <td colspan="4">'.$res['tab_details'].'</td>
+                                                <td colspan="7">'.$res['event_notes_c'].'</td>
+                                            </tr>';
+                                           }
+                                            
+                                         }   
+                                        $response .= ' <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="4"></td>
+                                                <td colspan="7"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                 <td colspan="3"></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="4"></td>
+                                                <td colspan="7"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                 <td colspan="3"></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="4"></td>
+                                                <td colspan="7"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                 <td colspan="3"></td>
+                                                <td colspan="3"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="4"></td>
+                                                <td colspan="7"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                                
+    
+    
+    
+                            </div>
+    
+    
+                            
+                              </tr>
+            </table>';
+    $response .= "</body></html>";
+        // dd($response);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($response);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.health_logbooks') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
 }

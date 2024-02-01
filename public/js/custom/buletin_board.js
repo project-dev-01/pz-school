@@ -199,7 +199,7 @@ $(function () {
                 $.each(res.data, function (key, val) {
                     $("#student_ids").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
-                if (parent_id != '') {
+                if (student_id != '') {
                     $("#buletinEditForm").find('select[name="student_ids"]').val(student_id);
                 }
             }
