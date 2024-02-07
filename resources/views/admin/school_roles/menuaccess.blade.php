@@ -92,20 +92,7 @@
 									<label for="role_id">{{ __('messages.portal') }}<span class="text-danger">*</span></label>
 									<select class="form-control" data-toggle="select2" id="role_id" name="role_id" data-placeholder="{{ __('messages.choose_role') }}" required>
 										<option value="">{{ __('messages.select') }}</option>
-										@forelse($roles as $r)
-
-										@if($r['id']!='1')
-										@if(@$role_id==6 && $r['id']==6)
-										<option value="{{$r['id']}}" Selected>{{ __('messages.' . strtolower($r['role_name'])) }}</option>
-										@elseif(@$role_id==5 && $r['id']==5)
-										<option value="{{$r['id']}}" Selected>{{ __('messages.' . strtolower($r['role_name'])) }}</option>
-										@elseif($r['id']==2 || $r['id']==3 || $r['id']==4)
-										@php $selrl =(@$role_id==$r['id'])?'Selected':''; @endphp
-										<option value="{{$r['id']}}" {{ $selrl }}>{{ __('messages.' . strtolower($r['role_name'])) }}</option>
-										@endif
-										@endif
-										@empty
-										@endforelse
+										
 									</select>
 								</div>
 							</div>
@@ -118,7 +105,7 @@
 					<br>
 					<hr><br>
 					<div class="table-responsive">
-						<input type="checkbox" id="select_all" /> Select all
+						<input type="checkbox" id="select_all" /> {{ __('messages.select_all') }}
 						<form method="post" action="{{ route('admin.school_role.setpermission') }}" autocomplete="off" novalidate="novalidate">
 							@csrf
 							<table class="table dt-responsive nowrap w-100">
@@ -126,12 +113,12 @@
 									<tr>
 										<th>#</th>
 										<th>{{ __('messages.name') }}</th>
-										<th>Read (View Page)</th>
-										<th>Add </th>
-										<th>Update </th>
-										<th>Delete </th>
+										<th>{{ __('messages.read') }}</th>
+										<th>{{ __('messages.add') }}  </th>
+										<th>{{ __('messages.update') }}  </th>
+										<th>{{ __('messages.delete') }}  </th>
 
-										<th>Export (Export / Download)</th>
+										<th>{{ __('messages.export') }} </th>
 
 									</tr>
 								</thead>
@@ -272,7 +259,7 @@
 									@endforeach
 								</tbody>
 							</table>
-							<input type="hidden" name="role_id" value="{{ @$role_id }}">
+							<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
 							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
 							@if(isset($branch_id))
 							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">Set Permission</button>
@@ -287,12 +274,12 @@
 									<!-- Modal content-->
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title">Menu Access Permission</h4>
+											<h4 class="modal-title">{{ __('messages.menu_access') }}</h4>
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 
 										</div>
 										<div class="modal-body">
-											<h4>Are You Confirm To Set Access Permission</h4>
+											<h4>{{ __('messages.menu_access_confirmation') }}</h4>
 										</div>
 										<div class="modal-footer">
 											<button name="submit" name="set" value="update" class="btn btn-success btn-lg"> Update </button>
@@ -374,35 +361,43 @@
 			$('.childmenu' + id).attr('disabled', true);
 		}
 	}
+	
 	$(document).ready(function() {
-
-		var schoolroleDetails = "{{ route('admin.school_role.details') }}";
+		var sid=$('#school_roleid').val();
+		
+		setTimeout(function() {
+			get_roles(sid); 
+			
+		}, 2000);
+		setTimeout(function() {
+			
+			var role_id=$('#prole_id').val();
+			$("#role_id").val(role_id);
+		}, 3000);
+		var schoolroleDetails = "{{ route('admin.school_menurole.details') }}";
 		$('#school_roleid').change(function() {
 			var id = $(this).val();
-			console.log(id);
-			$("#role_id").html('');
-
+			get_roles(id);
+			
+		});
+		function get_roles(id)
+		{
 			$.post(schoolroleDetails, {
 				id: id
 			}, function(data) {
-				// console.log("data");
-				// console.log(data);
+				
 				$("#role_id").empty();
 				$("#role_id").append('<option value="">' + select + '</option>');
-
+				
 				$.each(data.data, function(key, val) {
+					
 					$("#role_id").append('<option value="' + val.id + '">' + val.role_name + '</option>');
 				});
-				// if (data.data.portal_roleid == 5) {
-				// 	$("#role_id").html('<option value="' + data.data.portal_roleid + '">Parent</option>');
-				// } else if (data.data.portal_roleid == 6) {
-				// 	$("#role_id").html('<option value="' + data.data.portal_roleid + '">Student</option>');
-				// } else {
-				// 	$("#role_id").html('<option value="">Select</option><option value="' + data.data.portal_roleid + '">Admin</option><option value="3">Staff</option><option value="4">Teacher</option>');
-				// }
+				
 			}, 'json');
-			console.log(id);
-		});
+			
+		}
+		
 	});
 </script>
 <script>

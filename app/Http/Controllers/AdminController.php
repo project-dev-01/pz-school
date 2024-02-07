@@ -9285,10 +9285,13 @@ class AdminController extends Controller
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        $portal_roles = Helper::PostMethod(config('constants.api.portal_roles'), $data);
+        //dd($portal_roles);
         return view(
             'admin.school_roles.index',
             [
-                'roles' => isset($roles['data']) ? $roles['data'] : []
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'portal_roles' => isset($portal_roles['data']) ? $portal_roles['data'] : []
             ]
         );
     }
@@ -9333,6 +9336,15 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
         return $response;
     }
+    public function school_menurole_details(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
+        return $response;
+    }
+    
     public function updateschool_role(Request $request)
     {
         $data = [

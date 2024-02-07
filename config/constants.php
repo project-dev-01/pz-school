@@ -932,12 +932,15 @@ return [
 
         // event type url
         'school_role_add' => $url.'/school_role/add',
-        'school_role_list' => $url.'/school_role/list',
+        'school_role_list' => $url.'/school_role/lists',
         'school_role_details' => $url.'/school_role/school_role-details',
         'school_role_update' => $url.'/school_role/update',
         'school_role_delete' => $url.'/school_role/delete',
+        'portal_roles' => $url.'/school_role/portal_roles',
+        
 
         //School Role Permissions
+        'school_menurole_details' => $url.'/menus/getschool_menuroleDetails', 
         'schoolmenuaccess_list' => $url.'/menus/schoolaccesslist',       
         'setschoolpermission' => $url.'/menus/setschoolpermission',
         'getschoolroleaccess' => $url.'/menus/getschoolroleaccess', 

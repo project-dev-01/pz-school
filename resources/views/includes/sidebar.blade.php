@@ -367,12 +367,12 @@
                     <div class="collapse" id="sidebarrolemanagement">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('admin.school_role.index')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.school_role.index')}}" class="nav-link {{ (request()->is('admin/school_role/index')) ? 'active' : '' }}">
                                     <span>{{ __('messages.school_roles') }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.school_role.menuaccess')}}" class="nav-link {{ (request()->is('admin/school_role*')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.school_role.menuaccess')}}" class="nav-link {{ (request()->is('admin/school_role/menuaccess') || request()->is('admin/school_role/getmenus')) ? 'active' : '' }}">
                                     <span>{{ __('messages.school_rolepermissions') }}</span>
                                 </a>
                             </li>

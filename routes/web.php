@@ -543,6 +543,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('school_role/role-details', [AdminController::class, 'getschool_roleDetails'])->name('admin.school_role.details');
         Route::post('school_role/update', [AdminController::class, 'updateschool_role'])->name('admin.school_role.update');
         Route::post('school_role/delete', [AdminController::class, 'deleteschool_role'])->name('admin.school_role.delete');
+        Route::post('school_role/menurole-details', [AdminController::class, 'school_menurole_details'])->name('admin.school_menurole.details');
         Route::get('school_role/menuaccess', [AdminController::class, 'rollmenuaccess'])->name('admin.school_role.menuaccess');
 
         // School Role Permission routes
@@ -630,7 +631,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
 
         // exam Result Group        
-        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');
+        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');      
         Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
         Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
         Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');

@@ -32,15 +32,7 @@
 						<div class="card-body">
 							<form id="resultsByPaper" autocomplete="off" method="post" enctype="multipart/form-data" action="{{ route('admin.exam.import.add') }}">
 							 {{ csrf_field() }}
-								<div class="row"> 
-									<div class="col-12">
-										<div class="col-sm-12 col-md-12">
-											<div class="dt-buttons" style="float:right;"> 
-												<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam.csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
-											</div>
-										</div>
-									</div>
-								</div>
+								
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group">
@@ -87,6 +79,14 @@
 										</div>
 									</div>
 									<div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="paperID">{{ __('messages.paper_name') }}</label>
+                                            <select id="paperID" class="form-control" name="paper_id">
+                                                <option value="">{{ __('messages.select_paper') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+									<div class="col-md-3">
 										<div class="form-group">
 											<label for="semester_id">{{ __('messages.semester') }}</label>
 											<select id="semester_id" class="form-control" name="semester_id" required>
@@ -110,17 +110,21 @@
 											</select>
 										</div>
 									</div>
-									<!-- <div class="col-md-3">
-										<div class="form-group">
-										<label for="btwyears">Perspective<span class="text-danger">*</span></label>
-										<select id="btwyears" class="form-control" name="year">
-										<option value="">Select Perspective</option>
-										<option value="2">Knowledge And Skills</option>
-										<option value="1">Thinking</option>                                        
-										<option value="1">Musics</option>
-										</select>
+									
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<h3 id="Marktype" class="text-center"></h3>
+										<div class="dt-buttons" id="downmark" style="text-align:center;display:none;"> 
+											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Numeric Value).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
 										</div>
-									</div>-->
+										<div class="dt-buttons" id="downpoints" style="text-align:center;display:none;"> 
+											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Points).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
+										</div>
+										<div class="dt-buttons" id="downfreetext"style="text-align:center;display:none;"> 
+											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Free Text).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
+										</div>
 								</div>
 							</div>
 							@if(count($errors) > 0)
@@ -266,8 +270,10 @@
 				<script>
 					var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 					var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
-					var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";
-					
+					var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";					
+    				var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
+									
+    				var ExamPaperDetails = "{{ config('constants.api.exam_paper_details') }}";
 					var getExamPaperResults = "{{ config('constants.api.get_exam_paper_res') }}";
 					var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 					
@@ -277,6 +283,10 @@
 					var downloadFileName = "{{ __('messages.exam_paper_result') }}";
 					// localStorage variables
 					var exam_paper_result_storage = localStorage.getItem('admin_exam_paper_result_details');
+					var marktext="{{ __('messages.alertexamupload_mark') }}";
+					var pointstext="{{ __('messages.alertexamupload_points') }}";
+					var freetext="{{ __('messages.alertexamupload_freetext') }}";
+					var infotext="{{ __('messages.alertexamupload_info') }}";
 				</script>
 				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
 			@endsection												

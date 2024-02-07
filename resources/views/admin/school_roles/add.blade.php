@@ -9,20 +9,22 @@
             <div class="modal-body">
                 <form id="schoolRoleForm" method="post" action="{{ route('admin.school_role.add') }}" autocomplete="off">
                     @csrf
-                    
+                   
                     <div class="form-group">
                         <label for="portal_roleid">{{ __('messages.role') }}<span class="text-danger">*</span></label>
-                        <!--<select class="form-control select2-multiple" data-toggle="select2" multiple="multiple"id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
-                            @forelse($roles as $r)
-                            <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['role_name'])) }}</option>
+                        <select class="form-control " id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+                            @forelse($portal_roles as $r)
+                            
+                            <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['portal_name'])) }}</option>
                             @empty
                             @endforelse
-                        </select>-->
-                        <select class="form-control " id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+                        </select>
+                         <!--<select class="form-control " id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
                             <option value="3">{{ __('messages.' . strtolower('staff')) }}</option>
                             <option value="5">{{ __('messages.' . strtolower('parent')) }}</option>
                             <option value="6">{{ __('messages.' . strtolower('student')) }}</option> 
-                        </select>
+
+                        </select>-->
                     </div>
                     <div class="form-group">
                         <label for="fullname">{{ __('messages.school_role_fullname') }} <span class="text-danger">*</span></label>

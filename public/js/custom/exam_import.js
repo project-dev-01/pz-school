@@ -37,7 +37,8 @@ $(function () {
         $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#resultsByPaper").find("#subjectID").empty();
         $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
-
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
@@ -60,7 +61,8 @@ $(function () {
         $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
         $("#resultsByPaper").find("#subjectID").empty();
         $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
-
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $.post(subjectByExamNames, {
             token: token,
             branch_id: branchID,
@@ -84,6 +86,8 @@ $(function () {
         var teacher_id = teacherID;
         $("#resultsByPaper").find("#subjectID").empty();
         $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
         $.post(examBySubjects, {
             token: token,
             branch_id: branchID,
@@ -97,6 +101,73 @@ $(function () {
                 $.each(res.data, function (key, val) {
                     $("#resultsByPaper").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
                 });
+            }
+        }, 'json');
+    });
+    $('#subjectID').on('change', function () {
+        var subject_id = $(this).val();
+        var section_id = $("#sectionID").val();
+        var class_id = $("#changeClassName").val();
+        var exam_id = $("#examnames").val();
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
+        // paper list
+        $.post(subjectByPapers, {
+            token: token,
+            branch_id: branchID,
+            class_id: class_id,
+            section_id: section_id,
+            subject_id: subject_id,
+            academic_session_id: academic_session_id,
+            exam_id: exam_id
+        }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+    $('#paperID').on('change', function () {
+        var paper_id = $(this).val();
+        $.post(ExamPaperDetails, {
+            token: token,
+            branch_id: branchID,
+            id: paper_id
+        }, function (res) {
+            if (res.code == 200) {
+                
+                if(res.data.score_type=='Grade' || res.data.score_type=='Mark' )
+                {
+                    
+                    $("#downmark").show();
+                    $("#downpoints").hide();
+                    $("#downfreetext").hide();
+                    $("#Marktype").html('<span style="color:green;">'+marktext+'</span>'); 
+                }
+                else if(res.data.score_type=='Points')
+                {
+                    $("#downmark").hide();
+                    $("#downpoints").show();
+                    $("#downfreetext").hide();
+                    $("#Marktype").html('<span style="color:green;">'+pointstext+'</span>'); 
+                }
+                else if(res.data.score_type=='Freetext')
+                {
+                    
+                    $("#downmark").hide();
+                    $("#downpoints").hide();
+                    $("#downfreetext").show();
+                    $("#Marktype").html('<span style="color:green;">'+freetext+'</span>'); 
+                }
+                else
+                {
+                    $("#downmark").hide();
+                    $("#downpoints").hide();
+                    $("#downfreetext").hide();
+                    $("#Marktype").html('<span style="color:red;">'+infotext+'</span>'); 
+                }
+                
             }
         }, 'json');
     });

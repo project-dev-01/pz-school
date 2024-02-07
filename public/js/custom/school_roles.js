@@ -163,12 +163,7 @@ $(function () {
                     searchable: false,
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'role_name',
-                    name: 'role_name'
-                },
+                },                
                 {
                     data: 'fullname',
                     name: 'fullname'
@@ -176,6 +171,10 @@ $(function () {
                 {
                     data: 'shortname',
                     name: 'shortname'
+                },
+                {
+                    data: 'roles',
+                    name: 'roles'
                 },
                 {
                     data: 'actions',

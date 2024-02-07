@@ -19,9 +19,11 @@
                             @endforelse
                         </select>-->
                         <select class="form-control" id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">                           
-                            <option value="3">{{ __('messages.' . strtolower('staff')) }}</option>
-                            <option value="5">{{ __('messages.' . strtolower('student')) }}</option> 
-                            <option value="6">{{ __('messages.' . strtolower('parent')) }}</option>
+                             @forelse($portal_roles as $r)
+                            
+                            <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['portal_name'])) }}</option>
+                            @empty
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">
