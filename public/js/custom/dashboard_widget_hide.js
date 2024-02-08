@@ -101,7 +101,7 @@ $(function () {
             '<input type="hidden" name="unhide_data[' + i + '][class_id]" id="classID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][section_id]" id="sectionID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][pattern]" id="patternName' + i + '">' +
-            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">Add Widget</button>' +
+            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">' + addWidgetH + '</button>' +
             '</td>' +
             '<td class="col-md-3" style="padding:15px;">' +
             '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-up"></i></button>' +

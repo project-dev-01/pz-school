@@ -4686,6 +4686,7 @@ class AdminController extends Controller
     public function studentList(Request $request)
     {
         $data = [
+            "department_id" => $request->department_id,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
@@ -9344,7 +9345,7 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
         return $response;
     }
-    
+
     public function updateschool_role(Request $request)
     {
         $data = [

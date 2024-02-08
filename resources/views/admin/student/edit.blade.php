@@ -685,23 +685,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="passport_photo">{{ __('messages.passport_photo') }}</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg" >
-                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="passport_photo">{{ __('messages.passport_photo') }}</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
+                                                        <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
+                                                    </div>
+                                                </div>
+                                                @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
+                                                @endif
+                                                <span id="passport_photo_name"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
-                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
-                                    @endif
-                                    <span id="passport_photo_name"></span>
-                                </div>
-                            </div>
                                         @endif
                                         @if($form_field['visa'] == 0)
                                         <div class="col-md-4">
@@ -723,23 +723,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($student['visa_photo']) ? $student['visa_photo'] : ''}}" />
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="visa_photo">{{ __('messages.visa_photo') }}</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg" >
-                                            <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="visa_photo">{{ __('messages.visa_photo') }}</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg">
+                                                        <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
+                                                    </div>
+                                                </div>
+                                                @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
+                                                @endif
+                                                <span id="visa_photo_name"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
-                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
-                                    @endif
-                                    <span id="visa_photo_name"></span>
-                                </div>
-                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -1899,6 +1899,7 @@
     var indexStudent = "{{ route('admin.student.index') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var studentList = null;
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

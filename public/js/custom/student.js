@@ -7,8 +7,9 @@ $(function () {
         section_id: null,
         session_id: null
     };
-    getStudentList(formData);
-
+    if (studentList !== undefined && studentList !== null) {
+        getStudentList(formData);
+    }
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#editadmission';
@@ -465,6 +466,8 @@ $(function () {
     });
 
     function getStudentList(formData) {
+        console.log("formData");
+        console.log(formData);
         $("#student").show("slow");
         // set download filter value
         $('#excelStudentName').val(formData.student_name);
@@ -502,7 +505,8 @@ $(function () {
             ajax: {
                 url: studentList,
                 data: function (d) {
-                    d.student_name = formData.student_name,
+                    d.department_id = formData.department_id,
+                        d.student_name = formData.student_name,
                         d.class_id = formData.class_id,
                         d.section_id = formData.section_id,
                         d.session_id = formData.session_id
