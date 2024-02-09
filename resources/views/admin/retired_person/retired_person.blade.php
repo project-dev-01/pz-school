@@ -53,9 +53,9 @@
                                 <div class="form-group">
                                     <label for="employee_type">{{ __('messages.employee_type') }}</label>
                                     <select name="employee_type" class="form-control" id="employee_type">
-                                        <option value=''>{{ __('messages.select_the_employee_type') }}</option>
+                                        <option value=''>{{ __('messages.select_employee_type') }}</option>
                                         <option value='0'>{{ __('messages.all') }}</option>
-                                         <option value='1'>{{ __('messages.retired_employee') }}</option>
+                                         <option value='1'>{{ __('messages.retired_persons') }}</option>
                                    </select>
                                 </div>
                             </div>                       
