@@ -92,12 +92,12 @@
 									<label for="role_id">{{ __('messages.portal') }}<span class="text-danger">*</span></label>
 									<select class="form-control" data-toggle="select2" id="role_id" name="role_id" data-placeholder="{{ __('messages.choose_role') }}" required>
 										<option value="">{{ __('messages.select') }}</option>
-										
+
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3"><br>
-								<button type="submit" class="btn btn-success" name="getmenus" value="get"> GET Permissions </button>
+								<button type="submit" class="btn btn-success" name="getmenus" value="get"> {{ __('messages.get_permissions') }}</button>
 							</div>
 						</div>
 
@@ -105,7 +105,7 @@
 					<br>
 					<hr><br>
 					<div class="table-responsive">
-						<input type="checkbox" id="select_all" /> {{ __('messages.select_all') }}
+						<input type="checkbox" id="select_all" />{{ __('messages.select_all') }}
 						<form method="post" action="{{ route('admin.school_role.setpermission') }}" autocomplete="off" novalidate="novalidate">
 							@csrf
 							<table class="table dt-responsive nowrap w-100">
@@ -114,9 +114,9 @@
 										<th>#</th>
 										<th>{{ __('messages.name') }}</th>
 										<th>{{ __('messages.read') }}</th>
-										<th>{{ __('messages.add') }}  </th>
-										<th>{{ __('messages.update') }}  </th>
-										<th>{{ __('messages.delete') }}  </th>
+										<th>{{ __('messages.add') }} </th>
+										<th>{{ __('messages.update') }} </th>
+										<th>{{ __('messages.delete') }} </th>
 
 										<th>{{ __('messages.export') }} </th>
 
@@ -154,12 +154,12 @@
 											<input type="hidden" name="menuaccess_id[{{$menu['menu_id']}}]" value="{{ $menu['menuaccess_id'] }}">
 											<input type="hidden" name="act[{{$menu['menu_id']}}]" value="{{ $act }}">
 										</th>
-										<th><input type="checkbox" name="read[{{$menu['menu_id']}}]" class="checkall" id="mainmenu{{ $i }}" onchange="mainmenu({{ $i }},'A')" value="Access" {{ $readbtn1 }}> Read</th>
+										<th><input type="checkbox" name="read[{{$menu['menu_id']}}]" class="checkall" id="mainmenu{{ $i }}" onchange="mainmenu({{ $i }},'A')" value="Access" {{ $readbtn1 }}>{{ __('messages.read') }}</th>
 										@if($menu['menu_dropdown']=='No')
-										<th><input type="checkbox" name="add[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $addbtn1 }}> Add</th>
-										<th><input type="checkbox" name="updates[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $updatebtn1 }}> Update</th>
-										<th><input type="checkbox" name="deletes[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $deletebtn1 }}> Delete</th>
-										<th><input type="checkbox" name="export[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $exportbtn1 }}> Export</th>
+										<th><input type="checkbox" name="add[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $addbtn1 }}>{{ __('messages.add') }}</th>
+										<th><input type="checkbox" name="updates[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $updatebtn1 }}>{{ __('messages.update') }}</th>
+										<th><input type="checkbox" name="deletes[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $deletebtn1 }}>{{ __('messages.delete') }}</th>
+										<th><input type="checkbox" name="export[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $exportbtn1 }}>{{ __('messages.export') }}</th>
 										@else
 										<th colspan="4"></th>
 										@endif
@@ -196,12 +196,12 @@
 											<input type="hidden" name="menuaccess_id[{{$menu1['menu_id']}}]" value="{{ $menu1['menuaccess_id'] }}">
 											<input type="hidden" name="act[{{$menu1['menu_id']}}]" value="  {{ $act}}">
 										</th>
-										<th><input type="checkbox" name="read[{{$menu1['menu_id']}}]" class="checkall" id="submenu{{ $i }}{{ $k }}" onchange="submenu({{ $i }}{{ $k }},'A')" value="Access" {{ $readbtn2 }}> Read</th>
+										<th><input type="checkbox" name="read[{{$menu1['menu_id']}}]" class="checkall" id="submenu{{ $i }}{{ $k }}" onchange="submenu({{ $i }}{{ $k }},'A')" value="Access" {{ $readbtn2 }}>{{ __('messages.read') }}</th>
 										@if($menu1['menu_dropdown']=='No')
-										<th><input type="checkbox" name="add[{{$menu1['menu_id']}}]" class="checkall submenu{{ $i }}{{ $k }}" value="Access" {{ $addbtn2 }}> Add</th>
-										<th><input type="checkbox" name="updates[{{$menu1['menu_id']}}]" class="checkall submenu{{ $i }}{{ $k }}" value="Access" {{ $updatebtn2 }}> Update</th>
-										<th><input type="checkbox" name="deletes[{{$menu1['menu_id']}}]" class="checkall  submenu{{ $i }}{{ $k }}" value="Access" {{ $deletebtn2 }}> Delete</th>
-										<th><input type="checkbox" name="export[{{$menu1['menu_id']}}]" class="checkall  submenu{{ $i }}{{ $k }}" value="Access" {{ $exportbtn2 }}> Export</th>
+										<th><input type="checkbox" name="add[{{$menu1['menu_id']}}]" class="checkall submenu{{ $i }}{{ $k }}" value="Access" {{ $addbtn2 }}>{{ __('messages.add') }}</th>
+										<th><input type="checkbox" name="updates[{{$menu1['menu_id']}}]" class="checkall submenu{{ $i }}{{ $k }}" value="Access" {{ $updatebtn2 }}>{{ __('messages.update') }}</th>
+										<th><input type="checkbox" name="deletes[{{$menu1['menu_id']}}]" class="checkall  submenu{{ $i }}{{ $k }}" value="Access" {{ $deletebtn2 }}>{{ __('messages.delete') }}</th>
+										<th><input type="checkbox" name="export[{{$menu1['menu_id']}}]" class="checkall  submenu{{ $i }}{{ $k }}" value="Access" {{ $exportbtn2 }}>{{ __('messages.export') }}</th>
 										@else
 										<th colspan="4"></th>
 										@endif
@@ -239,12 +239,12 @@
 											<input type="hidden" name="act[{{$menu2['menu_id']}}]" value="{{$act}}">
 										</th>
 										<th>&emsp;&emsp;{{ __("messages.".$menu2['menu_name']) }}</th>
-										<th><input type="checkbox" name="read[{{$menu2['menu_id']}}]" class="checkall" id="childmenu{{ $i }}{{ $k }}{{ $j }}" onchange="childmenu({{ $i }}{{ $k }}{{ $j }},'A')" value="Access" {{ $readbtn3 }}> Read</th>
+										<th><input type="checkbox" name="read[{{$menu2['menu_id']}}]" class="checkall" id="childmenu{{ $i }}{{ $k }}{{ $j }}" onchange="childmenu({{ $i }}{{ $k }}{{ $j }},'A')" value="Access" {{ $readbtn3 }}>{{ __('messages.read') }}</th>
 										@if($menu2['menu_dropdown']=='No')
-										<th><input type="checkbox" name="add[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $addbtn3 }}> Add</th>
-										<th><input type="checkbox" name="updates[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $updatebtn3 }}> Update</th>
-										<th><input type="checkbox" name="deletes[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $deletebtn3 }}> Delete</th>
-										<th><input type="checkbox" name="export[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $exportbtn3 }}> Export</th>
+										<th><input type="checkbox" name="add[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $addbtn3 }}>{{ __('messages.add') }}</th>
+										<th><input type="checkbox" name="updates[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $updatebtn3 }}> {{ __('messages.update') }}</th>
+										<th><input type="checkbox" name="deletes[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $deletebtn3 }}>{{ __('messages.delete') }} </th>
+										<th><input type="checkbox" name="export[{{$menu2['menu_id']}}]" class="checkall childmenu{{ $i }}{{ $k }}{{ $j }}" value="Access" {{ $exportbtn3 }}> {{ __('messages.export') }}</th>
 										@else
 										<th colspan="4"></th>
 										@endif
@@ -262,7 +262,7 @@
 							<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
 							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
 							@if(isset($branch_id))
-							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">Set Permission</button>
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">{{ __('messages.set_permission') }}</button>
 
 							@endif
 							<!-- Trigger the modal with a button -->
@@ -282,8 +282,8 @@
 											<h4>{{ __('messages.menu_access_confirmation') }}</h4>
 										</div>
 										<div class="modal-footer">
-											<button name="submit" name="set" value="update" class="btn btn-success btn-lg"> Update </button>
-											<button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>
+											<button name="submit" name="set" value="update" class="btn btn-success btn-lg">{{ __('messages.update') }}</button>
+											<button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">{{ __('messages.close') }}</button>
 										</div>
 									</div>
 
@@ -361,43 +361,43 @@
 			$('.childmenu' + id).attr('disabled', true);
 		}
 	}
-	
+
 	$(document).ready(function() {
-		var sid=$('#school_roleid').val();
-		
+		var sid = $('#school_roleid').val();
+
 		setTimeout(function() {
-			get_roles(sid); 
-			
+			get_roles(sid);
+
 		}, 2000);
 		setTimeout(function() {
-			
-			var role_id=$('#prole_id').val();
+
+			var role_id = $('#prole_id').val();
 			$("#role_id").val(role_id);
 		}, 3000);
 		var schoolroleDetails = "{{ route('admin.school_menurole.details') }}";
 		$('#school_roleid').change(function() {
 			var id = $(this).val();
 			get_roles(id);
-			
+
 		});
-		function get_roles(id)
-		{
+
+		function get_roles(id) {
 			$.post(schoolroleDetails, {
 				id: id
 			}, function(data) {
-				
+
 				$("#role_id").empty();
 				$("#role_id").append('<option value="">' + select + '</option>');
-				
+
 				$.each(data.data, function(key, val) {
-					
+
 					$("#role_id").append('<option value="' + val.id + '">' + val.role_name + '</option>');
 				});
-				
+
 			}, 'json');
-			
+
 		}
-		
+
 	});
 </script>
 <script>

@@ -198,8 +198,8 @@
       <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>                 
       </div>-->
       <div class="modal-footer">
-      <button type="button" class="btn btn-light" data-dismiss="modal" name="set" value="update">{{ __('messages.close') }}Close</button>
-      <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}Update</button>
+      <button type="button" class="btn btn-light" data-dismiss="modal" name="set" value="update">{{ __('messages.close') }}</button>
+      <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
       </div>
     </div>
 

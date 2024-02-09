@@ -102,13 +102,12 @@
                             <div>
                                 <div class="container">
                                     <div class="row">
-                                        <button type="button" name="add" id="add" class="btn btn-primary" style="margin: 18px;border-color: #0ABAB5;
-    background-color: #6FC6CC; margin-left: 25px;margin-bottom: 0px;">{{ __('messages.add_hideunhide') }}</button>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-10">
+                                        <button type="button" name="add" id="add" class="btn btn-primary" style="margin: 18px;border-color: #0ABAB5;background-color: #6FC6CC; margin-left: 25px;margin-bottom: 0px;">{{ __('messages.add_hideunhide') }}</button>
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <form id="addDynamicFilter" action="{{ route('admin.widget.add') }}" method="post">
-                                                    <table class="table table-borderless" id="dynamic_field">
+                                                <div class="table-responsive">    
+                                                <table class="table table-borderless" id="dynamic_field">
                                                         @forelse($get_data_hide_unhide_dashboard as $r)
                                                         <tr class="widget" id="{{ $r['order_no'] }}" data-id="{{ $r['order_no'] }}" data-order="{{ $r['order_no'] }}">
                                                             <td class="col-md-9">
@@ -124,16 +123,19 @@
                                                                 <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">{{ $r['widget_name'] }}</button>
                                                             </td>
                                                             <td class="col-md-3" style="padding:15px;">
-                                                                <button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-up"></i></button>
-                                                                <button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-down"></i></button>
+                                                            <div class="btn-group">
+                                                                <button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px; margin-right:10px;"><i class="fe-arrow-up"></i></button>
+                                                                <button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px; margin-right:10px;"><i class="fe-arrow-down"></i></button>
                                                                 <button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-trash"></i></button>
+</div>
                                                             </td>
                                                         </tr>
                                                         @empty
                                                         @endforelse
                                                     </table>
+</div>
                                                     <div class="form-group text-right m-b-0">
-                                                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.save') }}</button>
+                                                        <button type="submit" class="btn btn-primary-bl waves-effect waves-light">{{ __('messages.save') }}</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -173,32 +175,32 @@
                                         <tr>
                                             <input type="hidden" value="" id="widgetDynamicID">
                                             <td>1</td>
-                                            <td>{{ __('messages.AttendanceReport') }}</td>
+                                            <td>{{ __('messages.attendancereport') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>{{ __('messages.Calendar') }}</td>
+                                            <td>{{ __('messages.calendar') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Calendar" data-orderno="2" data-widgetvalue="Calendar">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>{{ __('messages.Task') }}</td>
+                                            <td>{{ __('messages.task') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Task" data-orderno="3" data-widgetvalue="Task">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td>{{ __('messages.StudentTransferredList') }}</td>
+                                            <td>{{ __('messages.studenttransferredlist') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="StudentTransferredList" data-orderno="4" data-widgetvalue="StudentTransferredList">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td>{{ __('messages.ShortcutLinks') }}</td>
+                                            <td>{{ __('messages.shortcutlinks') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="ShortcutLinks" data-orderno="5" data-widgetvalue="ShortcutLinks">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
-                                            <td>{{ __('messages.BulletinBoard') }}</td>
+                                            <td>{{ __('messages.bulletinboard') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="BulletinBoard" data-orderno="6" data-widgetvalue="BulletinBoard">{{ __('messages.add') }}</button></td>
                                             </td>
                                         </tr>

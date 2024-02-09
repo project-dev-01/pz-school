@@ -146,16 +146,16 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total_leave">Number Of Days Leave<span class="text-danger">*</span></label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the number of days leave">
+                                    <label for="total_leave">{{ __('messages.number_of_days_leave') }}<span class="text-danger">*</span></label>
+                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeLevType">Leave Type<span class="text-danger">*</span></label>
+                                    <label for="changeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="changeLevType" class="form-control" name="changeLevType">
-                                        <option value="">Select Leave Type</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
                                         <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
                                         @empty
@@ -190,14 +190,14 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">Remarks<span class="text-danger">*</span></label>
-                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the remarks" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    <label for="changelev">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal"  id="studentAllReasons"> Click Here For Reason Details</button>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
                                     <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>

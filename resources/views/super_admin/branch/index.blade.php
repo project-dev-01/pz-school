@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
                                         <select id="country" class="form-control" name="country" required="">
-                                            <option value="">Select</option>
+                                            <option value="">{{ __('messages.select') }}</option>
                                             @foreach($countries as $c)
                                             <option value="{{$c['id']}}">{{$c['name']}}</option>
                                             @endforeach

@@ -126,7 +126,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                            {{ __('messages.important') }}
+                                            {{ __('messages.imp_buletin') }}
                                             </a>
                                         </li>
                                     </ul>

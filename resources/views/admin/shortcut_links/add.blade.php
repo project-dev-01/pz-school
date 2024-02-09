@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myaddBankModalLabel">Add Shortcut Link</h4>
+                <h4 class="modal-title" id="myaddBankModalLabel">{{ __('messages.add_shortcut_links') }}</h4>
                 <button type="button" class="close addClose" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -12,7 +12,7 @@
 
                     <div class="form-group">
                         <label for="name">{{ __('messages.title') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Sidebar Name">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('messages.enter_sidebar_name') }}">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">

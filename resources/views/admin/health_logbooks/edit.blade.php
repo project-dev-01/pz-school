@@ -3,7 +3,7 @@
   <div class="modal-dialog" style="max-width: 810px;" role="document">
     <div class="modal-content">
       <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Edit Form</h5>
+            <h5 class="modal-title" id="editModalLabel">{{ __('messages.edit_form') }}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -13,10 +13,10 @@
                 <div class="col-xl-12">
                     <ul class="nav nav-pills navtab-bg nav-justified" id="mainTabs">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab1" data-toggle="pill" href="#tabContent1" role="tab" aria-controls="tabContent1" aria-selected="true">Tab 1</a>
+                            <a class="nav-link active" id="tab1" data-toggle="pill" href="#tabContent1" role="tab" aria-controls="tabContent1" aria-selected="true">{{ __('messages.tab_1') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab2" data-toggle="pill" href="#tabContent2" role="tab" aria-controls="tabContent2" aria-selected="false">Tab 2</a>
+                            <a class="nav-link" id="tab2" data-toggle="pill" href="#tabContent2" role="tab" aria-controls="tabContent2" aria-selected="false">{{ __('messages.tab_2') }}</a>
                         </li>
                         <!-- Add more tabs as needed -->
                     </ul>

@@ -234,7 +234,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th >Id</th>
+                                            <th>{{ __('messages.id') }}</th>
                                             <th>{{ __('messages.department') }}</th>
                                             <th>{{ __('messages.grade') }}</th>
                                             <th>{{ __('messages.class') }}</th>

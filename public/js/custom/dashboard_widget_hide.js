@@ -104,9 +104,9 @@ $(function () {
             '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">' + addWidgetH + '</button>' +
             '</td>' +
             '<td class="col-md-3" style="padding:15px;">' +
-            '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-up"></i></button>' +
-            '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-arrow-down"></i></button>' +
-            '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-trash"></i></button>' +
+            '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-up"></i></button>' +
+            '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-down"></i></button>' +
+            '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-trash"></i></button>' +
             '</td>' +
             '</tr>';
 

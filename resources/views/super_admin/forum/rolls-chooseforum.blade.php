@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label for="state">{{ __('messages.school_names') }}<span class="text-danger">*</span></label>
                                         <select id="getbranchid" class="form-control" name="getbranchid">
-                                            <option value="">Select..</option>
+                                            <option value="">{{ __('messages.select') }}..</option>
                                             @if(!empty($dbnames))
                                             @foreach($dbnames as $c)
                                             <option value="{{$c['id']}}">{{$c['school_name']}}</option>

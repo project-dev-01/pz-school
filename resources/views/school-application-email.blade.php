@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Email Verification</title>
+    <title> {{ __('messages.email_verification') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -84,16 +84,16 @@
                                 </div>
 
                                 @if($application == "Email Verified Successfully")
-                                <h4 class="text-center" style="color: #000000;">Email Verified Successfully</h4>
+                                <h4 class="text-center" style="color: #000000;"> {{ __('messages.email_verified_successfully') }}</h4>
                                 @elseif($application == "Email Already Verified")
-                                <h4 class="text-center" style="color: #000000;">Your Email Already Verified</h4>
+                                <h4 class="text-center" style="color: #000000;"> {{ __('messages.your_email_already_verified') }}</h4>
                                 @elseif($application == "Link Has been Expired")
-                                <h4 class="text-center" style="color: #000000;">Your Link Has been Expired</h4>
+                                <h4 class="text-center" style="color: #000000;"> {{ __('messages.your_link_has_been_expired') }}</h4>
                                 @endif
                             </div>
                             <div class="form-group" style="text-align: center;">
                                 <button class="btn btn-primary-bl waves-effect waves-light">
-                                    Go to Home
+                                {{ __('messages.go_to_home') }}
                                 </button>
                             </div>
                         </div> <!-- end card-body -->

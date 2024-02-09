@@ -78,7 +78,7 @@
                     <div class="card">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.leave_details') }}
+                                <h4 class="navv">{{ __('messages.leavedetails') }}
                                     <h4>
                             </li>
                         </ul>
@@ -1177,7 +1177,7 @@
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <h4 class="navv">
-                        Shortcut Links
+                    <th>{{ __('messages.shortcutlinks') }}
                         <h4>
                 </li>
             </ul>

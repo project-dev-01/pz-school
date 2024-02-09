@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>School Application Form</title>
+    <title>{{ __('messages.school_application_form') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -122,7 +122,7 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox text-center">
                                                 <input type="checkbox" name="terms_condition" class="custom-control-input" id="terms_condition">
-                                                <label class="custom-control-label" for="terms_condition">I Understand and Accept the Terms</label>
+                                                <label class="custom-control-label" for="terms_condition">{{ __('messages.understand_accept') }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group -center">
                                                 <!-- <label for="first_name">{{ __('messages.email') }}<span class="text-danger">*</span></label> -->
-                                                <input type="text" class="form-control" id="verify_email" name="email" maxlength="50" placeholder="Enter Your Email" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="verify_email" name="email" maxlength="50" placeholder="{{ __('messages.enter_your_email') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -172,7 +172,7 @@
                                 <hr> -->
                                 <div class="form-group text-center m-b-0">
                                     <button class="btn btn-primary-bl waves-effect waves-light" disabled id="submit" type="submit" >
-                                        Verify
+                                    {{ __('messages.verify') }}
                                     </button>
                                 </div>
 

@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class="mt-md">
-                            <strong>Dynamic Tag : </strong>
+                            <strong>{{ __('messages.dynamic_tag') }}: </strong>
                             <a data-value="{name}" class="btn btn-light btn-xs btn_tag">{name}</a>
                             <a data-value="{email}" class="btn btn-light btn-xs btn_tag">{email}</a>
                             <a data-value="{mobile_no}" class="btn btn-light btn-xs btn_tag">{mobile_no}</a>

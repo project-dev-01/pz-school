@@ -37,7 +37,7 @@
                         <li class="breadcrumb-item active">List</li>
                     </ol>
                 </div> -->
-                <h4 class="page-title">Dashboard Shortcut Links</h4>
+                <h4 class="page-title">{{ __('messages.shortcut_links') }}</h4>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">Shortcut Links<h4>
+                        <h4 class="nav-link">{{ __('messages.shortcutlinks') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">
@@ -61,9 +61,9 @@
                         <table class="table dt-responsive nowrap w-100" id="shortcut-table">
                             <thead>
                                 <tr>
-                                    <th>S.No</th>
-                                    <th>Title</th>
-                                    <th>Url</th>
+                                    <th>{{ __('messages.s.no') }}</th>
+                                    <th>{{ __('messages.title') }}</th>
+                                    <th>{{ __('messages.url') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

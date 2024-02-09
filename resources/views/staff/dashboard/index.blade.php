@@ -567,7 +567,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            Shortcut Links
+                        {{ __('messages.shortcutlinks') }}
                             <h4>
                     </li>
                 </ul>

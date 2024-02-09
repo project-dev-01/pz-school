@@ -100,13 +100,13 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="pattern">Pattern<span class="text-danger">*</span></label>
+                                    <label for="pattern">{{ __('messages.pattern') }}<span class="text-danger">*</span></label>
                                     <select id="pattern" class="form-control" name="pattern">
-                                        <option value="">Select Pattern</option>
-                                        <option>Day</option>
-                                        <option>Month</option>
-                                        <option>Term</option>
-                                        <option>Year</option>
+                                        <option value="">{{ __('messages.select_pattern') }}</option>
+                                        <option>{{ __('messages.day') }}</option>
+                                        <option>{{ __('messages.month') }}</option>
+                                        <option>{{ __('messages.term') }}</option>
+                                        <option>{{ __('messages.year') }}</option>
                                     </select>
                                 </div>
                             </div>
