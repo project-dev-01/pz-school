@@ -1,4 +1,21 @@
 $(function () {
+    $(".number_validation").keypress(function(event){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    $("#date_of_birth").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-60:+1", // last hundred years
+        maxDate: 0
+    });
 
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
@@ -25,20 +42,13 @@ $(function () {
             $('#visa_photo_name').text(file.name);
         }
     });
-    $("#date_of_birth").datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-3:+6", // last hundred years
-    });
     
     $("#passport_expiry_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-3:+6", // last hundred years
+        yearRange: "-10:+10", // last hundred years
     });
 
     $("#visa_expiry_date").datepicker({
@@ -46,7 +56,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-3:+6", // last hundred years
+        yearRange: "-10:+10", // last hundred years
     });
     $("#next").click(function(){
             console.log('etts')
@@ -481,24 +491,6 @@ $(function () {
                 }, 'json');
             }
         });
-    });
-
-    $(".number_validation").keypress(function () {
-        console.log(123)
-        var regex = new RegExp("^[0-9-+]");
-        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-    $("#date_of_birth").datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        maxDate: 0
     });
 
     

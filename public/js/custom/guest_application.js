@@ -1,5 +1,14 @@
 $(function () {
 
+    $(".number_validation").keypress(function(event){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
@@ -31,7 +40,8 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-3:+6", // last hundred years
+        yearRange: "-60:+1", // last hundred years
+        maxDate: 0
     });
     
     $("#passport_expiry_date").datepicker({
@@ -39,7 +49,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-3:+6", // last hundred years
+        yearRange: "-10:+10", // last hundred years
     });
 
     $("#visa_expiry_date").datepicker({
@@ -47,7 +57,7 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         autoclose: true,
-        yearRange: "-3:+6", // last hundred years
+        yearRange: "-10:+10", // last hundred years
     });
     $("#next").click(function(){
             console.log('etts')
@@ -130,10 +140,10 @@ $(function () {
 
     $('#addApplication').on('submit', function (e) {
         e.preventDefault();
-        console.log('123')
         var admissionCheck = $("#addApplication").valid();
         if (admissionCheck === true) {
             var form = this;
+            $("#overlay").fadeIn(300);
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -142,12 +152,14 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    $("#overlay").fadeOut(300);
                     if (data.code == 200) {
                         toastr.success(data.message);
                         window.location.href = applicationIndex;
                     } else {
                         toastr.error(data.message);
                     }
+                    
                 }
             });
         }
@@ -209,6 +221,7 @@ $(function () {
         var admissionCheck = $("#editApplication").valid();
         if (admissionCheck === true) {
             var form = this;
+            $("#overlay").fadeIn(300);
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -217,6 +230,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    $("#overlay").fadeOut(300);
                     if (data.code == 200) {
                         toastr.success(data.message);
                         window.location.href = applicationIndex;
@@ -483,25 +497,6 @@ $(function () {
             }
         });
     });
-
-    $(".number_validation").keypress(function () {
-        console.log(123)
-        var regex = new RegExp("^[0-9-+]");
-        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-    $("#date_of_birth").datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        maxDate: 0
-    });
-
     
     
     $(document).on('click', '#viewApplicationBtn', function () {

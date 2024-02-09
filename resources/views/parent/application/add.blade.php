@@ -434,7 +434,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
+                                                <label for="state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="state" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
@@ -482,7 +482,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                                 <select id="blood_group" name="blood_group" class="form-control">
@@ -497,7 +497,7 @@
                                                     <option>AB-</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
@@ -661,7 +661,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="mother_phone_number" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" id="mother_phone_number" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -720,7 +720,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="father_phone_number" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" id="father_phone_number" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -791,7 +791,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="guardian_phone_number" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" id="guardian_phone_number" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -981,7 +981,56 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    var input = document.querySelector(".mobile_no");
+    
+    var input = document.querySelector("#mother_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#father_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
         allowExtensions: true,
         autoFormat: false,

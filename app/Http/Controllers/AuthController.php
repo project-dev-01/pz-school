@@ -813,7 +813,7 @@ class AuthController extends Controller
                 return redirect()->route('guest.login')->with('error', 'Access denied please contact admin');
             }
         } else {
-            return redirect()->route('parent.login')->with('error', $userDetails['message']);
+            return redirect()->route('guest.login')->with('error', $userDetails['message']);
         }
     }
 

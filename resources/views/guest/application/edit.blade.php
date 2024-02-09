@@ -400,7 +400,7 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">{{ __('messages.date_of_birth') }}</label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="date_of_birth" {{$readonly_phase_1}} value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('d-m-Y')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="date_of_birth" {{$readonly_phase_1}} value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -452,7 +452,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
+                                                <label for="state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="state" {{$readonly_phase_1}} value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
@@ -511,7 +511,7 @@
                                             </div>
                                         </div>
                                         @endif
-                                        @if($form_field['blood_group'] == 0)
+                                        <!-- @if($form_field['blood_group'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
@@ -531,7 +531,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        @endif
+                                        @endif -->
                                         @if($form_field['nationality'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -711,7 +711,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="mother_phone_number" {{$readonly_phase_1}} value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" id="mother_phone_number" {{$readonly_phase_1}} value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -773,7 +773,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" {{$readonly_phase_1}} id="father_phone_number" value="{{ isset($application['father_phone_number']) ? $application['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" {{$readonly_phase_1}} id="father_phone_number" value="{{ isset($application['father_phone_number']) ? $application['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -850,7 +850,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" {{$readonly_phase_1}} id="guardian_phone_number" value="{{ isset($application['guardian_phone_number']) ? $application['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation" {{$readonly_phase_1}} id="guardian_phone_number" value="{{ isset($application['guardian_phone_number']) ? $application['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -1008,7 +1008,7 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('d-m-Y')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1046,7 +1046,7 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('d-m-Y')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1175,7 +1175,55 @@
 </script>
 
 <script>
-    var input = document.querySelector(".mobile_no");
+    var input = document.querySelector("#mother_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#father_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
         allowExtensions: true,
         autoFormat: false,
