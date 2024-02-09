@@ -1901,7 +1901,8 @@ class ParentController extends Controller
     {
 
         $data = [
-            "status" => "Parent"
+            "status" => "Parent",
+            "parent_id" => session()->get('ref_user_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.parent_student_update_info_list'), $data);
         // dd($response);
