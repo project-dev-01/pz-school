@@ -2014,4 +2014,5 @@ return [
     "access" => "Access",
     "denied" => "Denied",
     "go_to" => "Go-To",
+    "no_data_avaliable" => "No Data Avaliable",
 ];

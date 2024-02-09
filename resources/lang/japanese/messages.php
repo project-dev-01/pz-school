@@ -1994,5 +1994,6 @@ return [
         "access" => "アクセス", 
         "denied" => "拒否されました",
         "go_to" => "ゴートゥー",
+        "no_data_avaliable" => "No Data Avaliable",
 
 ];

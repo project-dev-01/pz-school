@@ -1822,6 +1822,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
+            'relieving_date' => $request->relieving_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
             'teacher_type' => $request->teacher_type,
@@ -1914,7 +1915,8 @@ class AdminController extends Controller
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
             $data = [
-                'id' => $id
+                'id' => $id,
+                'deleted_by' => session()->get('ref_user_id')
             ];
             $response = Helper::PostMethod(config('constants.api.employee_delete'), $data);
             return $response;
@@ -10483,6 +10485,25 @@ class AdminController extends Controller
         ];
 
         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
+        return $response;
+    }
+    public function studentInterviewIndex(){
+
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+
+        return view('admin.student_interview_record.index',
+        [
+            'department' => isset($department['data']) ? $department['data'] : [],
+        ]);
+    }
+    public function getStudentInterviewData(Request $request){
+        $data = [
+            'department_id' => $request->department_id,
+            'grade_id' => $request->changeClassName,
+            'section_id' => $request->sectionID,
+            'student_id' => $request->student_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
         return $response;
     }
 }

@@ -2206,4 +2206,64 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
         return $response;
     }
+    public function studentInterviewNotesIndex(){
+
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        return view('teacher.student_interview_notes.index',
+        [
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+        ]);
+    }
+    public function createStudentInterviewNotes(){
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        return view(
+            'teacher.student_interview_notes.add',
+            [
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            ]
+        );
+    }
+    public function addStudentInterviewNotes(Request $request){
+        
+        $file = $request->file('interview_file');
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+          $data = [
+              'title' => $request->title,
+              'type' => $request->interview_type,
+              'comment' => $request->description,
+              'file' => $base64,
+              'file_extension' => $extension,
+              'class_id' => $request->class_id,
+              'section_id' => $request->section_id,
+              'student_id' =>  $request->student_id,
+              'created_by' => session()->get('ref_user_id')
+  
+          ];
+          $response = Helper::PostMethod(config('constants.api.student_interview_add'), $data);
+          return $response;
+
+    }
+    public function getStudentInterviewData(Request $request){
+        $data = [
+            'grade_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' => $request->student_id,
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
+        return $response;
+    }
 }

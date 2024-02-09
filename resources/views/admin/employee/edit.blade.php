@@ -972,6 +972,21 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-4">
+                                    <label for="relieving_date">{{ __('messages.relieving_date') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{ isset($employee['releive_date']) ? $employee['releive_date'] : ''}}" name="relieving_date" id="relieving_date" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card">

@@ -1030,6 +1030,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('shortcut_link/update', [AdminController::class, 'updateShortcutLinks'])->name('admin.shortcut_link.update');
         Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
         Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
+        // student interview notes
+        Route::get('student_interview_details', [AdminController::class, 'studentInterviewIndex'])->name('admin.student_interview_details');
+        Route::post('student_interview_details/list', [AdminController::class, 'getStudentInterviewData'])->name('admin.student_interview_details.list');
     });
 });
 // admin routes end
@@ -1433,6 +1436,11 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('shortcut_link/shortcut_link-details', [TeacherController::class, 'getShortcutLinksDetails'])->name('teacher.shortcut_link.details');
         Route::post('shortcut_link/update', [TeacherController::class, 'updateShortcutLinks'])->name('teacher.shortcut_link.update');
         Route::post('shortcut_link/delete', [TeacherController::class, 'deleteShortcutLinks'])->name('teacher.shortcut_link.delete');
+         //student interview notes
+         Route::get('student_interview_notes', [TeacherController::class, 'studentInterviewNotesIndex'])->name('teacher.student_interview_notes');
+         Route::get('student_interview_notes/create', [TeacherController::class, 'createStudentInterviewNotes'])->name('teacher.student_interview_notes.create');
+         Route::post('student_interview_notes/add', [TeacherController::class, 'addStudentInterviewNotes'])->name('teacher.student_interview_notes.add');
+         Route::post('student_interview_details/list', [TeacherController::class, 'getStudentInterviewData'])->name('teacher.student_interview_details.list');
     });
 });
 // TEACHER CONTROLLER END

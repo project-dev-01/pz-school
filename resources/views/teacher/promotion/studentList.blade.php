@@ -279,7 +279,7 @@
 										<th>{{ __('messages.attendance_no') }}</th>
 										<th>{{ __('messages.student_name') }}</th>
 										<th>{{ __('messages.student_number') }}</th>
-										<th>{{ __('messages.dept') }}</th>
+										<th>{{ __('messages.department') }}</th>
 										<th>{{ __('messages.grade') }}</th>
 										<th>{{ __('messages.class') }}</th>
 										<th>{{ __('messages.admission_date') }}</th>
@@ -302,7 +302,7 @@
 				<div class="card">
 					<ul class="nav nav-tabs">
 						<li class="nav-item">
-							<h4 class="navv">{{ __('messages.termination_student_list') }}<h4>
+							<h4 class="navv">{{ __('messages.student_termination_list') }}<h4>
 						</li>
 					</ul><br>
 					<div class="card-body">
@@ -314,7 +314,7 @@
 										<th>{{ __('messages.attendance_no') }}</th>
 										<th>{{ __('messages.student_name') }}</th>
 										<th>{{ __('messages.student_number') }}</th>
-										<th>{{ __('messages.dept') }}</th>
+										<th>{{ __('messages.department') }}</th>
 										<th>{{ __('messages.grade') }}</th>
 										<th>{{ __('messages.class') }}</th>
 										<th>{{ __('messages.admission_date') }}</th>

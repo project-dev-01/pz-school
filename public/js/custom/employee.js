@@ -17,6 +17,14 @@ $(function () {
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
     });
+     // joining date
+     $("#relieving_date").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+    });
     // emp DOB
     $("#empDOB").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -434,6 +442,7 @@ $(function () {
             formData.append('id', $('#id').val());
             formData.append('role_id', $('#role_id').val());
             formData.append('joining_date', convertDigitIn($('#joiningDate').val()));
+            formData.append('relieving_date', convertDigitIn($('#relieving_date').val()));
             formData.append('designation_id', $('#empDesignation').val());
             formData.append('department_id', $('#empDepartment').val());
             // formData.append('name', $('#userName').val());
@@ -519,7 +528,7 @@ $(function () {
             formData.append('job_title', $('#job_title').val());
             // Attach file
             formData.append('photo', $('input[type=file]')[0].files[0]);
-
+            console.log(formData);
             // formData.append('photo', $('input[type=file]')[0].files[0]);
             // Attach file
             // formData.append('photo', $('input[type=file]')[0].files[0]);
@@ -533,6 +542,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    console.log(data);
                     if (data.code == 200) {
                         $("#overlay").fadeOut(300);
                         $('.editEmployeeForm').find('form')[0].reset();
