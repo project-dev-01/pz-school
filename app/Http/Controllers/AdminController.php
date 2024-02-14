@@ -4438,6 +4438,8 @@ class AdminController extends Controller
             'last_name_english' => $request->last_name_english,
             'first_name_furigana' => $request->first_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
+            'first_name_common' => $request->first_name_common,
+            'last_name_common' => $request->last_name_common,
             'passport_expiry_date' => $request->passport_expiry_date,
             'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
@@ -4901,6 +4903,8 @@ class AdminController extends Controller
             'last_name_english' => $request->last_name_english,
             'first_name_furigana' => $request->first_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
+            'first_name_common' => $request->first_name_common,
+            'last_name_common' => $request->last_name_common,
             'passport_expiry_date' => $request->passport_expiry_date,
             'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
@@ -8822,6 +8826,8 @@ class AdminController extends Controller
             'last_name_english' => $request->last_name_english,
             'first_name_furigana' => $request->first_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
+            'first_name_common' => $request->first_name_common,
+            'last_name_common' => $request->last_name_common,
             'race' => $request->race,
             'religion' => $request->religion,
             'blood_group' => $request->blood_group,
@@ -9994,6 +10000,15 @@ class AdminController extends Controller
                     $result_name_english = "";
                 }
                 return '<input type="checkbox" ' . $result_name_english . '>';
+            })->addColumn('name_common', function ($row) {
+
+                $name_common = $row['name_common'];
+                if ($name_common == 0) {
+                    $result_name_common = "checked";
+                } else {
+                    $result_name_common = "";
+                }
+                return '<input type="checkbox" ' . $result_name_common . '>';
             })->addColumn('visa', function ($row) {
 
                 $visa = $row['visa'];
@@ -10036,7 +10051,7 @@ class AdminController extends Controller
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editFormFieldBtn"><i class="fe-edit"></i></a>
                          </div>';
             }) // <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFormFieldBtn"><i class="fe-trash-2"></i></a>
-            ->rawColumns(['name_english', 'visa', 'nationality', 'passport', 'nric', 'actions'])
+            ->rawColumns(['name_english','name_common', 'visa', 'nationality', 'passport', 'nric', 'actions'])
             ->make(true);
     }
     public function getFormFieldDetails(Request $request)
@@ -10506,4 +10521,149 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
         return $response;
     }
+    
+    public function childHealthImport(Request $request)
+    {
+
+        
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+
+        // dd($session);
+        return view(
+            'admin.child_health.import',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    public function childHealthImportAdd(Request $request)
+    {
+        $files = [];
+        if ($request->hasfile('file')) {
+            foreach ($request->file('file') as $file) {
+
+                $object = new \stdClass();
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+
+                $object->extension = $extension;
+                $object->base64 = $base64;
+                $object->fileName = $file->getClientOriginalName();
+                $object->tempPath = $file->getRealPath();
+                $object->fileSize = $file->getSize();
+                $object->mimeType = $file->getMimeType();
+                array_push($files, $object);
+            }
+        }
+        
+        $data = [
+            'file' => $files,
+            'missing_file' => "",
+            "date" => $request->date
+        ];
+        // dd($request->date);
+        $response = Helper::PostMethod(config('constants.api.import_child_health'), $data);
+        
+        // dd($response);
+        if ($response['code'] == 200) {
+            return redirect()->route('admin.child_health.import')->with('success', ' Child Health Data Imported Successfully');
+        } else {
+            return redirect()->route('admin.child_health.import')->with('errors', $response['data']['error']);
+        }
+    }
+    public function childHealthIndex(Request $request)
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view('admin.child_health.report', [
+            'department' => isset($department['data']) ? $department['data'] : [],
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+    public function childHealthList(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            'department_id' => $request->department_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $route = route('admin.child_health.pdf', $row['id']);
+                return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-toggle="modal"  data-target="#bs-example-modal-lg"><i class="fe-eye"></i></a>
+                    <a href="'.$route.'" class="btn btn-danger waves-effect waves-light" id="downloadChidlHealth"><i class="dripicons-download" style="color: white;"></i></a>
+                </div>';
+                
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function childHealthPdf(Request $request)
+    {
+        $data = [
+            'student_id' => $request->student_id,
+            "class_id" => $request->class_id,
+            'department_id' => $request->department_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $child_health = Helper::PostMethod(config('constants.api.child_health_export'), $data);
+        // dd($child_health);
+        $count = isset($child_health['data']['grade']) ? count($child_health['data']['grade']) : 0;
+        $empty = 9 - $count;
+        
+        
+        $pdf = PDF::loadView('admin.child_health.pdf', [
+            'child_health' => isset($child_health['data']['child_health']) ? $child_health['data']['child_health'] : [],
+            'grade' => isset($child_health['data']['grade']) ? $child_health['data']['grade'] : [],
+            'empty' => isset($empty) ? $empty : 9,
+            'storage' => storage_path('fonts/ipag.ttf')
+        ],);
+        // $pdf->setPaper('A3', 'landscape');
+        return $pdf->stream('pdfview.pdf');
+        
+        
+
+        // dd($count);
+        return view('admin.child_health.pdf', [
+            'child_health' => isset($child_health['data']['child_health']) ? $child_health['data']['child_health'] : [],
+            'grade' => isset($child_health['data']['grade']) ? $child_health['data']['grade'] : [],
+            'empty' => isset($empty) ? $empty : 9,
+                'storage' => storage_path('fonts/ipag.ttf')
+        ]);
+    }
+
 }

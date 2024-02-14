@@ -99,15 +99,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="department_id">{{ __('messages.department') }}</label>
-                                <select id="department_id" name="department_id" class="form-control">
-                                    <option value="">{{ __('messages.select_department') }}</option>
-                                    @forelse($department as $r)
-                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <select id="department_id" name="department_id" class="form-control">
+                                        <option value="">{{ __('messages.select_department') }}</option>
+                                        @forelse($department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -160,6 +162,7 @@
                                             <th> {{ __('messages.register_number') }}</th>
                                             <th> {{ __('messages.name') }}</th>
                                             <th> {{ __('messages.name_english') }}</th>
+                                            <th> {{ __('messages.name_common') }}</th>
                                             <th> {{ __('messages.type') }}</th>
                                             <th> {{ __('messages.gender') }}</th>
                                             <th> {{ __('messages.email') }}</th>

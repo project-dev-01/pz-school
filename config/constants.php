@@ -797,6 +797,8 @@ return [
         'import_employee'=> $url.'/importcsv/employee',
         'import_parent'=> $url.'/importcsv/parent',
         'import_student'=> $url.'/importcsv/student',
+        'import_child_health'=> $url.'/importcsv/child_health',
+
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
@@ -1053,6 +1055,12 @@ return [
           //student interview list
           'student_interview_list'=> $url.'/student_interview_list',
           'student_interview_add' => $url.'/student_interview_add',
-        ]
+
+        //child health
+        
+        'child_health_list' => $url.'/child_health/list',
+        'child_health_details' => $url.'/child_health/child_health-details',
+        'child_health_export' => $url.'/child/health/export',
+      ]
 
 ];

@@ -55,6 +55,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.name_english') }}</th>
+                                    <th>{{ __('messages.name_common') }}</th>
                                     <th>{{ __('messages.visa') }}</th>
                                     <th>{{ __('messages.passport') }}</th>
                                     <th>{{ __('messages.nationality') }}</th>

@@ -117,9 +117,10 @@ class GuestController extends Controller
         $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
         $academic_year_list = $academic_year_list_response->json();
         
-        $form_field_list_response = Http::post(config('constants.api.form_field_list'), $data);
-        $form_field_list = $form_field_list_response->json();
-        // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // $form_field_list_response = Http::post(config('constants.api.form_field_list'), $data);
+        // $form_field = $form_field_list_response->json();
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        // dd($form_field);
         return view(
             'guest.application.add',
             [
@@ -147,6 +148,8 @@ class GuestController extends Controller
             'last_name_english' => $request->last_name_english,
             'first_name_furigana' => $request->first_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
+            'first_name_common' => $request->first_name_common,
+            'last_name_common' => $request->last_name_common,
             'race' => $request->race,
             'religion' => $request->religion,
             'blood_group' => $request->blood_group,
@@ -195,7 +198,6 @@ class GuestController extends Controller
             "type" => $type
 
         ];
-
         $response = Helper::PostMethod(config('constants.api.application_add'), $data);
 
         return $response;
@@ -270,6 +272,8 @@ class GuestController extends Controller
                 'last_name_english' => $request->last_name_english,
                 'first_name_furigana' => $request->first_name_furigana,
                 'last_name_furigana' => $request->last_name_furigana,
+                'first_name_common' => $request->first_name_common,
+                'last_name_common' => $request->last_name_common,
                 'race' => $request->race,
                 'religion' => $request->religion,
                 'blood_group' => $request->blood_group,

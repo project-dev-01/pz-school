@@ -352,6 +352,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if($form_field['name_english'] == 0)
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -366,6 +367,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
+                                    @if($form_field['name_common'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name">{{ __('messages.first_name_common') }}<span class="text-danger"></span></label>
+                                                <input type="text" class="form-control" id="first_name_common" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name">{{ __('messages.last_name_common') }}</label>
+                                                <input type="text" class="form-control" id="last_name_common" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($form_field['name_furigana'] == 0)
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -380,6 +399,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -458,6 +478,7 @@
                                                 <input type="text" class="form-control" id="email" name="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
+                                        @if($form_field['race'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="race">{{ __('messages.race') }}</label>
@@ -470,6 +491,8 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($form_field['religion'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="religion">{{ __('messages.religion') }}</label>
@@ -482,6 +505,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        @endif
                                         <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="blood_group">{{ __('messages.blood_group') }}</label>
@@ -498,12 +522,14 @@
                                                 </select>
                                             </div>
                                         </div> -->
+                                        @if($form_field['nationality'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="50" id="nationality" class="form-control country" placeholder="{{ __('messages.nationality') }}" name="country" data-parsley-trigger="change">
                                             </div>
                                         </div>
+                                        @endif
                                     </div><br>
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">

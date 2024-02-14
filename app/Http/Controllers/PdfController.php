@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -206,9 +207,9 @@ class PdfController extends Controller
             return $pdf->download($fileName);
             // return $pdf->stream();
         }
-    }   
-    
-	public function downbysubject(Request $request)
+    }
+
+    public function downbysubject(Request $request)
     {
         $data = [
             'exam_id' => $request->exam_id,
@@ -1437,33 +1438,33 @@ class PdfController extends Controller
         if ($get_attendance_list_teacher['code'] == "200") {
             $student_details = $get_attendance_list_teacher['data']['student_details'];
             $i = 0;
-            if($request->pattern == "Day"){
-    
+            if ($request->pattern == "Day") {
+
                 $response .= '<div class="table-responsive">
             <table width="100%" style="border-collapse: collapse; border: 0px;">
                <thead>
                   <tr>
                      <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.status') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
-    
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name') . '</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name_english') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.grade') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.class') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.status') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.remarks') . '</th>';
+
                 $response .= '</tr></thead><tbody>';
                 foreach ($student_details as $key => $res) {
                     $i++;
                     $status = "";
-                    if($res['status']=="absent"){
+                    if ($res['status'] == "absent") {
                         $status = "Absent";
-                    }else if($res['status']=="present"){
+                    } else if ($res['status'] == "present") {
                         $status = "Present";
                     }
                     $response .= '<tr>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
-                    
+
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
@@ -1472,8 +1473,7 @@ class PdfController extends Controller
                     $response .= '</tr>';
                 }
                 $response .= '</tbody></table></div>';
-    
-            }else if($request->pattern == "Month"){
+            } else if ($request->pattern == "Month") {
                 $year_month = "01-" . $request->year_month;
                 // First day of the month.
                 $startDate = date('Y-m-01', strtotime($year_month));
@@ -1481,30 +1481,30 @@ class PdfController extends Controller
                 $endDate = date('Y-m-t', strtotime($year_month));
                 $begin = new DateTime($startDate);
                 $end = new DateTime($endDate);
-    
+
                 $end = $end->modify('+1 day');
-    
+
                 $interval = new DateInterval('P1D');
                 $daterange = new DatePeriod($begin, $interval, $end);
-    
+
                 $response .= '<div class="table-responsive">
             <table width="100%" style="border-collapse: collapse; border: 0px;">
                <thead>
                   <tr>
                      <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>';
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name') . '</th>';
                 foreach ($daterange as $date) {
                     $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . $date->format("Y-m-d") . '</th>>';
                 }
-                $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_present') .'</th>>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_absent') .'</th>>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.total_late') .'</th>>';
-    
+                $response .= '<th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.total_present') . '</th>>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.total_absent') . '</th>>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.total_late') . '</th>>';
+
                 $response .= '</tr></thead><tbody>';
                 foreach ($student_details as $key => $res) {
                     $attendance_details = $res['attendance_details'];
                     $response .= '<tr>
-                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i. '</td>
+                     <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
                     foreach ($daterange as $dat) {
                         $checkMatch = 0;
@@ -1538,31 +1538,30 @@ class PdfController extends Controller
                     $response .= '</tr>';
                 }
                 $response .= '</tbody></table></div>';
-    
-            }else if($request->pattern == "Term"){
-    
+            } else if ($request->pattern == "Term") {
+
                 $response .= '<div class="table-responsive">
             <table width="100%" style="border-collapse: collapse; border: 0px;">
                <thead>
                   <tr>
                      <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.semester') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_present') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_absent') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_late') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
-    
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name') . '</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name_english') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.grade') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.class') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.semester') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_present') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_absent') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_late') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.remarks') . '</th>';
+
                 $response .= '</tr></thead><tbody>';
                 foreach ($student_details as $key => $res) {
                     $i++;
                     $response .= '<tr>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
-                    
+
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
@@ -1574,30 +1573,29 @@ class PdfController extends Controller
                     $response .= '</tr>';
                 }
                 $response .= '</tbody></table></div>';
-    
-            }else if($request->pattern == "Year"){
-    
+            } else if ($request->pattern == "Year") {
+
                 $response .= '<div class="table-responsive">
             <table width="100%" style="border-collapse: collapse; border: 0px;">
                <thead>
                   <tr>
                      <th class="align-top" style="border: 1px solid; padding:12px;">#</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name') .'</th>
-                     <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.name_english') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.grade') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.class') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_present') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_absent') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.no_of_late') .'</th>
-                <th class="align-top" style="border: 1px solid; padding:12px;">'.__('messages.remarks') .'</th>';
-    
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name') . '</th>
+                     <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.name_english') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.grade') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.class') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_present') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_absent') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.no_of_late') . '</th>
+                <th class="align-top" style="border: 1px solid; padding:12px;">' . __('messages.remarks') . '</th>';
+
                 $response .= '</tr></thead><tbody>';
                 foreach ($student_details as $key => $res) {
                     $i++;
                     $response .= '<tr>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $i . '</td>
                      <td class="text-center" style="border: 1px solid; padding:12px;">' . $res['first_name'] . '' . $res['last_name'] . '</td>';
-                    
+
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['name_english'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['class_name'] . '</td>';
                     $response .= '<td class="text-center" style="border: 1px solid; padding:12px;">' . $res['section_name'] . '</td>';
@@ -1608,7 +1606,6 @@ class PdfController extends Controller
                     $response .= '</tr>';
                 }
                 $response .= '</tbody></table></div>';
-    
             }
         }
 
@@ -1851,8 +1848,8 @@ class PdfController extends Controller
          <th class="align-top" style="border: 1px solid; padding:12px;">No of Late</th>
          <th class="align-top" style="border: 1px solid; padding:12px;">Remarks</th>';
 
-     $response .= '</tr></thead><tbody>';
-     $response .= '
+        $response .= '</tr></thead><tbody>';
+        $response .= '
              <tr>
                  <td class="text-center" style="border: 1px solid; padding:12px;">1</td>
                  <td class="text-center" style="border: 1px solid; padding:12px;"> 佐藤 直美</td>
@@ -2002,8 +1999,8 @@ class PdfController extends Controller
          <th class="align-top" style="border: 1px solid; padding:12px;">No of Late</th>
          <th class="align-top" style="border: 1px solid; padding:12px;">Remarks</th>';
 
-     $response .= '</tr></thead><tbody>';
-     $response .= '
+        $response .= '</tr></thead><tbody>';
+        $response .= '
              <tr>
                  <td class="text-center" style="border: 1px solid; padding:12px;">1</td>
                  <td class="text-center" style="border: 1px solid; padding:12px;"> 佐藤 直美</td>
@@ -2451,23 +2448,23 @@ class PdfController extends Controller
             'date' => $request->date
         ];
         $footer_text = session()->get('footer_text');
-      
+
         $health_log_books_leave_summary = Helper::PostMethod(config('constants.api.health_logbook_leave_summary'), $data);
-        
-            $headers[]  = $health_log_books_leave_summary['data']['headers'];
-            $reasonCount[] = $health_log_books_leave_summary['data']['reason_count'];
+
+        $headers[]  = $health_log_books_leave_summary['data']['headers'];
+        $reasonCount[] = $health_log_books_leave_summary['data']['reason_count'];
 
         $health_log_books = Helper::PostMethod(config('constants.api.health_logbook_export'), $data);
         //dd($health_log_books);
-        foreach( $health_log_books['data']['partab'] as $data){
-           $temp =  $data['temp'];
-           $weather =  $data['weather'];
-           $humidity =  $data['humidity'];
-           $event_notes_a =  $data['event_notes_a'];
-           $event_notes_b =  $data['event_notes_b'];
-           $date =  $data['date'];
-           $dates =  strtotime($date);
-           $day = getDate($dates);
+        foreach ($health_log_books['data']['partab'] as $data) {
+            $temp =  $data['temp'];
+            $weather =  $data['weather'];
+            $humidity =  $data['humidity'];
+            $event_notes_a =  $data['event_notes_a'];
+            $event_notes_b =  $data['event_notes_b'];
+            $date =  $data['date'];
+            $dates =  strtotime($date);
+            $day = getDate($dates);
         }
         $fonturl = storage_path('fonts/ipag.ttf');
         $response = "<!DOCTYPE html>";
@@ -2585,15 +2582,15 @@ class PdfController extends Controller
                         
                             <div class="row">
                                 <div class="col-md-12">';
-                                
-                                    $response .= '<table class="table table-bordered" style="margin-bottom: 15px;">
+
+        $response .= '<table class="table table-bordered" style="margin-bottom: 15px;">
                                         <thead>
                                             
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td colspan="2" rowspan="4" style="text-align:center;border: 1px solid black;">'.$date.'
-                                                <br>'.$day['weekday'].'</td>
+                                                <td colspan="2" rowspan="4" style="text-align:center;border: 1px solid black;">' . $date . '
+                                                <br>' . $day['weekday'] . '</td>
                                                 <td colspan="2"  style="text-align:center;border: 1px solid black;width: 50px;height: 20px;"></td>
                                                 <td rowspan="4" style="border: 1px solid black;width: 20px;"></td>
                                                 <td colspan="4" rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
@@ -2605,67 +2602,67 @@ class PdfController extends Controller
                                                 <td colspan="' . (count($headers[0]) + 4) . '"  rowspan="4" style=" border: 1px solid black;width: 50px;"></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" rowspan="1" style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$weather.'</td>
+                                                <td colspan="2" rowspan="1" style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">' . $weather . '</td>
                                             </tr>
                                             <tr>
                                                 <td rowspan="1" colspan="1" style="text-align:center;border: 1px solid black;width: 50px;height: 20px;"></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$temp.'</td>
-                                                <td style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">'.$humidity.'</td>
+                                                <td  style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">' . $temp . '</td>
+                                                <td style="text-align:center;border: 1px solid black;width: 50px;height: 20px;">' . $humidity . '</td>
                                             </tr>
                                         </tbody>
                                         
                                         <tbody style="border: 1px solid black;">
                                             <tr>
-                                                <td colspan="4" rowspan="' . (count($reasonCount[0]) + 2) . '"  style="text-align:left;border: 1px solid black;height: 20px;">'.$event_notes_a.'</td>
+                                                <td colspan="4" rowspan="' . (count($reasonCount[0]) + 2) . '"  style="text-align:left;border: 1px solid black;height: 20px;">' . $event_notes_a . '</td>
                                                 <td colspan="' . (count($headers[0]) + 6) . '"   style="text-align:center;border: 1px solid black;height: 20px;">' .  __('messages.absense_checking') . '</td>
                                             </tr>
                                             <tr>
                                                 <td  colspan="2" style="text-align:center;border: 1px solid black;height: 15px;">' .  __('messages.category') . '</td>
                                                 <td colspan="2" class="diagonalCross2" style="width:0px;border: 1px solid black;border-right:hidden; border-left:hidden;"></td>
                                                 <td  colspan="2" style="text-align:center;border: 1px solid black;">' .  __('messages.grade') . '</td>';
-                                                // Display class names
-                                                foreach ($headers as $classes) {
-                                                    // Check if 'name' key exists in the current class array
-                                                    foreach ($classes as $class ) {
-                                                        $response .= '<td style=" border: 1px solid black;">' . $class['name'] . '</td>';
-                                                    }
-                                                }
-                                                $response .= ' </tr>';
-                                                $staticColumnDisplayed = false;
-                                                    // Display rows based on actual data
-                                                    foreach ($reasonCount[0] as $index => $reasonData) {
-                                                        $response .= '<tr>';
-                                                        if (!$staticColumnDisplayed) {
-                                                            $response .= '<td colspan="3" rowspan="' . (count($reasonCount[0])) . '" style="text-align:center;border: 1px solid black;height: 15px;">' .  __('messages.absense') . '</td>'; // Static column
-                                                            $staticColumnDisplayed = true; // Set the flag to true after displaying the static column
-                                                        } 
-                                                        $response .= '<td colspan="3" style="text-align:center;border: 1px solid black;height: 15px;">' . $reasonData['reason_name'] . '</td>';
+        // Display class names
+        foreach ($headers as $classes) {
+            // Check if 'name' key exists in the current class array
+            foreach ($classes as $class) {
+                $response .= '<td style=" border: 1px solid black;">' . $class['name'] . '</td>';
+            }
+        }
+        $response .= ' </tr>';
+        $staticColumnDisplayed = false;
+        // Display rows based on actual data
+        foreach ($reasonCount[0] as $index => $reasonData) {
+            $response .= '<tr>';
+            if (!$staticColumnDisplayed) {
+                $response .= '<td colspan="3" rowspan="' . (count($reasonCount[0])) . '" style="text-align:center;border: 1px solid black;height: 15px;">' .  __('messages.absense') . '</td>'; // Static column
+                $staticColumnDisplayed = true; // Set the flag to true after displaying the static column
+            }
+            $response .= '<td colspan="3" style="text-align:center;border: 1px solid black;height: 15px;">' . $reasonData['reason_name'] . '</td>';
 
-                                                        foreach ($headers as $classes) {
-                                                            foreach ($classes as $class) {
-                                                                $classId = array_key_exists('id', $class) ? $class['id'] : null;
+            foreach ($headers as $classes) {
+                foreach ($classes as $class) {
+                    $classId = array_key_exists('id', $class) ? $class['id'] : null;
 
-                                                                // Find the corresponding 'reasons_count' for the current class and reason_name
-                                                                $matchingGradeCnt = collect($reasonData['gradecnt'])->firstWhere('class_id', $classId);
+                    // Find the corresponding 'reasons_count' for the current class and reason_name
+                    $matchingGradeCnt = collect($reasonData['gradecnt'])->firstWhere('class_id', $classId);
 
-                                                                if ($matchingGradeCnt) {
-                                                                    $response .= '<td style="border: 1px solid black;">' . $matchingGradeCnt['reasons_count'] . '</td>';
-                                                                } else {
-                                                                    $response .= '<td style="border: 1px solid black;">0</td>';
-                                                                }
-                                                            }
-                                                        }
+                    if ($matchingGradeCnt) {
+                        $response .= '<td style="border: 1px solid black;">' . $matchingGradeCnt['reasons_count'] . '</td>';
+                    } else {
+                        $response .= '<td style="border: 1px solid black;">0</td>';
+                    }
+                }
+            }
 
-                                                        $response .= '</tr>';
-                                                    }
-                                            $response .= ' </tbody>
+            $response .= '</tr>';
+        }
+        $response .= ' </tbody>
                                         
                                         <tbody style="border: 1px solid black;">
                                             <tr>
                                                 <td style="text-align:center;border: 1px solid black;height: 200px;width: 50px;"></td>
-                                                <td  style="text-align:left;border: 1px solid black;height: 20px;border-right:hidden;">'.$event_notes_b.'</td>
+                                                <td  style="text-align:left;border: 1px solid black;height: 20px;border-right:hidden;">' . $event_notes_b . '</td>
                                             </tr>
                                         </tbody>
                                         
@@ -2681,23 +2678,22 @@ class PdfController extends Controller
                                                 <td colspan="4">' .  __('messages.details') . '</td>
                                                 <td colspan="7">' .  __('messages.notes') . '</td>
                                             </tr>';
-                                            if ($health_log_books['code'] == "200") {
-                                                $log = $health_log_books['data']['partc'];
-                                                 foreach ($log as  $res) {
-                                        $response .= '<tr>
-                                                <td style="height: 30px;">'.$res['class_name'].'</td>
-                                                <td>'.$res['section_name'].'</td>
-                                                <td colspan="3">'.$res['name'].'</td>
-                                                <td colspan="3">'.$res['gender'].'</td>
-                                                <td colspan="2">'.$res['time'].'</td>
-                                                <td colspan="2">'.$res['tab'].'</td>
-                                                <td colspan="4">'.$res['tab_details'].'</td>
-                                                <td colspan="7">'.$res['event_notes_c'].'</td>
+        if ($health_log_books['code'] == "200") {
+            $log = $health_log_books['data']['partc'];
+            foreach ($log as  $res) {
+                $response .= '<tr>
+                                                <td style="height: 30px;">' . $res['class_name'] . '</td>
+                                                <td>' . $res['section_name'] . '</td>
+                                                <td colspan="3">' . $res['name'] . '</td>
+                                                <td colspan="3">' . $res['gender'] . '</td>
+                                                <td colspan="2">' . $res['time'] . '</td>
+                                                <td colspan="2">' . $res['tab'] . '</td>
+                                                <td colspan="4">' . $res['tab_details'] . '</td>
+                                                <td colspan="7">' . $res['event_notes_c'] . '</td>
                                             </tr>';
-                                           }
-                                            
-                                         }   
-                                        $response .= ' <tr>
+            }
+        }
+        $response .= ' <tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td colspan="3"></td>
@@ -2764,7 +2760,7 @@ class PdfController extends Controller
                             
                               </tr>
             </table>';
-    $response .= "</body></html>";
+        $response .= "</body></html>";
         // dd($response);
         $pdf = \App::make('dompdf.wrapper');
         // set size
@@ -2777,6 +2773,1209 @@ class PdfController extends Controller
         $now = now();
         $name = strtotime($now);
         $fileName = __('messages.health_logbooks') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+
+    public function childHealthPdf(Request $request,$id)
+    {
+
+        // $student_id = [];
+        $student_id = null;
+        if($id){
+
+            $student_id = explode(',', $id);
+        }
+        $data = [
+            'student_id' => $student_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        // $footer_text = session()->get('footer_text');
+        $child_health = Helper::PostMethod(config('constants.api.child_health_export'), $data);
+        // dd($child_health);
+        $department = $child_health['data']['department'];
+        $grade = $child_health['data']['grade'];
+        $student = $child_health['data']['student'];
+
+        // dd($child_health);
+        // dd($expense);
+        // $response = "";
+        $footer_text = session()->get('footer_text');
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            text-align: left;
+            font-size: 13px;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+        }
+
+        .diagonal {
+            width: 150px;
+            height: 40px;
+        }
+
+        .diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+        }
+
+        .diagonal span.rt {
+            top: 2px;
+            right: 2px;
+        }
+
+        .diagonalCross2 {
+            background: linear-gradient(to top right, #fff calc(50% - 1px), black, #fff calc(50% + 1px))
+        }
+        ';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body>";
+        foreach($student as $stukey =>$stud){
+    $child_health = $stud['child_health'];
+    $profile = $stud['details'];
+
+    $empty_row = '';
+    $empty_table = '';
+        $output .= '<div class="content" style="box-sizing: border-box; max-width: 850px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff; border: 1px solid #dddddd;">';
+            $output .= '
+            <div class="row">
+                <div class="column">
+                    <p style="text-align:left;margin-left: 12px; ">Form </p>
+                    <p style="margin-left: 12px;margin-top: 2px;">Child Health Examination Form </p>
+                </div>
+                <div class="column" style="width: 45%;">
+                    <table style="margin-bottom: 15px;">
+                        <thead>
+                        
+                            <tr>
+                                <td colspan="4" style="text-align:center;border-right:hidden; border-left:hidden;border-top:hidden"></td>';
+                                $dep_count = 0;
+                                foreach($department as $dep){
+                                    $dep_count += $dep['count'];
+                                    $output .= '<td colspan="'.$dep['count'].'" style="border-right:hidden;border-top:hidden">'.$dep['name'].'</td>';
+                                }
+                                
+                            $output .= '</tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center;">Class </td>
+                                <td colspan="1" class="diagonalCross2" style="widtd:0px;border-right:hidden; border-left:hidden;"></td>
+                                <td colspan="1" style="text-align:center;">Grade</td>';
+                                foreach($grade as $gr){
+                                    $output .= '<td>'.$gr['name_numeric'].'</td>';
+                                }
+
+                            $output .= '</tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="4">Class</td>';
+                            
+        $empty = $dep_count - count($stud['grade']);
+        
+        if(count($child_health)==0){
+            for($i=0;$i<$dep_count; $i++){
+                $empty_row  .= '<td></td>';
+                $empty_table  .= '<td colspan="6"></td>';
+            }
+        }
+                            foreach($child_health as $key=>$ch){
+                                if($key=="class"){
+                                    foreach($grade as $gr){
+                                        $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                            $output .= '<td>'.$row.'</td>';
+                                    }
+                                }
+                            }
+
+                            $output .= $empty_row;
+                            // for($i=0;$i<$empty; $i++){
+                            //     $output .= '<td></td>';
+                            // }
+                        $output .= '</tr>
+                            <tr>
+                                <td colspan="4">Grade </td>';
+                                foreach($child_health as $key=>$ch){
+                                    if($key=="section"){
+                                        foreach($grade as $gr){
+                                            $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                                $output .= '<td>'.$row.'</td>';
+                                        }
+                                    }
+                                }
+    
+                                $output .= $empty_row;
+                                // for($i=0;$i<$empty; $i++){
+                                //     $output .= '<td></td>';
+                                // }
+                            $output .= '</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+    
+            <table class="">
+                <thead class="colspanHead">
+                    <tr>
+                        
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">'.$profile['name'].'</td>
+                    <td colspan="1" style="text-align:left;width:5%;">'.$profile['gender'].'
+                    </td>
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">
+                    </td>
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">
+                    </td>
+                    <td colspan="1" style="text-align:center;vertical-align: middle;border-right:hidden;">
+                    </td>
+                    <td colspan="1" style="text-align:center;vertical-align: middle;border-right:hidden;">
+                    </td>
+                    <td colspan="31" style="text-align:center;vertical-align: middle;">
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="10">School Name</td>
+                    <td colspan="20"></td>
+                    <td colspan="5"></td>
+                    <td colspan="29"></td>
+                </tr>
+                </tbody>
+    
+                <tbody style="border: 1px solid black;">
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Age</td>
+                        <td colspan="6">6</td>
+                        <td colspan="6">7</td>
+                        <td colspan="6">8</td>
+                        <td colspan="6">9</td>
+                        <td colspan="6">10</td>
+                        <td colspan="6">11</td>
+                        <td colspan="6">12</td>
+                        <td colspan="6">13</td>
+                        <td colspan="6">14</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Fiscal Year</td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Height</td>';
+                        
+                        foreach($child_health as $key=>$ch){
+                            if($key=="height"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Weight</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="weight"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Nutritional Status</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="nutritional_status"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Spine/Chest/Limb</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="spine_chest_limb"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Eyesight</td>
+                        <td colspan="9" style="text-align:center;">Right</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_sight_right"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Left</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_sight_left"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Eye Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Hearing</td>
+                        <td colspan="9" style="text-align:center;">Right</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="hearing_right"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Left</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="hearing_left"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Otorhinolaryngopathy</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="otorhinolaryngopathy"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Skin Diseases</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="skin_diseases"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Tuberculosis</td>
+                        <td colspan="9" style="text-align:center;">Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_clinical_medical_examination"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Instruction Category</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Heart</td>
+                        <td colspan="9" style="text-align:center;">Clinical Medical Examination</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_clinical_medical_examination"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+    
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Urine</td>
+                        <td colspan="9" style="text-align:center;">Protein</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine_protein"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Glucose</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine_glucose"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Glucose</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Other Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="other_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">School Doctors</td>
+                        <td colspan="9" style="text-align:center;">Findings</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="spine_chest_limb"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Date</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="school_doctors_date"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Follow Up Treatments</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="follow_up_treatments"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="">Remark</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="remarks"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                </tbody>
+            </table>
+            </div> 
+    
+            <br><br>';
+        }
+        $output .= "</body></html>";
+        // dd($output);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.child_health_report') . $name . ".pdf";
+        return $pdf->download($fileName);
+    }
+
+    
+    public function childHealthStudentPdf(Request $request)
+    {
+
+        // $student_id = [];
+        $student_id = null;
+        if($request->student_id){
+
+            $student_id = explode(',', $request->student_id);
+        }
+        $data = [
+            'student_id' => $student_id,
+            "class_id" => $request->class_id,
+            'department_id' => $request->department_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        // dd($data);
+        // $footer_text = session()->get('footer_text');
+        $child_health = Helper::PostMethod(config('constants.api.child_health_export'), $data);
+        // dd($child_health);
+        $department = $child_health['data']['department'];
+        $grade = $child_health['data']['grade'];
+        $student = $child_health['data']['student'];
+
+        // dd($child_health);
+        // dd($expense);
+        // $response = "";
+        $footer_text = session()->get('footer_text');
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            text-align: left;
+            font-size: 13px;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+        }
+
+        .diagonal {
+            width: 150px;
+            height: 40px;
+        }
+
+        .diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+        }
+
+        .diagonal span.rt {
+            top: 2px;
+            right: 2px;
+        }
+
+        .diagonalCross2 {
+            background: linear-gradient(to top right, #fff calc(50% - 1px), black, #fff calc(50% + 1px))
+        }
+        ';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body>";
+        foreach($student as $stukey =>$stud){
+    $child_health = $stud['child_health'];
+
+    $profile = $stud['details'];
+    $empty_row = '';
+    $empty_table = '';
+        $output .= '<div class="content" style="box-sizing: border-box; max-width: 850px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff; border: 1px solid #dddddd;">';
+            $output .= '
+            <div class="row">
+                <div class="column">
+                    <p style="text-align:left;margin-left: 12px; ">Form </p>
+                    <p style="margin-left: 12px;margin-top: 2px;">Child Health Examination Form </p>
+                </div>
+                <div class="column" style="width: 45%;">
+                    <table style="margin-bottom: 15px;">
+                        <thead>
+                        
+                            <tr>
+                                <td colspan="4" style="text-align:center;border-right:hidden; border-left:hidden;border-top:hidden"></td>';
+                                $dep_count = 0;
+                                foreach($department as $dep){
+                                    $dep_count += $dep['count'];
+                                    $output .= '<td colspan="'.$dep['count'].'" style="border-right:hidden;border-top:hidden">'.$dep['name'].'</td>';
+                                }
+                                
+                            $output .= '</tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center;">Class </td>
+                                <td colspan="1" class="diagonalCross2" style="widtd:0px;border-right:hidden; border-left:hidden;"></td>
+                                <td colspan="1" style="text-align:center;">Grade</td>';
+                                foreach($grade as $gr){
+                                    $output .= '<td>'.$gr['name_numeric'].'</td>';
+                                }
+
+                            $output .= '</tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="4">Class</td>';
+                            
+        $empty = $dep_count - count($stud['grade']);
+        
+        if(count($child_health)==0){
+            for($i=0;$i<$dep_count; $i++){
+                $empty_row  .= '<td></td>';
+                $empty_table  .= '<td colspan="6"></td>';
+            }
+        }
+                            foreach($child_health as $key=>$ch){
+                                if($key=="class"){
+                                    foreach($grade as $gr){
+                                        $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                            $output .= '<td>'.$row.'</td>';
+                                    }
+                                }
+                            }
+
+                            $output .= $empty_row;
+                            // for($i=0;$i<$empty; $i++){
+                            //     $output .= '<td></td>';
+                            // }
+                        $output .= '</tr>
+                            <tr>
+                                <td colspan="4">Grade </td>';
+                                foreach($child_health as $key=>$ch){
+                                    if($key=="section"){
+                                        foreach($grade as $gr){
+                                            $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                                $output .= '<td>'.$row.'</td>';
+                                        }
+                                    }
+                                }
+    
+                                $output .= $empty_row;
+                                // for($i=0;$i<$empty; $i++){
+                                //     $output .= '<td></td>';
+                                // }
+                            $output .= '</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+    
+            <table class="">
+                <thead class="colspanHead">
+                    <tr>
+                        
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">'.$profile['name'].'</td>
+                    <td colspan="1" style="text-align:left;width:5%;">'.$profile['gender'].'</td>
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">
+                    </td>
+                    <td colspan="10" style="text-align:center;vertical-align: middle;">
+                    </td>
+                    <td colspan="1" style="text-align:center;vertical-align: middle;border-right:hidden;">
+                    </td>
+                    <td colspan="1" style="text-align:center;vertical-align: middle;border-right:hidden;">
+                    </td>
+                    <td colspan="31" style="text-align:center;vertical-align: middle;">
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="10">School Name</td>
+                    <td colspan="20"></td>
+                    <td colspan="5"></td>
+                    <td colspan="29"></td>
+                </tr>
+                </tbody>
+    
+                <tbody style="border: 1px solid black;">
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Age</td>
+                        <td colspan="6">6</td>
+                        <td colspan="6">7</td>
+                        <td colspan="6">8</td>
+                        <td colspan="6">9</td>
+                        <td colspan="6">10</td>
+                        <td colspan="6">11</td>
+                        <td colspan="6">12</td>
+                        <td colspan="6">13</td>
+                        <td colspan="6">14</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Fiscal Year</td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Height</td>';
+                        
+                        foreach($child_health as $key=>$ch){
+                            if($key=="height"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Weight</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="weight"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Nutritional Status</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="nutritional_status"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Spine/Chest/Limb</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="spine_chest_limb"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Eyesight</td>
+                        <td colspan="9" style="text-align:center;">Right</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_sight_right"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Left</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_sight_left"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Eye Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="eye_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Hearing</td>
+                        <td colspan="9" style="text-align:center;">Right</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="hearing_right"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Left</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="hearing_left"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Otorhinolaryngopathy</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="otorhinolaryngopathy"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Skin Diseases</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="skin_diseases"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Tuberculosis</td>
+                        <td colspan="9" style="text-align:center;">Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_clinical_medical_examination"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Instruction Category</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Heart</td>
+                        <td colspan="9" style="text-align:center;">Clinical Medical Examination</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_clinical_medical_examination"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="heart_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+    
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">Urine</td>
+                        <td colspan="9" style="text-align:center;">Protein</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine_protein"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Glucose</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine_glucose"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Glucose</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="urine"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Other Diseases and abnormalities</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="other_diseases_abnormalities"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td rowspan="2" style="width: 0px;">School Doctors</td>
+                        <td colspan="9" style="text-align:center;">Findings</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="spine_chest_limb"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6"></td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="9" style="text-align:center;">Date</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="school_doctors_date"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="text-align:center;">Follow Up Treatments</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="follow_up_treatments"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                    <tr>
+                        <td colspan="10" style="">Remark</td>';
+                        foreach($child_health as $key=>$ch){
+                            if($key=="remarks"){
+                                foreach($grade as $gr){
+                                    $row = isset($ch[$gr['name']]) ? $ch[$gr['name']] : "";
+                                        $output .= '<td colspan="6">'.$row.'</td>';
+                                }
+                            }
+                        }
+
+                        $output .= $empty_table;
+                    $output .= '</tr>
+                </tbody>
+            </table>
+            </div> 
+    
+            <br><br>';
+        }
+        $output .= "</body></html>";
+        // dd($output);
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 1920.00, 810.00);
+        $pdf->set_paper($customPaper);
+        // $paper_size = array(0, 0, 360, 360);
+        // $pdf->set_paper($paper_size);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.child_health_report') . $name . ".pdf";
         return $pdf->download($fileName);
     }
 }

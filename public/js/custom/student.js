@@ -529,6 +529,10 @@ $(function () {
                     name: 'name'
                 },
                 {
+                    data: 'name_common',
+                    name: 'name_common'
+                },
+                {
                     data: 'register_no',
                     name: 'register_no'
                 },

@@ -151,6 +151,7 @@
                                                                     <tr>
                                                                         <th>#</th>
                                                                         <th> {{ __('messages.name') }}</th>
+                                                                        <th> {{ __('messages.name_common') }}</th>
                                                                         <th> {{ __('messages.register_no') }}</th>
                                                                         <th> {{ __('messages.roll_no') }}</th>
                                                                         <th> {{ __('messages.gender') }}</th>

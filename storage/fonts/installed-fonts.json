@@ -1,6 +1,6 @@
 {
     "ipag": {
-        "normal": "ipag_normal_15d8c63c75d843089b09293173b95288",
+        "normal": "ipag_normal_6ab772bd09c9f51dce42bef9a45524e4",
         "bold": "D:\\xampp\\htdocs\\paxsuzen_school\\storage\\fonts\/ipag_bold_0d118b28ccc759dd953e48ebf245e7cb"
     },
     "footable": {
@@ -39,5 +39,8 @@
     },
     "fontawesome": {
         "normal": "fontawesome_normal_7ea195556637d817f455524c7885b526"
+    },
+    "open sans": {
+        "normal": "open_sans_normal_bf11512877ef2223afd06e89358ef2fc"
     }
 }

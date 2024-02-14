@@ -375,7 +375,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">{{ __('messages.first_name') }}({{ __('messages.english') }})<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.first_name_english') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -388,7 +388,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">{{ __('messages.last_name') }}({{ __('messages.english') }})</label>
+                                    <label for="">{{ __('messages.last_name_english') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -401,11 +401,41 @@
                             </div>
                         </div>
                         @endif
+                        @if($form_field['name_common'] == 0)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">{{ __('messages.first_name_common') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="first_name_common" class="form-control alloptions" maxlength="50" id="first_name_common" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="">{{ __('messages.last_name_common') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="last_name_common" class="form-control alloptions" maxlength="50" id="last_name_common" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         @if($form_field['name_furigana'] == 0)
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">{{ __('messages.first_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
+                                    <label for="">{{ __('messages.first_name_furigana') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -418,7 +448,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})</label>
+                                    <label for="">{{ __('messages.last_name_furigana') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">

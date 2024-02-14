@@ -379,6 +379,22 @@
                                         </div>
                                     </div>
                                     @endif
+                                    @if($form_field['name_common'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name">{{ __('messages.first_name_common') }}<span class="text-danger"></span></label>
+                                                <input type="text" class="form-control" id="first_name_common" {{$readonly_phase_1}} value="{{ isset($application['first_name_common']) ? $application['first_name_common'] : ''}}" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name">{{ __('messages.last_name_common') }}</label>
+                                                <input type="text" class="form-control" id="last_name_common" {{$readonly_phase_1}} value="{{ isset($application['last_name_common']) ? $application['last_name_common'] : ''}}" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     @if($form_field['name_furigana'] == 0)
                                     <div class="row">
                                         <div class="col-md-4">
@@ -539,9 +555,8 @@
                                                 <input type="text" maxlength="50" id="nationality" {{$readonly_phase_1}} class="form-control country" placeholder="{{ __('messages.nationality') }}" value="{{ isset($application['nationality']) ? $application['nationality'] : ''}}" name="country" data-parsley-trigger="change">
                                             </div>
                                         </div>
-
-                                    </div>
-                                    @endif<br>
+                                        @endif
+                                    </div><br>
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">

@@ -380,6 +380,10 @@ $(function () {
                     name: 'name_english'
                 },
                 {
+                    data: 'name_common',
+                    name: 'name_common'
+                },
+                {
                     data: 'type',
                     name: 'type'
                 },

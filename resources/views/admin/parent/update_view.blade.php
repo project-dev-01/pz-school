@@ -536,6 +536,7 @@
     var roomByHostel = "{{ route('admin.room_by_hostel') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
     var parentList = "{{ route('admin.parent.list') }}";
+    var parentUpdateList = "{{ route('admin.parent.update_info_list') }}";
 </script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

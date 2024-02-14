@@ -645,7 +645,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
-
+        Route::get('child_health/import', [AdminController::class, 'childHealthImport'])->name('admin.child_health.import');
+        Route::post('child_health/import/add', [AdminController::class, 'childHealthImportAdd'])->name('admin.child_health.import.add');
+        Route::get('child_health/index', [AdminController::class, 'childHealthIndex'])->name('admin.child_health.index');
+        Route::get('child_health/list', [AdminController::class, 'childHealthList'])->name('admin.child_health.list');
+      
         //Graduates Yoroku primary /Secondary Report
 
         Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
@@ -668,6 +672,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('attendance/student_pdf_term_test', [PdfController::class, 'attendance_student_pdf_term_test'])->name('admin.attendance.student_pdf_term_test');
         Route::post('attendance/student_pdf_year_test', [PdfController::class, 'attendance_student_pdf_year_test'])->name('admin.attendance.student_pdf_year_test');
         Route::post('attendance/employee_pdf', [PdfController::class, 'attendance_employee_pdf'])->name('admin.attendance.employee_pdf');
+        Route::post('child_health/student_pdf', [PdfController::class, 'childHealthStudentPdf'])->name('admin.child_health.student_pdf');
+        Route::get('child_health/pdf/{id}', [PdfController::class, 'childHealthPdf'])->name('admin.child_health.pdf');
         // Test Result Route
         Route::get('test_result', [AdminController::class, 'testResult'])->name('admin.test_result');
         Route::get('exam_results/paper_wise_result', [AdminController::class, 'paperWiseResult'])->name('admin.paper_wise_result');

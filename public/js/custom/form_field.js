@@ -67,6 +67,10 @@ $(function () {
                     name: 'name_english'
                 },
                 {
+                    data: 'name_common',
+                    name: 'name_common'
+                },
+                {
                     data: 'visa',
                     name: 'visa'
                 },
@@ -103,6 +107,9 @@ $(function () {
             $('.editFormField').find('input[name="id"]').val(data.data.id);
             if(data.data.name_english == 0){
                 $('.editFormField').find('input[name="name_english"]').prop('checked',true);
+            }
+            if(data.data.name_common == 0){
+                $('.editFormField').find('input[name="name_common"]').prop('checked',true);
             }
             if(data.data.name_furigana == 0){
                 $('.editFormField').find('input[name="name_furigana"]').prop('checked',true);

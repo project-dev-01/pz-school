@@ -24,6 +24,13 @@
                             
                         </tbody>
                     </table>
+              <div class="col-6">
+                        <div class="form-group">
+                            <label for="message">{{ __('messages.remarks') }}</label>
+                            <textarea maxlength="255" id="remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            </textarea>
+                        </div>
+                        </div>
                 </div>
             </div>
             <div class="modal-footer">

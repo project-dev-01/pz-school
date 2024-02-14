@@ -234,6 +234,9 @@
     <!-- Init js-->
     <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
     <script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";

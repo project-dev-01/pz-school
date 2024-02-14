@@ -8,7 +8,7 @@ $(function () {
         $.post(parentUpdateView, { id: id,type: type,token: token,branch_id: branchID }, function (res) {
             var row = "";
             if (res.code == 200) {
-                $.each(res.data, function (key, val) {
+                $.each(res.data.data, function (key, val) {
                     var field = key+"_lang";
                     var status = "";
                     if(val.status=="accept"){
@@ -28,6 +28,8 @@ $(function () {
                     
                     row += '<tr> <td >'+window[field]+'</td><td >'+val.old_value+'</td> <td >'+val.new_value+'</td> <td ><div class="button-list"><span class="badge badge-soft-'+ color+' p-1">'+status+'</span></div></td><td >'+remark+'</td></tr>';
                 });
+                
+                $("#remarks").val(res.data.remarks);
                 $("#parent_update_view_body").append(row);
             }
         });

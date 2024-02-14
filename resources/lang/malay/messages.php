@@ -2015,4 +2015,11 @@ return [
     "denied" => "Denied",
     "go_to" => "Go-To",
     "no_data_avaliable" => "No Data Avaliable",
+    "import_expense" => "Import Expense",
+    "expense_list" => "Expense List",
+    "child_health" => "Child Health",
+    "import_bulk_upload" => "Import Bulk Upload",
+    "student_number" => "Student Number",
+    "child_health_report" => "Child Health Report",
+    "report_list" => "Report List",
 ];

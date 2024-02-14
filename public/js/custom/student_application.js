@@ -16,6 +16,10 @@ $(function () {
         
         var admissionCheck = $("#verifyApplication").valid();
         if (admissionCheck === true) {
+            
+            $("#overlay").fadeIn(300);
+            console.log(123)
+            return false;
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -27,6 +31,7 @@ $(function () {
                 success: function (data) {
                     
                     // toastr.success("Email Verification Sended Successfully");
+                    $("#overlay").fadeOut(300);
                     if (data.code == 200) {
                         $('#verify_email').val("");
                         toastr.success(data.message);

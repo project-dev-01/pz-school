@@ -17,6 +17,10 @@
 @endsection
 @section('content')
 <style>
+    .datepicker {
+        z-index: 1600 !important;
+        /* has to be larger than 1050 */
+    }
     fieldset {
         display: none;
     }
@@ -108,42 +112,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>230089</td>
-                                            <td> 佐藤 直美</td>
-                                            <td> Seyon Tamil</td>
-                                            <td> Male</td>
-                                            <td> seyon@gmail.com</td>
-                                            <td> 2023 - 2024</td>
-                                            <td> 2年</td>
-                                            <td> <span class="badge badge-soft-success p-1">Approved</span></td>
-                                            <td>2023-12-02</td>
-                                            <td>
-                                                <div class="button-list">
-                                                    
-                                                    
-    <a data-toggle="modal" data-target="#terminationModal" class="btn btn-warning waves-effect waves-light"><i class="fe-edit"></i></a></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>230104</td>
-                                            <td> 佐藤 直美</td>
-                                            <td> Monoj</td>
-                                            <td> Female</td>
-                                            <td> manoj@gmail.com</td>
-                                            <td> 2023 - 2024</td>
-                                            <td> 3年</td>
-                                            <td> <span class="badge badge-soft-danger p-1">Rejected</span></td>
-                                            <td> 2023-12-24 </td>
-                                            <td>
-                                                <div class="button-list">
-                                                    
-                                                    
-    <a data-toggle="modal" data-target="#terminationModal" class="btn btn-warning waves-effect waves-light"><i class="fe-edit"></i></a></div>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>

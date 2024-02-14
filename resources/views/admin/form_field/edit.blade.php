@@ -19,6 +19,10 @@
                                                 <td width="50%" class="name_english"><input type="checkbox" name="name_english" id="name_english"></td>
                                             </tr>
                                             <tr>
+                                                <th width="50%">{{ __('messages.name_common') }}</th>
+                                                <td width="50%" class="name_common"><input type="checkbox" name="name_common" id="name_common"></td>
+                                            </tr>
+                                            <tr>
                                                 <th width="50%">{{ __('messages.name_furigana') }}</th>
                                                 <td width="50%" class="name_furigana"><input type="checkbox" name="name_furigana" id="name_furigana"></td>
                                             </tr>
