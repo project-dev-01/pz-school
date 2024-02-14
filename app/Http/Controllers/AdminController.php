@@ -1822,7 +1822,7 @@ class AdminController extends Controller
             'id' => $request->id,
             'role_id' => $request->role_id,
             'joining_date' => $request->joining_date,
-            'relieving_date' => $request->relieving_date,
+            'releive_date' => $request->relieving_date,
             'designation_id' => $request->designation_id,
             'department_id' => $request->department_id,
             'teacher_type' => $request->teacher_type,

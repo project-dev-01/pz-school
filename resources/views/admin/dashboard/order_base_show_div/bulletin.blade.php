@@ -4,7 +4,7 @@
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <h4 class="navv">
-                        {{ __('messages.bulletinboard') }}
+                        {{ __('messages.BulletinBoard') }}
                         <h4>
                 </li>
             </ul>

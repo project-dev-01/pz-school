@@ -6,7 +6,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.task') }}
+                            <h4 class="navv">{{ __('messages.Task') }}
                                 <h4>
                         </li>
                     </ul>
