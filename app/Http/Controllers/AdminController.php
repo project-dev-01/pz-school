@@ -3948,6 +3948,7 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id'),
             'exam_id' => $request->exam_id,
         ];
+        // dd($data);
         $select_hall = __('messages.select_hall');
         $select_teacher = __('messages.select_teacher');
         $internal = __('messages.internal');

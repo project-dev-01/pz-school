@@ -2154,4 +2154,18 @@ class ParentController extends Controller
         $response = Helper::PostMethod(config('constants.api.termination_delete'), $data);
         return $response;
     }
+    public function studentMedicalRecord()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // dd($student);
+        return view(
+            'parent.student_medical.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+            ]
+        );
+    }
 }

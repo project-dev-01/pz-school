@@ -1554,7 +1554,7 @@ Route::group(['prefix' => 'parent'], function () {
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
         Route::get('/student_leaves', [ParentController::class, 'studentLeaves'])->name('parent.student_leaves');
-        //student report
+        //student report++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Route::post('attendance/student_pdf', [PdfController::class, 'attendance_student_pdf_parent'])->name('parent.attendance.student_pdf');
         Route::post('attendance/student_excel', [ParentController::class, 'studentAttendanceExcel'])->name('parent.attendance.student_excel');
 
@@ -1577,6 +1577,8 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/update_info', [ParentController::class, 'updateInfo'])->name('parent.update_info');
         Route::get('/update_info/list', [ParentController::class, 'getParentUpdateInfoList'])->name('parent.update_info_list');
         Route::get('/update_info/view/{id}', [ParentController::class, 'viewParentUpdateInfo'])->name('parent.update_info_view');
+        // student medical record
+        Route::get('/student-medical-record', [ParentController::class, 'studentMedicalRecord'])->name('student.medical.index');
     });
 });
 
