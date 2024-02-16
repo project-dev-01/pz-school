@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.personal_interview_report') . '')
+@section('title',' ' . __('messages.personal_interview') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -31,7 +31,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
 					</ol>-->
 				</div>
-                <h4 class="page-title">{{ __('messages.personal_interview_report') }}</h4>
+                <h4 class="page-title">{{ __('messages.personal_interview') }}</h4>
 			</div>
 		</div>
 	</div>
@@ -43,19 +43,32 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">{{ __('messages.select_ground') }}
-                            <h4>
-							</li>
-						</ul><br>
-						<div class="card-body">
-							<form id="StudentFilter"  autocomplete="off">
-								<div class="row">
+						</h4>
+					</li>
+				</ul><br>
+					<div class="card-body">
+						@if($message = Session::get('success'))
+						<div class="alert alert-success alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>{{ $message }}</strong>
+						</div>
+						@endif
+						@if($message = Session::get('errors'))
+						<div class="alert alert-danger alert-block">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<strong>{{ $message }}</strong>
+						</div>
+						@endif
+						<form id="bystudentfilter" method="post" action="{{ route('admin.personalinterview.store') }}" autocomplete="off">
+						@csrf
+							<div class="row">
 									
 									<div class="col-md-3">
 										<div class="form-group">
-											<label for="department_id_filter">{{ __('messages.department') }}<span class="text-danger">*</span></label>
-											<select id="department_id_filter" name="department_id_filter" class="form-control">
-												<option value="">{{ __('messages.select_department') }}</option>
-												@forelse($department as $r)
+											<label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
+											<select id="btwyears" class="form-control" name="year">
+												<option value="">{{ __('messages.select_academic_year') }}</option>
+												@forelse($academic_year_list as $r)
 												<option value="{{$r['id']}}">{{$r['name']}}</option>
 												@empty
 												@endforelse
@@ -63,62 +76,58 @@
 										</div>
 									</div>
 									<div class="col-md-3">
+												<div class="form-group">
+												<label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+												<select id="department_id" name="department_id" class="form-control">
+													<option value="">{{ __('messages.select_department') }}</option>
+														@forelse($department as $r)
+														<option value="{{$r['id']}}">{{$r['name']}}</option>
+														@empty
+														@endforelse
+												</select>
+												</div>
+											</div>
+									<div class="col-md-3">
 										<div class="form-group">
-											<label for="class_id">{{ __('messages.grade') }}</label>
-											<select id="class_id" class="form-control" name="class_id">
+											<label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+											<select id="changeClassName" class="form-control" name="class_id">
 												<option value="">{{ __('messages.select_grade') }}</option>
 											</select>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-3" id="section_drp_div">
 										<div class="form-group">
-											<label for="section_id">{{ __('messages.class') }}</label>
-											<select id="section_id" class="form-control" name="section_id">
+											<label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span>
+											</label>
+											<select id="sectionID" class="form-control" name="section_id">
 												<option value="">{{ __('messages.select_class') }}</option>
 											</select>
 										</div>
 									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group">
-											<label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
-											<select id="session_id" class="form-control" name="session_id">
-												<option value="">{{ __('messages.select_session') }}</option>
-												@forelse($session as $ses)
-												<option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
+											<select id="semester_id" class="form-control" name="semester_id" required>
+												<option value="0">{{ __('messages.select_semester') }}</option>
+												@forelse($semester as $sem)
+												<option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
 												@empty
 												@endforelse
 											</select>
 										</div>
 									</div>
-									
-									<div class="col-md-3">
-										
-										
-										
-										<div class="form-group">
-											<label for="session_id">{{ __('messages.student') }}<span class="text-danger">*</span>
-											</label>
-											<select id="session_id" class="form-control" name="session_id">
+									<div class="col-md-3 d-none">
+									<select id="student_id" class="form-control" name="student_id" required>
 												<option value="">{{ __('messages.select') }}</option>
-												<option value="">Ananad (900001)</option>
-												<option value="">Karthick (900002)</option>
-												<option value="">Rajesh (900003)</option>
-												<option value="">Shobana (900004)</option>
 											</select>
-										</div>
+											</div>
+									<div class="col-md-3"><br><button class="btn btn-success" type="submit" id="get_report"> {{ __('messages.filter') }} </button>
 									</div>
 								</div>
-								<div class="form-group text-right m-b-0">
-									<!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
-										Filter
-									</button> -->
-									<button class="btn btn-primary-bl waves-effect waves-light" onclick="savealert()">
-										{{ __('messages.download') }}
-									</button>
-									<!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-										Cancel
-									</button>-->
-								</div>
+								
+								
 							</form>
 							
 						</div> <!-- end card-body -->
@@ -127,99 +136,98 @@
 				
 			</div>
 			<!-- end row -->
-			
-			
 			<div class="row" id="student">
-				<div class="col-xl-12">
-					<div class="card">
-						<ul class="nav nav-tabs">
-							<li class="nav-item">
-								<h4 class="nav-link">
-									{{ __('messages.graduates_list') }}
-									<h4>
-									</li>
-								</ul><br>
-								<div class="card-body">
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="table-responsive">
-												<table class="table w-100 nowrap " id="student-table">
-													<thead>
-														<tr>
-															<th>#</th>
-															<th> {{ __('messages.name') }}</th>
-															<th> {{ __('messages.register_no') }}</th>
-															<th> {{ __('messages.roll_no') }}</th>
-															<th> {{ __('messages.gender') }}</th>
-															<th> {{ __('messages.email') }}</th>
-															<th> {{ __('messages.actions') }}</th>
-														</tr>
-													</thead>
-													<tbody>
-														
-													</tbody>
-												</table>
-											</div> <!-- end table-responsive-->
-										</div> <!-- end col-->
-										
-									</div>
-								</div> <!-- end card-body -->
-							</div> <!-- end card-->
-						</div> <!-- end col -->
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="nav-link">
+                            {{ __('messages.student_list') }}
+                            <h4>
+                    </li>
+                </ul><br>
+				<div id="class_all"  style="display:none;">
+					<form method="post" action="{{ route('admin.personalinterviewdownload.all') }}">
+						@csrf
 						
-					</div>
+						<input type="hidden" name="department_id" class="downDepartmentID">
+						<input type="hidden" name="class_id" class="downClassID">
+						<input type="hidden" name="semester_id" class="downSemesterID">
+						<input type="hidden" name="section_id" class="downSectionID">
+						<input type="hidden" name="academic_year" class="downAcademicYear">
+
+						<div class="clearfix float-right" style="margin-bottom:5px;">
+							<button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
+							<!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
+						</div>
+					</form>
+				</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table w-100 nowrap " id="student-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th> {{ __('messages.date') }}</th>
+                                            <th> {{ __('messages.name') }}</th>
+                                            <th> {{ __('messages.roll_no') }}</th>
+                                            <th> {{ __('messages.email') }}</th>
+                                            <th> {{ __('messages.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end col-->
+                        
+                    </div>
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
+			
+			
 					
-				</div> <!-- container -->
-				
-				@endsection
-				@section('scripts')
-				<!-- plugin js -->
-				<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
-				<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
-				<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-				
-				<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
-				<script src="{{ asset('toastr/toastr.min.js') }}"></script>
-				<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
-				<script>
-					toastr.options.preventDuplicates = true;
-				</script>
-				<!-- button js added -->
-				<!-- <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
-					<script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
-					<script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
-					<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
-					<script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
-				<script src="https://cdn.datatables.net/buttons/1.5.3/js/buttons.colVis.min.js"></script> -->
-				
-				<!-- validation js -->
-				<script src="{{ asset('js/validation/validation.js') }}"></script>
-				
-				<script>
-					var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
-					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
-					
-					var sectionByClass = "{{ route('admin.section_by_class') }}";
-					var studentDelete = "{{ route('admin.student.delete') }}";
-					var studentList = "{{ route('admin.graduates.list') }}";
-					// lang change name start
-					var deleteTitle = "{{ __('messages.are_you_sure') }}";
-					var deleteHtml = "{{ __('messages.delete_this_student') }}";
-					var deletecancelButtonText = "{{ __('messages.cancel') }}";
-					var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
-					// lang change name end// Get PDF Footer Text
-					
-					// Get PDF Footer Text
-					var header_txt = "{{ __('messages.student_list') }}";
-					var footer_txt = "{{ session()->get('footer_text') }}";
-					// Get PDF Header & Footer Text End
-					// localStorage variables
-					
-					var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
-					function savealert()
-					{
-					 toastr.success("Personal Interview Report Download Successfully");
-					}
-				</script>
-				<script src="{{ asset('js/custom/graduates.js') }}"></script>
-			@endsection																																																																																		
+</div> <!-- container -->
+
+@endsection
+@section('scripts')
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script>
+	toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
+<script>
+	var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
+	var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
+	var getbyStudent = "{{ config('constants.api.tot_grade_calcu_byStudent') }}";
+	var getInterviewData = "{{ config('constants.api.getInterviewData') }}";
+	
+    var interviewList = "{{ route('admin.personalinterview.show') }}";
+	// default image test
+	var teacher_id = null;
+	var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
+	var downloadFileName = "{{ __('messages.by_student') }}";
+	var getStudentList = "{{ config('constants.api.get_student_details') }}";
+	var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+	// localStorage variables
+	var exam_result_by_student_storage = localStorage.getItem('admin_exam_result_by_student_details');
+	function savealert()
+	{
+		toastr.success("Personal Interview Information Saved Successfully");
+	}
+</script>
+<script src="{{ asset('js/custom/student_interviewreport.js') }}"></script>
+
+@endsection																																																																																		

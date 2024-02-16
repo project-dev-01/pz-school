@@ -549,6 +549,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // School Role Permission routes
         Route::post('school_role/getmenus', [AdminController::class, 'getmenus'])->name('admin.school_role.getmenus');
         Route::post('school_role/setpermission', [AdminController::class, 'setpermission'])->name('admin.school_role.setpermission');
+        Route::post('school_role/deleteschoolpermission', [AdminController::class, 'deleteschoolpermission'])->name('admin.school_role.deleteschoolpermission');
         Route::post('school_role/checkpermissions', [AdminController::class, 'checkpermissions'])->name('admin.school_role.checkpermissions');
         // Library routes
         Route::get('library/book', [AdminController::class, 'book'])->name('admin.library.book');
@@ -1036,6 +1037,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('shortcut_link/update', [AdminController::class, 'updateShortcutLinks'])->name('admin.shortcut_link.update');
         Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
         Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
+        //KinderGardern Personal Interview
+		Route::get('personalinterview/add', [AdminController::class, 'personalinterviewIndex'])->name('admin.personalinterview.index');
+		Route::post('personalinterview/store', [AdminController::class, 'personalinterviewstore'])->name('admin.personalinterview.store');
+        Route::get('personalinterview/list', [AdminController::class, 'personalinterviewlist'])->name('admin.personalinterview.list');
+        Route::get('personalinterview/show', [AdminController::class, 'personalinterviewshow'])->name('admin.personalinterview.show');
+        Route::get('personalinterviewdownload/{id}', [ExamPdfController::class, 'personalinterviewdownload'])->name('admin.personalinterviewdownload');
+        Route::post('personalinterviewdownload/all', [ExamPdfController::class, 'personalinterviewdownloadall'])->name('admin.personalinterviewdownload.all');
+        
         // student interview notes
         Route::get('student_interview_details', [AdminController::class, 'studentInterviewIndex'])->name('admin.student_interview_details');
         Route::post('student_interview_details/list', [AdminController::class, 'getStudentInterviewData'])->name('admin.student_interview_details.list');

@@ -9479,6 +9479,25 @@ class AdminController extends Controller
             return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
         }
     }
+    public function deleteschoolpermission(Request $request)
+    {
+
+        $data = [
+            'role_id' => $request->role_id,
+            'br_id' => $request->branch_id,
+            'school_roleid' => $request->school_roleid
+            
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.deleteschoolpermission'), $data);
+        // dd($response);
+        //return redirect('admin/school_role/menuaccess');
+        if ($response['code'] == 200) {
+            return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+        } else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+        }
+    }
     public function checkpermissions(Request $request)
     {
         $pagedata = [
@@ -10665,6 +10684,100 @@ class AdminController extends Controller
             'empty' => isset($empty) ? $empty : 9,
                 'storage' => storage_path('fonts/ipag.ttf')
         ]);
+    }
+    public function personalinterviewIndex()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.personalinterview.student',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    public function personalinterviewstore(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'academic_year' => $request->year,
+            'department_id' => $request->department_id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'interview_date' => $request->interview_date,
+            'student_id' => $request->student_id,
+            'question_situation' => $request->question_situation,
+            'question_improved' => $request->question_improved,
+            'question_tried' => $request->question_tried,
+            'question_future' => $request->question_future,
+            'question_parent' => $request->question_parent,
+            'question_feedback' => $request->question_feedback,
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        //dd($data);
+
+        $response = Helper::PostMethod(config('constants.api.personalinterviewstore'), $data);
+        if ($response['code'] == 200) {
+            return redirect()->route('admin.personalinterview.index')->with('success', $response['message']);
+        } else {
+            return redirect()->route('admin.personalinterview.index')->with('errors', $response['message']);
+        }
+    
+    }
+    public function personalinterviewlist()
+    {
+        
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.personalinterview.report',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
+    public function personalinterviewshow(Request $request)
+    {
+        $data = [
+            "academic_year" => $request->year,
+            "department_id" => $request->department_id,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "semester_id" => $request->semester_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.interviewstudent_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.personalinterviewdownload', $row['id']);
+                return '<div class="button-list">
+                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                        </div>';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
 }

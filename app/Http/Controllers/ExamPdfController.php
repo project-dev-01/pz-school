@@ -35,7 +35,7 @@ class ExamPdfController extends Controller
         
         $footer_text = session()->get('footer_text');
 
-        $fonturl = storage_path('fonts/ipag.g');
+        $fonturl = storage_path('fonts/ipag.ttf');
         $output = "<!DOCTYPE html>";
         $output .= "<html><head>";
         $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
@@ -47,7 +47,7 @@ class ExamPdfController extends Controller
             font-weight: normal;
             src: url("' . $fonturl . '");
         } 
-        <style>
+        body{ font-family: ipag !important;}
 			.table td,
 			.table th {
             padding: 2px;
@@ -143,8 +143,7 @@ class ExamPdfController extends Controller
 			table,tr,td
 			{
 			border:none;
-			}
-		</style>';
+			}';
         $output .= '</style>';
         $output .= "</head>";
         $output .= '<body>';
@@ -174,49 +173,49 @@ class ExamPdfController extends Controller
 		foreach($getstudents['data'] as $stu)
         {
             $sno++; 
-        $output .= '<table class="main" width="100%">
+        $output .= '<table  style="width:100%">
 			<tr >
-				<td colspan="3" class="content-wrap aligncenter" style="margin: 0;padding: 20px;"
+				<td colspan="3"  style="margin: 0;padding: 20px;"
 				align="center">
 					
 					
-					<h1 style="margin-left: 15px;">'.$getbranch['data']['school_name'].'</h1>
+					<p style="font-size:30px;margin-left: 15px;">'.$footer_text.$getbranch['data']['school_name'].'</p>
 				</td>
 			</tr>
 			<tr>
 				
 				<td>
-					<h4>'.$acy.'</h4>
+					<p>'.$acy.'</p>
 				</td>
 				<td>
-					<h4>English Communication</h4>
+					<p>'.__('messages.english_communication').'</hp4>
 				</td>
 				<td>
-					<h4>'.$term['data']['name'].'</h4>
+					<p>'.$term['data']['name'].'</p>
 				</td>
 			</tr>
 			<tr>  <td>
-				<h5>Number</h5>
-				<h4>'.$stu['roll'].'</h4>
+				<p>'.__('messages.roll_number').'</p>
+				<p>'.$stu['roll'].'</p>
 			</td>
 			
 			<td>
-				<h5>EC-Class</h5>
-				<h4>Balsam</h4>
+				<p>EC-Class</p>
+				<p>Balsam</p>
 				
 			</td>
 			<td>
-				<h5>Level</h5>
-				<h4>Advanced</h4>
+				<p>Level</p>
+				<p>Advanced</p>
 				
 			</td>
 			</tr>
 			<tr>  
 				<td>
-					<h3>Student Name</h3>
+					<p>Student Name</p>
 				</td>
 				<td colspan="2" >
-					<h3>'.strtoupper($stu['name']).'</h3>
+					<p>'.strtoupper($stu['name']).'</p>
 				</td>
 				
 			</tr>
@@ -319,12 +318,12 @@ class ExamPdfController extends Controller
 			</tr>
 			<tr>
 					<td colspan="2">
-					<h5> English Teachers Name</h5>
+					<p> English Teachers Name</p>
 					</td>
 					
 					
 					<td>
-					<h5> '.$teachername.'</h5>
+					<p> '.$teachername.'</p>
 					
 				</td>
 			</tr>
@@ -437,6 +436,7 @@ class ExamPdfController extends Controller
             font-weight: normal;
             src: url("' . $fonturl . '");
         } 
+        body{ font-family: ipag !important;}
        
       
         .table td,
@@ -507,17 +507,17 @@ class ExamPdfController extends Controller
             $sno++;  
         $output .= '<table class="main" width="100%">
         <tr>
-            <td colspan="5"> <h4>'.$getbranch['data']['school_name'].'</h4> </td> 
+            <td colspan="5"> <p>'.$getbranch['data']['school_name'].'</p> </td> 
         </tr>
         <tr>
             <td >
-                <h4>'.$grade['data']['short_name'].'</h4>
+                <p>'.$grade['data']['short_name'].'</p>
             </td>
             <td>
-                <h4> '.__('messages.semester').'</h4>
+                <p> '.__('messages.semester').'</p>
             </td>
             <td>
-                <h4>Notification</h4>
+                <p>Notification</p>
             </td>
             <td style=" border: 1px solid black;">Class : '.$section['data']['name'].'</td>
             <td style=" border: 1px solid black;">No : '.$sno.'</td>
@@ -1002,6 +1002,7 @@ class ExamPdfController extends Controller
             font-weight: normal;
             src: url("' . $fonturl . '");
         } 
+        body{ font-family: ipag !important;}
         .table td,
         .table th {
         padding: 2px;
@@ -1087,18 +1088,18 @@ class ExamPdfController extends Controller
             $sno++; 
         $output .= '<table class="main" width="100%">			
             <tr>
-				<td colspan="5"> <h4>'.$getbranch['data']['school_name'].'</h4>
-				<h4>'.__('messages.individual_result').'  </h4></td> 
+				<td colspan="5"> <p>'.$getbranch['data']['school_name'].'</p>
+				<p>'.__('messages.individual_result').'  </p></td> 
 			</tr>
             <tr>
                 <td >
-					<h4>'.$grade['data']['short_name'].' </h4>
+					<p>'.$grade['data']['short_name'].' </p>
 				</td>
 				<td>
-					<h4>'.$request->semester_id.' '.__('messages.semester').'</h4>
+					<p>'.$request->semester_id.' '.__('messages.semester').'</p>
 				</td>
 				<td>
-					<h4><h4>'.$term['data']['name'].'</h4> </h4>
+					<p><p>'.$term['data']['name'].'</p> </p>
 				</td>
 				<td style=" border: 1px solid black;">Class : '.$section['data']['name'].'</td>
 				<td style=" border: 1px solid black;">No</td>
@@ -1318,19 +1319,19 @@ class ExamPdfController extends Controller
 			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
 			$parent=$getparent['data']['parent'];
 			
-			$fonturl = storage_path('fonts/ipag.ttf');
-			$output = "<!DOCTYPE html>";
-			$output .= "<html><head>";
-			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>';
-        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-        $output .= '@font-face {
-            font-family: ipag;
-            font-style: normal;
-            font-weight: normal;
-            src: url("' . $fonturl . '");
-         } 
-			
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $output = "<!DOCTYPE html>";
+            $output .= "<html><head>";
+            $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $output .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $output .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+            } 
+            body{ font-family: ipag !important;}
 			.table {
             width: 100%;
             margin-bottom: 1px;
@@ -1383,8 +1384,8 @@ class ExamPdfController extends Controller
 			</style>';
 			$output .= "</head>";
 			$output .= "<body>";
-			$output .='<main><h4 style=" text-align:center">'.__('messages.download_form1title').'</h4>
-			<h4 class="float-left">'.__('messages.download_form1title2').'</h4>
+			$output .='<main><p style=" text-align:center">'.__('messages.download_form1title').'</p>
+			<p class="float-left">'.__('messages.download_form1title2').'</p>
 			<table class="main" width="100%">
 			<tr>
 			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;align=center">
@@ -1601,7 +1602,8 @@ class ExamPdfController extends Controller
                 font-style: normal;
                 font-weight: normal;
                 src: url("' . $fonturl . '");
-            } 			
+            } 
+            body{ font-family: ipag !important;} 			
 			.table {
             width: 100%;
             margin-bottom: 1px;
@@ -1654,7 +1656,7 @@ class ExamPdfController extends Controller
 			</style>';
 			$output .= "</head>";
 			$output .= "<body>";
-			$output .='<h4 class=" float-left">'.__('messages.download_form2Atitle').'</h4>
+			$output .='<p class=" float-left">'.__('messages.download_form2Atitle').'</p>
 			<table class="main" width="100%">
             <tr>
 			<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding: 20px;
@@ -1958,18 +1960,19 @@ class ExamPdfController extends Controller
 			
 			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
             //dd($getclasssec)
-			$fonturl = storage_path('fonts/ipag.ttf');
-			$output = "<!DOCTYPE html>";
-			$output .= "<html><head>";
-			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>';
-        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-        $output .= '@font-face {
-            font-family: ipag;
-            font-style: normal;
-            font-weight: normal;
-            src: url("' . $fonturl . '");
-        } 
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $output = "<!DOCTYPE html>";
+            $output .= "<html><head>";
+            $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $output .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $output .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+            } 
+            body{ font-family: ipag !important;}
        
 			
 			.table {
@@ -2392,18 +2395,19 @@ class ExamPdfController extends Controller
 			//dd($student);
 			$footer_text = session()->get('footer_text');
 			
-			$fonturl = storage_path('fonts/ipag.ttf');
-			$output = "<!DOCTYPE html>";
-			$output .= "<html><head>";
-			$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-			$output .= '<style>';
-        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-        $output .= '@font-face {
-            font-family: ipag;
-            font-style: normal;
-            font-weight: normal;
-            src: url("' . $fonturl . '");
-        } 
+            $fonturl = storage_path('fonts/ipag.ttf');
+            $output = "<!DOCTYPE html>";
+            $output .= "<html><head>";
+            $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+            $output .= '<style>';
+            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+            $output .= '@font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url("' . $fonturl . '");
+            } 
+            body{ font-family: ipag !important;}
        
 			
 			.table {
@@ -2457,8 +2461,8 @@ class ExamPdfController extends Controller
 			}
 			</style>';
 			$output .= "</head>";
-			$output .= '<body><h4 style="text-align:center;">'.__('messages.download_secondary_form1_title').'</h4>
-			<h4 class="float-left">'.__('messages.download_secondary_form1_title2').'</h4>
+			$output .= '<body><p style="text-align:center;">'.__('messages.download_secondary_form1_title').'</p>
+			<p class="float-left">'.__('messages.download_secondary_form1_title2').'</p>
 			<table class="main" width="100%">
             <tr>
 			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
@@ -2689,6 +2693,285 @@ class ExamPdfController extends Controller
 			
 			
 		}
-		
-	//ass
+	public function personalinterviewdownload(Request $request)
+    {
+        //dd($request->id);
+        $data = [
+            'branch_id' => session()->get('branch_id'),
+            'id' => $request->id
+        ];
+        $datas = [
+            'department_id' => $request->department_id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'academic_year' => $request->academic_year
+        ];
+        $reports = Helper::PostMethod(config('constants.api.singlestudent_report'), $data);
+        $report= $reports['data'];
+        $footer_text = session()->get('footer_text');
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+            height:60px;
+			}';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body>
+        <header> " .  __('messages.personal_interview_report') . "</header>
+        <footer>" . $footer_text . "</footer>";
+            $output .= '<div class="table-responsive">
+            <table >
+            <tr><td align="center">'.  __("messages.personal_interview") .'</td><td style="text-decoration: underline;text-align:center;">'.$report['home_teacher'].'</td></tr>
+            <tr><td colspan="2" style="padding:25px;">'.  __("messages.personalinterview_title1") .'
+           <br> '.  __("messages.personalinterview_title2") .'
+            </td></tr>
+        </table>		
+        <table class="table table-bordered">
+            <tr>
+                <td style="width:20%">'.  __("messages.personalinterview_kinder") .'</td>
+                <td colspan="2" style="width:40%">'.$report['name'].'</td>
+                <td style="width:20%">'.  __("messages.personalinterview_date") .'</td>
+                <td style="width:20%">'.date('d M Y',strtotime($report['interview_date'])).'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_situation") .'</td>
+                <td colspan="3" style="width:75%">'.$report['question_situation'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.$report['semester_name'].'<br>'.  __("messages.personalinterview_improved") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_improved'].'</td>
+            </tr> 
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_tried") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_tried'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_future") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_future'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_parent") .'</td>
+                <td colspan="3" style="width:75%">'.$report['question_parent'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_feedback") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_feedback'].'</td>
+            </tr>
+        </table>
+        </div>';
+        //         $output .= '</main>
+        //  </body>
+        // </html>';
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 792.00, 1224.00);
+        $pdf->set_paper($customPaper);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.personal_interview') . $name . ".pdf";
+        return $pdf->download($fileName);
+        // return $pdf->stream();
+        
+    }   
+    public function personalinterviewdownloadall(Request $request)
+    {
+       
+        $data = [
+            'department_id' => $request->department_id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'semester_id' => $request->semester_id,
+            'academic_year' => $request->academic_year
+        ];
+        $reports = Helper::PostMethod(config('constants.api.classstudent_report'), $data);
+       //dd($reports);
+        $footer_text = session()->get('footer_text');
+        // dd($get_attendance_list_teacher);
+
+        // $response = "";
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color:  #111;
+            text-align: center;
+            line-height: 35px;
+            }
+
+        footer {
+            position: fixed; 
+            bottom: -60px; 
+            left: 0px; 
+            right: 0px;
+            height: 50px; 
+            font-size: 20px !important;
+
+            /** Extra personal styles **/
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            line-height: 35px;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1px;
+            color: black;
+            text-align: center;
+			}
+			
+			.table-bordered td,
+			.table-bordered th {
+            border: 1px solid black;
+            text-align: center;
+            height:60px;
+			}';
+        $output .= '</style>';
+        $output .= "</head>";
+        $output .= "<body>
+        <header> " .  __('messages.personal_interview_report') . "</header>
+        <footer>" . $footer_text . "</footer>";
+        foreach($reports['data'] as $report)
+        {
+            $output .= '<div class="table-responsive">
+            <table >
+            <tr><td align="center">'.  __("messages.personal_interview") .'</td><td style="text-decoration: underline;text-align:center;">'.$report['home_teacher'].'</td></tr>
+            <tr><td colspan="2" style="padding:25px;">'.  __("messages.personalinterview_title1") .'
+           <br> '.  __("messages.personalinterview_title2") .'
+            </td></tr>
+        </table>		
+        <table class="table table-bordered">
+            <tr>
+                <td style="width:20%">'.  __("messages.personalinterview_kinder") .'</td>
+                <td colspan="2" style="width:40%">'.$report['name'].'</td>
+                <td style="width:20%">'.  __("messages.personalinterview_date") .'</td>
+                <td style="width:20%">'.date('d M Y',strtotime($report['interview_date'])).'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_situation") .'</td>
+                <td colspan="3" style="width:75%">'.$report['question_situation'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.$report['semester_name'].'<br>'.  __("messages.personalinterview_improved") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_improved'].'</td>
+            </tr> 
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_tried") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_tried'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_future") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_future'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_parent") .'</td>
+                <td colspan="3" style="width:75%">'.$report['question_parent'].'</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:25%;height:200px;">'.  __("messages.personalinterview_feedback") .'
+                </td>
+                <td colspan="3" style="width:75%">'.$report['question_feedback'].'</td>
+            </tr>
+        </table>
+        </div>
+        <div style="page-break-after: always;"></div>';
+        }   
+        //         $output .= '</div></main>
+        //  </body>
+        // </html>';
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 792.00, 1224.00);
+        $pdf->set_paper($customPaper);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.personal_interview') . $name . ".pdf";
+        return $pdf->download($fileName);
+        // return $pdf->stream();
+        
+    }  
+	
 }

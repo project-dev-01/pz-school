@@ -2005,5 +2005,15 @@ return [
         "name_common" => "名前 (一般)",
         "first_name_common" => "名（一般)",
         "last_name_common" => "姓（一般)",
+        "personalinterview_situation"=>"入園、進級時の様子",
+    "personalinterview_improved"=>"伸びたところ",
+    "personalinterview_tried"=>"頑張っているところなど",
+    "personalinterview_future"=>"取り組んでいきたいこと （家庭にお願いしたいこと）",
+    "personalinterview_parent"=>"保護者に質問",
+    "personalinterview_feedback"=>"保護者から（当日の話 ",
+    "personalinterview_title1"=> "※個人面談1週間前までに教務・園長に個人面談日程表を添えて提出。面談後、記入したものも期日までに提出。",
+    "personalinterview_title2"=> "※要録様式Ⅱへ役立てるように記述をしてください。ここは箇条書きでもよいです。",
+    "personalinterview_kinder"=> "園児名",
+    "personalinterview_date"=> "実施日",
 
 ];

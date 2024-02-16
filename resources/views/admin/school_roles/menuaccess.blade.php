@@ -105,6 +105,39 @@
 					<br>
 					<hr><br>
 					<div class="table-responsive">
+					<form method="post" style="float:right;" action="{{ route('admin.school_role.deleteschoolpermission') }}" autocomplete="off" novalidate="novalidate">
+							@csrf
+						<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
+							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
+							@if(isset($branch_id))
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmdelete"> {{ __('messages.delete') }} {{ __('messages.menu_access') }}</button>
+
+							@endif
+							<!-- Trigger the modal with a button -->
+
+							<!-- Modal -->
+							<div id="confirmdelete" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">{{ __('messages.menu_access') }}</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+										</div>
+										<div class="modal-body">
+											<h4>{{ __('messages.menu_access_deleteconfirmation') }}</h4>
+										</div>
+										<div class="modal-footer">
+											<button name="submit" name="set" value="update" class="btn btn-danger btn-lg"> {{ __('messages.delete') }} </button>
+											<button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">{{ __('messages.close') }}</button>
+										</div>
+									</div>
+
+								</div>
+							</div><br><br>
+						</form>
 						<input type="checkbox" id="select_all" />{{ __('messages.select_all') }}
 						<form method="post" action="{{ route('admin.school_role.setpermission') }}" autocomplete="off" novalidate="novalidate">
 							@csrf

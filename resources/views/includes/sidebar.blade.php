@@ -535,6 +535,28 @@
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <!--<i class="fe-book-open"></i>-->
+                        <i data-feather="file-text" class="icon-dual"></i>
+                        <span> {{ __('messages.personal_interview') }} </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarHomework">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.personalinterview.index')}}" class="nav-link {{ (request()->is('admin/personalinterview/add')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.add_personal_interview') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.personalinterview.list')}}" class="nav-link {{ (request()->is('admin/personalinterview/list*')) ? 'active' : '' }}">
+                                    <span>{{ __('messages.personal_interview_report') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarHomework" data-toggle="collapse">
+                        <!--<i class="fe-book-open"></i>-->
                         <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
                         </svg>

@@ -36,7 +36,9 @@ $(function () {
                     branch_id: branchID,
                     department_id: department_id
                 }, function (res) {
+                    alert(res.code);
                     if (res.code == 200) {
+                        
                         $.each(res.data, function (key, val) {
                             $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
                         });
