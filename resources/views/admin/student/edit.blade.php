@@ -863,9 +863,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
+                                                <label for="session_id">{{ __('messages.session') }}</label>
                                                 <select id="session_id" class="form-control" name="session_id">
-                                                    <option value="">{{ __('messages.select_session') }}</option>
+                                                    <option value="0">{{ __('messages.select_session') }}</option>
                                                     @forelse($session as $ses)
                                                     <option value="{{$ses['id']}}" {{ isset($student['session_id']) ?  $student['session_id'] == $ses['id'] ? 'Selected' : '' : "" }}>{{$ses['name']}}</option>
 
@@ -880,8 +880,7 @@
                                                 <select id="semester_id" class="form-control" name="semester_id">
                                                     <option value="0">{{ __('messages.select_semester') }}</option>
                                                     @forelse($semester as $sem)
-                                                    <option value="{{$sem['id']}}" {{ isset($student['semester_id']) ? isset($student['semester_id']) == $sem['id'] ? 'Selected' : '' : "" }}>{{$sem['name']}}</option>
-
+                                                    <option value="{{ $sem['id'] }}" {{ (isset($student['semester_id']) && $student['semester_id'] == $sem['id']) ? 'selected' : '' }}>{{ $sem['name'] }}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1961,6 +1960,11 @@
             reverse: true
         });
         // nric validation end
+        setTimeout(function() {
+            // Clear the values of email and password fields
+            $("#confirm_password").val("");
+            $("#password").val("");
+        }, 2000);
     });
 </script>
 @endsection

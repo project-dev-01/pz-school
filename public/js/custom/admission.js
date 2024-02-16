@@ -109,7 +109,6 @@ $(function () {
     // rules validation
     $("#addadmission").validate({
         rules: {
-            session_id: "required",
             parent_id: "required",
             year: "required",
             txt_regiter_no: "required",

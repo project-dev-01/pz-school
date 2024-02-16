@@ -2036,4 +2036,7 @@ return [
     "personalinterview_title2"=> "*.Please write in a way that will be useful for Summary Form II. Bullet points are fine here.",
     "personalinterview_kinder"=> "Kindergarten name",
     "personalinterview_date"=> "Implementation date",
+    "setting_student_information" => "Setting Student Information",
+    "parent_details" => "Parent Details",
+    "test_results" => "Test Results",
 ];

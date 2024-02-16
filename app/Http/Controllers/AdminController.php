@@ -4752,11 +4752,9 @@ class AdminController extends Controller
     // get Student  details
     public function getStudentDetails($id)
     {
-
         $data = [
             'id' => $id,
         ];
-
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
         $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));

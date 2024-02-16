@@ -86,7 +86,7 @@
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -98,7 +98,7 @@
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                        <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -120,7 +120,6 @@
                                         <option value="report_card">{{ __('messages.report_card') }}</option>
                                         <option value="personal_test_res">{{ __('messages.personal_test_res') }}</option>
                                         <option value="english_communication">{{ __('messages.english_communication') }}</option>
-                                        
                                     </select>
                                 </div>
                             </div>
@@ -337,7 +336,8 @@
 <script>
     
     var studentList = "{{ route('admin.exam_result.sutdentlist') }}";
-    var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
+    // var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
+    var sectionByClass = "{{ config('constants.api.section_by_class') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";

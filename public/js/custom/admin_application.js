@@ -240,24 +240,23 @@ $(function () {
     function application() {
         $('#application-table').DataTable({
             processing: true,
+            serverSide: true,
             info: true,
             bDestroy: true,
-            // dom: 'lBfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            "language": {
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
+            language: {
+                emptyTable: no_data_available,
+                infoFiltered: filter_from_total_entries,
+                zeroRecords: no_matching_records_found,
+                infoEmpty: showing_zero_entries,
+                info: showing_entries,
+                lengthMenu: show_entries,
+                search: datatable_search,
+                paginate: {
+                    next: next,
+                    previous: previous
                 },
             },
             buttons: [
@@ -280,127 +279,53 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-
-                
                     customize: function (doc) {
-                    doc.pageMargins = [50,50,50,50];
-                    doc.defaultStyle.fontSize = 10;
-                    doc.styles.tableHeader.fontSize = 12;
-                    doc.styles.title.fontSize = 14;
-                    // Remove spaces around page title
-                    doc.content[0].text = doc.content[0].text.trim();
-                    /*// Create a Header
-                    doc['header']=(function(page, pages) {
-                        return {
-                            columns: [
-                                
-                                {
-                                    // This is the right column
-                                    bold: true,
-                                    fontSize: 20,
-                                    color: 'Blue',
-                                    fillColor: '#fff',
-                                    alignment: 'center',
-                                    text: header_txt
-                                }
-                            ],
-                            margin:  [50, 15,0,0]
-                        }
-                    });*/
-                    // Create a footer
-                    
-                    doc['footer']=(function(page, pages) {
-                        return {
-                            columns: [
-                                { alignment: 'left', text: [ footer_txt ],width:400} ,
-                                {
-                                    // This is the right column
-                                    alignment: 'right',
-                                    text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                    width:100
-
-                                }
-                            ],
-                            margin: [50, 0,0,0]
-                        }
-                    });
-                    
+                        doc.pageMargins = [50, 50, 50, 50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        doc.content[0].text = doc.content[0].text.trim();
+                        doc.footer = function (page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                    { alignment: 'right', text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }], width: 100 }
+                                ],
+                                margin: [50, 0, 0, 0]
+                            };
+                        };
+                    }
                 }
-            }
             ],
-            serverSide: true,
             ajax: {
                 url: applicationList,
                 data: function (d) {
-                    
                     d.academic_year = $('#academic_year').val(),
                     d.academic_grade = $('#academic_grade').val()
                 }
             },
-            "pageLength": 10,
-            "aLengthMenu": [
+            pageLength: 10,
+            lengthMenu: [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
             columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'register_number',
-                    name: 'register_number'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'name_english',
-                    name: 'name_english'
-                },
-                {
-                    data: 'name_common',
-                    name: 'name_common'
-                },
-                {
-                    data: 'type',
-                    name: 'type'
-                },
-                {
-                    data: 'gender',
-                    name: 'gender'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'academic_year',
-                    name: 'academic_year'
-                },
-                {
-                    data: 'academic_grade',
-                    name: 'academic_grade'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'phase_2_status',
-                    name: 'phase_2_status'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
+                { data: 'register_number', name: 'register_number' },
+                { data: 'name', name: 'name' },
+                { data: 'name_english', name: 'name_english' },
+                { data: 'name_common', name: 'name_common' },
+                { data: 'type', name: 'type' },
+                { data: 'gender', name: 'gender' },
+                { data: 'email', name: 'email' },
+                { data: 'academic_year', name: 'academic_year' },
+                { data: 'academic_grade', name: 'academic_grade' },
+                { data: 'status', name: 'status' },
+                { data: 'phase_2_status', name: 'phase_2_status' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false },
+            ]
         });
+        
     }
 
     
@@ -443,7 +368,7 @@ $(function () {
             academic_year: $('#academic_year').val(),
             academic_grade: $('#academic_grade').val(),
         };
-        setLocalStorageForApplicationList(formData);
+        // setLocalStorageForApplicationList(formData);
         application(formData);
     });
 
@@ -571,50 +496,50 @@ $(function () {
         });
         
 
-    function setLocalStorageForApplicationList(classObj) {
+    // function setLocalStorageForApplicationList(classObj) {
 
-        var applicationListDetails = new Object();
-        applicationListDetails.academic_year = classObj.academic_year;
-        applicationListDetails.academic_grade = classObj.academic_grade;
-        // here to attached to avoid localStorage other users to add
-        applicationListDetails.branch_id = branchID;
-        applicationListDetails.role_id = get_roll_id;
-        applicationListDetails.user_id = ref_user_id;
-        var applicationListArr = [];
-        applicationListArr.push(applicationListDetails);
-        if (get_roll_id == "2") {
-            // admin
-            localStorage.removeItem("admin_application_list_details");
-            localStorage.setItem('admin_application_list_details', JSON.stringify(applicationListArr));
-        }
-        return true;
-    }
-    // if localStorage
-    if (typeof admin_application_list_storage !== 'undefined') {
-        if ((admin_application_list_storage)) {
-            if (admin_application_list_storage) {
-                var adminApplicationListStorage = JSON.parse(admin_application_list_storage);
-                if (adminApplicationListStorage.length == 1) {
-                    var academicYear, academicGrade, userBranchID, userRoleID, userID;
-                    adminApplicationListStorage.forEach(function (user) {
-                        academicYear = user.academic_year;
-                        academicGrade = user.academic_grade;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+    //     var applicationListDetails = new Object();
+    //     applicationListDetails.academic_year = classObj.academic_year;
+    //     applicationListDetails.academic_grade = classObj.academic_grade;
+    //     // here to attached to avoid localStorage other users to add
+    //     applicationListDetails.branch_id = branchID;
+    //     applicationListDetails.role_id = get_roll_id;
+    //     applicationListDetails.user_id = ref_user_id;
+    //     var applicationListArr = [];
+    //     applicationListArr.push(applicationListDetails);
+    //     if (get_roll_id == "2") {
+    //         // admin
+    //         localStorage.removeItem("admin_application_list_details");
+    //         localStorage.setItem('admin_application_list_details', JSON.stringify(applicationListArr));
+    //     }
+    //     return true;
+    // }
+    // // if localStorage
+    // if (typeof admin_application_list_storage !== 'undefined') {
+    //     if ((admin_application_list_storage)) {
+    //         if (admin_application_list_storage) {
+    //             var adminApplicationListStorage = JSON.parse(admin_application_list_storage);
+    //             if (adminApplicationListStorage.length == 1) {
+    //                 var academicYear, academicGrade, userBranchID, userRoleID, userID;
+    //                 adminApplicationListStorage.forEach(function (user) {
+    //                     academicYear = user.academic_year;
+    //                     academicGrade = user.academic_grade;
+    //                     userBranchID = user.branch_id;
+    //                     userRoleID = user.role_id;
+    //                     userID = user.user_id;
+    //                 });
+    //                 if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         
-                        $("#academic_year").val(academicYear);
-                        $('#academic_grade').val(academicGrade);
-                        var formData = {
-                            academic_year: academicYear,
-                            academic_grade: academicGrade,
-                        };
-                        application(formData);
-                    }
-                }
-            }
-        }
-    }
+    //                     $("#academic_year").val(academicYear);
+    //                     $('#academic_grade').val(academicGrade);
+    //                     var formData = {
+    //                         academic_year: academicYear,
+    //                         academic_grade: academicGrade,
+    //                     };
+    //                     application(formData);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 });

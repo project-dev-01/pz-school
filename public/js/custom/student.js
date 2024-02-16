@@ -477,100 +477,42 @@ $(function () {
         $('#excelSession').val(formData.session_id);
         var table = $('#student-table').DataTable({
             processing: true,
+            serverSide: true,
             info: true,
             bDestroy: true,
-            // dom: 'lBfrtip',
             dom: 'Blfrtip',
-
-            // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            // dom: 'C&gt;"clear"&lt;lfrtip',
-            // "language": {
-
-            //     "emptyTable": no_data_available,
-            //     "infoFiltered": filter_from_total_entries,
-            //     "zeroRecords": no_matching_records_found,
-            //     "infoEmpty": showing_zero_entries,
-            //     "info": showing_entries,
-            //     "lengthMenu": show_entries,
-            //     "search": datatable_search,
-            //     "paginate": {
-            //         "next": next,
-            //         "previous": previous
-            //     },
-            // },
-            // exportOptions: { rows: ':visible' },
-            serverSide: true,
             ajax: {
                 url: studentList,
                 data: function (d) {
-                    d.department_id = formData.department_id,
-                        d.student_name = formData.student_name,
-                        d.class_id = formData.class_id,
-                        d.section_id = formData.section_id,
-                        d.session_id = formData.session_id
+                    Object.assign(d, formData);
                 }
             },
-            "pageLength": 10,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
+            pageLength: 10,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'name_common',
-                    name: 'name_common'
-                },
-                {
-                    data: 'register_no',
-                    name: 'register_no'
-                },
-                {
-                    data: 'roll_no',
-                    name: 'roll_no'
-                },
-                {
-                    data: 'gender',
-                    name: 'gender'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
+                { data: 'name', name: 'name' },
+                { data: 'name_common', name: 'name_common' },
+                { data: 'register_no', name: 'register_no' },
+                { data: 'roll_no', name: 'roll_no' },
+                { data: 'gender', name: 'gender' },
+                { data: 'email', name: 'email' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ],
             columnDefs: [
                 {
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
+                    targets: 1,
+                    className: 'table-user',
+                    render: function (data, type, row, meta) {
                         var currentImg = studentImg + row.photo;
-                        // var existUrl = UrlExists(currentImg);
-                        // console.log(currentImg);
                         var img = (row.photo != null) ? currentImg : defaultImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                        return '<img src="' + img + '" class="mr-2 rounded-circle">' +
                             '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
                     }
-                },
+                }
             ]
         });
+
     }
 
     // function setLocalStorageForStudentList(classObj) {
@@ -667,7 +609,6 @@ $(function () {
 
     $("#editadmission").validate({
         rules: {
-            session_id: "required",
             year: "required",
             txt_regiter_no: "required",
             txt_emailid: {

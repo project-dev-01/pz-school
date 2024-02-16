@@ -194,43 +194,43 @@
                                 </a>
                                 <div class="collapse {{  (request()->is('admin/student/student-details*') || request()->is('admin/student/update_info*')) ? 'show' : '' }}" id="sidebarStudentDetails">
                                     <ul class="nav-second-level">
-                                        <li>
-                                            <a href="{{ route('admin.admission')}}" class="nav-link {{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
+                                    <li class="{{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.admission')}}" class="nav-link">
                                                 <span>{{ __('messages.new_admission') }}</span>
                                             </a>
                                         </li>
-                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
-                                            <a href="{{ route('admin.student.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.student.index')}}" class="nav-link">
                                                 <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.application.index')}}" class="nav-link {{ (request()->is('admin/application/index')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/application/index')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.application.index')}}" class="nav-link">
                                                 <span>{{ __('messages.application_list') }}</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.termination.index')}}" class="nav-link {{ (request()->is('admin/termination/index')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/termination/index')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.termination.index')}}" class="nav-link">
                                                 <span>{{ __('messages.termination_list') }}</span>
                                             </a>
                                         </li>
-                                        <li class=" {{ (request()->is('admin/student/update_info*')) ? 'menuitem-active' : '' }}">
-                                            <a href="{{ route('admin.student.update_info')}}" class="nav-link {{ (request()->is('admin/student/update_info*')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/student/update_info*')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.student.update_info')}}" class="nav-link">
                                                 <span>{{ __('messages.student_update_list') }}</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{{ route('admin.student.import')}}" class="nav-link {{ (request()->is('admin/student/import')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/student/import')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.student.import')}}" class="nav-link">
                                                 <span>{{ __('messages.student_bulk_upload') }}</span>
                                             </a>
                                         </li>
-                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
-                                            <a href="{{ route('admin.graduates.index')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/graduates/index')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.graduates.index')}}" class="nav-link">
                                                 <span>{{ __('messages.graduates_list') }}</span>
                                             </a>
                                         </li>
-                                        <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
-                                            <a href="{{ route('admin.student.picture')}}" class="nav-link {{ (request()->is('admin/student') || request()->is('admin/student/student-details*')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/student/picture')) ? 'active' : '' }}">
+                                            <a href="{{ route('admin.student.picture')}}" class="nav-link">
                                                 <span>{{ __('messages.student_picture_upload') }}</span>
                                             </a>
                                         </li>
@@ -711,7 +711,7 @@
                     </a>
                 </li>
                 <li>
-                 <a href="#sidebarAdminChildHealth" data-toggle="collapse">
+                    <a href="#sidebarAdminChildHealth" data-toggle="collapse">
                         <!--<i class="fas fa-users"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_59_2147)">
@@ -734,7 +734,7 @@
                     <div class="collapse" id="sidebarAdminChildHealth">
                         <ul class="nav-second-level">
                             <li>
-                               <a href="{{ route('admin.child_health.import')}}" class="nav-link {{ (request()->is('admin/child_health/import')) ? 'active' : '' }}">
+                                <a href="{{ route('admin.child_health.import')}}" class="nav-link {{ (request()->is('admin/child_health/import')) ? 'active' : '' }}">
                                     <span>{{ __('messages.import_bulk_upload') }}</span>
                                 </a>
                             </li>
@@ -1083,7 +1083,17 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.student_interview_details')}}" class="nav-link {{ (request()->is('admin/student_interview_details*')) ? 'active' : '' }}">
-                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>notebook</title><path class="cls-1" d="M103.3,34.19l8.23,3.52a2.15,2.15,0,0,1,1.13,2.82l-2,4.56L98.53,39.88l2-4.56a2.15,2.15,0,0,1,2.82-1.13ZM8.88,7.88h8.19V2.73a2.74,2.74,0,0,1,5.47,0V7.88h12V2.73a2.73,2.73,0,1,1,5.46,0V7.88H52V2.73a2.73,2.73,0,0,1,5.46,0V7.88h12V2.73a2.73,2.73,0,0,1,5.46,0V7.88h9.27a8.91,8.91,0,0,1,8.88,8.88V28.54a12.27,12.27,0,0,0-1.76,2.9l-2,4.56A10,10,0,0,0,89,37.16a11.24,11.24,0,0,0-.58,1.15l-.6,1.4V16.76a3.6,3.6,0,0,0-3.58-3.58H75v5.15a2.73,2.73,0,0,1-5.46,0V13.18h-12v5.15a2.73,2.73,0,0,1-5.46,0V13.18H40v5.15a2.73,2.73,0,1,1-5.46,0V13.18h-12v5.15a2.74,2.74,0,0,1-5.47,0V13.18H8.88A3.58,3.58,0,0,0,5.3,16.76v92a3.6,3.6,0,0,0,3.58,3.59H59.16l.56,5.29H8.88A8.89,8.89,0,0,1,0,108.77v-92A8.91,8.91,0,0,1,8.88,7.88ZM20.34,94.35a2.65,2.65,0,0,1,0-5.3H66.72l-2.27,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.52,2.52,0,0,1,1.27.35l-2.12,5Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3ZM81,114.6l-6.19,5c-4.85,3.92-4.36,5.06-5-.88l-1-9.34h0L97.54,42.18l12.18,5.22L81,114.6Zm-10.09-4.31,8,3.42L74.82,117c-3.19,2.58-2.87,3.32-3.28-.57l-.66-6.14Z" fill="#C4C7D2"/></svg>
+                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill-rule: evenodd;
+                                    }
+                                </style>
+                            </defs>
+                            <title>notebook</title>
+                            <path class="cls-1" d="M103.3,34.19l8.23,3.52a2.15,2.15,0,0,1,1.13,2.82l-2,4.56L98.53,39.88l2-4.56a2.15,2.15,0,0,1,2.82-1.13ZM8.88,7.88h8.19V2.73a2.74,2.74,0,0,1,5.47,0V7.88h12V2.73a2.73,2.73,0,1,1,5.46,0V7.88H52V2.73a2.73,2.73,0,0,1,5.46,0V7.88h12V2.73a2.73,2.73,0,0,1,5.46,0V7.88h9.27a8.91,8.91,0,0,1,8.88,8.88V28.54a12.27,12.27,0,0,0-1.76,2.9l-2,4.56A10,10,0,0,0,89,37.16a11.24,11.24,0,0,0-.58,1.15l-.6,1.4V16.76a3.6,3.6,0,0,0-3.58-3.58H75v5.15a2.73,2.73,0,0,1-5.46,0V13.18h-12v5.15a2.73,2.73,0,0,1-5.46,0V13.18H40v5.15a2.73,2.73,0,1,1-5.46,0V13.18h-12v5.15a2.74,2.74,0,0,1-5.47,0V13.18H8.88A3.58,3.58,0,0,0,5.3,16.76v92a3.6,3.6,0,0,0,3.58,3.59H59.16l.56,5.29H8.88A8.89,8.89,0,0,1,0,108.77v-92A8.91,8.91,0,0,1,8.88,7.88ZM20.34,94.35a2.65,2.65,0,0,1,0-5.3H66.72l-2.27,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.52,2.52,0,0,1,1.27.35l-2.12,5Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3ZM81,114.6l-6.19,5c-4.85,3.92-4.36,5.06-5-.88l-1-9.34h0L97.54,42.18l12.18,5.22L81,114.6Zm-10.09-4.31,8,3.42L74.82,117c-3.19,2.58-2.87,3.32-3.28-.57l-.66-6.14Z" fill="#C4C7D2" />
+                        </svg>
                         <span>{{ __('messages.student_interview_details') }}</span>
                     </a>
                 </li>
@@ -1679,7 +1689,17 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.student_interview_notes')}}" class="nav-link {{ (request()->is('teacher/student_interview_notes*')) ? 'active' : '' }}">
-                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>notebook</title><path class="cls-1" d="M103.3,34.19l8.23,3.52a2.15,2.15,0,0,1,1.13,2.82l-2,4.56L98.53,39.88l2-4.56a2.15,2.15,0,0,1,2.82-1.13ZM8.88,7.88h8.19V2.73a2.74,2.74,0,0,1,5.47,0V7.88h12V2.73a2.73,2.73,0,1,1,5.46,0V7.88H52V2.73a2.73,2.73,0,0,1,5.46,0V7.88h12V2.73a2.73,2.73,0,0,1,5.46,0V7.88h9.27a8.91,8.91,0,0,1,8.88,8.88V28.54a12.27,12.27,0,0,0-1.76,2.9l-2,4.56A10,10,0,0,0,89,37.16a11.24,11.24,0,0,0-.58,1.15l-.6,1.4V16.76a3.6,3.6,0,0,0-3.58-3.58H75v5.15a2.73,2.73,0,0,1-5.46,0V13.18h-12v5.15a2.73,2.73,0,0,1-5.46,0V13.18H40v5.15a2.73,2.73,0,1,1-5.46,0V13.18h-12v5.15a2.74,2.74,0,0,1-5.47,0V13.18H8.88A3.58,3.58,0,0,0,5.3,16.76v92a3.6,3.6,0,0,0,3.58,3.59H59.16l.56,5.29H8.88A8.89,8.89,0,0,1,0,108.77v-92A8.91,8.91,0,0,1,8.88,7.88ZM20.34,94.35a2.65,2.65,0,0,1,0-5.3H66.72l-2.27,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.52,2.52,0,0,1,1.27.35l-2.12,5Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3ZM81,114.6l-6.19,5c-4.85,3.92-4.36,5.06-5-.88l-1-9.34h0L97.54,42.18l12.18,5.22L81,114.6Zm-10.09-4.31,8,3.42L74.82,117c-3.19,2.58-2.87,3.32-3.28-.57l-.66-6.14Z" fill="#C4C7D2"/></svg>
+                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill-rule: evenodd;
+                                    }
+                                </style>
+                            </defs>
+                            <title>notebook</title>
+                            <path class="cls-1" d="M103.3,34.19l8.23,3.52a2.15,2.15,0,0,1,1.13,2.82l-2,4.56L98.53,39.88l2-4.56a2.15,2.15,0,0,1,2.82-1.13ZM8.88,7.88h8.19V2.73a2.74,2.74,0,0,1,5.47,0V7.88h12V2.73a2.73,2.73,0,1,1,5.46,0V7.88H52V2.73a2.73,2.73,0,0,1,5.46,0V7.88h12V2.73a2.73,2.73,0,0,1,5.46,0V7.88h9.27a8.91,8.91,0,0,1,8.88,8.88V28.54a12.27,12.27,0,0,0-1.76,2.9l-2,4.56A10,10,0,0,0,89,37.16a11.24,11.24,0,0,0-.58,1.15l-.6,1.4V16.76a3.6,3.6,0,0,0-3.58-3.58H75v5.15a2.73,2.73,0,0,1-5.46,0V13.18h-12v5.15a2.73,2.73,0,0,1-5.46,0V13.18H40v5.15a2.73,2.73,0,1,1-5.46,0V13.18h-12v5.15a2.74,2.74,0,0,1-5.47,0V13.18H8.88A3.58,3.58,0,0,0,5.3,16.76v92a3.6,3.6,0,0,0,3.58,3.59H59.16l.56,5.29H8.88A8.89,8.89,0,0,1,0,108.77v-92A8.91,8.91,0,0,1,8.88,7.88ZM20.34,94.35a2.65,2.65,0,0,1,0-5.3H66.72l-2.27,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.52,2.52,0,0,1,1.27.35l-2.12,5Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3Zm0-17.48a2.65,2.65,0,0,1,0-5.3H72.78a2.65,2.65,0,0,1,0,5.3ZM81,114.6l-6.19,5c-4.85,3.92-4.36,5.06-5-.88l-1-9.34h0L97.54,42.18l12.18,5.22L81,114.6Zm-10.09-4.31,8,3.42L74.82,117c-3.19,2.58-2.87,3.32-3.28-.57l-.66-6.14Z" fill="#C4C7D2" />
+                        </svg>
                         <span>{{ __('messages.student_interview_notes') }}</span>
                     </a>
                 </li>

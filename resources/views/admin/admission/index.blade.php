@@ -743,12 +743,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
+                                    <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
-                                        <option value="">{{ __('messages.select_session') }}</option>
+                                        <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
                                         <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
-
                                         @empty
                                         @endforelse
                                     </select>
