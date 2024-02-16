@@ -23,6 +23,7 @@
     <!-- <link href="{{ asset('css/common.css')}}" rel="stylesheet" type="text/css" /> -->
     <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/custom/spinner.css') }}" rel="stylesheet" type="text/css" />
 
 
     <!-- date picker -->
@@ -41,7 +42,23 @@
     </style>
 </head>
 
-<body class="loading">
+<body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+<div id="overlay">
+        <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <!-- Start Content-->
     <div class="container-fluid">
         <!-- start page title -->
@@ -209,6 +226,13 @@
     </div>
     <!-- END wrapper -->
 
+    <!-- add spinner  -->
+    <!-- <div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div> -->
+    
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 

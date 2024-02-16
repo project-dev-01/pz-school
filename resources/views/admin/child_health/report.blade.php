@@ -12,13 +12,203 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 @endsection
 
 @section('content')
 <style>
+    .slider {
+        position: relative;
+        width: 100%;
+    }
+
+    .myslide {
+        height: 100;
+        display: none;
+        overflow: hidden;
+    }
+
+    .prev,
+    /* .next {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 50px;
+        padding: 15px;
+        cursor: pointer;
+        color: #fff;
+        transition: 0.1s;
+        user-select: none;
+    } */
+
+    .prev:hover,
+    .next:hover {
+        color: #00a7ff;
+        /* blue */
+    }
+
+    .next {
+        right: 0;
+    }
+
+    .dotsbox {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 20px;
+        cursor: pointer;
+    }
+
+    .dot {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .active,
+    .dot:hover {
+        border-color: #00a7ff;
+        /* blue */
+    }
+
+    .fade {
+        -webkit-animation-name: fade;
+        animation-name: fade;
+        animation-duration: 10s;
+    }
+
+    @-webkit-keyframes fade {
+        from {
+            opacity: 0.8
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 0.8
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .txt {
+        position: absolute;
+        letter-spacing: 2px;
+        line-height: 35px;
+        top: 40%;
+        left: 15%;
+
+        z-index: 1;
+    }
+
+    @-webkit-keyframes posi {
+        from {
+            left: 25%;
+        }
+
+        to {
+            left: 15%;
+        }
+    }
+
+    @keyframes posi {
+        from {
+            left: 25%;
+        }
+
+        to {
+            left: 15%;
+        }
+    }
+
+    .txt h1 {
+        color: #00a7ff;
+        /* blue */
+        font-size: 50px;
+        margin-bottom: 20px;
+    }
+
+    .txt p {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 800px) {
+        .myslide {
+            height: 500px;
+        }
+
+        .txt {
+            letter-spacing: 2px;
+            line-height: 25px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-animation-name: posi2;
+            -webkit-animation-duration: 2s;
+            animation-name: posi2;
+            animation-duration: 2s;
+        }
+
+        @-webkit-keyframes posi2 {
+            from {
+                top: 35%;
+            }
+
+            to {
+                top: 50%;
+            }
+        }
+
+
+        @keyframes posi2 {
+            from {
+                top: 35%;
+            }
+
+            to {
+                top: 50%;
+            }
+        }
+
+        .txt h1 {
+            font-size: 40px;
+        }
+
+        .txt p {
+            font-size: 13px;
+        }
+
+    }
+
+    .table1 td,
+    .table1 th {
+        padding: 2px;
+    }
+
+    .table1 {
+        width: 100%;
+        margin-bottom: 1px;
+        color: black;
+        text-align: center;
+    }
+
+    .table-bordered1 td,
+    .table-bordered1 th {
+        border: 1px solid black;
+        text-align: center;
+        font-size: 11px;
+    }
+
     .line {
         height: 10px;
         right: 10px;
@@ -50,12 +240,12 @@
         background: linear-gradient(to top right, #fff calc(50% - 1px), black, #fff calc(50% + 1px))
     }
 
-
     @media screen and (min-device-width: 280px) and (max-device-width: 900px) {
         .responsive {
             margin-top: 10px;
         }
     }
+
 </style>
 
 <!-- Start Content-->

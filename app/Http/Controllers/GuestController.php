@@ -100,25 +100,11 @@ class GuestController extends Controller
     public function applicationCreate()
     {
 
-        
-        $data = [
-            'branch_id' => config('constants.branch_id')
-        ];
-
-        $contact = Http::post(config('constants.api.get_home_page_details'), $data);
-        $contactDetails = $contact->json();
-
-        $grade_response = Http::post(config('constants.api.application_grade_list'), $data);
-        $grade = $grade_response->json();
-
-        $relation_response = Http::post(config('constants.api.application_relation_list'), $data);
-        $relation = $relation_response->json();
-
-        $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
-        $academic_year_list = $academic_year_list_response->json();
-        
-        // $form_field_list_response = Http::post(config('constants.api.form_field_list'), $data);
-        // $form_field = $form_field_list_response->json();
+        $grade = Helper::GetMethod(config('constants.api.class_list'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($form_field);
         return view(

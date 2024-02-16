@@ -2022,4 +2022,8 @@ return [
     "student_number" => "Student Number",
     "child_health_report" => "Child Health Report",
     "report_list" => "Report List",
+    "report_list" => "Report List",
+    "name_common" => "Name (Common)",
+    "first_name_common" => "First Name (Common)",
+    "last_name_common" => "Last Name (Common)",
 ];

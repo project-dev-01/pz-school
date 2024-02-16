@@ -762,12 +762,13 @@ class AuthController extends Controller
     }
     public function authenticateGuest(Request $request)
     {
-        $response = Http::post(config('constants.api.login'), [
+        $response = Http::post(config('constants.api.login_guest'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
+            'role_id' => "7",
             'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();

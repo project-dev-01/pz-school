@@ -18,8 +18,6 @@ $(function () {
         if (admissionCheck === true) {
             
             $("#overlay").fadeIn(300);
-            console.log(123)
-            return false;
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
