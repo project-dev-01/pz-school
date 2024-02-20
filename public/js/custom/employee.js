@@ -1,5 +1,20 @@
 $(function () {
 
+    $("#passport_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#visa_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
     $(".number_validation").keypress(function () {
         console.log(123)
         var regex = new RegExp("^[0-9-+]");

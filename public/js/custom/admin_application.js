@@ -154,7 +154,7 @@ $(function () {
                     $("#overlay").fadeOut(300);
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = application;
+                        window.location.href = applicationIndex;
                     } else {
                         toastr.error(data.message);
                     }

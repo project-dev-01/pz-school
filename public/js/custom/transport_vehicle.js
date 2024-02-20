@@ -244,6 +244,7 @@ $(function () {
     // delete TransportVehicleDelete
     $(document).on('click', '#deleteTransportVehicleBtn', function () {
         var id = $(this).data('id');
+        console.log('id',id)
         var url = transportVehicleDelete;
         swal.fire({
             title: deleteTitle + '?',
@@ -251,7 +252,7 @@ $(function () {
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonTex,
+            confirmButtonText: deleteconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,

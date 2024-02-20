@@ -704,14 +704,14 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
-                                    <label for="status">{{ __('messages.authentication') }}</label>
-                                    <div class="switch">
+                                    <label class="switch">{{ __('messages.authentication') }}
+
                                         <input id="status" name="status" type="checkbox">
                                         <span>
                                             <em></em>
                                             <strong></strong>
                                         </span>
-                                    </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>

@@ -428,6 +428,7 @@ $(function () {
                 $("#txt_prev_schname").val(data.school_last_attended);
                 $("#txt_prev_qualify").val(data.grade);
                 $("#education").val(data.education);
+                $("#txt_regiter_no").val(data.register_number);
                 $("#txt_mobile_no").val(data.mobile_no);
                 $("#address").val(data.address);
                 $("#btwyears").val(data.academic_year);

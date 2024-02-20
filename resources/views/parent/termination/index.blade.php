@@ -145,6 +145,7 @@
     var deleteHtml = "{{ __('messages.delete_this_termination') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <!-- button js added -->
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>

@@ -499,8 +499,6 @@
                 type: 'GET',
                 url: allNotifications,
                 success: function(res) {
-                    console.log("res")
-                    console.log(res)
                     $(".notification-list-show").html(res.notificationlist);
                     $(".badge-count").text(res.count);
                 },
@@ -517,8 +515,6 @@
                 type: 'GET',
                 url: remainderallNotifications,
                 success: function(res) {
-                    console.log("res")
-                    console.log(res)
                     $(".remainder-list-show").html(res.notificationlist);
                     $(".remainder-badge-count").text(res.count);
                 },

@@ -13,6 +13,7 @@ return [
     'api' => [
         // login url
         'login' => $url.'/login',
+        'login_guest' => $url.'/login_guest',
         'loginSA' => $url.'/loginSA',
         'login_branch' => $url.'/login_branch',
         // country,state,cities
@@ -797,6 +798,7 @@ return [
         'import_employee'=> $url.'/importcsv/employee',
         'import_parent'=> $url.'/importcsv/parent',
         'import_student'=> $url.'/importcsv/student',
+        'import_child_health'=> $url.'/importcsv/child_health',
         'chat_parent_list'=> $url.'/chat/get_parent_list',
         'chat_teacher_list'=> $url.'/chat/get_teacher_list',
         'chat_group_list'=> $url.'/chat/get_group_list',
@@ -1061,7 +1063,11 @@ return [
         'interviewstudent_list'=> $url.'/personalinterview/list',        
         'singlestudent_report'=> $url.'/personalinterview/individual',     
         'classstudent_report'=> $url.'/personalinterview/overall',
+        //child health
         
+        'child_health_list' => $url.'/child_health/list',
+        'child_health_details' => $url.'/child_health/child_health-details',
+        'child_health_export' => $url.'/child/health/export',
       ]
 
 ];

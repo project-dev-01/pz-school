@@ -184,7 +184,7 @@
                         <span>{{ __('messages.admission') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse {{ (request()->is('admin/student/student-details*') || request()->is('admin/parent/update_info*') || request()->is('admin/student/update_info*') || request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarAdmission">
+                    <div class="collapse {{ (request()->is('admin/student/student-details*') || request()->is('admin/application/edit*') || request()->is('admin/parent/update_info*') || request()->is('admin/student/update_info*') || request()->is('admin/parent/parent-details*')) ? 'show' : '' }}" id="sidebarAdmission">
                         <ul class="nav-second-level" style="padding-left: 30px;">
                             <li class="{{  (request()->is('admin/student/student-details*')) ? 'menuitem-active' : '' }}">
                                 <a href="#sidebarStudentDetails" data-toggle="collapse">
@@ -192,7 +192,7 @@
                                     <span>{{ __('messages.student_details') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse {{  (request()->is('admin/student/student-details*') || request()->is('admin/student/update_info*')) ? 'show' : '' }}" id="sidebarStudentDetails">
+                                <div class="collapse {{  (request()->is('admin/student/student-details*') || request()->is('admin/application/edit*') || request()->is('admin/student/update_info*')) ? 'show' : '' }}" id="sidebarStudentDetails">
                                     <ul class="nav-second-level">
                                     <li class="{{ (request()->is('admin/admission/index')) ? 'active' : '' }}">
                                             <a href="{{ route('admin.admission')}}" class="nav-link">
@@ -204,7 +204,7 @@
                                                 <span>{{ __('messages.student_list') }}</span>
                                             </a>
                                         </li>
-                                        <li class="{{ (request()->is('admin/application/index')) ? 'active' : '' }}">
+                                        <li class="{{ (request()->is('admin/application/index') || request()->is('admin/application/edit*')) ? 'active' : '' }}">
                                             <a href="{{ route('admin.application.index')}}" class="nav-link">
                                                 <span>{{ __('messages.application_list') }}</span>
                                             </a>
@@ -2214,12 +2214,12 @@
                         <span> {{ __('messages.clear_local_storage') }} </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('parent.profile_edit')}}" class="nav-link {{ (request()->is('parent/profile*')) ? 'active' : '' }}">
                         <i data-feather="message-square"></i>
                         <span>{{ __('messages.profile') }}</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="#sidebarParentProfileUpdate" data-toggle="collapse">
@@ -2276,7 +2276,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <li  class="{{  (request()->is('parent/application/edit*')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarParentApplication" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_122_3580)">
@@ -2292,10 +2292,10 @@
                         <span> {{ __('messages.application') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarParentApplication">
+                    <div class="collapse {{  (request()->is('parent/application/edit*')) ? 'show' : '' }}" id="sidebarParentApplication">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('parent.application.index')}}" class="nav-link {{ (request()->is('parent/application') || request()->is('parent/application/edit')) ? 'active' : '' }}">
+                                <a href="{{ route('parent.application.index')}}" class="nav-link {{ (request()->is('parent/application') || request()->is('parent/application/edit*')) ? 'active' : '' }}">
                                     <span> {{ __('messages.list') }} </span>
                                 </a>
                             </li>

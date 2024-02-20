@@ -359,7 +359,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name">{{ __('messages.last_name') }}</label>
-                                                <input type="text" class="form-control" id="last_name" {{$readonly_phase_1}} value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name" {{$readonly_phase_1}} value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>

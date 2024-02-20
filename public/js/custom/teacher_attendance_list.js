@@ -1,6 +1,66 @@
 $(function () {
 
+
+    $('#employeeDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        // autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+
+    $("#employeeDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+
+    $('#employeeReportDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        // autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        onClose: function (dateText, inst) {
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+
+    $("#employeeReportDate").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+    // $("#employeeReportDate").datepicker({
+    //     dateFormat: 'yy-mm-dd',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    //     yearRange: "-60:+1", // last hundred years
+    //     maxDate: 0
+    // });
+
+    // $("#employeeDate").datepicker({
+    //     dateFormat: 'yy-mm-dd',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    //     yearRange: "-60:+1", // last hundred years
+    //     maxDate: 0
+    // });
     
+
     $("#pattern").on("change", function() {
         var pattern = $(this).val();
         console.log('ch', pattern)
@@ -1131,47 +1191,6 @@ $(function () {
     $("#employee_attendance_widget").hide();
     $("#employee_attendance_report").hide();
 
-    $('#employeeDate').datepicker({
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'MM yy',
-        // autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        onClose: function (dateText, inst) {
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-        }
-    });
-
-    $("#employeeDate").focus(function () {
-        $(".ui-datepicker-calendar").hide();
-        $("#ui-datepicker-div").position({
-            my: "center top",
-            at: "center bottom",
-            of: $(this)
-        });
-    });
-
-    $('#employeeReportDate').datepicker({
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'MM yy',
-        // autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        onClose: function (dateText, inst) {
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-        }
-    });
-
-    $("#employeeReportDate").focus(function () {
-        $(".ui-datepicker-calendar").hide();
-        $("#ui-datepicker-div").position({
-            my: "center top",
-            at: "center bottom",
-            of: $(this)
-        });
-    });
     // rules validation
     $("#employeeAttendanceReport").validate({
         rules: {
@@ -1489,14 +1508,6 @@ $(function () {
     //         of: $(this)
     //     });
     // });
-
-    $("#employeeDate").datepicker({
-        dateFormat: 'MM yy',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-    });
 
     var count = 0;
     $("#employeeAttendanceFilter").validate({
