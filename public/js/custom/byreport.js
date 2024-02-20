@@ -80,7 +80,8 @@ $(function () {
             year: "required",
             class_id: "required",
             section_id: "required",
-            examnames: "required"
+            examnames: "required",
+            report_type: "required"
         }
     });
     $('#bysubjectfilter').on('submit', function (e) {

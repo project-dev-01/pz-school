@@ -207,5 +207,6 @@
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
 
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <script src="{{ asset('js/custom/promotion_bulk_process.js') }}"></script>@endsection

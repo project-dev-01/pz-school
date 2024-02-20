@@ -316,7 +316,7 @@ $(function () {
         row += '<input class="form-control break_type"  type="text" name="timetable[' + count + '][break_type]" ></input> ';
         row += '</div></td>';
         row += '<td width="20%" ><div class="form-group main">';
-        row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="timetable[' + count + '][teacher][]">';
+        row += '<select  class="form-control select2-multiple teacher" data-toggle="select2" multiple="multiple"  name="timetable[' + count + '][teacher][]">';
         row += '<option value="">' + select_teacher + '</option>';
         row += '<option value="0">' + all_lang + '</option>';
         $.each(teacher, function (key, val) {

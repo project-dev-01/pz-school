@@ -73,7 +73,8 @@ $(function () {
             paper_name: "required",
             paper_type: "required",
             grade_category: "required",
-            paper_type: "required"
+            paper_type: "required",
+            score_type: "required"
         }
     });
     // add exam
@@ -125,6 +126,10 @@ $(function () {
                         $('.addExamPaper').find('form')[0].reset();
                         toastr.error(data.message);
                     }
+                }, error: function (err) {
+                    $('.addExamPaper').modal('hide');
+                    $('.addExamPaper').find('form')[0].reset();
+                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                 }
             });
         }

@@ -262,7 +262,7 @@
                             </div>
                             <div class="col-md-4 parent_staff_holiday">
                                 <div class="form-group mt-3">
-                                    <span class="note">Note: If both are not checked mean events attendance</span>
+                                    <span class="note">{{ __('messages.event_note_edit') }}</span>
                                 </div>
                             </div>
                             <div class="col-md-4">

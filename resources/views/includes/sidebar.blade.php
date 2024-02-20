@@ -533,13 +533,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#sidebarHomework" data-toggle="collapse">
+                    <a href="#sidebarpersonalinterview" data-toggle="collapse">
                         <!--<i class="fe-book-open"></i>-->
                         <i data-feather="file-text" class="icon-dual"></i>
                         <span> {{ __('messages.personal_interview') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse" id="sidebarHomework">
+                    <div class="collapse" id="sidebarpersonalinterview">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('admin.personalinterview.index')}}" class="nav-link {{ (request()->is('admin/personalinterview/add')) ? 'active' : '' }}">

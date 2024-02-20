@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="paperID">{{ __('messages.paper_name') }}</label>
+                                            <label for="paperID">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
                                             <select id="paperID" class="form-control" name="paper_id">
                                                 <option value="">{{ __('messages.select_paper') }}</option>
                                             </select>

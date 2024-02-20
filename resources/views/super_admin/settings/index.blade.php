@@ -57,12 +57,12 @@
                         Hi I'm Johnathn Deo,has been the industry's standard dummy text ever since the
                         1500s, when an unknown printer took a galley of type.
                     </p> -->
-                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name"> {{ $user_details['name'] }} </span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.full_name') }} :</strong> <span class="ml-2 user_name">  </span></p>
 
                     <!-- <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ml-2">(123)
                             123 1234</span></p> -->
 
-                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> {{ $user_details['email'] }}</span></p>
+                    <p class="text-muted mb-2 font-13"><strong>{{ __('messages.email') }} :</strong> <span class="ml-2 "> </span></p>
 
                     <!-- <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ml-2">USA</span></p> -->
                 </div>
@@ -89,18 +89,18 @@
                         <form method="POST" action="{{ route('settings.updateProfileInfo') }}" id="updateProfileInfo">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.personal_info') }}</h5>
                             <div class="row">
-                            <input type="hidden" name="id" value="{{ $user_details['id'] }}">
+                            <input type="hidden" name="id" value="">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.name') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user_details['name'] }}" placeholder="{{ __('messages.enter_name') }}">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.enter_name') }}">
                                         <span class="text-danger error-text name_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email_address') }}</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ $user_details['email'] }}" placeholder="Enter email">
+                                        <input type="email" class="form-control" id="email" name="email"  placeholder="{{ __('messages.enter_the_email') }}">
                                         <span class="text-danger error-text email_error"></span>
                                         <!-- <span class="form-text text-muted"><small>If you want to change email please <a href="javascript: void(0);">click</a> here.</small></span> -->
                                     </div>
@@ -128,11 +128,11 @@
                         <form action="{{ route('settings.changePassword') }}" method="POST" id="changeNewPassword" class="comment-area-box mt-2 mb-3">
                             <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle mr-1"></i> {{ __('messages.change_password') }}</h5>
                             <div class="row">
-                                <input type="hidden" name="id" value="{{ $user_details['id'] }}">
+                                <input type="hidden" name="id">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">{{ __('messages.old_password') }}</label>
-                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter current password">
+                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="{{ __('messages.old_password') }}">
                                         <span class="text-danger error-text oldpassword_error"></span>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="newpassword">{{ __('messages.new_password') }}</label>
-                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter new password">
+                                        <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="{{ __('messages.new_password') }}">
                                         <span class="text-danger error-text newpassword_error"></span>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cnewpassword">{{ __('messages.confirm_new_password') }}</label>
-                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="ReEnter new password">
+                                        <input type="password" class="form-control" id="cnewpassword" name="cnewpassword" placeholder="{{ __('messages.confirm_new_password') }}">
                                         <span class="text-danger error-text cnewpassword_error"></span>
                                     </div>
                                 </div>

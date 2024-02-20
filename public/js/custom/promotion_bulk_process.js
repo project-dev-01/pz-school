@@ -152,7 +152,15 @@ $(function () {
                         name:'actions'
                     }
                     
-                ]
+                ],
+                initComplete: function (settings, json) {
+                    console.log(json);
+                
+                    // Check if the data array is empty or has no records
+                    if (json.data.length === 0 || json.recordsTotal === 0) {
+                        $('#saveFinalPromotionDataBtn').prop('disabled', true);
+                    }
+                },
             }).on('draw', function () {
                 toggleButton();
             });

@@ -3,14 +3,14 @@
     <div class="modal-dialog modal-full-width">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="fullWidthModalLabel">Reason Details</h4>
+                <h4 class="modal-title" id="fullWidthModalLabel">{{ __('messages.reason_details') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-box">
-                            <h4 class="header-title">Reason</h4>
+                            <h4 class="header-title">{{ __('messages.reason') }}</h4>
 
                             <div id="showAllReasons">
                             </div>

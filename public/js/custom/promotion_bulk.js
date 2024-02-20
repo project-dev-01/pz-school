@@ -27,15 +27,17 @@ $(function () {
     });
     $("#downloadListClassID").on('change', function (e) {
         e.preventDefault();
+        var Selector = '#promoteDownloadForm';
         var class_id = $(this).val();
         console.log(class_id);
-        $("#downloadListSectionID").empty();
-        $("#downloadListSectionID").append('<option value="">' + select_class + '</option>');
+        $(Selector).find('select[name="download_section_id"]').empty();
+        $(Selector).find('select[name="download_section_id"]').append('<option value="">' + select_class + '</option>');
 
-        $.post(sectionByClass, { class_id: class_id }, function (res) {
+        $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
+            console.log(res);
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#downloadListSectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                    $(Selector).find('select[name="download_section_id"]').append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
             }
         }, 'json');
@@ -264,6 +266,7 @@ $(function () {
             if ($.fn.DataTable.isDataTable('#promotionDataStudentList')) {
                 $('#promotionDataStudentList').DataTable().destroy();
             }
+           
              table = $('#promotionDataStudentList').DataTable({
                 processing: true,
                 info: true,
@@ -305,8 +308,10 @@ $(function () {
                         exportOptions: {
                             columns: 'th:not(:last-child)'
                         },
+    
+    
                         customize: function (doc) {
-                            doc.pageMargins = [50,50,50,50];
+                            doc.pageMargins = [50, 50, 50, 50];
                             doc.defaultStyle.fontSize = 10;
                             doc.styles.tableHeader.fontSize = 12;
                             doc.styles.title.fontSize = 14;
@@ -331,25 +336,24 @@ $(function () {
                                 }
                             });*/
                             // Create a footer
-                            
-                            doc['footer']=(function(page, pages) {
+    
+                            doc['footer'] = (function (page, pages) {
                                 return {
                                     columns: [
-                                        { alignment: 'left', text: [ footer_txt ],width:400} ,
+                                        { alignment: 'left', text: [footer_txt], width: 400 },
                                         {
                                             // This is the right column
                                             alignment: 'right',
-                                            text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                            width:100
-        
+                                            text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                            width: 100
+    
                                         }
                                     ],
-                                    margin: [50, 0,0,0]
+                                    margin: [50, 0, 0, 0]
                                 }
                             });
-                            
-                        }
     
+                        }
                     }
                 ],
                 "ajax": {

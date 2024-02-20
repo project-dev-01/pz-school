@@ -1138,13 +1138,14 @@ class SuperAdminController extends Controller
 
     // setting show
     public function settings()
-    {
-        $getUser = Helper::GetMethod(config('constants.api.get_user'));
+    {//dd("cbchey");
+        //$getUser = Helper::GetMethod(config('constants.api.get_user'));
+        
         return view(
-            'super_admin.settings.index',
-            [
-                'user_details' => $getUser['data']['user'],
-            ]
+             'super_admin.settings.index'
+            // [
+            //     'user_details' => $getUser['data']['user'],
+            // ]
         );
     }
 

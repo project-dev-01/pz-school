@@ -74,7 +74,7 @@
                                     <th>{{ __('messages.school_role_fullname') }}</th>
                                     <th>{{ __('messages.school_role_shortname') }}</th>
                                     
-                                    <th>{{ __('messages.role_access') }}</th>
+                                    <th>{{ __('messages.assigned_roleaccess') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>

@@ -118,18 +118,27 @@ $(function () {
         maxDate: 0
     });
 
-
+    $("#StudentFilter").validate({
+        rules: {
+            department_id_filter: "required",
+            class_id: "required",
+            section_id: "required",
+            session_id: "required"
+        }
+    });
     // get student list
     $('#StudentFilter').on('submit', function (e) {
         e.preventDefault();
         var StudentFilter = $("#StudentFilter").valid();
         if (StudentFilter === true) {
+            var department_id = $('#department_id_filter').val();
             var student_name = $('#student_name').val();
             var class_id = $('#class_id').val();
             var section_id = $('#section_id').val();
             var session_id = $('#session_id').val();
 
             var classObj = {
+                department_id:department_id,
                 student_name: student_name,
                 classID: class_id,
                 sectionID: section_id,
@@ -140,6 +149,7 @@ $(function () {
 
             var formData = {
                 student_name: student_name,
+                department_id: department_id,
                 class_id: class_id,
                 section_id: section_id,
                 session_id: session_id,
@@ -162,33 +172,34 @@ $(function () {
             // dom: 'lBfrtip',
             dom: 'Blfrtip',
 
-            // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            // dom: 'C&gt;"clear"&lt;lfrtip',
-            // "language": {
-
-            //     "emptyTable": no_data_available,
-            //     "infoFiltered": filter_from_total_entries,
-            //     "zeroRecords": no_matching_records_found,
-            //     "infoEmpty": showing_zero_entries,
-            //     "info": showing_entries,
-            //     "lengthMenu": show_entries,
-            //     "search": datatable_search,
-            //     "paginate": {
-            //         "next": next,
-            //         "previous": previous
-            //     },
-            // },
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        "language": {
+            
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
+            "info": showing_entries,
+            "lengthMenu": show_entries,
+            "search": datatable_search,
+            "paginate": {
+                "next": next,
+                "previous": previous
+            },
+        },
             // exportOptions: { rows: ':visible' },
             serverSide: true,
             ajax: {
                 url: studentList,
                 data: function (d) {
                     d.student_name = formData.student_name,
-                        d.class_id = formData.class_id,
-                        d.section_id = formData.section_id,
-                        d.session_id = formData.session_id
+                    d.department_id = formData.department_id,
+                    d.class_id = formData.class_id,
+                    d.section_id = formData.section_id,
+                    d.session_id = formData.session_id,
+                    d.session_id = formData.session_id
                 }
             },
             "pageLength": 10,
