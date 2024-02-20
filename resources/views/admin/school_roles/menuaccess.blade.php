@@ -55,7 +55,7 @@
 				</div>
 				@endif
 				<div class="card-body">
-					<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off" novalidate="novalidate">
+					<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off" >
 						@csrf
 						<div class="row">
 
@@ -110,7 +110,7 @@
 						<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
 							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
 							@if(isset($branch_id))
-							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmdelete"> {{ __('messages.delete') }} {{ __('messages.menu_access') }}</button>
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmdelete"> {{ __('messages.remove_portal_access_permission') }} </button>
 
 							@endif
 							<!-- Trigger the modal with a button -->
@@ -122,7 +122,7 @@
 									<!-- Modal content-->
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title">{{ __('messages.menu_access') }}</h4>
+											<h4 class="modal-title">{{ __('messages.remove_portal_access_permission') }} </h4>
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 
 										</div>

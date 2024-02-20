@@ -8,7 +8,8 @@ $(function () {
             min_mark: "required",
             max_mark: "required",
             status: "required",
-            grade_category: "required"
+            grade_category: "required",
+            score_type: "required",
         }
     });
     // add grade

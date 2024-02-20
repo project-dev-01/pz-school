@@ -37,7 +37,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
-											<select id="department_id" name="department_id" class="form-control">
+											<select id="department_id" name="department_id" class="form-control" required>
 												<option value="">{{ __('messages.select_department') }}</option>
 												@forelse($department as $r)
 												<option value="{{$r['id']}}">{{$r['name']}}</option>
@@ -49,7 +49,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-											<select id="changeClassName" class="form-control" name="class_id">
+											<select id="changeClassName" class="form-control" name="class_id" required>
 												<option value="">{{ __('messages.select_grade') }}</option>
 											</select>
 										</div>
@@ -57,7 +57,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="sectionID">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-											<select id="sectionID" class="form-control" name="section_id">
+											<select id="sectionID" class="form-control" name="section_id" required>
 												<option value="">{{ __('messages.select_class') }}</option>
 											</select>
 										</div>
@@ -65,7 +65,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
-											<select id="examnames" class="form-control" name="exam_id">
+											<select id="examnames" class="form-control" name="exam_id" required>
 												<option value="">{{ __('messages.select_exams') }}</option>
 											</select>
 										</div>
@@ -73,24 +73,24 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
-											<select id="subjectID" class="form-control" name="subject_id">
+											<select id="subjectID" class="form-control" name="subject_id" required>
 												<option value="">{{ __('messages.select_subject') }}</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="paperID">{{ __('messages.paper_name') }}</label>
-                                            <select id="paperID" class="form-control" name="paper_id">
+                                            <label for="paperID">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
+                                            <select id="paperID" class="form-control" name="paper_id" required>
                                                 <option value="">{{ __('messages.select_paper') }}</option>
                                             </select>
                                         </div>
                                     </div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label for="semester_id">{{ __('messages.semester') }}</label>
+											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
 											<select id="semester_id" class="form-control" name="semester_id" required>
-												<option value="0">{{ __('messages.select_semester') }}</option>
+												<option value="">{{ __('messages.select_semester') }}</option>
 												@forelse($semester as $sem)
 												<option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
 												@empty
@@ -100,9 +100,9 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label for="session_id">{{ __('messages.session') }}</label>
+											<label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
 											<select id="session_id" class="form-control" name="session_id" required>
-												<option value="0">{{ __('messages.select_session') }}</option>
+												<option value="">{{ __('messages.select_session') }}</option>
 												@forelse($session as $ses)
 												<option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
 												@empty

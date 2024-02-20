@@ -12,7 +12,7 @@
                    
                     <div class="form-group">
                         <label for="portal_roleid">{{ __('messages.role') }}<span class="text-danger">*</span></label>
-                        <select class="form-control " id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+                        <select class="form-control " id="portal_roleid" name="portal_roleid" data-placeholder="{{ __('messages.choose_role') }}" required>
                             @forelse($portal_roles as $r)
                             
                             <option value="{{$r['id']}}">{{ __('messages.' . strtolower($r['portal_name'])) }}</option>
@@ -28,12 +28,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fullname">{{ __('messages.school_role_fullname') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="{{ __('messages.enter_school_role_fullname') }}">
+                        <input type="text" id="fullname" name="fullname" class="form-control" placeholder="{{ __('messages.enter_school_role_fullname') }}" required>
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="shortname"> {{ __('messages.school_role_shortname') }} <span class="text-danger">*</span></label>
-                        <input type="text" id="shortname" name="shortname" class="form-control" placeholder="{{ __('messages.enter_school_role_shortname') }}" >
+                        <input type="text" id="shortname" name="shortname" class="form-control" placeholder="{{ __('messages.enter_school_role_shortname') }}"  required>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>

@@ -241,7 +241,8 @@ $(function () {
             class_id: "required",
             section_id: "required",
             subject_id: "required",
-            exam_id: "required"
+            exam_id: "required",
+            paper_id: "required"
         }
     });
     // data bind 
@@ -781,6 +782,8 @@ $(document).on("change", ".basepoints", function (e) {
                                 $('.lbl_pass_fail' + studID).val('Fail');
                             }
                         } else {
+                            $('.points' + studID).val(gradeData[0].points);
+                            $('.freetext' + studID).val(gradeData[0].freetext);
                             $('.score' + studID).val("");
                             $('.lbl_grade' + studID).text("-");
                             $('.lbl_grade' + studID).val("");
@@ -1108,7 +1111,8 @@ $(document).on("change", ".basepoints", function (e) {
                         var points = '<select class="form-control basepoints points' + row.student_id + '" id="' + row.student_id + '" ' + attribue + ' data-style="btn-outline-success" name="subjectmarks[' + meta.row + '][points]" >' +
                             '<option value="">'+choose+'</option>';
                             jQuery.each(grade, function(index, item) {
-                                points +='<option value="'+item.id+'">'+item.grade+'</option>';
+                                var sel=(item.id==row.points)?'Selected':'';
+                                points +='<option value="'+item.id+'" '+sel+'>'+item.grade+'</option>';
 
                             });
                             points +='</select>';
@@ -1208,7 +1212,7 @@ $(document).on("change", ".basepoints", function (e) {
                     data: 'name'
                 },
                 {
-                    data: 'text'
+                    data: 'freetext'
                 },
                 
                 {
@@ -1250,7 +1254,7 @@ $(document).on("change", ".basepoints", function (e) {
                         if (row.status == "absent") {
                             attribue = "disabled";
                         }
-                        var freetext = '<textarea class="form-control" name="subjectmarks[' + meta.row + '][freetext]" style="width:250px"></textarea>';
+                        var freetext = '<textarea class="form-control" name="subjectmarks[' + meta.row + '][freetext]" style="width:250px">'+row.freetext+'</textarea>';
                         return freetext;
                         
                     }

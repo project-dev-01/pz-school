@@ -953,7 +953,7 @@
                                             <div class="col-sm-8">
                                                 <h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
                                                 <div class="info">
-                                                    <span> Class: {{$child['class_name']}} ({{$child['section_name']}})</span>
+                                                    <span> {{ __('messages.class') }}: {{$child['class_name']}} ({{$child['section_name']}})</span>
                                                 </div>
                                                 <br>
                                                 <div class="profile">

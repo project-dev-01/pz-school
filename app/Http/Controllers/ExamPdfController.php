@@ -2844,6 +2844,7 @@ class ExamPdfController extends Controller
             'academic_year' => $request->academic_year
         ];
         $reports = Helper::PostMethod(config('constants.api.classstudent_report'), $data);
+
        //dd($reports);
         $footer_text = session()->get('footer_text');
         // dd($get_attendance_list_teacher);
