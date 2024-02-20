@@ -40,7 +40,7 @@
                                                 @if($category['soap_type_id']=="4")
                                                 <ul class="nav nav-tabs">
                                                     <li class="nav-item">
-                                                        <h4 class="navv">{{$category['name']}} Details<h4>
+                                                        <h4 class="navv">{{$category['name']}} {{ __('messages.details') }}<h4>
                                                     </li>
                                                 </ul>
                                                 <div class="table-responsive">

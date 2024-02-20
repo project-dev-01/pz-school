@@ -99,7 +99,7 @@
                                 <div class="form-group">
                                     <label for="pattern">Pattern<span class="text-danger">*</span></label>
                                     <select id="pattern" class="form-control" name="pattern">
-                                        <option value="">Select Pattern</option>
+                                        <option value="">{{ __('messages.select_pattern') }}</option>
                                         <option>Day</option>
                                         <option>Month</option>
                                         <option>Term</option>

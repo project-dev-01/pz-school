@@ -236,5 +236,6 @@ $('#saveAttendanceBtn').on('click', function() {
 
     var admin_promotion_storage = localStorage.getItem('admin_promotion_details');
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <script src="{{ asset('js/custom/promotion_bulk.js') }}"></script>@endsection

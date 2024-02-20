@@ -1456,6 +1456,8 @@ Route::group(['prefix' => 'teacher'], function () {
          Route::get('student_interview_notes/create', [TeacherController::class, 'createStudentInterviewNotes'])->name('teacher.student_interview_notes.create');
          Route::post('student_interview_notes/add', [TeacherController::class, 'addStudentInterviewNotes'])->name('teacher.student_interview_notes.add');
          Route::post('student_interview_details/list', [TeacherController::class, 'getStudentInterviewData'])->name('teacher.student_interview_details.list');
+         Route::post('student_interview_details/edit', [TeacherController::class, 'editStudentInterviewData'])->name('teacher.student_interview_details.edit');
+         Route::post('student_interview_details/update', [TeacherController::class, 'updateStudentInterviewData'])->name('teacher.student_interview_details.update');
     });
 });
 // TEACHER CONTROLLER END

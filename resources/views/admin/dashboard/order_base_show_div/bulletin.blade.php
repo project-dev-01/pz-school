@@ -28,8 +28,9 @@
                                                 </div>
                                             </div>
                                             <div class="col pl-0">
-                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['file']; ?></a>
-                                                <p class="mb-0">Preview</p>
+                                            <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['file']; ?>
+                                                    <p class="mb-0">Preview</p>
+                                                </a>
                                             </div>
                                             <div class="col-auto">
                                                 <!-- Button -->

@@ -2251,7 +2251,8 @@ class TeacherController extends Controller
               'class_id' => $request->class_id,
               'section_id' => $request->section_id,
               'student_id' =>  $request->student_id,
-              'created_by' => session()->get('ref_user_id')
+              'created_by' => session()->get('ref_user_id'),
+              'updated_by'=>session()->get('ref_user_id'),
   
           ];
           $response = Helper::PostMethod(config('constants.api.student_interview_add'), $data);
@@ -2265,6 +2266,26 @@ class TeacherController extends Controller
             'student_id' => $request->student_id,
         ];
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
+        return $response;
+    }
+    public function editStudentInterviewData(Request $request){
+        $data = [
+            'id' => $request->id
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_edit'), $data);
+        return $response;
+    }
+    public function updateStudentInterviewData(Request $request){
+        $data = [
+            'id' => $request->id,
+            'comment' => $request->comment,
+            'type' => $request->type,
+            'created_by' => session()->get('ref_user_id'),
+            'updated_by'=>session()->get('ref_user_id'),
+            'login_userid' => session()->get('user_id'),
+            'login_roleid' => session()->get('role_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
         return $response;
     }
 }

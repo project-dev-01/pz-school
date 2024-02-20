@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="nursingPopupTitle">Nursing Teacher</h5>
+                <h5 class="modal-title" id="nursingPopupTitle">{{ __('messages.nursing_teacher') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -42,7 +42,7 @@
                                 <td id="showleaveType"></td>
                             </tr>
                             <tr>
-                                <td>Absense Reason(From Parent)</td>
+                                <td>{{ __('messages.absense_reason') }}(From Parent)</td>
                                 <td>:</td>
                                 <td id="absentReasonFromParent"></td>
                             </tr>
@@ -52,7 +52,7 @@
                                 <td id="showleaveTypeTeacher"></td>
                             </tr>
                             <tr>
-                                <td>Absense Reason(Class Incharge)</td>
+                                <td>{{ __('messages.absense_reason') }}(Class Incharge)</td>
                                 <td>:</td>
                                 <td id="absentReasonForTeacher"></td>
                             </tr>
@@ -61,7 +61,7 @@
                                 <td>:</td>
                                 <td id="dropLeaveType">
                                     <select id="changeLevType" class="form-control" name="changeLevType">
-                                        <option value="">Select Leave Type</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
                                         <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
                                         @empty
@@ -70,7 +70,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Absense Reason (Nursing)</td>
+                                <td>{{ __('messages.absense_reason') }} (Nursing)</td>
                                 <td>:</td>
                                 <td id="absentReason">
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
@@ -82,7 +82,7 @@
                                 <td>{{ __('messages.your_remarks') }}</td>
                                 <td>:</td>
                                 <td>
-                                    <textarea maxlength="255" id="yourRemarks" class="form-control" placeholder="Enter the text..." name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    <textarea maxlength="255" id="yourRemarks" class="form-control" placeholder="{{ __('messages.enter_the_text') }}" name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     </textarea>
                                 </td>
                             </tr>

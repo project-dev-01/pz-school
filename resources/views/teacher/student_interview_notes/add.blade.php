@@ -158,6 +158,7 @@
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
     var addStudentInterview = "{{ route('teacher.student_interview_notes.add') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <script src="{{ asset('js/custom/student_interview_teacher.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))

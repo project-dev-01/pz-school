@@ -123,7 +123,7 @@
         </div>
     </div>
     <!-- container -->
-
+    
     @endsection
     @section('scripts')
     <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>

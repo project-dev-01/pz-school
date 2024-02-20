@@ -365,7 +365,7 @@
 		// default image test
 		var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 		var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
-
+		var footer_txt = "{{ session()->get('footer_text') }}";
 		var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 	</script>
 	<script src="{{ asset('js/custom/promotion_bulk.js') }}"></script>@endsection

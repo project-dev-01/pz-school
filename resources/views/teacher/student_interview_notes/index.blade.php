@@ -125,6 +125,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>id</th>
                                         <th>{{ __('messages.department') }}</th>
                                         <th>{{ __('messages.grade') }}</th>
                                         <th>{{ __('messages.class') }}</th>
@@ -148,8 +149,7 @@
         </div><!-- end col-->
     </div>
     <!-- end row-->
-    <!-- student leave remarks popup -->
-
+    @include('teacher.student_interview_notes.edit')
 </div> <!-- container -->
 
 @endsection
@@ -177,6 +177,9 @@
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
     var getStudentInterviewList = "{{ route('teacher.student_interview_details.list') }}";
+    var editStudentInterview = "{{ route('teacher.student_interview_details.edit') }}";
+    var updateStudentInterviewComment = "{{ route('teacher.student_interview_details.update') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <script src="{{ asset('js/custom/student_interview_teacher.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))

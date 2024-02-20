@@ -1061,6 +1061,12 @@ return [
         'interviewstudent_list'=> $url.'/personalinterview/list',        
         'singlestudent_report'=> $url.'/personalinterview/individual',     
         'classstudent_report'=> $url.'/personalinterview/overall',
+
+         //student interview list
+         'student_interview_list'=> $url.'/student_interview_list',
+         'student_interview_add' => $url.'/student_interview_add',
+         'student_interview_edit' => $url.'/student_interview_edit',
+         'student_interview_update' => $url.'/student_interview_update',
         
       ]
 
