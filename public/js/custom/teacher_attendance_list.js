@@ -261,7 +261,7 @@ $(function () {
                 }, function (res) {
                     if (res.code == 200) {
                         $.each(res.data, function (key, val) {
-                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.class_id + '">' + val.class_name + '</option>');
                         });
                         if (classID != '') {
                             $(Selector).find('select[name="class_id"]').val(classID);
@@ -761,206 +761,206 @@ $(function () {
 
 
     // if localStorage
-    if (get_roll_id == "4") {
-        // teacher
-        if (typeof teacher_student_attendance_report_storage !== 'undefined') {
-            if ((teacher_student_attendance_report_storage)) {
-                if (teacher_student_attendance_report_storage) {
-                    var teacherStudentAttendanceReportStorage = JSON.parse(teacher_student_attendance_report_storage);
-                    if (teacherStudentAttendanceReportStorage.length == 1) {
-                        var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                        teacherStudentAttendanceReportStorage.forEach(function (user) {
-                            classID = user.class_id;
-                            sectionID = user.section_id;
-                            subjectID = user.subject_id;
-                            semesterID = user.semester_id;
-                            sessionID = user.session_id;
-                            date = user.date;
-                            userBranchID = user.branch_id;
-                            userRoleID = user.role_id;
-                            userID = user.user_id;
-                        });
-                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                            $('#changeClassName').val(classID);
-                            $('#classDate').val(date);
-                            $('#semesterID').val(semesterID);
-                            $('#sessionID').val(sessionID);
-                            if (classID) {
+    // if (get_roll_id == "4") {
+    //     // teacher
+    //     if (typeof teacher_student_attendance_report_storage !== 'undefined') {
+    //         if ((teacher_student_attendance_report_storage)) {
+    //             if (teacher_student_attendance_report_storage) {
+    //                 var teacherStudentAttendanceReportStorage = JSON.parse(teacher_student_attendance_report_storage);
+    //                 if (teacherStudentAttendanceReportStorage.length == 1) {
+    //                     var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+    //                     teacherStudentAttendanceReportStorage.forEach(function (user) {
+    //                         classID = user.class_id;
+    //                         sectionID = user.section_id;
+    //                         subjectID = user.subject_id;
+    //                         semesterID = user.semester_id;
+    //                         sessionID = user.session_id;
+    //                         date = user.date;
+    //                         userBranchID = user.branch_id;
+    //                         userRoleID = user.role_id;
+    //                         userID = user.user_id;
+    //                     });
+    //                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+    //                         $('#changeClassName').val(classID);
+    //                         $('#classDate').val(date);
+    //                         $('#semesterID').val(semesterID);
+    //                         $('#sessionID').val(sessionID);
+    //                         if (classID) {
 
-                                $("#attendanceFilter").find("#sectionID").empty();
-                                $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
-                                $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
-                                    if (res.code == 200) {
-                                        $.each(res.data, function (key, val) {
-                                            $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                        });
-                                        $("#attendanceFilter").find("#sectionID").val(sectionID)
-                                    }
-                                }, 'json');
-                            }
-                            if (sectionID) {
-                                $("#attendanceFilter").find("#subjectID").empty();
-                                $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
-                                $.post(teacherSubjectUrl, {
-                                    token: token,
-                                    branch_id: branchID,
-                                    teacher_id: userID,
-                                    class_id: classID,
-                                    section_id: sectionID,
-                                    academic_session_id: academic_session_id,
-                                }, function (res) {
-                                    if (res.code == 200) {
-                                        $.each(res.data, function (key, val) {
-                                            $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                                        });
-                                        $("#attendanceFilter").find("#subjectID").val(subjectID)
-                                    }
-                                }, 'json');
-                            }
+    //                             $("#attendanceFilter").find("#sectionID").empty();
+    //                             $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
+    //                             $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
+    //                                 if (res.code == 200) {
+    //                                     $.each(res.data, function (key, val) {
+    //                                         $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+    //                                     });
+    //                                     $("#attendanceFilter").find("#sectionID").val(sectionID)
+    //                                 }
+    //                             }, 'json');
+    //                         }
+    //                         if (sectionID) {
+    //                             $("#attendanceFilter").find("#subjectID").empty();
+    //                             $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
+    //                             $.post(teacherSubjectUrl, {
+    //                                 token: token,
+    //                                 branch_id: branchID,
+    //                                 teacher_id: userID,
+    //                                 class_id: classID,
+    //                                 section_id: sectionID,
+    //                                 academic_session_id: academic_session_id,
+    //                             }, function (res) {
+    //                                 if (res.code == 200) {
+    //                                     $.each(res.data, function (key, val) {
+    //                                         $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+    //                                     });
+    //                                     $("#attendanceFilter").find("#subjectID").val(subjectID)
+    //                                 }
+    //                             }, 'json');
+    //                         }
 
-                            var reportDate = date;
-                            var class_id = classID;
-                            var section_id = sectionID
-                            var subject_id = subjectID
-                            var semester_id = semesterID
-                            var session_id = sessionID
+    //                         var reportDate = date;
+    //                         var class_id = classID;
+    //                         var section_id = sectionID
+    //                         var subject_id = subjectID
+    //                         var semester_id = semesterID
+    //                         var session_id = sessionID
 
-                            var date = new Date(reportDate)
-                            var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-                            //excel download
+    //                         var date = new Date(reportDate)
+    //                         var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+    //                         //excel download
 
-                            $("#excelSubject").val(subject_id);
-                            $("#excelClass").val(class_id);
-                            $("#excelSection").val(section_id);
-                            $("#excelSemester").val(semester_id);
-                            $("#excelSession").val(session_id);
-                            $("#excelDate").val(year_month);
-                            // pdf download
-                            $("#downExcelSubject").val(subject_id);
-                            $("#downExcelClass").val(class_id);
-                            $("#downExcelSection").val(section_id);
-                            $("#downExcelSemester").val(semester_id);
-                            $("#downExcelSession").val(session_id);
-                            $("#downExcelDate").val(year_month);
+    //                         $("#excelSubject").val(subject_id);
+    //                         $("#excelClass").val(class_id);
+    //                         $("#excelSection").val(section_id);
+    //                         $("#excelSemester").val(semester_id);
+    //                         $("#excelSession").val(session_id);
+    //                         $("#excelDate").val(year_month);
+    //                         // pdf download
+    //                         $("#downExcelSubject").val(subject_id);
+    //                         $("#downExcelClass").val(class_id);
+    //                         $("#downExcelSection").val(section_id);
+    //                         $("#downExcelSemester").val(semester_id);
+    //                         $("#downExcelSession").val(session_id);
+    //                         $("#downExcelDate").val(year_month);
 
-                            var formData = new FormData();
-                            formData.append('token', token);
-                            formData.append('branch_id', branchID);
-                            formData.append('class_id', class_id);
-                            formData.append('section_id', section_id);
-                            formData.append('subject_id', subject_id);
-                            formData.append('semester_id', semester_id);
-                            formData.append('session_id', session_id);
-                            formData.append('year_month', year_month);
-                            formData.append('academic_session_id', academic_session_id);
+    //                         var formData = new FormData();
+    //                         formData.append('token', token);
+    //                         formData.append('branch_id', branchID);
+    //                         formData.append('class_id', class_id);
+    //                         formData.append('section_id', section_id);
+    //                         formData.append('subject_id', subject_id);
+    //                         formData.append('semester_id', semester_id);
+    //                         formData.append('session_id', session_id);
+    //                         formData.append('year_month', year_month);
+    //                         formData.append('academic_session_id', academic_session_id);
 
-                            studentAttendanceList(formData, reportDate);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (get_roll_id == "2") {
-        // teacher
-        if (typeof admin_studentattentanceReport_storage !== 'undefined') {
-            if ((admin_studentattentanceReport_storage)) {
-                if (admin_studentattentanceReport_storage) {
-                    var adminStudentAttendanceReportStorage = JSON.parse(admin_studentattentanceReport_storage);
-                    if (adminStudentAttendanceReportStorage.length == 1) {
-                        var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
-                        adminStudentAttendanceReportStorage.forEach(function (user) {
-                            classID = user.class_id;
-                            sectionID = user.section_id;
-                            subjectID = user.subject_id;
-                            semesterID = user.semester_id;
-                            sessionID = user.session_id;
-                            date = user.date;
-                            userBranchID = user.branch_id;
-                            userRoleID = user.role_id;
-                            userID = user.user_id;
-                        });
-                        if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                            $('#changeClassName').val(classID);
-                            $('#classDate').val(date);
-                            $('#semesterID').val(semesterID);
-                            $('#sessionID').val(sessionID);
-                            if (classID) {
+    //                         studentAttendanceList(formData, reportDate);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // if (get_roll_id == "2") {
+    //     // teacher
+    //     if (typeof admin_studentattentanceReport_storage !== 'undefined') {
+    //         if ((admin_studentattentanceReport_storage)) {
+    //             if (admin_studentattentanceReport_storage) {
+    //                 var adminStudentAttendanceReportStorage = JSON.parse(admin_studentattentanceReport_storage);
+    //                 if (adminStudentAttendanceReportStorage.length == 1) {
+    //                     var classID, date, sectionID, subjectID, semesterID, sessionID, userBranchID, userRoleID, userID;
+    //                     adminStudentAttendanceReportStorage.forEach(function (user) {
+    //                         classID = user.class_id;
+    //                         sectionID = user.section_id;
+    //                         subjectID = user.subject_id;
+    //                         semesterID = user.semester_id;
+    //                         sessionID = user.session_id;
+    //                         date = user.date;
+    //                         userBranchID = user.branch_id;
+    //                         userRoleID = user.role_id;
+    //                         userID = user.user_id;
+    //                     });
+    //                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+    //                         $('#changeClassName').val(classID);
+    //                         $('#classDate').val(date);
+    //                         $('#semesterID').val(semesterID);
+    //                         $('#sessionID').val(sessionID);
+    //                         if (classID) {
 
-                                $("#attendanceFilter").find("#sectionID").empty();
-                                $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
-                                $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
-                                    if (res.code == 200) {
-                                        $.each(res.data, function (key, val) {
-                                            $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                        });
-                                        $("#attendanceFilter").find("#sectionID").val(sectionID)
-                                    }
-                                }, 'json');
-                            }
-                            if (sectionID) {
-                                $("#attendanceFilter").find("#subjectID").empty();
-                                $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
-                                $.post(teacherSubjectUrl, {
-                                    token: token,
-                                    branch_id: branchID,
-                                    teacher_id: userID,
-                                    class_id: classID,
-                                    section_id: sectionID,
-                                    academic_session_id: academic_session_id,
-                                }, function (res) {
-                                    if (res.code == 200) {
-                                        $.each(res.data, function (key, val) {
-                                            $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
-                                        });
-                                        $("#attendanceFilter").find("#subjectID").val(subjectID)
-                                    }
-                                }, 'json');
-                            }
+    //                             $("#attendanceFilter").find("#sectionID").empty();
+    //                             $("#attendanceFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
+    //                             $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
+    //                                 if (res.code == 200) {
+    //                                     $.each(res.data, function (key, val) {
+    //                                         $("#attendanceFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+    //                                     });
+    //                                     $("#attendanceFilter").find("#sectionID").val(sectionID)
+    //                                 }
+    //                             }, 'json');
+    //                         }
+    //                         if (sectionID) {
+    //                             $("#attendanceFilter").find("#subjectID").empty();
+    //                             $("#attendanceFilter").find("#subjectID").append('<option value="">' + select_subject + '</option>');
+    //                             $.post(teacherSubjectUrl, {
+    //                                 token: token,
+    //                                 branch_id: branchID,
+    //                                 teacher_id: userID,
+    //                                 class_id: classID,
+    //                                 section_id: sectionID,
+    //                                 academic_session_id: academic_session_id,
+    //                             }, function (res) {
+    //                                 if (res.code == 200) {
+    //                                     $.each(res.data, function (key, val) {
+    //                                         $("#attendanceFilter").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+    //                                     });
+    //                                     $("#attendanceFilter").find("#subjectID").val(subjectID)
+    //                                 }
+    //                             }, 'json');
+    //                         }
 
-                            var reportDate = date;
-                            var class_id = classID;
-                            var section_id = sectionID
-                            var subject_id = subjectID
-                            var semester_id = semesterID
-                            var session_id = sessionID
+    //                         var reportDate = date;
+    //                         var class_id = classID;
+    //                         var section_id = sectionID
+    //                         var subject_id = subjectID
+    //                         var semester_id = semesterID
+    //                         var session_id = sessionID
 
-                            var date = new Date(reportDate)
-                            var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
-                            //excel download
+    //                         var date = new Date(reportDate)
+    //                         var year_month = ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
+    //                         //excel download
 
-                            $("#excelSubject").val(subject_id);
-                            $("#excelClass").val(class_id);
-                            $("#excelSection").val(section_id);
-                            $("#excelSemester").val(semester_id);
-                            $("#excelSession").val(session_id);
-                            $("#excelDate").val(year_month);
-                            // pdf download
-                            $("#downExcelSubject").val(subject_id);
-                            $("#downExcelClass").val(class_id);
-                            $("#downExcelSection").val(section_id);
-                            $("#downExcelSemester").val(semester_id);
-                            $("#downExcelSession").val(session_id);
-                            $("#downExcelDate").val(year_month);
+    //                         $("#excelSubject").val(subject_id);
+    //                         $("#excelClass").val(class_id);
+    //                         $("#excelSection").val(section_id);
+    //                         $("#excelSemester").val(semester_id);
+    //                         $("#excelSession").val(session_id);
+    //                         $("#excelDate").val(year_month);
+    //                         // pdf download
+    //                         $("#downExcelSubject").val(subject_id);
+    //                         $("#downExcelClass").val(class_id);
+    //                         $("#downExcelSection").val(section_id);
+    //                         $("#downExcelSemester").val(semester_id);
+    //                         $("#downExcelSession").val(session_id);
+    //                         $("#downExcelDate").val(year_month);
 
-                            var formData = new FormData();
-                            formData.append('token', token);
-                            formData.append('branch_id', branchID);
-                            formData.append('class_id', class_id);
-                            formData.append('section_id', section_id);
-                            formData.append('subject_id', subject_id);
-                            formData.append('semester_id', semester_id);
-                            formData.append('session_id', session_id);
-                            formData.append('year_month', year_month);
-                            formData.append('academic_session_id', academic_session_id);
+    //                         var formData = new FormData();
+    //                         formData.append('token', token);
+    //                         formData.append('branch_id', branchID);
+    //                         formData.append('class_id', class_id);
+    //                         formData.append('section_id', section_id);
+    //                         formData.append('subject_id', subject_id);
+    //                         formData.append('semester_id', semester_id);
+    //                         formData.append('session_id', session_id);
+    //                         formData.append('year_month', year_month);
+    //                         formData.append('academic_session_id', academic_session_id);
 
-                            studentAttendanceList(formData, reportDate);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //                         studentAttendanceList(formData, reportDate);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     // studentDetails
     $(document).on('click', '.studentDetails', function () {
         var studentID = $(this).find('input').val();

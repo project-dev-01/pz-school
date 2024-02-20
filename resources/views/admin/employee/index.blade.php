@@ -677,7 +677,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="salary_grade">{{ __('messages.salary_grade') }}</label>
-                                    <input type="text" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
+                                    <input type="number" class="form-control" name="salary_grade" id="salaryGrade" placeholder="{{ __('messages.enter_salary_grade') }}">
                                 </div>
                             </div>
 

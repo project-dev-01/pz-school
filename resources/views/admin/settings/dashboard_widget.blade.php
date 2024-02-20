@@ -175,32 +175,32 @@
                                         <tr>
                                             <input type="hidden" value="" id="widgetDynamicID">
                                             <td>1</td>
-                                            <td>{{ __('messages.attendancereport') }}</td>
+                                            <td>{{ __('messages.AttendanceReport') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>{{ __('messages.calendar') }}</td>
+                                            <td>{{ __('messages.Calendar') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Calendar" data-orderno="2" data-widgetvalue="Calendar">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>{{ __('messages.task') }}</td>
+                                            <td>{{ __('messages.Task') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Task" data-orderno="3" data-widgetvalue="Task">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td>{{ __('messages.studenttransferredlist') }}</td>
+                                            <td>{{ __('messages.StudentTransferredList') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="StudentTransferredList" data-orderno="4" data-widgetvalue="StudentTransferredList">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td>{{ __('messages.shortcutlinks') }}</td>
+                                            <td>{{ __('messages.ShortcutLinks') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="ShortcutLinks" data-orderno="5" data-widgetvalue="ShortcutLinks">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
-                                            <td>{{ __('messages.bulletinboard') }}</td>
+                                            <td>{{ __('messages.BulletinBoard') }}</td>
                                             <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="BulletinBoard" data-orderno="6" data-widgetvalue="BulletinBoard">{{ __('messages.add') }}</button></td>
                                             </td>
                                         </tr>

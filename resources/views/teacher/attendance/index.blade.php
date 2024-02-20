@@ -70,23 +70,16 @@
                 <div class="card-body">
                     <form id="attendanceFilter" autocomplete="off">
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="department_id">{{ __('messages.department') }}</label>
-                                    <select id="department_id" name="department_id" class="form-control">
-                                        <option value="">{{ __('messages.select_department') }}</option>
-                                        @forelse($department as $r)
-                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="changeClassName">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse ($teacher_class as $class)
+                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        @empty
+                                        @endforelse
                                     </select>
                                 </div>
                             </div>

@@ -106,6 +106,7 @@
     var deleteHtml = "{{ __('messages.delete_this_leave_type') }}";
     var deletecancelButtonText = "{{ __('messages.cancel') }}";
     var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    var restoreconfirmButtonText = "{{ __('messages.yes') }}";
     var deleteHtmlrestore = "{{ __('messages.restore_this_leave_type') }}";
     // lang change name end
      // Get PDF Footer Text

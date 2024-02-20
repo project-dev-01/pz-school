@@ -277,7 +277,7 @@ $(function () {
             showCancelButton: true,
             showCloseButton: true,
             cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonText,
+            confirmButtonText: restoreconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
             width: 400,
