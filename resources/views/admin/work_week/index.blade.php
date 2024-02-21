@@ -105,9 +105,9 @@
                                             <table class="table table-bordered mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>S.No</th>
-                                                        <th>Day</th>
-                                                        <th>Status</th>
+                                                        <th>{{ __('messages.s.no') }}</th>
+                                                        <th>{{ __('messages.day') }}</th>
+                                                        <th>{{ __('messages.status') }}</th>
                                                     </tr>
 
                                                 </thead>

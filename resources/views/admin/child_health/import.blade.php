@@ -277,7 +277,7 @@
                 </div>
               </div> -->
             </div>
-            <input class="btn btn-success" type="submit" value="Upload">
+            <input class="btn btn-success" type="submit" value="{{ __('messages.upload') }}">
           </div>
 
         </form>

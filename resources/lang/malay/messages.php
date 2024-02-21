@@ -2061,5 +2061,10 @@ return [
     "promoted_semester" => "Semester Dinaikkan pangkat",
     "promoted_session" => "Sesi Digalakkan",
     "noshortcutLinks"=> "Tiada jalan pintas tersedia.",
+    "entitlement"  => "Kelayakan",
+    "edit_fees_type"  => "Edit Jenis Yuran",
+    "delete_this_fees_type" => "Anda mahu memadamkan Jenis Yuran ini",
+    "expense_import"  => "Perbelanjaan Import",
+    "shortcutlinks"  => "Pautan Pintasan",
     
 ];

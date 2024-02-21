@@ -161,12 +161,24 @@ $(function () {
             bDestroy: true,
             // dom: 'lBfrtip',
             dom: 'Blfrtip',
-
-           
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },  
             serverSide: true,
            
             ajax: {
-                
+                 
                 url: interviewList,
                 data: function (d) {
                     d.department_id = formData.department_id,

@@ -133,7 +133,7 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="interview_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-											<input type="date" name="interview_date" id="interview_date" class="form-control" required>
+											<input type="date" name="interview_date" id="interview_date" class="form-control" placeholder="{{ __('messages.yyyy_mm_dd') }}" required>
 										</div>
 									</div>
 								</div>

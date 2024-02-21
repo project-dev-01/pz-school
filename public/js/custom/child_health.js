@@ -142,20 +142,20 @@ $(function () {
             //     "<'row'<'col-sm-12'tr>>" +
             //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             // dom: 'C&gt;"clear"&lt;lfrtip',
-            // "language": {
+            "language": {
 
-            //     "emptyTable": no_data_available,
-            //     "infoFiltered": filter_from_total_entries,
-            //     "zeroRecords": no_matching_records_found,
-            //     "infoEmpty": showing_zero_entries,
-            //     "info": showing_entries,
-            //     "lengthMenu": show_entries,
-            //     "search": datatable_search,
-            //     "paginate": {
-            //         "next": next,
-            //         "previous": previous
-            //     },
-            // },
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
             // exportOptions: { rows: ':visible' },
             serverSide: true,
             ajax: {

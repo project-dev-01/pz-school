@@ -429,7 +429,7 @@ return [
     "add_soap_notes" => "SOAPメモの追加",
     "old_records" => "過去の記録",
     "new_records" => "新しい記録",
-    "s.no" => "S.no",
+    "s.no" => "いいえ",
     "personal_info" => "個人情報",
     "mobile_no" => "携帯電話番号",
     "class_Name" => "組名",
@@ -2040,5 +2040,11 @@ return [
     "student_interview_details" => "学生インタビューの詳細",    
     "noshortcutLinks"=> "利用可能なショートカットはありません。",
     "noshortcutLinks"=> "利用可能なショートカットはありません。",
+    "entitlement"  => "権利",
+    "edit_fees_type"  => "料金タイプの編集",
+    "delete_this_fees_type" => "この料金タイプを削除したい",
+    "expense_import"  => "経費インポート",
+    "password_contain_8_charcs" => "パスワードは少なくとも 8 文字で、数字と文字/特殊文字の両方を含む必要があります。",
+    "shortcutlinks"  => "ショートカットリンク",
 
 ];

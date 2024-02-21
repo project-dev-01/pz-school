@@ -99,6 +99,11 @@
     var header_txt="{{ __('messages.fees_type') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
+    // lang change name start
+    var deleteTitle = "{{ __('messages.are_you_sure?') }}";
+    var deleteHtml = "{{ __('messages.delete_this_fees_type') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
 </script>
 
 <script src="{{ asset('js/custom/fees_type.js') }}"></script>

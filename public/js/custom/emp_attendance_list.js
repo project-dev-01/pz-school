@@ -64,6 +64,7 @@ $(function () {
         var headers = datasetnew.headers;
         var headerLength = (datasetnew.headers.length * 3);
         var staff_leave_history = datasetnew.staff_leave_history;
+       
         $('#leaveListDetailsAppend').empty();
         var leaveListDetailsAppend = '<div class="table-responsive">' +
             '<table id="alreadyTakenLeave" class="table w-100 nowrap table-bordered table-striped table2excel">' +
@@ -72,12 +73,12 @@ $(function () {
             '<th style="border-bottom-style: hidden"></th>' +
             // '<th style="border-bottom-style: hidden"></th>' +
             '<th style="border-bottom-style: hidden"></th>' +
-            '<th colspan="' + headerLength + '" style="text-align:center;">Leave Type</th>' +
+            '<th colspan="' + headerLength + '" style="text-align:center;">'+ leave_type_lang +'</th>' +
             '</tr>' +
             '<tr>' +
-            '<th style="border-bottom-style: hidden">Dep Name</th>' +
+            '<th style="border-bottom-style: hidden">'+ department_lang +'</th>' +
             // '<th style="border-bottom-style: hidden">Dep Code</th>' +
-            '<th style="border-bottom-style: hidden">Employee Name</th>';
+            '<th style="border-bottom-style: hidden">'+employee_name_lang+'</th>';
         headers.forEach(function (resps) {
             leaveListDetailsAppend += '<th colspan="3" style="text-align:center;">' + resps.name + '</th>';
         });
@@ -87,9 +88,9 @@ $(function () {
             // '<th></th>' +
             '<th></th>';
         headers.forEach(function (resp) {
-            leaveListDetailsAppend += '<th>Entitlement</th>' +
-                '<th>Taken</th>' +
-                '<th>Balance</th>';
+            leaveListDetailsAppend += '<th>'+entitlement_lang+'</th>' +
+                '<th>'+taken_lang+'</th>' +
+                '<th>'+balance_lang+'</th>';
         });
         leaveListDetailsAppend += '</tr>' +
             '</thead>' +

@@ -253,6 +253,12 @@
     var visa_photo_lang = "{{ __('messages.visa_photo') }}";
     var AttendanceReportLabel = "{{ __('messages.AttendanceReport') }}";
     var addWidgetH = "{{ __('messages.add_widget') }}";
+    var leave_type_lang = "{{ __('messages.leave_type') }}";
+    var department_lang = "{{ __('messages.department_name') }}";
+    var employee_name_lang   ="{{ __('messages.employee_name') }}";
+    var entitlement_lang   ="{{ __('messages.entitlement') }}";
+    var taken_lang   ="{{ __('messages.taken') }}";
+    var balance_lang   ="{{ __('messages.balance') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
