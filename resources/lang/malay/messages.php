@@ -2066,5 +2066,10 @@ return [
     "delete_this_fees_type" => "Anda mahu memadamkan Jenis Yuran ini",
     "expense_import"  => "Perbelanjaan Import",
     "shortcutlinks"  => "Pautan Pintasan",
-    
+    "important"=> "Important",
+    "student_medical_record"=> "Laporan Perubatan Pelajar.",    
+    "file_details"=> "Butiran Fail",   
+    "get_menus"=> "Dapatkan Menu",
+    "copy_academic,exam_masters"=> "Salin Sarjana Akademik & Peperiksaan",
+    "grade,class"=> " Gred & Kelas",
 ];

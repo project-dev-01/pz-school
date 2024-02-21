@@ -192,5 +192,7 @@
 <script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>
-
+<script>
+    var  downloadFileName="{{ __('messages.timetable') }}";
+</script>
 @endsection

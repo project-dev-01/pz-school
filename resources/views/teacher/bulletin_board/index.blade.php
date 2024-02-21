@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                         <label for="employee_type">{{ __('messages.search') }}</label>
-                            <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_file') }}">
+                            <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,8 @@
     var header_txt="{{ __('messages.event') }}";
     var footer_txt="{{ session()->get('footer_text') }}";
     var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
-    
+    var modelheader="{{ __('messages.file_details') }}";
+    var download="{{ __('messages.download') }}";
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>

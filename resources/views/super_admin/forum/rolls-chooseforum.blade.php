@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary-bl waves-effect waves-light" id="branch-filter" type="submit">
-                            Go-To
+                        {{ __('messages.go_to') }}
                         </button>
                         <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                     Cancel

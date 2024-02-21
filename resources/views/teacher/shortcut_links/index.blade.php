@@ -48,7 +48,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="nav-link">{{ __('messages.shortcutlinks') }}<h4>
+                        <h4 class="nav-link">{{ __('messages.ShortcutLinks') }}<h4>
                     </li>
                 </ul><br>
                 <div class="form-group pull-right">

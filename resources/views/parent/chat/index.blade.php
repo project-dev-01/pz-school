@@ -36,7 +36,7 @@
                                 <a href="javascript: void(0);" class="text-reset">{{$name}}</a>({{$role}})
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-14">
-                                <small class="mdi mdi-circle text-success"></small> Online
+                                <small class="mdi mdi-circle text-success"></small> {{ __('messages.online') }}
                             </p>
                         </div>
                         <!--<div>
@@ -61,12 +61,12 @@
                         @foreach($group_list as $group)
                         <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" onclick="my_function('{{$group['id']}}','{{$group['name']}}','','Group')">
                             <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-                            <span class="mb-0 mt-1">{{$group['name']}} Group</span>
+                            <span class="mb-0 mt-1">{{$group['name']}} {{ __('messages.group') }}</span>
                         </a>
                         @endforeach
                         @if(count($group_list)==0)
                         <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-                            <span class="mb-0 mt-1">No Group Available</span>
+                            <span class="mb-0 mt-1">{{ __('messages.no_group_available') }}</span>
                         </a>
                         @endif
                     </div>
@@ -97,7 +97,7 @@
                                 @endforeach
                                 @if(count($teacher_list)==0)
 								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-									<span class="mb-0 mt-1">No Teacher Available</span>
+									<span class="mb-0 mt-1">{{ __('messages.no_teacher_available') }}</span>
 								</a>
 								@endif
 
@@ -119,8 +119,8 @@
                         <div class="col" style="height: 300px; margin-top:70px;">
                             <div id="center-text" style="text-align:center;">
                                 <img src="{{ asset('images/chat.png') }}" class="chatbox" style="height: 150px;border: 2px solid #EDEDED;border-radius: 1rem;">
-                                <h2>No messages</h2>
-                                <p>No messages yet, start the conversation!</p>
+                                <h2>{{ __('messages.no_messages') }}</h2>
+                                <p>{{ __('messages.no_messages_yet') }}</p>
                             </div>
                         </div>
                     </div>
@@ -137,8 +137,8 @@
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-12">
 								<span  id="onlinestatus">
-								<small class="mdi mdi-circle text-success"></small> Online  </span>
-								<a href="#"  data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0  Members</a>
+								<small class="mdi mdi-circle text-success"></small> {{ __('messages.online') }}  </span>
+								<a href="#"  data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0  {{ __('messages.members') }}</a>
                         
 							</p>
                         </div>
@@ -156,7 +156,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="conversation-list" data-simplebar style="height:250px; overflow-x: hidden;">
-                            <div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> Read more... </button></div>
+                            <div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> {{ __('messages.read_more') }} </button></div>
 							<div id="showchat">
                                 </div>
                             </ul>
@@ -179,7 +179,7 @@
                                     <div class="col mb-2 mb-sm-0">
                                         <input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
                                         <div class="invalid-feedback">
-                                            Please enter your messsage
+                                        {{ __('messages.enter_your_text') }}
                                         </div>
                                         <span id="status"></span>
                                     </div>

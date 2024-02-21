@@ -12,7 +12,7 @@
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab"><span>{{ __('messages.guidelines') }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.faq') }}</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab"><span>{{ __('messages.faqs') }}</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
                         <a class="nav-link" data-toggle="tab" href="#tt-tab-04" role="tab"><span>{{ __('messages.terms_of_service') }}</span></a>

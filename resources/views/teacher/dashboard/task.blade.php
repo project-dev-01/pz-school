@@ -45,7 +45,7 @@
                     <div class="form-group mb-3">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input allDayCheck" id="allDayCheck">
-                            <label class="custom-control-label" for="allDayCheck">All day</label>
+                            <label class="custom-control-label" for="allDayCheck">{{ __('messages.all_day') }}</label>
                         </div>
                     </div>
                     <!-- <div class="form-group">

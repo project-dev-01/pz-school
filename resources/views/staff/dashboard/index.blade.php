@@ -567,7 +567,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                        {{ __('messages.shortcutlinks') }}
+                        {{ __('messages.ShortcutLinks') }}
                             <h4>
                     </li>
                 </ul>
@@ -589,7 +589,7 @@
                             }
                         }else{
                                 // Display a message or take alternative action when no shortcuts are available
-                                echo '<div class="col-12  text-center">No shortcuts available.</div>';
+                                echo '<div class="col-12  text-center">'.__('messages.noshortcutLinks').'</div>';
                         }
                         ?>
 

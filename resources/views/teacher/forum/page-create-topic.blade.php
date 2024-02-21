@@ -286,7 +286,7 @@
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
                                 <label for="inputTopic" class="col-3 col-form-label">{{ __('messages.user') }}</label>
-                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">>
+                                <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.choose') }}...">>
                                     <option value=""></option>
                                     @foreach($usernames as $c)
                                     <option value="{{$c['id']}}">{{ __('messages.' . strtolower($c['name'])) }}</option>

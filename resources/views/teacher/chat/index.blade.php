@@ -99,7 +99,7 @@
 								@endforeach
 								@if(count($parent_list)==0)
 								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-									<span class="mb-0 mt-1">{{ __('messages.no_parent_available') }}</span>
+									<span class="mb-0 mt-1">{{ __('messages.no_parents_available') }}</span>
 								</a>
 								@endif
 							</div> <!-- end slimscroll-->
@@ -182,7 +182,7 @@
 						<div>
 							<form class="search-bar mb-3">
 								<div class="position-relative">
-									<input type="text" id="searchbar" onkeyup="search_keyword()" class="form-control form-control-light" style="padding-left: 40px;border-radius: 30px;" placeholder="{{ __('messages.search_keywords') }}">
+									<input type="text" id="searchbar" onkeyup="search_keyword()" class="form-control form-control-light" style="padding-left: 40px;border-radius: 30px;" placeholder="{{ __('messages.search_keyword') }}">
 									<span class="mdi mdi-magnify"></span>
 								</div>
 							</form>

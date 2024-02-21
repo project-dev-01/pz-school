@@ -336,13 +336,13 @@ function openFilePopup(fileUrl, fileName, fileDescription) {
     const filePreview = modal.querySelector("#filePreview");
     const previewLink = modal.querySelector("#previewLink");
 
-    modalTitle.innerText = "File Details";
+    modalTitle.innerText = modelheader;
     fileTitle.innerText = fileName;
     fileDescriptionElement.innerText = fileDescription;
 
     // Set the download link
     downloadLink.href = fileUrl;
-    downloadLink.innerText = "Download";
+    downloadLink.innerText =download;
 
     // Set the preview link to open in a new window
     previewLink.href = fileUrl;

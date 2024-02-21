@@ -9484,7 +9484,7 @@ class AdminController extends Controller
             'role_id' => $request->role_id,
             'br_id' => $request->branch_id,
             'school_roleid' => $request->school_roleid
-            
+
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.deleteschoolpermission'), $data);
@@ -10069,7 +10069,7 @@ class AdminController extends Controller
                                  <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light" data-id="' . $row['id'] . '" id="editFormFieldBtn"><i class="fe-edit"></i></a>
                          </div>';
             }) // <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteFormFieldBtn"><i class="fe-trash-2"></i></a>
-            ->rawColumns(['name_english','name_common', 'visa', 'nationality', 'passport', 'nric', 'actions'])
+            ->rawColumns(['name_english', 'name_common', 'visa', 'nationality', 'passport', 'nric', 'actions'])
             ->make(true);
     }
     public function getFormFieldDetails(Request $request)
@@ -10293,6 +10293,7 @@ class AdminController extends Controller
     public function graduatesList(Request $request)
     {
         $data = [
+            "department_id" => $request->department_id,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
@@ -10520,16 +10521,20 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
         return $response;
     }
-    public function studentInterviewIndex(){
+    public function studentInterviewIndex()
+    {
 
         $department = Helper::GetMethod(config('constants.api.department_list'));
 
-        return view('admin.student_interview_record.index',
-        [
-            'department' => isset($department['data']) ? $department['data'] : [],
-        ]);
+        return view(
+            'admin.student_interview_record.index',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+            ]
+        );
     }
-    public function getStudentInterviewData(Request $request){
+    public function getStudentInterviewData(Request $request)
+    {
         $data = [
             'department_id' => $request->department_id,
             'grade_id' => $request->changeClassName,
@@ -10539,11 +10544,11 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
         return $response;
     }
-    
+
     public function childHealthImport(Request $request)
     {
 
-        
+
         $department = Helper::GetMethod(config('constants.api.department_list'));
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
@@ -10585,7 +10590,7 @@ class AdminController extends Controller
                 array_push($files, $object);
             }
         }
-        
+
         $data = [
             'file' => $files,
             'missing_file' => "",
@@ -10593,7 +10598,7 @@ class AdminController extends Controller
         ];
         // dd($request->date);
         $response = Helper::PostMethod(config('constants.api.import_child_health'), $data);
-        
+
         // dd($response);
         if ($response['code'] == 200) {
             return redirect()->route('admin.child_health.import')->with('success', ' Child Health Data Imported Successfully');
@@ -10638,9 +10643,8 @@ class AdminController extends Controller
                 $route = route('admin.child_health.pdf', $row['id']);
                 return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-toggle="modal"  data-target="#bs-example-modal-lg"><i class="fe-eye"></i></a>
-                    <a href="'.$route.'" class="btn btn-danger waves-effect waves-light" id="downloadChidlHealth"><i class="dripicons-download" style="color: white;"></i></a>
+                    <a href="' . $route . '" class="btn btn-danger waves-effect waves-light" id="downloadChidlHealth"><i class="dripicons-download" style="color: white;"></i></a>
                 </div>';
-                
             })
 
             ->rawColumns(['actions'])
@@ -10662,8 +10666,8 @@ class AdminController extends Controller
         // dd($child_health);
         $count = isset($child_health['data']['grade']) ? count($child_health['data']['grade']) : 0;
         $empty = 9 - $count;
-        
-        
+
+
         $pdf = PDF::loadView('admin.child_health.pdf', [
             'child_health' => isset($child_health['data']['child_health']) ? $child_health['data']['child_health'] : [],
             'grade' => isset($child_health['data']['grade']) ? $child_health['data']['grade'] : [],
@@ -10672,15 +10676,15 @@ class AdminController extends Controller
         ],);
         // $pdf->setPaper('A3', 'landscape');
         return $pdf->stream('pdfview.pdf');
-        
-        
+
+
 
         // dd($count);
         return view('admin.child_health.pdf', [
             'child_health' => isset($child_health['data']['child_health']) ? $child_health['data']['child_health'] : [],
             'grade' => isset($child_health['data']['grade']) ? $child_health['data']['grade'] : [],
             'empty' => isset($empty) ? $empty : 9,
-                'storage' => storage_path('fonts/ipag.ttf')
+            'storage' => storage_path('fonts/ipag.ttf')
         ]);
     }
     public function personalinterviewIndex()
@@ -10731,11 +10735,10 @@ class AdminController extends Controller
         } else {
             return redirect()->route('admin.personalinterview.index')->with('errors', $response['message']);
         }
-    
     }
     public function personalinterviewlist()
     {
-        
+
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
@@ -10771,11 +10774,10 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                 $edit = route('admin.personalinterviewdownload', $row['id']);
                 return '<div class="button-list">
-                            <a href="'.$edit.'" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
                         </div>';
             })
             ->rawColumns(['actions'])
             ->make(true);
     }
-
 }
