@@ -349,7 +349,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name">{{ __('messages.last_name') }}</label>
-                                                <input type="text" class="form-control" id="last_name" value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name" value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +406,7 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth">{{ __('messages.date_of_birth') }}</label>
                                                 <div class="input-group input-group-merge">
-                                                    <input type="text" class="form-control" id="date_of_birth" value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : ''}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="date_of_birth" value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
@@ -950,7 +950,7 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('d-m-Y')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -988,7 +988,7 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('d-m-Y')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>

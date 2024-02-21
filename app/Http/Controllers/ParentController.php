@@ -1736,9 +1736,8 @@ class ParentController extends Controller
 
         ];
 
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.application_add'), $data);
-
+        // dd($response);
         return $response;
     }
 

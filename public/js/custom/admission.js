@@ -437,7 +437,6 @@ $(function () {
                 var class_id = data.academic_grade;
                 getSectionByClass(class_id);
 
-                console.log('data',data)
                 if(data.father_first_name != null){
 
                     if(data.father_first_name.length > 0){
