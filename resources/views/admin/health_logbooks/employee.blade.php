@@ -2,6 +2,7 @@
 @section('title',' ' .  __('messages.health_logbooks') . '')
 @section('component_css')
 <!-- date picker -->
+<link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -189,7 +190,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="time">{{ __('messages.time') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="time" name="time" placeholder="{{ __('messages.enter_time') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control timepicker" id="time" name="time" placeholder="{{ __('messages.enter_time') }}" >
                                         
                                     </div>
                                 </div>
@@ -300,6 +301,7 @@
 <script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
+<script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <!-- hightcharts js -->
 <script src="{{ asset('js/highcharts/highcharts.js') }}"></script>

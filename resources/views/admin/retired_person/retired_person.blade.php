@@ -101,7 +101,12 @@
                                         <tr>
                                             <th>#</th>
                                             <th> {{ __('messages.employee_name') }}</th>
+                                            <th style="display: none"> {{ __('messages.email') }}</th>
+                                            <th style="display: none"> {{ __('messages.mobile_number') }}</th>
+                                            <th style="display: none"> {{ __('messages.gender') }}</th>
+                                            <th style="display: none"> {{ __('messages.nationality') }}</th>
                                             <th> {{ __('messages.DOB') }}</th>
+                                            <th style="display: none"> {{ __('messages.joining_date') }}</th>
                                             <th> {{ __('messages.tenure') }}</th>
                                             <th> {{ __('messages.job_title') }}</th>
                                             <th> {{ __('messages.job_description') }}</th>

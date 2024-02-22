@@ -55,7 +55,7 @@ $(function () {
                     charset: 'utf-8',
                     bom: true,
                     exportOptions: {
-                        columns: [0,1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: 'th:not(:last-child)'
                     }
                 },
                 {
@@ -74,6 +74,8 @@ $(function () {
                     doc.defaultStyle.fontSize = 10;
                     doc.styles.tableHeader.fontSize = 12;
                     doc.styles.title.fontSize = 14;
+                    doc.pageSize = 'A3';
+                    doc.pageOrientation = 'landscape';
                     // Remove spaces around page title
                     doc.content[0].text = doc.content[0].text.trim();
                     // Create a footer
@@ -121,8 +123,33 @@ $(function () {
                     name: 'emp_name'
                 },
                 {
+                    data: 'email',
+                    name: 'email',
+                    visible: false
+                },
+                {
+                    data: 'mobile_no',
+                    name: 'mobile_no',
+                    visible: false
+                },
+                {
+                    data: 'gender',
+                    name: 'gender',
+                    visible: false
+                },
+                {
+                    data: 'nationality',
+                    name: 'nationality',
+                    visible: false
+                },
+                {
                     data: 'birthday',
                     name: 'birthday'
+                },
+                {
+                    data: 'joining_date',
+                    name: 'joining_date',
+                    visible: false
                 },
                 {
                     data: 'tenure',

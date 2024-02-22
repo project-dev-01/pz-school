@@ -8,6 +8,11 @@ $(function () {
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
     });
+    $("#time").flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K", // 12-hour format with AM/PM
+    });
 
     $("#department_id").on('change', function (e) {
         e.preventDefault();
@@ -325,6 +330,13 @@ $(function () {
                         
                     }
                 }
+            ],
+            columnDefs: [
+                {
+                    targets: [5], // Specify the columns for which you want to set custom widths (adjust column indices accordingly)
+                    width: '130px' // Set the desired width (you can use pixels or percentage)
+                },
+                // ... (other columnDefs if needed)
             ]
         }).on('draw', function () {
         });

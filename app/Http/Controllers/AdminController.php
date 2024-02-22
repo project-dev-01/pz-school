@@ -9777,7 +9777,7 @@ class AdminController extends Controller
             "working_status" => $request->employee_type
         ];
         $response = Helper::PostMethod(config('constants.api.retired_list'), $data);
-        $data = isset($response['data']) ? $response['data'] : [];
+        $data = isset($response['data']['staff']) ? $response['data']['staff'] : [];
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('designation_name', function ($row) {
