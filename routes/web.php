@@ -853,7 +853,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('soap_log/index', [AdminController::class, 'soapLog'])->name('admin.soap_log');
         Route::get('soap_log/list', [AdminController::class, 'getSoapLogList'])->name('admin.soap_log.list');
-        // Route::get('student/list', [AdminController::class, 'studentList'])->name('admin.student.list');
         Route::post('soap_student_id', [CommonController::class, 'soapStudentID'])->name('admin.settings.soap_student_id');
         // scedule download
         Route::post('scedule/exam_schedule_download_excel', [CommonController::class, 'examScheduleDownloadExcel'])->name('admin.exam_schedule_download_excel');

@@ -715,6 +715,7 @@
                         <span> {{ __('messages.student_leaves') }} </span>
                     </a>
                 </li>
+                <li>
                     <a href="#sidebarAdminChildHealth" data-toggle="collapse">
                         <!--<i class="fas fa-users"></i>-->
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1085,7 +1086,7 @@
                         <span> {{ __('messages.retired_persons') }} </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('admin.student_interview_details')}}" class="nav-link {{ (request()->is('admin/student_interview_details*')) ? 'active' : '' }}">
                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88">
                             <defs>
@@ -1100,7 +1101,7 @@
                         </svg>
                         <span>{{ __('messages.student_interview_details') }}</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="{{  (request()->is('admin/soap_subject/create')) ? 'menuitem-active' : '' }}">
                     <a href="#sidebarSoap" data-toggle="collapse">
                         <!--<i class="fas fa-map"></i>-->
@@ -1691,7 +1692,7 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('teacher.student_interview_notes')}}" class="nav-link {{ (request()->is('teacher/student_interview_notes*')) ? 'active' : '' }}">
                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112.83 122.88">
                             <defs>
@@ -1706,7 +1707,7 @@
                         </svg>
                         <span>{{ __('messages.student_interview_notes') }}</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="#sidebarHomework" data-toggle="collapse">
                         <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -466,8 +466,6 @@ $(function () {
     });
 
     function getStudentList(formData) {
-        console.log("formData");
-        console.log(formData);
         $("#student").show("slow");
         // set download filter value
         $('#excelStudentName').val(formData.student_name);

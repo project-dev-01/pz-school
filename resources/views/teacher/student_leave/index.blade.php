@@ -148,10 +148,10 @@
                 </div> <!-- end card body-->
             </div> <!-- end card -->
             @if($teacher_type == "nursing_teacher")
-            <div class="card studentLeaveShow" style="display:none;">
+            <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv"> Student Leave Authorization
+                        <h4 class="navv"> {{ __('messages.student_Leave_authorization') }}
                             <h4>
                     </li>
                 </ul><br>

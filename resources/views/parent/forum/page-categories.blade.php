@@ -42,8 +42,10 @@
                                 <li><a href="{{route('parent.forum.page-categories-single-val',[$value['categId'],$value['user_id'],$value['category_names']])}}">
                                         <span class="tt-color0{{$randomcolor}} tt-badge">
                                             @php
-                                            echo App\Http\Controllers\CommonController::limitedChar_category(($value['category_names']));
+                                            // Assuming limitedChar_category() is a static method in CommonController
+                                            echo \App\Http\Controllers\CommonController::limitedChar_category($value['category_names']);
                                             @endphp
+
                                     </a></li>
                             </ul>
                             <h4 class="tt-title"><a href="{{route('parent.forum.page-single-user')}}">{{ __('messages.threads') }}</a></h4>

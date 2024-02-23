@@ -209,6 +209,7 @@ class TeacherController extends Controller
             'teacher_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
+        // dd($staff_data);
         $nursing_or_homeroom = Helper::PostMethod(config('constants.api.nursing_or_homeroom'), $staff_data);
         $teacher_type = isset($nursing_or_homeroom['data']['teacher_type']) ? $nursing_or_homeroom['data']['teacher_type'] : null;
         if ($teacher_type == "nursing_teacher") {
@@ -216,7 +217,7 @@ class TeacherController extends Controller
         } else {
             $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         }
-        // dd($nursing_or_homeroom);
+        // dd($teacher_type);
 
         // $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
 

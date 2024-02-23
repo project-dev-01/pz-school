@@ -216,13 +216,13 @@ class CommonController extends Controller
             }
         }
     }
-    function limitedChar($str)
+    public static function limitedChar($str)
     {
         if (strlen($str) > 20)
             $str = substr($str, 0, 30) . '...';
         return $str;
     }
-    function limitedChar_category($str)
+    public static function limitedChar_category($str)
     {
         if (strlen($str) > 8)
             $str = substr($str, 0, 15) . '...';
