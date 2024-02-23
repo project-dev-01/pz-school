@@ -1,18 +1,24 @@
 $(function () {
 
     $(document).ready(function () {
-
+        // Get today's date
+        var today = new Date();
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
         $('#addBuletinModal').on('shown.bs.modal', function () {
             $("#date").flatpickr({
                // enableTime: !0,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
+                minDate: tomorrow,
                 container: '#addBuletinModal modal-body'
             });
             $("#end_date").flatpickr({
                 // enableTime: !0,
                  enableTime: true,
                  dateFormat: "Y-m-d H:i",
+                 minDate: tomorrow,
                  container: '#addBuletinModal modal-body'
              });
         });
@@ -22,11 +28,13 @@ $(function () {
                 // enableTime: !0,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i", // last hundred years
+                minDate: tomorrow,
                 container: '#editBuletinModal modal-body'
             });
             $("#publish_end_dates").flatpickr({
                 // enableTime: !0,
                 enableTime: true,
+                minDate: tomorrow,
                 dateFormat: "Y-m-d H:i", // last hundred years
                 container: '#editBuletinModal modal-body'
             });

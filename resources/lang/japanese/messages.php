@@ -1801,7 +1801,7 @@ return [
     "part_a" => "パートA",
     "part_b" => "パートb",
     "part_c" => "パートc",
-    "temperature" => "温度",
+    "temperature" => "温度°C",
     "weather" => "天気",
     "humidity" => "湿度",
     "enter_temperature" => "温度を入力します",
