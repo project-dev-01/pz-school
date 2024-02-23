@@ -2053,5 +2053,5 @@ return [
     "get_menus" => "メニューの取得",
     "copy_academic,exam_masters" => "アカデミックおよび試験マスターをコピーする",
     "grade,class" => "学年とクラス",
-    "attendance_report" => "出席報告の件名,
+    "attendance_report_subject" => "出席報告の件名",
 ];

@@ -2074,5 +2074,5 @@ return [
     "get_menus"=> "Get Menus",
     "copy_academic,exam_masters"=> "Copy Academic & Exam Masters",
     "grade,class"=> " Grade & Class",
-    "attendance_report" => "Attendance Report Subject",
+    "attendance_report_subject" => "Attendance Report Subject",
 ];
