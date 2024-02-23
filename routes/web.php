@@ -577,7 +577,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         // Attendance routes
         Route::get('attendance/student_report', [AdminController::class, 'studentAttendanceReport'])->name('admin.attendance.student_report');
-        Route::get('attendance/student_report_test', [AdminController::class, 'studentAttendanceReportTest'])->name('admin.attendance.student_report_test');
+        Route::get('attendance/student_report_subject', [AdminController::class, 'studentAttendanceReportSubject'])->name('admin.attendance.student_report_subject');
         Route::get('attendance/pdf_download', [AdminController::class, 'studentAttendancePdfDownload'])->name('admin.attendance.pdf_download');
         Route::post('attendance/student_excel', [AdminController::class, 'studentAttendanceExcel'])->name('admin.attendance.student_excel');
         Route::get('attendance/student_entry', [AdminController::class, 'studentEntry'])->name('admin.attendance.student_entry');

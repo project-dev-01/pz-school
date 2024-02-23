@@ -63,7 +63,6 @@ $(function () {
 
     $("#pattern").on("change", function() {
         var pattern = $(this).val();
-        console.log('ch', pattern)
         $(".dates").hide();
         $(".tables").hide();
         if (pattern == "Term") {
@@ -261,7 +260,7 @@ $(function () {
                 }, function (res) {
                     if (res.code == 200) {
                         $.each(res.data, function (key, val) {
-                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.class_id + '">' + val.class_name + '</option>');
+                            $(Selector).find('select[name="class_id"]').append('<option value="' + val.id + '">' + val.name + '</option>');
                         });
                         if (classID != '') {
                             $(Selector).find('select[name="class_id"]').val(classID);
@@ -316,6 +315,7 @@ $(function () {
             class_id: "required",
             section_id: "required",
             subject_id: "required",
+            semester_id: "required",
             pattern: "required",
             class_date: "required",
         }
@@ -395,6 +395,7 @@ $(function () {
     });
     function studentAttendanceList(formData, reportDate, pattern) {
 
+        console.log('123',getAttendanceListTeacher)
         var date = new Date(reportDate)
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -441,13 +442,12 @@ $(function () {
                         if (get_attendance_list.length > 0) {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
-                                console.log('fn',res.name_english)
                                 var name_english = "";
                                 if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
                                     name_english = res.name_english;
                                 }
                                 var remarks = "";
-                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                if(typeof(res.remarks) != "undefined" && res.remarks != null && res.remarks != "null") {
                                     remarks = res.remarks;
                                 }
                                 var status = "";
@@ -545,7 +545,6 @@ $(function () {
                                                     title = "Homeroom Teacher : "+res.homeroom_teacher_remarks+" \n Nursing Teacher :"+res.remarks;
                                                    
                                                     bg = "#5c595b";
-                                                    console.log('title',title)
                                                 }
                                             }
                                             attendanceListShow += '<td style="background-color:' + bg + '">' +
@@ -636,13 +635,12 @@ $(function () {
                         if (get_attendance_list.length > 0) {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
-                                console.log('fn',res.name_english)
                                 var name_english = "";
                                 if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
                                     name_english = res.name_english;
                                 }
                                 var remarks = "";
-                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                if(typeof(res.remarks) != "undefined" && res.remarks !== null && res.remarks != "null") {
                                     remarks = res.remarks;
                                 }
                                 attendanceListShow += '<tr>' +
@@ -689,13 +687,12 @@ $(function () {
                         if (get_attendance_list.length > 0) {
                             // add functions tr start
                             get_attendance_list.forEach(function (res) {
-                                console.log('fn',res.name_english)
                                 var name_english = "";
                                 if(typeof(res.name_english) != "undefined" && res.name_english !== null) {
                                     name_english = res.name_english;
                                 }
                                 var remarks = "";
-                                if(typeof(res.remarks) != "undefined" && res.remarks !== null) {
+                                if(typeof(res.remarks) != "undefined" && res.remarks !== null && res.remarks != "null") {
                                     remarks = res.remarks;
                                 }
                                 attendanceListShow += '<tr>' +
@@ -1241,7 +1238,6 @@ $(function () {
 
     });
     function employeeAttendanceReportList(formData, reportDate) {
-        console.log('form', formData.date)
         var date = new Date(reportDate)
         // var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -1718,7 +1714,6 @@ $(function () {
 
     function callout(data) {
         $.each(data, function (key, val) {
-            console.log('val', val)
             var row = "";
             var disabled = "";
             var holiday = "";

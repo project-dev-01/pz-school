@@ -2072,4 +2072,5 @@ return [
     "get_menus"=> "Dapatkan Menu",
     "copy_academic,exam_masters"=> "Salin Sarjana Akademik & Peperiksaan",
     "grade,class"=> " Gred & Kelas",
+    "attendance_report" => "Subjek Laporan Kehadiran",
 ];

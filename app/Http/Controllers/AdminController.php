@@ -7321,21 +7321,19 @@ class AdminController extends Controller
         ]);
     }
 
-    // end Global Setting
-    public function studentAttendanceReportTest()
+    // studentAttendanceReportSubject
+    public function studentAttendanceReportSubject()
     {
-        $semester = Helper::GetMethod(config('constants.api.semester'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
-        return view('admin.attendance.student_report_test', [
+        return view('admin.attendance.student_report_subject', [
             'department' => isset($department['data']) ? $department['data'] : [],
-            'class' => isset($getclass['data']) ? $getclass['data'] : [],
+            'term' => isset($term['data']) ? $term['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
-            'session' => isset($session['data']) ? $session['data'] : [],
-            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
-            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
         ]);
     }
     public function studentAttendanceExcel(Request $request)

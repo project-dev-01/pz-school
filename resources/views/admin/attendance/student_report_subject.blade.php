@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.attendance_report') . '')
+@section('title',' ' . __('messages.attendance_report_subject') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -47,7 +47,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title"> {{ __('messages.attendance_report') }}</h4>
+                <h4 class="page-title"> {{ __('messages.attendance_report_subject') }}</h4>
             </div>
         </div>
     </div>
@@ -95,59 +95,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3"  style="display:none">
                                 <div class="form-group">
                                     <label for="pattern">Pattern<span class="text-danger">*</span></label>
                                     <select id="pattern" class="form-control" name="pattern">
                                         <option value="">{{ __('messages.select_pattern') }}</option>
-                                        <option>Day</option>
-                                        <option>Month</option>
-                                        <option>Term</option>
-                                        <option>Year</option>
+                                        <option selected>Month</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3" class="dates" id="term" style="display:none">
-                                <div class="form-group">
-                                    <label for="class_date">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
-                                    <select id="patternTerm" class="form-control" name="class_date">
-                                        <option value="0">{{ __('messages.select_semester') }}</option>
-                                        @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3" class="dates" id="day" style="display:none">
-                                <div class="form-group">
-                                    <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="patternDay" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-3" class="dates" id="month" style="display:none">
+                            <div class="col-md-3" class="dates" id="month">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.month') }}/{{ __('messages.year') }}<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="class_date" id="patternMonth" placeholder="{{ __('messages.mm_yyyy') }}">
                                 </div>
                             </div>
-                            <div class="col-md-3" class="dates" id="year" style="display:none">
-                                <div class="form-group">
-                                    <label for="class_date">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
-                                    <select id="patternYear" name="class_date" class="form-control">
-                                        <option value="">{{ __('messages.select_academic_year') }}</option>
-                                        @forelse($academic_year_list as $r)
-                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label for="class_date">{{ __('messages.year') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="class_date" id="patternYear" placeholder="{{ __('messages.yyyy') }}">
-                                </div> -->
-                            </div>
-                            <div class="col-md-3" style="display:none">
+                            <div class="col-md-3" id="subject" >
                                 <div class="form-group">
                                     <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">
@@ -185,7 +148,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="navv">
-                            {{ __('messages.attendance_report') }}
+                            {{ __('messages.attendance_report_subject') }}
                             <h4>
                     </li>
                 </ul><br>
@@ -305,7 +268,7 @@
 <script>
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
-    var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";
+    var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher_by_subject') }}";
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var holidayList = "{{ config('constants.api.holidays_list') }}"
