@@ -43,6 +43,18 @@
                 </ul><br>
                 
                 <div class="card-body">
+				@if($message = Session::get('success'))
+				<div class="alert alert-success alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{{ $message }}</strong>
+				</div>
+				@endif
+				@if($message = Session::get('errors'))
+				<div class="alert alert-danger alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{{ $message }}</strong>
+				</div>
+				@endif
                     <form id="q" method="post" action="{{ route('super_admin.getmenus') }}" autocomplete="off" novalidate="novalidate">                    
                     @csrf     
                         <div class="row">
@@ -191,7 +203,7 @@
         
       </div>
       <div class="modal-body">
-        <h4>{{ __('messages.are_ypu_confirm') }}</h4>
+        <h4>{{ __('messages.are_you_confirm') }}</h4>
       </div>
       <!--<div class="modal-footer">
       <button name="submit" name="set" value="update" class="btn btn-success btn-lg"> Update </button>

@@ -43,6 +43,18 @@
                 </ul><br>
                 
                 <div class="card-body">
+				@if($message = Session::get('success'))
+				<div class="alert alert-success alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{{ $message }}</strong>
+				</div>
+				@endif
+				@if($message = Session::get('errors'))
+				<div class="alert alert-danger alert-block">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{{ $message }}</strong>
+				</div>
+				@endif
                     <form id="menu-form" method="post" action="{{ route('super_admin.addmenu') }}" autocomplete="off">
                     @csrf                  
                         <div class="row">
@@ -154,6 +166,13 @@
                                     </select>
                                 </div>
                             </div>
+							<div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ __('messages.order_code') }} <span class="text-danger">*</span></label>
+                                    <input type="text" autocomplete="off" name="menu_order" class="form-control " placeholder="{{ __('messages.order_code') }}" id="menu_order" required>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{ __('messages.menu_status') }} <span class="text-danger">*</span></label>
@@ -222,7 +241,7 @@
                                                     <th>{!! $menu['menu_icon'] !!} {{ __("messages.".$menu['menu_name']) }}</th>
                                                     <th>{{ $menu['menu_type'] }}</th>
                                                     <th>{{ $menu['menu_url'] }}</th>
-                                                    <th>{{ $menu['menu_status'] }}</th>
+                                                    <th>{{ ($menu['menu_status']=='1')?__('messages.active'):__('messages.de_active') }}</th>
                                                     <th>
                                                         <div class="button-list">
                                                             
@@ -240,7 +259,7 @@
                                                         <th>{!! $menu1['menu_icon'] !!}{{ __("messages.".$menu1['menu_name']) }}</th>
                                                         <th>{{ $menu1['menu_type'] }}</th>
                                                         <th>{{ $menu1['menu_url'] }}</th>
-                                                        <th>{{ $menu1['menu_status'] }}</th>
+                                                         <th>{{ ($menu1['menu_status']=='1')?__('messages.active'):__('messages.de_active') }}</th>
                                                         <th>
                                                         <div class="button-list">
                                                             
@@ -259,7 +278,7 @@
                                                                 <th>{!! $menu2['menu_icon'] !!} {{ __("messages.".$menu2['menu_name']) }}</th>
                                                                 <th>{{ $menu2['menu_type'] }}</th>
                                                                 <th>{{ $menu2['menu_url'] }}</th>
-                                                                <th>{{ $menu2['menu_status'] }}</th>
+                                                                <th>{{ ($menu2['menu_status']=='1')?__('messages.active'):__('messages.de_active') }}</th>
                                                                 <th>
                                                                     <div class="button-list">
                                                                     

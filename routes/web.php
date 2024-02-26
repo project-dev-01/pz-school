@@ -547,6 +547,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('school_role/menuaccess', [AdminController::class, 'rollmenuaccess'])->name('admin.school_role.menuaccess');
 
         // School Role Permission routes
+        Route::get('school_role/getmenus', [AdminController::class, 'getmenus1']);
         Route::post('school_role/getmenus', [AdminController::class, 'getmenus'])->name('admin.school_role.getmenus');
         Route::post('school_role/setpermission', [AdminController::class, 'setpermission'])->name('admin.school_role.setpermission');
         Route::post('school_role/deleteschoolpermission', [AdminController::class, 'deleteschoolpermission'])->name('admin.school_role.deleteschoolpermission');

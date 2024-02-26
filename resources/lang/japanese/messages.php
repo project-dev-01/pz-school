@@ -1696,7 +1696,7 @@ return [
     "enter_school_role_fullname" => "学校の役割のフルネームを入力します",
     "enter_school_role_shortname" => "学校の役割の短い名前を入力します",
     "assigned_roleaccess" => "割り当てられたポータルアクセス",
-    "delete_this_school_role " => "この学校の役割を削除したいと思います",
+    "delete_this_school_role" => "この学校の役割を削除したいと思います",
     "menu_access_confirmation" => "ポータルのアクセス許可を設定することを確認しますか?",
     "remove_portal_access_permission" => "ポータルアクセス許可の削除",
     "menu_access_deleteconfirmation" => "ポータルのアクセス許可を削除することを確認しますか?",
@@ -2053,5 +2053,7 @@ return [
     "get_menus" => "メニューの取得",
     "copy_academic,exam_masters" => "アカデミックおよび試験マスターをコピーする",
     "grade,class" => "学年とクラス",
+    "grades,classes" => "学年とクラス",
+    "guest" => "ゲスト",
     "attendance_report_subject" => "出席報告の件名",
 ];

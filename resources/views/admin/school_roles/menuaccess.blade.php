@@ -141,6 +141,8 @@
 						<input type="checkbox" id="select_all" />{{ __('messages.select_all') }}
 						<form method="post" action="{{ route('admin.school_role.setpermission') }}" autocomplete="off" novalidate="novalidate">
 							@csrf
+							<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
+							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
 							<table class="table dt-responsive nowrap w-100">
 								<thead>
 									<tr>
@@ -292,8 +294,7 @@
 									@endforeach
 								</tbody>
 							</table>
-							<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
-							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
+							
 							@if(isset($branch_id))
 							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">{{ __('messages.set_permission') }}</button>
 

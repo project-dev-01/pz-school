@@ -1742,12 +1742,18 @@ class SuperAdminController extends Controller
             'menu_routename' => $request->menu_routename,
             'menu_status' => $request->menu_status,
             'menu_dropdown' => $request->menu_dropdown,
+            'menu_order' => $request->menu_order,
             'tags' => $tags_add_also_currentroll
         ];
         //dd($data);
         $response = Helper::PostMethod(config('constants.api.addmenu'), $data);
         //dd($response);
-        return redirect('syscont/super_admin/menucreation');
+       
+        if ($response['code'] == 200) {
+            return redirect()->route('super_admin.createmenu')->with('success', $response['message']);
+        } else {
+            return redirect()->route('super_admin.createmenu')->with('errors', $response['message']);
+        }
         
     }
     public function createmenu()
@@ -1860,7 +1866,11 @@ class SuperAdminController extends Controller
         //dd($data);
         $response = Helper::PostMethod(config('constants.api.setpermission'), $data);
         //dd($response);
-        return redirect('syscont/super_admin/menuaccess');
+        if ($response['code'] == 200) {
+            return redirect()->route('super_admin.menuaccess')->with('success', $response['message']);
+        } else {
+            return redirect()->route('super_admin.menuaccess')->with('errors', $response['message']);
+        }
         
     }
     public function getmenuEditDetails(Request $request, $id)
@@ -1915,13 +1925,19 @@ class SuperAdminController extends Controller
             'menu_url' => $request->menu_url,
             'menu_routename' => $request->menu_routename,
             'menu_status' => $request->menu_status,
+            'menu_order' => $request->menu_order,
             'menu_dropdown' => $request->menu_dropdown,
             'tags' => $tags_add_also_currentroll
         ];
         //dd($data);
         $response = Helper::PostMethod(config('constants.api.menu_update'), $data);
         //dd($response);
-        return redirect('syscont/super_admin/menucreation');
+       
+        if ($response['code'] == 200) {
+            return redirect()->route('super_admin.createmenu')->with('success', $response['message']);
+        } else {
+            return redirect()->route('super_admin.createmenu')->with('errors', $response['message']);
+        }
         
     }
     // Menu Coding End

@@ -259,6 +259,7 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
     var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var choose = "{{ __('messages.choose') }}";
     var subjectByClass = "{{ route('admin.timetable.bulk.subject') }}";
     var timetableList = "{{ route('admin.timetable') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";

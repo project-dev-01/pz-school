@@ -9396,6 +9396,29 @@ class AdminController extends Controller
             ]
         );
     }
+    public function getmenus1(Request $request)
+    {
+        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
+        //$menus = Helper::GetMethod(config('constants.api.menus'));
+        $data = [
+            'status' => "All"
+        ];
+
+        $roles = Helper::PostMethod(config('constants.api.roles'), $data);
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+
+        return view(
+            'admin.school_roles.menuaccess',
+            [
+                'roles' => isset($roles['data']) ? $roles['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
+                'mainmenu' =>  [],
+                'submenu' => [],
+                'childmenu' =>  []
+            ]
+        );
+    }
     public function getmenus(Request $request)
     {
         $role_id = $request->role_id;
@@ -9454,7 +9477,6 @@ class AdminController extends Controller
 
         $data = [
             'role_id' => $request->role_id,
-            'br_id' => $request->branch_id,
             'school_roleid' => $request->school_roleid,
             'menu_id' => $request->menu_id,
             'menuaccess_id' => $request->menuaccess_id,
@@ -10715,7 +10737,7 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
-            'interview_date' => $request->interview_date,
+            'interview_date' => date('Y-m-d',strtotime($request->interview_date)),
             'student_id' => $request->student_id,
             'question_situation' => $request->question_situation,
             'question_improved' => $request->question_improved,
@@ -10772,7 +10794,7 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                 $edit = route('admin.personalinterviewdownload', $row['id']);
                 return '<div class="button-list">
-                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                            <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn" title="Download"><i class="fe-download"></i></a>
                         </div>';
             })
             ->rawColumns(['actions'])

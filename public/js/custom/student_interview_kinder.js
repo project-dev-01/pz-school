@@ -1,6 +1,12 @@
 var reasonChart;
-$(function () {
-    
+$(function () {   
+    $("#interview_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-3:+6", // last hundred years
+        });
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#bystudentfilter';

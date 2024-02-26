@@ -1,6 +1,9 @@
 @extends('layouts.admin-layout')
 @section('title',' ' . __('messages.personal_interview') . '')
 @section('component_css')
+<!-- date picker -->
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
@@ -133,7 +136,15 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="interview_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-											<input type="date" name="interview_date" id="interview_date" class="form-control" placeholder="{{ __('messages.yyyy_mm_dd') }}" required>
+											<div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="interview_date" id="interview_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" required>
+                                    </div>
+											
 										</div>
 									</div>
 								</div>
@@ -239,6 +250,7 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
 	toastr.options.preventDuplicates = true;
 </script>

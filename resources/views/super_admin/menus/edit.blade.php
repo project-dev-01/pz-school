@@ -155,6 +155,13 @@
                                     </select>
                                 </div>
                             </div>
+							<div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{ __('messages.order_code') }} <span class="text-danger">*</span></label>
+                                    <input type="text" autocomplete="off" name="menu_order" class="form-control " placeholder="{{ __('messages.order_code') }}" id="menu_order" value="{{@$MenuDetails['menu_order']}}" required>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>{{ __('messages.menu_status') }} <span class="text-danger">*</span></label>
