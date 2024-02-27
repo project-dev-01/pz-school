@@ -182,7 +182,7 @@
                                     <div class="input-group">
                                         <div class="">
                                             <input type="file" id="leave_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                            <label class="custom-file-label" for="leave_file">{{ __('messages.choose_file') }}</label>
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
@@ -190,9 +190,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                                    </textarea>
+                                    <label for="changelev">{{ __('messages.remarks') }}</label>
+                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">

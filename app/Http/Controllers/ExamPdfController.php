@@ -2312,21 +2312,24 @@ class ExamPdfController extends Controller
               
                 $mark=$getmarks['data'];
                 $remark='';
-                if($papers['score_type']=='Points')
+                if(isset($papers))
                 {
-                    $remark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                }
-                elseif($papers['score_type']=='Freetext')
-                {
-                    $remark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                }
-                elseif($papers['score_type']=='Grade')
-                {
-                    $remark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                }
-                else
-                {
-                    $remark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                    if($papers['score_type']=='Points')
+                    {
+                        $remark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                    }
+                    elseif($papers['score_type']=='Freetext')
+                    {
+                        $remark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                    }
+                    elseif($papers['score_type']=='Grade')
+                    {
+                        $remark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                    }
+                    else
+                    {
+                        $remark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                    }
                 }  
                     $getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
                     //dd($getattendance);

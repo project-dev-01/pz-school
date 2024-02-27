@@ -63,7 +63,6 @@ $(function () {
             total_leave: "required",
             changeLevType: "required",
             changelevReasons: "required",
-            txtarea_prev_remarks: "required"
         }
     });
     $('#stdGeneralDetails').on('submit', function (e) {
@@ -434,6 +433,7 @@ $(function () {
             {
                 branch_id: branchID
             }, function (res) {
+                $("#showAllReasons").empty();
                 $('#knowtheReasons').modal('show');
                 if (res.code == 200) {
                     const jsonObject = JSON.parse(res.data);
