@@ -258,10 +258,10 @@ $(function () {
                                 attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                             }
 
-                            attendanceListShow += '<th>Total<br>Present</th>' +
-                                '<th>Total<br>Absent</th>' +
-                                '<th>Total<br>Late</th>' +
-                                '<th>Total<br>Excused</th>' +
+                            attendanceListShow +=  '<th>'+total_lang+'<br>'+present_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+late_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+excused_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>';

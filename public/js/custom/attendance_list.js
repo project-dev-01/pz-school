@@ -27,7 +27,6 @@ $(function () {
     $("#getAttendanceList").validate({
         rules: {
             year_month: "required",
-            subject_id: "required"
         }
     });
 
@@ -65,6 +64,7 @@ $(function () {
             formData.append('ref_user_id', ref_user_id);
             formData.append('student_id', student_id);
             formData.append('subject_id', subject_id);
+            formData.append('academic_session_id', academic_session_id);
             var classObj = {
                 attendanceList: attendanceList,
                 subject_id: subject_id,
@@ -86,7 +86,6 @@ $(function () {
                         $("#attendanceReport").show();
 
                         var get_attendance_list = response.data.get_attendance_list;
-                        var get_attendance_counts = response.data.get_attendance_counts;
 
                         $("#attendanceListShow").empty(attendanceListShow);
                         var attendanceListShow = "";
@@ -97,7 +96,7 @@ $(function () {
                                 '<thead>' +
                                 '<tr>' +
                                 '<th>'+name_lang+'</th>';
-                            // '<th>' + get_attendance_list[0].first_name + '' + get_attendance_list[0].last_name + '</th>';
+                            // '<th>' + get_attendance_list.first_name + '' + get_attendance_list.last_name + '</th>';
                             for (var d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
                                 // daysOfYear.push(new Date(d));
                                 var ds = new Date(d);
@@ -110,51 +109,63 @@ $(function () {
                                 '<th>'+total_lang+'<br>'+late_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
-                                '<tbody>' +
-                                '<tr>' +
-                                '<td class="text-left">' +
-                                '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
-                                '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">' +
-                                '</a>' + get_attendance_list[0].first_name + ' ' + get_attendance_list[0].last_name +
-                                '</td>';
+                                '<tbody>';
+                            // add functions tr start
+                            get_attendance_list.forEach(function (res) {
+                                attendanceListShow += '<tr>' +
+                                    '<td class="text-left studentRow" style="display:grid;">' +
+                                    // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" data-toggle="modal" data-id="' + res.student_id + '" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                    '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light studentDetails" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                    '<input type="hidden" value="' + res.student_id + '">' +
+                                    // '<a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">' +
+                                    '<img src="' + defaultImg + '" alt="user-image" class="rounded-circle">' +
+                                    '</a>' + res.first_name + ' ' + res.last_name +
+                                    '</td>';
 
-                            for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
-                                // daysOfYear.push(new Date(d));
-                                var currentDate = formatDate(new Date(s));
+                                var attendance_details = res.attendance_details;
 
-                                var i = 0;
-                                get_attendance_list.forEach(function (res) {
+                                for (var s = firstDayTd; s <= lastDay; s.setDate(s.getDate() + 1)) {
+                                    // daysOfYear.push(new Date(d));
+                                    var currentDate = formatDate(new Date(s));
 
-                                    if (currentDate == res.date) {
-                                        var color = "";
-                                        if (res.status == "present") {
-                                            color = "btn-success";
+                                    var i = 0;
+                                    attendance_details.forEach(function (res1) {
+
+                                        if (currentDate == res1.date) {
+                                            var color = "";
+                                            if (res1.status == "present") {
+                                                color = "btn-success";
+                                            }
+                                            if (res1.status == "absent") {
+                                                color = "btn-danger";
+                                            }
+                                            if (res1.status == "late") {
+                                                color = "btn-warning";
+                                            }
+                                            attendanceListShow += '<td>' +
+                                                '<input type="hidden" value="' + res1.status + '" ></input>' +
+                                                '<button type="button" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
+                                                '</td>';
+                                            i = 1;
                                         }
-                                        if (res.status == "absent") {
-                                            color = "btn-danger";
-                                        }
-                                        if (res.status == "late") {
-                                            color = "btn-warning";
-                                        }
-                                        attendanceListShow += '<td>' +
-                                            '<input type="hidden" value="' + res.status + '" ></input>' +
-                                            '<button type="button" class="btn btn-xs ' + color + ' waves-effect waves-light"><i class="mdi mdi-check"></i></button>' +
-                                            '</td>';
+
+                                    });
+                                    if (i == 0) {
+                                        attendanceListShow += '<td style="background-color: #ddd; cursor: not-allowed;"></td>';
                                         i = 1;
                                     }
-
-                                });
-                                if (i == 0) {
-                                    attendanceListShow += '<td style="background-color: #ddd; cursor: not-allowed;"></td>';
-                                    i = 1;
                                 }
-                            }
-                            attendanceListShow += '<td>' + get_attendance_counts[0].presentCount + '</td>' +
-                                '<td>' + get_attendance_counts[0].absentCount + '</td>' +
-                                '<td>' + get_attendance_counts[0].lateCount + '</td>' +
-                                '</tr>' +
-                                '' +
-                                '</tbody>' +
+                                firstDayTd = new Date(date.getFullYear(), date.getMonth(), 1);
+
+                                attendanceListShow += '<td>' + res.presentCount + '</td>' +
+                                    '<td>' + res.absentCount + '</td>' +
+                                    '<td>' + res.lateCount + '</td>' +
+                                    '</tr>';
+                            });
+
+
+                            // add functions tr end
+                            attendanceListShow += '</tbody>' +
                                 '</table>' +
                                 '</div>';
                         } else {
@@ -396,9 +407,9 @@ $(function () {
                                 attendanceListShow += '<th>' + dayName + '<br>' + (i++) + '</th>';
                             }
 
-                            attendanceListShow += '<th>Total<br>Present</th>' +
-                                '<th>Total<br>Absent</th>' +
-                                '<th>Total<br>Late</th>' +
+                            attendanceListShow +=  '<th>'+total_lang+'<br>'+present_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+absent_lang+'</th>' +
+                            '<th>'+total_lang+'<br>'+late_lang+'</th>' +
                                 '</tr>' +
                                 '</thead>' +
                                 '<tbody>';

@@ -27,14 +27,16 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
     protected $subject;
     protected $date;
     protected $pattern;
+    protected $type;
 
-    function __construct($branch,$class,$section,$subject,$pattern,$date) {
+    function __construct($branch,$class,$section,$subject,$pattern,$date,$type) {
         $this->branch = $branch;
         $this->class = $class;
         $this->section = $section;
         $this->subject = $subject;
         $this->pattern = $pattern;
         $this->date = $date;
+        $this->type = $type;
     }
     public function collection()
     {
@@ -48,8 +50,17 @@ class StudentAttendanceExport implements FromCollection, WithHeadings, ShouldAut
             "pattern" => $this->pattern,
             "date" => $this->date,
         ];
-        // dd(config('constants.api.staff_attendance_export'));   
-        $response = Helper::PostMethod(config('constants.api.student_attendance_export'), $data);
+        // dd(config('constants.api.staff_attendance_export')); 
+
+        // dd($this->type);
+        if($this->type=="Subject"){
+            $response = Helper::PostMethod(config('constants.api.student_attendance_export_subject'), $data);
+        
+        }else if($this->type=="Day"){
+            $response = Helper::PostMethod(config('constants.api.student_attendance_export'), $data);
+        
+        }
+          
         // dd($response);
         $excel = $response['data']['attendance'];
         

@@ -40,6 +40,7 @@ class ParentAttendanceExport implements FromCollection, WithHeadings, ShouldAuto
             "branch_id" => $this->branch,
             "student_id" => $this->student,
             "subject_id" => $this->subject,
+            "pattern" => "Month",
             "date" => $this->date,
         ];
         // dd(config('constants.api.staff_attendance_export'));  

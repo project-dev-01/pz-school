@@ -58,18 +58,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="subject_id">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
-                                    <select id="subject_id" class="form-control" name="subject_id">
-                                        <option value="">{{ __('messages.select_subject') }}</option>
-                                        @forelse ($subjects as $sub)
-                                        <option value="{{ $sub['subject_id'] }}">{{ $sub['subject_name'] }}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <input type="hidden" id="student_id" value="{{$student_id}}" name="student_id">
                         <div class="form-group text-right m-b-0">

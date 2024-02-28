@@ -53,6 +53,7 @@ class StudentListExport  implements FromCollection, WithHeadings
             "section_id" => $this->section_id,
             "session" => $this->session
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.download_student_list_information'), $data);
         $excel = $response['data'];
         $this->studentList = collect($excel);

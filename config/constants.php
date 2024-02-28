@@ -5,7 +5,7 @@ return [
     // 'branch_id'=>'1',
     // 'school_name'=>'SMK Kiaramas',
     // 'school_image'=>'school.jpg',
-    'branch_id'=>'5',
+    'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     // 'image_url' => "https://api.suzen.school",
@@ -736,6 +736,8 @@ return [
          'exam_timetable_list_download' => $url.'/exam_timetable/list/download',
          'staff_attendance_export' => $url.'/staff_attendance/export',
          'student_attendance_export' => $url.'/student_attendance/export',
+         'student_attendance_export_subject' => $url.'/student_attendance/export/subject',
+         'student_attendance_export_parent' => $url.'/student_attendance/export/parent',
          
          'old_soap_student_list' => $url.'/old_soap_student/list',
          'soap_student_list' => $url.'/soap_student/list',

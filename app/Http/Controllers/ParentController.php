@@ -1900,12 +1900,19 @@ class ParentController extends Controller
             ->addIndexColumn()
             ->addColumn('status', function ($row) {
                 $color = "";
-                if ($row['status_parent'] == "Accept") {
-                    $color = "success";
-                } else if ($row['status_parent'] == "Reject") {
-                    $color = "danger";
-                } else if ($row['status_parent'] == "Remand") {
-                    $color = "info";
+                if($row['status']=="Admin"){
+
+                    $color = "warning";
+                    $row['status_parent'] = "Pending";
+                }else{
+
+                    if ($row['status_parent'] == "Accept") {
+                        $color = "success";
+                    } else if ($row['status_parent'] == "Reject") {
+                        $color = "danger";
+                    } else if ($row['status_parent'] == "Remand") {
+                        $color = "info";
+                    } 
                 }
                 return '<div class="button-list">
                 

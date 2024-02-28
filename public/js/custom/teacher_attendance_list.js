@@ -312,6 +312,7 @@ $(function () {
     // rules validation
     $("#attendanceFilter").validate({
         rules: {
+            department_id: "required",
             class_id: "required",
             section_id: "required",
             subject_id: "required",

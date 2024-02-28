@@ -69,7 +69,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="department_id">{{ __('messages.department') }}</label>
+                                    <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
                                     <select id="department_id" name="department_id" class="form-control">
                                         <option value="">{{ __('messages.select_department') }}</option>
                                         @forelse($department as $r)
@@ -111,7 +111,7 @@
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
                                     <select id="patternTerm" class="form-control" name="class_date">
-                                        <option value="0">{{ __('messages.select_semester') }}</option>
+                                        <option value="">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
                                         <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @empty
@@ -219,6 +219,7 @@
                             <input type="hidden" name="section" id="excelSection">
                             <input type="hidden" name="pattern" id="excelPattern">
                             <input type="hidden" name="date" id="excelDate">
+                            <input type="hidden" name="type" value="Day">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                     {{ __('messages.download') }}
@@ -232,6 +233,7 @@
                             <input type="hidden" name="section_id" id="downExcelSection">
                             <input type="hidden" name="pattern" id="downExcelPattern">
                             <input type="hidden" name="year_month" id="downExcelDate">
+                            <input type="hidden" name="type" value="Day">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                     {{ __('messages.pdf') }}

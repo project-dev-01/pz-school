@@ -143,7 +143,7 @@
                                     <input type="text" class="form-control" name="class_date" id="patternYear" placeholder="{{ __('messages.yyyy') }}">
                                 </div> -->
                             </div>
-                            <div class="col-md-3" id="subject" style="display:none">
+                            <div class="col-md-3" style="display:none">
                                 <div class="form-group">
                                     <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
                                     <select id="subjectID" class="form-control" name="subject_id">

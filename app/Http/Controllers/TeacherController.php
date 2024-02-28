@@ -897,10 +897,12 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $data);
+        $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
         
         return view('teacher.attendance.index', [
             'teacher_class' => isset($response['data']) ? $response['data'] : [],
             'department' => isset($department['data']) ? $department['data'] : [],
+            'term' => isset($term['data']) ? $term['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
             'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : []
