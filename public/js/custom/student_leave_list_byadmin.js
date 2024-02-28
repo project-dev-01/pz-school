@@ -22,12 +22,12 @@ $(function () {
     $("#changeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
-        $("#changelevReasons").empty();
-        $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
+        $("#changelevReasons1").empty();
+        $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');
         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $("#changelevReasons1").append('<option value="' + val.id + '">' + val.name + '</option>');
                 });
             }
         }, 'json');
@@ -124,6 +124,25 @@ $(function () {
         // // subject division
         studentLeaveList(formData);
     });
+    function getstudentLeaveList() 
+    {
+        var form = this;
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var student_name = $("#student_name").val();
+        var status = $("#leave_status").val();
+        var date = $("#range-datepicker").val();
+        var formData = new FormData();
+        formData.append('token', token);
+        formData.append('branch_id', branchID);
+        formData.append('class_id', class_id);
+        formData.append('section_id', section_id);
+        formData.append('student_name', student_name);
+        formData.append('status', status);
+        formData.append('date', date);
+        // // subject division
+        studentLeaveList(formData);
+    }
     function studentLeaveList(formData) {
 
         $(".studentLeaveShow").hide();
@@ -197,11 +216,12 @@ $(function () {
         });
 
     });
+   
     $(document).on('click', '#stdLeaveapprovedLeave', function () {
         var student_leave_tbl_id = $("#studentLeaveID").val();
         var status = $("#leave_status_name").val();
         var leave_type = $("#changeLevType").val();
-        var reason_id = $("#changelevReasons").val();
+        var reason_id = $("#changelevReasons1").val();
         var remarks = $("#yourRemarks").val();
         var formData = new FormData();
         formData.append('branch_id', branchID);
@@ -216,6 +236,10 @@ $(function () {
         //     console.log(pair[0]+ ', ' + pair[1]); 
         // }
         // return false;
+        
+        if (status!='') {
+            $('#alert_status').html('');
+            $('#leave_status_name').css('border-color', '');
         $.ajax({
             url: teacher_leave_remarks_updated,
             method: "post",
@@ -228,7 +252,8 @@ $(function () {
                     // allStudentLeave();
                     toastr.success('Leave Updated sucessfully');
                     $('#nursingPopup').modal('hide');
-                    location.reload();
+                    //location.reload();
+                    getstudentLeaveList();
                 }
                 else {
                     toastr.error(res.message);
@@ -236,6 +261,12 @@ $(function () {
                 }
             }
         });
+    }
+    else
+    {
+        $('#leave_status_name').css('border-color', 'red');
+        $('#alert_status').html('Required');
+    }
 
     });
     function allStudentLeave(dataSetNew) {
@@ -477,14 +508,14 @@ $(function () {
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
 
                     var student_leave_type_id = leave_details.nursing_leave_type;
-                    $("#changelevReasons").empty();
-                    $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
+                    $("#changelevReasons1").empty();
+                    $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');
                     if (student_leave_type_id) {
                         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
                             if (res.code == 200) {
                                 $.each(res.data, function (key, val) {
                                     var selected = leave_details.nursing_reason_id == val.id ? "selected" : "";
-                                    $("#changelevReasons").append('<option value="' + val.id + '" ' + selected + '>' + val.name + '</option>');
+                                    $("#changelevReasons1").append('<option value="' + val.id + '" ' + selected + '>' + val.name + '</option>');
                                 });
                             }
                         }, 'json');

@@ -142,7 +142,6 @@ $(function () {
             total_leave: "required",
             directchangeLevType: "required",
             changelevReasons: "required",
-            txtarea_prev_remarks: "required",
             stud_leave_status: "required"
         }
     });
@@ -216,7 +215,8 @@ $(function () {
         $.get(leaveTypeWiseGetAllReason,
             {
                 branch_id: branchID
-            }, function (res) {
+            }, function (res) {                
+                $("#showAllReasons").empty();
                 $('#knowtheReasons').modal('show');
                 if (res.code == 200) {
                     const jsonObject = JSON.parse(res.data);

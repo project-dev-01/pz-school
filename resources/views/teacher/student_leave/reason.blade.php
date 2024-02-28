@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card-box">
+                        <div class="card-box" style="overflow-y: auto;height:500px;">
                             <h4 class="header-title">Reason</h4>
 
                             <div id="showAllReasons">

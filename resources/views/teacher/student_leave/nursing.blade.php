@@ -73,7 +73,7 @@
                                 <td>Absense Reason (Nursing)</td>
                                 <td>:</td>
                                 <td id="absentReason">
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                    <select id="changelevReasons1" class="form-control" name="changelevReasons1">
                                         <option value="">{{ __('messages.select_reason') }}</option>
                                     </select>
                                 </td>
@@ -97,6 +97,7 @@
                                         <option value="Reject">{{ __('messages.reject') }}</option>
                                         <option value="Pending" selected>{{ __('messages.pending') }}</option>
                                     </select>
+                                    <span class="text-danger" id="alert_status"></span>
                                 </td>
                             </tr>
                         </tbody>
