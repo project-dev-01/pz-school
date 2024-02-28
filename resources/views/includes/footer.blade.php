@@ -259,6 +259,8 @@
     var entitlement_lang   ="{{ __('messages.entitlement') }}";
     var taken_lang   ="{{ __('messages.taken') }}";
     var balance_lang   ="{{ __('messages.balance') }}";
+    var warden_name_lang  = "{{ __('messages.choose_the_warden_name') }}";
+    var choose_lang  = "{{ __('messages.choose') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";

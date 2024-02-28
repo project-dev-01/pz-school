@@ -282,9 +282,9 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
   //event routes
-    var teacherList = "{{ route('teacher.buletin_board.list') }}";
-    var starRoute = "{{ route('teacher.buletin_board.star') }}";
-    var importantList = "{{ route('teacher.buletin_board.imp_list') }}";
+    var studentList = "{{ route('student.buletin_board.list') }}";
+    var starRoute = "{{ route('student.buletin_board.star') }}";
+    var importantList = "{{ route('student.buletin_board.imp_list') }}";
     // Get PDF Footer Text
     var header_txt="{{ __('messages.event') }}";
     var footer_txt="{{ session()->get('footer_text') }}";

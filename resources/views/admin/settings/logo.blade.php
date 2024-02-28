@@ -68,7 +68,7 @@
     toastr.options.preventDuplicates = true;
 </script>
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
+<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 

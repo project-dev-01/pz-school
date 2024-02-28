@@ -196,12 +196,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
-                                        <textarea class="form-control" name="descriptions" id="descriptions" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="descriptions">{{ __('messages.main_reason') }}<span class="text-danger">*</span></label><br>
@@ -209,7 +204,13 @@
                                         {{ __('messages.main_reason') }}
                                         </button>
                                     </div>
-                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- <div class="form-group">
+                                        <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
+                                        <textarea class="form-control" name="descriptions" id="descriptions" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                    </div> -->
+                                </div>
                                 <div class="col-md-4">
                                     <div class="float-right" >
                                     <input type="hidden" name="healthlogID" id="healthlogID">

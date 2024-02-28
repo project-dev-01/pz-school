@@ -37,7 +37,7 @@
     </div>
     <!-- end page title -->
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
@@ -62,27 +62,27 @@
                             </div>
                         </div>
                         <div class="form-group text-right m-b-0">
-                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                            <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
                                 Filter
-                            </button> -->
+                            </button> 
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                             {{ __('messages.filter') }}
                             </button>
-                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                 Cancel
-                            </button>-->
+                            </button>
                         </div>
                     </form>
 
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+                </div> 
+            </div> 
+        </div> 
 
-    </div>
+    </div> -->
     <!-- end row -->
 
 
-    <div class="row" id="emp" >
+    <div class="row" >
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
@@ -101,15 +101,33 @@
                                         <tr>
                                             <th>#</th>
                                             <th> {{ __('messages.employee_name') }}</th>
+                                            <th style="display: none"> {{ __('messages.name_english') }}</th>
+                                            <th style="display: none"> {{ __('messages.name_furigana') }}</th>
                                             <th style="display: none"> {{ __('messages.email') }}</th>
+                                            <th style="display: none"> {{ __('messages.city') }}</th>
+                                            <th style="display: none"> {{ __('messages.state') }}</th>
+                                            <th style="display: none"> {{ __('messages.country') }}</th>
+                                            <th style="display: none"> {{ __('messages.post_code') }}</th>
+                                            <th style="display: none"> {{ __('messages.present_address') }}</th>
+                                            <th style="display: none"> {{ __('messages.permanent_address') }}</th>
+                                            <th style="display: none"> {{ __('messages.nric_number') }}</th>
+                                            <th style="display: none"> {{ __('messages.visa_number') }}</th>
+                                            <th style="display: none"> {{ __('messages.passport') }}</th>
                                             <th style="display: none"> {{ __('messages.mobile_number') }}</th>
                                             <th style="display: none"> {{ __('messages.gender') }}</th>
+                                            <th style="display: none"> {{ __('messages.height') }}</th>
+                                            <th style="display: none"> {{ __('messages.weight') }}</th>
+                                            <th style="display: none"> {{ __('messages.allergy') }}</th>
+                                            <th style="display: none"> {{ __('messages.blood_group') }}</th>
                                             <th style="display: none"> {{ __('messages.nationality') }}</th>
+                                            <th style="display: none"> {{ __('messages.religion_name') }}</th>
                                             <th> {{ __('messages.DOB') }}</th>
                                             <th style="display: none"> {{ __('messages.joining_date') }}</th>
                                             <th> {{ __('messages.tenure') }}</th>
                                             <th> {{ __('messages.job_title') }}</th>
                                             <th> {{ __('messages.job_description') }}</th>
+                                            <th style="display: none"> {{ __('messages.staff_position') }}</th>
+                                            <th style="display: none"> {{ __('messages.staff_category') }}</th>
                                             <th> {{ __('messages.employment_status') }}</th>
                                             <th> {{ __('messages.employee_type') }}</th>
                                             <th style="display: none"> {{ __('messages.start_date') }}</th>

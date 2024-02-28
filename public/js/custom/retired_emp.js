@@ -1,30 +1,7 @@
 $(function () {
-    // rules validation
-    $("#EmpFilter").validate({
-        rules: {
-            employee_type: "required"
-        }
-    });
 
-    // get student list
-    $('#EmpFilter').on('submit', function (e) {
-        e.preventDefault();
-        var EmpFilter = $("#EmpFilter").valid();
-        if (EmpFilter === true) {
-            var employee_type = $('#employee_type').val();
-            
-            var formData = {
-                employee_type: employee_type,
-            };
-            getEmpFilter(formData);
-        } else {
-            $("#emp").hide("slow");
-        }
-
-    });
-    function getEmpFilter(formData){
-        $("#emp").show("slow");
-        console.log(formData);
+    if(employeeList){
+        
         $('#emp-table').DataTable({
             processing: true,
             info: true,
@@ -65,15 +42,15 @@ $(function () {
                     charset: 'utf-8',
                     bom: true,
                     exportOptions: {
-                        columns: 'th:not(:last-child)'
+                        columns:  [0,1, 2, 3, 4,5,6,7,8,9,10,11,13,14,15,20,21,22,23,24,25,26,27,28,29,30,31,32]
                     },
 
                 
                     customize: function (doc) {
                     doc.pageMargins = [50,50,50,50];
-                    doc.defaultStyle.fontSize = 10;
-                    doc.styles.tableHeader.fontSize = 12;
-                    doc.styles.title.fontSize = 14;
+                    doc.defaultStyle.fontSize = 7;
+                    doc.styles.tableHeader.fontSize = 8;
+                    doc.styles.title.fontSize = 12;
                     doc.pageSize = 'A3';
                     doc.pageOrientation = 'landscape';
                     // Remove spaces around page title
@@ -100,12 +77,13 @@ $(function () {
             }
             ],
             serverSide: true,
-            ajax: {
-                url: employeeList,
-                data: function (d) {
-                    d.employee_type = formData.employee_type
-                }
-            },
+            ajax: employeeList,
+            // {
+            //     url: employeeList,
+            //     data: function (d) {
+            //         d.employee_type = formData.employee_type
+            //     }
+            // },
             "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
@@ -123,8 +101,63 @@ $(function () {
                     name: 'emp_name'
                 },
                 {
+                    data: 'english_emp_name',
+                    name: 'english_emp_name',
+                    visible: false
+                },
+                {
+                    data: 'furigana_emp_name',
+                    name: 'furigana_emp_name',
+                    visible: false
+                },
+                {
                     data: 'email',
                     name: 'email',
+                    visible: false
+                },
+                {
+                    data: 'city',
+                    name: 'city',
+                    visible: false
+                },
+                {
+                    data: 'state',
+                    name: 'state',
+                    visible: false
+                },
+                {
+                    data: 'country',
+                    name: 'country',
+                    visible: false
+                },
+                {
+                    data: 'post_code',
+                    name: 'post_code',
+                    visible: false
+                },
+                {
+                    data: 'present_address',
+                    name: 'present_address',
+                    visible: false
+                },
+                {
+                    data: 'permanent_address',
+                    name: 'permanent_address',
+                    visible: false
+                },
+                {
+                    data: 'nric_number',
+                    name: 'nric_number',
+                    visible: false
+                },
+                {
+                    data: 'visa_number',
+                    name: 'visa_number',
+                    visible: false
+                },
+                {
+                    data: 'passport',
+                    name: 'passport',
                     visible: false
                 },
                 {
@@ -138,8 +171,32 @@ $(function () {
                     visible: false
                 },
                 {
+                    data: 'height',
+                    name: 'height',
+                    visible: false
+                }, {
+                    data: 'weight',
+                    name: 'weight',
+                    visible: false
+                },
+                {
+                    data: 'allergy',
+                    name: 'allergy',
+                    visible: false
+                },
+                {
+                    data: 'blood_group',
+                    name: 'blood_group',
+                    visible: false
+                },
+                {
                     data: 'nationality',
                     name: 'nationality',
+                    visible: false
+                },
+                {
+                    data: 'religion_name',
+                    name: 'religion_name',
                     visible: false
                 },
                 {
@@ -169,6 +226,14 @@ $(function () {
                             return ''; // Return an empty string if data is null
                         }
                     }
+                },
+                {
+                    data: 'staff_position_name',
+                    name: 'staff_position_name'
+                },
+                {
+                    data: 'staff_category_name',
+                    name: 'staff_category_name'
                 },
                 {
                     data: 'employment_status',
@@ -220,231 +285,20 @@ $(function () {
                 //     searchable: false
                 // },
             ],
-            columnDefs: [
-                {
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
-                        var currentImg = studentImg + row.photo;
-                        var img = (row.photo != null) ? currentImg : defaultImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
-                    }
-                },
+            // columnDefs: [
+            //     {
+            //         "targets": 1,
+            //         "className": "table-user",
+            //         "render": function (data, type, row, meta) {
+            //             var currentImg = studentImg + row.photo;
+            //             var img = (row.photo != null) ? currentImg : defaultImg;
+            //             var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
+            //                 '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+            //             return first_name;
+            //         }
+            //     },
              
-            ]
+            // ]
         });
     }
-
-    function setLocalStorageForStudentList(classObj) {
-
-        var studentListDetails = new Object();
-        studentListDetails.class_id = classObj.classID;
-        studentListDetails.section_id = classObj.sectionID;
-        studentListDetails.student_name = classObj.student_name;
-        studentListDetails.session_id = classObj.sessionID;
-        // here to attached to avoid localStorage other users to add
-        studentListDetails.branch_id = branchID;
-        studentListDetails.role_id = get_roll_id;
-        studentListDetails.user_id = ref_user_id;
-        var studentListClassArr = [];
-        studentListClassArr.push(studentListDetails);
-        if (get_roll_id == "2") {
-            // admin
-            localStorage.removeItem("admin_student_list_details");
-            localStorage.setItem('admin_student_list_details', JSON.stringify(studentListClassArr));
-        }
-        if (get_roll_id == "4") {
-            // teacher
-            localStorage.removeItem("teacher_student_list_details");
-            localStorage.setItem('teacher_student_list_details', JSON.stringify(studentListClassArr));
-        }
-        return true;
-    }
-    // if localStorage
-    if (typeof student_list_storage !== 'undefined') {
-        if ((student_list_storage)) {
-            if (student_list_storage) {
-                var studentListStorage = JSON.parse(student_list_storage);
-                if (studentListStorage.length == 1) {
-                    var classID, student_name,sectionID, sessionID, userBranchID, userRoleID, userID;
-                    studentListStorage.forEach(function (user) {
-                        classID = user.class_id;
-                        student_name = user.student_name;
-                        sectionID = user.section_id;
-                        sessionID = user.session_id;
-                        userBranchID = user.branch_id;
-                        userRoleID = user.role_id;
-                        userID = user.user_id;
-                    });
-                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $('#class_id').val(classID);
-                        $("#student_name").val(student_name);
-                        $('#session_id').val(sessionID);
-                        if (classID) {
-                            $("#section_id").empty();
-                            $("#section_id").append('<option value="">' + select_class + '</option>');
-                            $.post(sectionByClass, { class_id: classID }, function (res) {
-                                if (res.code == 200) {
-                                    $.each(res.data, function (key, val) {
-                                        $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                                    });
-                                    $("#section_id").val(classID);
-                                }
-                            }, 'json');
-                        }
-                        
-            
-                        var formData = {
-                            student_name: student_name,
-                            class_id: classID,
-                            section_id: sectionID,
-                            session_id: sessionID,
-                        };
-                        getEmpFilter(formData);
-                    }
-                }
-            }
-        }
-    }
-    $("#class_id").on('change', function (e) {
-        e.preventDefault();
-        var class_id = $(this).val();
-        $("#section_id").empty();
-        $("#section_id").append('<option value="">' + select_class + '</option>');
-        $.post(sectionByClass, { class_id: class_id }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#section_id").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                });
-            }
-        }, 'json');
-    });
-
-
-    $("#editadmission").validate({
-        rules: {
-            session_id: "required",
-            year: "required",
-            txt_regiter_no: "required",
-            txt_emailid: {
-                required: true,
-                email: true
-            },
-            txt_roll_no: "required",
-            admission_date: "required",
-            classnames: "required",
-            class_id: "required",
-            section_id: "required",
-            // categy: "required",
-            fname: "required",
-            txt_mobile_no: "required",
-            present_address: "required",
-            // txt_pwd: {
-            //     minlength: 6
-            // },
-            // txt_retype_pwd: {
-            //     minlength: 6,
-            //     equalTo: "txt_pwd"
-            // },  
-            password: {
-                // required: $("#password").val().length > 0,
-                minlength: 6
-            },
-            confirm_password: {
-                // required: $("#confirm_password").val().length > 0,
-                minlength: 6,
-                equalTo: "#password"
-            }
-        }
-    });
-
-    $('#editadmission').on('submit', function (e) {
-        e.preventDefault();
-        var admissionCheck = $("#editadmission").valid();
-        if (admissionCheck === true) {
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (data) {
-                    if (data.code == 200) {
-                        toastr.success(data.message);
-                        window.location.href = indexStudent;
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }
-            });
-        }
-    });
-
-    // delete Student 
-    $(document).on('click', '#deleteStudentBtn', function () {
-        var id = $(this).data('id');
-        var url = studentDelete;
-        swal.fire({
-            title: deleteTitle + '?',
-            html: deleteHtml,
-            showCancelButton: true,
-            showCloseButton: true,
-            cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonText,
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#556ee6',
-            width: 400,
-            allowOutsideClick: false
-        }).then(function (result) {
-            if (result.value) {
-                $.post(url, {
-                    id: id
-                }, function (data) {
-                    if (data.code == 200) {
-                        $("#student").show("slow");
-                        $('#student-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        $("#student").hide("slow");
-                        toastr.error(data.message);
-                    }
-                }, 'json');
-            }
-        });
-    });
-
-    $("#drp_transport_route").on('change', function (e) {
-        e.preventDefault();
-        var route_id = $(this).val();
-        $("#drp_transport_vechicleno").empty();
-        $("#drp_transport_vechicleno").append('<option value="">' + select_vehicle_number + '</option>');
-        $.post(vehicleByRoute, { route_id: route_id }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#drp_transport_vechicleno").append('<option value="' + val.vehicle_id + '">' + val.vehicle_no + '</option>');
-                });
-            }
-        }, 'json');
-    });
-
-
-
-    $("#drp_hostelnam").on('change', function (e) {
-        e.preventDefault();
-        var hostel_id = $(this).val();
-        $("#drp_roomname").empty();
-        $("#drp_roomname").append('<option value="">' + select_room_name + '</option>');
-        $.post(roomByHostel, { hostel_id: hostel_id }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#drp_roomname").append('<option value="' + val.room_id + '">' + val.room_name + '</option>');
-                });
-            }
-        }, 'json');
-    });
-
 });

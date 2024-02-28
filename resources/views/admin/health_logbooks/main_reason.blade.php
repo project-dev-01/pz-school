@@ -15,8 +15,8 @@
                         <div class="nav flex-column nav-pills" id="mainReasonTabs" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="reasonTab1" data-toggle="pill" href="#reason1" role="tab" aria-controls="reason1" aria-selected="true">{{ __('messages.tab_1') }}</a>
                             <a class="nav-link" id="reasonTab2" data-toggle="pill" href="#reason2" role="tab" aria-controls="reason2" aria-selected="false">{{ __('messages.tab_2') }}</a>
-                            <a class="nav-link" id="reasonTab2" data-toggle="pill" href="#reason3" role="tab" aria-controls="reason3" aria-selected="false">{{ __('messages.tab_3') }}</a>
-                            <a class="nav-link" id="reasonTab4" data-toggle="pill" href="#reason4" role="tab" aria-controls="reason3" aria-selected="false">{{ __('messages.tab_4') }}</a>
+                            <a class="nav-link" id="reasonTab3" data-toggle="pill" href="#reason3" role="tab" aria-controls="reason3" aria-selected="false">{{ __('messages.tab_3') }}</a>
+                            <a class="nav-link" id="reasonTab4" data-toggle="pill" href="#reason4" role="tab" aria-controls="reason4" aria-selected="false">{{ __('messages.tab_4') }}</a>
                             <!-- Add more tabs as needed -->
                         </div>
                     </div>
@@ -91,9 +91,20 @@
                                                         <span id="part_error" class="error"></span>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
+                                                        <textarea class="form-control" name="injury_reason" id="injury_reason" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                                        <span id="injury_reason_error" class="error"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group float-right">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                                            <button type="submit" id="saveMainReasonButton" data-tab="#reason1" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
+                                        </div>
                                 </div>
                                 <div class="tab-pane fade" id="reason2" role="tabpanel" aria-labelledby="reasonTab2">
                                     <div class="card">
@@ -111,7 +122,7 @@
                                                 <!-- Labels and Multi-Select Dropdowns -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_1') }}<span class="text-danger">*</span></label>
+                                                        <label for="class_id">{{ __('messages.category_5') }}<span class="text-danger">*</span></label>
                                                         <select id="illness_name" class="form-control select2-multiple"   data-toggle="select2" name="illness_name[]" multiple>
                                                             <option value="">{{ __('messages.select_illness_name') }}</option>
                                                             @forelse($illness as $r)
@@ -124,7 +135,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_2') }}<span class="text-danger">*</span></label>
+                                                        <label for="class_id">{{ __('messages.category_3') }}<span class="text-danger">*</span></label>
                                                         <select id="illness_treatment" class="form-control select2-multiple"   data-toggle="select2" name="illness_treatment[]" multiple>
                                                             <option value="">{{ __('messages.select_treatment') }}</option>
                                                             @forelse($illness as $r)
@@ -137,9 +148,16 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_3') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" name="reasonTemp" id="reasonTemp" placeholder="{{ __('messages.enter_temperature') }}">
+                                                        <label for="class_id">{{ __('messages.category_6') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" name="reasonTemp" id="reasonTemp" placeholder="{{ __('messages.enter_temperature') }}" maxlength="3" pattern="\d{3}">
                                                         <span id="reasonTemp_error" class="error"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
+                                                        <textarea class="form-control" name="illness_reason" id="illness_reason" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                                        <span id="illness_reason_error" class="error"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,7 +177,7 @@
                                                 <!-- Labels and Multi-Select Dropdowns -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_1') }}</label>
+                                                        <label for="class_id">{{ __('messages.category_7') }}</label>
                                                         <select id="meal" class="form-control" name="meal">
                                                             <option value="">{{ __('messages.select_meal') }}</option>
                                                             @forelse($illness as $r)
@@ -171,7 +189,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_2') }}</label>
+                                                        <label for="class_id">{{ __('messages.category_8') }}</label>
                                                         <select id="defecation" class="form-control" name="defecation">
                                                             <option value="">{{ __('messages.select_defecation') }}</option>
                                                             @forelse($illness as $r)
@@ -183,7 +201,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_3') }}</label>
+                                                        <label for="class_id">{{ __('messages.category_9') }}</label>
                                                         <select id="slept_time" class="form-control" name="slept_time">
                                                             <option value="">{{ __('messages.select_slept_time') }}</option>
                                                             @forelse($illness as $r)
@@ -196,6 +214,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group float-right">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                                            <button type="submit" id="saveMainReasonButton"  data-tab="#reason2" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
+                                        </div>
                                 </div>
                                 <div class="tab-pane fade" id="reason3" role="tabpanel" aria-labelledby="reasonTab3">
                                     <!-- Content for Reason 2 goes here -->
@@ -214,7 +236,7 @@
                                                 <!-- Labels and Multi-Select Dropdowns -->
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_1') }}<span class="text-danger">*</span></label>
+                                                        <label for="class_id">{{ __('messages.category_10') }}<span class="text-danger">*</span></label>
                                                         <select id="target" class="form-control select2-multiple"   data-toggle="select2" name="target[]" multiple>
                                                             <option value="">{{ __('messages.select_target') }}</option>
                                                             @forelse($healthConsult as $r)
@@ -227,7 +249,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="class_id">{{ __('messages.category_2') }}<span class="text-danger">*</span></label>
+                                                        <label for="class_id">{{ __('messages.category_3') }}<span class="text-danger">*</span></label>
                                                         <select id="health_treatment" class="form-control select2-multiple"   data-toggle="select2"   multiple name="health_treatment[]">
                                                             <option value="">{{ __('messages.select_treatment') }}</option>
                                                             @forelse($healthConsult as $r)
@@ -238,22 +260,51 @@
                                                         <span id="health_treatment_error" class="error"></span>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
+                                                        <textarea class="form-control" name="health_consult_reason" id="health_consult_reason" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                                        <span id="health_consult_reason_error" class="error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group float-right">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                                            <button type="submit" id="saveMainReasonButton" data-tab="#reason3" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
+                                        </div>
+                                </div>
+                                <div class="tab-pane fade" id="reason4" role="tabpanel" aria-labelledby="reasonTab4">
+                                    <div class="card">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <h4 class="navv">{{ __('messages.required') }}
+                                                    <h4>
+                                            </li>
+                                        </ul>
+                                        <div class="card-body">
+                                            <input type="hidden" name="Attend_to_heatlthcare_room" value="Attend to heatlthcare room" id="Attend_to_heatlthcare_room">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="descriptions">{{ __('messages.event_notes') }}<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" name="attend_to_heatlthcare_room_reason" id="attend_to_heatlthcare_room_reason" placeholder="{{ __('messages.enter_event_notes') }}"></textarea>
+                                                    <span id="attend_to_heatlthcare_room_reason_error" class="error"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="reason4" role="tabpanel" aria-labelledby="reasonTab4">
-                                    <input type="hidden" name="Attend_to_heatlthcare_room" value="Attend to heatlthcare room" id="Attend_to_heatlthcare_room">
+                                    <div class="form-group float-right">
+                                        <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                                        <button type="submit" id="saveMainReasonButton" data-tab="#reason4"  class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
+                                    </div>
                                 </div>
                                 <!-- Add more tab panes as needed -->
                             </div>
                     </div>
                     </form>
-                </div>
-                <div class="form-group float-right">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                    <button type="submit" id="saveMainReasonButton" class="btn btn-success waves-effect waves-light">{{ __('messages.update') }}</button>
-                </div>
+                </div> 
             </div>
         </div>
     </div>

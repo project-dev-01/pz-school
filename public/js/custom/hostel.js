@@ -6,6 +6,7 @@ $(function () {
 
         console.log('1')
         $('.select2-selection__rendered').html('<li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Choose ..." style="width: 424.034px;" aria-controls="select2-block_warden-jy-results" aria-activedescendant="select2-block_warden-jy-result-hnrw-54"></li>');
+        $('.select2-search__field').attr('placeholder', warden_name_lang);
         $('#hostelForm').trigger("reset");
     });
     $("#hostelForm").validate({

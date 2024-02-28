@@ -72,7 +72,7 @@
                                     <div class="row">
                                        <!-- Left Sidebar with Tabs -->
                                         <div class="col-md-2">
-                                            <div class="nav flex-column nav-pills" id="mainReasonTabs" role="tablist" aria-orientation="vertical">
+                                            <div class="nav flex-column nav-pills" id="mainReasonTabsEdit" role="tablist" aria-orientation="vertical">
                                             <a class="nav-link active" id="editreasonTab1" data-toggle="pill" href="#editreason1" role="tab" aria-controls="editreason1" aria-selected="true">{{ __('messages.tab_1') }}</a>
                                             <a class="nav-link" id="editreasonTab2" data-toggle="pill" href="#editreason2" role="tab" aria-controls="editreason2" aria-selected="false">{{ __('messages.tab_2') }}</a>
                                             <a class="nav-link" id="editreasonTab3" data-toggle="pill" href="#editreason3" role="tab" aria-controls="editreason3" aria-selected="false">{{ __('messages.tab_3') }}</a>

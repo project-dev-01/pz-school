@@ -9621,9 +9621,13 @@ class AdminController extends Controller
 
                 // Check if "admin" and "student" are in the target user names
                 if (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Student') !== false) {
-                    $targetUser .= '<br>Student: ' . $row['student_name'];
+                    if(!empty($row['student_name'])){
+                        $targetUser .= '<br>Student: ' . $row['student_name'];
+                    }
                 } elseif (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Teacher') !== false) {
-                    $targetUser .= '<br>Department: ' . $row['department_name'];
+                    if(!empty($row['department_name'])){
+                        $targetUser .= '<br>Department: ' . $row['department_name'];
+                     }
                 } else {
                     if (!empty($row['parent_name'])) {
                         $targetUser .= '<br>Parent: ' . $row['parent_name'];
@@ -9793,10 +9797,10 @@ class AdminController extends Controller
     }
     public function retiredPersonList(Request $request)
     {
-        $data = [
-            "working_status" => $request->employee_type
-        ];
-        $response = Helper::PostMethod(config('constants.api.retired_list'), $data);
+         // $data = [
+        //     "working_status" => $request->employee_type
+        // ];
+        $response = Helper::GetMethod(config('constants.api.retired_list'));
         $data = isset($response['data']['staff']) ? $response['data']['staff'] : [];
         return DataTables::of($data)
             ->addIndexColumn()

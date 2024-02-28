@@ -3,22 +3,19 @@ $(function () {
     $(document).ready(function () {
         // Get today's date
         var today = new Date();
-        // Set tomorrow's date
-        var tomorrow = new Date(today);
-        tomorrow.setDate(today.getDate() + 1);
         $('#addBuletinModal').on('shown.bs.modal', function () {
             $("#date").flatpickr({
                // enableTime: !0,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
-                minDate: tomorrow,
+                minDate: today,
                 container: '#addBuletinModal modal-body'
             });
             $("#end_date").flatpickr({
                 // enableTime: !0,
                  enableTime: true,
                  dateFormat: "Y-m-d H:i",
-                 minDate: tomorrow,
+                 minDate: today,
                  container: '#addBuletinModal modal-body'
              });
         });
@@ -28,13 +25,13 @@ $(function () {
                 // enableTime: !0,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i", // last hundred years
-                minDate: tomorrow,
+                minDate: today,
                 container: '#editBuletinModal modal-body'
             });
             $("#publish_end_dates").flatpickr({
                 // enableTime: !0,
                 enableTime: true,
-                minDate: tomorrow,
+                minDate: today,
                 dateFormat: "Y-m-d H:i", // last hundred years
                 container: '#editBuletinModal modal-body'
             });
@@ -70,8 +67,18 @@ $(function () {
                 $(form).find('span.date_error').text("");
             }
         }
-           //Date validate
            var startDate = $("#date").val();
+           var selectedDateTime =flatpickr.parseDate(startDate, "Y-m-d H:i");
+           var now = new Date();
+           // Extract time part only for comparison
+           if (now.toDateString() === selectedDateTime.toDateString() && now >= selectedDateTime) {
+            // Check if the selected date is today and the selected time is in the past
+            $(form).find('span.date_error').text("Publish time should be in the future.");
+            return false;
+            }
+           //Date validate
+           
+           var endDate = $("#end_date").val();
            if (endDate !== "" && startDate > endDate) {
             $(form).find('span.end_date_error').text("End Date should be greater than Start Date.");
             $("#end_date").val("");
@@ -404,7 +411,12 @@ $(function () {
                 },
                 {
                     data: 'file',
-                    name: 'file'
+                    name: 'file',
+                    render: function (data, type, full, meta) {
+                        // Assuming 'file' contains the file path or link
+                        // You can customize the link or action based on your requirements
+                        return '<a href="' + image_url + data + '" target="_blank">' + data + '</a>';
+                    } 
                 },
                 {
                     data: 'target_user',
@@ -470,16 +482,47 @@ $(function () {
             $('.viewBuletin').find('.title').text(data.data.title);
             $('.viewBuletin').find('.file').text(data.data.file);
             $('.viewBuletin').find('.publish_date').text(data.data.publish_date);
+            $('.viewBuletin').find('.publish_end_date').text(data.data.publish_end_date);
            
             var targetUserValues = data.data.target_user.split(',');
             if (targetUserValues.includes('5')) {
-                $('.viewBuletin').find('.target_user').html(data.data.name+"<br> Grade: " +data.data.grade_name+" <br> Class: " + data.data.section_name+" <br> Parent: " + data.data.parent_name);
+                var content = data.data.name + "<br>";
+
+                if (data.data.grade_name !== null) {
+                    content += "Grade: " + data.data.grade_name + "<br>";
+                }
+
+                if (data.data.section_name !== null) {
+                    content += "Class: " + data.data.section_name + "<br>";
+                }
+
+                if (data.data.parent_name !== null) {
+                    content += "Parent: " + data.data.parent_name;
+                }
+                $('.viewBuletin').find('.target_user').html(content);
               
             } else if (targetUserValues.includes('4')) {
-                $('.viewBuletin').find('.target_user').html(data.data.name+"<br> Department: " +data.data.department_name);
+                var content = data.data.name + "<br>";
+
+                if (data.data.department_name !== null) {
+                    content += "Department: " + data.data.department_name + "<br>";
+                }
+                $('.viewBuletin').find('.target_user').html(content);
             }else{
-               
-                $('.viewBuletin').find('.target_user').html(data.data.name+"<br> Grade: " +data.data.grade_name+" <br> Class: " + data.data.section_name+" <br> Student: "+ data.data.student_name);
+                var content = data.data.name + "<br>";
+
+                if (data.data.grade_name !== null) {
+                    content += "Grade: " + data.data.grade_name + "<br>";
+                }
+
+                if (data.data.section_name !== null) {
+                    content += "Class: " + data.data.section_name + "<br>";
+                }
+
+                if (data.data.student_name !== null) {
+                    content += "Student: " + data.data.student_name;
+                }
+                $('.viewBuletin').find('.target_user').html(content);
                 
             }
             
@@ -552,6 +595,7 @@ $(function () {
             $('#class').show();
             $('#student').hide();
              $('#parentss').show();
+             
         }else if (selectedOptions && selectedOptions.includes('6')) {
             // Hide the other dropdown and show class dropdown
             $('#department').hide();
@@ -565,14 +609,14 @@ $(function () {
         }
     });
   
-    $("#target_user").on('change', function (e) {
+    $("#filtersectionID").on('change', function (e) {
         e.preventDefault();
         var target_user = $("#target_user").val();
         var class_id = $("#changeClassName").val();
         var section_id = $("#filtersectionID").val();
        
       // console.log('Active div data-value:', activeDivDataValue);  // Use the stored data-value
-        console.log(target_user);
+        //console.log(target_user,class_id,section_id);
        if(target_user.includes('6') && target_user.includes('5'))
        {
             $("#student_id").empty();
@@ -587,6 +631,7 @@ $(function () {
             }, 'json');
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
+
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
                 console.log(res);
                 if (res.code == 200) {
@@ -599,6 +644,7 @@ $(function () {
        {
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
+            console.log(target_user,class_id,section_id);
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
                 console.log(res);
                 if (res.code == 200) {

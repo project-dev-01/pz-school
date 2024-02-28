@@ -37,6 +37,10 @@
                                         <td class="publish_date"></td>
                                     </tr>
                                     <tr>
+                                        <td>{{ __('messages.publish_end_date') }}</td>
+                                        <td class="publish_end_date"></td>
+                                    </tr>
+                                    <tr>
                                         <td>{{ __('messages.target_user') }}</td>
                                         <td class="target_user"></td>
                                     </tr>

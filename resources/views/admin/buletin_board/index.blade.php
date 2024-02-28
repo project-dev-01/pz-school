@@ -124,7 +124,8 @@
     var buletinBoardDelete = "{{ route('admin.buletin_board.delete') }}";
     var sectionByClassUrl = "{{ config('constants.api.section_by_class') }}";
     var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
-    var getParentList ="{{config('constants.api.get_parent_details_buletin_board') }}"
+    var getParentList ="{{config('constants.api.get_parent_details_buletin_board') }}";
+    var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
      // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
     var deleteHtml = "{{ __('messages.delete_this_bulletin') }}";

@@ -226,7 +226,7 @@ $(function () {
             $('#date_of_homework').val(data[0].date);
             $('#gender').val(data[0].gender);
             $('#time').val(data[0].time);
-            $('#descriptions').val(data[0].event_notes_c);
+           // $('#descriptions').val(data[0].event_notes_c);
             $('#temp').val(data[0].temp);
             $('#department_id').val(data[0].department_id);
             if (data[0].department_id != "") {
@@ -333,10 +333,9 @@ $(function () {
             ],
             columnDefs: [
                 {
-                    targets: [5], // Specify the columns for which you want to set custom widths (adjust column indices accordingly)
-                    width: '130px' // Set the desired width (you can use pixels or percentage)
+                    targets: [5], 
+                    width: '130px' 
                 },
-                // ... (other columnDefs if needed)
             ]
         }).on('draw', function () {
         });
@@ -426,7 +425,7 @@ $(function () {
             var sectionID = $('#sectionID').val();
             var student_id = $('#student_id').val();
             var time = $('#time').val();
-            var event_notes_c = $('#descriptions').val();
+            //var event_notes_c = $('#descriptions').val();
             var date = $('#date_of_homework').val(); // Get the date value
             var selectedInjuryName = $('#injury_name').val();
             var selectedPlace = $('#place').val();
@@ -444,7 +443,22 @@ $(function () {
             var illness = $('#illness').val();
             var injury = $('#injury').val();
             var Attend_to_heatlthcare_room = $('#Attend_to_heatlthcare_room').val();
-            var tabs = injury + ', ' + illness  + ', ' + health_consult + ', ' + Attend_to_heatlthcare_room;
+            var activeTabId = $('#mainReasonTabs .nav-link.active').attr('id');
+            console.log('Active Tab ID:', activeTabId);
+            var reasonValue;
+            if (activeTabId === "reasonTab1") {
+                reasonValue = $('#injury_reason').val();
+            } else if (activeTabId === "reasonTab2") {
+                reasonValue = $('#illness_reason').val();
+            } else if (activeTabId === "reasonTab3") {
+                reasonValue = $('#health_consult_reason').val();
+            } else if (activeTabId === "reasonTab4") {
+                reasonValue = $('#attend_to_heatlthcare_room_reason').val();
+            }
+            var nonEmptyValues = [injury, illness, health_consult, Attend_to_heatlthcare_room].filter(value => value.trim() !== '');
+
+            // Join the non-empty values with a comma and space
+            var tabs = nonEmptyValues.join(', ');
             var selectedText = {
                 InjuryName: getSelectedText('#injury_name'),
                 Place: getSelectedText('#place'),
@@ -467,7 +481,7 @@ $(function () {
             formData.set('sectionID', sectionID);
             formData.set('student_id', student_id);
             formData.set('time', time);
-            formData.set('event_notes_c', event_notes_c);
+            formData.set('event_notes_c', reasonValue);
             formData.set('tab', tabs);
             formData.set('tab_details', mainReasonText);
             formData.set('selectedInjuryName', selectedInjuryName);
@@ -591,7 +605,12 @@ $(function () {
                     var Selector = '#edit-health-form';
                 studentAllocation(class_id, sectionID, Selector, student_id);
                 }
-                $('#edit_injury_name').val(data.data.injury_id.split(',')).trigger('change');
+                var injuryId = data.data.injury_id;
+                // Check if injuryId is not empty
+                if (injuryId) {
+                // Split the value and set it
+                $('#edit_injury_name').val(injuryId.split(',')).trigger('change');
+                }
                 $('#edit_place').val(data.data.place_id).trigger('change');
                 $('#edit_injury_treatment').val(data.data.injury_treatment_id).trigger('change');
                 $('#edit_part').val(data.data.part_id).trigger('change');
@@ -744,93 +763,143 @@ $(function () {
       $('#mainReasonModal').on('click', '#saveMainReasonButton', function(event) {
         // Prevent the default form submission behavior
         event.preventDefault();
+        var activeTabId = $('#mainReasonTabs .nav-link.active').attr('id');
+        console.log(activeTabId);
+        var selectedText = {};
+        if(activeTabId === "reasonTab1")
+        {
+            var injuryName = getSelectedText('#injury_name');
+            if (injuryName === '') {
+                $('#injury_name_error').text("Injure name is required."); 
+                return false;
+            }else{
+                $('#injury_name_error').text("");
+            }
+           
+            var place = getSelectedText('#place');
+            if (place === '') {
+                $('#place_error').text(" Place is required."); 
+                return false;
+            }else{
+                $('#place_error').text("");
+            }
+            
+            var injurytreatment = getSelectedText('#injury_treatment');
+            if (injurytreatment === '') {
+                $('#injury_treatment_error').text("Injure Treatment is required."); 
+                return false;
+            }else{
+                $('#injury_treatment_error').text("");
+            }
+           
+            var part = getSelectedText('#part');
+            if (part === '') {
+                $('#part_error').text("Part is required."); 
+                return false;
+            }else{
+                $('#part_error').text("");
+            }
+            var reason = $('#injury_reason').val();
+            if (reason === '') {
+                $('#injury_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#injury_reason_error').text("");
+            }
+            selectedText = {
+                InjuryName: injuryName,
+                Place: place,
+                InjuryTreatment: injurytreatment ,
+                Part: part,
+                Reason: $('#injury_reason').val()
+                // Add other fields for tab1
+            };
+           
+        }else if (activeTabId === 'reasonTab2') {
        
-        var injuryName = getSelectedText('#injury_name');
-        if (injuryName === '') {
-            $('#injury_name_error').text("Injure name is required."); 
-            return false;
-        }else{
-            $('#injury_name_error').text("");
-        }
-       
-        var place = getSelectedText('#place');
-        if (place === '') {
-            $('#place_error').text(" Place is required."); 
-            return false;
-        }else{
-            $('#place_error').text("");
-        }
+            var illnessName = getSelectedText('#illness_name');
+            if (illnessName === '') {
+                $('#illness_name_error').text("Illness name is required."); 
+                return false;
+            }else{
+                $('#illness_name_error').text("");
+            }
         
-        var injurytreatment = getSelectedText('#injury_treatment');
-        if (injurytreatment === '') {
-            $('#injury_treatment_error').text("Injure Treatment is required."); 
-            return false;
-        }else{
-            $('#injury_treatment_error').text("");
-        }
-       
-        var part = getSelectedText('#part');
-        if (part === '') {
-            $('#part_error').text("Part is required."); 
-            return false;
-        }else{
-            $('#part_error').text("");
-        }
-       
-        var illnessName = getSelectedText('#illness_name');
-        if (illnessName === '') {
-            $('#illness_name_error').text("Illness name is required."); 
-            return false;
-        }else{
-            $('#illness_name_error').text("");
-        }
-      
-        var illnesstreatment = getSelectedText('#illness_treatment');
-        if (illnesstreatment === '') {
-            $('#illness_treatment_error').text("Illness Treatment is required."); 
-            return false;
-        }else{
-            $('#illness_treatment_error').text("");
-        }
-        var reasontemp = $('#reasonTemp').val();
-        if (reasontemp === '') {
-            $('#reasonTemp_error').text("Temperature is required."); 
-            return false;
-        }else{
-            $('#reasonTemp_error').text("");
-        }
+            var illnesstreatment = getSelectedText('#illness_treatment');
+            if (illnesstreatment === '') {
+                $('#illness_treatment_error').text("Illness Treatment is required."); 
+                return false;
+            }else{
+                $('#illness_treatment_error').text("");
+            }
+            var reasontemp = $('#reasonTemp').val();
+            if (reasontemp === '') {
+                $('#reasonTemp_error').text("Temperature is required."); 
+                return false;
+            }else{
+                $('#reasonTemp_error').text("");
+            }
+            var reason = $('#illness_reason').val();
+            if (reason === '') {
+                $('#illness_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#illness_reason_error').text("");
+            }
+            selectedText = {
+                Illness: illnessName,
+                IllnessTreatment: illnesstreatment,
+                ReasonTemp: reasontemp,
+                Meal: getSelectedText2('#meal'),
+                Defecation: getSelectedText2('#defecation'),
+                SleptTime: getSelectedText2('#slept_time'),
+                Reason: $('#illness_reason').val()
+                // Add other fields for tab1
+            };
+        }else if (activeTabId === 'reasonTab3') {
         
-        var target = getSelectedText('#target');
-        if (target === '') {
-            $('#target_error').text("Target is required."); 
-            return false;
-        }else{
-            $('#target_error').text("");
+            var target = getSelectedText('#target');
+            if (target === '') {
+                $('#target_error').text("Target is required."); 
+                return false;
+            }else{
+                $('#target_error').text("");
+            }
+        
+            var healthtreatment = getSelectedText('#health_treatment');
+            if (healthtreatment === '') {
+                $('#health_treatment_error').text("Health Treatment is required."); 
+                return false;
+            }else{
+                $('#health_treatment_error').text("");
+            }
+            var reason = $('#health_consult_reason').val();
+            if (reason === '') {
+                $('#health_consult_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#health_consult_reason_error').text("");
+            }
+            selectedText = {
+                Target:target,
+                HealthTreatment: healthtreatment,
+                Reason: $('#health_consult_reason').val()
+                // Add other fields for tab1
+            };
+        }else if (activeTabId === 'reasonTab4') { 
+            var reason = $('#attend_to_heatlthcare_room_reason').val();
+            if (reason === '') {
+                $('#attend_to_heatlthcare_room_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#attend_to_heatlthcare_room_reason_error').text("");
+            }
+            selectedText = {
+                AttendToHealthcareRoom: $('#Attend_to_heatlthcare_room').val(),
+                Reason: $('#attend_to_heatlthcare_room_reason').val()
+                // Add other fields for tab1
+            };
         }
-       
-        var healthtreatment = getSelectedText('#health_treatment');
-        if (healthtreatment === '') {
-            $('#health_treatment_error').text("Health Treatment is required."); 
-            return false;
-        }else{
-            $('#health_treatment_error').text("");
-        }
-        // Get the selected text from the dropdowns
-        var selectedText = {
-            InjuryName: injuryName,
-            Place: place,
-            InjuryTreatment: injurytreatment ,
-            Part: part,
-            Illness: illnessName,
-            IllnessTreatment: illnesstreatment,
-            ReasonTemp: reasontemp,
-            Meal: getSelectedText2('#meal'),
-            Defecation: getSelectedText2('#defecation'),
-            Target:target,
-            SleptTime: getSelectedText2('#slept_time'),
-            HealthTreatment: healthtreatment,
-            AttendToHealthcareRoom: $('#Attend_to_heatlthcare_room').val()
-        };
     
         console.log('Selected Text:', selectedText);
     
