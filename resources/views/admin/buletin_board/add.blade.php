@@ -39,7 +39,7 @@
                     </div>
                     <div id="class">
                         <div class="form-group">
-                            <label for="changeClassName"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                            <label for="changeClassName"> {{ __('messages.grade') }}</label>
                             <select id="changeClassName" class="form-control add_class_name" name="class_id">
                                 <option value="">{{ __('messages.select_grade') }}</option>
                                 @forelse ($classDetails as $cla)
@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="filtersectionID"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
+                            <label for="filtersectionID"> {{ __('messages.class') }}</label>
                             <select id="filtersectionID" class="form-control" name="section_id">
                                 <option value="">{{ __('messages.select_class') }}</option>
                             </select>
