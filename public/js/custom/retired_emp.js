@@ -229,11 +229,13 @@ $(function () {
                 },
                 {
                     data: 'staff_position_name',
-                    name: 'staff_position_name'
+                    name: 'staff_position_name',
+                    visible: false
                 },
                 {
                     data: 'staff_category_name',
-                    name: 'staff_category_name'
+                    name: 'staff_category_name',
+                    visible: false
                 },
                 {
                     data: 'employment_status',
