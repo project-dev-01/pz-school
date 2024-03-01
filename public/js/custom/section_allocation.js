@@ -256,15 +256,17 @@ $(function () {
         e.preventDefault();
         var sectionValid = $("#editsectionAllocationForm").valid();
         if (sectionValid === true) {
+            
             var sectionAlloID = $("#sectionAlloID").val();
             var editClassID = $("#editClassID").val();
             var editSectionID = $("#editSectionID").val();
             var sectionCapacity = $("#editsectionCapacity").val();
-
+            var department_id = $("#edit_department_id").val();
             var formData = new FormData();
             formData.append('id', sectionAlloID);
             formData.append('token', token);
             formData.append('branch_id', branchID);
+            formData.append('department_id', department_id);
             formData.append('class_id', editClassID);
             formData.append('section_id', editSectionID);
             formData.append('capacity', sectionCapacity);

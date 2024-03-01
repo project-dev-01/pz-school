@@ -109,6 +109,7 @@ $(function () {
     // rules validation
     $("#addAssignClassSubject").validate({
         rules: {
+            department_id: "required",
             class_name: "required",
             section_name: "required",
             subject_id: "required",
@@ -200,6 +201,7 @@ $(function () {
     // update 
     $("#updateAssignClassSubject").validate({
         rules: {
+            edit_department_id: "required",
             class_name: "required",
             section_name: "required",
             subject_id: "required",

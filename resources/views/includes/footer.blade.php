@@ -80,6 +80,7 @@
 <script src="{{ asset('js/app.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/custom/common.js') }}"></script>
 
 <!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <script>

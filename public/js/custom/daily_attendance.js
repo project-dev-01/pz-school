@@ -120,11 +120,14 @@ $(function () {
             var classObj = {
                 classID: classID,
                 sectionID: sectionID,
-                classDate: classDate,
+                classDate: convertDigitIn(classDate),
                 semesterID: semesterID,
                 sessionID: sessionID,
                 academic_session_id: academic_session_id
             };
+            console.log(classObj);
+            console.log(classDate);
+            console.log(convertDigitIn(classDate));
             var formData = new FormData();
             formData.append('branch_id', branchID);
             formData.append('class_id', classID);
@@ -132,7 +135,13 @@ $(function () {
             formData.append('semester_id', semesterID);
             formData.append('session_id', sessionID);
             formData.append('academic_session_id', academic_session_id);
-            formData.append('date', convertDigitIn(classDate));
+            formData.append('date', classDate);
+
+            // Display the key/value pairs
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            // return false;
             // list mode
             listModeAjax(formData, classObj);
         }
@@ -148,6 +157,8 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
+                console.log("response");
+                console.log(response);
                 var dataSetNew = response.data.get_student_attendence;
                 $("#attendaceTakenSts").empty();
                 if (response.data.taken_attentance_status) {
@@ -357,17 +368,10 @@ $(function () {
                     "targets": 2,
                     "width": "20%",
                     "render": function (data, type, row, meta) {
+                        console.log(row);
+                        console.log(row.att_status);
                         // current_old_att_status
-                        var status = "";
-                        if (row.att_status) {
-                            status = row.att_status;
-                        } else if (row.current_old_att_status) {
-                            status = row.current_old_att_status;
-                        } else if (row.taken_leave_status) {
-                            status = "absent";
-                        } else {
-                            status = row.att_status;
-                        }
+                        var status = row.att_status;
                         var att_status = '<select class="form-control changeAttendanceSelect list-mode-table" data-id="' + row.student_id + '" id="attendance' + row.student_id + '" data-style="btn-outline-success" name="attendance[' + meta.row + '][att_status]">' +
                             '<option value="">' + choose + '</option>' +
                             '<option value="present" ' + (status == "present" ? "selected" : "selected") + '>' + present_lang + '</option>' +
