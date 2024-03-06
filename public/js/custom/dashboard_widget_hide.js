@@ -164,7 +164,7 @@ $(function () {
     });
     $('#attendanceFilter').on('submit', function (e) {
         e.preventDefault();
-        var employeeCheck = $("#addEmployeeForm").valid();
+        var employeeCheck = $("#attendanceFilter").valid();
         if (employeeCheck === true) {
             var widgetDynamicID = $("#widgetDynamicID").val();
             var att_widget_name = $("#att_widget_name").val();

@@ -58,9 +58,12 @@ class TeacherController extends Controller
             'staff_id' => session()->get('ref_user_id')
         ];
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
+        $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
+        // dd($get_data_hide_unhide_dashboard);
         return view(
             'teacher.dashboard.index',
             [
+                'get_data_hide_unhide_dashboard' => isset($get_data_hide_unhide_dashboard['data']) ? $get_data_hide_unhide_dashboard['data'] : [],
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
                 'get_to_do_list_dashboard' => isset($get_to_do_list_dashboard['data']) ? $get_to_do_list_dashboard['data'] : [],
                 'greetings' => isset($greetings) ? $greetings : [],
@@ -79,6 +82,44 @@ class TeacherController extends Controller
                 'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
             ]
         );
+    }
+    public function dashboardWidget()
+    {
+        // $data = [
+        //     'academic_session_id' => session()->get('academic_session_id')
+        // ];
+        // $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        // $semester = Helper::GetMethod(config('constants.api.semester'));
+        // $term = Helper::GETMethodWithData(config('constants.api.exam_term_list'), $data);
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $userid = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_settings_attendance_report'), $userid);
+        $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $userid);
+
+        return view('teacher.settings.dashboard_widget', [
+
+            'get_data_hide_unhide_dashboard' => isset($get_data_hide_unhide_dashboard['data']) ? $get_data_hide_unhide_dashboard['data'] : [],
+            'get_settings_row' => isset($response['data']) ? $response['data'] : [],
+            'department' => isset($department['data']) ? $department['data'] : [],
+            // 'term' => isset($term['data']) ? $term['data'] : [],
+            // 'semester' => isset($semester['data']) ? $semester['data'] : [],
+            // 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+        ]);
+    }
+    public function widgetAddUpdate(Request $request)
+    {
+        // echo "<pre>";
+        // print_r($request);
+
+        $data = [
+            'staff_id' => session()->get('ref_user_id'),
+            "unhide_data" => $request->unhide_data,
+        ];
+        // dd($data);
+        $response = Helper::PostMethod(config('constants.api.hide_unhide_dashboard'), $data);
+        return $response;
     }
     public function applyleave()
     {
@@ -897,7 +938,7 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $data);
-        
+
         return view('teacher.attendance.index', [
             'teacher_class' => isset($response['data']) ? $response['data'] : [],
             'department' => isset($department['data']) ? $department['data'] : [],
@@ -2165,12 +2206,12 @@ class TeacherController extends Controller
     }
     public function getShortcutLinksList(Request $request)
     {
-      $staff_id = [
-          'staff_id' => session()->get('ref_user_id')
-      ];
+        $staff_id = [
+            'staff_id' => session()->get('ref_user_id')
+        ];
         $response = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $data = isset($response['data']) ? $response['data'] : [];
-      
+
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
@@ -2211,18 +2252,22 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
         return $response;
     }
-    public function studentInterviewNotesIndex(){
+    public function studentInterviewNotesIndex()
+    {
 
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
-        return view('teacher.student_interview_notes.index',
-        [
-            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
-        ]);
+        return view(
+            'teacher.student_interview_notes.index',
+            [
+                'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            ]
+        );
     }
-    public function createStudentInterviewNotes(){
+    public function createStudentInterviewNotes()
+    {
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
@@ -2234,8 +2279,9 @@ class TeacherController extends Controller
             ]
         );
     }
-    public function addStudentInterviewNotes(Request $request){
-        
+    public function addStudentInterviewNotes(Request $request)
+    {
+
         $file = $request->file('interview_file');
         if ($file) {
             $path = $file->path();
@@ -2246,24 +2292,24 @@ class TeacherController extends Controller
             $base64 = null;
             $extension = null;
         }
-          $data = [
-              'title' => $request->title,
-              'type' => $request->interview_type,
-              'comment' => $request->description,
-              'file' => $base64,
-              'file_extension' => $extension,
-              'class_id' => $request->class_id,
-              'section_id' => $request->section_id,
-              'student_id' =>  $request->student_id,
-              'created_by' => session()->get('ref_user_id'),
-              'updated_by'=>session()->get('ref_user_id'),
-  
-          ];
-          $response = Helper::PostMethod(config('constants.api.student_interview_add'), $data);
-          return $response;
+        $data = [
+            'title' => $request->title,
+            'type' => $request->interview_type,
+            'comment' => $request->description,
+            'file' => $base64,
+            'file_extension' => $extension,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' =>  $request->student_id,
+            'created_by' => session()->get('ref_user_id'),
+            'updated_by' => session()->get('ref_user_id'),
 
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_add'), $data);
+        return $response;
     }
-    public function getStudentInterviewData(Request $request){
+    public function getStudentInterviewData(Request $request)
+    {
         $data = [
             'grade_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -2272,20 +2318,22 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
         return $response;
     }
-    public function editStudentInterviewData(Request $request){
+    public function editStudentInterviewData(Request $request)
+    {
         $data = [
             'id' => $request->id
         ];
         $response = Helper::PostMethod(config('constants.api.student_interview_edit'), $data);
         return $response;
     }
-    public function updateStudentInterviewData(Request $request){
+    public function updateStudentInterviewData(Request $request)
+    {
         $data = [
             'id' => $request->id,
             'comment' => $request->comment,
             'type' => $request->type,
             'created_by' => session()->get('ref_user_id'),
-            'updated_by'=>session()->get('ref_user_id'),
+            'updated_by' => session()->get('ref_user_id'),
             'login_userid' => session()->get('user_id'),
             'login_roleid' => session()->get('role_id'),
         ];

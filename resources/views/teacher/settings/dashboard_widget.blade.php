@@ -105,7 +105,7 @@
                                         <button type="button" name="add" id="add" class="btn btn-primary" style="margin: 18px;border-color: #0ABAB5;background-color: #6FC6CC; margin-left: 25px;margin-bottom: 0px;">{{ __('messages.add_hideunhide') }}</button>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <form id="addDynamicFilter" action="{{ route('admin.widget.add') }}" method="post">
+                                                <form id="addDynamicFilter" action="{{ route('teacher.widget.add') }}" method="post">
                                                     <div class="table-responsive">
                                                         <table class="table table-borderless" id="dynamic_field">
                                                             @forelse($get_data_hide_unhide_dashboard as $r)
