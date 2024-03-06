@@ -175,17 +175,11 @@ $(function () {
            // Initialize form validation
            $('#promoteDownloadForm').validate({
             rules: {
-                download_department_id: {
-                    required: true,
-                },
                 download_class_id: {
                     required: true,
                 },
             },
             messages: {
-                download_department_id: {
-                    required: 'Please select a department.',
-                },
                 download_class_id: {
                     required: 'Please select a grade.',
                 },
@@ -202,22 +196,18 @@ $(function () {
                         // Check if the request was successful and has the expected structure
                         if (response && response.success && response.data) {
                             // Extract CSV content from the 'data' property
-                            var csvContent = "#,Student Name,Student Number,Current Attendance No,Current Academic Year,Current Department,Current Grade,Current Class,Current Semester,Current Session,Promoted Academic Year,Promoted Department,Promoted Grade,Promoted Class,Promoted Semester,Promoted Session\n" +
-                            response.data.map(function (item) {
+                            var csvContent = "\uFEFF#,Student Name,Student Number,Current Attendance No,Current Academic Year,Current Department,Current Grade,Current Class,Promoted Academic Year,Promoted Department,Promoted Grade,Promoted Class\n" +
+                            response.data.map(function (item, index) {
                                 return [
-                                    1,
-                                    '',
-                                    '',
-                                    '',
-                                    '',
+                                    index + 1,
+                                    item.student_name,
+                                    item.register_no,
+                                    item.attendance_no,
+                                    item.academic_year,
                                     item.name,
                                     item.class_name,
                                     item.section_name,
-                                    '', // Placeholder for AdditionalColumn1 (no data provided)
-                                    '', // Placeholder for AdditionalColumn2 (no data provided)
                                     '',  // Placeholder for AdditionalColumn3 (no data provided)
-                                    '',
-                                    '',
                                     '',
                                     '',
                                     ''
@@ -226,7 +216,6 @@ $(function () {
 
                             // You can log the CSV content if needed
                             console.log('CSV file content:', csvContent);
-
                             // Open the content in a new window
                             window.open('data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent));
                         } else {
@@ -245,24 +234,22 @@ $(function () {
 
         $("#promoteStudentListForm").validate({
             rules: {
-                promote_list_department_id: "required",
                 promote_list_class_id: "required"
             }
         });
         $('#sort').on('change', function() {
             // Trigger form validation on dropdown change
             $("#promoteStudentListForm").valid();
-            var selectedDepartment = $('#promote_list_department_id').val();
             var selectedGrade = $('#promoteListClassID').val();
             var selectedSection = $('#promoteListSectionID').val();
             var selectedSort = $(this).val();
-            promotionDataStudentList(selectedDepartment,selectedGrade,selectedSection,selectedSort);
-            unassignedStudentList(selectedDepartment,selectedGrade,selectedSection);
-            terminationStudentList(selectedDepartment,selectedGrade,selectedSection);
+            promotionDataStudentList(selectedGrade,selectedSection,selectedSort);
+            unassignedStudentList(selectedGrade,selectedSection);
+            terminationStudentList(selectedGrade,selectedSection);
 
         });
-        promotionDataStudentList(selectedDepartment = "All",selectedGrade = "All",selectedSection = "All",selectedSort = "All");
-        function promotionDataStudentList(selectedDepartment,selectedGrade,selectedSection,selectedSort) {
+        promotionDataStudentList(selectedGrade = "All",selectedSection = "All",selectedSort = "All");
+        function promotionDataStudentList(selectedGrade,selectedSection,selectedSort) {
             if ($.fn.DataTable.isDataTable('#promotionDataStudentList')) {
                 $('#promotionDataStudentList').DataTable().destroy();
             }
@@ -363,7 +350,6 @@ $(function () {
                     // data: { month:getSelectedMonth },
                     // data: formData,
                     data: {
-                        department: selectedDepartment,
                         grade: selectedGrade,
                         section: selectedSection,
                         sort: selectedSort,
@@ -414,7 +400,7 @@ $(function () {
                         data: 'name'
                     },
                     {
-                        data: 'roll'
+                        data: 'register_no'
                     },
                     {
                         data: 'deptName'
@@ -449,7 +435,7 @@ $(function () {
 
             table.rows().every(function (index, element) {
                 var rowData = this.data();
-                if (rowData.status === 1 || rowData.status !== 4) {
+                if (rowData.status === 2 || rowData.status === 3){
                     allRowsStatus3 = false;
                     return false; // Stop iterating if any row doesn't have status 3
                 }
@@ -471,12 +457,12 @@ $(function () {
          // Assuming you have a button with id "saveButton"
          $('#savePreparedDataBtn').on('click', function () {
              swal.fire({
-                 title: "Are you sure want to proceed?",
+                 title: confirmTitle,
                  html: "",
                  showCancelButton: true,
                  showCloseButton: true,
-                 cancelButtonText: "cancel",
-                 confirmButtonText: "confirm",
+                 cancelButtonText: cancelButtonText,
+                 confirmButtonText: confirmButtonText,
                  cancelButtonColor: '#d33',
                  confirmButtonColor: '#556ee6',
                  width: 400,
@@ -502,12 +488,23 @@ $(function () {
                              success: function(response) {
                                  
                                  console.log('Data saved successfully:', response);
-                                 swal.fire("Success", "Your data has been saved.", "success");
+                                 Swal.fire({
+                                    title: successButtonText,
+                                    text: promotion_message_moved,
+                                    icon: 'success',
+                                    confirmButtonColor: '#556ee6'
+                                });
                              },
                              error: function(error) {
                                  // Handle error response from the server
                                  console.error('Error saving data:', error);
-                                 swal.fire("Error", "There was an error saving your data.", "error");
+                                 Swal.fire({
+                                    title: error,
+                                    text: promotion_message_error,
+                                    icon: 'error',
+                                    confirmButtonColor: '#556ee6'
+                                });
+                                
                              }
                          });
                  } else {
@@ -516,8 +513,8 @@ $(function () {
                  }
              });
          });
-         unassignedStudentList(selectedDepartment = "All",selectedGrade = "All",selectedSection = "All");
-        function unassignedStudentList(selectedDepartment,selectedGrade,selectedSection) {
+         unassignedStudentList(selectedGrade = "All",selectedSection = "All");
+        function unassignedStudentList(selectedGrade,selectedSection) {
             if ($.fn.DataTable.isDataTable('#unassignedStudentList')) {
                 $('#unassignedStudentList').DataTable().destroy();
             }
@@ -616,7 +613,6 @@ $(function () {
                     // data: { month:getSelectedMonth },
                     // data: formData,
                     data: {
-                        department: selectedDepartment,
                         grade: selectedGrade,
                         section: selectedSection,
                     },
@@ -654,7 +650,7 @@ $(function () {
                         data: 'name'
                     },
                     {
-                        data: 'roll'
+                        data: 'register_no'
                     },
                     {
                         data: 'deptName'
@@ -685,8 +681,8 @@ $(function () {
             }).on('draw', function () {
             });
         }
-        terminationStudentList(selectedDepartment = "All",selectedGrade = "All",selectedSection = "All");
-        function terminationStudentList(selectedDepartment,selectedGrade,selectedSection) {
+        terminationStudentList(selectedGrade = "All",selectedSection = "All");
+        function terminationStudentList(selectedGrade,selectedSection) {
             if ($.fn.DataTable.isDataTable('#terminationStudentList')) {
                 $('#terminationStudentList').DataTable().destroy();
             }
@@ -767,7 +763,6 @@ $(function () {
                     // data: { month:getSelectedMonth },
                     // data: formData,
                     data: {
-                        department: selectedDepartment,
                         grade: selectedGrade,
                         section: selectedSection,
                     },
@@ -805,7 +800,7 @@ $(function () {
                         data: 'name'
                     },
                     {
-                        data: 'roll'
+                        data: 'register_no'
                     },
                     {
                         data: 'deptName'
@@ -815,6 +810,8 @@ $(function () {
                     },
                     {
                         data: 'sectionName'
+                    },{
+                        data: 'admission_date'
                     },
                     {
                         data: 'date_of_termination'

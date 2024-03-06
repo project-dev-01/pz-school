@@ -55,7 +55,7 @@
 					<div class="card-body">
 						<form id="promoteDownloadForm" method="post" action="{{ route('teacher.promotion.downloadCSV') }}" autocomplete="off">
 							<div class="row">
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									<div class="form-group">
 										<label for="download_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
 										<select id="download_department_id" name="download_department_id" class="form-control">
@@ -63,15 +63,19 @@
 												@forelse($department as $r)
 												<option value="{{$r['id']}}">{{$r['name']}}</option>
 												@empty
-												@endforelse
+												@endforelse 
 										</select>
 									</div>
-								</div>
+								</div> -->
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="downloadListClassID">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
 										<select id="downloadListClassID" class="form-control" name="download_class_id">
 										   <option value="">{{ __('messages.select_grade') }}</option>
+										   @forelse($teacher_class as $cla)
+											<option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+											@empty
+											@endforelse
 										</select>
 									</div>
 								</div>
@@ -118,7 +122,7 @@
 						<div class="form-group" style="text-align: center;">
 							<div class="card-body" style="margin-left: 17px;">
 								<label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
-								<input type="file" name="file" id="file"/>
+								<input type="file" name="file" id="file" accept=".csv" />
 							</div>
 							<input type="submit" name="upload" class="btn btn-success" value="{{ __('messages.upload') }}">
 						</div>
@@ -154,7 +158,7 @@
 					<form id="promoteStudentListForm" method="post" action="" autocomplete="off">
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									<div class="form-group">
 										<label for="promote_list_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
 										<select id="promote_list_department_id" name="promote_list_department_id" class="form-control">
@@ -165,12 +169,16 @@
 												@endforelse
 										</select>
 									</div>
-								</div>
+								</div> -->
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="promoteListClassID">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
 										<select id="promoteListClassID" class="form-control" name="promote_list_class_id">
 										   <option value="All">{{ __('messages.all') }}</option>
+										   @forelse($teacher_class as $cla)
+											<option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+											@empty
+											@endforelse
 										</select>
 									</div>
 								</div>
@@ -362,6 +370,13 @@
 		var getTerminationStudentList = "{{ route('teacher.promotion.termination_student_list') }}";
 		var promotionImportPreparedUrl = "{{ route('teacher.promotion.save_prepared_data') }}";
 		var sectionByClass = "{{ route('teacher.section_by_class') }}";
+		var confirmTitle = "{{ __('messages.promotion_message') }}";
+		var cancelButtonText = "{{ __('messages.cancel') }}";
+		var confirmButtonText = "{{ __('messages.confirm') }}";
+		var successButtonText = "{{ __('messages.success') }}";
+		var promotion_message_moved = "{{ __('messages.promotion_message_moved') }}";
+		var promotion_message_error = "{{ __('messages.promotion_message_error') }}";
+		var error = "{{ __('messages.error') }}";
 		// default image test
 		var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 		var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";

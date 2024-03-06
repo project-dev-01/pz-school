@@ -2828,11 +2828,14 @@ class AdminController extends Controller
     }
     public function updateHealthLogbooksDataPartC(Request $request)
     {
+
+        // Log the request payload to check if data is received
+       // \Log::info($request->all());
         $data = [
-            'healthlogID' =>  $request->healthlogID,
-            'department_id' => $request->department_id,
-            'grade_id' => $request->changeClassName,
-            'section_id' => $request->sectionID,
+            'healthlogID' =>  $request->id,
+            'department_id' => $request->editdepartment_id,
+            'grade_id' => $request->class_id,
+            'section_id' => $request->section_id,
             'student_id' => $request->student_id,
             'time' => $request->time,
             'event_notes_c' => $request->event_notes_c,
@@ -2852,6 +2855,7 @@ class AdminController extends Controller
             'selectedHealth_treatment' => $request->selectedHealth_treatment,
             'date' => $request->date
         ];
+       
         $response = Helper::PostMethod(config('constants.api.health_logbook_update'), $data);
         return $response;
     }

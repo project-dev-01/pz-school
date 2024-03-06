@@ -2084,4 +2084,19 @@ return [
     "grades,classes"=> " Grade & Class",    
     "guest" => "Guest",
     "attendance_report_subject" => "Attendance Report Subject",
+    "partc_tab_1" => "Part C",
+    "main_reasons_tab_2" => "Main Reasons",
+    "promotion_message"  => "Are you sure you want to proceed ?",
+    "promotion_message_moved"  => "Your data moved to the next level.",
+    "promotion_message_error"  => "There was an error moving your data.",
+    "error"  => "Error",
+    "data_prepared" => "Data Prepared",
+    "data_preparing" => "Data Preparing",
+    "data_freezed" => "Data Freezed",
+    "temporary_unlock" => "Temporary Unlock",
+    "student_promoted_message" => "All students are promoted",
+    "student_promoted_status"  => "Status has been saved",
+    "valid_status"  => "Please select a valid status."
+
+    
 ];

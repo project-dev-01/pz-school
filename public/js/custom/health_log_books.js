@@ -439,26 +439,23 @@ $(function () {
             var selectedTarget = $('#target').val();
             var selectedSlept_time = $('#slept_time').val();
             var selectedHealth_treatment = $('#health_treatment').val();
-            var health_consult = $('#health_consult').val();
-            var illness = $('#illness').val();
-            var injury = $('#injury').val();
-            var Attend_to_heatlthcare_room = $('#Attend_to_heatlthcare_room').val();
             var activeTabId = $('#mainReasonTabs .nav-link.active').attr('id');
             console.log('Active Tab ID:', activeTabId);
             var reasonValue;
+            var tabs;
             if (activeTabId === "reasonTab1") {
                 reasonValue = $('#injury_reason').val();
+                tabs = $('#injury').val();
             } else if (activeTabId === "reasonTab2") {
                 reasonValue = $('#illness_reason').val();
+                tabs = $('#illness').val();
             } else if (activeTabId === "reasonTab3") {
                 reasonValue = $('#health_consult_reason').val();
+                tabs = $('#health_consult').val();
             } else if (activeTabId === "reasonTab4") {
                 reasonValue = $('#attend_to_heatlthcare_room_reason').val();
+                tabs = $('#Attend_to_heatlthcare_room').val();
             }
-            var nonEmptyValues = [injury, illness, health_consult, Attend_to_heatlthcare_room].filter(value => value.trim() !== '');
-
-            // Join the non-empty values with a comma and space
-            var tabs = nonEmptyValues.join(', ');
             var selectedText = {
                 InjuryName: getSelectedText('#injury_name'),
                 Place: getSelectedText('#place'),
@@ -578,11 +575,12 @@ $(function () {
     });
     $(document).on('click', '#editPartCBtn', function () {
         var id = $(this).data('id');
-        console.log(id);
+        //console.log(id);
         $('.editModal').find('form')[0].reset();
         $.post(editHealthLogBooksListPartC, { id: id, token: token, branch_id: branchID }, function (data) {
             console.log("---");
-            console.log(data);
+          //  console.log(data);
+            $('.health-logbook-tab').removeClass('active');
              $('.editModal').find('input[name="id"]').val(data.data.id);
              $('#editdepartment_id').val(data.data.department_id).trigger('change');
              if (data.data.department_id != "") {
@@ -605,136 +603,297 @@ $(function () {
                     var Selector = '#edit-health-form';
                 studentAllocation(class_id, sectionID, Selector, student_id);
                 }
+                
                 var injuryId = data.data.injury_id;
                 // Check if injuryId is not empty
                 if (injuryId) {
+                $('#editreasonTab1').addClass('active'); // Add 'active' class to the selected tab
                 // Split the value and set it
                 $('#edit_injury_name').val(injuryId.split(',')).trigger('change');
+                $('#edit_injury_reason').html(data.data.event_notes_c);
+                $('#editreason1').addClass('show active');
+                } 
+                var placeId = data.data.place_id;
+                if(placeId){
+                    $('#edit_place').val(placeId.split(',')).trigger('change');
                 }
-                $('#edit_place').val(data.data.place_id).trigger('change');
-                $('#edit_injury_treatment').val(data.data.injury_treatment_id).trigger('change');
-                $('#edit_part').val(data.data.part_id).trigger('change');
-                $('#edit_illness_name').val(data.data.illness_id).trigger('change');
-                $('#edit_illness_treatment').val(data.data.illness_treatment_id).trigger('change');
-                $('#edit_meal').val(data.data.meal_id).trigger('change');
-                $('#edit_defecation').val(data.data.defecation_id).trigger('change');
-                $('#edit_slept_time').val(data.data.slept_time_id).trigger('change');
-                $('#edit_target').val(data.data.target_id).trigger('change');
-                $('#edit_health_treatment').val(data.data.health_treatment_id).trigger('change');
-                $('.editModal').find('input[name="edit_reasonTemp"]').val(data.data.reasonTemp);
+                var injuryTreatment = data.data.injury_treatment_id;
+                if(injuryTreatment){
+                    $('#edit_injury_treatment').val(injuryTreatment.split(',')).trigger('change');
+                }
+                var partId =  data.data.part_id;
+                if(partId){
+                    $('#edit_part').val(partId.split(',')).trigger('change');
+                }
+                var illnessId = data.data.illness_id;
+                if(illnessId){
+                    // Activate the tab
+                    $('#editreasonTab2').addClass('active'); // Add 'active' class to the selected tab
+                    $('#edit_illness_name').val(illnessId.split(',')).trigger('change');
+                    $('#edit_illness_reason').html(data.data.event_notes_c);
+                    $('#editreason2').addClass('show active');
+                    
+                }
+                var illnessTreatmentId = data.data.illness_treatment_id;
+                if(illnessTreatmentId){
+                    $('#edit_illness_treatment').val(illnessTreatmentId.split(',')).trigger('change');
+                }
+                var mealId = data.data.meal_id;
+                if(mealId){
+                    $('#edit_meal').val(mealId.split(',')).trigger('change');
+                }
+                var defectionId = data.data.defecation_id;
+                if(defectionId){
+                    $('#edit_defecation').val(defectionId.split(',')).trigger('change');
+                }
+                var sleptTimeId = data.data.slept_time_id;
+                if(sleptTimeId){
+                    $('#edit_slept_time').val(sleptTimeId.split(',')).trigger('change');
+                }
+               var targetId = data.data.target_id;
+               if(targetId){
+                $('#edit_target').val(targetId.split(',')).trigger('change');
+                $('#edit_health_consult_reason').html(data.data.event_notes_c);
+               }
+               var healthTreatmentId = data.data.health_treatment_id;
+               if(healthTreatmentId){
+                $('#edit_health_treatment').val(healthTreatmentId.split(',')).trigger('change');
+               }
+               if(data.data.tab == "Attend to heatlthcare room")
+               {
+                $('#edit_attend_to_heatlthcare_room_reason').html(data.data.event_notes_c);
+               }
+            
+            $('.editModal').find('input[name="edit_reasonTemp"]').val(data.data.reasonTemp);
              $('.editModal').find('input[name="time"]').val(data.data.time);
-             $('#editdescriptions').html(data.data.event_notes_c);
+            
 
             $('#editModal').modal('show');
         }, 'json');
     });
-    $("#edit-health-form").validate({
-        rules: {
-            rules: {
-                editdepartment_id: "required",
-                student_id: "required",
-                gender: "required",
+   
+    
+    $(document).on('click', '#editMainReasonButton', function () {
+        var activeTabId = $('#mainReasonTabsEdit .nav-link.active').attr('id');
+
+        if (activeTabId === "editreasonTab1") {
+            var injuryName = getSelectedText('#edit_injury_name');
+            if (injuryName === '') {
+                $('#edit_injury_name_error').text("Injure name is required.");
+                return false;
+            } else {
+                $('#edit_injury_name_error').text("");
+            }
+
+            var place = getSelectedText('#edit_place');
+            if (place === '') {
+                $('#edit_place_error').text(" Place is required."); 
+                return false;
+            }else{
+                $('#edit_place_error').text("");
+            }
+            
+            var injurytreatment = getSelectedText('#edit_injury_treatment');
+            if (injurytreatment === '') {
+                $('#edit_injury_treatment_error').text("Injure Treatment is required."); 
+                return false;
+            }else{
+                $('#edit_injury_treatment_error').text("");
+            }
+           
+            var part = getSelectedText('#edit_part');
+            if (part === '') {
+                $('#edit_part_error').text("Part is required."); 
+                return false;
+            }else{
+                $('#edit_part_error').text("");
+            }
+            var reason = $('#edit_injury_reason').val();
+            if (reason === '') {
+                $('#edit_injury_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#edit_injury_reason_error').text("");
+            }
+
+        } else if (activeTabId === 'editreasonTab2') {
+            var illnessName = getSelectedText('#edit_illness_name');
+            if (illnessName === '') {
+                $('#edit_illness_name_error').text("Illness name is required.");
+                return false;
+            } else {
+                $('#edit_illness_name_error').text("");
+            }
+            var illnesstreatment = getSelectedText('#edit_illness_treatment');
+            if (illnesstreatment === '') {
+                $('#edit_illness_treatment_error').text("Illness Treatment is required."); 
+                return false;
+            }else{
+                $('#edit_illness_treatment_error').text("");
+            }
+            var reasontemp = $('#edit_reasonTemp').val();
+            if (reasontemp === '') {
+                $('#edit_reasonTemp_error').text("Temperature is required."); 
+                return false;
+            }else{
+                $('#edit_reasonTemp_error').text("");
+            }
+            var reason = $('#edit_illness_reason').val();
+            if (reason === '') {
+                $('#edit_illness_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#edit_illness_reason_error').text("");
+            }
+
+            // Add similar validation checks for other fields in tab2
+
+        } else if (activeTabId === 'editreasonTab3') {
+            var target = getSelectedText('#edit_target');
+            if (target === '') {
+                $('#edit_target_error').text("Target is required.");
+                return false;
+            }else{
+                $('#edit_target_error').text("");
+            }
+            var healthtreatment = getSelectedText('#edit_health_treatment');
+            if (healthtreatment === '') {
+                $('#edit_health_treatment_error').text("Health Treatment is required."); 
+                return false;
+            }else{
+                $('#edit_health_treatment_error').text("");
+            }
+            var reason = $('#edit_health_consult_reason').val();
+            if (reason === '') {
+                $('#edit_health_consult_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#edit_health_consult_reason_error').text("");
+            }
+
+            // Add similar validation checks for other fields in tab3
+
+        } else if (activeTabId === 'editreasonTab4') {
+            var reason = $('#edit_attend_to_heatlthcare_room_reason').val();
+            if (reason === '') {
+                $('#edit_attend_to_heatlthcare_room_reason_error').text("Reason is required."); 
+                return false;
+            }else{
+                $('#edit_attend_to_heatlthcare_room_reason_error').text("");
             }
         }
-    });
-    $('#edit-health-form').on('submit', function (e) {
-        e.preventDefault();
+        // var heathCheck = $("#edit-health-form").valid();
+        // if(heathCheck === true)
+        // {
 
-        var formData = new FormData($('#healthLogBookForm')[0]);
-            var healthlogID = $('#id').val();
-            console.log(healthlogID);
-            var department_id = $('#editdepartment_id').val();
-            var changeClassName = $('#changeClassName').val();
-            var sectionID = $('#editsectionID').val();
-            var student_id = $('#editstudent_id').val();
-            var time = $('#time').val();
-            var event_notes_c = $('#editdescriptions').val();
-            var date = $('#date_of_homework').val(); // Get the date value
-            var selectedInjuryName = $('#edit_injury_name').val();
-            var selectedPlace = $('#edit_place').val();
-            var selectedInjuryTreatment = $('#edit_injury_treatment').val();
-            var selectedPart = $('#edit_part').val();
-            var selectedIllness = $('#edit_illness_name').val();
-            var selectedIllnessTreatment = $('#edit_illness_treatment').val();
-            var selectedReasonTemp = $('#edit_reasonTemp').val();
-            var selectedMeal = $('#edit_meal').val();
-            var selectedDefecation = $('#edit_defecation').val();
-            var selectedTarget = $('#edit_target').val();
-            var selectedSlept_time = $('#edit_slept_time').val();
-            var selectedHealth_treatment = $('#edit_health_treatment').val();
-            var health_consult = $('#health_consult').val();
-            var illness = $('#illness').val();
-            var injury = $('#injury').val();
-            var Attend_to_heatlthcare_room = $('#Attend_to_heatlthcare_room').val();
-            var tabs = injury + ', ' + illness  + ', ' + health_consult + ', ' + Attend_to_heatlthcare_room;
-            var selectedText = {
-                InjuryName: getSelectedText('#edit_injury_name'),
-                Place: getSelectedText('#edit_place'),
-                InjuryTreatment: getSelectedText('#edit_injury_treatment'),
-                Part: getSelectedText('#edit_part'),
-                Illness: getSelectedText('#edit_illness_name'),
-                IllnessTreatment: getSelectedText('#edit_illness_treatment'),
-                ReasonTemp: $('#edit_reasonTemp').val(),
-                Meal: getSelectedText2('#edit_meal'),
-                Defecation: getSelectedText2('#edit_defecation'),
-                Target: getSelectedText('#edit_target'),
-                SleptTime: getSelectedText2('#edit_slept_time'),
-                HealthTreatment: getSelectedText('#edit_health_treatment')
-            };
-
-           var mainReasonText = Object.values(selectedText).filter(value => value !== '').join(', ');
-
-            formData.set('healthlogID', healthlogID);
-            formData.set('department_id', department_id);
-            formData.set('changeClassName', changeClassName);
-            formData.set('sectionID', sectionID);
-            formData.set('student_id', student_id);
-            formData.set('time', time);
-            formData.set('event_notes_c', event_notes_c);
-            formData.set('tab', tabs);
-            formData.set('tab_details', mainReasonText);
-            formData.set('selectedInjuryName', selectedInjuryName);
-            formData.set('selectedPlace', selectedPlace);
-            formData.set('selectedInjuryTreatment', selectedInjuryTreatment);
-            formData.set('selectedPart', selectedPart);
-            formData.set('selectedIllness', selectedIllness);
-            formData.set('selectedIllnessTreatment', selectedIllnessTreatment);
-            formData.set('selectedReasonTemp', selectedReasonTemp);
-            formData.set('selectedMeal', selectedMeal);
-            formData.set('selectedDefecation', selectedDefecation);
-            formData.set('selectedTarget', selectedTarget);
-            formData.set('selectedSlept_time', selectedSlept_time);
-            formData.set('selectedHealth_treatment', selectedHealth_treatment);
-            formData.set('date', date); // Set the date in the FormData
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                beforeSend: function () {
-                    $(form).find('span.error-text').text('');
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data.code == 0) {
-                        $.each(data.error, function (prefix, val) {
-                            $(form).find('span.' + prefix + '_error').text(val[0]);
-                        });
-                    } else {
-                        if (data.code == 200) {
+            var formData = new FormData($('#edit-health-form')[0]);
+            console.log(formData);
+                var healthlogID = $('#id').val();
+                console.log(healthlogID);
+                var department_id = $('#editdepartment_id').val();
+                var changeClassName = $('#editchangeClassName').val();
+                var sectionID = $('#editsectionID').val();
+                var student_id = $('#editstudent_id').val();
+                var time = $('#time').val();
+                var date = $('#date_of_homework').val(); // Get the date value
+                var selectedInjuryName = $('#edit_injury_name').val();
+                var selectedPlace = $('#edit_place').val();
+                var selectedInjuryTreatment = $('#edit_injury_treatment').val();
+                var selectedPart = $('#edit_part').val();
+                var selectedIllness = $('#edit_illness_name').val();
+                var selectedIllnessTreatment = $('#edit_illness_treatment').val();
+                var selectedReasonTemp = $('#edit_reasonTemp').val();
+                var selectedMeal = $('#edit_meal').val();
+                var selectedDefecation = $('#edit_defecation').val();
+                var selectedTarget = $('#edit_target').val();
+                var selectedSlept_time = $('#edit_slept_time').val();
+                var selectedHealth_treatment = $('#edit_health_treatment').val();
+                var activeTabId = $('#mainReasonTabsEdit .nav-link.active').attr('id');
+                console.log('Active Tab ID:', activeTabId);
+                var reasonValue;
+                var tabs;
+                if (activeTabId === "editreasonTab1") {
+                    reasonValue = $('#edit_injury_reason').val();
+                    tabs = $('#edit_injury').val();
+                } else if (activeTabId === "editreasonTab2") {
+                    reasonValue = $('#edit_illness_reason').val();
+                    tabs = $('#edit_illness').val();
+                } else if (activeTabId === "editreasonTab3") {
+                    reasonValue = $('#edit_health_consult_reason').val();
+                    tabs = $('#edit_health_consult').val();
+                } else if (activeTabId === "editreasonTab4") {
+                    reasonValue = $('#edit_attend_to_heatlthcare_room_reason').val();
+                    tabs = $('#edit_Attend_to_heatlthcare_room').val();
+                }
+                var selectedText = {
+                    InjuryName: getSelectedText('#edit_injury_name'),
+                    Place: getSelectedText('#edit_place'),
+                    InjuryTreatment: getSelectedText('#edit_injury_treatment'),
+                    Part: getSelectedText('#edit_part'),
+                    Illness: getSelectedText('#edit_illness_name'),
+                    IllnessTreatment: getSelectedText('#edit_illness_treatment'),
+                    ReasonTemp: $('#edit_reasonTemp').val(),
+                    Meal: getSelectedText2('#edit_meal'),
+                    Defecation: getSelectedText2('#edit_defecation'),
+                    Target: getSelectedText('#edit_target'),
+                    SleptTime: getSelectedText2('#edit_slept_time'),
+                    HealthTreatment: getSelectedText('#edit_health_treatment')
+                };
+    
+               var mainReasonText = Object.values(selectedText).filter(value => value !== '').join(', ');
+    
+                formData.set('id', healthlogID);
+                formData.set('editdepartment_id', department_id);
+                formData.set('class_id', changeClassName);
+                formData.set('section_id', sectionID);
+                formData.set('student_id', student_id);
+                formData.set('time', time);
+                formData.set('event_notes_c', reasonValue);
+                formData.set('tab', tabs);
+                formData.set('tab_details', mainReasonText);
+                formData.set('selectedInjuryName', selectedInjuryName);
+                formData.set('selectedPlace', selectedPlace);
+                formData.set('selectedInjuryTreatment', selectedInjuryTreatment);
+                formData.set('selectedPart', selectedPart);
+                formData.set('selectedIllness', selectedIllness);
+                formData.set('selectedIllnessTreatment', selectedIllnessTreatment);
+                formData.set('selectedReasonTemp', selectedReasonTemp);
+                formData.set('selectedMeal', selectedMeal);
+                formData.set('selectedDefecation', selectedDefecation);
+                formData.set('selectedTarget', selectedTarget);
+                formData.set('selectedSlept_time', selectedSlept_time);
+                formData.set('selectedHealth_treatment', selectedHealth_treatment);
+                formData.set('date', date); // Set the date in the FormData
+                console.log(formData);
+              
+                $.ajax({
+                    url: updateHealthLogBooksListPartC,
+                    method: "post",
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code == 0) {
+                            $.each(data.error, function (prefix, val) {
+                                $('#edit-health-form').find('span.' + prefix + '_error').text(val[0]);
+                            });
+                        } else {
+                            if (data.code == 200) {
                                 $('#editModal').modal('hide');
                                 updateDataTable(date);
                                 toastr.success(data.message);
-                        }else {
-                            toastr.error(data.message);
+                            }else{
+                                toastr.error(data.message);
+                            }
+
                         }
+                        
                     }
-                }
-            });
+                });
+        //}
     });
+
+     
     function updateDataTable(updateDate) {
         console.log(updateDate);
         $.ajax({

@@ -2057,7 +2057,7 @@ class TeacherController extends Controller
             $response = Helper::PostMethod(config('constants.api.promotion_data_bulk'), $data);
             if ($response['code'] == 200) {
 
-                return redirect()->route('teacher.promotion.studentlist')->with('success', ' Employee Imported Successfully');
+                return redirect()->route('teacher.promotion.studentlist')->with('success', ' Student Imported Successfully');
             } else {
                 return redirect()->route('teacher.promotion.studentlist')->with('errors', $response['data']);
             }
@@ -2067,7 +2067,7 @@ class TeacherController extends Controller
     {
         // Fetch data based on the selected department, class, and section
         $data = [
-            'department_id' => $request->input('download_department_id'),
+            
             'class_id' => $request->input('download_class_id'),
             'section_id' => $request->input('download_section_id')
         ];
@@ -2095,20 +2095,22 @@ class TeacherController extends Controller
     }
     public function promotionBulkStudentList(Request $request)
     {
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $data = [
+            'teacher_id' => session()->get('ref_user_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'teacher.promotion.studentList',
             [
                 'department' => isset($department['data']) ? $department['data'] : [],
-                'classes' => isset($getclass['data']) ? $getclass['data'] : []
+                'teacher_class' => isset($response['data']) ? $response['data'] : [],
             ]
         );
     }
     public function promotionBulkDataStudentList(Request $request)
     {
         $data = [
-            'department_id' => $request->department,
             'grade_id' => $request->grade,
             'section_id' => $request->section,
             'sort_id' => $request->sort,
@@ -2120,7 +2122,6 @@ class TeacherController extends Controller
     public function promotionUnassignedStudentList(Request $request)
     {
         $data = [
-            'department_id' => $request->department,
             'grade_id' => $request->grade,
             'section_id' => $request->section
         ];
@@ -2130,7 +2131,6 @@ class TeacherController extends Controller
     public function promotionTerminationStudentList(Request $request)
     {
         $data = [
-            'department_id' => $request->department,
             'grade_id' => $request->grade,
             'section_id' => $request->section
         ];
@@ -2160,11 +2160,20 @@ class TeacherController extends Controller
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
+            ->addColumn('actions', function ($row) {  
+                 $status = $row['status'];  // Replace 'status' with the actual column name
+
+                $disabledAttribute = $status != 2 ? 'disabled' : '';
+                $selectedOption = $status == 2 ? 'selected' : '';
+                $data_freezed = __('messages.data_freezed');
+                $temporary_unlock =  __('messages.temporary_unlock');
+                $none =  __('messages.none');
+
                 return '<div class="form-group">
-                 <select class="form-control"><option value="0">None</option><option value="3">Data Freezed</option>
-                 <option value="4">Temporary Unlock</option></select>
-                 </div>';
+             <select class="form-control"><option value="">' . addslashes($none) . '</option>
+             <option value="3" ' . $selectedOption . ' ' . $disabledAttribute . '>' . addslashes($data_freezed) . '</option>
+             <option value="4">' . addslashes($temporary_unlock) . '</option></select>
+           </div>';
             })
 
             ->rawColumns(['actions'])

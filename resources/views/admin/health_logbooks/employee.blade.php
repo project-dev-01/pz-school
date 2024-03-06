@@ -320,6 +320,7 @@
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
     var downloadHealthLogBooksList ="{{ route('admin.health_logbooks.downloadpdf') }}";
     var editHealthLogBooksListPartC ="{{ route('admin.health_logbooks_partc.edit') }}";
+    var updateHealthLogBooksListPartC ="{{ route('admin.health_logbooks_partc.update') }}";
     var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
     var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
     

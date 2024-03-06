@@ -51,10 +51,10 @@
                                     <label for="promote_list_department_id">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                     <select id="promote_list_status_id" name="promote_list_status_id" class="form-control">
                                         <option value="All">{{ __('messages.all') }}</option>
-                                        <option value="1">Data Preparing</option>
-                                        <option value="2">Prepared</option>
-                                        <option value="3">Data Freezed</option>
-                                        <option value="4">Temporary Unlock</option>
+                                        <option value="1">{{ __('messages.data_preparing') }}</option>
+                                        <option value="2">{{ __('messages.data_prepared') }}</option>
+                                        <option value="3">{{ __('messages.data_freezed') }}</option>
+                                        <option value="4">{{ __('messages.temporary_unlock') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                         </div>
                     </form>
                 </div> <!-- end card-box -->
-            </div> <!-- end col -->
+            </div> <!-- end col --> 
         </div>
     </div>
     <div class="row">
@@ -205,7 +205,17 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
-
+    var data_prepared = "{{ __('messages.data_prepared') }}";
+    var data_preparing = "{{ __('messages.data_preparing') }}";
+    var data_freezed = "{{ __('messages.data_freezed') }}";
+    var temporary_unlock = "{{ __('messages.temporary_unlock') }}";
+    var student_promoted_message = "{{ __('messages.student_promoted_message') }}";
+    var student_promoted_status = "{{ __('messages.student_promoted_status') }}";
+    var valid_status     = "{{ __('messages.valid_status') }}";
+    var cancelButtonText = "{{ __('messages.cancel') }}";
+	var confirmButtonText = "{{ __('messages.confirm') }}";
+	var successButtonText = "{{ __('messages.success') }}";
+    var error = "{{ __('messages.error') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
 </script>

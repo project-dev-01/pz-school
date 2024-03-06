@@ -138,12 +138,14 @@ $(function () {
                         render: function (data, type, row, meta) {
                             if (data === 1) {
                                 // Your custom rendering logic for status 1
-                                return "Data preparing"; // Return the data for status 1
+                                return data_preparing; // Return the data for status 1
                             } else if(data === 3){
-                                return "Data Freezed";
+                                return data_freezed;
+                            }else if(data === 4){
+                                return temporary_unlock;
                             }else {
                                 // Your custom rendering logic for other statuses
-                                return 'Data prepared'; // Return an empty string or any other value for other statuses
+                                return data_prepared ; // Return an empty string or any other value for other statuses
                             }
                         }
                     },
@@ -192,9 +194,18 @@ $(function () {
         toggleButton();
         $(document).on('click', '#saveStatusDataBtn', function () {
             var selectedData = [];
+            var statusSelected = false;
             buttonEnable.rows().every(function () {
                 var rowData = this.data();
                 var selectedStatus = $(this.node()).find('select').val();
+        
+                // Check if at least one row is selected
+                if (selectedStatus !== '' && selectedStatus !== '0' && selectedStatus !== null) {
+                    statusSelected = true;
+                 }// else {
+                //     // If selectedStatus is empty or null, use the column value 'status'
+                //     selectedStatus = rowData.status;
+                // }
         
                 // Assuming 'id' is a unique identifier for each row
                 selectedData.push({
@@ -205,6 +216,16 @@ $(function () {
         
             // Now 'selectedData' array contains the selected status for each row
             console.log(selectedData);
+            if (!statusSelected) {
+                // Show a message indicating that status needs to be selected
+                Swal.fire({
+                    title: error,
+                    text: valid_status,
+                    icon: 'warning',
+                    confirmButtonColor: '#556ee6'
+                });
+                return; // Exit the function without sending the AJAX request
+            }
             // Send an AJAX request to the server
             $.ajax({
                 url: savestatusFreezed, // replace with your actual server endpoint
@@ -213,12 +234,22 @@ $(function () {
                 success: function(response) {
                     $('#promotionDataFreezedStudentList').DataTable().ajax.reload(null, false);
                     console.log('Data saved successfully:', response);
-                    swal.fire("Success", "Status has been saved.", "success");
+                    Swal.fire({
+                        title: successButtonText,
+                        text: student_promoted_status,
+                        icon: 'success',
+                        confirmButtonColor: '#556ee6'
+                    });
                 },
                 error: function(error) {
                     // Handle error response from the server
                     console.error('Error saving data:', error);
-                    swal.fire("Error", "There was an error saving your data.", "error");
+                    Swal.fire({
+                        title: error,
+                        text: promotion_message_error,
+                        icon: 'error',
+                        confirmButtonColor: '#556ee6'
+                    });
                 }
             });
         });
@@ -251,12 +282,22 @@ $(function () {
                 success: function(response) {
                     $('#promotionDataFreezedStudentList').DataTable().ajax.reload(null, false);
                     console.log('Data saved successfully:', response);
-                    swal.fire("Success", "Status has been saved.", "success");
+                    Swal.fire({
+                        title: successButtonText,
+                        text: student_promoted_message,
+                        icon: 'success',
+                        confirmButtonColor: '#556ee6'
+                    });
                 },
                 error: function(error) {
                      // Handle error response from the server
                      console.error('Error saving data:', error);
-                     swal.fire("Error", "There was an error saving your data.", "error");
+                     Swal.fire({
+                        title: error,
+                        text: promotion_message_error,
+                        icon: 'error',
+                        confirmButtonColor: '#556ee6'
+                    });
                 }
             });
         });
@@ -348,8 +389,8 @@ $(function () {
                         name: 'name'
                     },
                     {
-                        data: 'roll',
-                        name: 'roll'
+                        data: 'register_no',
+                        name: 'register_no'
                     },
                     {
                         data: 'deptName',

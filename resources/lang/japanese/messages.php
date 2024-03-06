@@ -2063,4 +2063,17 @@ return [
     "guest" => "ゲスト",
     "attendance_report_subject" => "出席報告の件名",
     "add_shortcut_links" => "ショートカットリンクを追加",
+    "partc_tab_1" => "パートc",
+    "main_reasons_tab_2" => "主な理由",
+    "promotion_message"  => "続行してもよろしいですか?",
+    "promotion_message_moved"  => "データは次のレベルに移動しました.",
+    "promotion_message_error"  => "データの移動中にエラーが発生しました.",
+    "error"  => "エラー",
+    "data_prepared" => "準備されたデータ",
+    "data_preparing" => "データの準備",
+    "data_freezed" => "データの凍結",
+    "temporary_unlock" => "一時ロック解除",
+    "student_promoted_message" => "生徒全員が進級します",
+    "student_promoted_status"  => "ステータスが保存されました",
+    "valid_status"  => "有効なステータスを選択してください."
 ];

@@ -5,18 +5,24 @@ $(function () {
         var today = new Date();
         $('#addBuletinModal').on('shown.bs.modal', function () {
             $("#date").flatpickr({
-               // enableTime: !0,
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 minDate: today,
-                container: '#addBuletinModal modal-body'
+           //     container: '#addBuletinModal modal-body',
+                defaultHour : today.getHours(),
+                defaultMinute : today.getMinutes(),
+                minuteIncrement : 1,
+               
             });
             $("#end_date").flatpickr({
                 // enableTime: !0,
                  enableTime: true,
                  dateFormat: "Y-m-d H:i",
                  minDate: today,
-                 container: '#addBuletinModal modal-body'
+                 defaultHour : today.getHours(),
+                 defaultMinute : today.getMinutes(),
+                // container: '#addBuletinModal modal-body',
+                 minuteIncrement: 1 
              });
         });
 
