@@ -913,10 +913,10 @@
                                                     <label for="phase_1_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                     <select id="phase_1_status" name="status" class="form-control" disabled>
                                                         <option value="">{{ __('messages.status') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }}>{{ __('messages.applied') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }}>{{ __('messages.approved') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }}>{{ __('messages.send_back') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }}>{{ __('messages.reject') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }} value="Applied">{{ __('messages.applied') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                     </select>   
                                                 </div>
                                             </div>
@@ -946,8 +946,8 @@
                                                     <label for="enrollment">{{ __('messages.enrollment') }}<span class="text-danger">*</span></label>
                                                     <select id="enrollment" name="enrollment" class="form-control" disabled>
                                                         <option value="">{{ __('messages.select_enrollment') }}</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }}>{{ __('messages.trail_enrollment') }}</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }}>{{ __('messages.official_enrollment') }}</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1088,10 +1088,10 @@
                                                 <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                 <select id="phase_2_status" name="phase_2_status" class="form-control">
                                                     <option value="">{{ __('messages.select_status') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }}>{{ __('messages.process') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} disabled>{{ __('messages.approved') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} disabled>{{ __('messages.send_back') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} disabled>{{ __('messages.reject') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }}  value="Process">{{ __('messages.process') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} disabled  value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} disabled  value="Send Back">{{ __('messages.send_back') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} disabled  value="Reject">{{ __('messages.reject') }}</option>
                                                 </select>
                                             </div>
                                         </div>

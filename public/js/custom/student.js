@@ -398,6 +398,7 @@ $(function () {
         var class_id = $('#class_id').val();
         var section_id = $('#section_id').val();
         var session_id = $('#session_id').val();
+        var status = $('#student_status').val();
 
         var classObj = {
             student_name: student_name,
@@ -406,10 +407,12 @@ $(function () {
             sectionID: section_id,
             sessionID: session_id,
             userID: userID,
+            status: status,
         };
         // setLocalStorageForStudentList(classObj);
 
         var formData = {
+            status: status,
             student_name: student_name,
             department_id: department_id_filter,
             class_id: class_id,
@@ -472,6 +475,7 @@ $(function () {
         $('#excelDepartment').val(formData.department_id);
         $('#excelClassID').val(formData.class_id);
         $('#excelSectionID').val(formData.section_id);
+        $('#excelStatus').val(formData.status);
         $('#excelSession').val(formData.session_id);
         var table = $('#student-table').DataTable({
             processing: true,
@@ -627,7 +631,7 @@ $(function () {
     $("#editadmission").validate({
         rules: {
             year: "required",
-            txt_regiter_no: "required",
+            // txt_regiter_no: "required",
             txt_emailid: {
                 required: true,
                 email: true

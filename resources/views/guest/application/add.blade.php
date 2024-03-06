@@ -864,7 +864,7 @@
                                                 </div>
                                                 <div class="col-md-4" id="last_date" style="display:none">
                                                     <div class="form-group">
-                                                        <label for="last_date_of_withdrawal">{{ __('messages.last_date_of_withdrawal') }}<span class="text-danger"></span></label>
+                                                        <label for="last_date_of_withdrawal">{{ __('messages.last_date_of_withdrawal') }}<span class="text-danger">*</span></label>
                                                         <div class="input-group input-group-merge">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">

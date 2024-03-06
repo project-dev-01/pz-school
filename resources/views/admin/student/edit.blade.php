@@ -785,7 +785,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
-                                                <select id="btwyears" class="form-control" name="year">
+                                                <select id="btwyears" class="form-control" name="year" disabled>
                                                     <option value="">{{ __('messages.select_academic_year') }}</option>
                                                     @forelse($academic_year_list as $r)
                                                     <option value="{{$r['id']}}" {{ isset($student['year']) ?  $student['year'] == $r['id'] ? 'Selected' : '' : "" }}>{{$r['name']}}</option>
@@ -794,12 +794,15 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <input type="hidden" id="btwyears" class="form-control" name="year" value="{{ isset($student['year']) ? $student['year'] : ''}}" >
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.register_no') }}<span class="text-danger">*</span></label>
                                                 <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="{{ __('messages.enter_register_no') }}" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
-                                        </div>
+                                        </div> -->
+                                        
+                                     <input type="hidden" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" >
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.roll') }}<span class="text-danger">*</span></label>
@@ -811,7 +814,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
-                                                <select id="department_id" name="department_id" class="form-control">
+                                                <select id="department_id" name="department_id" class="form-control" disabled>
                                                     <option value="">{{ __('messages.select_department') }}</option>
                                                     @forelse($department as $r)
                                                     <option value="{{$r['id']}}" {{ isset($student['department_id']) ?  $student['department_id'] == $r['id'] ? 'Selected' : '' : "" }}>{{$r['name']}}</option>
@@ -823,7 +826,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                                                <select id="class_id" class="form-control" name="class_id">
+                                                <select id="class_id" class="form-control" name="class_id" disabled>
                                                     <option value="">{{ __('messages.select_grade') }}</option>
                                                     @forelse($grade_list_by_department as $rd)
                                                     <option value="{{$rd['id']}}" {{ isset($student['class_id']) ?  $student['class_id'] == $rd['id'] ? 'Selected' : '' : "" }}>{{$rd['name']}}</option>
@@ -835,7 +838,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
-                                                <select id="section_id" class="form-control" name="section_id">
+                                                <select id="section_id" class="form-control" name="section_id" disabled>
                                                     <option value="">{{ __('messages.select_class') }}</option>
                                                     @forelse($section as $sec)
                                                     <option value="{{$sec['section_id']}}" {{ isset($student['section_id']) ?  $student['section_id'] == $sec['section_id'] ? 'Selected' : '' : "" }}>{{$sec['section_name']}}</option>
@@ -857,14 +860,14 @@
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" id="admission_date" value="{{ isset($student['admission_date']) ? $student['admission_date'] : ''}}" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="admission_date" value="{{ isset($student['admission_date']) ? $student['admission_date'] : ''}}" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="session_id">{{ __('messages.session') }}</label>
-                                                <select id="session_id" class="form-control" name="session_id">
+                                                <select id="session_id" class="form-control" name="session_id" disabled>
                                                     <option value="0">{{ __('messages.select_session') }}</option>
                                                     @forelse($session as $ses)
                                                     <option value="{{$ses['id']}}" {{ isset($student['session_id']) ?  $student['session_id'] == $ses['id'] ? 'Selected' : '' : "" }}>{{$ses['name']}}</option>
@@ -877,7 +880,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="semester_id">{{ __('messages.semester') }}</label>
-                                                <select id="semester_id" class="form-control" name="semester_id">
+                                                <select id="semester_id" class="form-control" name="semester_id" disabled>
                                                     <option value="0">{{ __('messages.select_semester') }}</option>
                                                     @forelse($semester as $sem)
                                                     <option value="{{ $sem['id'] }}" {{ (isset($student['semester_id']) && $student['semester_id'] == $sem['id']) ? 'selected' : '' }}>{{ $sem['name'] }}</option>

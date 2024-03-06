@@ -111,7 +111,7 @@ $(function () {
         rules: {
             parent_id: "required",
             year: "required",
-            txt_regiter_no: "required",
+            // txt_regiter_no: "required",
             txt_emailid: {
                 required: true,
                 email: true

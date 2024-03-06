@@ -1053,6 +1053,8 @@ class AuthController extends Controller
                 $redirect_route = route('parent.login');
             } elseif ($role == 6) {
                 $redirect_route = route('student.login');
+            } elseif ($role == 7) {
+                $redirect_route = route('guest.login');
             }
             return view(
                 'auth.success',
@@ -1114,7 +1116,53 @@ class AuthController extends Controller
         ]);
         $userDetails = $response->json();
         if ($userDetails['code'] == 200) {
-            return redirect()->route('admin.login')->with('success', 'Your password has been changed!');
+            
+            $data = [
+                'branch_id' => config('constants.branch_id')
+            ];
+            $response = Http::post(config('constants.api.get_school_type'), $data);
+            $schoolDetails = $response->json();
+            $image_url =  config('constants.image_url') . "/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Admin.webp";
+            // set default language
+            if (Cookie::get('locale') !== null) {
+                $defalutLang = Cookie::get('locale');
+            } else {
+                $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+            }
+            $setLang = isset($defalutLang) ? $defalutLang : 'en';
+            App::setLocale($setLang);
+            session()->put('locale', $setLang);
+            $role_ids = explode(",", $userDetails['data']['role_id']);
+            $role = $role_ids['0'];
+            // dd($role_ids);
+            if ($role == 1) {
+                $redirect_route = route('super_admin.login');
+            } elseif ($role == 2) {
+                $redirect_route = route('admin.login');
+            } elseif ($role == 3) {
+                $redirect_route = route('staff.login');
+            } elseif ($role == 4) {
+                $redirect_route = route('teacher.login');
+            } elseif ($role == 5) {
+                $redirect_route = route('parent.login');
+            } elseif ($role == 6) {
+                $redirect_route = route('student.login');
+            } elseif ($role == 7) {
+                $redirect_route = route('guest.login');
+            }
+            
+            return view(
+                'auth.success',
+                [
+                    'redirect_route' => $redirect_route,
+                    'branch_id' => config('constants.branch_id'),
+                    'school_name' => config('constants.school_name'),
+                    'school_image' => config('constants.school_image'),
+                    'language_name' => $setLang,
+                    'image_url' => $image_url
+                ]
+            );
+            // return redirect()->$redirect_route->with('success', 'Your password has been changed!');
         } else {
             return redirect()->back()->with('error', $userDetails['message']);
         }

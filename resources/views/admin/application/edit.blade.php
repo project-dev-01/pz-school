@@ -316,6 +316,8 @@
                         @csrf
                         <input type="hidden" id="id" name="id" value="{{ isset($application['id']) ? $application['id'] : ''}}">
 
+                        <input type="hidden" name="register_number" value="{{ isset($application['register_number']) ? $application['register_number'] : ''}}">
+
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#basic" data-toggle="tab" aria-expanded="false" class="nav-link active">
@@ -856,10 +858,10 @@
                                                     <label for="phase_1_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                     <select id="phase_1_status" name="status" class="form-control">
                                                         <option value="">{{ __('messages.select_status') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }}>{{ __('messages.applied') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }}>{{ __('messages.approved') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }}>{{ __('messages.send_back') }}</option>
-                                                        <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }}>{{ __('messages.reject') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }} value="Applied">{{ __('messages.applied') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
+                                                        <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -873,7 +875,7 @@
                                             <div class="col-md-4" id="reason_1" style="display:{{$phase_1_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_1_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_1_reason" value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" placeholder="Enter Reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" class="form-control" id="phase_1_reason" name="phase_1_reason" placeholder="{{ __('messages.enter_reason') }}" aria-describedby="inputGroupPrepend">{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                             @php
@@ -889,8 +891,8 @@
                                                     <label for="enrollment">{{ __('messages.enrollment') }}<span class="text-danger">*</span></label>
                                                     <select id="enrollment" name="enrollment" class="form-control">
                                                         <option value="">{{ __('messages.select_enrollment') }}</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }}>Trail Enrollment</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }}>Official Enrollment</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1015,10 +1017,10 @@
                                                 <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                 <select id="phase_2_status" name="phase_2_status" class="form-control">
                                                     <option value="">{{ __('messages.select_status') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }}>{{ __('messages.process') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }}>{{ __('messages.approved') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }}>{{ __('messages.send_back') }}</option>
-                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }}>{{ __('messages.reject') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }} value="Process">{{ __('messages.process') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
+                                                    <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1031,7 +1033,7 @@
                                             <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_2_reason" value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" placeholder="Enter Reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" class="form-control" id="phase_2_reason" name="phase_2_reason" placeholder="{{ __('messages.enter_reason') }}" aria-describedby="inputGroupPrepend">{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                     </div>

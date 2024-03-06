@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Http;
-use Log;
-
 class TerminationCron extends Command
 {
     /**
@@ -39,12 +38,9 @@ class TerminationCron extends Command
     {
         \Log::info("Cron is working fine!");
         $data = [
-            'branch_id' => session()->get('branch_id')
+            'branch_id' => config('constants.branch_id')
         ];
-        $url = config('constants.api.termination_student');
-        $response = Http::post($url, $data);
-        \Log::info(config('constants.api.termination_student'));
-        return $response->json();
-        //
+        $response = Http::post(config('constants.api.termination_student'), $data);
+        $schoolDetails = $response->json();
     }
 }

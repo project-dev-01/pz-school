@@ -124,7 +124,7 @@ class GuestController extends Controller
     {
 
         $type = "Admission";
-        if($request->last_date_of_withdrawal){
+        if($request->re_admission == "yes"){
             $type = "Re-Admission";
         }
         $data = [

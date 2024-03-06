@@ -1583,7 +1583,7 @@ class AdminController extends Controller
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
             'linkedin_url' => $request->linkedin_url,
-            'skip_bank_details' => $request->skip_bank_details,
+            // 'skip_bank_details' => $request->skip_bank_details,
             'holder_name' => $request->holder_name,
             'bank_name' => $request->bank_name,
             'status' => $status,
@@ -1844,7 +1844,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'role_user_id' => $request->role_user_id,
-            'skip_bank_details' => $request->skip_bank_details,
+            // 'skip_bank_details' => $request->skip_bank_details,
             'facebook_url' => $request->facebook_url,
             'twitter_url' => $request->twitter_url,
             'linkedin_url' => $request->linkedin_url,
@@ -4700,6 +4700,7 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
+            "status" => $request->status,
             "academic_session_id" => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
@@ -8849,6 +8850,7 @@ class AdminController extends Controller
             'phase_2_status' => $request->phase_2_status,
             'phase_1_reason' => $request->phase_1_reason,
             'phase_2_reason' => $request->phase_2_reason,
+            'register_number' => $request->register_number,
             'role_id' => session()->get('role_id'),
         ];
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);

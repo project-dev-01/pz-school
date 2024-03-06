@@ -66,14 +66,14 @@ $(function () {
     selectRefresh();
 
     // skipped employee bank details
-    $("#skip_bank_details").on("change", function () {
-        // alert($(this).is(":checked"));
-        if ($(this).is(":checked")) {
-            $("#bank_details_form").hide("slow");
-        } else {
-            $("#bank_details_form").show("slow");
-        }
-    });
+    // $("#skip_bank_details").on("change", function () {
+    //     // alert($(this).is(":checked"));
+    //     if ($(this).is(":checked")) {
+    //         $("#bank_details_form").hide("slow");
+    //     } else {
+    //         $("#bank_details_form").show("slow");
+    //     }
+    // });
     // skip_medical_history
     $("#skip_medical_history").on("change", function () {
         if ($(this).is(":checked")) {
@@ -235,12 +235,12 @@ $(function () {
                 minlength: 5,
                 equalTo: "#password"
             },
-            bank_name: "required",
-            holder_name: "required",
-            bank_branch: "required",
-            bank_address: "required",
-            ifsc_code: "required",
-            account_no: "required",
+            // bank_name: "required",
+            // holder_name: "required",
+            // bank_branch: "required",
+            // bank_address: "required",
+            // ifsc_code: "required",
+            // account_no: "required",
             // city: "required",
             // state: "required",
             // country: "required",
@@ -422,12 +422,12 @@ $(function () {
             //     minlength: 5,
             //     equalTo: "#password"
             // },
-            bank_name: "required",
-            holder_name: "required",
-            bank_branch: "required",
-            bank_address: "required",
-            ifsc_code: "required",
-            account_no: "required",
+            // bank_name: "required",
+            // holder_name: "required",
+            // bank_branch: "required",
+            // bank_address: "required",
+            // ifsc_code: "required",
+            // account_no: "required",
             // city: "required",
             // state: "required",
             // country: "required",

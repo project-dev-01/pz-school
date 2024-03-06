@@ -121,6 +121,16 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="status">{{ __('messages.status') }}</label>
+                                                                <select id="student_status" class="form-control" name="status">
+                                                                    <option value="">{{ __('messages.select_status') }}</option>
+                                                                    <option value="0" selected>{{ __('messages.active') }}</option>
+                                                                    <option value="1">{{ __('messages.de_active') }}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group text-right m-b-0">
                                                         <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -173,6 +183,7 @@
                                                                 <input type="hidden" name="department_id" id="excelDepartment">
                                                                 <input type="hidden" name="class_id" id="excelClassID">
                                                                 <input type="hidden" name="section_id" id="excelSectionID">
+                                                                <input type="hidden" name="status" id="excelStatus">
                                                                 <input type="hidden" name="session" id="excelSession">
                                                                 <div class="clearfix float-right">
                                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">

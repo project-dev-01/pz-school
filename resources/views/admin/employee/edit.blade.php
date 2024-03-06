@@ -1184,29 +1184,29 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="skip_bank_details" name="skip_bank_details">
                                     <label class="custom-control-label" for="skip_bank_details">{{ __('messages.skipped_bank_details') }}</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div id="bank_details_form">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="bank_name">{{ __('messages.bank_name') }}<span class="text-danger">*</span></label>
+                                            <label for="bank_name">{{ __('messages.bank_name') }}</label>
                                             <input type="text" id="bank_name" value="{{ isset($bank['bank_name']) ? $bank['bank_name']:' ' }}" class="form-control" name="bank_name" placeholder="{{ __('messages.enter_bank_name') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="holder_name">{{ __('messages.account_holder') }}<span class="text-danger">*</span></label>
+                                            <label for="holder_name">{{ __('messages.account_holder') }}</label>
                                             <input type="text" id="holder_name" value="{{ isset($bank['holder_name']) ? $bank['holder_name']:''}}" class="form-control" name="holder_name" placeholder="{{ __('messages.enter_account_holder') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="bank_branch">{{ __('messages.bank_branch') }}<span class="text-danger">*</span></label>
+                                            <label for="bank_branch">{{ __('messages.bank_branch') }}</label>
                                             <input type="text" id="bank_branch" value="{{ isset($bank['bank_branch']) ? $bank['bank_branch']:'' }}" class="form-control" name="bank_branch" placeholder="{{ __('messages.enter_bank_branch') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
@@ -1214,19 +1214,19 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
-                                            <label for="bank_address">{{ __('messages.bank_address') }}<span class="text-danger">*</span></label>
+                                            <label for="bank_address">{{ __('messages.bank_address') }}</label>
                                             <input type="text" class="form-control" value="{{ isset($bank['bank_address']) ? $bank['bank_address']:'' }}" id="bank_address" name="bank_address" placeholder="{{ __('messages.enter_bank_address') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
-                                            <label for="ifsc_code">{{ __('messages.ifsc_code') }}<span class="text-danger">*</span></label>
+                                            <label for="ifsc_code">{{ __('messages.ifsc_code') }}</label>
                                             <input type="text" class="form-control" value="{{ isset($bank['ifsc_code']) ? $bank['ifsc_code']:''}}" id="ifsc_code" name="ifsc_code" placeholder="{{ __('messages.enter_ifsc_code') }}" aria-describedby="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
-                                            <label for="">{{ __('messages.account_no') }}<span class="text-danger">*</span></label>
+                                            <label for="">{{ __('messages.account_no') }}</label>
                                             <input type="text" class="form-control" value="{{ isset($bank['account_no']) ? $bank['account_no']:'' }}" id="account_no" name="account_no" placeholder="{{ __('messages.enter_account_no') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
