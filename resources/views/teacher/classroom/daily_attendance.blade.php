@@ -46,7 +46,7 @@
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($teacher_class as $class)
-                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -72,7 +72,7 @@
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -86,7 +86,7 @@
                                     <select id="session_id" class="form-control" name="session_id">
                                         <option value="0">{{ __('messages.select_session') }}</option>
                                         @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                        <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -146,7 +146,7 @@
                                             <input type="hidden" name="section_id" id="listModeSectionID">
                                             <input type="hidden" name="semester_id" id="listModeSemesterID">
                                             <input type="hidden" name="session_id" id="listModeSessionID">
-                                            <input type="hidden" name="date" id="listModeSelectedDate">
+                                            <input type="text" name="date" id="listModeSelectedDate">
                                         </div>
                                     </div>
                                     <div class="card">
@@ -230,7 +230,7 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 
 <script>
-    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    var teacherSectionUrl = "{{ config('constants.api.class_teacher_sections') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 

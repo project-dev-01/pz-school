@@ -235,13 +235,25 @@
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="directchangeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="directchangeLevType" class="form-control" name="directchangeLevType">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
                                         <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="directchangeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
+                                    <select id="directchangeLevType" class="form-control" name="directchangeLevType">
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
+                                        @forelse ($get_student_leave_types as $ress)
+                                        <option value="{{ $ress['id'] }}">{{ __('messages.' . $ress['name']) }}</option>
                                         @empty
                                         @endforelse
                                     </select>

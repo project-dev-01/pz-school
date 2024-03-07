@@ -30,7 +30,7 @@ class AuthController extends Controller
         ];
         $response = Http::post(config('constants.api.get_school_type'), $data);
         $schoolDetails = $response->json();
-        // dd($schoolDetails);
+        // dd($response);
 
         $image_url =  config('constants.image_url') . "/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Admin.webp";
         // set default language

@@ -77,7 +77,7 @@
                                     <select id="changeClassName" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($teacher_class as $class)
-                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -293,7 +293,7 @@
 </script>
 
 <script>
-    var teacherSectionUrl = "{{ config('constants.api.teacher_section') }}";
+    var teacherSectionUrl = "{{ config('constants.api.class_teacher_sections') }}";
     var teacherSubjectUrl = "{{ config('constants.api.teacher_subject') }}";
     var getAttendanceListTeacher = "{{ config('constants.api.get_attendance_list_teacher') }}";
     var getReasonsByStudent = "{{ config('constants.api.get_reasons_by_student') }}";

@@ -2018,12 +2018,12 @@
                         </ul>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="{{ route('teacher.settings.shortcut_links')}}" class="nav-link {{ (request()->is('teacher/settings/shortcut_links')) ? 'active' : '' }}">
                         <i class="fa fa-desktop" aria-hidden="true"></i>
                         <span> {{ __('messages.shortcut_links') }} </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('teacher.clear_local_storage')}}" class="nav-link {{ (request()->is('teacher/clear_local_storage')) ? 'active' : '' }}">
                         <svg class="svg-icon" style="width: 15; height: 20;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">

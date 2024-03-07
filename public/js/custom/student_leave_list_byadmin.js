@@ -124,8 +124,7 @@ $(function () {
         // // subject division
         studentLeaveList(formData);
     });
-    function getstudentLeaveList() 
-    {
+    function getstudentLeaveList() {
         var form = this;
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
@@ -216,7 +215,7 @@ $(function () {
         });
 
     });
-   
+
     $(document).on('click', '#stdLeaveapprovedLeave', function () {
         var student_leave_tbl_id = $("#studentLeaveID").val();
         var status = $("#leave_status_name").val();
@@ -236,211 +235,379 @@ $(function () {
         //     console.log(pair[0]+ ', ' + pair[1]); 
         // }
         // return false;
-        
-        if (status!='') {
+
+        if (status != '') {
             $('#alert_status').html('');
             $('#leave_status_name').css('border-color', '');
-        $.ajax({
-            url: teacher_leave_remarks_updated,
-            method: "post",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (res) {
-                if (res.code == 200) {
-                    // allStudentLeave();
-                    toastr.success('Leave Updated sucessfully');
-                    $('#nursingPopup').modal('hide');
-                    //location.reload();
-                    getstudentLeaveList();
-                }
-                else {
-                    toastr.error(res.message);
+            $.ajax({
+                url: teacher_leave_remarks_updated,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (res) {
+                    if (res.code == 200) {
+                        // allStudentLeave();
+                        toastr.success('Leave Updated sucessfully');
+                        $('#nursingPopup').modal('hide');
+                        //location.reload();
+                        getstudentLeaveList();
+                    }
+                    else {
+                        toastr.error(res.message);
 
+                    }
                 }
-            }
-        });
-    }
-    else
-    {
-        $('#leave_status_name').css('border-color', 'red');
-        $('#alert_status').html('Required');
-    }
+            });
+        }
+        else {
+            $('#leave_status_name').css('border-color', 'red');
+            $('#alert_status').html('Required');
+        }
 
     });
-    function allStudentLeave(dataSetNew) {
+    // function allStudentLeave(dataSetNew) {
 
-        $('#student-leave-table').DataTable({
+    //     $('#student-leave-table').DataTable({
+    //         processing: true,
+    //         bDestroy: true,
+    //         info: true,
+    //         // dom: 'lBfrtip',
+    //         dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+    //             "<'row'<'col-sm-12'tr>>" +
+    //             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    //         "language": {
+
+    //             "emptyTable": no_data_available,
+    //             "infoFiltered": filter_from_total_entries,
+    //             "zeroRecords": no_matching_records_found,
+    //             "infoEmpty": showing_zero_entries,
+    //             "info": showing_entries,
+    //             "lengthMenu": show_entries,
+    //             "search": datatable_search,
+    //             "paginate": {
+    //                 "next": next,
+    //                 "previous": previous
+    //             },
+    //         },
+    //         buttons: [
+    //             {
+    //                 extend: 'csv',
+    //                 text: downloadcsv,
+    //                 extension: '.csv',
+    //                 charset: 'utf-8',
+    //                 bom: true,
+    //                 exportOptions: {
+    //                     columns: 'th:not(:last-child)'
+    //                 }
+    //             },
+    //             {
+    //                 extend: 'pdf',
+    //                 text: downloadpdf,
+    //                 extension: '.pdf',
+    //                 charset: 'utf-8',
+    //                 bom: true,
+    //                 exportOptions: {
+    //                     columns: 'th:not(:last-child)'
+    //                 }
+
+    //             }
+    //         ],
+    //         data: dataSetNew,
+    //         "pageLength": 10,
+    //         "aLengthMenu": [
+    //             [5, 10, 25, 50, -1],
+    //             [5, 10, 25, 50, "All"]
+    //         ],
+    //         columns: [
+    //             {
+    //                 "targets": 0,
+    //                 "render": function (data, type, row, meta) {
+    //                     return meta.row + 1;
+    //                 }
+    //             },
+    //             {
+    //                 data: 'name'
+    //             },
+    //             {
+    //                 data: 'class_name'
+    //             },
+    //             {
+    //                 data: 'section_name'
+    //             },
+    //             {
+    //                 data: 'from_leave'
+    //             },
+    //             {
+    //                 data: 'to_leave'
+    //             },
+    //             // {
+    //             //     data: 'status'
+    //             // },
+    //             {
+    //                 data: 'status'
+    //             },
+    //             {
+    //                 data: 'reason'
+    //             },
+    //             {
+    //                 data: 'document'
+    //             },
+    //             {
+    //                 data: 'teacher_remarks'
+    //             },
+    //             {
+    //                 data: 'nursing_teacher_remarks'
+    //             },
+    //             {
+    //                 data: 'status'
+    //             },
+    //             {
+    //                 data: 'id'
+    //             }
+    //         ],
+    //         columnDefs: [
+    //             {
+
+    //                 "targets": 1,
+    //                 "className": "table-user",
+    //                 "render": function (data, type, row, meta) {
+    //                     var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+    //                         '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+    //                     return first_name;
+    //                 }
+    //             },
+    //             // {
+    //             //     "targets": 6,
+    //             //     "render": function (data, type, row, meta) {
+    //             //         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
+    //             //             '<option value="">' + choose + '</option>' +
+    //             //             '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>' + approve_lang + '</option>' +
+    //             //             '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>' + reject_lang + '</option>' +
+    //             //             '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>' + pending_lang + '</option>'
+    //             //         '</select>';
+    //             //         return status;
+    //             //     }
+    //             // }
+    //             {
+    //                 "targets": 6,
+    //                 "render": function (data, type, row, meta) {
+    //                     if (data == "Approve") {
+
+    //                         var status = '<span class="badge badge-success">' + data + '</span>';
+    //                     } else if (data == "Reject") {
+
+    //                         var status = '<span class="badge badge-danger">' + data + '</span>';
+    //                     } else if (data == "Pending") {
+
+    //                         var status = '<span class="badge badge-info">' + data + '</span>';
+    //                     }
+    //                     return status;
+    //                 }
+    //             },
+    //             {
+    //                 "targets": 8,
+    //                 "render": function (data, type, row, meta) {
+    //                     var document = "";
+    //                     if (row.document) {
+    //                         var document = '<a href="' + studentDocUrl + '/' + row.document + '" download class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
+    //                     } else {
+    //                         document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
+    //                     }
+    //                     return document;
+    //                 }
+    //             },
+    //             {
+    //                 "targets": 11,
+    //                 "render": function (data, type, row, meta) {
+    //                     var addremarks = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
+    //                         '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
+    //                     return addremarks;
+    //                 }
+    //             },
+    //             {
+    //                 "targets": 12,
+    //                 "render": function (data, type, row, meta) {
+    //                     // var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">' + update + '</button>';
+    //                     // return submitbtn;
+    //                     var submitbtn = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-student_id="' + row.student_id + '" id="viewDetails">viewDetails</a></div>';
+    //                     return submitbtn;
+    //                 }
+    //             },
+    //         ]
+    //     }).on('draw', function () {
+    //     });
+    // }
+    function allStudentLeave(dataSetNew) {
+        // DataTable configuration
+        var table = $('#student-leave-table').DataTable({
             processing: true,
-            bDestroy: true,
+            destroy: true,
             info: true,
-            // dom: 'lBfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            "language": {
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
-                },
-            },
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: downloadcsv,
-                    extension: '.csv',
-                    charset: 'utf-8',
-                    bom: true,
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    text: downloadpdf,
-                    extension: '.pdf',
-                    charset: 'utf-8',
-                    bom: true,
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    }
-
+            language: {
+                emptyTable: no_data_available,
+                infoFiltered: filter_from_total_entries,
+                zeroRecords: no_matching_records_found,
+                infoEmpty: showing_zero_entries,
+                info: showing_entries,
+                lengthMenu: show_entries,
+                search: datatable_search,
+                paginate: {
+                    next: next,
+                    previous: previous
                 }
+            },
+            buttons: [{
+                extend: 'csv',
+                text: downloadcsv,
+                extension: '.csv',
+                charset: 'utf-8',
+                bom: true,
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            },
+            {
+                extend: 'pdf',
+                text: downloadpdf,
+                extension: '.pdf',
+                charset: 'utf-8',
+                bom: true,
+                exportOptions: {
+                    columns: 'th:not(:last-child)'
+                }
+            }
             ],
             data: dataSetNew,
-            "pageLength": 10,
-            "aLengthMenu": [
+            pageLength: 10,
+            lengthMenu: [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
-            columns: [
-                {
-                    "targets": 0,
-                    "render": function (data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'class_name'
-                },
-                {
-                    data: 'section_name'
-                },
-                {
-                    data: 'from_leave'
-                },
-                {
-                    data: 'to_leave'
-                },
-                // {
-                //     data: 'status'
-                // },
-                {
-                    data: 'status'
-                },
-                {
-                    data: 'reason'
-                },
-                {
-                    data: 'document'
-                },
-                {
-                    data: 'teacher_remarks'
-                },
-                {
-                    data: 'nursing_teacher_remarks'
-                },
-                {
-                    data: 'status'
-                },
-                {
-                    data: 'id'
+            columns: [{
+                targets: 0,
+                render: function (data, type, row, meta) {
+                    return meta.row + 1;
                 }
+            },
+            {
+                data: 'name'
+            },
+            {
+                data: 'class_name'
+            },
+            {
+                data: 'section_name'
+            },
+            {
+                data: 'from_leave'
+            },
+            {
+                data: 'to_leave'
+            },
+            {
+                data: 'status'
+            },
+            {
+                data: 'reason'
+            },
+            {
+                data: 'document'
+            },
+            {
+                data: 'teacher_remarks'
+            },
+            {
+                data: 'nursing_teacher_remarks'
+            },
+            {
+                data: 'status'
+            },
+            {
+                data: 'id'
+            }
             ],
-            columnDefs: [
-                {
-
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
-                        var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
-                    }
-                },
-                // {
-                //     "targets": 6,
-                //     "render": function (data, type, row, meta) {
-                //         var status = '<select class="form-control" id="leavestatus' + row.id + '" data-style="btn-outline-success" name="student_leave_upd[' + meta.row + '][status]">' +
-                //             '<option value="">' + choose + '</option>' +
-                //             '<option value="Approve"  ' + (data == "Approve" ? "selected" : "") + '>' + approve_lang + '</option>' +
-                //             '<option value="Reject"  ' + (data == "Reject" ? "selected" : "") + '>' + reject_lang + '</option>' +
-                //             '<option value="Pending"  ' + (data == "Pending" ? "selected" : "") + '>' + pending_lang + '</option>'
-                //         '</select>';
-                //         return status;
-                //     }
-                // }
-                {
-                    "targets": 6,
-                    "render": function (data, type, row, meta) {
-                        if (data == "Approve") {
-
-                            var status = '<span class="badge badge-success">' + data + '</span>';
-                        } else if (data == "Reject") {
-
-                            var status = '<span class="badge badge-danger">' + data + '</span>';
-                        } else if (data == "Pending") {
-
-                            var status = '<span class="badge badge-info">' + data + '</span>';
-                        }
-                        return status;
-                    }
-                },
-                {
-                    "targets": 8,
-                    "render": function (data, type, row, meta) {
-                        var document = "";
-                        if (row.document) {
-                            var document = '<a href="' + studentDocUrl + '/' + row.document + '" download class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
-                        } else {
-                            document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
-                        }
-                        return document;
-                    }
-                },
-                {
-                    "targets": 11,
-                    "render": function (data, type, row, meta) {
-                        var addremarks = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
-                            '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
-                        return addremarks;
-                    }
-                },
-                {
-                    "targets": 12,
-                    "render": function (data, type, row, meta) {
-                        // var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">' + update + '</button>';
-                        // return submitbtn;
-                        var submitbtn = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-student_id="' + row.student_id + '" id="viewDetails">viewDetails</a></div>';
-                        return submitbtn;
-                    }
-                },
+            columnDefs: [{
+                targets: 1,
+                className: "table-user",
+                render: function (data, type, row, meta) {
+                    var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                    return first_name;
+                }
+            },
+            {
+                targets: 6,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 8,
+                render: function (data, type, row, meta) {
+                    var documentLink = getDocumentLink(row);
+                    return documentLink;
+                }
+            },
+            {
+                targets: 11,
+                render: function (data, type, row, meta) {
+                    var remarksButtons = getRemarksButtons(row);
+                    return remarksButtons;
+                }
+            },
+            {
+                targets: 12,
+                render: function (data, type, row, meta) {
+                    var viewDetailsButton = getViewDetailsButton(row);
+                    return viewDetailsButton;
+                }
+            },
             ]
-        }).on('draw', function () {
         });
+
+        // Event listeners or other post-init operations can be added here
     }
+
+    // Helper functions
+    function getStatusBadge(data) {
+        var status = '';
+        if (data == "Approve") {
+            status = '<span class="badge badge-success">' + data + '</span>';
+        } else if (data == "Reject") {
+            status = '<span class="badge badge-danger">' + data + '</span>';
+        } else if (data == "Pending") {
+            status = '<span class="badge badge-info">' + data + '</span>';
+        }
+        return status;
+    }
+
+    function getDocumentLink(row) {
+        var document = '';
+        if (row.document) {
+            document = '<a href="' + studentDocUrl + '/' + row.document + '" download class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
+        } else {
+            document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
+        }
+        return document;
+    }
+
+    function getRemarksButtons(row) {
+        var remarksButtons = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
+            '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
+        return remarksButtons;
+    }
+
+    function getViewDetailsButton(row) {
+        var viewDetailsButton = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-student_id="' + row.student_id + '" id="viewDetails">viewDetails</a></div>';
+        return viewDetailsButton;
+    }
+
 
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
@@ -590,6 +757,90 @@ $(function () {
             }
         });
     });
+    // rules validation
+    $("#stdGeneralDetails").validate({
+        rules: {
+            direct_department_id: "required",
+            class_id: "required",
+            section_id: "required",
+            changeStdName: "required",
+            to_ldate: "required",
+            frm_ldate: "required",
+            total_leave: "required",
+            directchangeLevType: "required",
+            changelevReasons: "required",
+            stud_leave_status: "required"
+        }
+    });
+    $('#stdGeneralDetails').on('submit', function (e) {
+        e.preventDefault();
+        var start = convertDigitIn($("#frm_ldate").val());
+        var end = convertDigitIn($("#to_ldate").val());
+        let startDate = new Date(start);
+        let endDate = new Date(end);
+        if (startDate > endDate) {
+            toastr.error("To date should be greater than leave from");
+            $("to_ldate").val("");
+            return false;
+        }
+        var std_details = $("#stdGeneralDetails").valid();
+
+        if (std_details === true) {
+            var form = this;
+            var class_id = $('#directClassName').val();
+            var section_id = $('#directsectionID').val();
+            var student_id = $("#changeStdName").val();
+            var frm_leavedate = $("#frm_ldate").val();
+            var to_leavedate = $("#to_ldate").val();
+            var total_leave = $("#total_leave").val();
+            var changeLevType = $("#directchangeLevType").val();
+            var reason = $("#changelevReasons").val();
+            var remarks = $("#txtarea_prev_remarks").val();
+            var leave_status = $("#stud_leave_status").val();
+
+            var formData = new FormData();
+            formData.append('branch_id', branchID);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('student_id', student_id);
+            formData.append('frm_leavedate', frm_leavedate);
+            formData.append('to_leavedate', to_leavedate);
+            formData.append('total_leave', total_leave);
+            formData.append('change_lev_type', changeLevType);
+            formData.append('reason', reason);
+            formData.append('remarks', remarks);
+            formData.append('leave_status', leave_status);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+            // Display the key/value pairs
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ', ' + pair[1]);
+            // }
+            // return false;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        toastr.success('Leave apply sucessfully');
+                        // $('#student-leave-table').DataTable().ajax.reload(null, false);
+                        $('#stdGeneralDetails')[0].reset();
+                        $("#file_name").html("");
+                        getstudentLeaveList();
+                    } else {
+                        toastr.error(response.message);
+                    }
+                }
+            });
+        };
+    });
+    // reverse dob
+    function convertDigitIn(str) {
+        return str.split('-').reverse().join('-');
+    }
     // function setLocalStorageStudentLeaveTeacher(classObj) {
 
     //     var studentLeaveDetails = new Object();

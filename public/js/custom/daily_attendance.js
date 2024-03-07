@@ -85,7 +85,7 @@ $(function () {
         $("#classroomFilter").find("#sectionID").empty();
         $("#classroomFilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
 
-        $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: ref_user_id, class_id: class_id }, function (res) {
+        $.post(teacherSectionUrl, { token: token, branch_id: branchID, academic_session_id: academic_session_id, teacher_id: ref_user_id, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $("#classroomFilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
@@ -125,9 +125,6 @@ $(function () {
                 sessionID: sessionID,
                 academic_session_id: academic_session_id
             };
-            console.log(classObj);
-            console.log(classDate);
-            console.log(convertDigitIn(classDate));
             var formData = new FormData();
             formData.append('branch_id', branchID);
             formData.append('class_id', classID);
@@ -188,7 +185,7 @@ $(function () {
                         $("#listModeSectionID").val(classObj.sectionID);
                         $("#listModeSemesterID").val(classObj.semesterID);
                         $("#listModeSessionID").val(classObj.sessionID);
-                        $("#listModeSelectedDate").val(convertDigitIn(classObj.classDate));
+                        $("#listModeSelectedDate").val(classObj.classDate);
 
                     } else {
                         $(".classRoomHideSHow").hide();
