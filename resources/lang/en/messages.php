@@ -2084,6 +2084,8 @@ return [
     "grades,classes"=> " Grade & Class",    
     "guest" => "Guest",
     "attendance_report_subject" => "Attendance Report Subject",
+    "alertmenus1" =>"Menus not assigned in this portal",
+    "alertmenus2" =>"Menus not assigned in this School Role",
     "partc_tab_1" => "Part C",
     "main_reasons_tab_2" => "Main Reasons",
     "promotion_message"  => "Are you sure you want to proceed ?",

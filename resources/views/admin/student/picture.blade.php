@@ -43,23 +43,19 @@
                         <h4 class="nav-link">{{ __('messages.student_picture_upload') }}<h4>
                     </li>
                 </ul><br>
-                @if(count($errors) > 0)
-							<div class="alert alert-danger">
-								{{ __('messages.upload_validation_error') }}<br><br>
-								<ul>
-									@foreach($errors as $error)
-									<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-							@endif
-							
-							@if($message = Session::get('success'))
-							<div class="alert alert-success alert-block">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-								<strong>{{ $message }}</strong>
-							</div>
-							@endif
+                
+                @if($message = Session::get('errors'))
+                <div class="alert alert-warning alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+                @if($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
                 <div class="card-body">
                 <form  method="post" action="{{ route('admin.student.addpicture') }}" enctype="multipart/form-data" autocomplete="off">
                     @csrf

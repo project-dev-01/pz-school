@@ -58,8 +58,10 @@
                                         <select id="department_id" name="department_id" class="form-control">
                                             <option value="">{{ __('messages.select_department') }}</option>
                                                 @forelse($department as $r)
-                                                <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                                @empty
+                                                    @if($r['id']==1 || $r['id']==2)
+                                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                                    @endif
+                                                    @empty
                                                 @endforelse
                                         </select>
                                         </div>

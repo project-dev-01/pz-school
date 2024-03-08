@@ -208,8 +208,10 @@ $(function () {
                 if (res.code == 200) {
                     // allStudentLeave();
                     toastr.success('Leave Updated sucessfully');
-                    location.reload();
+                   
                     // $('#student-leave-table').DataTable().ajax.reload(null, false);
+                     //location.reload();
+                     getstudentLeaveList();
                 }
                 else {
                     toastr.error(res.message);

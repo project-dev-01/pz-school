@@ -26,12 +26,9 @@ class ExamPdfController extends Controller
             'academic_session_id' => $request->academic_year,
             'pdf_report' => 1
             
-        ];
-        
+        ];        
         
         $getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
-       
-        $getsubjects = Helper::PostMethod(config('constants.api.get_subjectlist'), $data);
         
         $footer_text = session()->get('footer_text');
 
@@ -57,7 +54,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -69,7 +66,7 @@ class ExamPdfController extends Controller
 			
 			table td {
             overflow: hidden;
-           
+            
             text-align: center;
 			}
 			
@@ -179,7 +176,7 @@ class ExamPdfController extends Controller
 				align="center">
 					
 					
-					<p style="font-size:30px;margin-left: 15px;">'.$footer_text.$getbranch['data']['school_name'].'</p>
+					<p style="font-size:30px;margin-left: 15px;"><img src="https://api.suzen.school/common-asset/images/logo_jskl.jpeg"><br>'.$getbranch['data']['school_name'].'</p>
 				</td>
 			</tr>
 			<tr>
@@ -188,14 +185,14 @@ class ExamPdfController extends Controller
 					<p>'.$acy.'</p>
 				</td>
 				<td>
-					<p>'.__('messages.english_communication').'</hp4>
+					<p>English Communication</hp4>
 				</td>
 				<td>
 					<p>'.$term['data']['name'].'</p>
 				</td>
 			</tr>
 			<tr>  <td>
-				<p>'.__('messages.roll_number').'</p>
+				<p>Number</p>
 				<p>'.$stu['roll'].'</p>
 			</td>
 			
@@ -220,76 +217,213 @@ class ExamPdfController extends Controller
 				
 			</tr>
             <tr> 
-				<td colspan="3" >
-					<table class="table table-bordered">';
+				<td colspan="3" >';
+                if($request->department_id==1)
+                {
+                // Subject Name => EC or English Communication
+
+                //Listening
+                $l1="L-1 Understands and follows instructions in class activities";	
+                $l2="L-2 Understands simple transactions in conversations and activities"; 
+                $l3="L-3 Understands and recognises main points in simple speech.";
+                //Reading
+                $r1="R-1 Reads simple words and follows instructions on posters and worksheets";	
+                $r2="R-2 Reads simple sentences in the text book"; 	
+                //Speaking
+                $s1="S-1 Tries to have a conversation form using simple phrases and sentences"; 	
+                $s2="S-2 Asks and answers simple questions on familiar topics"; 	
+                $s3=" S-3 Uses clear and loud speech to communicate";	
+                $s4="S-4 Uses learned phrases and sentences to give ideas and opinions"; 	
+                //Writing
+                $w1="W-1 Writes simple, short words";	
+                $w2="W-2 Fills in simple forms and worksheets with proper words and phrases"; 	
+                //Attitude
+                $a1="A-1 Cooperates and pays attention in class"; 	
+                $a2="A-2 Participates actively in class activities, games, and discussions"; 	
+                $a3="A-3 Contributes positively in group work";
+                $heading=array('Listening','Reading','Speaking','Writing','Attitude');
+                $papers[0]=array($l1,$l2,$l3);
+                $papers[1]=array($r1,$r2);
+                $papers[2]=array($s1,$s2,$s3);
+                $papers[3]=array($w1,$w2);
+                $papers[4]=array($a1,$a2,$a3);
+                                $output.='<table class="table table-bordered">';
                     $teachername='';$teachercmd='';
-            foreach($getsubjects['data'] as $subject)
-            {
-                $teachername=($subject['teacher_id']!=0)?$subject['teacher']:$teachername;
-                $pdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'exam_id' => $request->exam_id,
-                    'department_id' => $request->department_id,
-                    'class_id' => $request->class_id,
-                    'section_id' => $request->section_id,
-                    'semester_id' => $request->semester_id,
-                    'session_id' => $request->session_id,
-                    'academic_session_id' => $request->academic_year,
-                    'student_id' => $stu['student_id'],
-                    'subject_id' => $subject['subject_id'],
-                    'pdf_report' => 1
-                    
-                ];
-                $Getpaper = Helper::PostMethod(config('constants.api.exam_papermarks'), $pdata);
-                //dd($pdata);
-                $output.='
+                    $i=0;
+                    foreach($heading as $heads)
+                    {
+                        $output.='
 			
 						<thead class="colspanHead">
 							<tr>
 								<td colspan="2"
 								style="text-align:center; border: 1px solid black;background-color:#40403a57">
-								'.$subject['name'].'</td>
+								'.$heads.'</td>
 							</tr>
 						</thead>
 						<tbody>';
-                        
+                        $paperslist=$papers[$i];
                         //dd($Getpaper);
-                        foreach($Getpaper['data'] as $paper)
+                        $i++;
+                        foreach($paperslist as $papername)
                         { 
-                            $teachercmd.=($paper['memo']!='null')?$paper['memo'].', ':'';
-                            
-                            if($paper['score_type']=='Points')
-                            {
-                                $mark=$paper['grade_name'];
+                            $pdata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'exam_id' => $request->exam_id,
+                                'department_id' => $request->department_id,
+                                'class_id' => $request->class_id,
+                                'section_id' => $request->section_id,
+                                'semester_id' => $request->semester_id,
+                                'session_id' => $request->session_id,
+                                'academic_session_id' => $request->academic_year,
+                                'student_id' => $stu['student_id'],
+                                
+                                'paper_name' => $papername
+                                
+                            ];
+                           
+                            $paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+                            //dd($getspsubject1);//dd($pdata);
+                            $mark="";
+                            if(!empty($paper['data']))
+                            {                         
+                         
+                                if($paper['data']['score_type']=='Points')
+                                {
+                                    $mark=$paper['data']['grade_name'];
+                                }
+                                elseif($paper['data']['score_type']=='Freetext')
+                                {
+                                    $mark=$paper['data']['freetext'];
+                                }
+                                elseif($paper['data']['score_type']=='Grade')
+                                {
+                                    $mark=$paper['data']['grade'];
+                                }
+                                else
+                                {
+                                    $mark=$paper['data']['score'];
+                                }
                             }
-                            elseif($paper['score_type']=='Freetext')
-                            {
-                                $mark=$paper['freetext'];
-                            }
-                            elseif($paper['score_type']=='Grade')
-                            {
-                                $mark=$paper['grade'];
-                            }
-                            else
-                            {
-                                $mark=$paper['score'];
-                            }
+                           
                             $output.='<tr>
-								<td>'.$paper['paper_name'].'</td>
+								<td>'.$papername.'</td>
 								<td>'.$mark.'</td>
 							</tr>';
                         }
-                            
-                                                 
-							
-                            $output.='</tbody>
+                        $output.='</tbody>
 						
 					';
                     }
 
-			 $output.='</table>
-             </td>
-         </tr><tr>
+                $output.='</table>';
+                }
+                if($request->department_id==2)
+                {
+                // Subject Name => EC or English Communication
+
+                //Listening
+                $l1="L-1 Understands and follows instructions in class activities"; 	
+                $l2="L-2 Understands transactions in conversations and activities"; 	
+                $l3="L-3 Understands and recognises main points in speech";  	
+                //Reading
+                $r1="R-1 Reads high frequency words"; 	
+                $r2="R-2 Reads sentences in the text book"; 	
+                //Speaking
+                $s1="S-1 Tries to have a conversation form using phrases and sentences";  	
+                $s2="S-2 Asks and answers questions on familiar topics";  	
+                $s3="S-3 Uses clear and loud speech to communicate";  	
+                $s4="S-4 Uses learned phrases and sentences to give ideas and opinions";  	
+                $s5="S-5 Speaks with fluency, proper pronunciation and intonation";  	
+                //Writing
+                $w1="W-1 Writes simple, short words";  	
+                $w2="W-2 Fills in simple forms and worksheets with proper words and phrases";  	
+                $w3="W-3 Expresses opinions and ideas using learned words and sentences";  	
+                //Attitude
+                $a1="A-1 Cooperates and pays attention in class"; 	
+                $a2="A-2 Brings books and files, submit homework and classwork on time"; 	
+                $a3="A-3 Participates actively in class activities, games, and discussions";  	
+                $a4="A-4 Contributes positively in group work"; 	
+                $heading=array('Listening','Reading','Speaking','Writing','Attitude');
+                $papers[0]=array($l1,$l2,$l3);
+                $papers[1]=array($r1,$r2);
+                $papers[2]=array($s1,$s2,$s3,$s4,$s5);
+                $papers[3]=array($w1,$w2,$w3);
+                $papers[4]=array($a1,$a2,$a3,$a4);
+                    $output.='<table class="table table-bordered">';
+                    $teachername='';$teachercmd='';
+                    $i=0;
+                    foreach($heading as $heads)
+                    {
+                        $output.='
+			
+						<thead class="colspanHead">
+							<tr>
+								<td colspan="2"
+								style="text-align:center; border: 1px solid black;background-color:#40403a57">
+								'.$heads.'</td>
+							</tr>
+						</thead>
+						<tbody>';
+                        $paperslist=$papers[$i];
+                        //dd($Getpaper);
+                        $i++;
+                        foreach($paperslist as $papername)
+                        { 
+                            $pdata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'exam_id' => $request->exam_id,
+                                'department_id' => $request->department_id,
+                                'class_id' => $request->class_id,
+                                'section_id' => $request->section_id,
+                                'semester_id' => $request->semester_id,
+                                'session_id' => $request->session_id,
+                                'academic_session_id' => $request->academic_year,
+                                'student_id' => $stu['student_id'],
+                                
+                                'paper_name' => $papername
+                                
+                            ];
+                           
+                            $paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+                            //dd($getspsubject1);//dd($pdata);
+                            $mark="";
+                            if(!empty($paper['data']))
+                            {                         
+                         
+                                if($paper['data']['score_type']=='Points')
+                                {
+                                    $mark=$paper['data']['grade_name'];
+                                }
+                                elseif($paper['data']['score_type']=='Freetext')
+                                {
+                                    $mark=$paper['data']['freetext'];
+                                }
+                                elseif($paper['data']['score_type']=='Grade')
+                                {
+                                    $mark=$paper['data']['grade'];
+                                }
+                                else
+                                {
+                                    $mark=$paper['data']['score'];
+                                }
+                            }
+                           
+                            $output.='<tr>
+								<td>'.$papername.'</td>
+								<td>'.$mark.'</td>
+							</tr>';
+                        }
+                        $output.='</tbody>
+						
+					';
+                    }
+
+                $output.='</table>';
+                }
+                $output.=' </td>
+            </tr>
+            <tr>
 				<td></td>
 				<td colspan="2" >
 					
@@ -304,8 +438,50 @@ class ExamPdfController extends Controller
 								<td colspan="24"
 								style="text-align:center; border: 1px solid black;background-color:#40403a57;color:black;">
 								Teachers Comments</td>
-							</tr>';                                   
-                           
+							</tr>';  
+                            $papername="Teachers Comments";                               
+                            $pdata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'exam_id' => $request->exam_id,
+                                'department_id' => $request->department_id,
+                                'class_id' => $request->class_id,
+                                'section_id' => $request->section_id,
+                                'semester_id' => $request->semester_id,
+                                'session_id' => $request->session_id,
+                                'academic_session_id' => $request->academic_year,
+                                'student_id' => $stu['student_id'],                               
+                                'paper_name' => $papername
+                                
+                            ];
+                            $paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+                            //dd($getspsubject1);//dd($pdata);
+                            $teachercmd="";
+                            if(!empty($paper['data']))
+                            {                         
+                         
+                                if($paper['data']['score_type']=='Points')
+                                {
+                                    $teachercmd=$paper['data']['grade_name'];
+                                }
+                                elseif($paper['data']['score_type']=='Freetext')
+                                {
+                                    $teachercmd=$paper['data']['freetext'];
+                                }
+                                elseif($paper['data']['score_type']=='Grade')
+                                {
+                                    $teachercmd=$paper['data']['grade'];
+                                }
+                                else
+                                {
+                                    $teachercmd=$paper['data']['score'];
+                                }
+                            }
+                            $teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
+                            $teachername='';
+                            if(!empty($teachernameapi['data']))
+                            {
+                                $teachername=$teachernameapi['data']['first_name'].' '.$teachernameapi['data']['last_name'];
+                            }
 							$output.='<tr>
 								<td colspan="24"
 								style="text-align:left; border: 1px solid black;height:100px;color:black;">
@@ -350,7 +526,7 @@ class ExamPdfController extends Controller
             // return $pdf->stream();
         
     }
-    public function downbyreportcard(Request $request)
+     public function downbyreportcard(Request $request)
     {
        
         
@@ -366,62 +542,110 @@ class ExamPdfController extends Controller
             'pdf_report' => 0 // All Primary Subjects
             
         ];
-        $spdata1 = [
-            'branch_id' => session()->get('branch_id'),
-            'exam_id' => $request->exam_id,
-            'department_id' => $request->department_id,
-            'class_id' => $request->class_id,
-            'section_id' => $request->section_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => $request->academic_year,
-            'pdf_report' => 2 // Excellent Report
-            
-        ];
-        $spdata2 = [
-            'branch_id' => session()->get('branch_id'),
-            'exam_id' => $request->exam_id,
-            'department_id' => $request->department_id,
-            'class_id' => $request->class_id,
-            'section_id' => $request->section_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => $request->academic_year,
-            'pdf_report' => 3 // Free text - All Semeter
-            
-        ];
-        $spdata3 = [
-            'branch_id' => session()->get('branch_id'),
-            'exam_id' => $request->exam_id,
-            'department_id' => $request->department_id,
-            'class_id' => $request->class_id,
-            'section_id' => $request->section_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => $request->academic_year,
-            'pdf_report' => 4 // Free text - Final Semeter
-            
-        ];
+
+        $language="国語";
+        $math='算数';
+        $life='生活';
+        $music='音楽';
+        $art='図工';
+        $sport='体育';
+        $science="理科";
+        $socity="社会";
+        $homeeconomics="家庭科";
+        $foreignlanguage="外国語";
+        $english="英語";
+        $tech_homeeconomics="技術・家庭科";
+
+
+        $primarypaper1="知識・技能"; //Knowledge & Skills
+        $primarypaper2="思考・判断・表現"; //Thinking, Judgment, and Expression
+        $primarypaper3="主体的に学習に取り組む態度"; //Attitude to proactive learning
+        $primarypaper4 ="評定"; // Rate / Rating
+        $personal_score="個人得点"; //   individual score / Personal Points
+
+        $specialsubject1="行動及び生活の記録"; //Records of actions and life
+        $specialpaper1="気持ちのよい挨拶と返事をし、時間を守り、規則正しい生活を する。";// Greet and reply pleasantly, be punctual, and be regular Make a living.
+        $specialpaper2="体力の向上に努め、元気に生活をする。"; // Strive to improve own physical fitness and live a healthy life.						
+        $specialpaper3="より高い目標を決め、根気強く努力する。";	// Set higher goals and work hard.					
+        $specialpaper4="自分の役割と責任を自覚し、信頼される行動をする";	//Be aware of own roles and responsibilities and act in a way that is trustworthy.				
+        $specialpaper5="進んで新しい考えや方法を見付け、工夫して生活をよりよくしよう とする。";	// willing to find new ideas and methods, and try to improve own living by devising ways to do so					
+        $specialpaper6="思いやりや感謝の心をもつとともに、相手の考えや立場を尊重し、力を合わせて生活する。"	;	//Have compassion and gratitude, and understand the thoughts and positions of others.   Respect and live together.				
+        $specialpaper7="自然や自他の生命を大切にする。";	//Cherish nature, self and other life.					
+        $specialpaper8="人や社会に役立つことを考え、進んで仕事や奉仕活動をする。";	//Think about being useful to people and society, and be willing to work and do service activities.  Do.					
+        $specialpaper9="正義を大切にし、公正・公平にふるまう。";	// We value justice and act in a fair and equitable manner.				
+        $specialpaper10="公共の物を大切にし、学校や社会のきまりを守って生活する。";	// Cherish public objects and live in compliance with the rules of school and society Do.			 		
         
+        $specialsubject2="特別の教科 道徳"; // Special Subject: Morality
+        $specialsubject3="特 別 活 動 等 の 記 録"; // Records of special activities, etc
+        $specialsubject4="所見"; // Findings
+        $specialsubject5="総合的な学習の時間"; // Hours of integrated study         
+        $specialsubject6="外 国 語 活 動"; // Foreign Language Activities
+        $description=array("説明"); // Descriptions
         
-       
-        //dd($data);
         
         $getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data); 
             
-        $getprimarysubjects = Helper::PostMethod(config('constants.api.get_subjectlist'), $data);
-       
-        $getspsubject1 = Helper::PostMethod(config('constants.api.get_subjectlist'), $spdata1);
-        
-        $getspsubject2 = Helper::PostMethod(config('constants.api.get_subjectlist'), $spdata2);
-        
-        $getspsubject3 = Helper::PostMethod(config('constants.api.get_subjectlist'), $spdata3);
-        
         $getacyeardates = Helper::PostMethod(config('constants.api.getacyeardates'), $data);
+        $getteacherdata = Helper::PostMethod(config('constants.api.classteacher_principal'), $data);
         
         $grade = Helper::PostMethod(config('constants.api.class_details'), $data);
         $section = Helper::PostMethod(config('constants.api.section_details'), $data);
-        //dd($section);
+        $stuclass=$grade['data']['name_numeric'];
+        if($request->department_id==1) // Primary 
+        {
+            if($stuclass==1 || $stuclass==2)
+            {
+                $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+                $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
+                $getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+                $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+                $getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+                $getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+                $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+                $getspsubject5 = array(); // Hours of integrated study (2nd Semester)
+                $getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
+            }
+            if($stuclass==3 || $stuclass==4)
+            {
+                $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+                $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
+                $getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+                $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+                $getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+                $getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+                $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+                $getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
+                $getspsubject6 = array($specialsubject6); // Foreign Language Activities  ( 3rd Semester) 
+
+            }
+            if($stuclass==5 || $stuclass==6)
+            {
+                $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+                $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
+                $getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+                $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+                $getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+                $getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+                $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+                $getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
+                $getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
+            }
+
+        }
+        elseif($request->department_id==2) // Secondary 
+        {
+            $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+                $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
+                $getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+                $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+                $getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+                $getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+                $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+                $getspsubject5 = array(); // Hours of integrated study (2nd Semester)
+                $getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
+        }
+        
+
         $footer_text = session()->get('footer_text');
 
         $fonturl = storage_path('fonts/ipag.ttf');
@@ -442,20 +666,18 @@ class ExamPdfController extends Controller
         .table td,
         .table th {
         padding: 2px;
-        }
-        
-        .table {
-        width: 100%;
+       
         margin-bottom: 1px;
         color: black;
-        text-align: center;
+        text-align: center; border-collapse: collapse;
         }
         
         .table-bordered td,
         .table-bordered th {
-        border: 1px solid black;
         text-align: center;
         font-size:11px;
+        border-collapse: collapse;
+       
         }
         
         
@@ -463,6 +685,7 @@ class ExamPdfController extends Controller
         overflow: hidden;
         border: 1px solid #000;
         text-align: center;
+        border-collapse: collapse;
         }
         
         .line {
@@ -505,50 +728,48 @@ class ExamPdfController extends Controller
 		foreach($getstudents['data'] as $stu)
         {
             $sno++;  
-        $output .= '<table class="main" width="100%">
+        $output .= '<table class="table" width="100%">
         <tr>
-            <td colspan="5"> <p>'.$getbranch['data']['school_name'].'</p> </td> 
+            <td colspan="10"> <p>クアラルンプール日本人学校　小学部</p> </td> 
         </tr>
         <tr>
             <td >
-                <p>'.$grade['data']['short_name'].'</p>
+                <p>'.$grade['data']['name'].'</p>
             </td>
             <td>
-                <p> '.__('messages.semester').'</p>
+                <p> 学期</p>
             </td>
             <td>
-                <p>Notification</p>
+                <p>通知表</p>
             </td>
-            <td style=" border: 1px solid black;">Class : '.$section['data']['name'].'</td>
-            <td style=" border: 1px solid black;">No : '.$sno.'</td>
-        </tr>
-        
-        <tr style="height:60px;">
-            <th colspan="2" style=" border: 1px solid black;vertical-align: top;border-right-style: hidden;">Name</th>
-            <th colspan="3"style=" border: 1px solid black;vertical-align: inherit;">'.$stu['name'].'</th>
+            <td style=" border: 1px solid black;">組 : '.$section['data']['name'].'</td>
+            <td style=" border: 1px solid black;">番 : '.$sno.'</td>
+       
+            <td colspan="2" style=" border: 1px solid black;vertical-align: top;border-right-style: hidden;">氏名</td>
+            <td colspan="3"style=" border: 1px solid black;vertical-align: inherit;">'.$stu['name'].'</td>
         </tr>
         <tr style="height:60px;">
-        <td colspan="3">
-        <table class="table table-bordered table-responsive">
+        <td colspan="5">
+        <table class="table table-bordered table-responsive" style="width:100%">
             <thead class="colspanHead">
                 <tr>
                     <td  colspan="2"style="text-align:center; border: 1px solid black;border-right-style: hidden;vertical-align: middle;">
-                    Transcript of the study</td>
+                    学 習 の 記 録</td>
                     <td colspan="'.count($getacyeardates['data']['semesters']).'" style="text-align:left; border: 1px solid black;">
-                        ( A Well done )<br>
-                        ( B Good )<br>
-                    ( C Need improve )<br></td>
+                            （A　よくできる）<br>
+                    　　　（Ｂ　できる）<br>
+                    　　　（Ｃ　がんばろう）<br></td>
                     </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Subject</td>
-                            <td style="text-align:left;">Learning Status by Perspective</td>';
+                            <td>教科</td>
+                            <td style="text-align:left;">観点別学習状況</td>';
                             $s=0;
                             foreach($getacyeardates['data']['semesters'] as $sem)
                             {
                                $s++;
-                                $output.='<td > '.$s.' Semester</td>';
+                                $output.='<td > '.$s.' 学期</td>';
                             }
                             
                            
@@ -556,10 +777,11 @@ class ExamPdfController extends Controller
                             $output.='</tr>
                         
                     </tbody>';
-                        
-                        foreach($getprimarysubjects['data'] as $subject)
+                        $p=0;
+
+                        foreach($getprimarysubjects as $subject)
                         {   
-                            //dd($subject);
+                           $p++; //dd($subject);
                             $pdata = [
                                 'branch_id' => session()->get('branch_id'),
                                 'exam_id' => $request->exam_id,
@@ -570,12 +792,17 @@ class ExamPdfController extends Controller
                                 'session_id' => $request->session_id,
                                 'academic_session_id' => $request->academic_year,
                                 'student_id' => $stu['student_id'],
-                                'subject_id' => $subject['subject_id'],
-                                'pdf_report' => 0
-                                
+                                'subject' => $subject,
+                                'papers' => $getprimarypapers,
+                                'pdf_report' => 0                                
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.getsubjecpapertlist'), $pdata);
-                          
+                           
+                            $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                            //dd($getmarks);
+                            if($p!=1)
+                            {
+                               //dd($getmarks);
+                            }
                             $i=0;
                             $n=count($getmarks['data']); 
                             
@@ -591,27 +818,14 @@ class ExamPdfController extends Controller
                             $output.=' <tr>';
                             if($i==1)
                             {
-                                $output.='<td rowspan="'.$n.'" style="width: 0px;">'.$subject['name'].'</td>';
+                                $output.='<td rowspan="'.$n.'" style="width: 0px;">'.$subject.'</td>';
                             }
-                            $output.='<td  style="text-align:left;">'.$papers['papers']['paper_name'].'</td>';
+                            $output.='<td  style="text-align:left;">'.$papers['papers'].'</td>';
                             foreach($papers['marks'] as $mark)
                             {
-                                if($papers['papers']['score_type']=='Points')
-                                {
-                                    $mark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                                }
-                                elseif($papers['papers']['score_type']=='Freetext')
-                                {
-                                    $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                                }
-                                elseif($papers['papers']['score_type']=='Grade')
-                                {
-                                    $mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                                }
-                                else
-                                {
-                                    $mark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                                }   
+                                
+                                $mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                                
                                 $output.=' <td>'.$mark.'</td>';
                             }          
                             $output.=' </tr>';
@@ -621,18 +835,74 @@ class ExamPdfController extends Controller
                             }
                         }
                     }                  
-                    $output.=' </table>
-                    <table class="table table-bordered table-responsive" style="margin-top:30px">
+                    $output.=' </table>';
+                    foreach($getspsubject6 as $subject)
+                    {   
+                        //dd($subject);
+                        $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'exam_id' => $request->exam_id,
+                            'department_id' => $request->department_id,
+                            'class_id' => $request->class_id,
+                            'section_id' => $request->section_id,
+                            'semester_id' => $request->semester_id,
+                            'session_id' => $request->session_id,
+                            'academic_session_id' => $request->academic_year,
+                            'student_id' => $stu['student_id'],
+                            'subject' => $subject,
+                            'papers' => $description
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                        //dd($getmarks);
+                        $i=0;
+                        $n=count($getmarks['data']); 
+                        
+                        foreach($getmarks['data'] as $papers)
+                        {
+                           
+                           
+                        $output.='<table class="table table-bordered" style="margin-top:10px;">
+                        <thead class="colspanHead">
+                            <tr>
+                                <td colspan="5" style="text-align:center; border: 1px solid black;">
+                                '.$subject.' （3学期に記載）</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody><tr>';
+                        $nsem=count($papers['marks']);
+                        $s=0;
+                        foreach($papers['marks'] as $mark)
+                        {
+                            $s++;
+                            if($s==$nsem)
+                            {
+                            
+                                $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                            
+                                $output.=' <td colspan="5" style="height:70px;">'.$mark.'</td>';
+                            }     
+                        }     
+                        $output.=' </tr>';
+                        $output.='</tbody></table>';
+                        
+                        
+                    }
+                    
+                } 
+
+                $output.='<table class="table table-bordered table-responsive" style="margin-top:30px">
                         <thead class="colspanHead" >
                             <tr>
-                                <th style="border-bottom: 1px solid black;">出欠の記録</th>
-                                <th style="border-bottom: 1px solid black;">Number of school days</th>
-                                <th style="border-bottom: 1px solid black;">Suspension of attendance Bereavement, etc.</th>
-                                <th style="border-bottom: 1px solid black;">Number of days you have to attend</th>
-                                <th style="border-bottom: 1px solid black;">Number of days absent</th>
-                                <th style="border-bottom: 1px solid black;">Number of days of attendance</th>
-                                <th style="border-bottom: 1px solid black;">Late</th>
-                                <th style="border-bottom: 1px solid black;">Early</th>
+                                <td style="border-bottom: 1px solid black;">出欠の記録</td>
+                                <td style="border-bottom: 1px solid black;">授業 日数</td>
+                                <td style="border-bottom: 1px solid black;">出席停止 忌引き等</td>
+                                <td style="border-bottom: 1px solid black;">出席しなければならない日数</td>
+                                <td style="border-bottom: 1px solid black;">欠席日数</td>
+                                <td style="border-bottom: 1px solid black;">出席日数</td>
+                                <td style="border-bottom: 1px solid black;">遅刻</td>
+                                <td style="border-bottom: 1px solid black;">早退</td>
                             </tr>
                         </thead>
                         <tbody style="border: 1px solid black;">';
@@ -649,14 +919,21 @@ class ExamPdfController extends Controller
                                 
                             ];
                            
-                                
-                              
-                                $getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
+                            $attarray=array('','1月',' 2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月');
+                            $getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
                                 //dd($getattendance);
-                              foreach($getattendance['data'] as $att)
-                              {  
+                            $at_tot1=0; $at_tot2=0; $at_tot3=0; $at_tot4=0; $at_tot5=0; $at_tot6=0;$at_tot7=0;
+                            foreach($getattendance['data'] as $att)
+                            {  
+                                $at_tot1+=$att['no_schooldays'];
+                                $at_tot2+=$att['suspension'];
+                                $at_tot3+=$att['totalcoming'];
+                                $at_tot4+=$att['totabs'];
+                                $at_tot5+=$att['totpres'];
+                                $at_tot6+=$att['totlate'];
+                                $at_tot7+=$att['totexc'];
                                 $output.='<tr>
-                                <td>'.$att['month'].'</td>
+                                <td>'.$attarray[intval($att['month'])].'</td>
                                 <td>'.$att['no_schooldays'].'</td>
                                 <td>'.$att['suspension'].'</td>
                                 <td>'.$att['totalcoming'].'</td>
@@ -666,8 +943,17 @@ class ExamPdfController extends Controller
                                 <td>'.$att['totexc'].'</td>
                             </tr>';
                             }
-                            
-                            
+                            $output.='<tr>
+                            <td> 合計</td>
+                            <td>'.$at_tot1.'</td>
+                            <td>'.$at_tot2.'</td>
+                            <td>'.$at_tot3.'</td>
+                            <td>'.$at_tot4.'</td>
+                            <td>'.$at_tot5.'</td>
+                            <td>'.$at_tot6.'</td>
+                            <td>'.$at_tot7.'</td>
+                        </tr>';
+                           
                             
                         $output.='</tbody>
                         
@@ -675,10 +961,10 @@ class ExamPdfController extends Controller
                         
                     </table>
                     </td>
-                    <td colspan="2">
-                    <table class="table table-bordered">
+                    <td colspan="5">
+                    <table class="table table-bordered" style="width:100%;">
                         ';
-                        foreach($getspsubject1['data'] as $subject)
+                        foreach($getspsubject1 as $subject)
                         {   
                             //dd($subject);
                             $pdata = [
@@ -691,12 +977,11 @@ class ExamPdfController extends Controller
                                 'session_id' => $request->session_id,
                                 'academic_session_id' => $request->academic_year,
                                 'student_id' => $stu['student_id'],
-                                'subject_id' => $subject['subject_id'],                                
-                                'pdf_report' => 2
-                                
+                                'subject' => $subject,   
+                                'papers' => $getspecialpapers
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.getsubjecpapertlist'), $pdata);
-                          
+                            $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                            //dd($getmarks);
                             $i=0;
                             $n=count($getmarks['data']); 
                             
@@ -710,10 +995,11 @@ class ExamPdfController extends Controller
                                     <thead class="colspanHead">
                                     <tr>
                                         <td colspan="4" style="text-align:center; border: 1px solid black;vertical-align: middle;">
-                                        '.$subject['name'].'</td>
+                                        '.$subject.'</td>
                                         <td colspan="1" style="text-align:center; border: 1px solid black;">
-                                            (Listed in the Final semester)<br>
-                                        ( O Excellent)</td>
+                                        （3学期に記載）<br>
+
+                                        （○すぐれている）</td>
                                     </tr>
                                 </thead>
                                 <tbody>';
@@ -731,106 +1017,27 @@ class ExamPdfController extends Controller
                                         if($s==$nsem)
                                         {
                                             
-                                            if($papers['papers']['score_type']=='Points')
-                                            {
-                                                $mark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                                            }
-                                            elseif($papers['papers']['score_type']=='Freetext')
-                                            {
-                                                $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                                            }
-                                            elseif($papers['papers']['score_type']=='Grade')
-                                            {
-                                                $mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                                            }
-                                            else
-                                            {
-                                                $mark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                                            } 
-                                           
+                                            
+                                            $mark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                                            
                                         }
                                         
-                                       
+                            
                             }  
                           //dd($mark);
                             $fmark=($mark=="Excellent")?'<b>O</b>':'';
-                           
+                            
                             $output.=' <tr>
-                                    <td colspan="4" style="text-align:left;">'.$papers['papers']['paper_name'].'</td>
+                                    <td colspan="4" style="text-align:left;">'.$papers['papers'].'</td>
                                     <td colspan="1">'.$fmark.'</td>
                                 </tr>';
-                       
+                        
                         }
                         $output.=' </tbody>';
                     } 
-                       
-                           
+                    
                     $output.=' </table>';
-                    foreach($getspsubject2['data'] as $subject)
-                        {   
-                            //dd($subject);
-                            $pdata = [
-                                'branch_id' => session()->get('branch_id'),
-                                'exam_id' => $request->exam_id,
-                                'department_id' => $request->department_id,
-                                'class_id' => $request->class_id,
-                                'section_id' => $request->section_id,
-                                'semester_id' => $request->semester_id,
-                                'session_id' => $request->session_id,
-                                'academic_session_id' => $request->academic_year,
-                                'student_id' => $stu['student_id'],
-                                'subject_id' => $subject['subject_id'],                                
-                                'pdf_report' => 3
-                                
-                            ];
-                            $getmarks = Helper::PostMethod(config('constants.api.getsubjecpapertlist'), $pdata);
-                          
-                            $i=0;
-                            $n=count($getmarks['data']); 
-                            
-                            foreach($getmarks['data'] as $papers)
-                            {
-                               
-                               
-                            $output.='<table class="table table-bordered" style="margin-top:10px;">
-                            <thead class="colspanHead">
-                                <tr>
-                                    <td colspan="5" style="text-align:center; border: 1px solid black;">
-                                    '.$subject['name'].'</td>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody><tr> <td colspan="5" style="height:70px;">';
-                           
-                            foreach($papers['marks'] as $mark)
-                            {
-                                if($papers['papers']['score_type']=='Points')
-                                {
-                                    $mark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                                }
-                                elseif($papers['papers']['score_type']=='Freetext')
-                                {
-                                    $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                                }
-                                elseif($papers['papers']['score_type']=='Grade')
-                                {
-                                    $mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                                }
-                                else
-                                {
-                                    $mark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                                }   
-                                $output.=''.$mark.'<br>';
-                            }          
-                            $output.=' </td></tr>';
-                            $output.='</tbody>
-                            </table>';
-                             
-                            
-                        }
-                       
-                    } 
-                    foreach($getspsubject3['data'] as $subject)
+                    foreach($getspsubject2 as $subject)
                     {   
                         //dd($subject);
                         $pdata = [
@@ -843,12 +1050,12 @@ class ExamPdfController extends Controller
                             'session_id' => $request->session_id,
                             'academic_session_id' => $request->academic_year,
                             'student_id' => $stu['student_id'],
-                            'subject_id' => $subject['subject_id'],                                
-                            'pdf_report' => 4
+                            'subject' => $subject,
+                            'papers' => $description
                             
                         ];
-                        $getmarks = Helper::PostMethod(config('constants.api.getsubjecpapertlist'), $pdata);
-                      
+                        $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                        //dd($getmarks);
                         $i=0;
                         $n=count($getmarks['data']); 
                         
@@ -856,41 +1063,28 @@ class ExamPdfController extends Controller
                         {
                            
                            
-                        $output.='<table class="table table-bordered" style="margin-top:10px;">
+                        $output.='<table class="table table-bordered" style="margin-top:10px;width:100%">
                         <thead class="colspanHead">
                             <tr>
                                 <td colspan="5" style="text-align:center; border: 1px solid black;">
-                                '.$subject['name'].' (listed in Final Semester)</td>
+                                '.$subject.' （3学期に記載）</td>
                                 
                             </tr>
                         </thead>
                         <tbody><tr>';
                         $nsem=count($papers['marks']);
                         $s=0;
-                          foreach($papers['marks'] as $mark)
-                          {
-                              $s++;
-                              if($s==$nsem)
-                              {
-                            if($papers['papers']['score_type']=='Points')
+                        foreach($papers['marks'] as $mark)
+                        {
+                            $s++;
+                            if($s==$nsem)
                             {
-                                $mark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                            }
-                            elseif($papers['papers']['score_type']=='Freetext')
-                            {
+                           
                                 $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                            }
-                            elseif($papers['papers']['score_type']=='Grade')
-                            {
-                                $mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                            }
-                            else
-                            {
-                                $mark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                            }   
-                            $output.=' <td colspan="5" style="height:70px;">'.$mark.'</td>';
+                            
+                                $output.=' <td colspan="5" style="height:70px;">'.$mark.'</td>';
+                            }     
                         }     
-                    }     
                         $output.=' </tr>';
                         $output.='</tbody></table>';
                          
@@ -898,18 +1092,178 @@ class ExamPdfController extends Controller
                     }
                    
                 } 
-                $output .= '<p style="text-align:left;font-size:9px;">*The contents of the first and second semester will be communicated in a three-parties meeting.</p>
+                    foreach($getspsubject3 as $subject)
+                        {   
+                            //dd($subject);
+                            $pdata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'exam_id' => $request->exam_id,
+                                'department_id' => $request->department_id,
+                                'class_id' => $request->class_id,
+                                'section_id' => $request->section_id,
+                                'semester_id' => $request->semester_id,
+                                'session_id' => $request->session_id,
+                                'academic_session_id' => $request->academic_year,
+                                'student_id' => $stu['student_id'],
+                                'subject' => $subject,
+                                'papers' => $description
                                 
-                            <table class="table table-bordered"style="margin-top:12px;">
+                            ];
+                            $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                            //dd($getmarks);
+                            $i=0;
+                            $n=count($getmarks['data']); 
+                            
+                            foreach($getmarks['data'] as $papers)
+                            {
+                               
+                               
+                            $output.='<table class="table table-bordered" style="margin-top:10px;width:100%;">
+                            <thead class="colspanHead">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; border: 1px solid black;">
+                                    '.$subject.' (毎学期記載)</td>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody><tr> <td colspan="5" style="height:70px;">';
+                           
+                            foreach($papers['marks'] as $mark)
+                            {
+                                $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                              
+                                $output.=''.$mark.'<br>';
+                            }          
+                            $output.=' </td></tr>';
+                            $output.='</tbody>
+                            </table>';
+                             
+                            
+                        }
+                       
+                    } 
+                    foreach($getspsubject5 as $subject)
+                    {   
+                        //dd($subject);
+                        $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'exam_id' => $request->exam_id,
+                            'department_id' => $request->department_id,
+                            'class_id' => $request->class_id,
+                            'section_id' => $request->section_id,
+                            'semester_id' => $request->semester_id,
+                            'session_id' => $request->session_id,
+                            'academic_session_id' => $request->academic_year,
+                            'student_id' => $stu['student_id'],
+                            'subject' => $subject,
+                            'papers' => $description
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                        //dd($getmarks);
+                        $i=0;
+                        $n=count($getmarks['data']); 
+                        
+                        foreach($getmarks['data'] as $papers)
+                        {
+                           
+                           
+                        $output.='<table class="table table-bordered" style="margin-top:10px;width:100%;">
+                        <thead class="colspanHead">
+                            <tr>
+                                <td colspan="5" style="text-align:center; border: 1px solid black;">
+                                '.$subject.' （(2学期に記載)</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody><tr>';
+                        $nsem=count($papers['marks']);
+                        $s=0;
+                        foreach($papers['marks'] as $mark)
+                        {
+                            $s++;
+                            if($s==2)
+                            {
+                           
+                                $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                            
+                                $output.=' <td colspan="5" style="height:70px;">'.$mark.'</td>';
+                            }     
+                        }     
+                        $output.=' </tr>';
+                        $output.='</tbody></table>';
+                         
+                        
+                    }
+                   
+                } 
+                    foreach($getspsubject4 as $subject)
+                    {   
+                        //dd($subject);
+                        $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'exam_id' => $request->exam_id,
+                            'department_id' => $request->department_id,
+                            'class_id' => $request->class_id,
+                            'section_id' => $request->section_id,
+                            'semester_id' => $request->semester_id,
+                            'session_id' => $request->session_id,
+                            'academic_session_id' => $request->academic_year,
+                            'student_id' => $stu['student_id'],
+                            'subject' => $subject,
+                            'papers' => $description
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
+                        //dd($getmarks);
+                        $i=0;
+                        $n=count($getmarks['data']); 
+                        
+                        foreach($getmarks['data'] as $papers)
+                        {
+                           
+                           
+                        $output.='<table class="table table-bordered" style="margin-top:10px;width:100%;">
+                        <thead class="colspanHead">
+                            <tr>
+                                <td colspan="5" style="text-align:center; border: 1px solid black;">
+                                '.$subject.' （3学期に記載）</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody><tr>';
+                        $nsem=count($papers['marks']);
+                        $s=0;
+                        foreach($papers['marks'] as $mark)
+                        {
+                            $s++;
+                            if($s==$nsem)
+                            {
+                           
+                                $mark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                            
+                                $output.=' <td colspan="5" style="height:70px;">'.$mark.'</td>';
+                            }     
+                        }     
+                        $output.=' </tr>';
+                        $output.='</tbody></table>';
+                         
+                        
+                    }
+                   
+                } 
+                $output .= '<p style="text-align:left;font-size:9px;">※1，2学期の内容は、三者懇談でお伝えさせていただきます。</p>
+                                
+                            <table class="table table-bordered" style="margin-top:12px;width:100%;">
                                 <thead class="colspanHead">
                                     
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td colspan="2" style="text-align:left;height:40px;">Principal<br><br><br><br></td>
+                                        <td colspan="2" style="text-align:left;height:40px;">校長<br><br><br><br>'.$getteacherdata['data']['principal'].'</td>
                                         
                                     
-                                        <td colspan="3" style="text-align:left;height:40px;">Class Teacher<br><br><br><br></td>
+                                        <td colspan="3" style="text-align:left;height:40px;">クラスの先生<br><br><br><br>'.$getteacherdata['data']['teacher'].'</td>
                                         
                                     </tr>
                                     
@@ -941,6 +1295,7 @@ class ExamPdfController extends Controller
             // return $pdf->stream();
         
     }
+    
     public function downbypersoanalreport(Request $request)
     {
         
@@ -954,41 +1309,23 @@ class ExamPdfController extends Controller
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
             'academic_session_id' => $request->academic_year,
-            
-            
-        ];
-        $data1 = [
-            'branch_id' => session()->get('branch_id'),
-            'exam_id' => $request->exam_id,
-            'department_id' => $request->department_id,
-            'class_id' => $request->class_id,
-            'section_id' => $request->section_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => $request->academic_year,
-            'pdf_report' => 0, // All Primary Subjects
-            'mandatory'=>'1' // Mandatory Subjects
-            
-        ];
-        $data2 = [
-            'branch_id' => session()->get('branch_id'),
-            'exam_id' => $request->exam_id,
-            'department_id' => $request->department_id,
-            'class_id' => $request->class_id,
-            'section_id' => $request->section_id,
-            'semester_id' => $request->semester_id,
-            'session_id' => $request->session_id,
-            'academic_session_id' => $request->academic_year,
-            'pdf_report' => 0, // All Primary Subjects
-            'mandatory'=>'0' // Non Mandatory Subjects
-            
-        ];
+        ];        
+        $language="国語";
+        $socity="社会";
+        $math="数学";
+        $science="理科";
+        $english="英語";
+        $music="音楽";
+        $art="美術";
+        $sport="保体";
+        $engineer="技家";
         
         $getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
         
-        $getmainsubjects = Helper::PostMethod(config('constants.api.get_mainsubjectlist'), $data1);        
-        $getnonmainsubjects = Helper::PostMethod(config('constants.api.get_mainsubjectlist'), $data2);
+        $getmainsubjects =array($language,$socity,$math,$science,$english);        
+        $getnonmainsubjects =array($music,$art,$sport,$engineer);  
         $footer_text = session()->get('footer_text');
+        $personal_score="個人得点"; //   individual score
 
         $fonturl = storage_path('fonts/ipag.ttf');
         $output = "<!DOCTYPE html>";
@@ -1012,7 +1349,7 @@ class ExamPdfController extends Controller
         width: 100%;
         margin-bottom: 1px;
         color: black;
-        text-align: center;
+        text-align: center; border-collapse: collapse;
         }
         
         .table-bordered td,
@@ -1086,57 +1423,57 @@ class ExamPdfController extends Controller
 		foreach($getstudents['data'] as $stu)
         {
             $sno++; 
-        $output .= '<table class="main" width="100%">			
+            $output .= '<table class="table" width="100%">			
             <tr>
-				<td colspan="5"> <p>'.$getbranch['data']['school_name'].'</p>
-				<p>'.__('messages.individual_result').'  </p></td> 
+				<td colspan="5"> <p>クアラルンプール日本人学校　小学部</p> 
+				<p> 個人結果表 </p></td> 
 			</tr>
             <tr>
                 <td >
-					<p>'.$grade['data']['short_name'].' </p>
+					<p>'.$grade['data']['name'].' </p>
 				</td>
 				<td>
-					<p>'.$request->semester_id.' '.__('messages.semester').'</p>
+					<p>'.$request->semester_id.' 学期</p>
 				</td>
 				<td>
 					<p><p>'.$term['data']['name'].'</p> </p>
 				</td>
-				<td style=" border: 1px solid black;">Class : '.$section['data']['name'].'</td>
-				<td style=" border: 1px solid black;">No</td>
+				<td style=" border: 1px solid black;">クラス : '.$section['data']['name'].'</td>
+				<td style=" border: 1px solid black;">番 : '.$sno.'</td>
 			</tr>
            
 			<tr style="height:60px;">
-				<th colspan="2" style=" border: 1px solid black;">Roll No : '.$stu['roll'].'</th>
-				<th colspan="3"style=" border: 1px solid black;vertical-align: inherit;">Name :'.$stu['name'].'</th>
+				<td colspan="2" style=" border: 1px solid black;">ロール番号 : '.$stu['roll'].'</td>
+				<td colspan="3"style=" border: 1px solid black;vertical-align: inherit;">名前 :'.$stu['name'].'</td>
 			</tr>
 			<tr> 
 				<td colspan="5" >
-                <table class="main" width="100%">
+                <table class="table" width="100%">
                 <thead>                
                     <tr>
                         <td></td>';
                         $main=0;$opt=0;
 
-                       foreach($getmainsubjects['data'] as $mainsubject)
+                       foreach($getmainsubjects as $mainsubject)
                        {
                         $main++;
-                       $output.=' <td>'.$mainsubject['name'].'</td>';
+                       $output.=' <td>'.$mainsubject.'</td>';
                        }
-                       foreach($getnonmainsubjects['data'] as $optsubject)
+                       foreach($getnonmainsubjects as $optsubject)
                        {
                         $opt++;
-                       $output.=' <td>'.$optsubject['name'].'</td>';
+                       $output.=' <td>'.$optsubject.'</td>';
                        }
                         
-                       $output.=' <td>Total of   '.$main.' subject</td>
-                        <td>Total of   '.($main+$opt).' subject</td>
+                       $output.=' <td>5教科合計</td>
+                        <td>9教科合計</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Personal point</td>';
+                        <td>個人得点</td>';
                         $i=0; $totalmain=0;$totalopt=0;
-                        foreach($getmainsubjects['data'] as $subject)
+                        foreach($getmainsubjects as $subject)
                        {
                             $i++;
                             $studata = [
@@ -1147,20 +1484,20 @@ class ExamPdfController extends Controller
                             'section_id' => $request->section_id,
                             'semester_id' => $request->semester_id,
                             'session_id' => $request->session_id,
-                            'subject_id' => $subject['subject_id'],
-                            'pdf_report' => 5,
+                            'subject' => $subject,
+                            'paper' => $personal_score,
                             'academic_session_id' => $request->academic_year
                             
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_marklist'), $studata);
-                            //dd($getmainsubjects['data'],$studata,$getmarks);
-                            $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
+                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
                            
+                            $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
+                            
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
                             $totalmain+=$mark;
                         }
-                        foreach($getnonmainsubjects['data'] as $subject)
+                        foreach($getnonmainsubjects as $subject)
                         {
                             $i++;
                             $studata = [
@@ -1171,30 +1508,30 @@ class ExamPdfController extends Controller
                             'section_id' => $request->section_id,
                             'semester_id' => $request->semester_id,
                             'session_id' => $request->session_id,
-                            'subject_id' => $subject['subject_id'],
-                            'pdf_report' => 5,
+                            'subject' => $subject,
+                            'paper' => $personal_score,
                             'academic_session_id' => $request->academic_year
                             
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_marklist'), $studata);
+                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
                             
-                           
-                                $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
-                           
+                            
+                            $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
+                            
                             
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
                             $totalopt+=$mark;
                         }
                         $totall=$totalmain+ $totalopt;
-                            $output.='<td>'.$totalmain.'</td>
-                                    <td>'.$totall.'</td>';
+                        $output.='<td>'.$totalmain.'</td>
+                                  <td>'.$totall.'</td>';
                         
                         $output.='</tr>
                     <tr>
-                        <td>Grade Avarage</td>';
+                        <td>学年平均</td>';
                         $ma=0; $totalavgmain=0;$totalavgopt=0;
-                        foreach($getmainsubjects['data'] as $subject)
+                        foreach($getmainsubjects as $subject)
                        {
                             $ma++;
                             $studata = [
@@ -1205,21 +1542,22 @@ class ExamPdfController extends Controller
                             'section_id' => $request->section_id,
                             'semester_id' => $request->semester_id,
                             'session_id' => $request->session_id,
-                            'subject_id' => $subject['subject_id'],
-                            'pdf_report' => 5,
+                            'subject' => $subject,
+                            'paper' => $personal_score,
                             'academic_session_id' => $request->academic_year
                             
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_avgmarklist'), $studata);
+                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
+                            
                             $mark=(isset($getmarks['data']['avg']) && $getmarks['data']['avg']!=null)?$getmarks['data']['avg']:'';
-                           
+                            
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
-                           $totalavgmain+=$mark;
+                            $totalavgmain+=$mark;
 
                         }
                         $op=0;
-                        foreach($getnonmainsubjects['data'] as $subject)
+                        foreach($getnonmainsubjects as $subject)
                        {
                             $op++;
                             $studata = [
@@ -1230,17 +1568,17 @@ class ExamPdfController extends Controller
                             'section_id' => $request->section_id,
                             'semester_id' => $request->semester_id,
                             'session_id' => $request->session_id,
-                            'subject_id' => $subject['subject_id'],
-                            'pdf_report' => 5,
+                            'subject' => $subject,
+                            'paper' => $personal_score,
                             'academic_session_id' => $request->academic_year
                             
                             ];
-                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_avgmarklist'), $studata);
+                            $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
                             $mark=(isset($getmarks['data']['avg']) && $getmarks['data']['avg']!=null)?$getmarks['data']['avg']:'';
-                           
+                            
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
-                           
+                            
                             $totalavgopt+=$mark;
                         }
 
@@ -1253,12 +1591,13 @@ class ExamPdfController extends Controller
                 </tbody>
             </table>
             <br>
-            <table class="main" width="100%">
+            <p>学習の振り返り</p>
+            <table class="table" width="100%">
                 <thead>
                     <tr style="height:60px;">
-                        <td>Achievements /Good things</td>
-                        <td>Things that unable to achieve</td>
-                        <td> Parent comment</td>
+                        <td>できたこと・よかったこと </td>
+                        <td>できなかったこと・反省，今後の学習に向けて</td>
+                        <td>保護者の方のコメント</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -1336,7 +1675,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -1384,13 +1723,11 @@ class ExamPdfController extends Controller
 			</style>';
 			$output .= "</head>";
 			$output .= "<body>";
-			$output .='<main><p style=" text-align:center">'.__('messages.download_form1title').'</p>
-			<p class="float-left">'.__('messages.download_form1title2').'</p>
-			<table class="main" width="100%">
+			$output .='<main><p style=" text-align:center">小　学　校　児　童　指　導　要　録</p>
+			<p class="float-left">様式１（学籍に関する記録）</p>
+			<table class="table" width="100%">
 			<tr>
-			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;align=center">
-			
-			
+			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;align=center">	
 			<table class="table table-bordered">
 			<thead>
 			<tr>
@@ -1406,16 +1743,16 @@ class ExamPdfController extends Controller
 			<table class="table table-bordered" style="margin-bottom: 15px;">
 			<thead>
 			<tr>
-			<th  colspan="2" style="text-align:center;width:50px;border: 1px solid black;">'.__('messages.division').'</th>
-			<th colspan="1" class="diagonalCross2" style="width:50px;border: 1px solid black;border-right:hidden; border-left:hidden;"></th>
-			<th  colspan="1" style="text-align:center;border: 1px solid black;">'.__('messages.grade').'</th>
+			<td  colspan="2" style="text-align:center;width:50px;border: 1px solid black;">区分</td>
+			<td colspan="1" class="diagonalCross2" style="width:50px;border: 1px solid black;border-right:hidden; border-left:hidden;"></td>
+			<td  colspan="1" style="text-align:center;border: 1px solid black;">学年</td>
 			';
 			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 			//dd('$getgrade');
 			foreach($getgrade['data'] as $grade)
 			{
 				
-				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
 			}
 			
 			$output.='</tr>
@@ -1423,7 +1760,7 @@ class ExamPdfController extends Controller
 			</thead>
 			<tbody>
 			<tr>
-			<td colspan="4">'.__('messages.class').'</td>';
+			<td colspan="4">学●   ●級</td>';
 			foreach($getclasssec['data'] as $sec)
 			{
 				
@@ -1431,7 +1768,7 @@ class ExamPdfController extends Controller
 			}
 			$output.='</tr>
 			<tr>
-			<td colspan="4">'.__('messages.attendance_no').'</td>
+			<td colspan="4">整 理 番 号</td>
 			';
 			foreach($getclasssec['data'] as $sec)
 			{
@@ -1449,104 +1786,108 @@ class ExamPdfController extends Controller
 			<table class="table table-bordered">
 			<thead class="colspanHead">
 			<tr>
-			<th colspan="15" style="text-align:center; border: 1px solid black;">'.__('messages.records_academic').'</th>
+			<td colspan="15" style="text-align:center; border: 1px solid black;">学　　　　籍　　　　の　　　　記　　　　録</td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-			<td rowspan="2">'.__('messages.student').'</td>
-			<td>'.__('messages.phonetic_name').'</td>
+			<td rowspan="2">児童</td>
+			<td>ふりがな  氏名</td>
 			<td colspan="3">'.$student['first_name'].' '.$student['last_name'].'<br>
 			
 			'.$student['birthday'].'<br></td>
-			<td colspan="">'.__('messages.gender').'</td>
+			<td colspan="">性 別</td>
 			<td colspan="">'.$student['gender'].'</td>
-			<td colspan="3">'.__('messages.previous_school').'</td>
+			<td colspan="3">入学前の経歴</td>
 			<td colspan="5">'.$school_name.'</td>
 			</tr>
 			<tr>
-			<td>'.__('messages.current_address').'</td>
+			<td>現住所</td>
 			<td colspan="5">'.$student['current_address'].'</td>
-			<td colspan="3">'.__('messages.admissions_transfers_etc').'</td>
+			<td colspan="3">入学・編入学等</td>
 			<td colspan="5"></td>
 			</tr>
 			<tr>
-			<td rowspan="3">'.__('messages.parent').'</td>
-			<td>'.__('messages.phonetic_name').'</td>
+			<td rowspan="3">保護者</td>
+			<td>ふりがな 氏名</td>
 			<td colspan="5">'.$parent['first_name'].' '.$parent['last_name'].'</td>
-			<td colspan="3">'.__('messages.dropout').'</td>
+			<td colspan="3">退　学　等</td>
 			<td colspan="5"></td>
 			</tr>
 			
 			<tr style="height:70px">
-			<td rowspan="2">'.__('messages.current_address').'</td>
+			<td rowspan="2">現住所</td>
 			<td rowspan="2" colspan="5">'.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
-			<td colspan="3">'.__('messages.graduation').'</td>
+			<td colspan="3">卒業</td>
 			<td colspan="5"></td>
 			</tr>
 			<tr>
-			<td colspan="3" style="height:70px">'.__('messages.next_school').'</td>
+			<td colspan="3" style="height:70px">進学先</td>
 			<td colspan="5"></td>
 			</tr>
 			</tbody>
 			</table>
 			<table class="table table-bordered">
 			<tr>
-			<td colspan="4" style="width:90px">'.__('messages.school_name_and_location').'</td>';
+			<td colspan="4" style="width:90px">学校名
+            及び
+            所在地</td>';
 			
 			$bdata = [
 			'id' => session()->get('branch_id'),
 			];
 			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 			//dd($getbranch);
-			$output.='<td colspan="7">
-			'.$getbranch['data']['school_name'].'<br>
-			'.$getbranch['data']['address'].'<br>
-			Tel: '.$getbranch['data']['mobile_no'].' Mail : '.$getbranch['data']['email'].'<br>
+			$output.='<td colspan="7">在マレーシア日本国大使館附属・クアラルンプール日本人会日本人学校<br>
+            The Japanese School of Kuala Lumpur<br>
+            Saujana Resort Seksyen U2, 40150 Shah Alam, Selangor Darul Ehsan, Malaysia<br>
+            Tel: 03-78465939         Fax: 03-78465949
+
 			</td>
 			</tr>
 			</table>
 			<table class="table table-bordered">
 			<tr>
 			<td class="diagonal" style="width:122px;border-bottom:hidden">
-			<span class="lb">'.__('messages.fiscal_year').'</span>
+			<span class="lb">年度</span>
 			<span class="rt"></span>
 			<div class="line"></div>
 			</td>';
 			foreach($getclasssec['data'] as $ac)
 			{
 				
-				$output.=' <th style=" border: 1px solid black;">'.$ac['academic_year'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$ac['academic_year'].'</td>';
 			}
 			
 			$output.='
 			
 			</tr>
 			<tr>
-			<td>'.__('messages.division_grade').'</td>';
+			<td>学年</td>';
 			foreach($getgrade['data'] as $grade)
 			{
 				
-				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
 			}
 			
 			$output.='
 			</tr>
 			<tr style="height:80px">
-			<td>'.__('messages.principals_name_seal').'</td>';
+			<td>校長氏名印</td>';
 			foreach($getclasssec['data'] as $princ)
 			{
-				$output.=' <th style=" border: 1px solid black;">'.$princ['principal'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$princ['principal'].'</td>';
 			}
 			
 			$output.='
 			
 			</tr>
 			<tr style="height:80px">
-			<td>'.__('messages.class_teacher_name_stamp').'</td>';
+			<td>学級担任者
+            氏名印</td>';
 			foreach($getclasssec['data'] as $teach)
 			{
-				$output.=' <th style=" border: 1px solid black;">'.$teach['teacher'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$teach['teacher'].'</td>';
 			}
 			
 			$output.='
@@ -1588,8 +1929,7 @@ class ExamPdfController extends Controller
             'department_id' => $student['department_id'],
 			];       
 			
-			$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
-			
+            $getclasssec= Helper::PostMethod(config('constants.api.studentclasssection'), $data);
 			
             $fonturl = storage_path('fonts/ipag.ttf');
             $output = "<!DOCTYPE html>";
@@ -1608,7 +1948,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -1656,19 +1996,16 @@ class ExamPdfController extends Controller
 			</style>';
 			$output .= "</head>";
 			$output .= "<body>";
-			$output .='<p class=" float-left">'.__('messages.download_form2Atitle').'</p>
-			<table class="main" width="100%">
-            <tr>
-			<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding: 20px;
-			align=" center">
+			$output .='<p class=" float-left">様式２（指導に関する記録）</p>
+			
 			
 			
 			<table class="table table-bordered" style="margin-bottom: 15px;">
 			<thead>
 			<tr>
-			<th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
-			<th style=" border: 1px solid black;">'.__('messages.school_name').'</th>
-			<th style=" border: 1px solid black;">'.__('messages.division_grade').'</th>';
+			<td style=" border: 1px solid black;">生 徒 氏 名</td>
+			<td style=" border: 1px solid black;">学 校 名</td>
+			<td style=" border: 1px solid black;">区分 \ 学年</td>';
 			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 			//dd($getgrade);
 			$totgrade=0;
@@ -1676,7 +2013,7 @@ class ExamPdfController extends Controller
 			{
 				$totgrade++;
 				//dd($grade);
-				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
 			}
 			
 			$output.='
@@ -1685,16 +2022,16 @@ class ExamPdfController extends Controller
 			</thead>
 			<tbody>
 			<tr>
-			<td rowspan="6">'.$student['first_name'].' '.$student['last_name'].'</td>';
+			<td rowspan="2">'.$student['first_name'].' '.$student['last_name'].'</td>';
 			$bdata = [
 			'id' => session()->get('branch_id'),
 			];
-			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+			//$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 			//dd($getbranch);
 			$output.='
-			<td rowspan="6">'.$getbranch['data']['school_name'].'<br>
-			'.$getbranch['data']['address'].'</td>
-			<td style="height:60px;">'.__('messages.class').'</td>';
+			<td rowspan="2">在マレーシア日本国大使館附属<br>
+            クアラルンプール日本人会日本人学校</td>
+			<td style="height:60px;">学 級</td>';
 			foreach($getclasssec['data'] as $sec)
 			{
 				
@@ -1703,7 +2040,7 @@ class ExamPdfController extends Controller
 			$output.='</tr>
 			
 			<tr>
-			<td style="height:60px;">'.__('messages.attendance_no').'</td>';
+			<td style="height:60px;">整理番号</td>';
 			foreach($getclasssec['data'] as $sec)
 			{
 				
@@ -1713,9 +2050,8 @@ class ExamPdfController extends Controller
 			</tr>
 			</tbody>
 			</table>
-			</td>
-			</tr>
-			
+			<table class="table" width="100%">
+           
 			<tr>
 			<td style="width:50%">
 			
@@ -1725,20 +2061,20 @@ class ExamPdfController extends Controller
 			<thead class="colspanHead">
 			<tr>
 			<td colspan="'.($totgrade+4).'" style="text-align:center; border: 1px solid black;">
-			'.__('messages.transcripts_of_each_subject').'</td>
+			各　教　科　の　学　習　の　記　録</td>
 			
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-			<td colspan="1">'.__('messages.subject').'</td>
-			<td colspan="1">'.__('messages.perspectives').'</td>
+			<td colspan="1">教科</td>
+			<td colspan="1">観 点 </td>
 			<td colspan="1" class="diagonalCross2"></td>
-			<td colspan="1">'.__('messages.grade').'</td>';
+			<td colspan="1">学 年</td>';
 			foreach($getgrade['data'] as $grade)
 			{
 				//dd($grade);
-				$output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+				$output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
 			}
 			
 			$output.='
@@ -1750,69 +2086,110 @@ class ExamPdfController extends Controller
                 
             ];
             
-            $getprimarysubjects = Helper::PostMethod(config('constants.api.get_overallsubjectlist'), $data);
-          
-			foreach($getprimarysubjects['data'] as $subject)
-			{ 
-                $sdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'department_id' => $student['department_id'],
-                    'subject_id' => $subject['subject_id'],
-                    'pdf_report' => 0 // All Primary Subjects
+            $language="国語";
+            $math='算数';
+            $life='生活';
+            $music='音楽';
+            $art='図工';
+            $sport='体育';
+            $science="理科";
+            $socity="社会";
+            $homeeconomics="家庭科";
+            $foreignlanguage="外国語";
+            $english="英語";
+            $tech_homeeconomics="技術・家庭科";
+    
+    
+            $primarypaper1="知識・技能"; //Knowledge & Skills
+            $primarypaper2="思考・判断・表現"; //Thinking, Judgment, and Expression
+            $primarypaper3="主体的に学習に取り組む態度"; //Attitude to proactive learning
+            $primarypaper4 ="評定"; // Rate / Rating
+           
+            $specialsubject1="特別の教科 道徳"; // Special Subject: Morality                     
+            $specialsubject2="外 国 語 活 動"; // Foreign Language Activities
+            $specialsubject3="総合"; // Comprehensive study time notes
+            $specialsubject4="特 別 活 動 等 の 記 録"; // Records of special activities, etc
+            $sp_paper1="学習活動"; // Learning and Activities
+            $sp_paper2="観点";  //Perspectives
+            $sp_paper3="評価";   //Rate  
+            $sp_paper4="学級活動";   //Classroom Activities  
+            $sp_paper5="生徒会活動";   //Student Council Activities  
+            $sp_paper6="学校行事";   //School Event  
+            $sp_paper7="児童会活動";   //Children's Association Activities    
+            $sp_paper8="クラブ活動";   //Club Activities  
                     
-                ];
-                $getpaperlist = Helper::PostMethod(config('constants.api.get_overallpaperlist'), $sdata);
-               
-                $n=count($getpaperlist['data']); 
+            if($student['department_id']==1) // Primary 
+            {
+                
+                    $getprimarysubjects = array($language,$socity,$math,$science,$life,$music,$art,$homeeconomics,$sport,$foreignlanguage);
+                    $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
+                    $getspsubject1 = array($specialsubject1); // Special Subject: Morality ( 3rd Semester)  
+                    $getspsubject2 = array($specialsubject2); // Foreign Language Activities ( 3rd Semester)              
+                    $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
+                    $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
+                    $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                    $specialsubject2papers=array($primarypaper1,$primarypaper2,$primarypaper3); 
+                    $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
+                    $specialsubject4papers=array($sp_paper4,$sp_paper7,$sp_paper8,$sp_paper6);                   
+
+            }
+            elseif($student['department_id']==2) // Secondary 
+            {
+                $getprimarysubjects = array($language,$socity,$math,$science,$music,$art,$sport,$homeeconomics,$english);
+                $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
+                $getspsubject1 = array($specialsubject1); // Special Subject: Morality ( 3rd Semester)  
+                $getspsubject2 = array(); // Foreign Language Activities ( 3rd Semester)              
+                $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
+                $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
+                $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                $specialsubject2papers=array(); 
+                $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
+                $specialsubject4papers=array($sp_paper4,$sp_paper5,$sp_paper6);
+            }
+			foreach($getprimarysubjects as $subject)
+			{ 
+                
+                $n=count($getprimarypapers); 
                 $i=0;
-                foreach($getpaperlist['data'] as $papers)
+                foreach($getprimarypapers as $papers)
 			    { 
-                    $i++;
-                            
-                         
+                    $i++;                         
+                    
                     $output.=' <tr>';
                     if($i==1)
                     {
-                        $output.='<td rowspan="'.$n.'" style="width: 0px;">'.$subject['name'].'</td>';
+                        $output.='<td rowspan="'.$n.'" style="width: 0px;">'.$subject.'</td>';
                     }
-                    $output.='<td  style="text-align:left;" colspan="3">'.$papers['paper_name'].'</td>';
+                    $output.='<td  style="text-align:left;" colspan="3">'.$papers.'</td>';
 
                     foreach($getclasssec['data'] as $sec)
                     {				
-                        $pdata = [
+                        if($sec['class_id']=='')
+                        {
+                            $fmark='';
+                        }
+                        else
+                        {   $pdata = [
                             'branch_id' => session()->get('branch_id'),
                             'department_id' => $student['department_id'],
                             'class_id' =>  $sec['class_id'],
                             'section_id' =>  $sec['section_id'],
                             'academic_session_id' => $sec['academic_session_id'],
                             'student_id' => $student['id'],
-                            'subject_id' => $subject['subject_id'],
-                            'paper_id' => $papers['id'],
-                            'pdf_report' => 0
+                            'subject' => $subject,
+                            'paper' => $papers,
                             
                         ];
-                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist'), $pdata);
-                      
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                        
                         $mark=$getmarks['data'];
                         $fmark='';
-                        if($papers['score_type']=='Points')
-                        {
-                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                        }
-                        elseif($papers['score_type']=='Freetext')
-                        {
-                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                        }
-                        elseif($papers['score_type']=='Grade')
-                        {
-                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                        }
-                        else
-                        {
-                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                        }  
                         
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                          
+                        }
                         $output.=' <td>'.$fmark.'</td>';
+                   
                     }
                               
                         
@@ -1830,42 +2207,26 @@ class ExamPdfController extends Controller
 			</td>
 			<td style="width:50%">';
             
-            $data = [
-                'branch_id' => session()->get('branch_id'),
-                'department_id' => $student['department_id'],
-                'pdf_report' => 7 // Yoroko Form 2a Subjects
-                
-            ];
             
-            $getspecialsubjects = Helper::PostMethod(config('constants.api.get_overallsubjectlist'), $data);
-          
-			foreach($getspecialsubjects['data'] as $subject)
+			foreach($getspsubject1 as $subject)
 			{ 
-                $sdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'department_id' => $student['department_id'],
-                    'subject_id' => $subject['subject_id'],
-                    'pdf_report' => 7 // Yoroko Form 2a Subjects
-                    
-                ];
-                $getsppaperlist = Helper::PostMethod(config('constants.api.get_overallpaperlist'), $sdata);
                
-                $n=count($getsppaperlist['data']); 
+                $n=count($specialsubject1papers); 
                 $output.='<table class="table table-bordered specialtable">
 			<thead class="colspanHead">
 			<tr>
 			
 			<td colspan="'.($n+1).'" style="text-align:center; border: 1px solid black;">
-			'.$subject['name'].'
+			'.$subject.'
 			</td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
 			<td colspan="1">'.__('messages.grade').'</td>';
-            foreach($getsppaperlist['data'] as $papers)
+            foreach($specialsubject1papers as $papers)
 			    {
-                    $output.='<td colspan="1">'.$papers['paper_name'].'</td>';
+                    $output.='<td colspan="1">'.$papers.'</td>';
                 }
                 $output.='</tr>';
 			
@@ -1873,47 +2234,357 @@ class ExamPdfController extends Controller
                 foreach($getclasssec['data'] as $sec)
                 {
 				$output.='<tr >
-				<td >'.$sec['class'].'</td>';
-               
-                foreach($getsppaperlist['data'] as $papers)
-			    {
-                    $pdata = [
-                        'branch_id' => session()->get('branch_id'),
-                        'department_id' => $student['department_id'],
-                        'class_id' =>  $sec['class_id'],
-                        'section_id' =>  $sec['section_id'],
-                        'academic_session_id' => $sec['academic_session_id'],
-                        'student_id' => $student['id'],
-                        'subject_id' => $subject['subject_id'],
-                        'paper_id' => $papers['id'],
-                        'pdf_report' => 7
+				<td style="height:40px;">'.$sec['class_numeric'].'</td>';
+              
+                    foreach($specialsubject1papers as $papers)
+                    {
+                        if($sec['class_id']=='')
+                        {
+                            $output.='<td  colspan="1"  ></td>';
+                        }
+                        else{
+                            $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'department_id' => $student['department_id'],
+                            'class_id' =>  $sec['class_id'],
+                            'section_id' =>  $sec['section_id'],
+                            'academic_session_id' => $sec['academic_session_id'],
+                            'student_id' => $student['id'],
+                            'subject' => $subject,
+                            'paper' => $papers,
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                    
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        if(isset($mark['score_type']) && $mark['score_type']=='Points')
+                        {
+                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Freetext')
+                        {
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
                         
-                    ];
-                    $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist'), $pdata);
-                  
-                    $mark=$getmarks['data'];
-                    $fmark='';
-                    if($papers['score_type']=='Points')
-                    {
-                        $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Grade')
+                        {
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                        }
+                        else
+                        {
+                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                        }  
+                        
+                        
+                        $output.='<td  colspan="1"  >'.$fmark.'</td>';
                     }
-                    elseif($papers['score_type']=='Freetext')
-                    {
-                        $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                       
-                    }
-                    elseif($papers['score_type']=='Grade')
-                    {
-                        $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                    }
-                    else
-                    {
-                        $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                    }  
-                    
-                    
-                    $output.='<td  colspan="1"  >'.$fmark.'</td>';
+                 }
+				$output.='</tr>';
+				
+			}
+			$output.='
+			</tbody>
+			</table>';
+        }
+        if($student['department_id']==1)
+        {
+        foreach($getspsubject2 as $subject)
+			{ 
+               
+                $n=count($specialsubject2papers); 
+                $output.='<table class="table table-bordered specialtable">
+			<thead class="colspanHead">
+			<tr>
+			
+			<td colspan="'.($n+1).'" style="text-align:center; border: 1px solid black;">
+			'.$subject.'
+			</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="1">'.__('messages.grade').'</td>';
+            foreach($specialsubject2papers as $papers)
+			    {
+                    $output.='<td colspan="1">'.$papers.'</td>';
                 }
+                $output.='</tr>';
+			
+			
+                foreach($getclasssec['data'] as $sec)
+                {
+                if($sec['class_numeric']==3 || $sec['class_numeric']==4 )
+                {
+				$output.='<tr >
+				<td style="height:40px;">'.$sec['class_numeric'].'</td>';
+              
+                    foreach($specialsubject2papers as $papers)
+                    {
+                        if($sec['class_id']=='')
+                        {
+                         $output.='<td  colspan="1"  ></td>';
+                        }
+                        else{
+                            $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'department_id' => $student['department_id'],
+                            'class_id' =>  $sec['class_id'],
+                            'section_id' =>  $sec['section_id'],
+                            'academic_session_id' => $sec['academic_session_id'],
+                            'student_id' => $student['id'],
+                            'subject' => $subject,
+                            'paper' => $papers,
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                    
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        if(isset($mark['score_type']) && $mark['score_type']=='Points')
+                        {
+                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Freetext')
+                        {
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Grade')
+                        {
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                        }
+                        else
+                        {
+                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                        }  
+                        
+                        
+                        $output.='<td  colspan="1"  >'.$fmark.'</td>';
+                    }
+                 }
+				$output.='</tr>';
+				
+			}
+        }
+			$output.='
+			</tbody>
+			</table>';
+        }
+    }
+        foreach($getspsubject3 as $subject)
+			{ 
+               
+                $n=count($specialsubject3papers); 
+                $output.='<table class="table table-bordered specialtable">
+			<thead class="colspanHead">
+			<tr>
+			
+			<td colspan="'.($n+1).'" style="text-align:center; border: 1px solid black;">
+			'.$subject.'
+			</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td colspan="1">'.__('messages.grade').'</td>';
+            foreach($specialsubject3papers as $papers)
+			    {
+                    $output.='<td colspan="1">'.$papers.'</td>';
+                }
+                $output.='</tr>';
+			
+			
+                foreach($getclasssec['data'] as $sec)
+                {
+                    if($student['department_id']==1 && ($sec['class_numeric']==3 || $sec['class_numeric']==4 || $sec['class_numeric']==5 || $sec['class_numeric']==6) )
+                    {
+				$output.='<tr >
+				<td style="height:40px;">'.$sec['class_numeric'].'</td>';
+              
+                    foreach($specialsubject3papers as $papers)
+                    {
+                        if($sec['class_id']=='')
+                        {
+                         $output.='<td  colspan="1"  ></td>';
+                        }
+                        else{
+                            $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'department_id' => $student['department_id'],
+                            'class_id' =>  $sec['class_id'],
+                            'section_id' =>  $sec['section_id'],
+                            'academic_session_id' => $sec['academic_session_id'],
+                            'student_id' => $student['id'],
+                            'subject' => $subject,
+                            'paper' => $papers,
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                    
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        if(isset($mark['score_type']) && $mark['score_type']=='Points')
+                        {
+                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Freetext')
+                        {
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Grade')
+                        {
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                        }
+                        else
+                        {
+                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                        }  
+                        
+                        
+                        $output.='<td  colspan="1"  >'.$fmark.'</td>';
+                    }
+                 }
+				$output.='</tr>';
+                    }
+                    elseif($student['department_id']==2)
+                    {
+                        $output.='<tr >
+				    <td style="height:70px;">'.$sec['class_numeric'].'</td>';
+              
+                    foreach($specialsubject3papers as $papers)
+                    {
+                        if($sec['class_id']=='')
+                        {
+                         $output.='<td  colspan="1"  ></td>';
+                        }
+                        else{
+                            $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'department_id' => $student['department_id'],
+                            'class_id' =>  $sec['class_id'],
+                            'section_id' =>  $sec['section_id'],
+                            'academic_session_id' => $sec['academic_session_id'],
+                            'student_id' => $student['id'],
+                            'subject' => $subject,
+                            'paper' => $papers,
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                    
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        if(isset($mark['score_type']) && $mark['score_type']=='Points')
+                        {
+                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Freetext')
+                        {
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Grade')
+                        {
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                        }
+                        else
+                        {
+                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                        }  
+                        
+                        
+                        $output.='<td  colspan="1"  >'.$fmark.'</td>';
+                    }
+                 }
+				$output.='</tr>';
+                    }
+			}
+			$output.='
+			</tbody>
+			</table>';
+        }
+        foreach($getspsubject4 as $subject)
+			{ 
+                
+                $n=count($getclasssec['data']); 
+                $output.='<table class="table table-bordered specialtable">
+                <thead class="colspanHead">
+                <tr>
+                
+                <td colspan="'.($n+2).'" style="text-align:center; border: 1px solid black;">
+                '.$subject.'
+                </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td colspan="1">内　容</td>
+                <td colspan="1">観　点 \ 学　年</td>';
+                foreach($getclasssec['data'] as $sec)
+                {
+                    $output.='<td colspan="1">'.$sec['class_numeric'].'</td>';
+                }
+                $output.='</tr>';
+			
+                $p=0;
+                $np=count($specialsubject4papers); 
+                foreach($specialsubject4papers as $papers)
+                {
+                    $p++;
+
+				$output.='<tr >
+				<td style="height:60px;">'.$papers.'</td>';
+                if($p==1)
+                {
+                    $output.='
+                    <td rowspan="'.$np.'"></td>'; 
+                }
+               
+                foreach($getclasssec['data'] as $sec)
+                {
+                        if($sec['class_id']=='')
+                        {
+                            $output.='<td  colspan="1"  ></td>';
+                        }
+                        else{
+                            $pdata = [
+                            'branch_id' => session()->get('branch_id'),
+                            'department_id' => $student['department_id'],
+                            'class_id' =>  $sec['class_id'],
+                            'section_id' =>  $sec['section_id'],
+                            'academic_session_id' => $sec['academic_session_id'],
+                            'student_id' => $student['id'],
+                            'subject' => $subject,
+                            'paper' => $papers
+                            
+                        ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                    
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        if(isset($mark['score_type']) && $mark['score_type']=='Points')
+                        {
+                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Freetext')
+                        {
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
+                        }
+                        elseif(isset($mark['score_type']) && $mark['score_type']=='Grade')
+                        {
+                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
+                        }
+                        else
+                        {
+                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
+                        }  
+                        
+                        
+                        $output.='<td  colspan="1"  >'.$fmark.'</td>';
+                    }
+                 }
 				$output.='</tr>';
 				
 			}
@@ -1979,7 +2650,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -2026,16 +2697,16 @@ class ExamPdfController extends Controller
 			}
 			</style>';
 			$output .= "</head>";
-			$output .= '<body><table class="main" width="100%">
+			$output .= '<body><table class="table" width="100%">
             <tr> 
 			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
 			text-align:center">
 			
 			
-			<table class="table table-bordered" style="margin-bottom: 15px;">
+			<table class="table table-bordered" style="margin-bottom: 15px;width:300px;">
 			<thead>
 			<tr>
-			<th style=" border: 1px solid black;">'.__('messages.student_name').'</th>
+			<td style=" border: 1px solid black;">児　童　氏　名</td>
 			</tr>
 			
 			</thead>
@@ -2046,62 +2717,125 @@ class ExamPdfController extends Controller
 			
 			</tbody>
 			</table>';
-			$data2 = [
-                'branch_id' => session()->get('branch_id'),
-                'department_id' => $student['department_id'],
-                'pdf_report' => 8 // YOROKO FORM 2B
-                
-            ];
+		
             
-            $getprimarysubjects = Helper::PostMethod(config('constants.api.get_overallsubjectlist'), $data2);
-          //dd($getprimarysubjects);
-			foreach($getprimarysubjects['data'] as $subject)
-			{ 
-                $sdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'department_id' => $student['department_id'],
-                    'subject_id' => $subject['subject_id'],
-                    'pdf_report' => 8 // YOROKO FORM 2B
-                    
-                ];
-                $getpaperlist = Helper::PostMethod(config('constants.api.get_overallpaperlist'), $sdata);
-                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-                $ng=count($getgrade['data']); 
-                $n=count($getpaperlist['data']); 
-                $i=0;
-                $output.='<table class="table table-bordered">
+            
+            $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+            $ng=count($getgrade['data']); 
+            $i=0;
+            $output.='<table class="table table-bordered">
 			<thead class="colspanHead">
 			<tr>
-			<td colspan="'.($ng+3).'" style="text-align:center; border: 1px solid black;">
-			'.$subject['name'].'</td>
+			<td colspan="12" style="text-align:center; border: 1px solid black;">
+			行　　　　動　　　　の　　　　　記　　　録</td>
 			</tr>
+            </thead>
             <tr>
-			<td colspan="1" style="text-align:center;width:50px;">'.__('messages.item').'</td>
+            <td colspan="6">
+            <table class="table table-bordered">
+            <tr>
+			<td colspan="1" style="text-align:center;width:50px;">項 目 </td>
 			<td colspan="1" class="diagonalCross2" style="width:50px;"></td>
-			<td colspan="1" style="text-align:center;">'.__('messages.grade').'</td>';
+			<td colspan="1" style="text-align:center;">学 年</td>';
 			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 			
 			foreach($getgrade['data'] as $grade)
 			{
-				$output.=' <td>'.$grade['name'].'</td>';
+				$output.=' <td>'.$grade['name_numeric'].'</td>';
 			}                                
 			$output.='
 			
-			</tr>
-			
-			</thead>
-			<tbody>';
-                foreach($getpaperlist['data'] as $papers)
+			</tr>';
+            $subject1="行動の記録"; //Record of actions
+            $subject2="総合"; //comprehensive
+            $subject3="出 欠 の 記 録"; //Record of attendance
+            $ra_paper1="基本的な生活習慣";										
+            $ra_paper2="健康・体力の向上";										
+            $ra_paper3="自主・自律";										
+            $ra_paper4="責任感";										
+            $ra_paper5="創意工夫";	
+            $ra_paper6="思いやり・協力";										
+            $ra_paper7="生命尊重・自然愛護";										
+            $ra_paper8="勤労・奉仕";										
+            $ra_paper9="公正・公平";										
+            $ra_paper10="公共心・公徳心";										
+            $getpaperlist1=array($ra_paper1,$ra_paper2,$ra_paper3,$ra_paper4,$ra_paper5);                                  
+            $getpaperlist2=array($ra_paper6,$ra_paper7,$ra_paper8,$ra_paper9,$ra_paper10); 
+            $description="説明"; 
+            $remarks="備考"; 
+			foreach($getpaperlist1 as $papers)
 			    { 
-                    
-                            
-                         
                     $output.=' <tr>';
-                   
-                    $output.='<td  style="text-align:left;" colspan="3">'.$papers['paper_name'].'</td>';
+                    
+                    $output.='<td  style="text-align:left;" colspan="3">'.$papers.'</td>';
 
                     foreach($getclasssec['data'] as $sec)
                     {				
+                        
+                        if($sec['class_id']=='')
+                        {
+                            $output.=' <td></td>';
+                        }
+                        else
+                        {
+                            $pdata = [
+                                'branch_id' => session()->get('branch_id'),
+                                'department_id' => $student['department_id'],
+                                'class_id' =>  $sec['class_id'],
+                                'section_id' =>  $sec['section_id'],
+                                'academic_session_id' => $sec['academic_session_id'],
+                                'student_id' => $student['id'],
+                                'subject' => $subject1,
+                                'paper' => $papers,                         
+                                
+                            ];
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
+                        //dd($getmarks);
+                        $mark=$getmarks['data'];
+                        $fmark='';
+                        
+                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
+                        
+                        $output.=' <td>'.$fmark.'</td>';
+                        }
+                    }
+                    $output.='</tr>';
+                    
+                }
+                $output.='
+                </table>
+            </td>
+            <td colspan="6">
+            <table class="table table-bordered">
+            <tr>
+			<td colspan="1" style="text-align:center;width:50px;">項 目 </td>
+			<td colspan="1" class="diagonalCross2" style="width:50px;"></td>
+			<td colspan="1" style="text-align:center;">学 年</td>';
+			$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+			
+			foreach($getgrade['data'] as $grade)
+			{
+				$output.=' <td>'.$grade['name_numeric'].'</td>';
+			}                                
+			$output.='
+			
+			</tr>';
+			foreach($getpaperlist2 as $papers)
+			    { 
+                   
+                    $output.=' <tr>';
+                   
+                    $output.='<td  style="text-align:left;" colspan="3">'.$papers.'</td>';
+
+                    foreach($getclasssec['data'] as $sec)
+                    {				
+                        if($sec['class_id']=='')
+                        {
+                            $output.=' <td></td>'; 
+                        }
+                        else
+                        {
                         $pdata = [
                             'branch_id' => session()->get('branch_id'),
                             'department_id' => $student['department_id'],
@@ -2109,33 +2843,20 @@ class ExamPdfController extends Controller
                             'section_id' =>  $sec['section_id'],
                             'academic_session_id' => $sec['academic_session_id'],
                             'student_id' => $student['id'],
-                            'subject_id' => $subject['subject_id'],
-                            'paper_id' => $papers['id'],
-                            'pdf_report' => 8
+                            'subject' => $subject1,
+                            'paper' => $papers,                         
                             
                         ];
-                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist'), $pdata);
+                        $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist1'), $pdata);
                       
                         $mark=$getmarks['data'];
                         $fmark='';
-                        if($papers['score_type']=='Points')
-                        {
-                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                        }
-                        elseif($papers['score_type']=='Freetext')
-                        {
-                            $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                        }
-                        elseif($papers['score_type']=='Grade')
-                        {
-                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                        }
-                        else
-                        {
-                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                        }  
+                        
+                        $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                        
                         
                         $output.=' <td>'.$fmark.'</td>';
+                        }
                     }
                               
                         
@@ -2143,51 +2864,40 @@ class ExamPdfController extends Controller
                         $output.='</tr>';
                    
                 }
-				$output.='</tbody>
+                $output.='
+                </table>
+                </td>
+                
 			</table>';	
 				
-			} 
-			
-			$data1 = [
-                'branch_id' => session()->get('branch_id'),
-                'department_id' => $student['department_id'],
-                'pdf_report' => 9 // YOROKO FORM 2B
-                
-            ];
-            
-            $getspecialsubjects = Helper::PostMethod(config('constants.api.get_overallsubjectlist'), $data1);
-          
-			foreach($getspecialsubjects['data'] as $subject)
-			{ 
-                $sdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'department_id' => $student['department_id'],
-                    'subject_id' => $subject['subject_id'],
-                    'pdf_report' => 9 // YOROKO FORM 2B
-                    
-                ];
-                $getpaperlist = Helper::PostMethod(config('constants.api.get_overallpaperlist'), $sdata);
-                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-                $ng=count($getgrade['data']); 
-                $n=count($getpaperlist['data']); 
-                $i=0;
+            if($student['department_id']==2)
+            {
+                $cols=2;
+            }
+            else
+            {$cols=4;
+
+            }
                 $output.='<table class="table table-bordered">
 			<thead class="colspanHead">
 			<tr>
-			<td colspan="4" style="text-align:center; border: 1px solid black;">
-			'.$subject['name'].'</td>
+			<td colspan="'.$cols.'" style="text-align:center; border: 1px solid black;">
+            総　合　所　見　及　び　指　導　上　参　考　と　な　る　諸　事　項</td>
 			</tr>
 			</thead>
 			<tbody>';
            
-                foreach($getpaperlist['data'] as $papers)
-			    { 
-                    
-                    $output.='<tr>';      
+                 $output.='<tr>';      
                     $k=0;
                     foreach($getclasssec['data'] as $sec)
                     {				
                         $k++;
+                        if($sec['class_id']=='')
+                        {
+                            $fmark='';
+                        }
+                        else
+                        {
                         $pdata = [
                             'branch_id' => session()->get('branch_id'),
                             'department_id' => $student['department_id'],
@@ -2195,36 +2905,27 @@ class ExamPdfController extends Controller
                             'section_id' =>  $sec['section_id'],
                             'academic_session_id' => $sec['academic_session_id'],
                             'student_id' => $student['id'],
-                            'subject_id' => $subject['subject_id'],
-                            'paper_id' => $papers['id'],
-                            'pdf_report' => 9
+                            'subject' => $subject2,
+                            'paper' => $description,
+                           
                             
                         ];
                         $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist'), $pdata);
-                      
+                        //dd($getmarks);
                         $mark=$getmarks['data'];
                         $fmark='';
-                        if($papers['score_type']=='Points')
-                        {
-                            $fmark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                        }
-                        elseif($papers['score_type']=='Freetext')
-                        {
+                       
                             $fmark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                        }
-                        elseif($papers['score_type']=='Grade')
-                        {
-                            $fmark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                        }
-                        else
-                        {
-                            $fmark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                        }  
-                      
-                         $output.='<td  style="height: 200px;width: 0px; padding-top: 45px;">Y<br>e<br>a<br>r<br>'.$k.'</td>';
+                        
+                    }
+                         $output.='<td  style="height: 200px;width: 0px; padding-top: 45px;">第<br>'.$k.'<br>学<br>年</td>';
                      
                         $output.=' <td>'.$fmark.'</td>';
-                        if($k%2==0)
+                        if($student['department_id']==2)
+                        {
+                            $output.='</tr><tr>'; 
+                        }
+                        elseif($k%2==0)
                         {
                             $output.='</tr><tr>';  
                         } 
@@ -2234,29 +2935,29 @@ class ExamPdfController extends Controller
               
                         $output.='</tr>';
                    
-                }
+               
 				$output.='</tbody>
 			</table>';	
 				
-			} 
+		
 			
 			$output.='<table class="table table-bordered">
 			<thead class="colspanHead">
 			<tr>
 			<td colspan="18" style="text-align:center; border: 1px solid black;">
-			'.__('messages.Attendance_records').'</td>
+			出　　欠　　の　　記　　録</td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-            <td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.grade_division').'</td>
-			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_classes').'</td>
-			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_suspension').'</td>
-			<td colspan="1" style="width: 85px;font-size: 10px;">'.__('messages.number_of_days_have_to_attend').'</td>
-			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_absent').'</td>
-			<td colspan="1" style="width: 0px;font-size: 10px;">'.__('messages.number_of_days_of_attendance').'</td>
+            <td colspan="1" style="width: 0px;font-size: 10px;">学年＼区分</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">授業数</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">出席停止・忌引き等の日数</td>
+			<td colspan="1" style="width: 85px;font-size: 10px;">出席しなければならない日数</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">欠席日数</td>
+			<td colspan="1" style="width: 0px;font-size: 10px;">出席日数</td>
 			
-			<td colspan="12" style="width: 0px;font-size: 10px;">'.__('messages.remarks').'</td>
+			<td colspan="12" style="width: 0px;font-size: 10px;">備　　　　　　考</td>
 			
 			</tr>';
             $data1 = [
@@ -2265,29 +2966,17 @@ class ExamPdfController extends Controller
                 'pdf_report' => 10 // YOROKO FORM 2B
                 
             ];
-            $subject_id=0;$paper_id=0;
-            $getspecialsubjects = Helper::PostMethod(config('constants.api.get_overallsubjectlist'), $data1);
-           
-            if(isset($getspecialsubjects['data']) && $getspecialsubjects['data']!=[])
-            {
-			$subject_id=$getspecialsubjects['data'][0]['subject_id'];
-            }
-            $sdata = [
-                    'branch_id' => session()->get('branch_id'),
-                    'department_id' => $student['department_id'],
-                    'subject_id' => $subject_id,
-                    'pdf_report' => 10 // YOROKO FORM 2B
-                    
-                ];
-                $getpaperlist = Helper::PostMethod(config('constants.api.get_overallpaperlist'), $sdata);
-                if(isset($getpaperlist['data'])  && $getpaperlist['data']!=[])
-                {
-                $paper_id=$getpaperlist['data'][0]['id'];
-                }
+            
             foreach($getclasssec['data'] as $sec)
             {
                 $totaldays='0'; $suspension='0'; $totalcomimg='0'; $totpres='0';$totabs='0';
-                $attdata = [
+                if($sec['class_id']=='')
+                {
+                    $remark='';
+                }
+                else
+                {
+                    $attdata = [
                     'branch_id' => session()->get('branch_id'),
                     'department_id' => $student['department_id'],
                     'class_id' =>  $sec['class_id'],
@@ -2303,34 +2992,19 @@ class ExamPdfController extends Controller
                     'section_id' =>  $sec['section_id'],
                     'academic_session_id' => $sec['academic_session_id'],
                     'student_id' => $student['id'],
-                    'subject_id' => $subject_id,
-                    'paper_id' => $paper_id,
-                    'pdf_report' => 10
+                    'subject' => $subject3,
+                    'paper' => $remarks,
+                   
                     
                 ];
                 $getmarks = Helper::PostMethod(config('constants.api.getpaperoverallmarklist'), $pdata);
-              
+                //dd($getmarks);
                 $mark=$getmarks['data'];
-                $remark='';
-                if(isset($papers))
-                {
-                    if($papers['score_type']=='Points')
-                    {
-                        $remark=(isset($mark['grade_name'])&& $mark['grade_name']!=null)?$mark['grade_name']:'';
-                    }
-                    elseif($papers['score_type']=='Freetext')
-                    {
-                        $remark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
-                    }
-                    elseif($papers['score_type']=='Grade')
-                    {
-                        $remark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
-                    }
-                    else
-                    {
-                        $remark=(isset($mark['score'])&& $mark['score']!=null)?$mark['score']:'';
-                    }
-                }  
+               
+               
+                    $remark=(isset($mark['freetext'])&& $mark['freetext']!=null)?$mark['freetext']:'';
+                
+             
                     $getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
                     //dd($getattendance);
                 foreach($getattendance['data'] as $att)
@@ -2341,9 +3015,10 @@ class ExamPdfController extends Controller
                     $totalcomimg+=$att['totalcoming']; 
                     $totpres+=$att['totpres'];
                     $totabs+=$att['totabs'];
-                }                  
+                } 
+            }                 
             $output.=' <tr>
-            <td colspan="1" style="width: 0px;">'.$sec['class'].'</td>
+            <td colspan="1" style="width: 0px;">'.$sec['class_numeric'].'</td>
             <td colspan="1" style="width: 0px;">'.$totaldays.'</td>
             <td colspan="1" style="width: 0px;">'.$suspension.'</td>
             <td colspan="1" style="width: 0px;">'.$totalcomimg.'</td>
@@ -2351,8 +3026,8 @@ class ExamPdfController extends Controller
             <td colspan="1" style="width: 0px;">'.$totpres.'</td>
             <td colspan="12" style="width: 0px;;">'. $remark.'</td>            
             </tr>';
-            }
-			
+            
+        }
 			$output.='</tbody>
 			</table>
 			
@@ -2417,7 +3092,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -2464,28 +3139,25 @@ class ExamPdfController extends Controller
 			}
 			</style>';
 			$output .= "</head>";
-			$output .= '<body><p style="text-align:center;">'.__('messages.download_secondary_form1_title').'</p>
-			<p class="float-left">'.__('messages.download_secondary_form1_title2').'</p>
-			<table class="main" width="100%">
-            <tr>
-			<td class="content-wrap aligncenter" style="margin: 0;padding: 20px;
-			text-align:center">
+			$output .= '<body><p style="text-align:center;">中 学 校 生 徒 指 導 要 録</p>
+			<p class="float-left">様式１（学籍に関する記録)</p>
 			
 			
-			<table class="table table-bordered" style="margin-bottom: 15px;">
+			
+			<table class="table table-bordered" style="margin-bottom: 15px;width:400px;">
 			<thead>
 			<tr>
 			<tr>
-			<td class="cell-left">'.__('messages.category').'</td>
+			<td class="cell-left">区分 </td>
 			<td class="diagonalCross2" style="border-right:hidden; border-left:hidden;"></td>
-			<td class="cell-right">'.__('messages.grade').'</td>';
+			<td class="cell-right">学年</td>';
             $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
             $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
             //dd('$getgrade');
             foreach($getgrade['data'] as $grade)
             {
                 
-            $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+            $output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
             }
             
             $output.='
@@ -2494,7 +3166,7 @@ class ExamPdfController extends Controller
 			</thead>
 			<tbody>
 			<tr>
-			<td colspan="3">Class</td>'; foreach($getclasssec['data'] as $sec)
+			<td colspan="3">学 級</td>'; foreach($getclasssec['data'] as $sec)
             {
             
             $output.='<td> '.$sec['section'].'</td>';
@@ -2502,7 +3174,7 @@ class ExamPdfController extends Controller
             $output.='
 			</tr>
 			<tr>
-			<td colspan="3">Attendance No</td>'; foreach($getclasssec['data'] as $sec)
+			<td colspan="3">整理番号</td>'; foreach($getclasssec['data'] as $sec)
             {
             
             $output.='<td> '.$sec['studentPlace'].'</td>';
@@ -2515,87 +3187,94 @@ class ExamPdfController extends Controller
 			<table class="table table-bordered">
 			<thead class="colspanHead">
 			<tr>
-			<th colspan="17" style="text-align:center; border: 1px solid black;">'.__('messages.records_of_academic_records').'</th>
+			<td colspan="17" style="text-align:center; border: 1px solid black;">学 籍 の 記 録</td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-			<td rowspan="4" colspan="1" style="width:10px">'.__('messages.student').'</td>
-			<td colspan="2">'.__('messages.pronouncation').'</td>
+			<td rowspan="4" colspan="1" style="width:10px">氏 名/td>
+			<td colspan="2">ふりがな</td>
 			<td colspan="6"></td>
-			<td style="width:10px">'.__('messages.gender').'</td>
+			<td style="width:10px">性別</td>
 			<td style="width:10px"> '.$student['gender'].'</td>
-			<td colspan="2" style="border-bottom:hidden" >'.__('messages.admission_transfer').'</td>
-			<td colspan="4" style="border-bottom:hidden">'.__('messages.admission_transfer_previous').'</td>
+			<td colspan="2" style="border-bottom:hidden" >入学・編入学等</td>
+			<td colspan="4" style="border-bottom:hidden">入学 編入学 <br> 編入前
+            在学校名</td>
 			</tr>
 			<tr>
-			<td colspan="2">'.__('messages.name').'</td>                                           
+			<td colspan="2">氏 名</td>                                           
 			<td colspan="8"> '.$student['first_name'].' '.$student['last_name'].'</td>
 			<td colspan="2" ></td>
 			<td colspan="4" > '.$school_name.' </td>
 			</tr>
 			<tr>
-			<td colspan="2">'.__('messages.date_of_birth').'</td>                                           
+			<td colspan="2">生年月日</td>                                           
 			<td colspan="8"> '.$student['birthday'].'</td>
-			<td colspan="2" style="border-bottom:hidden" >'.__('messages.transfer_student').'</td>
+			<td colspan="2" style="border-bottom:hidden" ></td>
 			<td colspan="4" style="border-bottom:hidden" ></td>
 			</tr>
 			<tr>
-			<td colspan="2">'.__('messages.current_address').'</td>                                           
+			<td colspan="2">現住所</td>                                           
 			<td colspan="8">'.$student['current_address'].'</td>
-			<td colspan="2" ></td>
-			<td colspan="4" ></td>
+			
+            <td colspan="2">転 入 学</td>
+			<td colspan="4" >年 月 日 第 学年転入学  </td>
 			</tr>
 			
 			
 			<tr>
-			<td rowspan="6" colspan="1" style="width:10px">'.__('messages.parent').'</td>
-			<td colspan="2" rowspan="2" >'.__('messages.pronouncation').'</td>
+			<td rowspan="6" colspan="1" style="width:10px">保護者</td>
+			<td colspan="2" rowspan="2" >ふりがな</td>
 			<td colspan="8" rowspan="2" ></td>
-			<td colspan="2" >'.__('messages.the_day_left_school_to_transfer').'</td>
+            <td rowspan="6" >転学・
+            退学
+            等 </td>
+			<td colspan="1" >転学するため学校
+            を去った年月日 </td>
 			<td colspan="4"></td>
 			</tr>
 			<tr>
 			
-			<td colspan="2">'.__('messages.date_of_withdrawal').'</td>
+			<td colspan="1">退学等年月日
+            （除籍日)</td>
 			<td colspan="4" ></td>
 			
 			</tr>
 			<tr>
-			<td colspan="2" rowspan="2" >'.__('messages.name').'</td>
+			<td colspan="2" rowspan="2" >氏 名</td>
 			<td colspan="8" rowspan="2" >'.$parent['first_name'].' '.$parent['last_name'].'</td>
-			<td colspan="2" >'.__('messages.next_transfer_school_name').'</td>
+			<td colspan="1" >転学先学校名</td>
 			<td colspan="4" ></td>
 			</tr>
 			
 			<tr>
 			
 			
-			<td colspan="2" >'.__('messages.year_of_transfer').'</td>
+			<td colspan="1" >転入学年</td>
 			<td colspan="4" ></td>
 			
 			</tr>
 			<tr>
 			
-			<td colspan="2" style="border-bottom:hidden">'.__('messages.current_address').'</td>
+			<td colspan="2" style="border-bottom:hidden">現住所</td>
 			<td colspan="8" style="border-bottom:hidden"> '.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
-			<td colspan="2" >'.__('messages.location_as_above').'</td>
+			<td colspan="1" >同上所在地</td>
 			<td colspan="4" ></td>
 			
 			</tr>
 			<tr>
 			<td colspan="2" ></td>
 			<td colspan="8"></td>
-			<td colspan="2" ></td>
+			<td colspan="1" >事 由</td>
 			<td colspan="4" ></td>
 			
 			</tr>
 			<tr>
-			<td style="border-bottom:hidden">'.__('messages.experiences_before_admission').'
+			<td style="border-bottom:hidden">入学前の経歴
 			</td>
 			<td colspan="2" style="border-bottom:hidden;border-right:hidden;"></td>
 			<td colspan="8" style="border-bottom:hidden;"></td>
-			<td colspan="2" >'.__('messages.graduation').'</td>
+			<td colspan="2" >卒 業</td>
 			<td colspan="4"></td>
 			
 			</tr>
@@ -2603,7 +3282,8 @@ class ExamPdfController extends Controller
 			<td></td>
 			<td colspan="2" style="border-right:hidden;" ></td>
 			<td colspan="8"></td>
-			<td colspan="2" >'.__('messages.next_high_school_name').'</td>
+			<td colspan="2" >進 学 先
+            就 職 先 等 </td>
 			<td colspan="4"></td>
 			
 			</tr>
@@ -2612,7 +3292,11 @@ class ExamPdfController extends Controller
 			
 			<table class="table table-bordered">
             <tr>
-                <td colspan="4" style="width:90px">'.__('messages.school_name_and_location').'</td>';
+                <td colspan="4" style="width:90px">学 校 名
+                及 び
+                所 在 地
+                （分校名・所在地
+                等</td>';
                 
                 $bdata = [
                     'id' => session()->get('branch_id'),
@@ -2620,53 +3304,53 @@ class ExamPdfController extends Controller
                 $getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
                 //dd($getbranch);
                 $output.='<td colspan="7">
-                    '.$getbranch['data']['school_name'].'<br>
-                    '.$getbranch['data']['address'].'<br>
-                    Tel: '.$getbranch['data']['mobile_no'].' Mail : '.$getbranch['data']['email'].'<br>
+                在マレーシア日本国大使館附属・クアラルンプール日本人会日本人学校<br>
+                Saujana Resort Seksyen U2,40150 Shah Alam,Selangor Darul Ehsan, Malaysia
                 </td>
             </tr>
         </table>
         <table class="table table-bordered">
             <tr>
                 <td class="diagonal" style="width:122px;border-bottom:hidden">
-                    <span class="lb">'.__('messages.fiscal_year').'</span>
+                    <span class="lb">年 度 </span>
                     <span class="rt"></span>
                     <div class="line"></div>
                 </td>';
                 foreach($getclasssec['data'] as $ac)
                     {
                         
-                    $output.=' <th style=" border: 1px solid black;">'.$ac['academic_year'].'</th>';
+                    $output.=' <td style=" border: 1px solid black;">'.$ac['academic_year'].'</td>';
                     }
                     
                     $output.='
             
             </tr>
             <tr>
-                <td style="height:60px;">'.__('messages.division_grade').'</td>';
+                <td style="height:60px;">区分 学年 </td>';
                 foreach($getgrade['data'] as $grade)
                     {
                         
-                    $output.=' <th style=" border: 1px solid black;">'.$grade['name'].'</th>';
+                    $output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
                     }
                     
                     $output.='
             </tr>
             <tr style="height:80px">
-                <td style="height:60px;">'.__('messages.principal_sign').'</td>';
+                <td style="height:60px;">校長氏名印</td>';
                 foreach($getclasssec['data'] as $princ)
                     {
-                        $output.=' <th style=" border: 1px solid black;">'.$princ['principal'].'</th>';
+                        $output.=' <td style=" border: 1px solid black;">'.$princ['principal'].'</td>';
                     }
                     
                     $output.='
                 
             </tr>
             <tr style="height:80px">
-                <td style="height:60px;">'.__('messages.grade_teacher_sign').'</td>';
+                <td style="height:60px;">学級担任者
+                氏 名 印</td>';
                 foreach($getclasssec['data'] as $teach)
                 {
-                    $output.=' <th style=" border: 1px solid black;">'.$teach['teacher'].'</th>';
+                    $output.=' <td style=" border: 1px solid black;">'.$teach['teacher'].'</td>';
                 }
                 
                 $output.='
@@ -2677,9 +3361,7 @@ class ExamPdfController extends Controller
 			</tbody>
 			</table>
 			
-			</td>
-			</tr>
-			</table>';
+			';
 			
 			$output .= '</body></html>';
 			$pdf = \App::make('dompdf.wrapper');
@@ -2762,7 +3444,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,
@@ -2899,7 +3581,7 @@ class ExamPdfController extends Controller
             width: 100%;
             margin-bottom: 1px;
             color: black;
-            text-align: center;
+            text-align: center; border-collapse: collapse;
 			}
 			
 			.table-bordered td,

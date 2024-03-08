@@ -2092,5 +2092,8 @@ return [
     "temporary_unlock" => "Buka Kunci Sementara",
     "student_promoted_message" => "Semua pelajar dinaikkan pangkat",
     "student_promoted_status"  => "Status telah disimpan",
-    "valid_status"  => "Sila pilih status yang sah."
+    "valid_status"  => "Sila pilih status yang sah.",
+    "alertmenus1" =>"Menu tidak diberikan dalam portal ini",
+    "alertmenus2" =>"Menu tidak diberikan dalam Peranan Sekolah ini",
+
 ];

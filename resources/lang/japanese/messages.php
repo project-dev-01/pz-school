@@ -2063,6 +2063,8 @@ return [
     "guest" => "ゲスト",
     "attendance_report_subject" => "出席報告の件名",
     "add_shortcut_links" => "ショートカットリンクを追加",
+    "alertmenus1" =>"このポータルに割り当てられていないメニュー",
+    "alertmenus2" =>"この学校の役割に割り当てられていないメニュー",
     "partc_tab_1" => "パートc",
     "main_reasons_tab_2" => "主な理由",
     "promotion_message"  => "続行してもよろしいですか?",

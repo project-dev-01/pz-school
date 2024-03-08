@@ -181,10 +181,7 @@ $(function () {
                             {
                                 $("#byec_body").hide("slow");
                                 $("#byreport_body").show("slow");                                       
-                                $("#bypersonal_body").hide("slow");
-                                    
-                                
-                                
+                                $("#bypersonal_body").hide("slow"); 
                             }
                             else
                             {

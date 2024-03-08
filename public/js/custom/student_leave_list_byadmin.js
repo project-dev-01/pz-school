@@ -124,7 +124,8 @@ $(function () {
         // // subject division
         studentLeaveList(formData);
     });
-    function getstudentLeaveList() {
+    function getstudentLeaveList() 
+    {
         var form = this;
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
@@ -204,8 +205,10 @@ $(function () {
                 if (res.code == 200) {
                     // allStudentLeave();
                     toastr.success('Leave Updated sucessfully');
-                    location.reload();
+                   
                     // $('#student-leave-table').DataTable().ajax.reload(null, false);
+                     //location.reload();
+                    getstudentLeaveList();
                 }
                 else {
                     toastr.error(res.message);
@@ -261,7 +264,8 @@ $(function () {
                 }
             });
         }
-        else {
+        else 
+        {
             $('#leave_status_name').css('border-color', 'red');
             $('#alert_status').html('Required');
         }

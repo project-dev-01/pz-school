@@ -5,7 +5,7 @@ return [
     // 'branch_id'=>'1',
     // 'school_name'=>'SMK Kiaramas',
     // 'school_image'=>'school.jpg',
-    'branch_id'=>'4',
+    'branch_id'=>'5',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     // 'image_url' => "https://api.suzen.school",
@@ -1077,6 +1077,16 @@ return [
         'child_health_list' => $url.'/child_health/list',
         'child_health_details' => $url.'/child_health/child_health-details',
         'child_health_export' => $url.'/child/health/export',
+
+        
+        'getec_marks' => $url.'/exam_result/getec_marks',
+        'getec_teacher' => $url.'/exam_result/getec_teacher',        
+        'getsubjectpapermarks' => $url.'/exam_result/getsubjectpapermark',
+        'stuexam_ppmarklist' => $url.'/exam_result/stuexam_ppmarklist',        
+        'stuexam_ppavgmarklist' => $url.'/exam_result/stuexam_ppavgmarklist',   
+        'classteacher_principal' => $url.'/exam_result/classteacher_principal',  
+        'getpaperoverallmarklist1' => $url.'/exam_result/getpaperoverallmarklist1',
+        
       ]
 
 ];
