@@ -131,9 +131,9 @@ $(function () {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
                         const isPDF = data.toLowerCase().endsWith('.pdf');
-                        const fileName = full.title;
-                        const fileDescription = full.discription;
-                        const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
+                        // const fileName = full.title;
+                        // const fileDescription = full.discription;
+                        // const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
                     
                         // Create a combined column with the "parent_imp" button and the file link
                         return `
@@ -246,20 +246,19 @@ $(function () {
 
                 }
             ],
-            ajax: importantList,
+            ajax: {
+                url: importantList,
+                error: function (xhr, error, thrown) {
+                    console.log("Ajax error:", error);
+                    console.log("Error details:", thrown);
+                }
+            },
             "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
             columns: [
-                //  {data:'id', name:'id'},
-                // {
-                //     data: 'checkbox',
-                //     name: 'checkbox',
-                //     orderable: false,
-                //     searchable: false
-                // },
                 {
                     searchable: false,
                     data: 'DT_RowIndex',
@@ -276,9 +275,9 @@ $(function () {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
                         const isPDF = data.toLowerCase().endsWith('.pdf');
-                        const fileName = full.title;
-                        const fileDescription = full.discription;
-                        const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
+                        // const fileName = full.title;
+                        // const fileDescription = full.discription;
+                        // const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
                     
                         // Create a combined column with the "parent_imp" button and the file link
                         return `

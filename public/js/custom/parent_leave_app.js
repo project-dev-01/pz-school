@@ -24,6 +24,7 @@ $(function () {
     $("#changeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
+       // console.log(student_leave_type_id);
         $("#changelevReasons").empty();
         $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
@@ -426,6 +427,7 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    let selectedLeaveType;
     // studentAllReasons
     $(document).on('click', '#studentAllReasons', function () {
         // staffLeaveDetailsShowUrl
@@ -457,35 +459,66 @@ $(function () {
         const headerRow = thead.insertRow();
         const leaveTypesSet = new Set();
 
-        // Extract unique leave types
         Object.values(data).forEach(entry => {
-            leaveTypesSet.add(entry.leave_type);
+            leaveTypesSet.add({
+                leave_type_id: entry.leave_type_id,
+                leave_type: entry.leave_type
+            });
         });
-
+        
         const uniqueLeaveTypes = Array.from(leaveTypesSet);
-
+        
         // Create table headers with leave types
         uniqueLeaveTypes.forEach(leaveType => {
             const header = document.createElement('th');
-            header.textContent = leaveType;
+            header.textContent = leaveType.leave_type; // Access leave_type property
             headerRow.appendChild(header);
         });
-
+        
         // Find reasons for each leave type and populate the table
         const maxReasonsCount = Math.max(...Object.values(data).map(entry => parseReasons(entry.reasons).length));
-
+        
         for (let i = 0; i < maxReasonsCount; i++) {
             const row = tbody.insertRow();
-
+        
             uniqueLeaveTypes.forEach(leaveType => {
                 const cell = row.insertCell();
                 const reasons = Object.values(data)
-                    .filter(entry => entry.leave_type === leaveType)
-                    .map(entry => parseReasons(entry.reasons))
-                    .flat();
+                    .filter(entry => entry.leave_type_id === leaveType.leave_type_id)
+                    .map(entry => ({
+                        leave_type_id: entry.leave_type_id, // Include the unique identifier (leave_type_id)
+                        reason_id: parseReasons(entry.id)[i], // Include the unique identifier (leave_type_id)
+                        reason: parseReasons(entry.reasons)[i]
+                    }))
+                    .filter(reason => reason); 
+        
+                if (reasons.length > 0) {
+                    const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
 
-                if (reasons[i]) {
-                    cell.textContent = reasons[i].reason;
+                    // Check if the reason is an object (assuming it's a string)
+                    const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
+                
+                    cell.textContent = reasonText;
+                   // console.log(reasons[0]);
+                    // Add a click event listener to each cell
+                    cell.addEventListener('click', function () {
+                        var selectedLeaveTypeId = reasons[0].leave_type_id;
+                        var selectedReasonId = reasons[0].reason_id.id;
+                        //console.log(selectedReasonId);
+                         $("#changeLevType").val(selectedLeaveTypeId);
+                        // Find the select element
+                       $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
+                        if (res.code == 200) {
+                        $("#changelevReasons").empty();
+                            $.each(res.data, function (key, val) {
+                                $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                            });
+                            $("#changelevReasons").val(selectedReasonId);
+                        }
+                    }, 'json');
+                        // Close the modal after selecting the leave type
+                        $('#knowtheReasons').modal('hide');
+                    });
                 }
             });
         }

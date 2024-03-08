@@ -179,11 +179,40 @@ $(function () {
                 const cell = row.insertCell();
                 const reasons = Object.values(data)
                     .filter(entry => entry.leave_type === leaveType)
-                    .map(entry => parseReasons(entry.reasons))
-                    .flat();
+                    .map(entry => ({
+                        leave_type_id: entry.leave_type_id, // Include the unique identifier (leave_type_id)
+                        reason_id: parseReasons(entry.id)[i], // Include the unique identifier (leave_type_id)
+                        reason: parseReasons(entry.reasons)[i]
+                    }))
+                    .filter(reason => reason); 
 
-                if (reasons[i]) {
-                    cell.textContent = reasons[i].reason;
+                if (reasons.length > 0) {
+                    const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
+                    console.log(reasonObject);
+                    // Check if the reason is an object (assuming it's a string)
+                    const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
+                
+                    cell.textContent = reasonText;
+                   // console.log(reasons[0]);
+                    // Add a click event listener to each cell
+                    cell.addEventListener('click', function () {
+                        var selectedLeaveTypeId = reasons[0].leave_type_id;
+                        var selectedReasonId = reasons[0].reason_id.id;
+                        //console.log(selectedReasonId);
+                         $("#directchangeLevType").val(selectedLeaveTypeId);
+                        // Find the select element
+                       $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
+                        if (res.code == 200) {
+                        $("#changelevReasons").empty();
+                            $.each(res.data, function (key, val) {
+                                $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                            });
+                            $("#changelevReasons").val(selectedReasonId);
+                        }
+                    }, 'json');
+                        // Close the modal after selecting the leave type
+                        $('#knowtheReasons').modal('hide');
+                    });
                 }
             });
         }
