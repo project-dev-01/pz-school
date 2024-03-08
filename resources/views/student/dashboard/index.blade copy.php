@@ -591,18 +591,18 @@
                             <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                 <option value="0">{{ __('messages.select_semester') }}</option>
                                 @foreach($semester as $sem)
-                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="display:none;">
                         <div class="form-group">
                             <label for="session_id">{{ __('messages.session') }}</label>
                             <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                 <option value="0">{{ __('messages.select_session') }}</option>
                                 @foreach($session as $ses)
-                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                 @endforeach
                             </select>
                         </div>

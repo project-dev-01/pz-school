@@ -63,7 +63,7 @@
                                                 <option>B</option>
                                                 <option>C</option>
                                                 <option>D</option>
-                                                <option>E</option>n>
+                                                <option>E</option>
                                             </select>
                                         </div>
                                     </div>

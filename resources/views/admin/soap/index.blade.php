@@ -122,7 +122,7 @@
                                     <div class="card-body">
                                         <form id="oldStudentFilter" autocomplete="off" enctype="multipart/form-data">
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                     <label for="department_id">{{ __('messages.department') }}</label>
                                                     <select id="department_id" name="department_id" class="form-control">
@@ -134,7 +134,7 @@
                                                     </select>
                                                     </div>
                                                 </div>                          
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="old_class_id">{{ __('messages.grade') }}</label>
                                                         <select id="old_class_id" class="form-control" name="class_id">
@@ -143,7 +143,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="old_section_id">{{ __('messages.class') }}</label>
                                                         <select id="old_section_id" class="form-control" name="section_id">
@@ -151,13 +151,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3" style="display:none;">
                                                     <div class="form-group">
                                                         <label for="old_session_id">{{ __('messages.session') }}</label>
                                                         <select id="old_session_id" class="form-control"  name="session_id">                              
                                                         <option value="">{{ __('messages.select_session') }}</option>
                                                             @forelse($session as $ses)
-                                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                                                <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
@@ -227,7 +227,7 @@
                                     <div class="card-body">
                                         <form id="newStudentFilter" autocomplete="off" enctype="multipart/form-data">
                                             <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                     <div class="form-group">
                                                     <label for="department_id">{{ __('messages.department') }}</label>
                                                     <select id="newdepartment_id" name="department_id" class="form-control">
@@ -239,7 +239,7 @@
                                                     </select>
                                                     </div>
                                                 </div> 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="class_id">{{ __('messages.grade') }}</label>
                                                         <select id="class_id" class="form-control" name="class_id">
@@ -247,7 +247,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="section_id">{{ __('messages.class') }}</label>
                                                         <select id="section_id" class="form-control" name="section_id">
@@ -255,13 +255,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3" style="display:none;">
                                                     <div class="form-group">
                                                         <label for="session_id">{{ __('messages.session') }}</label>
                                                         <select id="session_id" class="form-control"  name="session_id">                              
                                                         <option value="">{{ __('messages.select_session') }}</option>
                                                             @forelse($session as $ses)
-                                                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                                                <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
@@ -604,7 +604,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-4" style="display:none;">
                                                                 <div class="form-group">
                                                                     <label for="std_session_id">{{ __('messages.session') }}</label>
                                                                     <select id="std_session_id" class="form-control" name="std_session_id" disabled>

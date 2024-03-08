@@ -1590,6 +1590,7 @@ return [
     "old_file" => "古いファイル",
     "select_parent" => "親を選択します",
     "retired_persons" => "退職した従業員",
+    "employees_section" => "従業員セクション",
     "employee_type" => "従業員タイプ",
     "job_title" => "役職",
     "tenure" => "在職期間",

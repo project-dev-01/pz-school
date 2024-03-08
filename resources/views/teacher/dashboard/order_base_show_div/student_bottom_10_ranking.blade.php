@@ -46,7 +46,7 @@
                             <select id="sb10_semester_id" class="form-control studentBottom" name="semester_id">
                                 <option value="0">{{ __('messages.select_semester') }}</option>
                                 @forelse($semester as $sem)
-                                <option value="{{$sem['id']}}" {{ $current_semester == $sem['id'] ? 'selected' : ''}}>{{$sem['name']}}</option>
+                                <option value="{{$sem['id']}}">{{$sem['name']}}</option>
                                 @empty
                                 @endforelse
                             </select>
@@ -58,7 +58,7 @@
                             <select id="sb10_session_id" class="form-control studentBottom" name="session_id">
                                 <option value="0">{{ __('messages.select_session') }}</option>
                                 @forelse($session as $ses)
-                                <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                 @empty
                                 @endforelse
                             </select>

@@ -1589,6 +1589,7 @@ return [
     "old_file" => "Old File",
     "select_parent" => "Select Parent",
     "retired_persons" => "Retired Employees",
+    "employees_section" => "Employees Section",
     "no_data_avaliable" => "No Data Avaliable",
     "employee_type" => "Employee Type",
     "job_title" => "Job Title",

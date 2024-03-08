@@ -71,14 +71,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="display:none;">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
                                     <select id="employeeReportSession" class="form-control" name="session_id">
                                         <option value="">{{ __('messages.select_session') }}</option>
                                         <option value="All">{{ __('messages.all') }}</option>
                                         @forelse($session as $ses)
-                                        <option value="{{$ses['id']}}" {{$current_session == $ses['id'] ? 'selected' : ''}}>{{ __('messages.' . strtolower($ses['name'])) }}</option>
+                                        <option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
                                         @empty
                                         @endforelse
                                     </select>

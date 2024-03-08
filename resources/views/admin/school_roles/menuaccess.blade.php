@@ -96,9 +96,15 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-3"><br>
-								<button type="submit" class="btn btn-success" name="getmenus" value="get"> {{ __('messages.get_permissions') }}</button>
+							<div class="col-md-3">
+								
 							</div>
+
+							<div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit" name="getmenus" value="get" style="width: 150px;margin-top: 27px;">
+							{{ __('messages.get_permissions') }}
+                            </button>
+                            </div>
 						</div>
 
 					</form>

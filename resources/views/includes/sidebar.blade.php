@@ -296,7 +296,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarEmpMasters" data-toggle="collapse">
-                                    {{ __('messages.masters') }}<span class="menu-arrow"></span>
+                                    <span>{{ __('messages.masters') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sideBarEmpMasters">
                                     <ul class="nav-second-level">
@@ -401,7 +401,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarForClassSec" data-toggle="collapse">
-                                    {{ __('messages.grades') }} & {{ __('messages.classes') }}<span class="menu-arrow"></span>
+                                   <span> {{ __('messages.grades') }} & {{ __('messages.classes') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForClassSec">
                                     <ul class="nav-second-level">
@@ -430,7 +430,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarForSub" data-toggle="collapse">
-                                    {{ __('messages.subjects') }} <span class="menu-arrow"></span>
+                                   <span> {{ __('messages.subjects') }}</span> <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarForSub">
                                     <ul class="nav-second-level">
@@ -514,7 +514,16 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.health_logbooks.health')}}" class="nav-link {{ (request()->is('admin/health*')) ? 'active' : '' }}">
-                        <i data-feather="file-text" class="icon-dual"></i>
+                       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+                            <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+                            <g>
+                                <g>
+                                    <g>
+                                        <path fill="#C4C7D2" d="M19.8,246V46.9L54.3,10h142.6c6.4,0,12.7,1.9,18.8,5.7c6.1,3.8,11.1,8.7,14.9,14.9c3.8,6.1,5.7,12.4,5.7,18.8v147.5l-19.7,19.7V59.2c0-19.7-9.8-29.5-29.5-29.5H66.4L46.7,49.4h120.6c8.1,0,15.1,2.9,20.9,8.6c5.8,5.8,8.6,12.7,8.6,20.9v137.6c0,8.1-2.9,15.1-8.6,20.9c-5.8,5.8-12.7,8.6-20.9,8.6L19.8,246L19.8,246z M100.2,188c0.5,0.5,1,0.7,1.6,0.7s1.2-0.2,1.6-0.7l67.8-67.7c0.5-0.5,0.7-1,0.7-1.7c0-0.7-0.2-1.2-0.7-1.7l-15.3-15.1c-0.5-0.4-1-0.6-1.7-0.6s-1.2,0.2-1.7,0.7L103.5,151c-0.5,0.5-1,0.7-1.7,0.7c-0.7,0-1.2-0.2-1.7-0.7l-18.3-18.3c-0.5-0.5-1-0.7-1.7-0.7c-0.6,0-1.2,0.2-1.7,0.7L63.4,148c-0.5,0.5-0.7,1-0.7,1.7s0.2,1.2,0.7,1.6L100.2,188z" />
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
                         <span>{{ __('messages.health_logbooks') }} </span>
                     </a>
                 </li>
@@ -526,9 +535,9 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.student.daily_attendance')}}" class="nav-link {{ (request()->is('admin/student/daily_attendance')) ? 'active' : '' }}">
-                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
-                        </svg>
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px;"><g fill="#C4C7D2">
+                        <path d="m7 11c-1.1 0-2-.9-2-2v-1c0-1.1.9-2 2-2s2 .9 2 2v1c0 1.1-.9 2-2 2zm-2 6.993 4 .007c.55 0 1-.45 1-1v-2c0-1.65-1.35-3-3-3s-3 1.35-3 3v2c0 .552.448.993 1 .993zm14 .007h-6c-.553 0-1-.447-1-1s.447-1 1-1h6c.553 0 1 .447 1 1s-.447 1-1 1zm0-4h-6c-.553 0-1-.448-1-1s.447-1 1-1h6c.553 0 1 .448 1 1s-.447 1-1 1zm0-4h-6c-.553 0-1-.448-1-1s.447-1 1-1h6c.553 0 1 .448 1 1s-.447 1-1 1z"/>
+                        <path d="m22 2h-20c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2v-16c0-1.1-.9-2-2-2zm0 17.5c0 .28-.22.5-.5.5h-19c-.28 0-.5-.22-.5-.5v-15c0-.28.22-.5.5-.5h19c.28 0 .5.22.5.5z"/></g></svg>
                         <span>{{ __('messages.class_student_attendance') }} </span>
                     </a>
                 </li>
@@ -774,7 +783,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarMultilevel2" data-toggle="collapse">
-                                    {{ __('messages.exam') }} <span class="menu-arrow"></span>
+                                   <span> {{ __('messages.exam') }}</span> <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMultilevel2">
                                     <ul class="nav-second-level">
@@ -803,7 +812,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarSchedule" data-toggle="collapse">
-                                    {{ __('messages.exam_schedule') }} <span class="menu-arrow"></span>
+                                    <span>{{ __('messages.exam_schedule') }}</span> <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarSchedule">
                                     <ul class="nav-second-level">
@@ -822,7 +831,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarMarks" data-toggle="collapse">
-                                    {{ __('messages.marks') }} <span class="menu-arrow"></span>
+                                    <span>{{ __('messages.marks') }}</span> <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarMarks">
                                     <ul class="nav-second-level">
@@ -857,7 +866,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
-                                    {{ __('messages.exam_results') }}<span class="menu-arrow"></span>
+                                   <span> {{ __('messages.exam_results') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarResult">
                                     <ul class="nav-second-level">
@@ -930,7 +939,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sidebarHostel" data-toggle="collapse">
-                                    {{ __('messages.hostel') }}<span class="menu-arrow"></span>
+                                    <span>{{ __('messages.hostel') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarHostel">
                                     <ul class="nav-second-level">
@@ -966,7 +975,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarTransport" data-toggle="collapse">
-                                    {{ __('messages.transport') }}<span class="menu-arrow"></span>
+                                    <span>{{ __('messages.transport') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarTransport">
                                     <ul class="nav-second-level">
@@ -1082,8 +1091,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 446 511.89">
                             <path fill="#C4C7D2" d="M35.61 13.26a32.08 32.08 0 00-5.74 23.93l42.95 266.86a32.09 32.09 0 0010.87 19.4c5.69 4.86 13.07 7.72 20.88 7.71h2.85v.1h42.86l-39.66 110.78c-18.8-8.04-36.06-18.34-50.93-30.87-6.17-5.19-12.01-10.9-17.45-17.09-8.76-10.02-24-11.03-34.01-2.27-10.02 8.77-11.03 24-2.27 34.01 6.88 7.84 14.51 15.25 22.74 22.19 51.08 43.04 123.58 64.33 195.41 63.87 71.99-.47 144.12-22.72 194.27-66.75 7.77-6.83 15.13-14.31 21.97-22.43 8.56-10.17 7.24-25.36-2.93-33.91-10.17-8.56-25.35-7.24-33.91 2.93-5.04 5.98-10.7 11.71-16.88 17.13-7.62 6.7-15.9 12.77-24.72 18.24l-31.11-95.83h32.23c8.91 0 16.98-3.61 22.81-9.44 5.82-5.83 9.43-13.9 9.43-22.81 0-8.91-3.61-16.98-9.44-22.81-5.83-5.82-13.89-9.43-22.8-9.43H221.51l28.77-63.82h88.3c5.28 0 10.05-2.14 13.5-5.58 3.45-3.45 5.59-8.23 5.59-13.5 0-5.28-2.14-10.06-5.59-13.51a19.062 19.062 0 00-13.5-5.58H115.52L93.36 27.11c-1.38-8.75-6.21-16.14-12.86-20.97A32.124 32.124 0 0056.57.4c-8.75 1.38-16.13 6.21-20.96 12.86zm158.75 35.91l-18.51-4.96-29.14 108.26h19.39l28.26-103.3zm52.89 93.87c11.28 3.03 22.91-3.67 25.93-14.96 3.03-11.29-3.68-22.92-14.97-25.93-11.3-3.02-22.92 3.68-25.94 14.97-3.02 11.29 3.7 22.9 14.98 25.92zm67.96 9.43l22.6-84.61-131.14-35.14-32.21 119.75h19.31l20.97-77.86c9.33 2.5 18.98-3.09 21.48-12.42l61.8 16.55c-2.5 9.35 3.06 19 12.4 21.5l-13.94 52.23h18.73zM148.04 454.65l44.21-123.39h97.05l37.13 113.5c-31.5 12.4-66.92 18.72-102.51 18.95-25.79.16-51.56-2.86-75.88-9.06zm-23.05-251.7h83.48l-28.76 63.82h-47.77l-10.27-63.82h3.32z" />
                         </svg>
-
-                        <span> {{ __('messages.retired_persons') }} </span>
+                        <span>{{ __('messages.employees_section') }} 
+                        </span>
                     </a>
                 </li>
                 <!-- <li>
@@ -1264,7 +1273,7 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="#sideBarSettingMasters" data-toggle="collapse">
-                                    {{ __('messages.masters') }} <span class="menu-arrow"></span>
+                                   <span> {{ __('messages.masters') }}</span> <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sideBarSettingMasters">
                                     <ul class="nav-second-level">
@@ -1323,7 +1332,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarCopyOldData" data-toggle="collapse">
-                                    {{ __('messages.copy_academic') }}&{{ __('messages.exam_masters') }}
+                                <span>{{ __('messages.copy_academic') }} & {{ __('messages.exam_masters') }}  </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarCopyOldData">
@@ -1649,9 +1658,10 @@
                 </li>
                 <li>
                     <a href="{{ route('teacher.student.daily_attendance')}}" class="nav-link {{ (request()->is('teacher/student/daily_attendance')) ? 'active' : '' }}">
-                        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#C4C7D2" />
-                        </svg>
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px;"><g fill="#C4C7D2">
+                        <path d="m7 11c-1.1 0-2-.9-2-2v-1c0-1.1.9-2 2-2s2 .9 2 2v1c0 1.1-.9 2-2 2zm-2 6.993 4 .007c.55 0 1-.45 1-1v-2c0-1.65-1.35-3-3-3s-3 1.35-3 3v2c0 .552.448.993 1 .993zm14 .007h-6c-.553 0-1-.447-1-1s.447-1 1-1h6c.553 0 1 .447 1 1s-.447 1-1 1zm0-4h-6c-.553 0-1-.448-1-1s.447-1 1-1h6c.553 0 1 .448 1 1s-.447 1-1 1zm0-4h-6c-.553 0-1-.448-1-1s.447-1 1-1h6c.553 0 1 .448 1 1s-.447 1-1 1z"/>
+                        <path d="m22 2h-20c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2v-16c0-1.1-.9-2-2-2zm0 17.5c0 .28-.22.5-.5.5h-19c-.28 0-.5-.22-.5-.5v-15c0-.28.22-.5.5-.5h19c.28 0 .5.22.5.5z"/></g></svg>
+                        
                         <span>{{ __('messages.class_student_attendance') }} </span>
                     </a>
                 </li>
@@ -1831,7 +1841,7 @@
                             </li>
                             <li>
                                 <a href="#sidebarResult" data-toggle="collapse">
-                                    {{ __('messages.exam_results') }}<span class="menu-arrow"></span>
+                                    <span>{{ __('messages.exam_results') }}</span><span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarResult">
                                     <ul class="nav-second-level">

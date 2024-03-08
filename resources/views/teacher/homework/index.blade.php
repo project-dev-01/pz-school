@@ -165,7 +165,7 @@ width: 14.3em;
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="display:none;">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">

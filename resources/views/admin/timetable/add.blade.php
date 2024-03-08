@@ -110,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="display:none;">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}</label>
                                     <select id="session_id" class="form-control" name="session_id">
@@ -157,7 +157,7 @@
                             <div class="col-md-12">
                                 <div class="">
                                     <div class="table-responsive">
-                                        <table class="table nowrap" id="timetable_table" style="width: max-content;">
+                                        <table class="table nowrap" id="timetable_table" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th>{{ __('messages.break') }}</th>
