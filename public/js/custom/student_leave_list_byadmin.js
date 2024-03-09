@@ -124,8 +124,7 @@ $(function () {
         // // subject division
         studentLeaveList(formData);
     });
-    function getstudentLeaveList() 
-    {
+    function getstudentLeaveList() {
         var form = this;
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
@@ -205,9 +204,9 @@ $(function () {
                 if (res.code == 200) {
                     // allStudentLeave();
                     toastr.success('Leave Updated sucessfully');
-                   
+
                     // $('#student-leave-table').DataTable().ajax.reload(null, false);
-                     //location.reload();
+                    //location.reload();
                     getstudentLeaveList();
                 }
                 else {
@@ -264,8 +263,7 @@ $(function () {
                 }
             });
         }
-        else 
-        {
+        else {
             $('#leave_status_name').css('border-color', 'red');
             $('#alert_status').html('Required');
         }
@@ -517,6 +515,12 @@ $(function () {
                 data: 'status'
             },
             {
+                data: 'home_teacher_status'
+            },
+            {
+                data: 'nursing_teacher_status'
+            },
+            {
                 data: 'reason'
             },
             {
@@ -552,21 +556,35 @@ $(function () {
                 }
             },
             {
+                targets: 7,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
                 targets: 8,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 10,
                 render: function (data, type, row, meta) {
                     var documentLink = getDocumentLink(row);
                     return documentLink;
                 }
             },
             {
-                targets: 11,
+                targets: 13,
                 render: function (data, type, row, meta) {
                     var remarksButtons = getRemarksButtons(row);
                     return remarksButtons;
                 }
             },
             {
-                targets: 12,
+                targets: 14,
                 render: function (data, type, row, meta) {
                     var viewDetailsButton = getViewDetailsButton(row);
                     return viewDetailsButton;
@@ -594,7 +612,7 @@ $(function () {
     function getDocumentLink(row) {
         var document = '';
         if (row.document) {
-            document = '<a href="' + studentDocUrl + '/' + row.document + '" download class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
+            document = '<a href="' + studentDocUrl + '/' + row.document + '" download target="_blank" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
         } else {
             document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
         }

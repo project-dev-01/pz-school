@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="nursingPopupTitle">Homeroom Teacher</h5>
+                <h5 class="modal-title" id="nursingPopupTitle">{{ __('messages.homeroom_teacher') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -37,34 +37,34 @@
                                 <td id="documentDetails"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.leave_type') }} (From Parent)</td>
+                                <td>{{ __('messages.leave_type') }} ( {{ __('messages.from_parent') }} )</td>
                                 <td>:</td>
                                 <td id="showleaveType"></td>
                             </tr>
                             <tr>
-                                <td>Absense Reason(From Parent)</td>
+                                <td>{{ __('messages.absense_reason') }} ( {{ __('messages.from_parent') }} )</td>
                                 <td>:</td>
                                 <td id="absentReasonFromParent"></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.leave_type') }} (Nursing)</td>
+                                <td>{{ __('messages.leave_type') }} ( {{ __('messages.nursing') }} )</td>
                                 <td>:</td>
                                 <td id="dropLeaveType">
                                 </td>
                             </tr>
                             <tr>
-                                <td>Absense Reason (Nursing)</td>
+                                <td>{{ __('messages.absense_reason') }} ( {{ __('messages.nursing') }} )</td>
                                 <td>:</td>
                                 <td id="absentReason">
 
                                 </td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.leave_type') }} (Class Incharge)</td>
+                                <td>{{ __('messages.leave_type') }} ( {{ __('messages.class_incharge') }} )</td>
                                 <td>:</td>
                                 <td id="showleaveTypeTeacher">
                                     <select id="changeLevType" class="form-control" name="changeLevType">
-                                        <option value="">Select Leave Type</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
                                         <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
                                         @empty
@@ -73,10 +73,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Absense Reason(Class Incharge)</td>
+                                <td>{{ __('messages.absense_reason') }}( {{ __('messages.class_incharge') }} )</td>
                                 <td>:</td>
                                 <td id="absentReasonForTeacher">
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                    <select id="changelevReasons1" class="form-control" name="changelevReasons1">
                                         <option value="">{{ __('messages.select_reason') }}</option>
                                     </select>
                                 </td>

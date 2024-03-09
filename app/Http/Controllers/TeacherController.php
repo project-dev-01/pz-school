@@ -258,7 +258,7 @@ class TeacherController extends Controller
         } else {
             $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         }
-        // dd($teacher_type);
+        // dd($getclass);
 
         // $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
 

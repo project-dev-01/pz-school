@@ -290,26 +290,28 @@ class CommonController extends Controller
                     }
                     if ($notification['type'] == "App\Notifications\StudentLeaveApply") {
                         $redirectRoute = "javascript:void(0)";
-                        if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
-                            $redirectRoute = route('admin.student_leave.list');
+                        if (session()->has('role_id')) {
+                            $role_id = session()->get('role_id');
+                            if ($role_id == 2) {
+                                $redirectRoute = route('admin.student_leave.list');
+                            } elseif ($role_id == 3) {
+                                $redirectRoute = route('staff.student_leave.list');
+                            } elseif ($role_id == 4) {
+                                $redirectRoute = route('teacher.student_leave.list');
+                            }
                         }
-                        if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
-                            $redirectRoute = route('staff.student_leave.list');
-                        }
-                        if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
-                            $redirectRoute = route('teacher.student_leave.list');
-                        }
-
+                    
                         $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
                         $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
                         $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
                         $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">' . ucfirst($name) . '</p>
-                        <p class="text-muted mb-0 user-msg">
-                            <small>Student Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>
-                        </p>
-                    </a>';
+                            <p class="notify-details">' . ucfirst($name) . '</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>Student Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>
+                            </p>
+                        </a>';
                     }
+                    
                     if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
                         $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
                         $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
@@ -465,6 +467,19 @@ class CommonController extends Controller
             }
         }
         return array('count' => $count, 'notificationlist' => $notificationlist);
+    }
+    protected function getRedirectRoute($routeName)
+    {
+        switch (session()->get('role_id')) {
+            case 2:
+                return route('admin.' . $routeName);
+            case 3:
+                return route('staff.' . $routeName);
+            case 4:
+                return route('teacher.' . $routeName);
+            default:
+                return "javascript:void(0)";
+        }
     }
     // remainder Notifications
     public function remainderNotifications(Request $request)

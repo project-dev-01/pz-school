@@ -132,14 +132,31 @@
                                     <th> {{ __('messages.class') }}</th>
                                     <th> {{ __('messages.from') }}</th>
                                     <th> {{ __('messages.to') }}</th>
-                                    <!-- <th> {{ __('messages.approval_status') }}</th> -->
                                     <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.homeroom_status') }}</th>
+                                    <th> {{ __('messages.nursing_status') }}</th>
                                     <th> {{ __('messages.reason') }}</th>
                                     <th> {{ __('messages.document') }}</th>
-                                    <th> {{ __('messages.teacher_remarks') }}</th>
+                                    <th> {{ __('messages.homeroom_teacher_remarks') }}</th>
                                     <th> {{ __('messages.nursing_teacher_remarks') }}</th>
                                     <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.action') }}</th>
+
+                                    <!-- <th>#</th>
+                                    <th> {{ __('messages.student_name') }}</th>
+                                    <th> {{ __('messages.grade') }}</th>
+                                    <th> {{ __('messages.class') }}</th>
+                                    <th> {{ __('messages.from') }}</th>
+                                    <th> {{ __('messages.to') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.homeroom_status') }}</th>
+                                    <th> {{ __('messages.nursing_status') }}</th>
+                                    <th> {{ __('messages.reason') }}</th>
+                                    <th> {{ __('messages.document') }}</th>
+                                    <th> {{ __('messages.homeroom_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.nursing_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
+                                    <th> {{ __('messages.action') }}</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -253,7 +270,7 @@
                                     <select id="directchangeLevType" class="form-control" name="directchangeLevType">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
-                                        <option value="{{ $ress['id'] }}">{{ __('messages.' . $ress['name']) }}</option>
+                                        <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>

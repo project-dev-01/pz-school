@@ -5,7 +5,9 @@ $(function () {
         department_id: null,
         class_id: null,
         section_id: null,
-        session_id: null
+        session_id: null,
+        status: "0",
+        academic_year:academic_session_id
     };
     if (studentList !== undefined && studentList !== null) {
         getStudentList(formData);
@@ -393,6 +395,7 @@ $(function () {
         e.preventDefault();
         // var StudentFilter = $("#StudentFilter").valid();
         // if (StudentFilter === true) {
+        var academic_year = $('#academic_year').val();
         var student_name = $('#student_name').val();
         var department_id_filter = $('#department_id_filter').val();
         var class_id = $('#class_id').val();
@@ -408,6 +411,7 @@ $(function () {
             sessionID: session_id,
             userID: userID,
             status: status,
+            academic_year:academic_year
         };
         // setLocalStorageForStudentList(classObj);
 
@@ -418,6 +422,7 @@ $(function () {
             class_id: class_id,
             section_id: section_id,
             session_id: session_id,
+            academic_year:academic_year
         };
         getStudentList(formData);
         // } else {
@@ -430,18 +435,18 @@ $(function () {
         var formData = {
             studentDetails: document.getElementById('checkboxStudentDetails').checked,
             parentDetails: document.getElementById('checkboxParentDetails').checked,
-            // schoolDetails: document.getElementById('checkboxSchoolDetails').checked,
-            academicDetails: document.getElementById('checkboxAcademic').checked,
-            gradeAndClasses: document.getElementById('checkboxGrade').checked,
-            gardeClassAcademic: $('#gardeClassAcademic').val(),
-            attendance: document.getElementById('checkboxAttendance').checked,
-            attendanceAcademic: $('#attendanceAcademic').val(),
-            testResult: document.getElementById('checkboxTestResult').checked,
-            testResultAcademic: $('#testResultAcademic').val()
+            schoolDetails: document.getElementById('checkboxSchoolDetails').checked,
+            // academicDetails: document.getElementById('checkboxAcademic').checked,
+            // gradeAndClasses: document.getElementById('checkboxGrade').checked,
+            // gardeClassAcademic: $('#gardeClassAcademic').val(),
+            // attendance: document.getElementById('checkboxAttendance').checked,
+            // attendanceAcademic: $('#attendanceAcademic').val(),
+            // testResult: document.getElementById('checkboxTestResult').checked,
+            // testResultAcademic: $('#testResultAcademic').val()
             // Add similar lines for other checkboxes as needed
             // Add data for dropdowns if needed
         };
-        console.log(formData);
+        // console.log(formData);
         // Send the data to the server using AJAX
         $.ajax({
             type: 'POST',
@@ -477,6 +482,7 @@ $(function () {
         $('#excelSectionID').val(formData.section_id);
         $('#excelStatus').val(formData.status);
         $('#excelSession').val(formData.session_id);
+        $('#academicYear').val(formData.academic_year);
         var table = $('#student-table').DataTable({
             processing: true,
             serverSide: true,

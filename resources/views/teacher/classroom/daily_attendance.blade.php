@@ -63,7 +63,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="class_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="<?php echo date('d-m-Y'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
+                                    <input type="text" class="form-control" value="<?php echo date('Y-m-d'); ?>" name="class_date" placeholder="{{ __('messages.dd_mm_yyyy') }}" id="classDate" require="">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -146,7 +146,7 @@
                                             <input type="hidden" name="section_id" id="listModeSectionID">
                                             <input type="hidden" name="semester_id" id="listModeSemesterID">
                                             <input type="hidden" name="session_id" id="listModeSessionID">
-                                            <input type="text" name="date" id="listModeSelectedDate">
+                                            <input type="hidden" name="date" id="listModeSelectedDate">
                                         </div>
                                     </div>
                                     <div class="card">

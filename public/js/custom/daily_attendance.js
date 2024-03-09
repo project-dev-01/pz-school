@@ -120,7 +120,7 @@ $(function () {
             var classObj = {
                 classID: classID,
                 sectionID: sectionID,
-                classDate: convertDigitIn(classDate),
+                classDate: classDate,
                 semesterID: semesterID,
                 sessionID: sessionID,
                 academic_session_id: academic_session_id

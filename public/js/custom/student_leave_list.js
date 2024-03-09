@@ -471,7 +471,7 @@ $(function () {
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (row.document) {
-                            var document = '<a href="' + studentDocUrl + '/' + row.document + '" download class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
+                            var document = '<a href="' + studentDocUrl + '/' + row.document + '" download target="_blank" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
                         } else {
                             document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
                         }

@@ -2890,14 +2890,14 @@ class AdminController extends Controller
         $data = [
             'studentDetails' => $request->studentDetails,
             'parentDetails' => $request->parentDetails,
-            // 'schoolDetails' => $request->schoolDetails,
-            'academicDetails' => $request->academicDetails,
-            'gradeAndClasses' => $request->gradeAndClasses,
-            'gardeClassAcademic' => $request->gardeClassAcademic,
-            'attendance' => $request->attendance,
-            'attendanceAcademic' => $request->attendanceAcademic,
-            'testResult' => $request->testResult,
-            'testResultAcademic' => $request->testResultAcademic,
+            'schoolDetails' => $request->schoolDetails,
+            // 'academicDetails' => $request->academicDetails,
+            // 'gradeAndClasses' => $request->gradeAndClasses,
+            // 'gardeClassAcademic' => $request->gardeClassAcademic,
+            // 'attendance' => $request->attendance,
+            // 'attendanceAcademic' => $request->attendanceAcademic,
+            // 'testResult' => $request->testResult,
+            // 'testResultAcademic' => $request->testResultAcademic,
             'staff_id' => session()->get('ref_user_id')
 
         ];
@@ -4701,7 +4701,7 @@ class AdminController extends Controller
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
             "status" => $request->status,
-            "academic_session_id" => session()->get('academic_session_id')
+            "academic_session_id" => $request->academic_year
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
@@ -6923,10 +6923,9 @@ class AdminController extends Controller
 
         $branch_id = session()->get('branch_id');
         $staff_id = session()->get('ref_user_id');
-        // $employee_attendance_report = __('messages.employee_attendance_report');
-        $student_list_report = "Student List";
+        $student_list_report = __('messages.student_list');
         // dd($request);
-        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session), $student_list_report . '.xlsx');
+        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session,$request->academic_year), $student_list_report . '.xlsx');
     }
     public function feesExpenseExcel(Request $request)
     {

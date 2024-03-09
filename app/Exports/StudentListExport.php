@@ -31,8 +31,9 @@ class StudentListExport  implements FromCollection, WithHeadings
     protected $section_id;
     protected $session;
     protected $studentList;
+    protected $academic_year;
 
-    function __construct($branch, $staff_id, $student_name, $department_id, $class_id, $section_id, $session)
+    function __construct($branch, $staff_id, $student_name, $department_id, $class_id, $section_id, $session,$academic_year)
     {
         $this->staff_id = $staff_id;
         $this->branch = $branch;
@@ -41,6 +42,7 @@ class StudentListExport  implements FromCollection, WithHeadings
         $this->class_id = $class_id;
         $this->section_id = $section_id;
         $this->session = $session;
+        $this->academic_year = $academic_year;
         $this->columns = [];
         $this->keyValArray = [];
         $data = [
@@ -51,30 +53,41 @@ class StudentListExport  implements FromCollection, WithHeadings
             "department_id" => $this->department_id,
             "class_id" => $this->class_id,
             "section_id" => $this->section_id,
-            "session" => $this->session
+            "session" => $this->session,
+            "academic_year" => $this->academic_year,
+            
         ];
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.download_student_list_information'), $data);
         $excel = $response['data'];
+
         $this->studentList = collect($excel);
         $this->getSingleColumn = isset($this->studentList[0]) ? $this->studentList[0] : [];
         $this->columns = [
             'Attendance No',
             'Student Name',
+            'Student No',
             'Student Email',
             'Student Gender',
-            'DOB',
+            'Student DOB',
+            'Student Passport',
+            'Student NRIC',
+            'Student Admission Date',
+            'Student Nationality',
+            'Student Address1',
+            'Student Address2',
+            'Student Mobile No',
             'Parent Name',
             'Parent Gender',
             'Parent Email',
-            'Nationality',
-            'Grade Name',
-            'Class Name',
-            'No of Days Attendance',
-            'Present Count',
-            'Absent Count',
-            'Late Count',
-            'Excused Count'
+            'Parent DOB',
+            'Parent Occupation',
+            'Parent Passport',
+            'Parent NRIC',
+            'Parent Mobile No',
+            'Parent Nationality',
+            'School Address',
+            'School Mobile No',
+            'School Email',
         ];
         // here we add dynamic papernames
         if (isset($this->getSingleColumn['all_marks']) && is_array($this->getSingleColumn['all_marks'])) {
@@ -89,37 +102,49 @@ class StudentListExport  implements FromCollection, WithHeadings
     public function collection()
     {
         $exportData = $this->studentList->map(function ($item) {
-            $this->keyValArray = [
-                'Attendance No' => $item['attendance_no'] ?? null,
-                'Student Name' => $item['name'] ?? null,
-                'Student Email' => $item['email'] ?? null,
-                'Student Gender' => $item['gender'] ?? null,
-                'DOB' => $item['birthday'] ?? null,
-                'Parent Name' => $item['parent_name'] ?? null,
-                'Parent Gender' => $item['parent_gender'] ?? null,
-                'Parent Email' => $item['parent_email'] ?? null,
-                'Nationality' => $item['nationality'] ?? null,
-                'Grade Name' => $item['class_name'] ?? null,
-                'Class Name' => $item['section_name'] ?? null,
-                'No of Days Attendance' => $item['no_of_days_attendance'] ?? null,
-                'Present Count' => $item['presentCount'] ?? null,
-                'Absent Count' => $item['absentCount'] ?? null,
-                'Late Count' => $item['lateCount'] ?? null,
-                'Excused Count' => $item['excusedCount'] ?? null,
+            $this->columns = [
+                'Attendance No'=> $item['attendance_no'] ?? null,
+                'Student Name'=> $item['name'] ?? null,
+                'Student No'=> $item['register_no'] ?? null,
+                'Student Email'=> $item['email'] ?? null,
+                'Student Gender'=> $item['gender'] ?? null,
+                'Student DOB'=> $item['birthday'] ?? null,
+                'Student Passport'=> $item['passport'] ?? null,
+                'Student NRIC'=> $item['nric'] ?? null,
+                'Student Admission Date'=> $item['admission_date'] ?? null,
+                'Student Nationality'=> $item['nationality'] ?? null,
+                'Student Address1'=> $item['current_address'] ?? null,
+                'Student Address2'=> $item['permanent_address'] ?? null,
+                'Student Mobile No'=> $item['mobile_no'] ?? null,
+                'Parent Name'=> $item['parent_name'] ?? null,
+                'Parent Gender'=> $item['parent_gender'] ?? null,
+                'Parent Email'=> $item['parent_email'] ?? null,
+                'Parent DOB'=> $item['parent_dob'] ?? null,
+                'Parent Occupation'=> $item['parent_occupation'] ?? null,
+                'Parent Passport'=> $item['parent_passport'] ?? null,
+                'Parent NRIC'=> $item['parent_nric'] ?? null,
+                'Parent Mobile No'=> $item['parent_mobile_no'] ?? null,
+                'Parent Nationality'=> $item['parent_nationality'] ?? null,
+                'School Address'=> $item['school_address'] ?? null,
+                'School Mobile No'=> $item['school_mobile_no'] ?? null,
+                'School Email'=> $item['school_email'] ?? null
             ];
+            return $this->columns;
+            // dd($this->columns);
             // Check if 'all_marks' key exists in $item
-            if (isset($item['all_marks']) && is_array($item['all_marks'])) {
-                collect($item['all_marks'])->each(function ($mark) {
-                    // dd($mark);
-                    $header = ($mark['academic_session_name'] ?? null) . '-' . ($mark['subject_name'] ?? null) . '-' . ($mark['paper_name'] ?? null);
-                    $score = ($mark['score'] ?? null);
-                    $this->keyValArray[$header] = $score;
-                });
-            } else {
-                $this->keyValArray['AY-SUB-PAPER'] = null;
-            }
-            return $this->keyValArray;
+            // if (isset($item['all_marks']) && is_array($item['all_marks'])) {
+            //     collect($item['all_marks'])->each(function ($mark) {
+            //         // dd($mark);
+            //         $header = ($mark['academic_session_name'] ?? null) . '-' . ($mark['subject_name'] ?? null) . '-' . ($mark['paper_name'] ?? null);
+            //         $score = ($mark['score'] ?? null);
+            //         $this->keyValArray[$header] = $score;
+            //     });
+            // } else {
+            //     $this->keyValArray['AY-SUB-PAPER'] = null;
+            // }
+            // return $this->keyValArray;
         });
+        // dd($exportData);
         return $exportData;
     }
     public function headings(): array
