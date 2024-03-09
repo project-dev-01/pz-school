@@ -55,7 +55,7 @@
 				</div>
 				@endif
 				<div class="card-body">
-					<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off" >
+					<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off">
 						@csrf
 						<div class="row">
 
@@ -97,23 +97,23 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								
+
 							</div>
 
 							<div class="form-group text-right m-b-0">
-                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit" name="getmenus" value="get" style="width: 150px;margin-top: 27px;">
-							{{ __('messages.get_permissions') }}
-                            </button>
-                            </div>
+								<button class="btn btn-primary-bl waves-effect waves-light" type="submit" name="getmenus" value="get" style="width: 150px;margin-top: 27px;">
+									{{ __('messages.get_permissions') }}
+								</button>
+							</div>
 						</div>
 
 					</form>
 					<br>
 					<hr><br>
 					<div class="table-responsive">
-					<form method="post" style="float:right;" action="{{ route('admin.school_role.deleteschoolpermission') }}" autocomplete="off" novalidate="novalidate">
+						<form method="post" style="float:right;" action="{{ route('admin.school_role.deleteschoolpermission') }}" autocomplete="off" novalidate="novalidate">
 							@csrf
-						<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
+							<input type="hidden" name="role_id" id="prole_id" value="{{ @$role_id }}">
 							<input type="hidden" name="school_roleid" value="{{ @$school_roleid }}">
 							@if(isset($branch_id))
 							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmdelete"> {{ __('messages.remove_portal_access_permission') }} </button>
@@ -197,10 +197,10 @@
 										</th>
 										<th><input type="checkbox" name="read[{{$menu['menu_id']}}]" class="checkall" id="mainmenu{{ $i }}" onchange="mainmenu({{ $i }},'A')" value="Access" {{ $readbtn1 }}>{{ __('messages.read') }}</th>
 										@if($menu['menu_dropdown']=='No')
-										<th><input type="checkbox" name="add[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $addbtn1 }}>{{ __('messages.add') }}</th>
-										<th><input type="checkbox" name="updates[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $updatebtn1 }}>{{ __('messages.update') }}</th>
-										<th><input type="checkbox" name="deletes[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $deletebtn1 }}>{{ __('messages.delete') }}</th>
-										<th><input type="checkbox" name="export[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $exportbtn1 }}>{{ __('messages.export') }}</th>
+										<th><input type="checkbox" name="add[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $addbtn1 }}> {{ __('messages.add') }}</th>
+										<th><input type="checkbox" name="updates[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $updatebtn1 }}> {{ __('messages.update') }}</th>
+										<th><input type="checkbox" name="deletes[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $deletebtn1 }}> {{ __('messages.delete') }}</th>
+										<th><input type="checkbox" name="export[{{$menu['menu_id']}}]" class="checkall mainmenu{{ $i }}" value="Access" {{ $exportbtn1 }}> {{ __('messages.export') }}</th>
 										@else
 										<th colspan="4"></th>
 										@endif
@@ -300,10 +300,14 @@
 									@endforeach
 								</tbody>
 							</table>
-							
-							@if(isset($branch_id))
-							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">{{ __('messages.set_permission') }}</button>
 
+							@if(isset($branch_id))
+							<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#confirm">{{ __('messages.set_permission') }}</button> -->
+							<div class="form-group text-left m-b-0">
+								<button class="btn btn-primary-bl waves-effect waves-light" data-toggle="modal" data-target="#confirm" style="width: 150px;">
+									{{ __('messages.set_permission') }}
+								</button>
+							</div>
 							@endif
 							<!-- Trigger the modal with a button -->
 

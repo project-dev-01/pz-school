@@ -705,7 +705,6 @@ class StudentController extends Controller
             'student_id' => session()->get('ref_user_id'),
             'academic_session_id' => session()->get('academic_session_id')
         ];
-
         $days = array(
             'monday',
             'tuesday',
@@ -717,6 +716,7 @@ class StudentController extends Controller
         );
         // dd($request);
         $timetable = Helper::PostMethod(config('constants.api.timetable_student'), $data);
+        // dd($timetable);
         return view(
             'student.timetable.index',
             [

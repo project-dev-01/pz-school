@@ -199,7 +199,7 @@
                                                                 <input type="hidden" name="status" id="excelStatus">
                                                                 <input type="hidden" name="session" id="excelSession">
                                                                 <input type="hidden" name="academic_year" id="academicYear">
-                                                                <div class="clearfix float-right">
+                                                                <div class="clearfix float-right" style="margin-top:20px;">
                                                                     <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                                                         {{ __('messages.download') }}
                                                                     </button>
@@ -370,33 +370,33 @@
                                                                 </div>
                                                             </div>
                                                             </li> -->
-                                                            </ul>
-                                                    </div>
-                                                    <div class="col-md-3">
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="form-group text-left m-b-0">
+                                                                <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                                                    {{ __('messages.save') }}
+                                                                </button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div class="form-group text-left m-b-0">
-                                                    <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
-                                                        {{ __('messages.save') }}
-                                                    </button>
-                                                </div>
-                                                </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- </div>  -->
-                                </div> <!-- end card-->
-                            </div> <!-- end col -->
+                                            <!-- </div>  -->
+                                        </div> <!-- end card-->
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div> <!-- end col -->
+                </div> <!-- end col -->
 
-    </div>
-</div> <!-- end card-box -->
-</div> <!-- end col -->
+            </div>
+        </div> <!-- end card-box -->
+    </div> <!-- end col -->
 </div>
 <!--- end row -->
 </div>

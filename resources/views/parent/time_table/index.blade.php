@@ -65,7 +65,7 @@
                     <li class="nav-item">
                         <h4 class="navv">
                             @if($timetable>0)
-                            {{ __('messages.class') }} {{ $details['class']['class_name'] }} ({{ __('messages.section') }}: {{ $details['section']['section_name'] }}) ({{ __('messages.semester') }}: {{ $details['semester']['semester_name'] }}) ({{ __('messages.session') }}: {{ $details['session']['session_name'] }})
+                            {{ __('messages.class') }} {{ $details['class']['class_name'] ?? "" }} ({{ __('messages.section') }}: {{ $details['section']['section_name'] ?? "" }})
                             @endif
                         </h4>
 

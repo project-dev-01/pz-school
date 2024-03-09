@@ -24,7 +24,7 @@ $(function () {
     $("#changeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
-       // console.log(student_leave_type_id);
+        // console.log(student_leave_type_id);
         $("#changelevReasons").empty();
         $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
@@ -138,6 +138,8 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
+                    console.log("response");
+                    console.log(response);
                     if (response.code == 200) {
                         $('#studentleave-table').DataTable().ajax.reload(null, false);
                         toastr.success('Leave apply sucessfully');
@@ -146,7 +148,27 @@ $(function () {
                     } else {
                         toastr.error(response.message);
                     }
+                },
+                error: function (xhr, status, error) {
+                    console.log("err")
+                    console.log(xhr)
+                    console.log(xhr.responseText)
+                
+                    // Parse the responseText to get the error message
+                    let responseJSON;
+                    try {
+                        responseJSON = JSON.parse(xhr.responseText);
+                    } catch (e) {
+                        console.error("Error parsing JSON response:", e);
+                    }
+                
+                    if (responseJSON && responseJSON.message) {
+                        toastr.error(responseJSON.message);
+                    } else {
+                        toastr.error('Something went wrong');
+                    }
                 }
+                
             });
             // console.log(classObj);
             // setLocalStorageForparentleaveapply(classObj);
@@ -465,22 +487,22 @@ $(function () {
                 leave_type: entry.leave_type
             });
         });
-        
+
         const uniqueLeaveTypes = Array.from(leaveTypesSet);
-        
+
         // Create table headers with leave types
         uniqueLeaveTypes.forEach(leaveType => {
             const header = document.createElement('th');
             header.textContent = leaveType.leave_type; // Access leave_type property
             headerRow.appendChild(header);
         });
-        
+
         // Find reasons for each leave type and populate the table
         const maxReasonsCount = Math.max(...Object.values(data).map(entry => parseReasons(entry.reasons).length));
-        
+
         for (let i = 0; i < maxReasonsCount; i++) {
             const row = tbody.insertRow();
-        
+
             uniqueLeaveTypes.forEach(leaveType => {
                 const cell = row.insertCell();
                 const reasons = Object.values(data)
@@ -490,32 +512,32 @@ $(function () {
                         reason_id: parseReasons(entry.id)[i], // Include the unique identifier (leave_type_id)
                         reason: parseReasons(entry.reasons)[i]
                     }))
-                    .filter(reason => reason); 
-        
+                    .filter(reason => reason);
+
                 if (reasons.length > 0) {
                     const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
 
                     // Check if the reason is an object (assuming it's a string)
                     const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
-                
+
                     cell.textContent = reasonText;
-                   // console.log(reasons[0]);
+                    // console.log(reasons[0]);
                     // Add a click event listener to each cell
                     cell.addEventListener('click', function () {
                         var selectedLeaveTypeId = reasons[0].leave_type_id;
                         var selectedReasonId = reasons[0].reason_id.id;
                         //console.log(selectedReasonId);
-                         $("#changeLevType").val(selectedLeaveTypeId);
+                        $("#changeLevType").val(selectedLeaveTypeId);
                         // Find the select element
-                       $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
-                        if (res.code == 200) {
-                        $("#changelevReasons").empty();
-                            $.each(res.data, function (key, val) {
-                                $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
-                            });
-                            $("#changelevReasons").val(selectedReasonId);
-                        }
-                    }, 'json');
+                        $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
+                            if (res.code == 200) {
+                                $("#changelevReasons").empty();
+                                $.each(res.data, function (key, val) {
+                                    $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                });
+                                $("#changelevReasons").val(selectedReasonId);
+                            }
+                        }, 'json');
                         // Close the modal after selecting the leave type
                         $('#knowtheReasons').modal('hide');
                     });
