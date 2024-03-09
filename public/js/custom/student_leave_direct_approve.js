@@ -185,14 +185,14 @@ $(function () {
                         reason: parseReasons(entry.reasons)[i]
                     }))
                     .filter(reason => reason); 
-
+                   // console.log(reasons);
                 if (reasons.length > 0) {
                     const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
                     console.log(reasonObject);
                     // Check if the reason is an object (assuming it's a string)
                     const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
                 
-                    cell.textContent = reasonText;
+                    cell.textContent = reasonText; 
                    // console.log(reasons[0]);
                     // Add a click event listener to each cell
                     cell.addEventListener('click', function () {

@@ -9,11 +9,11 @@ $(function () {
     var dates = [];
     getHolidays();
     function getHolidays() {
-        $.get(holidayList, { token: token, branch_id: branchID }, function (res) {
+        $.get(holidayEventList, { token: token, branch_id: branchID }, function (res) {
             // console.log('test',res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    dates.push(val.date);
+                    dates.push(val.start_date);
                 });
             }
         }, 'json');

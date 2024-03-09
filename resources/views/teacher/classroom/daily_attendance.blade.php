@@ -235,7 +235,7 @@
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 
     var getStudentAttendance = "{{ config('constants.api.get_student_attendance_by_day') }}";
-    var holidayList = "{{ config('constants.api.holidays_list') }}";
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}"
 
     var getDailyReportRemarks = "{{ config('constants.api.get_daily_report_remarks') }}";
     var getClassRoomWidget = "{{ config('constants.api.get_classroom_widget_data') }}";
