@@ -85,16 +85,6 @@
                                     </select></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.delete_google_address') }}</td>
-                                <td>:</td>
-                                <td>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input allDayCheck" id="delete_google_address" name="delete_google_address">
-                            <label class="custom-control-label" for="delete_google_address"></label>
-                        </div>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>{{ __('messages.termination_status') }}<span class="text-danger">*</span></td>
                                 <td>:</td>
                                 <td> <select id="termination_status" class="form-control" name="termination_status">
@@ -136,6 +126,16 @@
                             <input type="text" class="form-control datepicker" id="date_of_termination" name="date_of_termination" aria-describedby="inputGroupPrepend">
                         </div>
                     </div>    </td>
+                            </tr>
+                            <tr>
+                                <td>{{ __('messages.delete_google_address') }}</td>
+                                <td>:</td>
+                                <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input allDayCheck" id="delete_google_address" name="delete_google_address">
+                            <label class="custom-control-label" for="delete_google_address"></label>
+                        </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

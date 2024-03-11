@@ -208,6 +208,7 @@
                             <input type="hidden" name="section" id="excelSection">
                             <input type="hidden" name="pattern" id="excelPattern">
                             <input type="hidden" name="date" id="excelDate">
+                            <input type="hidden" name="type" value="Day">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                 {{ __('messages.download') }}
@@ -221,6 +222,7 @@
                             <input type="hidden" name="section_id" id="downExcelSection">
                             <input type="hidden" name="pattern" id="downExcelPattern">
                             <input type="hidden" name="year_month" id="downExcelDate">
+                            <input type="hidden" name="type" value="Day">
                             <div class="clearfix float-right">
                                 <button class="btn btn-primary-bl waves-effect waves-light" style="margin-right:5px;" type="submit">
                                 {{ __('messages.pdf') }}

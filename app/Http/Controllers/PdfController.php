@@ -1384,6 +1384,7 @@ class PdfController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $footer_text = session()->get('footer_text');
+        $get_attendance_list_teacher = [];
         if($request->type=="Day"){
             $get_attendance_list_teacher = Helper::PostMethod(config('constants.api.get_attendance_list_teacher'), $data);
         

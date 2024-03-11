@@ -8683,6 +8683,7 @@ class AdminController extends Controller
         $data = [
             'id' => $id,
         ];
+
         // dd($data);
         $application = Helper::PostMethod(config('constants.api.application_details'), $data);
         $grade = Helper::GetMethod(config('constants.api.class_list'));
@@ -8693,6 +8694,22 @@ class AdminController extends Controller
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($application);
+        $dep_data = [
+            "department_id" =>isset($application['data']['enrolled_department']) ? $application['data']['enrolled_department'] : ""
+        ];
+        $class_data = [
+            "class_id" =>isset($application['data']['enrolled_grade']) ? $application['data']['enrolled_grade'] : ""
+        ];
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        if(isset($application['data']['enrolled_grade'])){
+
+            $gradebydepartment = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $dep_data);
+        }
+        if(isset($application['data']['enrolled_grade'])){
+
+            $section_by_class = Helper::PostMethod(config('constants.api.section_by_class'), $class_data);
+        }
+        // dd($gradebydepartment);
         return view(
             'admin.application.edit',
             [
@@ -8703,6 +8720,9 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'gradebydepartment' => isset($gradebydepartment['data']) ? $gradebydepartment['data'] : [],
+                'section_by_class' => isset($section_by_class['data']) ? $section_by_class['data'] : [],
             ]
         );
     }
@@ -8730,30 +8750,29 @@ class AdminController extends Controller
         return $response;
     }
 
-    public function getApplicationDetails($id)
-    {
+    // public function getApplicationDetails($id)
+    // {
 
-        $data = [
-            'id' => $id,
-        ];
+    //     $data = [
+    //         'id' => $id,
+    //     ];
 
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $relation = Helper::GetMethod(config('constants.api.relation_list'));
-        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+    //     $getclass = Helper::GetMethod(config('constants.api.class_list'));
+    //     $relation = Helper::GetMethod(config('constants.api.relation_list'));
+    //     $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
 
 
-        $application = Helper::PostMethod(config('constants.api.application_details'), $data);
-        // dd($student);
-        return view(
-            'admin.application.edit',
-            [
-                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'application' => isset($application['data']) ? $application['data'] : [],
-            ]
-        );
-    }
+    //     $application = Helper::PostMethod(config('constants.api.application_details'), $data);
+    //     return view(
+    //         'admin.application.edit',
+    //         [
+    //             'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+    //             'relation' => isset($relation['data']) ? $relation['data'] : [],
+    //             'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+    //             'application' => isset($application['data']) ? $application['data'] : [],
+    //         ]
+    //     );
+    // }
 
 
     public function updateApplication(Request $request)
@@ -8782,27 +8801,98 @@ class AdminController extends Controller
             $passport_extension = $passport_file->getClientOriginalExtension();
         }
 
+        $nric_base64 = "";
+        $nric_extension = "";
+        $nric_file = $request->file('nric_photo');
+        if ($nric_file) {
+            $nric_path = $nric_file->path();
+            $nric_data = file_get_contents($nric_path);
+            $nric_base64 = base64_encode($nric_data);
+            $nric_extension = $nric_file->getClientOriginalExtension();
+        }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
+
+        $image_supplimental_base64 = "";
+        $image_supplimental_extension = "";
+        $image_supplimental_file = $request->file('japanese_association_membership_image_supplimental');
+        if ($image_supplimental_file) {
+            $image_supplimental_path = $image_supplimental_file->path();
+            $image_supplimental_data = file_get_contents($image_supplimental_path);
+            $image_supplimental_base64 = base64_encode($image_supplimental_data);
+            $image_supplimental_extension = $image_supplimental_file->getClientOriginalExtension();
+        }
+        
+
+        $passport_father_base64 = "";
+        $passport_father_extension = "";
+        $passport_father_file = $request->file('passport_father_photo');
+        if ($passport_father_file) {
+            $passport_father_path = $passport_father_file->path();
+            $passport_father_data = file_get_contents($passport_father_path);
+            $passport_father_base64 = base64_encode($passport_father_data);
+            $passport_father_extension = $passport_father_file->getClientOriginalExtension();
+        }
+
+        $passport_mother_base64 = "";
+        $passport_mother_extension = "";
+        $passport_mother_file = $request->file('passport_mother_photo');
+        if ($passport_mother_file) {
+            $passport_mother_path = $passport_mother_file->path();
+            $passport_mother_data = file_get_contents($passport_mother_path);
+            $passport_mother_base64 = base64_encode($passport_mother_data);
+            $passport_mother_extension = $passport_mother_file->getClientOriginalExtension();
+        }
+
+        $visa_father_base64 = "";
+        $visa_father_extension = "";
+        $visa_father_file = $request->file('visa_father_photo');
+        if ($visa_father_file) {
+            $visa_father_path = $visa_father_file->path();
+            $visa_father_data = file_get_contents($visa_father_path);
+            $visa_father_base64 = base64_encode($visa_father_data);
+            $visa_father_extension = $visa_father_file->getClientOriginalExtension();
+        }
+
+        $visa_mother_base64 = "";
+        $visa_mother_extension = "";
+        $visa_mother_file = $request->file('visa_mother_photo');
+        if ($visa_mother_file) {
+            $visa_mother_path = $visa_mother_file->path();
+            $visa_mother_data = file_get_contents($visa_mother_path);
+            $visa_mother_base64 = base64_encode($visa_mother_data);
+            $visa_mother_extension = $visa_mother_file->getClientOriginalExtension();
+        }
+
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
-            'mobile_no' => $request->mobile_no,
+            // 'mobile_no' => $request->mobile_no,
             'email' => $request->email,
-            'address_1' => $request->address_1,
-            'address_2' => $request->address_2,
+            // 'address_1' => $request->address_1,
+            // 'address_2' => $request->address_2,
             'country' => $request->country,
             'city' => $request->city,
             'state' => $request->state,
             'postal_code' => $request->postal_code,
             'academic_grade' => $request->academic_grade,
             'academic_year' => $request->academic_year,
-            'grade' => $request->grade,
-            'school_year' => $request->school_year,
+            // 'grade' => $request->grade,
+            // 'school_year' => $request->school_year,
             'school_last_attended' => $request->school_last_attended,
-            'school_address_1' => $request->school_address_1,
-            'school_address_2' => $request->school_address_2,
+            // 'school_address_1' => $request->school_address_1,
+            // 'school_address_2' => $request->school_address_2,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -8839,7 +8929,7 @@ class AdminController extends Controller
             'passport' => $request->passport,
             'nric' => $request->nric,
             'passport_expiry_date' => $request->passport_expiry_date,
-            'visa_number' => $request->visa_number,
+            // 'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
             'nationality' => $request->nationality,
             'visa_photo' => $visa_base64,
@@ -8851,7 +8941,95 @@ class AdminController extends Controller
             'phase_2_reason' => $request->phase_2_reason,
             'register_number' => $request->register_number,
             'role_id' => session()->get('role_id'),
+
+            
+
+                
+            "middle_name" => $request->middle_name,
+            "middle_name_english" => $request->middle_name_english,
+            "middle_name_furigana" => $request->middle_name_furigana,
+            "dual_nationality" => $request->dual_nationality,
+            "school_enrollment_status" => $request->school_enrollment_status,
+            "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
+            "mother_middle_name" => $request->mother_middle_name,
+            "mother_last_name_furigana" => $request->mother_last_name_furigana,
+            "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
+            "mother_first_name_furigana" => $request->mother_first_name_furigana,
+            "mother_last_name_english" => $request->mother_last_name_english,
+            "mother_middle_name_english" => $request->mother_middle_name_english,
+            "mother_first_name_english" => $request->mother_first_name_english,
+            "mother_nationality" => $request->mother_nationality,
+            "father_middle_name" => $request->father_middle_name,
+            "father_last_name_furigana" => $request->father_last_name_furigana,
+            "father_middle_name_furigana" => $request->father_middle_name_furigana,
+            "father_first_name_furigana" => $request->father_first_name_furigana,
+            "father_last_name_english" => $request->father_last_name_english,
+            "father_middle_name_english" => $request->father_middle_name_english,
+            "father_first_name_english" => $request->father_first_name_english,
+            "father_nationality" => $request->father_nationality,
+            "guardian_middle_name" => $request->guardian_middle_name,
+            "guardian_last_name_furigana" => $request->guardian_last_name_furigana,
+            "guardian_middle_name_furigana" => $request->guardian_middle_name_furigana,
+            "guardian_first_name_furigana" => $request->guardian_first_name_furigana,
+            "guardian_last_name_english" => $request->guardian_last_name_english,
+            "guardian_middle_name_english" => $request->guardian_middle_name_english,
+            "guardian_first_name_english" => $request->guardian_first_name_english,
+            "guardian_company_name_japan" => $request->guardian_company_name_japan,
+            "guardian_company_name_local" => $request->guardian_company_name_local,
+            "guardian_company_phone_number" => $request->guardian_company_phone_number,
+            "guardian_employment_status" => $request->guardian_employment_status,
+            "expected_academic_year" => $request->expected_academic_year,
+            "expected_grade" => $request->expected_grade,
+            "expected_enroll_date" => $request->expected_enroll_date,
+            "remarks" => $request->remarks,
+
+            // "nric_photo" => $request->nric_photo,
+            // "japanese_association_membership_image_principal" => $request->japanese_association_membership_image_principal,
+            // "japanese_association_membership_image_supplimental" => $request->japanese_association_membership_image_supplimental,
+            
+            "address_unit_no" => $request->address_unit_no,
+            "address_condominium" => $request->address_condominium,
+            "address_street" => $request->address_street,
+            "address_district" => $request->address_district,
+            "visa_type" => $request->visa_type,
+            "visa_type_others" => $request->visa_type_others,
+            "japanese_association_membership_number_student" => $request->japanese_association_membership_number_student,
+            "phase2_remarks" => $request->phase2_remarks,
+            
+            'nric_photo' => $nric_base64,
+            'nric_file_extension' => $nric_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            'image_supplimental_photo' => $image_supplimental_base64,
+            'image_supplimental_file_extension' => $image_supplimental_extension,
+            'visa_father_photo' => $visa_father_base64,
+            'visa_father_file_extension' => $visa_father_extension,
+            'visa_mother_photo' => $visa_mother_base64,
+            'visa_mother_file_extension' => $visa_mother_extension,
+            'passport_mother_photo' => $passport_mother_base64,
+            'passport_mother_file_extension' => $passport_mother_extension,
+            'passport_father_photo' => $passport_father_base64,
+            'passport_father_file_extension' => $passport_father_extension,
+            
+            'visa_old_photo' => $request->visa_old_photo,
+            'passport_old_photo' => $request->passport_old_photo,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'image_supplimental_old_photo' => $request->japanese_association_membership_image_supplimental_old,
+            'nric_old_photo' => $request->nric_old_photo,
+            'passport_father_old_photo' => $request->passport_father_old_photo,
+            'passport_mother_old_photo' => $request->passport_mother_old_photo,
+            'visa_father_old_photo' => $request->visa_father_old_photo,
+            'visa_mother_old_photo' => $request->visa_mother_old_photo,
+
+            "status_after_approval" => $request->status_after_approval,
+            "enrolled_academic_year" => $request->enrolled_academic_year,
+            "enrolled_department" => $request->enrolled_department,
+            "enrolled_grade" => $request->enrolled_grade,
+            "enrolled_class" => $request->enrolled_class,
+            'url' => url('/'),
         ];
+        // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);
 
         return $response;

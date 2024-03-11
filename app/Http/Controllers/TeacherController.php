@@ -1735,7 +1735,7 @@ class TeacherController extends Controller
         // dd($request);
         $branch_id = session()->get('branch_id');
         $attendance_report = __('messages.attendance_report');
-        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date), $attendance_report . '.xlsx');
+        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date,$request->type), $attendance_report . '.xlsx');
     }
 
     public function studentList(Request $request)

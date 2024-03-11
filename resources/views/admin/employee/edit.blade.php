@@ -648,7 +648,7 @@
                                         @forelse($school_roles as $r)
                                         @if($r['portal_roleid']==3 && $r['roles']!=null)
 
-                                        <option value="{{$r['id']}}" {{ (isset($role['school_roleid']) && $role['school_roleid'] ==$r['id']) ? 'selected' : ''  }}>{{ $r['fullname'] }}</option>
+                                        <option value="{{$r['id']}}" {{ (isset($role['school_roleid']) && $role['school_roleid'] ==$r['id']) ? 'selected' : ''  }}>{{ $r['fullname'] }} ( {{ $r['roles'] }} )</option>
                                         @endif
                                         @empty
 
