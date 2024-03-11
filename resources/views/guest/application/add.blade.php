@@ -944,7 +944,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="guardian_email" readonly value="{{$email}}"   value="{{ isset($guardian['guardian_email']) ? $guardian['guardian_email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="guardian_email" readonly value="{{$email}}"  name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
