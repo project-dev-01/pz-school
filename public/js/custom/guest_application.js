@@ -604,6 +604,7 @@ $(function () {
     $('.copy_parent_info').on('change', function () {
         var check = $('.copy_parent:checked').val();
         if (check != "others") {
+            
             var field_name = $(this).attr('name');
             var value = $("#" + field_name).val();
             var guard_name = field_name.replace(check, 'guardian');
@@ -641,8 +642,6 @@ $(function () {
         var first_name_english = $("#" + value + "_first_name_english").val();
         $("#guardian_first_name_english").val(first_name_english);
 
-        var email = $("#" + value + "_email").val();
-        $("#guardian_email").val(email);
         var phone_number = $("#" + value + "_phone_number").val();
         $("#guardian_phone_number").val(phone_number);
         var occupation = $("#" + value + "_occupation").val();

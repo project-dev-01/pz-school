@@ -675,7 +675,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_email"  value="{{ isset($application['mother_email']) ? $application['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control  mother_form" id="mother_email"  value="{{ isset($application['mother_email']) ? $application['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -795,7 +795,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_email" value="{{ isset($application['father_email']) ? $application['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control  father_form"  id="father_email" value="{{ isset($application['father_email']) ? $application['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -947,7 +947,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_email" value="{{ isset($application['guardian_email']) ? $application['guardian_email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_email" readonly value="{{ isset($application['guardian_email']) ? $application['guardian_email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
