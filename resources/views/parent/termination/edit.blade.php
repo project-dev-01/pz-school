@@ -442,7 +442,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="termination_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
-                                        <select id="termination_status" class="form-control" name="termination_status" disabled>
+                                        <select id="termination_status" class="form-control" name="termination_status" >
                                             <option value="">{{ __('messages.select_status') }}</option>
                                             <option value="Approved" {{ $termination['termination_status'] == 'Approved' ? 'selected' : ''}}>{{ __('messages.approved') }}</option>
                                             <option value="Pending" {{ $termination['termination_status'] == 'Pending' ? 'selected' : ''}}>{{ __('messages.pending') }}</option>

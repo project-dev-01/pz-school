@@ -832,7 +832,6 @@ return [
         'application_verify'=> $url.'/application/verify',
         'application_list'=> $url.'/application/list',
         'application_details'=> $url.'/application/application-details',
-        'get_application_guardian_details'=> $url.'/get_application_guardian_details',
         'application_approve'=> $url.'/application/approve',
         'application_update'=> $url.'/application/update',
         'application_delete'=> $url.'/application/delete',

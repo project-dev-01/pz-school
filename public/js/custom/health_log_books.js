@@ -225,31 +225,31 @@ $(function () {
             $("#healthlogID").val(data[0].id);
             $('#date_of_homework').val(data[0].date);
             $('#gender').val(data[0].gender);
-            $('#time').val(data[0].time);
+            //$('#time').val(data[0].time);
            // $('#descriptions').val(data[0].event_notes_c);
             $('#temp').val(data[0].temp);
-            $('#department_id').val(data[0].department_id);
-            if (data[0].department_id != "") {
-            var department_id =  data[0].department_id;
-            var Selector = '#healthLogBookForm';
-            var classID = data[0].class_id;
-            classAllocation(department_id, Selector, classID)
-            }
-            if (data[0].class_id != "") {
-                var class_id = data[0].class_id;
-                var Selector = '#healthLogBookForm';
-                var sectionID = data[0].section_id;
-                sectionAllocation(class_id, Selector, sectionID);
-            }
-            if(data[0].class_id != "" && data[0].section_id != "" && data[0].student_id != "")
-            {
-                console.log("hgfxfghh");
-                var class_id = data[0].class_id;
-                var Selector = '#healthLogBookForm';
-                var sectionID = data[0].section_id;
-                var studentId = data[0].student_id;
-                studentAllocation(class_id, sectionID, Selector, studentId);
-            }
+            // $('#department_id').val(data[0].department_id);
+            // if (data[0].department_id != "") {
+            // var department_id =  data[0].department_id;
+            // var Selector = '#healthLogBookForm';
+            // var classID = data[0].class_id;
+            // classAllocation(department_id, Selector, classID)
+            // }
+            // if (data[0].class_id != "") {
+            //     var class_id = data[0].class_id;
+            //     var Selector = '#healthLogBookForm';
+            //     var sectionID = data[0].section_id;
+            //     sectionAllocation(class_id, Selector, sectionID);
+            // }
+            // if(data[0].class_id != "" && data[0].section_id != "" && data[0].student_id != "")
+            // {
+            //     console.log("hgfxfghh");
+            //     var class_id = data[0].class_id;
+            //     var Selector = '#healthLogBookForm';
+            //     var sectionID = data[0].section_id;
+            //     var studentId = data[0].student_id;
+            //     studentAllocation(class_id, sectionID, Selector, studentId);
+            // }
             $('#weather').val(data[0].weather);
             $('#humidity').val(data[0].humidity);
             $('#description').val(data[0].event_notes_a);
@@ -507,6 +507,7 @@ $(function () {
                 // Handle success if needed
                 toastr.success(data.message);
                 updateDataTable(date)
+                refreshDivContent();
             },
             error: function (error) {
                 // Handle error if needed
@@ -514,6 +515,13 @@ $(function () {
             }
         });
     });
+    function refreshDivContent() {
+        // Clear the content of the div
+        $('.refresh :input').val('');
+       
+        
+        $('#mainReasonBtn').text(' Main Reason');
+    }
     // deleteToDoList
     $(document).on('click', '#deletePartCBtn', function () {
         var id = $(this).data('id');

@@ -92,6 +92,11 @@ $(function () {
             school_fees_payment_status : "required", 
         }
     });
+    $('#school_fees_payment_status').on('change', function () {
+        var isUnpaidSelected = $(this).val() === 'Unpaid';
+        $('#termination_status option[value="Approved"]').prop('disabled', isUnpaidSelected);
+        $('#termination_status').val('').trigger('change'); 
+    });
     $('#terminationEditForm').on('submit', function(e){
         e.preventDefault();
 

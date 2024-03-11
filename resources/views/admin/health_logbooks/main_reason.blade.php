@@ -277,7 +277,7 @@
                                         </div>
                                 </div>
                                 <div class="tab-pane fade" id="reason4" role="tabpanel" aria-labelledby="reasonTab4">
-                                    <div class="card">
+                                 <div class="card">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
                                                 <h4 class="navv">{{ __('messages.required') }}

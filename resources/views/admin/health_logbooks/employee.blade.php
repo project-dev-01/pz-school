@@ -140,7 +140,7 @@
                         </div>
         </div>
 
-        <div class="card classRoomHideSHow" style="display: none;">
+        <div class="card classRoomHideSHow refresh" style="display: none;">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="navv">{{ __('messages.part_c') }}
