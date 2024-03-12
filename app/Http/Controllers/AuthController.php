@@ -368,7 +368,7 @@ class AuthController extends Controller
         $branch_id = "";
         $userDetails = $check->json();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 if ($userDetails['data']['user']['role_id'] != 1) {
                     $branch_id = $userDetails['data']['user']['branch_id'];
                     $user_id = $userDetails['data']['user']['user_id'];
@@ -458,7 +458,7 @@ class AuthController extends Controller
             // if (Carbon::now()->diffInDays($password_changed_at) >= 1) {
             //     return redirect()->route('password.expired')->with('error', 'Your password is expired');
             // } else {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -516,7 +516,7 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -574,7 +574,7 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -629,7 +629,7 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -686,7 +686,7 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -776,7 +776,7 @@ class AuthController extends Controller
         $user_name = "";
         $request->session()->regenerate();
         if ($userDetails['code'] == 200) {
-            if ($userDetails['data']['subsDetails']) {
+            if (isset($userDetails['data']['user']['subs_details'])) {
                 // check 2 FA Enable
                 $twoFaEnable = isset($userDetails['data']['user']['google2fa_secret_enable']) ? $userDetails['data']['user']['google2fa_secret_enable'] : 0;
                 // add remember me
@@ -1236,7 +1236,7 @@ class AuthController extends Controller
     public function sessionCommon($req, $userDetails, $roleID)
     {
         // return $req;
-        // dd($userDetails);
+        
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
         $req->session()->put('ref_user_id', $userDetails['data']['user']['user_id']);
         $req->session()->put('school_roleid', $userDetails['data']['user']['school_roleid']);
@@ -1247,13 +1247,13 @@ class AuthController extends Controller
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
         $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
-        $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
-        $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
-        $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+        $req->session()->put('branch_id', $userDetails['data']['user']['subs_details']['id']);
+        $req->session()->put('school_name', $userDetails['data']['user']['subs_details']['school_name']);
+        $req->session()->put('school_logo', $userDetails['data']['user']['subs_details']['logo']);
         // password_changed_at
-        // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
+        // $req->session()->put('password_changed_at', $userDetails['data']['user']['subs_details']['password_changed_at']);
         // space remove school name
-        $string = preg_replace('/\s+/', '-', $userDetails['data']['subsDetails']['school_name']);
+        $string = preg_replace('/\s+/', '-', $userDetails['data']['user']['subs_details']['school_name']);
         $req->session()->put('school_name_url', $string);
         // greeting session 
         $req->session()->put('greetting_id', 1);
@@ -1397,7 +1397,7 @@ class AuthController extends Controller
             }
             // staff
             if ($routePref == "staff") {
-                if ($userDetails['data']['subsDetails']) {
+                if (isset($userDetails['data']['user']['subs_details'])) {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                     $matchRoleIndex = array_search('3', $role_ids, true);
@@ -1417,7 +1417,7 @@ class AuthController extends Controller
             }
             // teacher
             if ($routePref == "teacher") {
-                if ($userDetails['data']['subsDetails']) {
+                if (isset($userDetails['data']['user']['subs_details'])) {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                     $matchRoleIndex = array_search('4', $role_ids, true);
@@ -1437,7 +1437,7 @@ class AuthController extends Controller
             }
             // parent
             if ($routePref == "parent") {
-                if ($userDetails['data']['subsDetails']) {
+                if (isset($userDetails['data']['user']['subs_details'])) {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                     $matchRoleIndex = array_search('5', $role_ids, true);
@@ -1457,7 +1457,7 @@ class AuthController extends Controller
             }
             // student
             if ($routePref == "student") {
-                if ($userDetails['data']['subsDetails']) {
+                if (isset($userDetails['data']['user']['subs_details'])) {
                     // multiple roles same account
                     $role_ids = explode(",", $userDetails['data']['user']['role_id']);
                     $matchRoleIndex = array_search('6', $role_ids, true);
