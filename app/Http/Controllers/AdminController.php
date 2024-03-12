@@ -10593,7 +10593,7 @@ class AdminController extends Controller
                 'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                 'photo' => $base64,
                 'file_extension' => $extension,
-                'roll_no' => $request->roll_no,
+                'register_no' => $request->register_no,
                 'branch_id' => config('constants.branch_id')
             ];
             //dd($data);
@@ -10626,7 +10626,7 @@ class AdminController extends Controller
                     'filename' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                     'photo' => $base64,
                     'file_extension' => $extension,
-                    'roll_no' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
+                    'register_no' => pathinfo($filenamewithextension, PATHINFO_FILENAME),
                     'branch_id' => config('constants.branch_id')
                 ];
                 //dd($data);

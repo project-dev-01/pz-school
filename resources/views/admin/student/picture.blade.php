@@ -63,7 +63,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">{{ __('messages.student_no') }}<span class="text-danger">*</span></label>
-                                <input type="text" id="name" name="roll_no" class="form-control" placeholder="{{ __('messages.student_no') }}" required>
+                                <input type="text" id="name" name="register_no" class="form-control" placeholder="{{ __('messages.student_no') }}" required>
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                         </div>
@@ -209,7 +209,7 @@ var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
                 var student_rollno = fileName.split('.').slice(0, -1).join('.');
 				console.log(student_rollno);
 
-            $('#image_preview').append("<div class='row' id='img-div"+i+"' ><div class='img-div col-3' > Student Roll No :<br>"+student_rollno+"</div><div class='col-3' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image img-thumbnail' title='"+total_file[i].name+"' style='width:150px;height:150px;'></div><div class='col-3'><button id='action-icon' value='img-div"+i+"' class='btn btn-danger' role='"+total_file[i].name+"'><i class='fa fa-trash'></i></button></div></div>");
+            $('#image_preview').append("<div class='row' id='img-div"+i+"' ><div class='img-div col-3' > Student Register Number :<br>"+student_rollno+"</div><div class='col-3' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image img-thumbnail' title='"+total_file[i].name+"' style='width:150px;height:150px;'></div><div class='col-3'><button id='action-icon' value='img-div"+i+"' class='btn btn-danger' role='"+total_file[i].name+"'><i class='fa fa-trash'></i></button></div></div>");
           }
         }
    });
