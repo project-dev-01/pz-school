@@ -99,12 +99,12 @@ class GuestController extends Controller
 
     public function applicationCreate()
     {
+
         $data = [
             'email' => session()->get('email'),
         ];
         $application = Helper::PostMethod(config('constants.api.get_application_guardian_details'), $data);
 
-        // dd($application);
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
@@ -229,7 +229,6 @@ class GuestController extends Controller
             "remarks" => $request->remarks,
 
         ];
-        return $data;
         $response = Helper::PostMethod(config('constants.api.application_add'), $data);
 // dd($response);
         return $response;

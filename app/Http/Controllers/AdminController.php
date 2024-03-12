@@ -4777,7 +4777,6 @@ class AdminController extends Controller
             'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
         ];
         $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-
         $prev = json_decode($student['data']['student']['previous_details']);
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
