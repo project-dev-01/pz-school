@@ -2103,5 +2103,6 @@ return [
     "valid_status"  => "Sila pilih status yang sah.",
     "alertmenus1" =>"Menu tidak diberikan dalam portal ini",
     "alertmenus2" =>"Menu tidak diberikan dalam Peranan Sekolah ini",
+    "lists" => "Senarai",
 
 ];

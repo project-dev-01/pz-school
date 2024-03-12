@@ -2173,5 +2173,6 @@ return [
     "invoice_sent" => "Invoice sent",
     "payment_confirmed" => "Payment confirmed",
     "grade_and_class_fixed" => "Grade and class fixed",
+    "lists" => "List",
     
 ];
