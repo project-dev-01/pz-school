@@ -395,6 +395,9 @@ $(function () {
                     data: 'nursing_teacher_status'
                 },
                 {
+                    data: 'leave_type_name'
+                },
+                {
                     data: 'reason'
                 },
                 {
@@ -467,7 +470,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 10,
+                    "targets": 11,
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (row.document) {
@@ -479,7 +482,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 13,
+                    "targets": 14,
                     "render": function (data, type, row, meta) {
                         var addremarks = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
                             '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
@@ -487,7 +490,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 14,
+                    "targets": 15,
                     "render": function (data, type, row, meta) {
                         // var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">' + update + '</button>';
                         // return submitbtn;

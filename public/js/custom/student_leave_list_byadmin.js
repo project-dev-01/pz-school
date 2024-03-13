@@ -442,6 +442,8 @@ $(function () {
     //     });
     // }
     function allStudentLeave(dataSetNew) {
+        console.log("dataSetNew");
+        console.log(dataSetNew);
         // DataTable configuration
         var table = $('#student-leave-table').DataTable({
             processing: true,
@@ -521,6 +523,9 @@ $(function () {
                 data: 'nursing_teacher_status'
             },
             {
+                data: 'leave_type_name'
+            },
+            {
                 data: 'reason'
             },
             {
@@ -570,21 +575,21 @@ $(function () {
                 }
             },
             {
-                targets: 10,
+                targets: 11,
                 render: function (data, type, row, meta) {
                     var documentLink = getDocumentLink(row);
                     return documentLink;
                 }
             },
             {
-                targets: 13,
+                targets: 14,
                 render: function (data, type, row, meta) {
                     var remarksButtons = getRemarksButtons(row);
                     return remarksButtons;
                 }
             },
             {
-                targets: 14,
+                targets: 15,
                 render: function (data, type, row, meta) {
                     var viewDetailsButton = getViewDetailsButton(row);
                     return viewDetailsButton;

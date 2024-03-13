@@ -2104,5 +2104,10 @@ return [
     "alertmenus1" =>"Menu tidak diberikan dalam portal ini",
     "alertmenus2" =>"Menu tidak diberikan dalam Peranan Sekolah ini",
     "lists" => "Senarai",
-
+    "admin_portal" => "Portal Pentadbir",
+    "staff_portal" => "Portal Staf",
+    "teacher_portal" => "Portal Guru",
+    "parent_portal" => "Portal Ibubapa",
+    "student_portal" => "Portal Pelajar",
+    "guest_portal" => "Portal Tetamu",
 ];

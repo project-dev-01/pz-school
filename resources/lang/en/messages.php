@@ -2174,5 +2174,10 @@ return [
     "payment_confirmed" => "Payment confirmed",
     "grade_and_class_fixed" => "Grade and class fixed",
     "lists" => "List",
-    
+    "admin_portal" => "Admin Portal",
+    "staff_portal" => "Staff Portal",
+    "teacher_portal" => "Teacher Portal",
+    "parent_portal" => "Parent Portal",
+    "student_portal" => "Student Portal",
+    "guest_portal" => "Guest Portal",
 ];

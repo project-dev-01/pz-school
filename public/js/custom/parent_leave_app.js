@@ -153,7 +153,7 @@ $(function () {
                     console.log("err")
                     console.log(xhr)
                     console.log(xhr.responseText)
-                
+
                     // Parse the responseText to get the error message
                     let responseJSON;
                     try {
@@ -161,14 +161,14 @@ $(function () {
                     } catch (e) {
                         console.error("Error parsing JSON response:", e);
                     }
-                
+
                     if (responseJSON && responseJSON.message) {
                         toastr.error(responseJSON.message);
                     } else {
                         toastr.error('Something went wrong');
                     }
                 }
-                
+
             });
             // console.log(classObj);
             // setLocalStorageForparentleaveapply(classObj);
@@ -354,6 +354,10 @@ $(function () {
                     name: 'teacher_remarks'
                 },
                 {
+                    data: 'leave_type_name',
+                    name: 'leave_type_name'
+                },
+                {
                     data: 'reason',
                     name: 'reason'
                 },
@@ -392,7 +396,7 @@ $(function () {
                 //     }
                 // },
                 {
-                    "targets": 4,
+                    "targets": 5,
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (data && data != "null") {
@@ -404,7 +408,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 6,
+                    "targets": 7,
                     "render": function (data, type, row, meta) {
                         var document = "";
                         if (data) {
@@ -418,7 +422,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 7,
+                    "targets": 8,
                     "render": function (data, type, row, meta) {
                         var badgeColor = "";
                         if (data == "Approve") {
@@ -435,7 +439,7 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 9,
+                    "targets": 10,
                     "render": function (data, type, row, meta) {
                         if (row.document) {
                             return '-';
@@ -540,6 +544,13 @@ $(function () {
                         }, 'json');
                         // Close the modal after selecting the leave type
                         $('#knowtheReasons').modal('hide');
+                    });
+                    // Add hover effect to individual cells
+                    cell.addEventListener('mouseenter', function () {
+                        this.classList.add('hovered-cell');
+                    });
+                    cell.addEventListener('mouseleave', function () {
+                        this.classList.remove('hovered-cell');
                     });
                 }
             });

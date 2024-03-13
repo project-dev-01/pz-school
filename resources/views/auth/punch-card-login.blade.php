@@ -43,8 +43,9 @@
             <div class="auth-fluid-right text-center teacherlogin">
                 <div class="">
                     <!--Auth fluid left content -->
-                    <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}<br>{{ __('messages.act_of_optimism') }}</p>
+                    <div class="auth-user-testimonial">
+                        <p class="mb-3 text-white text"></p>
+                        <!-- <p class="mb-3 text-white text">{{ __('messages.teaching_is_the_greatest') }}<br>{{ __('messages.act_of_optimism') }}</p> -->
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>

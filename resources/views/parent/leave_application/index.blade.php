@@ -16,6 +16,11 @@
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
+    .selected-cell {
+        background-color: #f2f2f2;
+        /* Change to your desired highlight color */
+    }
+
     .ui-datepicker {
         width: 21.4em;
     }
@@ -196,7 +201,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal" id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
                                     <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
@@ -235,6 +240,7 @@
                                     <th>{{ __('messages.leave_from') }}</th>
                                     <th>{{ __('messages.to_from') }}</th>
                                     <th>{{ __('messages.teacher_remarks') }}</th>
+                                    <th>{{ __('messages.leave_type') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
                                     <th>{{ __('messages.document') }}</th>
                                     <th>{{ __('messages.status') }}</th>
@@ -250,7 +256,7 @@
             </div>
         </div> <!-- end card-->
     </div> <!-- end col -->
-    
+
     <!-- Center modal content -->
     @include('parent.leave_application.reason')
 

@@ -41,8 +41,9 @@
             <div class="auth-fluid-right text-center parentlogin">
                 <div class="">
                     <!--Auth fluid left content -->
-                    <div class="auth-user-testimonial bg">
-                        <p class="mb-3 text-white text">{{ __('messages.a_parent’s_love_is') }}</p>
+                    <div class="auth-user-testimonial">
+                        <p class="mb-3 text-white text"></p>
+                        <!-- <p class="mb-3 text-white text">{{ __('messages.a_parent’s_love_is') }}</p> -->
                     </div> <!-- end auth-user-testimonial-->
                 </div>
             </div>
@@ -83,7 +84,7 @@
                         <!-- form -->
                         <div class="form">
                             <form id="LoginAuth" action="{{ route('parent.authenticate') }}" method="post">
-                                <h1 class="welcomeback">{{ __('messages.welcome_back') }}</h1>
+                                <h1 class="welcomeback">{{ __('messages.welcome_back') }}, {{ __('messages.parent_portal') }}</h1>
                                 <input type="hidden" name="branch_id" value="{{$branch_id}}">
                                 <input type="hidden" name="user_browser" id="user_browser" value="">
                                 <input type="hidden" name="user_os" id="user_os" value="">

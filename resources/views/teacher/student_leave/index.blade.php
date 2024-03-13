@@ -132,6 +132,7 @@
                                     <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.homeroom_status') }}</th>
                                     <th> {{ __('messages.nursing_status') }}</th>
+                                    <th> {{ __('messages.leave_type') }}</th>
                                     <th> {{ __('messages.reason') }}</th>
                                     <th> {{ __('messages.document') }}</th>
                                     <th> {{ __('messages.homeroom_teacher_remarks') }}</th>
