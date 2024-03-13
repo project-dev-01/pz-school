@@ -4357,6 +4357,7 @@ class AdminController extends Controller
     // add admission
     public function addAdmission(Request $request)
     {
+       // dd($request);
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4391,6 +4392,26 @@ class AdminController extends Controller
             $passport_base64 = base64_encode($passport_data);
             $passport_extension = $passport_file->getClientOriginalExtension();
         }
+        $nric_base64 = "";
+        $nric_extension = "";
+        $nric_file = $request->file('nric_photo');
+        if ($nric_file) {
+            $nric_path = $nric_file->path();
+            $nric_data = file_get_contents($nric_path);
+            $nric_base64 = base64_encode($nric_data);
+            $nric_extension = $nric_file->getClientOriginalExtension();
+        }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
+
 
         $data = [
             'year' => $request->year,
@@ -4400,13 +4421,14 @@ class AdminController extends Controller
             'category_id' => $request->categy,
             'first_name' => $request->fname,
             'last_name' => $request->lname,
+            'middle_name' => $request->mname,
             'father_id' => $request->father_id,
             'mother_id' => $request->mother_id,
             'guardian_id' => $request->guardian_id,
             'relation' => $request->relation,
             'status' => $status,
-            'passport' => $request->txt_passport,
-            'nric' => $request->txt_nric,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
             'gender' => $request->gender,
             'blood_group' => $request->blooddgrp,
             'birthday' => $request->dob,
@@ -4419,8 +4441,10 @@ class AdminController extends Controller
             'state' => $request->drp_state,
             'photo' => $base64,
             'file_extension' => $extension,
-            'current_address' => $request->txtarea_paddress,
-            'permanent_address' => $request->txtarea_permanent_address,
+            'address_unit_no' => $request->address_unit_no,
+            'address_condominium' => $request->address_condominium,
+            'address_street' => $request->address_street,
+            'address_district' => $request->address_district,
             'email' => $request->txt_emailid,
             'route_id' => $request->drp_transport_route,
             'vehicle_id' => $request->drp_transport_vechicleno,
@@ -4441,8 +4465,10 @@ class AdminController extends Controller
             'school_roleid' => $request->school_roleid,
             'first_name_english' => $request->first_name_english,
             'last_name_english' => $request->last_name_english,
+            'middle_name_english' => $request->middle_name_english,
             'first_name_furigana' => $request->first_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
+            'middle_name_furigana' => $request->middle_name_furigana,
             'first_name_common' => $request->first_name_common,
             'last_name_common' => $request->last_name_common,
             'passport_expiry_date' => $request->passport_expiry_date,
@@ -4453,6 +4479,20 @@ class AdminController extends Controller
             'visa_file_extension' => $visa_extension,
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
+            'nric_photo' => $nric_base64,
+            'nric_file_extension' => $nric_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            "dual_nationality" => $request->dual_nationality,
+            "school_enrollment_status" => $request->school_enrollment_status,
+            "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
+            "visa_type" => $request->visa_type,
+            "visa_type_others" => $request->visa_type_others,
+            "japanese_association_membership_number_student" => $request->japanese_association_membership_number_student,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
         ];
 
         // dd($data);
@@ -4848,6 +4888,25 @@ class AdminController extends Controller
             $passport_base64 = base64_encode($passport_data);
             $passport_extension = $passport_file->getClientOriginalExtension();
         }
+        $nric_base64 = "";
+        $nric_extension = "";
+        $nric_file = $request->file('nric_photo');
+        if ($nric_file) {
+            $nric_path = $nric_file->path();
+            $nric_data = file_get_contents($nric_path);
+            $nric_base64 = base64_encode($nric_data);
+            $nric_extension = $nric_file->getClientOriginalExtension();
+        }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
 
         $data = [
             'login_userid' => session()->get('user_id'),
@@ -4918,6 +4977,26 @@ class AdminController extends Controller
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
             'passport_old_photo' => $request->passport_old_photo,
+            'dual_nationality' => $request->dual_nationality,
+            'nric_old_photo' => $request->nric_old_photo,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'nric_photo' => $nric_base64,
+            'nric_file_extension' => $nric_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            "address_unit_no" => $request->address_unit_no,
+            "address_condominium" => $request->address_condominium,
+            "address_street" => $request->address_street,
+            "address_district" => $request->address_district,
+            "visa_type" => $request->visa_type,
+            "visa_type_others" => $request->visa_type_others,
+            "school_enrollment_status" => $request->school_enrollment_status,
+            "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
+            "japanese_association_membership_number_student" => $request->japanese_association_membership_number_student,
         ];
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;

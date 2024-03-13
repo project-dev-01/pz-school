@@ -85,7 +85,18 @@ $(function () {
             $('#passport_photo_name').text(file.name);
         }
     });
-    
+    $('#nric_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#nric_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#nric_photo_name').text("File greater than 2Mb");
+            $("#nric_photo_name").addClass("error");
+            $('#nric_photo').val('');
+        } else {
+            $("#nric_photo_name").removeClass("error");
+            $('#nric_photo_name').text(file.name);
+        }
+    });
     $('#visa_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#visa_photo')[0].files[0];
@@ -98,6 +109,18 @@ $(function () {
             $('#visa_photo_name').text(file.name);
         }
     });
+    $('#japanese_association_membership_image_principal').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#japanese_association_membership_image_principal')[0].files[0];
+        if(file.size > 2097152) {
+            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
+            $("#japanese_association_membership_image_principal_name").addClass("error");
+            $('#japanese_association_membership_image_principal').val('');
+        } else {
+            $("#japanese_association_membership_image_principal_name").removeClass("error");
+            $('#japanese_association_membership_image_principal_name').text(file.name);
+        }
+    });
     $("#dob").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -106,10 +129,21 @@ $(function () {
         yearRange: "-60:+1", // last hundred years
         maxDate: 0
     });
+    $("#visa_type_others_show").hide();
+
+    // Listen for changes in the visa_type dropdown
+    $("#visa_type").change(function() {
+        // If the selected value is "Others", show the additional input field, otherwise hide it
+        if ($(this).val() === "Others") {
+            $("#visa_type_others_show").show();
+        } else {
+            $("#visa_type_others_show").hide();
+        }
+    });
     // rules validation
     $("#addadmission").validate({
         rules: {
-            parent_id: "required",
+           // parent_id: "required",
             year: "required",
             // txt_regiter_no: "required",
             txt_emailid: {
@@ -122,10 +156,41 @@ $(function () {
             department_id: "required",
             class_id: "required",
             section_id: "required",
+            school_enrollment_status_tendency:"required",
             // categy: "required",
             fname: "required",
+            first_name_english: "required",
+            first_name_furigana: "required",
             txt_mobile_no: "required",
-            present_address: "required",
+            lname: "required",
+            last_name_english: "required",
+            last_name_furigana: "required",
+            dob: "required",
+            gender: "required",
+            address_unit_no: "required",
+            address_condominium: "required",
+            address_street: "required",
+            address_district: "required",
+            drp_city: "required",
+            drp_state: "required",
+            drp_country: "required",
+            drp_post_code: "required",
+            txt_religion: "required",
+            nationality: "required",
+            passport: "required",
+            passport_expiry_date: "required",
+            passport_photo: "required",
+            visa_expiry_date: "required",
+            visa_photo: "required",
+            visa_type: "required",
+            japanese_association_membership_number_student: "required",
+            txt_prev_schname: "required",
+            school_country: "required",
+            school_state: "required",
+            school_city: "required",
+            school_postal_code: "required",
+            school_enrollment_status: "required",
+           // present_address: "required",
             txt_pwd: {
                 required: true,
                 minlength: 6
@@ -141,8 +206,10 @@ $(function () {
     $('#addadmission').on('submit', function (e) {
         e.preventDefault();
         var admissionCheck = $("#addadmission").valid();
+        
         if (admissionCheck === true) {
             var form = this;
+            console.log(form);
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -151,6 +218,7 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
+                    console.log(data);
                     if (data.code == 200) {
                         toastr.success(data.message);
                         window.location.href = indexAdmission;
@@ -158,8 +226,13 @@ $(function () {
                         toastr.error(data.message);
                     }
                 }, error: function (err) {
-                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    if (err.responseJSON && err.responseJSON.data && err.responseJSON.data.error) {
+                        toastr.error(err.responseJSON.data.error);
+                    } else {
+                        toastr.error('Something went wrong');
+                    }
                 }
+                
             });
         }
     });
