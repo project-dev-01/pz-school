@@ -210,10 +210,25 @@ $(function () {
                     var src = defaultImg;
                 }
                 var name = data.first_name + " " + data.last_name;
+                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
+                var name_english = data.first_name_english + " " + data.last_name_english;
+                $('#guardian_name_furigana').val(name_furigana);
+                $('#guardian_name_english').val(name_english);
                 $('#guardian_name').val(name);
                 $("#guardian_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#guardian_first_name").val(data.first_name);
                 $("#guardian_last_name").val(data.last_name);
+                $("#guardian_middle_name").val(data.middle_name);
+                $("#guardian_last_name_furigana").val(data.last_name_furigana);
+                $("#guardian_middle_name_furigana").val(data.middle_name_furigana);
+                $("#guardian_middle_name_furigana").val(data.middle_name_furigana);
+                $("#guardian_last_name_english").val(data.last_name_english);
+                $("#guardian_middle_name_english").val(data.middle_name_english);
+                $("#guardian_first_name_english").val(data.first_name_english);
+                $("#guardian_company_name_japan").val(data.guardian_company_name_japan);
+                $("#guardian_company_name_local").val(data.guardian_company_name_local);
+                $("#guardian_company_phone_number").val(data.guardian_company_phone_number);
+                $("#guardian_employment_status").val(data.guardian_employment_status);
                 $("#guardian_email").val(data.email);
                 $("#guardian_nric").val(data.nric);
                 $("#guardian_gender").val(data.gender);
@@ -232,6 +247,8 @@ $(function () {
                 $("#guardian_address").val(data.address);
 
                 $(".guardian_name").html(name);
+                $('.guardian_name_furigana').html(name_furigana);
+                $('.guardian_name_english').html(name_english);
                 $(".guardian_date_of_birth").html(data.date_of_birth);
                 $(".guardian_email").html(data.email);
                 $(".guardian_passport").html(data.passport);
@@ -247,6 +264,10 @@ $(function () {
                 $(".guardian_state").html(data.state);
                 $(".guardian_city").html(data.city);
                 $(".guardian_address").html(data.address);
+                $(".guardian_company_name_japan").val(data.guardian_company_name_japan);
+                $(".guardian_company_name_local").val(data.guardian_company_name_local);
+                $(".guardian_company_phone_number").val(data.guardian_company_phone_number);
+                $(".guardian_employment_status").val(data.guardian_employment_status);
             }
         }, 'json');
     }
@@ -295,10 +316,22 @@ $(function () {
                     var src = defaultImg;
                 }
                 var name = data.first_name + " " + data.last_name;
+                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
+                var name_english = data.first_name_english + " " + data.last_name_english;
                 $('#father_name').val(name);
+                $('#father_name_furigana').val(name_furigana);
+                $('#father_name_english').val(name_english);
                 $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#father_first_name").val(data.first_name);
+                $("#father_middle_name").val(data.middle_name);
                 $("#father_last_name").val(data.last_name);
+                $("#father_last_name_furigana").val(data.last_name_furigana);
+                $("#father_middle_name_furigana").val(data.middle_name_furigana);
+                $("#father_first_name_furigana").val(data.first_name_furigana);
+                $("#father_last_name_english").val(data.last_name_english);
+                $("#father_middle_name_english").val(data.middle_name_english);
+                $("#father_first_name_english").val(data.first_name_english);
+                $("#father_nationality").val(data.nationality);
                 $("#father_email").val(data.email);
                 $("#father_gender").val(data.gender);
                 $("#father_date_of_birth").val(data.date_of_birth);
@@ -319,6 +352,8 @@ $(function () {
 
 
                 $(".father_name").html(name);
+                $('.father_name_furigana').html(name_furigana)
+                $('.father_name_english').html(name_english)
                 $(".father_date_of_birth").html(data.date_of_birth);
                 $(".father_email").html(data.email);
                 $(".father_passport").html(data.passport);
@@ -334,6 +369,7 @@ $(function () {
                 $(".father_state").html(data.state);
                 $(".father_city").html(data.city);
                 $(".father_address").html(data.address);
+                $(".father_nationality").val(data.nationality);
             }
         }, 'json');
     }
@@ -383,10 +419,24 @@ $(function () {
                     var src = defaultImg;
                 }
                 var name = data.first_name + " " + data.last_name;
+                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
+                var name_english = data.first_name_english + " " + data.last_name_english;
+                $('#mother_name_furigana').val(name_furigana);
+                $('#mother_name_english').val(name_english);
                 $('#mother_name').val(name);
                 $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                 $("#mother_first_name").val(data.first_name);
                 $("#mother_last_name").val(data.last_name);
+                $("#mother_middle_name").val(data.middle_name);
+                $("#mother_last_name_furigana").val(data.last_name_furigana);
+                $("#mother_middle_name_furigana").val(data.middle_name_furigana);
+                $("#mother_first_name_furigana").val(data.first_name_furigana);
+                $("#mother_last_name_english").val(data.last_name_english);
+                $("#mother_middle_name_english").val(data.middle_name_english);
+                $("#mother_first_name_english").val(data.first_name_english);
+                $("#mother_nationality").val(data.nationality);
+               
+
                 $("#mother_email").val(data.email);
                 $("#mother_gender").val(data.gender);
                 $("#mother_date_of_birth").val(data.date_of_birth);
@@ -405,6 +455,8 @@ $(function () {
                 $("#mother_address").val(data.address);
 
                 $(".mother_name").html(name);
+                $('.mother_name_furigana').html(name_furigana)
+                $('.mother_name_english').html(name_english)
                 $(".mother_date_of_birth").html(data.date_of_birth);
                 $(".mother_email").html(data.email);
                 $(".mother_passport").html(data.passport);
@@ -420,6 +472,7 @@ $(function () {
                 $(".mother_state").html(data.state);
                 $(".mother_city").html(data.city);
                 $(".mother_address").html(data.address);
+                $(".mother_nationality").val(data.nationality);
             }
         }, 'json');
     }
@@ -677,7 +730,7 @@ $(function () {
                 required: true,
                 email: true
             },
-            txt_roll_no: "required",
+           // txt_roll_no: "required",
             admission_date: "required",
             classnames: "required",
             department_id: "required",

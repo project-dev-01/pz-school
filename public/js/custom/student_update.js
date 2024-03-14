@@ -41,6 +41,41 @@ $(function () {
             $('#visa_photo_name').text(file.name);
         }
     });
+    $('#nric_photo').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#nric_photo')[0].files[0];
+        if(file.size > 2097152) {
+            $('#nric_photo_name').text("File greater than 2Mb");
+            $("#nric_photo_name").addClass("error");
+            $('#nric_photo').val('');
+        } else {
+            $("#nric_photo_name").removeClass("error");
+            $('#nric_photo_name').text(file.name);
+        }
+    });
+    $('#japanese_association_membership_image_principal').change(function() {
+        // var i = $(this).prev('label').clone();
+        var file = $('#japanese_association_membership_image_principal')[0].files[0];
+        if(file.size > 2097152) {
+            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
+            $("#japanese_association_membership_image_principal_name").addClass("error");
+            $('#japanese_association_membership_image_principal').val('');
+        } else {
+            $("#japanese_association_membership_image_principal_name").removeClass("error");
+            $('#japanese_association_membership_image_principal_name').text(file.name);
+        }
+    });
+    $("#visa_type_others_show").hide();
+
+    // Listen for changes in the visa_type dropdown
+    $("#visa_type").change(function() {
+        // If the selected value is "Others", show the additional input field, otherwise hide it
+        if ($(this).val() === "Others") {
+            $("#visa_type_others_show").show();
+        } else {
+            $("#visa_type_others_show").hide();
+        }
+    });
     
     $(document).on('click', ".remand", function () {
         var name = $(this).attr("remand");
@@ -326,6 +361,64 @@ $(function () {
             }
         }, 'json');
     }
+    $("#updateStudentProfile").validate({
+        rules: {
+           
+            fname: "required",
+            txt_mobile_no: "required",
+            school_enrollment_status_tendency:"required",
+            // categy: "required",
+            fname: "required",
+            first_name_english: "required",
+            first_name_furigana: "required",
+            txt_mobile_no: "required",
+            lname: "required",
+            last_name_english: "required",
+            last_name_furigana: "required",
+            dob: "required",
+            gender: "required",
+            address_unit_no: "required",
+            address_condominium: "required",
+            address_street: "required",
+            address_district: "required",
+            drp_city: "required",
+            drp_state: "required",
+            drp_country: "required",
+            drp_post_code: "required",
+            txt_religion: "required",
+            nationality: "required",
+            txt_passport: "required",
+            passport_expiry_date: "required",
+            passport_photo: "required",
+            visa_expiry_date: "required",
+            visa_photo: "required",
+            visa_type: "required",
+            japanese_association_membership_number_student: "required",
+            txt_prev_schname: "required",
+            school_country: "required",
+            school_state: "required",
+            school_city: "required",
+            school_postal_code: "required",
+            school_enrollment_status: "required",
+          
+            // txt_pwd: {
+            //     minlength: 6
+            // },
+            // txt_retype_pwd: {
+            //     minlength: 6,
+            //     equalTo: "txt_pwd"
+            // },  
+            password: {
+                // required: $("#password").val().length > 0,
+                minlength: 6
+            },
+            confirm_password: {
+                // required: $("#confirm_password").val().length > 0,
+                minlength: 6,
+                equalTo: "#password"
+            }
+        }
+    });
     
     $('#updateStudentProfile').on('submit', function (e) {
         e.preventDefault();

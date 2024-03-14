@@ -1544,6 +1544,25 @@ class ParentController extends Controller
             $passport_base64 = base64_encode($passport_data);
             $passport_extension = $passport_file->getClientOriginalExtension();
         }
+        $nric_base64 = "";
+        $nric_extension = "";
+        $nric_file = $request->file('nric_photo');
+        if ($nric_file) {
+            $nric_path = $nric_file->path();
+            $nric_data = file_get_contents($nric_path);
+            $nric_base64 = base64_encode($nric_data);
+            $nric_extension = $nric_file->getClientOriginalExtension();
+        }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
@@ -1562,10 +1581,41 @@ class ParentController extends Controller
             'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
             'nationality' => $request->nationality,
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'first_name_english' => $request->first_name_english,
+            'last_name_english' => $request->last_name_english,
+            'first_name_furigana' => $request->first_name_furigana,
+            'last_name_furigana' => $request->last_name_furigana,
+            'first_name_common' => $request->first_name_common,
+            'last_name_common' => $request->last_name_common,
+            "middle_name" => $request->middle_name,
+            "middle_name_english" => $request->middle_name_english,
+            "middle_name_furigana" => $request->middle_name_furigana,
             'visa_photo' => $visa_base64,
             'visa_file_extension' => $visa_extension,
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
+            'dual_nationality' => $request->dual_nationality,
+            'nric_old_photo' => $request->nric_old_photo,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'nric_photo' => $nric_base64,
+            'nric_file_extension' => $nric_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            'school_country' => $request->school_country,
+            'school_city' => $request->school_city,
+            'school_state' => $request->school_state,
+            'school_postal_code' => $request->school_postal_code,
+            "address_unit_no" => $request->address_unit_no,
+            "address_condominium" => $request->address_condominium,
+            "address_street" => $request->address_street,
+            "address_district" => $request->address_district,
+            "visa_type" => $request->visa_type,
+            "visa_type_others" => $request->visa_type_others,
+            "school_enrollment_status" => $request->school_enrollment_status,
+            "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
+            "japanese_association_membership_number_student" => $request->japanese_association_membership_number_student,
             'parent_id' => session()->get('ref_user_id'),
 
         ];

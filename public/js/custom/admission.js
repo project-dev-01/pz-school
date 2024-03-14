@@ -150,7 +150,7 @@ $(function () {
                 required: true,
                 email: true
             },
-            txt_roll_no: "required",
+           // txt_roll_no: "required",
             admission_date: "required",
             classnames: "required",
             department_id: "required",

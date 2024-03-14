@@ -313,7 +313,7 @@
             <div class="card">
                 <div class="card-body">
                     <form id="updateStudentProfile" method="post" action="{{ route('parent.student.update') }}" enctype="multipart/form-data" autocomplete="off">
-                        @csrf
+                        @csrf 
                         <input type="hidden" name="student_id" value="{{ isset($student['id']) ? $student['id'] : ''}}">
 
 
@@ -324,8 +324,202 @@
                                 </li>
                             </ul>
                             <div class="card-body">
+                            <div class="row">
+                                    <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name') }} <span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.middle_name') }} </label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="mname" class="form-control alloptions" maxlength="50" id="mname" value="{{ isset($student['middle_name']) ? $student['middle_name'] : ''}}"placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    @if($form_field['name_english'] == 0)
+                                    <div class="row">
+                                    <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($student['last_name_english']) ? $student['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.middle_name_roma') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="middle_name_english" class="form-control alloptions" maxlength="50" id="middle_name_english" value="{{ isset($student['middle_name_english']) ? $student['middle_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.first_name_roma') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($student['first_name_english']) ? $student['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    @endif
+                                    @if($form_field['name_furigana'] == 0)
+                                    <div class="row">
+                                    <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($student['last_name_furigana']) ? $student['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.middle_name_furigana') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="middle_name_furigana" class="form-control alloptions" maxlength="50" id="middle_name_furigana"  value="{{ isset($student['middle_name_furigana']) ? $student['middle_name_furigana'] : ''}}"placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.first_name_furigana') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="first_name_furigana" class="form-control alloptions" maxlength="50" id="first_name_furigana" value="{{ isset($student['first_name_furigana']) ? $student['first_name_furigana'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    @endif
+                                    
+                                    <div class="row">
+                                        @if($form_field['name_common'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.last_name_common') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="last_name_common" class="form-control alloptions" maxlength="50" id="last_name_common" value="{{ isset($student['last_name_common']) ? $student['last_name_common'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.first_name_common') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user-graduate"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="first_name_common" class="form-control alloptions" maxlength="50" id="first_name_common" value="{{ isset($student['first_name_common']) ? $student['first_name_common'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}" data-parsley-trigger="change">
+                                        </div>
+                                    </div>
+                                    </div>
                                 <div class="row">
                                     <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="address_unit_no">{{ __('messages.address_unit_no') }}<span class="text-danger">*</span></label>
+                                            <input type="text" maxlength="255" id="address_unit_no" value="{{ isset($student['address_unit_no']) ? $student['address_unit_no'] : ''}}" class="form-control alloptions" placeholder="{{ __('messages.enter_address_unit_no') }}" name="address_unit_no" data-parsley-trigger="change">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address_condominium">{{ __('messages.address_condominium') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="address_condominium"  name="address_condominium" value="{{ isset($student['address_condominium']) ? $student['address_condominium'] : ''}}"  placeholder="{{ __('messages.enter_address_condominium') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address_street">{{ __('messages.address_street') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="address_street"  name="address_street" value="{{ isset($student['address_street']) ? $student['address_street'] : ''}}" placeholder="{{ __('messages.enter_address_street') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address_district">{{ __('messages.address_district') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="address_district" value="{{ isset($student['address_district']) ? $student['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        
+                                    <!-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="txtarea_paddress">{{ __('messages.address_1') }}</label>
                                             <input type="" id="txtarea_paddress" class="form-control" placeholder="{{ __('messages.enter_address_1') }}" name="txtarea_paddress" data-parsley-trigger="change" value="{{ isset($student['current_address']) ? $student['current_address'] : ''}}">
@@ -336,42 +530,63 @@
                                             <label for="txtarea_permanent_address">{{ __('messages.address_2') }}</label>
                                             <input type="" id="txtarea_permanent_address" class="form-control" placeholder="{{ __('messages.enter_address_2') }}" name="txtarea_permanent_address" data-parsley-trigger="change" value="{{ isset($student['permanent_address']) ? $student['permanent_address'] : ''}}">
                                         </div>
+                                    </div> -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="drp_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                            <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="drp_city">{{ __('messages.city') }}</label>
-                                            <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
+                                            <label for="drp_post_code">{{ __('messages.zip_postal_code') }}<span class="text-danger">*</span></label>
+                                            <input type="" id="drp_post_code" class="form-control" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change" value="{{ isset($student['post_code']) ? $student['post_code'] : ''}}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="drp_post_code">{{ __('messages.zip_postal_code') }}</label>
-                                            <input type="" id="drp_post_code" class="form-control" placeholder="{{ __('messages.zip_postal_code') }}" name="drp_post_code" data-parsley-trigger="change" value="{{ isset($student['post_code']) ? $student['post_code'] : ''}}">
-                                        </div>
-                                    </div>
+                                    
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="drp_state">{{ __('messages.state_province') }}</label>
+                                            <label for="drp_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
                                             <input type="" id="drp_state" placeholder="{{ __('messages.state_province') }}" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{ isset($student['state']) ? $student['state'] : ''}}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="drp_country">{{ __('messages.country') }}</label>
+                                            <label for="drp_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
                                             <input type="" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label for="">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-birthday-cake"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" name="dob" class="form-control" value="{{ isset($student['birthday']) ? $student['birthday'] : ''}}" id="dob" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                  
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control number_validation" name="txt_mobile_no" id="txt_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" value="{{ isset($student['mobile_no']) ? $student['mobile_no'] : ''}}" data-parsley-trigger="change">
+                                 
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
+                                                <select id="gender" name="gender" class="form-control">
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
+                                                    <option value="Male" {{ isset($student['gender']) ?  $student['gender'] == "Male" ? 'Selected' : '' : "" }}>{{ __('messages.male') }}</option>
+                                                    <option value="Female" {{ isset($student['gender']) ?  $student['gender'] == "Female" ? 'Selected' : '' : "" }}>{{ __('messages.female') }}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
+                                    
                                     @if($form_field['race'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -389,7 +604,7 @@
                                     @if($form_field['religion'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="txt_religion">{{ __('messages.religion') }}</label>
+                                            <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
                                             <select class="form-control" name="txt_religion" id="religion">
                                                 <option value="">{{ __('messages.select_religion') }}</option>
                                                 @forelse($religion as $r)
@@ -425,24 +640,30 @@
                                             <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{$student['nationality']}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                                <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
                                     @endif
 
                                     @if($form_field['nric'] == 0)
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="txt_nric">{{ __('messages.nric_number') }}</label>
                                             <input type="text" maxlength="20" id="txt_nric" class="form-control alloptions" value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999" name="txt_nric" data-parsley-trigger="change">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     @endif
                                     @if($form_field['passport'] == 0)
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="Passport">{{ __('messages.passport_number') }}</label>
                                             <input type="text" maxlength="20" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($student['passport']) ? $student['passport'] : ''}}">
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    </div> -->
+                                    <!-- <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="text">{{ __('messages.passport_expiry_date') }}<span class="text-danger"></span></label>
                                             <div class="input-group input-group-merge">
@@ -454,8 +675,8 @@
                                                 <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['passport_expiry_date']) ? $student['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
-                                    </div>
-                                    <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
+                                    </div> -->
+                                    <!-- <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -471,10 +692,10 @@
                                             @endif
                                             <span id="passport_photo_name"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     @endif
                                     @if($form_field['visa'] == 0)
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="visa_number">{{ __('messages.visa_number') }}</label>
                                             <input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" name="visa_number" value="{{ isset($student['visa_number']) ? $student['visa_number'] : ''}}" data-parsley-trigger="change">
@@ -509,8 +730,251 @@
                                             @endif
                                             <span id="visa_photo_name"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     @endif
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card">
+                                <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">{{ __('messages.personal_details') }}<h4>
+                                        </li>
+                                </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            @if($form_field['nric'] == 0)
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="nric">{{ __('messages.nric_number_only_for_malaysian') }}</label>
+                                                    <input type="text" maxlength="16" id="txt_nric" class="form-control alloptions"  value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999"  name="txt_nric" data-parsley-trigger="change">
+
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="nric_old_photo" id="nric_old_photo" value="{{ isset($student['nric_photo']) ? $student['nric_photo'] : ''}}" />
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="nric_photo">{{ __('messages.nric_image_only_for_malaysian') }}</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="nric_photo" class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="nric_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($student['nric_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'] }}" target="_blank"> {{ __('messages.nric_image_only_for_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="nric_photo_name"></span>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if($form_field['passport'] == 0)
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="passport">{{ __('messages.passport_number_japan') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" maxlength="20" class="form-control alloptions" id="txt_passport" value="{{ isset($student['passport']) ? $student['passport'] : ''}}"  placeholder="{{ __('messages.enter_passport_number') }}"  name="txt_passport">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="passport_expiry_date">{{ __('messages.passport_expiry_date_japan') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}"  value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                    <label for="passport_expiry_date" class="error"></label>
+                                                </div>
+                                            </div>
+                                        <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="passport_photo">{{ __('messages.passport_image_japan') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
+                                                @endif
+                                                    <span id="passport_photo_name"></span>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if($form_field['visa'] == 0)
+                                            <!-- <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_number">{{ __('messages.visa_number') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['visa_number']) ? $application['visa_number'] : ''}}" name="visa_number" data-parsley-trigger="change">
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_expiry_date">{{ __('messages.visa_expiry_date_for_non_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                    <label for="visa_expiry_date" class="error"></label>
+                                                </div>
+                                            </div>
+                                           
+                                            <input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($student['visa_photo']) ? $student['visa_photo'] : ''}}" />
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_photo">{{ __('messages.visa_image__for_non_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="visa_photo" class="custom-file-input" value="" name="visa_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
+                                                @endif
+                                                    <span id="visa_photo_name"></span>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <select id="visa_type" name="visa_type" class="form-control">
+                                                    <option value="No Require (Malaysian)" {{ isset($student['visa_type']) ? $student['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
+                                                        <option value="Depedent Pass" {{ isset($student['visa_type']) ? $student['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
+                                                        <option value="MM2H" {{ isset($student['visa_type']) ? $student['visa_type'] == "MM2H" ? 'selected' : '' : '' }}>{{ __('messages.mm2h') }}</option>
+                                                        <option value="Resident Pass" {{ isset($student['visa_type']) ? $student['visa_type'] == "Resident Pass" ? 'selected' : '' : '' }}>{{ __('messages.resident_pass') }}</option>
+                                                        <option value="Others" {{ isset($student['visa_type']) ? $student['visa_type'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            @endif
+                                            @php
+
+                                            $visa_type_others = "none";
+                                            if($student['visa_type'] == "Others"){
+
+                                            $visa_type_others = "";
+                                            }
+                                            @endphp
+                                            
+                                            <div class="col-md-4" id="visa_type_others_show" style="display:{{$visa_type_others}}" >
+
+                                                <div class="form-group">
+                                                    <label for="visa_type_others">{{ __('messages.visa_type_others') }}</label>
+                                                    <input type="text" id="visa_type_others" class="form-control" placeholder="{{ __('messages.enter_visa_type_others') }}"  value="{{ isset($student['visa_type_others']) ? $student['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" id="japanese_association_membership_number_student" class="form-control alloptions" placeholder="999999-99-9999"  value="{{ isset($student['japanese_association_membership_number_student']) ? $student['japanese_association_membership_number_student'] : ''}}"  name="japanese_association_membership_number_student" data-parsley-trigger="change">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($student['japanese_association_membership_image_principal']) ? $student['japanese_association_membership_image_principal'] : ''}}" />
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    <label for="japanese_association_membership_image_principal" class="error"></label>
+                                                    @if(isset($student['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
+                                                    @endif
+                                                    <span id="japanese_association_membership_image_principal_name"></span>
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+                                    </div>
+                                 </div>
+                                 <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">{{ __('messages.previous_school_details') }}</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_prev_schname">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : '' }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="50" id="school_country"  value="{{ isset($student['school_country']) ? $student['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_state"  value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_postal_code" name="school_postal_code" value="{{ isset($student['school_postal_code']) ? $student['school_postal_code'] : ''}}" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_enrollment_status"  value="{{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
+                                                <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control">
+                                                    <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                    <option value="Yes"  {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
+                                                    <option value="No"  {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txt_prev_qualify">{{ __('messages.qualification') }}</label>
+                                                <input type="text" id="txt_prev_qualify" class="form-control" name="txt_prev_qualify" placeholder="{{ __('messages.enter_qualification') }}" data-parsley-trigger="change" value="{{ isset($student['qualification']) ? $student['qualification'] : '' }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="txtarea_prev_remarks">{{ __('messages.remarks') }}</label>
+                                                <textarea id="txtarea_prev_remarks" class="form-control" name="txtarea_prev_remarks" placeholder="{{ __('messages.enter_the_remarks') }}">{{ isset($student['remarks']) ? $student['remarks'] : '' }}
+                                                </textarea>
+                                            </div>
+                                        </div> -->
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="card">
