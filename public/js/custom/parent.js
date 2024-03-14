@@ -95,7 +95,7 @@ $(function () {
                 processData: false,
                 dataType: 'json',
                 contentType: false,
-                success: function (data) {
+                success: function (data) {                    
                     if (data.code == 200) {
                         toastr.success(data.message);
                         window.location.href = indexParent;

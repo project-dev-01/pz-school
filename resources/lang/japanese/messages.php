@@ -2157,4 +2157,11 @@ return [
     "parent_portal" =>  "保護者ポータル",
     "student_portal" =>  "学生ポータル",
     "guest_portal" => "ゲストポータル",
+    "japan_address_postal"=>"日本の住所：郵便番号",     
+    "japan_address"=>"日本の住所：郵便番号",
+    "japan_contact_phone_number"=>"日本の連絡先電話番号",
+    "Emergency_tel_sms"=>"緊急電話（SMS）",   
+    "stay_category"=>"宿泊カテゴリー",
+    "long_stay"=>"Long stay 長期滞在",
+    "pr_stay"=>"PR 永住",
 ];
