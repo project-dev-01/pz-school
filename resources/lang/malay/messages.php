@@ -2110,4 +2110,11 @@ return [
     "parent_portal" => "Portal Ibubapa",
     "student_portal" => "Portal Pelajar",
     "guest_portal" => "Portal Tetamu",
+    "japan_address_postal"=>"Japan address : Postcode",     
+    "japan_address"=>"alamat Jepun",
+    "japan_contact_phone_number"=>"nombor telefon hubungan Jepun",
+    "Emergency_tel_sms"=>"Tel Kecemasan (SMS)",   
+    "stay_category"=>"Kategori kekal",
+    "long_stay"=>"Long stay 長期滞在",
+    "pr_stay"=>"PR 永住",
 ];
