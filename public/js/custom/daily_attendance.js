@@ -140,6 +140,7 @@ $(function () {
             }
             // return false;
             // list mode
+            console.log(academic_session_id);
             listModeAjax(formData, classObj);
         }
     });
