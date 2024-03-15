@@ -38,7 +38,7 @@
                             <div class="custom-file">
                                 <input type="file" id="edit_photo" class="custom-file-input" name="photo" accept="image/png, image/gif, image/jpeg" >
                                 <input type="hidden"  name="old_photo" >
-                                <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                <label class="custom-file-label" for="document">{{ __('messages.choose_the_file') }}</label>
                             </div>
                         </div>
                         <a href="" target="_blank"><span id="edit_photo_name"></span></a>

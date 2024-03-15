@@ -249,15 +249,9 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="leave_file">{{ __('messages.attachment_file') }}</label>
-
-                                    <div class="input-group">
-                                        <div class="">
-                                            <input type="file" id="leave_file" class="custom-file-input" name="file">
-                                            <label class="custom-file-label" for="leave_file">{{ __('messages.choose_file') }}</label>
-                                            <span id="file_name"></span>
-                                        </div>
-                                    </div>
+                                <label for="changelev"></label>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;margin-top: 8px;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
                         </div>
@@ -271,8 +265,15 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white" data-toggle="modal" id="studentAllReasons"> Click Here For Reason Details</button>
-                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
+                                    <label for="leave_file">{{ __('messages.attachment_file') }}</label>
+
+                                    <div class="input-group">
+                                        <div class="">
+                                            <input type="file" id="leave_file" class="custom-file-input" name="file">
+                                            <label class="custom-file-label" for="leave_file">{{ __('messages.choose_the_file') }}</label>
+                                            <span id="file_name"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">

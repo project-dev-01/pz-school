@@ -252,7 +252,7 @@
                                                         <label for="inputEmail3" class="col-md-6 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="col-md-6 custom-file-input" id="inputGroupFile04" disabled>
-                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_file') }}</label>
+                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -365,7 +365,7 @@
                                                         <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
-                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_file') }}</label>
+                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -479,7 +479,7 @@
                                                         <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
-                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_file') }}</label>
+                                                            <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>
                                                         </div>
                                                     </div>
                                                 </div>

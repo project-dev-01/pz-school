@@ -799,7 +799,7 @@
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                         <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
-                                                        <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
+                                                        <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_the_file') }}</label>
                                                     </div>
                                                 </div>
                                                 @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
@@ -837,7 +837,7 @@
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                         <input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg">
-                                                        <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
+                                                        <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_the_file') }}</label>
                                                     </div>
                                                 </div>
                                                 @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])

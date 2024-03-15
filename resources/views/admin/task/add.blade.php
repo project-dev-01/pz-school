@@ -112,7 +112,7 @@
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">
-                                    <label class="custom-file-label" for="attachment">{{ __('messages.choose_file') }}</label>
+                                    <label class="custom-file-label" for="attachment">{{ __('messages.choose_the_file') }}</label>
                                 </div>
                             </div>
                         </div>

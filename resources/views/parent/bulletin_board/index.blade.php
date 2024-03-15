@@ -83,6 +83,21 @@
 #Important {
     display: none;
 }
+@media screen and (min-device-width: 280px) and (max-device-width: 653px) 
+ {
+    .nav {
+    display: block;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav-item
+{
+    margin-bottom:10px;
+}
+}
+
 </style>
 @endsection
 @section('content')
@@ -144,11 +159,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                            <div class="col-sm-6 col-md-6">
-                                        
-                            </div>
-                            </div>
-                                <table class="table w-100 nowrap" id="parent-bulletin-table">
+                        <table class="table w-100 nowrap" id="parent-bulletin-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -161,6 +172,7 @@
                                 <!-- Your Bulletin Board table content here -->
                             </tbody>
                         </table>
+                         </div>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
                     </div>
@@ -185,7 +197,7 @@
                                         
                             
                             </div>
-                            </div>
+                           
                                 <table class="table w-100 nowrap" id="parent-bulletin-imp-table">
                             <thead>
                                 <tr>
@@ -199,6 +211,7 @@
                                 <!-- Your Bulletin Board table content here -->
                             </tbody>
                         </table>
+                        </div>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
                     </div>

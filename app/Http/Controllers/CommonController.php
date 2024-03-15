@@ -262,7 +262,7 @@ class CommonController extends Controller
                         $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
                         $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="text-muted mb-0 user-msg">
-                            <small>Your leave application for ' . $from_leave . ' to ' . $to_leave . ' was approved</small>
+                        <small>' . __('messages.your_leave-application_for') . ' ' . $from_leave . ' ' . __('messages.to')  . ' ' . $to_leave . ' ' . __('messages.was_approved') . '</small>
                         </p>
                         </a>';
                     }
@@ -284,7 +284,7 @@ class CommonController extends Controller
                         $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . ucfirst($name) . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>
+                            <small>' . __('messages.leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to')  . ' ' . $to_leave . '</small>
                         </p>
                     </a>';
                     }
@@ -307,7 +307,7 @@ class CommonController extends Controller
                         $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                             <p class="notify-details">' . ucfirst($name) . '</p>
                             <p class="text-muted mb-0 user-msg">
-                                <small>Student Leave Start from ' . $from_leave . ' to ' . $to_leave . '</small>
+                            <small>' . __('messages.student_leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to') . ' ' . $to_leave . '</small>
                             </p>
                         </a>';
                     }
@@ -317,21 +317,23 @@ class CommonController extends Controller
                         $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
 
                         $notificationlist .= '<a href="' . route('admin.student.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Information Update</p>
+                        <p class="notify-details">' . __('messages.information_update') . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $parent_name . ' Parent Updated Their Student ' . $student_name . ' Information </small>
+                        <small>' . $parent_name . ' ' . __('messages.parent_updated_their_student', ['parent_name' => $parent_name, 'student_name' => $student_name]) . ' ' . $student_name . ' ' . __('messages.information') . '</small>
                         </p>
                         </a>';
+
                     }
                     if ($notification['type'] == "App\Notifications\ParentInfoUpdate") {
                         $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
 
                         $notificationlist .= '<a href="' . route('admin.parent.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Information Update</p>
+                        <p class="notify-details">' . __('messages.information_update') . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $parent_name . ' Parent Updated Their Information </small>
+                            <small> ' . $parent_name . ' ' . __('messages.parent_updated_their_information') . ' </small>
                         </p>
                         </a>';
+
                     }
                     if ($notification['type'] == "App\Notifications\ParentTermination") {
                         $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
@@ -339,11 +341,12 @@ class CommonController extends Controller
                         $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
 
                         $notificationlist .= '<a href="' . route('admin.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Termination</p>
+                        <p class="notify-details">' . __('messages.termination') . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $student_name . ' Termination  has Been ' . $status . ' By ' . $parent_name . ' </small>
+                            <small> ' . $student_name . ' ' . __('messages.termination_has_been') . ' ' . $status . ' ' . __('messages.by') . ' ' . $parent_name . ' </small>
                         </p>
                         </a>';
+
                     }
                     if ($notification['type'] == "App\Notifications\AdminTermination") {
                         $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
@@ -351,11 +354,12 @@ class CommonController extends Controller
                         $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
 
                         $notificationlist .= '<a href="' . route('parent.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Termination</p>
+                        <p class="notify-details">' . __('messages.termination') . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $student_name . ' Termination  has Been ' . $status . ' By  Admin Termination Date ( ' . $date . ' )</small>
+                            <small> ' . $student_name . ' ' . __('messages.termination_has_been') . ' ' . $status . ' ' . __('messages.by') . ' ' . __('messages.admin_termination_date') . ' (' . $date . ')</small>
                         </p>
                         </a>';
+
                     }
 
                     if ($notification['type'] == "App\Notifications\ReliefAssignment") {
@@ -371,9 +375,9 @@ class CommonController extends Controller
                         $start = isset($response['data']['start']) ? $response['data']['start'] : '-';
                         $end = isset($response['data']['end']) ? $response['data']['end'] : '-';
                         $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Relief assignment</p>
+                        <p class="notify-details">' . __('messages.relief_assignment') . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>A timetable for this standard ' . $class_name . ' and class ' . $section_name . ' for this subject ' . $subject_name . ' and timing is ' . $start . ' to ' . $end . '</small>
+                            <small>' . __('messages.a_timetable_for_this_standard') . ' ' . $class_name . ' ' . __('messages.and_class') . ' ' . $section_name . ' ' . __('messages.for_this_subject') . ' ' . $subject_name . ' ' . __('messages.and_timing_is') . ' ' . $start . ' ' . __('messages.to') . ' ' . $end . '</small>
                         </p>
                     </a>';
                     }
@@ -391,9 +395,9 @@ class CommonController extends Controller
                         $date = isset($notification['data']['homework']['date']) ? $notification['data']['homework']['date'] : '';
                         $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
                         $notificationlist .= '<a href="' . route('teacher.evaluation_report') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Homework (' . $date . ')</p>
+                        <p class="notify-details">' . __('messages.homework') . ' (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small> ' . $student_name . ' ( ' . $class_name . ' - ' . $section_name . ' ) has Submitted Homework ' . $homework_name . ' ( ' . $subject_name . ' )</small>
+                            <small> ' . $student_name . ' ( ' . $class_name . ' - ' . $section_name . ' ) ' . __('messages.has_submitted_homework') . ' ' . $homework_name . ' ( ' . $subject_name . ' )</small>
                         </p>
                         </a>';
                     }
@@ -411,11 +415,12 @@ class CommonController extends Controller
                         $date = isset($notification['data']['homework']['due_date']) ? $notification['data']['homework']['due_date'] : '';
                         $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
                         $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        <p class="notify-details">Homework (' . $date . ')</p>
+                        <p class="notify-details">' . __('messages.homework') . ' (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>' . $homework_name . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
+                            <small>' . $homework_name . ' ( ' . $subject_name . ' ) ' . __('messages.has_assigned') . ' - ' . __('messages.due_date') . ' (' . $date . ' )</small>
                         </p>
                         </a>';
+
                     }
                     if ($notification['type'] == "App\Notifications\LeaveReasonNotification") {
 
@@ -445,8 +450,7 @@ class CommonController extends Controller
                         $to_leave = isset($notification['data']['leave_approve_details']['to_leave']) ? $notification['data']['leave_approve_details']['to_leave'] : '-';
                         $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="text-muted mb-0 user-msg">
-                            <small>Your leave application for ' . $from_leave . ' to ' . $to_leave . ' was ' . $status . '</small>
-
+                            <small>' . __('messages.your_leave-application_for') . ' ' . $from_leave . ' ' . __('messages.to') . ' ' . $to_leave . ' ' . __('messages.was') . ' ' . $status . '</small>
                         </p>
                         </a>';
                     }
@@ -458,7 +462,7 @@ class CommonController extends Controller
                
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>There are no new notifications</small>
+                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
                 $notificationlist .= '</div>';
@@ -531,7 +535,7 @@ class CommonController extends Controller
                 $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>There are no new notifications</small>
+                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
             }
@@ -539,7 +543,7 @@ class CommonController extends Controller
                 $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>There are no new notifications</small>
+                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
             }

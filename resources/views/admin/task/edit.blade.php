@@ -97,7 +97,7 @@
                                 <div class="custom-file">
                                     <input type="file" name="file[]" class="custom-file-input up" multiple id="attachment">
                                     <input type="hidden" name="old_file" id="old_file" value="{{isset($to_do_row['file']) ? $to_do_row['file'] : ''}}">
-                                    <label class="custom-file-label" for="attachment">{{ __('messages.choose_file') }}</label>
+                                    <label class="custom-file-label" for="attachment">{{ __('messages.choose_the_file') }}</label>
                                 </div>
                             </div>
                         </div>

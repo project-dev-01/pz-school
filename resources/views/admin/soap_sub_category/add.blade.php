@@ -36,7 +36,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" id="photo" class="custom-file-input" name="photo" accept="image/png, image/gif, image/jpeg" >
-                                <label class="custom-file-label" for="document">{{ __('messages.choose_file') }}</label>
+                                <label class="custom-file-label" for="document">{{ __('messages.choose_the_file') }}</label>
                             </div>
                         </div>
                         <span id="photo_name"></span>
