@@ -199,6 +199,7 @@ $(function () {
     });
     // applyFilter
     // rules validation
+    if ($('#parent-table').length) {
     $("#resultsByPaper").validate({
         rules: {
             department_id: "required",
@@ -208,5 +209,6 @@ $(function () {
             exam_id: "required"
         }
     });
+}
     
 });

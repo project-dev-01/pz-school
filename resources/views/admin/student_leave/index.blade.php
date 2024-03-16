@@ -377,7 +377,7 @@
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
+<!--<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>-->
 <script>
     toastr.options.preventDuplicates = true;
 </script>

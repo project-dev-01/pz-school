@@ -144,7 +144,8 @@
 
     </div>
     <!-- end row -->
-
+    <div id="late-present-absent" class="apex-mixed-1" data-colors="#1FAB44,#FEB019,#EB5234"></div>
+                                        
 </div> <!-- container -->
 
 @endsection
@@ -172,6 +173,7 @@
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
     var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
     
+    var holidayList = "{{ config('constants.api.holidays_list') }}"
     // localStorage variables
     var teacher_employee_attendance_storage = localStorage.getItem('teacher_employee_attendance_details');
 </script>

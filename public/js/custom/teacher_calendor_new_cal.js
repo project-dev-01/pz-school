@@ -766,7 +766,7 @@ $(document).ready(function () {
         dynamicEventSource.events = []; // Clear the events array
     });
     // calendar.removeAllEvents();
-    calendar.render();
+    //calendar.render();
     // Define the time you want to scroll to (e.g., 2:00 PM)
     // let scrollTimeNew = '14:00:00'; // 24-hour format
 

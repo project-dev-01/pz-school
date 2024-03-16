@@ -1226,7 +1226,7 @@
 <script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
 <script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
 <!-- Init js-->
-<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<!--<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>-->
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
     
@@ -1324,8 +1324,8 @@
     var applicationIndex = "{{ route('parent.application.index') }}";
 </script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<!--<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>-->
 <script src="{{ asset('js/custom/parent_application.js') }}"></script>
 <script>
     $('.dropify-im').dropify({

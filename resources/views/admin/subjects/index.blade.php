@@ -98,7 +98,7 @@
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script src="{{ asset('libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>
+<!--<script src="{{ asset('js/pages/form-pickers.init.js') }}"></script>-->
 
 <script>
     var subjectsAddUrl = "{{ config('constants.api.subject_add') }}";

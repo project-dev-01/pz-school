@@ -371,10 +371,10 @@
 </script>
 <script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
 <script src="{{ asset('js/custom/student_leave_direct_approve.js') }}"></script>
-@if(!empty(Session::get('school_roleid')))
+<!--@if(!empty(Session::get('school_roleid')))
 <script>
     var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
-@endif
+@endif-->
 @endsection

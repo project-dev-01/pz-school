@@ -151,7 +151,7 @@ $(function () {
         }
     });
 
-    
+    if ($('#parent-table').length) {
     $('#parent-table').DataTable({
         processing: true,
         info: true,
@@ -294,7 +294,7 @@ $(function () {
         ]
     }).on('draw', function () {
     });
-    
+}
 
     // delete Parent 
     $(document).on('click', '#deleteParentBtn', function () {

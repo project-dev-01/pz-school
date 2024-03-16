@@ -1561,10 +1561,11 @@
 														</script>
 														<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 														<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-														<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-														<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+														<!--<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+														<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>-->
 														<script src="{{ asset('js/custom/parent.js') }}"></script>
 														<script>
+															var parentList = "{{ route('admin.parent.list') }}";
 															$('.dropify-im').dropify({
 																messages: {
 																	default: drag_and_drop_to_check,

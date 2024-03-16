@@ -652,7 +652,7 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
+        //utilsScript: "js/utils.js"
     });
 
 $(".country").countrySelect({

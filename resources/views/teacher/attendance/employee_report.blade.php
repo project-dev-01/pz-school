@@ -306,7 +306,8 @@
 
     </div>
     <!-- end row -->
-
+    <div id="late-present-absent" class="apex-mixed-1" data-colors="#1FAB44,#FEB019,#EB5234"></div>
+    
 </div> <!-- container -->
 
 @endsection
@@ -332,6 +333,7 @@
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var staffImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/images/staffs' }}";
     var employeeByDepartment = "{{ config('constants.api.employee_by_department') }}";
+    var holidayList = "{{ config('constants.api.holidays_list') }}"
     // localStorage variables
     var teacher_employee_attendance_report_storage = localStorage.getItem('teacher_employee_attendance_report_details');
 </script>

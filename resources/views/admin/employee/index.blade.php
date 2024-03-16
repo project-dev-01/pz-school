@@ -1208,8 +1208,9 @@
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<!-- <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>-->
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;
@@ -1218,7 +1219,6 @@
     var emp_designation_list = @json($emp_designation);
     var employee_type_list = @json($employee_type_list);
 </script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/employee_add_more.js') }}"></script>
 <script>
