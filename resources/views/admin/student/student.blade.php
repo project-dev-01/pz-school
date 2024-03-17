@@ -75,7 +75,7 @@
                                             <div class="card-body">
                                                 <form id="StudentFilter" autocomplete="off">
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <!-- <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="academic_year">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
                                                                 <select id="academic_year" name="academic_year" class="form-control">
@@ -87,7 +87,7 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="student_name">{{ __('messages.student_name') }}</label>

@@ -483,7 +483,7 @@ $(function () {
         e.preventDefault();
         // var StudentFilter = $("#StudentFilter").valid();
         // if (StudentFilter === true) {
-        var academic_year = $('#academic_year').val();
+        // var academic_year = $('#academic_year').val();
         var student_name = $('#student_name').val();
         var department_id_filter = $('#department_id_filter').val();
         var class_id = $('#class_id').val();
@@ -499,7 +499,7 @@ $(function () {
             sessionID: session_id,
             userID: userID,
             status: status,
-            academic_year:academic_year
+            // academic_year:academic_year
         };
         // setLocalStorageForStudentList(classObj);
 
@@ -510,7 +510,7 @@ $(function () {
             class_id: class_id,
             section_id: section_id,
             session_id: session_id,
-            academic_year:academic_year
+            // academic_year:academic_year
         };
         getStudentList(formData);
         // } else {
@@ -570,7 +570,7 @@ $(function () {
         $('#excelSectionID').val(formData.section_id);
         $('#excelStatus').val(formData.status);
         $('#excelSession').val(formData.session_id);
-        $('#academicYear').val(formData.academic_year);
+        // $('#academicYear').val(formData.academic_year);
         var table = $('#student-table').DataTable({
             processing: true,
             serverSide: true,

@@ -4768,7 +4768,7 @@ class AdminController extends Controller
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
             "status" => $request->status,
-            "academic_session_id" => $request->academic_year
+            "academic_session_id" => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.student_list'), $data);
         $data = isset($response['data']) ? $response['data'] : [];

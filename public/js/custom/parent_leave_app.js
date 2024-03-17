@@ -527,8 +527,9 @@ $(function () {
                     cell.addEventListener('click', function () {
                         var selectedLeaveTypeId = reasons[0].leave_type_id;
                         var selectedReasonId = reasons[0].reason_id.id;
-                        $("#directchangeLevType").val(selectedLeaveTypeId);
-
+                        $("#changeLevType").val(selectedLeaveTypeId);
+console.log(selectedLeaveTypeId);
+console.log(selectedReasonId);
                         // Find the select element
                         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
                             if (res.code == 200) {
