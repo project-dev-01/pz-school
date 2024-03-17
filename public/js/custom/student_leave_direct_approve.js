@@ -76,7 +76,7 @@ $(function () {
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
-        minDate: 0
+        // minDate: 0
     });
     $("#to_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -84,7 +84,7 @@ $(function () {
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
-        minDate: 0
+        // minDate: 0
     });
     $("#to_ldate").on('change', function () {
         let frm_ldate = $("#frm_ldate").val();
@@ -123,20 +123,24 @@ $(function () {
             $('#file_name').text(file.name);
         }
     });
-    
+
     // studentAllReasons
     $(document).on('click', '#studentAllReasons', function () {
         // staffLeaveDetailsShowUrl
         $.get(leaveTypeWiseGetAllReason,
             {
                 branch_id: branchID
-            }, function (res) {                
+            }, function (res) {
                 $("#showAllReasons").empty();
                 $('#knowtheReasons').modal('show');
                 if (res.code == 200) {
                     const jsonObject = JSON.parse(res.data);
+                    console.log(res.data);
+                    console.log(jsonObject);
+                    // return false;
                     var appendData = displayLeaveTypesAndReasonsTable(jsonObject);
                     $("#showAllReasons").append(appendData);
+
                 }
             }, 'json');
     });
@@ -144,10 +148,9 @@ $(function () {
     function parseReasons(reasonsString) {
         return JSON.parse(reasonsString);
     }
-    // Function to display leave types and corresponding reasons in a table format
     function displayLeaveTypesAndReasonsTable(data) {
         const table = document.createElement('table');
-        table.classList.add('table', 'table-responsive');
+        table.classList.add('table', 'table-striped');
 
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
@@ -184,42 +187,75 @@ $(function () {
                         reason_id: parseReasons(entry.id)[i], // Include the unique identifier (leave_type_id)
                         reason: parseReasons(entry.reasons)[i]
                     }))
-                    .filter(reason => reason); 
-                   // console.log(reasons);
+                    .filter(reason => reason);
+
                 if (reasons.length > 0) {
                     const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
-                    console.log(reasonObject);
                     // Check if the reason is an object (assuming it's a string)
                     const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
-                
-                    cell.textContent = reasonText; 
-                   // console.log(reasons[0]);
+
+                    cell.textContent = reasonText;
+
                     // Add a click event listener to each cell
                     cell.addEventListener('click', function () {
                         var selectedLeaveTypeId = reasons[0].leave_type_id;
                         var selectedReasonId = reasons[0].reason_id.id;
-                        //console.log(selectedReasonId);
-                         $("#directchangeLevType").val(selectedLeaveTypeId);
+                        $("#directchangeLevType").val(selectedLeaveTypeId);
+
                         // Find the select element
-                       $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
-                        if (res.code == 200) {
-                        $("#changelevReasons").empty();
-                            $.each(res.data, function (key, val) {
-                                $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
-                            });
-                            $("#changelevReasons").val(selectedReasonId);
-                        }
-                    }, 'json');
+                        $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
+                            if (res.code == 200) {
+                                $("#changelevReasons").empty();
+                                $.each(res.data, function (key, val) {
+                                    $("#changelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                });
+                                $("#changelevReasons").val(selectedReasonId);
+                            }
+                        }, 'json');
                         // Close the modal after selecting the leave type
                         $('#knowtheReasons').modal('hide');
                     });
+                    // Add CSS for cell hover color
+                    cell.classList.add('hoverable-cell');
+
                 }
             });
         }
 
         table.appendChild(thead);
         table.appendChild(tbody);
+        // document.body.appendChild(table); // Append the table to the body
+
+        // Add CSS for sticky header and cell hover color
+        const style = document.createElement('style');
+        style.textContent = `
+        table {
+            font-family: Verdana;
+            font-size: 14px;
+            border-collapse: collapse;
+            width: 600px;
+            table-layout: fixed;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            z-index: 2; /* Ensures the header stays above other content */
+        }
+        .hoverable-cell:hover {
+            background-color: yellow;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            z-index: 1; /* Ensures cells stay below header */
+        }
+        `;
+        document.head.appendChild(style);
         return table;
-        // document.body.appendChild(table); // Append the table to the body or your desired element
     }
+
 });

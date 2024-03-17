@@ -442,8 +442,6 @@ $(function () {
     //     });
     // }
     function allStudentLeave(dataSetNew) {
-        console.log("dataSetNew");
-        console.log(dataSetNew);
         // DataTable configuration
         var table = $('#student-leave-table').DataTable({
             processing: true,

@@ -12,6 +12,7 @@ use Excel;
 use App\Exports\ExamScheduleDownload;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 
 class CommonController extends Controller
 {
@@ -52,7 +53,6 @@ class CommonController extends Controller
     }
     public function showApplicationForm()
     {
-
         $data = [
             'branch_id' => config('constants.branch_id')
         ];
@@ -68,6 +68,18 @@ class CommonController extends Controller
 
         $academic_year_list_response = Http::post(config('constants.api.application_academic_year_list'), $data);
         $academic_year_list = $academic_year_list_response->json();
+        $response = Http::post(config('constants.api.get_school_type'), $data);
+        $schoolDetails = $response->json();
+
+        // set default language
+        if (Cookie::get('locale') !== null) {
+            $defalutLang = Cookie::get('locale');
+        } else {
+            $defalutLang = isset($schoolDetails['data']['academicSession']['language_name']) ? $schoolDetails['data']['academicSession']['language_name'] : 'en';
+        }
+        $setLang = isset($defalutLang) ? $defalutLang : 'en';
+        App::setLocale($setLang);
+        session()->put('locale', $setLang);
         return view(
             'school-application-form',
             [
@@ -75,10 +87,13 @@ class CommonController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
+                'branch_id' => config('constants.branch_id'),
+                'school_name' => config('constants.school_name'),
+                'school_image' => config('constants.school_image'),
+                'language_name' => $setLang,
             ]
         );
     }
-
     public function addApplicationForm(Request $request)
     {
         $verify_email = $request->verify_email . '_email';
@@ -236,243 +251,237 @@ class CommonController extends Controller
         // return $unread_notifications;
         $notificationlist = '';
         $count = 0;
-        if(isset($unread_notifications) && $unread_notifications!=null)
-        {
-        if ($unread_notifications['code'] == 200) {
-            // dd($unread_notifications['data']['unread']);
-            // dd($unread_notifications['data']['unread_count']);
-            $count = isset($unread_notifications['data']['unread']) ? count($unread_notifications['data']['unread']) : 0;
-            // $count = count($count);
-            // dd($count);
-            if (!empty($unread_notifications['data']['unread'])) {
-                $notificationlist .= '<div class="noti-scroll" data-simplebar>';
-                foreach ($unread_notifications['data']['unread'] as $notification) {
-                    // dd($notification['type']);
-                    if ($notification['type'] == "App\Notifications\LeaveApprove") {
-                        $redirectRoute = "javascript:void(0)";
-                        if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
-                            $redirectRoute = route('admin.leave_management.applyleave');
-                        }
-                        if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
-                            $redirectRoute = route('staff.leave_management.applyleave');
-                        }
-                        if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
-                            $redirectRoute = route('teacher.leave_management.applyleave');
-                        }
+        if (isset($unread_notifications) && $unread_notifications != null) {
+            if ($unread_notifications['code'] == 200) {
+                // dd($unread_notifications['data']['unread']);
+                // dd($unread_notifications['data']['unread_count']);
+                $count = isset($unread_notifications['data']['unread']) ? count($unread_notifications['data']['unread']) : 0;
+                // $count = count($count);
+                // dd($count);
+                if (!empty($unread_notifications['data']['unread'])) {
+                    $notificationlist .= '<div class="noti-scroll" data-simplebar>';
+                    foreach ($unread_notifications['data']['unread'] as $notification) {
+                        // dd($notification['type']);
+                        if ($notification['type'] == "App\Notifications\LeaveApprove") {
+                            $redirectRoute = "javascript:void(0)";
+                            if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
+                                $redirectRoute = route('admin.leave_management.applyleave');
+                            }
+                            if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
+                                $redirectRoute = route('staff.leave_management.applyleave');
+                            }
+                            if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
+                                $redirectRoute = route('teacher.leave_management.applyleave');
+                            }
 
-                        $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
-                        $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
-                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
+                            $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
+                            $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="text-muted mb-0 user-msg">
                         <small>' . __('messages.your_leave-application_for') . ' ' . $from_leave . ' ' . __('messages.to')  . ' ' . $to_leave . ' ' . __('messages.was_approved') . '</small>
                         </p>
                         </a>';
-                    }
-                    if ($notification['type'] == "App\Notifications\LeaveApply") {
-                        $redirectRoute = "javascript:void(0)";
-                        if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
-                            $redirectRoute = route('admin.leave_management.allleaves');
                         }
-                        if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
-                            $redirectRoute = route('staff.leave_management.allleaves');
-                        }
-                        if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
-                            $redirectRoute = route('teacher.leave_management.allleaves');
-                        }
+                        if ($notification['type'] == "App\Notifications\LeaveApply") {
+                            $redirectRoute = "javascript:void(0)";
+                            if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
+                                $redirectRoute = route('admin.leave_management.allleaves');
+                            }
+                            if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
+                                $redirectRoute = route('staff.leave_management.allleaves');
+                            }
+                            if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
+                                $redirectRoute = route('teacher.leave_management.allleaves');
+                            }
 
-                        $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
-                        $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
-                        $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
-                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
+                            $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
+                            $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
+                            $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . ucfirst($name) . '</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>' . __('messages.leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to')  . ' ' . $to_leave . '</small>
+                        <small>' . __('messages.leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to')  . ' ' . $to_leave . '</small>
                         </p>
                     </a>';
-                    }
-                    if ($notification['type'] == "App\Notifications\StudentLeaveApply") {
-                        $redirectRoute = "javascript:void(0)";
-                        if (session()->has('role_id')) {
-                            $role_id = session()->get('role_id');
-                            if ($role_id == 2) {
-                                $redirectRoute = route('admin.student_leave.list');
-                            } elseif ($role_id == 3) {
-                                $redirectRoute = route('staff.student_leave.list');
-                            } elseif ($role_id == 4) {
-                                $redirectRoute = route('teacher.student_leave.list');
-                            }
                         }
-                    
-                        $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
-                        $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
-                        $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
-                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                            <p class="notify-details">' . ucfirst($name) . '</p>
-                            <p class="text-muted mb-0 user-msg">
-                            <small>' . __('messages.student_leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to') . ' ' . $to_leave . '</small>
-                            </p>
-                        </a>';
-                    }
-                    
-                    if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
-                        $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
-                        $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
+                        if ($notification['type'] == "App\Notifications\StudentLeaveApply") {
+                            $redirectRoute = "javascript:void(0)";
+                            if (session()->has('role_id')) {
+                                $role_id = session()->get('role_id');
+                                if ($role_id == 2) {
+                                    $redirectRoute = route('admin.student_leave.list');
+                                } elseif ($role_id == 3) {
+                                    $redirectRoute = route('staff.student_leave.list');
+                                } elseif ($role_id == 4) {
+                                    $redirectRoute = route('teacher.student_leave.list');
+                                }
+                            }
 
-                        $notificationlist .= '<a href="' . route('admin.student.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $name = isset($notification['data']['name']) ? $notification['data']['name'] : '-';
+                            $from_leave = isset($notification['data']['from_leave']) ? $notification['data']['from_leave'] : '-';
+                            $to_leave = isset($notification['data']['to_leave']) ? $notification['data']['to_leave'] : '-';
+                            $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        <p class="notify-details">' . ucfirst($name) . '</p>
+                        <p class="text-muted mb-0 user-msg">
+                        <small>' . __('messages.student_leave_start_from') . ' ' . $from_leave . ' ' . __('messages.to') . ' ' . $to_leave . '</small>
+                        </p>
+                        </a>';
+                        }
+
+                        if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
+                            $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
+                            $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';
+
+                            $notificationlist .= '<a href="' . route('admin.student.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.information_update') . '</p>
                         <p class="text-muted mb-0 user-msg">
                         <small>' . $parent_name . ' ' . __('messages.parent_updated_their_student', ['parent_name' => $parent_name, 'student_name' => $student_name]) . ' ' . $student_name . ' ' . __('messages.information') . '</small>
                         </p>
                         </a>';
+                        }
+                        if ($notification['type'] == "App\Notifications\ParentInfoUpdate") {
+                            $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
 
-                    }
-                    if ($notification['type'] == "App\Notifications\ParentInfoUpdate") {
-                        $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
-
-                        $notificationlist .= '<a href="' . route('admin.parent.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $notificationlist .= '<a href="' . route('admin.parent.update_info') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.information_update') . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small> ' . $parent_name . ' ' . __('messages.parent_updated_their_information') . ' </small>
                         </p>
                         </a>';
+                        }
+                        if ($notification['type'] == "App\Notifications\ParentTermination") {
+                            $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
+                            $parent_name = isset($notification['data']['termination']['parent_name']) ? $notification['data']['termination']['parent_name'] : '-';
+                            $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
 
-                    }
-                    if ($notification['type'] == "App\Notifications\ParentTermination") {
-                        $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
-                        $parent_name = isset($notification['data']['termination']['parent_name']) ? $notification['data']['termination']['parent_name'] : '-';
-                        $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
-
-                        $notificationlist .= '<a href="' . route('admin.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $notificationlist .= '<a href="' . route('admin.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.termination') . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small> ' . $student_name . ' ' . __('messages.termination_has_been') . ' ' . $status . ' ' . __('messages.by') . ' ' . $parent_name . ' </small>
                         </p>
                         </a>';
+                        }
+                        if ($notification['type'] == "App\Notifications\AdminTermination") {
+                            $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
+                            $date = isset($notification['data']['termination']['date']) ? $notification['data']['termination']['date'] : '-';
+                            $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
 
-                    }
-                    if ($notification['type'] == "App\Notifications\AdminTermination") {
-                        $student_name = isset($notification['data']['termination']['student_name']) ? $notification['data']['termination']['student_name'] : '-';
-                        $date = isset($notification['data']['termination']['date']) ? $notification['data']['termination']['date'] : '-';
-                        $status = isset($notification['data']['termination']['status']) ? $notification['data']['termination']['status'] : '-';
-
-                        $notificationlist .= '<a href="' . route('parent.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $notificationlist .= '<a href="' . route('parent.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.termination') . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small> ' . $student_name . ' ' . __('messages.termination_has_been') . ' ' . $status . ' ' . __('messages.by') . ' ' . __('messages.admin_termination_date') . ' (' . $date . ')</small>
                         </p>
                         </a>';
+                        }
 
-                    }
-
-                    if ($notification['type'] == "App\Notifications\ReliefAssignment") {
-                        $data = [
-                            'calendar_id' => $notification['data']['calendar_id']
-                        ];
-                        $response = Helper::PostMethod(config('constants.api.get_calendar_details_timetable'), $data);
-                        // dd($response['data']);
-                        // dd($response['data']['class_name']);
-                        $class_name = isset($response['data']['class_name']) ? $response['data']['class_name'] : '-';
-                        $section_name = isset($response['data']['section_name']) ? $response['data']['section_name'] : '-';
-                        $subject_name = isset($response['data']['subject_name']) ? $response['data']['subject_name'] : '-';
-                        $start = isset($response['data']['start']) ? $response['data']['start'] : '-';
-                        $end = isset($response['data']['end']) ? $response['data']['end'] : '-';
-                        $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                        if ($notification['type'] == "App\Notifications\ReliefAssignment") {
+                            $data = [
+                                'calendar_id' => $notification['data']['calendar_id']
+                            ];
+                            $response = Helper::PostMethod(config('constants.api.get_calendar_details_timetable'), $data);
+                            // dd($response['data']);
+                            // dd($response['data']['class_name']);
+                            $class_name = isset($response['data']['class_name']) ? $response['data']['class_name'] : '-';
+                            $section_name = isset($response['data']['section_name']) ? $response['data']['section_name'] : '-';
+                            $subject_name = isset($response['data']['subject_name']) ? $response['data']['subject_name'] : '-';
+                            $start = isset($response['data']['start']) ? $response['data']['start'] : '-';
+                            $end = isset($response['data']['end']) ? $response['data']['end'] : '-';
+                            $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.relief_assignment') . '</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>' . __('messages.a_timetable_for_this_standard') . ' ' . $class_name . ' ' . __('messages.and_class') . ' ' . $section_name . ' ' . __('messages.for_this_subject') . ' ' . $subject_name . ' ' . __('messages.and_timing_is') . ' ' . $start . ' ' . __('messages.to') . ' ' . $end . '</small>
                         </p>
                     </a>';
-                    }
+                        }
 
-                    if ($notification['type'] == "App\Notifications\StudentHomeworkSubmit") {
+                        if ($notification['type'] == "App\Notifications\StudentHomeworkSubmit") {
 
-                        // dd($notification['data']['homework']['homework_name']);
+                            // dd($notification['data']['homework']['homework_name']);
 
-                        // dd($response['data']['class_name']);
+                            // dd($response['data']['class_name']);
 
-                        $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
-                        $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
-                        $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
-                        $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
-                        $date = isset($notification['data']['homework']['date']) ? $notification['data']['homework']['date'] : '';
-                        $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
-                        $notificationlist .= '<a href="' . route('teacher.evaluation_report') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
+                            $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
+                            $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
+                            $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
+                            $date = isset($notification['data']['homework']['date']) ? $notification['data']['homework']['date'] : '';
+                            $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
+                            $notificationlist .= '<a href="' . route('teacher.evaluation_report') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.homework') . ' (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
                             <small> ' . $student_name . ' ( ' . $class_name . ' - ' . $section_name . ' ) ' . __('messages.has_submitted_homework') . ' ' . $homework_name . ' ( ' . $subject_name . ' )</small>
                         </p>
                         </a>';
-                    }
+                        }
 
-                    if ($notification['type'] == "App\Notifications\TeacherHomework") {
+                        if ($notification['type'] == "App\Notifications\TeacherHomework") {
 
-                        // dd($notification['data']['homework']['homework_name']);
+                            // dd($notification['data']['homework']['homework_name']);
 
-                        // dd($response['data']['class_name']);
+                            // dd($response['data']['class_name']);
 
-                        $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
-                        $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
-                        $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
-                        $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
-                        $date = isset($notification['data']['homework']['due_date']) ? $notification['data']['homework']['due_date'] : '';
-                        $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
-                        $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $student_name = isset($notification['data']['homework']['student_name']) ? $notification['data']['homework']['student_name'] : '';
+                            $class_name = isset($notification['data']['homework']['class_name']) ? $notification['data']['homework']['class_name'] : '';
+                            $section_name = isset($notification['data']['homework']['section_name']) ? $notification['data']['homework']['section_name'] : '';
+                            $subject_name = isset($notification['data']['homework']['subject_name']) ? $notification['data']['homework']['subject_name'] : '';
+                            $date = isset($notification['data']['homework']['due_date']) ? $notification['data']['homework']['due_date'] : '';
+                            $homework_name = isset($notification['data']['homework']['homework_name']) ? $notification['data']['homework']['homework_name'] : '';
+                            $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="notify-details">' . __('messages.homework') . ' (' . $date . ')</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>' . $homework_name . ' ( ' . $subject_name . ' ) ' . __('messages.has_assigned') . ' - ' . __('messages.due_date') . ' (' . $date . ' )</small>
                         </p>
                         </a>';
+                        }
+                        if ($notification['type'] == "App\Notifications\LeaveReasonNotification") {
 
-                    }
-                    if ($notification['type'] == "App\Notifications\LeaveReasonNotification") {
+                            // dd($notification['data']['homework']['homework_name']);
 
-                        // dd($notification['data']['homework']['homework_name']);
+                            // dd($response['data']['class_name']);
+                            $status = isset($notification['data']['leave_approve_details']['status']) ? $notification['data']['leave_approve_details']['status'] : '';
+                            // $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            // <p class="notify-details">Homework (' . $date . ')</p>
+                            // <p class="text-muted mb-0 user-msg">
+                            //     <small>' . $status . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
+                            // </p>
+                            // </a>';
 
-                        // dd($response['data']['class_name']);
-                        $status = isset($notification['data']['leave_approve_details']['status']) ? $notification['data']['leave_approve_details']['status'] : '';
-                        // $notificationlist .= '<a href="' . route('student.homework') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                        // <p class="notify-details">Homework (' . $date . ')</p>
-                        // <p class="text-muted mb-0 user-msg">
-                        //     <small>' . $status . ' ( ' . $subject_name . ' ) has Assigned - Due Date (' . $date . ' )</small>
-                        // </p>
-                        // </a>';
+                            $redirectRoute = "javascript:void(0)";
+                            // if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
+                            //     $redirectRoute = route('admin.leave_management.applyleave');
+                            // }
+                            // if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
+                            //     $redirectRoute = route('staff.leave_management.applyleave');
+                            // }
+                            // if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
+                            //     $redirectRoute = route('teacher.leave_management.applyleave');
+                            // }
 
-                        $redirectRoute = "javascript:void(0)";
-                        // if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
-                        //     $redirectRoute = route('admin.leave_management.applyleave');
-                        // }
-                        // if (session()->get('role_id') == 3 || session()->get('role_id') == '3') {
-                        //     $redirectRoute = route('staff.leave_management.applyleave');
-                        // }
-                        // if (session()->get('role_id') == 4 || session()->get('role_id') == '4') {
-                        //     $redirectRoute = route('teacher.leave_management.applyleave');
-                        // }
-
-                        $from_leave = isset($notification['data']['leave_approve_details']['from_leave']) ? $notification['data']['leave_approve_details']['from_leave'] : '-';
-                        $to_leave = isset($notification['data']['leave_approve_details']['to_leave']) ? $notification['data']['leave_approve_details']['to_leave'] : '-';
-                        $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            $from_leave = isset($notification['data']['leave_approve_details']['from_leave']) ? $notification['data']['leave_approve_details']['from_leave'] : '-';
+                            $to_leave = isset($notification['data']['leave_approve_details']['to_leave']) ? $notification['data']['leave_approve_details']['to_leave'] : '-';
+                            $notificationlist .= '<a href="' . $redirectRoute . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                         <p class="text-muted mb-0 user-msg">
                             <small>' . __('messages.your_leave-application_for') . ' ' . $from_leave . ' ' . __('messages.to') . ' ' . $to_leave . ' ' . __('messages.was') . ' ' . $status . '</small>
                         </p>
                         </a>';
+                        }
                     }
-                }
-                $notificationlist .= '</div>';
-            } else {
-                $notificationlist .= '<div class="noti-scroll" data-simplebar>';
-                $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
+                    $notificationlist .= '</div>';
+                } else {
+                    $notificationlist .= '<div class="noti-scroll" data-simplebar>';
+                    $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
                
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
                     <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
-                $notificationlist .= '</div>';
+                    $notificationlist .= '</div>';
 
-                // dd($notificationlist);
+                    // dd($notificationlist);
+                }
             }
         }
-    }
         return array('count' => $count, 'notificationlist' => $notificationlist);
     }
     protected function getRedirectRoute($routeName)
@@ -511,7 +520,7 @@ class CommonController extends Controller
         $count = 0;
         if(isset($unread_notifications) && $unread_notifications !=null)
         {
-            if ($unread_notifications['code'] == 200) {
+        if ($unread_notifications['code'] == 200) {
             $counting = isset($unread_notifications['data']) ? $unread_notifications['data'] : 0;
             $lengthArr = count($counting);
             // $notificationlist .= '<div class="noti-scroll" data-simplebar>';
@@ -540,7 +549,7 @@ class CommonController extends Controller
                 $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
+                <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
             }
@@ -548,11 +557,12 @@ class CommonController extends Controller
                 $notificationlist .= '<a href="javascript:void(0);" class="dropdown-item notify-item">
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
+                <small>' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
             }
             // $notificationlist .= '</div>';
+        }
         }
         return array('count' => $count, 'notificationlist' => $notificationlist);
     }
@@ -604,7 +614,6 @@ class CommonController extends Controller
                 return null;
                 // return $meetingDatetime->format('Y-m-d H:i:s') . ' ' . $currentDatetime->format('Y-m-d H:i:s');
             }
-        }
         }
     }
     // public function timebetweenCheck()

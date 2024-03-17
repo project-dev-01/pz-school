@@ -43,7 +43,7 @@
 </head>
 
 <body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
-<div id="overlay">
+    <div id="overlay">
         <div class="lds-spinner">
             <div></div>
             <div></div>
@@ -87,6 +87,7 @@
                         </div>
                     </div>
                     <div class="text-center w-75 m-auto">
+
                         <div class="auth-logo">
                             <a href="" class="logo logo-dark text-center">
                                 <span class="logo-lg">
@@ -95,6 +96,19 @@
                             </a>
                         </div>
                         <h3 class="text-center" style="color:#596368">{{ __('messages.student_application_form') }}</h3>
+                        <div class="text-center form-group">
+                            <div class="lang-select">
+                                <button class="btn-select" value=""></button>
+                                <div class="b" style="text-align:justify;">
+                                    <ul id="a" style="margin-bottom:0px;">
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                        <li><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr style="border:1px solid #6FC6CC">
                     <div class="card">
@@ -134,18 +148,18 @@
                                         </div>
 
                                     </div><br>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox text-center">
-                                                <input type="checkbox" name="terms_condition" class="custom-control-input" id="terms_condition">
-                                                <label class="custom-control-label" for="terms_condition">{{ __('messages.understand_accept') }}</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox text-center">
+                                                    <input type="checkbox" name="terms_condition" class="custom-control-input" id="terms_condition">
+                                                    <label class="custom-control-label" for="terms_condition">{{ __('messages.understand_accept') }}</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                
+
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
@@ -156,16 +170,16 @@
                                 <div class="card-body">
                                     <div id="guardian_details">
                                         <div class="row">
-                                        <div class="col-md-3">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group -center">
-                                                <!-- <label for="first_name">{{ __('messages.email') }}<span class="text-danger">*</span></label> -->
-                                                <input type="text" class="form-control" id="verify_email" name="email" maxlength="50" placeholder="{{ __('messages.enter_your_email') }}" aria-describedby="inputGroupPrepend">
+                                            <div class="col-md-3">
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                        </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group -center">
+                                                    <!-- <label for="first_name">{{ __('messages.email') }}<span class="text-danger">*</span></label> -->
+                                                    <input type="text" class="form-control" id="verify_email" name="email" maxlength="50" placeholder="{{ __('messages.enter_your_email') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,8 +202,8 @@
                                 </div>
                                 <hr> -->
                                 <div class="form-group text-center m-b-0">
-                                    <button class="btn btn-primary-bl waves-effect waves-light" disabled id="submit" type="submit" >
-                                    {{ __('messages.verify') }}
+                                    <button class="btn btn-primary-bl waves-effect waves-light" disabled id="submit" type="submit">
+                                        {{ __('messages.verify') }}
                                     </button>
                                 </div>
 
@@ -232,7 +246,7 @@
         <span class="spinner"></span>
     </div>
 </div> -->
-    
+
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
@@ -258,10 +272,103 @@
     <!-- Init js-->
     <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
     <script src="{{ asset('country/js/countrySelect.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+    <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+    <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+    <script type="text/javascript">
+        var locale = "{{ Session::get('locale') }}";
+        var url = "{{ route('changeLang') }}";
+        //change button stuff on click
+        $('#a li').click(function() {
+            var img = $(this).find('img').attr("src");
+            var value = $(this).find('img').attr('value');
+            window.location.href = url + "?lang=" + value;
+            var text = this.innerText;
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+            $(".b").toggle();
+        });
 
+        $(".btn-select").click(function() {
+            $(".b").toggle();
+        });
+        var locale_lang = "{{ Cookie::get('locale') }}";
+        var language_name = "{{ $language_name }}";
+        if (locale_lang) {
+            if (locale_lang == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else if (locale_lang == "malay") {
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
+        } else if (language_name) {
+            if (language_name == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else if (language_name == "malay") {
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
+        } else {
+            if (locale == "japanese") {
+                //find an item with value of sessionLang\
+                var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+                var value = "japanese";
+                var text = "日本語";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else if (locale == "malay") {
+                var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+                var value = "malay";
+                var text = "Malay";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            } else {
+                var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+                var value = "en";
+                var text = "English";
+                var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+                $('.btn-select').html(item);
+                $('.btn-select').attr('value', value);
+            }
+        }
+    </script>
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";
         var input = document.querySelector(".mobile_no");

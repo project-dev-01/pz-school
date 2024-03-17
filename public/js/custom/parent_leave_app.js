@@ -477,7 +477,7 @@ $(function () {
     // Function to display leave types and corresponding reasons in a table format
     function displayLeaveTypesAndReasonsTable(data) {
         const table = document.createElement('table');
-        table.classList.add('table', 'table-responsive');
+        table.classList.add('table', 'table-striped');
 
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
@@ -485,11 +485,9 @@ $(function () {
         const headerRow = thead.insertRow();
         const leaveTypesSet = new Set();
 
+        // Extract unique leave types
         Object.values(data).forEach(entry => {
-            leaveTypesSet.add({
-                leave_type_id: entry.leave_type_id,
-                leave_type: entry.leave_type
-            });
+            leaveTypesSet.add(entry.leave_type);
         });
 
         const uniqueLeaveTypes = Array.from(leaveTypesSet);
@@ -497,7 +495,7 @@ $(function () {
         // Create table headers with leave types
         uniqueLeaveTypes.forEach(leaveType => {
             const header = document.createElement('th');
-            header.textContent = leaveType.leave_type; // Access leave_type property
+            header.textContent = leaveType;
             headerRow.appendChild(header);
         });
 
@@ -510,7 +508,7 @@ $(function () {
             uniqueLeaveTypes.forEach(leaveType => {
                 const cell = row.insertCell();
                 const reasons = Object.values(data)
-                    .filter(entry => entry.leave_type_id === leaveType.leave_type_id)
+                    .filter(entry => entry.leave_type === leaveType)
                     .map(entry => ({
                         leave_type_id: entry.leave_type_id, // Include the unique identifier (leave_type_id)
                         reason_id: parseReasons(entry.id)[i], // Include the unique identifier (leave_type_id)
@@ -520,18 +518,17 @@ $(function () {
 
                 if (reasons.length > 0) {
                     const reasonObject = reasons[0].reason; // Access the 'reason' property from the first reason object
-
                     // Check if the reason is an object (assuming it's a string)
                     const reasonText = typeof reasonObject === 'object' ? reasonObject.reason : reasonObject;
 
                     cell.textContent = reasonText;
-                    // console.log(reasons[0]);
+
                     // Add a click event listener to each cell
                     cell.addEventListener('click', function () {
                         var selectedLeaveTypeId = reasons[0].leave_type_id;
                         var selectedReasonId = reasons[0].reason_id.id;
-                        //console.log(selectedReasonId);
-                        $("#changeLevType").val(selectedLeaveTypeId);
+                        $("#directchangeLevType").val(selectedLeaveTypeId);
+
                         // Find the select element
                         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
                             if (res.code == 200) {
@@ -545,21 +542,47 @@ $(function () {
                         // Close the modal after selecting the leave type
                         $('#knowtheReasons').modal('hide');
                     });
-                    // Add hover effect to individual cells
-                    cell.addEventListener('mouseenter', function () {
-                        this.classList.add('hovered-cell');
-                    });
-                    cell.addEventListener('mouseleave', function () {
-                        this.classList.remove('hovered-cell');
-                    });
+                    // Add CSS for cell hover color
+                    cell.classList.add('hoverable-cell');
+
                 }
             });
         }
 
         table.appendChild(thead);
         table.appendChild(tbody);
+        // document.body.appendChild(table); // Append the table to the body
+
+        // Add CSS for sticky header and cell hover color
+        const style = document.createElement('style');
+        style.textContent = `
+        table {
+            font-family: Verdana;
+            font-size: 14px;
+            border-collapse: collapse;
+            width: 600px;
+            table-layout: fixed;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            z-index: 2; /* Ensures the header stays above other content */
+        }
+        .hoverable-cell:hover {
+            background-color: yellow;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            z-index: 1; /* Ensures cells stay below header */
+        }
+        `;
+        document.head.appendChild(style);
         return table;
-        // document.body.appendChild(table); // Append the table to the body or your desired element
     }
 
     // updateIssueFile

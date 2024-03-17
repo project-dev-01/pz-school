@@ -307,11 +307,11 @@
                                     <span>{{ __('messages.add_employee') }}</span>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{ route('admin.employee.import')}}" class="nav-link {{ (request()->is('admin/employee/import')) ? 'active' : '' }}">
                                     <span>{{ __('messages.employee_bulk_upload') }}</span>
                                 </a>
-                            </li> -->
+                            </li>
                             <li>
                                 <a href="#sideBarEmpMasters" data-toggle="collapse">
                                     <span>{{ __('messages.masters') }}</span><span class="menu-arrow"></span>
@@ -2563,13 +2563,13 @@
                     <div class="collapse {{  (request()->is('guest/application/edit*')) ? 'show' : '' }}" id="sidebarGuestApplication">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('guest.application.index')}}" class="nav-link {{ (request()->is('guest/application') || request()->is('guest/application/edit*')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.list') }} </span>
+                                <a href="{{ route('guest.application.create')}}" class="nav-link {{ (request()->is('guest/application/create')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.add') }} </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('guest.application.create')}}" class="nav-link {{ (request()->is('guest/application/create')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.add') }} </span>
+                                <a href="{{ route('guest.application.index')}}" class="nav-link {{ (request()->is('guest/application') || request()->is('guest/application/edit*')) ? 'active' : '' }}">
+                                    <span> {{ __('messages.list') }} </span>
                                 </a>
                             </li>
                         </ul>
