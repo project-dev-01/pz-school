@@ -184,12 +184,15 @@ $(function () {
             visa_photo: "required",
             visa_type: "required",
             japanese_association_membership_number_student: "required",
+            japanese_association_membership_image_principal:"required",
             txt_prev_schname: "required",
             school_country: "required",
             school_state: "required",
             school_city: "required",
             school_postal_code: "required",
             school_enrollment_status: "required",
+           
+
            // present_address: "required",
             txt_pwd: {
                 required: true,

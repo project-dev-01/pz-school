@@ -226,12 +226,107 @@ $(function () {
         })
     });
 
-
+    $("#skip_mother_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            
+            // $(".mother_form").val("");
+            // if ($("#copy_mother").is(":checked")) {
+            //     $("#copy_others").prop('checked', true)
+            //     value = "copy_others";
+            //     copyparent(value)
+            // }
+            //$("#copy_mother").prop('disabled', true);
+            $("#mother_details").hide("slow");
+        } else {
+            //$("#copy_mother").prop('disabled', false);
+            $("#mother_details").show("slow");
+        }
+    });
+    // skip_father_details
+    $("#skip_father_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            // $(".father_form").val("");
+            // if ($("#copy_father").is(":checked")) {
+            //     $("#copy_others").prop('checked', true)
+            //     value = "copy_others";
+            //     copyparent(value)
+            // }
+           // $("#copy_father").prop('disabled', true);
+            $("#father_details").hide("slow");
+        } else {
+            //$("#copy_father").prop('disabled', false);
+            $("#father_details").show("slow");
+        }
+    });
     
     $("#profileEdit").validate({
         rules: {
             first_name: "required",
             occupation: "required",
+            mother_last_name: "required",
+            mother_first_name_furigana: "required",
+            mother_first_name_english: "required",
+            mother_last_name_furigana: "required",
+            mother_last_name_english: "required",
+            mother_nationality: "required",
+            mother_occupation: "required",
+            mother_first_name: "required",
+
+            mother_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            mother_occupation: "required",
+            mother_email: {
+                required: true,
+                email: true
+            },
+            father_last_name: "required",
+            father_last_name_furigana: "required",
+            father_last_name_english: "required",
+            father_first_name_furigana: "required",
+            father_first_name_english: "required",
+            father_nationality: "required",
+            father_first_name: "required",
+            father_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            father_occupation: "required",
+            father_email: {
+                required: true,
+                email: true
+            },
+            guardian_remarks: "required",
+            last_name: "required",
+            last_name_furigana: "required",
+            last_name_english: "required",
+            first_name_furigana: "required",
+            first_name_english: "required",
+
+            company_name_japan: "required",
+            company_name_local: "required",
+            // guardian_company_phone_number: "required",
+
+            company_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            employment_status: "required",
+            first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
+            occupation: "required",
+            mobile_no: "required",
         }
     });
 

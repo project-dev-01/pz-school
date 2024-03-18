@@ -315,22 +315,22 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.first_name + " " + data.last_name;
-                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
-                var name_english = data.first_name_english + " " + data.last_name_english;
+                var name = data.father_first_name + " " + data.father_last_name;
+                var name_furigana = data.father_first_name_furigana + " " + data.father_last_name_furigana;
+                var name_english = data.father_first_name_english + " " + data.father_last_name_english;
                 $('#father_name').val(name);
                 $('#father_name_furigana').val(name_furigana);
                 $('#father_name_english').val(name_english);
                 $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
-                $("#father_first_name").val(data.first_name);
-                $("#father_middle_name").val(data.middle_name);
-                $("#father_last_name").val(data.last_name);
-                $("#father_last_name_furigana").val(data.last_name_furigana);
-                $("#father_middle_name_furigana").val(data.middle_name_furigana);
-                $("#father_first_name_furigana").val(data.first_name_furigana);
-                $("#father_last_name_english").val(data.last_name_english);
-                $("#father_middle_name_english").val(data.middle_name_english);
-                $("#father_first_name_english").val(data.first_name_english);
+                $("#father_first_name").val(data.father_first_name);
+                $("#father_middle_name").val(data.father_middle_name);
+                $("#father_last_name").val(data.father_last_name);
+                $("#father_last_name_furigana").val(data.father_last_name_furigana);
+                $("#father_middle_name_furigana").val(data.father_middle_name_furigana);
+                $("#father_first_name_furigana").val(data.father_first_name_furigana);
+                $("#father_last_name_english").val(data.father_last_name_english);
+                $("#father_middle_name_english").val(data.father_middle_name_english);
+                $("#father_first_name_english").val(data.father_first_name_english);
                 $("#father_nationality").val(data.nationality);
                 $("#father_email").val(data.email);
                 $("#father_gender").val(data.gender);
@@ -418,22 +418,22 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.first_name + " " + data.last_name;
-                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
-                var name_english = data.first_name_english + " " + data.last_name_english;
+                var name = data.mother_first_name + " " + data.mother_last_name;
+                var name_furigana = data.mother_first_name_furigana + " " + data.mother_last_name_furigana;
+                var name_english = data.mother_first_name_english + " " + data.mother_last_name_english;
                 $('#mother_name_furigana').val(name_furigana);
                 $('#mother_name_english').val(name_english);
                 $('#mother_name').val(name);
                 $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
-                $("#mother_first_name").val(data.first_name);
-                $("#mother_last_name").val(data.last_name);
-                $("#mother_middle_name").val(data.middle_name);
-                $("#mother_last_name_furigana").val(data.last_name_furigana);
-                $("#mother_middle_name_furigana").val(data.middle_name_furigana);
-                $("#mother_first_name_furigana").val(data.first_name_furigana);
-                $("#mother_last_name_english").val(data.last_name_english);
-                $("#mother_middle_name_english").val(data.middle_name_english);
-                $("#mother_first_name_english").val(data.first_name_english);
+                $("#mother_first_name").val(data.mother_first_name);
+                $("#mother_last_name").val(data.mother_last_name);
+                $("#mother_middle_name").val(data.mother_middle_name);
+                $("#mother_last_name_furigana").val(data.mother_last_name_furigana);
+                $("#mother_middle_name_furigana").val(data.mother_middle_name_furigana);
+                $("#mother_first_name_furigana").val(data.mother_first_name_furigana);
+                $("#mother_last_name_english").val(data.mother_last_name_english);
+                $("#mother_middle_name_english").val(data.mother_middle_name_english);
+                $("#mother_first_name_english").val(data.mother_first_name_english);
                 $("#mother_nationality").val(data.nationality);
                
 
@@ -767,12 +767,41 @@ $(function () {
             visa_photo: "required",
             visa_type: "required",
             japanese_association_membership_number_student: "required",
+            japanese_association_membership_image_principal:"required",
             txt_prev_schname: "required",
             school_country: "required",
             school_state: "required",
             school_city: "required",
             school_postal_code: "required",
             school_enrollment_status: "required",
+            
+            "passport_photo": {
+                required: function (element) {
+                    if ($("#passport_old_photo").val() == null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            "visa_photo": {
+                required: function (element) {
+                    if ($("#visa_old_photo").val() == null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            "japanese_association_membership_image_principal": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_principal_old").val() == null) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
           
             // txt_pwd: {
             //     minlength: 6

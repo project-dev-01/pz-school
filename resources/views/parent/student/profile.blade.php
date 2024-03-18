@@ -335,8 +335,8 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
-                                            </div>
+                                                </div> <label for="lname" class="error"></label>
+                                            </div> 
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -361,7 +361,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="fname" class="error"></label>
                                             </div>
                                         </div>
                                         
@@ -378,7 +378,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($student['last_name_english']) ? $student['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="last_name_english" class="error"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -404,7 +404,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($student['first_name_english']) ? $student['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="first_name_english" class="error"></label>
                                             </div>
                                         </div>
                                         
@@ -422,7 +422,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($student['last_name_furigana']) ? $student['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="last_name_furigana" class="error"></label>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -448,7 +448,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="first_name_furigana" class="form-control alloptions" maxlength="50" id="first_name_furigana" value="{{ isset($student['first_name_furigana']) ? $student['first_name_furigana'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="first_name_furigana" class="error"></label>
                                             </div>
                                         </div>
                                        
@@ -569,7 +569,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="dob" class="form-control" value="{{ isset($student['birthday']) ? $student['birthday'] : ''}}" id="dob" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
-                                                </div>
+                                                </div><label for="dob" class="error"></label>
                                             </div>
                                         </div>
                                   
@@ -839,6 +839,7 @@
                                                             <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
+                                                    <label for="visa_photo" class="error"></label>
                                                     @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
                                                 <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
                                                 @endif
@@ -1115,6 +1116,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
@@ -1122,7 +1124,7 @@
     });
 
     $(".country").countrySelect({
-        preferredCountries: ['my', 'jp'],
+        defaultCountry: "jp",
         responsiveDropdown: true
     });
 </script>

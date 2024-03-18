@@ -422,22 +422,25 @@ $(function () {
     
     $('#updateStudentProfile').on('submit', function (e) {
         e.preventDefault();
-        var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (data) {
-                if (data.code == 200) {
-                    toastr.success(data.message);
-                } else {
-                    toastr.error(data.message);
+        var studentProfilecheck = $("#updateStudentProfile").valid();
+        if (studentProfilecheck === true) {
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (data) {
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
     
     

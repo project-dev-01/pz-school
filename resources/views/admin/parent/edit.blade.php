@@ -356,7 +356,7 @@
 											</div>
 											<div class="media-body pl-2">
 												<h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-													<a href="javascript: void(0);" class="text-reset">{{ isset($parent['mobile_no']) ? Crypt::decryptString($parent['mobile_no']) : ''}}</a>
+													<a href="javascript: void(0);" class="text-reset">{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}</a>
 												</h5>
 											</div>
 										</div>
@@ -1131,7 +1131,7 @@
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="mother_passport_photo">{{ __('messages.passport_photo') }}</label>
+														<label for="mother_passport_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
 														<div class="input-group">
 															<div class="custom-file">
 																<input type="file" id="mother_passport_photo" class="custom-file-input" name="mother_passport_photo" accept="image/png, image/gif, image/jpeg" >
@@ -1139,13 +1139,17 @@
 																<input type="hidden" id="mother_passport_photo_old" value="{{ isset($parent['passport_mother_photo']) ?$parent['passport_mother_photo'] : ''}}" name="mother_passport_photo_old">
 															</div>
 														</div>
-														<span id="mother_passport_photo_name"></span>
+														<label for="mother_passport_photo" class="error"></label>
+															@if(isset($parent['passport_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_mother_photo'])
+															<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_mother_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
+															@endif
+															<span id="mother_passport_photo_name"></span>
 													</div>
 												</div>
 												
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="mother_visa_photo">{{ __('messages.visa_photo') }}</label>
+														<label for="mother_visa_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
 														<div class="input-group">
 															<div class="custom-file">
 																<input type="file" id="mother_visa_photo" class="custom-file-input" name="mother_visa_photo" accept="image/png, image/gif, image/jpeg" >
@@ -1154,12 +1158,15 @@
 																
 															</div>
 														</div>
-														<span id="mother_visa_photo_name"></span>
+														@if(isset($parent['visa_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_mother_photo'])
+															<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_mother_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
+															@endif
+															<span id="mother_visa_photo_name"></span>
 													</div>
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="passport_photo">{{ __('messages.passport_photo') }}</label>
+														<label for="passport_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
 														<div class="input-group">
 															<div class="custom-file">
 																<input type="file" id="father_passport_photo" class="custom-file-input" name="father_passport_photo" accept="image/png, image/gif, image/jpeg" >
@@ -1167,13 +1174,17 @@
 																<input type="hidden" id="father_passport_photo_old" value="{{ isset($parent['passport_father_photo']) ?$parent['passport_father_photo'] : ''}}" name="father_passport_photo_old">
 															</div>
 														</div>
-														<span id="father_passport_photo_name"></span>
+														<label for="father_passport_photo" class="error"></label>
+															@if(isset($parent['passport_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_father_photo'])
+															<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_father_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
+															@endif
+															<span id="father_passport_photo_name"></span>
 													</div>
 												</div>
 												
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="father_visa_photo">{{ __('messages.visa_photo') }}</label>
+														<label for="father_visa_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
 														<div class="input-group">
 															<div class="custom-file">
 																<input type="file" id="father_visa_photo" class="custom-file-input" name="father_visa_photo" accept="image/png, image/gif, image/jpeg" >
@@ -1181,7 +1192,10 @@
 																<input type="hidden" id="father_visa_photo_old" value="{{ isset($parent['visa_father_photo']) ?$parent['visa_father_photo'] : ''}}" name="father_visa_photo_old">
 															</div>
 														</div>
-														<span id="father_visa_photo_name"></span>
+														@if(isset($parent['visa_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_father_photo'])
+															<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_father_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
+															@endif
+															<span id="father_visa_photo_name"></span>
 													</div>
 												</div>
 												
@@ -1399,7 +1413,7 @@
 																								</div>
 																							</div>
 																							<input type="password" class="form-control" id="password" name="password" placeholder="********" aria-describedby="inputGroupPrepend">
-																						</div>
+																						</div><label for="password" class="error"></label>
 																					</div>
 																				</div>
 																				<div class="col-md-4">
@@ -1412,7 +1426,7 @@
 																								</div>
 																							</div>
 																							<input type="password" class="form-control" name="confirm_password" placeholder="********" aria-describedby="inputGroupPrepend">
-																						</div>
+																						</div><label for="confirm_password" class="error"></label>
 																					</div>
 																				</div>
 																			</div>
@@ -1505,21 +1519,70 @@
 										<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 										<script src="{{ asset('country/js/countrySelect.js') }}"></script>
 										<script>
-											var input = document.querySelector("#mobile_no");
-											intlTelInput(input, {
-												allowExtensions: true,
-												autoFormat: false,
-												autoHideDialCode: false,
-												autoPlaceholder: false,
-												defaultCountry: "auto",
-												ipinfoToken: "yolo",
-												nationalMode: false,
-												numberType: "MOBILE",
-												//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-												//preferredCountries: ['cn', 'jp'],
-												preventInvalidNumbers: true,
-												utilsScript: "js/utils.js"
-											});
+											var input = document.querySelector("#mother_phone_number");
+															intlTelInput(input, {
+																allowExtensions: true,
+																autoFormat: false,
+																autoHideDialCode: false,
+																autoPlaceholder: false,
+																defaultCountry: "auto",
+																ipinfoToken: "yolo",
+																nationalMode: false,
+																numberType: "MOBILE",
+																initialCountry: "jp",
+																//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+																//preferredCountries: ['cn', 'jp'],
+																preventInvalidNumbers: true,
+																// utilsScript: "js/utils.js"
+															});
+															var input = document.querySelector("#father_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_company_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
 											
 											$(".country").countrySelect({
 												responsiveDropdown: true

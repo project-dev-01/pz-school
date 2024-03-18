@@ -835,7 +835,7 @@
 <script src="{{ asset('js/custom/parent_settings.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
-        messages: {
+        messages: { 
             default: drag_and_drop_to_check,
             replace: drag_and_drop_to_replace,
             remove: remove,

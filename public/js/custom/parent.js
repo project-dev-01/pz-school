@@ -62,6 +62,94 @@ $(function () {
             $('#visa_photo_name').text(file.name);
         }
     });
+    $("#skip_mother_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            
+            $(".mother_form").val("");
+            if ($("#copy_mother").is(":checked")) {
+                $("#copy_others").prop('checked', true)
+                value = "copy_others";
+                copyparent(value)
+            }
+            $("#copy_mother").prop('disabled', true);
+            $("#mother_details").hide("slow");
+        } else {
+            $("#copy_mother").prop('disabled', false);
+            $("#mother_details").show("slow");
+        }
+    });
+    // skip_father_details
+    $("#skip_father_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            $(".father_form").val("");
+            if ($("#copy_father").is(":checked")) {
+                $("#copy_others").prop('checked', true)
+                value = "copy_others";
+                copyparent(value)
+            }
+            $("#copy_father").prop('disabled', true);
+            $("#father_details").hide("slow");
+        } else {
+            $("#copy_father").prop('disabled', false);
+            $("#father_details").show("slow");
+        }
+    });
+    // skip_guardian_details
+    $("#skip_guardian_details").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#guardian_details").hide("slow");
+        } else {
+            $("#guardian_details").show("slow");
+        }
+    });
+    $('.copy_parent_info').on('change', function () {
+        var check = $('.copy_parent:checked').val();
+        if (check != "others") {
+            var field_name = $(this).attr('name');
+            var value = $("#" + field_name).val();
+            var guard_name = field_name.replace(check, 'guardian');
+            $("#" + guard_name).val(value);
+        }
+    });
+    $('.copy_parent').on('change', function () {
+        var value = $(this).val();
+
+        // if(value != "others"){
+        copyparent(value)
+        // }
+
+    });
+    function copyparent(value) {
+
+        var last_name = $("#" + value + "_last_name").val();
+        $("#guardian_last_name").val(last_name);
+        var middle_name = $("#" + value + "_middle_name").val();
+        $("#guardian_middle_name").val(middle_name);
+        var first_name = $("#" + value + "_first_name").val();
+        $("#guardian_first_name").val(first_name);
+
+        var last_name_furigana = $("#" + value + "_last_name_furigana").val();
+        $("#guardian_last_name_furigana").val(last_name_furigana);
+        var middle_name_furigana = $("#" + value + "_middle_name_furigana").val();
+        $("#guardian_middle_name_furigana").val(middle_name_furigana);
+        var first_name_furigana = $("#" + value + "_first_name_furigana").val();
+        $("#guardian_first_name_furigana").val(first_name_furigana);
+
+        var last_name_english = $("#" + value + "_last_name_english").val();
+        $("#guardian_last_name_english").val(last_name_english);
+        var middle_name_english = $("#" + value + "_middle_name_english").val();
+        $("#guardian_middle_name_english").val(middle_name_english);
+        var first_name_english = $("#" + value + "_first_name_english").val();
+        $("#guardian_first_name_english").val(first_name_english);
+
+        var email = $("#" + value + "_email").val();
+        $("#guardian_email").val(email);
+        var phone_number = $("#" + value + "_phone_number").val();
+        $("#guardian_phone_number").val(phone_number);
+        var occupation = $("#" + value + "_occupation").val();
+        $("#guardian_occupation").val(occupation);
+    }
     $("#addparent").validate({
         rules: {
             first_name: "required",
@@ -69,8 +157,71 @@ $(function () {
                 required: true,
                 email: true
             },
-            occupation: "required",
+            mother_last_name: "required",
+            mother_first_name_furigana: "required",
+            mother_first_name_english: "required",
+            mother_last_name_furigana: "required",
+            mother_last_name_english: "required",
+            mother_nationality: "required",
+            mother_occupation: "required",
+            mother_first_name: "required",
+
+            mother_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            mother_occupation: "required",
+            mother_email: {
+                required: true,
+                email: true
+            },
+            father_last_name: "required",
+            father_last_name_furigana: "required",
+            father_last_name_english: "required",
+            father_first_name_furigana: "required",
+            father_first_name_english: "required",
+            father_nationality: "required",
+            father_first_name: "required",
+            father_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            father_occupation: "required",
+            father_email: {
+                required: true,
+                email: true
+            },
+
+            guardian_last_name: "required",
+            guardian_last_name_furigana: "required",
+            guardian_last_name_english: "required",
+            guardian_first_name_furigana: "required",
+            guardian_first_name_english: "required",
+
+            guardian_company_name_japan: "required",
+            guardian_company_name_local: "required",
+            // guardian_company_phone_number: "required",
+
+            guardian_company_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_employment_status: "required",
+            guardian_first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
+            guardian_occupation: "required",
             mobile_no: "required",
+            passport_father_photo: "required",
+            passport_mother_photo: "required",
             password: {
                 required: true,
                 minlength: 6
@@ -80,6 +231,7 @@ $(function () {
                 minlength: 6,
                 equalTo: "#password"
             },
+            guardian_remarks: "required",
         }
     });
 
@@ -114,12 +266,77 @@ $(function () {
                 required: true,
                 email: true
             },
+            mother_last_name: "required",
+            mother_first_name_furigana: "required",
+            mother_first_name_english: "required",
+            mother_last_name_furigana: "required",
+            mother_last_name_english: "required",
+            mother_nationality: "required",
+            mother_occupation: "required",
+            mother_first_name: "required",
+
+            mother_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            mother_occupation: "required",
+            mother_email: {
+                required: true,
+                email: true
+            },
+            father_last_name: "required",
+            father_last_name_furigana: "required",
+            father_last_name_english: "required",
+            father_first_name_furigana: "required",
+            father_first_name_english: "required",
+            father_nationality: "required",
+            father_first_name: "required",
+            father_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            father_occupation: "required",
+            father_email: {
+                required: true,
+                email: true
+            },
+            guardian_remarks: "required",
+            last_name: "required",
+            last_name_furigana: "required",
+            last_name_english: "required",
+            first_name_furigana: "required",
+            first_name_english: "required",
+
+            guardian_company_name_japan: "required",
+            guardian_company_name_local: "required",
+            // guardian_company_phone_number: "required",
+
+            guardian_company_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_employment_status: "required",
+            first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
             occupation: "required",
             mobile_no: "required",
+            mother_passport_photo: "required",
+            father_passport_photo: "required",
             password: {
+                required: true,
                 minlength: 6
             },
             confirm_password: {
+                required: true,
                 minlength: 6,
                 equalTo: "#password"
             },

@@ -775,8 +775,8 @@
 																		<span class="far fa-user"></span>
 																	</div>
 																</div>
-																<input type="text" class="form-control" name="last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" class="form-control" name="guardian_last_name"   id="guardian_last_name"  placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_last_name" class="error"></label>
 														</div>
 													</div>
 													<div class="col-md-4">
@@ -788,7 +788,7 @@
 																		<span class="far fa-user"></span>
 																	</div>
 																</div>
-																<input type="text" class="form-control" name="middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+																<input type="text" class="form-control" name="guardian_middle_name" id="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
 															</div>
 														</div>
 													</div>
@@ -801,8 +801,8 @@
 																		<span class="far fa-user"></span>
 																	</div>
 																</div>
-																<input type="text" class="form-control" name="first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" class="form-control" name="guardian_first_name" id="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_first_name" class="error"></label>
 														</div>
 													</div>
 													
@@ -818,8 +818,8 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" name="guardian_last_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_last_name_furigana" class="error"></label>
 														</div>
 													</div>
 													<div class="col-md-4">
@@ -831,7 +831,7 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="middle_name_furigana" class="form-control alloptions" maxlength="50" id="middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+																<input type="text" name="guardian_middle_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
 															</div>
 														</div>
 													</div>
@@ -844,8 +844,8 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="first_name_furigana" class="form-control alloptions" maxlength="50" id="first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" name="guardian_first_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_first_name_furigana" class="error"></label>
 														</div>
 													</div>
 													
@@ -863,8 +863,8 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" name="guardian_last_name_english" class="form-control alloptions" maxlength="50" id="guardian_last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_last_name_english" class="error"></label>
 														</div>
 													</div>
 													<div class="col-md-4">
@@ -876,7 +876,7 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="middle_name_english" class="form-control alloptions" maxlength="50" id="middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+																<input type="text" name="guardian_middle_name_english" class="form-control alloptions" maxlength="50" id="guardian_middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
 															</div>
 														</div>
 													</div>
@@ -889,8 +889,8 @@
 																		<span class="fas fa-user-graduate"></span>
 																	</div>
 																</div>
-																<input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-															</div>
+																<input type="text" name="guardian_first_name_english" class="form-control alloptions" maxlength="50" id="guardian_first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+															</div><label for="guardian_first_name_english" class="error"></label>
 														</div>
 													</div>
 												</div>
@@ -950,7 +950,7 @@
 													<div class="col-md-4">
 														<div class="form-group">
 															<label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-															<input type="text" class="form-control" name="occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
+															<input type="text" class="form-control" name="guardian_occupation" id="guardian_occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
 														</div>
 													</div>
 												</div>
@@ -1381,7 +1381,7 @@
 																							</div>
 																						</div>
 																						<input type="text" class="form-control" name="email" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
-																					</div>
+																					</div><label for="email" class="error"></label>
 																				</div>
 																			</div>
 																			<div class="col-md-3">
@@ -1407,7 +1407,7 @@
 																							</div>
 																						</div>
 																						<input type="password" class="form-control" name="confirm_password" placeholder="********" aria-describedby="inputGroupPrepend">
-																					</div>
+																					</div><label for="confirm_password" class="error"></label>
 																				</div>
 																			</div>
 																			<div class="col-md-2">
@@ -1537,7 +1537,7 @@
 														<script>
 															var indexParent = "{{ route('admin.parent') }}";
 															
-															var input = document.querySelector("#mobile_no");
+															var input = document.querySelector("#mother_phone_number");
 															intlTelInput(input, {
 																allowExtensions: true,
 																autoFormat: false,
@@ -1547,15 +1547,63 @@
 																ipinfoToken: "yolo",
 																nationalMode: false,
 																numberType: "MOBILE",
-																initialCountry: "my",
+																initialCountry: "jp",
 																//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
 																//preferredCountries: ['cn', 'jp'],
 																preventInvalidNumbers: true,
 																// utilsScript: "js/utils.js"
 															});
+															var input = document.querySelector("#father_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#guardian_company_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
 															
 															$(".country").countrySelect({
-																defaultCountry: "my",
+																defaultCountry: "jp",
 																responsiveDropdown: true
 															});
 														</script>
@@ -1592,4 +1640,4 @@
 																// nric validation end
 															});
 														</script>
-													@endsection													
+													@endsection		 											

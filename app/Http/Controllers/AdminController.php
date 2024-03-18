@@ -5248,9 +5248,9 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,       
             'father_passport_expiry_date' => $request->father_passport_expiry_date,*/
             
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'middle_name' => $request->middle_name,
+            'first_name' => $request->guardian_first_name,
+            'last_name' => $request->guardian_last_name,
+            'middle_name' => $request->guardian_middle_name,
             /*'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'race' => $request->race,
@@ -5267,7 +5267,7 @@ class AdminController extends Controller
             'address_2' => $request->address_2,*/
             
             'status' => $status, 
-            'occupation' => $request->occupation,
+            'occupation' => $request->guardian_occupation,
             'mobile_no' => $request->guardian_phone_number,
             'email' => $request->email,
             'password' => $request->password,
@@ -5283,12 +5283,12 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,
             'school_roleid' => $request->school_roleid,*/
-            'first_name_english' => $request->first_name_english,
-            'middle_name_english' => $request->middle_name_english,                    
-            'last_name_english' => $request->last_name_english,
-            'first_name_furigana' => $request->first_name_furigana,
-            'middle_name_furigana' => $request->middle_name_furigana, 
-            'last_name_furigana' => $request->last_name_furigana,
+            'first_name_english' => $request->guardian_first_name_english,
+            'middle_name_english' => $request->guardian_middle_name_english,                    
+            'last_name_english' => $request->guardian_last_name_english,
+            'first_name_furigana' => $request->guardian_first_name_furigana,
+            'middle_name_furigana' => $request->guardian_middle_name_furigana, 
+            'last_name_furigana' => $request->guardian_last_name_furigana,
             
             'school_roleid' => isset($request->school_roleid)? $request->school_roleid:'',
             /*'nric' => $request->nric,

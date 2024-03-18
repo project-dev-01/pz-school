@@ -2207,4 +2207,12 @@ return [
     "special_need_class" => "Special need class",
     "regular_guidance_class" => "Regular guidance class",
     "official_date" => "Official Date",
+    "japan_address_postal" => "Japan Address Postal",
+    "japan_contact_phone_number" => "Japan Contact Phone Number",
+    "Emergency_tel_sms" => "Japan Emergency SMS",
+    "japan_address" => "Japan Address",
+    "stay_category"  => "Stay Category",
+    "long_stay"  => "Long Stay",
+    "pr_stay"  => "PR Stay"
+
 ];

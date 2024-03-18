@@ -185,7 +185,7 @@ $(function () {
         }
     });
 
-
+   // $.noConflict();
     $(document).ready(function () {
         $("#postal_code").change(function () {
 
@@ -411,6 +411,8 @@ $(function () {
             phase_2_reason:"required",
             phase_1_reason:"required",
             enrollment:"required",
+            passport_father_photo:"required",
+            passport_mother_photo:"required",
 
             "passport_photo": {
                 required: function (element) {
