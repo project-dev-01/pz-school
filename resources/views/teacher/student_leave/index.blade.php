@@ -132,10 +132,9 @@
                                     <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.homeroom_status') }}</th>
                                     <th> {{ __('messages.nursing_status') }}</th>
-                                    <th> {{ __('messages.leave_type') }}</th>
                                     <th> {{ __('messages.reason') }}</th>
                                     <th> {{ __('messages.document') }}</th>
-                                    <th> {{ __('messages.homeroom_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.teacher_remarks') }}</th>
                                     <th> {{ __('messages.nursing_teacher_remarks') }}</th>
                                     <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.action') }}</th>
@@ -206,7 +205,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -219,8 +218,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total_leave">Number Of Days Leave<span class="text-danger">*</span></label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the number of days leave">
+                                    <label for="total_leave">{{ __('messages.number_of_days_leave') }}<span class="text-danger">*</span></label>
+                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -229,9 +228,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="directchangeLevType">Leave Type<span class="text-danger">*</span></label>
+                                    <label for="directchangeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="directchangeLevType" class="form-control" name="directchangeLevType">
-                                        <option value="">Select Leave Type</option>
+                                        <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
                                         <option value="{{ $ress['id'] }}">{{ $ress['name'] }}</option>
                                         @empty
@@ -239,31 +238,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
-                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
-                                        <option value="">{{ __('messages.select_reason') }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label for="changelev"></label>
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;margin-top: 8px;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
-                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
-                                </div>
-                            </div>
-                        </div>
-                        <!--3st row-->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="changelev">Remarks</label>
-                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="Enter the remarks" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="leave_file">{{ __('messages.attachment_file') }}</label>
 
@@ -278,6 +253,18 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
+                                    <select id="changelevReasons" class="form-control" name="changelevReasons">
+                                        <option value="">{{ __('messages.select_reason') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <!--3st row-->
+                        <div class="row">
+                        <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="stud_leave_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                     <select id="stud_leave_status" class="form-control" name="stud_leave_status">
                                         <option value="">{{ __('messages.select_status') }}</option>
@@ -285,6 +272,21 @@
                                         <option value="Reject">{{ __('messages.reject') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="changelev">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    </textarea>
+                                </div>
+                            </div>
+                           
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal" id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
                         </div>
@@ -371,10 +373,10 @@
 </script>
 <script src="{{ asset('js/custom/student_leave_list.js') }}"></script>
 <script src="{{ asset('js/custom/student_leave_direct_approve.js') }}"></script>
-<!--@if(!empty(Session::get('school_roleid')))
+@if(!empty(Session::get('school_roleid')))
 <script>
     var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
-@endif-->
+@endif
 @endsection

@@ -135,7 +135,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -181,13 +181,6 @@
                         </div>
                         <!--3st row-->
                         <div class="row">
-                        <div class="col-md-4">
-                                <div class="form-group">
-                                <label for="changelev"></label>
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;margin-top: 8px;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
-                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document">{{ __('messages.attachment_file') }}</label>
@@ -209,6 +202,13 @@
                                     <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
+                                </div>
+                            </div>
+                            
                           
                         </div>
                         <div class="form-group text-right m-b-0">

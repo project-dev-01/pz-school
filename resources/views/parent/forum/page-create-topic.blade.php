@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <label for="inputTopicTitle">{{ __('messages.topic_title') }}</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicTitle" class="form-control" id="inputTopicTitle" placeholder="Subject of your topic">
+                        <input type="text" name="inputTopicTitle" class="form-control" id="inputTopicTitle" placeholder="{{ __('messages.subject_of_your_topic') }}">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">{{ __('messages.describe_your_topic') }}</div>

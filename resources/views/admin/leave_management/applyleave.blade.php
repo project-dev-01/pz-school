@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="col-md-4 dateSlotShow">
                                         <div class="form-group">
-                                            <label for="to_ldate">{{ __('messages.to') }}<span class="text-danger">*</span></label>
+                                            <label for="to_ldate">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
