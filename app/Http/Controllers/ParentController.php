@@ -206,7 +206,7 @@ class ParentController extends Controller
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
 
-        $prev = json_decode($student['data']['student']['previous_details']);
+        $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
@@ -1874,6 +1874,10 @@ class ParentController extends Controller
         if($request->enrollment=="Trail Enrollment"){
             $trail_date = $request->trail_date;
         }
+        $official_date = "";
+        if($request->enrollment=="Official Enrollment"){
+            $official_date = $request->official_date;
+        }
         $status = $request->status;
         if($request->status==""){
             $status = $request->phase_1_status;
@@ -2029,6 +2033,7 @@ class ParentController extends Controller
                 'phase_2_status' => $request->phase_2_status,
                 'enrollment' => $request->enrollment,
                 'trail_date' => $trail_date,
+                'official_date' => $official_date,
                 'phase_1_reason' => $request->phase_1_reason,
                 'phase_2_reason' => $request->phase_2_reason,
                 'role_id' => session()->get('role_id'),
@@ -2370,6 +2375,7 @@ class ParentController extends Controller
             'date_of_termination' => $request->date_of_termination,
             'termination_notification' => $termination_notification,
             "created_by" => session()->get('ref_user_id'),
+            'role_id' => session()->get('role_id'),
         ];
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.termination_update'), $data);

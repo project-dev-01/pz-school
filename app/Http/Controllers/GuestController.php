@@ -99,7 +99,6 @@ class GuestController extends Controller
 
     public function applicationCreate()
     {
-
         $data = [
             'email' => session()->get('email'),
         ];
@@ -272,6 +271,10 @@ class GuestController extends Controller
         if($request->enrollment=="Trail Enrollment"){
             $trail_date = $request->trail_date;
         }
+        $official_date = "";
+        if($request->enrollment=="Official Enrollment"){
+            $official_date = $request->official_date;
+        }
         $status = $request->status;
         if($request->status==""){
             $status = $request->phase_1_status;
@@ -427,6 +430,7 @@ class GuestController extends Controller
                 'phase_2_status' => $request->phase_2_status,
                 'enrollment' => $request->enrollment,
                 'trail_date' => $trail_date,
+                'official_date' => $official_date,
                 'phase_1_reason' => $request->phase_1_reason,
                 'phase_2_reason' => $request->phase_2_reason,
                 'role_id' => session()->get('role_id'),

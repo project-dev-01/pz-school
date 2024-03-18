@@ -313,305 +313,404 @@
                 <input type="hidden" name="email" value="{{ isset($parent['email']) ? $parent['email'] : ''}}">
                 <input type="hidden" name="first_name" value="{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}">
                 <div class="card">
-                    <ul class="nav nav-tabs" style="display: block;">
-                        <li class="nav-item">
-                            <h4 class="navv float-left">{{ __('messages.parent_profile') }}</h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="education">{{ __('messages.education') }}</label>
-                                    <select class="form-control" name="education">
-                                        <option value="">{{ __('messages.select_education') }}</option>
-                                        @forelse($education as $e)
-                                        <option value="{{$e['id']}}" {{ isset($parent['education']) ? $parent['education'] == $e['id'] ? "selected" : "" : "" }}>{{$e['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="occupation" value="{{ isset($parent['occupation']) ? $parent['occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="income">{{ __('messages.income') }}</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-calculator"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="income" value="{{ isset($parent['income']) ? $parent['income'] : ''}}" placeholder="{{ __('messages.enter_income') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="address">{{ __('messages.address_1') }}</label>
-                                    <input class="form-control" name="address" id="address" value="{{ isset($parent['address']) ? $parent['address'] : ''}}" placeholder="{{ __('messages.enter_address_1') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="address_2">{{ __('messages.address_2') }}</label>
-                                    <input class="form-control" name="address_2" id="address_2" value="{{ isset($parent['address_2']) ? $parent['address_2'] : ''}}" placeholder="{{ __('messages.enter_address_2') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="city">{{ __('messages.city') }}</label>
-                                    <input type="text" class="form-control" name="city" value="{{ isset($parent['city']) ? $parent['city'] : ''}}" placeholder="{{ __('messages.enter_city') }}" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-                                    <input type="text" class="form-control" name="post_code" value="{{ isset($parent['post_code']) ? $parent['post_code'] : ''}}" id="postCode" placeholder="{{ __('messages.zip_postal_code') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="state">{{ __('messages.state_province') }}</label>
-                                    <input type="text" class="form-control" name="state" value="{{ isset($parent['state']) ? $parent['state'] : ''}}" placeholder="{{ __('messages.state_province') }}" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="country">{{ __('messages.country') }}</label>
-                                    <input type="text" class="form-control country" name="country" value="{{ isset($parent['country']) ? $parent['country'] : ''}}" id="country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control number_validation" value="{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}" name="mobile_no" id="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            
-                            @if($form_field['race'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="race">{{ __('messages.race') }}</label>
-                                    <select class="form-control" name="race">
-                                        <option value="">{{ __('messages.select_race') }}</option>
-                                        @forelse($races as $r)
-                                        <option value="{{$r['id']}}" {{ isset($parent['race']) ? $parent['race'] == $r['id'] ? "selected" : "" : "" }}>{{$r['races_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            @endif
-                            @if($form_field['religion'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="txt_religion">{{ __('messages.religion') }}</label>
-                                    <select class="form-control" name="religion">
-                                        <option value="">{{ __('messages.select_religion') }}</option>
-                                        @forelse($religion as $r)
-                                        <option value="{{$r['id']}}" {{ isset($parent['religion']) ? $parent['religion'] == $r['id'] ? "selected" : "" : "" }}>{{$r['religions_name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            @endif
-                            @if($form_field['blood_group'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="blooddgrp">{{ __('messages.blood_group') }}</label>
-                                    <select class="form-control" name="blood_group">
-                                        <option value="">{{ __('messages.select_blood_group') }}</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O+" ? "selected" : "" : "" }}>O+</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A+" ? "selected" : "" : "" }}>A+</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B+" ? "selected" : "" : "" }}>B+</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB+" ? "selected" : "" : "" }}>AB+</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O-" ? "selected" : "" : "" }}>O-</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A-" ? "selected" : "" : "" }}>A-</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B-" ? "selected" : "" : "" }}>B-</option>
-                                        <option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB-" ? "selected" : "" : "" }}>AB-</option>
-                                    </select>
-                                </div>
-                            </div>
-                            @endif
-                            @if($form_field['nationality'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nationality">{{ __('messages.nationality') }}</label>
-                                    <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{$parent['nationality']}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            @endif
-                            
-                            @if($form_field['nric'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="txt_nric">{{ __('messages.nric_number') }}</label>
-                                    <input type="text" maxlength="50" id="nric" value="{{$parent['nric']}}" class="form-control alloptions" placeholder="{{ __('messages.enter_nric_number') }}" name="nric" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            @endif
-                            @if($form_field['passport'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="Passport">{{ __('messages.passport_number') }}</label>
-                                    <input type="text" maxlength="50" class="form-control alloptions" value="{{$parent['passport']}}" placeholder="{{ __('messages.enter_passport_number') }}" name="passport">
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="text">{{ __('messages.passport_expiry_date') }}<span class="text-danger"></span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($parent['passport_expiry_date']) ? $parent['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($parent['passport_photo']) ? $parent['passport_photo'] : ''}}" />
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="passport_photo">{{ __('messages.passport_photo') }}</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg" >
-                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_the_file') }}</label>
-                                        </div>
-                                    </div>
-                                    @if(isset($parent['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_photo'])
-                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
-                                    @endif
-                                    <span id="passport_photo_name"></span>
-                                </div>
-                            </div>
-                            @endif
-                            @if($form_field['visa'] == 0)
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="visa_number">{{ __('messages.visa_number') }}</label>
-                                    <input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" name="visa_number" value="{{ isset($parent['visa_number']) ? $parent['visa_number'] : ''}}" data-parsley-trigger="change">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="text">{{ __('messages.visa_expiry_date') }}<span class="text-danger"></span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" value="{{ isset($parent['visa_expiry_date']) ? $parent['visa_expiry_date'] : ''}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($parent['visa_photo']) ? $parent['visa_photo'] : ''}}" />
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="visa_photo">{{ __('messages.visa_photo') }}</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg" >
-                                            <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_the_file') }}</label>
-                                        </div>
-                                    </div>
-                                    @if(isset($parent['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_photo'])
-                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
-                                    @endif
-                                    <span id="visa_photo_name"></span>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">
-                                {{ __('messages.social_links') }}
+                                {{ __('messages.mother_details') }}
                                 <h4>
                         </li>
-                    </ul>
+                    </ul><br>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="facebook_url"> {{ __('messages.facebook') }}</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fab fa-facebook-f"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" value="{{ isset($parent['facebook_url']) ? $parent['facebook_url'] : ''}}" name="facebook_url" placeholder="{{ __('messages.enter_facebook_url') }}" aria-describedby="inputGroupPrepend">
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" {{ isset($parent['mother_first_name']) ? "" : 'checked'}}>
+                                <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
+                            </div>
+                        </div>
+                        <div id="mother_details" style="display: {{ isset($parent['mother_first_name']) ? '' : '' }}">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_last_name" value="{{ isset($parent['mother_last_name']) ? $parent['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_middle_name" value="{{ isset($parent['mother_middle_name']) ? $parent['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name" value="{{ isset($parent['mother_first_name']) ? $parent['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="twitter_url">{{ __('messages.twitter') }}</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fab fa-twitter"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" value="{{ isset($parent['twitter_url']) ? $parent['twitter_url'] : ''}}" name="twitter_url" placeholder="{{ __('messages.enter_twitter_url') }}" aria-describedby="inputGroupPrepend">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_last_name_furigana" value="{{ isset($parent['mother_last_name_furigana']) ? $parent['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_middle_name_furigana" value="{{ isset($parent['mother_middle_name_furigana']) ? $parent['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name_furigana" value="{{ isset($parent['mother_first_name_furigana']) ? $parent['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="linkedin_url">{{ __('messages.linkedin') }}</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fab fa-linkedin-in"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="linkedin_url" value="{{ isset($parent['linkedin_url']) ? $parent['linkedin_url'] : ''}}" placeholder="{{ __('messages.enter_linkedIn_url') }}" aria-describedby="inputGroupPrepend">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_last_name_english" value="{{ isset($parent['mother_last_name_english']) ? $parent['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_middle_name_english" value="{{ isset($parent['mother_middle_name_english']) ? $parent['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name_english" value="{{ isset($parent['mother_first_name_english']) ? $parent['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form country"  id="mother_nationality" name="mother_nationality" value="{{ isset($parent['mother_nationality']) ? $parent['mother_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control  mother_form"  id="mother_email" value="{{ isset($parent['mother_email']) ? $parent['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form number_validation"  id="mother_phone_number" value="{{ isset($parent['mother_phone_number']) ? $parent['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="mother_phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                        <select    id="mother_occupation" name="mother_occupation" class="form-control copy_parent_info mother_form">
+                                                            <option value="">{{ __('messages.select_occupation') }}</option>
+                                                            <option {{ isset($parent['mother_occupation']) ? $parent['mother_occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
+                                                            <option {{ isset($parent['mother_occupation']) ? $parent['mother_occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
+                                                            <option {{ isset($parent['mother_occupation']) ? $parent['mother_occupation'] == "Civil Department" ? 'selected' : '' : '' }}>Civil Department</option>
+                                                            <option {{ isset($parent['mother_occupation']) ? $parent['mother_occupation'] == "Others" ? 'selected' : '' : '' }}>Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_occupation" name="mother_occupation" value="{{ isset($parent['mother_occupation']) ? $parent['mother_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- end card-body -->
+                    </div>
+                    <br>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">
+                                {{ __('messages.father_details') }}
+                                <h4>
+                        </li>
+                    </ul><br>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details"  {{ isset($parent['father_first_name']) ? "" : 'checked'}}>
+                                <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
+                            </div>
+                        </div>
+
+                        <div id="father_details" style="display: {{ isset($parent['father_first_name']) ? '' : '' }}">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name"  value="{{ isset($parent['father_last_name']) ? $parent['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name"  value="{{ isset($parent['father_middle_name']) ? $parent['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name"  value="{{ isset($parent['father_first_name']) ? $parent['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana"  value="{{ isset($parent['father_last_name_furigana']) ? $parent['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana"  value="{{ isset($parent['father_middle_name_furigana']) ? $parent['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana"  value="{{ isset($parent['father_first_name_furigana']) ? $parent['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english"  value="{{ isset($parent['father_last_name_english']) ? $parent['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english"  value="{{ isset($parent['father_middle_name_english']) ? $parent['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english"  value="{{ isset($parent['father_first_name_english']) ? $parent['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form country" id="father_nationality" name="father_nationality"  value="{{ isset($parent['father_nationality']) ? $parent['father_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control  father_form" id="father_email"  value="{{ isset($parent['father_email']) ? $parent['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form number_validation" id="father_phone_number"  value="{{ isset($parent['father_phone_number']) ? $parent['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="father_phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                        <select  id="father_occupation" name="father_occupation" class="form-control">
+                                                            <option  value="">{{ __('messages.select_occupation') }}</option>
+                                                            <option {{ isset($parent['father_occupation']) ? $parent['father_occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
+                                                            <option {{ isset($parent['father_occupation']) ? $parent['father_occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
+                                                            <option {{ isset($parent['father_occupation']) ? $parent['father_occupation'] == "Civil Department" ? 'selected' : '' : '' }}>Civil Department</option>
+                                                            <option {{ isset($parent['father_occupation']) ? $parent['father_occupation'] == "Others" ? 'selected' : '' : '' }}>Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_occupation" name="father_occupation"  value="{{ isset($parent['father_occupation']) ? $parent['father_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <ul class="nav nav-tabs" style="display: block;">
+                        <li class="nav-item">
+                            <h4 class="navv float-left">{{ __('messages.guardian_details') }}</h4>
+                        </li>
+                    </ul>
+
+                    <div class="card-body">
+
+                        <div id="guardian_details">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="last_name" value="{{ isset($parent['last_name']) ? $parent['last_name'] : ''}}" name="last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control" id="middle_name" value="{{ isset($parent['middle_name']) ? $parent['middle_name'] : ''}}" name="middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="first_name" value="{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}" name="first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="last_name_furigana" value="{{ isset($parent['last_name_furigana']) ? $parent['last_name_furigana'] : ''}}" name="last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control" id="middle_name_furigana" value="{{ isset($parent['middle_name_furigana']) ? $parent['middle_name_furigana'] : ''}}" name="middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="first_name_furigana" value="{{ isset($parent['first_name_furigana']) ? $parent['first_name_furigana'] : ''}}" name="first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="last_name_english" value="{{ isset($parent['last_name_english']) ? $parent['last_name_english'] : ''}}" name="last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control" id="middle_name_english" value="{{ isset($parent['middle_name_english']) ? $parent['middle_name_english'] : ''}}" name="middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="first_name_english" value="{{ isset($parent['first_name_english']) ? $parent['first_name_english'] : ''}}" name="first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="email" readonly value="{{ isset($parent['email']) ? $parent['email'] : ''}}" name="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control number_validation" id="phone_number" value="{{ isset($parent['phone_number']) ? $parent['phone_number'] : ''}}" name="phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="occupation" name="occupation" value="{{ isset($parent['occupation']) ? $parent['occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                        <select  id="occupation" name="occupation" class="form-control">
+                                                            <option  value="">{{ __('messages.select_occupation') }}</option>
+                                                            <option {{ isset($parent['occupation']) ? $parent['occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
+                                                            <option {{ isset($parent['occupation']) ? $parent['occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
+                                                            <option {{ isset($parent['occupation']) ? $parent['occupation'] == "Civil Department" ? 'selected' : '' : '' }}>Civil Department</option>
+                                                            <option {{ isset($parent['occupation']) ? $parent['occupation'] == "Others" ? 'selected' : '' : '' }}>Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="company_name_japan" name="company_name_japan" value="{{ isset($parent['company_name_japan']) ? $parent['company_name_japan'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="company_name_local" name="company_name_local" value="{{ isset($parent['company_name_local']) ? $parent['company_name_local'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control  number_validation " id="company_phone_number" name="company_phone_number" value="{{ isset($parent['company_phone_number']) ? $parent['company_phone_number'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="company_phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
+                                        <select id="employment_status" name="employment_status" class="form-control">
+                                            <option value="">{{ __('messages.select_employment_status') }}</option>
+                                            <option value="Expat" {{ isset($parent['employment_status']) ? $parent['employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
+                                            <option value="Local Hire" {{ isset($parent['employment_status']) ? $parent['employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
+                                            <option value="Public Servant" {{ isset($parent['employment_status']) ? $parent['employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
+                                            <option value="Self-Employed" {{ isset($parent['employment_status']) ? $parent['employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    
                     <div class="form-group text-right m-b-0">
-                    <button class="btn btn-primary-bl waves-effect waves-light" style="width: 100px; margin-right: 15px;">
-                        {{ __('messages.update') }}
-                    </button>
-                    <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                        <button class="btn btn-primary-bl waves-effect waves-light" style="width: 100px; margin-right: 15px;">
+                            {{ __('messages.update') }}
+                        </button>
+                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                         Cancel
                     </button>-->
+                    </div>
                 </div>
-                </div> <!-- end card-->
 
-                
- 
-                </div>
-        </div> <!-- end col -->
-        </form>
-    </div>
-    <!-- end row -->
+
+        </div>
+    </div> <!-- end col -->
+    </form>
+</div>
+<!-- end row -->
 </div>
 <!-- container -->
 
@@ -639,6 +738,59 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
+    $(".country").countrySelect({
+        defaultCountry: "jp",
+        preferredCountries: ['my', 'jp'],
+        responsiveDropdown: true
+    });
+    var input = document.querySelector("#mother_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#father_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
     var input = document.querySelector("#mobile_no");
     intlTelInput(input, {
         allowExtensions: true,
@@ -652,13 +804,25 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
-        //utilsScript: "js/utils.js"
+        utilsScript: "js/utils.js"
     });
 
-$(".country").countrySelect({
-    preferredCountries: ['my', 'jp'],
-    responsiveDropdown: true
-});
+    var input = document.querySelector("#company_phone_number");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
 </script>
 <script>
     //event routes

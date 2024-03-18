@@ -53,6 +53,7 @@ $(function () {
                 $('#parent_email_address_after_transfer').val(data.data.parent_email_address_after_transfer);
                 $('#school_fees_payment_status').val(data.data.school_fees_payment_status);
                 $('#termination_status').val(data.data.termination_status);
+                $('#termination_status_old').val(data.data.termination_status);
                 console.log('123',data.data.delete_google_address)
                 if(data.data.delete_google_address == "Yes"){
                     $('#delete_google_address').prop('checked',true)

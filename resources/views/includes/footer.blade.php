@@ -82,6 +82,7 @@
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/custom/common.js') }}"></script>
 
+<script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
 <!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <script>
     var token = "{{ Session::get('token') }}";

@@ -2187,4 +2187,8 @@ return [
     "was" => "だった",
     "there_are_no_new_notifications" => "新しい通知はありません",
     "choose_the_file" => "ファイルを選ぶ",
+    "regular_class" => "通常学級",
+    "special_need_class" => "特別支援学級",
+    "regular_guidance_class" => "通級指導",
+    "official_date" => "Official Date",
 ];

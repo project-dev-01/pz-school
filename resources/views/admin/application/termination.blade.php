@@ -87,6 +87,7 @@
                             <tr>
                                 <td>{{ __('messages.termination_status') }}<span class="text-danger">*</span></td>
                                 <td>:</td>
+                                <input type="hidden"  name="termination_status_old">
                                 <td> <select id="termination_status" class="form-control" name="termination_status">
                                         <option value="">{{ __('messages.select_status') }}</option>
                                         <option value="Approved">{{ __('messages.approved') }}</option>

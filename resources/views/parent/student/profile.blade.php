@@ -637,7 +637,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nationality">{{ __('messages.nationality') }}</label>
-                                            <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{$student['nationality']}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
+                                            <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{ isset($student['nationality']) ? $student['nationality'] : ''}}"  placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -799,6 +799,7 @@
                                                             <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
+                                                    <label for="passport_photo" class="error"></label>
                                                     @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
                                                 <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
                                                 @endif
@@ -946,7 +947,12 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="school_enrollment_status"  value="{{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                                <select id="school_enrollment_status"   name="school_enrollment_status" class="form-control">
+                                                    <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                    <option value="Regular class"  {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
+                                                    <option value="Special need class"  {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
+                                                    <option value="Regular guidance class"  {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular guidance class" ? 'selected' : '' : '' }}>{{ __('messages.regular_guidance_class') }}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

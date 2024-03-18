@@ -2203,4 +2203,8 @@ return [
     "was" => "was",
     "there_are_no_new_notifications" => "There are no new notifications",
     "choose_the_file" => "Choose file",
+    "regular_class" => "Regular class",
+    "special_need_class" => "Special need class",
+    "regular_guidance_class" => "Regular guidance class",
+    "official_date" => "Official Date",
 ];

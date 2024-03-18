@@ -9173,6 +9173,10 @@ class AdminController extends Controller
         if ($request->enrollment == "Trail Enrollment") {
             $trail_date = $request->trail_date;
         }
+        $official_date = "";
+        if($request->enrollment=="Official Enrollment"){
+            $official_date = $request->official_date;
+        }
         $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
@@ -9318,6 +9322,7 @@ class AdminController extends Controller
             'status' => $request->status,
             'enrollment' => $request->enrollment,
             'trail_date' => $trail_date,
+            'official_date' => $official_date,
             'passport' => $request->passport,
             'nric' => $request->nric,
             'passport_expiry_date' => $request->passport_expiry_date,
@@ -9332,6 +9337,8 @@ class AdminController extends Controller
             'phase_1_reason' => $request->phase_1_reason,
             'phase_2_reason' => $request->phase_2_reason,
             'register_number' => $request->register_number,
+            'phase_2_status_old' => $request->phase_2_status_old,
+            'status_old' => $request->status_old,
             'role_id' => session()->get('role_id'),
 
             
@@ -10790,11 +10797,13 @@ class AdminController extends Controller
             'id' => $request->id,
             'school_fees_payment_status' => $request->school_fees_payment_status,
             'termination_status' => $request->termination_status,
+            'termination_status_old' => $request->termination_status_old,
             'delete_google_address' => $delete_google_address,
             'remarks' => $request->remarks,
             'student_status' => $request->student_status,
             'date_of_termination' => $date_of_termination,
             'termination_notification' => $termination_notification,
+            'role_id' => session()->get('role_id'),
 
         ];
         // dd($request);

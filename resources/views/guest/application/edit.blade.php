@@ -325,15 +325,23 @@
                         $readonly_phase_1 = "readonly";
                         $hidden_phase_2 = "";
                         }
+
+                        
+                        $readonly_phase_2 = "";
+                        $disabled_phase_2 = "";
+                        if($application['phase_2_status']=="Approved"){
+                        $disabled_phase_2 = "disabled";
+                        $readonly_phase_2 = "readonly";
+                        }
                         @endphp
                         <ul class="nav nav-pills navtab-bg nav-justified" style="display:{{$hidden_phase_2}}">
                             <li class="nav-item">
-                                <a href="#basic" id="basic_tab" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                <a href="#basic" id="basic_tab" data-toggle="tab" aria-expanded="false" class="nav-link   {{ isset($application['status']) ? $application['status'] != 'Approved' ? 'active' : '' : '' }} ">
                                     {{ __('messages.phase_1') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#personal" id="personal_tab" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link ">
+                                <a href="#personal" id="personal_tab" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link  {{ isset($application['status']) ? $application['status'] == 'Approved' ? 'active' : '' : '' }} ">
                                     {{ __('messages.phase_2') }}
                                 </a>
                             </li>
@@ -341,7 +349,7 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <!-- start Dashboard -->
-                                <div class="tab-pane show active" id="basic">
+                                <div class="tab-pane {{ isset($application['status']) ? $application['status'] != 'Approved' ? 'active' : '' : '' }}" id="basic">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -438,9 +446,12 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="date_of_birth" {{$readonly_phase_1}} value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="date_of_birth" {{$disabled_phase_1}} value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
 
                                                     </div>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="date_of_birth" value="{{$application['date_of_birth']}}">
+                                                        @endif
                                                     <label for="date_of_birth" class="error"></label>
                                                 </div>
                                             </div>
@@ -591,7 +602,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_enrollment_status" {{$readonly_phase_1}} value="{{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                                    <select id="school_enrollment_status"  {{$disabled_phase_1}} name="school_enrollment_status" class="form-control">
+                                                        <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                        <option value="Regular class"  {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
+                                                        <option value="Special need class"  {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
+                                                        <option value="Regular guidance class"  {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Regular guidance class" ? 'selected' : '' : '' }}>{{ __('messages.regular_guidance_class') }}</option>
+                                                    </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="school_enrollment_status" value="{{$application['school_enrollment_status']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -1099,9 +1118,12 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{ isset($application['expected_enroll_date']) ? $application['expected_enroll_date'] : ''}}" {{$readonly_phase_1}} id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" value="{{ isset($application['expected_enroll_date']) ? $application['expected_enroll_date'] : ''}}" {{$disabled_phase_1}} id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
 
                                                     </div>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="expected_enroll_date" value="{{$application['expected_enroll_date']}}">
+                                                    @endif
                                                     <label for="expected_enroll_date" class="error"></label>
                                                 </div>
                                             </div>
@@ -1150,20 +1172,13 @@
                                                                     <span class="far fa-calendar-alt"></span>
                                                                 </div>
                                                             </div>
-                                                            <input type="text" class="form-control" {{$readonly_phase_1}} id="last_date_of_withdrawal" value="{{ isset($application['last_date_of_withdrawal']) ? $application['last_date_of_withdrawal'] : ''}}" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                            <input type="text" class="form-control" {{$disabled_phase_1}} id="last_date_of_withdrawal" value="{{ isset($application['last_date_of_withdrawal']) ? $application['last_date_of_withdrawal'] : ''}}" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                         </div>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="last_date_of_withdrawal" value="{{$application['last_date_of_withdrawal']}}">
+                                                        @endif
                                                         <label for="last_date_of_withdrawal" class="error"></label>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                                    <textarea type="text" id="remarks" class="form-control" {{$readonly_phase_1}} placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1218,6 +1233,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <textarea type="text" id="remarks" class="form-control" {{$readonly_phase_1}} placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group text-right m-b-0">
                                         @if($application['status']=="Approved")
                                         <a class="btn btn-primary-bl waves-effect waves-light" id="next" href="#personal" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link ">
@@ -1233,7 +1258,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="personal">
+                                <div class="tab-pane {{ isset($application['status']) ? $application['status'] == 'Approved' ? 'active' : '' : '' }}" id="personal">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -1247,19 +1272,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control number_validation" id="postal_code" value="{{ isset($application['postal_code']) ? $application['postal_code'] : ''}}" name="postal_code" placeholder="{{ __('messages.enter_postal_code') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control number_validation" id="postal_code" value="{{ isset($application['postal_code']) ? $application['postal_code'] : ''}}" name="postal_code" placeholder="{{ __('messages.enter_postal_code') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_unit_no">{{ __('messages.address_unit_no') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="address_unit_no" value="{{ isset($application['address_unit_no']) ? $application['address_unit_no'] : ''}}" name="address_unit_no" placeholder="{{ __('messages.enter_address_unit_no') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="address_unit_no" value="{{ isset($application['address_unit_no']) ? $application['address_unit_no'] : ''}}" name="address_unit_no" placeholder="{{ __('messages.enter_address_unit_no') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_condominium">{{ __('messages.address_condominium') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_condominium" value="{{ isset($application['address_condominium']) ? $application['address_condominium'] : ''}}" name="address_condominium" placeholder="{{ __('messages.enter_address_condominium') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="address_condominium" value="{{ isset($application['address_condominium']) ? $application['address_condominium'] : ''}}" name="address_condominium" placeholder="{{ __('messages.enter_address_condominium') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1267,19 +1292,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_street">{{ __('messages.address_street') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_street" value="{{ isset($application['address_street']) ? $application['address_street'] : ''}}" name="address_street" placeholder="{{ __('messages.enter_address_street') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="address_street" value="{{ isset($application['address_street']) ? $application['address_street'] : ''}}" name="address_street" placeholder="{{ __('messages.enter_address_street') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_district">{{ __('messages.address_district') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_district" value="{{ isset($application['address_district']) ? $application['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="address_district" value="{{ isset($application['address_district']) ? $application['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="city" value="{{ isset($application['city']) ? $application['city'] : ''}}" name="city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="city" value="{{ isset($application['city']) ? $application['city'] : ''}}" name="city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1287,13 +1312,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="state" value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="state" value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="country" class="form-control country" placeholder="{{ __('messages.country') }}" value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50" id="country" {{$readonly_phase_2}} class="form-control country" placeholder="{{ __('messages.country') }}" value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                         </div>
@@ -1312,7 +1337,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="nric">{{ __('messages.nric_number_only_for_malaysian') }}</label>
-                                                    <input type="text" maxlength="16" id="nric" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['nric']) ? $application['nric'] : ''}}" name="nric" data-parsley-trigger="change">
+                                                    <input type="text" {{$readonly_phase_2}}  maxlength="16" id="nric" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['nric']) ? $application['nric'] : ''}}" name="nric" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <input type="hidden" name="nric_old_photo" id="nric_old_photo" value="{{ isset($application['nric_photo']) ? $application['nric_photo'] : ''}}" />
@@ -1322,7 +1347,7 @@
                                                     <label for="nric_photo">{{ __('messages.nric_image_only_for_malaysian') }}</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="nric_photo" class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="nric_photo" {{$disabled_phase_2}} class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="nric_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1337,7 +1362,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="passport">{{ __('messages.passport_number_japan') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="20" class="form-control alloptions" id="passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($application['passport']) ? $application['passport'] : ''}}" name="passport">
+                                                    <input type="text" maxlength="20"  {{$readonly_phase_2}}  class="form-control alloptions" id="passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($application['passport']) ? $application['passport'] : ''}}" name="passport">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1349,7 +1374,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  {{$disabled_phase_2}}  id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="passport_expiry_date" class="error"></label>
                                                 </div>
@@ -1361,7 +1386,7 @@
                                                     <label for="passport_photo">{{ __('messages.passport_image_japan') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="passport_photo"  {{$disabled_phase_2}}  class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1390,7 +1415,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  {{$disabled_phase_2}}  id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="visa_expiry_date" class="error"></label>
                                                 </div>
@@ -1402,7 +1427,7 @@
                                                     <label for="visa_photo">{{ __('messages.visa_image__for_non_malaysian') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="visa_photo" class="custom-file-input" value="" name="visa_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="visa_photo"  {{$disabled_phase_2}}  class="custom-file-input" value="" name="visa_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1416,7 +1441,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
-                                                    <select id="visa_type" name="visa_type" class="form-control">
+                                                    <select id="visa_type" name="visa_type"  {{$disabled_phase_2}}  class="form-control">
                                                         <option value="">{{ __('messages.select_visa_type') }}</option>
                                                         <option value="No Require (Malaysian)" {{ isset($application['visa_type']) ? $application['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
                                                         <option value="Depedent Pass" {{ isset($application['visa_type']) ? $application['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
@@ -1440,7 +1465,7 @@
 
                                                 <div class="form-group">
                                                     <label for="visa_type_others">{{ __('messages.visa_type_others') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="visa_type_others" class="form-control" placeholder="{{ __('messages.enter_visa_type_others') }}" value="{{ isset($application['visa_type_others']) ? $application['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
+                                                    <input type="text" id="visa_type_others"  {{$readonly_phase_2}}  class="form-control" placeholder="{{ __('messages.enter_visa_type_others') }}" value="{{ isset($application['visa_type_others']) ? $application['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1456,7 +1481,7 @@
                                                     <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1474,7 +1499,7 @@
                                                     <label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="japanese_association_membership_image_supplimental" class="custom-file-input" value="" name="japanese_association_membership_image_supplimental" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="japanese_association_membership_image_supplimental" class="custom-file-input" value="" name="japanese_association_membership_image_supplimental" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="japanese_association_membership_image_supplimental">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1483,77 +1508,6 @@
                                                     <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['japanese_association_membership_image_supplimental'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_supplimental') }} </a>
                                                     @endif
                                                     <span id="japanese_association_membership_image_supplimental_name"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
-                                                    <select id="phase_2_status" name="phase_2_status" class="form-control">
-                                                        <option value="">{{ __('messages.select_status') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }} value="Process" >{{ __('messages.process') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} disabled value="Approved">{{ __('messages.approved') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} disabled value="Send Back">{{ __('messages.send_back') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} disabled value="Reject">{{ __('messages.reject') }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            @php
-
-                                            $enrollment = "none";
-                                            if($application['enrollment']){
-
-                                            $enrollment = "";
-                                            }
-                                            @endphp
-                                            <div class="col-md-4" id="enrollment_show" style="display:{{$enrollment}}">
-                                                <div class="form-group">
-                                                    <label for="enrollment">{{ __('messages.enrollment') }}<span class="text-danger">*</span></label>
-                                                    <select id="enrollment" name="enrollment" class="form-control" disabled>
-                                                        <option value="">{{ __('messages.select_enrollment') }}</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
-                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            @php
-
-                                            $trail_date = "none";
-                                            if($application['enrollment']=="Trail Enrollment"){
-
-                                            $trail_date = "";
-                                            }
-                                            @endphp
-                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
-                                                <div class="form-group">
-                                                    <label for="text">{{ __('messages.trail_date') }}<span class="text-danger"></span></label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="far fa-calendar-alt"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" readonly class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                                    <textarea type="text" id="phase2_remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="phase2_remarks" data-parsley-trigger="change"> {{ isset($application['phase2_remarks']) ? $application['phase2_remarks'] : ''}} </textarea>
-                                                </div>
-                                            </div>
-                                            @php
-                                            $phase_2_reason = "none";
-                                            if($application['phase_2_status']=="Reject" || $application['phase_2_status']=="Send Back"){
-
-                                            $phase_2_reason = "";
-                                            }
-                                            @endphp
-                                            <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
-                                                <div class="form-group">
-                                                    <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_2_reason" readonly value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
 
@@ -1577,7 +1531,7 @@
                                                     <label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg"  value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg"  value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}">
                                                             <label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1596,7 +1550,7 @@
                                                     <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1616,7 +1570,7 @@
                                                     <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1634,7 +1588,7 @@
                                                     <label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file"  {{$disabled_phase_2}}  id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1645,12 +1599,123 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div><br>
+                                    
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">
+                                                {{ __('messages.status') }}
+                                                <h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            
+
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
+                                                    <select id="phase_2_status"  {{$disabled_phase_2}}  name="phase_2_status" class="form-control">
+                                                        <option value="">{{ __('messages.select_status') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }} {{ isset($application['phase_2_status']) ? "" : 'selected'}} value="Process" >{{ __('messages.process') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} disabled value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} disabled value="Send Back">{{ __('messages.send_back') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} disabled value="Reject">{{ __('messages.reject') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @php
+
+                                            $enrollment = "none";
+                                            if($application['enrollment']){
+
+                                            $enrollment = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="enrollment_show" style="display:{{$enrollment}}">
+                                                <div class="form-group">
+                                                    <label for="enrollment">{{ __('messages.enrollment') }}<span class="text-danger">*</span></label>
+                                                    <select id="enrollment"  {{$disabled_phase_2}}  name="enrollment" class="form-control" disabled>
+                                                        <option value="">{{ __('messages.select_enrollment') }}</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                                        <option {{ isset($application['enrollment']) ? $application['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @php
+
+                                            $trail_date = "none";
+                                            if($application['enrollment']=="Trail Enrollment"){
+
+                                            $trail_date = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.trail_date') }}<span class="text-danger"></span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="trail_date"   value="{{ isset($application['trail_date']) ? $application['trail_date'] : '' }}">
+                                            </div>
+                                            @php
+
+                                            $official_date = "none";
+                                            if($application['enrollment']=="Official Enrollment"){
+
+                                            $official_date = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.official_date') }}<span class="text-danger"></span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="trail_date"   value="{{ isset($application['trail_date']) ? $application['trail_date'] : '' }}">
+                                            </div>
+                                            @php
+                                            $phase_2_reason = "none";
+                                            if($application['phase_2_status']=="Reject" || $application['phase_2_status']=="Send Back"){
+
+                                            $phase_2_reason = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
+                                                <div class="form-group">
+                                                    <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control"  {{$readonly_phase_2}}  id="phase_2_reason" readonly value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <textarea type="text" id="phase2_remarks"  {{$readonly_phase_2}}  class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="phase2_remarks" data-parsley-trigger="change"> {{ isset($application['phase2_remarks']) ? $application['phase2_remarks'] : ''}} </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group text-right m-b-0">
-                                        <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit">
+                                        <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled_phase_2}} id="submit" type="submit">
                                             {{ __('messages.update') }}
                                         </button>
-                                        <a href="{{ route('admin.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                        <a href="{{ route('guest.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}
                                         </a>
                                     </div>
@@ -1727,7 +1792,7 @@
 
 <script>
     $(".country").countrySelect({
-        defaultCountry: "my",
+        defaultCountry: "jp",
         preferredCountries: ['my', 'jp'],
         responsiveDropdown: true
     });
@@ -1741,7 +1806,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1757,7 +1822,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1773,7 +1838,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1789,7 +1854,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1805,7 +1870,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,

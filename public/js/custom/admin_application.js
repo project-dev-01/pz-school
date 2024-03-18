@@ -492,10 +492,14 @@ $(function () {
     $('#phase_2_status').on('change', function () {
         var status = $(this).val();
         $("#status_after_approval").val("");
+        $(".academic_details_form").val("");
+        $("#academic_details_show").hide();
         if(status=="Approved"){
 
+            $("#enrollment_show").show();
             $("#status_after_approval_show").show();
         }else{
+            $("#enrollment_show").hide();
             $("#status_after_approval_show").hide();
         }
     });
@@ -504,7 +508,9 @@ $(function () {
         if(status=="Trail Enrollment"){
 
             $("#trail_date_show").show();
-        }else{
+            $("#official_date_show").hide();
+        }else if(status=="Official Enrollment"){
+            $("#official_date_show").show();
             $("#trail_date_show").hide();
         }
     });

@@ -314,18 +314,36 @@
 
                     <form id="editApplication" method="post" action="{{ route('admin.application.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
+                        @php
+                        $readonly_phase_1 = "";
+                        $disabled_phase_1 = "";
+                        $hidden_phase_2 = "none";
+                        if($application['status']=="Approved"){
+                        $disabled_phase_1 = "disabled";
+                        $readonly_phase_1 = "readonly";
+                        $hidden_phase_2 = "";
+                        }
+
+                        
+                        $readonly_phase_2 = "";
+                        $disabled_phase_2 = "";
+                        if($application['phase_2_status']=="Approved"){
+                        $disabled_phase_2 = "disabled";
+                        $readonly_phase_2 = "readonly";
+                        }
+                        @endphp
                         <input type="hidden" id="id" name="id" value="{{ isset($application['id']) ? $application['id'] : ''}}">
 
                         <input type="hidden" name="register_number" value="{{ isset($application['register_number']) ? $application['register_number'] : ''}}">
 
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
-                                <a href="#basic" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                <a href="#basic" data-toggle="tab" aria-expanded="false" class="nav-link  {{ isset($application['status']) ? $application['status'] != 'Approved' ? 'active' : '' : '' }}">
                                 {{ __('messages.phase_1') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#personal" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link ">
+                                <a href="#personal" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link  {{ isset($application['status']) ? $application['status'] == 'Approved' ? 'active' : '' : '' }}">
                                 {{ __('messages.phase_2') }}
                                 </a>
                             </li>
@@ -333,7 +351,7 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <!-- start Dashboard -->
-                                <div class="tab-pane show active" id="basic">
+                                <div class="tab-pane show  {{ isset($application['status']) ? $application['status'] != 'Approved' ? 'active' : '' : '' }}" id="basic">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -346,19 +364,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name"  value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name"  {{$readonly_phase_1}}  value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="middle_name">{{ __('messages.middle_name') }}</label>
-                                                    <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ isset($application['middle_name']) ? $application['middle_name'] : ''}}" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="middle_name" name="middle_name" {{$readonly_phase_1}}  value="{{ isset($application['middle_name']) ? $application['middle_name'] : ''}}" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name"  value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name"  {{$readonly_phase_1}}  value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -367,19 +385,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name_furigana"  value="{{ isset($application['last_name_furigana']) ? $application['last_name_furigana'] : ''}}" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_furigana"  {{$readonly_phase_1}}  value="{{ isset($application['last_name_furigana']) ? $application['last_name_furigana'] : ''}}" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="middle_name">{{ __('messages.middle_name_furigana') }}</label>
-                                                    <input type="text" class="form-control" id="middle_name_furigana"  value="{{ isset($application['middle_name_furigana']) ? $application['middle_name_furigana'] : ''}}" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="middle_name_furigana"  {{$readonly_phase_1}}  value="{{ isset($application['middle_name_furigana']) ? $application['middle_name_furigana'] : ''}}" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name_furigana"  value="{{ isset($application['first_name_furigana']) ? $application['first_name_furigana'] : ''}}" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_furigana"  {{$readonly_phase_1}}  value="{{ isset($application['first_name_furigana']) ? $application['first_name_furigana'] : ''}}" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -389,19 +407,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name_english"  value="{{ isset($application['last_name_english']) ? $application['last_name_english'] : ''}}" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_english"  {{$readonly_phase_1}}  value="{{ isset($application['last_name_english']) ? $application['last_name_english'] : ''}}" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="middle_name">{{ __('messages.middle_name_roma') }}</label>
-                                                    <input type="text" class="form-control" id="middle_name_english"  value="{{ isset($application['middle_name_english']) ? $application['middle_name_english'] : ''}}" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="middle_name_english"  {{$readonly_phase_1}}  value="{{ isset($application['middle_name_english']) ? $application['middle_name_english'] : ''}}" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name_english"  value="{{ isset($application['first_name_english']) ? $application['first_name_english'] : ''}}" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_english"  {{$readonly_phase_1}}  value="{{ isset($application['first_name_english']) ? $application['first_name_english'] : ''}}" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -411,13 +429,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_common') }}<span class="text-danger"></span></label>
-                                                    <input type="text" class="form-control" id="first_name_common"  value="{{ isset($application['first_name_common']) ? $application['first_name_common'] : ''}}" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_common"  {{$readonly_phase_1}}  value="{{ isset($application['first_name_common']) ? $application['first_name_common'] : ''}}" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_common') }}</label>
-                                                    <input type="text" class="form-control" id="last_name_common"  value="{{ isset($application['last_name_common']) ? $application['last_name_common'] : ''}}" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_common"  {{$readonly_phase_1}}  value="{{ isset($application['last_name_common']) ? $application['last_name_common'] : ''}}" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             @endif
@@ -430,33 +448,42 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="date_of_birth"  value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="date_of_birth"   {{$disabled_phase_1}}   value="{{ isset($application['date_of_birth']) ? $application['date_of_birth'] : date('Y-m-d')}}" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
 
                                                     </div>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="date_of_birth" value="{{$application['date_of_birth']}}">
+                                                        @endif
                                                     <label for="date_of_birth" class="error"></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
-                                                    <select  id="gender"  name="gender" class="form-control">
+                                                    <select  id="gender"  {{$disabled_phase_1}}  name="gender" class="form-control">
                                                         <option value="">{{ __('messages.select_gender') }}</option>
                                                         <option value="Male" {{ isset($application['gender']) ? $application['gender'] =="Male" ? 'selected' : '' : '' }}>{{ __('messages.male') }}</option>
                                                         <option value="Female" {{ isset($application['gender']) ? $application['gender'] == "Female" ? 'selected' : '' : '' }}>{{ __('messages.female') }}</option>
                                                     </select>
                                                 </div>
+                                                @if($disabled_phase_1=="disabled")
+                                                <input type="hidden" name="gender" value="{{$application['gender']}}">
+                                                @endif
                                             </div>
                                             @if($form_field['race'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="race">{{ __('messages.race') }}</label>
-                                                    <select  class="form-control" name="race" id="race">
+                                                    <select  class="form-control" {{$disabled_phase_1}}   name="race" id="race">
                                                         <option value="">{{ __('messages.select_race') }}</option>
                                                         @forelse($races as $r)
                                                         <option value="{{$r['id']}}" {{ isset($application['race']) ? $application['race'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['races_name']}}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="race" value="{{$application['race']}}">
+                                                    @endif
 
                                                 </div>
                                             </div>
@@ -465,13 +492,16 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
-                                                    <select  class="form-control" name="religion" id="religion">
+                                                    <select  class="form-control" {{$disabled_phase_1}}  name="religion" id="religion">
                                                         <option value="">{{ __('messages.select_religion') }}</option>
                                                         @forelse($religion as $r)
                                                         <option value="{{$r['id']}}" {{ isset($application['religion']) ? $application['religion'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['religions_name']}}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="religion" value="{{$application['religion']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endif
@@ -497,20 +527,20 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="nationality"  class="form-control country" placeholder="{{ __('messages.nationality') }}" value="{{ isset($application['nationality']) ? $application['nationality'] : ''}}" name="nationality" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50"  {{$readonly_phase_1}} id="nationality"  class="form-control country" placeholder="{{ __('messages.nationality') }}" value="{{ isset($application['nationality']) ? $application['nationality'] : ''}}" name="nationality" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                                    <input type="text" maxlength="50" id="dual_nationality"  class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($application['dual_nationality']) ? $application['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50"  {{$readonly_phase_1}} id="dual_nationality"  class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($application['dual_nationality']) ? $application['dual_nationality'] : ''}}" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             @endif
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control number_validation mobile_no" id="mobile_no"  value="{{ isset($application['mobile_no']) ? $application['mobile_no'] : ''}}" name="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control number_validation mobile_no"  {{$readonly_phase_1}} id="mobile_no"  value="{{ isset($application['mobile_no']) ? $application['mobile_no'] : ''}}" name="mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div> -->
                                         </div>
@@ -527,31 +557,31 @@
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_address_1">{{ __('messages.school_address1') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_address_1"  value="{{ isset($application['school_address_1']) ? $application['school_address_1'] : ''}}" name="school_address_1" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_address_1"  value="{{ isset($application['school_address_1']) ? $application['school_address_1'] : ''}}" name="school_address_1" placeholder="{{ __('messages.enter_address_1') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_address_2">{{ __('messages.school_address2') }}<br></label>
-                                                    <input type="text" class="form-control" id="school_address_2"  value="{{ isset($application['school_address_2']) ? $application['school_address_2'] : ''}}" name="school_address_2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_address_2"  value="{{ isset($application['school_address_2']) ? $application['school_address_2'] : ''}}" name="school_address_2" placeholder="{{ __('messages.enter_address_2') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div> -->
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_last_attended">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_last_attended"  value="{{ isset($application['school_last_attended']) ? $application['school_last_attended'] : ''}}" name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_last_attended"  value="{{ isset($application['school_last_attended']) ? $application['school_last_attended'] : ''}}" name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="school_country"  value="{{ isset($application['school_country']) ? $application['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50"  {{$readonly_phase_1}} id="school_country"  value="{{ isset($application['school_country']) ? $application['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_state"  value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_state"  value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -559,19 +589,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_city"  value="{{ isset($application['school_city']) ? $application['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_city"  value="{{ isset($application['school_city']) ? $application['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control number_validation" id="school_postal_code"  value="{{ isset($application['school_postal_code']) ? $application['school_postal_code'] : ''}}" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control number_validation"  {{$readonly_phase_1}} id="school_postal_code"  value="{{ isset($application['school_postal_code']) ? $application['school_postal_code'] : ''}}" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="school_enrollment_status"  value="{{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control"  {{$readonly_phase_1}} id="school_enrollment_status"  value="{{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -579,11 +609,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
-                                                    <select  id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control">
+                                                    <select  id="school_enrollment_status_tendency"  {{$disabled_phase_1}}  name="school_enrollment_status_tendency" class="form-control">
                                                         <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                                         <option value="Yes" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
                                                         <option value="No" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                                     </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="school_enrollment_status_tendency" value="{{$application['school_enrollment_status_tendency']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -599,7 +632,7 @@
 
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" {{ $application['mother_first_name'] ? "" : 'checked'}}>
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details" {{$disabled_phase_1}} name="skip_mother_details" {{ $application['mother_first_name'] ? "" : 'checked'}}>
                                                 <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                             </div>
                                         </div>
@@ -609,19 +642,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name"  value="{{ isset($application['mother_last_name']) ? $application['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_last_name"  value="{{ isset($application['mother_last_name']) ? $application['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name"  value="{{ isset($application['mother_middle_name']) ? $application['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_middle_name"  value="{{ isset($application['mother_middle_name']) ? $application['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name" value="{{ isset($application['mother_first_name']) ? $application['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form"  {{$readonly_phase_1}}  id="mother_first_name" value="{{ isset($application['mother_first_name']) ? $application['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -629,19 +662,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana"  value="{{ isset($application['mother_last_name_furigana']) ? $application['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_last_name_furigana"  value="{{ isset($application['mother_last_name_furigana']) ? $application['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana"  value="{{ isset($application['mother_middle_name_furigana']) ? $application['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_middle_name_furigana"  value="{{ isset($application['mother_middle_name_furigana']) ? $application['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name_furigana" value="{{ isset($application['mother_first_name_furigana']) ? $application['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form"  {{$readonly_phase_1}}  id="mother_first_name_furigana" value="{{ isset($application['mother_first_name_furigana']) ? $application['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -649,19 +682,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english"  value="{{ isset($application['mother_last_name_english']) ? $application['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_last_name_english"  value="{{ isset($application['mother_last_name_english']) ? $application['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english"  value="{{ isset($application['mother_middle_name_english']) ? $application['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_middle_name_english"  value="{{ isset($application['mother_middle_name_english']) ? $application['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form"  id="mother_first_name_english" value="{{ isset($application['mother_first_name_english']) ? $application['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form"  {{$readonly_phase_1}}  id="mother_first_name_english" value="{{ isset($application['mother_first_name_english']) ? $application['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -669,26 +702,26 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form country"  id="mother_nationality" name="mother_nationality" value="{{ isset($application['mother_nationality']) ? $application['mother_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form country"  {{$readonly_phase_1}}  id="mother_nationality" name="mother_nationality" value="{{ isset($application['mother_nationality']) ? $application['mother_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control  mother_form" id="mother_email"  value="{{ isset($application['mother_email']) ? $application['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control  mother_form" {{$readonly_phase_1}}  id="mother_email"  value="{{ isset($application['mother_email']) ? $application['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form number_validation" id="mother_phone_number"  value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form number_validation" {{$readonly_phase_1}}  id="mother_phone_number"  value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                         <label for="mother_phone_number" class="error"></label>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                        <select  id="mother_occupation" name="mother_occupation" class="form-control copy_parent_info mother_form">
+                                                        <select  {{$readonly_phase_1}}  id="mother_occupation" name="mother_occupation" class="form-control copy_parent_info mother_form">
                                                             <option value="">{{ __('messages.select_occupation') }}</option>
                                                             <option {{ isset($application['mother_occupation']) ? $application['mother_occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
                                                             <option {{ isset($application['mother_occupation']) ? $application['mother_occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
@@ -702,7 +735,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_occupation" name="mother_occupation"  value="{{ isset($application['mother_occupation']) ? $application['mother_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" {{$readonly_phase_1}}  id="mother_occupation" name="mother_occupation"  value="{{ isset($application['mother_occupation']) ? $application['mother_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -719,7 +752,7 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details"   {{ $application['father_first_name'] ? "" : 'checked'}}>
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details" {{$disabled_phase_1}}  {{ $application['father_first_name'] ? "" : 'checked'}}>
                                                 <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                             </div>
                                         </div>
@@ -729,19 +762,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_last_name" value="{{ isset($application['father_last_name']) ? $application['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_last_name" {{$readonly_phase_1}} value="{{ isset($application['father_last_name']) ? $application['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_middle_name" value="{{ isset($application['father_middle_name']) ? $application['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_middle_name" {{$readonly_phase_1}} value="{{ isset($application['father_middle_name']) ? $application['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name" value="{{ isset($application['father_first_name']) ? $application['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name" {{$readonly_phase_1}} value="{{ isset($application['father_first_name']) ? $application['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -749,19 +782,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana"  value="{{ isset($application['father_last_name_furigana']) ? $application['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana"  {{$readonly_phase_1}} value="{{ isset($application['father_last_name_furigana']) ? $application['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana"  value="{{ isset($application['father_middle_name_furigana']) ? $application['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana"  {{$readonly_phase_1}} value="{{ isset($application['father_middle_name_furigana']) ? $application['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name_furigana" value="{{ isset($application['father_first_name_furigana']) ? $application['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['father_first_name_furigana']) ? $application['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -769,19 +802,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english"  value="{{ isset($application['father_last_name_english']) ? $application['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english"  {{$readonly_phase_1}} value="{{ isset($application['father_last_name_english']) ? $application['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english"  value="{{ isset($application['father_middle_name_english']) ? $application['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english"  {{$readonly_phase_1}} value="{{ isset($application['father_middle_name_english']) ? $application['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name_english" value="{{ isset($application['father_first_name_english']) ? $application['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form"  id="father_first_name_english" {{$readonly_phase_1}} value="{{ isset($application['father_first_name_english']) ? $application['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -789,19 +822,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form country"  id="father_nationality" name="father_nationality" value="{{ isset($application['father_nationality']) ? $application['father_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form country"  id="father_nationality" name="father_nationality" {{$readonly_phase_1}} value="{{ isset($application['father_nationality']) ? $application['father_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control  father_form"  id="father_email" value="{{ isset($application['father_email']) ? $application['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control  father_form"  id="father_email" {{$readonly_phase_1}} value="{{ isset($application['father_email']) ? $application['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form number_validation"  id="father_phone_number" value="{{ isset($application['father_phone_number']) ? $application['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form number_validation"  id="father_phone_number" {{$readonly_phase_1}} value="{{ isset($application['father_phone_number']) ? $application['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                         <label for="father_phone_number" class="error"></label>
                                                     </div>
                                                 </div>
@@ -809,7 +842,7 @@
                                                     <div class="form-group">
                                                         <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                         <select  id="father_occupation" name="father_occupation" class="form-control">
-                                                            <option value="">{{ __('messages.select_occupation') }}</option>
+                                                            <option {{$readonly_phase_1}} value="">{{ __('messages.select_occupation') }}</option>
                                                             <option {{ isset($application['father_occupation']) ? $application['father_occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
                                                             <option {{ isset($application['father_occupation']) ? $application['father_occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
                                                             <option {{ isset($application['father_occupation']) ? $application['father_occupation'] == "Civil Department" ? 'selected' : '' : '' }}>Civil Department</option>
@@ -822,7 +855,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_occupation" name="father_occupation"  value="{{ isset($application['father_occupation']) ? $application['father_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info father_form" id="father_occupation" name="father_occupation"  {{$readonly_phase_1}} value="{{ isset($application['father_occupation']) ? $application['father_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -847,7 +880,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="radio radio-success form-check-inline">
-                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_father" value="father"  {{ isset($application['guardian_email']) ? $application['guardian_email'] != $application['father_email'] ? 'checked' : '' : '' }}>
+                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_father" {{$readonly_phase_1}} value="father"  {{ isset($application['guardian_email']) ? $application['guardian_email'] != $application['father_email'] ? 'checked' : '' : '' }}>
                                                         <label for="father"> {{ __('messages.copy_from_father_details') }} </label>
                                                     </div>
                                                 </div>
@@ -855,7 +888,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="radio radio-success form-check-inline">
-                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_mother" value="mother"    {{ isset($application['guardian_email']) ? $application['guardian_email'] == $application['mother_email'] ? 'checked' : '' : '' }}>
+                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_mother" {{$readonly_phase_1}} value="mother"    {{ isset($application['guardian_email']) ? $application['guardian_email'] == $application['mother_email'] ? 'checked' : '' : '' }}>
                                                         <label for="mother"> {{ __('messages.copy_from_mother_details') }} </label>
                                                     </div>
                                                 </div>
@@ -863,7 +896,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="radio radio-success form-check-inline">
-                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_others" value="others"   {{ isset($application['guardian_email']) ? $application['guardian_email'] != $application['father_email'] ? 'checked' : '' : '' }}  {{ isset($application['guardian_email']) ? $application['guardian_email'] == $application['mother_email'] ? 'checked' : '' : '' }}>
+                                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_others" {{$readonly_phase_1}} value="others"   {{ isset($application['guardian_email']) ? $application['guardian_email'] != $application['father_email'] ? 'checked' : '' : '' }}  {{ isset($application['guardian_email']) ? $application['guardian_email'] == $application['mother_email'] ? 'checked' : '' : '' }}>
                                                         <label for="others"> {{ __('messages.others') }} </label>
                                                     </div>
                                                 </div>
@@ -875,19 +908,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_last_name" value="{{ isset($application['guardian_last_name']) ? $application['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_last_name" {{$readonly_phase_1}} value="{{ isset($application['guardian_last_name']) ? $application['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
-                                                        <input type="text" class="form-control"  id="guardian_middle_name" value="{{ isset($application['guardian_middle_name']) ? $application['guardian_middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_middle_name" {{$readonly_phase_1}} value="{{ isset($application['guardian_middle_name']) ? $application['guardian_middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_first_name" value="{{ isset($application['guardian_first_name']) ? $application['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_first_name" {{$readonly_phase_1}} value="{{ isset($application['guardian_first_name']) ? $application['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -895,19 +928,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="guardian_last_name_furigana"  value="{{ isset($application['guardian_last_name_furigana']) ? $application['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="guardian_last_name_furigana"  {{$readonly_phase_1}} value="{{ isset($application['guardian_last_name_furigana']) ? $application['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                                        <input type="text" class="form-control" id="guardian_middle_name_furigana"  value="{{ isset($application['guardian_middle_name_furigana']) ? $application['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="guardian_middle_name_furigana"  {{$readonly_phase_1}} value="{{ isset($application['guardian_middle_name_furigana']) ? $application['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_first_name_furigana" value="{{ isset($application['guardian_first_name_furigana']) ? $application['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_first_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['guardian_first_name_furigana']) ? $application['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -915,19 +948,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="guardian_last_name_english"  value="{{ isset($application['guardian_last_name_english']) ? $application['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="guardian_last_name_english"  {{$readonly_phase_1}} value="{{ isset($application['guardian_last_name_english']) ? $application['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                                        <input type="text" class="form-control" id="guardian_middle_name_english"  value="{{ isset($application['guardian_middle_name_english']) ? $application['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="guardian_middle_name_english"  {{$readonly_phase_1}} value="{{ isset($application['guardian_middle_name_english']) ? $application['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_first_name_english" value="{{ isset($application['guardian_first_name_english']) ? $application['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_first_name_english" {{$readonly_phase_1}} value="{{ isset($application['guardian_first_name_english']) ? $application['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -935,25 +968,28 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
-                                                        <select  id="guardian_relation" name="guardian_relation" class="form-control">
+                                                        <select  id="guardian_relation" {{$disabled_phase_1}} name="guardian_relation" class="form-control">
                                                             <option value="">{{ __('messages.select_relation') }}</option>
                                                             @forelse($relation as $r)
                                                             <option value="{{$r['id']}}" {{ isset($application['guardian_relation']) ? $application['guardian_relation'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
                                                             @empty
                                                             @endforelse
                                                         </select>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="guardian_relation" value="{{$application['guardian_relation']}}">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_email" readonly value="{{ isset($application['guardian_email']) ? $application['guardian_email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_email" readonly {{$readonly_phase_1}} value="{{ isset($application['guardian_email']) ? $application['guardian_email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control number_validation"  id="guardian_phone_number" value="{{ isset($application['guardian_phone_number']) ? $application['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control number_validation"  id="guardian_phone_number" {{$readonly_phase_1}} value="{{ isset($application['guardian_phone_number']) ? $application['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                         <label for="guardian_phone_number" class="error"></label>
                                                     </div>
                                                 </div>
@@ -961,7 +997,7 @@
                                                     <div class="form-group">
                                                         <label for="guardian_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                         <select  id="guardian_occupation" name="guardian_occupation" class="form-control">
-                                                            <option value="">{{ __('messages.select_occupation') }}</option>
+                                                            <option  value="">{{ __('messages.select_occupation') }}</option>
                                                             <option {{ isset($application['guardian_occupation']) ? $application['guardian_occupation'] == "Business" ? 'selected' : '' : '' }}>Business</option>
                                                             <option {{ isset($application['guardian_occupation']) ? $application['guardian_occupation'] == "IT/Software" ? 'selected' : '' : '' }}>IT/Software</option>
                                                             <option {{ isset($application['guardian_occupation']) ? $application['guardian_occupation'] == "Civil Department" ? 'selected' : '' : '' }}>Civil Department</option>
@@ -974,19 +1010,19 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_occupation" name="guardian_occupation" value="{{ isset($application['guardian_occupation']) ? $application['guardian_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_occupation" name="guardian_occupation" {{$readonly_phase_1}} value="{{ isset($application['guardian_occupation']) ? $application['guardian_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_company_name_japan" name="guardian_company_name_japan" value="{{ isset($application['guardian_company_name_japan']) ? $application['guardian_company_name_japan'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_company_name_japan" name="guardian_company_name_japan" {{$readonly_phase_1}} value="{{ isset($application['guardian_company_name_japan']) ? $application['guardian_company_name_japan'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control"  id="guardian_company_name_local" name="guardian_company_name_local" value="{{ isset($application['guardian_company_name_local']) ? $application['guardian_company_name_local'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  id="guardian_company_name_local" name="guardian_company_name_local" {{$readonly_phase_1}} value="{{ isset($application['guardian_company_name_local']) ? $application['guardian_company_name_local'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -994,20 +1030,23 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control  number_validation "  id="guardian_company_phone_number" name="guardian_company_phone_number" value="{{ isset($application['guardian_company_phone_number']) ? $application['guardian_company_phone_number'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control  number_validation "  id="guardian_company_phone_number" name="guardian_company_phone_number" {{$readonly_phase_1}} value="{{ isset($application['guardian_company_phone_number']) ? $application['guardian_company_phone_number'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                         <label for="guardian_company_phone_number" class="error"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
-                                                        <select id="guardian_employment_status" name="guardian_employment_status"  class="form-control">
+                                                        <select id="guardian_employment_status" {{$disabled_phase_1}} name="guardian_employment_status"  class="form-control">
                                                             <option value="">{{ __('messages.select_employment_status') }}</option>
                                                             <option value="Expat" {{ isset($application['guardian_employment_status']) ? $application['guardian_employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
                                                             <option value="Local Hire" {{ isset($application['guardian_employment_status']) ? $application['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
                                                             <option value="Public Servant" {{ isset($application['guardian_employment_status']) ? $application['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
                                                             <option value="Self-Employed" {{ isset($application['guardian_employment_status']) ? $application['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
                                                         </select>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="guardian_employment_status" value="{{$application['guardian_employment_status']}}">
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1025,25 +1064,31 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="expected_academic_year">{{ __('messages.expected_academic_year') }}<span class="text-danger">*</span></label>
-                                                    <select id="expected_academic_year"  name="expected_academic_year" class="form-control">
+                                                    <select id="expected_academic_year"  {{$disabled_phase_1}}   name="expected_academic_year" class="form-control">
                                                         <option value="">{{ __('messages.select_academic_year') }}</option>
                                                         @forelse($academic_year_list as $r)
                                                         <option value="{{$r['id']}}" {{ isset($application['expected_academic_year']) ? $application['expected_academic_year'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="expected_academic_year" value="{{$application['expected_academic_year']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="expected_grade">{{ __('messages.expected_grade') }}<span class="text-danger">*</span></label>
-                                                    <select id="expected_grade"  name="expected_grade" class="form-control">
+                                                    <select id="expected_grade"  {{$disabled_phase_1}}  name="expected_grade" class="form-control">
                                                         <option value="">{{ __('messages.select_grade') }}</option>
                                                         @forelse($grade as $g)
                                                         <option value="{{$g['id']}}" {{ isset($application['expected_grade']) ? $application['expected_grade'] == $g['id'] ? 'selected' : '' : '' }}>{{$g['name']}}</option>
                                                         @empty
                                                         @endforelse
                                                     </select>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="expected_grade" value="{{$application['expected_grade']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1055,9 +1100,12 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" value="{{ isset($application['expected_enroll_date']) ? $application['expected_enroll_date'] : ''}}"  id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  {{$disabled_phase_1}}  value="{{ isset($application['expected_enroll_date']) ? $application['expected_enroll_date'] : ''}}"  id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
 
                                                     </div>
+                                                    @if($disabled_phase_1=="disabled")
+                                                    <input type="hidden" name="expected_enroll_date" value="{{$application['expected_enroll_date']}}">
+                                                    @endif
                                                     <label for="expected_enroll_date" class="error"></label>
                                                 </div>
                                             </div>
@@ -1076,11 +1124,11 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id=""  name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id=""  {{$readonly_phase_1}} name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
                                                             <label for="yes"> {{ __('messages.yes') }} </label>
                                                         </div>
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id=""  name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id=""  {{$readonly_phase_1}} name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
                                                             <label for="no"> {{ __('messages.no') }} </label>
                                                         </div>
                                                         <!-- <div class="radio radio-success form-check-inline">
@@ -1106,20 +1154,13 @@
                                                                     <span class="far fa-calendar-alt"></span>
                                                                 </div>
                                                             </div>
-                                                            <input type="text" class="form-control"  id="last_date_of_withdrawal" value="{{ isset($application['last_date_of_withdrawal']) ? $application['last_date_of_withdrawal'] : ''}}" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                            <input type="text" class="form-control" {{$disabled_phase_1}} id="last_date_of_withdrawal" value="{{ isset($application['last_date_of_withdrawal']) ? $application['last_date_of_withdrawal'] : ''}}" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                         </div>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="last_date_of_withdrawal" value="{{$application['last_date_of_withdrawal']}}">
+                                                        @endif
                                                         <label for="last_date_of_withdrawal" class="error"></label>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                                    <textarea type="text" id="remarks" class="form-control"  placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1144,17 +1185,20 @@
                                                     </select>
                                                 </div>
                                             </div> -->
-                                            <input type="hidden" name="phase_1_status" value="{{$application['status']}}">
+                                            <input type="hidden" name="status_old" value="{{$application['status']}}">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="phase_1_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
-                                                    <select id="phase_1_status" name="status" class="form-control">
+                                                    <select id="phase_1_status" {{$disabled_phase_2}} name="status" class="form-control">
                                                         <option value="">{{ __('messages.status') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }} value="Applied">{{ __('messages.applied') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                     </select>
+                                                        @if($disabled_phase_2=="disabled")
+                                                        <input type="hidden" name="status" value="{{$application['status']}}">
+                                                        @endif
                                                 </div>
                                             </div>
                                             @php
@@ -1168,13 +1212,24 @@
                                             <div class="col-md-4" id="reason_1" style="display:{{$phase_1_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_1_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_1_reason"  value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="phase_1_reason" {{$readonly_phase_2}} value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <textarea type="text" id="remarks" class="form-control"  placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="personal">
+                                <div class="tab-pane  {{ isset($application['status']) ? $application['status'] == 'Approved' ? 'active' : '' : '' }}" id="personal">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -1188,19 +1243,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control number_validation" id="postal_code" value="{{ isset($application['postal_code']) ? $application['postal_code'] : ''}}" name="postal_code" placeholder="{{ __('messages.enter_postal_code') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control number_validation" id="postal_code"  {{$readonly_phase_2}}  value="{{ isset($application['postal_code']) ? $application['postal_code'] : ''}}" name="postal_code" placeholder="{{ __('messages.enter_postal_code') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_unit_no">{{ __('messages.address_unit_no') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="address_unit_no" value="{{ isset($application['address_unit_no']) ? $application['address_unit_no'] : ''}}" name="address_unit_no" placeholder="{{ __('messages.enter_address_unit_no') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="address_unit_no"  {{$readonly_phase_2}}  value="{{ isset($application['address_unit_no']) ? $application['address_unit_no'] : ''}}" name="address_unit_no" placeholder="{{ __('messages.enter_address_unit_no') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_condominium">{{ __('messages.address_condominium') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_condominium" value="{{ isset($application['address_condominium']) ? $application['address_condominium'] : ''}}" name="address_condominium" placeholder="{{ __('messages.enter_address_condominium') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="address_condominium"  {{$readonly_phase_2}}  value="{{ isset($application['address_condominium']) ? $application['address_condominium'] : ''}}" name="address_condominium" placeholder="{{ __('messages.enter_address_condominium') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1208,19 +1263,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_street">{{ __('messages.address_street') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_street" value="{{ isset($application['address_street']) ? $application['address_street'] : ''}}" name="address_street" placeholder="{{ __('messages.enter_address_street') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="address_street"  {{$readonly_phase_2}}  value="{{ isset($application['address_street']) ? $application['address_street'] : ''}}" name="address_street" placeholder="{{ __('messages.enter_address_street') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="address_district">{{ __('messages.address_district') }}<span class="text-danger">*</span><br></label>
-                                                    <input type="text" class="form-control" id="address_district" value="{{ isset($application['address_district']) ? $application['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="address_district"  {{$readonly_phase_2}}  value="{{ isset($application['address_district']) ? $application['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="city" value="{{ isset($application['city']) ? $application['city'] : ''}}" name="city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="city"  {{$readonly_phase_2}}  value="{{ isset($application['city']) ? $application['city'] : ''}}" name="city" placeholder="{{ __('messages.enter_city') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -1228,13 +1283,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="state" value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="state"  {{$readonly_phase_2}}  value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="country" class="form-control country" placeholder="{{ __('messages.country') }}" value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50" id="country" class="form-control country" placeholder="{{ __('messages.country') }}"  {{$readonly_phase_2}}  value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                         </div>
@@ -1253,17 +1308,17 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="nric">{{ __('messages.nric_number_only_for_malaysian') }}</label>
-                                                    <input type="text" maxlength="16" id="nric" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['nric']) ? $application['nric'] : ''}}" name="nric" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="16" id="nric" class="form-control alloptions" placeholder="999999-99-9999"  {{$readonly_phase_2}}  value="{{ isset($application['nric']) ? $application['nric'] : ''}}" name="nric" data-parsley-trigger="change">
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="nric_old_photo" id="nric_old_photo" value="{{ isset($application['nric_photo']) ? $application['nric_photo'] : ''}}" />
+                                            <input type="hidden" name="nric_old_photo" id="nric_old_photo"   value="{{ isset($application['nric_photo']) ? $application['nric_photo'] : ''}}" />
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="nric_photo">{{ __('messages.nric_image_only_for_malaysian') }}</label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="nric_photo" class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="nric_photo"  {{$disabled_phase_2}}  class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="nric_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1278,7 +1333,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="passport">{{ __('messages.passport_number_japan') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="20" class="form-control alloptions" id="passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($application['passport']) ? $application['passport'] : ''}}" name="passport">
+                                                    <input type="text" maxlength="20" {{$readonly_phase_2}} class="form-control alloptions" id="passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($application['passport']) ? $application['passport'] : ''}}" name="passport">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1290,7 +1345,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control"  {{$disabled_phase_2}}  id="passport_expiry_date" value="{{ isset($application['passport_expiry_date']) ? $application['passport_expiry_date'] : date('Y-m-d')}}" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="passport_expiry_date" class="error"></label>
                                                 </div>
@@ -1302,7 +1357,7 @@
                                                     <label for="passport_photo">{{ __('messages.passport_image_japan') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="passport_photo" {{$disabled_phase_2}}  class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1331,8 +1386,11 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" {{$disabled_phase_2}} id="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
+                                                    @if($disabled_phase_2=="disabled")
+                                                        <input type="hidden" name="visa_expiry_date" value="{{$application['visa_expiry_date']}}">
+                                                    @endif
                                                     <label for="visa_expiry_date" class="error"></label>
                                                 </div>
                                             </div>
@@ -1343,7 +1401,7 @@
                                                     <label for="visa_photo">{{ __('messages.visa_image__for_non_malaysian') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="visa_photo" class="custom-file-input" value="" name="visa_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" {{$disabled_phase_2}} id="visa_photo" class="custom-file-input" value="" name="visa_photo" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="visa_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1357,7 +1415,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
-                                                    <select id="visa_type" name="visa_type" class="form-control">
+                                                    <select id="visa_type" {{$disabled_phase_2}} name="visa_type" class="form-control">
                                                         <option value="">{{ __('messages.select_visa_type') }}</option>
                                                         <option value="No Require (Malaysian)" {{ isset($application['visa_type']) ? $application['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
                                                         <option value="Depedent Pass" {{ isset($application['visa_type']) ? $application['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
@@ -1365,6 +1423,9 @@
                                                         <option value="Resident Pass" {{ isset($application['visa_type']) ? $application['visa_type'] == "Resident Pass" ? 'selected' : '' : '' }}>{{ __('messages.resident_pass') }}</option>
                                                         <option value="Others" {{ isset($application['visa_type']) ? $application['visa_type'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
                                                     </select>
+                                                    @if($disabled_phase_2=="disabled")
+                                                        <input type="hidden" name="visa_type" value="{{$application['visa_type']}}">
+                                                    @endif
                                                 </div>
                                             </div>
                                             
@@ -1381,13 +1442,13 @@
 
                                                 <div class="form-group">
                                                     <label for="visa_type_others">{{ __('messages.visa_type_others') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="visa_type_others" class="form-control" placeholder="{{ __('messages.enter_visa_type_others') }}" value="{{ isset($application['visa_type_others']) ? $application['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
+                                                    <input type="text" id="visa_type_others" class="form-control" {{$readonly_phase_2}} placeholder="{{ __('messages.enter_visa_type_others') }}" value="{{ isset($application['visa_type_others']) ? $application['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="japanese_association_membership_number_student" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['japanese_association_membership_number_student']) ? $application['japanese_association_membership_number_student'] : ''}}" name="japanese_association_membership_number_student" data-parsley-trigger="change">
+                                                    <input type="text" id="japanese_association_membership_number_student" {{$readonly_phase_2}} class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['japanese_association_membership_number_student']) ? $application['japanese_association_membership_number_student'] : ''}}" name="japanese_association_membership_number_student" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                             <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($application['japanese_association_membership_image_principal']) ? $application['japanese_association_membership_image_principal'] : ''}}" />
@@ -1397,7 +1458,7 @@
                                                     <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" id="japanese_association_membership_image_principal" {{$disabled_phase_2}} class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1415,7 +1476,7 @@
                                                     <label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="japanese_association_membership_image_supplimental" class="custom-file-input" value="" name="japanese_association_membership_image_supplimental" accept="image/png, image/gif, image/jpeg">
+                                                            <input type="file" {{$disabled_phase_2}} id="japanese_association_membership_image_supplimental" class="custom-file-input" value="" name="japanese_association_membership_image_supplimental" accept="image/png, image/gif, image/jpeg">
                                                             <label class="custom-file-label" for="japanese_association_membership_image_supplimental">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
@@ -1427,10 +1488,109 @@
                                                 </div>
                                             </div>
 
+                                        </div>
+                                    </div><br>
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">
+                                                {{ __('messages.guardian_details') }}
+                                                <h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+
+                                            <input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}" />
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="passport_father_photo" {{$disabled_phase_2}} class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg"  value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}">
+                                                            <label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    <label for="passport_father_photo" class="error"></label>
+                                                    @if(isset($application['passport_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_father_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_father_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="passport_father_photo_name"></span>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($application['passport_mother_photo']) ? $application['passport_mother_photo'] : ''}}" />
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="passport_mother_photo" {{$disabled_phase_2}} class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    <label for="passport_mother_photo" class="error"></label>
+                                                    @if(isset($application['passport_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_mother_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_mother_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="passport_mother_photo_name"></span>
+                                                </div>
+                                            </div>
+
+
+                                            <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($application['visa_father_photo']) ? $application['visa_father_photo'] : ''}}" />
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="visa_father_photo" {{$disabled_phase_2}} class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($application['visa_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_father_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_father_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="visa_father_photo_name"></span>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($application['visa_mother_photo']) ? $application['visa_mother_photo'] : ''}}" />
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="visa_mother_photo" {{$disabled_phase_2}} class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($application['visa_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_mother_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_mother_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="visa_mother_photo_name"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="navv">
+                                                {{ __('messages.status') }}
+                                                <h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <input type="hidden" name="phase_2_status_old" value="{{$application['phase_2_status']}}">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
-                                                    <select id="phase_2_status" name="phase_2_status" class="form-control">
+                                                    <select id="phase_2_status"  name="phase_2_status" class="form-control">
                                                         <option value="">{{ __('messages.select_status') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }} value="Process">{{ __('messages.process') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }}  value="Approved">{{ __('messages.approved') }}</option>
@@ -1474,7 +1634,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4" id="enrollment_show">
+                                            <div class="col-md-4" id="enrollment_show" style="display:{{$phase_2_status}}" >
                                                 <div class="form-group">
                                                     <label for="enrollment">{{ __('messages.enrollment') }}<span class="text-danger">*</span></label>
                                                     <select id="enrollment" name="enrollment" class="form-control" >
@@ -1505,30 +1665,45 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                                    <textarea type="text" id="phase2_remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="phase2_remarks" data-parsley-trigger="change"> {{ isset($application['phase2_remarks']) ? $application['phase2_remarks'] : ''}} </textarea>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div><br>
+                                            
                                             @php
+                                            $official_date = "none";
+                                            if($application['enrollment']=="Official Enrollment"){
 
-                                            $academic_details = "none";
-                                            if($application['status_after_approval']=="Grade and class fixed"){
-
-                                            $academic_details = "";
+                                            $official_date = "";
                                             }
                                             @endphp
+                                            <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.official_date') }}<span class="text-danger"></span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" disabled class="form-control" id="official_date" value="{{ isset($application['official_date']) ? $application['official_date'] : date('Y-m-d')}}" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br>
+                                                        
+                                    @php
+
+                                    $academic_details = "none";
+                                    if($application['status_after_approval']=="Grade and class fixed"){
+
+                                    $academic_details = "";
+                                    }
+                                    @endphp
                                     <div id="academic_details_show" style="display:{{$academic_details}}">
                                         <ul class="nav nav-tabs">
-                                            <li class="nav-item">
-                                                <h4 class="navv">
-                                                    {{ __('messages.academic_details') }}
-                                                    <h4>
-                                            </li>
+                                        <li class="nav-item">
+                                            <h4 class="navv">
+                                                {{ __('messages.academic_details') }}
+                                                <h4>
+                                        </li>
                                         </ul><br>
                                         <div class="card-body">
                                             <div class="row">
@@ -1586,95 +1761,20 @@
                                             </div>
                                         </div><br>
                                     </div>
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item">
-                                            <h4 class="navv">
-                                                {{ __('messages.guardian_details') }}
-                                                <h4>
-                                        </li>
-                                    </ul><br>
                                     <div class="card-body">
                                         <div class="row">
-
-                                            <input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}" />
-
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg"  value="{{ isset($application['passport_father_photo']) ? $application['passport_father_photo'] : ''}}">
-                                                            <label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    <label for="passport_father_photo" class="error"></label>
-                                                    @if(isset($application['passport_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_father_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_father_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
-                                                    @endif
-                                                    <span id="passport_father_photo_name"></span>
-                                                </div>
-                                            </div>
-
-                                            <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($application['passport_mother_photo']) ? $application['passport_mother_photo'] : ''}}" />
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    <label for="passport_mother_photo" class="error"></label>
-                                                    @if(isset($application['passport_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_mother_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['passport_mother_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
-                                                    @endif
-                                                    <span id="passport_mother_photo_name"></span>
-                                                </div>
-                                            </div>
-
-
-                                            <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($application['visa_father_photo']) ? $application['visa_father_photo'] : ''}}" />
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    @if(isset($application['visa_father_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_father_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_father_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
-                                                    @endif
-                                                    <span id="visa_father_photo_name"></span>
-                                                </div>
-                                            </div>
-
-                                            <input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($application['visa_mother_photo']) ? $application['visa_mother_photo'] : ''}}" />
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    @if(isset($application['visa_mother_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_mother_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$application['visa_mother_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
-                                                    @endif
-                                                    <span id="visa_mother_photo_name"></span>
+                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <textarea type="text" id="phase2_remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="phase2_remarks" data-parsley-trigger="change"> {{ isset($application['phase2_remarks']) ? $application['phase2_remarks'] : ''}} </textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div><br>
+                            
+                        </div><br> 
                         <!-- <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="navv">
@@ -1705,11 +1805,17 @@
                             </div>
                         </div>
                         <hr> -->
+                        @php
+                        $disabled_phase_2_after = "";
+                        if($application['status_after_approval']=="Grade and class fixed"){
+                        $disabled_phase_2_after = "disabled";
+                        }
+                        @endphp
                         <div class="form-group text-right m-b-0">
                             <!-- <a class="btn btn-primary-bl waves-effect waves-light" id="next" href="#personal" data-toggle="tab" data-tab="info" aria-expanded="true" class="nav-link ">
                                 Next
                             </a> -->
-                            <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit">
+                            <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled_phase_2_after}} id="submit" type="submit">
                                 {{ __('messages.update') }}
                             </button>
                             <a href="{{ route('admin.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
@@ -1761,7 +1867,7 @@
     
 
     $(".country").countrySelect({
-        defaultCountry: "my",
+        defaultCountry: "jp",
         preferredCountries: ['my', 'jp'],
         responsiveDropdown: true
     });
@@ -1775,7 +1881,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1791,7 +1897,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1807,7 +1913,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1823,7 +1929,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "my",
+        initialCountry: "jp",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1846,5 +1952,6 @@
 
     });
 </script>
+<!-- <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script> -->
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 @endsection
