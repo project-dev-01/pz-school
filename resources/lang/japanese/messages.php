@@ -239,7 +239,7 @@ return [
     "reason" => "理由",
     "attendance_report" => "出欠レポート",
     "student" => "生徒",
-    "present" => "出欠閲覧",
+    "present" => "出席",
     "absent" => "欠席",
     "holiday" => "祝日",
     "late" => "遅刻",
