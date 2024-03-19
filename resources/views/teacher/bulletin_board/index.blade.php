@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.buletin') . '')
+@section('title',' ' . __('messages.buletin') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -27,76 +27,103 @@
     .datepicker {
         z-index: 99999 !important;
     }
+
     .pdf-icon {
-    color: #FF0000; /* Red color for PDF icon */
-    font-size: 24px; /* Adjust the font size of the icon */
-}
+        color: #FF0000;
+        /* Red color for PDF icon */
+        font-size: 24px;
+        /* Adjust the font size of the icon */
+    }
 
-.pdf-file {
-    font-weight: bold; /* Bold font for the file name */
-    color: #0000FF; /* Blue color for PDF file name */
-}
-.star-button {
-    font-size: 24px;
-    border: none;
-    background: none;
-    cursor: pointer;
- }
- .star-button::before {
-    content: '☆';
-    color: gray;
- }
+    .pdf-file {
+        font-weight: bold;
+        /* Bold font for the file name */
+        color: #0000FF;
+        /* Blue color for PDF file name */
+    }
 
-.star-button.star-important::before {
-    content: '★';
-    color: gold;
-}
-/* Style for the tabs */
-.tabs {
-    display: flex;
-    justify-content: space-between; /* Adjust spacing between buttons */
-    margin-bottom: 20px; /* Adjust as needed */
-    margin-right: 774px;
-}
+    .star-button {
+        font-size: 24px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
 
-/* Style for the tab buttons */
-.tablink {
-    border-color: #0ABAB5;
-    background-color: #6FC6CC;
-    border: none; /* Remove border */
-    color: black; /* Text color */
-    padding: 10px 20px; /* Padding */
-    cursor: pointer; /* Cursor style */
-    transition: background-color 0.3s; /* Transition effect on hover */
-    float: left; /* Float left */
-}
+    .star-button::before {
+        content: '☆';
+        color: gray;
+    }
 
-/* Change background color on hover */
-.tablink:hover {
-    background-color: #0ABAB5;
-}
+    .star-button.star-important::before {
+        content: '★';
+        color: gold;
+    }
 
-/* Style for the active tab */
-.tablink.active {
-    background-color: #0ABAB5;
-}
-#Important {
-    display: none;
-}
-@media screen and (min-device-width: 280px) and (max-device-width: 653px) 
- {
-    .nav {
-    display: block;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-}
-.nav-item
-{
-    margin-bottom:10px;
-}
-}
+    /* Style for the tabs */
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        /* Adjust spacing between buttons */
+        margin-bottom: 20px;
+        /* Adjust as needed */
+        margin-right: 774px;
+    }
+
+    /* Style for the tab buttons */
+    .tablink {
+        border-color: #0ABAB5;
+        background-color: #6FC6CC;
+        border: none;
+        /* Remove border */
+        color: black;
+        /* Text color */
+        padding: 10px 20px;
+        /* Padding */
+        cursor: pointer;
+        /* Cursor style */
+        transition: background-color 0.3s;
+        /* Transition effect on hover */
+        float: left;
+        /* Float left */
+    }
+
+    /* Change background color on hover */
+    .tablink:hover {
+        background-color: #0ABAB5;
+    }
+
+    /* Style for the active tab */
+    .tablink.active {
+        background-color: #0ABAB5;
+    }
+
+    #Important {
+        display: none;
+    }
+
+    @media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .nav {
+            display: block;
+            flex-wrap: wrap;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+    }
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
+     {
+        .dt-buttons {
+            margin-left: 56px;
+        }
+
+        div.dt-buttons {
+            display: flex;
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -120,113 +147,113 @@
     <!-- end page title -->
     <!-- Add the search input here -->
     <div class="card-box">
-                    <div class="row">
-                        <div class="col-lg-3">
-                        <label for="employee_type">{{ __('messages.search') }}</label>
-                            <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="employee_type">{{ __('messages.search') }}</label>
+                <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-xl-12">
+                        <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs">
+                            <li class="nav-item">
+                                <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                    {{ __('messages.buletin') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                                    {{ __('messages.imp_buletin') }}
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="home1">
+                                <div class="card">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="nav-link">
+                                                {{ __('messages.buletin') }}
+                                                <h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive">
+                                                    <div class="col-sm-6 col-md-6">
+
+
+                                                    </div>
+                                                    <table class="table w-100 nowrap" id="teacher-bulletin-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>{{ __('messages.title') }}</th>
+                                                                <th>{{ __('messages.file') }}</th>
+                                                                <th>{{ __('messages.action') }}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- Your Bulletin Board table content here -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div> <!-- end table-responsive-->
+                                        </div> <!-- end col-->
+                                    </div>
+                                </div> <!-- end card-body -->
+                            </div> <!-- end card-->
+
+
+                            <div class="tab-pane show active" id="profile1">
+                                <div class="card">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <h4 class="nav-link">
+                                                {{ __('messages.imp_buletin') }}
+                                                <h4>
+                                        </li>
+                                    </ul><br>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="table-responsive">
+                                                    <div class="col-sm-6 col-md-6">
+
+
+                                                    </div>
+                                                </div>
+                                                <table class="table w-100 nowrap" id="teacher-bulletin-imp-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>{{ __('messages.title') }}</th>
+                                                            <th>{{ __('messages.file') }}</th>
+                                                            <th>{{ __('messages.action') }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Your Bulletin Board table content here -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> <!-- end table-responsive-->
+                                    </div> <!-- end col-->
+                                </div>
+                            </div> <!-- end card-body -->
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                <div class="col-lg-12">
-            <div class="card-box">
-            <div class="card-body">
-                <div class="col-xl-12">
-                                    <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs">
-                                        <li class="nav-item">
-                                            <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                            {{ __('messages.buletin') }}
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                            {{ __('messages.imp_buletin') }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane" id="home1">
-                                        <div class="card">
-                <ul class="nav nav-tabs" >
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                        {{ __('messages.buletin') }}
-                        <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                            <div class="col-sm-6 col-md-6">
-                                        
-                            
-                                        </div>
-                                <table class="table w-100 nowrap" id="teacher-bulletin-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('messages.title') }}</th>
-                                    <th>{{ __('messages.file') }}</th>
-                                    <th>{{ __('messages.action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Your Bulletin Board table content here -->
-                            </tbody>
-                        </table>
-</div>
-                            </div> <!-- end table-responsive-->
-                        </div> <!-- end col-->
-                    </div>
-                </div> <!-- end card-body -->
-            </div> <!-- end card-->
-                                           
-                                       
-                                        <div class="tab-pane show active" id="profile1">
-                                                                                  <div class="card">
-                <ul class="nav nav-tabs" >
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                        {{ __('messages.imp_buletin') }}
-                        <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                            <div class="col-sm-6 col-md-6">
-                                        
-                            
-                            </div>
-                            </div>
-                                <table class="table w-100 nowrap" id="teacher-bulletin-imp-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('messages.title') }}</th>
-                                    <th>{{ __('messages.file') }}</th>
-                                    <th>{{ __('messages.action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Your Bulletin Board table content here -->
-                            </tbody>
-                        </table>
-</div>
-                            </div> <!-- end table-responsive-->
-                        </div> <!-- end col-->
-                    </div>
-                </div> <!-- end card-body -->  
-                                        </div>
-                                        </div>
-                                    </div>
-                </div> <!-- end col -->
-                    
-                </div>
-            </div> <!-- end card-box -->
-        </div> <!-- end col -->
+            </div> <!-- end col -->
+
+        </div>
+    </div> <!-- end card-box -->
+</div> <!-- end col -->
 </div>
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -236,14 +263,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-            <div class="row">
+                <div class="row">
                     <div class="col">
                         <div class="card-box eventpopup" style="background-color: #8adfee14;">
                             <div class="table-responsive">
                                 <table class="table w-100 nowrap">
                                     <tr>
                                         <td>{{ __('messages.title') }}</td>
-                                        <td  id="fileTitle"></td>
+                                        <td id="fileTitle"></td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
@@ -265,8 +292,8 @@
                 <iframe id="filePreview" src="" style="display: none; width: 100%; height: 500px;"></iframe>
             </div>
         </div>
-        </div>
     </div>
+</div>
 </div>
 </div>
 <!-- container -->
@@ -297,16 +324,16 @@
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script>
-  //event routes
+    //event routes
     var teacherList = "{{ route('teacher.buletin_board.list') }}";
     var starRoute = "{{ route('teacher.buletin_board.star') }}";
     var importantList = "{{ route('teacher.buletin_board.imp_list') }}";
     // Get PDF Footer Text
-    var header_txt="{{ __('messages.event') }}";
-    var footer_txt="{{ session()->get('footer_text') }}";
+    var header_txt = "{{ __('messages.event') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
     var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
-    var modelheader="{{ __('messages.file_details') }}";
-    var download="{{ __('messages.download') }}";
+    var modelheader = "{{ __('messages.file_details') }}";
+    var download = "{{ __('messages.download') }}";
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>

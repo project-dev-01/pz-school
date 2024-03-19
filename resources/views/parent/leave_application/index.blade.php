@@ -72,6 +72,16 @@
             width: 14.3em;
         }
     }
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
+     {
+        .dt-buttons {
+            margin-left: 56px;
+        }
+
+        div.dt-buttons {
+            display: flex;
+        }
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">

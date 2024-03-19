@@ -4,11 +4,22 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
     th#hide-id {
       display: none;
+    }
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
+     {
+        .dt-buttons {
+            margin-left: 56px;
+        }
+
+        div.dt-buttons {
+            display: flex;
+        }
     }
   </style>
 <!-- Page Content -->

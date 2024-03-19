@@ -24,6 +24,7 @@
 <link href="{{ asset('css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -76,6 +77,16 @@
     @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
         .ui-datepicker {
             width: 14.3em;
+        }
+    }
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
+     {
+        .dt-buttons {
+            margin-left: 56px;
+        }
+
+        div.dt-buttons {
+            display: flex;
         }
     }
 </style>
