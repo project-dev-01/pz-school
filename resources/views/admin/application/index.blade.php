@@ -243,7 +243,7 @@
     var admin_application_list_storage = localStorage.getItem('admin_application_list_details');
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 </script>
-<script src="{{ asset('js/custom/admin_application.js') }}"></script>
+<script src="{{ asset('js/custom/admin_application_list.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))
 <script>
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";

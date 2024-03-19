@@ -202,6 +202,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('application', [AdminController::class, 'applicationIndex'])->name('admin.application.index');
         Route::get('application/list', [AdminController::class, 'applicationList'])->name('admin.application.list');
         Route::get('/application/edit/{id}', [AdminController::class, 'applicationEdit'])->name('admin.application.edit');
+        Route::post('/application/malaysia_postalCode', [CommonController::class, 'getPostalCode'])->name('admin.malaysia_postalCode');
         Route::get('application/application-details/{id}', [AdminController::class, 'getApplicationDetails'])->name('admin.application.details');
         Route::post('application/update', [AdminController::class, 'updateApplication'])->name('admin.application.update');
         Route::post('application/approve', [AdminController::class, 'approveApplication'])->name('admin.application.approve');

@@ -17,6 +17,7 @@ use App\Exports\StudentListExport;
 use App\Exports\FeesExpenseExport;
 use App\Exports\StudentAttendanceExport;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -2830,7 +2831,7 @@ class AdminController extends Controller
     {
 
         // Log the request payload to check if data is received
-       // \Log::info($request->all());
+        // \Log::info($request->all());
         $data = [
             'healthlogID' =>  $request->id,
             'department_id' => $request->editdepartment_id,
@@ -2855,7 +2856,7 @@ class AdminController extends Controller
             'selectedHealth_treatment' => $request->selectedHealth_treatment,
             'date' => $request->date
         ];
-       
+
         $response = Helper::PostMethod(config('constants.api.health_logbook_update'), $data);
         return $response;
     }
@@ -4357,7 +4358,7 @@ class AdminController extends Controller
     // add admission
     public function addAdmission(Request $request)
     {
-       // dd($request);
+        // dd($request);
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4415,7 +4416,7 @@ class AdminController extends Controller
 
         $data = [
             'year' => $request->year,
-           // 'register_no' => $request->txt_regiter_no,
+            // 'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
@@ -4824,6 +4825,7 @@ class AdminController extends Controller
     // get Student  details
     public function getStudentDetails($id)
     {
+        
         $data = [
             'id' => $id,
         ];
@@ -5106,7 +5108,7 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
-               
+
                 'guardian' => isset($application['data']) ? $application['data'] : [],
                 'email' => session()->get('email'),
             ]
@@ -5121,7 +5123,7 @@ class AdminController extends Controller
             $status = "1";
         }
 
-      /*  $base64 = "";
+        /*  $base64 = "";
         $extension = "";
         $file = $request->file('photo');
         if ($file) {
@@ -5170,7 +5172,7 @@ class AdminController extends Controller
             $father_passport_base64 = base64_encode($father_passport_data);
             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
         }
-       /* $visa_base64 = "";
+        /* $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
         if ($visa_file) {
@@ -5199,23 +5201,23 @@ class AdminController extends Controller
             $japanese_association_membership_image_supplimental_extension = $file->getClientOriginalExtension();
         }
         $data = [
-            
+
             "mother_last_name_furigana" => $request->mother_last_name_furigana,
             "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
             "mother_first_name_furigana" => $request->mother_first_name_furigana,
             "mother_last_name_english" => $request->mother_last_name_english,
             "mother_middle_name_english" => $request->mother_middle_name_english,
             "mother_first_name_english" => $request->mother_first_name_english,
-            "mother_nationality" => $request->mother_nationality,           
+            "mother_nationality" => $request->mother_nationality,
             'mother_first_name' => $request->mother_first_name,
             'mother_last_name' => $request->mother_last_name,
             "mother_middle_name" => $request->mother_middle_name,
             'mother_phone_number' => $request->mother_phone_number,
             'mother_occupation' => $request->mother_occupation,
             'mother_email' => $request->mother_email,
-            'visa_mother_photo' => $mother_visa_base64,            
-            'passport_mother_photo' => $mother_passport_base64,            
-            'mother_passport_file_extension' => $mother_passport_extension,          
+            'visa_mother_photo' => $mother_visa_base64,
+            'passport_mother_photo' => $mother_passport_base64,
+            'mother_passport_file_extension' => $mother_passport_extension,
             'mother_visa_file_extension' => $mother_visa_extension,
             /*'mother_nric' => $request->mother_nric,
             'mother_visa_number' => $request->mother_visa_number,
@@ -5223,7 +5225,7 @@ class AdminController extends Controller
             'mother_passport_number' => $request->mother_passport_number,
             'mother_passport_expiry_date' => $request->mother_passport_expiry_date,*/
 
-            
+
             "father_last_name_furigana" => $request->father_last_name_furigana,
             "father_middle_name_furigana" => $request->father_middle_name_furigana,
             "father_first_name_furigana" => $request->father_first_name_furigana,
@@ -5239,7 +5241,7 @@ class AdminController extends Controller
             'father_email' => $request->father_email,
             'visa_father_photo' => $father_visa_base64,
             'father_visa_file_extension' => $father_visa_extension,
-            'passport_father_photo' => $father_passport_base64,     
+            'passport_father_photo' => $father_passport_base64,
             'father_passport_file_extension' => $father_passport_extension,
             /*
             'father_nric' => $request->father_nric,
@@ -5247,7 +5249,7 @@ class AdminController extends Controller
             'father_visa_expiry_date' => $request->father_visa_expiry_date,     
             'father_passport_number' => $request->father_passport_number,       
             'father_passport_expiry_date' => $request->father_passport_expiry_date,*/
-            
+
             'first_name' => $request->guardian_first_name,
             'last_name' => $request->guardian_last_name,
             'middle_name' => $request->guardian_middle_name,
@@ -5265,18 +5267,18 @@ class AdminController extends Controller
             'state' => $request->state,
             'address' => $request->address,
             'address_2' => $request->address_2,*/
-            
-            'status' => $status, 
+
+            'status' => $status,
             'occupation' => $request->guardian_occupation,
             'mobile_no' => $request->guardian_phone_number,
             'email' => $request->email,
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'google2fa_secret_enable' => $request->google2fa_secret_enable,
-          
-           
 
-           /* 'photo' => $base64,
+
+
+            /* 'photo' => $base64,
            
             'file_extension' => $extension,
             'facebook_url' => $request->facebook_url,
@@ -5284,13 +5286,13 @@ class AdminController extends Controller
             'twitter_url' => $request->twitter_url,
             'school_roleid' => $request->school_roleid,*/
             'first_name_english' => $request->guardian_first_name_english,
-            'middle_name_english' => $request->guardian_middle_name_english,                    
+            'middle_name_english' => $request->guardian_middle_name_english,
             'last_name_english' => $request->guardian_last_name_english,
             'first_name_furigana' => $request->guardian_first_name_furigana,
-            'middle_name_furigana' => $request->guardian_middle_name_furigana, 
+            'middle_name_furigana' => $request->guardian_middle_name_furigana,
             'last_name_furigana' => $request->guardian_last_name_furigana,
-            
-            'school_roleid' => isset($request->school_roleid)? $request->school_roleid:'',
+
+            'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             /*'nric' => $request->nric,
             'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
@@ -5309,14 +5311,14 @@ class AdminController extends Controller
             'guardian_remarks' => $request->guardian_remarks,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
-         
-            'school_roleid' => isset($request->school_roleid)? $request->school_roleid:'',
+
+            'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
             'japan_contact_no' => $request->japan_contact_no,
             'japan_emergency_sms' => $request->japan_emergency_sms,
             'japan_address' => $request->japan_address,
             'japan_staycategory' => $request->japan_staycategory,
-            
+
 
         ];
         //  dd($data);
@@ -5454,7 +5456,7 @@ class AdminController extends Controller
 
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
-        
+
         $application = Helper::PostMethod(config('constants.api.get_application_guardian_details'), $data1);
 
         $grade = Helper::GetMethod(config('constants.api.class_list'));
@@ -5476,7 +5478,7 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
-               
+
                 'guardian' => isset($application['data']) ? $application['data'] : [],
                 'email' => session()->get('email'),
             ]
@@ -5492,7 +5494,7 @@ class AdminController extends Controller
 
         $base64 = "";
         $extension = "";
-       /* $file = $request->file('photo');
+        /* $file = $request->file('photo');
 
         if ($file) {
             $path = $file->path();
@@ -5577,7 +5579,7 @@ class AdminController extends Controller
             "mother_last_name_english" => $request->mother_last_name_english,
             "mother_middle_name_english" => $request->mother_middle_name_english,
             "mother_first_name_english" => $request->mother_first_name_english,
-            "mother_nationality" => $request->mother_nationality,           
+            "mother_nationality" => $request->mother_nationality,
             'mother_first_name' => $request->mother_first_name,
             'mother_last_name' => $request->mother_last_name,
             "mother_middle_name" => $request->mother_middle_name,
@@ -5585,9 +5587,9 @@ class AdminController extends Controller
             'mother_occupation' => $request->mother_occupation,
             'mother_email' => $request->mother_email,
             'visa_mother_photo' => $mother_visa_base64,
-            'mother_visa_file_extension' => $mother_visa_extension,            
-            'passport_mother_photo' => $mother_passport_base64,           
-            'mother_passport_file_extension' => $mother_passport_extension,         
+            'mother_visa_file_extension' => $mother_visa_extension,
+            'passport_mother_photo' => $mother_passport_base64,
+            'mother_passport_file_extension' => $mother_passport_extension,
             /*'mother_nric' => $request->mother_nric,
             'mother_visa_number' => $request->mother_visa_number,
             'mother_visa_expiry_date' => $request->mother_visa_expiry_date,
@@ -5600,7 +5602,7 @@ class AdminController extends Controller
             'passport_mother_photo_old' => $request->passport_mother_photo_old,
             'visa_mother_photo_old' => $request->visa_mother_photo_old,*/
 
-            
+
             "father_last_name_furigana" => $request->father_last_name_furigana,
             "father_middle_name_furigana" => $request->father_middle_name_furigana,
             "father_first_name_furigana" => $request->father_first_name_furigana,
@@ -5615,9 +5617,9 @@ class AdminController extends Controller
             'father_occupation' => $request->father_occupation,
             'father_email' => $request->father_email,
             'passport_father_photo' => $father_passport_base64,
-            'father_passport_file_extension' => $father_passport_extension, 
+            'father_passport_file_extension' => $father_passport_extension,
             'visa_father_photo' => $father_visa_base64,
-            'father_visa_file_extension' => $father_visa_extension,     
+            'father_visa_file_extension' => $father_visa_extension,
             /*'father_nric' => $request->father_nric,
             'father_visa_number' => $request->father_visa_number,
             'father_visa_expiry_date' => $request->father_visa_expiry_date,
@@ -5635,8 +5637,8 @@ class AdminController extends Controller
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
-            'status' => $status, 
-            'occupation' => $request->occupation,           
+            'status' => $status,
+            'occupation' => $request->occupation,
             'mobile_no' => $request->guardian_phone_number,
             /*'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
@@ -5664,10 +5666,10 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,*/
             'first_name_english' => $request->first_name_english,
-            'middle_name_english' => $request->middle_name_english,                    
+            'middle_name_english' => $request->middle_name_english,
             'last_name_english' => $request->last_name_english,
             'first_name_furigana' => $request->first_name_furigana,
-            'middle_name_furigana' => $request->middle_name_furigana, 
+            'middle_name_furigana' => $request->middle_name_furigana,
             'last_name_furigana' => $request->last_name_furigana,
             /*'passport_expiry_date' => $request->passport_expiry_date,
             'visa_number' => $request->visa_number,
@@ -5687,8 +5689,8 @@ class AdminController extends Controller
             'guardian_remarks' => $request->guardian_remarks,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
-            "japanese_association_membership_image_supplimental_old"=> $request->japanese_association_membership_image_supplimental_old,
-            'school_roleid' => isset($request->school_roleid)? $request->school_roleid:'',
+            "japanese_association_membership_image_supplimental_old" => $request->japanese_association_membership_image_supplimental_old,
+            'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
             'japan_contact_no' => $request->japan_contact_no,
             'japan_emergency_sms' => $request->japan_emergency_sms,
@@ -7317,7 +7319,7 @@ class AdminController extends Controller
         $staff_id = session()->get('ref_user_id');
         $student_list_report = __('messages.student_list');
         // dd($request);
-        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session,$request->academic_year), $student_list_report . '.xlsx');
+        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session, $request->academic_year), $student_list_report . '.xlsx');
     }
     public function feesExpenseExcel(Request $request)
     {
@@ -7737,7 +7739,7 @@ class AdminController extends Controller
         // dd($request);
         $branch_id = session()->get('branch_id');
         $attendance_report = __('messages.attendance_report');
-        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date,$request->type), $attendance_report . '.xlsx');
+        return Excel::download(new StudentAttendanceExport($branch_id, $request->class, $request->section, $request->subject, $request->pattern, $request->date, $request->type), $attendance_report . '.xlsx');
     }
     // copy academic
     public function acdemicCopyAssignTeacher(Request $request)
@@ -9070,8 +9072,7 @@ class AdminController extends Controller
 
     public function applicationEdit($id)
     {
-
-
+       
         $data = [
             'id' => $id,
         ];
@@ -9087,17 +9088,17 @@ class AdminController extends Controller
         // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($application);
         $dep_data = [
-            "department_id" =>isset($application['data']['enrolled_department']) ? $application['data']['enrolled_department'] : ""
+            "department_id" => isset($application['data']['enrolled_department']) ? $application['data']['enrolled_department'] : ""
         ];
         $class_data = [
-            "class_id" =>isset($application['data']['enrolled_grade']) ? $application['data']['enrolled_grade'] : ""
+            "class_id" => isset($application['data']['enrolled_grade']) ? $application['data']['enrolled_grade'] : ""
         ];
         $department = Helper::GetMethod(config('constants.api.department_list'));
-        if(isset($application['data']['enrolled_grade'])){
+        if (isset($application['data']['enrolled_grade'])) {
 
             $gradebydepartment = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $dep_data);
         }
-        if(isset($application['data']['enrolled_grade'])){
+        if (isset($application['data']['enrolled_grade'])) {
 
             $section_by_class = Helper::PostMethod(config('constants.api.section_by_class'), $class_data);
         }
@@ -9174,7 +9175,7 @@ class AdminController extends Controller
             $trail_date = $request->trail_date;
         }
         $official_date = "";
-        if($request->enrollment=="Official Enrollment"){
+        if ($request->enrollment == "Official Enrollment") {
             $official_date = $request->official_date;
         }
         $visa_base64 = "";
@@ -9226,7 +9227,7 @@ class AdminController extends Controller
             $image_supplimental_base64 = base64_encode($image_supplimental_data);
             $image_supplimental_extension = $image_supplimental_file->getClientOriginalExtension();
         }
-        
+
 
         $passport_father_base64 = "";
         $passport_father_extension = "";
@@ -9341,9 +9342,9 @@ class AdminController extends Controller
             'status_old' => $request->status_old,
             'role_id' => session()->get('role_id'),
 
-            
 
-                
+
+
             "middle_name" => $request->middle_name,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
@@ -9385,7 +9386,7 @@ class AdminController extends Controller
             // "nric_photo" => $request->nric_photo,
             // "japanese_association_membership_image_principal" => $request->japanese_association_membership_image_principal,
             // "japanese_association_membership_image_supplimental" => $request->japanese_association_membership_image_supplimental,
-            
+
             "address_unit_no" => $request->address_unit_no,
             "address_condominium" => $request->address_condominium,
             "address_street" => $request->address_street,
@@ -9394,7 +9395,7 @@ class AdminController extends Controller
             "visa_type_others" => $request->visa_type_others,
             "japanese_association_membership_number_student" => $request->japanese_association_membership_number_student,
             "phase2_remarks" => $request->phase2_remarks,
-            
+
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
             'image_principal_photo' => $image_principal_base64,
@@ -9409,7 +9410,7 @@ class AdminController extends Controller
             'passport_mother_file_extension' => $passport_mother_extension,
             'passport_father_photo' => $passport_father_base64,
             'passport_father_file_extension' => $passport_father_extension,
-            
+
             'visa_old_photo' => $request->visa_old_photo,
             'passport_old_photo' => $request->passport_old_photo,
             'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
@@ -10203,13 +10204,13 @@ class AdminController extends Controller
 
                 // Check if "admin" and "student" are in the target user names
                 if (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Student') !== false) {
-                    if(!empty($row['student_name'])){
+                    if (!empty($row['student_name'])) {
                         $targetUser .= '<br>Student: ' . $row['student_name'];
                     }
                 } elseif (strpos($row['name'], 'Admin') !== false && strpos($row['name'], 'Teacher') !== false) {
-                    if(!empty($row['department_name'])){
+                    if (!empty($row['department_name'])) {
                         $targetUser .= '<br>Department: ' . $row['department_name'];
-                     }
+                    }
                 } else {
                     if (!empty($row['parent_name'])) {
                         $targetUser .= '<br>Parent: ' . $row['parent_name'];
@@ -10379,7 +10380,7 @@ class AdminController extends Controller
     }
     public function retiredPersonList(Request $request)
     {
-         // $data = [
+        // $data = [
         //     "working_status" => $request->employee_type
         // ];
         $response = Helper::GetMethod(config('constants.api.retired_list'));
@@ -11325,7 +11326,7 @@ class AdminController extends Controller
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'semester_id' => $request->semester_id,
-            'interview_date' => date('Y-m-d',strtotime($request->interview_date)),
+            'interview_date' => date('Y-m-d', strtotime($request->interview_date)),
             'student_id' => $request->student_id,
             'question_situation' => $request->question_situation,
             'question_improved' => $request->question_improved,

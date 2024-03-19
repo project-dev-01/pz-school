@@ -1836,6 +1836,7 @@
 <script>
     var applicationList = "{{ route('admin.application.list') }}";
     var applicationIndex = "{{ route('admin.application.index') }}";
+    var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
     
     var getClassByGrade = "{{ config('constants.api.section_by_class') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
@@ -1951,6 +1952,7 @@
         })
 
     });
+    
 </script>
 <!-- <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script> -->
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

@@ -285,8 +285,8 @@
                                                                                                     </select>
                                                                                                 </li>
                                                                                             </ul>
-                                                                                        </li>
-                                                                                         <li class="list-unstyled">
+                                                                                        </li> -->
+                                                                                         <!-- <li class="list-unstyled">
                                                                                         <ul class="list-inline m-b-0">
                                                                                             <li class="list-inline-item">
                                                                                                 <div class="checkbox checkbox-primary mb-2">
@@ -306,7 +306,7 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </li> -->
-                                                                        <!-- <li class="list-unstyled">
+                                                                         <!-- <li class="list-unstyled">
                                                                             <ul class="list-inline m-b-0">
                                                                                 <li class="list-inline-item">
                                                                                     <div class="checkbox checkbox-primary mb-2">
@@ -325,8 +325,8 @@
                                                                                     </select>
                                                                                 </li>
                                                                             </ul>
-                                                                        </li>
-                                                                        <li class="list-unstyled">
+                                                                        </li> -->
+                                                                        <!-- <li class="list-unstyled">
                                                                             <ul class="list-inline m-b-0">
                                                                                 <li class="list-inline-item">
                                                                                     <div class="checkbox checkbox-primary mb-2">
@@ -345,8 +345,8 @@
                                                                                     </select>
                                                                                 </li>
                                                                             </ul>
-                                                                        </li>
-                                                                        <li class="list-unstyled">
+                                                                        </li> -->
+                                                                        <!-- <li class="list-unstyled">
                                                                                         <ul class="list-inline m-b-0">
                                                                                             <li class="list-inline-item">
                                                                                                 <div class="checkbox checkbox-primary mb-2">
@@ -365,11 +365,11 @@
                                                                                                 </select>
                                                                                             </li>
                                                                                         </ul>
-                                                                                    </li> 
+                                                                                    </li>  -->
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            </li> -->
+                                                            </li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="col-md-3">

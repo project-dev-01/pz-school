@@ -734,4 +734,17 @@ class CommonController extends Controller
     {
         return view('clear-local-storage');
     }
+    public function getPostalCode(Request $request){
+
+        $postalCode = $request->input('postalCode');        
+         $country = 'my'; // Country Code: 
+         $apiUrl = 'https://api.zippopotam.us/' . $country . '/' . $postalCode;         // Make request to the third-party API
+         $response = Http::get($apiUrl);         // Check if the request was successful
+         if ($response->successful()) {             
+            return $response->json();         
+        } else {             // Return an error response if the request failed
+            return response()->json(['error' => 'Failed to fetch data from the third-party API'], 
+            $response->status());         
+        }
+    }
 }
