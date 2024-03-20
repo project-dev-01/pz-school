@@ -495,13 +495,13 @@ $(function () {
             // japanese_association_membership_image_principal:"required",
             // japanese_association_membership_image_supplimental:"required",
             phase2_remarks: "required",
-            passport_father_photo: "required",
-            passport_mother_photo: "required",
+            // passport_father_photo: "required",
+            // passport_mother_photo: "required",
 
 
             "passport_photo": {
                 required: function (element) {
-                    if ($("#passport_old_photo").val() == null) {
+                    if ($("#passport_old_photo").val().length < 1) {
                         return true;
                     } else {
                         return false;
@@ -510,7 +510,7 @@ $(function () {
             },
             "japanese_association_membership_image_principal": {
                 required: function (element) {
-                    if ($("#japanese_association_membership_image_principal_old").val() == null) {
+                    if ($("#japanese_association_membership_image_principal_old").val().length < 1) {
                         return true;
                     } else {
                         return false;
@@ -519,7 +519,7 @@ $(function () {
             },
             "japanese_association_membership_image_supplimental": {
                 required: function (element) {
-                    if ($("#japanese_association_membership_image_supplimental_old").val() == null) {
+                    if ($("#japanese_association_membership_image_supplimental_old").val().length < 1) {
                         return true;
                     } else {
                         return false;
@@ -528,7 +528,7 @@ $(function () {
             },
             "passport_father_photo": {
                 required: function (element) {
-                    if ($("#passport_father_old_photo").val() == null) {
+                    if ($("#passport_father_old_photo").val().length < 1) {
                         return true;
                     } else {
                         return false;
@@ -537,7 +537,7 @@ $(function () {
             },
             "passport_mother_photo": {
                 required: function (element) {
-                    if ($("#passport_mother_old_photo").val() == null) {
+                    if ($("#passport_mother_old_photo").val().length < 1) {
                         return true;
                     } else {
                         return false;

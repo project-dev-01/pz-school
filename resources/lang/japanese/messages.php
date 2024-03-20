@@ -2162,8 +2162,8 @@ return [
     "japan_contact_phone_number"=>"日本の連絡先電話番号",
     "Emergency_tel_sms"=>"緊急電話（SMS）",   
     "stay_category"=>"宿泊カテゴリー",
-    "long_stay"=>"Long stay 長期滞在",
-    "pr_stay"=>"PR 永住",
+    "long_stay"=>"長期滞在",
+    "pr_stay"=>"永住",
     
     "your_leave-application_for" => "あなたの休暇申請書は",
     "was_approved" => "承認されました",

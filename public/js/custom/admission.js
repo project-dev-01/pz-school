@@ -283,22 +283,20 @@ $(function () {
                     $("#guardian_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
                     $("#guardian_first_name").val(data.first_name);
                     $("#guardian_last_name").val(data.last_name);
+                    $("#guardian_middle_name").val(data.middle_name);
                     $("#guardian_email").val(data.email);
-                    $("#guardian_nric").val(data.nric);
-                    $("#guardian_gender").val(data.gender);
-                    $("#guardian_date_of_birth").val(data.date_of_birth);
-                    $("#guardian_passport").val(data.passport);
-                    $("#guardian_country").val(data.country);
-                    $("#guardian_post_code").val(data.post_code);
-                    $("#guardian_address_2").val(data.address_2);
+                    $("#guardian_first_name_english").val(data.first_name_english);
+                    $("#guardian_last_name_english").val(data.last_name_english);
+                    $("#guardian_middle_name_english").val(data.middle_name_english);
+                    $("#guardian_first_name_furigana").val(data.first_name_furigana);
+                    $("#guardian_last_name_furigana").val(data.last_name_furigana);
+                    $("#guardian_middle_name_furigana").val(data.middle_name_furigana);
                     $("#guardian_occupation").val(data.occupation);
-                    $("#guardian_income").val(data.income);
-                    $("#guardian_blooddgrp").val(data.blood_group);
-                    $("#guardian_education").val(data.education);
                     $("#guardian_mobile_no").val(data.mobile_no);
-                    $("#guardian_state").val(data.state);
-                    $("#guardian_city").val(data.city);
-                    $("#guardian_address").val(data.address);
+                    $("#guardian_company_name_japan").val(data.company_name_japan);
+                    $("#guardian_company_name_local").val(data.company_name_local);
+                    $("#guardian_company_phone_number").val(data.company_phone_number);
+                    $("#guardian_employment_status").val(data.employment_status);
                 }
             }, 'json');
         }

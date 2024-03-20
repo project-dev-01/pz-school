@@ -152,42 +152,7 @@ $(function () {
     }
     $("#addparent").validate({
         rules: {
-            first_name: "required",
             email: {
-                required: true,
-                email: true
-            },
-            mother_last_name: "required",
-            mother_first_name_furigana: "required",
-            mother_first_name_english: "required",
-            mother_last_name_furigana: "required",
-            mother_last_name_english: "required",
-            mother_nationality: "required",
-            mother_occupation: "required",
-            mother_first_name: "required",
-
-            mother_phone_number: {
-                required: true,
-                minlength: 8
-            },
-            mother_occupation: "required",
-            mother_email: {
-                required: true,
-                email: true
-            },
-            father_last_name: "required",
-            father_last_name_furigana: "required",
-            father_last_name_english: "required",
-            father_first_name_furigana: "required",
-            father_first_name_english: "required",
-            father_nationality: "required",
-            father_first_name: "required",
-            father_phone_number: {
-                required: true,
-                minlength: 8
-            },
-            father_occupation: "required",
-            father_email: {
                 required: true,
                 email: true
             },
@@ -200,7 +165,6 @@ $(function () {
 
             guardian_company_name_japan: "required",
             guardian_company_name_local: "required",
-            // guardian_company_phone_number: "required",
 
             guardian_company_phone_number: {
                 required: true,
@@ -208,20 +172,15 @@ $(function () {
             },
             guardian_employment_status: "required",
             guardian_first_name: "required",
-            guardian_relation: "required",
             guardian_phone_number: {
                 required: true,
                 minlength: 8
             },
             guardian_occupation: "required",
-            guardian_email: {
-                required: true,
-                email: true
-            },
-            guardian_occupation: "required",
-            mobile_no: "required",
-            passport_father_photo: "required",
-            passport_mother_photo: "required",
+            // guardian_email: {
+            //     required: true,
+            //     email: true
+            // },
             password: {
                 required: true,
                 minlength: 6
@@ -231,7 +190,19 @@ $(function () {
                 minlength: 6,
                 equalTo: "#password"
             },
-            guardian_remarks: "required",
+            japan_postalcode: "required",
+            japan_address: "required",
+            stay_category: "required",
+            
+            
+            japan_contact_no: {
+                required: true,
+                minlength: 8
+            },
+            japan_emergency_sms: {
+                required: true,
+                minlength: 8
+            },
         }
     });
 
@@ -261,84 +232,62 @@ $(function () {
 
     $("#editParent").validate({
         rules: {
-            first_name: "required",
+            guardian_first_name: "required",
+            guardian_last_name: "required",
             email: {
                 required: true,
                 email: true
             },
-            mother_last_name: "required",
-            mother_first_name_furigana: "required",
-            mother_first_name_english: "required",
-            mother_last_name_furigana: "required",
-            mother_last_name_english: "required",
-            mother_nationality: "required",
-            mother_occupation: "required",
-            mother_first_name: "required",
-
-            mother_phone_number: {
-                required: true,
-                minlength: 8
-            },
-            mother_occupation: "required",
-            mother_email: {
-                required: true,
-                email: true
-            },
-            father_last_name: "required",
-            father_last_name_furigana: "required",
-            father_last_name_english: "required",
-            father_first_name_furigana: "required",
-            father_first_name_english: "required",
-            father_nationality: "required",
-            father_first_name: "required",
-            father_phone_number: {
-                required: true,
-                minlength: 8
-            },
-            father_occupation: "required",
-            father_email: {
-                required: true,
-                email: true
-            },
-            guardian_remarks: "required",
-            last_name: "required",
-            last_name_furigana: "required",
-            last_name_english: "required",
-            first_name_furigana: "required",
-            first_name_english: "required",
+            guardian_last_name_furigana: "required",
+            guardian_last_name_english: "required",
+            guardian_first_name_furigana: "required",
+            guardian_first_name_english: "required",
 
             guardian_company_name_japan: "required",
             guardian_company_name_local: "required",
             // guardian_company_phone_number: "required",
 
-            guardian_company_phone_number: {
-                required: true,
-                minlength: 8
-            },
             guardian_employment_status: "required",
-            first_name: "required",
-            guardian_relation: "required",
+            // guardian_relation: "required",
             guardian_phone_number: {
                 required: true,
                 minlength: 8
             },
-            guardian_occupation: "required",
-            guardian_email: {
+            guardian_company_phone_number: {
                 required: true,
-                email: true
+                minlength: 8
             },
-            occupation: "required",
-            mobile_no: "required",
-            mother_passport_photo: "required",
-            father_passport_photo: "required",
-            password: {
+            guardian_phone_number: {
                 required: true,
+                minlength: 8
+            },
+            password: {
                 minlength: 6
             },
-            confirm_password: {
-                required: true,
+            
+            "confirm_password": {
+                required: function (element) {
+                    if ($("#password").val().length > 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
                 minlength: 6,
                 equalTo: "#password"
+            },
+            japan_postalcode: "required",
+            japan_address: "required",
+            stay_category: "required",
+
+            
+            japan_contact_no: {
+                required: true,
+                minlength: 8
+            },
+            japan_emergency_sms: {
+                required: true,
+                minlength: 8
             },
         }
     });

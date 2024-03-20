@@ -371,7 +371,7 @@ $(function () {
             fname: "required",
             first_name_english: "required",
             first_name_furigana: "required",
-            txt_mobile_no: "required",
+            // txt_mobile_no: "required",
             lname: "required",
             last_name_english: "required",
             last_name_furigana: "required",
@@ -389,7 +389,7 @@ $(function () {
             nationality: "required",
             txt_passport: "required",
             passport_expiry_date: "required",
-            passport_photo: "required",
+            visa_type_others: "required",
             visa_expiry_date: "required",
             visa_photo: "required",
             visa_type: "required",
@@ -401,6 +401,36 @@ $(function () {
             school_postal_code: "required",
             school_enrollment_status: "required",
           
+
+            "passport_photo": {
+                required: function (element) {
+                    if ($("#passport_old_photo").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+
+            "visa_photo": {
+                required: function (element) {
+                    if ($("#visa_old_photo").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+
+            "japanese_association_membership_image_principal": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_principal_old").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
             // txt_pwd: {
             //     minlength: 6
             // },

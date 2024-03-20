@@ -1162,7 +1162,7 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">{{ __('messages.father_name') }}</label>
                                     <input type="text" class="form-control" id="father_name" placeholder="{{ __('messages.yamamoto') }} {{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
@@ -1170,14 +1170,14 @@
                                     <div id="father_list">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-4" id="father_photo" style="display:none;">
 
                             </div>
                         </div>
-                        <div id="father_form" style="display:none;">
+                        <div id="father_form">
                             <div class="row">
 
                                 <div class="col-md-4">
@@ -1401,7 +1401,7 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">{{ __('messages.mother_name') }}</label>
                                     <input type="text" class="form-control" id="mother_name" placeholder="{{ __('messages.sato') }} {{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" >
@@ -1409,14 +1409,14 @@
                                     <div id="mother_list">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-4" id="mother_photo" style="display:none;">
 
                             </div>
                         </div>
-                        <div id="mother_form" style="display:none;">
+                        <div id="mother_form">
                             <div class="row">
 
                                 <div class="col-md-4">
