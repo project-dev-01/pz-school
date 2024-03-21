@@ -1208,9 +1208,9 @@
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<!-- <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>-->
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;

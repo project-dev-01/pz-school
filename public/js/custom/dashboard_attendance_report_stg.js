@@ -194,7 +194,7 @@ $(function () {
         dataType: 'json',
         success: function (response) {
             //console.log("response");
-           // console.log(response);
+            console.log(response);
             // dataSetNew
             var dataSetNew = response.data;
             studentJoiningList(dataSetNew);

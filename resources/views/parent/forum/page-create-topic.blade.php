@@ -457,7 +457,7 @@
     var indexPost = "{{ route('parent.forum.page-create-topic') }}";
     var deletePost = "{{ config('constants.api.forum_delete') }}";
 </script>
-<!--<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>-->
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/forum-createpost.js') }}"></script>
 <script>
     function SimpleUploadAdapterPlugin(editor) {

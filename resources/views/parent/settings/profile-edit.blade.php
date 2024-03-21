@@ -978,7 +978,7 @@
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js"
+        utilsScript: "js/utils.js"
     });
 </script>
 <script>

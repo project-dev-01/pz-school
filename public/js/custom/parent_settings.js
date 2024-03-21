@@ -34,7 +34,7 @@ $(function () {
             $("#father_details").show("slow");
         }
     });
-   /* $("#passport_expiry_date").datepicker({
+    $("#passport_expiry_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
@@ -49,7 +49,7 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
-    */
+    
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];
