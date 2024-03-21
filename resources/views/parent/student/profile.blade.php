@@ -328,40 +328,25 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.last_name') }} <span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                            
                                                 <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="fname" class="error"></label>
+                                          
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">{{ __('messages.middle_name') }} </label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+
                                                 <input type="text" name="mname" class="form-control alloptions" maxlength="50" id="mname" value="{{ isset($student['middle_name']) ? $student['middle_name'] : ''}}" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                           
                                                 <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="fname" class="error"></label>
+                                            
                                         </div>
                                     </div>
 
@@ -371,40 +356,25 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                            
                                                 <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($student['last_name_english']) ? $student['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="last_name_english" class="error"></label>
+                                          
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.middle_name_roma') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                           
                                                 <input type="text" name="middle_name_english" class="form-control alloptions" maxlength="50" id="middle_name_english" value="{{ isset($student['middle_name_english']) ? $student['middle_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">{{ __('messages.first_name_roma') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                            
                                                 <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($student['first_name_english']) ? $student['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="first_name_english" class="error"></label>
+                                            
                                         </div>
                                     </div>
 
@@ -415,40 +385,25 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                            
                                                 <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($student['last_name_furigana']) ? $student['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="last_name_furigana" class="error"></label>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.middle_name_furigana') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                          
                                                 <input type="text" name="middle_name_furigana" class="form-control alloptions" maxlength="50" id="middle_name_furigana" value="{{ isset($student['middle_name_furigana']) ? $student['middle_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">{{ __('messages.first_name_furigana') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                          
                                                 <input type="text" name="first_name_furigana" class="form-control alloptions" maxlength="50" id="first_name_furigana" value="{{ isset($student['first_name_furigana']) ? $student['first_name_furigana'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="first_name_furigana" class="error"></label>
+                                       
                                         </div>
                                     </div>
 
@@ -460,27 +415,17 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.last_name_common') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                          
                                                 <input type="text" name="last_name_common" class="form-control alloptions" maxlength="50" id="last_name_common" value="{{ isset($student['last_name_common']) ? $student['last_name_common'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="">{{ __('messages.first_name_common') }}</label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-user-graduate"></span>
-                                                    </div>
-                                                </div>
+                                            
                                                 <input type="text" name="first_name_common" class="form-control alloptions" maxlength="50" id="first_name_common" value="{{ isset($student['first_name_common']) ? $student['first_name_common'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                            </div>
+                                          
                                         </div>
                                     </div>
                                     @endif
@@ -493,14 +438,9 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label for="">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group input-group-merge">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <span class="fas fa-birthday-cake"></span>
-                                                    </div>
-                                                </div>
+                                           
                                                 <input type="text" name="dob" class="form-control" value="{{ isset($student['birthday']) ? $student['birthday'] : ''}}" id="dob" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
-                                            </div><label for="dob" class="error"></label>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -567,7 +507,7 @@
                                     @if($form_field['nationality'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="nationality">{{ __('messages.nationality') }}</label>
+                                            <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
                                             <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{ isset($student['nationality']) ? $student['nationality'] : ''}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
                                         </div>
                                     </div>
@@ -590,8 +530,8 @@
                                             <input type="text" maxlength="255" id="address_unit_no" value="{{ isset($student['address_unit_no']) ? $student['address_unit_no'] : ''}}" class="form-control alloptions" placeholder="{{ __('messages.enter_address_unit_no') }}" name="address_unit_no" data-parsley-trigger="change">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
+                              
+                                <!-- <div class="row"> -->
 
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -611,7 +551,14 @@
                                             <input type="text" class="form-control" id="address_district" value="{{ isset($student['address_district']) ? $student['address_district'] : ''}}" name="address_district" placeholder="{{ __('messages.enter_address_district') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="drp_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                            <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
+                                        </div>
+                                    </div>
+                            </div>
+                                <!-- </div> -->
                                 <div class="row">
 
                                     <!-- <div class="col-md-4">
@@ -626,12 +573,7 @@
                                             <input type="" id="txtarea_permanent_address" class="form-control" placeholder="{{ __('messages.enter_address_2') }}" name="txtarea_permanent_address" data-parsley-trigger="change" value="{{ isset($student['permanent_address']) ? $student['permanent_address'] : ''}}">
                                         </div>
                                     </div> -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="drp_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                            <input type="" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="drp_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
@@ -1111,26 +1053,11 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    var input = document.querySelector("#txt_mobile_no");
-    intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        defaultCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        initialCountry: "jp",
-        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        //preferredCountries: ['cn', 'jp'],
-        preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js"
-    });
 
-    $(".country").countrySelect({
+    
+$(".country").countrySelect({
+        responsiveDropdown: true,
         defaultCountry: "jp",
-        responsiveDropdown: true
     });
 </script>
 <script>

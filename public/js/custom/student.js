@@ -264,10 +264,10 @@ $(function () {
                 $(".guardian_state").html(data.state);
                 $(".guardian_city").html(data.city);
                 $(".guardian_address").html(data.address);
-                $(".guardian_company_name_japan").val(data.guardian_company_name_japan);
-                $(".guardian_company_name_local").val(data.guardian_company_name_local);
-                $(".guardian_company_phone_number").val(data.guardian_company_phone_number);
-                $(".guardian_employment_status").val(data.guardian_employment_status);
+                $(".guardian_company_name_japan").val(data.company_name_japan);
+                $(".guardian_company_name_local").val(data.company_name_local);
+                $(".guardian_company_phone_number").val(data.company_phone_number);
+                $(".guardian_employment_status").val(data.employment_status);
             }
         }, 'json');
     }
@@ -315,22 +315,22 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.father_first_name + " " + data.father_last_name;
-                var name_furigana = data.father_first_name_furigana + " " + data.father_last_name_furigana;
-                var name_english = data.father_first_name_english + " " + data.father_last_name_english;
+                var name = data.first_name + " " + data.last_name;
+                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
+                var name_english = data.first_name_english + " " + data.last_name_english;
                 $('#father_name').val(name);
                 $('#father_name_furigana').val(name_furigana);
                 $('#father_name_english').val(name_english);
                 $("#father_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
-                $("#father_first_name").val(data.father_first_name);
-                $("#father_middle_name").val(data.father_middle_name);
-                $("#father_last_name").val(data.father_last_name);
-                $("#father_last_name_furigana").val(data.father_last_name_furigana);
-                $("#father_middle_name_furigana").val(data.father_middle_name_furigana);
-                $("#father_first_name_furigana").val(data.father_first_name_furigana);
-                $("#father_last_name_english").val(data.father_last_name_english);
-                $("#father_middle_name_english").val(data.father_middle_name_english);
-                $("#father_first_name_english").val(data.father_first_name_english);
+                $("#father_first_name").val(data.first_name);
+                $("#father_middle_name").val(data.middle_name);
+                $("#father_last_name").val(data.last_name);
+                $("#father_last_name_furigana").val(data.last_name_furigana);
+                $("#father_middle_name_furigana").val(data.middle_name_furigana);
+                $("#father_first_name_furigana").val(data.first_name_furigana);
+                $("#father_last_name_english").val(data.last_name_english);
+                $("#father_middle_name_english").val(data.middle_name_english);
+                $("#father_first_name_english").val(data.first_name_english);
                 $("#father_nationality").val(data.nationality);
                 $("#father_email").val(data.email);
                 $("#father_gender").val(data.gender);
@@ -407,7 +407,7 @@ $(function () {
 
     function mother(id) {
         $('#mother_id').val(id);
-        $("#mother_form").show("slow");
+       // $("#mother_form").show("slow");
         $("#mother_photo").show();
         $("#mother_info").show();
         $.post(parentDetails, { token: token, branch_id: branchID, id: id }, function (res) {
@@ -418,22 +418,22 @@ $(function () {
                 } else {
                     var src = defaultImg;
                 }
-                var name = data.mother_first_name + " " + data.mother_last_name;
-                var name_furigana = data.mother_first_name_furigana + " " + data.mother_last_name_furigana;
-                var name_english = data.mother_first_name_english + " " + data.mother_last_name_english;
+                var name = data.first_name + " " + data.last_name;
+                var name_furigana = data.first_name_furigana + " " + data.last_name_furigana;
+                var name_english = data.first_name_english + " " + data.last_name_english;
                 $('#mother_name_furigana').val(name_furigana);
                 $('#mother_name_english').val(name_english);
                 $('#mother_name').val(name);
                 $("#mother_photo").html('<img src="' + src + '" class="img-fluid d-block rounded" style="width:100px" />');
-                $("#mother_first_name").val(data.mother_first_name);
-                $("#mother_last_name").val(data.mother_last_name);
-                $("#mother_middle_name").val(data.mother_middle_name);
-                $("#mother_last_name_furigana").val(data.mother_last_name_furigana);
-                $("#mother_middle_name_furigana").val(data.mother_middle_name_furigana);
-                $("#mother_first_name_furigana").val(data.mother_first_name_furigana);
-                $("#mother_last_name_english").val(data.mother_last_name_english);
-                $("#mother_middle_name_english").val(data.mother_middle_name_english);
-                $("#mother_first_name_english").val(data.mother_first_name_english);
+                $("#mother_first_name").val(data.first_name);
+                $("#mother_last_name").val(data.last_name);
+                $("#mother_middle_name").val(data.middle_name);
+                $("#mother_last_name_furigana").val(data.last_name_furigana);
+                $("#mother_middle_name_furigana").val(data.middle_name_furigana);
+                $("#mother_first_name_furigana").val(data.first_name_furigana);
+                $("#mother_last_name_english").val(data.last_name_english);
+                $("#mother_middle_name_english").val(data.middle_name_english);
+                $("#mother_first_name_english").val(data.first_name_english);
                 $("#mother_nationality").val(data.nationality);
                
 
@@ -720,7 +720,67 @@ $(function () {
             }
         }, 'json');
     });
-
+    $("#guardian_relation").change(function () {
+        var dataParentId = $(this).find(':selected').data('parent-id');
+        
+       // Check if data-parent-id is 1 for father or 2 for mother
+       if (dataParentId === 1 || dataParentId === 2) {
+        var guardianLastName = $('#guardian_last_name').val();
+        var guardianMiddleName = $('#guardian_middle_name').val();
+        var guardianFirstName = $('#guardian_first_name').val();
+        var guardianLastNameFurigana = $('#guardian_last_name_furigana').val();
+        var guardianMiddleNameFurigana = $('#guardian_middle_name_furigana').val();
+        var guardianFirstNameFurigana = $('#guardian_first_name_furigana').val();
+        var guardianLastNameEnglish = $('#guardian_last_name_english').val();
+        var guardianMiddleNameEnglish = $('#guardian_middle_name_english').val();
+        var guardianFirstNameEnglish = $('#guardian_first_name_english').val();
+        var guardianEmail = $('#guardian_email').val();
+        var guardianMobileNo = $('#guardian_mobile_no').val();
+        var guardianOccupation = $('#guardian_occupation').val();
+        var guardianId = $('#guardian_id').val();
+        
+            if (dataParentId === 1) {
+                $('#father_id').val(guardianId);
+                $('#father_last_name').val(guardianLastName);
+                $('#father_middle_name').val(guardianMiddleName);
+                $('#father_first_name').val(guardianFirstName);
+                $('#father_last_name_furigana').val(guardianLastNameFurigana);
+                $('#father_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#father_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#father_last_name_english').val(guardianLastNameEnglish);
+                $('#father_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#father_first_name_english').val(guardianFirstNameEnglish);
+                $('#father_email').val(guardianEmail);
+                $('#father_mobile_no').val(guardianMobileNo);
+                $('#father_occupation').val(guardianOccupation);
+                $('#father_form input, #father_form select').prop('readonly', true);
+                $('#mother_form input, #mother_form select').prop('readonly', false);
+                $('#mother_form input').val('');
+                $('#mother_form select').val('');
+            } else if (dataParentId === 2) {
+                $('#mother_id').val(guardianId);
+                $('#mother_last_name').val(guardianLastName);
+                $('#mother_middle_name').val(guardianMiddleName);
+                $('#mother_first_name').val(guardianFirstName);
+                $('#mother_last_name_furigana').val(guardianLastNameFurigana);
+                $('#mother_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#mother_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#mother_last_name_english').val(guardianLastNameEnglish);
+                $('#mother_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#mother_first_name_english').val(guardianFirstNameEnglish);
+                $('#mother_email').val(guardianEmail);
+                $('#mother_mobile_no').val(guardianMobileNo);
+                $('#mother_occupation').val(guardianOccupation);
+                $('#mother_form input, #mother_form select').prop('readonly', true);
+                $('#father_form input, #father_form select').prop('readonly', false);
+                $('#father_form input').val('');
+                $('#father_form select').val('');
+            } else {
+                    // Enable all fields if data-parent-id is neither 1 nor 2
+                $('#father_form input, #father_form select, #mother_form input, #mother_form select').prop('readonly', false);
+            }
+        }
+    });
 
     $("#editadmission").validate({
         rules: {
@@ -774,6 +834,26 @@ $(function () {
             school_city: "required",
             school_postal_code: "required",
             school_enrollment_status: "required",
+            father_last_name:"required",
+            father_first_name:"required",
+            father_last_name_furigana:"required",
+            father_first_name_furigana:"required",
+            father_last_name_english:"required",
+            father_first_name_english:"required",
+            father_nationality:"required",
+            father_email:"required",
+            father_mobile_no:"required",
+            father_occupation:"required",
+            mother_last_name:"required",
+            mother_first_name:"required",
+            mother_last_name_furigana:"required",
+            mother_first_name_furigana:"required",
+            mother_last_name_english:"required",
+            mother_first_name_english:"required",
+            mother_nationality:"required",
+            mother_email:"required",
+            mother_mobile_no:"required",
+            mother_occupation:"required",
             
             "passport_photo": {
                 required: function (element) {

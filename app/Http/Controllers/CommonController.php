@@ -736,9 +736,16 @@ class CommonController extends Controller
     }
     public function getPostalCode(Request $request){
 
-        $postalCode = $request->input('postalCode');        
-         $country = 'my'; // Country Code: 
-         $apiUrl = 'https://api.zippopotam.us/' . $country . '/' . $postalCode;         // Make request to the third-party API
+        $postalCode = $request->input('postalCode');  
+        $countryCodes = [
+            "Malaysia" => "my",
+            "Japan" => "jp",
+            "Japan (日本)" =>"jp"
+            // Add more mappings as needed
+        ];      
+         $country = $request->input('country'); 
+         $countryCode = isset($countryCodes[$country]) ? $countryCodes[$country] : null;
+         $apiUrl = 'https://api.zippopotam.us/' . $countryCode . '/' . $postalCode;         // Make request to the third-party API
          $response = Http::get($apiUrl);         // Check if the request was successful
          if ($response->successful()) {             
             return $response->json();         

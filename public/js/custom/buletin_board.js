@@ -8,7 +8,7 @@ $(function () {
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 minDate: today,
-           //     container: '#addBuletinModal modal-body',
+              container: '#addBuletinModal modal-body',
                 defaultHour : today.getHours(),
                 defaultMinute : today.getMinutes(),
                 minuteIncrement : 1,
@@ -21,7 +21,7 @@ $(function () {
                  minDate: today,
                  defaultHour : today.getHours(),
                  defaultMinute : today.getMinutes(),
-                // container: '#addBuletinModal modal-body',
+                 container: '#addBuletinModal modal-body',
                  minuteIncrement: 1 
              });
         });

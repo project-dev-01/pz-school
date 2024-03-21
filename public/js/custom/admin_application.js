@@ -190,8 +190,10 @@ $(function () {
         $("#postal_code").change(function () {
 
             var postalCode = $('#postal_code').val();
+            var country = $('#country').val();
             var formData = new FormData();
             formData.append('postalCode', postalCode);
+            formData.append('country', country);
 
             $.ajax({
                 url: malaysiaPostalCode,
