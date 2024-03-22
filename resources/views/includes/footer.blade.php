@@ -76,8 +76,9 @@
 </script>
 @endif
 @endif
-<script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
+
 <script src="{{ asset('js/app.min.js') }}"></script>
+ <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/custom/common.js') }}"></script>
