@@ -1231,10 +1231,10 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="relation">{{ __('messages.relation') }}</label>
-                                                <select class="form-control" name="relation">
+                                                <select class="form-control" name="relation" id="guardian_relation">
                                                     <option value="">{{ __('messages.select_relation') }}</option>
                                                     @forelse($relation as $r)
-                                                    <option value="{{$r['id']}}" {{isset($student['relation']) == $r['id'] ? "selected" : ""}}>{{$r['name']}}</option>
+                                                    <option value="{{$r['id']}}"  data-parent-id="{{$r['parent']}}" {{isset($student['relation']) == $r['id'] ? "selected" : ""}}>{{$r['name']}}</option>
                                                     @empty
                                                     @endforelse
                                                 </select>
@@ -1489,7 +1489,15 @@
                                     </li>
                                 </ul>
                                 <div class="card-body">
+                                    
+                            
                                     <div class="row">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" >
+                                                <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
+                                            </div>
+                                        </div>
                                         <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="father_name">{{ __('messages.father_name') }}</label>
@@ -1716,7 +1724,15 @@
                                     </li>
                                 </ul>
                                 <div class="card-body">
+                                    
+
                                     <div class="row">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details">
+                                                <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
+                                            </div>
+                                        </div>
                                         <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="mother_name">{{ __('messages.mother_name') }}</label>

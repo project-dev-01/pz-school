@@ -17,7 +17,6 @@ class AuthController extends Controller
 
     public function showLoginForm(Request $request)
     {
-
         if (session()->has('role_id')) {
             $role_id = session()->get('role_id');
             if ($role_id == 2) {
@@ -32,6 +31,7 @@ class AuthController extends Controller
         $schoolDetails = $response->json();
         // dd($response);
 
+        // dd($data);
         $image_url =  config('constants.image_url') . "/common-asset/images/school-type/" . (isset($schoolDetails['data']['school_type']['school_type']) ? $schoolDetails['data']['school_type']['school_type'] : "") . "/Admin.webp";
         // set default language
         if (Cookie::get('locale') !== null) {

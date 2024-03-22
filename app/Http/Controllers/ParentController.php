@@ -1138,13 +1138,13 @@ class ParentController extends Controller
         ];
         $student = Helper::PostMethod(config('constants.api.student_details'), $student_data);
 
+        // dd($student);
         $mother_id = isset($student['data']['student']['mother_id']) ? $student['data']['student']['mother_id'] : "";
         $father_id = isset($student['data']['student']['father_id']) ? $student['data']['student']['father_id'] : "";
         $guardian_relation = isset($student['data']['student']['relation']) ? $student['data']['student']['relation'] : "";
         $guardian_data = [
             'id' => session()->get('ref_user_id')
         ];
-        // dd($guardian_data);
         
         $mother = [];
         if($mother_id){
@@ -1173,7 +1173,7 @@ class ParentController extends Controller
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_details'), $guardian_data);
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-        // dd($father);
+        // dd($mother);
         return view(
             'parent.settings.profile-edit',
             [

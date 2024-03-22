@@ -1,11 +1,115 @@
 $(function () {
 
+    // copyparent();
+    $('.copy_guardian_info').on('change', function () {
+        var dataParentId = $('#guardian_relation').find(':selected').data('parent-id');
+        var field_name = $(this).attr('name');
+        var value = $("#" + field_name).val();
+        if (dataParentId === 1) {
+            
+            $("#father_details").show("slow"); 
+            $('#skip_father_details').prop('checked', false);
+            var guard_name = field_name.replace("guardian", 'father');
+        }
+         if (dataParentId === 2) {
+            
+            $("#mother_details").show("slow"); 
+            $('#skip_mother_details').prop('checked', false);
+            var guard_name = field_name.replace("guardian", 'mother');
+        }
+        $("#" + guard_name).val(value);
+    });
+    
+    $("#guardian_relation").change(function () {
+        copyparent();
+    });
+   
+    function copyparent(dataParentId){
+        
+        var dataParentId = $('#guardian_relation').find(':selected').data('parent-id');
+        
+       // Check if data-parent-id is 1 for father or 2 for mother
+       
+       var guardianLastName = $('#guardian_last_name').val();
+       var guardianMiddleName = $('#guardian_middle_name').val();
+       var guardianFirstName = $('#guardian_first_name').val();
+       var guardianLastNameFurigana = $('#guardian_last_name_furigana').val();
+       var guardianMiddleNameFurigana = $('#guardian_middle_name_furigana').val();
+       var guardianFirstNameFurigana = $('#guardian_first_name_furigana').val();
+       var guardianLastNameEnglish = $('#guardian_last_name_english').val();
+       var guardianMiddleNameEnglish = $('#guardian_middle_name_english').val();
+       var guardianFirstNameEnglish = $('#guardian_first_name_english').val();
+       var guardianEmail = $('#guardian_email').val();
+       var guardianMobileNo = $('#guardian_mobile_no').val();
+       var guardianOccupation = $('#guardian_occupation').val();
+       var guardianId = $('#guardian_id').val();
+       if (dataParentId === 1 || dataParentId === 2) {
+        
+            if (dataParentId === 1) {
+                
+                $("#father_details").show("slow"); 
+                $('#skip_father_details').prop('checked', false);
+                $('#father_id').val(guardianId);
+                $('#father_last_name').val(guardianLastName);
+                $('#father_middle_name').val(guardianMiddleName);
+                $('#father_first_name').val(guardianFirstName);
+                $('#father_last_name_furigana').val(guardianLastNameFurigana);
+                $('#father_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#father_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#father_last_name_english').val(guardianLastNameEnglish);
+                $('#father_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#father_first_name_english').val(guardianFirstNameEnglish);
+                $('#father_email').val(guardianEmail);
+                $('#father_mobile_no').val(guardianMobileNo);
+                $('#father_occupation').val(guardianOccupation);
+                $('#mother_details input').val('');
+                $('#mother_details select').val('');
+                $('#father_details input, #father_details select').prop('readonly', true);
+                $('#mother_details input, #mother_details select').prop('readonly', false);
+            } else if (dataParentId === 2) {
+                
+                $("#mother_details").show("slow"); 
+                $('#skip_mother_details').prop('checked', false);
+                $('#mother_id').val(guardianId);
+                $('#mother_last_name').val(guardianLastName);
+                $('#mother_middle_name').val(guardianMiddleName);
+                $('#mother_first_name').val(guardianFirstName);
+                $('#mother_last_name_furigana').val(guardianLastNameFurigana);
+                $('#mother_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#mother_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#mother_last_name_english').val(guardianLastNameEnglish);
+                $('#mother_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#mother_first_name_english').val(guardianFirstNameEnglish);
+                $('#mother_email').val(guardianEmail);
+                $('#mother_mobile_no').val(guardianMobileNo);
+                $('#mother_occupation').val(guardianOccupation);
+                $('#father_details input').val('');
+                $('#father_details select').val('');
+                $('#mother_details input, #mother_details select').prop('readonly', true);
+                $('#father_details input, #father_details select').prop('readonly', false);
+            }
+        } else {
+            var fatherEmail = $('#father_email').val();
+            var motherEmail = $('#mother_email').val();
+            // Enable all fields if data-parent-id is neither 1 nor 2
+            if(guardianEmail == fatherEmail){
+                $('#father_details input').val('');
+                $('#father_details select').val('');
+                $('#father_details input, #father_details select').prop('readonly', false);
+            }else if(guardianEmail == motherEmail){
+                $('#mother_details input').val('');
+                $('#mother_details select').val('');
+                $('#mother_details input, #mother_details select').prop('readonly', false);
+            }
+            
+        }
+    }
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
         
         if ($(this).is(":checked")) {
             
-            $(".mother_form").val("");
+            $(".mother_details").val("");
             if ($("#copy_mother").is(":checked")) {
                 $("#copy_others").prop('checked', true)
                 value = "copy_others";
@@ -21,7 +125,7 @@ $(function () {
     // skip_father_details
     $("#skip_father_details").on("change", function () {
         if ($(this).is(":checked")) {
-            $(".father_form").val("");
+            $(".father_details").val("");
             if ($("#copy_father").is(":checked")) {
                 $("#copy_others").prop('checked', true)
                 value = "copy_others";
@@ -50,31 +154,73 @@ $(function () {
         yearRange: "-3:+6", // last hundred years
     });
     
-    $('#passport_photo').change(function() {
+    
+    $('#passport_father_photo').change(function () {
         // var i = $(this).prev('label').clone();
-        var file = $('#passport_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#passport_photo_name').text("File greater than 2Mb");
-            $("#passport_photo_name").addClass("error");
-            $('#passport_photo').val('');
+        var file = $('#passport_father_photo')[0].files[0];
+        if (file.size > 2097152) {
+            $('#passport_father_photo_name').text("File greater than 2Mb");
+            $("#passport_father_photo_name").addClass("error");
+            $('#passport_father_photo').val('');
         } else {
-            $("#passport_photo_name").removeClass("error");
-            $('#passport_photo_name').text(file.name);
+            $("#passport_father_photo_name").removeClass("error");
+            $('#passport_father_photo_name').text(file.name);
+        }
+    });
+
+    $('#passport_mother_photo').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#passport_mother_photo')[0].files[0];
+        if (file.size > 2097152) {
+            $('#passport_mother_photo_name').text("File greater than 2Mb");
+            $("#passport_mother_photo_name").addClass("error");
+            $('#passport_mother_photo').val('');
+        } else {
+            $("#passport_mother_photo_name").removeClass("error");
+            $('#passport_mother_photo_name').text(file.name);
+        }
+    });
+
+    $('#visa_father_photo').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#visa_father_photo')[0].files[0];
+        if (file.size > 2097152) {
+            $('#visa_father_photo_name').text("File greater than 2Mb");
+            $("#visa_father_photo_name").addClass("error");
+            $('#visa_father_photo').val('');
+        } else {
+            $("#visa_father_photo_name").removeClass("error");
+            $('#visa_father_photo_name').text(file.name);
+        }
+    });
+
+    $('#visa_mother_photo').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#visa_mother_photo')[0].files[0];
+        if (file.size > 2097152) {
+            $('#visa_mother_photo_name').text("File greater than 2Mb");
+            $("#visa_mother_photo_name").addClass("error");
+            $('#visa_mother_photo').val('');
+        } else {
+            $("#visa_mother_photo_name").removeClass("error");
+            $('#visa_mother_photo_name').text(file.name);
         }
     });
     
-    $('#visa_photo').change(function() {
+
+    $('#japanese_association_membership_image_supplimental').change(function () {
         // var i = $(this).prev('label').clone();
-        var file = $('#visa_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#visa_photo_name').text("File greater than 2Mb");
-            $("#visa_photo_name").addClass("error");
-            $('#visa_photo').val('');
+        var file = $('#japanese_association_membership_image_supplimental')[0].files[0];
+        if (file.size > 2097152) {
+            $('#japanese_association_membership_image_supplimental_name').text("File greater than 2Mb");
+            $("#japanese_association_membership_image_supplimental_name").addClass("error");
+            $('#japanese_association_membership_image_supplimental').val('');
         } else {
-            $("#visa_photo_name").removeClass("error");
-            $('#visa_photo_name').text(file.name);
+            $("#japanese_association_membership_image_supplimental_name").removeClass("error");
+            $('#japanese_association_membership_image_supplimental_name').text(file.name);
         }
     });
+
     $(".number_validation").keypress(function(event){
         console.log(123)
         var regex = new RegExp("^[0-9-+]");

@@ -126,10 +126,6 @@ $(function () {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
                         const isPDF = data.toLowerCase().endsWith('.pdf');
-                        const fileName = full.title;
-                        const fileDescription = full.discription;
-                        const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
-                    
                         // Create a combined column with the "parent_imp" button and the file link
                         return `
                             <div>
@@ -269,10 +265,6 @@ $(function () {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
                         const isPDF = data.toLowerCase().endsWith('.pdf');
-                        const fileName = full.title;
-                        const fileDescription = full.discription;
-                        const fileUrl = `http://localhost/paxsuze-api/public/4/admin-documents/buletin_files/${data}`;
-                    
                         // Create a combined column with the "parent_imp" button and the file link
                         return `
                             <div>

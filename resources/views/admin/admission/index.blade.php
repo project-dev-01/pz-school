@@ -1226,27 +1226,15 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
                                             <input type="text" class="form-control copy_guardian_info" id="guardian_email" name="guardian_email" placeholder="xxxxx@gmail.com" readonly>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-phone-volume"></span>
-                                                </div>
-                                            </div>
-                                            <input type="number" class="form-control copy_guardian_info" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
-                                        </div>
+                                        <input type="number" class="form-control copy_guardian_info" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1362,6 +1350,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" >
+                                    <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
+                                </div>
+                            </div>
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">{{ __('messages.father_name') }}</label>
@@ -1384,7 +1378,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="father_last_name" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control father_form" maxlength="50" id="father_last_name" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -1396,7 +1390,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" maxlength="50" id="father_first_name" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                        <input type="text" class="form-control father_form" maxlength="50" id="father_first_name" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
                                     </div>
                                 </div>
                             </div>
@@ -1587,6 +1581,7 @@
                     </div>
                 </div>
                 <div class="card">
+                    
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">{{ __('messages.mother_details') }}
@@ -1595,6 +1590,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" >
+                                    <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
+                                </div>
+                            </div>
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">{{ __('messages.mother_name') }}</label>

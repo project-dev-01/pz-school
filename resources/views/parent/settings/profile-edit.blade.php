@@ -312,6 +312,225 @@
 
                 <div class="card">
 
+                    <ul class="nav nav-tabs" style="display: block;">
+                        <li class="nav-item">
+                            <h4 class="navv float-left">{{ __('messages.guardian_details') }}</h4>
+                        </li>
+                    </ul>
+
+                    <div class="card-body">
+
+                        <div id="guardian_details">
+
+                            <input type="hidden" name="guardian_id" value="{{ isset($guardian['id']) ? $guardian['id'] : ''}}">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name" value="{{ isset($guardian['last_name']) ? $guardian['last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name" value="{{ isset($guardian['middle_name']) ? $guardian['middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name" value="{{ isset($guardian['first_name']) ? $guardian['first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_furigana" value="{{ isset($guardian['last_name_furigana']) ? $guardian['last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_furigana" value="{{ isset($guardian['middle_name_furigana']) ? $guardian['middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_furigana" value="{{ isset($guardian['first_name_furigana']) ? $guardian['first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_english" value="{{ isset($guardian['last_name_english']) ? $guardian['last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_english" value="{{ isset($guardian['middle_name_english']) ? $guardian['middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_english" value="{{ isset($guardian['first_name_english']) ? $guardian['first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+                                        <select id="guardian_relation" name="guardian_relation" class="form-control copy_guardian_info">
+                                            <option value="">{{ __('messages.select_relation') }}</option>
+                                            @forelse($relation as $r)
+                                            <option value="{{$r['id']}}" data-parent-id="{{$r['parent']}}" {{ isset($guardian_relation) ? $guardian_relation == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_email" readonly value="{{ isset($guardian['email']) ? $guardian['email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info number_validation" id="guardian_phone_number" value="{{ isset($guardian['phone_number']) ? $guardian['phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="guardian_phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_occupation" name="guardian_occupation" value="{{ isset($guardian['occupation']) ? $guardian['occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian__name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="guardian_company_name_japan" name="guardian_company_name_japan" value="{{ isset($guardian['company_name_japan']) ? $guardian['company_name_japan'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="guardian_company_name_local" name="guardian_company_name_local" value="{{ isset($guardian['company_name_local']) ? $guardian['company_name_local'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control  number_validation " id="guardian_company_phone_number" name="guardian_company_phone_number" value="{{ isset($guardian['company_phone_number']) ? $guardian['company_phone_number'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <label for="guardian_company_phone_number" class="error"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
+                                        <select id="guardian_employment_status" name="guardian_employment_status" class="form-control">
+                                            <option value="">{{ __('messages.select_employment_status') }}</option>
+                                            <option value="Expat" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
+                                            <option value="Local Hire" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
+                                            <option value="Public Servant" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
+                                            <option value="Self-Employed" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}">
+                                                <label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        <label for="passport_father_photo" class="error"></label>
+                                        @if(isset($father['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
+                                        @endif
+                                        <span id="passport_father_photo_name"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($mother['passport_photo']) ? $mother['passport_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        <label for="passport_mother_photo" class="error"></label>
+                                        @if(isset($mother['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
+                                        @endif
+                                        <span id="passport_mother_photo_name"></span>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($father['visa_photo']) ? $father['visa_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
+                                                <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        @if(isset($father['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
+                                        @endif
+                                        <span id="visa_father_photo_name"></span>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($mother['visa_photo']) ? $mother['visa_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                <label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        @if(isset($mother['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
+                                        @endif
+                                        <span id="visa_mother_photo_name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">
@@ -554,225 +773,6 @@
                         </div>
                     </div>
                     <br>
-                    <ul class="nav nav-tabs" style="display: block;">
-                        <li class="nav-item">
-                            <h4 class="navv float-left">{{ __('messages.guardian_details') }}</h4>
-                        </li>
-                    </ul>
-
-                    <div class="card-body">
-
-                        <div id="guardian_details">
-
-                            <input type="hidden" name="guardian_id" value="{{ isset($guardian['id']) ? $guardian['id'] : ''}}">
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name" value="{{ isset($guardian['last_name']) ? $guardian['last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name" value="{{ isset($guardian['middle_name']) ? $guardian['middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name" value="{{ isset($guardian['first_name']) ? $guardian['first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name_furigana" value="{{ isset($guardian['last_name_furigana']) ? $guardian['last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name_furigana" value="{{ isset($guardian['middle_name_furigana']) ? $guardian['middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name_furigana" value="{{ isset($guardian['first_name_furigana']) ? $guardian['first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name_english" value="{{ isset($guardian['last_name_english']) ? $guardian['last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name_english" value="{{ isset($guardian['middle_name_english']) ? $guardian['middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name_english" value="{{ isset($guardian['first_name_english']) ? $guardian['first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
-                                        <select id="guardian_relation" name="guardian_relation" class="form-control">
-                                            <option value="">{{ __('messages.select_relation') }}</option>
-                                            @forelse($relation as $r)
-                                            <option value="{{$r['id']}}" {{ isset($guardian_relation) ? $guardian_relation == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
-                                            @empty
-                                            @endforelse
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_email" readonly value="{{ isset($guardian['email']) ? $guardian['email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control number_validation" id="guardian_phone_number" value="{{ isset($guardian['phone_number']) ? $guardian['phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="guardian_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" value="{{ isset($guardian['occupation']) ? $guardian['occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian__name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_company_name_japan" name="guardian_company_name_japan" value="{{ isset($guardian['company_name_japan']) ? $guardian['company_name_japan'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_company_name_local" name="guardian_company_name_local" value="{{ isset($guardian['company_name_local']) ? $guardian['company_name_local'] : ''}}" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control  number_validation " id="guardian_company_phone_number" name="guardian_company_phone_number" value="{{ isset($guardian['company_phone_number']) ? $guardian['company_phone_number'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="guardian_company_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
-                                        <select id="guardian_employment_status" name="guardian_employment_status" class="form-control">
-                                            <option value="">{{ __('messages.select_employment_status') }}</option>
-                                            <option value="Expat" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
-                                            <option value="Local Hire" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
-                                            <option value="Public Servant" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
-                                            <option value="Self-Employed" {{ isset($guardian['employment_status']) ? $guardian['employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}" />
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}">
-                                                <label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
-                                            </div>
-                                        </div>
-                                        <label for="passport_father_photo" class="error"></label>
-                                        @if(isset($father['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
-                                        @endif
-                                        <span id="passport_father_photo_name"></span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($mother['passport_photo']) ? $mother['passport_photo'] : ''}}" />
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
-                                                <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
-                                            </div>
-                                        </div>
-                                        <label for="passport_mother_photo" class="error"></label>
-                                        @if(isset($mother['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
-                                        @endif
-                                        <span id="passport_mother_photo_name"></span>
-                                    </div>
-                                </div>
-
-
-                                <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($father['visa_photo']) ? $father['visa_photo'] : ''}}" />
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
-                                                <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
-                                            </div>
-                                        </div>
-                                        @if(isset($father['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
-                                        @endif
-                                        <span id="visa_father_photo_name"></span>
-                                    </div>
-                                </div>
-
-                                <input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($mother['visa_photo']) ? $mother['visa_photo'] : ''}}" />
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
-                                                <label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
-                                            </div>
-                                        </div>
-                                        @if(isset($mother['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
-                                        @endif
-                                        <span id="visa_mother_photo_name"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><br>
 
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -794,14 +794,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="japan_contact_no">{{ __('messages.japan_contact_phone_number') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="japan_contact_no" value="{{ isset($guardian['japan_contact_no']) ? $guardian['japan_contact_no'] : ''}}" name="japan_contact_no" placeholder="" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control number_validation" id="japan_contact_no" value="{{ isset($guardian['japan_contact_no']) ? $guardian['japan_contact_no'] : ''}}" name="japan_contact_no" placeholder="" aria-describedby="inputGroupPrepend">
                                     <label for="japan_contact_no" class="error"></label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="japan_emergency_sms">{{ __('messages.Emergency_tel_sms') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="japan_emergency_sms" value="{{ isset($guardian['japan_emergency_sms']) ? $guardian['japan_emergency_sms'] : ''}}" name="japan_emergency_sms" placeholder="" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control number_validation" id="japan_emergency_sms" value="{{ isset($guardian['japan_emergency_sms']) ? $guardian['japan_emergency_sms'] : ''}}" name="japan_emergency_sms" placeholder="" aria-describedby="inputGroupPrepend">
                                     <label for="japan_emergency_sms" class="error"></label>
                                 </div>
                             </div>
@@ -964,22 +964,71 @@
     //     utilsScript: "js/utils.js"
     // });
 
-    var input = document.querySelector("#company_phone_number");
-    intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        defaultCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        initialCountry: "jp",
-        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['my', 'jp'],
-        preventInvalidNumbers: true,
-        utilsScript: "js/utils.js"
-    });
+    
+	var input = document.querySelector("#japan_emergency_sms");
+	intlTelInput(input, {
+		allowExtensions: true,
+		autoFormat: false,
+		autoHideDialCode: false,
+		autoPlaceholder: false,
+		defaultCountry: "auto",
+		ipinfoToken: "yolo",
+		nationalMode: false,
+		numberType: "MOBILE",
+		initialCountry: "jp",
+		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+		//preferredCountries: ['cn', 'jp'],
+		preventInvalidNumbers: true,
+		// utilsScript: "js/utils.js"
+	});
+	var input = document.querySelector("#japan_contact_no");
+	intlTelInput(input, {
+		allowExtensions: true,
+		autoFormat: false,
+		autoHideDialCode: false,
+		autoPlaceholder: false,
+		defaultCountry: "auto",
+		ipinfoToken: "yolo",
+		nationalMode: false,
+		numberType: "MOBILE",
+		initialCountry: "jp",
+		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+		preferredCountries: ['my', 'jp'],
+		preventInvalidNumbers: true,
+		// utilsScript: "js/utils.js"
+	});
+	var input = document.querySelector("#guardian_phone_number");
+	intlTelInput(input, {
+		allowExtensions: true,
+		autoFormat: false,
+		autoHideDialCode: false,
+		autoPlaceholder: false,
+		defaultCountry: "auto",
+		ipinfoToken: "yolo",
+		nationalMode: false,
+		numberType: "MOBILE",
+		initialCountry: "jp",
+		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+		preferredCountries: ['my', 'jp'],
+		preventInvalidNumbers: true,
+		// utilsScript: "js/utils.js"
+	});
+	var input = document.querySelector("#guardian_company_phone_number");
+	intlTelInput(input, {
+		allowExtensions: true,
+		autoFormat: false,
+		autoHideDialCode: false,
+		autoPlaceholder: false,
+		defaultCountry: "auto",
+		ipinfoToken: "yolo",
+		nationalMode: false,
+		numberType: "MOBILE",
+		initialCountry: "jp",
+		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+		preferredCountries: ['my', 'jp'],
+		preventInvalidNumbers: true,
+		// utilsScript: "js/utils.js"
+	});
 </script>
 <script>
     //event routes
