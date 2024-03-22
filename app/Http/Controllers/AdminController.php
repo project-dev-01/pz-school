@@ -7371,7 +7371,7 @@ class AdminController extends Controller
         $staff_id = session()->get('ref_user_id');
         $student_list_report = __('messages.student_list');
         // dd($request);
-        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->session, $request->academic_year), $student_list_report . '.xlsx');
+        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id,$request->status, $request->session, $request->academic_year), $student_list_report . '.xlsx');
     }
     public function feesExpenseExcel(Request $request)
     {

@@ -139,7 +139,7 @@
                                                                 <label for="status">{{ __('messages.status') }}</label>
                                                                 <select id="student_status" class="form-control" name="status">
                                                                     <option value="">{{ __('messages.select_status') }}</option>
-                                                                    <option value="0" selected>{{ __('messages.active') }}</option>
+                                                                    <option value="0">{{ __('messages.active') }}</option>
                                                                     <option value="1">{{ __('messages.de_active') }}</option>
                                                                 </select>
                                                             </div>

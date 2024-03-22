@@ -30,10 +30,11 @@ class StudentListExport  implements FromCollection, WithHeadings
     protected $class_id;
     protected $section_id;
     protected $session;
+    protected $status;
     protected $studentList;
     protected $academic_year;
 
-    function __construct($branch, $staff_id, $student_name, $department_id, $class_id, $section_id, $session,$academic_year)
+    function __construct($branch, $staff_id, $student_name, $department_id, $class_id, $section_id, $status,$session,$academic_year)
     {
         $this->staff_id = $staff_id;
         $this->branch = $branch;
@@ -42,6 +43,7 @@ class StudentListExport  implements FromCollection, WithHeadings
         $this->class_id = $class_id;
         $this->section_id = $section_id;
         $this->session = $session;
+        $this->status = $status;
         $this->academic_year = $academic_year;
         $this->columns = [];
         $this->keyValArray = [];
@@ -53,6 +55,7 @@ class StudentListExport  implements FromCollection, WithHeadings
             "department_id" => $this->department_id,
             "class_id" => $this->class_id,
             "section_id" => $this->section_id,
+            "status" => $this->status,
             "session" => $this->session,
             "academic_year" => $this->academic_year,
             
