@@ -1738,14 +1738,12 @@ class AdminController extends Controller
     // show employee
     public function showEmployee()
     {
-        // echo "jka";
-        // exit;
-        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
         $data = [
             'status' => "0"
         ];
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+        // dd($school_roles);
         $emp_department = Helper::GetMethod(config('constants.api.department_list'));
         $emp_designation = Helper::PostMethod(config('constants.api.emp_designation'), []);
         $qualifications = Helper::GetMethod(config('constants.api.get_qualifications'));
@@ -1761,7 +1759,6 @@ class AdminController extends Controller
         return view(
             'admin.employee.index',
             [
-                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
                 'roles' => isset($roles['data']) ? $roles['data'] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
                 'emp_department' => isset($emp_department['data']) ? $emp_department['data'] : [],
@@ -10013,21 +10010,16 @@ class AdminController extends Controller
 
     public function rollmenuaccess(Request $request)
     {
-        $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
-        //$menus = Helper::GetMethod(config('constants.api.menus'));
         $data = [
             'status' => "All"
         ];
-
         $roles = Helper::PostMethod(config('constants.api.roles'), $data);
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
-
         return view(
             'admin.school_roles.menuaccess',
             [
                 'roles' => isset($roles['data']) ? $roles['data'] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
-                'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
                 'mainmenu' =>  [],
                 'submenu' => [],
                 'childmenu' =>  []

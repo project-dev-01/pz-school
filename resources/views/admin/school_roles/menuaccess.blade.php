@@ -58,20 +58,6 @@
 					<form id="q" method="post" action="{{ route('admin.school_role.getmenus') }}" autocomplete="off">
 						@csrf
 						<div class="row">
-
-							<!-- <div class="col-md-3">
-										<div class="form-group">
-										<label for="role_id">{{ __('messages.branch') }}<span class="text-danger">*</span></label>
-										<select class="form-control" data-toggle="select2" id="branch_id" name="branch_id"  data-placeholder="{{ __('messages.choose_branch') }}" required>
-                                        <option value="">{{ __('messages.select') }}</option>
-                                        @forelse($branches as $br)
-                                        @php $selbr =(@$branch_id==$br['id'])?'Selected':''; @endphp
-                                        <option value="{{$br['id']}}" {{ $selbr }}>{{ $br['name'] }}</option>
-                                        @empty
-                                        @endforelse
-										</select>
-										</div>
-									</div>-->
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="role_id">{{ __('messages.school_roles') }}<span class="text-danger">*</span></label>
