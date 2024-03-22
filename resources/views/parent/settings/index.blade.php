@@ -7,6 +7,7 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
 
 .iti {

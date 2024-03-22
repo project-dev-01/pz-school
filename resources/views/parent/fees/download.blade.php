@@ -20,6 +20,7 @@
   <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('css/custom/feesinvoice.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 
   <style>
     @font-face {

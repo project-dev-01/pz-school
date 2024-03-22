@@ -13,13 +13,11 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
-@endsection
-@section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+@section('content')  
 <!-- Start Content-->
 <div class="container-fluid">
-
     <!-- start page title -->
     <div class="row">
         <div class="col-12">

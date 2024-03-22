@@ -5,6 +5,7 @@
 <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
     .nav-tabs {

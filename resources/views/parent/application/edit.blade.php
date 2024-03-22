@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
+<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .switch {
         height: 24px;

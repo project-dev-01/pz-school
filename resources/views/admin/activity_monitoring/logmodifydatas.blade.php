@@ -15,6 +15,11 @@
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
+<style>
+     div.dt-buttons {
+        display: flex;
+    }
+</style>    
 <!-- Start Content-->
 <div class="container-fluid">
 

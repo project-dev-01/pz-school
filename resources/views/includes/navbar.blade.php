@@ -97,25 +97,54 @@
                 </a>
             </li> -->
 
-            <li class="dropdown notification-list topbar-dropdown">
-                <div class="lang-select mt-1 ml-2">
+            <!--<li class="dropdown notification-list topbar-dropdown">
+                <div class="lang-select mt-1 ml-2" style="margin-right: -20px !important;">
                     <button class="btn-select" value=""></button>
                     <div class="b">
                         <ul id="a">
-                            <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
-                            <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
-                            <li><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
+                            <li><a href="#" data-value="action"><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                            <li><a href="#" data-value="another action"><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                            <li><a href="#" data-value="something else here"><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
                         </ul>
                     </div>
                 </div>
-            </li>
-            <!-- <li class="dropdown d-none d-lg-inline-block">
+            </li>-->
+
+
+
+
+            <li class="dropdown d-lg-inline-block topbar-dropdown">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/us.jpg' }}" alt="user-image" style="height: 21px; width: 32px;margin-bottom: 3px;">
+                </a>
+                <div class="dropdown-menu dropdown-menu-left">
+                    <!-- item-->
+                    <a href="" class="dropdown-item">
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/us.jpg' }}" alt="en" value="en" class="mr-1" style="height: 15px;" /><span class="align-middle">English</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="" class="dropdown-item">
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/jpn.png' }}" alt="japanese" value="japanese" class="mr-1" style="height: 15px;" /><span class="align-middle">日本語</span>
+                    </a>
+                    <a href="" class="dropdown-item">
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/mal.png' }}" alt="malay" value="malay" class="mr-1" style="height: 15px;/"><span class=" align-middle">Malay</span>
+                    </a>
+
+                </div>
+</li>
+
+
+
+
+
+                <!-- <li class="dropdown d-none d-lg-inline-block">
                 <div class="form-group">
                     
                     <input type="text" class="form-control changeLang" name="country" id="countryLang" placeholder="Country" data-parsley-trigger="change">
                 </div>
             </li> -->
-            <!-- <li class="dropdown d-none d-lg-inline-block">
+                <!-- <li class="dropdown d-none d-lg-inline-block">
                 <div class="form-group ">
                     <label class="control-label"></label>
                     <select class="form-control custom-select changeLang" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
@@ -125,21 +154,32 @@
                     </select>
                 </div>
             </li> -->
-            @if(Session::get('role_id') != '1')
+                <!--@if(Session::get('role_id') != '1')
             <li class="d-lg-inline-block schl">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
                     <span class="header-span"><b> {{ Session::get('school_name') }} </b>
                 </a>
             </li>
 
+            @endif-->
+                @if(Session::get('role_id') != '1')
+            <li class="d-lg-inline-block schl">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="http://localhost/paxsuzen-api-dev/public/common-asset/images/logo_jskl.jpeg" class="mr-2 rounded-circle" alt="{{ Session::get('school_name') }}" style="margin-bottom: 5px; margin-left: 20px;">
+                </a>
+            </li>
+
+
             @endif
+
             @if(Session::get('role_id') == '5')
+            <!-- Original dropdown for larger screens -->
             <li class="dropdown d-none d-lg-inline-block allChild">
-                <div class="form-group ">
+                <div class="form-group">
                     <label class="control-label"></label>
                     <select class="form-control custom-select all_child" style="white-space: nowrap; text-overflow: ellipsis; margin-top: 20px;
-			  margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
-                        <!-- <option disabled >Select Children</option> -->
+            margin-left:4px; max-height: 30px; padding-top: 5px; -webkit-line-clamp: 2; display: inline-grid; width:150px;" name="all_child" id="changeChildren" required>
+                        <option disabled>Select Children</option>
                         @if(Session::get('all_child'))
                         @forelse (Session::get('all_child') as $child)
                         <option value="{{ $child['id'] }}" {{ Session::get('student_id') == $child['id'] ? 'selected' : ''}}>{{ $child['name'] }}</option>
@@ -151,12 +191,23 @@
                 </div>
             </li>
 
-            @endif
-            <li class="dropdown d-lg-inline-block responsive">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
-                    <i class="fe-maximize noti-icon"></i>
+            <!-- Additional dropdown for small screens -->
+            <li class="dropdown d-inline-block d-lg-none">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> <!-- Change the icon to a user icon or any other suitable icon -->
                 </a>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    @if(Session::get('all_child'))
+                    @forelse (Session::get('all_child') as $child)
+                    <a class="dropdown-item" href="#child_{{ $child['id'] }}">{{ $child['name'] }}</a>
+                    @empty
+                    @endforelse
+                    @endif
+                </div>
             </li>
+            @endif
+
+
 
 
             <li class="dropdown notification-list topbar-dropdown">

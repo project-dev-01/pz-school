@@ -83,6 +83,19 @@
 #Important {
     display: none;
 }
+@media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+        .nav {
+            display: block;
+            flex-wrap: wrap;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -115,7 +128,7 @@
                 </div>
                 <div class="row">
                 <div class="col-lg-12">
-            <div class="card-box">
+            <div class="card">
             <div class="card-body">
                 <div class="col-xl-12">
                                     <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs">
@@ -144,10 +157,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                            <div class="col-sm-6 col-md-6">
-                                        
-                            </div>
-                            </div>
+                            
+                            
                                 <table class="table w-100 nowrap" id="student-bulletin-table">
                             <thead>
                                 <tr>
@@ -162,6 +173,7 @@
                             </tbody>
                         </table>
                             </div> <!-- end table-responsive-->
+</div>
                         </div> <!-- end col-->
                     </div>
                 </div> <!-- end card-body -->
@@ -181,11 +193,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                            <div class="col-sm-6 col-md-6">
-                                        
                             
-                            </div>
-                            </div>
+                            
                                 <table class="table w-100 nowrap" id="student-bulletin-imp-table">
                             <thead>
                                 <tr>
@@ -199,6 +208,7 @@
                                 <!-- Your Bulletin Board table content here -->
                             </tbody>
                         </table>
+                        </div>
                             </div> <!-- end table-responsive-->
                         </div> <!-- end col-->
                     </div>
