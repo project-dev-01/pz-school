@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="{{ config('constants.image_url').'/common-asset/images/favicon.ico' }}">
 
     <!-- jquery -->
+    <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
     @yield('calendar')
     <!-- App css -->
     <link href="{{ asset('css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
