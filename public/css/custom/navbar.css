@@ -9,6 +9,10 @@
         float: left;
         font-size: 13px;
     }
+    .img
+    {
+        font-size:18px;
+    }
 
 @media screen and (min-device-width: 280px) and (max-device-width: 653px) 
     {
@@ -19,12 +23,12 @@
 
         .navbar-custom .button-menu-mobile 
         {
-            width: 17px;
+            width: 20px;
         }
 
         .logo-box
         {
-            width: 32px !important;
+            width: 25px !important;
             padding-right: 0 !important;
             margin-top:-3px;
         }
@@ -35,11 +39,14 @@
         }
        .schl
         {
-            width:21px;
+            width:50px;
         }
         .notification-list 
         {
             margin-left: -4px;
+        }
+        .navbar-custom .topnav-menu .nav-link {
+            padding: 0 9px;
         }
     }
 
@@ -71,6 +78,11 @@
         {
             margin-left: 2px!important;
             width: 55px;
+        }
+        .img
+        {
+            font-size: 23px;
+    margin-left: -15px;
         }
 
     }

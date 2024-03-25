@@ -90,7 +90,8 @@
             display: flex;
         }
     }
-</style>
+    
+  </style>
 <!-- Start Content-->
 <div class="container-fluid">
 

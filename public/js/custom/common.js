@@ -21,7 +21,30 @@ $(function () {
         });
 
     });
-
+    // responsiveAllChild
+    $('.responsiveAllChild').on('click', function (event) {
+        event.preventDefault();
+        var childID = $(this).data('id');
+        console.log(childID);
+        $.ajax({
+            type: "POST",
+            url: updateChildSessionID,
+            // data: { student_id: childID },
+            data: {
+                student_id: childID,
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function (res) {
+                // console.log("--------")
+                // console.log(res)
+                location.reload();
+            }
+            // , error: function (err) {
+            //     console.log("--------")
+            //     console.log(err)
+            // }
+        });
+    });
 
 });
 
