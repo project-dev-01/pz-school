@@ -685,10 +685,21 @@ $(function () {
                     searchable: false,
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
-                },
+                }, 
                 {
                     data: 'name',
                     name: 'name'
+                },
+                
+                {
+                    data: 'english_emp_name',
+                    name: 'english_emp_name',
+                    visible: false
+                },
+                {
+                    data: 'furigana_emp_name',
+                    name: 'furigana_emp_name',
+                    visible: false
                 },
                 {
                     data: 'short_name',
@@ -713,6 +724,70 @@ $(function () {
                 {
                     data: 'email',
                     name: 'email'
+                },
+                {
+                    data: 'staff_position_name',
+                    name: 'staff_position_name',
+                    visible: false
+                },
+                {
+                    data: 'staff_category_name',
+                    name: 'staff_category_name',
+                    visible: false
+                },
+                {
+                    data: 'employment_status',
+                    name: 'employment_status',
+                    visible: false
+                },
+                {
+                    data: 'gender',
+                    name: 'gender',
+                    visible: false
+                },
+                {
+                    data: 'height',
+                    name: 'height',
+                    visible: false
+                }, {
+                    data: 'weight',
+                    name: 'weight',
+                    visible: false
+                },
+                {
+                    data: 'allergy',
+                    name: 'allergy',
+                    visible: false
+                },
+                {
+                    data: 'blood_group',
+                    name: 'blood_group',
+                    visible: false
+                },
+                {
+                    data: 'nationality',
+                    name: 'nationality',
+                    visible: false
+                },
+                {
+                    data: 'religion_name',
+                    name: 'religion_name',
+                    visible: false
+                },
+                {
+                    data: 'birthday',
+                    name: 'birthday',
+                    visible: false
+                },
+                {
+                    data: 'joining_date',
+                    name: 'joining_date',
+                    visible: false
+                },
+                {
+                    data: 'employee_name',
+                    name: 'employee_name',
+                    visible: false
                 },
                 {
                     data: 'actions',

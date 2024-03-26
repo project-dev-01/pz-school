@@ -68,12 +68,27 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.name') }}</th>
+                                    <th style="display: none"> {{ __('messages.name_english') }}</th>
+                                    <th style="display: none"> {{ __('messages.name_furigana') }}</th>
                                     <th>{{ __('messages.short_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.stream_type') }}</th>
                                     <th>{{ __('messages.department') }}</th>
                                     <th>{{ __('messages.designation') }}</th>
                                     <th>{{ __('messages.email') }}</th>
+                                    <th style="display: none"> {{ __('messages.staff_position') }}</th>
+                                    <th style="display: none"> {{ __('messages.staff_category') }}</th>
+                                    <th style="display: none"> {{ __('messages.employment_status') }}</th>
+                                    <th style="display: none"> {{ __('messages.gender') }}</th>
+                                    <th style="display: none"> {{ __('messages.height') }}</th>
+                                    <th style="display: none"> {{ __('messages.weight') }}</th>
+                                    <th style="display: none"> {{ __('messages.allergy') }}</th>
+                                    <th style="display: none"> {{ __('messages.blood_group') }}</th>
+                                    <th style="display: none"> {{ __('messages.nationality') }}</th>
+                                    <th style="display: none"> {{ __('messages.religion_name') }}</th>
+                                    <th style="display: none"> {{ __('messages.DOB') }}</th>
+                                    <th style="display: none"> {{ __('messages.joining_date') }}</th>
+                                    <th style="display: none"> {{ __('messages.employee_type') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
