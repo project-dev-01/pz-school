@@ -482,31 +482,23 @@ $(function () {
             processing: true,
             bDestroy: true,
             info: true,
-            // dom: 'lBfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            "language": {
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
-                },
+            language: {
+                emptyTable: no_data_available,
+                infoFiltered: filter_from_total_entries,
+                zeroRecords: no_matching_records_found,
+                infoEmpty: showing_zero_entries,
+                info: showing_entries,
+                lengthMenu: show_entries,
+                search: datatable_search,
+                paginate: {
+                    next: next,
+                    previous: previous
+                }
             },
-            buttons: [
-                {
+            buttons: [{
                     extend: 'csv',
                     text: downloadcsv,
                     extension: '.csv',
@@ -525,71 +517,49 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-                    title: function () {
+                    title: function() {
                         return leave_status_txt;
                     },
-
-                    customize: function (doc) {
+                    customize: function(doc) {
                         doc.pageMargins = [50, 50, 50, 50];
                         doc.defaultStyle.fontSize = 10;
                         doc.styles.tableHeader.fontSize = 12;
                         doc.styles.title.fontSize = 14;
-                        // Remove spaces around page title
-                        doc.content[0].text = doc.content[0].text.trim();
-                        // Create a Header
-                        // doc['title']=(function(page, pages) {
-                        //     return {
-                        //         columns: [
-
-                        //             {
-                        //                 // This is the right column
-                        //                 bold: true,
-                        //                 fontSize: 20,
-                        //                 color: 'Blue',
-                        //                 fillColor: '#fff',
-                        //                 alignment: 'center',
-                        //                 text: leave_status_txt
-                        //             }
-                        //         ],
-                        //         margin:  [50, 15,0,0]
-                        //     }
-                        // });
-                        // Create a footer
-
-                        doc['footer'] = (function (page, pages) {
+                        doc['footer'] = (function(page, pages) {
                             return {
-                                columns: [
-                                    { alignment: 'left', text: [footer_txt], width: 400 },
+                                columns: [{
+                                        alignment: 'left',
+                                        text: [footer_txt],
+                                        width: 400
+                                    },
                                     {
-                                        // This is the right column
                                         alignment: 'right',
-                                        text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                        text: ['page ', {
+                                            text: page.toString()
+                                        }, ' of ', {
+                                            text: pages.toString()
+                                        }],
                                         width: 100
-
                                     }
                                 ],
                                 margin: [50, 0, 0, 0]
-                            }
+                            };
                         });
-
                     }
-
                 }
             ],
             ajax: stutdentleaveList,
-            "pageLength": 5,
-            "aLengthMenu": [
+            pageLength: 5,
+            aLengthMenu: [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
-            columns: [
-                {
-                    "targets": 0,
-                    "render": function (data, type, row, meta) {
+            columns: [{
+                    targets: 0,
+                    render: function(data, type, row, meta) {
                         return meta.row + 1;
                     }
-                }
-                ,
+                },
                 {
                     data: 'name',
                     name: 'name'
@@ -616,37 +586,22 @@ $(function () {
                 },
                 {
                     data: 'status',
-                    name: 'status',
+                    name: 'status'
                 },
                 {
                     data: 'created_at',
-                    name: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
                     searchable: false
-                },
+                }
             ],
-            columnDefs: [
-                // {
-                //     "targets": 6,
-                //     "render": function (data, type, row, meta) {
-                //         if (row.status != "Approve") {
-                //             var fileUpload = '<div>' +
-                //                 '<input type="file" id="reissue_file' + row.id + '" name="file">' +
-                //                 '</div>';
-                //         } else {
-                //             fileUpload = "<p style='text-align: center;''>-</p>";
-                //         }
-
-                //         return fileUpload;
-                //     }
-                // },
-                {
-                    "targets": 4,
-                    "render": function (data, type, row, meta) {
+            columnDefs: [{
+                    targets: 4,
+                    render: function(data, type, row, meta) {
                         var document = "";
                         if (data && data != "null") {
                             document = data;
@@ -657,8 +612,8 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 6,
-                    "render": function (data, type, row, meta) {
+                    targets: 6,
+                    render: function(data, type, row, meta) {
                         var document = "";
                         if (data) {
                             document = '<a href="' + StudentDocUrl + '/' + data + '" download ><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
@@ -671,8 +626,8 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 7,
-                    "render": function (data, type, row, meta) {
+                    targets: 7,
+                    render: function(data, type, row, meta) {
                         var badgeColor = "";
                         if (data == "Approve") {
                             badgeColor = "badge-success";
@@ -688,20 +643,19 @@ $(function () {
                     }
                 },
                 {
-                    "targets": 9,
-                    "render": function (data, type, row, meta) {
+                    targets: 9,
+                    render: function(data, type, row, meta) {
                         if (row.document) {
                             return '-';
                         } else {
                             return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">' + upload_lang + '</a></div>';
                         }
                     }
-                },
-
+                }
             ]
-        }).on('draw', function () {
-        });
+        }).on('draw', function() {});
     }
+    
     // updateIssueFile
     $(document).on('click', '#updateIssueFile', function () {
         var id = $(this).data('id');

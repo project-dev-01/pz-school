@@ -1,18 +1,6 @@
 
 $(function () {
-
-    $(".timepicker").flatpickr({
-        enableTime: !0,
-        noCalendar: !0,
-        dateFormat: "H:i",
-        time_24hr: !0,
-        defaultDate: "08:30"
-    });
-
-
     eventTable();
-
-
     function eventTable() {
         $('#parent-bulletin-table').DataTable({
             processing: true,
@@ -151,8 +139,6 @@ $(function () {
         }).on('draw', function () {
         });
     }
-   
-    
     parentBulletin();
     function parentBulletin() {
         $('#parent-bulletin-imp-table').DataTable({
@@ -245,8 +231,8 @@ $(function () {
             ajax: {
                 url: importantList,
                 error: function (xhr, error, thrown) {
-                    console.log("Ajax error:", error);
-                    console.log("Error details:", thrown);
+                    // console.log("Ajax error:", error);
+                    // console.log("Error details:", thrown);
                 }
             },
             "pageLength": 10,
@@ -318,7 +304,6 @@ $(function () {
         
         // Determine which DataTable is active based on the selected tab
         const activeTabId = $('#myTabs .nav-link.active').attr('id');
-        console.log(activeTabId);
         let dataTableId;
 
         if (activeTabId === 'tab1') {
@@ -404,7 +389,7 @@ function toggleStar(itemId, parentImp) {
             }
         },
         error: function (xhr, status, error) {
-            console.error('Error saving data:', error);
+            // console.error('Error saving data:', error);
         }
     });
 }

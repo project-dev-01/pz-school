@@ -1,9 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title',' ' . __('messages.buletin') . '')
 @section('component_css')
-<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -11,8 +8,6 @@
 <!-- button link  -->
 <link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
 
-<!-- date picker -->
-<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -301,17 +296,11 @@
 @endsection
 @section('scripts')
 <!-- plugin js -->
-<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('libs/flatpickr/flatpickr.min.js') }}"></script>
-<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
-<!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
@@ -333,9 +322,6 @@
     var footer_txt = "{{ session()->get('footer_text') }}";
     var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
 </script>
-<script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/parent_bulletin.js') }}"></script>
 
 @endsection

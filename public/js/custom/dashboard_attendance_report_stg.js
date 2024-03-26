@@ -194,13 +194,13 @@ $(function () {
         dataType: 'json',
         success: function (response) {
             //console.log("response");
-            console.log(response);
+            // console.log(response);
             // dataSetNew
             var dataSetNew = response.data;
             studentJoiningList(dataSetNew);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.error('Example 2 Error:', textStatus, errorThrown);
+            // console.error('Example 2 Error:', textStatus, errorThrown);
             studentJoiningList([]);
         }
     });

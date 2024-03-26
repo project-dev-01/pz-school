@@ -302,24 +302,6 @@ class AdminController extends Controller
     //
     public function index()
     {
-        // session()->pull('role_id');
-        // session()->pull('token');
-        // session()->pull('picture');
-        // session()->pull('name');
-        // session()->pull('email');
-        // session()->pull('role_name');
-        // session()->pull('user_id');
-        // session()->pull('branch_id');
-        // session()->pull('ref_user_id');
-        // session()->pull('student_id');
-        // session()->pull('school_name');
-        // session()->pull('school_logo');
-        // session()->pull('all_child');
-        // session()->pull('academic_session_id');
-        // // session()->pull('password_changed_at');
-        // $req->session()->flush();
-        // echo "ff";exit;
-        // dd(session('school_name_url'));
         $myArray = session()->get('hidden_week_ends');
         $delimiter = ','; // Delimiter you want between array items
         $hiddenWeekends = implode($delimiter, $myArray);
