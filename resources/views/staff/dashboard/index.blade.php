@@ -64,7 +64,7 @@
     </div>
     @endif
     <!-- end page title -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card-box">
                 <div class="row">
@@ -101,9 +101,9 @@
                     </div>
                     <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
-            </div> <!-- end card-box-->
+            </div> 
 
-        </div> <!-- end col-->
+        </div> 
 
         <div class="col-md-6 col-xl-3">
             <div class="card-box">
@@ -138,9 +138,9 @@
                     </div>
                     <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
-            </div> <!-- end card-box-->
+            </div> 
 
-        </div> <!-- end col-->
+        </div> 
 
         <div class="col-md-6 col-xl-3">
             <div class="card-box">
@@ -167,9 +167,9 @@
                     </div>
                     <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
-            </div> <!-- end card-box-->
+            </div> 
 
-        </div> <!-- end col-->
+        </div> 
 
         <div class="col-md-6 col-xl-3">
             <div class="card-box">
@@ -198,9 +198,9 @@
                     </div>
                     <h6 class="text-uppercase"><span class="float-right" style="color:#3A4265">{{ __('messages.total_strength') }}</span></h6>
                 </div>
-            </div> <!-- end card-box-->
-        </div> <!-- end col-->
-    </div>
+            </div> 
+        </div> 
+    </div> -->
 
     <!-- end row-->
     <div class="row">

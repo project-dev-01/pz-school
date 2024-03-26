@@ -76,7 +76,7 @@
     </div>
     @endif
     <!-- end page title -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
             <div class="widget-rounded-circle card-box">
                 <div class="row">
@@ -91,9 +91,9 @@
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.employee') }}</p>
                         </div>
                     </div>
-                </div> <!-- end row-->
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+                </div> 
+            </div>
+        </div> 
 
         <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
             <div class="widget-rounded-circle card-box">
@@ -110,9 +110,9 @@
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.students') }}</p>
                         </div>
                     </div>
-                </div> <!-- end row-->
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+                </div> 
+            </div>
+        </div> 
 
         <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
             <div class="widget-rounded-circle card-box">
@@ -128,9 +128,9 @@
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.parents') }}</p>
                         </div>
                     </div>
-                </div> <!-- end row-->
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+                </div> 
+            </div>
+        </div> 
 
         <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3">
             <div class="widget-rounded-circle card-box">
@@ -146,10 +146,10 @@
                             <p class="text-muted mb-1 text-truncate">{{ __('messages.teachers') }}</p>
                         </div>
                     </div>
-                </div> <!-- end row-->
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-    </div>
+                </div> 
+            </div>
+        </div> 
+    </div> -->
     @php
     $taskBladeFileName = 'task'; // Your dynamic file name variable
     $calendarBladeFileName = 'calendar'; // Your dynamic file name variable
