@@ -15,7 +15,6 @@
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .selected-cell {
         background-color: #f2f2f2;

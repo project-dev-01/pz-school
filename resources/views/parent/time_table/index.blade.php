@@ -9,7 +9,6 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('content')

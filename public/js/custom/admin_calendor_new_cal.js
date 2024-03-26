@@ -90,399 +90,430 @@ $(document).ready(function () {
         return check;
     };
     var calendarEl = document.getElementById('new_calendor');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
-        slotDuration: "00:30:00",
-        // minTime: "08:00:00",
-        // maxTime: "24:00:00",
-        themeSystem: "bootstrap",
-        bootstrapFontAwesome: !1,
-        // buttonText: {
-        //     today: today,
-        //     month: month,
-        //     week: week,
-        //     day: day,
-        //     list: list,
-        //     prev: previous,
-        //     next: next
-        // },
-        buttonText: {
-            prev: previous,
-            next: next,
-            today: today,
-            dayGridMonth: month,
-            timeGridWeek: week,
-            workWeek: work_week,
-            timeGridDay: day,
-            listMonth: list
-        },
-        // timeformat to show
-        eventTimeFormat: {
-            hour: 'numeric',
-            minute: 'numeric',
-            omitZeroMinute: true,
-            meridiem: 'short'
-        },
-        allDayText: allday_lang,
-        noEventsMessage: no_events_to_display_lang,
-        defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
-        nowIndicator: true, // This will display the current time indicator line
-        displayEventTime: true,
-        handleWindowResize: !0,
-        // height: (window).height() - 200,
-        header: {
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,workWeek,timeGridDay,listMonth"
-        },
-        businessHours: {
-            daysOfWeek: [1, 2, 3, 4, 5], // Monday through Friday
-            startTime: employee_check_in_time, // Business hours start time (9:00 AM)
-            endTime: employee_check_out_time,   // Business hours end time (5:00 PM)
-        },
-        views: {
-            timeGridWeek: { // Basic week view (Sunday to Saturday)
-                type: 'timeGridWeek'
+    if (calendarEl) {
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid", "list"],
+            slotDuration: "00:30:00",
+            // minTime: "08:00:00",
+            // maxTime: "24:00:00",
+            themeSystem: "bootstrap",
+            bootstrapFontAwesome: !1,
+            // buttonText: {
+            //     today: today,
+            //     month: month,
+            //     week: week,
+            //     day: day,
+            //     list: list,
+            //     prev: previous,
+            //     next: next
+            // },
+            buttonText: {
+                prev: previous,
+                next: next,
+                today: today,
+                dayGridMonth: month,
+                timeGridWeek: week,
+                workWeek: work_week,
+                timeGridDay: day,
+                listMonth: list
             },
-            workWeek: { // Work week view (Monday to Friday)
-                type: 'timeGridWeek',
-                hiddenDays: workWeekArray // Hide Sat and Sun
-                // weekends: false, // Exclude weekends
-                // weekends: [1,2], // Exclude weekends
-            }
-        },
-        locale: calLang,
-        // events: t,
-        editable: !0,
-        // editable: true,
-        droppable: !0,
-        // eventLimit: !0,
-        eventLimit: 3, // set limit to show
-        selectable: !0,
-        eventSources: [
-            // added event source after fetch remove also
-            dynamicEventSource,
-            // get Public Holidays
-            {
-                // backgroundColor:"red",
-                // borderColor:"blue",
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getPublicHolidays + '?branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            hs = response.data;
-                            successCallback(hs);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
+            // timeformat to show
+            eventTimeFormat: {
+                hour: 'numeric',
+                minute: 'numeric',
+                omitZeroMinute: true,
+                meridiem: 'short'
+            },
+            allDayText: allday_lang,
+            noEventsMessage: no_events_to_display_lang,
+            defaultView: window.mobilecheck() ? "listMonth" : "dayGridMonth",
+            nowIndicator: true, // This will display the current time indicator line
+            displayEventTime: true,
+            handleWindowResize: !0,
+            // height: (window).height() - 200,
+            header: {
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,workWeek,timeGridDay,listMonth"
+            },
+            businessHours: {
+                daysOfWeek: [1, 2, 3, 4, 5], // Monday through Friday
+                startTime: employee_check_in_time, // Business hours start time (9:00 AM)
+                endTime: employee_check_out_time,   // Business hours end time (5:00 PM)
+            },
+            views: {
+                timeGridWeek: { // Basic week view (Sunday to Saturday)
+                    type: 'timeGridWeek'
+                },
+                workWeek: { // Work week view (Monday to Friday)
+                    type: 'timeGridWeek',
+                    hiddenDays: workWeekArray // Hide Sat and Sun
+                    // weekends: false, // Exclude weekends
+                    // weekends: [1,2], // Exclude weekends
                 }
             },
-            // calendor events
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: calendorListTaskCalendor + '?token=' + token + '&branch_id=' + branchID + '&login_id=' + userID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            s = response.data;
-                            successCallback(s);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            },
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getBirthdayCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            t = response.data;
-                            successCallback(t);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            },
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getEventCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            m = response.data;
-                            successCallback(m);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            },
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getEventGroupCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            g = response.data;
-                            successCallback(g);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            },
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            b = response.data;
-                            successCallback(b);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            },
-            {
-                events: function (info, successCallback, failureCallback) {
-                    $.ajax({
-                        url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID,
-                        dataType: 'json',
-                        type: 'get',
-                        data: {
-                            start: info.startStr,
-                            end: info.endStr
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function (response) {
-                            c = response.data;
-                            successCallback(c);
-                        },
-                        error: function (err) {
-                            failureCallback(err);
-                        },
-                    });
-                }
-            }
-        ],
-        selectable: true,
-        selectHelper: true,
-        select: function (e) {
-            let starthminutes = moment(e.start).format('HH:mm');
-            let endhminutes = moment(e.end).format('HH:mm');
-            let allDay = e.allDay;
-            // var title = prompt('Event Title:');
-            $('#addTasksModal').modal('toggle');
-            $('.addTasks').find('form')[0].reset();
-            var selected_start = moment(e.start).format('YYYY-MM-DD');
-            var selected_end = moment(e.end).subtract(1, 'seconds').format('YYYY-MM-DD');
-
-            $("#taskAdd").find("#taskfromDate").val(selected_start);
-            $("#taskAdd").find("#taskToDate").val(selected_end);
-            $("#taskAdd").find("#tasktimeSlotStart").val(starthminutes);
-            $("#taskAdd").find("#tasktimeSlotEnd").val(endhminutes);
-            if (allDay === true) {
-                $("#taskAdd").find("#allDayCheck").prop('checked', true);
-                $("#taskAdd").find("#addTimeSlot").hide();
-            } else {
-                $("#taskAdd").find("#allDayCheck").prop('checked', false);
-                $("#taskAdd").find("#addTimeSlot").show();
-            }
-            // rules validation
-            $("#taskAdd").validate({
-                rules: {
-                    title: "required",
-                    taskdateSlot: "required"
-                }
-            });
-            $('#taskAdd').on('submit', function (event) {
-                event.preventDefault();
-                var taskAdd = $("#taskAdd").valid();
-                if (taskAdd === true) {
-                    var title = $('#taskTitle').val();
-                    var description = $("#taskDescription").val();
-                    var taskfromDate = $("#taskfromDate").val();
-                    var taskToDate = $("#taskToDate").val();
-                    var tasktimeSlotStart = $("#tasktimeSlotStart").val();
-                    var tasktimeSlotEnd = $("#tasktimeSlotEnd").val();
-                    var allDayCheck = $('#allDayCheck').is(':checked');
-                    if (allDayCheck === true) {
-                        var startdate = taskfromDate + " " + "00:00:00";
-                        var startend = taskToDate + " " + "24:00:00";
-                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
-                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
-                    } else {
-                        var startdate = taskfromDate + " " + tasktimeSlotStart + ":00";
-                        var startend = taskToDate + " " + tasktimeSlotEnd + ":00";
-                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
-                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+            locale: calLang,
+            // events: t,
+            editable: !0,
+            // editable: true,
+            droppable: !0,
+            // eventLimit: !0,
+            eventLimit: 3, // set limit to show
+            selectable: !0,
+            eventSources: [
+                // added event source after fetch remove also
+                dynamicEventSource,
+                // get Public Holidays
+                {
+                    // backgroundColor:"red",
+                    // borderColor:"blue",
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getPublicHolidays + '?branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                hs = response.data;
+                                successCallback(hs);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
                     }
-                    $.ajax({
-                        url: calendorAddTaskCalendor,
-                        type: "POST",
-                        dataType: 'json',
-                        data: {
-                            token: token,
-                            branch_id: branchID,
-                            title: title,
-                            start: start_date,
-                            end: end_date,
-                            login_id: userID,
-                            all_day: allDayCheck,
-                            description: description
-                        },
-                        success: function (response) {
-                            var newData = response.data;
-                            $('#addTasksModal').modal('hide')
-                            $('.addTasks').find('form')[0].reset();
-                            let eventObject = {
-                                calendor_id: newData.calendor_id,
-                                title: newData.title,
-                                start: newData.start,
-                                end: newData.end,
-                                description: newData.description,
-                                className: newData.className,
-                                allDay: newData.allDay
-                            };
-                            // calendar.addEvent(eventObject);
-                            addDynamicEvent(eventObject);
-                        }
-                    });
-                    calendar.unselect();
+                },
+                // calendor events
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: calendorListTaskCalendor + '?token=' + token + '&branch_id=' + branchID + '&login_id=' + userID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                s = response.data;
+                                successCallback(s);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
+                },
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getBirthdayCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                t = response.data;
+                                successCallback(t);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
+                },
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getEventCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                m = response.data;
+                                successCallback(m);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
+                },
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getEventGroupCalendorAdmin + '?token=' + token + '&branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                g = response.data;
+                                successCallback(g);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
+                },
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getBulkCalendor + '?token=' + token + '&branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                b = response.data;
+                                successCallback(b);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
+                },
+                {
+                    events: function (info, successCallback, failureCallback) {
+                        $.ajax({
+                            url: getScheduleExamDetailsUrl + '?token=' + token + '&branch_id=' + branchID,
+                            dataType: 'json',
+                            type: 'get',
+                            data: {
+                                start: info.startStr,
+                                end: info.endStr
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'Authorization': 'Bearer ' + token
+                            },
+                            success: function (response) {
+                                c = response.data;
+                                successCallback(c);
+                            },
+                            error: function (err) {
+                                failureCallback(err);
+                            },
+                        });
+                    }
                 }
-            });
+            ],
+            selectable: true,
+            selectHelper: true,
+            select: function (e) {
+                let starthminutes = moment(e.start).format('HH:mm');
+                let endhminutes = moment(e.end).format('HH:mm');
+                let allDay = e.allDay;
+                // var title = prompt('Event Title:');
+                $('#addTasksModal').modal('toggle');
+                $('.addTasks').find('form')[0].reset();
+                var selected_start = moment(e.start).format('YYYY-MM-DD');
+                var selected_end = moment(e.end).subtract(1, 'seconds').format('YYYY-MM-DD');
 
-
-        },
-        eventClick: function (e) {
-            //
-            if (e.event.extendedProps.event_id) {
-                console.log('jd', e.event.start)
-                console.log('end', e.event)
-                console.log('ee', e.event.extendedProps)
-                $('#admin-modal').modal('toggle');
-                var start = e.event.start_date;
-                var end = e.event.end_date;
-                var setCurDate = formatDate(end);
-                if (e.event.allDay == "1") {
-                    var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
-                    var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                $("#taskAdd").find("#taskfromDate").val(selected_start);
+                $("#taskAdd").find("#taskToDate").val(selected_end);
+                $("#taskAdd").find("#tasktimeSlotStart").val(starthminutes);
+                $("#taskAdd").find("#tasktimeSlotEnd").val(endhminutes);
+                if (allDay === true) {
+                    $("#taskAdd").find("#allDayCheck").prop('checked', true);
+                    $("#taskAdd").find("#addTimeSlot").hide();
                 } else {
-                    var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
-                    var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
+                    $("#taskAdd").find("#allDayCheck").prop('checked', false);
+                    $("#taskAdd").find("#addTimeSlot").show();
                 }
-                $("#title").html(e.event.title);
-                $("#type").html(e.event.extendedProps.event_type);
-                $("#start_date").html(start_dt);
-                $("#end_date").html(end_dt);
-                if (e.event.extendedProps.audience == "1") {
-                    var aud = e.event.extendedProps.class_name;
-                } else if (e.event.extendedProps.audience == "2") {
-                    var aud = "<b>Grade  :</b> " + e.event.extendedProps.class_name;
-                } else if (e.event.extendedProps.audience == "3") {
-                    var aud = "<b>Group  :</b> " + e.event.extendedProps.class_name;
+                // rules validation
+                $("#taskAdd").validate({
+                    rules: {
+                        title: "required",
+                        taskdateSlot: "required"
+                    }
+                });
+                $('#taskAdd').on('submit', function (event) {
+                    event.preventDefault();
+                    var taskAdd = $("#taskAdd").valid();
+                    if (taskAdd === true) {
+                        var title = $('#taskTitle').val();
+                        var description = $("#taskDescription").val();
+                        var taskfromDate = $("#taskfromDate").val();
+                        var taskToDate = $("#taskToDate").val();
+                        var tasktimeSlotStart = $("#tasktimeSlotStart").val();
+                        var tasktimeSlotEnd = $("#tasktimeSlotEnd").val();
+                        var allDayCheck = $('#allDayCheck').is(':checked');
+                        if (allDayCheck === true) {
+                            var startdate = taskfromDate + " " + "00:00:00";
+                            var startend = taskToDate + " " + "24:00:00";
+                            var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                            var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        } else {
+                            var startdate = taskfromDate + " " + tasktimeSlotStart + ":00";
+                            var startend = taskToDate + " " + tasktimeSlotEnd + ":00";
+                            var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                            var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        }
+                        $.ajax({
+                            url: calendorAddTaskCalendor,
+                            type: "POST",
+                            dataType: 'json',
+                            data: {
+                                token: token,
+                                branch_id: branchID,
+                                title: title,
+                                start: start_date,
+                                end: end_date,
+                                login_id: userID,
+                                all_day: allDayCheck,
+                                description: description
+                            },
+                            success: function (response) {
+                                var newData = response.data;
+                                $('#addTasksModal').modal('hide')
+                                $('.addTasks').find('form')[0].reset();
+                                let eventObject = {
+                                    calendor_id: newData.calendor_id,
+                                    title: newData.title,
+                                    start: newData.start,
+                                    end: newData.end,
+                                    description: newData.description,
+                                    className: newData.className,
+                                    allDay: newData.allDay
+                                };
+                                // calendar.addEvent(eventObject);
+                                addDynamicEvent(eventObject);
+                            }
+                        });
+                        calendar.unselect();
+                    }
+                });
+
+
+            },
+            eventClick: function (e) {
+                //
+                if (e.event.extendedProps.event_id) {
+                    $('#admin-modal').modal('toggle');
+                    var start = e.event.start_date;
+                    var end = e.event.end_date;
+                    var setCurDate = formatDate(end);
+                    if (e.event.allDay == "1") {
+                        var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                        var end_dt = moment(e.event.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                    } else {
+                        var start_dt = moment(e.event.start).format('DD-MM-YYYY dddd hh:mm A');
+                        var end_dt = moment(e.event.end).format('DD-MM-YYYY dddd hh:mm A');
+                    }
+                    $("#title").html(e.event.title);
+                    $("#type").html(e.event.extendedProps.event_type);
+                    $("#start_date").html(start_dt);
+                    $("#end_date").html(end_dt);
+                    if (e.event.extendedProps.audience == "1") {
+                        var aud = e.event.extendedProps.class_name;
+                    } else if (e.event.extendedProps.audience == "2") {
+                        var aud = "<b>Grade  :</b> " + e.event.extendedProps.class_name;
+                    } else if (e.event.extendedProps.audience == "3") {
+                        var aud = "<b>Group  :</b> " + e.event.extendedProps.class_name;
+                    }
+                    $("#audience").html(aud);
+                    $("#description").html(e.event.extendedProps.remarks);
+                    $("#setCurDate").val(setCurDate);
+                } else if (e.event.extendedProps.birthday) {
+                    $('#birthday-modal').modal('toggle');
+                    var start = e.event.start;
+                    var end = e.event.end;
+                    var setCurDate = formatDate(end);
+                    $("#name").html(e.event.extendedProps.name);
+                    $("#setCurDate").val(setCurDate);
+                } else if (e.event.extendedProps.bulk_id) {
+                    $('#bulk-modal').modal('toggle');
+                    var start = e.event.start;
+                    var end = e.event.end;
+                    var setCurDate = formatDate(end);
+                    $("#bulk_name").html(e.event.extendedProps.name);
+                    $("#setCurDate").val(setCurDate);
+                } else if (e.event.extendedProps.schedule_id) {
+                    $('#examScheduleModal').modal('toggle');
+                    var time_start = e.event.extendedProps.time_start;
+                    var time_end = e.event.extendedProps.time_end;
+                    // var setCurDate = formatDate(end);
+                    $("#examName").html(e.event.extendedProps.exam_name);
+                    $("#examStandard").html(e.event.extendedProps.class_name);
+                    $("#examClass").html(e.event.extendedProps.section_name);
+                    $("#examSubject").html(e.event.extendedProps.subject_name);
+                    $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
+                } else if (e.event.extendedProps.calendor_id) {
+                    var calendor_id = e.event.extendedProps.calendor_id;
+                    if (calendor_id) {
+                        $.ajax({
+                            url: calendorEditTaskCalendor,
+                            type: "GET",
+                            dataType: 'json',
+                            data: {
+                                token: token,
+                                branch_id: branchID,
+                                calendor_id: calendor_id
+                            },
+                            success: function (response) {
+                                if (response.code == 200) {
+                                    var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
+                                    var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
+                                    $('#showTasksModal').modal('toggle');
+                                    $("#showTasksModal").find("#calendorID").val(calendor_id);
+                                    $("#startDateDetails").html(start_dt);
+                                    $("#endDateDetails").html(subonesec);
+                                    $("#taskShowTit").html(response.data.title);
+                                    $("#taskShowDesc").html(response.data.description);
+                                } else {
+                                    toastr.error(response.message);
+                                }
+                            }, error: function (err) {
+                                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                            }
+                        });
+                    }
+
                 }
-                $("#audience").html(aud);
-                $("#description").html(e.event.extendedProps.remarks);
-                $("#setCurDate").val(setCurDate);
-            } else if (e.event.extendedProps.birthday) {
-                $('#birthday-modal').modal('toggle');
-                var start = e.event.start;
-                var end = e.event.end;
-                var setCurDate = formatDate(end);
-                $("#name").html(e.event.extendedProps.name);
-                $("#setCurDate").val(setCurDate);
-            } else if (e.event.extendedProps.bulk_id) {
-                $('#bulk-modal').modal('toggle');
-                var start = e.event.start;
-                var end = e.event.end;
-                var setCurDate = formatDate(end);
-                $("#bulk_name").html(e.event.extendedProps.name);
-                $("#setCurDate").val(setCurDate);
-            } else if (e.event.extendedProps.schedule_id) {
-                $('#examScheduleModal').modal('toggle');
-                var time_start = e.event.extendedProps.time_start;
-                var time_end = e.event.extendedProps.time_end;
-                // var setCurDate = formatDate(end);
-                $("#examName").html(e.event.extendedProps.exam_name);
-                $("#examStandard").html(e.event.extendedProps.class_name);
-                $("#examClass").html(e.event.extendedProps.section_name);
-                $("#examSubject").html(e.event.extendedProps.subject_name);
-                $("#examTiming").html(tConvert(time_start) + ' - ' + tConvert(time_end));
-            } else if (e.event.extendedProps.calendor_id) {
-                var calendor_id = e.event.extendedProps.calendor_id;
-                if (calendor_id) {
+                $("#editEventBtn").unbind().click(function () {
+                    $('#taskUpdate')[0].reset();
+                    $('#showTasksModal').modal('hide');
+                    $('#updateTasksModal').modal('show');
+                    var calendor_id = $("#calendorID").val();
                     $.ajax({
                         url: calendorEditTaskCalendor,
                         type: "GET",
@@ -494,14 +525,25 @@ $(document).ready(function () {
                         },
                         success: function (response) {
                             if (response.code == 200) {
-                                var start_dt = moment(response.data.start).format('DD-MM-YYYY dddd hh:mm A');
-                                var subonesec = moment(response.data.end).subtract(1, 'seconds').format('DD-MM-YYYY dddd hh:mm A');
-                                $('#showTasksModal').modal('toggle');
-                                $("#showTasksModal").find("#calendorID").val(calendor_id);
-                                $("#startDateDetails").html(start_dt);
-                                $("#endDateDetails").html(subonesec);
-                                $("#taskShowTit").html(response.data.title);
-                                $("#taskShowDesc").html(response.data.description);
+                                if (response.data.allDay == "1") {
+                                    $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
+                                    $("#updateTasksModal").find("#editTimeSlot").hide();
+                                } else {
+                                    $("#updateTasksModal").find("#editAllDayCheck").prop('checked', false);
+                                    $("#updateTasksModal").find("#editTimeSlot").show();
+                                }
+                                var startdt = moment(response.data.start).format('YYYY-MM-DD');
+                                var enddt = moment(response.data.end).subtract(1, 'seconds').format('YYYY-MM-DD');
+                                var starthminutes = moment(response.data.start).format('HH:mm');
+                                var endhminutes = moment(response.data.end).format('HH:mm');
+                                $("#updateTasksModal").find("#calendorID").val(response.data.calendor_id);
+                                $("#updateTasksModal").find("#taskTitle").val(response.data.title);
+                                $("#updateTasksModal").find("#edittaskfromDate").val(startdt);
+                                $("#updateTasksModal").find("#edittaskToDate").val(enddt);
+                                $("#updateTasksModal").find("#editTasktimeSlotStart").val(starthminutes);
+                                $("#updateTasksModal").find("#editTasktimeSlotEnd").val(endhminutes);
+                                $("#updateTasksModal").find("#taskDescription").val(response.data.description);
+
                             } else {
                                 toastr.error(response.message);
                             }
@@ -509,223 +551,179 @@ $(document).ready(function () {
                             toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
                         }
                     });
-                }
-
-            }
-            $("#editEventBtn").unbind().click(function () {
-                $('#taskUpdate')[0].reset();
-                $('#showTasksModal').modal('hide');
-                $('#updateTasksModal').modal('show');
-                var calendor_id = $("#calendorID").val();
-                $.ajax({
-                    url: calendorEditTaskCalendor,
-                    type: "GET",
-                    dataType: 'json',
-                    data: {
-                        token: token,
-                        branch_id: branchID,
-                        calendor_id: calendor_id
-                    },
-                    success: function (response) {
-                        if (response.code == 200) {
-                            if (response.data.allDay == "1") {
-                                $("#updateTasksModal").find("#editAllDayCheck").prop('checked', true);
-                                $("#updateTasksModal").find("#editTimeSlot").hide();
-                            } else {
-                                $("#updateTasksModal").find("#editAllDayCheck").prop('checked', false);
-                                $("#updateTasksModal").find("#editTimeSlot").show();
-                            }
-                            var startdt = moment(response.data.start).format('YYYY-MM-DD');
-                            var enddt = moment(response.data.end).subtract(1, 'seconds').format('YYYY-MM-DD');
-                            var starthminutes = moment(response.data.start).format('HH:mm');
-                            var endhminutes = moment(response.data.end).format('HH:mm');
-                            $("#updateTasksModal").find("#calendorID").val(response.data.calendor_id);
-                            $("#updateTasksModal").find("#taskTitle").val(response.data.title);
-                            $("#updateTasksModal").find("#edittaskfromDate").val(startdt);
-                            $("#updateTasksModal").find("#edittaskToDate").val(enddt);
-                            $("#updateTasksModal").find("#editTasktimeSlotStart").val(starthminutes);
-                            $("#updateTasksModal").find("#editTasktimeSlotEnd").val(endhminutes);
-                            $("#updateTasksModal").find("#taskDescription").val(response.data.description);
-
-                        } else {
-                            toastr.error(response.message);
+                });
+                // delete
+                $("#deleteEventBtn").unbind().click(function () {
+                    var id = $("#calendorID").val();
+                    swal.fire({
+                        title: 'Are you sure?',
+                        html: 'You want to <b>delete</b> this',
+                        showCancelButton: true,
+                        showCloseButton: true,
+                        cancelButtonText: 'Cancel',
+                        confirmButtonText: 'Yes, Delete',
+                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#556ee6',
+                        width: 400,
+                        allowOutsideClick: false
+                    }).then(function (result) {
+                        if (result.value) {
+                            $.ajax({
+                                url: calendorDeleteTaskCalendor,
+                                type: "POST",
+                                dataType: 'json',
+                                data: {
+                                    token: token,
+                                    branch_id: branchID,
+                                    id: id
+                                },
+                                success: function (response) {
+                                    if (response.code == 200) {
+                                        toastr.success(response.message);
+                                        $('#showTasksModal').modal('hide');
+                                        e.event.remove(); // try this instead
+                                    } else {
+                                        toastr.error(response.message);
+                                    }
+                                }, error: function (err) {
+                                    toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                                }
+                            });
                         }
-                    }, error: function (err) {
-                        toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                    });
+                });
+                // rules validation
+                $("#taskUpdate").validate({
+                    rules: {
+                        title: "required",
+                        taskdateSlot: "required"
                     }
                 });
-            });
-            // delete
-            $("#deleteEventBtn").unbind().click(function () {
-                var id = $("#calendorID").val();
-                swal.fire({
-                    title: 'Are you sure?',
-                    html: 'You want to <b>delete</b> this',
-                    showCancelButton: true,
-                    showCloseButton: true,
-                    cancelButtonText: 'Cancel',
-                    confirmButtonText: 'Yes, Delete',
-                    cancelButtonColor: '#d33',
-                    confirmButtonColor: '#556ee6',
-                    width: 400,
-                    allowOutsideClick: false
-                }).then(function (result) {
-                    if (result.value) {
+                // update
+                $('#taskUpdate').unbind().on('submit', function (event) {
+                    event.preventDefault();
+                    var taskUpdate = $("#taskUpdate").valid();
+                    if (taskUpdate === true) {
+                        // $("#updateCalBtn").unbind().click(function () {
+                        e.event.remove();
+                        let calendor_id = $("#updateTasksModal").find("#calendorID").val();
+                        let title = $("#updateTasksModal").find("#taskTitle").val();
+                        let description = $("#updateTasksModal").find("#taskDescription").val();
+                        let edittaskfromDate = $("#updateTasksModal").find("#edittaskfromDate").val();
+                        let edittaskToDate = $("#updateTasksModal").find("#edittaskToDate").val();
+                        let tasktimeSlotStart = $("#updateTasksModal").find("#editTasktimeSlotStart").val();
+                        let tasktimeSlotEnd = $("#updateTasksModal").find("#editTasktimeSlotEnd").val();
+                        var allDayCheck = $("#updateTasksModal").find('#editAllDayCheck').is(':checked');
+                        if (allDayCheck === true) {
+                            // var datFm = new Date(edittaskfromDate);
+                            // var datTo = new Date(edittaskToDate);
+                            // var startOfDayDate = new Date(datFm.getFullYear()
+                            //     , datFm.getMonth()
+                            //     , datFm.getDate()
+                            //     , 00, 00, 01); // start day
+                            // var endOfDayDate = new Date(datTo.getFullYear()
+                            //     , datTo.getMonth()
+                            //     , datTo.getDate()
+                            //     , 23, 59, 59); // end of day
+                            // var start_date = moment(startOfDayDate).format('YYYY-MM-DD HH:mm:ss');
+                            // var end_date = moment(endOfDayDate).format('YYYY-MM-DD HH:mm:ss');
+                            // var start_date = moment(e.start).format('YYYY-MM-DD HH:mm:ss');
+                            // var end_date = moment(e.end).format('YYYY-MM-DD HH:mm:ss');
+                            var startdate = edittaskfromDate + " " + "00:00:00";
+                            var startend = edittaskToDate + " " + "24:00:00";
+
+                            var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                            var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        } else {
+                            var startdate = edittaskfromDate + " " + tasktimeSlotStart + ":00";
+                            var startend = edittaskToDate + " " + tasktimeSlotEnd + ":00";
+                            var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
+                            var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
+                        }
                         $.ajax({
-                            url: calendorDeleteTaskCalendor,
+                            url: calendorUpdateTaskCalendor,
                             type: "POST",
                             dataType: 'json',
                             data: {
                                 token: token,
                                 branch_id: branchID,
-                                id: id
+                                title: title,
+                                calendor_id: calendor_id,
+                                description: description,
+                                start: start_date,
+                                end: end_date,
+                                all_day: allDayCheck
                             },
                             success: function (response) {
-                                if (response.code == 200) {
-                                    toastr.success(response.message);
-                                    $('#showTasksModal').modal('hide');
-                                    e.event.remove(); // try this instead
-                                } else {
-                                    toastr.error(response.message);
-                                }
-                            }, error: function (err) {
-                                toastr.error(err.responseJSON.data.error ? err.responseJSON.data.error : 'Something went wrong');
+                                var datas = response.data;
+                                $('#updateTasksModal').modal('hide')
+                                $('#taskUpdate')[0].reset();
+                                let obj = {
+                                    calendor_id: datas.calendor_id,
+                                    title: datas.title,
+                                    start: datas.start,
+                                    end: datas.end,
+                                    description: datas.description,
+                                    className: datas.className,
+                                    allDay: datas.allDay
+                                };
+                                // calendar.addEvent(obj);
+                                addDynamicEvent(obj);
                             }
                         });
+                        calendar.unselect();
                     }
                 });
-            });
-            // rules validation
-            $("#taskUpdate").validate({
-                rules: {
-                    title: "required",
-                    taskdateSlot: "required"
-                }
-            });
-            // update
-            $('#taskUpdate').unbind().on('submit', function (event) {
-                event.preventDefault();
-                var taskUpdate = $("#taskUpdate").valid();
-                if (taskUpdate === true) {
-                    // $("#updateCalBtn").unbind().click(function () {
-                    e.event.remove();
-                    let calendor_id = $("#updateTasksModal").find("#calendorID").val();
-                    let title = $("#updateTasksModal").find("#taskTitle").val();
-                    let description = $("#updateTasksModal").find("#taskDescription").val();
-                    let edittaskfromDate = $("#updateTasksModal").find("#edittaskfromDate").val();
-                    let edittaskToDate = $("#updateTasksModal").find("#edittaskToDate").val();
-                    let tasktimeSlotStart = $("#updateTasksModal").find("#editTasktimeSlotStart").val();
-                    let tasktimeSlotEnd = $("#updateTasksModal").find("#editTasktimeSlotEnd").val();
-                    var allDayCheck = $("#updateTasksModal").find('#editAllDayCheck').is(':checked');
-                    if (allDayCheck === true) {
-                        // var datFm = new Date(edittaskfromDate);
-                        // var datTo = new Date(edittaskToDate);
-                        // var startOfDayDate = new Date(datFm.getFullYear()
-                        //     , datFm.getMonth()
-                        //     , datFm.getDate()
-                        //     , 00, 00, 01); // start day
-                        // var endOfDayDate = new Date(datTo.getFullYear()
-                        //     , datTo.getMonth()
-                        //     , datTo.getDate()
-                        //     , 23, 59, 59); // end of day
-                        // var start_date = moment(startOfDayDate).format('YYYY-MM-DD HH:mm:ss');
-                        // var end_date = moment(endOfDayDate).format('YYYY-MM-DD HH:mm:ss');
-                        // var start_date = moment(e.start).format('YYYY-MM-DD HH:mm:ss');
-                        // var end_date = moment(e.end).format('YYYY-MM-DD HH:mm:ss');
-                        var startdate = edittaskfromDate + " " + "00:00:00";
-                        var startend = edittaskToDate + " " + "24:00:00";
-
-                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
-                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
-                    } else {
-                        var startdate = edittaskfromDate + " " + tasktimeSlotStart + ":00";
-                        var startend = edittaskToDate + " " + tasktimeSlotEnd + ":00";
-                        var start_date = moment(startdate).format('YYYY-MM-DD HH:mm:ss');
-                        var end_date = moment(startend).format('YYYY-MM-DD HH:mm:ss');
-                    }
-                    $.ajax({
-                        url: calendorUpdateTaskCalendor,
-                        type: "POST",
-                        dataType: 'json',
-                        data: {
-                            token: token,
-                            branch_id: branchID,
-                            title: title,
-                            calendor_id: calendor_id,
-                            description: description,
-                            start: start_date,
-                            end: end_date,
-                            all_day: allDayCheck
-                        },
-                        success: function (response) {
-                            var datas = response.data;
-                            $('#updateTasksModal').modal('hide')
-                            $('#taskUpdate')[0].reset();
-                            let obj = {
-                                calendor_id: datas.calendor_id,
-                                title: datas.title,
-                                start: datas.start,
-                                end: datas.end,
-                                description: datas.description,
-                                className: datas.className,
-                                allDay: datas.allDay
-                            };
-                            // calendar.addEvent(obj);
-                            addDynamicEvent(obj);
-                        }
-                    });
-                    calendar.unselect();
-                }
-            });
+            }
+        });
+        // Remove all events from the dynamic event source before rendering
+        calendar.on('datesRender', function (info) {
+            dynamicEventSource.events = []; // Clear the events array
+        });
+        calendar.render();
+        // calendar.setOption('buttonText', {
+        //     dayGridMonth: month,
+        //     timeGridWeek: week,
+        //     workWeek: work_week,
+        //     timeGridDay: day,
+        //     listMonth: list,
+        // });
+        // An array to keep track of dynamically added events
+        // Add events dynamically
+        function addDynamicEvent(event) {
+            dynamicEventSource.events.push(event); // Push the new event into the array
+            calendar.refetchEvents(); // Redraw the events on the calendar
         }
-    });
-    // Remove all events from the dynamic event source before rendering
-    calendar.on('datesRender', function (info) {
-        dynamicEventSource.events = []; // Clear the events array
-    });
-    calendar.render();
-    // calendar.setOption('buttonText', {
-    //     dayGridMonth: month,
-    //     timeGridWeek: week,
-    //     workWeek: work_week,
-    //     timeGridDay: day,
-    //     listMonth: list,
-    // });
-    // An array to keep track of dynamically added events
-    // Add events dynamically
-    function addDynamicEvent(event) {
-        dynamicEventSource.events.push(event); // Push the new event into the array
-        calendar.refetchEvents(); // Redraw the events on the calendar
-    }
-    // unbind model
-    $("#addTasksModal").on("hidden.bs.modal", function () {
-        $('#taskAdd').unbind();
-    });
-    // unbind model
-    // $("#updateTasksModal").on("hidden.bs.modal", function () {
-    //     $('#updateCalBtn').unbind();
-    // });
+        // unbind model
+        $("#addTasksModal").on("hidden.bs.modal", function () {
+            $('#taskAdd').unbind();
+        });
+        // unbind model
+        // $("#updateTasksModal").on("hidden.bs.modal", function () {
+        //     $('#updateCalBtn').unbind();
+        // });
 
 
 
-    function tConvert(time) {
-        // Check correct time format and split into components
-        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-        if (time.length > 1) { // If time format correct
-            time = time.slice(1);  // Remove full string match value
-            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
-            time[0] = +time[0] % 12 || 12; // Adjust hours
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
         }
-        return time.join(''); // return adjusted time or original string
-    }
 
-    function GetCalendarDateRange() {
-        var calendar = $('#new_calendor').fullCalendar('getCalendar');
-        var view = calendar.view;
-        var start = view.start._d;
-        var end = view.end._d;
-        var dates = { start: start, end: end };
-        return dates;
+        function GetCalendarDateRange() {
+            var calendar = $('#new_calendor').fullCalendar('getCalendar');
+            var view = calendar.view;
+            var start = view.start._d;
+            var end = view.end._d;
+            var dates = { start: start, end: end };
+            return dates;
+        }
     }
 });

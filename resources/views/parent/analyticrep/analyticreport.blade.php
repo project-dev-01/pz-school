@@ -3,7 +3,6 @@
 @section('component_css')
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">

@@ -22,35 +22,37 @@
 
 <!-- Vendor js -->
 <script src="{{ asset('js/vendor.min.js') }}"></script>
-@if(Session::get('role_id') == '1')
+@if(Session::has('role_id'))
 <script>
-    var backToLogin = "{{ route('super_admin.login') }}";
-    var logoutIdle = "{{ route('super_admin.logout') }}";
-</script>
-@elseif(Session::get('role_id') == '3')
-<script>
-    var backToLogin = "{{ route('staff.login') }}";
-    var logoutIdle = "{{ route('staff.logout') }}";
-</script>
-@elseif(Session::get('role_id') == '4')
-<script>
-    var backToLogin = "{{ route('teacher.login') }}";
-    var logoutIdle = "{{ route('teacher.logout') }}";
-</script>
-@elseif(Session::get('role_id') == '5')
-<script>
-    var backToLogin = "{{ route('parent.login') }}";
-    var logoutIdle = "{{ route('parent.logout') }}";
-</script>
-@elseif(Session::get('role_id') == '6')
-<script>
-    var backToLogin = "{{ route('student.login') }}";
-    var logoutIdle = "{{ route('student.logout') }}";
-</script>
-@else
-<script>
-    var backToLogin = "{{ route('admin.login') }}";
-    var logoutIdle = "{{ route('admin.logout') }}";
+    var sessionRoutes = {
+        1: {
+            login: "{{ route('super_admin.login') }}",
+            logout: "{{ route('super_admin.logout') }}"
+        },
+        3: {
+            login: "{{ route('staff.login') }}",
+            logout: "{{ route('staff.logout') }}"
+        },
+        4: {
+            login: "{{ route('teacher.login') }}",
+            logout: "{{ route('teacher.logout') }}"
+        },
+        5: {
+            login: "{{ route('parent.login') }}",
+            logout: "{{ route('parent.logout') }}"
+        },
+        6: {
+            login: "{{ route('student.login') }}",
+            logout: "{{ route('student.logout') }}"
+        },
+        default: {
+            login: "{{ route('admin.login') }}",
+            logout: "{{ route('admin.logout') }}"
+        }
+    };
+    var roleId = "{{ Session::get('role_id') }}";
+    var backToLogin = sessionRoutes[roleId] ? sessionRoutes[roleId].login : sessionRoutes.default.login;
+    var logoutIdle = sessionRoutes[roleId] ? sessionRoutes[roleId].logout : sessionRoutes.default.logout;
 </script>
 @endif
 <script>
@@ -68,13 +70,11 @@
         return [year, month, day].join('-');
     }
 </script>
-@if(Session::get('role_id'))
-@if(Session::get('role_id') == '5')
+@if(Session::get('role_id') && Session::get('role_id') == '5')
 <script>
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
 </script>
-@endif
 @endif
 
 <script src="{{ asset('js/app.min.js') }}"></script>
@@ -256,12 +256,12 @@
     var addWidgetH = "{{ __('messages.add_widget') }}";
     var leave_type_lang = "{{ __('messages.leave_type') }}";
     var department_lang = "{{ __('messages.department_name') }}";
-    var employee_name_lang   ="{{ __('messages.employee_name') }}";
-    var entitlement_lang   ="{{ __('messages.entitlement') }}";
-    var taken_lang   ="{{ __('messages.taken') }}";
-    var balance_lang   ="{{ __('messages.balance') }}";
-    var warden_name_lang  = "{{ __('messages.choose_the_warden_name') }}";
-    var choose_lang  = "{{ __('messages.choose') }}";
+    var employee_name_lang = "{{ __('messages.employee_name') }}";
+    var entitlement_lang = "{{ __('messages.entitlement') }}";
+    var taken_lang = "{{ __('messages.taken') }}";
+    var balance_lang = "{{ __('messages.balance') }}";
+    var warden_name_lang = "{{ __('messages.choose_the_warden_name') }}";
+    var choose_lang = "{{ __('messages.choose') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
@@ -273,22 +273,13 @@
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
     var deleteBranch = "{{ route('branch.delete') }}";
-
     // assign teacher routes
     var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
     var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";
-
     // Event details
     var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
-
-
-    // settings url
-    // var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
-    // var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
-    // var profilePath = "{{ asset('users/images') }}";
     // greeding
     var updateGreddingSession = "{{ route('greetting.session') }}";
-
     // users routes
     var userList = "{{ route('users.user_list') }}";
     var userShow = "{{ route('users.user') }}";
@@ -368,29 +359,28 @@
                 }
             });
         }, 10000);
-        if(get_roll_id=='4' || get_roll_id=='5')
-		{
-        var sTimeOutq = setInterval(function() {
+        if (get_roll_id == '4' || get_roll_id == '5') {
+            var sTimeOutq = setInterval(function() {
 
 
-            $.ajax({
-                type: 'GET',
-                url: chatnotification,
+                $.ajax({
+                    type: 'GET',
+                    url: chatnotification,
 
-                success: function(res) {
-                    if (res.success) {
+                    success: function(res) {
+                        if (res.success) {
 
-                        //alert(res.data);
-                        $('.chat-count').html(res.data[0].count_row);
+                            //alert(res.data);
+                            $('.chat-count').html(res.data[0].count_row);
+                        }
+                    },
+                    error: function(err) {
+                        // console.log("logout error");
+                        // console.log(err)
                     }
-                },
-                error: function(err) {
-                    // console.log("logout error");
-                    // console.log(err)
-                }
-            });
-        }, 10000);
-    }
+                });
+            }, 10000);
+        }
         getNotifications();
 
         function getNotifications() {

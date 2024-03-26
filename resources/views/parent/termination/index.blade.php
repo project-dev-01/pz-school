@@ -65,7 +65,6 @@
     }
 </style> 
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
 
