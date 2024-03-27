@@ -181,6 +181,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="table-responsive">
+                                                <div class="col-sm-6 col-md-6"></div>
                                                     <table class="table w-100 nowrap" id="parent-bulletin-table">
                                                         <thead>
                                                             <tr>
@@ -215,11 +216,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="table-responsive">
-                                                    <div class="col-sm-6 col-md-6">
-
-
-                                                    </div>
-
+                                                    <div class="col-sm-6 col-md-6"></div>
                                                     <table class="table w-100 nowrap" id="parent-bulletin-imp-table">
                                                         <thead>
                                                             <tr>

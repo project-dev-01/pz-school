@@ -34,17 +34,35 @@
         padding-left: 50px;
         list-style: none;
     }
-
-    .navbar-custom .dropdown .dropdown-menu {
-        left: 150px !important;
+    .schllogo
+    {
+        margin-left: -1px;
+        margin-bottom: 3px;
     }
 }
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1400px) {
-
-    .navbar-custom .dropdown .dropdown-menu {
-        left: 0px !important;
-        right: 0px !important;
+@media (max-width: 280px) {
+    .notification-list,
+    .chat-count {
+        display: none;
     }
-
+    .sidebarresponsive {
+        margin-left: 20px;
+    }
+    .logo-box {
+        width: 50px !important
+    }
+    .schl {
+        width: 80px;
+    }
+    .schl {
+        white-space: nowrap;
+        width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+   
+    
 }
+
+
+

@@ -1,11 +1,12 @@
-.schl
+    .schl
     {
         white-space: nowrap;
         width: 70px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    .navbar-custom .topnav-menu>li {
+    .navbar-custom .topnav-menu>li 
+    {
         float: left;
         font-size: 13px;
     }
@@ -13,17 +14,26 @@
     {
         font-size:18px;
     }
+    .schllogo
+    {
+        margin-left:20px;
+    }
+    .small-dropdown 
+    {
+        width: auto;
+        max-width: 200px; /* Adjust as needed */
+        margin-left: 151px;
+    }
+    .sidebarresponsive
+    {
+        margin-left:9px;
+    }
 
 @media screen and (min-device-width: 280px) and (max-device-width: 653px) 
     {
         .responsive 
         {
             display: none !important;
-        }
-
-        .navbar-custom .button-menu-mobile 
-        {
-            width: 20px;
         }
 
         .logo-box
@@ -45,18 +55,15 @@
         {
             margin-left: -4px;
         }
-        .navbar-custom .topnav-menu .nav-link {
-            padding: 0 9px;
+        .schllogo
+        {
+        margin-left:2px;
         }
     }
 
 @media screen and (min-device-width: 360px) and (max-device-width: 740px) 
     {
         
-       .schl
-        {
-            width:70px;
-        }
         .ml-2, .mx-2 
         {
             margin-left: 2px!important;
@@ -82,7 +89,10 @@
         .img
         {
             font-size: 23px;
-    margin-left: -15px;
+            margin-left: -15px;
+        }
+        .sidebarresponsive {
+            margin-left: 0px;
         }
 
     }
@@ -90,10 +100,6 @@
 @media screen and (min-device-width: 375px) and (max-device-width: 667px) 
     {
         
-       .schl
-        {
-            width:70px;
-        }
         .ml-2, .mx-2 
         {
             margin-left: 2px!important;
@@ -127,3 +133,22 @@
         }
 
     }
+
+    @media screen and (min-device-width: 540px) and (max-device-width: 720px) 
+    {
+        .teacher
+        {
+            width: 65px !important;
+            padding-right: 0 !important;
+            margin-top:-3px;
+        }
+        .respone
+        {
+            margin-left: 2px!important;
+            width: 71px;
+        }
+
+    }
+
+ 
+
