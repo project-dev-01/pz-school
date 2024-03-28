@@ -219,49 +219,49 @@
         width: 20.2em;
     }
 
-    @media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+    @media screen and (min-width: 320px) and (max-width: 660px) {
         .ui-datepicker {
             width: 14em;
         }
     }
 
-    @media screen and (min-device-width: 360px) and (max-device-width: 740px) {
+    @media screen and (min-width: 360px) and (max-width: 740px) {
         .ui-datepicker {
             width: 13.9em;
         }
     }
 
-    @media screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    @media screen and (min-width: 375px) and (max-width: 667px) {
         .ui-datepicker {
             width: 14.8em;
         }
     }
 
-    @media screen and (min-device-width: 390px) and (max-device-width: 844px) {
+    @media screen and (min-width: 390px) and (max-width: 844px) {
         .ui-datepicker {
             width: 16em;
         }
     }
 
-    @media screen and (min-device-width: 412px) and (max-device-width: 915px) {
+    @media screen and (min-width: 412px) and (max-width: 915px) {
         .ui-datepicker {
             width: 17.8em;
         }
     }
 
-    @media screen and (min-device-width: 540px) and (max-device-width: 720px) {
+    @media screen and (min-width: 540px) and (max-width: 720px) {
         .ui-datepicker {
             width: 27.6em;
         }
     }
 
-    @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
         .ui-datepicker {
             width: 13.2em;
         }
     }
 
-    @media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+    @media screen and (min-width: 820px) and (max-width: 1180px) {
         .ui-datepicker {
             width: 13.3em;
         }

@@ -509,7 +509,7 @@ div.dt-buttons {
 }
 
 .open {
-	display: show !important;
+	display: block !important;
 }
 
 .btn-select {

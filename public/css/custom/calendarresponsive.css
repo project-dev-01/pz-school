@@ -57,7 +57,7 @@
     background-color: #D1E9EF;
 }
 
-@media screen and (min-device-width: 320px) and (max-device-width: 660px) {
+@media screen and (min-width: 320px) and (max-width: 660px) {
     .popupresponsive {
         margin: 0px -65px 0px -70px;
         word-wrap: break-word;
@@ -81,7 +81,7 @@
   
 }
 
-@media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+@media screen and (min-width: 280px) and (max-width: 653px) {
     .popupresponsive {
         margin: 0px -78px 0px -78px;
 
@@ -113,7 +113,7 @@
     
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
     .popupresponsive {
         margin: 0px -65px 0px -65px;
     }

@@ -55,7 +55,7 @@
 }
 
 
-@media screen and (min-device-width: 280px) and (max-device-width: 653px) {
+@media screen and (min-width: 280px) and (max-width: 653px) {
 
 
     .lang-select {
@@ -104,7 +104,7 @@
 }
 
 
-@media screen and (min-device-width: 320px) and (max-device-width: 670px) {
+@media screen and (min-width: 320px) and (max-width: 670px) {
     .account-pages {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -150,7 +150,7 @@
 
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
 
     .lang-select {
         margin-right: 63px;
@@ -191,7 +191,7 @@
     }
 }
 
-@media screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+@media screen and (min-width: 820px) and (max-width: 1180px) {
 
     .lang-select {
         margin-right: 63px;
@@ -238,7 +238,7 @@
 
 }
 
-@media screen and (min-device-width: 912px) and (max-device-width: 1368px) {
+@media screen and (min-width: 912px) and (max-width: 1368px) {
 
     .lang-select {
         margin-right: 75px;

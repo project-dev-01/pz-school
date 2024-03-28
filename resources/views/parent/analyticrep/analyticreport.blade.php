@@ -7,13 +7,13 @@
 @section('content')
 <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <style>
-    @media only screen and (min-device-width: 320px) and (max-device-width: 844px) {
+    @media only screen and (min-width: 320px) and (max-width: 844px) {
         .homework {
             height: 95%;
         }
     }
 
-    @media only screen and (min-device-width: 390px) and (max-device-width: 896px) {
+    @media only screen and (min-width: 390px) and (max-width: 896px) {
         .homeworkstatus {
             margin-top: 25px;
         }

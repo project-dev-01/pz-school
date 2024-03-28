@@ -134,7 +134,7 @@
 }
 
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 665px) {
+@media only screen and (min-width: 320px) and (max-width: 665px) {
     .auth-fluid .auth-fluid-form-box {
         padding: 1px;
     }
@@ -144,7 +144,7 @@
     }
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 634px) {
+@media only screen and (min-width: 320px) and (max-width: 634px) {
     .auth-fluid .auth-fluid-form-box {
         padding: 1px;
     }
@@ -159,7 +159,7 @@
     }
 }
 
-@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+@media only screen and (min-width: 280px) and (max-width: 653px) {
     .auth-fluid .auth-fluid-form-box {
         padding: 1px;
     }
@@ -174,25 +174,25 @@
     }
 }
 
-@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+@media only screen and (min-width: 280px) and (max-width: 653px) {
     .auth-fluid .auth-fluid-form-box {
         padding: 0px;
     }
 }
 
-@media only screen and (min-device-width: 820px) and (max-device-width: 1180px) {
+@media only screen and (min-width: 820px) and (max-width: 1180px) {
     .col {
         max-width: 100%;
     }
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
     .col {
         max-width: 100%;
     }
 }
 
-@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+@media only screen and (min-width: 280px) and (max-width: 653px) {
     .col {
         max-width: 100%;
     }
@@ -245,7 +245,7 @@
   }
   
   .open{
-	display: show !important;
+	display: block !important;
   }
   
   .btn-select{
