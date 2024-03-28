@@ -339,25 +339,25 @@
 	width: 100px;
 }
 
-@media only screen and (min-device-width: 375px) and (max-device-width: 812px) {
+@media only screen and (min-width: 375px) and (max-width: 812px) {
 	.btn {
 		padding: .45rem 0.5rem;
 	}
 }
 
-@media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
+@media only screen and (min-width: 360px) and (max-width: 640px) {
 	.btn {
 		padding: .45rem 0.2rem;
 	}
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+@media only screen and (min-width: 320px) and (max-width: 568px) {
 	.btn {
 		padding: .45rem 0.0rem;
 	}
 }
 
-@media only screen and (min-device-width: 400px) and (max-device-width: 734px) {
+@media only screen and (min-width: 400px) and (max-width: 734px) {
 	.btn-primary-bl {
 		color: #fff;
 		border-color: #0ABAB5;
