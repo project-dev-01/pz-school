@@ -1077,36 +1077,26 @@ class ParentController extends Controller
             'id' => session()->get('student_id')
         ];
         $student = Helper::PostMethod(config('constants.api.student_details'), $student_data);
-
-        // dd($student);
         $mother_id = isset($student['data']['student']['mother_id']) ? $student['data']['student']['mother_id'] : "";
         $father_id = isset($student['data']['student']['father_id']) ? $student['data']['student']['father_id'] : "";
         $guardian_relation = isset($student['data']['student']['relation']) ? $student['data']['student']['relation'] : "";
         $guardian_data = [
             'id' => session()->get('ref_user_id')
         ];
-
         $mother = [];
         if ($mother_id) {
-
             $mother_data = [
                 'id' => $mother_id
             ];
             $mother = Helper::PostMethod(config('constants.api.parent_details'), $mother_data);
         }
-
         $father = [];
         if ($father_id) {
-
             $father_data = [
                 'id' => $father_id
             ];
             $father = Helper::PostMethod(config('constants.api.parent_details'), $father_data);
         }
-
-
-
-        // $father = Helper::PostMethod(config('constants.api.parent_details'), $father_data);
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $races = Helper::GetMethod(config('constants.api.races'));

@@ -80,7 +80,6 @@
 <script src="{{ asset('js/app.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('js/custom/common.js') }}"></script>
 
 <!-- <script src="{{ asset('date-picker/jquery-ui.js') }}"></script> -->
 <script>
@@ -260,8 +259,6 @@
     var entitlement_lang = "{{ __('messages.entitlement') }}";
     var taken_lang = "{{ __('messages.taken') }}";
     var balance_lang = "{{ __('messages.balance') }}";
-    var warden_name_lang = "{{ __('messages.choose_the_warden_name') }}";
-    var choose_lang = "{{ __('messages.choose') }}";
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
@@ -273,13 +270,22 @@
     var branchList = "{{ route('branch.list') }}";
     var branchShow = "{{ route('branch.index') }}";
     var deleteBranch = "{{ route('branch.delete') }}";
+
     // assign teacher routes
     var branchbyAssignTeacher = "{{ config('constants.api.branch_by_assign_teacher') }}";
     var getsectionAllocation = "{{ config('constants.api.section_by_class') }}";
+
     // Event details
     var branchByEvent = "{{ config('constants.api.branch_by_event') }}";
+
+
+    // settings url
+    // var profileUpdateStg = "{{ config('constants.api.change_profile_picture') }}";
+    // var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
+    // var profilePath = "{{ asset('users/images') }}";
     // greeding
     var updateGreddingSession = "{{ route('greetting.session') }}";
+
     // users routes
     var userList = "{{ route('users.user_list') }}";
     var userShow = "{{ route('users.user') }}";
@@ -294,6 +300,116 @@
     var allLogout = "{{ route('all_logout') }}";
 </script>
 
+<script type="text/javascript">
+    var url = "{{ route('changeLang') }}";
+    // var langArray = [];
+    // $('.vodiapicker option').each(function() {
+    //     var img = $(this).attr("data-thumbnail");
+    //     var text = this.innerText;
+    //     var value = $(this).val();
+    //     var item = '<li><img src="' + img + '" alt="" value="' + value + '"/><span>' + text + '</span></li>';
+    //     langArray.push(item);
+    // })
+
+    // $('#a').html(langArray);
+
+    // //Set the button value to the first el of the array
+    // $('.btn-select').html(langArray[0]);
+    // $('.btn-select').attr('value', 'en');
+
+    // change button stuff on click
+    $('#a li').click(function() {
+
+        var img = $(this).find('img').attr("src");
+        var value = $(this).find('img').attr('value');
+
+        window.location.href = url + "?lang=" + value;
+        var text = this.innerText;
+        var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+        $('.btn-select').html(item);
+        $('.btn-select').attr('value', value);
+        $(".b").toggle();
+    });
+
+    $(".btn-select").click(function() {
+        $(".b").toggle();
+    });
+
+    //check local storage for the lang
+    if (locale_lang) {
+        if (locale_lang == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else if (locale_lang == "malay") {
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    } else if (language_name) {
+        if (language_name == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else if (language_name == "malay") {
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    } else {
+        if (locale == "japanese") {
+            //find an item with value of sessionLang\
+            var img = "{{ config('constants.image_url').'/common-asset/images/JPN.png' }}";
+            var value = "japanese";
+            var text = "日本語";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else if (locale == "malay") {
+            var img = "{{ config('constants.image_url').'/common-asset/images/MAL.png' }}";
+            var value = "malay";
+            var text = "Malay";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        } else {
+            var img = "{{ config('constants.image_url').'/common-asset/images/USA.png' }}";
+            var value = "en";
+            var text = "English";
+            var item = '<li><img src="' + img + '" alt="" /><span >' + text + '</span></li>';
+            $('.btn-select').html(item);
+            $('.btn-select').attr('value', value);
+        }
+    }
+</script>
 <script>
     function sendMarkRequest(id = null) {
         return $.ajax(readNotifications, {

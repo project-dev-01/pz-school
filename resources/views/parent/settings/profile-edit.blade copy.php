@@ -1,8 +1,6 @@
 @extends('layouts.admin-layout')
 @section('title','Profile Edit')
 @section('component_css')
-<link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
@@ -871,9 +869,14 @@
 
 @endsection
 @section('scripts')
+<!-- <script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
 <script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/multiselect/js/jquery.multi-select.js') }}"></script>
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<script src="{{ asset('libs/devbridge-autocomplete/jquery.autocomplete.min.js') }}"></script> -->
+<!-- <script src="{{ asset('libs/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+<script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script> -->
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 
@@ -884,12 +887,11 @@
     toastr.options.preventDuplicates = true;
 </script>
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-<script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
 <script src="{{ asset('libs/autonumeric/autoNumeric-min.js') }}"></script>
 
 <!-- Init js-->
-<script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
-<script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
+<!-- <script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
+<script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script> -->
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
@@ -898,7 +900,8 @@
         preferredCountries: ['my', 'jp'],
         responsiveDropdown: true
     });
-    var input = document.querySelector("#mother_phone_number");
+    function initializeIntlTelInput(inputSelector) {
+    var input = document.querySelector(inputSelector);
     intlTelInput(input, {
         allowExtensions: true,
         autoFormat: false,
@@ -914,126 +917,21 @@
         preventInvalidNumbers: true,
         // utilsScript: "js/utils.js"
     });
-    var input = document.querySelector("#father_phone_number");
-    intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        defaultCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        initialCountry: "jp",
-        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['my', 'jp'],
-        preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js"
-    });
-    var input = document.querySelector("#phone_number");
-    intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        defaultCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        initialCountry: "jp",
-        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['my', 'jp'],
-        preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js"
-    });
-    // var input = document.querySelector("#mobile_no");
-    // intlTelInput(input, {
-    //     allowExtensions: true,
-    //     autoFormat: false,
-    //     autoHideDialCode: false,
-    //     autoPlaceholder: false,
-    //     defaultCountry: "auto",
-    //     ipinfoToken: "yolo",
-    //     nationalMode: false,
-    //     numberType: "MOBILE",
-    //     //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-    //     //preferredCountries: ['cn', 'jp'],
-    //     preventInvalidNumbers: true,
-    //     utilsScript: "js/utils.js"
-    // });
-
-    
-	var input = document.querySelector("#japan_emergency_sms");
-	intlTelInput(input, {
-		allowExtensions: true,
-		autoFormat: false,
-		autoHideDialCode: false,
-		autoPlaceholder: false,
-		defaultCountry: "auto",
-		ipinfoToken: "yolo",
-		nationalMode: false,
-		numberType: "MOBILE",
-		initialCountry: "jp",
-		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-		//preferredCountries: ['cn', 'jp'],
-		preventInvalidNumbers: true,
-		// utilsScript: "js/utils.js"
-	});
-	var input = document.querySelector("#japan_contact_no");
-	intlTelInput(input, {
-		allowExtensions: true,
-		autoFormat: false,
-		autoHideDialCode: false,
-		autoPlaceholder: false,
-		defaultCountry: "auto",
-		ipinfoToken: "yolo",
-		nationalMode: false,
-		numberType: "MOBILE",
-		initialCountry: "jp",
-		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-		preferredCountries: ['my', 'jp'],
-		preventInvalidNumbers: true,
-		// utilsScript: "js/utils.js"
-	});
-	var input = document.querySelector("#guardian_phone_number");
-	intlTelInput(input, {
-		allowExtensions: true,
-		autoFormat: false,
-		autoHideDialCode: false,
-		autoPlaceholder: false,
-		defaultCountry: "auto",
-		ipinfoToken: "yolo",
-		nationalMode: false,
-		numberType: "MOBILE",
-		initialCountry: "jp",
-		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-		preferredCountries: ['my', 'jp'],
-		preventInvalidNumbers: true,
-		// utilsScript: "js/utils.js"
-	});
-	var input = document.querySelector("#guardian_company_phone_number");
-	intlTelInput(input, {
-		allowExtensions: true,
-		autoFormat: false,
-		autoHideDialCode: false,
-		autoPlaceholder: false,
-		defaultCountry: "auto",
-		ipinfoToken: "yolo",
-		nationalMode: false,
-		numberType: "MOBILE",
-		initialCountry: "jp",
-		//onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-		preferredCountries: ['my', 'jp'],
-		preventInvalidNumbers: true,
-		// utilsScript: "js/utils.js"
-	});
+}
+initializeIntlTelInput("#mother_phone_number");
+initializeIntlTelInput("#father_phone_number");
+initializeIntlTelInput("#phone_number");
+initializeIntlTelInput("#japan_emergency_sms");
+initializeIntlTelInput("#japan_contact_no");
+initializeIntlTelInput("#guardian_phone_number");
+initializeIntlTelInput("#guardian_company_phone_number");
 </script>
 <script>
     //event routes
     var eventList = "{{ route('parent.event.list') }}";
     var eventDetails = "{{ route('parent.event.details') }}";
 </script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<!-- <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script> -->
 <script src="{{ asset('js/custom/parent_settings.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
