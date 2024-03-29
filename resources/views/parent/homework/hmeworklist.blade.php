@@ -85,7 +85,7 @@
                         <div class="row ml-1">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="row"><label for="heard">{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
+                                    <div class="row"><label>{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
 
                                     <div class="row">
                                         <div class="form-check ">
@@ -240,7 +240,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-md-6 col-form-label">{{ __('messages.note') }} :</label>
+                                                        <label for="product-description" class="col-md-6 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="col-md-6 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
@@ -249,7 +249,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-md-6 col-form-label">{{ __('messages.attachment_file') }}:</label>
+                                                        <label for="inputGroupFile04" class="col-md-6 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="col-md-6 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>
@@ -353,7 +353,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
+                                                        <label for="product-description" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="ml-2 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
@@ -362,7 +362,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
+                                                        <label for="inputGroupFile04" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>
@@ -467,7 +467,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
+                                                        <label for="product-description" class="mb-2 col-form-label">{{ __('messages.note') }} :</label>
                                                         <div class="col-9">
                                                             <textarea class="ml-2 form-control" id="product-description" rows="5">
 														 I am most respectfully writing this in regard to the Homework </textarea>
@@ -476,7 +476,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="inputEmail3" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
+                                                        <label for="inputGroupFile04" class="mb-2 col-form-label">{{ __('messages.attachment_file') }}:</label>
                                                         <div class="col-9">
                                                             <input type="file" class="ml-2 custom-file-input" id="inputGroupFile04" disabled>
                                                             <label class="custom-file-label" for="inputGroupFile04">{{ __('messages.choose_the_file') }}</label>

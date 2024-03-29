@@ -3,6 +3,7 @@
 return [
     "menu_details" => "Menu Details",
     "dashboards" => "Dashboards",
+    "back_to_dashboard" => "Back to Dashboard",
     "dashboard" => "Dashboard",
     "employee" => "Employee",
     "students" => "Students",

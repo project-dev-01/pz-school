@@ -3,6 +3,7 @@
 return [
     "menu_details" => "メニュー",
     "dashboards" => "ダッシュボード",
+    "back_to_dashboard" => "ダッシュボードに戻る",
     "dashboard" => "ダッシュボード",
     "employee" => "職員",
     "students" => "生徒",

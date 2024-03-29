@@ -23,8 +23,8 @@ $(function () {
             url: updateGreddingSession,
             data: { greetting_id: greetting_id },
             success: function (res) {
-                console.log("--------")
-                console.log(res)
+                // console.log("--------")
+                // console.log(res)
             }
         });
     }

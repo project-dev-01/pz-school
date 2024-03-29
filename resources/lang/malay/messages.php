@@ -2,6 +2,7 @@
 return [
     "menu_details" => "Butiran Menu",
     "dashboards" => "Papan Pemuka",
+    "back_to_dashboard" => "Back to Dashboard",
     "dashboard" => "Papan Pemuka",
     "employee" => "Pekerja",
     "students" => "Pelajar",

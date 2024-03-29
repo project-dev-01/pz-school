@@ -247,7 +247,7 @@ border-bottom: 1px solid #E9D528;
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
+                                <label for="getCountry" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
                                         <option value="">{{ __('messages.select_category') }}</option>
@@ -262,7 +262,7 @@ border-bottom: 1px solid #E9D528;
                         </div>
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                <label for="inputTopic" class="col-3 col-form-label">User</label>
+                                <label for="selectedusers" class="col-3 col-form-label">User</label>
                                 
                                 <select class="form-control select2-multiple" data-toggle="select2" id="selectedusers" name="tags[]" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">
                                     <option value="">{{ __('messages.select_user') }}</option>

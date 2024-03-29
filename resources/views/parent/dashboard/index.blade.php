@@ -79,8 +79,8 @@
             width: 14.3em;
         }
     }
-    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
-     {
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px) {
         .dt-buttons {
             margin-left: 56px;
         }
@@ -89,8 +89,7 @@
             display: flex;
         }
     }
-    
-  </style>
+</style>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -672,7 +671,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="semester_id">{{ __('messages.semester') }}</label>
+                                <label for="sr_semester_id">{{ __('messages.semester') }}</label>
                                 <select id="sr_semester_id" class="form-control studentRank" name="semester_id">
                                     <option value="0">{{ __('messages.select_semester') }}</option>
                                     @forelse($semester as $sem)
@@ -685,7 +684,7 @@
                         </div>
                         <div class="col-md-3" style="display:none;">
                             <div class="form-group">
-                                <label for="session_id">{{ __('messages.session') }}</label>
+                                <label for="sr_session_id">{{ __('messages.session') }}</label>
                                 <select id="sr_session_id" class="form-control studentRank" name="session_id">
                                     <option value="0">{{ __('messages.select_session') }}</option>
                                     @forelse($session as $ses)
@@ -698,7 +697,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
+                                <label for="sr_examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                 <select id="sr_examnames" class="form-control studentRank" name="examnames">
                                     <option value="">{{ __('messages.select_exams') }}</option>
                                     @forelse($exams as $exam)
@@ -710,7 +709,12 @@
                         </div>
                         <div class="col-md-4 form-inline">
                             <div class="form-group">
-                                <label for=""><b> {{ __('messages.class_rank') }} : <span id="class_rank"></span> <br>{{ __('messages.total_marks') }}: <span id="class_total"></span></b></label>
+                                <div>
+                                    <b>{{ __('messages.class_rank') }}:</b> <span id="class_rank"></span>
+                                </div>
+                                <div>
+                                    <b>{{ __('messages.total_marks') }}:</b> <span id="class_total"></span>
+                                </div>
                             </div>
                         </div>
                     </div><br>
@@ -860,7 +864,7 @@
                             <div class="card-body" dir="ltr">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="examID">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
+                                        <label for="scoreExamID">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
                                         <select id="scoreExamID" class="form-control" name="examID">
                                             <option value="">{{ __('messages.select_exams') }}</option>
                                             @foreach($exams as $exam)

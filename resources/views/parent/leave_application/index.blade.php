@@ -132,7 +132,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
+                                    <label for="frm_ldate">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="to_ldate">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -180,7 +180,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
+                                    <label for="changelevReasons">{{ __('messages.reason(s)') }}<span class="text-danger">*</span></label>
                                     <select id="changelevReasons" class="form-control" name="changelevReasons">
                                         <option value="">{{ __('messages.select_reason') }}</option>
                                     </select>
@@ -193,7 +193,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document">{{ __('messages.attachment_file') }}</label>
+                                    <label for="leave_file">{{ __('messages.attachment_file') }}</label>
 
                                     <div class="input-group">
                                         <div class="">
@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changelev">{{ __('messages.remarks') }}</label>
+                                    <label for="txtarea_prev_remarks">{{ __('messages.remarks') }}</label>
                                     <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10"></textarea>
                                 </div>
                             </div>

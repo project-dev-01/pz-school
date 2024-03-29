@@ -185,7 +185,7 @@
                 <div class="form-group">
                     <label for="inputTopicHeader">{{ __('messages.topic_header') }}</label>
                     <div class="tt-value-wrapper">
-                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicTitle" placeholder="{{ __('messages.header_of_your_topic') }}">
+                        <input type="text" name="inputTopicHeader" class="form-control" id="inputTopicHeader" placeholder="{{ __('messages.header_of_your_topic') }}">
                         <span class="tt-value-input"></span>
                     </div>
                     <div class="tt-note">{{ __('messages.describe_your_topic_header') }}..</div>
@@ -270,7 +270,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="category" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
+                                <label for="getCountry" class="col-3 col-form-label">{{ __('messages.category') }}<span class="text-danger">*</span></label>
                                 <div class="col-9">
                                     <select id="getCountry" class="form-control" name="category">
                                         <option value="">{{ __('messages.select_category') }}</option>
@@ -285,7 +285,7 @@
                         </div>
                         <div class="col-md-8" style="width: 800px;margin:0 auto;">
                             <div class="form-group">
-                                <label for="inputTopic" class="col-3 col-form-label">{{ __('messages.user') }}</label>
+                                <label for="selectedusers" class="col-3 col-form-label">{{ __('messages.user') }}</label>
                                 <select name="tags[]" id="selectedusers" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.select_user') }}">>
                                     <option value=""></option>
                                     @foreach($usernames as $c)

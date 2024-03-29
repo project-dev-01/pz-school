@@ -106,15 +106,15 @@
                         <div class="row ml-1">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="row"><label for="status">{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
+                                    <div class="row"><label>{{ __('messages.status') }}<span class="text-danger">*</span></label> </div>
 
                                     <div class="row">
                                         <div class="form-check ">
-                                            <input type="radio" class="form-check-input" name="status" value="1">
+                                            <input type="radio" class="form-check-input" id="materialInline1" name="status" value="1">
                                             <label class="form-check-label font-weight-bold" for="materialInline1">{{ __('messages.completed') }}</label>
                                         </div> &nbsp;&nbsp;
                                         <div class="form-check col-md-offset-4">
-                                            <input type="radio" class="form-check-input" name="status" value="0">
+                                            <input type="radio" class="form-check-input" id="materialInline2" name="status" value="0">
                                             <label class="form-check-label font-weight-bold" for="materialInline2">{{ __('messages.incompleted') }}</label>
                                         </div>
                                     </div>

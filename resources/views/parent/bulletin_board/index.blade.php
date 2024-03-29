@@ -145,7 +145,7 @@
     <div class="card-box">
         <div class="row">
             <div class="col-lg-3">
-                <label for="employee_type">{{ __('messages.search') }}</label>
+                <label for="pdfSearchInput">{{ __('messages.search') }}</label>
                 <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
             </div>
         </div>
