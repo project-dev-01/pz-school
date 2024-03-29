@@ -163,7 +163,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            {{ __('messages.email_verification') }}
+                                            {{ __('messages.email_verification') }} 
                                             <h4>
                                     </li>
                                 </ul>
@@ -201,7 +201,25 @@
                                     </div>
                                 </div>
                                 <hr> -->
+
+
                                 <div class="form-group text-center m-b-0">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox text-center">
+                                                    
+                                                <!-- <a href="https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3" target="_blank"></a> -->
+                                                    <input type="checkbox" name="submit_instruction" class="custom-control-input" id="submit_instruction">
+                                                    
+                                                    <label class="custom-control-label" for="submit_instruction">{{ __('messages.i_have_read_the_submit_instruction') }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center m-b-0">
+
                                     <button class="btn btn-primary-bl waves-effect waves-light" disabled id="submit" type="submit">
                                         {{ __('messages.verify') }}
                                     </button>
@@ -276,6 +294,8 @@
     <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
     <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
     <script type="text/javascript">
+
+
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
         //change button stuff on click
@@ -368,6 +388,8 @@
                 $('.btn-select').attr('value', value);
             }
         }
+
+        
     </script>
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";

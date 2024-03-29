@@ -369,7 +369,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="schedule_date_of_termination">{{ __('messages.scheduled_date_of_termination') }}</label>
+                                        <label for="schedule_date_of_termination">{{ __('messages.scheduled_date_of_termination_5_business_day') }}</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" class="form-control" {{$disabled}} id="schedule_date_of_termination" value="{{ $termination['schedule_date_of_termination']}}" name="schedule_date_of_termination" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">
@@ -398,26 +398,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="transfer_destination_tel">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" {{$readonly}} id="transfer_destination_tel" value="{{ $termination['transfer_destination_tel']}}" name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control number_validation" {{$readonly}} id="transfer_destination_tel" value="{{ $termination['transfer_destination_tel']}}" name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parent_phone_number_after_transfer">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" {{$readonly}} id="parent_phone_number_after_transfer" value="{{ $termination['parent_phone_number_after_transfer']}}" name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control number_validation" {{$readonly}} id="parent_phone_number_after_transfer" value="{{ $termination['parent_phone_number_after_transfer']}}" name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parent_email_address_after_transfer">{{ __('messages.parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
+                                        
                                             <input type="text" name="parent_email_address_after_transfer" {{$readonly}} value="{{ $termination['parent_email_address_after_transfer']}}" class="form-control" id="parent_email_address_after_transfer" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -426,7 +421,7 @@
                                         <textarea type="text" class="form-control" {{$readonly}} id="parent_address_after_transfer" name="parent_address_after_transfer" placeholder="{{ __('messages.enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend">{{ $termination['parent_address_after_transfer']}}</textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="school_fees_payment_status">{{ __('messages.school_fees_payment_status') }}<span class="text-danger">*</span></label>
                                         <select id="school_fees_payment_status" name="school_fees_payment_status" class="form-control"  {{$disabled}}>
@@ -438,8 +433,8 @@
                                         <input type="hidden" value="{{$termination['school_fees_payment_status']}}" name="school_fees_payment_status">
                                         @endif
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> -->
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="termination_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                         <select id="termination_status" class="form-control" name="termination_status" >
@@ -460,7 +455,7 @@
                                         <input type="text" class="form-control" id="remarks" value="{{$termination['remarks']}}" name="remarks" placeholder="{{ __('messages.enter_remarks') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
-                                @endif
+                                @endif -->
                                 @if($termination['termination_status']=="Approved")
                                 <input type="hidden" value="{{ $termination['date_of_termination']}}" name="old_date_of_termination">
                                 <div class="col-md-4">
@@ -481,7 +476,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="delete_google_address">{{ __('messages.delete_google_address') }}<span class="text-danger">*</span></label>
                                         <div class="custom-control custom-checkbox">
@@ -492,7 +487,7 @@
                                         <input type="hidden" value="{{ $termination['delete_google_address']}}" name="delete_google_address">
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
                             </div><br>
                             <!-- </div><br>
                         <ul class="nav nav-tabs">

@@ -332,19 +332,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user-graduate"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control shortNameChange" value="{{ isset($employee['first_name']) ? $employee['first_name'] : ''}}" name="first_name" id="firstName" placeholder="{{ __('messages.yamamoto') }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label for="last_name">{{ __('messages.last_name') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
@@ -356,39 +343,35 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @if($form_field['name_english'] == 0)
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">{{ __('messages.first_name') }}({{ __('messages.english') }})<span class="text-danger">*</span></label>
+                                    <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($employee['first_name_english']) ? $employee['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-3">
-                                    <label for="">{{ __('messages.last_name') }}({{ __('messages.english') }})</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="fas fa-user-graduate"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($employee['last_name_english']) ? $employee['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control shortNameChange" value="{{ isset($employee['first_name']) ? $employee['first_name'] : ''}}" name="first_name" id="firstName" placeholder="{{ __('messages.yamamoto') }}">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endif
                         @if($form_field['name_furigana'] == 0)
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($employee['last_name_furigana']) ? $employee['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">{{ __('messages.first_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
@@ -402,16 +385,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        @endif
+                        @if($form_field['name_english'] == 0)
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
-                                    <label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})</label>
+                                    <label for="">{{ __('messages.last_name_roma') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="fas fa-user-graduate"></span>
                                             </div>
                                         </div>
-                                        <input type="text" name="last_name_furigana" class="form-control alloptions" maxlength="50" id="last_name_furigana" value="{{ isset($employee['last_name_furigana']) ? $employee['last_name_furigana'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" name="last_name_english" class="form-control alloptions" maxlength="50" id="last_name_english" value="{{ isset($employee['last_name_english']) ? $employee['last_name_english'] : ''}}" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-user-graduate"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="first_name_english" class="form-control alloptions" maxlength="50" id="first_name_english" value="{{ isset($employee['first_name_english']) ? $employee['first_name_english'] : ''}}" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

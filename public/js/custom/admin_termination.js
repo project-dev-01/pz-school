@@ -88,7 +88,7 @@ $(function () {
     
     $("#terminationEditForm").validate({
         rules: {
-            date_of_termination : "required", 
+            // date_of_termination : "required", 
             termination_status: "required", 
             school_fees_payment_status : "required", 
         }

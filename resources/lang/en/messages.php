@@ -66,7 +66,7 @@ return [
     "mother_details" => "Mother Details",
     "mother_name" => "Mother Name",
     "guardian" => "Guardian",
-    "guardian_details" => "Guardian Details",
+    "guardian_details" => "Guardian details (Please use head of family)",
     "guardian_name" => "Guardian Name",
     "relation" => "Relation",
     "transport_details" => "Transport Details",
@@ -2047,8 +2047,9 @@ return [
     "child_health_report" => "Child Health Report",
     "report_list" => "Report List",
     "name_common" => "Name (Common)",
-    "first_name_common" => "First Name (Common)",
-    "last_name_common" => "Last Name (Common)","personalinterview_situation"=>"Situation when they entered the class",
+    "first_name_common" => "Common name (First Name) ",
+    "last_name_common" => "Common name (Last Name) ",
+    "personalinterview_situation"=>"Situation when they entered the class",
     "personalinterview_improved"=>"What kind of thing they have improved",
     "personalinterview_tried"=>"What kind of things they have tried",
     "personalinterview_future"=>"What kind of thing they trying to do in the future",
@@ -2213,6 +2214,8 @@ return [
     "japan_address" => "Japan Address",
     "stay_category"  => "Stay Category",
     "long_stay"  => "Long Stay",
-    "pr_stay"  => "PR Stay"
-
+    "pr_stay"  => "PR Stay",
+    "scheduled_date_of_termination_5_business_day" => "Scheduled date of Termination (Please enter date after 5 business day)",
+    "i_have_read_the_submit_instruction" => "I Have Read the Submit Instruction",
+    "skip_prev_school_details" => "Skip Prev School Details",
 ];

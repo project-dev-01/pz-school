@@ -1,6 +1,15 @@
 $(function () {
 
     
+    $(".number_validation").keypress(function(event){
+        console.log(123)
+        var regex = new RegExp("^[0-9-+]");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
     $("#date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,

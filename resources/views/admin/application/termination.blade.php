@@ -31,7 +31,7 @@
                             </tr>
                             
                             <tr>
-                                <td>{{ __('messages.scheduled_date_of_termination') }}</td>
+                                <td>{{ __('messages.scheduled_date_of_termination_5_business_day') }}</td>
                                 <td>:</td>
                                 <td><div class="input-group input-group-merge">
                                             <input type="text" class="form-control" id="schedule_date_of_termination" name="schedule_date_of_termination" readonly  placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
@@ -113,7 +113,7 @@
                                     </select></td>
                             </tr>
                             <tr id="date_of_termination_row" style="display:none">
-                                <td>{{ __('messages.date_of_termination') }}<span class="text-danger">*</span></td>
+                                <td>{{ __('messages.date_of_termination') }}</td>
                                 <td>:</td>
                                 <td>
                                 
@@ -126,6 +126,7 @@
                             </div>
                             <input type="text" class="form-control datepicker" id="date_of_termination" name="date_of_termination" aria-describedby="inputGroupPrepend">
                         </div>
+                        <label for="date_of_termination" class="error"></label>
                     </div>    </td>
                             </tr>
                             <tr>

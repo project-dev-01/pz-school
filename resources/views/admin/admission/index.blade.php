@@ -1350,12 +1350,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" >
                                     <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">{{ __('messages.father_name') }}</label>
@@ -1590,12 +1590,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" >
                                     <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">{{ __('messages.mother_name') }}</label>

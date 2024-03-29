@@ -194,7 +194,6 @@ $(function () {
             var formData = new FormData();
             formData.append('postalCode', postalCode);
             formData.append('country', country);
-            console.log(formData);
             $.ajax({
                 url: malaysiaPostalCode,
                 type: "POST",
@@ -221,53 +220,60 @@ $(function () {
 
         });
     });
-    // $("#date_of_birth").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-60:+1", // last hundred years
-    //     maxDate: 0
-    // });
-    // $("#expected_enroll_date").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-1:+1", // last hundred years
-    //     minDate: 0
-    // });
-    // $("#trail_date").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-3:+6", // last hundred years
-    // });
+    $("#date_of_birth").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-60:+1", // last hundred years
+        maxDate: 0
+    });
+    $("#expected_enroll_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-1:+1", // last hundred years
+        minDate: 0
+    });
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+    $("#official_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
 
-    // $("#passport_expiry_date").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-10:+10", // last hundred years
-    // });
+    $("#passport_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-10:+10", // last hundred years
+    });
 
-    // $("#visa_expiry_date").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-10:+10", // last hundred years
-    // });
-    // $("#last_date_of_withdrawal").datepicker({
-    //     dateFormat: 'yy-mm-dd',
-    //     changeMonth: true,
-    //     changeYear: true,
-    //     autoclose: true,
-    //     yearRange: "-20:+50", // last hundred years
-    //     maxDate: 0
-    // });
+    $("#visa_expiry_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-10:+10", // last hundred years
+    });
+    $("#last_date_of_withdrawal").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-20:+50", // last hundred years
+        maxDate: 0
+    });
     $("#next").click(function () {
         console.log('etts')
         $("#basic_tab").removeClass("active");
@@ -409,14 +415,14 @@ $(function () {
             passport_father_photo: "required",
             passport_mother_photo: "required",
 
-            status_after_approval: "required",
+            // status_after_approval: "required",
             enrolled_academic_year: "required",
             enrolled_department: "required",
             enrolled_grade: "required",
             enrolled_class: "required",
             phase_2_reason:"required",
             phase_1_reason:"required",
-            enrollment:"required",
+            // enrollment:"required",
             stay_category:"required",
 
             "passport_photo": {
@@ -522,6 +528,17 @@ $(function () {
         }
     });
 
+    // skip_prev_school_details
+    $("#skip_prev_school_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            
+            $(".prev_school_form").val("");
+            $("#prev_school_details").hide("slow");
+        } else {
+            $("#prev_school_details").show("slow");
+        }
+    });
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
         

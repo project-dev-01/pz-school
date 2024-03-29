@@ -33,7 +33,7 @@
                         <i class="h1 mdi mdi-comment-multiple-outline text-muted"></i>
                         <h3 class="mb-3">{{ __('messages.frequently_asked_questions') }}</h3>
                         <p class="text-muted">{{ __('messages.have_questions_look') }}</p>
-                        <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>{{ __('messages.email_us_your_question') }}</button>
+                        <!-- <button type="button" class="btn btn-success waves-effect waves-light mt-2 mr-1" data-toggle="modal" data-target="#faq-mail"><i class="mdi mdi-email-outline mr-1"></i>{{ __('messages.email_us_your_question') }}</button> -->
                     </div>
                 </div><!-- end col -->
             </div><!-- end row -->

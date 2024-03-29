@@ -342,7 +342,7 @@
                                     <div class="form-group">
                                         <label for="date">{{ __('messages.date') }}</label>
                                         <div class="input-group input-group-merge">
-                                            <input type="text" class="form-control" id="date"  value="<?php echo date('Y-m-d'); ?>" name="date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="date"  disabled value="<?php echo date('Y-m-d'); ?>" name="date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <span class="far fa-calendar-alt"></span>
@@ -351,9 +351,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="schedule_date_of_termination">{{ __('messages.scheduled_date_of_termination') }}</label>
+                                        <label for="schedule_date_of_termination">{{ __('messages.scheduled_date_of_termination_5_business_day') }}</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" class="form-control" id="schedule_date_of_termination"  value="<?php echo date('Y-m-d'); ?>" name="schedule_date_of_termination" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">
@@ -379,26 +380,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="transfer_destination_tel">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_phone_number_after_transfer">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="parent_email_address_after_transfer">{{ __('messages.parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-envelope-open"></span>
-                                            </div>
-                                        </div>
+                                    
                                         <input type="text" name="parent_email_address_after_transfer" class="form-control" id="parent_email_address_after_transfer" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
-                                    </div>
+                                    
                                 </div>
                             </div>
                                 <!-- <div class="col-md-4">

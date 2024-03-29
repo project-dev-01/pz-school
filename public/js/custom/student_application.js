@@ -53,8 +53,14 @@ $(function () {
         }
 
     });
+    $(document).on('change', '#submit_instruction', function () {
+        if ($(this).prop('checked') == true) {
+            window.open("https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3", '_blank');
+            // $(this).prop('disabled', true);
+        }
+    });
+    
     $(".number_validation").keypress(function () {
-        console.log(123)
         var regex = new RegExp("^[0-9-+]");
         var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
