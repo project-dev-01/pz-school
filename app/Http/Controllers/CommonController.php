@@ -734,24 +734,34 @@ class CommonController extends Controller
     {
         return view('clear-local-storage');
     }
-    public function getPostalCode(Request $request){
-
-        $postalCode = $request->input('postalCode');  
+    public function getPostalCode(Request $request)
+    {
+        $postalCode = $request->input('postalCode');
         $countryCodes = [
             "Malaysia" => "my",
             "Japan" => "jp",
-            "Japan (日本)" =>"jp"
+            "Japan (日本)" => "jp"
             // Add more mappings as needed
-        ];      
-         $country = $request->input('country'); 
-         $countryCode = isset($countryCodes[$country]) ? $countryCodes[$country] : null;
-         $apiUrl = 'https://api.zippopotam.us/' . $countryCode . '/' . $postalCode;         // Make request to the third-party API
-         $response = Http::get($apiUrl);         // Check if the request was successful
-         if ($response->successful()) {             
-            return $response->json();         
-        } else {             // Return an error response if the request failed
-            return response()->json(['error' => 'Failed to fetch data from the third-party API'], 
-            $response->status());         
+        ];
+        
+        $country = $request->input('country');
+        $countryCode = isset($countryCodes[$country]) ? $countryCodes[$country] : null;
+        
+        if ($countryCode === null) {
+            return response()->json(['error' => 'Invalid country specified'], 400);
+        }
+        
+        $apiUrl = 'https://api.zippopotam.us/' . $countryCode . '/' . $postalCode;
+
+        // Make request to the third-party API
+        $response = Http::get($apiUrl);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            return $response->json();
+        } else {
+            // Return an error response if the request failed
+            return response()->json(['error' => 'Failed to fetch data from the third-party API'], $response->status());
         }
     }
 }

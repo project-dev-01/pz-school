@@ -2148,6 +2148,7 @@ class ParentController extends Controller
             'passport_mother_old_photo' => $request->passport_mother_old_photo,
             'visa_father_old_photo' => $request->visa_father_old_photo,
             'visa_mother_old_photo' => $request->visa_mother_old_photo,
+            'stay_category'=> $request->stay_category,
         ];
         // }
         // return $data;

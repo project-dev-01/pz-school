@@ -1071,6 +1071,7 @@ $(".country").countrySelect({
     var indexStudent = "{{ route('admin.student.index') }}";
     var indexAdmission = "{{ route('admin.admission') }}";
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
+    var malaysiaPostalCode = "{{ route('parent.malaysia_postalCode') }}";
 </script>
 <!-- button js added -->
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>

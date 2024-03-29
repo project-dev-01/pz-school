@@ -2448,6 +2448,7 @@
     var indexAdmission = "{{ route('admin.admission') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var studentList = null;
+    var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

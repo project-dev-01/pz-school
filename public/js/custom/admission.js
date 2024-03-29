@@ -249,6 +249,48 @@ $(function () {
             $("#father_form").show("slow");
         }
     });
+    $("#passport, #japanese_association_membership_number_student").on("input", function() {
+        var regexp = /^[A-Za-z0-9]+$/;
+        if (!regexp.test($(this).val())) {
+            $(this).val($(this).val().replace(/[^\w]/gi, ''));
+        }
+    });
+    $(document).ready(function () {
+        $("#drp_post_code").change(function () {
+
+            var postalCode = $('#drp_post_code').val();
+            var country = $('#drp_country').val();
+            var formData = new FormData();
+            formData.append('postalCode', postalCode);
+            formData.append('country', country);
+            console.log(formData);
+            $.ajax({
+                url: malaysiaPostalCode,
+                type: "POST",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    if (response.places && response.places.length > 0) {
+                        var place = response.places[0];
+                        var city = place['place name'];
+                        var state = place['state'];
+                        $('#drp_city').val(city);
+                        $('#drp_state').val(state);
+                    } else {
+                        alert('Postal code not found or invalid.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
+
+        });
+    });
     // rules validation
     $("#addadmission").validate({
         rules: {

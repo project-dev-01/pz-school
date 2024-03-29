@@ -43,7 +43,7 @@
                     </li>
                 </ul><br>
                 <div class="card-body">
-                    <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <form id="employeeHealthLogFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                         <div class="col-md-4">
                                 <div class="form-group">

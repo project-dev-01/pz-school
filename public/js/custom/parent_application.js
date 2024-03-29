@@ -138,22 +138,21 @@ $(function () {
 
     $(document).ready(function () {
         $("#postal_code").change(function () {
-
             var postalCode = $('#postal_code').val();
-
-            var ccou = $('#country').val();
-            console.log('sys',ccou)
-            var country = 'my/'; // Country Code: my
-
-            var apiUrl = 'https://api.zippopotam.us/' + country + postalCode;
-
+            var country = $('#country').val();
+            var formData = new FormData();
+            formData.append('postalCode', postalCode);
+            formData.append('country', country);
+            console.log(formData);
             $.ajax({
-                url: apiUrl,
-                type: "GET",
+                url: malaysiaPostalCode,
+                type: "POST",
+                data: formData,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
+                    console.log(response);
                     if (response.places && response.places.length > 0) {
                         var place = response.places[0];
                         var city = place['place name'];
@@ -369,6 +368,12 @@ $(function () {
             });
         }
     });
+    $("#passport, #japanese_association_membership_number_student").on("input", function() {
+        var regexp = /^[A-Za-z0-9]+$/;
+        if (!regexp.test($(this).val())) {
+            $(this).val($(this).val().replace(/[^\w]/gi, ''));
+        }
+    });
     $("#editApplication").validate({
         rules: {
             first_name: "required",
@@ -491,6 +496,7 @@ $(function () {
             visa_expiry_date: "required",
             visa_type: "required",
             visa_type_others: "required",
+            stay_category:"required",
             japanese_association_membership_number_student: "required",
             // japanese_association_membership_image_principal:"required",
             // japanese_association_membership_image_supplimental:"required",

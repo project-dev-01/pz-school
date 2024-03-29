@@ -180,7 +180,7 @@
                                             <div class="row">
                                                 <!-- Labels and Multi-Select Dropdowns -->
                                                 <div class="col-md-3">
-                                                    <div class="form-group">
+                                                    <div class="form-group"> 
                                                     <label for="class_id">{{ __('messages.category_1') }}<span class="text-danger">*</span></label>
                                                         <select id="edit_illness_name" class="form-control select2-multiple"   data-toggle="select2"   multiple name="edit_illness_name[]">
                                                             <option value="">{{ __('messages.select_illness_name') }}</option>

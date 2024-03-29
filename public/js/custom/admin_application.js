@@ -194,7 +194,7 @@ $(function () {
             var formData = new FormData();
             formData.append('postalCode', postalCode);
             formData.append('country', country);
-
+            console.log(formData);
             $.ajax({
                 url: malaysiaPostalCode,
                 type: "POST",
@@ -272,6 +272,13 @@ $(function () {
         console.log('etts')
         $("#basic_tab").removeClass("active");
         $("#personal_tab").addClass("active");
+    });
+    
+    $("#passport, #japanese_association_membership_number_student").on("input", function() {
+        var regexp = /^[A-Za-z0-9]+$/;
+        if (!regexp.test($(this).val())) {
+            $(this).val($(this).val().replace(/[^\w]/gi, ''));
+        }
     });
     $("#editApplication").validate({
         rules: {
@@ -410,6 +417,7 @@ $(function () {
             phase_2_reason:"required",
             phase_1_reason:"required",
             enrollment:"required",
+            stay_category:"required",
 
             "passport_photo": {
                 required: function (element) {

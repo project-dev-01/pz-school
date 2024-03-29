@@ -126,44 +126,6 @@ $(function () {
             $('#visa_mother_photo_name').text(file.name);
         }
     });
-
-
-    $(document).ready(function () {
-        $("#postal_code").change(function () {
-
-            var postalCode = $('#postal_code').val();
-
-            var ccou = $('#country').val();
-            console.log('sys',ccou)
-            var country = 'my/'; // Country Code: my
-
-            var apiUrl = 'https://api.zippopotam.us/' + country + postalCode;
-
-            $.ajax({
-                url: apiUrl,
-                type: "GET",
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    if (response.places && response.places.length > 0) {
-                        var place = response.places[0];
-                        var city = place['place name'];
-                        var state = place['state'];
-                        $('#city').val(city);
-                        $('#state').val(state);
-                    } else {
-                        alert('Postal code not found or invalid.');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-
-
-        });
-    });
     $("#date_of_birth").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -387,6 +349,49 @@ $(function () {
             });
         }
     });
+    
+    $(document).ready(function () {
+        $("#postal_code").change(function () {
+
+            var postalCode = $('#postal_code').val();
+            var country = $('#country').val();
+            var formData = new FormData();
+            formData.append('postalCode', postalCode);
+            formData.append('country', country);
+            console.log(formData);
+            $.ajax({
+                url: malaysiaPostalCode,
+                type: "POST",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    if (response.places && response.places.length > 0) {
+                        var place = response.places[0];
+                        var city = place['place name'];
+                        var state = place['state'];
+                        $('#city').val(city);
+                        $('#state').val(state);
+                    } else {
+                        alert('Postal code not found or invalid.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
+
+        });
+    });
+    $("#passport, #japanese_association_membership_number_student").on("input", function() {
+        var regexp = /^[A-Za-z0-9]+$/;
+        if (!regexp.test($(this).val())) {
+            $(this).val($(this).val().replace(/[^\w]/gi, ''));
+        }
+    });
     $("#editApplication").validate({
         rules: {
             first_name: "required",
@@ -515,6 +520,7 @@ $(function () {
             phase2_remarks: "required",
             passport_father_photo: "required",
             passport_mother_photo: "required",
+            stay_category:"required",
 
 
             "passport_photo": {

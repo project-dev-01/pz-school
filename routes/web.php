@@ -182,6 +182,7 @@ Route::group(['prefix' => 'guest'], function () {
         Route::post('/application/add', [GuestController::class, 'applicationAdd'])->name('guest.application.add');
         Route::get('/application/edit/{id}', [GuestController::class, 'applicationEdit'])->name('guest.application.edit');
         Route::post('/application/update', [GuestController::class, 'applicationUpdate'])->name('guest.application.update');
+        Route::post('/application/malaysia_postalCode', [CommonController::class, 'getPostalCode'])->name('guest.malaysia_postalCode');
     });
 });
 
@@ -1586,6 +1587,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::post('/application/add', [ParentController::class, 'applicationAdd'])->name('parent.application.add');
         Route::get('/application/edit/{id}', [ParentController::class, 'applicationEdit'])->name('parent.application.edit');
         Route::post('/application/update', [ParentController::class, 'applicationUpdate'])->name('parent.application.update');
+        Route::post('/application/malaysia_postalCode', [CommonController::class, 'getPostalCode'])->name('parent.malaysia_postalCode');
 
 
 

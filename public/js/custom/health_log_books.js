@@ -97,87 +97,50 @@ $(function () {
     }
     
 
-    $('#studentHomeworkFilter').on('submit', function (e) {
-        e.preventDefault();
-        var form = this;
-        var formstatus = $('input[name="status"]:checked').val();
+    // $('#studentHomeworkFilter').on('submit', function (e) {
+    //     e.preventDefault();
+    //     var form = this;
+    //     var formstatus = $('input[name="status"]:checked').val();
 
-        var formsubject = $('#subject').val();
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (data) {
-                console.log('cs', data)
-                if (data.code == 200) {
-                    $("#homeworks").show("slow");
-                    if (data.subject != "All") {
-                        var sub = homework_list_lang + ' (' + data.subject + ')';
+    //     var formsubject = $('#subject').val();
+    //     $.ajax({
+    //         url: $(form).attr('action'),
+    //         method: $(form).attr('method'),
+    //         data: new FormData(form),
+    //         processData: false,
+    //         dataType: 'json',
+    //         contentType: false,
+    //         success: function (data) {
+    //             console.log('cs', data)
+    //             if (data.code == 200) {
+    //                 $("#homeworks").show("slow");
+    //                 if (data.subject != "All") {
+    //                     var sub = homework_list_lang + ' (' + data.subject + ')';
 
-                    } else {
-                        var sub = homework_list_lang + ' (' + all_subject_lang + ')';
-                    }
-                    $("#title").html(sub);
-                    $("#homework_list").html(data.list);
-                } else {
-                    $("#homeworks").hide("slow");
-                    toastr.error(data.message);
-                }
-            }
-        });
-        var classObj = {
-            formstatus: formstatus,
-            formsubject: formsubject,
-            academic_session_id: academic_session_id
-        };
-        // console.log(academic_session_id);
-        setLocalStorageForparenthomework(classObj);
-    });
-
-    function setLocalStorageForparenthomework(classObj) {
-
-        var homeworkDetails = new Object();
-        homeworkDetails.status = classObj.formstatus;
-        homeworkDetails.subject = classObj.formsubject;
-        // here to attached to avoid localStorage other users to add
-        homeworkDetails.branch_id = branchID;
-        homeworkDetails.role_id = get_roll_id;
-        homeworkDetails.user_id = ref_user_id;
-        var homeworkClassArr = [];
-        homeworkClassArr.push(homeworkDetails);
-        if (get_roll_id == "5") {
-            // Parent
-            localStorage.removeItem("parent_homework_details");
-            localStorage.setItem('parent_homework_details', JSON.stringify(homeworkClassArr));
-        }
-        if (get_roll_id == "6") {
-            // Parent
-            localStorage.removeItem("student_homework_details");
-            localStorage.setItem('student_homework_details', JSON.stringify(homeworkClassArr));
-        }
-
-        return true;
-    }
-
-
-
-
-
+    //                 } else {
+    //                     var sub = homework_list_lang + ' (' + all_subject_lang + ')';
+    //                 }
+    //                 $("#title").html(sub);
+    //                 $("#homework_list").html(data.list);
+    //             } else {
+    //                 $("#homeworks").hide("slow");
+    //                 toastr.error(data.message);
+    //             }
+    //         }
+    //     });
+    // });
     // rules validation
-    $("#employeeAttendanceFilter").validate({
+    $("#employeeHealthLogFilter").validate({
         rules: {
             date_of_homework: "required"
         }
     });
 
     // add Homework
-    $('#employeeAttendanceFilter').on('submit', function (e) {
+    $('#employeeHealthLogFilter').on('submit', function (e) {
         e.preventDefault();
       
-        var homeworkCheck = $("#employeeAttendanceFilter").valid();
+        var homeworkCheck = $("#employeeHealthLogFilter").valid();
 
         if (homeworkCheck === true) {
             $(".classRoomHideSHow").show("slow");
@@ -363,10 +326,7 @@ $(function () {
     formData.set('event_notes_b', event_notes_b);
     formData.set('date', date); // Set the date in the FormData
 
-    // // Log the entire FormData object using entries()
-    // for (var pair of formData.entries()) {
-    //     console.log(pair[0] + ': ' + pair[1]);
-    // }
+   
 
         // Submit the save form
         $.ajax({
@@ -660,8 +620,10 @@ $(function () {
                 }
                var targetId = data.data.target_id;
                if(targetId){
+                $('#editreasonTab3').addClass('active'); // Add 'active' class to the selected tab
                 $('#edit_target').val(targetId.split(',')).trigger('change');
                 $('#edit_health_consult_reason').html(data.data.event_notes_c);
+                $('#editreason3').addClass('show active');
                }
                var healthTreatmentId = data.data.health_treatment_id;
                if(healthTreatmentId){
@@ -669,7 +631,9 @@ $(function () {
                }
                if(data.data.tab == "Attend to heatlthcare room")
                {
+                $('#editreasonTab4').addClass('active'); // Add 'active' class to the selected tab
                 $('#edit_attend_to_heatlthcare_room_reason').html(data.data.event_notes_c);
+                $('#editreason4').addClass('show active');
                }
             
             $('.editModal').find('input[name="edit_reasonTemp"]').val(data.data.reasonTemp);
@@ -681,7 +645,8 @@ $(function () {
     });
    
     
-    $(document).on('click', '#editMainReasonButton', function () {
+    $('.editMainReasonButton').on('click', function(e) {
+        e.preventDefault();
         var activeTabId = $('#mainReasonTabsEdit .nav-link.active').attr('id');
 
         if (activeTabId === "editreasonTab1") {
@@ -794,8 +759,7 @@ $(function () {
         // if(heathCheck === true)
         // {
 
-            var formData = new FormData($('#edit-health-form')[0]);
-            console.log(formData);
+          
                 var healthlogID = $('#id').val();
                 console.log(healthlogID);
                 var department_id = $('#editdepartment_id').val();
@@ -849,7 +813,8 @@ $(function () {
                 };
     
                var mainReasonText = Object.values(selectedText).filter(value => value !== '').join(', ');
-    
+               var formData = new FormData($('#edit-health-form')[0]); // Using get() method to get the raw DOM element
+
                 formData.set('id', healthlogID);
                 formData.set('editdepartment_id', department_id);
                 formData.set('class_id', changeClassName);
@@ -874,28 +839,34 @@ $(function () {
                 formData.set('date', date); // Set the date in the FormData
                 console.log(formData);
               
+
                 $.ajax({
-                    url: updateHealthLogBooksListPartC,
-                    method: "post",
+                    url: $('#edit-health-form').attr('action'),
+                    method: 'POST',
                     data: formData,
+                    processData: false, // Important for FormData
+                    contentType: false, // Important for FormData
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
                         if (data.code == 0) {
-                            $.each(data.error, function (prefix, val) {
-                                $('#edit-health-form').find('span.' + prefix + '_error').text(val[0]);
+                            $.each(data.error, function(prefix, val) {
+                                $('#' + prefix + '_error').text(val[0]);
                             });
                         } else {
                             if (data.code == 200) {
                                 $('#editModal').modal('hide');
                                 updateDataTable(date);
                                 toastr.success(data.message);
-                            }else{
+                            } else {
                                 toastr.error(data.message);
                             }
-
                         }
-                        
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle AJAX errors
+                        console.error(xhr.responseText);
+                        toastr.error('An error occurred while processing your request.');
                     }
                 });
         //}

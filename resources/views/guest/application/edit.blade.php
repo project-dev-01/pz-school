@@ -1600,7 +1600,28 @@
                                             </div>
                                         </div>
                                     </div><br>
-                                    
+                                    <div class="card">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item">
+                                                    <h4 class="navv">
+                                                        {{ __('messages.family_details') }}
+                                                    </h4>
+                                                </li>
+                                            </ul><br>
+                                            <div class="card-body">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="stay_category">{{ __('messages.stay_category') }}<span class="text-danger">*</span></label>
+                                                            <select id="stay_category" name="stay_category" class="form-control">
+                                                                <option value="">{{ __('messages.select_employment_status') }}</option>
+                                                                <option value="Long stay" {{ isset($application['stay_category']) ? $application['stay_category'] == "Long stay" ? 'selected' : '' : '' }}>{{ __('messages.long_stay') }}</option>
+                                                                <option value="PR" {{ isset($application['stay_category']) ? $application['stay_category'] == "PR" ? 'selected' : '' : '' }}>{{ __('messages.pr_stay') }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -1766,6 +1787,7 @@
 <script>
     var applicationList = "{{ route('guest.application.list') }}";
     var applicationIndex = "{{ route('guest.application.index') }}";
+    var malaysiaPostalCode = "{{ route('guest.malaysia_postalCode') }}";
 </script>
 <!-- Plugins js-->
 <script src="{{ asset('libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
