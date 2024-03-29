@@ -73,6 +73,26 @@
 <script>
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
+
+    var childData = {!! json_encode(Session::get('all_child', [])) !!};
+
+    function showStudentName() {
+        var studentId = "{{ Session::get('student_id') }}";
+        var studentName = document.getElementById('studentName');
+        
+        for (var i = 0; i < childData.length; i++) {
+            if (childData[i].id == studentId) {
+                studentName.textContent = childData[i].name;
+                studentName.style.display = 'block';
+                break;
+            }
+        }
+    }
+
+    function hideStudentName() {
+        var studentName = document.getElementById('studentName');
+        studentName.style.display = 'none';
+    }
 </script>
 @endif
 @endif

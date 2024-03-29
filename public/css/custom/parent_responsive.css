@@ -1,3 +1,11 @@
+.student-name {
+    position: absolute;
+    top: 70%;
+    /* Adjust this value to position the tooltip higher or lower */
+    left: 0%;
+    /* Ensure the tooltip appears above other elements */
+}
+
 @media only screen and (min-width: 280px) and (max-width: 1200px) {
     .content-page {
         padding-right: 0px;
@@ -9,15 +17,15 @@
     }
 
     #sidebar-menu .menu-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     #sidebar-menu>ul>li>a {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .nav-second-level li a {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     #sidebar-menu>ul>li>a svg {
@@ -38,6 +46,13 @@
     {
         margin-left: -1px;
         margin-bottom: 3px;
+    }
+    .student-name {
+        position: absolute;
+        top: 70%;
+        /* Adjust this value to position the tooltip higher or lower */
+        left: 60%;
+        /* Ensure the tooltip appears above other elements */
     }
 }
 @media (max-width: 280px) {
