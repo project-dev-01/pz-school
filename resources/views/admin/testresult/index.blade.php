@@ -450,7 +450,7 @@
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('buttons-datatables/vfs_fonts.js') }}" async></script>
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
