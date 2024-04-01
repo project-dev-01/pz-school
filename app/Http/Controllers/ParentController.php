@@ -1595,6 +1595,8 @@ class ParentController extends Controller
             $image_principal_base64 = base64_encode($image_principal_data);
             $image_principal_extension = $image_principal_file->getClientOriginalExtension();
         }
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
@@ -1628,7 +1630,7 @@ class ParentController extends Controller
             'visa_file_extension' => $visa_extension,
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
-            'dual_nationality' => $request->dual_nationality,
+            'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
             'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'nric_photo' => $nric_base64,
@@ -1770,6 +1772,8 @@ class ParentController extends Controller
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1829,7 +1833,7 @@ class ParentController extends Controller
             "middle_name" => $request->middle_name,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
-            "dual_nationality" => $request->dual_nationality,
+            "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
             "mother_middle_name" => $request->mother_middle_name,
@@ -1912,6 +1916,8 @@ class ParentController extends Controller
         if ($request->enrollment == "Official Enrollment") {
             $official_date = $request->official_date;
         }
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $status = $request->status;
         if ($request->status == "") {
             $status = $request->phase_1_status;
@@ -2076,7 +2082,7 @@ class ParentController extends Controller
             "middle_name" => $request->middle_name,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
-            "dual_nationality" => $request->dual_nationality,
+            "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
             "mother_middle_name" => $request->mother_middle_name,

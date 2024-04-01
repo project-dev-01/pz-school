@@ -246,6 +246,13 @@ $(function () {
             $("#father_details").show("slow");
         }
     });
+    $('#has_dual_nationality_checkbox').change(function() {
+        if(this.checked) {
+            $('#dual_nationality_container').show();
+        } else {
+            $('#dual_nationality_container').hide();
+        }
+    });
     $("#addApplication").validate({
         rules: {
             first_name: "required",

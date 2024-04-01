@@ -4411,7 +4411,7 @@ class AdminController extends Controller
             $image_principal_extension = $image_principal_file->getClientOriginalExtension();
         }
 
-
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'year' => $request->year,
             // 'register_no' => $request->txt_regiter_no,
@@ -4482,7 +4482,7 @@ class AdminController extends Controller
             'nric_file_extension' => $nric_extension,
             'image_principal_photo' => $image_principal_base64,
             'image_principal_file_extension' => $image_principal_extension,
-            "dual_nationality" => $request->dual_nationality,
+            "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
             "visa_type" => $request->visa_type,
@@ -4947,7 +4947,7 @@ class AdminController extends Controller
             $image_principal_base64 = base64_encode($image_principal_data);
             $image_principal_extension = $image_principal_file->getClientOriginalExtension();
         }
-
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'login_userid' => session()->get('user_id'),
             'login_roleid' => session()->get('role_id'),
@@ -5020,7 +5020,7 @@ class AdminController extends Controller
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
             'passport_old_photo' => $request->passport_old_photo,
-            'dual_nationality' => $request->dual_nationality,
+            'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
             'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'nric_photo' => $nric_base64,
@@ -9321,7 +9321,7 @@ class AdminController extends Controller
             $visa_mother_base64 = base64_encode($visa_mother_data);
             $visa_mother_extension = $visa_mother_file->getClientOriginalExtension();
         }
-
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,
@@ -9401,7 +9401,7 @@ class AdminController extends Controller
             "middle_name" => $request->middle_name,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
-            "dual_nationality" => $request->dual_nationality,
+            "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
             "mother_middle_name" => $request->mother_middle_name,

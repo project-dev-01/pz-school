@@ -286,6 +286,13 @@ $(function () {
             $(this).val($(this).val().replace(/[^\w]/gi, ''));
         }
     });
+    $('#has_dual_nationality_checkbox').change(function() {
+        if(this.checked) {
+            $('#dual_nationality_container').show();
+        } else {
+            $('#dual_nationality_container').hide();
+        }
+    });
     $("#editApplication").validate({
         rules: {
             first_name: "required",

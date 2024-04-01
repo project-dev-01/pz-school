@@ -504,20 +504,7 @@
                                     </div>
                                     @endif
 
-                                    @if($form_field['nationality'] == 0)
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                            <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{ isset($student['nationality']) ? $student['nationality'] : ''}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                            <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                    @endif
+                                  
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="drp_post_code">{{ __('messages.zip_postal_code') }}<span class="text-danger">*</span></label>
@@ -557,6 +544,18 @@
                                             <input type="text" id="drp_city" class="form-control" placeholder="{{ __('messages.enter_city') }}" name="drp_city" data-parsley-trigger="change" value="{{ isset($student['city']) ? $student['city'] : ''}}">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="drp_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                            <input type="text" id="drp_state" placeholder="{{ __('messages.state_province') }}" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{ isset($student['state']) ? $student['state'] : ''}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="drp_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
+                                            <input type="text" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- </div> -->
                                 <div class="row">
@@ -574,18 +573,29 @@
                                         </div>
                                     </div> -->
 
+                                   
+                                    @if($form_field['nationality'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="drp_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                            <input type="text" id="drp_state" placeholder="{{ __('messages.state_province') }}" class="form-control" name="drp_state" data-parsley-trigger="change" value="{{ isset($student['state']) ? $student['state'] : ''}}">
+                                            <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                            <input type="text" maxlength="50" id="nationality" class="form-control country" value="{{ isset($student['nationality']) ? $student['nationality'] : ''}}" placeholder="{{ __('messages.nationality') }}" name="nationality" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="drp_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                            <input type="text" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
-                                        </div>
-                                    </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
+                                                    <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                                    <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                                </div>
+                                            </div>
+                                    @endif
                                 </div>
                                 <div class="row">
 

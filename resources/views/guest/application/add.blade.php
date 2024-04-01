@@ -515,6 +515,15 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
+                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                        
+                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input">
+                                                        <label class="custom-control-label"  for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"  id="dual_nationality_container" style="display: none;">
+                                                <div class="form-group">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
                                                 </div>

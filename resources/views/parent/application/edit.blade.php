@@ -534,6 +534,14 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
+                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($application['dual_nationality']) ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group" id="dual_nationality_container" style="{{ isset($application['dual_nationality']) ? '' : 'display: none;' }}">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" {{$readonly_phase_1}} class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($application['dual_nationality']) ? $application['dual_nationality'] : ''}}" data-parsley-trigger="change">
                                                 </div>

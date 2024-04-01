@@ -133,6 +133,8 @@ class GuestController extends Controller
         if($request->re_admission == "yes"){
             $type = "Re-Admission";
         }
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -192,7 +194,7 @@ class GuestController extends Controller
             "middle_name" => $request->middle_name,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
-            "dual_nationality" => $request->dual_nationality,
+            "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
             "mother_middle_name" => $request->mother_middle_name,
@@ -271,6 +273,8 @@ class GuestController extends Controller
         if($request->enrollment=="Trail Enrollment"){
             $trail_date = $request->trail_date;
         }
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $official_date = "";
         if($request->enrollment=="Official Enrollment"){
             $official_date = $request->official_date;
@@ -439,7 +443,7 @@ class GuestController extends Controller
                 "middle_name" => $request->middle_name,
                 "middle_name_english" => $request->middle_name_english,
                 "middle_name_furigana" => $request->middle_name_furigana,
-                "dual_nationality" => $request->dual_nationality,
+                "dual_nationality" => $dual_nationality,
                 "school_enrollment_status" => $request->school_enrollment_status,
                 "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
                 "mother_middle_name" => $request->mother_middle_name,

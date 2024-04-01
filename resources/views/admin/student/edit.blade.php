@@ -387,8 +387,7 @@
                                                 </div>
                                                 <div class="media-body pl-2">
                                                     <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['current_address']) ? $student['current_address'] : ''}}</a>
-                                                    </h5>
+                                                    <a href="javascript:void(0);" class="text-reset">{{ isset($student['address_unit_no']) ? $student['address_unit_no'] . ',' : ''}} {{ isset($student['address_condominium']) ? $student['address_condominium'] . ',' : ''}} {{ isset($student['address_street']) ? $student['address_street'] . ',' : ''}} {{ isset($student['address_district']) ? $student['address_district']  : ''}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -675,11 +674,20 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                                <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
+                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
+                                                    <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                                    <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                                </div>
+                                            </div>
+                                       
                                         @endif
                                     </div>
 
@@ -907,7 +915,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}"  value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}"  value="{{ isset($student['passport_expiry_date']) ? $student['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="passport_expiry_date" class="error"></label>
                                                 </div>
@@ -979,7 +987,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="visa_expiry_date" class="error"></label>
                                                 </div>
@@ -1610,7 +1618,7 @@
                                         
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <div class="form-group">
+                                                <div class="form-group father">
                                                     <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control copy_parent_info father_form country"  id="father_nationality" name="father_nationality" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
@@ -1869,7 +1877,7 @@
                                                 </div>
                                             </div> -->
                                             <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group mother">
                                         <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control copy_parent_info mother_form country"  id="mother_nationality" name="mother_nationality" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend"  >
                                     </div>

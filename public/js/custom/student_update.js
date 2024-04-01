@@ -402,6 +402,13 @@ $(function () {
 
         });
     });
+    $('#has_dual_nationality_checkbox').change(function() {
+        if(this.checked) {
+            $('#dual_nationality_container').show();
+        } else {
+            $('#dual_nationality_container').hide();
+        }
+    });
     $("#updateStudentProfile").validate({
         rules: {
            
