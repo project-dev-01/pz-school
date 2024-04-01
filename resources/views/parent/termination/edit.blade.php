@@ -355,7 +355,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="date">{{ __('messages.date') }}</label>
+                                        <label for="date">{{ __('messages.apply_date') }}</label>
                                         <div class="input-group input-group-merge">
                                             <input type="text" class="form-control" id="date" disabled value="{{ $termination['date']}}" name="date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                             <div class="input-group-prepend">

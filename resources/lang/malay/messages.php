@@ -2140,4 +2140,5 @@ return [
     "was" => "was",
     "there_are_no_new_notifications" => "There are no new notifications",
     "choose_the_file" => "Choose file",
+    "select_stay_category" => "Pilih kategori Tinggal",
 ];

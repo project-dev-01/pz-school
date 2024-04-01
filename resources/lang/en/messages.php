@@ -2219,4 +2219,5 @@ return [
     "scheduled_date_of_termination_5_business_day" => "Scheduled date of Termination (Please enter date after 5 business day)",
     "i_have_read_the_submit_instruction" => "I Have Read the Submit Instruction",
     "skip_prev_school_details" => "Skip Prev School Details",
+    "select_stay_category" => "Select Stay category",
 ];

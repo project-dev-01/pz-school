@@ -873,32 +873,25 @@
                                 </ul><br>
                                     <div class="card-body">
                                         <div class="row">
-                                            @if($form_field['nric'] == 0)
+                                        @if($form_field['passport'] == 0)
+                                            <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="nric">{{ __('messages.nric_number_only_for_malaysian') }}</label>
-                                                    <input type="text" maxlength="16" id="nric" class="form-control alloptions"  value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999"  name="nric" data-parsley-trigger="change">
-
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="nric_old_photo" id="nric_old_photo" value="{{ isset($student['nric_photo']) ? $student['nric_photo'] : ''}}" />
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="nric_photo">{{ __('messages.nric_image_only_for_malaysian') }}</label>
+                                                    <label for="passport_photo">{{ __('messages.passport_image_japan') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" id="nric_photo" class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="nric_photo">{{ __('messages.choose_file') }}</label>
+                                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
                                                         </div>
                                                     </div>
-                                                    @if(isset($student['nric_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'] }}" target="_blank"> {{ __('messages.nric_image_only_for_malaysian') }} </a>
-                                                    @endif
-                                                    <span id="nric_photo_name"></span>
+                                                    <label for="passport_photo" class="error"></label>
+                                                    @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
+                                                @endif
+                                                    <span id="passport_photo_name"></span>
+                                                    
                                                 </div>
                                             </div>
-                                            @endif
-                                            @if($form_field['passport'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="passport">{{ __('messages.passport_number_japan') }}<span class="text-danger">*</span></label>
@@ -919,25 +912,10 @@
                                                     <label for="passport_expiry_date" class="error"></label>
                                                 </div>
                                             </div>
-                                        <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="passport_photo">{{ __('messages.passport_image_japan') }}<span class="text-danger">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="passport_photo">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    <label for="passport_photo" class="error"></label>
-                                                    @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
-                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
-                                                @endif
-                                                    <span id="passport_photo_name"></span>
-                                                    
-                                                </div>
-                                            </div>
+                                        
                                             @endif
+                                           
+                                            
                                             @if($form_field['visa'] == 0)
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
@@ -945,21 +923,6 @@
                                                     <input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($application['visa_number']) ? $application['visa_number'] : ''}}" name="visa_number" data-parsley-trigger="change">
                                                 </div>
                                             </div> -->
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="visa_expiry_date">{{ __('messages.visa_expiry_date_for_non_malaysian') }}<span class="text-danger">*</span></label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="far fa-calendar-alt"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
-                                                    </div>
-                                                    <label for="visa_expiry_date" class="error"></label>
-                                                </div>
-                                            </div>
-                                           
                                             <input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($student['visa_photo']) ? $student['visa_photo'] : ''}}" />
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -991,8 +954,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
-                                            @endif
                                             @php
 
                                             $visa_type_others = "none";
@@ -1001,7 +962,7 @@
                                             $visa_type_others = "";
                                             }
                                             @endphp
-                                            
+
                                             <div class="col-md-4" id="visa_type_others_show" style="display:{{$visa_type_others}}" >
 
                                                 <div class="form-group">
@@ -1009,6 +970,22 @@
                                                     <input type="text" id="visa_type_others" class="form-control" placeholder="{{ __('messages.enter_visa_type_others') }}"  value="{{ isset($student['visa_type_others']) ? $student['visa_type_others'] : ''}}" name="visa_type_others" data-parsley-trigger="change">
                                                 </div>
                                             </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="visa_expiry_date">{{ __('messages.visa_expiry_date_for_non_malaysian') }}<span class="text-danger">*</span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                    <label for="visa_expiry_date" class="error"></label>
+                                                </div>
+                                            </div>
+                                            @endif
+                                          
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>
@@ -1033,6 +1010,31 @@
                                                  
                                                 </div>
                                             </div>
+                                            @if($form_field['nric'] == 0)
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="nric">{{ __('messages.nric_number_only_for_malaysian') }}</label>
+                                                    <input type="text" maxlength="16" id="nric" class="form-control alloptions"  value="{{ isset($student['nric']) ? $student['nric'] : ''}}" placeholder="999999-99-9999"  name="nric" data-parsley-trigger="change">
+
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="nric_old_photo" id="nric_old_photo" value="{{ isset($student['nric_photo']) ? $student['nric_photo'] : ''}}" />
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="nric_photo">{{ __('messages.nric_image_only_for_malaysian') }}</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" id="nric_photo" class="custom-file-input" name="nric_photo" accept="image/png, image/gif, image/jpeg">
+                                                            <label class="custom-file-label" for="nric_photo">{{ __('messages.choose_file') }}</label>
+                                                        </div>
+                                                    </div>
+                                                    @if(isset($student['nric_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'] }}" target="_blank"> {{ __('messages.nric_image_only_for_malaysian') }} </a>
+                                                    @endif
+                                                    <span id="nric_photo_name"></span>
+                                                </div>
+                                            </div>
+                                            @endif
                                            
 
                                         </div>
