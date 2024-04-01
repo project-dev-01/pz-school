@@ -40,24 +40,64 @@ $(function () {
             });
         }
     });
-    $(document).on('change', '#terms_condition', function () {
+    // $(document).on('change', '#terms_condition', function () {
         
-        if ($(this).prop('checked') == false) {
-            $('#submit').prop('disabled', true);
-            $('#submit').prop('disabled', true);
-        } else {
-            $('#aggrement').modal({ backdrop: 'static', keyboard: false })
-            $('#aggrement').modal('show')
+    //     if ($('#confirm_admission').prop('checked') == false) {
+    //         $('#submit').prop('disabled', true);
+    //         $('#submit').prop('disabled', true);
+    //     } else {
+    //         $('#aggrement').modal({ backdrop: 'static', keyboard: false })
+    //         $('#aggrement').modal('show')
+    //         $('#submit').prop('disabled', false);
+    //         $('#submit').prop('disabled', false);
+    //     }
+
+    // });
+    
+    function verify() {
+        
+        if ($('#confirm_admission').prop('checked') == true && $('#agree_school_policy').prop('checked') == true && $('#agree_terms').prop('checked') == true  ) {
             $('#submit').prop('disabled', false);
             $('#submit').prop('disabled', false);
         }
 
-    });
-    $(document).on('change', '#submit_instruction', function () {
+    }
+    $(document).on('change', '#confirm_admission', function () {
         if ($(this).prop('checked') == true) {
             window.open("https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3", '_blank');
             // $(this).prop('disabled', true);
+        }else{
+             $('#submit').prop('disabled', true);
         }
+        verify();
+    });
+    $(document).on('change', '#agree_terms', function () {
+        
+        if ($(this).prop('checked') == true) {
+            var lang = $("#language").val();
+            console.log('sd',lang)
+            if(lang=="en"){
+
+                window.open(commonpath+"SUZEN PRIVACY POLICY_EN.pdf", '_blank');
+            }else if(lang=="japanese"){
+                
+                window.open(commonpath+"SUZEN PRIVACY POLICY_JP.pdf", '_blank');
+            }
+            // $(this).prop('disabled', true);
+        }else{
+             $('#submit').prop('disabled', true);
+        }
+        verify();
+    });
+    $(document).on('change', '#agree_school_policy', function () {
+        
+        if ($(this).prop('checked') == true) {
+            window.open("https://jskl.edu.my/wp-contentcontent/uploads/2023/02/JSKL-Privacy-Policy.pdf", '_blank');
+            // $(this).prop('disabled', true);
+        }else{
+             $('#submit').prop('disabled', true);
+        }
+        verify();
     });
     
     $(".number_validation").keypress(function () {

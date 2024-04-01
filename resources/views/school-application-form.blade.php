@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group" style="position: relative;">
                                     <div class="lang-select" style="position: absolute; top: -50px; right: -50px;">
-                                        <button class="btn-select" value=""></button>
+                                        <button class="btn-select" id="language" value=""></button>
                                         <div class="b" style="text-align: justify;">
                                             <ul id="a" style="margin-bottom: 0;">
                                                 <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
@@ -173,17 +173,17 @@
 
                                             <div id="agree">
                                                 <span class="toggle" style="font-family: Arial, Helvetica, sans-serif;font-weight:400">
-                                                    <input type="checkbox" name="agree">
+                                                    <input type="checkbox" name="agree" id="confirm_admission">
                                                     <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_confirmed_the_admission') }}</label></span>
                                             </div>
                                             <div id="terms">
                                                 <span class="toggle" style="font-family: Arial, Helvetica, sans-serif;font-weight:400">
-                                                    <input type="checkbox" name="terms">
+                                                    <input type="checkbox" name="terms" id="agree_terms">
                                                     <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_agree_to_the_terms_of_service') }}</label></span>
                                             </div>
                                             <div id="terms">
                                                 <span class="toggle">
-                                                    <input type="checkbox" name="terms">
+                                                    <input type="checkbox" name="terms" id="agree_school_policy">
                                                     <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_agree_to_our_school') }}</label></span>
                                             </div>
                                         </div>
@@ -292,6 +292,12 @@
 
         </div>
     </div>
+    <div id="dialog" style="display: none;">
+        <div>
+            <iframe id="frame"></iframe>
+        </div>
+    </div>
+
     <!-- END wrapper -->
 
     <!-- add spinner  -->
@@ -330,6 +336,8 @@
     <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
     <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
     <script type="text/javascript">
+        
+	    var commonpath = "{{ config('constants.image_url').'/common-asset/downloads/' }}";
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
         //change button stuff on click

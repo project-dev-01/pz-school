@@ -859,9 +859,9 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input skip" id="skip_guardian_details" name="skip_guardian_details">
                                                 <label class="custom-control-label" for="skip_guardian_details">{{ __('messages.skip_guardian_details') }}</label>
-                                            </div>
-                                        </div> -->
-                                        <div class="row"  style="display:{{ isset($guardian['guardian_email']) ? 'none' : ''}}">
+                                            </div>  style="display:{{ isset($guardian['guardian_email']) ? 'none' : ''}}"
+                                        </div> -->  
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="radio radio-success form-check-inline">

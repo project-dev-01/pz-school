@@ -616,12 +616,12 @@
                                     </ul><br>
                                     <div class="card-body">
 
-                                        <!-- <div class="form-group">
+                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details">
                                                 <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div id="mother_details">
 
                                             <div class="row">
@@ -736,12 +736,12 @@
                                         </li>
                                     </ul><br>
                                     <div class="card-body">
-                                        <!-- <div class="form-group">
+                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details"  >
                                                 <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <div id="father_details">
                                             <div class="row">
@@ -862,7 +862,7 @@
                                                 <label class="custom-control-label" for="skip_guardian_details">{{ __('messages.skip_guardian_details') }}</label>
                                             </div>
                                         </div> -->
-                                        <div class="row" style="display:{{ isset($guardian['guardian_email']) ? 'none' : ''}}">
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <div class="radio radio-success form-check-inline">
