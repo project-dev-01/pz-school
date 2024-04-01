@@ -39,6 +39,25 @@
         .error {
             color: red;
         }
+
+        #hyper {
+
+            text-decoration: none;
+        }
+
+        #terms,
+        #agree {
+
+            font-size: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle {
+            width: 300px;
+        }
     </style>
 </head>
 
@@ -87,16 +106,32 @@
                         </div>
                     </div>
                     <div class="text-center w-75 m-auto">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="auth-logo">
+                                    <a href="" class="logo logo-dark text-center">
+                                        <span class="logo-lg">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/logo-dark.png'}}" alt="" height="50">
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="form-group" style="position: relative;">
+                                    <div class="lang-select" style="position: absolute; top: -50px; right: -50px;">
+                                        <button class="btn-select" value=""></button>
+                                        <div class="b" style="text-align: justify;">
+                                            <ul id="a" style="margin-bottom: 0;">
+                                                <li><img src="{{ config('constants.image_url').'/common-asset/images/USA.png' }}" alt="en" value="en" /><span>English</span></li>
+                                                <li><img src="{{ config('constants.image_url').'/common-asset/images/JPN.png' }}" alt="japanese" value="japanese" /><span>日本語</span></li>
+                                                <li><img src="{{ config('constants.image_url').'/common-asset/images/MAL.png' }}" alt="malay" value="malay" /><span>Malay</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="auth-logo">
-                            <a href="" class="logo logo-dark text-center">
-                                <span class="logo-lg">
-                                    <img src="{{ config('constants.image_url').'/common-asset/images/logo-dark.png'}}" alt="" height="50">
-                                </span>
-                            </a>
+                            </div>
                         </div>
-                        <h3 class="text-center" style="color:#596368">{{ __('messages.student_application_form') }}</h3>
-                        <div class="text-center form-group">
+                        <h4 class="text-center" style="color:#596368">{{ __('messages.japanese_school_kuala') }}</h4>
+                        <!-- <div class="text-center form-group">
                             <div class="lang-select">
                                 <button class="btn-select" value=""></button>
                                 <div class="b" style="text-align:justify;">
@@ -108,7 +143,8 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
+
                     </div>
                     <hr style="border:1px solid #6FC6CC">
                     <div class="card">
@@ -117,63 +153,62 @@
                                 @csrf
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <h4 class="navv">{{ __('messages.contact_details') }}
+                                        <h4 class="navv">{{ __('messages.please_check_before_applying') }}
                                             <h4>
                                     </li>
                                 </ul><br>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <i class="fa fa-map-marker"></i>
-                                                <span style="margin-left: 12px;">{{ isset($contact['address'])?$contact['address']:''}}</span>
-                                            </div>
-                                        </div>
-                                    </div><br>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <i class="fa fa-phone"></i>
-                                                <span style="margin-left: 10px;"><a href="tel:123-456-7890">{{ isset($contact['mobile_no'])?$contact['mobile_no']:''}}</a></span>
-                                            </div>
-                                        </div>
-                                    </div><br>
+                                        <div class="col-md-12" style="text-align: justify;">
+                                            <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.if_you_would_like_to_submit_an_application') }}</p>
+                                            <p style="font-size: 12px;">※{{ __('messages.this_email_address_will_be_used_for_logging') }}</p>
+                                            <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.admission_conditions_info') }}</p>
+                                            <p style="font-size: 12px;">・{{ __('messages.if_your_child_sibling_is_currently') }}</p>
+                                            <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.school_contact') }}</p>
+                                            <p style="margin-bottom: 5px; margin-left: 20px;font-size: 12px;">{{ __('messages.primary_secondary') }}: <u><a href="mailto:jsk2@jskl.edu.my">jsk2@jskl.edu.my</a></u></p>
+                                            <p style="margin-left: 20px;font-size: 12px;">{{ __('messages.kindergarten') }}: <u><a href="mailto:kindergarten2@jskl.edu.my">kindergarten2@jskl.edu.my</a></u></p>
+                                            <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.please_check_the_link_below_for') }}</p>
+                                            <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.please_check_the_terms_of_service') }}</p>
+                                            <p style="font-size: 12px;">・{{ __('messages.please_check_the_privacy_policy_regarding') }}</p>
 
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <i class="fa fa-envelope"></i>
-                                                <span style="margin-left: 11px;"><a href="mailto:{{ isset($contact['email'])?$contact['email']:''}}">{{ isset($contact['email'])?$contact['email']:''}}</a></span>
+                                            <div id="agree">
+                                                <span class="toggle" style="font-family: Arial, Helvetica, sans-serif;font-weight:400">
+                                                    <input type="checkbox" name="agree">
+                                                    <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_confirmed_the_admission') }}</label></span>
+                                            </div>
+                                            <div id="terms">
+                                                <span class="toggle" style="font-family: Arial, Helvetica, sans-serif;font-weight:400">
+                                                    <input type="checkbox" name="terms">
+                                                    <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_agree_to_the_terms_of_service') }}</label></span>
+                                            </div>
+                                            <div id="terms">
+                                                <span class="toggle">
+                                                    <input type="checkbox" name="terms">
+                                                    <label style="font-family:Arial, Helvetica, sans-serif;font-weight:400;font-size: 12px;"> {{ __('messages.i_agree_to_our_school') }}</label></span>
                                             </div>
                                         </div>
 
-                                    </div><br>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox text-center">
-                                                    <input type="checkbox" name="terms_condition" class="custom-control-input" id="terms_condition">
-                                                    <label class="custom-control-label" for="terms_condition">{{ __('messages.understand_accept') }}</label>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">
-                                            {{ __('messages.email_verification') }} 
+                                            {{ __('messages.school_registration') }}
                                             <h4>
                                     </li>
                                 </ul>
                                 <div class="card-body">
                                     <div id="guardian_details">
                                         <div class="row">
+                                            <div class="col-md-12" style="text-align: justify;">
+                                                <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.after_entering_the_email_address') }}</p>
+                                                <p style="font-size: 12px;">・{{ __('messages.an_email_will_be_sent_to_the_email_address') }}</p>
+                                            </div>
                                             <div class="col-md-3">
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group -center">
+                                                <div class="form-group-center">
                                                     <!-- <label for="first_name">{{ __('messages.email') }}<span class="text-danger">*</span></label> -->
                                                     <input type="text" class="form-control" id="verify_email" name="email" maxlength="50" placeholder="{{ __('messages.enter_your_email') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
@@ -203,21 +238,21 @@
                                 <hr> -->
 
 
-                                <div class="form-group text-center m-b-0">
+                                <!-- <div class="form-group text-center m-b-0">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox text-center">
-                                                    
-                                                <!-- <a href="https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3" target="_blank"></a> -->
-                                                    <input type="checkbox" name="submit_instruction" class="custom-control-input" id="submit_instruction">
-                                                    
+
+                                                    <!-- <a href="https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3" target="_blank"></a> -->
+                                <!--<input type="checkbox" name="submit_instruction" class="custom-control-input" id="submit_instruction">
+
                                                     <label class="custom-control-label" for="submit_instruction">{{ __('messages.i_have_read_the_submit_instruction') }}</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group text-center m-b-0">
 
                                     <button class="btn btn-primary-bl waves-effect waves-light" disabled id="submit" type="submit">
@@ -230,8 +265,9 @@
                     </div>
                 </div> <!-- end card-->
             </div> <!-- container -->
-            <div class="col-md-2"></div>
         </div>
+        <div class="col-md-2"></div>
+    </div>
     </div>
     <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button> -->
 
@@ -294,8 +330,6 @@
     <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
     <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
     <script type="text/javascript">
-
-
         var locale = "{{ Session::get('locale') }}";
         var url = "{{ route('changeLang') }}";
         //change button stuff on click
@@ -388,8 +422,6 @@
                 $('.btn-select').attr('value', value);
             }
         }
-
-        
     </script>
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";
