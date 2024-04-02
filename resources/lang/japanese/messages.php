@@ -419,7 +419,7 @@ return [
     "likes" => "いいね",
     "replies" => "返信",
     "views" => "閲覧",
-    "soap" => "石鹸",
+    "soap" => "SOAPノート",
     "soap_category" => "SOAP種別",
     "add_soap_category" => "SOAP種別の追加",
     "soap_type" => "SOAPタイプ",

@@ -39,36 +39,14 @@
             </div><!-- end row -->
 
 
-            <div class="row pt-5">
+            <div class="row pt-3">
                 <div class="col-lg-5 offset-lg-1">
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_admission') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.for_those_seeking_admissions') }}..</p>
+                        <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.who_should_i_contact_if_i_have_any') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.please_send_your_inquire') }}</p>
                     </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.other_than_a_ptm') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.school_considers_parents') }}</p>
-                    </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.what_will_be') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.school_timings_are') }} </p>
-                    </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question" data-wow-delay=".1s">{{ __('messages.what_is_the_fee') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.please_call_the_school') }}</p>
-                    </div>
-
                 </div>
                 <!--/col-md-5 -->
 
@@ -76,29 +54,14 @@
                     <!-- Question/Answer -->
                     <div>
                         <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.will_the_school') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.school_maintains_a_high') }}</p>
-                    </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.what_is_the_kind') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.the_school_has_installed') }}</p>
-                    </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.how_many_terms') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.we_will_be_having') }} </p>
-                    </div>
-
-                    <!-- Question/Answer -->
-                    <div>
-                        <div class="faq-question-q-box">Q.</div>
-                        <h4 class="faq-question">{{ __('messages.how_many_students') }}</h4>
-                        <p class="faq-answer mb-4">{{ __('messages.we_strive_to_maintain') }}</p>
+                        <h4 class="faq-question">{{ __('messages.where_can_i_download_the_user') }}</h4>
+                        <p class="faq-answer mb-4">{{ __('messages.you_can_download_the_user_manual') }}
+                            <span class="text-left" style="display: inline-block; color: red;margin-top:10px;">
+                                {{ __('messages.faq_japanese') }}: <a href="http://www.OOOOOOO.com/jp" style="color: red;">http://www.OOOOOOO.com/jp</a>
+                                <br>
+                                {{ __('messages.faq_english') }}: <a href="http://www.OOOOOOO.com/en" style="color: red;">http://www.OOOOOOO.com/en</a>
+                            </span>
+                        </p>
                     </div>
 
                 </div>
