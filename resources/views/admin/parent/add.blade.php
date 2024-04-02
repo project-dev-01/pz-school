@@ -697,6 +697,7 @@
 										<option value="Local Hire" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
 										<option value="Public Servant" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
 										<option value="Self-Employed" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
+                                        <option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
 									</select>
 								</div>
 							</div>
@@ -747,7 +748,7 @@
 								<div class="form-group">
 									<label for="stay_category">{{ __('messages.stay_category') }}<span class="text-danger">*</span></label>
 									<select id="stay_category" name="stay_category" class="form-control">
-										<option value="">{{ __('messages.select_employment_status') }}</option>
+										<option value="">{{ __('messages.select_stay_category') }}</option>
 										<option value="Long stay" {{ isset($parent['stay_category']) ? $parent['stay_category'] == "Long stay" ? 'selected' : '' : '' }}>{{ __('messages.long_stay') }}</option>
 										<option value="PR" {{ isset($parent['stay_category']) ? $parent['stay_category'] == "PR" ? 'selected' : '' : '' }}>{{ __('messages.pr_stay') }}</option>
 									</select>

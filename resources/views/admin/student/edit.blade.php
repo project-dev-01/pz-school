@@ -1429,6 +1429,7 @@
                                                             <option value="Local Hire" >{{ __('messages.local_hire') }}</option>
                                                             <option value="Public Servant" >{{ __('messages.public_servant') }}</option>
                                                             <option value="Self-Employed" >{{ __('messages.self_employed') }}</option>
+                                                            <option value="Others" >{{ __('messages.others') }}</option>
                                                         </select>
                                                     </div>
                                                 </div>

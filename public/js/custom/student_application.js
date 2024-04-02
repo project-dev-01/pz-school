@@ -64,7 +64,7 @@ $(function () {
     }
     $(document).on('change', '#confirm_admission', function () {
         if ($(this).prop('checked') == true) {
-            window.open("https://app.box.com/s/bimvbk6e3txoxqpkbhnqalgt3s123eu3", '_blank');
+            window.open(commonpath+"JSKL ADMISSION PROCEDURE 2024.pdf", '_blank');
             // $(this).prop('disabled', true);
         }else{
              $('#submit').prop('disabled', true);
