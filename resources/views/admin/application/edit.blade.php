@@ -615,9 +615,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" {{$readonly_phase_1}} id="school_enrollment_status" value="{{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                                        <!-- <input type="text" class="form-control prev_school_form" {{$readonly_phase_1}} id="school_enrollment_status" value="{{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend"> -->
+                                                        <select id="school_enrollment_status" {{$disabled_phase_1}} name="school_enrollment_status" class="form-control prev_school_form">
+                                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                            <option value="Regular class" {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
+                                                            <option value="Special need class" {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
+                                                            <option value="Regular guidance class" {{ isset($application['school_enrollment_status']) ? $application['school_enrollment_status'] == "Regular guidance class" ? 'selected' : '' : '' }}>{{ __('messages.regular_guidance_class') }}</option>
+                                                        </select>
+                                                        @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="school_enrollment_status" value="{{$application['school_enrollment_status']}}">
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

@@ -640,7 +640,7 @@
                                     <select class="form-control " id="role_id" name="role_id" data-placeholder="{{ __('messages.choose_role') }}">
                                         <option value="">{{ __('messages.select_role') }}</option>
                                         @forelse($school_roles as $r)
-                                        @if($r['portal_roleid']==3 && $r['roles']!=null)
+                                        @if($r['portal_roleid']==1 && $r['roles']!=null)
                                         <option value="{{$r['id']}}">{{ $r['fullname'] }} ( {{ $r['roles'] }} )</option>
                                         @endif
                                         @empty
