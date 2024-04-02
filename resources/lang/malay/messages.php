@@ -2165,5 +2165,6 @@ return [
     "you_can_download_the_user_manual" => "You can download the user manual guide for Admin Portal from below link",
     "faq_japanese" => "Japanese",
     "faq_english" => "English",
+    "enter_attendance_no" =>"Masukkan nombor Kehadiran",
 
 ];

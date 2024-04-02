@@ -321,7 +321,7 @@
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">
-                            <h1 class="mb-3">{{ isset($student['first_name']) ? $student['first_name'] : ''}} {{ isset($student['last_name']) ? $student['last_name'] : ''}}</h5>
+                            <h1 class="mb-3">{{ isset($student['last_name']) ? $student['last_name'] : ''}} {{ isset($student['first_name']) ? $student['first_name'] : ''}} </h5>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <div>
@@ -1077,12 +1077,7 @@
                                         </div> -->
                                         
                                      <input type="hidden" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" >
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="">{{ __('messages.roll') }}</label>
-                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_roll_no') }}" value="{{ isset($student['roll_no']) ? $student['roll_no'] : ''}}" data-parsley-trigger="change">
-                                            </div>
-                                        </div>
+                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
@@ -1095,9 +1090,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
@@ -1110,6 +1102,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                       
+                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
@@ -1121,6 +1117,12 @@
                                                     @empty
                                                     @endforelse
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.attendance_no') }}</label>
+                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" value="{{ isset($student['roll_no']) ? $student['roll_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -2360,7 +2362,63 @@
 
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
+
 <script>
+    var parentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
+    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
+    var parentName = "{{ config('constants.api.parent_name') }}";
+    var parentDetails = "{{ config('constants.api.parent_details') }}";
+    var sectionByClass = "{{ route('admin.section_by_class') }}";
+    var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
+    var roomByHostel = "{{ route('admin.room_by_hostel') }}";
+    var indexStudent = "{{ route('admin.student.index') }}";
+    var indexAdmission = "{{ route('admin.admission') }}";
+    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var studentList = null;
+    var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
+</script>
+
+<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/student.js') }}"></script>
+<script>
+    $('.dropify-im').dropify({
+        messages: {
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove: remove,
+            error: oops_went_wrong
+        }
+    });
+    $(function() {
+        // nric validation start
+        // var $form_2 = $('#editadmission');
+        // $form_2.validate({
+        //     debug: true
+        // });
+
+        // $('#txt_nric').rules("add", {
+        //     required: true
+        // });
+
+        $('#txt_nric').mask("000000-00-0000", {
+            reverse: true
+        });
+        // nric validation end
+        setTimeout(function() {
+            // Clear the values of email and password fields
+            $("#confirm_password").val("");
+            $("#password").val("");
+        }, 2000);
+    });
+</script>
+<script>
+    $(".country").countrySelect({
+        responsiveDropdown: true,
+        defaultCountry: "jp",
+    });
     var input = document.querySelector("#txt_mobile_no");
     intlTelInput(input, {
         allowExtensions: true,
@@ -2442,60 +2500,6 @@
         // utilsScript: "js/utils.js"
     });
 
-    $(".country").countrySelect({
-        responsiveDropdown: true,
-        defaultCountry: "jp",
-    });
-</script>
-<script>
-    var parentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
-    var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
-    var parentName = "{{ config('constants.api.parent_name') }}";
-    var parentDetails = "{{ config('constants.api.parent_details') }}";
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
-    var roomByHostel = "{{ route('admin.room_by_hostel') }}";
-    var indexStudent = "{{ route('admin.student.index') }}";
-    var indexAdmission = "{{ route('admin.admission') }}";
-    var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
-    var studentList = null;
-    var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
-</script>
-
-<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/student.js') }}"></script>
-<script>
-    $('.dropify-im').dropify({
-        messages: {
-            default: drag_and_drop_to_check,
-            replace: drag_and_drop_to_replace,
-            remove: remove,
-            error: oops_went_wrong
-        }
-    });
-    $(function() {
-        // nric validation start
-        // var $form_2 = $('#editadmission');
-        // $form_2.validate({
-        //     debug: true
-        // });
-
-        // $('#txt_nric').rules("add", {
-        //     required: true
-        // });
-
-        $('#txt_nric').mask("000000-00-0000", {
-            reverse: true
-        });
-        // nric validation end
-        setTimeout(function() {
-            // Clear the values of email and password fields
-            $("#confirm_password").val("");
-            $("#password").val("");
-        }, 2000);
-    });
+    
 </script>
 @endsection

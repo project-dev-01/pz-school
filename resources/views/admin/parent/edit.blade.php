@@ -378,7 +378,7 @@
 												</div>
 												<div class="media-body pl-2">
 													<h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-														<a href="javascript: void(0);" class="text-reset">{{ isset($parent['address']) ? $parent['address'] : ''}}</a>
+														<a href="javascript: void(0);" class="text-reset">{{ isset($parent['japan_address']) ? $parent['japan_address'] : ''}}</a>
 													</h5>
 												</div>
 											</div>

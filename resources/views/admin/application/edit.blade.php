@@ -1307,7 +1307,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="country" class="form-control country" placeholder="{{ __('messages.country') }}" {{$readonly_phase_2}} value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50" id="country" class="form-control student_country" placeholder="{{ __('messages.country') }}" {{$readonly_phase_2}} value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                         </div>
@@ -1908,6 +1908,11 @@
 
 <script>
     $(".country").countrySelect({
+        defaultCountry: "jp",
+        preferredCountries: ['my', 'jp'],
+        responsiveDropdown: true
+    });
+    $(".student_country").countrySelect({
         defaultCountry: "my",
         preferredCountries: ['my', 'jp'],
         responsiveDropdown: true

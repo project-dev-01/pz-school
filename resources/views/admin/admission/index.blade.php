@@ -761,12 +761,7 @@
                                     <input type="text" id="txt_regiter_no" class="form-control" name="txt_regiter_no" placeholder="{{ __('messages.enter_register_no') }}" data-parsley-trigger="change">
                                 </div>
                             </div> -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="txt_roll_no">{{ __('messages.roll_no') }}</label>
-                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_roll_no') }}" data-parsley-trigger="change">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
@@ -779,9 +774,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
@@ -790,6 +782,10 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+
+                           
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="class_id">{{ __('messages.expected_grade') }}<span class="text-danger">*</span></label>
@@ -808,6 +804,12 @@
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="txt_roll_no">{{ __('messages.attendance_no') }}</label>
+                                    <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
