@@ -2166,5 +2166,7 @@ return [
     "faq_japanese" => "Japanese",
     "faq_english" => "English",
     "enter_attendance_no" =>"Masukkan nombor Kehadiran",
+    "siblings" => "Adik beradik",
+    "relationship" => "Perhubungan",
 
 ];

@@ -492,7 +492,49 @@ $(function () {
             }
         });
     });
+  
+    // designation add start
+    var designation_increment = 1;
+    $("#add_department").click(function () {
+        designation_increment++;
+        var designationAppend = '<tr id="row_designation' + designation_increment + '">' +
+            '<td>'
+            '<input type="text" class="form-control" id="full_name" value="" name="full_name" placeholder="" aria-describedby="inputGroupPrepend">' +
+            '</td>' +
+            '<td>' +
+            '<div class="input-group input-group-merge">' +
+            '<div class="input-group-prepend">' +
+            '<div class="input-group-text">' +
+            '<span class="fas fa-calendar"></span>' +
+            '</div>' +
+            '</div>' +
+            '<input type="text" class="form-control designationDatepicker" name="designation_start[]" placeholder="' + yyyy_mm_dd + '">' +
+            '</div>' +
+            '</td>' +
+            '<td>' +
+           '<input type="text" class="form-control" id="relationship" value="" name="relationship" placeholder="" aria-describedby="inputGroupPrepend">'+
+            '</td>' +
+            '<td>' +
+            '<button type="button" name="remove_designation" id="' + designation_increment + '" class="btn btn-danger btn_remove_designation">X</button>' +
+            '</td>' +
+            '</tr>';
 
+        var appendDesHtml = $('#dynamic_field_two').append(designationAppend);
+        // Initialize datepicker for the new field
+        appendDesHtml.find('.designationDatepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50", // last hundred years
+        });
+
+    });
+    $(document).on('click', '.btn_remove_designation', function () {
+        var button_id = $(this).attr("id");
+        $('#row_department' + button_id + '').remove();
+    });
+    // department add end
     function UrlExists(url) {
         // var http = new XMLHttpRequest();
         // http.open('HEAD', url, false);

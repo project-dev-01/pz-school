@@ -2246,4 +2246,6 @@ return [
     "faq_japanese" => "Japanese",
     "faq_english" => "English",
     "enter_attendance_no" =>"Enter Attendance number",
+    "siblings" => "Sibling",
+    "relationship" => "Relationship",
 ];

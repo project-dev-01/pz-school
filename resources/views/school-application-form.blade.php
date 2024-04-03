@@ -165,7 +165,7 @@
                                             <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.admission_conditions_info') }}</p>
                                             <p style="font-size: 12px;">・{{ __('messages.if_your_child_sibling_is_currently') }}</p>
                                             <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.school_contact') }}</p>
-                                            <p style="margin-bottom: 5px; margin-left: 20px;font-size: 12px;">{{ __('messages.primary_secondary') }}: <u><a href="mailto:jsk2@jskl.edu.my">jsk2@jskl.edu.my</a></u></p>
+                                            <p style="margin-bottom: 5px; margin-left: 20px;font-size: 12px;">{{ __('messages.primary_secondary') }}: <u><a href="mailto:jskl2@jskl.edu.my">jskl2@jskl.edu.my</a></u></p>
                                             <p style="margin-left: 20px;font-size: 12px;">{{ __('messages.kindergarten') }}: <u><a href="mailto:kindergarten2@jskl.edu.my">kindergarten2@jskl.edu.my</a></u></p>
                                             <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.please_check_the_link_below_for') }}</p>
                                             <p style="margin-bottom: 5px;font-size: 12px;">・{{ __('messages.please_check_the_terms_of_service') }}</p>

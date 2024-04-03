@@ -755,6 +755,46 @@
 								</div>
 							</div>
 						</div>
+						<!-- <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="siblings">{{ __('messages.siblings') }}<span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>{{ __('messages.full_name') }}</td>
+                                        <td>{{ __('messages.date_of_birth') }}</td>
+                                        <td>{{ __('messages.relationship') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="dynamic_field_one">
+                                    <tr>
+                                        <td>
+										<input type="text" class="form-control" id="full_name" value="" name="full_name" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control designationDatepicker" name="department_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+										<input type="text" class="form-control" id="relationship" value="" name="relationship" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </td>
+                                        <td>
+                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">{{ __('messages.add') }} +</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+
 					</div>
 				</div>
 				<div class="card">
@@ -1038,6 +1078,7 @@
 <script src="{{ asset('js/custom/parent.js') }}"></script>
 <script>
 	var parentList = "{{ route('admin.parent.list') }}";
+	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	$('.dropify-im').dropify({
 		messages: {
 			default: drag_and_drop_to_check,
