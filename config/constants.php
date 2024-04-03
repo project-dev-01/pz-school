@@ -1,6 +1,6 @@
 <?php
 $url = "http://localhost/paxsuze-api/public/api";
-// $url = "https://api.suzen.school/api";
+// $url = "https://api.suzen.school/api";test
 return [
     'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
