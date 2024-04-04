@@ -1,17 +1,17 @@
 var pathname = window.location.pathname;
 
-pathname=pathname.replace('/school-management-system/','');
+pathname=pathname.replace('/school-management-system/public/','');
 //alert(pathname);
 $.post(checkpermissions, { menu_id:pathname }, function (data) {
     
-   if(data.data!='' || data.data!=null)
-   {
+    if(data.data!='' || data.data!=null)
+    {
         var addbtn=data.data.add;
         var editbtn=data.data.updates;
         var deletebtn=data.data.deletes;
         var exportbtn=data.data.export;
         if(addbtn=='Access')
-            {
+        {
             $('.add-btn').show();
                     
         }
@@ -57,6 +57,10 @@ $.post(checkpermissions, { menu_id:pathname }, function (data) {
                 }, 1000);   
             
         }
+    }
+    else
+    {
+        
     }
 }, 'json');
 

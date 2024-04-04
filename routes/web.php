@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
 
-    Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
+    Route::group(['middleware' => ['isAdmin', 'logroute','Checkmenuaccess']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::post('/student_list/excel', [AdminController::class, 'StudentListExcel'])->name('admin.student_list.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -1061,7 +1061,7 @@ Route::group(['prefix' => 'staff'], function () {
     Route::any('/authenticate', [AuthController::class, 'authenticateStaff'])->name('staff.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutStaff'])->name('staff.logout');
 
-    Route::group(['middleware' => ['isStaff', 'logroute']], function () {
+    Route::group(['middleware' => ['isStaff', 'logroute','Checkmenuaccess']], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
 
         // Forum routes
@@ -1286,7 +1286,7 @@ Route::group(['prefix' => 'teacher'], function () {
     Route::get('/login', [AuthController::class, 'teacherLoginForm'])->name('teacher.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateTeacher'])->name('teacher.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutTeacher'])->name('teacher.logout');
-    Route::group(['middleware' => ['isTeacher', 'logroute']], function () {
+    Route::group(['middleware' => ['isTeacher', 'logroute','Checkmenuaccess']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
         // Test Result Rotes
         Route::get('test_result', [TeacherController::class, 'testResult'])->name('teacher.test_result');

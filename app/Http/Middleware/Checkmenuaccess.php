@@ -18,18 +18,18 @@ class Checkmenuaccess
     public function handle(Request $request, Closure $next)
     {
         //local URL start
-        $url = str_replace('/school-management-system/','',$_SERVER['REQUEST_URI']);
+        $url = str_replace('/school-management-system/public/','',$_SERVER['REQUEST_URI']);
         //local URL end
         //LIVE URL start
         //$url = $_SERVER['REQUEST_URI'];
         //LIVE URL end
         $role_id = Session::get('role_id');
-$school_roleid = Session::get('school_roleid');
+        $school_roleid = Session::get('school_roleid');
         $branch_id =config('constants.branch_id');
-if(!empty(Session::get('school_roleid')))
+        if(!empty($school_roleid) && $school_roleid!='1')
         {
             $pagedata = [
-                //'menu_id' => "27",
+                
                 'menu_id' => $url, 
                 'role_id' => $role_id,  
                 'school_roleid' => $school_roleid,             
@@ -38,7 +38,7 @@ if(!empty(Session::get('school_roleid')))
            // dd($pagedata);
             $permission = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
            // dd($permission);
-            if($permission['data']==null)
+            if($permission === null) 
             {
                 return $next($request);
             }
@@ -49,30 +49,12 @@ if(!empty(Session::get('school_roleid')))
             else
             {
                 abort(403);
-            }       
-        }
-        else
-        { 
-        $data = [
-			'role_id' => $role_id,
-            //'role_id' => "2",
-			'br_id' => $branch_id,
-			'menu_id' => $url
-			];
-        $permission = Helper::PostMethod(config('constants.api.menuaccess_permission'),$data);
-        //dd($permission['data']);
-        if($permission['data']==null)
-        {
-            return $next($request);
-        }
-        elseif($permission['data']['menu_permission']!='Denied')
-        {
-            return $next($request);
-        }
+            }    
+
+        }   
         else
         {
-            abort(403);
-        }       
+            return $next($request);
+        }   
     }
-}
 }
