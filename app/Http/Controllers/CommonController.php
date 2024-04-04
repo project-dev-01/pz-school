@@ -473,7 +473,7 @@ class CommonController extends Controller
                
                 <p class="notify-details"></p>
                 <p class="text-muted mb-0 user-msg">
-                    <small>' . __('messages.there_are_no_new_notifications') . '</small>
+                    <small class="notificationfonts1">' . __('messages.there_are_no_new_notifications') . '</small>
                 </p>
             </a>';
                     $notificationlist .= '</div>';

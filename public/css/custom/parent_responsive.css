@@ -1,9 +1,34 @@
-.student-name {
+.student-name 
+{
     position: absolute;
     top: 70%;
     /* Adjust this value to position the tooltip higher or lower */
     left: 0%;
     /* Ensure the tooltip appears above other elements */
+}
+.iconsuser {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-family: Open Sans;
+}
+
+.childname {
+    font-weight: 600;
+    font-family: Open Sans;
+    font-size: 12px;
+    font-family: Open Sans;
+}
+
+.flag2 {
+    height: 15px;
+    margin-left: -12px;
+    margin-right: 12px;
+}
+
+.flagfont2 {
+    font-size: 12px;
+    font-family: Open Sans;
 }
 
 @media only screen and (min-width: 280px) and (max-width: 1200px) {
@@ -42,11 +67,11 @@
         padding-left: 50px;
         list-style: none;
     }
-    .schllogo
-    {
-        margin-left: -1px;
+
+    .schllogo {
         margin-bottom: 3px;
     }
+
     .student-name {
         position: absolute;
         top: 70%;
@@ -54,30 +79,96 @@
         left: 60%;
         /* Ensure the tooltip appears above other elements */
     }
+
+    .iconsuser {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .childname {
+        font-weight: 600;
+        font-family: Open Sans;
+        font-size: 16px;
+    }
+
+    .userfont {
+        font-size: 16px;
+        font-family: Open Sans;
+    }
+
+    .userfont1 {
+        font-size: 15px;
+        font-family: Open Sans;
+    }
+
+    .userfont2 {
+        font-size: 15px;
+        font-family: Open Sans;
+    }
+
+    .fonticon {
+
+        font-size: 18px;
+        font-family: Open Sans;
+    }
+
+    .flag2 {
+        height: 20px;
+        margin-left: -12px;
+        margin-right: 12px;
+        margin-top: -4px;
+    }
+
+    .flagfont2 {
+        font-size: 16px;
+        font-family: Open Sans;
+    }
+    .notificationfont{
+        font-size: 16px;
+    }
+    .notificationfonts
+    {
+        font-size: 15px;
+    }
+    .notificationfonts1
+    {
+        font-size: 14px;
+    }
+    .tooltip-inner
+    {
+        font-size: 16px;
+    }
+    .flagsp 
+    {
+        margin-bottom:5px
+    }
 }
+
 @media (max-width: 280px) {
+
     .notification-list,
     .chat-count {
         display: none;
     }
+
     .sidebarresponsive {
         margin-left: 20px;
     }
+
     .logo-box {
         width: 50px !important
     }
+
     .schl {
         width: 80px;
     }
+
     .schl {
         white-space: nowrap;
         width: 70px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-   
-    
 }
-
-
-

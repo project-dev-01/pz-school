@@ -2313,7 +2313,10 @@
                 </li>
                 <li>
                     <a href="{{ route('parent.exam.schedule')}}" class="nav-link {{ (request()->is('parent/exam*')) ? 'active' : '' }}">
-                        <i class="fas fa-dna"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#C4C7D2">
+                            <path fill-rule="evenodd" d="M20.001 2H4C2.897 2 2 2.897 2 4v16c0 1.103.897 2 2 2h16.001c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm-1 16H5V8h14v10zm0-12H5V5h14v1zm-6 5h4v2h-4v-2z" clip-rule="evenodd" />
+                        </svg>
+
                         <span> {{ __('messages.exam_schedule') }} </span>
                     </a>
                 </li>
@@ -2472,7 +2475,9 @@
                 </li>
                 <li>
                     <a href="{{ route('student.exam.schedule')}}" class="nav-link {{ (request()->is('student/exam*')) ? 'active' : '' }}">
-                        <i class="fas fa-dna" style="height:14px;"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#C4C7D2">
+                            <path fill-rule="evenodd" d="M20.001 2H4C2.897 2 2 2.897 2 4v16c0 1.103.897 2 2 2h16.001c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm-1 16H5V8h14v10zm0-12H5V5h14v1zm-6 5h4v2h-4v-2z" clip-rule="evenodd" />
+                        </svg>
 
                         <span> {{ __('messages.exam_schedule') }} </span>
                     </a>

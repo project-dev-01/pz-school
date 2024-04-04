@@ -1,6 +1,6 @@
-
 <!-- Topbar Start -->
 <link href="{{ asset('css/custom/navbar.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/parent_responsive.css') }}" rel="stylesheet" type="text/css" />
 <div class="navbar-custom" style="background-color:white;">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-right mb-0">
@@ -21,12 +21,12 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
                     <!-- item-->
                     <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
+                        <h5 class="m-0 notificationfont">
                             <span class="float-right">
                                 <a href="javascript:void(0)" class="text-dark" id="mark-all-read">
-                                    <small>{{ __('messages.mark_all_as_read') }}</small>
+                                    <small class="notificationfonts">{{ __('messages.mark_all_as_read') }}</small>
                                 </a>
-                            </span>{{ __('messages.notification') }}
+                            </span class="notificationfont">{{ __('messages.notification') }}
                         </h5>
                     </div>
                     <div class="notification-list-show">
@@ -71,66 +71,26 @@
             @endif
 
             @if(Session::get('role_id') == '5')
-            <!--<li class="dropdown d-inline-block">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.png' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:2px;margin-left: -17px;margin-right: -12px;">
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    @if(Session::get('all_child'))
-                    @forelse (Session::get('all_child') as $child)
-                    <a class="dropdown-item responsiveAllChild" href="javascript:void(0)" data-id="{{ $child['id'] }}"> <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" alt="user-image" class="rounded-circle admin_picture"  style="width:30px;margin-right: 10px;">{{ $child['name'] }}</a>
-                    @empty
-                    @endforelse
-                    @endif
-                </div>
-            </li>-->
-            <!--<li class="dropdown d-inline-block">
-    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.png' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:2px;margin-left: -17px;margin-right: -12px;">
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-        @if(Session::get('all_child'))
-        @forelse (Session::get('all_child') as $child)
-        <a class="dropdown-item responsiveAllChild" href="javascript:void(0)" data-id="{{ $child['id'] }}"><i class="fe-user" style="margin-right: 10px;margin-bottom: 10px;"></i><span>{{ $child['name'] }}</span></a>
-        @empty
-        @endforelse
-        @endif
-    </div>
-</li>-->
-            <!--<li class="dropdown d-inline-block">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="user-image-container" style="position: relative; display: inline-block;">
-                        <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.png' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:4px;margin-left: -13px;margin-right: -12px;" onmouseover="document.getElementById('studentName').style.display='block'" onmouseout="document.getElementById('studentName').style.display='none'">
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    @if(Session::get('all_child'))
-                    @forelse (Session::get('all_child') as $child)
-                    <a class="dropdown-item responsiveAllChild" href="javascript:void(0)" data-id="{{ $child['id'] }}"><i class="fe-user" style="margin-right: 10px;margin-bottom: 10px;"></i><span>{{ $child['name'] }}</span></a>
-                    @empty
-                    @endforelse
-                    @endif
-                </div>
-            </li>-->
             <li class="dropdown d-inline-block">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ Session::get('picture') ? config('constants.image_url').'/'.$branch_id.'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.png' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:4px;margin-left: -13px;margin-right: -12px;" onmouseover="showStudentName()" onmouseout="hideStudentName()">
+                    <img src="{{ Session::get('picture') ? config('constants.image_url').'/'.$branch_id.'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.webp' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:4px;margin-left: -13px;margin-right: -12px;" onmouseover="showStudentName()" onmouseout="hideStudentName()">
                     <span id="studentName" class="student-name"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     @forelse (Session::get('all_child', []) as $child)
                     <a class="dropdown-item responsiveAllChild" href="javascript:void(0)" data-id="{{ $child['id'] }}">
-                        <i class="fe-user" style="margin-right: 10px;margin-bottom: 10px;"></i>
-                        <span>{{ $child['name'] }}</span>
+                        <i class="fe-user iconsuser"></i>
+                        <span class="childname">{{ $child['name'] }}</span>
                     </a>
                     @empty
                     @endforelse
                 </div>
             </li>
+
             @endif
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" alt="user-image" class="rounded-circle admin_picture" style="margin-bottom: 2px;">
+                    <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.webp' }}" alt="user-image" class="rounded-circle admin_picture" style="margin-bottom: 2px;">
                     <span class="pro-user-name ml-1 user_name">
                         <i class="mdi mdi-chevron-down"></i>
                     </span>
@@ -138,39 +98,39 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">{{ __('messages.welcome') }} ! {{ Session::get('name') }}</h6>
+                        <h6 class="text-overflow m-0 userfont">{{ __('messages.welcome') }} ! {{ Session::get('name') }}</h6>
                     </div>
 
                     <!-- item-->
                     @if(Session::get('role_id') == '1')
                     <a href="{{ route('super_admin.settings')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <i class="fe-user fonticon"></i>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '3')
                     <a href="{{ route('staff.settings')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <i class="fe-userfonticon"></i>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '4')
                     <a href="{{ route('teacher.settings')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <i class="fe-user fonticon"></i>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '5')
                     <a href="{{ route('parent.settings')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <i class="fe-user fonticon"></i>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @elseif(Session::get('role_id') == '6')
                     <a href="{{ route('student.settings')}}" class="dropdown-item notify-item">
                         <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @else
                     <a href="{{ route('admin.settings')}}" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>{{ __('messages.my_account') }}</span>
+                        <i class="fe-user fonticon"></i>
+                        <span class=userfont1>{{ __('messages.my_account') }}</span>
                     </a>
                     @endif
 
@@ -184,8 +144,8 @@
 
                     <!-- item-->
                     <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item notify-item">
-                        <i class="fe-log-out"></i>
-                        <span>{{ __('messages.logout') }}</span>
+                        <i class="fe-log-out fonticon"></i>
+                        <span class=userfont2>{{ __('messages.logout') }}</span>
                     </a>
                     @if(Session::get('role_id') == '1')
                     <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
@@ -223,13 +183,13 @@
             <li class="dropdown d-lg-inline-block topbar-dropdown" style="margin-right: -6px;">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     @if(app()->getLocale() == 'en')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/us.jpg' }}" alt="user-image" style="height: 20px;width: 27px;margin-left: 4px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
                     @endif
                     @if(app()->getLocale() == 'japanese')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/jpn.png' }}" alt="user-image" style="height: 20px;width: 27px;margin-left: 4px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
                     @endif
                     @if(app()->getLocale() == 'malay')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/mal.png' }}" alt="user-image" style="height: 20px;width: 27px;margin-left: 4px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
                     @endif
                 </a>
                 <!--<div class="dropdown-menu dropdown-menu-right">
@@ -248,16 +208,16 @@
                 </div>-->
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
-                    <a href="{{ route('changeLang', ['lang' => 'en']) }}" class="dropdown-item @if(app()->getLocale() == 'en') active @endif">
-                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/us.jpg' }}" alt="en" value="en" style="height: 15px;margin-left: -12px;margin-right: 12px;" /><span style="font-size:12px;">English</span>
+                    <a href="{{ route('changeLang', ['lang' => 'en']) }}" class="dropdown-item flagsp @if(app()->getLocale() == 'en') active @endif">
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="en" value="en" class="flag2"/><span class="flagfont2">English</span>
                     </a>
 
                     <!-- item-->
-                    <a href="{{ route('changeLang', ['lang' => 'japanese']) }}" class="dropdown-item @if(app()->getLocale() == 'japanese') active @endif">
-                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/jpn.png' }}" alt="japanese" value="japanese" style="height: 15px;margin-left: -12px;margin-right: 12px;" /><span style="font-size:12px;">日本語</span>
+                    <a href="{{ route('changeLang', ['lang' => 'japanese']) }}" class="dropdown-item flagsp @if(app()->getLocale() == 'japanese') active @endif">
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="japanese" value="japanese" class="flag2" /><span class="flagfont2">日本語</span>
                     </a>
                     <a href="{{ route('changeLang', ['lang' => 'malay']) }}" class="dropdown-item @if(app()->getLocale() == 'malay') active @endif">
-                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/mal.png' }}" alt="malay" value="malay" style="height: 15px;margin-left: -12px;margin-right: 12px;"><span style="font-size:12px;">Malay</span>
+                        <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="malay" value="malay" class="flag2"><span class="flagfont2">Malay</span>
                     </a>
                 </div>
 
@@ -269,10 +229,10 @@
 
             <a href="javascript:void(0)" class="logo logo-light text-center">
                 <span class="logo-sm">
-                    <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="22">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.webp' }}" alt="" height="22">
                 </span>
                 <span class="logo-lg">
-                    <img src="{{ config('constants.image_url').'/common-asset/images/Logo.png' }}" alt="" style="height:35px; width:100px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/Logo.webp' }}" alt="" style="height:35px; width:100px;">
                 </span>
             </a>
         </div>

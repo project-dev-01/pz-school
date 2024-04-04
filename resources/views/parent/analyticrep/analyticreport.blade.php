@@ -1,11 +1,19 @@
 @extends('layouts.admin-layout')
 @section('title','Analytic Report')
 @section('component_css')
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+<!-- button link  -->
+<link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
+<!-- date picker -->
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <style>
     @media only screen and (min-width: 320px) and (max-width: 844px) {
         .homework {
@@ -26,17 +34,17 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
-                </div> -->
+                <div class="page-title-right">
+                    <!--<ol class="breadcrumb m-0">
+                    </ol>-->
+                </div>
                 <h4 class="page-title">{{ __('messages.analytic_report') }}</h4>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">

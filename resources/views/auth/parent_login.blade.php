@@ -74,7 +74,7 @@
                                 <div class="auth-logo">
                                     <a href="" class="logo logo-dark">
                                         <span class="logo-lg">
-                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.png' }}" alt="" height="60px">
+                                            <img src="{{ config('constants.image_url').'/common-asset/images/Suzen-app-logo.webp' }}" alt="" height="60px">
                                         </span>
                                     </a>
                                 </div>
